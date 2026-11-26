@@ -1,0 +1,23 @@
+{
+  "registryEntries": 332,
+  "counts": {
+    "Microsoft Defender Offline": 2,
+    "Windows": 2,
+    "Everything": 1,
+    "Autopsy": 1,
+    "Chainsaw": 1,
+    "SFC": 2
+  },
+  "longestMatch": true,
+  "repeatedMentions": true,
+  "caseSensitiveAmbiguousNames": true,
+  "boundaries": true,
+  "bareUrlsPreserved": true,
+  "existingAnchorsPreserved": true,
+  "headingsLinked": true,
+  "commandsBytePreserved": true,
+  "htmlEscaped": true,
+  "controlsUnaffected": true,
+  "noNestedAnchors": true,
+  "errors": []
+}

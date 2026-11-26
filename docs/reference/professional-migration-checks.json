@@ -1,0 +1,38 @@
+{
+  "legacyStepIndices": [
+    1,
+    5
+  ],
+  "currentStepIndices": [
+    2,
+    7
+  ],
+  "stableAnchors": [
+    "step-02",
+    "step-06"
+  ],
+  "insertedStepsUnchecked": 3,
+  "unchangedUniqueTitlesMigrated": true,
+  "changedTitlesNotMigrated": true,
+  "duplicateTitlesNotMigrated": true,
+  "conflictingLegacyCandidatesNotGuessed": true,
+  "uncheckPersists": true,
+  "newCheckPersists": true,
+  "resetUndoPreservesMigratedState": true,
+  "v1StorageKeyPreserved": true,
+  "storageUnavailableWorkingSession": true,
+  "errors": [],
+  "migrated": {
+    "step:anchor:step-01": false,
+    "step:anchor:step-02": true,
+    "step:anchor:step-06": true
+  },
+  "freshState": {
+    "malware-removal": {
+      "step:anchor:step-01": false,
+      "step:anchor:step-02": false,
+      "step:anchor:step-06": true,
+      "step:anchor:step-choose-the-cleanup-incident-or-rebuild-path": true
+    }
+  }
+}

@@ -1,21 +1,26 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# 💾 [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)
+<a id="-rescue-data-from-a-failing-or-unreadable-drive"></a>
+
+# [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)
 
 Preserve the source, create a recoverable image, and perform recovery on a copy.
 
-| Work area | Experience | Plan your time | Workflow |
-| --- | --- | --- | --- |
-| Storage & recovery | Advanced | Triage 15–30 min; imaging varies | 6 steps + acceptance |
+**Storage & recovery** · Advanced · Triage 15–30 min; imaging varies · 8 steps
 
-**[▶ Open the interactive checklist](https://herbertofury.github.io/INTA/#job/failing-drive)** · [Decision route](#decision-route) · [Toolkit](#toolkit) · [Walkthrough](#walkthrough) · [Acceptance](#acceptance) · [Sources](#sources)
+[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/failing-drive)
 
-> [!TIP]
-> **Your starting move:** Stop ordinary use of the source drive. Ask whether the data is replaceable and whether a verified backup exists before applying power again.
+> [!NOTE]
+> **Start here.** Stop ordinary use of the source drive. Ask whether the data is replaceable and whether a verified backup exists before applying power again.
 
 <a id="decision-route"></a>
 
-## 🧭 Choose the right branch
+<a id="-choose-the-right-branch"></a>
+
+## 🧭 Choose a route
+
+<details>
+<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -31,13 +36,15 @@ flowchart TD
     H -->|"No"| J["Carve recoverable file content"]:::action
     I --> K["Validate recovered data and gaps"]:::done
     J --> K
-    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa
-    classDef action fill:#172033,stroke:#64748b,color:#f8fafc
-    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2
-    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5
+    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46
+    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445
+    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137
+    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449
 ```
 
-**Diagram routes:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Clone a healthy system or migrate to a new SSD](disk-migration.md) · [Prove a backup can actually restore](backup-restore.md) · [Build and refresh a technician rescue USB](boot-usb.md) · [Close a repair with a clear client handoff](client-handoff.md)
+**Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Clone a healthy system or migrate to a new SSD](disk-migration.md) · [Prove a backup can actually restore](backup-restore.md) · [Build and refresh a technician rescue USB](boot-usb.md) · [Close a repair with a clear client handoff](client-handoff.md)
+
+</details>
 
 | Checkpoint | What to carry forward |
 | --- | --- |
@@ -47,9 +54,11 @@ flowchart TD
 
 <a id="toolkit"></a>
 
-## 🧰 Build the right toolkit
+<a id="-build-the-right-toolkit"></a>
 
-Choose the tools that answer the case’s next question. Opening a tool is a separate decision from changing the customer’s system.
+## Recommended tools
+
+Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
 | Tool / official download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
@@ -61,7 +70,9 @@ Choose the tools that answer the case’s next question. Opening a tool is a sep
 
 <a id="walkthrough"></a>
 
-## 🪜 Work the case
+<a id="-work-the-case"></a>
+
+## Procedure
 
 Work in order, record the result of each step, and change route when the evidence calls for it.
 
@@ -97,26 +108,47 @@ lsblk -o NAME,SIZE,MODEL,SERIAL,TYPE,MOUNTPOINTS
 
 - [ ] Use [GNU ddrescue](https://www.gnu.org/software/ddrescue/) following its manual, with a mapfile saved on healthy storage. Start with a low-stress pass that retrieves easy data before any deliberate retry phase. Preserve the mapfile and image together, track errors and temperature, and stop if the device deteriorates.
 
+<a id="step-reconcile-the-image-and-mapfile-before-recovery"></a>
+
+### 05 · Reconcile the image and mapfile before recovery
+
+- [ ] Perform [image and mapfile reconciliation](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) before filesystem work. Record the imaging command, source size, rescue domain, output path, mapfile path and saved status. Use the mapfile to distinguish finished ranges from non-tried, non-trimmed, non-scraped and bad-sector ranges; retain incomplete areas explicitly. A large image file, a finished process or an exit without a fatal error does not prove all source bytes were recovered. Preserve the image/mapfile pair and its acquisition notes together.
+
+<a id="step-protect-the-accepted-acquisition-checkpoint"></a>
+
+### 06 · Protect the accepted acquisition checkpoint
+
+- [ ] After the imaging process has stopped and its writes are complete, record a checksum of the image and preserve the corresponding mapfile version on healthy storage. Hash or verify a working copy from healthy storage before analyzing it. This proves copy identity, not source completeness; do not reread the failing source solely to obtain a comparison hash. If imaging is resumed, retain the earlier checkpoint identity and record the new image/mapfile pair separately.
+
 <a id="step-05"></a>
 
-### 05 · Recover from a working copy
+<a id="05--recover-from-a-working-copy"></a>
+
+### 07 · Recover from a working copy
 
 - [ ] Keep the original recovery image unchanged and create a working copy if capacity permits. Use [TestDisk](https://www.cgsecurity.org/wiki/TestDisk) for partition/filesystem investigation or [PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec) for file carving as appropriate. Save recovered files to a different healthy location and expect carving to lose some names or folder structure.
 
 <a id="step-06"></a>
 
-### 06 · Validate what was actually recovered
+<a id="06--validate-what-was-actually-recovered"></a>
 
-- [ ] Open representative documents, photos, databases, and archives with the user’s applications. Compare expected folders and counts where known, record unreadable regions and missing files, and retain the recovery image until the client accepts the result.
+### 08 · Validate what was actually recovered
+
+- [ ] Open representative documents, photos, databases, and archives with the user’s applications. Compare expected folders and counts where known, record unreadable regions and missing files, and retain the recovery image until the client accepts the result. Separate image coverage from file usability: a representative sample is a sample, not proof that every file is intact. For priority databases or archives, use the owning application's validation or [restore test](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) on a copy and report exactly what passed. Include expected but missing folders, failed sample checks and the agreed image-retention decision in the handoff.
 
 <a id="acceptance"></a>
 
-## ✅ Prove the result
+<a id="-prove-the-result"></a>
+
+## Verification
 
 - [ ] The original source has not been repaired or overwritten.
 - [ ] The image, mapfile, and device identities are recorded.
 - [ ] Recovered files are stored separately and checked for usability.
 - [ ] Unreadable data and incomplete recovery are explicitly reported.
+- [ ] The recorded mapfile coverage distinguishes successfully copied ranges from every remaining incomplete state.
+- [ ] The stopped acquisition checkpoint has an image checksum and its corresponding mapfile; working-copy identity is verified on healthy storage.
+- [ ] Priority-file/application tests and sample limits are recorded separately from byte coverage, with unresolved loss stated clearly.
 
 > [!WARNING]
 > **Pause this route and escalate when:**
@@ -124,7 +156,9 @@ lsblk -o NAME,SIZE,MODEL,SERIAL,TYPE,MOUNTPOINTS
 > - Source and destination cannot be distinguished with certainty.
 > - The data value calls for a specialist rather than further bench attempts.
 
-## 🔀 Continue with the evidence
+<a id="-continue-with-the-evidence"></a>
+
+## Related playbooks
 
 | Next playbook | What it resolves |
 | --- | --- |
@@ -133,17 +167,19 @@ lsblk -o NAME,SIZE,MODEL,SERIAL,TYPE,MOUNTPOINTS
 | [Build and refresh a technician rescue USB](boot-usb.md) | Keep verified recovery images, [Windows repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) media, and the INTA knowledge hub ready for offline use. |
 | [Close a repair with a clear client handoff](client-handoff.md) | Turn completed technical work into proof the customer can use, with clean access and an actionable service record. |
 
-Found a reusable improvement? [Contribute the correction](https://github.com/Herbertofury/INTA/wiki/Contribute) and include the test that proved it.
-
 <a id="sources"></a>
 
-## 🔎 Source trail
+<a id="-source-trail"></a>
+
+## Official sources
 
 <details>
-<summary>Official references and editorial review</summary>
+<summary>References and review notes</summary>
 
 - [GNU ddrescue manual](https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html)
 - [CGSecurity: PhotoRec data recovery](https://www.cgsecurity.org/wiki/PhotoRec)
+- [GNU ddrescue: mapfile, algorithm and status semantics](https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html#Mapfile-structure)
+- [INTA: Service Evidence](https://github.com/Herbertofury/INTA/wiki/Service-Evidence)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
@@ -151,6 +187,6 @@ Reviewed **2026-11-26**. Timing is a planning range. A successful command is evi
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)
 
 [← All playbooks](README.md) · [Live Wiki](https://github.com/Herbertofury/INTA/wiki) · [Contribution guide](https://github.com/Herbertofury/INTA/blob/main/CONTRIBUTING.md)

@@ -1,34 +1,38 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# ✨ AI assistance
+<a id="-ai-assistance"></a>
+
+# AI assistance
 
 Use sanitized evidence, verified sources, and reviewed commands throughout an assisted investigation.
 
-**5 tools** · [All disciplines](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**5 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
-> [!TIP]
-> **Choose by the job:** Explain evidence, review a script, or compare hypotheses?
+**Selection question:** Explain evidence, review a script, or compare hypotheses?
 
-## 🧭 Start with a workflow
+<a id="-start-with-a-workflow"></a>
+
+## Related playbooks
 
 - [Use AI as a careful troubleshooting copilot](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage)
 - [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage)
 
 <a id="compare-options"></a>
 
-## ⚖️ Compare the options
+<a id="️-compare-the-options"></a>
+<a id="-compare-the-options"></a>
+
+## Tool comparison
 
 | Tool | Choose it for | Platforms | Role |
 | --- | --- | --- | --- |
-| [ChatGPT](#chatgpt) | Explaining redacted errors, drafting job notes and reviewing a proposed troubleshooting plan. | Web, [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) | 🟢 Core |
-| [Claude Code](#claude-code) | Explaining logs and developing a reviewed automation script. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) | 🟢 Core |
-| [OpenAI Codex CLI](#codex-cli) | Reviewing or building technician scripts in a controlled working folder. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) | 🟢 Core |
-| [Gemini CLI](#gemini-cli) | An additional AI-assisted terminal workflow for reviewed scripts and documentation. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) | 🔬 Specialist |
-| [Ollama](#ollama) | A local AI assistant when the machine has the capacity and model files are available. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🔬 Specialist |
+| [ChatGPT](#chatgpt) | Explaining redacted errors, drafting job notes and reviewing a proposed troubleshooting plan. | Web, [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) | Core |
+| [Claude Code](#claude-code) | Explaining logs and developing a reviewed automation script. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) | Core |
+| [OpenAI Codex CLI](#codex-cli) | Reviewing or building technician scripts in a controlled working folder. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) | Core |
+| [Gemini CLI](#gemini-cli) | An additional AI-assisted terminal workflow for reviewed scripts and documentation. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) | Specialist |
+| [Ollama](#ollama) | A local AI assistant when the machine has the capacity and model files are available. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
-
----
 
 <a id="chatgpt"></a>
 
@@ -36,7 +40,7 @@ Core means an everyday candidate; Specialist means a focused advanced use; Evalu
 
 AI assistant available through the official web service and supported desktop apps.
 
-**[ChatGPT: official download →](https://chatgpt.com/download/)** · [Documentation](https://help.openai.com/) · [Publisher](https://chatgpt.com/)
+[Official download](https://chatgpt.com/download/) · [Documentation](https://help.openai.com/) · [Publisher](https://chatgpt.com/)
 
 | Decision | Detail |
 | --- | --- |
@@ -44,7 +48,7 @@ AI assistant available through the official web service and supported desktop ap
 | **Where it runs** | Web, [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) |
 | **How you use it** | web |
 | **Access / pricing** | Free and paid plans |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Use redacted evidence. A browser shortcut in the [Linux](https://www.kernel.org/) rescue environment is not a native offline [ChatGPT](https://chatgpt.com/) app.
 
@@ -59,9 +63,7 @@ AI assistant available through the official web service and supported desktop ap
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="claude-code"></a>
 
@@ -69,7 +71,7 @@ AI assistant available through the official web service and supported desktop ap
 
 Terminal-based coding assistant for navigating and changing a project.
 
-**[Claude Code: official download →](https://code.claude.com/docs/en/setup)** · [Documentation](https://code.claude.com/docs/en/overview) · [Publisher](https://code.claude.com/docs/en/overview)
+[Official download](https://code.claude.com/docs/en/setup) · [Documentation](https://code.claude.com/docs/en/overview) · [Publisher](https://code.claude.com/docs/en/overview)
 
 | Decision | Detail |
 | --- | --- |
@@ -77,7 +79,7 @@ Terminal-based coding assistant for navigating and changing a project.
 | **Where it runs** | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | installed |
 | **Access / pricing** | Account or API access according to current plan |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Use an isolated job workspace and keep client secrets out of prompts and public files.
 
@@ -92,9 +94,7 @@ Terminal-based coding assistant for navigating and changing a project.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="codex-cli"></a>
 
@@ -102,7 +102,7 @@ Terminal-based coding assistant for navigating and changing a project.
 
 Coding agent that works with local project files and tools through a terminal interface.
 
-**[OpenAI Codex CLI: official download →](https://github.com/openai/codex/releases/latest)** · [Documentation](https://developers.openai.com/codex/cli/) · [Publisher](https://github.com/openai/codex)
+[Official download](https://github.com/openai/codex/releases/latest) · [Documentation](https://developers.openai.com/codex/cli/) · [Publisher](https://github.com/openai/codex)
 
 | Decision | Detail |
 | --- | --- |
@@ -110,7 +110,7 @@ Coding agent that works with local project files and tools through a terminal in
 | **Where it runs** | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | installed |
 | **Access / pricing** | Open-source client; account or API usage terms apply |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Review generated commands and their effects before using them on client systems.
 
@@ -125,9 +125,7 @@ Coding agent that works with local project files and tools through a terminal in
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="gemini-cli"></a>
 
@@ -135,7 +133,7 @@ Coding agent that works with local project files and tools through a terminal in
 
 Open-source command-line agent with Google Gemini integration.
 
-**[Gemini CLI: official download →](https://github.com/google-gemini/gemini-cli/releases/latest)** · [Documentation](https://geminicli.com/docs/) · [Publisher](https://github.com/google-gemini/gemini-cli)
+[Official download](https://github.com/google-gemini/gemini-cli/releases/latest) · [Documentation](https://geminicli.com/docs/) · [Publisher](https://github.com/google-gemini/gemini-cli)
 
 | Decision | Detail |
 | --- | --- |
@@ -143,7 +141,7 @@ Open-source command-line agent with Google Gemini integration.
 | **Where it runs** | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | installed |
 | **Access / pricing** | Open-source client; account and usage limits vary |
-| **Selection role** | 🔬 Specialist |
+| **Selection role** | Specialist |
 
 > **Before using it:** Confirm the current authentication path, quotas and tool permissions before deployment.
 
@@ -158,9 +156,7 @@ Open-source command-line agent with Google Gemini integration.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="ollama"></a>
 
@@ -168,7 +164,7 @@ Open-source command-line agent with Google Gemini integration.
 
 Local model runtime with downloadable models and a local API.
 
-**[Ollama: official download →](https://ollama.com/download)** · [Documentation](https://docs.ollama.com/) · [Publisher](https://ollama.com/)
+[Official download](https://ollama.com/download) · [Documentation](https://docs.ollama.com/) · [Publisher](https://ollama.com/)
 
 | Decision | Detail |
 | --- | --- |
@@ -176,7 +172,7 @@ Local model runtime with downloadable models and a local API.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | installed |
 | **Access / pricing** | Runtime available freely; model licenses differ |
-| **Selection role** | 🔬 Specialist |
+| **Selection role** | Specialist |
 
 > **Before using it:** Offline use requires downloaded models. Measure CPU, RAM and GPU cost before adding it to a rescue image.
 
@@ -191,9 +187,9 @@ Local model runtime with downloadable models and a local API.
 
 </details>
 
-[↑ Compare the options](#compare-options)
+[Back to comparison](#compare-options)
 
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

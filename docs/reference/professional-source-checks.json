@@ -1,0 +1,325 @@
+{
+  "reviewedAt": "2026-11-26",
+  "scope": [
+    "remote-support",
+    "malware-removal",
+    "failing-drive"
+  ],
+  "athenaCommit": "7d529423b52d3cc6104ce7469eec358f5dc9b9ac",
+  "sources": [
+    {
+      "id": "remote-quick-assist",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+      "primary": "Microsoft Learn",
+      "review": "Direct page and targeted text inspected",
+      "supports": [
+        "Separate sharing and control approval",
+        "Local UAC participation can be required",
+        "No local logs on helper or sharer",
+        "Enterprise management boundaries and Microsoft-Support-only macOS route"
+      ]
+    },
+    {
+      "id": "remote-quick-assist-flow",
+      "url": "https://support.microsoft.com/en-us/windows/apps/solve-pc-problems-remotely-using-quick-assist",
+      "primary": "Microsoft Support",
+      "review": "Primary search page content inspected",
+      "supports": [
+        "Support code and Leave workflow",
+        "Browser and macOS support restricted to Microsoft Support"
+      ]
+    },
+    {
+      "id": "remote-google",
+      "url": "https://support.google.com/chrome/answer/1649523",
+      "primary": "Google Chrome Help",
+      "review": "Direct page inspected",
+      "supports": [
+        "One-use support code",
+        "Sharing confirmation every 30 minutes",
+        "PIN-based persistent access is a separate path",
+        "Disable remote connections differs from ending session"
+      ]
+    },
+    {
+      "id": "remote-rustdesk-permissions",
+      "url": "https://rustdesk.com/docs/en/self-host/client-configuration/advanced-settings/",
+      "primary": "RustDesk Documentation",
+      "review": "Direct page and targeted primary search inspected",
+      "supports": [
+        "Manual click and password approval modes",
+        "Temporary and permanent password selection",
+        "Separate incoming keyboard, clipboard, file-transfer and terminal capabilities"
+      ]
+    },
+    {
+      "id": "remote-rustdesk-client",
+      "url": "https://github.com/rustdesk/rustdesk",
+      "primary": "RustDesk official repository",
+      "review": "Direct page inspected",
+      "supports": [
+        "Repository identifies AGPL-3.0 license"
+      ]
+    },
+    {
+      "id": "remote-rustdesk-pro",
+      "url": "https://rustdesk.com/docs/en/self-host/rustdesk-server-pro/license/",
+      "primary": "RustDesk Documentation",
+      "review": "Direct official page inspected",
+      "supports": [
+        "Server Pro has a distinct product license path"
+      ]
+    },
+    {
+      "id": "remote-meshcentral",
+      "url": "https://docs.meshcentral.com/meshcentral/devicetabs/",
+      "primary": "MeshCentral Documentation",
+      "review": "Direct page and primary indexed content inspected",
+      "supports": [
+        "Consent/privacy-bar options",
+        "Desktop, Terminal and Files channels",
+        "Agent Events audit log"
+      ]
+    },
+    {
+      "id": "remote-meshcentral-license",
+      "url": "https://github.com/Ylianst/MeshCentral",
+      "primary": "MeshCentral official repository",
+      "review": "Direct page inspected",
+      "supports": [
+        "Repository identifies Apache-2.0 license"
+      ]
+    },
+    {
+      "id": "remote-anydesk-permissions",
+      "url": "https://support.anydesk.com/docs/settings",
+      "primary": "AnyDesk Support",
+      "review": "Primary search page content inspected",
+      "supports": [
+        "Interactive approval differs from unattended credentials",
+        "Effective permission profiles"
+      ]
+    },
+    {
+      "id": "remote-anydesk-files",
+      "url": "https://support.anydesk.com/file-manager-and-file-transfer",
+      "primary": "AnyDesk Support",
+      "review": "Primary search page content inspected",
+      "supports": [
+        "Dedicated desktop file manager",
+        "Transfer and clipboard permissions vary by selected route"
+      ]
+    },
+    {
+      "id": "remote-anydesk-commercial",
+      "url": "https://support.anydesk.com/docs/how-does-the-anydesk-licensing-model-work",
+      "primary": "AnyDesk Support",
+      "review": "Primary page search excerpt inspected, published 2026-05-05",
+      "supports": [
+        "Commercial initiating clients require a license; receive-only clients do not require an outgoing-client license",
+        "Plans vary by licensed users, connections and managed devices"
+      ]
+    },
+    {
+      "id": "security-safety-scanner",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+      "primary": "Microsoft Learn",
+      "review": "Direct page and exact log-path text inspected",
+      "supports": [
+        "On-demand and 10-day download expiry",
+        "Not a replacement for real-time protection",
+        "Detailed log at %SYSTEMROOT%\\debug\\msert.log"
+      ]
+    },
+    {
+      "id": "security-defender-offline",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+      "primary": "Microsoft Learn",
+      "review": "Direct page and prerequisite section inspected",
+      "supports": [
+        "Windows ARM and Windows Server excluded",
+        "Update path requires Defender Antivirus primary",
+        "Local administrative privileges and enabled WinRE",
+        "BitLocker preparation"
+      ]
+    },
+    {
+      "id": "security-recovery-options",
+      "url": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+      "primary": "Microsoft Support",
+      "review": "Direct page and current indexed content inspected",
+      "supports": [
+        "Installation media recovery for suspected malware",
+        "Recovery choices have different data-loss boundaries"
+      ]
+    },
+    {
+      "id": "security-clean-install",
+      "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/reinstall-windows-with-the-installation-media",
+      "primary": "Microsoft Support",
+      "review": "Primary search page content inspected",
+      "supports": [
+        "In-place and clean-install paths differ",
+        "Clean install removes files, applications and settings"
+      ]
+    },
+    {
+      "id": "security-cisa",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf",
+      "primary": "CISA/MS-ISAC official PDF",
+      "review": "Updated official PDF location verified in primary search index; root supplied primary recovery-section evidence; direct fetch returned 403.",
+      "supports": [
+        "Rebuild clean systems",
+        "Address affected accounts and persistence",
+        "Restore from offline backups without reinfecting clean systems"
+      ],
+      "limits": [
+        "Direct full-PDF readback was unavailable. The URL location is dated 2025-03; no unverified publication-version date is asserted."
+      ],
+      "title": "CISA #StopRansomware Guide"
+    },
+    {
+      "id": "recovery-ddrescue",
+      "url": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+      "primary": "GNU ddrescue official manual",
+      "review": "Primary search-indexed manual and mapfile section inspected; direct fetch timed out",
+      "supports": [
+        "Mapfile preserves acquired and remaining ranges",
+        "Block states + ? * / - differ from overall operation state",
+        "Good data recovery and resumable acquisition",
+        "Output size is not a coverage proof"
+      ],
+      "limits": [
+        "No new pinned-version promise; no physical failing-drive experiment claimed."
+      ]
+    },
+    {
+      "id": "athena-evidence-principles",
+      "url": "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md",
+      "primary": "ATHENA public research, immutable commit",
+      "review": "Local clone HEAD and complete guide inspected",
+      "supports": [
+        "Findings and coverage are distinct",
+        "Cancelled/inaccessible work cannot become a clean verdict",
+        "Owned resources need an actual stop/teardown result",
+        "Documented candidates remain unmeasured until tested"
+      ],
+      "limits": [
+        "Transferred evidence practices only; no prototype protection or performance claim adopted."
+      ]
+    },
+    {
+      "id": "requested-sysinternals-suite",
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+      "primary": "Microsoft Learn",
+      "review": "Current official page inspected; existing core record retained.",
+      "supports": [
+        "Suite download and troubleshooting collection; no duplicate tool record added"
+      ]
+    },
+    {
+      "id": "requested-wiztree-download",
+      "url": "https://diskanalyzer.com/download",
+      "primary": "Antibody Software / official WizTree site",
+      "review": "Direct current page inspected; installer and portable links resolved to the vendor CDN.",
+      "supports": [
+        "Official platform-specific Windows, macOS and Linux builds",
+        "Canonical download chooser retained instead of a pinned archive URL"
+      ],
+      "observedDownloadLinks": [
+        "https://diskanalyzer.com/files/wiztree_4_34_setup.exe",
+        "https://diskanalyzer.com/files/wiztree_4_34_portable.zip"
+      ],
+      "redirectHost": "antibodysoftware-17031.kxcdn.com",
+      "observedVersion": "Windows 4.34; macOS/Linux 1.01 shown on 2026-11-26",
+      "limits": [
+        "Binary bytes were not retrieved, hashed or run. The catalog does not pin the observed versions."
+      ]
+    },
+    {
+      "id": "requested-wiztree-use",
+      "url": "https://diskanalyzer.com/about",
+      "primary": "Antibody Software / official WizTree site",
+      "review": "Direct page inspected",
+      "supports": [
+        "Folder and largest-file disk-space analysis",
+        "Visual treemap and exports",
+        "Duplicate candidate criteria are name/size/optional date, not byte equality"
+      ]
+    },
+    {
+      "id": "requested-wiztree-business",
+      "url": "https://diskanalyzer.com/eula",
+      "primary": "Antibody Software / official WizTree EULA",
+      "review": "Current commercial and technician clauses inspected",
+      "supports": [
+        "Personal-use free version",
+        "Commercial coverage by business site and staff size",
+        "Technician use and client-staff use have separate boundaries"
+      ]
+    },
+    {
+      "id": "requested-wizfile-download",
+      "url": "https://antibody-software.com/wizfile/download",
+      "primary": "Antibody Software",
+      "review": "Direct current official download page inspected.",
+      "supports": [
+        "Installer and portable distribution choices described by the official page",
+        "Canonical download page is used without guessing a direct binary URL"
+      ],
+      "observedVersion": "3.15 shown on 2026-11-26",
+      "limits": [
+        "The extracted page did not expose a current binary-button URL. No guessed archive URL or claimed binary verification is used."
+      ]
+    },
+    {
+      "id": "requested-wizfile-use",
+      "url": "https://antibody-software.com/wizfile/quick-start",
+      "primary": "Antibody Software",
+      "review": "Direct official guide inspected",
+      "supports": [
+        "Filename and full-path search",
+        "Size/date filters",
+        "Background/tray lifecycle and File > Exit",
+        "Temporary startup option cleanup"
+      ]
+    },
+    {
+      "id": "requested-wizfile-business",
+      "url": "https://antibody-software.com/wizfile/eula",
+      "primary": "Antibody Software / official WizFile EULA",
+      "review": "Current commercial and technician clauses inspected; compared with older FAQ wording.",
+      "supports": [
+        "Personal-use free version",
+        "Commercial coverage by business site and staff size",
+        "Technician use and client-staff use have separate boundaries"
+      ],
+      "limits": [
+        "FAQ describes older individual-user licensing; catalog cites the current EULA and does not repeat that conflicting scope."
+      ]
+    }
+  ],
+  "openClaims": [
+    "Integrated file-transfer availability for every Quick Assist and Chrome Remote Desktop client was not established by the cited guides. Selection matrix requires an approved separate route or preflight instead of asserting parity.",
+    "No remote-client runtime, actual malware-removal, destructive rebuild or physical failing-drive test was performed for this editorial update.",
+    "Commercial plan features and editions must be checked for the actual deployment; no seat price or blanket commercial-use permission is asserted."
+  ],
+  "editorialChallengeResolved": [
+    "Preserved each original step title and exact command, and added explicit stable anchors so inserted steps cannot redirect legacy bookmarks.",
+    "Separated file-transfer routes requiring a client preflight from capabilities actually established by the primary guide.",
+    "Narrowed Defender Offline platform eligibility without changing existing tool identity or unrelated data.",
+    "Removed broad front-loaded boilerplate from the new user-facing guides; kept relevant limits with the corresponding decision rows."
+  ],
+  "requestedAdditions": {
+    "toolsBefore": 111,
+    "toolsAfter": 113,
+    "newIds": [
+      "wiztree",
+      "wizfile"
+    ],
+    "retainedCoreId": "sysinternals",
+    "methods": 45,
+    "jobs": 22,
+    "downloadPolicy": "Official canonical download pages, no guessed or fixed-version binary links."
+  }
+}

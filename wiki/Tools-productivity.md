@@ -1,15 +1,18 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# 🧰 Technician productivity
+<a id="-technician-productivity"></a>
+
+# Technician productivity
 
 Make everyday technician work clearer without leaving unnecessary software on customer machines.
 
-**8 tools** · [All disciplines](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**9 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
-> [!TIP]
-> **Choose by the job:** Inspect, document, transfer, or improve your own workspace?
+**Selection question:** Inspect, document, transfer, or improve your own workspace?
 
-## 🧭 Start with a workflow
+<a id="-start-with-a-workflow"></a>
+
+## Related playbooks
 
 - [Set up a dependable new workstation](https://github.com/Herbertofury/INTA/wiki/Job-new-pc)
 - [Run a useful workstation maintenance visit](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)
@@ -17,22 +20,24 @@ Make everyday technician work clearer without leaving unnecessary software on cu
 
 <a id="compare-options"></a>
 
-## ⚖️ Compare the options
+<a id="️-compare-the-options"></a>
+<a id="-compare-the-options"></a>
+
+## Tool comparison
 
 | Tool | Choose it for | Platforms | Role |
 | --- | --- | --- | --- |
-| [7-Zip](#7zip) | Packaging logs or extracting a trusted portable tool. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/) | 🟢 Core |
-| [Everything](#everything) | Locating files by name on a technician workstation. | [Windows](https://www.microsoft.com/windows) | 🟢 Core |
-| [KeePassXC](#keepassxc) | Keeping a protected technician vault with a deliberate sharing and backup process. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🟢 Core |
-| [LocalSend](#localsend) | Moving a selected log or tool between trusted devices on the same network. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), Android, iOS | 🟢 Core |
-| [Microsoft PowerToys](#powertoys) | Making the technician workstation easier to navigate and operate. | [Windows](https://www.microsoft.com/windows) | 🟢 Core |
-| [Notepad++](#notepadplusplus) | Reading logs and making deliberate configuration-file changes. | [Windows](https://www.microsoft.com/windows) | 🟢 Core |
-| [ShareX](#sharex) | Capturing a problem and producing clear technician documentation. | [Windows](https://www.microsoft.com/windows) | 🟢 Core |
-| [UniGetUI](#unigetui) | Reviewing available applications and updates in one technician interface. | [Windows](https://www.microsoft.com/windows) | 🟢 Core |
+| [7-Zip](#7zip) | Packaging logs or extracting a trusted portable tool. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/) | Core |
+| [Everything](#everything) | Locating files by name on a technician workstation. | [Windows](https://www.microsoft.com/windows) | Core |
+| [KeePassXC](#keepassxc) | Keeping a protected technician vault with a deliberate sharing and backup process. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
+| [LocalSend](#localsend) | Moving a selected log or tool between trusted devices on the same network. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), Android, iOS | Core |
+| [Microsoft PowerToys](#powertoys) | Making the technician workstation easier to navigate and operate. | [Windows](https://www.microsoft.com/windows) | Core |
+| [Notepad++](#notepadplusplus) | Reading logs and making deliberate configuration-file changes. | [Windows](https://www.microsoft.com/windows) | Core |
+| [ShareX](#sharex) | Capturing a problem and producing clear technician documentation. | [Windows](https://www.microsoft.com/windows) | Core |
+| [UniGetUI](#unigetui) | Reviewing available applications and updates in one technician interface. | [Windows](https://www.microsoft.com/windows) | Core |
+| [WizFile](#wizfile) | Locating a known file, log or recently changed group of files without guessing its folder. | [Windows](https://www.microsoft.com/windows) | Core |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
-
----
 
 <a id="7zip"></a>
 
@@ -40,7 +45,7 @@ Core means an everyday candidate; Specialist means a focused advanced use; Evalu
 
 Archive creation, extraction and integrity testing for common archive formats.
 
-**[7-Zip: official download →](https://www.7-zip.org/download.html)** · [Documentation](https://www.7-zip.org/faq.html) · [Publisher](https://www.7-zip.org/)
+[Official download](https://www.7-zip.org/download.html) · [Documentation](https://www.7-zip.org/faq.html) · [Publisher](https://www.7-zip.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -48,7 +53,7 @@ Archive creation, extraction and integrity testing for common archive formats.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Extract untrusted archives to an isolated directory and review their contents before execution.
 
@@ -64,9 +69,7 @@ Archive creation, extraction and integrity testing for common archive formats.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="everything"></a>
 
@@ -74,7 +77,7 @@ Archive creation, extraction and integrity testing for common archive formats.
 
 Fast indexed filename search on supported [Windows](https://www.microsoft.com/windows) filesystems.
 
-**[Everything: official download →](https://www.voidtools.com/downloads/)** · [Documentation](https://www.voidtools.com/support/everything/) · [Publisher](https://www.voidtools.com/)
+[Official download](https://www.voidtools.com/downloads/) · [Documentation](https://www.voidtools.com/support/everything/) · [Publisher](https://www.voidtools.com/)
 
 | Decision | Detail |
 | --- | --- |
@@ -82,7 +85,7 @@ Fast indexed filename search on supported [Windows](https://www.microsoft.com/wi
 | **Where it runs** | [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | installed |
 | **Access / pricing** | Freeware |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** The index and optional service are persistent components; avoid indexing sensitive client data unnecessarily.
 
@@ -98,9 +101,7 @@ Fast indexed filename search on supported [Windows](https://www.microsoft.com/wi
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="keepassxc"></a>
 
@@ -108,7 +109,7 @@ Fast indexed filename search on supported [Windows](https://www.microsoft.com/wi
 
 Local encrypted password database with cross-platform clients.
 
-**[KeePassXC: official download →](https://keepassxc.org/download/)** · [Documentation](https://keepassxc.org/docs/) · [Publisher](https://keepassxc.org/)
+[Official download](https://keepassxc.org/download/) · [Documentation](https://keepassxc.org/docs/) · [Publisher](https://keepassxc.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -116,7 +117,7 @@ Local encrypted password database with cross-platform clients.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Store the database and recovery material outside the public repository; control who receives a copy.
 
@@ -132,9 +133,7 @@ Local encrypted password database with cross-platform clients.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="localsend"></a>
 
@@ -142,7 +141,7 @@ Local encrypted password database with cross-platform clients.
 
 Cross-platform local-network file transfer without a cloud account.
 
-**[LocalSend: official download →](https://localsend.org/download)** · [Documentation](https://github.com/localsend/localsend) · [Publisher](https://localsend.org/)
+[Official download](https://localsend.org/download) · [Documentation](https://github.com/localsend/localsend) · [Publisher](https://localsend.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -150,7 +149,7 @@ Cross-platform local-network file transfer without a cloud account.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), Android, iOS |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Confirm the recipient device and network; local transfer is not backup.
 
@@ -166,9 +165,7 @@ Cross-platform local-network file transfer without a cloud account.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="powertoys"></a>
 
@@ -176,7 +173,7 @@ Cross-platform local-network file transfer without a cloud account.
 
 Modular [Windows](https://www.microsoft.com/windows) utilities including window layout, file naming and input helpers.
 
-**[Microsoft PowerToys: official download →](https://github.com/microsoft/PowerToys/releases/latest)** · [Documentation](https://learn.microsoft.com/en-us/windows/powertoys/) · [Publisher](https://learn.microsoft.com/en-us/windows/powertoys/)
+[Official download](https://github.com/microsoft/PowerToys/releases/latest) · [Documentation](https://learn.microsoft.com/en-us/windows/powertoys/) · [Publisher](https://learn.microsoft.com/en-us/windows/powertoys/)
 
 | Decision | Detail |
 | --- | --- |
@@ -184,7 +181,7 @@ Modular [Windows](https://www.microsoft.com/windows) utilities including window 
 | **Where it runs** | [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Enable only the modules needed; client machines do not need a permanent utility suite for a one-time job.
 
@@ -200,9 +197,7 @@ Modular [Windows](https://www.microsoft.com/windows) utilities including window 
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="notepadplusplus"></a>
 
@@ -210,7 +205,7 @@ Modular [Windows](https://www.microsoft.com/windows) utilities including window 
 
 [Windows](https://www.microsoft.com/windows) text editor with searching, syntax support and large text-file workflows.
 
-**[Notepad++: official download →](https://notepad-plus-plus.org/downloads/)** · [Documentation](https://npp-user-manual.org/) · [Publisher](https://notepad-plus-plus.org/)
+[Official download](https://notepad-plus-plus.org/downloads/) · [Documentation](https://npp-user-manual.org/) · [Publisher](https://notepad-plus-plus.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -218,7 +213,7 @@ Modular [Windows](https://www.microsoft.com/windows) utilities including window 
 | **Where it runs** | [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | portable |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 <details>
 <summary>Source, review date, and selection history</summary>
@@ -232,9 +227,7 @@ Modular [Windows](https://www.microsoft.com/windows) utilities including window 
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="sharex"></a>
 
@@ -242,7 +235,7 @@ Modular [Windows](https://www.microsoft.com/windows) utilities including window 
 
 Screenshots, recordings and configurable local output workflows.
 
-**[ShareX: official download →](https://github.com/ShareX/ShareX/releases/latest)** · [Documentation](https://github.com/ShareX/ShareX) · [Publisher](https://getsharex.com/)
+[Official download](https://github.com/ShareX/ShareX/releases/latest) · [Documentation](https://github.com/ShareX/ShareX) · [Publisher](https://getsharex.com/)
 
 | Decision | Detail |
 | --- | --- |
@@ -250,7 +243,7 @@ Screenshots, recordings and configurable local output workflows.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Choose local saving and review upload actions before capturing client screens.
 
@@ -266,9 +259,7 @@ Screenshots, recordings and configurable local output workflows.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="unigetui"></a>
 
@@ -276,7 +267,7 @@ Screenshots, recordings and configurable local output workflows.
 
 Graphical management interface for multiple software package managers.
 
-**[UniGetUI: official download →](https://github.com/Devolutions/UniGetUI/releases/latest)** · [Documentation](https://github.com/Devolutions/UniGetUI) · [Publisher](https://github.com/Devolutions/UniGetUI)
+[Official download](https://github.com/Devolutions/UniGetUI/releases/latest) · [Documentation](https://github.com/Devolutions/UniGetUI) · [Publisher](https://github.com/Devolutions/UniGetUI)
 
 | Decision | Detail |
 | --- | --- |
@@ -284,7 +275,7 @@ Graphical management interface for multiple software package managers.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Package-source trust and application licensing still depend on each upstream package.
 
@@ -300,9 +291,44 @@ Graphical management interface for multiple software package managers.
 
 </details>
 
-[↑ Compare the options](#compare-options)
+[Back to comparison](#compare-options)
+
+<a id="wizfile"></a>
+
+## [WizFile](https://antibody-software.com/wizfile/)
+
+Fast filename and path lookup with size, date and other filters on [Windows](https://www.microsoft.com/windows).
+
+[Official download](https://antibody-software.com/wizfile/download) · [Documentation](https://antibody-software.com/wizfile/quick-start) · [Publisher](https://antibody-software.com/wizfile/)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Locating a known file, log or recently changed group of files without guessing its folder. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows) |
+| **How you use it** | portable / installed |
+| **Access / pricing** | Free for personal use; commercial supporter or enterprise license required by business site and staff size. |
+| **Selection role** | Core |
+
+> **Before using it:** Search results do not establish that a file is safe or disposable. The close button can leave monitoring active in the tray; use File > Exit for a finished one-time job and remove any case-only startup setting. Consult the current EULA for commercial scope; older FAQ wording differs.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://antibody-software.com/wizfile/eula)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Documentation reviewed; not an INTA runtime certification
+- **Selection provenance:**
+  - Official project or vendor documentation
+  - Explicit INTA user request
+  - https://antibody-software.com/wizfile/download
+  - https://antibody-software.com/wizfile/eula
+  - https://antibody-software.com/wizfile/quick-start
+
+</details>
+
+[Back to comparison](#compare-options)
 
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

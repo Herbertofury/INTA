@@ -1,5 +1,3 @@
-**🧭 INTA Computer Services · Service Atlas**
+**INTA Computer Services**
 
-[Hub](https://herbertofury.github.io/INTA/) · [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Contribute](https://github.com/Herbertofury/INTA/wiki/Contribute)
-
-**Find the right path. Leave a better one.**
+[Hub](https://herbertofury.github.io/INTA/) · [Standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Interface design](https://github.com/Herbertofury/INTA/wiki/Interface-Design) · [Contribute](https://github.com/Herbertofury/INTA/wiki/Contribute)

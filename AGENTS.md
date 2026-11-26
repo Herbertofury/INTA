@@ -2,6 +2,8 @@
 
 Read [Knowledge Standards](docs/knowledge-standards.md) before changing the hub, guides or generated wiki. Use [Contributing](CONTRIBUTING.md) for the edit → proof → publication path. Preserve existing content, working features and the current project checkpoint.
 
+For visual work, follow [Interface Design](docs/interface-design.md): a compact, neutral professional workspace informed by the linked [Athena](https://github.com/Herbertofury/Athena) references. The rejected green palette, oversized cards, decorative gradients and promotional hero must not return. Preserve every tool, guide, field and interaction while changing their presentation.
+
 ## Canonical inputs
 
 - [Tool catalog](data/tools.json): stable IDs, official routes, platform and pricing boundaries, editorial review evidence.

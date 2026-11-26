@@ -15,28 +15,34 @@
     "steps": [
       {
         "title": "Establish the working boundary",
-        "detail": "Identify the device, operating system, asset label, contact, business impact, and maintenance window. Ask whether work is saved and whether the device contains the only copy of important data. Use the private ticket for identifying information; this public wiki stays generic."
+        "detail": "Identify the device, operating system, asset label, contact, business impact, and maintenance window. Ask whether work is saved and whether the device contains the only copy of important data. Use the private ticket for identifying information; this public wiki stays generic.",
+        "anchor": "step-01"
       },
       {
         "title": "Choose the urgent branch",
-        "detail": "Encryption spreading or a compromise alert goes to ransomware response. Clicking drives, vanishing volumes, repeated I/O errors, or a device dropped in liquid go to the failing-drive or hardware path before scans, repairs, or repeated boots. A widespread outage goes to the outage guide."
+        "detail": "Encryption spreading or a compromise alert goes to ransomware response. Clicking drives, vanishing volumes, repeated I/O errors, or a device dropped in liquid go to the failing-drive or hardware path before scans, repairs, or repeated boots. A widespread outage goes to the outage guide.",
+        "anchor": "step-02"
       },
       {
         "title": "Capture the smallest useful baseline",
         "detail": "Record the exact error text and time, OS build, recent changes, uptime, free space, and Task Manager CPU/memory/disk usage during the symptom. On Windows, open Reliability Monitor from Run with the command below to correlate failures with changes; save evidence to the private service record.",
-        "command": "perfmon /rel"
+        "command": "perfmon /rel",
+        "anchor": "step-03"
       },
       {
         "title": "Reproduce and narrow the scope",
-        "detail": "Test whether the failure affects one user, one app, one device, or everyone. Compare with a working account or device where practical. Change one variable at a time and note whether it changes the symptom."
+        "detail": "Test whether the failure affects one user, one app, one device, or everyone. Compare with a working account or device where practical. Change one variable at a time and note whether it changes the symptom.",
+        "anchor": "step-04"
       },
       {
         "title": "Protect a rollback point",
-        "detail": "Confirm a usable backup or export of the data that the next step may affect. Record the current configuration before changing it. A restore point is useful for some system changes but is not a replacement for a file backup."
+        "detail": "Confirm a usable backup or export of the data that the next step may affect. Record the current configuration before changing it. A restore point is useful for some system changes but is not a replacement for a file backup.",
+        "anchor": "step-05"
       },
       {
         "title": "Pick one guide and define success",
-        "detail": "Choose the closest job below and write a concrete acceptance test, such as opening the real accounting file, completing a print job, or restoring a document. Capture each change and result so another technician can resume without repeating failed work."
+        "detail": "Choose the closest job below and write a concrete acceptance test, such as opening the real accounting file, completing a print job, or restoring a document. Capture each change and result so another technician can resume without repeating failed work.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -85,34 +91,58 @@
     "steps": [
       {
         "title": "Contain and preserve the story",
-        "detail": "Disconnect the affected endpoint from ordinary network access if compromise is suspected. Record detection names, paths, timestamps, symptoms, and recent downloads. Use a clean device for account changes. If business systems or multiple endpoints are involved, switch to the incident-response guide."
+        "detail": "Disconnect the affected endpoint from ordinary network access if compromise is suspected. Record detection names, paths, timestamps, symptoms, and recent downloads. Use a clean device for account changes. If business systems or multiple endpoints are involved, switch to the incident-response guide.",
+        "anchor": "step-01"
+      },
+      {
+        "title": "Choose the cleanup, incident or rebuild path",
+        "detail": "Keep an isolated, understood browser or unwanted-software case on the routine-cleanup path. Move active encryption, privileged-account compromise or multiple affected devices to the incident owner. If detections recur, the entry point remains open or the trusted system baseline cannot be established, preserve the findings and prepare a clean rebuild; do not keep cycling scanners as a substitute for a recovery decision.",
+        "anchor": "step-choose-the-cleanup-incident-or-rebuild-path"
       },
       {
         "title": "Prepare trustworthy scanners",
-        "detail": "Get tools from the official links on a clean computer and verify signatures where available. Keep one managed real-time antivirus product; use any second-opinion scanner as an on-demand tool. Download a fresh Safety Scanner for the case because its package expires after 10 days."
+        "detail": "Get tools from the official links on a clean computer and verify signatures where available. Keep one managed real-time antivirus product; use any second-opinion scanner as an on-demand tool. Download a fresh Safety Scanner for the case because its package expires after 10 days.",
+        "anchor": "step-02"
       },
       {
         "title": "Run the primary cleanup",
-        "detail": "Update the installed endpoint protection through a controlled connection or approved update channel, run its full scan, and preserve the results. Quarantine identified threats rather than manually deleting unfamiliar files. Reboot when the product requests it and record its post-reboot status."
+        "detail": "Update the installed endpoint protection through a controlled connection or approved update channel, run its full scan, and preserve the results. Quarantine identified threats rather than manually deleting unfamiliar files. Reboot when the product requests it and record its post-reboot status.",
+        "anchor": "step-03"
       },
       {
         "title": "Use an offline or focused second check",
-        "detail": "If persistence is suspected, save work, make the BitLocker recovery key available, and run Microsoft Defender Offline from Windows Security > Virus & threat protection > Scan options on a supported system. For unwanted browser software, use AdwCleaner and inspect proposed changes before applying them."
+        "detail": "If persistence is suspected, save work, make the BitLocker recovery key available, and run Microsoft Defender Offline from Windows Security > Virus & threat protection > Scan options on a supported system. For unwanted browser software, use AdwCleaner and inspect proposed changes before applying them. Check the actual platform first: Microsoft Defender Offline does not support Windows on ARM or Windows Server. Its update path requires Microsoft Defender Antivirus as the primary antivirus, and the recovery environment must be available. Follow the documented BitLocker preparation and verify protection is restored afterward.",
+        "anchor": "step-04"
+      },
+      {
+        "title": "Reconcile findings with scan coverage",
+        "detail": "Perform scan coverage reconciliation for every run: record product and engine or intelligence version where exposed, scan mode, scope, start/end time, completion or cancellation, inaccessible areas, detections and disposition. Retain the product report; Microsoft Safety Scanner writes detailed results to %SYSTEMROOT%\\debug\\msert.log. A timeout, blocked scan or unscanned location remains incomplete even when no threat is reported. Reconcile repeated detections with the specific path, item and action rather than declaring a clean result from the headline alone.",
+        "anchor": "step-reconcile-findings-with-scan-coverage"
       },
       {
         "title": "Review persistence and accounts",
-        "detail": "Use Autoruns to inspect startup items and verify suspicious publishers, locations, and signatures. Review browser extensions, notification permissions, proxy settings, and unexpected remote-access agents. Disable only entries tied to evidence, retain an export, and avoid uploading client files to public scanners."
+        "detail": "Use Autoruns to inspect startup items and verify suspicious publishers, locations, and signatures. Review browser extensions, notification permissions, proxy settings, and unexpected remote-access agents. Disable only entries tied to evidence, retain an export, and avoid uploading client files to public scanners.",
+        "anchor": "step-05"
       },
       {
         "title": "Close the entry point and retest",
-        "detail": "Patch the affected software, restore the intended browser/search settings, and remove unwanted software. From a known-clean device, rotate affected credentials and revoke suspect sessions as appropriate. If you cannot establish system integrity, rebuild from trusted media and restore validated data."
+        "detail": "Patch the affected software, restore the intended browser/search settings, and remove unwanted software. From a known-clean device, rotate affected credentials and revoke suspect sessions as appropriate. If you cannot establish system integrity, rebuild from trusted media and restore validated data.",
+        "anchor": "step-06"
+      },
+      {
+        "title": "Prepare and prove a trusted rebuild when required",
+        "detail": "Use clean rebuild acceptance when system integrity cannot be established. Before any destructive installation, identify the exact target, preserve required evidence and usable data, obtain recovery material through the approved store, and agree on the data/application restoration scope. Create installation media from the official source on a known-clean device and follow the clean-install procedure. Reinstall applications from trusted sources, restore validated data deliberately, update the system and endpoint protection, and prove the original customer task. Document unresolved account exposure separately; a reinstalled endpoint does not reset stolen credentials or revoke cloud sessions. Use Service Evidence for the before-wipe and return-to-service checks.",
+        "anchor": "step-prepare-and-prove-a-trusted-rebuild-when-required"
       }
     ],
     "verify": [
       "The primary security product is healthy and updated after reboot.",
       "Follow-up scans and persistence review show no unresolved detections.",
       "The user can complete the original task and browser settings remain stable.",
-      "Any account exposure has a documented response, not only a clean scan."
+      "Any account exposure has a documented response, not only a clean scan.",
+      "Each scan has a completion state, scope, findings and explicit coverage limits; incomplete work is not recorded as clean.",
+      "If rebuilt, the target, preserved data/evidence, trusted media, restored applications, endpoint health and customer task test are recorded.",
+      "Reconnection and restored data have been assessed against the original entry point; credentials and cloud sessions have a separate resolution owner."
     ],
     "stopIf": [
       "Ransomware, privileged account compromise, or lateral spread is suspected.",
@@ -130,6 +160,26 @@
       {
         "title": "Microsoft Sysinternals: Autoruns",
         "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+      },
+      {
+        "title": "Microsoft: recovery options for suspected malware",
+        "url": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      },
+      {
+        "title": "Microsoft: reinstall with installation media",
+        "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/reinstall-windows-with-the-installation-media"
+      },
+      {
+        "title": "CISA: #StopRansomware Guide, recovery checklist",
+        "url": "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf"
+      },
+      {
+        "title": "ATHENA: findings, coverage and explicit resource ownership",
+        "url": "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md"
+      },
+      {
+        "title": "INTA: Service Evidence",
+        "url": "https://github.com/Herbertofury/INTA/wiki/Service-Evidence"
       }
     ],
     "related": [
@@ -154,27 +204,33 @@
     "steps": [
       {
         "title": "Isolate affected systems",
-        "detail": "Disconnect affected network links or isolate the relevant switch ports and wireless access. Coordinate the action with the incident lead so essential services are understood. Do not connect backup media or use the compromised endpoint for routine communications."
+        "detail": "Disconnect affected network links or isolate the relevant switch ports and wireless access. Coordinate the action with the incident lead so essential services are understood. Do not connect backup media or use the compromised endpoint for routine communications.",
+        "anchor": "step-01"
       },
       {
         "title": "Preserve evidence without allowing spread",
-        "detail": "Keep the device powered on after network isolation when feasible so trained responders can capture volatile evidence. If isolation is impossible and harm is continuing, containment may require shutdown. Record the decision, visible symptoms, time, and who acted."
+        "detail": "Keep the device powered on after network isolation when feasible so trained responders can capture volatile evidence. If isolation is impossible and harm is continuing, containment may require shutdown. Record the decision, visible symptoms, time, and who acted.",
+        "anchor": "step-02"
       },
       {
         "title": "Map the impact",
-        "detail": "List affected devices, identities, remote-access services, shares, cloud accounts, and backup systems. Preserve relevant logs before retention expires. Keep an untouched copy of original evidence and work from copies; do not run a broad cleanup that destroys the investigation trail."
+        "detail": "List affected devices, identities, remote-access services, shares, cloud accounts, and backup systems. Preserve relevant logs before retention expires. Keep an untouched copy of original evidence and work from copies; do not run a broad cleanup that destroys the investigation trail.",
+        "anchor": "step-03"
       },
       {
         "title": "Protect the recovery environment",
-        "detail": "Use a known-clean administrative device and a separate recovery network. Verify backup availability without exposing backups to the affected environment. Coordinate credential resets, session revocation, and remote-access restrictions with the incident lead so the attacker does not retain access."
+        "detail": "Use a known-clean administrative device and a separate recovery network. Verify backup availability without exposing backups to the affected environment. Coordinate credential resets, session revocation, and remote-access restrictions with the incident lead so the attacker does not retain access.",
+        "anchor": "step-04"
       },
       {
         "title": "Rebuild in dependency order",
-        "detail": "Restore identity, network, storage, and critical business services according to the agreed recovery plan. Rebuild affected systems from trusted images where required. Scan and validate restored data, close the identified entry point, and prevent old vulnerable configurations from being reintroduced."
+        "detail": "Restore identity, network, storage, and critical business services according to the agreed recovery plan. Rebuild affected systems from trusted images where required. Scan and validate restored data, close the identified entry point, and prevent old vulnerable configurations from being reintroduced.",
+        "anchor": "step-05"
       },
       {
         "title": "Rejoin only after explicit acceptance",
-        "detail": "Test critical workflows in the clean recovery environment and monitor for recurrence. The incident lead decides when systems may reconnect and when the incident is closed. Record remaining unknowns, recovery gaps, owners, and follow-up actions."
+        "detail": "Test critical workflows in the clean recovery environment and monitor for recurrence. The incident lead decides when systems may reconnect and when the incident is closed. Record remaining unknowns, recovery gaps, owners, and follow-up actions.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -220,40 +276,49 @@
       "sysinternals",
       "crystaldiskinfo",
       "hwinfo",
-      "windows-performance-toolkit"
+      "windows-performance-toolkit",
+      "wiztree",
+      "wizfile"
     ],
     "startHere": "Reproduce the exact slow action and measure it before changing anything. Ask whether the slowdown began after an update, new drive, app, or security product.",
     "steps": [
       {
         "title": "Capture a repeatable baseline",
-        "detail": "Time sign-in and the specific failing task separately. Note AC power, current applications, storage connections, network state, and background updates. Repeat the same short workload after each change so an apparent improvement is comparable."
+        "detail": "Time sign-in and the specific failing task separately. Note AC power, current applications, storage connections, network state, and background updates. Repeat the same short workload after each change so an apparent improvement is comparable.",
+        "anchor": "step-01"
       },
       {
         "title": "Inspect pressure while the lag happens",
         "detail": "Use Task Manager or Resource Monitor to identify CPU, committed memory, disk response, and network pressure. A high percentage alone is not a diagnosis: correlate it with the lag and the responsible process, path, or service.",
-        "command": "resmon"
+        "command": "resmon",
+        "anchor": "step-02"
       },
       {
         "title": "Check storage and hardware first",
-        "detail": "Review drive health and temperatures. If a disk disappears, clicks, reports I/O errors, or stalls the system when accessed, stop repair scans and use the failing-drive guide. Check a suspect external drive separately after outstanding writes have finished; preserve the user’s files."
+        "detail": "Review drive health and temperatures. If a disk disappears, clicks, reports I/O errors, or stalls the system when accessed, stop repair scans and use the failing-drive guide. Check a suspect external drive separately after outstanding writes have finished; preserve the user’s files. For a healthy drive with a capacity problem, use WizTree to identify the largest folders and distinguish allocation from the specific files the user needs. Use WizFile when the question is where a named file, log or recently changed file lives. Neither lookup proves that an item should be deleted; record the owner and retention need before using supported cleanup controls.",
+        "anchor": "step-03"
       },
       {
         "title": "Trace the responsible application",
-        "detail": "Use Process Explorer for process detail and a short, filtered Process Monitor capture for file or registry stalls. Capture only the affected interval, stop recording, and save the trace privately. Inspect missing paths, repeated failures, or excessive work before choosing a fix."
+        "detail": "Use Process Explorer for process detail and a short, filtered Process Monitor capture for file or registry stalls. Capture only the affected interval, stop recording, and save the trace privately. Inspect missing paths, repeated failures, or excessive work before choosing a fix. Microsoft Sysinternals Suite supplies these process and I/O diagnostics; it answers a different question from a disk-space treemap or filename lookup.",
+        "anchor": "step-04"
       },
       {
         "title": "Apply one reversible correction",
-        "detail": "Fix the observed cause: a failing device, incompatible driver, misconfigured backup, unwanted startup app, or software regression. Use vendor-supported settings. Do not apply blanket registry cleaners, remove needed services, or disable endpoint protection simply to improve a benchmark."
+        "detail": "Fix the observed cause: a failing device, incompatible driver, misconfigured backup, unwanted startup app, or software regression. Use vendor-supported settings. Do not apply blanket registry cleaners, remove needed services, or disable endpoint protection simply to improve a benchmark.",
+        "anchor": "step-05"
       },
       {
         "title": "Measure and keep the evidence",
-        "detail": "Repeat the baseline workload with the same data and conditions. Check functionality, responsiveness, and resource use together. Restore changes that did not help and record the measured before/after result plus anything still reproducible."
+        "detail": "Repeat the baseline workload with the same data and conditions. Check functionality, responsiveness, and resource use together. Restore changes that did not help and record the measured before/after result plus anything still reproducible.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
       "The original task is measurably faster or the root cause is clearly identified.",
       "Required applications, protection, backup, and peripherals still work.",
-      "The improvement survives a restart and the normal user workload."
+      "The improvement survives a restart and the normal user workload.",
+      "If capacity or file location was part of the problem, the identified path, ownership decision and before/after free-space or task result are recorded."
     ],
     "stopIf": [
       "Storage-health symptoms appear during testing.",
@@ -267,6 +332,18 @@
       {
         "title": "Microsoft Sysinternals: Process Monitor",
         "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon"
+      },
+      {
+        "title": "Microsoft: Sysinternals Suite",
+        "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite"
+      },
+      {
+        "title": "WizTree: disk-space analysis and export",
+        "url": "https://diskanalyzer.com/about"
+      },
+      {
+        "title": "WizFile: search filters and shutdown",
+        "url": "https://antibody-software.com/wizfile/quick-start"
       }
     ],
     "related": [
@@ -293,29 +370,35 @@
     "steps": [
       {
         "title": "Record the exact failure",
-        "detail": "Capture the app or Windows feature that fails, error code, OS build, recent changes, and available disk space. Save relevant event entries before repair. Confirm this is a Windows component problem rather than an application-only fault."
+        "detail": "Capture the app or Windows feature that fails, error code, OS build, recent changes, and available disk space. Save relevant event entries before repair. Confirm this is a Windows component problem rather than an application-only fault.",
+        "anchor": "step-01"
       },
       {
         "title": "Prepare the online Windows session",
-        "detail": "Save work, finish a pending restart if practical, connect stable power, and open Terminal or Command Prompt as administrator. These commands target the currently running Windows installation. Do not paste them into WinRE expecting them to repair an offline Windows volume."
+        "detail": "Save work, finish a pending restart if practical, connect stable power, and open Terminal or Command Prompt as administrator. These commands target the currently running Windows installation. Do not paste them into WinRE expecting them to repair an offline Windows volume.",
+        "anchor": "step-02"
       },
       {
         "title": "Repair the component store",
         "detail": "Run DISM and wait for its final result. If the repair source cannot be found, retain the error code and use Microsoft’s matching-source guidance; do not download replacement DLLs from a third-party site.",
-        "command": "DISM.exe /Online /Cleanup-Image /RestoreHealth"
+        "command": "DISM.exe /Online /Cleanup-Image /RestoreHealth",
+        "anchor": "step-03"
       },
       {
         "title": "Check protected system files",
         "detail": "After DISM completes successfully, run System File Checker. Record whether corruption was absent, repaired, or unresolved. Keep the relevant CBS and DISM log excerpts privately if escalation is needed.",
-        "command": "sfc /scannow"
+        "command": "sfc /scannow",
+        "anchor": "step-04"
       },
       {
         "title": "Reboot and retest the original feature",
-        "detail": "Reproduce the exact failure from intake. Check Windows Update and Reliability Monitor for new errors. A successful command exit is evidence about servicing, not proof that the user’s problem is solved."
+        "detail": "Reproduce the exact failure from intake. Check Windows Update and Reliability Monitor for new errors. A successful command exit is evidence about servicing, not proof that the user’s problem is solved.",
+        "anchor": "step-05"
       },
       {
         "title": "Escalate from the remaining evidence",
-        "detail": "If a stable system still has unresolved servicing problems, evaluate a supported repair reinstall that preserves apps and files. Confirm backup, edition, language, recovery keys, available space, and the actual preservation options before proceeding. Repeated corruption returns to hardware diagnostics."
+        "detail": "If a stable system still has unresolved servicing problems, evaluate a supported repair reinstall that preserves apps and files. Confirm backup, edition, language, recovery keys, available space, and the actual preservation options before proceeding. Repeated corruption returns to hardware diagnostics.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -359,27 +442,33 @@
     "steps": [
       {
         "title": "Confirm the failure and update policy",
-        "detail": "Read Settings > Windows Update > Update history. Determine whether the failure is download, installation, or reboot rollback. On managed devices, check the assigned update policy and maintenance window before overriding settings."
+        "detail": "Read Settings > Windows Update > Update history. Determine whether the failure is download, installation, or reboot rollback. On managed devices, check the assigned update policy and maintenance window before overriding settings.",
+        "anchor": "step-01"
       },
       {
         "title": "Check the simple prerequisites",
-        "detail": "Verify stable power, free space, correct time, functioning network/proxy, and whether a restart is pending. Compare with another device on the same network to distinguish local servicing from a broader service issue."
+        "detail": "Verify stable power, free space, correct time, functioning network/proxy, and whether a restart is pending. Compare with another device on the same network to distinguish local servicing from a broader service issue.",
+        "anchor": "step-02"
       },
       {
         "title": "Run the supported troubleshooter",
-        "detail": "Open Get Help and run the Windows Update troubleshooter. Capture its findings and restart when appropriate, then retry the specific update once. If the same failure persists, use the new evidence rather than looping identical retries."
+        "detail": "Open Get Help and run the Windows Update troubleshooter. Capture its findings and restart when appropriate, then retry the specific update once. If the same failure persists, use the new evidence rather than looping identical retries.",
+        "anchor": "step-03"
       },
       {
         "title": "Follow the exact error path",
-        "detail": "Use Microsoft’s troubleshooting reference for the captured code. Inspect relevant logs and service state. A cache reset or security-product change should be tied to a specific diagnosis and have a recovery plan; avoid one-click scripts that reset unrelated settings."
+        "detail": "Use Microsoft’s troubleshooting reference for the captured code. Inspect relevant logs and service state. A cache reset or security-product change should be tied to a specific diagnosis and have a recovery plan; avoid one-click scripts that reset unrelated settings.",
+        "anchor": "step-04"
       },
       {
         "title": "Repair servicing if indicated",
-        "detail": "For component-store or protected-file errors on a healthy drive, follow the Windows repair guide. If install rollback names a driver, check the device manufacturer’s supported update or rollback path instead of layering more repair commands."
+        "detail": "For component-store or protected-file errors on a healthy drive, follow the Windows repair guide. If install rollback names a driver, check the device manufacturer’s supported update or rollback path instead of layering more repair commands.",
+        "anchor": "step-05"
       },
       {
         "title": "Validate the installed result",
-        "detail": "Confirm the intended update appears in history and the resulting OS build is correct. Test the user’s business applications, network, printing, and restart. Record any deferred update with its cause, owner, and next review."
+        "detail": "Confirm the intended update appears in history and the resulting OS build is correct. Test the user’s business applications, network, printing, and restart. Record any deferred update with its cause, owner, and next review.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -427,27 +516,33 @@
     "steps": [
       {
         "title": "Identify the failure stage",
-        "detail": "Check whether the system powers on, completes firmware POST, detects its drive, reaches Windows Boot Manager, or fails after the Windows logo. Disconnect only nonessential peripherals. A missing drive or hardware error goes to hardware or failing-drive diagnosis."
+        "detail": "Check whether the system powers on, completes firmware POST, detects its drive, reaches Windows Boot Manager, or fails after the Windows logo. Disconnect only nonessential peripherals. A missing drive or hardware error goes to hardware or failing-drive diagnosis.",
+        "anchor": "step-01"
       },
       {
         "title": "Protect data and encryption access",
-        "detail": "Confirm the BitLocker recovery key is available through the customer’s approved account or management system. Never publish it in the wiki or ticket attachments visible to unrelated staff. Do not clear the TPM, initialize the disk, or reinstall over the only data copy."
+        "detail": "Confirm the BitLocker recovery key is available through the customer’s approved account or management system. Never publish it in the wiki or ticket attachments visible to unrelated staff. Do not clear the TPM, initialize the disk, or reinstall over the only data copy.",
+        "anchor": "step-02"
       },
       {
         "title": "Enter Windows Recovery Environment",
-        "detail": "Use the built-in recovery environment or official Windows installation media and select Repair my PC. Check the actual volume layout and encryption status before working on an offline installation; drive letters can differ from the normal Windows session."
+        "detail": "Use the built-in recovery environment or official Windows installation media and select Repair my PC. Check the actual volume layout and encryption status before working on an offline installation; drive letters can differ from the normal Windows session.",
+        "anchor": "step-03"
       },
       {
         "title": "Try the narrow recovery option",
-        "detail": "Use Startup Repair for a startup fault. If the failure follows a known update or driver change, consider the relevant update removal or restore option after checking its effect on data. Review the result before trying another repair."
+        "detail": "Use Startup Repair for a startup fault. If the failure follows a known update or driver change, consider the relevant update removal or restore option after checking its effect on data. Review the result before trying another repair.",
+        "anchor": "step-04"
       },
       {
         "title": "Reserve manual boot edits for a confirmed diagnosis",
-        "detail": "If boot files or the EFI partition require repair, follow Microsoft’s procedure for the observed firmware mode, disk layout, and Windows installation. Have another technician verify the selected partitions. Do not paste generic bootrec, bcdboot, diskpart, or format sequences."
+        "detail": "If boot files or the EFI partition require repair, follow Microsoft’s procedure for the observed firmware mode, disk layout, and Windows installation. Have another technician verify the selected partitions. Do not paste generic bootrec, bcdboot, diskpart, or format sequences.",
+        "anchor": "step-05"
       },
       {
         "title": "Boot, validate, and preserve a recovery path",
-        "detail": "Test a normal boot and a second restart, confirm encryption is healthy, and run the real business workflow. Record the root cause and boot changes. If recovery remains uncertain, export or image the data before planning a supported reinstall."
+        "detail": "Test a normal boot and a second restart, confirm encryption is healthy, and run the real business workflow. Record the root cause and boot changes. If recovery remains uncertain, export or image the data before planning a supported reinstall.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -495,35 +590,54 @@
     "steps": [
       {
         "title": "Choose professional recovery when needed",
-        "detail": "Clicking, repeated spin-up, liquid or impact damage, unstable detection, and irreplaceable data justify a specialist recovery decision before further attempts. Repeated scans can consume the remaining readable life. Do not open a drive or repeatedly power-cycle it."
+        "detail": "Clicking, repeated spin-up, liquid or impact damage, unstable detection, and irreplaceable data justify a specialist recovery decision before further attempts. Repeated scans can consume the remaining readable life. Do not open a drive or repeatedly power-cycle it.",
+        "anchor": "step-01"
       },
       {
         "title": "Identify every device",
         "detail": "In the Linux rescue session, record source and destination model, serial, capacity, interface, and mount state. Use a known-good cable and stable power when appropriate. Disable automount and keep the source unmounted or read-only; do not initialize, format, or run filesystem repair on it.",
-        "command": "lsblk -o NAME,SIZE,MODEL,SERIAL,TYPE,MOUNTPOINTS"
+        "command": "lsblk -o NAME,SIZE,MODEL,SERIAL,TYPE,MOUNTPOINTS",
+        "anchor": "step-02"
       },
       {
         "title": "Prepare a separate healthy destination",
-        "detail": "Choose a destination with sufficient capacity for the image and recovery output. Record the exact source, output file or device, and persistent mapfile path. A second technician should verify those identities before any imaging command that can overwrite a destination."
+        "detail": "Choose a destination with sufficient capacity for the image and recovery output. Record the exact source, output file or device, and persistent mapfile path. A second technician should verify those identities before any imaging command that can overwrite a destination.",
+        "anchor": "step-03"
       },
       {
         "title": "Image with a resumable recovery tool",
-        "detail": "Use GNU ddrescue following its manual, with a mapfile saved on healthy storage. Start with a low-stress pass that retrieves easy data before any deliberate retry phase. Preserve the mapfile and image together, track errors and temperature, and stop if the device deteriorates."
+        "detail": "Use GNU ddrescue following its manual, with a mapfile saved on healthy storage. Start with a low-stress pass that retrieves easy data before any deliberate retry phase. Preserve the mapfile and image together, track errors and temperature, and stop if the device deteriorates.",
+        "anchor": "step-04"
+      },
+      {
+        "title": "Reconcile the image and mapfile before recovery",
+        "detail": "Perform image and mapfile reconciliation before filesystem work. Record the imaging command, source size, rescue domain, output path, mapfile path and saved status. Use the mapfile to distinguish finished ranges from non-tried, non-trimmed, non-scraped and bad-sector ranges; retain incomplete areas explicitly. A large image file, a finished process or an exit without a fatal error does not prove all source bytes were recovered. Preserve the image/mapfile pair and its acquisition notes together.",
+        "anchor": "step-reconcile-the-image-and-mapfile-before-recovery"
+      },
+      {
+        "title": "Protect the accepted acquisition checkpoint",
+        "detail": "After the imaging process has stopped and its writes are complete, record a checksum of the image and preserve the corresponding mapfile version on healthy storage. Hash or verify a working copy from healthy storage before analyzing it. This proves copy identity, not source completeness; do not reread the failing source solely to obtain a comparison hash. If imaging is resumed, retain the earlier checkpoint identity and record the new image/mapfile pair separately.",
+        "anchor": "step-protect-the-accepted-acquisition-checkpoint"
       },
       {
         "title": "Recover from a working copy",
-        "detail": "Keep the original recovery image unchanged and create a working copy if capacity permits. Use TestDisk for partition/filesystem investigation or PhotoRec for file carving as appropriate. Save recovered files to a different healthy location and expect carving to lose some names or folder structure."
+        "detail": "Keep the original recovery image unchanged and create a working copy if capacity permits. Use TestDisk for partition/filesystem investigation or PhotoRec for file carving as appropriate. Save recovered files to a different healthy location and expect carving to lose some names or folder structure.",
+        "anchor": "step-05"
       },
       {
         "title": "Validate what was actually recovered",
-        "detail": "Open representative documents, photos, databases, and archives with the user’s applications. Compare expected folders and counts where known, record unreadable regions and missing files, and retain the recovery image until the client accepts the result."
+        "detail": "Open representative documents, photos, databases, and archives with the user’s applications. Compare expected folders and counts where known, record unreadable regions and missing files, and retain the recovery image until the client accepts the result. Separate image coverage from file usability: a representative sample is a sample, not proof that every file is intact. For priority databases or archives, use the owning application's validation or restore test on a copy and report exactly what passed. Include expected but missing folders, failed sample checks and the agreed image-retention decision in the handoff.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
       "The original source has not been repaired or overwritten.",
       "The image, mapfile, and device identities are recorded.",
       "Recovered files are stored separately and checked for usability.",
-      "Unreadable data and incomplete recovery are explicitly reported."
+      "Unreadable data and incomplete recovery are explicitly reported.",
+      "The recorded mapfile coverage distinguishes successfully copied ranges from every remaining incomplete state.",
+      "The stopped acquisition checkpoint has an image checksum and its corresponding mapfile; working-copy identity is verified on healthy storage.",
+      "Priority-file/application tests and sample limits are recorded separately from byte coverage, with unresolved loss stated clearly."
     ],
     "stopIf": [
       "The source develops new noises, unstable detection, or worsening read failures.",
@@ -538,6 +652,14 @@
       {
         "title": "CGSecurity: PhotoRec data recovery",
         "url": "https://www.cgsecurity.org/wiki/PhotoRec"
+      },
+      {
+        "title": "GNU ddrescue: mapfile, algorithm and status semantics",
+        "url": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html#Mapfile-structure"
+      },
+      {
+        "title": "INTA: Service Evidence",
+        "url": "https://github.com/Herbertofury/INTA/wiki/Service-Evidence"
       }
     ],
     "related": [
@@ -565,27 +687,33 @@
     "steps": [
       {
         "title": "Inventory before the move",
-        "detail": "Record source and destination model/serial/capacity, firmware mode, partition layout, encryption, and the applications that must survive. Confirm the chosen tool supports the filesystem and intended target size. Shrinking to a smaller drive needs a specifically supported procedure."
+        "detail": "Record source and destination model/serial/capacity, firmware mode, partition layout, encryption, and the applications that must survive. Confirm the chosen tool supports the filesystem and intended target size. Shrinking to a smaller drive needs a specifically supported procedure.",
+        "anchor": "step-01"
       },
       {
         "title": "Create an independent rollback",
-        "detail": "Make a verified file backup and save recovery-key access. Export application inventory and record licenses or sign-in requirements through the client’s approved process. Keep the old drive intact until the new system is accepted."
+        "detail": "Make a verified file backup and save recovery-key access. Export application inventory and record licenses or sign-in requirements through the client’s approved process. Keep the old drive intact until the new system is accepted.",
+        "anchor": "step-02"
       },
       {
         "title": "Prepare the destination and media",
-        "detail": "Use current trusted rescue media and connect stable power. Disconnect unrelated removable storage where practical. Match source and target by serial number, not only the drive letter or position in a list; cloning overwrites the selected target."
+        "detail": "Use current trusted rescue media and connect stable power. Disconnect unrelated removable storage where practical. Match source and target by serial number, not only the drive letter or position in a list; cloning overwrites the selected target.",
+        "anchor": "step-03"
       },
       {
         "title": "Perform and verify the copy",
-        "detail": "Use the imaging application’s supported clone or image/restore workflow. Review the source, target, partition plan, and confirmation screen before committing. Keep the operation log and use the tool’s image verification feature when creating an image."
+        "detail": "Use the imaging application’s supported clone or image/restore workflow. Review the source, target, partition plan, and confirmation screen before committing. Keep the operation log and use the tool’s image verification feature when creating an image.",
+        "anchor": "step-04"
       },
       {
         "title": "Boot the replacement on its own",
-        "detail": "For the first boot, disconnect or otherwise isolate the original system disk so you can prove the replacement is the actual boot device. Resolve any driver or boot-mode issue through supported vendor guidance. Check encryption state after the migration."
+        "detail": "For the first boot, disconnect or otherwise isolate the original system disk so you can prove the replacement is the actual boot device. Resolve any driver or boot-mode issue through supported vendor guidance. Check encryption state after the migration.",
+        "anchor": "step-05"
       },
       {
         "title": "Validate applications and rollback readiness",
-        "detail": "Test the real business files, sign-in, network, printers, backup, and restart. Confirm usable capacity and partition layout. Retain the original drive or image for the agreed acceptance window; erase it only through a separately authorized disposal task."
+        "detail": "Test the real business files, sign-in, network, printers, backup, and restart. Confirm usable capacity and partition layout. Retain the original drive or image for the agreed acceptance window; erase it only through a separately authorized disposal task.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -635,27 +763,33 @@
     "steps": [
       {
         "title": "Inventory the recovery set",
-        "detail": "List protected devices, folders, application data, backup destination, retention, encryption keys, and the last successful job. Confirm the person covering an outage can obtain the credentials. Identify data that lives outside the usual Documents/Desktop folders."
+        "detail": "List protected devices, folders, application data, backup destination, retention, encryption keys, and the last successful job. Confirm the person covering an outage can obtain the credentials. Identify data that lives outside the usual Documents/Desktop folders.",
+        "anchor": "step-01"
       },
       {
         "title": "Inspect repository and job health",
-        "detail": "Read recent backup logs, skipped-file reports, capacity, and retention errors. Use the product’s integrity check. For restic, a normal check validates repository structure; reading and verifying stored data requires the additional data-check option and an appropriate maintenance window."
+        "detail": "Read recent backup logs, skipped-file reports, capacity, and retention errors. Use the product’s integrity check. For restic, a normal check validates repository structure; reading and verifying stored data requires the additional data-check option and an appropriate maintenance window.",
+        "anchor": "step-02"
       },
       {
         "title": "Select a representative restore",
-        "detail": "Choose a known snapshot and business-relevant files, including a large file and a format used by the client. Restore to an empty separate folder or isolated test machine. Avoid restoring directly over live files during a routine verification."
+        "detail": "Choose a known snapshot and business-relevant files, including a large file and a format used by the client. Restore to an empty separate folder or isolated test machine. Avoid restoring directly over live files during a routine verification.",
+        "anchor": "step-03"
       },
       {
         "title": "Test the content with the real application",
-        "detail": "Open documents, photos, archives, and business data in their intended applications. Check permissions and required metadata. For databases or server workloads, follow the application’s supported recovery procedure and confirm consistency, not just file presence."
+        "detail": "Open documents, photos, archives, and business data in their intended applications. Check permissions and required metadata. For databases or server workloads, follow the application’s supported recovery procedure and confirm consistency, not just file presence.",
+        "anchor": "step-04"
       },
       {
         "title": "Exercise the outage path",
-        "detail": "For system recovery, boot the recovery media in a test environment and confirm it can see the backup destination and required storage/network hardware. Measure restore time. Verify recovery still works when the original PC or ordinary sign-in method is unavailable."
+        "detail": "For system recovery, boot the recovery media in a test environment and confirm it can see the backup destination and required storage/network hardware. Measure restore time. Verify recovery still works when the original PC or ordinary sign-in method is unavailable.",
+        "anchor": "step-05"
       },
       {
         "title": "Record and resolve gaps",
-        "detail": "Save the restore date, snapshot, scope, integrity result, elapsed time, and evidence in the private service record. Assign an owner to missing data, inaccessible keys, slow restore paths, or capacity problems. Keep backup copies isolated from ordinary endpoint write access where supported."
+        "detail": "Save the restore date, snapshot, scope, integrity result, elapsed time, and evidence in the private service record. Assign an owner to missing data, inaccessible keys, slow restore paths, or capacity problems. Keep backup copies isolated from ordinary endpoint write access where supported.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -702,29 +836,35 @@
     "steps": [
       {
         "title": "Check the physical and radio link",
-        "detail": "Confirm power, cable, switch port, adapter link speed, Wi-Fi association, and signal. Try a known-good cable or port when the evidence points there. Record any recent router, VPN, adapter-driver, or firewall changes."
+        "detail": "Confirm power, cable, switch port, adapter link speed, Wi-Fi association, and signal. Try a known-good cable or port when the evidence points there. Record any recent router, VPN, adapter-driver, or firewall changes.",
+        "anchor": "step-01"
       },
       {
         "title": "Read the assigned configuration",
         "detail": "On Windows, run the command below in PowerShell. Check address, subnet, default route, DNS servers, and DHCP source. Compare with a working device on the same intended network. On a domain network, preserve the organization’s DNS design; replacing internal DNS with a public resolver can break domain services.",
-        "command": "Get-NetIPConfiguration"
+        "command": "Get-NetIPConfiguration",
+        "anchor": "step-02"
       },
       {
         "title": "Test reachability and name resolution separately",
         "detail": "Test the observed gateway, then an approved external destination, then the failing hostname. Use the actual gateway from the previous step. An unsuccessful ping alone does not prove an outage because ICMP may be filtered; compare the application’s required TCP connection. The PowerShell command uses a public baseline hostname; repeat it with the actual failing hostname.",
-        "command": "Resolve-DnsName learn.microsoft.com"
+        "command": "Resolve-DnsName learn.microsoft.com",
+        "anchor": "step-03"
       },
       {
         "title": "Narrow the application path",
-        "detail": "Compare another browser or application and test with the approved VPN/proxy state. Check time, certificates, captive portal, and service-status information. Use a short, targeted Wireshark capture only when it can resolve a specific question, and keep the trace private."
+        "detail": "Compare another browser or application and test with the approved VPN/proxy state. Check time, certificates, captive portal, and service-status information. Use a short, targeted Wireshark capture only when it can resolve a specific question, and keep the trace private.",
+        "anchor": "step-04"
       },
       {
         "title": "Repair only the identified layer",
-        "detail": "Correct the proven DNS, DHCP, routing, adapter, or application configuration. Back up current settings before changes. Reserve network reset for cases that justify rebuilding adapters and settings; it may disrupt VPNs, virtual switches, and a remote-support session."
+        "detail": "Correct the proven DNS, DHCP, routing, adapter, or application configuration. Back up current settings before changes. Reserve network reset for cases that justify rebuilding adapters and settings; it may disrupt VPNs, virtual switches, and a remote-support session.",
+        "anchor": "step-05"
       },
       {
         "title": "Retest the business workflow",
-        "detail": "Check the original site or app, local shares, printers, domain sign-in, and any VPN. For throughput questions, compare like-for-like endpoints and use upstream iperf3 on a supported Linux or macOS system rather than assuming a Windows build is official."
+        "detail": "Check the original site or app, local shares, printers, domain sign-in, and any VPN. For throughput questions, compare like-for-like endpoints and use upstream iperf3 on a supported Linux or macOS system rather than assuming a Windows build is official.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -773,27 +913,33 @@
     "steps": [
       {
         "title": "Check the physical environment",
-        "detail": "Inspect UPS status, breakers, power strips, equipment alarms, and visible damage. Keep equipment with electrical damage, liquid exposure, or repeated power cycling out of service. Record the approximate outage and shutdown times from available logs."
+        "detail": "Inspect UPS status, breakers, power strips, equipment alarms, and visible damage. Keep equipment with electrical damage, liquid exposure, or repeated power cycling out of service. Record the approximate outage and shutdown times from available logs.",
+        "anchor": "step-01"
       },
       {
         "title": "Restore the network foundation",
-        "detail": "Bring up the internet handoff, firewall/router, switches, and wireless infrastructure in the site’s documented dependency order. Wait for each to reach a healthy state, then verify local link, addressing, routing, and name resolution before starting application tests."
+        "detail": "Bring up the internet handoff, firewall/router, switches, and wireless infrastructure in the site’s documented dependency order. Wait for each to reach a healthy state, then verify local link, addressing, routing, and name resolution before starting application tests.",
+        "anchor": "step-02"
       },
       {
         "title": "Recover storage and core services",
-        "detail": "Check storage controllers and arrays for degraded state before normal workload resumes. Bring up required hypervisors, storage, identity/DNS/DHCP, and dependent services in their actual site order. Avoid repeated hard resets of a server performing recovery or consistency work."
+        "detail": "Check storage controllers and arrays for degraded state before normal workload resumes. Bring up required hypervisors, storage, identity/DNS/DHCP, and dependent services in their actual site order. Avoid repeated hard resets of a server performing recovery or consistency work.",
+        "anchor": "step-03"
       },
       {
         "title": "Validate applications from one workstation",
-        "detail": "Use one known-good client to test domain sign-in, shared folders, printing, email, and each critical line-of-business application. An open server console or a successful ping does not prove the business service is healthy."
+        "detail": "Use one known-good client to test domain sign-in, shared folders, printing, email, and each critical line-of-business application. An open server console or a successful ping does not prove the business service is healthy.",
+        "anchor": "step-04"
       },
       {
         "title": "Review shutdown and recovery evidence",
-        "detail": "Inspect UPS logs and relevant event logs. Kernel-Power Event ID 41 indicates Windows did not shut down cleanly; it does not by itself identify the power supply or the original cause. Correlate the event with other evidence before replacing parts."
+        "detail": "Inspect UPS logs and relevant event logs. Kernel-Power Event ID 41 indicates Windows did not shut down cleanly; it does not by itself identify the power supply or the original cause. Correlate the event with other evidence before replacing parts.",
+        "anchor": "step-05"
       },
       {
         "title": "Resume operations and verify backups",
-        "detail": "Release workstations in a controlled order, confirm time synchronization and remote management, and check that backup jobs resume. Record any disk repairs, degraded components, interrupted transactions, and remaining follow-up with the designated service owner."
+        "detail": "Release workstations in a controlled order, confirm time synchronization and remote management, and check that backup jobs resume. Record any disk repairs, degraded components, interrupted transactions, and remaining follow-up with the designated service owner.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -841,42 +987,91 @@
     "steps": [
       {
         "title": "Choose the session type",
-        "detail": "For a one-time Windows session, Quick Assist offers attended sharing and a separate control request. Use the organization’s approved RustDesk or MeshCentral deployment for recurring managed support. Cross-platform support needs a tool explicitly supporting both endpoints."
+        "detail": "For a one-time Windows session, Quick Assist offers attended sharing and a separate control request. Use the organization’s approved RustDesk or MeshCentral deployment for recurring managed support. Cross-platform support needs a tool explicitly supporting both endpoints. Apply remote capability preflight before choosing: identify who will be present, both operating systems, the required control and file-transfer capabilities, how elevated prompts will be handled, and the approved end state for access. Use the Tool Selection guide for the decision matrix.",
+        "anchor": "step-01"
       },
       {
         "title": "Use an official client and the right endpoint",
-        "detail": "Open the tool from the official catalog link or the already managed installation. Confirm the device label with the user and close unrelated sensitive windows. Do not install a second unattended agent merely to avoid fixing an existing approved connection."
+        "detail": "Open the tool from the official catalog link or the already managed installation. Confirm the device label with the user and close unrelated sensitive windows. Do not install a second unattended agent merely to avoid fixing an existing approved connection.",
+        "anchor": "step-02"
+      },
+      {
+        "title": "Prove the needed capabilities before repair",
+        "detail": "Start in the least-permissive mode that supports the task. Test pointer or view access, a harmless control action if needed, the approved transfer route, and the reconnect plan before changing the machine. Quick Assist is an attended Windows path for INTA; its macOS client and browser support path are restricted to Microsoft Support. For Chrome Remote Desktop, distinguish the one-use support code from persistent PIN-based access, and keep the user available for renewed sharing confirmation.",
+        "anchor": "step-prove-the-needed-capabilities-before-repair"
       },
       {
         "title": "Connect with the user present",
-        "detail": "For Quick Assist, the helper shares the code, the recipient allows screen sharing, and the helper requests control separately. Explain the immediate action before taking control. Let the user enter passwords or handle protected prompts when the tool requires it."
+        "detail": "For Quick Assist, the helper shares the code, the recipient allows screen sharing, and the helper requests control separately. Explain the immediate action before taking control. Let the user enter passwords or handle protected prompts when the tool requires it.",
+        "anchor": "step-03"
+      },
+      {
+        "title": "Transfer only the files required for this case",
+        "detail": "Agree on file direction, destination, scope and retention before transfer. Prefer an official publisher download on the target for installers. Use an approved private transfer channel for diagnostic evidence; do not copy unrelated customer folders. RustDesk has a file-transfer permission, while MeshCentral exposes a separate Files channel. Enable only the needed capability and confirm the actual transfer on the selected clients. The presence of a desktop session alone does not prove the transfer route works.",
+        "anchor": "step-transfer-only-the-files-required-for-this-case"
       },
       {
         "title": "Maintain a recovery path",
-        "detail": "Before a reboot, adapter change, VPN modification, or security-product restart, confirm how the session will resume and whether someone can act locally. Record work in the private ticket and capture only the evidence needed for the repair."
+        "detail": "Before a reboot, adapter change, VPN modification, or security-product restart, confirm how the session will resume and whether someone can act locally. Record work in the private ticket and capture only the evidence needed for the repair.",
+        "anchor": "step-04"
       },
       {
         "title": "Handle recurring access deliberately",
-        "detail": "For an explicitly managed endpoint, use named technician accounts, the deployment’s access roles, MFA where supported, and a documented device owner. Review existing access rather than sharing one permanent password across coworkers."
+        "detail": "For an explicitly managed endpoint, use named technician accounts, the deployment’s access roles, MFA where supported, and a documented device owner. Review existing access rather than sharing one permanent password across coworkers.",
+        "anchor": "step-05"
       },
       {
         "title": "Close and verify",
-        "detail": "Ask the user to perform the original task, end the session, and remove temporary access if it was created only for this case. Confirm any approved persistent agent remains assigned to the correct customer and that the user knows how to contact support again."
+        "detail": "Ask the user to perform the original task, end the session, and remove temporary access if it was created only for this case. Confirm any approved persistent agent remains assigned to the correct customer and that the user knows how to contact support again.",
+        "anchor": "step-06"
+      },
+      {
+        "title": "Leave evidence that access matches the agreement",
+        "detail": "Perform temporary access revocation: close desktop, file and terminal channels; end the support session; remove any one-case unattended credential or temporary enrollment through the approved workflow. Record the ended-session time and access removed, without storing codes or passwords in the ticket. If continuing access is authorized, record its named owner, device group, scope and review date instead. A closed browser tab is not evidence that an installed agent or permanent credential was removed. Use Service Evidence for the acceptance record.",
+        "anchor": "step-leave-evidence-that-access-matches-the-agreement"
       }
     ],
     "verify": [
       "The intended device was reached and the user’s original task succeeds.",
       "The session is ended and temporary access is removed.",
-      "Persistent access, if requested, has a named owner and correct access scope."
+      "Persistent access, if requested, has a named owner and correct access scope.",
+      "The chosen client, platform, user-presence model, transfer route and reconnect behavior were checked before the repair.",
+      "The transfer record states purpose and destination, and case-only files or access have a documented retention or removal decision.",
+      "Desktop, file and terminal channels are closed; any continuing access is explicitly owned and authorized."
     ],
     "stopIf": [
       "The device or caller identity does not match the service request.",
-      "The next action could disconnect a critical system without a local recovery path."
+      "The next action could disconnect a critical system without a local recovery path.",
+      "The requested session would create unattended access, expose files, or use a business plan outside the agreed service scope."
     ],
     "sources": [
       {
         "title": "Microsoft: Quick Assist",
         "url": "https://support.microsoft.com/en-us/windows/apps/solve-pc-problems-remotely-using-quick-assist"
+      },
+      {
+        "title": "Microsoft: Quick Assist requirements and enterprise limitations",
+        "url": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist"
+      },
+      {
+        "title": "Google: support codes, confirmation and removal of remote access",
+        "url": "https://support.google.com/chrome/answer/1649523"
+      },
+      {
+        "title": "RustDesk: incoming permissions",
+        "url": "https://rustdesk.com/docs/en/self-host/client-configuration/advanced-settings/"
+      },
+      {
+        "title": "MeshCentral: desktop, files and events",
+        "url": "https://docs.meshcentral.com/meshcentral/devicetabs/"
+      },
+      {
+        "title": "INTA: Tool Selection",
+        "url": "https://github.com/Herbertofury/INTA/wiki/Tool-Selection"
+      },
+      {
+        "title": "INTA: Service Evidence",
+        "url": "https://github.com/Herbertofury/INTA/wiki/Service-Evidence"
       }
     ],
     "related": [
@@ -900,28 +1095,34 @@
     "steps": [
       {
         "title": "Confirm the exact failure",
-        "detail": "Record the trust error, hostname, domain membership, recent rename/reimage/restore, and whether another device has reused the same computer account. Use a known local administrator or approved recovery access rather than repeatedly trying cached domain credentials."
+        "detail": "Record the trust error, hostname, domain membership, recent rename/reimage/restore, and whether another device has reused the same computer account. Use a known local administrator or approved recovery access rather than repeatedly trying cached domain credentials.",
+        "anchor": "step-01"
       },
       {
         "title": "Verify the domain path",
-        "detail": "Confirm the device uses the intended internal DNS, can reach its domain controllers, and has correct time. Check VPN requirements for offsite devices. If connectivity is broken, fix that first; a channel test cannot establish trust across a missing network path."
+        "detail": "Confirm the device uses the intended internal DNS, can reach its domain controllers, and has correct time. Check VPN requirements for offsite devices. If connectivity is broken, fix that first; a channel test cannot establish trust across a missing network path.",
+        "anchor": "step-02"
       },
       {
         "title": "Test without repairing",
         "detail": "Open Windows PowerShell as administrator on the member computer and run the diagnostic command. Record the result and relevant NETLOGON events. Do not apply this cmdlet to a domain controller, where the result can be misleading.",
-        "command": "Test-ComputerSecureChannel -Verbose"
+        "command": "Test-ComputerSecureChannel -Verbose",
+        "anchor": "step-03"
       },
       {
         "title": "Resolve conflicting computer identity",
-        "detail": "Have the directory administrator inspect the computer object and recent changes. Give each active machine its own correct computer identity. Do not let two physical computers alternate using one cloned domain computer account, and do not delete the object until its dependencies are understood."
+        "detail": "Have the directory administrator inspect the computer object and recent changes. Give each active machine its own correct computer identity. Do not let two physical computers alternate using one cloned domain computer account, and do not delete the object until its dependencies are understood.",
+        "anchor": "step-04"
       },
       {
         "title": "Repair the confirmed secure-channel fault",
-        "detail": "If the network is healthy and the correct computer object is established, the directory administrator can use the documented Test-ComputerSecureChannel repair flow with credentials that have the required rights. Keep credentials in the interactive prompt and plan the restart with the user."
+        "detail": "If the network is healthy and the correct computer object is established, the directory administrator can use the documented Test-ComputerSecureChannel repair flow with credentials that have the required rights. Keep credentials in the interactive prompt and plan the restart with the user.",
+        "anchor": "step-05"
       },
       {
         "title": "Validate from a fresh sign-in",
-        "detail": "After the approved repair and restart, repeat the secure-channel test and perform a real domain sign-in. Check group policy, shares, printers, and business apps. If rejoin is needed, plan profile and local-access continuity before leaving the domain."
+        "detail": "After the approved repair and restart, repeat the secure-channel test and perform a real domain sign-in. Check group policy, shares, printers, and business apps. If rejoin is needed, plan profile and local-access continuity before leaving the domain.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -965,27 +1166,33 @@
     "steps": [
       {
         "title": "Locate the failing layer",
-        "detail": "Check the provider’s service status and test the same mailbox in its official webmail. Record the exact send/receive error, whether one or all accounts are affected, mailbox quota, and a specific message that fails. Do not expose credentials or message contents in public notes."
+        "detail": "Check the provider’s service status and test the same mailbox in its official webmail. Record the exact send/receive error, whether one or all accounts are affected, mailbox quota, and a specific message that fails. Do not expose credentials or message contents in public notes.",
+        "anchor": "step-01"
       },
       {
         "title": "Verify identity and addressing",
-        "detail": "Confirm the account is signed in through the intended provider and that password/MFA changes have completed. For manually configured mail, compare SMTP/IMAP hostnames, ports, and encryption with the provider’s current settings. An internal directory domain is not automatically the outbound email domain."
+        "detail": "Confirm the account is signed in through the intended provider and that password/MFA changes have completed. For manually configured mail, compare SMTP/IMAP hostnames, ports, and encryption with the provider’s current settings. An internal directory domain is not automatically the outbound email domain.",
+        "anchor": "step-02"
       },
       {
         "title": "Check the message and network path",
-        "detail": "Inspect Outbox for a stuck or oversized message and verify whether attachment size, recipient address, or a provider rejection explains the failure. Compare a small test message through webmail. Check VPN/proxy and DNS only when the symptom points there."
+        "detail": "Inspect Outbox for a stuck or oversized message and verify whether attachment size, recipient address, or a provider rejection explains the failure. Compare a small test message through webmail. Check VPN/proxy and DNS only when the symptom points there.",
+        "anchor": "step-03"
       },
       {
         "title": "Use the correct client-specific repair",
-        "detail": "For classic Outlook, a safe-mode launch can isolate add-in problems; disable only the implicated add-in after testing. New Outlook uses a different architecture and does not use the classic safe-mode/profile repair workflow. Follow the current support path for the actual client."
+        "detail": "For classic Outlook, a safe-mode launch can isolate add-in problems; disable only the implicated add-in after testing. New Outlook uses a different architecture and does not use the classic safe-mode/profile repair workflow. Follow the current support path for the actual client.",
+        "anchor": "step-04"
       },
       {
         "title": "Preserve local-only data before rebuilding",
-        "detail": "Before removing an account, recreating a classic profile, or repairing data files, identify local PST archives, POP mail, unsent items, and anything not present on the server. Make a verified backup and retain the old profile until the replacement is proven."
+        "detail": "Before removing an account, recreating a classic profile, or repairing data files, identify local PST archives, POP mail, unsent items, and anything not present on the server. Make a verified backup and retain the old profile until the replacement is proven.",
+        "anchor": "step-05"
       },
       {
         "title": "Prove both directions",
-        "detail": "Send a small message to a test recipient and receive a reply, then test the user’s normal attachment and shared-mailbox workflow. Record whether the final fix was service-side, account configuration, add-in, profile, or network, and remove only temporary diagnostic changes."
+        "detail": "Send a small message to a test recipient and receive a reply, then test the user’s normal attachment and shared-mailbox workflow. Record whether the final fix was service-side, account configuration, add-in, profile, or network, and remove only temporary diagnostic changes.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -1028,27 +1235,33 @@
     "steps": [
       {
         "title": "Check the printer itself",
-        "detail": "Inspect its display, paper path, consumables, and connection. Print the device’s internal test or configuration page when available. If that fails, work on the hardware state before changing Windows drivers."
+        "detail": "Inspect its display, paper path, consumables, and connection. Print the device’s internal test or configuration page when available. If that fails, work on the hardware state before changing Windows drivers.",
+        "anchor": "step-01"
       },
       {
         "title": "Verify the connection and queue",
-        "detail": "Confirm USB connection or the printer’s current network address against the queue’s configured port. Check that the intended queue is selected, not an old duplicate or offline copy. A changed DHCP address can leave a working printer behind an obsolete port."
+        "detail": "Confirm USB connection or the printer’s current network address against the queue’s configured port. Check that the intended queue is selected, not an old duplicate or offline copy. A changed DHCP address can leave a working printer behind an obsolete port.",
+        "anchor": "step-02"
       },
       {
         "title": "Separate application and queue faults",
-        "detail": "Print a Windows test page and a simple document from another application. If only one application fails, troubleshoot its print settings or installation. If all jobs fail, inspect queue status and run the Windows printer troubleshooter."
+        "detail": "Print a Windows test page and a simple document from another application. If only one application fails, troubleshoot its print settings or installation. If all jobs fail, inspect queue status and run the Windows printer troubleshooter.",
+        "anchor": "step-03"
       },
       {
         "title": "Clear the specific obstruction",
-        "detail": "Cancel only the affected user’s stuck job when possible. Coordinate before restarting the Print Spooler because that affects other queues. On a shared print server, identify all affected users and obtain a service window before clearing queues or replacing a shared driver."
+        "detail": "Cancel only the affected user’s stuck job when possible. Coordinate before restarting the Print Spooler because that affects other queues. On a shared print server, identify all affected users and obtain a service window before clearing queues or replacing a shared driver.",
+        "anchor": "step-04"
       },
       {
         "title": "Use the supported driver path",
-        "detail": "Install or repair the manufacturer-supported driver for the exact model and Windows architecture, or the supported Windows class driver where appropriate. Preserve existing ports and options; document any queue replacement so duplex, trays, and scanning are not lost."
+        "detail": "Install or repair the manufacturer-supported driver for the exact model and Windows architecture, or the supported Windows class driver where appropriate. Preserve existing ports and options; document any queue replacement so duplex, trays, and scanning are not lost.",
+        "anchor": "step-05"
       },
       {
         "title": "Verify real output",
-        "detail": "Print the original document and check page size, orientation, color, duplex, and selected tray. Test another user on shared printers, and verify scanning separately if the device is multifunction. Remove obsolete duplicate queues only after the working one is confirmed."
+        "detail": "Print the original document and check page size, orientation, color, duplex, and selected tray. Test another user on shared printers, and verify scanning separately if the device is multifunction. Remove obsolete duplicate queues only after the working one is confirmed.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -1095,27 +1308,33 @@
     "steps": [
       {
         "title": "Capture evidence before repeated testing",
-        "detail": "Save the stop code, Reliability Monitor history, relevant events, and available crash dump in the private case. Note the dump’s sensitivity because it may contain user data. A named module is a clue that still needs context."
+        "detail": "Save the stop code, Reliability Monitor history, relevant events, and available crash dump in the private case. Note the dump’s sensitivity because it may contain user data. A named module is a clue that still needs context.",
+        "anchor": "step-01"
       },
       {
         "title": "Check basic stability",
-        "detail": "Inspect cooling, dust, fans, physical connections, and any changed overclock or memory profile. Review temperatures under the normal failing workload. If a recent tuning change correlates with the issue, return it to the documented supported baseline before stress testing."
+        "detail": "Inspect cooling, dust, fans, physical connections, and any changed overclock or memory profile. Review temperatures under the normal failing workload. If a recent tuning change correlates with the issue, return it to the documented supported baseline before stress testing.",
+        "anchor": "step-02"
       },
       {
         "title": "Rule out storage problems",
-        "detail": "Inspect storage health and I/O errors before filesystem repairs or long benchmarks. A disappearing or unhealthy drive moves to data recovery. Keep the user’s data safe before intentionally reproducing a crash."
+        "detail": "Inspect storage health and I/O errors before filesystem repairs or long benchmarks. A disappearing or unhealthy drive moves to data recovery. Keep the user’s data safe before intentionally reproducing a crash.",
+        "anchor": "step-03"
       },
       {
         "title": "Test one hypothesis at a time",
-        "detail": "Use bootable memory diagnostics for suspected RAM and the hardware vendor’s diagnostics for the relevant component. Stop a stress test if temperatures or behavior become abnormal. Record test configuration and duration; one clean test does not prove every intermittent fault absent."
+        "detail": "Use bootable memory diagnostics for suspected RAM and the hardware vendor’s diagnostics for the relevant component. Stop a stress test if temperatures or behavior become abnormal. Record test configuration and duration; one clean test does not prove every intermittent fault absent.",
+        "anchor": "step-04"
       },
       {
         "title": "Investigate the driver or power path",
-        "detail": "Compare the failure with the installation timeline and use an OEM-supported driver update or rollback when evidence supports it. Review dumps with an appropriate debugger for persistent crashes. Event ID 41 records an unclean shutdown and must not be treated as a complete power-supply diagnosis."
+        "detail": "Compare the failure with the installation timeline and use an OEM-supported driver update or rollback when evidence supports it. Review dumps with an appropriate debugger for persistent crashes. Event ID 41 records an unclean shutdown and must not be treated as a complete power-supply diagnosis.",
+        "anchor": "step-05"
       },
       {
         "title": "Recreate the original workload",
-        "detail": "After the targeted fix, repeat the real application or idle/sleep/resume scenario that failed. Verify restart, sleep, peripherals, and normal temperatures. Record the cause confidence, replaced component or driver, and remaining monitoring instructions."
+        "detail": "After the targeted fix, repeat the real application or idle/sleep/resume scenario that failed. Verify restart, sleep, peripherals, and normal temperatures. Record the cause confidence, replaced component or driver, and remaining monitoring instructions.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -1163,27 +1382,33 @@
     "steps": [
       {
         "title": "Record the new device and baseline",
-        "detail": "Capture model, serial, warranty, Windows edition/build, firmware, storage, and memory in the private asset record. Use the supported OS and vendor driver path. Confirm hardware compatibility before applying firmware or feature updates."
+        "detail": "Capture model, serial, warranty, Windows edition/build, firmware, storage, and memory in the private asset record. Use the supported OS and vendor driver path. Confirm hardware compatibility before applying firmware or feature updates.",
+        "anchor": "step-01"
       },
       {
         "title": "Establish identity and recovery",
-        "detail": "Give the device a unique approved name and join the intended management/domain system. Set up the employee’s standard account and approved administrative access. Configure encryption and verify recovery-key escrow through the organization’s chosen management system."
+        "detail": "Give the device a unique approved name and join the intended management/domain system. Set up the employee’s standard account and approved administrative access. Configure encryption and verify recovery-key escrow through the organization’s chosen management system.",
+        "anchor": "step-02"
       },
       {
         "title": "Install the approved application set",
-        "detail": "Use official installers or reviewed WinGet package IDs. An exported WinGet list can help migration, but unmatched apps, settings, licenses, and data still need separate handling. Review the package list before importing; do not blindly reproduce obsolete or unwanted software."
+        "detail": "Use official installers or reviewed WinGet package IDs. An exported WinGet list can help migration, but unmatched apps, settings, licenses, and data still need separate handling. Review the package list before importing; do not blindly reproduce obsolete or unwanted software.",
+        "anchor": "step-03"
       },
       {
         "title": "Migrate and verify data",
-        "detail": "Restore approved user data from a validated backup or migration source. Preserve folder structure and permissions, and open the client’s important files. Do not overwrite the source computer until the new device has passed acceptance."
+        "detail": "Restore approved user data from a validated backup or migration source. Preserve folder structure and permissions, and open the client’s important files. Do not overwrite the source computer until the new device has passed acceptance.",
+        "anchor": "step-04"
       },
       {
         "title": "Finish the operational services",
-        "detail": "Configure the single intended real-time security product, backup, printers, VPN, email, browser settings, and approved remote management. Confirm notifications and background jobs fit the employee’s working hours without disabling essential protection."
+        "detail": "Configure the single intended real-time security product, backup, printers, VPN, email, browser settings, and approved remote management. Confirm notifications and background jobs fit the employee’s working hours without disabling essential protection.",
+        "anchor": "step-05"
       },
       {
         "title": "Run a user-led acceptance session",
-        "detail": "Have the employee sign in and complete the real tasks: open files, send and receive email, print, reach shared resources, and restart. Prove a small backup restore. Record any remaining app or access gap with an owner and due date."
+        "detail": "Have the employee sign in and complete the real tasks: open files, send and receive email, print, reach shared resources, and restart. Prove a small backup restore. Record any remaining app or access gap with an owner and due date.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -1225,27 +1450,33 @@
     "steps": [
       {
         "title": "Retest the original job with the user",
-        "detail": "Have the user repeat the failing action with real, representative data. Compare the result with the intake baseline. Record unresolved symptoms honestly rather than hiding them behind a successful diagnostic command."
+        "detail": "Have the user repeat the failing action with real, representative data. Compare the result with the intake baseline. Record unresolved symptoms honestly rather than hiding them behind a successful diagnostic command.",
+        "anchor": "step-01"
       },
       {
         "title": "Check adjacent essentials",
-        "detail": "Verify restart, network, email, printing, security health, backup state, and any feature touched by the repair. Confirm restored files open and that no temporary setting changed a normal workflow."
+        "detail": "Verify restart, network, email, printing, security health, backup state, and any feature touched by the repair. Confirm restored files open and that no temporary setting changed a normal workflow.",
+        "anchor": "step-02"
       },
       {
         "title": "Remove temporary access and artifacts",
-        "detail": "End support sessions, remove case-specific temporary agents if appropriate, and return diagnostic logging to the intended level. Keep required evidence in the private service record; remove credentials and sensitive captures from temporary work areas according to the agreed handling process."
+        "detail": "End support sessions, remove case-specific temporary agents if appropriate, and return diagnostic logging to the intended level. Keep required evidence in the private service record; remove credentials and sensitive captures from temporary work areas according to the agreed handling process.",
+        "anchor": "step-03"
       },
       {
         "title": "Explain the result in plain language",
-        "detail": "Tell the user what caused the problem, what changed, and what they should notice. Distinguish confirmed causes from likely causes. Include any action they must take, such as signing in, storing a recovery key, or scheduling hardware replacement."
+        "detail": "Tell the user what caused the problem, what changed, and what they should notice. Distinguish confirmed causes from likely causes. Include any action they must take, such as signing in, storing a recovery key, or scheduling hardware replacement.",
+        "anchor": "step-04"
       },
       {
         "title": "Record rollback and follow-up",
-        "detail": "Document changed versions/settings, recovery images or backups, tested tasks, remaining issues, and who owns them. Give the next technician the exact next action and the failed routes that should not be repeated."
+        "detail": "Document changed versions/settings, recovery images or backups, tested tasks, remaining issues, and who owns them. Give the next technician the exact next action and the failed routes that should not be repeated.",
+        "anchor": "step-05"
       },
       {
         "title": "Complete the private handoff record",
-        "detail": "Use the intake/handoff template linked from this wiki. Keep customer names, serials, network details, credentials, and case evidence in the approved private system. The public wiki holds reusable methods only."
+        "detail": "Use the intake/handoff template linked from this wiki. Keep customer names, serials, network details, credentials, and case evidence in the approved private system. The public wiki holds reusable methods only.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -1289,27 +1520,33 @@
     "steps": [
       {
         "title": "Choose the media strategy",
-        "detail": "Use Ventoy for a multiboot collection that can be refreshed by copying ISO files, or Rufus for a dedicated image. Keep official Windows media for WinRE and Windows-native repair alongside Linux-based rescue tools. An ISO’s platform determines which tools run inside it."
+        "detail": "Use Ventoy for a multiboot collection that can be refreshed by copying ISO files, or Rufus for a dedicated image. Keep official Windows media for WinRE and Windows-native repair alongside Linux-based rescue tools. An ISO’s platform determines which tools run inside it.",
+        "anchor": "step-01"
       },
       {
         "title": "Download from the official source",
-        "detail": "Use the catalog’s official download links and keep release notes and vendor checksums with each image. Use the INTA Media Creator for its verified INTA ISO download/update flow. A current boot environment does not guarantee every bundled third-party tool is current."
+        "detail": "Use the catalog’s official download links and keep release notes and vendor checksums with each image. Use the INTA Media Creator for its verified INTA ISO download/update flow. A current boot environment does not guarantee every bundled third-party tool is current.",
+        "anchor": "step-02"
       },
       {
         "title": "Verify the bytes before writing",
-        "detail": "Compare the local SHA-256 hash with the release’s published checksum using the exact file path. In PowerShell, select the downloaded ISO and run Get-FileHash for that file. The hash proves a match to the published value; also verify you obtained that value from the genuine release."
+        "detail": "Compare the local SHA-256 hash with the release’s published checksum using the exact file path. In PowerShell, select the downloaded ISO and run Get-FileHash for that file. The hash proves a match to the published value; also verify you obtained that value from the genuine release.",
+        "anchor": "step-03"
       },
       {
         "title": "Write or update the chosen device",
-        "detail": "Installing Ventoy or writing with Rufus can erase the selected USB. Review the device identity before confirming. Use Ventoy’s Update operation for an existing Ventoy installation when intended, and copy refreshed verified ISOs to its data partition. Keep a rollback image until the new one boots."
+        "detail": "Installing Ventoy or writing with Rufus can erase the selected USB. Review the device identity before confirming. Use Ventoy’s Update operation for an existing Ventoy installation when intended, and copy refreshed verified ISOs to its data partition. Keep a rollback image until the new one boots.",
+        "anchor": "step-04"
       },
       {
         "title": "Test the actual boot path",
-        "detail": "Boot the USB on a representative spare machine and confirm keyboard, display, storage, network, and recovery tools. Test the intended firmware mode. Read Ventoy’s current Secure Boot documentation before enrolling keys or changing firmware settings; firmware and image support must be proven on the target hardware."
+        "detail": "Boot the USB on a representative spare machine and confirm keyboard, display, storage, network, and recovery tools. Test the intended firmware mode. Read Ventoy’s current Secure Boot documentation before enrolling keys or changing firmware settings; firmware and image support must be proven on the target hardware.",
+        "anchor": "step-05"
       },
       {
         "title": "Keep an offline manifest and refresh on demand",
-        "detail": "Record image name, source URL, release, hash, download date, and successful boot test. Include the INTA offline hub and keep client evidence on a separate encrypted destination. Refresh before a service visit and re-verify changed images instead of assuming the old USB is current."
+        "detail": "Record image name, source URL, release, hash, download date, and successful boot test. Include the INTA offline hub and keep client evidence on a separate encrypted destination. Refresh before a service visit and re-verify changed images instead of assuming the old USB is current.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -1363,27 +1600,33 @@
     "steps": [
       {
         "title": "Prepare a minimal case summary",
-        "detail": "Include OS/build, hardware class, exact error, time, reproduction steps, recent changes, and diagnostics already tried. Replace customer names, usernames, tenant IDs, internal addresses, file content, credentials, and recovery keys with neutral labels. Keep the original evidence private."
+        "detail": "Include OS/build, hardware class, exact error, time, reproduction steps, recent changes, and diagnostics already tried. Replace customer names, usernames, tenant IDs, internal addresses, file content, credentials, and recovery keys with neutral labels. Keep the original evidence private.",
+        "anchor": "step-01"
       },
       {
         "title": "Ask for a ranked hypothesis list",
-        "detail": "Ask the assistant to distinguish observed facts from assumptions, rank likely causes, and propose the smallest diagnostic that separates the leading possibilities. Require a source link for a product-specific command or compatibility claim."
+        "detail": "Ask the assistant to distinguish observed facts from assumptions, rank likely causes, and propose the smallest diagnostic that separates the leading possibilities. Require a source link for a product-specific command or compatibility claim.",
+        "anchor": "step-02"
       },
       {
         "title": "Keep command execution separate",
-        "detail": "Request an explanation of each command’s target, privileges, effects, output, and rollback. Review commands before running them. Do not give an agent broad unattended access to a customer machine merely because it can generate a script."
+        "detail": "Request an explanation of each command’s target, privileges, effects, output, and rollback. Review commands before running them. Do not give an agent broad unattended access to a customer machine merely because it can generate a script.",
+        "anchor": "step-03"
       },
       {
         "title": "Validate against the actual environment",
-        "detail": "Check that the advice matches Windows versus Linux, online Windows versus WinRE, and classic versus new Outlook. Read the relevant vendor documentation and inspect real output. Treat untrusted logs, webpages, or pasted scripts as data rather than instructions to the assistant."
+        "detail": "Check that the advice matches Windows versus Linux, online Windows versus WinRE, and classic versus new Outlook. Read the relevant vendor documentation and inspect real output. Treat untrusted logs, webpages, or pasted scripts as data rather than instructions to the assistant.",
+        "anchor": "step-04"
       },
       {
         "title": "Run one targeted diagnostic and feed back the result",
-        "detail": "Execute the approved step through the technician’s usual workflow, record the exact output, and update the hypothesis. If the advice repeats an unchanged failed step, ask for a different explanation grounded in the new evidence."
+        "detail": "Execute the approved step through the technician’s usual workflow, record the exact output, and update the hypothesis. If the advice repeats an unchanged failed step, ask for a different explanation grounded in the new evidence.",
+        "anchor": "step-05"
       },
       {
         "title": "Convert the result into a reusable handoff",
-        "detail": "Ask AI to draft a concise cause/change/test summary using only verified facts. Review it, preserve uncertainty, and save the private case details in the service system. Add a generic improvement to this wiki only after removing customer-specific information."
+        "detail": "Ask AI to draft a concise cause/change/test summary using only verified facts. Review it, preserve uncertainty, and save the private case details in the service system. Add a generic improvement to this wiki only after removing customer-specific information.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
@@ -1424,40 +1667,49 @@
       "crystaldiskinfo",
       "hwinfo",
       "sysinternals",
-      "veeam-agent"
+      "veeam-agent",
+      "wiztree",
+      "wizfile"
     ],
     "startHere": "Agree on the maintenance window and identify the user’s current pain points. Preserve a baseline of the system’s normal work.",
     "steps": [
       {
         "title": "Review health and recurring failures",
-        "detail": "Check Reliability Monitor, storage health, available capacity, temperatures, and recent support history. Separate actionable errors from harmless noise. Investigate symptoms that affect the user before scheduling broad changes."
+        "detail": "Check Reliability Monitor, storage health, available capacity, temperatures, and recent support history. Separate actionable errors from harmless noise. Investigate symptoms that affect the user before scheduling broad changes.",
+        "anchor": "step-01"
       },
       {
         "title": "Verify protection and access",
-        "detail": "Confirm the intended real-time security product is healthy and current, firewall policy is intact, and approved remote-management access belongs to the right people. Review unwanted startup apps and browser extensions with the user; remove only what is understood."
+        "detail": "Confirm the intended real-time security product is healthy and current, firewall policy is intact, and approved remote-management access belongs to the right people. Review unwanted startup apps and browser extensions with the user; remove only what is understood.",
+        "anchor": "step-02"
       },
       {
         "title": "Review updates before applying them",
         "detail": "Check Windows and application updates, reboot requirements, vendor advisories, and line-of-business compatibility. WinGet with no target lists available upgrades; review that list and update the intended packages rather than blindly upgrading every application during production work.",
-        "command": "winget upgrade"
+        "command": "winget upgrade",
+        "anchor": "step-03"
       },
       {
         "title": "Check backups through a restore",
-        "detail": "Read backup logs and capacity, then restore a small representative item to a separate folder. Confirm recovery-key access and that a coworker can follow the recovery path. If the backup is not restorable, treat that as a repair task with an owner."
+        "detail": "Read backup logs and capacity, then restore a small representative item to a separate folder. Confirm recovery-key access and that a coworker can follow the recovery path. If the backup is not restorable, treat that as a repair task with an owner.",
+        "anchor": "step-04"
       },
       {
         "title": "Handle storage and physical upkeep",
-        "detail": "Use the system’s supported storage cleanup controls after reviewing what will be removed. Preserve downloads, local mail, and application data that may be unique. Clean physical dust using the device’s service guidance; avoid registry cleaners and indiscriminate driver-updater bundles."
+        "detail": "Use the system’s supported storage cleanup controls after reviewing what will be removed. Preserve downloads, local mail, and application data that may be unique. Clean physical dust using the device’s service guidance; avoid registry cleaners and indiscriminate driver-updater bundles. Use WizTree to explain capacity use and WizFile to locate a specific retained file or log before cleanup. Compare the proposed deletion with the owner's retention needs and the available backup. Recheck free space and the original workload afterward; exit WizFile and remove any one-case startup setting so a temporary visit does not leave unplanned monitoring.",
+        "anchor": "step-05"
       },
       {
         "title": "Retest and schedule only real follow-up",
-        "detail": "After the planned restart, test the user’s main applications, network, printers, backup, and remote access. Record versions and changes, measurable improvements, deferred work, and hardware replacement recommendations based on evidence."
+        "detail": "After the planned restart, test the user’s main applications, network, printers, backup, and remote access. Record versions and changes, measurable improvements, deferred work, and hardware replacement recommendations based on evidence.",
+        "anchor": "step-06"
       }
     ],
     "verify": [
       "Security, updates, backup restore, and hardware health were reviewed.",
       "The normal workload works after maintenance and restart.",
-      "Every deferred or failed item has an owner and next action."
+      "Every deferred or failed item has an owner and next action.",
+      "Storage cleanup has an explained target, retention decision and observed result; temporary search or capture utilities are closed."
     ],
     "stopIf": [
       "The maintenance would interrupt an unplanned critical workload.",
@@ -1471,6 +1723,18 @@
       {
         "title": "restic: restore a backup",
         "url": "https://restic.readthedocs.io/en/stable/050_restore.html"
+      },
+      {
+        "title": "Microsoft: Sysinternals Suite",
+        "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite"
+      },
+      {
+        "title": "WizTree: disk-space analysis and export",
+        "url": "https://diskanalyzer.com/about"
+      },
+      {
+        "title": "WizFile: search filters and shutdown",
+        "url": "https://antibody-software.com/wizfile/quick-start"
       }
     ],
     "related": [

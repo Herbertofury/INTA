@@ -1,21 +1,27 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# 🖥️ [Start and finish a clean remote-support session](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)
+<a id="️-start-and-finish-a-clean-remote-support-session"></a>
+<a id="-start-and-finish-a-clean-remote-support-session"></a>
+
+# [Start and finish a clean remote-support session](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)
 
 Choose the right attended or managed tool and leave a clear, auditable handoff.
 
-| Work area | Experience | Plan your time | Workflow |
-| --- | --- | --- | --- |
-| [Remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) | Starter | 5–15 min setup | 6 steps + acceptance |
+**[Remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)** · Starter · 5–15 min setup · 9 steps
 
-**[▶ Open the interactive checklist](https://herbertofury.github.io/INTA/#job/remote-support)** · [Decision route](#decision-route) · [Toolkit](#toolkit) · [Walkthrough](#walkthrough) · [Acceptance](#acceptance) · [Sources](#sources)
+[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/remote-support)
 
-> [!TIP]
-> **Your starting move:** Confirm the customer, intended device, and requested task through the established service channel before exchanging a session code.
+> [!NOTE]
+> **Start here.** Confirm the customer, intended device, and requested task through the established service channel before exchanging a session code.
 
 <a id="decision-route"></a>
 
-## 🧭 Choose the right branch
+<a id="-choose-the-right-branch"></a>
+
+## 🧭 Choose a route
+
+<details>
+<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -31,13 +37,15 @@ flowchart TD
     H --> I{"Temporary access created?"}:::decision
     I -->|"Yes"| J["Remove it and end the session"]:::done
     I -->|"No"| K["End session and retain approved management"]:::done
-    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa
-    classDef action fill:#172033,stroke:#64748b,color:#f8fafc
-    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2
-    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5
+    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46
+    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445
+    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137
+    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449
 ```
 
-**Diagram routes:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Start here: triage any computer problem](intake-triage.md) · [Fix internet, DNS, or local-network problems](network-dns.md) · [Close a repair with a clear client handoff](client-handoff.md)
+**Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Start here: triage any computer problem](intake-triage.md) · [Fix internet, DNS, or local-network problems](network-dns.md) · [Close a repair with a clear client handoff](client-handoff.md)
+
+</details>
 
 | Checkpoint | What to carry forward |
 | --- | --- |
@@ -47,9 +55,11 @@ flowchart TD
 
 <a id="toolkit"></a>
 
-## 🧰 Build the right toolkit
+<a id="-build-the-right-toolkit"></a>
 
-Choose the tools that answer the case’s next question. Opening a tool is a separate decision from changing the customer’s system.
+## Recommended tools
+
+Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
 | Tool / official download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
@@ -60,7 +70,9 @@ Choose the tools that answer the case’s next question. Opening a tool is a sep
 
 <a id="walkthrough"></a>
 
-## 🪜 Work the case
+<a id="-work-the-case"></a>
+
+## Procedure
 
 Work in order, record the result of each step, and change route when the evidence calls for it.
 
@@ -68,7 +80,7 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ### 01 · Choose the session type
 
-- [ ] For a one-time [Windows](https://www.microsoft.com/windows) session, [Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) offers attended sharing and a separate control request. Use the organization’s approved [RustDesk](https://rustdesk.com/) or [MeshCentral](https://meshcentral.com/) deployment for recurring managed support. Cross-platform support needs a tool explicitly supporting both endpoints.
+- [ ] For a one-time [Windows](https://www.microsoft.com/windows) session, [Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) offers attended sharing and a separate control request. Use the organization’s approved [RustDesk](https://rustdesk.com/) or [MeshCentral](https://meshcentral.com/) deployment for recurring managed support. Cross-platform support needs a tool explicitly supporting both endpoints. Apply [remote capability preflight](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) before choosing: identify who will be present, both operating systems, the required control and file-transfer capabilities, how elevated prompts will be handled, and the approved end state for access. Use the [Tool Selection](https://github.com/Herbertofury/INTA/wiki/Tool-Selection) guide for the decision matrix.
 
 <a id="step-02"></a>
 
@@ -76,44 +88,78 @@ Work in order, record the result of each step, and change route when the evidenc
 
 - [ ] Open the tool from the official catalog link or the already managed installation. Confirm the device label with the user and close unrelated sensitive windows. Do not install a second unattended agent merely to avoid fixing an existing approved connection.
 
+<a id="step-prove-the-needed-capabilities-before-repair"></a>
+
+### 03 · Prove the needed capabilities before repair
+
+- [ ] Start in the least-permissive mode that supports the task. Test pointer or view access, a harmless control action if needed, the approved transfer route, and the reconnect plan before changing the machine. [Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) is an attended [Windows](https://www.microsoft.com/windows) path for INTA; its [macOS](https://support.apple.com/macos) client and browser support path are restricted to Microsoft Support. For [Chrome Remote Desktop](https://remotedesktop.google.com/), distinguish the one-use support code from persistent PIN-based access, and keep the user available for renewed sharing confirmation.
+
 <a id="step-03"></a>
 
-### 03 · Connect with the user present
+<a id="03--connect-with-the-user-present"></a>
+
+### 04 · Connect with the user present
 
 - [ ] For [Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist), the helper shares the code, the recipient allows screen sharing, and the helper requests control separately. Explain the immediate action before taking control. Let the user enter passwords or handle protected prompts when the tool requires it.
 
+<a id="step-transfer-only-the-files-required-for-this-case"></a>
+
+### 05 · Transfer only the files required for this case
+
+- [ ] Agree on file direction, destination, scope and retention before transfer. Prefer an official publisher download on the target for installers. Use an approved private transfer channel for diagnostic evidence; do not copy unrelated customer folders. [RustDesk](https://rustdesk.com/) has a file-transfer permission, while [MeshCentral](https://meshcentral.com/) exposes a separate Files channel. Enable only the needed capability and confirm the actual transfer on the selected clients. The presence of a desktop session alone does not prove the transfer route works.
+
 <a id="step-04"></a>
 
-### 04 · Maintain a recovery path
+<a id="04--maintain-a-recovery-path"></a>
+
+### 06 · Maintain a recovery path
 
 - [ ] Before a reboot, adapter change, VPN modification, or security-product restart, confirm how the session will resume and whether someone can act locally. Record work in the private ticket and capture only the evidence needed for the repair.
 
 <a id="step-05"></a>
 
-### 05 · Handle recurring access deliberately
+<a id="05--handle-recurring-access-deliberately"></a>
+
+### 07 · Handle recurring access deliberately
 
 - [ ] For an explicitly managed endpoint, use named technician accounts, the deployment’s access roles, MFA where supported, and a documented device owner. Review existing access rather than sharing one permanent password across coworkers.
 
 <a id="step-06"></a>
 
-### 06 · Close and verify
+<a id="06--close-and-verify"></a>
+
+### 08 · Close and verify
 
 - [ ] Ask the user to perform the original task, end the session, and remove temporary access if it was created only for this case. Confirm any approved persistent agent remains assigned to the correct customer and that the user knows how to contact support again.
 
+<a id="step-leave-evidence-that-access-matches-the-agreement"></a>
+
+### 09 · Leave evidence that access matches the agreement
+
+- [ ] Perform [temporary access revocation](https://github.com/Herbertofury/INTA/wiki/Job-remote-support): close desktop, file and terminal channels; end the support session; remove any one-case unattended credential or temporary enrollment through the approved workflow. Record the ended-session time and access removed, without storing codes or passwords in the ticket. If continuing access is authorized, record its named owner, device group, scope and review date instead. A closed browser tab is not evidence that an installed agent or permanent credential was removed. Use [Service Evidence](https://github.com/Herbertofury/INTA/wiki/Service-Evidence) for the acceptance record.
+
 <a id="acceptance"></a>
 
-## ✅ Prove the result
+<a id="-prove-the-result"></a>
+
+## Verification
 
 - [ ] The intended device was reached and the user’s original task succeeds.
 - [ ] The session is ended and temporary access is removed.
 - [ ] Persistent access, if requested, has a named owner and correct access scope.
+- [ ] The chosen client, platform, user-presence model, transfer route and reconnect behavior were checked before the repair.
+- [ ] The transfer record states purpose and destination, and case-only files or access have a documented retention or removal decision.
+- [ ] Desktop, file and terminal channels are closed; any continuing access is explicitly owned and authorized.
 
 > [!WARNING]
 > **Pause this route and escalate when:**
 > - The device or caller identity does not match the service request.
 > - The next action could disconnect a critical system without a local recovery path.
+> - The requested session would create unattended access, expose files, or use a business plan outside the agreed service scope.
 
-## 🔀 Continue with the evidence
+<a id="-continue-with-the-evidence"></a>
+
+## Related playbooks
 
 | Next playbook | What it resolves |
 | --- | --- |
@@ -121,16 +167,22 @@ Work in order, record the result of each step, and change route when the evidenc
 | [Fix internet, DNS, or local-network problems](network-dns.md) | Locate the failing layer before resetting adapters or changing the whole network. |
 | [Close a repair with a clear client handoff](client-handoff.md) | Turn completed technical work into proof the customer can use, with clean access and an actionable service record. |
 
-Found a reusable improvement? [Contribute the correction](https://github.com/Herbertofury/INTA/wiki/Contribute) and include the test that proved it.
-
 <a id="sources"></a>
 
-## 🔎 Source trail
+<a id="-source-trail"></a>
+
+## Official sources
 
 <details>
-<summary>Official references and editorial review</summary>
+<summary>References and review notes</summary>
 
 - [Microsoft: Quick Assist](https://support.microsoft.com/en-us/windows/apps/solve-pc-problems-remotely-using-quick-assist)
+- [Microsoft: Quick Assist requirements and enterprise limitations](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)
+- [Google: support codes, confirmation and removal of remote access](https://support.google.com/chrome/answer/1649523)
+- [RustDesk: incoming permissions](https://rustdesk.com/docs/en/self-host/client-configuration/advanced-settings/)
+- [MeshCentral: desktop, files and events](https://docs.meshcentral.com/meshcentral/devicetabs/)
+- [INTA: Tool Selection](https://github.com/Herbertofury/INTA/wiki/Tool-Selection)
+- [INTA: Service Evidence](https://github.com/Herbertofury/INTA/wiki/Service-Evidence)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
@@ -138,6 +190,6 @@ Reviewed **2026-11-26**. Timing is a planning range. A successful command is evi
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)
 
 [← All playbooks](README.md) · [Live Wiki](https://github.com/Herbertofury/INTA/wiki) · [Contribution guide](https://github.com/Herbertofury/INTA/blob/main/CONTRIBUTING.md)

@@ -1,0 +1,18 @@
+{
+  "reviewedAt": "2026-11-26",
+  "baseline": "28275815ff602fbb03a1f510b677b4dfc72659f7",
+  "candidateHtmlSha256": "3431842ebcf5f4f02806ba7561c7c4e6e6b0ce2d3e9360bef5e5212ca2915c3c",
+  "method": "Independent root review of the managed preview plus actual desktop, mobile and light-theme screenshots",
+  "observations": {
+    "home": "Complete flat grouped directory, compact neutral sidebar and blue interactions",
+    "knowledge": "Nine flat linked reference rows",
+    "wizSearch": "Two matching records out of 113 with exact official download routes",
+    "wizTreeDetail": "Platform, pricing, operating boundaries, official sources and relevant playbooks present",
+    "mobile": "Readable labeled tool fields; no document-wide overflow in reviewed 390px screenshots",
+    "lightTheme": "Neutral light surfaces and visible selected navigation",
+    "wikiPreview": "Compact masthead, routing tables, complete playbook coverage and disclosure diagrams"
+  },
+  "materialChallengeResolved": "Replaced the remaining generic detail-page slogan with a functional selection-guide link; targeted post-change proof recorded separately",
+  "independentPreservation": "All132 original semantic step destinations and nine executable commands match baseline",
+  "remainingPublicationGate": "Exact source, deployed bytes, live Wiki file readback and complete artifact upload must be recorded in the release receipt."
+}

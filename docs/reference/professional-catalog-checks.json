@@ -1,0 +1,77 @@
+{
+  "tools": 113,
+  "jobs": 22,
+  "methods": 45,
+  "unchangedJobContent": 17,
+  "changedJobs": {
+    "malware-removal": {
+      "steps": 9,
+      "verificationChecks": 7,
+      "sources": 8
+    },
+    "slow-pc": {
+      "steps": 6,
+      "verificationChecks": 4,
+      "sources": 5
+    },
+    "failing-drive": {
+      "steps": 8,
+      "verificationChecks": 7,
+      "sources": 4
+    },
+    "remote-support": {
+      "steps": 9,
+      "verificationChecks": 6,
+      "sources": 7
+    },
+    "preventive-maintenance": {
+      "steps": 6,
+      "verificationChecks": 4,
+      "sources": 5
+    }
+  },
+  "originalStepsPreserved": 132,
+  "originalCommandsPreserved": 9,
+  "originalAcceptanceChecksPreserved": 72,
+  "originalStepAnchorsPreserved": 132,
+  "newDescriptiveStepAnchors": 8,
+  "originalMethodsUnchanged": 40,
+  "toolRecordsUnchanged": 110,
+  "narrowToolCorrection": "defender-offline cautions only",
+  "addedCoreTools": [
+    "wiztree",
+    "wizfile"
+  ],
+  "retainedCoreSuite": "sysinternals",
+  "totalSteps": 140,
+  "totalAcceptanceChecks": 83,
+  "schemaAndReferencesPass": true,
+  "newToolOfficialSourceMapPass": true,
+  "sourceEvidenceRecords": 25,
+  "stepTextPreservationRule": "Every original detail remains an unchanged prefix; original titles, order, anchors and commands match.",
+  "registryEntries": 332,
+  "registryConflicts": 0,
+  "docs": [
+    {
+      "path": "docs/service-evidence.md",
+      "sha256": "d837e80498a79ccd77a7e0ca4960969da166f1b390077f1d5cc0076a33a5a890",
+      "words": 1341,
+      "explicitLinks": 31
+    },
+    {
+      "path": "docs/tool-selection.md",
+      "sha256": "c78663435018cd020555549176999f513458fa70c9a976ef5df29b0af58e75a0",
+      "words": 1348,
+      "explicitLinks": 46
+    },
+    {
+      "path": "docs/methods.md",
+      "sha256": "85f7d894ea555ebdba9b11d77513076af45e6cfef88fb5b30dc6f311fd884f8f",
+      "words": 1900,
+      "explicitLinks": 69
+    }
+  ],
+  "unlinkedKnownNames": 0,
+  "newDocLinkingIdempotent": true,
+  "buildOrPublicationRun": false
+}

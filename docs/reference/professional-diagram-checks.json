@@ -1,0 +1,278 @@
+{
+  "sourceMode": "final generated Wiki",
+  "buildManifestSha256": "a22290413e32f089c221145da04fadd726c2f50ff8c561ee4a4a564dac048bd5",
+  "mermaidVersion": "12.3.0",
+  "diagrams": 27,
+  "results": [
+    {
+      "id": "Continuous-Improvement-1",
+      "wikiFile": "Continuous-Improvement.md",
+      "wikiFileSha256": "c441f6513562132c992106ddf3ab201989fa1ea602eb3db79e1f975995c5042f",
+      "sourceSha256": "3cc5ffbf79f9a402778dc11338e70011f0f4667fb550c840dbb3d6c3e970baab",
+      "width": 360,
+      "height": 715,
+      "nodes": 7,
+      "edges": 7
+    },
+    {
+      "id": "Decision-Desk-1",
+      "wikiFile": "Decision-Desk.md",
+      "wikiFileSha256": "fce5f298f5b990f4368ba734c5b20aa35fbf28a2674aab99e34744a6a1e4709e",
+      "sourceSha256": "976688b9b88cae4ae60ab98aa9fe944b8fb1360a84ecad8b7718795dce554be9",
+      "width": 790.625,
+      "height": 586,
+      "nodes": 8,
+      "edges": 9
+    },
+    {
+      "id": "Home-1",
+      "wikiFile": "Home.md",
+      "wikiFileSha256": "c16a6deb6089fe3c2e2c3348ea05aa4573d1f3df662cef23f972a07ea001b093",
+      "sourceSha256": "762c230db502c384166db423b4c4cdf6cbfeebb9d43a421e3a00d62a9265a351",
+      "width": 660.5,
+      "height": 1258,
+      "nodes": 11,
+      "edges": 11
+    },
+    {
+      "id": "Job-ad-trust-1",
+      "wikiFile": "Job-ad-trust.md",
+      "wikiFileSha256": "4d36458e425d505c76f5198bd5a1d428d79d140b424cbe438f48608aebb0178f",
+      "sourceSha256": "e74d6d6454cd0626c3fd18c3d9b9867e68627cd62b5bc05c68727f6b09c7b519",
+      "width": 486.5,
+      "height": 1427,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Job-ai-triage-1",
+      "wikiFile": "Job-ai-triage.md",
+      "wikiFileSha256": "24f890404433ccea57fbd72452a591e34124d852109a6e6b8eccd8a8f4b7eb9e",
+      "sourceSha256": "f9710a745d593f8407db6615fe2f5560dc88af6888129e1e39814754932a3d0f",
+      "width": 388.90625,
+      "height": 1554,
+      "nodes": 10,
+      "edges": 12
+    },
+    {
+      "id": "Job-backup-restore-1",
+      "wikiFile": "Job-backup-restore.md",
+      "wikiFileSha256": "8aa7b304f349d64b6391a2bce2fe58f14c614d179d2be66bf5fa1f5108e1e6d8",
+      "sourceSha256": "377bfe95b5a62c7210948bd7b8ab5b45621eecba6b4e7f10433a4ef546d4ecd6",
+      "width": 483.078125,
+      "height": 1510.96875,
+      "nodes": 10,
+      "edges": 10
+    },
+    {
+      "id": "Job-boot-recovery-1",
+      "wikiFile": "Job-boot-recovery.md",
+      "wikiFileSha256": "ff097736f251ee492c994f440d213ed627eca164788943266ca9f938ba9b86d6",
+      "sourceSha256": "7ca305113f25e9461a4edc39b0d621c68c3edc0ad4d11038ae07b512b5671ac1",
+      "width": 572,
+      "height": 1635,
+      "nodes": 12,
+      "edges": 12
+    },
+    {
+      "id": "Job-boot-usb-1",
+      "wikiFile": "Job-boot-usb.md",
+      "wikiFileSha256": "7d5f75e1fcae7eefc4a96d69a39ff1db55b475e5493b899d299f02ba7ef73cd0",
+      "sourceSha256": "ef18ae44d661b3b85edc477969e4fb69ac58e96acb2aee94c4c233b13d485d80",
+      "width": 456,
+      "height": 1511,
+      "nodes": 11,
+      "edges": 11
+    },
+    {
+      "id": "Job-client-handoff-1",
+      "wikiFile": "Job-client-handoff.md",
+      "wikiFileSha256": "bd9ad05e49cb2614b27aa79690342e595470e2ca982c7ef50840d50d06b43e1f",
+      "sourceSha256": "f528d046acd6d91ed2cec3a47b04f26bb5b30d06c9f1a351c3cb245efa4b9148",
+      "width": 380.5,
+      "height": 1512,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Job-disk-migration-1",
+      "wikiFile": "Job-disk-migration.md",
+      "wikiFileSha256": "f9d2a91832003f54b4a7f6486366e9f969e7ed0416734b75536a18ff00912be5",
+      "sourceSha256": "e69004e203d95cbb536d23a921fe55d61f9ac4e4de79b2ccfa224048ea941f5a",
+      "width": 476,
+      "height": 1512,
+      "nodes": 11,
+      "edges": 11
+    },
+    {
+      "id": "Job-failing-drive-1",
+      "wikiFile": "Job-failing-drive.md",
+      "wikiFileSha256": "7f825b34c4adfdbc24b4ed9408b5a7e260d65028fb4bd4dc96a44bbe26ebb795",
+      "sourceSha256": "d8d873c46687e08351ae763745fc1570c4da70ff7f9d0324d7bd993352c3dd9b",
+      "width": 456,
+      "height": 1596,
+      "nodes": 11,
+      "edges": 12
+    },
+    {
+      "id": "Job-hardware-bsod-1",
+      "wikiFile": "Job-hardware-bsod.md",
+      "wikiFileSha256": "2b51a5cca45068b1e1b976c818b0962e38bea95f0ea7da892ed856310945b51c",
+      "sourceSha256": "54e6be9d7a2cdb2410197529bc3361dd5411f81a684b957dd1f1ecb722acaa94",
+      "width": 423.4375,
+      "height": 1488.984375,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Job-intake-triage-1",
+      "wikiFile": "Job-intake-triage.md",
+      "wikiFileSha256": "2ed93f1c81f39c79e723940a8c1a626a2002510f8bfb592974b7f42c661471f0",
+      "sourceSha256": "bd3dae4ba2f0a35fc4e35100c73ceeb0ae55c88ef92cfe83e623bbfcff3d5ee4",
+      "width": 657.5,
+      "height": 859,
+      "nodes": 8,
+      "edges": 8
+    },
+    {
+      "id": "Job-malware-removal-1",
+      "wikiFile": "Job-malware-removal.md",
+      "wikiFileSha256": "f50428f8e7bafe07a93535b6ded28421e6c6f599c751aeb92d47705aeac1229b",
+      "sourceSha256": "b8f0d00acdf34cbb85a315496834ba27d6c67dae2cc83820f0c17afb6b288407",
+      "width": 456,
+      "height": 1406,
+      "nodes": 10,
+      "edges": 10
+    },
+    {
+      "id": "Job-network-dns-1",
+      "wikiFile": "Job-network-dns.md",
+      "wikiFileSha256": "7c4819fa59825f7de7239bbc7159d2450160049b0adb4238aef9d8ce3264650f",
+      "sourceSha256": "9f16b549e6270bdd1340f6b3ebe52649346645b9315fb4f61abf01e7b031d936",
+      "width": 500.15625,
+      "height": 1341.953125,
+      "nodes": 10,
+      "edges": 12
+    },
+    {
+      "id": "Job-new-pc-1",
+      "wikiFile": "Job-new-pc.md",
+      "wikiFileSha256": "36e26ebffbb2917f01ee5258c2c1b40a9c161b8fe4d45ec57074f2529292a2cf",
+      "sourceSha256": "a525ba18db56aca0f54cf55058b7562de711f790026614b3c1f9155bbef79e0e",
+      "width": 467,
+      "height": 1196,
+      "nodes": 9,
+      "edges": 9
+    },
+    {
+      "id": "Job-outage-recovery-1",
+      "wikiFile": "Job-outage-recovery.md",
+      "wikiFileSha256": "9739397e9d84843c2edb01c367243e92b779c83be4b8b07cb755505a5acf0459",
+      "sourceSha256": "2bc3258a46535d3926bc486da9ae5a1d25db0813d94f7c9350eb731da66a140e",
+      "width": 488.65625,
+      "height": 1341.96875,
+      "nodes": 10,
+      "edges": 10
+    },
+    {
+      "id": "Job-outlook-email-1",
+      "wikiFile": "Job-outlook-email.md",
+      "wikiFileSha256": "ad7887283b6d046e3f1cb35534a089a327172739e7d1dc4e5fc365fb53d39a8f",
+      "sourceSha256": "dd979d90c40bd48ba4494730b308b6f9caf52a6bcf9770deb0374c4ea37777dd",
+      "width": 500.15625,
+      "height": 1489.953125,
+      "nodes": 10,
+      "edges": 12
+    },
+    {
+      "id": "Job-preventive-maintenance-1",
+      "wikiFile": "Job-preventive-maintenance.md",
+      "wikiFileSha256": "635686bdc77873579f924dbf3be2f5a79b4d08c0db3a303ce55a7af81fdaf078",
+      "sourceSha256": "cb6e5534df485ead84e1ef07e844f8c957e86e5cceaba4bfc23f9e734e22d0d4",
+      "width": 456,
+      "height": 1511,
+      "nodes": 11,
+      "edges": 11
+    },
+    {
+      "id": "Job-printer-repair-1",
+      "wikiFile": "Job-printer-repair.md",
+      "wikiFileSha256": "3414c8aff881bad77711c1596c8d8e6f3b351f71d9535ad5e062d090c46826be",
+      "sourceSha256": "b432315f83166f1c442547730f333ac1e7297ca82d0f4b2a3846173c95f3578f",
+      "width": 592.5,
+      "height": 1236,
+      "nodes": 9,
+      "edges": 10
+    },
+    {
+      "id": "Job-ransomware-response-1",
+      "wikiFile": "Job-ransomware-response.md",
+      "wikiFileSha256": "9ed6d04bab07e6d93d6a5107d3de9b7bb2093e57d9197f4a333c9d738b6c5796",
+      "sourceSha256": "30ac71a9a3a231a66db39ede15db47324832aa92ab7157393e419581c0643ee6",
+      "width": 439,
+      "height": 1511,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Job-remote-support-1",
+      "wikiFile": "Job-remote-support.md",
+      "wikiFileSha256": "2baa111f01cb31660c34a24f78f8a719ed9ab0119ce316521fdf18b83c5cdd39",
+      "sourceSha256": "e0670c714645815366989a0e917c515872047948ca6648399d658cdd44b018f5",
+      "width": 360,
+      "height": 1533,
+      "nodes": 11,
+      "edges": 12
+    },
+    {
+      "id": "Job-slow-pc-1",
+      "wikiFile": "Job-slow-pc.md",
+      "wikiFileSha256": "95e800cfc43821d17def886570cab962a5d0bb45a9c4bf88a1c9042392ae323d",
+      "sourceSha256": "3128594a78e38509e042cbee50f9669398f1655bb077ccfcfc6035544ad7be2d",
+      "width": 537.15625,
+      "height": 1320.96875,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Job-windows-repair-1",
+      "wikiFile": "Job-windows-repair.md",
+      "wikiFileSha256": "847ac12dce526fd9de04b18f31caaaf7d456785f88ca78ff50556ee5e349cc09",
+      "sourceSha256": "cf86a17227f0fed60def89e0cec3f73b9f1b177f51c8607b1cdd4c8d76a61feb",
+      "width": 494.65625,
+      "height": 1299.96875,
+      "nodes": 10,
+      "edges": 10
+    },
+    {
+      "id": "Job-windows-update-1",
+      "wikiFile": "Job-windows-update.md",
+      "wikiFileSha256": "16d8e09103d5d1b11ffa80300ffe65423872d012104ac07d0f7c7472d21d8f88",
+      "sourceSha256": "6a4fe2737660c9baa060e7dacffa5fc6ac92cf9393eb757a97e8a5b940845902",
+      "width": 528.453125,
+      "height": 1489,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Knowledge-Standards-1",
+      "wikiFile": "Knowledge-Standards.md",
+      "wikiFileSha256": "7ba8bd4dac4c730e43c8cdd83a30abee44688934b8b92389fda7c641762e7734",
+      "sourceSha256": "6eb52f2294a5dc5057d4cfcb8fc025c8a257c8a7ccd6562d3041653de121b6ef",
+      "width": 552,
+      "height": 566,
+      "nodes": 6,
+      "edges": 5
+    },
+    {
+      "id": "Rescue-Media-1",
+      "wikiFile": "Rescue-Media.md",
+      "wikiFileSha256": "63403e4eb09a7a3c530f93375402cd11460f177391134fa342096ecbd903ebaf",
+      "sourceSha256": "4df6ca7f1c1a437b757f05a35621627936ea1289d523fce94e4d503c07a6c04c",
+      "width": 360,
+      "height": 358,
+      "nodes": 7,
+      "edges": 6
+    }
+  ]
+}

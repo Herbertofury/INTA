@@ -1,4 +1,4 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 # ✨ Knowledge standards
 
@@ -8,6 +8,8 @@
 > Every page should answer three questions: **Where do I start? What do I do next? What evidence tells me it worked?** Visual polish supports those answers.
 
 **Editorial review: November 26, 2026.** These are the durable authoring and implementation rules for the [technician hub](https://herbertofury.github.io/INTA/), its [live wiki](https://github.com/Herbertofury/INTA/wiki), and its offline build.
+
+The owner's current visual direction is documented in [Interface Design](https://github.com/Herbertofury/INTA/wiki/Interface-Design): a compact professional workspace with neutral charcoal surfaces, restrained blue interaction accents, readable rows and document layouts. Replace the previous green, oversized-card treatment. Keep sparse useful emoji in the Wiki, direct links and decision diagrams while reducing repetitive decoration.
 
 ## 🧭 1. One home, predictable paths
 
@@ -107,4 +109,4 @@ Use [the contribution template](https://github.com/Herbertofury/INTA/wiki/Templa
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

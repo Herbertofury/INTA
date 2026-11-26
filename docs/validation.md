@@ -1,50 +1,52 @@
-# 🧪 Technician knowledge hub validation
+# Technician workspace validation
 
-**Review date: November 26, 2026.** This record covers the Service Atlas upgrade and the preserved complete homepage directory from source commit `5cb05efa3fd5948520f919c32f7b38265c60c16c`.
+**Review date: November 26, 2026.** This record covers the professional interface redesign and the additions of [WizTree](https://diskanalyzer.com/download) and [WizFile](https://antibody-software.com/wizfile/download). The preservation baseline is source commit `28275815ff602fbb03a1f510b677b4dfc72659f7`.
 
-## Complete content and executable editorial rules
+## Content and generated output
 
 | Gate | Observed result |
 | --- | --- |
-| Original tool catalog and job data | 111 tools and 22 playbooks preserved; neither canonical catalog lost entries or procedure fields. |
-| Workflow completeness | 132 ordered steps and 72 acceptance checks remain available. |
-| Method coverage | 40 named methods cover all 22 jobs, with selection guidance, proof and primary sources. |
-| Wiki publication set | 45 content pages and 2 shared navigation files. |
-| Link registry | 315 exact tool, application, method and alias entries, with collision and URL validation. |
-| Wiki link audit | Every registered prose occurrence, internal page/anchor and diagram legend passes the [complete audit](../scripts/check-wiki.py). |
-| Diagram coverage | 27 diagrams, including a distinct branching decision map for every playbook. |
-| Regression suite | 20 tests pass, including the original [Media Creator](rescue.md) tests and byte-preservation checks for every canonical command. |
-| Generation | All 74 outputs match their canonical source; repeated builds are deterministic. |
+| Tool catalog | 113 complete records; all 111 previous tools retained, including [Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite). |
+| Procedures | All 22 playbooks remain. The catalog now contains 140 ordered steps and 83 acceptance checks. |
+| Original content | All 132 original steps retain their titles, original detail text, relative order and semantic destinations; all 72 original checks and nine executable commands remain. |
+| Methods | All 40 original methods remain; five additions bring the registry and authored roster to 45. |
+| Wiki | 48 content pages and two shared navigation files; 27 decision diagrams. |
+| Link audit | 332 exact registered names and 3,461 inline links pass the complete audit, including repeated mentions, page destinations, fragments and linked legends. |
+| Regression suite | 22 tests pass, including the original [Media Creator](rescue.md) tests, command preservation and published step destinations. |
+| Generation | All 77 outputs match their canonical input; syntax and whitespace checks pass. |
 
-The link tests include repeated occurrences, longest matches, word boundaries, ambiguous ordinary words, existing links, images, reference links, raw URLs, code spans, fenced commands, diagram source and malicious URL rejection. A deliberately unlinked name and nonexistent page both fail the gate.
+The complete [content-preservation report](reference/professional-content-preservation.json) compares every original tool, job and method ID, original command and published step destination. The [contribution report](reference/professional-catalog-checks.json) additionally checks unchanged original step text, new tool references and the complete method roster.
 
-## Actual browser and diagram proof
+## Interface and browser evidence
 
-The complete built app was exercised in [Chromium](https://www.chromium.org/) 158.0.8127.0. The homepage renders all 111 tools and all 10 discipline destinations; every jump route was exercised. The tool library retains all 111 entries, core/specialist/evaluate filtering returns 74/33/4, and the six Knowledge Desk destinations are present. Search, combined filters, browser Back, favorites, checklist persistence, reset Undo, exports, offline reopening and mobile navigation passed. No JavaScript errors, runtime network requests or 390-pixel horizontal overflow were observed.
+The actual self-contained artifact was exercised in [Chromium](https://www.chromium.org/) 158.0.8127.0. Home and Library each render **all 113 tools**, and all ten discipline routes work. The 22 playbooks, nine Knowledge Desk destinations and 52 official reference entries remain reachable. Recommendation filters return 76 everyday, 33 specialist and four evaluation entries. A broad search returns 104 matching records without a result cap.
 
-The linked-prose checks exercised headings, repeated names, exact-case ambiguity, escaped content, existing anchors and code preservation. The app creates no nested anchors and keeps commands byte-identical. A root review also loads a fresh copied HTML artifact and checks the actual tool-title link, Knowledge Desk, full directory, commands and mobile layout.
+The visual design follows [Interface Design](interface-design.md) and the linked [Athena](https://github.com/Herbertofury/Athena) references. Screenshots were reviewed at desktop and narrow widths in both themes. The default surface is neutral charcoal; headings use 30px text, reading text uses 16px, and working controls are at least 14px. Records use flat rows and thin dividers. No gradients are present in the inspected Home DOM. At 320, 390 and 720 CSS pixels, the checked layouts retain their content without document-wide horizontal overflow.
 
-All 27 final [Mermaid](https://mermaid.js.org/) diagrams were parsed and rendered in a real browser using version 12.3.0 installed only in the verification workspace. The shipped hub adds no diagram runtime or CDN dependency. The diagram report records source hashes for every graph; representative rendered diagrams and the native vector banner were visually inspected.
+Search, combined filters, browser Back, saved tools, keyboard navigation, focus feedback, theme persistence, checklist progress, reset Undo, Markdown export and offline HTML export pass. The final source creates no external runtime resource requests, and the exercised flows record no JavaScript errors. All nine command blocks across all 22 guides match the canonical command bytes.
 
-## Evidence records
+These observations establish the tested behavior and layout. They do not assert complete accessibility conformance or a controlled performance improvement. The [render report](reference/professional-render-checks.json) records DOM counts honestly: complete rows and additional linked content increase some counts. No record is culled, virtualized or hidden for the comparison.
 
-- [Complete Wiki audit](reference/knowledge-quality.json)
-- [Browser regression results](reference/knowledge-browser-checks.json)
-- [Adversarial linking results](reference/knowledge-link-checks.json)
-- [Final fresh-copy smoke test](reference/knowledge-final-smoke.json)
-- [Rendered diagram source hashes](reference/knowledge-diagram-checks.json)
-- [New source-route checks and corrections](reference/knowledge-source-checks.json)
+## Saved progress and stable links
 
-The [publishing workflow](../.github/workflows/hub.yml) reruns the regression suite, generated-output check and complete Wiki audit. Actual Wiki publication requires matching the live `.wiki.git` files to this generated publication set, as described in [Maintaining the Hub](maintaining-the-hub.md).
+Inserting a step previously changed its position-based storage key. The portal now identifies steps by stable anchors and conservatively migrates an old saved item only when its unchanged title has one unambiguous match. The existing version-one storage key is retained. Browser fixtures prove that the old checked scanner-preparation and final-retest steps remain checked at their new positions, while inserted steps begin unchecked. Changed titles, duplicate titles and conflicting old candidates are not guessed. Unchecking, reloading, resetting, Undo and a storage-unavailable session were exercised.
 
-## Material challenge findings resolved
+Existing published step fragments remain attached to their original actions. New steps receive distinct descriptive fragments. Regression tests verify specific moved actions and reject duplicate destinations. The [migration report](reference/professional-migration-checks.json) and [content-preservation report](reference/professional-content-preservation.json) record these results.
 
-- Preserved the concurrent complete homepage directory instead of overwriting it during the design upgrade.
-- Fixed discipline fragments so they open Home and scroll to the actual section, including direct and mobile links.
-- Fixed longest-alias matching so a partial longer alias cannot swallow a valid shorter name.
-- Added explicit section/step anchors so emoji headings retain reliable navigation.
-- Added linked legends immediately after all job diagrams and command examples.
-- Kept ordinary words such as “everything” and “windows” from becoming accidental product links.
-- Resolved the moved virtualization product route through its official current source.
+## Wiki and source review
 
-These checks establish the hub's behavior and the consistency of the knowledge system. Third-party software execution, antivirus efficacy and physical recovery-media compatibility require their own recorded evidence. The separate Rescue workflow continues to own image build and boot proof.
+All 27 [Mermaid](https://mermaid.js.org/) diagrams were parsed and rendered using version 12.3.0 in the verification workspace. The shipped hub adds no diagram runtime or CDN dependency. Complete decision topologies and existing checkpoints remain; native disclosures keep long diagrams available without pushing the procedure down the page. The source hashes are recorded in the [diagram report](reference/professional-diagram-checks.json).
+
+The new [Tool Selection](tool-selection.md) and [Service Evidence](service-evidence.md) pages explain diagnostic fit, remote-session capabilities, scan coverage, rebuild acceptance and image/mapfile reconciliation. Their primary-source review is recorded in the [source report](reference/professional-source-checks.json). Official source availability, documentation review and physical execution are distinct evidence levels; third-party software binaries were not executed or certified in this change. The current [CISA guide](https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf) was checked through primary indexed text; full-PDF retrieval was unavailable in the review environment.
+
+## Evidence and publication
+
+- [Complete Wiki audit](reference/professional-wiki-checks.json)
+- [Browser behavior checks](reference/professional-browser-checks.json)
+- [Adversarial linked-prose checks](reference/professional-link-checks.json)
+- [Rendering, typography, commands and candidate hashes](reference/professional-render-checks.json)
+- [Root review of the final requested tool entries](reference/professional-root-review.json)
+
+The [publishing workflow](../.github/workflows/hub.yml) reruns the test suite, generated-output check and complete Wiki audit. Publication requires the exact remote source checkpoint, matching hosted HTML, a byte-for-byte comparison of the actual live Wiki against generated files, and a verified complete source archive plus offline HTML in the existing project destination. Follow [Maintaining the Hub](maintaining-the-hub.md) for that process; local test success alone does not establish deployment success.
+
+The material review resolved old checklist progress migration, stable published step links, mobile header height and anchor offset, linked command references, complete method coverage, and the last generic tool-detail slogan. The separate [Rescue workflow](rescue.md) continues to own image-build and physical boot evidence.

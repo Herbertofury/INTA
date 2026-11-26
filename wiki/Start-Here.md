@@ -1,10 +1,10 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# 🧭 Welcome to the INTA bench
+# 🧭 Start here
 
 [Home](https://github.com/Herbertofury/INTA/wiki) › **Start here**
 
-**One place to choose the right job, reach the official tools and follow the repair through to proof.** Open the [interactive technician hub](https://herbertofury.github.io/INTA/) for search and checklists, or stay in the wiki for the complete field guides.
+**Find a tool, choose a procedure, and record the result.** Open the [interactive technician hub](https://herbertofury.github.io/INTA/) for search and checklists, or stay in the wiki for the complete field guides.
 
 | I want to… | Open |
 | --- | --- |
@@ -40,9 +40,10 @@ The levels describe editorial selection. They do not certify that every tool was
 
 | Tab | Use it for |
 | --- | --- |
-| **Home** | Choose a job and reach the everyday kit quickly. |
+| **Home** | Browse the complete tool directory and jump to a discipline. |
 | **Tool library** | Search the complete catalog and combine discipline, platform and kit-level filters. |
 | **Playbooks** | Follow steps, tick progress, copy a scoped diagnostic command and verify the result. |
+| **Knowledge desk** | Find methods, tool-selection guidance, [service evidence](https://github.com/Herbertofury/INTA/wiki/Service-Evidence), and contribution standards. |
 | **Saved** | Keep personal preferred tools close at hand. |
 | **Resources** | Reach this wiki, releases, canonical source and original documentation. |
 
@@ -69,4 +70,4 @@ When a guide lacks a useful branch or a link moves, follow [Contribute](https://
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

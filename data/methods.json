@@ -593,6 +593,84 @@
         "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
         "https://restic.readthedocs.io/en/stable/050_restore.html"
       ]
+    },
+    {
+      "id": "remote-capability-preflight",
+      "name": "Remote capability preflight",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-remote-support",
+      "aliases": [
+        "remote session preflight"
+      ],
+      "summary": "Match the session to the job and prove the required control, file, privilege and reconnect paths before changing the endpoint.",
+      "when": "Before choosing or starting a one-time or managed support connection.",
+      "proof": "Both platforms, user presence, permissions, transfer route and reconnect plan are recorded and the required capabilities are exercised.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+        "https://rustdesk.com/docs/en/self-host/client-configuration/advanced-settings/",
+        "https://docs.meshcentral.com/meshcentral/devicetabs/"
+      ]
+    },
+    {
+      "id": "temporary-access-revocation",
+      "name": "Temporary access revocation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-remote-support",
+      "aliases": [
+        "temporary access removal proof"
+      ],
+      "summary": "Close every case-specific session and remove temporary access while preserving explicitly authorized managed access.",
+      "when": "At the end of remote work or when ownership and scope change.",
+      "proof": "Session end, closed channels and removed credentials/enrollments are recorded, or continuing access has a named owner and review date.",
+      "sourceUrls": [
+        "https://support.google.com/chrome/answer/1649523",
+        "https://docs.meshcentral.com/meshcentral/devicetabs/",
+        "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md"
+      ]
+    },
+    {
+      "id": "scan-coverage-reconciliation",
+      "name": "Scan coverage reconciliation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-malware-removal",
+      "aliases": [
+        "scan coverage check"
+      ],
+      "summary": "Report findings separately from scope, inaccessible regions, cancellation and completion.",
+      "when": "After each malware scan and before a cleanup or escalation decision.",
+      "proof": "The case has scan mode, version, scope, completion, exclusions or errors, findings and disposition with the product report.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+        "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md"
+      ]
+    },
+    {
+      "id": "clean-rebuild-acceptance",
+      "name": "Clean rebuild acceptance",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-malware-removal",
+      "aliases": [
+        "trusted rebuild acceptance"
+      ],
+      "summary": "Carry the case safely from preserved evidence and data to a trusted installation and demonstrated customer task.",
+      "when": "When the trusted endpoint baseline cannot be established or the incident owner requires rebuilding.",
+      "proof": "Pre-wipe target and data decisions, media provenance, patch/protection state, restore checks, account-response ownership and customer-task evidence are recorded.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/reinstall-windows-with-the-installation-media",
+        "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf"
+      ]
+    },
+    {
+      "id": "image-mapfile-reconciliation",
+      "name": "Image and mapfile reconciliation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-failing-drive",
+      "aliases": [
+        "recovery image acceptance"
+      ],
+      "summary": "Bind an acquired image to its device identities, rescue-domain coverage, persistent mapfile and stopped-checkpoint checksum.",
+      "when": "At an imaging checkpoint and before filesystem repair or extraction from a working copy.",
+      "proof": "Saved mapfile states, remaining unreadable ranges, matching image/mapfile checkpoint and healthy-storage copy checks are recorded separately from file usability.",
+      "sourceUrls": [
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html#Mapfile-structure"
+      ]
     }
   ]
 }

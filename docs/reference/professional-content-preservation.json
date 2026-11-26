@@ -1,0 +1,37 @@
+{
+  "baseline": "28275815ff602fbb03a1f510b677b4dfc72659f7",
+  "errors": [],
+  "tools": {
+    "before": 111,
+    "after": 113,
+    "missingIds": [],
+    "addedIds": [
+      "wizfile",
+      "wiztree"
+    ]
+  },
+  "jobs": {
+    "before": 22,
+    "after": 22,
+    "missingIds": [],
+    "addedIds": []
+  },
+  "stepsBefore": 132,
+  "stepsAfter": 140,
+  "checksBefore": 72,
+  "checksAfter": 83,
+  "originalCommandsPreserved": 9,
+  "originalStepDestinationsPreserved": 132,
+  "methods": {
+    "before": 40,
+    "after": 45,
+    "missingIds": [],
+    "addedIds": [
+      "clean-rebuild-acceptance",
+      "image-mapfile-reconciliation",
+      "remote-capability-preflight",
+      "scan-coverage-reconciliation",
+      "temporary-access-revocation"
+    ]
+  }
+}
