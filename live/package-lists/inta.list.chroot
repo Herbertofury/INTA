@@ -1,6 +1,7 @@
-live-boot live-config live-config-systemd
+live-boot live-config live-config-systemd user-setup sudo procps
 linux-image-amd64 firmware-linux-free firmware-misc-nonfree firmware-realtek firmware-iwlwifi firmware-amd-graphics
-lightdm lightdm-gtk-greeter xfce4 xfce4-terminal dbus-x11 network-manager network-manager-gnome firefox-esr python3-tk
+lightdm lightdm-gtk-greeter xserver-xorg xauth xfce4 xfce4-terminal dbus-x11 dbus-user-session mate-polkit
+network-manager network-manager-gnome firefox-esr fonts-dejavu-core python3-tk
 gparted gsmartcontrol smartmontools nvme-cli hdparm lshw dmidecode pciutils usbutils inxi lm-sensors memtester stress-ng
 clonezilla partclone testdisk gddrescue rsync
 ntfs-3g exfatprogs dosfstools e2fsprogs btrfs-progs xfsprogs cryptsetup dislocker lvm2 mdadm

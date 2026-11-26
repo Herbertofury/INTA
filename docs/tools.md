@@ -21,3 +21,5 @@
 | [PE-sieve](https://github.com/hasherezade/pe-sieve), [HollowsHunter](https://github.com/hasherezade/hollows_hunter), [System Informer](https://systeminformer.sourceforge.io/) | Windows-native running-process inspection candidates from Athena endpoint-security research. Use these in an authorized Windows session. |
 
 INTA uses Debian's authenticated package repositories for base system packages. See the package list for exactly what the build requests and the release manifest for resolved Debian packages.
+
+Athena reference: [Windows endpoint security](https://github.com/Herbertofury/Athena/blob/c976a3d35c507e4fe94aefafc3db6f6f97e8eb8e/docs/windows-endpoint-security.md).
