@@ -84,6 +84,21 @@ The [hub workflow](https://github.com/Herbertofury/INTA/actions/workflows/hub.ym
 
 Record results in [the contribution template](https://github.com/Herbertofury/INTA/wiki/Templates). Downloaded offline copies retain their build snapshot; replace the HTML when you want updated guidance.
 
+
+## ⭐ Maintain tool reputation evidence
+
+The canonical reputation design lives in [Tool Reputation](tool-reputation.md), with source identities in [reputation-sources.json](../data/reputation-sources.json). Treat these as distinct evidence streams:
+
+- GitHub stars, forks and repository activity (only after matching the exact project).
+- Native professional-review ratings with their original scale and review count.
+- Independent laboratory results with product version, platform, test date and methodology.
+- Recommendations from named technical publications and verified practitioners.
+- Community discussion signals with distinct-author and cross-post deduplication.
+- Security advisories and INTA's own runtime/field validation.
+
+A provider registry entry does not mean that provider is integrated, queried or endorsed. Use documented APIs, permitted public pages or feeds only. Respect provider terms, rate limits, privacy and access controls. Preserve the last successful snapshot on provider failure and mark it stale; never replace missing data with zero. Popularity, sentiment and expert evidence must never be merged into one unexplained score or bypass the existing promotion and rescue-image gates.
+
+
 ## 📚 Maintainer references
 
 - [GitHub: adding and editing wiki pages](https://docs.github.com/en/communities/documenting-your-project-with-wikis/adding-or-editing-wiki-pages)
