@@ -20,6 +20,7 @@
 | Canonical file | Author here |
 | --- | --- |
 | [Tool catalog](https://github.com/Herbertofury/INTA/blob/main/data/tools.json) | Tool identity, official links, usage boundary, tier, tags and review evidence |
+| [Quick-start selections](https://github.com/Herbertofury/INTA/blob/main/data/quick-start.json) | Free starting tools for urgent scenarios, task fit, source evidence and practical limits; shared by the front pages |
 | [Job guides](https://github.com/Herbertofury/INTA/blob/main/data/jobs.json) | Procedures, selected tool IDs, verification, escalation and sources |
 | [Method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json) | Precise method names, aliases, canonical destinations and proof |
 | [Link aliases](https://github.com/Herbertofury/INTA/blob/main/data/link-aliases.json) and [linking helper](https://github.com/Herbertofury/INTA/blob/main/scripts/wiki_links.py) | Additional precise application names and linking of every repeated mention |

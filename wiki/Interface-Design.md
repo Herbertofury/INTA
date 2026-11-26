@@ -25,11 +25,11 @@ The [Compact and Sieve observations](https://github.com/Herbertofury/Athena/blob
 ## Layout
 
 - **Application shell:** a quiet sidebar, a compact utility bar, and a fluid working area. Navigation names the actual destination.
-- **Home:** a concise heading and practical routes, followed by the complete tool directory. Use grouped rows with direct actions. Keep every catalog entry available.
+- **Home:** lead with the problem, a suitable free starting tool, its official link, and the matching procedure. Use a compact, immediately visible selection table before the complete tool directory. Keep every catalog entry available below it.
 - **Tool library:** a readable list with visible filters, result count, platform information, recommendation tier, details, official source, and save control.
 - **Playbooks:** a compact index. Individual procedures use a document column with a restrained context area for the toolkit and related information.
 - **Knowledge desk:** linked reference rows with short descriptions. Its purpose is finding guidance, so it does not need a gallery of equally sized cards.
-- **Wiki:** use the host's document typography, short navigation, restrained section markers, useful tables, and meaningful decision diagrams. The masthead establishes identity without dominating the page.
+- **Wiki:** use the host's document typography, bold task links, meaningful emoji, useful tables, and decision diagrams. Every service scenario and tool category must be visible immediately in the sidebar. Place common jobs and direct official tool links before administration links. The masthead establishes identity without dominating the page.
 
 Avoid giant welcome sections, equal-height promotional tiles, decorative statistic panels, fake avatars, decorative status dots, slogan-filled footers, and oversized empty containers. A box belongs around a real control group or distinct working context. Ordinary text does not need a card.
 
@@ -45,7 +45,11 @@ The default theme is neutral dark. The light theme is equally complete and keeps
 
 Application controls use one small, consistent line-icon style with readable text labels or accessible names. Remove sparkle motifs, decorative icon tiles, and icon-only controls whose purpose is unclear.
 
-The Wiki may retain sparse emoji as section markers because the owner requested them. They must help recognize a section and must not decorate every heading, link, list item, or cell. Existing direct-link rules apply to every recognized tool, app, and named method, including repeated mentions.
+The Wiki uses meaningful emoji on scenario, category and quick-tool navigation. Pair each icon with a bold, short linked label, such as **[🦠 Virus removal](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal)** or **[💾 Recover data](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)**. This is functional emphasis requested by the owner: users should recognize and open their destination immediately. Keep decorative emoji out of ordinary explanatory prose. Existing direct-link rules apply to every recognized tool, app, and named method, including repeated mentions.
+
+**Navigation stays expanded.** Do not place scenarios, tool categories, official-download shortcuts or reference destinations inside collapsed groups, accordions, tabs or a “more” menu. A longer visible list is preferable to extra navigation clicks. Optional explanatory diagrams may use disclosures when all action destinations also remain visible outside them.
+
+**Front pages start with useful tools.** The application Home, Wiki Home, repository README and Start Here page share the same curated quick-start data. Show the scenario, a strong free choice for that job, a direct official link, a concise reason and the guide. Favor tools available without a paid upgrade for the intended technician workflow. Explain a relevant limitation where it changes the next action. Put detailed selection evidence in the linked guide. Never invent ratings, apply one product's test score to a different edition or utility, or claim a universal winner when the evidence covers a narrower task.
 
 Use [Mermaid](https://mermaid.js.org/) only where a branch, dependency, or sequence benefits from a diagram. Preserve plain labels and provide linked legends immediately afterward. A table is usually better for selecting a tool from a small set.
 
@@ -54,6 +58,7 @@ Use [Mermaid](https://mermaid.js.org/) only where a branch, dependency, or seque
 | State or path | Required behavior |
 | --- | --- |
 | Keyboard navigation | Every action is reachable; visible focus remains clear against the surface |
+| Wiki destinations | All scenarios, tool categories and quick tool links are bold and directly clickable without expanding a group |
 | Search and filters | Show all matching entries and a truthful result count; preserve the query through expected navigation |
 | Saved tools and checklists | Persist the existing keys and user state across reloads and redesigns |
 | Empty result | Explain the current filter and provide a working way to clear it |
@@ -71,6 +76,7 @@ Check narrow layouts against the [reflow guidance](https://www.w3.org/WAI/WCAG22
 - [ ] Visually inspect the actual final home, library, procedure, knowledge, and mobile views.
 - [ ] Confirm the new composition addresses the rejected green/card-heavy layout.
 - [ ] Confirm all tools, jobs, methods, commands, and source routes remain available.
+- [ ] Confirm every Wiki scenario and tool category is visible without opening a collapsed group, and official-download shortcuts go straight to the catalog's verified publisher route.
 - [ ] Exercise search, filters, direct links, history, saving, checklists, reset/undo, theme, and exports.
 - [ ] Check keyboard focus, readable control text, long labels, and narrow-screen overflow.
 - [ ] Verify that the live site and actual Wiki reflect the tested source revision.

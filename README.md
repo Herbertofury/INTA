@@ -2,11 +2,59 @@
 
 # INTA Computer Services
 
-Tools, procedures, and service knowledge for the INTA team.
+Choose a repair scenario below for a free starting tool and a step-by-step guide. Built for INTA Computer Services.
 
-**[Technician workspace](https://herbertofury.github.io/INTA/)** · [Wiki](https://github.com/Herbertofury/INTA/wiki) · [Tool selection](https://github.com/Herbertofury/INTA/wiki/Tool-Selection) · [Rescue releases](https://github.com/Herbertofury/INTA/releases)
+**[🧰 Open the workspace](https://herbertofury.github.io/INTA/)** · **[📚 Open the Wiki](https://github.com/Herbertofury/INTA/wiki)** · **[💾 Rescue media](https://github.com/Herbertofury/INTA/wiki/Rescue-Media)**
+
+<!-- INTA:QUICK-START:START -->
+
+<a id="free-tools"></a>
+
+## ⚡ Free tools for common jobs
+
+Open a tool below, or select the scenario for its step-by-step guide. [How these picks were chosen](https://github.com/Herbertofury/INTA/wiki/Free-Tool-Picks).
+
+| Scenario | Primary free tool |
+| --- | --- |
+| **[🛡️ Suspected malware](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal)** | **[Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download)** |
+| **[📁 Deleted files](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)** | **[PhotoRec](https://www.cgsecurity.org/wiki/TestDisk_Download)** |
+| **[💾 Failing drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)** | **[GNU ddrescue](https://ftp.gnu.org/gnu/ddrescue/)** |
+| **[🐢 Slow PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)** | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)** |
+| **[📊 Disk space](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)** | **[WinDirStat](https://github.com/windirstat/windirstat/releases/latest)** |
+| **[🔎 Find a file](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)** | **[Everything](https://www.voidtools.com/downloads/)** |
+| **[🖥️ Remote help](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)** | **[Microsoft Quick Assist](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** |
+| **[🔌 Boot USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb)** | **[Rufus](https://rufus.ie/#download)** |
+| **[🧰 Windows repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair)** | **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** |
+| **[🌐 Inspect network traffic](https://github.com/Herbertofury/INTA/wiki/Job-network-dns)** | **[Wireshark](https://www.wireshark.org/download.html)** |
+| **[🧪 Suspected RAM fault](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod)** | **[Memtest86+](https://www.memtest.org/#download)** |
+| **[🗄️ File backup](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)** | **[restic](https://github.com/restic/restic/releases/latest)** |
+
+Selection review: **2026-11-26** · [Complete tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory)
+
+<!-- INTA:QUICK-START:END -->
 
 ---
+
+<a id="-what-are-you-fixing"></a>
+
+## 🛠 Choose a job
+
+| Your job | Open the guide | The result you are aiming for |
+| --- | --- | --- |
+| A new service request | [Intake & triage](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) | A clear problem, protected data and a testable outcome. |
+| Suspected infection | [Malware removal](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) | Containment, purposeful scanning and a supported cleanup or rebuild decision. |
+| Active ransomware | [Ransomware response](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response) | Containment, preserved evidence and a controlled recovery path. |
+| A slow or unstable PC | [Slow PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) · [Hardware / BSOD](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod) | An identified bottleneck or fault and a measured, repeatable fix. |
+| Broken [Windows](https://www.microsoft.com/windows) or updates | [Windows repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) · [Updates](https://github.com/Herbertofury/INTA/wiki/Job-windows-update) | Correct servicing, healthy components and verified restart behavior. |
+| A machine that will not boot | [Boot recovery](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery) | The right recovery environment and a data-conscious [boot repair](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery). |
+| A failing disk or lost files | [Drive recovery](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) | Data preservation before filesystem repair attempts. |
+| An SSD upgrade or restore | [Migration](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration) · [Backup / restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) | A verified copy, successful boot and a real [restore test](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore). |
+| Connectivity or an outage | [Network / DNS](https://github.com/Herbertofury/INTA/wiki/Job-network-dns) · [Outage recovery](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery) | A traced failure boundary and service restored in dependency order. |
+| Supporting someone remotely | [Remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) | The right attended or managed connection with a clear handoff. |
+| Office and workplace issues | [Outlook](https://github.com/Herbertofury/INTA/wiki/Job-outlook-email) · [Printers](https://github.com/Herbertofury/INTA/wiki/Job-printer-repair) · [AD trust](https://github.com/Herbertofury/INTA/wiki/Job-ad-trust) | Diagnosis at the correct device, account or service layer. |
+| Preparing the next job | [New PC](https://github.com/Herbertofury/INTA/wiki/Job-new-pc) · [Maintenance](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) · [USB media](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) | A ready kit and a machine that is ready for real use. |
+
+**[Browse all 22 playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks)**
 
 <a id="-a-home-for-the-whole-service-desk"></a>
 
@@ -31,27 +79,6 @@ The browser hub works online and as a single offline HTML file. The live [Wiki](
 | [Tool selection](https://github.com/Herbertofury/INTA/wiki/Tool-Selection) | Choose diagnostics, disk-space analysis, file search, or remote access for the job. |
 | [Service evidence](https://github.com/Herbertofury/INTA/wiki/Service-Evidence) | Record scan coverage, session closure, and recovery acceptance. |
 | [Interface design](https://github.com/Herbertofury/INTA/wiki/Interface-Design) | Maintain the compact professional layout and its source-informed design decisions. |
-
-<a id="-what-are-you-fixing"></a>
-
-## 🛠 Choose a job
-
-| Your job | Open the guide | The result you are aiming for |
-| --- | --- | --- |
-| A new service request | [Intake & triage](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) | A clear problem, protected data and a testable outcome. |
-| Suspected infection | [Malware removal](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) | Containment, purposeful scanning and a supported cleanup or rebuild decision. |
-| Active ransomware | [Ransomware response](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response) | Containment, preserved evidence and a controlled recovery path. |
-| A slow or unstable PC | [Slow PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) · [Hardware / BSOD](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod) | An identified bottleneck or fault and a measured, repeatable fix. |
-| Broken [Windows](https://www.microsoft.com/windows) or updates | [Windows repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) · [Updates](https://github.com/Herbertofury/INTA/wiki/Job-windows-update) | Correct servicing, healthy components and verified restart behavior. |
-| A machine that will not boot | [Boot recovery](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery) | The right recovery environment and a data-conscious [boot repair](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery). |
-| A failing disk or lost files | [Drive recovery](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) | Data preservation before filesystem repair attempts. |
-| An SSD upgrade or restore | [Migration](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration) · [Backup / restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) | A verified copy, successful boot and a real [restore test](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore). |
-| Connectivity or an outage | [Network / DNS](https://github.com/Herbertofury/INTA/wiki/Job-network-dns) · [Outage recovery](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery) | A traced failure boundary and service restored in dependency order. |
-| Supporting someone remotely | [Remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) | The right attended or managed connection with a clear handoff. |
-| Office and workplace issues | [Outlook](https://github.com/Herbertofury/INTA/wiki/Job-outlook-email) · [Printers](https://github.com/Herbertofury/INTA/wiki/Job-printer-repair) · [AD trust](https://github.com/Herbertofury/INTA/wiki/Job-ad-trust) | Diagnosis at the correct device, account or service layer. |
-| Preparing the next job | [New PC](https://github.com/Herbertofury/INTA/wiki/Job-new-pc) · [Maintenance](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) · [USB media](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) | A ready kit and a machine that is ready for real use. |
-
-**[Browse all 22 playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks)**
 
 <a id="-your-workspace-with-the-useful-details-built-in"></a>
 

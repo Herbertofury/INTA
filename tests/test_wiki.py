@@ -1,6 +1,7 @@
 import copy
 import importlib.util
 import json
+import re
 from pathlib import Path
 import unittest
 from unittest.mock import patch
@@ -88,6 +89,42 @@ A["Windows"] --> B["PowerShell"]
         result = audit.inspect({'wiki/Home.md': 'PowerShell\n\n[Missing](Missing-Page)\n'}, self.registry, [])
         self.assertTrue(any('unlinked' in x for x in result['errors']))
         self.assertTrue(any('missing Wiki page' in x for x in result['errors']))
+
+    def test_sidebar_exposes_every_scenario_and_tool_category_without_expansion(self):
+        sidebar = build.build_outputs()['wiki/_Sidebar.md']
+        self.assertNotRegex(sidebar.lower(), r'<(?:details|summary)\b')
+        for job in self.jobs:
+            destination = re.escape('Job-' + job['id'])
+            self.assertRegex(sidebar, r'\*\*\[[^\]]+\]\((?:' + re.escape(build.WIKI) + r'/)?' + destination + r'\)\*\*')
+        for category in {tool['category'] for tool in self.tools}:
+            self.assertIn('(Tools-' + build.slug(category) + ')', sidebar)
+
+    def test_complete_directory_exposes_official_tool_routes(self):
+        directory = build.build_outputs()['wiki/Tool-Directory.md']
+        for tool in self.tools:
+            self.assertIn('](' + tool['downloadUrl'] + ')', directory, tool['id'])
+
+    def test_front_pages_share_direct_free_tool_and_scenario_routes(self):
+        quick_start = json.loads((ROOT / 'data/quick-start.json').read_text())
+        tools = {tool['id']: tool for tool in self.tools}
+        jobs = {job['id'] for job in self.jobs}
+        output = build.build_outputs()
+        rows = quick_start['items']
+        self.assertTrue(rows)
+        self.assertEqual(len({row['id'] for row in rows}), len(rows))
+        for row in rows:
+            self.assertIn(row['jobId'], jobs)
+            self.assertIn(row['toolId'], tools)
+            self.assertTrue(row['freeUse'])
+            self.assertTrue(row['qualityBasis'])
+            self.assertTrue(row['evidenceUrls'])
+            for path in ['README.md', 'docs/start-here.md', 'wiki/Home.md', 'wiki/Start-Here.md']:
+                page = output[path]
+                self.assertIn('](' + tools[row['toolId']]['downloadUrl'] + ')', page, path + ': ' + row['id'])
+                self.assertIn('](' + build.WIKI + '/Job-' + row['jobId'] + ')', page, path + ': ' + row['id'])
+        for path in ['README.md', 'docs/start-here.md']:
+            self.assertEqual(output[path].count('<!-- INTA:QUICK-START:START -->'), 1)
+            self.assertEqual(output[path].count('<!-- INTA:QUICK-START:END -->'), 1)
 
     def test_methods_have_sources_and_complete_operating_guidance(self):
         methods = json.loads((ROOT / 'data/methods.json').read_text())['methods']

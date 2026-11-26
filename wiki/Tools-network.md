@@ -272,7 +272,7 @@ Network inventory and service discovery for an approved address range.
 | **Choose it for** | Identifying expected hosts and exposed services on a managed network. |
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | installed |
-| **Access / pricing** | Source-available under [Nmap](https://nmap.org/) terms; Npcap terms differ |
+| **Access / pricing** | Source-available under [Nmap](https://nmap.org/) terms; [Npcap](https://npcap.com/) terms differ |
 | **Selection role** | Specialist |
 
 > **Before using it:** Choose a scoped, non-disruptive discovery plan. Avoid intrusive script categories during ordinary troubleshooting.

@@ -6,6 +6,35 @@
 
 **Find a tool, choose a procedure, and record the result.** Open the [interactive technician hub](https://herbertofury.github.io/INTA/) for search and checklists, or stay in the wiki for the complete field guides.
 
+<!-- INTA:QUICK-START:START -->
+
+<a id="free-tools"></a>
+
+## ⚡ Free tools for common jobs
+
+Open a tool below, or select the scenario for its step-by-step guide. [How these picks were chosen](https://github.com/Herbertofury/INTA/wiki/Free-Tool-Picks).
+
+| Scenario | Primary free tool |
+| --- | --- |
+| **[🛡️ Suspected malware](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal)** | **[Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download)** |
+| **[📁 Deleted files](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)** | **[PhotoRec](https://www.cgsecurity.org/wiki/TestDisk_Download)** |
+| **[💾 Failing drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)** | **[GNU ddrescue](https://ftp.gnu.org/gnu/ddrescue/)** |
+| **[🐢 Slow PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)** | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)** |
+| **[📊 Disk space](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)** | **[WinDirStat](https://github.com/windirstat/windirstat/releases/latest)** |
+| **[🔎 Find a file](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)** | **[Everything](https://www.voidtools.com/downloads/)** |
+| **[🖥️ Remote help](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)** | **[Microsoft Quick Assist](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** |
+| **[🔌 Boot USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb)** | **[Rufus](https://rufus.ie/#download)** |
+| **[🧰 Windows repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair)** | **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** |
+| **[🌐 Inspect network traffic](https://github.com/Herbertofury/INTA/wiki/Job-network-dns)** | **[Wireshark](https://www.wireshark.org/download.html)** |
+| **[🧪 Suspected RAM fault](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod)** | **[Memtest86+](https://www.memtest.org/#download)** |
+| **[🗄️ File backup](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)** | **[restic](https://github.com/restic/restic/releases/latest)** |
+
+Selection review: **2026-11-26** · [Complete tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory)
+
+<!-- INTA:QUICK-START:END -->
+
+## Find the rest of the workspace
+
 | I want to… | Open |
 | --- | --- |
 | Find the right guide from a symptom | [Decision Desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) |
@@ -40,7 +69,7 @@ The levels describe editorial selection. They do not certify that every tool was
 
 | Tab | Use it for |
 | --- | --- |
-| **Home** | Browse the complete tool directory and jump to a discipline. |
+| **Home** | Open a free starting tool for a common job, then browse the complete directory. |
 | **Tool library** | Search the complete catalog and combine discipline, platform and kit-level filters. |
 | **Playbooks** | Follow steps, tick progress, copy a scoped diagnostic command and verify the result. |
 | **Knowledge desk** | Find methods, tool-selection guidance, [service evidence](https://github.com/Herbertofury/INTA/wiki/Service-Evidence), and contribution standards. |

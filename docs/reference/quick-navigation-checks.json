@@ -1,0 +1,385 @@
+{
+  "reviewedAt": "2026-11-26",
+  "baseCommit": "a651b47fce7740ce6fbb11b3f779969eeb64c5b8",
+  "scope": "Phase 2: visible scenario/tool navigation and shared free-tool starting selections",
+  "independentSidebarReview": {
+    "sourceSha256": "5eabe055f19769b67ad194fec21f994e3fa1d0b396b9e624c36a3d6375a4b05e",
+    "catalogTools": 113,
+    "scenarioLinks": 22,
+    "categoryLinks": 10,
+    "quickTools": 12,
+    "allVisibleWithoutExpansion": true,
+    "boldMeaningfulLabels": true,
+    "oldRoutesPreserved": 49,
+    "oldAnchorsPreserved": 13,
+    "officialQuickDestinationsMatchCatalog": true,
+    "sidebarWidthsTested": [
+      295,
+      271
+    ],
+    "noHorizontalOverflow": true,
+    "noClipping": true,
+    "scenarios": [
+      {
+        "id": "intake-triage",
+        "label": "🧭 Triage a new issue",
+        "canonicalTitle": "Start here: triage any computer problem"
+      },
+      {
+        "id": "malware-removal",
+        "label": "🦠 Remove viruses",
+        "canonicalTitle": "Remove malware and browser hijackers"
+      },
+      {
+        "id": "ransomware-response",
+        "label": "🚨 Contain ransomware",
+        "canonicalTitle": "Contain ransomware or a wider compromise"
+      },
+      {
+        "id": "slow-pc",
+        "label": "🐢 Fix a slow PC",
+        "canonicalTitle": "Diagnose a slow, freezing, or hitching PC"
+      },
+      {
+        "id": "windows-repair",
+        "label": "🛠️ Repair Windows",
+        "canonicalTitle": "Repair Windows component or system-file corruption"
+      },
+      {
+        "id": "windows-update",
+        "label": "🔄 Fix Windows updates",
+        "canonicalTitle": "Fix a failing Windows update"
+      },
+      {
+        "id": "boot-recovery",
+        "label": "🚑 Fix boot failure",
+        "canonicalTitle": "Recover a Windows PC that will not boot"
+      },
+      {
+        "id": "failing-drive",
+        "label": "💾 Recover data",
+        "canonicalTitle": "Rescue data from a failing or unreadable drive"
+      },
+      {
+        "id": "disk-migration",
+        "label": "💽 Clone or migrate a disk",
+        "canonicalTitle": "Clone a healthy system or migrate to a new SSD"
+      },
+      {
+        "id": "backup-restore",
+        "label": "🗄️ Test a backup restore",
+        "canonicalTitle": "Prove a backup can actually restore"
+      },
+      {
+        "id": "network-dns",
+        "label": "🌐 Fix internet & DNS",
+        "canonicalTitle": "Fix internet, DNS, or local-network problems"
+      },
+      {
+        "id": "outage-recovery",
+        "label": "⚡ Recover from an outage",
+        "canonicalTitle": "Bring an office back after a power outage"
+      },
+      {
+        "id": "remote-support",
+        "label": "🖥️ Help remotely",
+        "canonicalTitle": "Start and finish a clean remote-support session"
+      },
+      {
+        "id": "ad-trust",
+        "label": "🔑 Repair domain trust",
+        "canonicalTitle": "Repair a workstation’s domain trust relationship"
+      },
+      {
+        "id": "outlook-email",
+        "label": "📧 Fix email",
+        "canonicalTitle": "Fix Outlook or email send/receive problems"
+      },
+      {
+        "id": "printer-repair",
+        "label": "🖨️ Fix printing",
+        "canonicalTitle": "Restore printing without breaking other queues"
+      },
+      {
+        "id": "hardware-bsod",
+        "label": "🌡️ Diagnose crashes / BSOD",
+        "canonicalTitle": "Diagnose crashes, blue screens, and overheating"
+      },
+      {
+        "id": "new-pc",
+        "label": "🆕 Set up a new PC",
+        "canonicalTitle": "Set up a dependable new workstation"
+      },
+      {
+        "id": "client-handoff",
+        "label": "📋 Complete the handoff",
+        "canonicalTitle": "Close a repair with a clear client handoff"
+      },
+      {
+        "id": "boot-usb",
+        "label": "🔌 Build a rescue USB",
+        "canonicalTitle": "Build and refresh a technician rescue USB"
+      },
+      {
+        "id": "ai-triage",
+        "label": "🧠 Troubleshoot with AI",
+        "canonicalTitle": "Use AI as a careful troubleshooting copilot"
+      },
+      {
+        "id": "preventive-maintenance",
+        "label": "🧹 Maintain a workstation",
+        "canonicalTitle": "Run a useful workstation maintenance visit"
+      }
+    ],
+    "quick": [
+      {
+        "id": "sysinternals",
+        "label": "🧰 Sysinternals Suite",
+        "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+        "routeType": "download"
+      },
+      {
+        "id": "wiztree",
+        "label": "📊 WizTree",
+        "url": "https://diskanalyzer.com/download",
+        "routeType": "download"
+      },
+      {
+        "id": "wizfile",
+        "label": "🔎 WizFile",
+        "url": "https://antibody-software.com/wizfile/download",
+        "routeType": "download"
+      },
+      {
+        "id": "adwcleaner",
+        "label": "🧹 AdwCleaner",
+        "url": "https://www.malwarebytes.com/adwcleaner",
+        "routeType": "download"
+      },
+      {
+        "id": "hitmanpro",
+        "label": "🛡️ HitmanPro",
+        "url": "https://www.sophos.com/en-us/products/hitmanpro",
+        "routeType": "download"
+      },
+      {
+        "id": "defender-offline",
+        "label": "🔐 Defender Offline setup",
+        "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+        "routeType": "setup"
+      },
+      {
+        "id": "crystaldiskinfo",
+        "label": "💽 CrystalDiskInfo",
+        "url": "https://crystalmark.info/en/download/",
+        "routeType": "download"
+      },
+      {
+        "id": "rustdesk",
+        "label": "🖥️ RustDesk",
+        "url": "https://github.com/rustdesk/rustdesk/releases/latest",
+        "routeType": "download"
+      },
+      {
+        "id": "ventoy",
+        "label": "🔌 Ventoy",
+        "url": "https://www.ventoy.net/en/download.html",
+        "routeType": "download"
+      },
+      {
+        "id": "rufus",
+        "label": "💿 Rufus",
+        "url": "https://rufus.ie/#download",
+        "routeType": "download"
+      },
+      {
+        "id": "testdisk",
+        "label": "🗂️ TestDisk",
+        "url": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+        "routeType": "download"
+      },
+      {
+        "id": "photorec",
+        "label": "📷 PhotoRec",
+        "url": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+        "routeType": "download"
+      }
+    ],
+    "errors": [],
+    "scope": "Independent local render of actual generated Markdown using the installed marked parser and a restrained GitHub-like 295px sidebar. This is not a screenshot of the hosted GitHub Wiki; root owns actual hosted readback.",
+    "themesReviewed": [
+      "dark",
+      "light"
+    ],
+    "reviewedAt": "2026-11-26",
+    "evidencePhase": "Visible navigation before the Free Tool Picks reference was added",
+    "sourceIsCurrent": false,
+    "currentRevisionRerendered": false,
+    "applicability": "The 295px and 271px observations apply to the recorded source hash. The current sidebar was compared as Markdown and differs by exactly one reference link; no new sidebar render is claimed."
+  },
+  "currentSidebarStaticCheck": {
+    "sourceSha256": "ef73caa46597b6db83e81df3a03b171f0674dc6461aaba20f24e9f55809be351",
+    "previouslyRenderedSourceSha256": "5eabe055f19769b67ad194fec21f994e3fa1d0b396b9e624c36a3d6375a4b05e",
+    "onlyChangeFromRenderedSource": {
+      "addedLine": "- [Free Tool Picks](Free-Tool-Picks)",
+      "destination": "Free-Tool-Picks",
+      "section": "Reference"
+    },
+    "removingAddedLineRecoversReviewedSourceHash": true,
+    "all22ScenariosRemainBoldAndVisible": true,
+    "all10CategoriesRemainBoldAndVisible": true,
+    "quickToolShortcuts": 12,
+    "disclosureElements": 0,
+    "visualRerenderPerformed": false
+  },
+  "preservation": {
+    "baseCommit": "a651b47fce7740ce6fbb11b3f779969eeb64c5b8",
+    "scope": "Exact catalog, command, diagram and selected portal-file comparison",
+    "unchangedSourceFiles": [
+      "data/tools.json",
+      "data/jobs.json",
+      "data/methods.json",
+      "portal/index.template.html"
+    ],
+    "intentionallyChangedSourceFiles": [
+      "portal/app.js",
+      "portal/styles.css"
+    ],
+    "intentionallyChangedGeneratedFiles": [
+      "site/index.html"
+    ],
+    "fileComparisons": [
+      {
+        "path": "data/tools.json",
+        "baseSha256": "5a67051c6d405628b450c7c51c51aed8b4ee28b1a04b3e0750acfe603379c782",
+        "currentSha256": "5a67051c6d405628b450c7c51c51aed8b4ee28b1a04b3e0750acfe603379c782",
+        "byteIdentical": true
+      },
+      {
+        "path": "data/jobs.json",
+        "baseSha256": "9c08541bd245c424e5566d5b7bfc5e91e4351fbcec3aa2dbd2788440c9c10832",
+        "currentSha256": "9c08541bd245c424e5566d5b7bfc5e91e4351fbcec3aa2dbd2788440c9c10832",
+        "byteIdentical": true
+      },
+      {
+        "path": "data/methods.json",
+        "baseSha256": "f835e11fbd298ec851113921c1660426021418a47b6df1df1f8059c4da37baca",
+        "currentSha256": "f835e11fbd298ec851113921c1660426021418a47b6df1df1f8059c4da37baca",
+        "byteIdentical": true
+      },
+      {
+        "path": "portal/app.js",
+        "baseSha256": "94cc5ceadc717dc331c9f07ffa3797355ed567198f24f8e543eef15dc8f49174",
+        "currentSha256": "df407a79bbd03ea4d9ab1107394dbbc5f48a547b34c54491424ac70cc4f5bb99",
+        "byteIdentical": false
+      },
+      {
+        "path": "portal/styles.css",
+        "baseSha256": "c2f4dd0b6f442b199177e0531061df60d24add73471cb01ac29d1aacc5bd01d3",
+        "currentSha256": "638a570837eec2c7aa5a9f4325b993266c3998e3f4c1dc90e42201120beb6673",
+        "byteIdentical": false
+      },
+      {
+        "path": "portal/index.template.html",
+        "baseSha256": "06e2ea5e5e2e244bd50cb8325bdba9ca94df671fa4600484b008041450d89033",
+        "currentSha256": "06e2ea5e5e2e244bd50cb8325bdba9ca94df671fa4600484b008041450d89033",
+        "byteIdentical": true
+      },
+      {
+        "path": "site/index.html",
+        "baseSha256": "3431842ebcf5f4f02806ba7561c7c4e6e6b0ce2d3e9360bef5e5212ca2915c3c",
+        "currentSha256": "564a5dab754dc35e0836209ae3c79a4519edeae20f97cfe2ed97c21eaa410bdf",
+        "byteIdentical": false
+      }
+    ],
+    "all27DiagramsByteIdentical": true,
+    "diagramSources": 27,
+    "diagramSourceSha256": {
+      "Job-hardware-bsod-1": "54e6be9d7a2cdb2410197529bc3361dd5411f81a684b957dd1f1ecb722acaa94",
+      "Decision-Desk-1": "976688b9b88cae4ae60ab98aa9fe944b8fb1360a84ecad8b7718795dce554be9",
+      "Home-1": "762c230db502c384166db423b4c4cdf6cbfeebb9d43a421e3a00d62a9265a351",
+      "Job-network-dns-1": "9f16b549e6270bdd1340f6b3ebe52649346645b9315fb4f61abf01e7b031d936",
+      "Job-preventive-maintenance-1": "cb6e5534df485ead84e1ef07e844f8c957e86e5cceaba4bfc23f9e734e22d0d4",
+      "Job-client-handoff-1": "f528d046acd6d91ed2cec3a47b04f26bb5b30d06c9f1a351c3cb245efa4b9148",
+      "Knowledge-Standards-1": "6eb52f2294a5dc5057d4cfcb8fc025c8a257c8a7ccd6562d3041653de121b6ef",
+      "Job-intake-triage-1": "bd3dae4ba2f0a35fc4e35100c73ceeb0ae55c88ef92cfe83e623bbfcff3d5ee4",
+      "Job-failing-drive-1": "d8d873c46687e08351ae763745fc1570c4da70ff7f9d0324d7bd993352c3dd9b",
+      "Job-outlook-email-1": "dd979d90c40bd48ba4494730b308b6f9caf52a6bcf9770deb0374c4ea37777dd",
+      "Job-ransomware-response-1": "30ac71a9a3a231a66db39ede15db47324832aa92ab7157393e419581c0643ee6",
+      "Job-outage-recovery-1": "2bc3258a46535d3926bc486da9ae5a1d25db0813d94f7c9350eb731da66a140e",
+      "Job-windows-update-1": "6a4fe2737660c9baa060e7dacffa5fc6ac92cf9393eb757a97e8a5b940845902",
+      "Job-boot-recovery-1": "7ca305113f25e9461a4edc39b0d621c68c3edc0ad4d11038ae07b512b5671ac1",
+      "Job-new-pc-1": "a525ba18db56aca0f54cf55058b7562de711f790026614b3c1f9155bbef79e0e",
+      "Job-malware-removal-1": "b8f0d00acdf34cbb85a315496834ba27d6c67dae2cc83820f0c17afb6b288407",
+      "Job-printer-repair-1": "b432315f83166f1c442547730f333ac1e7297ca82d0f4b2a3846173c95f3578f",
+      "Job-ai-triage-1": "f9710a745d593f8407db6615fe2f5560dc88af6888129e1e39814754932a3d0f",
+      "Rescue-Media-1": "4df6ca7f1c1a437b757f05a35621627936ea1289d523fce94e4d503c07a6c04c",
+      "Job-ad-trust-1": "e74d6d6454cd0626c3fd18c3d9b9867e68627cd62b5bc05c68727f6b09c7b519",
+      "Job-windows-repair-1": "cf86a17227f0fed60def89e0cec3f73b9f1b177f51c8607b1cdd4c8d76a61feb",
+      "Job-slow-pc-1": "3128594a78e38509e042cbee50f9669398f1655bb077ccfcfc6035544ad7be2d",
+      "Job-disk-migration-1": "e69004e203d95cbb536d23a921fe55d61f9ac4e4de79b2ccfa224048ea941f5a",
+      "Continuous-Improvement-1": "3cc5ffbf79f9a402778dc11338e70011f0f4667fb550c840dbb3d6c3e970baab",
+      "Job-boot-usb-1": "ef18ae44d661b3b85edc477969e4fb69ac58e96acb2aee94c4c233b13d485d80",
+      "Job-remote-support-1": "e0670c714645815366989a0e917c515872047948ca6648399d658cdd44b018f5",
+      "Job-backup-restore-1": "377bfe95b5a62c7210948bd7b8ab5b45621eecba6b4e7f10433a4ef546d4ecd6"
+    },
+    "diagramsRerenderedForThisReceipt": false,
+    "catalogTools": 113,
+    "playbooks": 22,
+    "methods": 45,
+    "steps": 140,
+    "acceptanceChecks": 83,
+    "commands": 9,
+    "allCommandsByteIdentical": true,
+    "commandsSha256": "c103f2a4092c389125a68f74e91f0da895f100bf7ecf943ed348d12579b170ae",
+    "errors": []
+  },
+  "quickStart": {
+    "selections": 12,
+    "markdownColumns": 2,
+    "completeDataAndGuidanceRetained": true,
+    "sourceEvidence": "quick-start-source-checks.json",
+    "portalEvidence": "quick-start-ui-checks.json",
+    "markdownEvidence": "quick-start-markdown-checks.json"
+  },
+  "completeDirectoryOfficialLinks": 113,
+  "quickToolLinksHaveNoQuantityCap": true,
+  "quickStartSelectionsHaveNoQuantityCap": true,
+  "localRegressionTestsPassed": 25,
+  "maintainerConfirmedGates": {
+    "reviewedAt": "2026-11-26",
+    "evidence": "Command results confirmed by the maintainer during this candidate review; receipt writing did not rerun builds or the regression suite.",
+    "commands": [
+      {
+        "command": "python3 -m unittest discover -s tests",
+        "exitCode": 0,
+        "testsPassed": 25,
+        "seconds": 4.682
+      },
+      {
+        "command": "git diff --check",
+        "exitCode": 0
+      },
+      {
+        "command": "node --check portal/app.js",
+        "exitCode": 0
+      },
+      {
+        "command": "python3 scripts/build-hub.py --check",
+        "exitCode": 0,
+        "outputsVerified": 80
+      }
+    ]
+  },
+  "wikiAudit": {
+    "wikiFiles": 51,
+    "wikiPages": 49,
+    "registeredNames": 334,
+    "inlineLinks": 3787,
+    "mermaidDiagrams": 27,
+    "playbooks": 22,
+    "errors": []
+  },
+  "sidebarSha256": "ef73caa46597b6db83e81df3a03b171f0674dc6461aaba20f24e9f55809be351",
+  "buildManifestSha256": "66415a42c9d53d48da22a59f45e6a9f281997d56d57dc3e2d94429803e77ed68"
+}

@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "items": [
+    {
+      "id": "suspected-malware",
+      "icon": "🛡️",
+      "jobId": "malware-removal",
+      "toolId": "safety-scanner",
+      "label": "Suspected malware",
+      "why": "Run a portable, on-demand malware scan without replacing the client’s existing protection.",
+      "boundary": "Contain spreading compromise first; download a fresh copy for the job and treat a clean scan as limited evidence.",
+      "freeUse": "Free Microsoft download",
+      "qualityBasis": "Microsoft documents malware detection/removal, a detailed scan log and a 10-day download expiry; this is a workflow-based pick, not a comparative cleanup rating.",
+      "evidenceUrls": [
+        "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+        "https://www.microsoft.com/en-us/security/blog/2012/03/22/free-pc-safety-scan/"
+      ]
+    },
+    {
+      "id": "deleted-files",
+      "icon": "📁",
+      "jobId": "failing-drive",
+      "toolId": "photorec",
+      "label": "Deleted files",
+      "why": "Recover recognizable file contents from healthy media or an image when an intact backup cannot restore them.",
+      "boundary": "Stop source-disk writes and recover to another disk; original names and folders may be lost, and failing media needs imaging first.",
+      "freeUse": "Free and open source for business use",
+      "qualityBasis": "The project documents read-only source access and recovery by file signatures across damaged file systems; recoverability still depends on surviving data.",
+      "evidenceUrls": [
+        "https://www.cgsecurity.org/wiki/PhotoRec",
+        "https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step",
+        "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose"
+      ]
+    },
+    {
+      "id": "failing-drive",
+      "icon": "💾",
+      "jobId": "failing-drive",
+      "toolId": "ddrescue",
+      "label": "Failing drive",
+      "why": "Preserve readable data in an image with a resumable mapfile before attempting file-system repairs.",
+      "boundary": "Confirm source and destination; stop for physical damage, repeated disconnects or irreplaceable data that warrants a recovery specialist.",
+      "freeUse": "Free software; destination storage is separate",
+      "qualityBasis": "The GNU manual explains good-area-first recovery, resumable mapfiles and unreadable-range accounting; an image alone does not prove usable files.",
+      "evidenceUrls": [
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+        "https://www.gnu.org/software/ddrescue/",
+        "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose"
+      ]
+    },
+    {
+      "id": "slow-pc",
+      "icon": "🐢",
+      "jobId": "slow-pc",
+      "toolId": "sysinternals",
+      "label": "Slow PC",
+      "why": "Inspect process activity and startup entries to identify a concrete cause before changing settings.",
+      "boundary": "Choose utilities supported on the client’s Windows release; observe before terminating processes or disabling startup entries.",
+      "freeUse": "Free Microsoft utilities",
+      "qualityBasis": "Microsoft documents process ownership, handles, loaded modules and startup inspection; these observations support a measured troubleshooting decision.",
+      "evidenceUrls": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+        "https://learn.microsoft.com/en-us/sysinternals/license-terms"
+      ]
+    },
+    {
+      "id": "disk-space",
+      "icon": "📊",
+      "jobId": "slow-pc",
+      "toolId": "windirstat",
+      "label": "Disk space",
+      "why": "See which folders and file types occupy a healthy disk before choosing a cleanup target.",
+      "boundary": "Avoid scanning failing media; confirm file ownership and a recovery route before deleting anything.",
+      "freeUse": "Free and open source for business use",
+      "qualityBasis": "The official project documents size-sorted lists, file-type statistics and treemaps that make disk allocation inspectable.",
+      "evidenceUrls": [
+        "https://github.com/windirstat/windirstat",
+        "https://github.com/windirstat/windirstat/blob/master/LICENSE.md",
+        "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose"
+      ]
+    },
+    {
+      "id": "find-a-file",
+      "icon": "🔎",
+      "jobId": "preventive-maintenance",
+      "toolId": "everything",
+      "label": "Find a file",
+      "why": "Locate files and folders by name using a local index instead of repeatedly browsing directories.",
+      "boundary": "Scope the desktop index to approved locations; the separate server product has paid business licensing.",
+      "freeUse": "Free desktop edition for business use",
+      "qualityBasis": "The official FAQ documents filename indexing, live updates and NTFS requirements; the published license and developer guidance permit commercial desktop use.",
+      "evidenceUrls": [
+        "https://www.voidtools.com/faq/",
+        "https://www.voidtools.com/License.txt",
+        "https://www.voidtools.com/forum/viewtopic.php?t=7508",
+        "https://www.voidtools.com/everything/server/buy/"
+      ]
+    },
+    {
+      "id": "remote-help",
+      "icon": "🖥️",
+      "jobId": "remote-support",
+      "toolId": "quick-assist",
+      "label": "Remote help",
+      "why": "Start a one-time attended Windows support session with separate screen-sharing and control approval.",
+      "boundary": "Requires internet and a present user; use the organization’s approved managed tool when unattended access or session audit logs are required.",
+      "freeUse": "Free Microsoft app; organization policy applies",
+      "qualityBasis": "Microsoft’s IT guidance documents the session-code flow, helper sign-in, user approval and the absence of local session logs.",
+      "evidenceUrls": [
+        "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+        "https://apps.microsoft.com/detail/9P7BP5VNWKX5"
+      ]
+    },
+    {
+      "id": "boot-usb",
+      "icon": "🔌",
+      "jobId": "boot-usb",
+      "toolId": "rufus",
+      "label": "Boot USB",
+      "why": "Write a trusted operating-system or rescue image to a USB drive with explicit target and boot-mode choices.",
+      "boundary": "Writing erases the selected USB; verify its identity and use a trusted image that matches the target firmware.",
+      "freeUse": "Free software; image licensing is separate",
+      "qualityBasis": "The official project documents BIOS/UEFI media creation, image checksums and portable operation.",
+      "evidenceUrls": [
+        "https://github.com/pbatard/rufus",
+        "https://rufus.ie/en/",
+        "https://github.com/pbatard/rufus/wiki/FAQ"
+      ]
+    },
+    {
+      "id": "windows-repair",
+      "icon": "🧰",
+      "jobId": "windows-repair",
+      "toolId": "dism",
+      "label": "Windows repair",
+      "why": "Check and repair the Windows component store before the guide’s system-file verification step.",
+      "boundary": "Check storage health and recovery options first; use the correct online or offline target and a compatible repair source.",
+      "freeUse": "Included with Windows",
+      "qualityBasis": "Microsoft documents corruption checks, repairable/non-repairable image states and controlled repair sources.",
+      "evidenceUrls": [
+        "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/using-system-file-checker-in-windows"
+      ]
+    },
+    {
+      "id": "inspect-network-traffic",
+      "icon": "🌐",
+      "jobId": "network-dns",
+      "toolId": "wireshark",
+      "label": "Inspect network traffic",
+      "why": "Explain a stubborn DNS or TCP failure with a narrowly scoped packet capture after basic connection checks.",
+      "boundary": "Start with the guide’s address, gateway and DNS checks; capture only authorized traffic and keep case data private.",
+      "freeUse": "Free software; capture-driver terms apply",
+      "qualityBasis": "The official guide documents packet inspection and filtering; the capture-driver publisher confirms the relevant free-use exception.",
+      "evidenceUrls": [
+        "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIntroduction.html",
+        "https://npcap.com/guide/index.html",
+        "https://www.wireshark.org/docs/wsdg_html_chunked/ChLibsPcap"
+      ]
+    },
+    {
+      "id": "suspected-ram-fault",
+      "icon": "🧪",
+      "jobId": "hardware-bsod",
+      "toolId": "memtest86plus",
+      "label": "Suspected RAM fault",
+      "why": "Test memory outside the running operating system when crash evidence points to RAM or memory stability.",
+      "boundary": "Record firmware settings and test duration; memory errors need isolation, and a passing run does not rule out other crash causes.",
+      "freeUse": "Free and open source for business use",
+      "qualityBasis": "The official project documents independent boot testing, error investigation and supported firmware/platform requirements.",
+      "evidenceUrls": [
+        "https://www.memtest.org/",
+        "https://github.com/memtest86plus/memtest86plus",
+        "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose"
+      ]
+    },
+    {
+      "id": "file-backup",
+      "icon": "🗄️",
+      "jobId": "backup-restore",
+      "toolId": "restic",
+      "label": "File backup",
+      "why": "Create encrypted file snapshots and restore a representative sample to prove the backup is usable.",
+      "boundary": "This is a file-backup workflow, not a bare-metal image; retain the repository password and test a separate restore target.",
+      "freeUse": "Free software; storage is separate",
+      "qualityBasis": "The official documentation provides repository checks, snapshot selection and explicit restore commands.",
+      "evidenceUrls": [
+        "https://restic.net/",
+        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
+        "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ]
+    }
+  ]
+}

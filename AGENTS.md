@@ -4,9 +4,14 @@ Read [Knowledge Standards](docs/knowledge-standards.md) before changing the hub,
 
 For visual work, follow [Interface Design](docs/interface-design.md): a compact, neutral professional workspace informed by the linked [Athena](https://github.com/Herbertofury/Athena) references. The rejected green palette, oversized cards, decorative gradients and promotional hero must not return. Preserve every tool, guide, field and interaction while changing their presentation.
 
+Wiki navigation must make every service scenario and tool category directly visible. Use bold, short, clickable action labels with meaningful emoji. Put common scenarios and official tool shortcuts first; never hide these destinations in collapsed groups or require an extra expansion click.
+
+Lead the application Home, Wiki Home, README and Start Here with shared, source-checked free tool picks for common urgent scenarios, direct official links and the matching guide. Preserve the complete catalog below this fast starting point. Record the evidence and current free-use boundary for each pick; do not invent ratings or present a limited test result as a universal ranking.
+
 ## Canonical inputs
 
 - [Tool catalog](data/tools.json): stable IDs, official routes, platform and pricing boundaries, editorial review evidence.
+- [Quick-start selections](data/quick-start.json): scenario-specific free starting tools, practical fit, current sources and evidence for their selection.
 - [Job guides](data/jobs.json): procedure, recommended tool IDs, verification, escalation and sources.
 - [Method registry](data/methods.json): precise names/aliases and canonical method destinations.
 - [Link aliases](data/link-aliases.json) and [linking helper](scripts/wiki_links.py): exact names and repeated-mention linking.
@@ -14,6 +19,8 @@ For visual work, follow [Interface Design](docs/interface-design.md): a compact,
 - [Hub metadata](data/meta.json), [portal source](portal/), and authored [documentation](docs/).
 
 The [hub builder](scripts/build-hub.py) owns generated `site/`, `wiki/` and `docs/runbooks/`. Edit their inputs and rebuild. Keep the complete catalog available; performance changes must preserve content, features, search coverage and accessibility.
+
+The builder also owns the quick-start tables between `INTA:QUICK-START` markers in `README.md` and `docs/start-here.md`. Edit their shared selection data instead of changing those generated rows. Text outside the markers remains authored content.
 
 ## Required editorial behavior
 
