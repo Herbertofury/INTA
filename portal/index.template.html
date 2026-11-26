@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#101719">
+  <meta name="description" content="The INTA Computer Services technician workspace. Find the right tools, follow a clear playbook, and verify every fix.">
+  <title>INTA | Technician workspace</title>
+  <style id="inta-styles">{{STYLES}}</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="INTA home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M8 8h8v8H8zM20 8h8v8h-8zM8 20h8v8H8z" fill="currentColor"/><path d="M20 20h8v8h-8z" stroke="currentColor" stroke-width="2"/></svg></span>
+        <span class="brand-wordmark">INTA<span>COMPUTER SERVICES</span></span>
+      </a>
+      <div class="workspace-label"><span class="status-dot"></span>TECHNICIAN WORKSPACE</div>
+      <nav id="primary-nav">
+        <a href="#home" data-nav="home"><span data-icon="home"></span>Overview</a>
+        <a href="#tools" data-nav="tools"><span data-icon="grid"></span>Tool library<span class="nav-count" id="tool-count"></span></a>
+        <a href="#playbooks" data-nav="playbooks"><span data-icon="book"></span>Job playbooks<span class="nav-count" id="job-count"></span></a>
+        <a href="#saved" data-nav="saved"><span data-icon="bookmark"></span>Saved tools<span class="nav-count" id="saved-count">0</span></a>
+        <a href="#resources" data-nav="resources"><span data-icon="compass"></span>Resources &amp; wiki</a>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <div class="nav-section-label">THE INTA TOOLKIT</div>
+      <nav class="secondary-nav">
+        <a href="https://github.com/Herbertofury/INTA/releases" target="_blank" rel="noopener noreferrer"><span data-icon="usb"></span>Rescue &amp; boot media<span data-icon="external" class="small-icon"></span></a>
+        <a href="https://github.com/Herbertofury/INTA/wiki" target="_blank" rel="noopener noreferrer"><span data-icon="layers"></span>GitHub wiki<span data-icon="external" class="small-icon"></span></a>
+        <a href="https://github.com/Herbertofury/Athena" target="_blank" rel="noopener noreferrer"><span data-icon="spark"></span>Athena research<span data-icon="external" class="small-icon"></span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="field-note"><span data-icon="shield"></span><div><strong>Good tools. Clear methods.</strong><p>Built for the people behind the fix.</p></div></div>
+        <div class="sidebar-footer"><span>INTA / FIELD GUIDE</span><button id="theme-toggle" class="icon-button" aria-label="Switch to light theme" title="Switch theme"><span data-icon="sun"></span></button></div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="mobile-menu" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar"><span data-icon="menu"></span></button>
+        <div class="breadcrumb" id="breadcrumb">Workspace <span>/</span> Overview</div>
+        <div class="global-search-wrap">
+          <span data-icon="search"></span>
+          <input id="global-search" type="search" placeholder="Find a tool or a fix…" aria-label="Search all tools and playbooks" aria-controls="search-results" aria-expanded="false" autocomplete="off">
+          <kbd>/</kbd>
+          <div id="search-results" class="search-results" hidden></div>
+        </div>
+        <a class="topbar-github" href="https://github.com/Herbertofury/INTA" target="_blank" rel="noopener noreferrer" aria-label="Open INTA on GitHub"><span data-icon="github"></span><span>GitHub</span><span data-icon="external" class="small-icon"></span></a>
+        <span class="team-avatar" title="INTA Computer Services" aria-label="INTA Computer Services">IN</span>
+      </header>
+      <main id="main" tabindex="-1"><div id="app"></div></main>
+      <footer class="main-footer"><span><span class="footer-mark">✳</span> Made for better days at the service desk.</span><a href="#resources">Sources, updates &amp; project information<span data-icon="arrow"></span></a></footer>
+    </div>
+  </div>
+  <button id="nav-backdrop" class="nav-backdrop" aria-label="Close navigation" hidden></button>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><div class="noscript">This interactive workspace needs JavaScript. The complete guides are also available in the <a href="https://github.com/Herbertofury/INTA/wiki">INTA GitHub wiki</a>.</div></noscript>
+  <script id="inta-data">{{DATA}}</script>
+  <script id="inta-app">{{APP}}</script>
+</body>
+</html>

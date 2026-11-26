@@ -1,0 +1,3330 @@
+[
+  {
+    "id": "defender-offline",
+    "name": "Microsoft Defender Offline",
+    "category": "malware",
+    "summary": "Reboots Windows into its recovery environment to scan outside the normal Windows session.",
+    "bestFor": "Persistent malware that may interfere with an ordinary scan.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows",
+    "homepage": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+    "downloadUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+    "docsUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+    "sourceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "offline scan",
+      "virus removal",
+      "windows security"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Save work and obtain the BitLocker recovery key before the reboot. Verify recovery environment availability."
+  },
+  {
+    "id": "safety-scanner",
+    "name": "Microsoft Safety Scanner",
+    "category": "malware",
+    "summary": "Portable, manually triggered Microsoft malware scanner with a detailed local scan log.",
+    "bestFor": "A fresh Microsoft second-opinion scan without installing another resident antivirus.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free download",
+    "homepage": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+    "downloadUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+    "docsUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+    "sourceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "virus removal",
+      "msert",
+      "second opinion"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Expires 10 days after download; download a fresh copy for each job. It does not provide ongoing protection."
+  },
+  {
+    "id": "adwcleaner",
+    "name": "Malwarebytes AdwCleaner",
+    "category": "malware",
+    "summary": "Focused cleanup for adware, browser hijackers and potentially unwanted applications.",
+    "bestFor": "Unexpected browser redirects, pop-ups and bundled unwanted software.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free tool",
+    "homepage": "https://www.malwarebytes.com/adwcleaner",
+    "downloadUrl": "https://www.malwarebytes.com/adwcleaner",
+    "docsUrl": "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner",
+    "sourceUrl": "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "adware",
+      "browser",
+      "pup",
+      "cleanup"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Review detections before quarantine. Keep the log and reboot when the tool requests it."
+  },
+  {
+    "id": "malwarebytes",
+    "name": "Malwarebytes",
+    "category": "malware",
+    "summary": "On-demand malware cleanup and separately licensed ongoing protection.",
+    "bestFor": "An additional malware assessment after the primary endpoint product.",
+    "platforms": [
+      "Windows",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free scan options; paid protection and business products",
+    "homepage": "https://www.malwarebytes.com/",
+    "downloadUrl": "https://www.malwarebytes.com/mwb-download",
+    "docsUrl": "https://www.malwarebytes.com/free-tools",
+    "sourceUrl": "https://www.malwarebytes.com/free-tools",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "virus removal",
+      "second opinion"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use the edition and deployment rights appropriate for client servicing; a scan is not proof that an incident is fully contained."
+  },
+  {
+    "id": "hitmanpro",
+    "name": "Sophos HitmanPro",
+    "category": "malware",
+    "summary": "Portable second-opinion malware scanner and removal tool.",
+    "bestFor": "A targeted independent assessment when the first scanner leaves uncertainty.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free scanning; removal trial and paid licensing",
+    "homepage": "https://www.sophos.com/en-us/products/hitmanpro",
+    "downloadUrl": "https://www.sophos.com/en-us/products/hitmanpro",
+    "docsUrl": "https://www.sophos.com/en-us/free-tools",
+    "sourceUrl": "https://www.sophos.com/en-us/free-tools",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "sophos",
+      "virus removal",
+      "second opinion",
+      "scan and clean"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Sophos currently routes its legacy virus-removal page to HitmanPro. Do not assume old Scan & Clean downloads remain a separate supported product."
+  },
+  {
+    "id": "eset-online-scanner",
+    "name": "ESET Online Scanner",
+    "category": "malware",
+    "summary": "Windows scanner that downloads detection modules and supports one-time malware checks.",
+    "bestFor": "A second-opinion scan with an independently maintained detection engine.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free one-time scanner",
+    "homepage": "https://www.eset.com/us/home/online-scanner/",
+    "downloadUrl": "https://www.eset.com/us/home/online-scanner/",
+    "docsUrl": "https://support.eset.com/en/kb405-online-scanner-faq",
+    "sourceUrl": "https://support.eset.com/en/kb405-online-scanner-faq",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "virus removal",
+      "second opinion"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Internet is needed for the initial module update. This tool is not continuous endpoint protection."
+  },
+  {
+    "id": "clamav",
+    "name": "ClamAV",
+    "category": "malware",
+    "summary": "Open-source scanning engine for file inspection, including use from a Linux rescue environment.",
+    "bestFor": "Scanning copied files, mail stores and mounted data with current ClamAV signatures.",
+    "platforms": [
+      "Linux",
+      "Windows",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://www.clamav.net/",
+    "downloadUrl": "https://www.clamav.net/downloads",
+    "docsUrl": "https://docs.clamav.net/",
+    "sourceUrl": "https://docs.clamav.net/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "linux",
+      "file scan",
+      "signatures",
+      "offline"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Update signatures before scanning. A file scan does not establish that Windows persistence or accounts are clean."
+  },
+  {
+    "id": "bitdefender-gravityzone",
+    "name": "Bitdefender GravityZone",
+    "category": "malware",
+    "summary": "Business endpoint security with centralized deployment and policy management.",
+    "bestFor": "Managed protection for a client organization and its supported endpoints.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "Paid business subscription; trial available",
+    "homepage": "https://www.bitdefender.com/en-us/business/smb-products/business-security",
+    "downloadUrl": "https://www.bitdefender.com/en-us/business/smb-products/business-security",
+    "docsUrl": "https://www.bitdefender.com/en-us/business/smb-products/business-security",
+    "sourceUrl": "https://www.bitdefender.com/en-us/business/smb-products/business-security",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "business",
+      "endpoint",
+      "edr",
+      "managed protection"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Choose the business product and features needed by the client. Consumer free editions are a separate offering."
+  },
+  {
+    "id": "defender-business",
+    "name": "Microsoft Defender for Business",
+    "category": "malware",
+    "summary": "Business endpoint security integrated with Microsoft administration and incident response.",
+    "bestFor": "Small-business fleets using Microsoft identity and management.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Android",
+      "iOS"
+    ],
+    "mode": "installed",
+    "pricing": "Paid business subscription; licensing varies",
+    "homepage": "https://learn.microsoft.com/en-us/defender-business/mdb-overview",
+    "downloadUrl": "https://learn.microsoft.com/en-us/defender-business/mdb-overview",
+    "docsUrl": "https://learn.microsoft.com/en-us/defender-business/mdb-overview",
+    "sourceUrl": "https://learn.microsoft.com/en-us/defender-business/mdb-overview",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "business",
+      "endpoint",
+      "microsoft",
+      "managed protection"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Check the current license, server requirements and onboarding status before relying on coverage."
+  },
+  {
+    "id": "sophos-endpoint",
+    "name": "Sophos Endpoint",
+    "category": "malware",
+    "summary": "Managed endpoint prevention and response through Sophos Central.",
+    "bestFor": "Clients already using Sophos Central or needing a managed endpoint platform.",
+    "platforms": [
+      "Windows",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Paid business subscription",
+    "homepage": "https://www.sophos.com/en-us/products/endpoint-security",
+    "downloadUrl": "https://www.sophos.com/en-us/products/endpoint-security",
+    "docsUrl": "https://www.sophos.com/en-us/products/endpoint-security",
+    "sourceUrl": "https://www.sophos.com/en-us/products/endpoint-security",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "business",
+      "endpoint",
+      "sophos",
+      "managed protection"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "Official Sophos Protection for Linux release notes and server policy: https://docs.sophos.com/releasenotes/output/en-us/esg/linux_protection_rn.html"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Windows/macOS endpoint coverage is listed here. Linux uses the separate Sophos Protection for Linux/server-protection deployment and policy path; confirm the applicable subscription instead of assuming an endpoint seat covers it. Response features depend on platform and purchased tier."
+  },
+  {
+    "id": "bitdefender-free",
+    "name": "Bitdefender Antivirus Free",
+    "category": "malware",
+    "summary": "Consumer Windows antivirus with ongoing malware protection.",
+    "bestFor": "The previously discussed free Bitdefender option for a suitable home-PC use case.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free consumer product; account required",
+    "homepage": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+    "downloadUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+    "docsUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+    "sourceUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "bitdefender",
+      "home",
+      "antivirus",
+      "free"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "This consumer product is separate from GravityZone business management; check the deployment terms for the intended customer."
+  },
+  {
+    "id": "emsisoft-emergency-kit",
+    "name": "Emsisoft Emergency Kit",
+    "category": "malware",
+    "summary": "Portable graphical and command-line malware-removal toolkit with detection updates.",
+    "bestFor": "A professional portable second-opinion cleanup workflow.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free private use; Pro for business and for-profit use",
+    "homepage": "https://www.emsisoft.com/en/emergency-kit/",
+    "downloadUrl": "https://www.emsisoft.com/en/emergency-kit/",
+    "docsUrl": "https://www.emsisoft.com/en/help/1702/getting-started/",
+    "sourceUrl": "https://www.emsisoft.com/en/help/1702/getting-started/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "virus removal",
+      "portable",
+      "second opinion"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Update the program and detection data before scanning and review the quarantine record. INTA client servicing needs the applicable Pro rights."
+  },
+  {
+    "id": "meshcentral",
+    "name": "MeshCentral",
+    "category": "remote",
+    "summary": "Self-hosted remote management with browser-based desktop, terminal and file access.",
+    "bestFor": "INTA-managed unattended support with its own server and device groups.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source; hosting has a cost",
+    "homepage": "https://meshcentral.com/",
+    "downloadUrl": "https://github.com/Ylianst/MeshCentral",
+    "docsUrl": "https://docs.meshcentral.com/",
+    "sourceUrl": "https://docs.meshcentral.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "remote support",
+      "self-hosted",
+      "unattended",
+      "rmm"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use the agent generated by the correct INTA server; configure account MFA and scoped device access."
+  },
+  {
+    "id": "rustdesk",
+    "name": "RustDesk",
+    "category": "remote",
+    "summary": "Cross-platform remote desktop with self-hosted server options.",
+    "bestFor": "A flexible remote-control option across mixed client platforms.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Open-source components; paid Server Pro features",
+    "homepage": "https://rustdesk.com/",
+    "downloadUrl": "https://github.com/rustdesk/rustdesk/releases/latest",
+    "docsUrl": "https://rustdesk.com/docs/en/",
+    "sourceUrl": "https://rustdesk.com/docs/en/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "remote support",
+      "self-hosted",
+      "attended",
+      "unattended"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Match the client to the intended server and key. Persistent access must be a deliberate managed configuration."
+  },
+  {
+    "id": "quick-assist",
+    "name": "Microsoft Quick Assist",
+    "category": "remote",
+    "summary": "Windows attended screen sharing using a support code and user-approved control.",
+    "bestFor": "A quick one-time Windows support session without deploying an RMM agent.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free Microsoft app",
+    "homepage": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+    "downloadUrl": "https://apps.microsoft.com/detail/9P7BP5VNWKX5",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "remote support",
+      "attended",
+      "microsoft"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "The helper signs in; the user approves the session. The macOS edition is restricted to Microsoft Support interactions."
+  },
+  {
+    "id": "chrome-remote-desktop",
+    "name": "Chrome Remote Desktop",
+    "category": "remote",
+    "summary": "Browser-led remote access with separate temporary support and persistent access flows.",
+    "bestFor": "Attended support or an explicitly configured personal remote-access endpoint.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free service",
+    "homepage": "https://remotedesktop.google.com/",
+    "downloadUrl": "https://remotedesktop.google.com/support",
+    "docsUrl": "https://support.google.com/chrome/answer/1649523",
+    "sourceUrl": "https://support.google.com/chrome/answer/1649523",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "remote support",
+      "google",
+      "attended",
+      "unattended"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Support codes are one-time. Do not confuse temporary sharing with persistent PIN-based access."
+  },
+  {
+    "id": "anydesk",
+    "name": "AnyDesk",
+    "category": "remote",
+    "summary": "Remote desktop and support software with business plans and portable client options.",
+    "bestFor": "Client support when the customer already standardizes on AnyDesk.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "portable",
+    "pricing": "Commercial license for professional use",
+    "homepage": "https://anydesk.com/",
+    "downloadUrl": "https://anydesk.com/en/downloads",
+    "docsUrl": "https://support.anydesk.com/",
+    "sourceUrl": "https://support.anydesk.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "remote support",
+      "attended",
+      "unattended"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification"
+  },
+  {
+    "id": "teamviewer",
+    "name": "TeamViewer Remote",
+    "category": "remote",
+    "summary": "Commercial remote support and device-access platform.",
+    "bestFor": "Supporting customers whose approved remote-access stack uses TeamViewer.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Commercial license for professional use",
+    "homepage": "https://www.teamviewer.com/",
+    "downloadUrl": "https://www.teamviewer.com/en/download/",
+    "docsUrl": "https://www.teamviewer.com/en/global/support/knowledge-base/",
+    "sourceUrl": "https://www.teamviewer.com/en/global/support/knowledge-base/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "remote support",
+      "attended",
+      "unattended"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification"
+  },
+  {
+    "id": "screenconnect",
+    "name": "ScreenConnect",
+    "category": "remote",
+    "summary": "Remote support sessions and managed access for service teams.",
+    "bestFor": "A ticket-oriented remote-support workflow with technician administration.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Paid service or licensed deployment",
+    "homepage": "https://www.screenconnect.com/",
+    "downloadUrl": "https://www.screenconnect.com/Download",
+    "docsUrl": "https://www.screenconnect.com/Download",
+    "sourceUrl": "https://www.screenconnect.com/Download",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "remote support",
+      "msp",
+      "attended",
+      "unattended"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Keep the server and agents current and restrict administrative access."
+  },
+  {
+    "id": "tailscale",
+    "name": "Tailscale",
+    "category": "remote",
+    "summary": "Identity-based private connectivity for reaching approved devices and services.",
+    "bestFor": "Remote administration of private services without exposing them directly to the internet.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Personal and paid business plans",
+    "homepage": "https://tailscale.com/",
+    "downloadUrl": "https://tailscale.com/download",
+    "docsUrl": "https://tailscale.com/docs",
+    "sourceUrl": "https://tailscale.com/docs",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "vpn",
+      "private network",
+      "remote access"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "It provides connectivity rather than a remote-desktop interface; apply device and access policies."
+  },
+  {
+    "id": "sysinternals",
+    "name": "Microsoft Sysinternals Suite",
+    "category": "windows",
+    "summary": "Microsoft collection for investigating processes, startup, files, networking and system behavior.",
+    "bestFor": "The core portable Windows troubleshooting kit.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free Microsoft utilities",
+    "homepage": "https://learn.microsoft.com/en-us/sysinternals/",
+    "downloadUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+    "docsUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/",
+    "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "triage",
+      "portable",
+      "microsoft",
+      "diagnostics"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use each utility for a specific question; process termination and startup changes are separate actions."
+  },
+  {
+    "id": "autoruns",
+    "name": "Autoruns",
+    "category": "windows",
+    "summary": "Enumerates the startup locations used by applications, services, drivers and other persistence.",
+    "bestFor": "Explaining unexpected startup behavior and investigating persistence.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free Microsoft utility",
+    "homepage": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+    "downloadUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+    "docsUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+    "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "startup",
+      "persistence",
+      "malware",
+      "performance"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Export the baseline and disable one understood item at a time; do not delete unknown entries in bulk."
+  },
+  {
+    "id": "process-explorer",
+    "name": "Process Explorer",
+    "category": "windows",
+    "summary": "Shows process trees, open handles, loaded DLLs and detailed process information.",
+    "bestFor": "Finding which process owns a locked file or consumes resources.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free Microsoft utility",
+    "homepage": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+    "downloadUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+    "docsUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+    "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "process",
+      "handles",
+      "dll",
+      "performance"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "A familiar name or valid signature alone does not prove a process is benign."
+  },
+  {
+    "id": "procmon",
+    "name": "Process Monitor",
+    "category": "windows",
+    "summary": "Captures Windows file-system, Registry and process/thread activity with rich filtering.",
+    "bestFor": "Reproducing an application failure and locating denied or missing resources.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free Microsoft utility",
+    "homepage": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+    "downloadUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+    "docsUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+    "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "procmon",
+      "trace",
+      "filesystem",
+      "registry",
+      "application"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Capture a short reproduction with focused filters; trace files can contain client paths and data."
+  },
+  {
+    "id": "tcpview",
+    "name": "TCPView",
+    "category": "windows",
+    "summary": "Displays TCP and UDP endpoints with their owning processes.",
+    "bestFor": "Identifying which local application is opening a network connection.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free Microsoft utility",
+    "homepage": "https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview",
+    "downloadUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview",
+    "docsUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview",
+    "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "network",
+      "process",
+      "connections"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Connection ownership is a clue, not a malware verdict."
+  },
+  {
+    "id": "rammap",
+    "name": "RAMMap",
+    "category": "windows",
+    "summary": "Breaks down how Windows uses physical memory, including cache and driver allocations.",
+    "bestFor": "Explaining high memory use when Task Manager does not show a clear owner.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free Microsoft utility",
+    "homepage": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+    "downloadUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+    "docsUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+    "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "ram",
+      "memory",
+      "cache",
+      "performance"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Inspect first. Emptying caches can make subsequent workloads slower and is not a general repair."
+  },
+  {
+    "id": "procdump",
+    "name": "ProcDump",
+    "category": "windows",
+    "summary": "Captures process dumps around exceptions, hangs and chosen performance conditions.",
+    "bestFor": "Collecting evidence for a repeatable crash or hung application.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free Microsoft utility",
+    "homepage": "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump",
+    "downloadUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump",
+    "docsUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump",
+    "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "crash",
+      "hang",
+      "dump",
+      "debugging"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Dumps may contain credentials and document contents; store them in the private job record."
+  },
+  {
+    "id": "sigcheck",
+    "name": "Sigcheck",
+    "category": "windows",
+    "summary": "Reports file signatures, versions and hashes for executable inspection.",
+    "bestFor": "Checking publisher and file identity before running or escalating a suspicious binary.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free Microsoft utility",
+    "homepage": "https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck",
+    "downloadUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck",
+    "docsUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck",
+    "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "hash",
+      "signature",
+      "publisher",
+      "malware"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Keep external reputation queries separate from local checking and from uploading client files."
+  },
+  {
+    "id": "dism",
+    "name": "DISM",
+    "category": "windows",
+    "summary": "Windows servicing tool for examining and repairing the component store and offline images.",
+    "bestFor": "Component-store corruption and controlled image servicing.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with Windows",
+    "homepage": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "repair",
+      "component store",
+      "windows update"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Choose the correct online or offline image and a compatible repair source. Save the DISM log."
+  },
+  {
+    "id": "sfc",
+    "name": "System File Checker",
+    "category": "windows",
+    "summary": "Checks protected Windows system files and can repair them from the component store.",
+    "bestFor": "System-file corruption after establishing disk health and servicing status.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with Windows",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "repair",
+      "system files",
+      "sfc"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use the right offline paths in recovery. A successful scan does not diagnose every crash or performance problem."
+  },
+  {
+    "id": "windows-recovery",
+    "name": "Windows Recovery Environment",
+    "category": "windows",
+    "summary": "Windows startup repair, recovery and troubleshooting environment.",
+    "bestFor": "A Windows machine that will not boot or needs supported recovery options.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with Windows",
+    "homepage": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "boot",
+      "winre",
+      "startup",
+      "restore"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Identify the Windows volume and preserve BitLocker recovery access before recovery actions."
+  },
+  {
+    "id": "winget",
+    "name": "WinGet",
+    "category": "windows",
+    "summary": "Microsoft package manager for finding, installing and updating Windows applications.",
+    "bestFor": "Repeatable application setup and individually reviewed updates.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+    "downloadUrl": "https://github.com/microsoft/winget-cli/releases/latest",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "packages",
+      "updates",
+      "deployment"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Review source, exact package ID and upgrade changes; avoid blind bulk upgrades on a client machine."
+  },
+  {
+    "id": "powershell",
+    "name": "PowerShell",
+    "category": "windows",
+    "summary": "Object-oriented shell for repeatable inspection, automation and evidence collection.",
+    "bestFor": "Documented administration and scripts with clear input, output and rollback.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://learn.microsoft.com/en-us/powershell/",
+    "downloadUrl": "https://github.com/PowerShell/PowerShell/releases/latest",
+    "docsUrl": "https://learn.microsoft.com/en-us/powershell/",
+    "sourceUrl": "https://learn.microsoft.com/en-us/powershell/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "automation",
+      "shell",
+      "scripts"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "PowerShell 7 and Windows PowerShell 5.1 are distinct; modules may target only one."
+  },
+  {
+    "id": "windows-terminal",
+    "name": "Windows Terminal",
+    "category": "windows",
+    "summary": "Tabbed terminal host for PowerShell, command prompt, WSL and other shells.",
+    "bestFor": "A consistent technician command-line workspace.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://learn.microsoft.com/en-us/windows/terminal/",
+    "downloadUrl": "https://github.com/microsoft/terminal/releases/latest",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/terminal/",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/terminal/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "terminal",
+      "shell",
+      "productivity"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification"
+  },
+  {
+    "id": "system-informer",
+    "name": "System Informer",
+    "category": "windows",
+    "summary": "Detailed process and resource inspection with debugging and system-information features.",
+    "bestFor": "Advanced process investigation beyond the standard task manager.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://systeminformer.sourceforge.io/",
+    "downloadUrl": "https://systeminformer.sourceforge.io/downloads",
+    "docsUrl": "https://github.com/winsiderss/systeminformer",
+    "sourceUrl": "https://github.com/winsiderss/systeminformer",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "process",
+      "diagnostics",
+      "performance",
+      "athena"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use the selected stable or explicitly evaluated build; privileged features need careful interpretation."
+  },
+  {
+    "id": "windirstat",
+    "name": "WinDirStat",
+    "category": "windows",
+    "summary": "Visual disk-usage map and directory statistics.",
+    "bestFor": "Finding what consumes disk space before choosing a cleanup action.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://windirstat.net/",
+    "downloadUrl": "https://github.com/windirstat/windirstat/releases/latest",
+    "docsUrl": "https://github.com/windirstat/windirstat",
+    "sourceUrl": "https://github.com/windirstat/windirstat",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "disk space",
+      "cleanup",
+      "treemap"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Inspection is safe; deletion is a separate decision. Protected system files and application caches need context."
+  },
+  {
+    "id": "bcuninstaller",
+    "name": "Bulk Crap Uninstaller",
+    "category": "windows",
+    "summary": "Application inventory and batch-uninstall orchestration with leftover review.",
+    "bestFor": "Removing a selected set of unwanted applications from a workstation.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://www.bcuninstaller.com/",
+    "downloadUrl": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller/releases/latest",
+    "docsUrl": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller",
+    "sourceUrl": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "uninstall",
+      "cleanup",
+      "applications"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Review shared files and proposed leftovers. Preserve the application and configuration needed to reverse a removal."
+  },
+  {
+    "id": "windows-performance-toolkit",
+    "name": "Windows Performance Toolkit",
+    "category": "windows",
+    "summary": "Windows Performance Recorder and Analyzer for detailed system traces.",
+    "bestFor": "Investigating intermittent CPU, storage or application responsiveness problems with evidence.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free Microsoft toolkit",
+    "homepage": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "wpr",
+      "wpa",
+      "etw",
+      "performance",
+      "trace"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Record the smallest relevant reproduction and protect trace data in the job record."
+  },
+  {
+    "id": "windbg",
+    "name": "WinDbg",
+    "category": "windows",
+    "summary": "Microsoft debugger for user-mode and kernel debugging and crash-dump analysis.",
+    "bestFor": "Interpreting a crash dump when basic event logs do not establish the cause.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free Microsoft tool",
+    "homepage": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "bsod",
+      "crash",
+      "dump",
+      "debugging"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "A faulting module alone does not prove root cause; corroborate symbols, stack and reproduction."
+  },
+  {
+    "id": "winsat",
+    "name": "WinSAT (legacy)",
+    "category": "windows",
+    "summary": "Legacy Windows performance-assessment interfaces retained here for interpreting older job records.",
+    "bestFor": "Understanding a legacy assessment when the target system still provides it; prefer WPR/WPA for current investigations.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included on supported Windows versions",
+    "homepage": "https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal",
+    "reviewedAt": "2026-11-26",
+    "tier": "evaluate",
+    "tags": [
+      "benchmark",
+      "performance",
+      "windows"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Microsoft says WinSAT may change or be unavailable after Windows 8.1. Check availability and do not treat it as a modern health certification."
+  },
+  {
+    "id": "crystaldiskinfo",
+    "name": "CrystalDiskInfo",
+    "category": "storage",
+    "summary": "Displays supported drive health indicators, temperatures and SMART attributes.",
+    "bestFor": "First-pass HDD and SSD health inspection in Windows.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://crystalmark.info/en/software/crystaldiskinfo/",
+    "downloadUrl": "https://crystalmark.info/en/download/",
+    "docsUrl": "https://crystalmark.info/en/software/crystaldiskinfo/",
+    "sourceUrl": "https://crystalmark.info/en/software/crystaldiskinfo/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "smart",
+      "ssd",
+      "hdd",
+      "health"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "SMART is incomplete through some USB bridges and cannot rule out impending failure."
+  },
+  {
+    "id": "smartmontools",
+    "name": "smartmontools",
+    "category": "storage",
+    "summary": "smartctl and smartd tools for drive health information and supported self-tests.",
+    "bestFor": "Reading SMART and NVMe health from a rescue environment or supported host OS.",
+    "platforms": [
+      "Linux",
+      "Windows",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://www.smartmontools.org/",
+    "downloadUrl": "https://github.com/smartmontools/smartmontools/releases",
+    "docsUrl": "https://github.com/smartmontools/smartmontools",
+    "sourceUrl": "https://github.com/smartmontools/smartmontools",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "smart",
+      "ssd",
+      "hdd",
+      "health"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Read health before long tests; if a drive is failing, preserve data before stressing it."
+  },
+  {
+    "id": "ddrescue",
+    "name": "GNU ddrescue",
+    "category": "storage",
+    "summary": "Copies readable areas from damaged media and records progress in a resumable mapfile.",
+    "bestFor": "Creating an image of a failing disk before recovery or repair attempts.",
+    "platforms": [
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://www.gnu.org/software/ddrescue/",
+    "downloadUrl": "https://ftp.gnu.org/gnu/ddrescue/",
+    "docsUrl": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+    "sourceUrl": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "failing disk",
+      "image",
+      "recovery",
+      "mapfile"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Source and destination direction is critical. Keep the mapfile and never recover files back onto the failing source."
+  },
+  {
+    "id": "testdisk",
+    "name": "TestDisk",
+    "category": "storage",
+    "summary": "Partition and filesystem recovery tool for diagnosing lost partitions and recovering some files.",
+    "bestFor": "Investigating missing partitions on an image or safely copied disk.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://www.cgsecurity.org/wiki/TestDisk",
+    "downloadUrl": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+    "docsUrl": "https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step",
+    "sourceUrl": "https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "partition",
+      "recovery",
+      "filesystem"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Image first when data matters; writing a partition table changes the evidence and can worsen an incorrect diagnosis."
+  },
+  {
+    "id": "photorec",
+    "name": "PhotoRec",
+    "category": "storage",
+    "summary": "File carving that can recover supported file content when filesystem metadata is unavailable.",
+    "bestFor": "Recovering files from an image when directory-based recovery is unsuccessful.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://www.cgsecurity.org/wiki/PhotoRec",
+    "downloadUrl": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+    "docsUrl": "https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step",
+    "sourceUrl": "https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "recovery",
+      "file carving",
+      "photos"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Recovered filenames and folder structure may be lost; write results to a different disk."
+  },
+  {
+    "id": "dmde",
+    "name": "DMDE",
+    "category": "storage",
+    "summary": "Disk inspection, filesystem reconstruction and data recovery software.",
+    "bestFor": "Complex partition and file recovery where a specialist needs detailed filesystem views.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "portable",
+    "pricing": "Free edition with limits; paid editions",
+    "homepage": "https://dmde.com/",
+    "downloadUrl": "https://dmde.com/download.html",
+    "docsUrl": "https://dmde.com/manual.html",
+    "sourceUrl": "https://dmde.com/manual.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "recovery",
+      "partition",
+      "filesystem",
+      "disk editor"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Prefer read-only investigation on an image. Disk-editor writes require a verified plan."
+  },
+  {
+    "id": "gparted",
+    "name": "GParted",
+    "category": "storage",
+    "summary": "Graphical partition editor available as a Linux application and bootable live image.",
+    "bestFor": "A planned partition resize or layout change after backup and health checks.",
+    "platforms": [
+      "Linux",
+      "Bootable PC"
+    ],
+    "mode": "boot",
+    "pricing": "Free / open source",
+    "homepage": "https://gparted.org/",
+    "downloadUrl": "https://gparted.org/download.php",
+    "docsUrl": "https://gparted.org/documentation.php",
+    "sourceUrl": "https://gparted.org/documentation.php",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "partition",
+      "resize",
+      "filesystem"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Partition moves and resizing can lose data if interrupted; confirm a recoverable backup and stable power."
+  },
+  {
+    "id": "rescuezilla",
+    "name": "Rescuezilla",
+    "category": "storage",
+    "summary": "Bootable graphical disk-imaging and recovery environment compatible with Clonezilla images.",
+    "bestFor": "A visual bare-metal backup or restore workflow at the bench.",
+    "platforms": [
+      "Bootable PC"
+    ],
+    "mode": "boot",
+    "pricing": "Free / open source",
+    "homepage": "https://rescuezilla.com/",
+    "downloadUrl": "https://rescuezilla.com/download",
+    "docsUrl": "https://rescuezilla.com/help",
+    "sourceUrl": "https://rescuezilla.com/help",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "backup",
+      "image",
+      "clone",
+      "restore"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Verify the destination model, serial and capacity before a restore overwrites it."
+  },
+  {
+    "id": "clonezilla",
+    "name": "Clonezilla",
+    "category": "storage",
+    "summary": "Bootable disk and partition imaging with multiple deployment modes.",
+    "bestFor": "Capturing or restoring a supported disk image with a repeatable procedure.",
+    "platforms": [
+      "Bootable PC",
+      "Linux"
+    ],
+    "mode": "boot",
+    "pricing": "Free / open source",
+    "homepage": "https://clonezilla.org/",
+    "downloadUrl": "https://clonezilla.org/downloads.php",
+    "docsUrl": "https://clonezilla.org/clonezilla-live-doc.php",
+    "sourceUrl": "https://clonezilla.org/clonezilla-live-doc.php",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "backup",
+      "image",
+      "clone",
+      "restore"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Source and target selection must be verified; check filesystem and target-size constraints for the chosen operation."
+  },
+  {
+    "id": "restic",
+    "name": "restic",
+    "category": "storage",
+    "summary": "Encrypted, deduplicating file-backup snapshots across local and remote storage.",
+    "bestFor": "Repeatable file backups with explicit integrity and restore checks.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://restic.net/",
+    "downloadUrl": "https://github.com/restic/restic/releases/latest",
+    "docsUrl": "https://restic.readthedocs.io/en/stable/",
+    "sourceUrl": "https://restic.readthedocs.io/en/stable/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "backup",
+      "encrypted",
+      "snapshots",
+      "restore"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Keep the repository password recoverable and test restoration of real files. A snapshot is not a full bare-metal image."
+  },
+  {
+    "id": "kopia",
+    "name": "Kopia",
+    "category": "storage",
+    "summary": "Encrypted snapshot backups with both desktop and command-line interfaces.",
+    "bestFor": "A visual backup workflow with repository policies and restore browsing.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://kopia.io/",
+    "downloadUrl": "https://kopia.io/docs/installation/",
+    "docsUrl": "https://kopia.io/docs/",
+    "sourceUrl": "https://kopia.io/docs/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "backup",
+      "encrypted",
+      "snapshots",
+      "restore"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Record credentials and verify a restore before relying on the repository."
+  },
+  {
+    "id": "rclone",
+    "name": "rclone",
+    "category": "storage",
+    "summary": "Transfers, checks and synchronizes files across many storage providers.",
+    "bestFor": "Cloud migrations, verifiable copies and controlled provider-to-provider transfers.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://rclone.org/",
+    "downloadUrl": "https://rclone.org/downloads/",
+    "docsUrl": "https://rclone.org/docs/",
+    "sourceUrl": "https://rclone.org/docs/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "cloud",
+      "migration",
+      "copy",
+      "backup"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Start with copy and dry-run where applicable. sync can remove destination files and is not versioned backup by itself."
+  },
+  {
+    "id": "veeam-agent",
+    "name": "Veeam Agent for Microsoft Windows",
+    "category": "storage",
+    "summary": "Windows backup with file, volume and full-machine recovery options.",
+    "bestFor": "Image backup and recovery media for a supported Windows endpoint.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free and paid editions; service-provider terms differ",
+    "homepage": "https://www.veeam.com/products/free/microsoft-windows",
+    "downloadUrl": "https://www.veeam.com/products/free/microsoft-windows",
+    "docsUrl": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html",
+    "sourceUrl": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "backup",
+      "image",
+      "windows",
+      "restore"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use the licensing appropriate to managed client services; test recovery media and a restore path."
+  },
+  {
+    "id": "freefilesync",
+    "name": "FreeFileSync",
+    "category": "storage",
+    "summary": "Visual folder comparison and synchronization with configurable directions.",
+    "bestFor": "Reviewed file migration when technicians need to see proposed differences.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Business Edition for commercial use",
+    "homepage": "https://freefilesync.org/",
+    "downloadUrl": "https://freefilesync.org/download.php",
+    "docsUrl": "https://freefilesync.org/faq.php",
+    "sourceUrl": "https://freefilesync.org/faq.php",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "migration",
+      "sync",
+      "compare",
+      "files"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Choose the intended direction and preview deletions. Synchronization alone does not retain independent history."
+  },
+  {
+    "id": "robocopy",
+    "name": "Robocopy",
+    "category": "storage",
+    "summary": "Windows file-copy utility with restart, retry, metadata and logging controls.",
+    "bestFor": "A documented migration between accessible Windows folders or shares.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with Windows",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "migration",
+      "copy",
+      "windows",
+      "logs"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Mirror and purge options delete destination content. Check exit-code semantics and verify the copied data."
+  },
+  {
+    "id": "hwinfo",
+    "name": "HWiNFO",
+    "category": "hardware",
+    "summary": "Detailed hardware inventory and supported sensor readings.",
+    "bestFor": "Investigating temperatures, clocks, power and component identity.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Pro license for commercial use of 64/ARM64 editions",
+    "homepage": "https://www.hwinfo.com/",
+    "downloadUrl": "https://www.hwinfo.com/download/",
+    "docsUrl": "https://www.hwinfo.com/licenses/",
+    "sourceUrl": "https://www.hwinfo.com/licenses/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "temperature",
+      "sensors",
+      "hardware",
+      "thermal"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use the appropriate commercial license. Sensor availability varies by hardware; logging creates background work."
+  },
+  {
+    "id": "libre-hardware-monitor",
+    "name": "Libre Hardware Monitor",
+    "category": "hardware",
+    "summary": "Open-source hardware sensor monitoring for supported components.",
+    "bestFor": "A freely available option for temperature, fan and clock investigation.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+    "downloadUrl": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/latest",
+    "docsUrl": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+    "sourceUrl": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "temperature",
+      "sensors",
+      "hardware"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Validate sensor labels against the actual hardware and stop collection when the job is done."
+  },
+  {
+    "id": "memtest86plus",
+    "name": "Memtest86+",
+    "category": "hardware",
+    "summary": "Open-source bootable memory testing independent of the installed operating system.",
+    "bestFor": "Investigating memory instability and repeatable hardware errors.",
+    "platforms": [
+      "Bootable PC"
+    ],
+    "mode": "boot",
+    "pricing": "Free / open source",
+    "homepage": "https://www.memtest.org/",
+    "downloadUrl": "https://www.memtest.org/#download",
+    "docsUrl": "https://github.com/memtest86plus/memtest86plus",
+    "sourceUrl": "https://github.com/memtest86plus/memtest86plus",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "ram",
+      "memory",
+      "boot",
+      "stability"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Record configuration, duration and error evidence. Passing tests do not rule out every intermittent hardware issue."
+  },
+  {
+    "id": "memtest86",
+    "name": "PassMark MemTest86",
+    "category": "hardware",
+    "summary": "UEFI memory testing with free and professional editions.",
+    "bestFor": "A documented bench memory test with the edition features the job requires.",
+    "platforms": [
+      "UEFI PC"
+    ],
+    "mode": "boot",
+    "pricing": "Free and paid Pro / site editions",
+    "homepage": "https://www.memtest86.com/",
+    "downloadUrl": "https://www.memtest86.com/download.htm",
+    "docsUrl": "https://www.memtest86.com/tech.html",
+    "sourceUrl": "https://www.memtest86.com/tech.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "ram",
+      "memory",
+      "boot",
+      "stability"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Choose a supported CPU/firmware platform and edition. It does not boot Apple Silicon Macs."
+  },
+  {
+    "id": "cpu-z",
+    "name": "CPU-Z",
+    "category": "hardware",
+    "summary": "CPU, motherboard and memory identification with detailed operating parameters.",
+    "bestFor": "Confirming the actual hardware and memory configuration.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free utility; vendor terms apply",
+    "homepage": "https://www.cpuid.com/softwares/cpu-z.html",
+    "downloadUrl": "https://www.cpuid.com/softwares/cpu-z.html",
+    "docsUrl": "https://www.cpuid.com/softwares/cpu-z.html",
+    "sourceUrl": "https://www.cpuid.com/softwares/cpu-z.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "cpu",
+      "memory",
+      "inventory",
+      "hardware"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Inventory is not a stability test; compare readings with the system configuration."
+  },
+  {
+    "id": "occt",
+    "name": "OCCT",
+    "category": "hardware",
+    "summary": "Component stress tests and stability diagnostics.",
+    "bestFor": "Reproducing a suspected load-related CPU, GPU or memory problem.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Personal and paid professional editions",
+    "homepage": "https://www.ocbase.com/",
+    "downloadUrl": "https://www.ocbase.com/download",
+    "docsUrl": "https://www.ocbase.com/",
+    "sourceUrl": "https://www.ocbase.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "stress test",
+      "cpu",
+      "gpu",
+      "stability"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Check cooling, power and data protection first. Use the professional edition for client work and stop on unsafe temperatures."
+  },
+  {
+    "id": "oem-drivers",
+    "name": "Official OEM driver and firmware portals",
+    "category": "hardware",
+    "summary": "Manufacturer-supported driver and firmware sources matched to a specific device.",
+    "bestFor": "Repairing a confirmed device issue or applying a required vendor update.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "web",
+    "pricing": "Vendor downloads; support terms vary",
+    "homepage": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+    "downloadUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+    "docsUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+    "sourceUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "drivers",
+      "firmware",
+      "oem",
+      "updates"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use the exact model or service tag and vendor rollback procedure; do not substitute a generic driver-updater bundle."
+  },
+  {
+    "id": "wireshark",
+    "name": "Wireshark",
+    "category": "network",
+    "summary": "Packet capture and protocol analysis with display filters and stream inspection.",
+    "bestFor": "Explaining DNS, TCP and application-protocol failures from a bounded capture.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://www.wireshark.org/",
+    "downloadUrl": "https://www.wireshark.org/download.html",
+    "docsUrl": "https://www.wireshark.org/docs/",
+    "sourceUrl": "https://www.wireshark.org/docs/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "packets",
+      "dns",
+      "tcp",
+      "capture"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Captures can contain client traffic and credentials. Scope the capture and keep it in the private job record."
+  },
+  {
+    "id": "iperf3",
+    "name": "iperf3",
+    "category": "network",
+    "summary": "Measures throughput and loss between a controlled client and server.",
+    "bestFor": "Separating local network bandwidth limits from internet or application problems.",
+    "platforms": [
+      "Linux",
+      "macOS",
+      "FreeBSD"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://software.es.net/iperf/",
+    "downloadUrl": "https://downloads.es.net/pub/iperf/",
+    "docsUrl": "https://software.es.net/iperf/invoking.html",
+    "sourceUrl": "https://software.es.net/iperf/invoking.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "bandwidth",
+      "throughput",
+      "network test"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Upstream officially supports Ubuntu Linux, FreeBSD and macOS, not native Windows. Use the INTA Linux environment for the upstream path."
+  },
+  {
+    "id": "nmap",
+    "name": "Nmap",
+    "category": "network",
+    "summary": "Network inventory and service discovery for an approved address range.",
+    "bestFor": "Identifying expected hosts and exposed services on a managed network.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Source-available under Nmap terms; Npcap terms differ",
+    "homepage": "https://nmap.org/",
+    "downloadUrl": "https://nmap.org/download.html",
+    "docsUrl": "https://nmap.org/book/man.html",
+    "sourceUrl": "https://nmap.org/book/man.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "inventory",
+      "ports",
+      "services",
+      "discovery"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Choose a scoped, non-disruptive discovery plan. Avoid intrusive script categories during ordinary troubleshooting."
+  },
+  {
+    "id": "angry-ip-scanner",
+    "name": "Angry IP Scanner",
+    "category": "network",
+    "summary": "Graphical IP-address and port discovery for local network inventory.",
+    "bestFor": "Quickly finding devices on a known managed subnet.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://angryip.org/",
+    "downloadUrl": "https://angryip.org/download/",
+    "docsUrl": "https://angryip.org/documentation/",
+    "sourceUrl": "https://angryip.org/documentation/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "discovery",
+      "inventory",
+      "ip",
+      "lan"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use the intended subnet and reasonable scan settings; results can be incomplete when devices block probes."
+  },
+  {
+    "id": "putty",
+    "name": "PuTTY",
+    "category": "network",
+    "summary": "SSH and serial terminal client with companion transfer utilities.",
+    "bestFor": "Connecting to network equipment or Linux systems from Windows.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://www.chiark.greenend.org.uk/~sgtatham/putty/",
+    "downloadUrl": "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html",
+    "docsUrl": "https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html",
+    "sourceUrl": "https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "ssh",
+      "serial",
+      "terminal"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Verify host keys through the expected inventory rather than accepting an unexpected change."
+  },
+  {
+    "id": "winscp",
+    "name": "WinSCP",
+    "category": "network",
+    "summary": "SFTP, SCP and other file-transfer workflows with a Windows graphical interface.",
+    "bestFor": "Transferring support logs and configuration files to an approved host.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://winscp.net/",
+    "downloadUrl": "https://winscp.net/eng/download.php",
+    "docsUrl": "https://winscp.net/eng/docs/start",
+    "sourceUrl": "https://winscp.net/eng/docs/start",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "sftp",
+      "scp",
+      "transfer",
+      "ssh"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Verify host identity and keep stored credentials protected."
+  },
+  {
+    "id": "openssh",
+    "name": "OpenSSH",
+    "category": "network",
+    "summary": "Secure shell and file-transfer tools, including supported Windows client and server components.",
+    "bestFor": "Repeatable authenticated remote shell and transfer operations.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://www.openssh.com/",
+    "downloadUrl": "https://www.openssh.com/portable.html",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh-overview",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh-overview",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "ssh",
+      "sftp",
+      "terminal",
+      "remote administration"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Client and server setup are different. Opening an inbound server is an explicit deployment decision."
+  },
+  {
+    "id": "pktmon",
+    "name": "Windows Packet Monitor",
+    "category": "network",
+    "summary": "Built-in packet capture, filtering and network-stack diagnostics.",
+    "bestFor": "Collecting Windows network evidence without installing a separate capture application.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "capture",
+      "packets",
+      "network",
+      "windows"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Stop the capture after reproduction and protect the trace file."
+  },
+  {
+    "id": "rufus",
+    "name": "Rufus",
+    "category": "boot",
+    "summary": "Writes bootable USB media from operating-system and recovery images.",
+    "bestFor": "Preparing one ISO on a dedicated USB drive.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://rufus.ie/",
+    "downloadUrl": "https://rufus.ie/#download",
+    "docsUrl": "https://github.com/pbatard/rufus/wiki/FAQ",
+    "sourceUrl": "https://github.com/pbatard/rufus/wiki/FAQ",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "usb",
+      "boot",
+      "iso",
+      "media"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Writing media erases the selected target. Verify the drive identity before starting."
+  },
+  {
+    "id": "ventoy",
+    "name": "Ventoy",
+    "category": "boot",
+    "summary": "Boot menu for multiple ISO and other image files copied onto prepared media.",
+    "bestFor": "Maintaining a technician USB with several independently updated rescue images.",
+    "platforms": [
+      "Windows",
+      "Linux"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://www.ventoy.net/",
+    "downloadUrl": "https://www.ventoy.net/en/download.html",
+    "docsUrl": "https://www.ventoy.net/en/doc_start.html",
+    "sourceUrl": "https://www.ventoy.net/en/doc_start.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "usb",
+      "multiboot",
+      "iso",
+      "media"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Initial installation formats the target. Updating Ventoy and replacing an ISO are separate operations; test boot compatibility."
+  },
+  {
+    "id": "systemrescue",
+    "name": "SystemRescue",
+    "category": "boot",
+    "summary": "Linux rescue environment for storage, filesystem and administrative recovery work.",
+    "bestFor": "A ready-made Linux recovery environment for an unbootable or damaged machine.",
+    "platforms": [
+      "Bootable PC"
+    ],
+    "mode": "boot",
+    "pricing": "Free / open source",
+    "homepage": "https://www.system-rescue.org/",
+    "downloadUrl": "https://www.system-rescue.org/Download/",
+    "docsUrl": "https://www.system-rescue.org/manual/",
+    "sourceUrl": "https://www.system-rescue.org/manual/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "rescue",
+      "linux",
+      "storage",
+      "boot"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Verify checksums/signatures and choose the intended disk before mounting or modifying filesystems."
+  },
+  {
+    "id": "hirens-bootcd-pe",
+    "name": "Hiren's BootCD PE",
+    "category": "boot",
+    "summary": "Windows PE recovery environment containing a broad collection of technician utilities.",
+    "bestFor": "A familiar Windows-oriented offline bench toolkit.",
+    "platforms": [
+      "Bootable PC"
+    ],
+    "mode": "boot",
+    "pricing": "Free distribution; bundled tools have individual terms",
+    "homepage": "https://www.hirensbootcd.org/",
+    "downloadUrl": "https://www.hirensbootcd.org/download/",
+    "docsUrl": "https://www.hirensbootcd.org/howtos/",
+    "sourceUrl": "https://www.hirensbootcd.org/howtos/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "winpe",
+      "rescue",
+      "boot",
+      "windows"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "The official bundle contains older tool versions. Treat its ISO and each included application as separate freshness checks."
+  },
+  {
+    "id": "microsoft-windows11-media",
+    "name": "Windows 11 installation media",
+    "category": "boot",
+    "summary": "Official Microsoft installation assistant, media creation and ISO download source.",
+    "bestFor": "A clean installation or supported repair using the correct Windows edition and architecture.",
+    "platforms": [
+      "Windows",
+      "Bootable PC"
+    ],
+    "mode": "boot",
+    "pricing": "Download available; Windows license required",
+    "homepage": "https://www.microsoft.com/software-download/windows11",
+    "downloadUrl": "https://www.microsoft.com/software-download/windows11",
+    "docsUrl": "https://www.microsoft.com/software-download/windows11",
+    "sourceUrl": "https://www.microsoft.com/software-download/windows11",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "windows",
+      "installation",
+      "iso",
+      "repair"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "An installation can erase data. Match edition, language and architecture and preserve the recovery key."
+  },
+  {
+    "id": "debian-live",
+    "name": "Debian Live",
+    "category": "boot",
+    "summary": "Official live images for a standard Debian desktop and recovery starting point.",
+    "bestFor": "A general Linux session independent of the installed operating system.",
+    "platforms": [
+      "Bootable PC"
+    ],
+    "mode": "boot",
+    "pricing": "Free / open source",
+    "homepage": "https://www.debian.org/CD/live/",
+    "downloadUrl": "https://www.debian.org/CD/live/",
+    "docsUrl": "https://live-team.pages.debian.net/live-manual/html/live-manual/index.en.html",
+    "sourceUrl": "https://live-team.pages.debian.net/live-manual/html/live-manual/index.en.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "linux",
+      "live",
+      "rescue",
+      "debian"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification"
+  },
+  {
+    "id": "ubuntu-live",
+    "name": "Ubuntu Desktop live media",
+    "category": "boot",
+    "summary": "Official Ubuntu desktop installer with a live try-before-install workflow.",
+    "bestFor": "Hardware checks and file access from a familiar Linux desktop.",
+    "platforms": [
+      "Bootable PC"
+    ],
+    "mode": "boot",
+    "pricing": "Free / open source",
+    "homepage": "https://ubuntu.com/desktop",
+    "downloadUrl": "https://ubuntu.com/download/desktop",
+    "docsUrl": "https://ubuntu.com/tutorials/try-ubuntu-before-you-install",
+    "sourceUrl": "https://ubuntu.com/tutorials/try-ubuntu-before-you-install",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "linux",
+      "live",
+      "rescue",
+      "ubuntu"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Choose the live session when diagnosing; installing is a separate disk-changing action."
+  },
+  {
+    "id": "7zip",
+    "name": "7-Zip",
+    "category": "productivity",
+    "summary": "Archive creation, extraction and integrity testing for common archive formats.",
+    "bestFor": "Packaging logs or extracting a trusted portable tool.",
+    "platforms": [
+      "Windows",
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://www.7-zip.org/",
+    "downloadUrl": "https://www.7-zip.org/download.html",
+    "docsUrl": "https://www.7-zip.org/faq.html",
+    "sourceUrl": "https://www.7-zip.org/faq.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "archive",
+      "zip",
+      "logs",
+      "files"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Extract untrusted archives to an isolated directory and review their contents before execution."
+  },
+  {
+    "id": "notepadplusplus",
+    "name": "Notepad++",
+    "category": "productivity",
+    "summary": "Windows text editor with searching, syntax support and large text-file workflows.",
+    "bestFor": "Reading logs and making deliberate configuration-file changes.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://notepad-plus-plus.org/",
+    "downloadUrl": "https://notepad-plus-plus.org/downloads/",
+    "docsUrl": "https://npp-user-manual.org/",
+    "sourceUrl": "https://github.com/notepad-plus-plus/notepad-plus-plus",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "editor",
+      "logs",
+      "configuration"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification"
+  },
+  {
+    "id": "powertoys",
+    "name": "Microsoft PowerToys",
+    "category": "productivity",
+    "summary": "Modular Windows utilities including window layout, file naming and input helpers.",
+    "bestFor": "Making the technician workstation easier to navigate and operate.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://learn.microsoft.com/en-us/windows/powertoys/",
+    "downloadUrl": "https://github.com/microsoft/PowerToys/releases/latest",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/powertoys/",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/powertoys/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "productivity",
+      "windows",
+      "utilities"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Enable only the modules needed; client machines do not need a permanent utility suite for a one-time job."
+  },
+  {
+    "id": "everything",
+    "name": "Everything",
+    "category": "productivity",
+    "summary": "Fast indexed filename search on supported Windows filesystems.",
+    "bestFor": "Locating files by name on a technician workstation.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Freeware",
+    "homepage": "https://www.voidtools.com/",
+    "downloadUrl": "https://www.voidtools.com/downloads/",
+    "docsUrl": "https://www.voidtools.com/support/everything/",
+    "sourceUrl": "https://www.voidtools.com/support/everything/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "search",
+      "files",
+      "index"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "The index and optional service are persistent components; avoid indexing sensitive client data unnecessarily."
+  },
+  {
+    "id": "sharex",
+    "name": "ShareX",
+    "category": "productivity",
+    "summary": "Screenshots, recordings and configurable local output workflows.",
+    "bestFor": "Capturing a problem and producing clear technician documentation.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://getsharex.com/",
+    "downloadUrl": "https://github.com/ShareX/ShareX/releases/latest",
+    "docsUrl": "https://github.com/ShareX/ShareX",
+    "sourceUrl": "https://github.com/ShareX/ShareX",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "screenshots",
+      "documentation",
+      "recording"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Choose local saving and review upload actions before capturing client screens."
+  },
+  {
+    "id": "keepassxc",
+    "name": "KeePassXC",
+    "category": "productivity",
+    "summary": "Local encrypted password database with cross-platform clients.",
+    "bestFor": "Keeping a protected technician vault with a deliberate sharing and backup process.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://keepassxc.org/",
+    "downloadUrl": "https://keepassxc.org/download/",
+    "docsUrl": "https://keepassxc.org/docs/",
+    "sourceUrl": "https://keepassxc.org/docs/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "passwords",
+      "vault",
+      "credentials"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Store the database and recovery material outside the public repository; control who receives a copy."
+  },
+  {
+    "id": "localsend",
+    "name": "LocalSend",
+    "category": "productivity",
+    "summary": "Cross-platform local-network file transfer without a cloud account.",
+    "bestFor": "Moving a selected log or tool between trusted devices on the same network.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS",
+      "Android",
+      "iOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://localsend.org/",
+    "downloadUrl": "https://localsend.org/download",
+    "docsUrl": "https://github.com/localsend/localsend",
+    "sourceUrl": "https://github.com/localsend/localsend",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "lan",
+      "transfer",
+      "files"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Confirm the recipient device and network; local transfer is not backup."
+  },
+  {
+    "id": "unigetui",
+    "name": "UniGetUI",
+    "category": "productivity",
+    "summary": "Graphical management interface for multiple software package managers.",
+    "bestFor": "Reviewing available applications and updates in one technician interface.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://github.com/Devolutions/UniGetUI",
+    "downloadUrl": "https://github.com/Devolutions/UniGetUI/releases/latest",
+    "docsUrl": "https://github.com/Devolutions/UniGetUI",
+    "sourceUrl": "https://github.com/Devolutions/UniGetUI",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "packages",
+      "updates",
+      "deployment"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Package-source trust and application licensing still depend on each upstream package."
+  },
+  {
+    "id": "chatgpt",
+    "name": "ChatGPT",
+    "category": "ai",
+    "summary": "AI assistant available through the official web service and supported desktop apps.",
+    "bestFor": "Explaining redacted errors, drafting job notes and reviewing a proposed troubleshooting plan.",
+    "platforms": [
+      "Web",
+      "Windows",
+      "macOS"
+    ],
+    "mode": "web",
+    "pricing": "Free and paid plans",
+    "homepage": "https://chatgpt.com/",
+    "downloadUrl": "https://chatgpt.com/download/",
+    "docsUrl": "https://help.openai.com/",
+    "sourceUrl": "https://help.openai.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "ai",
+      "notes",
+      "troubleshooting",
+      "assistant"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use redacted evidence. A browser shortcut in the Linux rescue environment is not a native offline ChatGPT app."
+  },
+  {
+    "id": "codex-cli",
+    "name": "OpenAI Codex CLI",
+    "category": "ai",
+    "summary": "Coding agent that works with local project files and tools through a terminal interface.",
+    "bestFor": "Reviewing or building technician scripts in a controlled working folder.",
+    "platforms": [
+      "Linux",
+      "macOS",
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Open-source client; account or API usage terms apply",
+    "homepage": "https://github.com/openai/codex",
+    "downloadUrl": "https://github.com/openai/codex/releases/latest",
+    "docsUrl": "https://developers.openai.com/codex/cli/",
+    "sourceUrl": "https://developers.openai.com/codex/cli/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "ai",
+      "coding",
+      "scripts",
+      "cli"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Review generated commands and their effects before using them on client systems."
+  },
+  {
+    "id": "claude-code",
+    "name": "Claude Code",
+    "category": "ai",
+    "summary": "Terminal-based coding assistant for navigating and changing a project.",
+    "bestFor": "Explaining logs and developing a reviewed automation script.",
+    "platforms": [
+      "Linux",
+      "macOS",
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Account or API access according to current plan",
+    "homepage": "https://code.claude.com/docs/en/overview",
+    "downloadUrl": "https://code.claude.com/docs/en/setup",
+    "docsUrl": "https://code.claude.com/docs/en/overview",
+    "sourceUrl": "https://code.claude.com/docs/en/overview",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "ai",
+      "coding",
+      "scripts",
+      "cli"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use an isolated job workspace and keep client secrets out of prompts and public files."
+  },
+  {
+    "id": "gemini-cli",
+    "name": "Gemini CLI",
+    "category": "ai",
+    "summary": "Open-source command-line agent with Google Gemini integration.",
+    "bestFor": "An additional AI-assisted terminal workflow for reviewed scripts and documentation.",
+    "platforms": [
+      "Linux",
+      "macOS",
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Open-source client; account and usage limits vary",
+    "homepage": "https://github.com/google-gemini/gemini-cli",
+    "downloadUrl": "https://github.com/google-gemini/gemini-cli/releases/latest",
+    "docsUrl": "https://geminicli.com/docs/",
+    "sourceUrl": "https://geminicli.com/docs/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "ai",
+      "coding",
+      "scripts",
+      "cli"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Confirm the current authentication path, quotas and tool permissions before deployment."
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama",
+    "category": "ai",
+    "summary": "Local model runtime with downloadable models and a local API.",
+    "bestFor": "A local AI assistant when the machine has the capacity and model files are available.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Runtime available freely; model licenses differ",
+    "homepage": "https://ollama.com/",
+    "downloadUrl": "https://ollama.com/download",
+    "docsUrl": "https://docs.ollama.com/",
+    "sourceUrl": "https://docs.ollama.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "ai",
+      "local models",
+      "offline",
+      "llm"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Offline use requires downloaded models. Measure CPU, RAM and GPU cost before adding it to a rescue image."
+  },
+  {
+    "id": "yara-x",
+    "name": "YARA-X",
+    "category": "security",
+    "summary": "Rust-based pattern-matching engine for compiling and applying YARA rules.",
+    "bestFor": "Scanning selected evidence files with reviewed detection rules.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://github.com/VirusTotal/yara-x",
+    "downloadUrl": "https://github.com/VirusTotal/yara-x/releases/latest",
+    "docsUrl": "https://virustotal.github.io/yara-x/",
+    "sourceUrl": "https://virustotal.github.io/yara-x/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "athena",
+      "yara",
+      "rules",
+      "malware",
+      "rust"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "A rule match is an investigation lead. Rule compatibility and quality must be checked; this is not a complete antivirus."
+  },
+  {
+    "id": "pe-sieve",
+    "name": "PE-sieve",
+    "category": "security",
+    "summary": "Inspects one Windows process for suspicious memory modifications and injected code.",
+    "bestFor": "A specialist on-demand memory-integrity investigation.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://github.com/hasherezade/pe-sieve",
+    "downloadUrl": "https://github.com/hasherezade/pe-sieve/releases/latest",
+    "docsUrl": "https://github.com/hasherezade/pe-sieve",
+    "sourceUrl": "https://github.com/hasherezade/pe-sieve",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "athena",
+      "memory",
+      "injection",
+      "forensics"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "JIT code, overlays and legitimate hooks can look suspicious; findings need interpretation and coverage notes."
+  },
+  {
+    "id": "hollows-hunter",
+    "name": "HollowsHunter",
+    "category": "security",
+    "summary": "Uses PE-sieve to inspect multiple Windows processes and collect findings.",
+    "bestFor": "A broader on-demand scan for suspicious process-memory modifications.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://github.com/hasherezade/hollows_hunter",
+    "downloadUrl": "https://github.com/hasherezade/hollows_hunter/releases/latest",
+    "docsUrl": "https://github.com/hasherezade/hollows_hunter",
+    "sourceUrl": "https://github.com/hasherezade/hollows_hunter",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "athena",
+      "memory",
+      "forensics",
+      "processes"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Do not automatically terminate every flagged process. Record inaccessible processes and explain benign hooks."
+  },
+  {
+    "id": "fibratus",
+    "name": "Fibratus",
+    "category": "security",
+    "summary": "Windows event telemetry and rule-driven threat investigation with capture capabilities.",
+    "bestFor": "A scoped lab or managed investigation requiring event correlation.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://github.com/rabbitstack/fibratus",
+    "downloadUrl": "https://github.com/rabbitstack/fibratus/releases/latest",
+    "docsUrl": "https://www.fibratus.io/",
+    "sourceUrl": "https://www.fibratus.io/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "athena",
+      "telemetry",
+      "etw",
+      "detection"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Event collection has a resource cost and observes only its collection window; configure and stop it deliberately."
+  },
+  {
+    "id": "rustinel",
+    "name": "Rustinel",
+    "category": "security",
+    "summary": "Rust endpoint telemetry and detection project studied by ATHENA for reusable components.",
+    "bestFor": "An isolated evaluation of collection, rules, health checks and replay.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Open-source project; inspect current license",
+    "homepage": "https://github.com/Karib0u/rustinel",
+    "downloadUrl": "https://github.com/Karib0u/rustinel/releases",
+    "docsUrl": "https://github.com/Karib0u/rustinel",
+    "sourceUrl": "https://github.com/Karib0u/rustinel",
+    "reviewedAt": "2026-11-26",
+    "tier": "evaluate",
+    "tags": [
+      "athena",
+      "rust",
+      "research",
+      "endpoint"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "ATHENA records missing pre-execution blocking and anti-tamper. It is not approved here as a production antivirus replacement."
+  },
+  {
+    "id": "prx-sd",
+    "name": "PRX-SD",
+    "category": "security",
+    "summary": "Cross-platform file-scanning and detection project evaluated in ATHENA research.",
+    "bestFor": "Comparative lab evaluation of a Rust security engine and its documented platform coverage.",
+    "platforms": [
+      "Linux",
+      "Windows",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Open-source project; inspect current license",
+    "homepage": "https://github.com/openprx/prx-sd",
+    "downloadUrl": "https://github.com/openprx/prx-sd/releases",
+    "docsUrl": "https://github.com/openprx/prx-sd",
+    "sourceUrl": "https://github.com/openprx/prx-sd",
+    "reviewedAt": "2026-11-26",
+    "tier": "evaluate",
+    "tags": [
+      "athena",
+      "rust",
+      "research",
+      "antivirus"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "The reviewed Windows path differs from Linux interception. Do not transfer Linux protection claims to Windows."
+  },
+  {
+    "id": "sentinella",
+    "name": "Sentinella",
+    "category": "security",
+    "summary": "Security-engine research candidate with resource-management and scan-cache lessons.",
+    "bestFor": "Studying and testing scheduling, cache correctness and cancellation behavior.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Open-source project; inspect current license",
+    "homepage": "https://github.com/LeewayOpenSoftware/Sentinella",
+    "downloadUrl": "https://github.com/LeewayOpenSoftware/Sentinella/releases",
+    "docsUrl": "https://github.com/LeewayOpenSoftware/Sentinella",
+    "sourceUrl": "https://github.com/LeewayOpenSoftware/Sentinella",
+    "reviewedAt": "2026-11-26",
+    "tier": "evaluate",
+    "tags": [
+      "athena",
+      "research",
+      "antivirus",
+      "performance"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "ATHENA treats architectural claims as hypotheses requiring runtime proof; not a certified production replacement."
+  },
+  {
+    "id": "velociraptor",
+    "name": "Velociraptor",
+    "category": "security",
+    "summary": "Endpoint collection and investigation platform using VQL artifacts.",
+    "bestFor": "Scoped forensic collection across a managed endpoint fleet.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://docs.velociraptor.app/",
+    "downloadUrl": "https://github.com/Velocidex/velociraptor/releases/latest",
+    "docsUrl": "https://docs.velociraptor.app/",
+    "sourceUrl": "https://docs.velociraptor.app/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "dfir",
+      "endpoint",
+      "collection",
+      "incident"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Artifact scope and server access determine the data collected; use a private evidence repository."
+  },
+  {
+    "id": "hayabusa",
+    "name": "Hayabusa",
+    "category": "security",
+    "summary": "Windows event-log threat hunting and timeline generation with Sigma-based detections.",
+    "bestFor": "Analyzing exported EVTX logs during incident triage.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://github.com/Yamato-Security/hayabusa",
+    "downloadUrl": "https://github.com/Yamato-Security/hayabusa/releases/latest",
+    "docsUrl": "https://github.com/Yamato-Security/hayabusa",
+    "sourceUrl": "https://github.com/Yamato-Security/hayabusa",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "evtx",
+      "timeline",
+      "sigma",
+      "rust",
+      "incident"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Rule alerts need corroboration. Preserve original logs and report missing channels or collection periods."
+  },
+  {
+    "id": "chainsaw",
+    "name": "Chainsaw",
+    "category": "security",
+    "summary": "Fast Windows event-log search and detection tooling.",
+    "bestFor": "Searching exported logs and generating investigation leads.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source",
+    "homepage": "https://github.com/WithSecureOpenSource/chainsaw",
+    "downloadUrl": "https://github.com/WithSecureOpenSource/chainsaw/releases/latest",
+    "docsUrl": "https://github.com/WithSecureOpenSource/chainsaw",
+    "sourceUrl": "https://github.com/WithSecureOpenSource/chainsaw",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "evtx",
+      "sigma",
+      "rust",
+      "incident"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Match the rule and mapping versions to the evidence and retain the original log files."
+  },
+  {
+    "id": "sigma",
+    "name": "Sigma rules",
+    "category": "security",
+    "summary": "Generic detection-rule format and community rules for security log analysis.",
+    "bestFor": "A starting point for reviewed detections in an existing analysis platform.",
+    "platforms": [
+      "Cross-platform"
+    ],
+    "mode": "portable",
+    "pricing": "Open-source rule set; rule and tooling licenses vary",
+    "homepage": "https://sigmahq.io/",
+    "downloadUrl": "https://github.com/SigmaHQ/sigma",
+    "docsUrl": "https://sigmahq.io/docs/",
+    "sourceUrl": "https://sigmahq.io/docs/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "rules",
+      "detection",
+      "logs",
+      "incident"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Rules require compatible backends, correct field mappings and local false-positive tuning."
+  },
+  {
+    "id": "osquery",
+    "name": "osquery",
+    "category": "security",
+    "summary": "Exposes supported system state as SQL-queryable tables.",
+    "bestFor": "Repeatable endpoint inventory and documented state checks.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://osquery.io/",
+    "downloadUrl": "https://osquery.io/downloads/",
+    "docsUrl": "https://osquery.readthedocs.io/en/stable/",
+    "sourceUrl": "https://osquery.readthedocs.io/en/stable/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "inventory",
+      "endpoint",
+      "sql",
+      "audit"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Table coverage differs by OS. Scheduled queries and extensions must be explicitly configured."
+  },
+  {
+    "id": "wazuh",
+    "name": "Wazuh",
+    "category": "security",
+    "summary": "Endpoint agents and a central platform for security monitoring and analysis.",
+    "bestFor": "An ongoing client security-monitoring deployment with managed operations.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source; hosting and operations cost",
+    "homepage": "https://wazuh.com/",
+    "downloadUrl": "https://documentation.wazuh.com/current/installation-guide/index.html",
+    "docsUrl": "https://documentation.wazuh.com/current/",
+    "sourceUrl": "https://documentation.wazuh.com/current/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "siem",
+      "endpoint",
+      "monitoring",
+      "incident"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "A real deployment needs sizing, alert tuning, retention and ownership; installing an agent alone is not an operating SOC."
+  },
+  {
+    "id": "volatility",
+    "name": "Volatility 3",
+    "category": "security",
+    "summary": "Framework for analyzing supported memory captures.",
+    "bestFor": "Specialist examination of memory evidence after collection.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Open-source framework; license terms apply",
+    "homepage": "https://volatilityfoundation.org/",
+    "downloadUrl": "https://github.com/volatilityfoundation/volatility3/releases/latest",
+    "docsUrl": "https://volatility3.readthedocs.io/en/latest/",
+    "sourceUrl": "https://volatility3.readthedocs.io/en/latest/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "memory",
+      "forensics",
+      "dfir"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Requires a compatible memory image and symbols; it does not acquire a memory image by itself."
+  },
+  {
+    "id": "autopsy",
+    "name": "Autopsy",
+    "category": "security",
+    "summary": "Graphical digital-forensics platform for examining disk and file evidence.",
+    "bestFor": "A structured specialist investigation of an acquired image.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://www.autopsy.com/",
+    "downloadUrl": "https://www.autopsy.com/download/",
+    "docsUrl": "https://www.sleuthkit.org/autopsy/docs/user-docs/",
+    "sourceUrl": "https://www.sleuthkit.org/autopsy/docs/user-docs/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "forensics",
+      "disk image",
+      "dfir",
+      "evidence"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Work from a verified image and record acquisition hashes and analysis settings."
+  },
+  {
+    "id": "nvme-cli",
+    "name": "nvme-cli",
+    "category": "storage",
+    "summary": "Linux NVMe controller and namespace inspection utilities.",
+    "bestFor": "Reading NVMe identity and health information from INTA Rescue.",
+    "platforms": [
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://github.com/linux-nvme/nvme-cli",
+    "downloadUrl": "https://github.com/linux-nvme/nvme-cli/releases/latest",
+    "docsUrl": "https://github.com/linux-nvme/nvme-cli",
+    "sourceUrl": "https://github.com/linux-nvme/nvme-cli",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "nvme",
+      "ssd",
+      "health",
+      "inta rescue"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Inventory and health commands differ from format, sanitize and firmware commands; keep those write operations separate."
+  },
+  {
+    "id": "gsmartcontrol",
+    "name": "GSmartControl",
+    "category": "storage",
+    "summary": "Graphical frontend for drive health inspection and smartctl self-tests.",
+    "bestFor": "A visual SMART investigation in the rescue desktop.",
+    "platforms": [
+      "Linux",
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://gsmartcontrol.shaduri.dev/",
+    "downloadUrl": "https://gsmartcontrol.shaduri.dev/downloads",
+    "docsUrl": "https://gsmartcontrol.shaduri.dev/",
+    "sourceUrl": "https://gsmartcontrol.shaduri.dev/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "smart",
+      "disk health",
+      "inta rescue"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Health reads may not pass through every USB adapter. Avoid lengthy self-tests on a failing drive."
+  },
+  {
+    "id": "tcpdump",
+    "name": "tcpdump",
+    "category": "network",
+    "summary": "Command-line packet capture and filtering.",
+    "bestFor": "A small, bounded network capture from INTA Rescue or a Linux host.",
+    "platforms": [
+      "Linux",
+      "macOS",
+      "BSD"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://www.tcpdump.org/",
+    "downloadUrl": "https://github.com/the-tcpdump-group/tcpdump/releases",
+    "docsUrl": "https://www.tcpdump.org/manpages/tcpdump.1.html",
+    "sourceUrl": "https://github.com/the-tcpdump-group/tcpdump",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "packets",
+      "capture",
+      "cli",
+      "inta rescue"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Store packet captures privately and stop collection after the reproduction."
+  },
+  {
+    "id": "cryptsetup",
+    "name": "cryptsetup",
+    "category": "storage",
+    "summary": "Linux tooling for encrypted-volume management and supported unlock workflows.",
+    "bestFor": "Opening a supported encrypted volume using the correct recovery material.",
+    "platforms": [
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://gitlab.com/cryptsetup/cryptsetup",
+    "downloadUrl": "https://gitlab.com/cryptsetup/cryptsetup/-/releases",
+    "docsUrl": "https://gitlab.com/cryptsetup/cryptsetup",
+    "sourceUrl": "https://gitlab.com/cryptsetup/cryptsetup",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "encryption",
+      "luks",
+      "recovery",
+      "inta rescue"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Unlocking and formatting are different operations. Never format or alter headers as a troubleshooting shortcut."
+  },
+  {
+    "id": "dislocker",
+    "name": "Dislocker",
+    "category": "storage",
+    "summary": "Access to supported BitLocker-encrypted volumes from a non-Windows environment.",
+    "bestFor": "Reading an encrypted client volume with its valid key or recovery material.",
+    "platforms": [
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://github.com/Aorimn/dislocker",
+    "downloadUrl": "https://github.com/Aorimn/dislocker/releases",
+    "docsUrl": "https://github.com/Aorimn/dislocker",
+    "sourceUrl": "https://github.com/Aorimn/dislocker",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "bitlocker",
+      "encryption",
+      "recovery",
+      "inta rescue"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use read-only access for recovery when possible. It does not bypass the need for authorized key material."
+  },
+  {
+    "id": "rsync",
+    "name": "rsync",
+    "category": "storage",
+    "summary": "Incremental file transfer with explicit preservation and comparison controls.",
+    "bestFor": "A logged file copy from Linux rescue to a separate destination.",
+    "platforms": [
+      "Linux",
+      "macOS",
+      "BSD"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source",
+    "homepage": "https://rsync.samba.org/",
+    "downloadUrl": "https://rsync.samba.org/download.html",
+    "docsUrl": "https://download.samba.org/pub/rsync/rsync.1",
+    "sourceUrl": "https://download.samba.org/pub/rsync/rsync.1",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "copy",
+      "migration",
+      "linux",
+      "inta rescue"
+    ],
+    "provenance": [
+      "Official project or vendor documentation",
+      "https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Check trailing-slash semantics and avoid delete options unless deletion is part of the reviewed plan."
+  }
+]

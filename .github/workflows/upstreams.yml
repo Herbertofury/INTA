@@ -1,0 +1,20 @@
+name: Check tool upstreams
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  report:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Check every tool without installing or promoting updates
+        run: python3 scripts/check-upstreams.py
+      - name: Preserve complete report including unresolved upstreams
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: inta-upstream-report
+          path: reports/upstreams.json
+          if-no-files-found: error

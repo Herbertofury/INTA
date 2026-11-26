@@ -1,0 +1,17 @@
+name: Playbook correction
+description: Make a workflow clearer, safer or more effective.
+title: '[Guide] '
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Guide and step
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should change and why?
+      description: Include an official reference and how to verify the corrected procedure. Remove customer names, credentials and private logs.
+    validations:
+      required: true

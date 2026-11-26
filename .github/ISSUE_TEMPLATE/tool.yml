@@ -1,0 +1,25 @@
+name: Tool recommendation
+description: Recommend an original-source tool for an INTA technician job.
+title: '[Tool] '
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Official publisher or source repository
+      description: Use the original source, not a download mirror.
+    validations:
+      required: true
+  - type: textarea
+    id: job
+    attributes:
+      label: What job does it improve?
+      description: Explain when to choose it and what it improves over the existing kit.
+    validations:
+      required: true
+  - type: textarea
+    id: proof
+    attributes:
+      label: Compatibility and verification
+      description: Operating system, architecture, tested version, outcome, costs and limitations. Keep customer data private.
+    validations:
+      required: true

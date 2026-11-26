@@ -1,0 +1,41 @@
+name: Validate and publish technician hub
+on:
+  push:
+    branches: [main]
+    paths: ['data/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'tests/test_hub.py', '.github/workflows/hub.yml']
+  pull_request:
+    paths: ['data/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'tests/test_hub.py', '.github/workflows/hub.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: inta-hub-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Validate complete content and generated outputs
+        run: |
+          python3 -m unittest discover -s tests
+          python3 scripts/build-hub.py --check
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy validated hub
+        id: deploy
+        uses: actions/deploy-pages@v4

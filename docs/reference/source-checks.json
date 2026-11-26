@@ -1,0 +1,788 @@
+{
+  "checkedAt": "2026-11-26",
+  "scope": "Primary-source routing and documentation retrieval; not executable download, install or runtime certification.",
+  "checks": [
+    {
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/microsoft-365/security/intelligence/safety-scanner-download?view=o365-worldwide",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/security/defender/safety-scanner-download?view=o365-worldwide",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.malwarebytes.com/adwcleaner",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.malwarebytes.com/free-tools",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.sophos.com/en-us/free-tools",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.scribd.com/document/929979228/EP4025-5-0v1-Getting-Started-With-Sophos-Central-Threat-Remediation",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.microsoft.com/en-us/download/details.aspx?id=9905&lc=1033&msockid=024354b1e76b69be014e4203e66e681c",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/office/how-to-troubleshoot-an-error-when-you-run-the-microsoft-safety-scanner",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://help.eset.com/eos/en-US/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.eset.com/us/home/online-scanner/?attr=3917268",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://support.eset.com/en/kb405-online-scanner-faq",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.bitdefender.com/en-us/business/deals/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.bitdefender.com/en-us/business/smb-products/business-security",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/sysinternals/downloads/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-utilities",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/sysinternals/downloads/procmon",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://docs.meshcentral.com/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://rustdesk.com/docs",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/apps/solve-pc-problems-remotely-using-quick-assist",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://support.google.com/chrome/answer/1649523?hl=en-0",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.ventoy.net/en/download.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.system-rescue.org/Download/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://rufus.ie/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.hirensbootcd.org/usb-booting/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.ventoy.net/en/doc_start.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.clamav.net/downloads",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://crystalmark.info/en/software/crystaldiskinfo/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.hwinfo.com/download/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.memtest86.com/download.htm",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.memtest.org/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.smartmontools.org/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.gnu.org/software/ddrescue/",
+      "status": "retrieval-unavailable",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://dmde.com/download.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://gparted.org/download.php",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://rescuezilla.com/download",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://clonezilla.org/downloads.php",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://restic.net/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://kopia.io/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://rclone.org/downloads/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.veeam.com/products/free/microsoft-windows.html",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://www.veeam.com/products/free/microsoft-windows",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://freefilesync.org/faq.php",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.wireshark.org/download.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://software.es.net/iperf/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://nmap.org/download.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/defender-business/mdb-overview",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.sophos.com/en-us/products/endpoint-antivirus",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://www.sophos.com/en-us/products/endpoint-security",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://rustdesk.com/docs/en/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://support.anydesk.com/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.teamviewer.com/en/global/support/knowledge-base/",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-remote/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://docs.connectwise.com/ConnectWise_ScreenConnect_Documentation",
+      "status": "retrieval-unavailable",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://tailscale.com/kb",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://tailscale.com/docs",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image?view=windows-11",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference?view=windows-11",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/terminal/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/winsat",
+      "status": "retrieval-unavailable",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.screenconnect.com/Download",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/th-th/windows/win32/winsat/using-winsat",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/%20%20%20%20%20%20windows-server/administration/windows-commands/winsat-mem",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://docs.connectwise.com/%40api/deki/files/51841/ScreenConnect_Remote_Support_End_User_Guide.pdf?revision=1",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://freefilesync.org/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/winsiderss/systeminformer",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/windirstat/windirstat",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/smartmontools/smartmontools",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+      "status": "retrieval-unavailable",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://dmde.com/manual/",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://dmde.com/manual.html",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.hwinfo.com/licenses/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.cpuid.com/softwares/cpu-z.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.ocbase.com/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/automatically-get-recommended-drivers-and-updates-for-your-hardware",
+      "status": "retrieval-unavailable",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://angryip.org/documentation/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://winscp.net/eng/docs/start",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh-overview",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.microsoft.com/software-download/windows11",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://www.microsoft.com/da-dk/software-download/windows11",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://live-team.pages.debian.net/live-manual/html/live-manual/index.en.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://ubuntu.com/tutorials/try-ubuntu-before-you-install",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://getsharex.com/docs",
+      "status": "retrieval-unavailable",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://keepassxc.org/docs/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.7-zip.org/faq.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://npp-user-manual.org/",
+      "status": "retrieval-unavailable",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/powertoys/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.voidtools.com/support/everything/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/localsend/localsend",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/Devolutions/UniGetUI",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://help.openai.com/",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://help.openai.com/en",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://developers.openai.com/codex/cli/",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://learn.chatgpt.com/docs/codex/cli",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://code.claude.com/docs/en/overview",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://geminicli.com/docs/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://docs.ollama.com/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://virustotal.github.io/yara-x/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/hasherezade/pe-sieve",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/hasherezade/hollows_hunter",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.fibratus.io/",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://fibratus.io/",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/Karib0u/rustinel",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/openprx/prx-sd",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/LeewayOpenSoftware/Sentinella",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://docs.velociraptor.app/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/Yamato-Security/hayabusa",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/WithSecureLabs/chainsaw",
+      "status": "primary-source-accessed",
+      "redirectedTo": "https://github.com/WithSecureOpenSource/chainsaw",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://sigmahq.io/docs/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://osquery.readthedocs.io/en/stable/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://documentation.wazuh.com/current/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/automatically-get-recommended-and-updated-hardware-drivers",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.get-sharex.com/docs/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.notepad-plus-plus.app/online-help/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.gnu.org/software/ddrescue/ddrescue",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://volatility3.readthedocs.io/en/latest/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.sleuthkit.org/autopsy/docs/user-docs/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/linux-nvme/nvme-cli",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://gsmartcontrol.shaduri.dev/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.tcpdump.org/manpages/tcpdump.1.html",
+      "status": "retrieval-unavailable",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://gitlab.com/cryptsetup/cryptsetup",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/Aorimn/dislocker",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://download.samba.org/pub/rsync/rsync.1",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://gsmartcontrol.shaduri.dev/downloads",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.screenconnect.com/remote-support",
+      "status": "retrieval-unavailable",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.tcpdump.org/",
+      "status": "retrieval-unavailable",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.sophos.com/en-us/products/endpoint-security",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://support.google.com/chrome/answer/1649523",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.hirensbootcd.org/download/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/ShareX/ShareX",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/notepad-plus-plus/notepad-plus-plus",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://github.com/the-tcpdump-group/tcpdump",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.emsisoft.com/en/emergency-kit/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "url": "https://www.emsisoft.com/en/help/1702/getting-started/",
+      "status": "primary-source-accessed",
+      "checkedAt": "2026-11-26"
+    }
+  ]
+}
