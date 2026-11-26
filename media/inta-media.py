@@ -9,11 +9,9 @@ import shutil
 import subprocess
 import tempfile
 import threading
-import tkinter as tk
 import urllib.request
 import webbrowser
 from pathlib import Path
-from tkinter import filedialog, messagebox, ttk
 
 REPO = "Herbertofury/INTA"
 RELEASE_API = f"https://api.github.com/repos/{REPO}/releases/latest"
@@ -89,6 +87,9 @@ def copy_to_ventoy(source, volume):
 
 
 def main():
+    import tkinter as tk
+    from tkinter import filedialog, messagebox, ttk
+
     root = tk.Tk()
     root.title("INTA Media Creator")
     root.minsize(630, 420)
