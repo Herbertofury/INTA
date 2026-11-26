@@ -15,7 +15,8 @@
     "windows": 20
   },
   "contentSha256": "73102fe60ad2ef2022671daaeead8c20f8e86c0ca7fb973b8ca8443452b59ef2",
-  "wikiPages": 41,
+  "wikiPages": 39,
+  "wikiFiles": 41,
   "files": {
     "docs/runbooks/ad-trust.md": "4c0b738bd83e10421e73898f4e1d901f147a4d07c850513dbdc2ada9798659a6",
     "docs/runbooks/ai-triage.md": "49f43894d84cc88be26fda698181067768baa5bfb4cebdbe2494eb89c8174117",

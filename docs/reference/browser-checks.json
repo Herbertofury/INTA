@@ -1,0 +1,34 @@
+{
+  "browser": "158.0.8127.0",
+  "tools": 111,
+  "jobs": 22,
+  "allToolsRendered": 111,
+  "tiers": {
+    "core": 74,
+    "specialist": 33,
+    "evaluate": 4
+  },
+  "categoryPlatformMatches": 8,
+  "backPreservesFilters": true,
+  "favoritesPersist": true,
+  "checklistPersistsAfterReload": true,
+  "checklistResetUndo": true,
+  "markdownExportContainsCheckedProgress": true,
+  "noEmptyJobToolPanel": true,
+  "globalSearchMatches": 102,
+  "themePersistsAfterReload": true,
+  "skipToContent": true,
+  "officialReferences": 39,
+  "offlineExportRendersAllTools": true,
+  "mobileNavigation": true,
+  "mobileHorizontalOverflow": false,
+  "mobileAllToolsRendered": true,
+  "networkRequests": [],
+  "consoleErrors": [],
+  "sourceCommit": "0b7a34aa2b2757f7a6069ea4da7e23ce787e271f",
+  "sourceHashes": {
+    "index.template.html": "af7b02a916e22ab883ac2bbe9a4415d9fab455d59faf2963bbe14ef68f47c23a",
+    "styles.css": "4a061fa74816007789dbc2eb91e037b49a882519c1bb6a5be7077ea5747f7528",
+    "app.js": "83e1989c37a7923750e5e9546f11a22d6b954857791f5fab1367f270ce228042"
+  }
+}

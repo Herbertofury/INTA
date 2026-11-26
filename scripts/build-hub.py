@@ -215,7 +215,9 @@ def build_outputs() -> dict[str, str]:
     for title, filename in mirrors.items():
         outputs[f"wiki/{title}.md"] = (ROOT / "docs" / filename).read_text(encoding="utf-8")
     manifest = {"schemaVersion": 1, "tools": len(tools), "jobs": len(jobs), "categories": dict(sorted(Counter(t["category"] for t in tools).items())),
-                "contentSha256": hashlib.sha256(data_json.encode()).hexdigest(), "wikiPages": len([x for x in outputs if x.startswith("wiki/")]),
+                "contentSha256": hashlib.sha256(data_json.encode()).hexdigest(),
+                "wikiPages": len([x for x in outputs if x.startswith("wiki/") and not Path(x).name.startswith("_")]),
+                "wikiFiles": len([x for x in outputs if x.startswith("wiki/")]),
                 "files": {path: hashlib.sha256(content.encode()).hexdigest() for path, content in sorted(outputs.items())}}
     outputs["site/build-manifest.json"] = json.dumps(manifest, indent=2) + "\n"
     return outputs
