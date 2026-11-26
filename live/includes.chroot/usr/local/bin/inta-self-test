@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+for exe in xfce4-session lightdm firefox-esr gparted gsmartcontrol smartctl nvme \
+    clonezilla testdisk photorec ddrescue mmls dislocker hivexsh clamscan yara tcpdump; do
+    command -v "$exe" >/dev/null
+done
+test -x /usr/local/bin/inta-rescue
+python3 -c 'import tkinter'
+/opt/inta-ai/node_modules/.bin/codex --version
+/opt/inta-ai/node_modules/.bin/claude --version

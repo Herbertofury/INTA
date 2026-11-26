@@ -1,0 +1,42 @@
+#!/bin/bash
+set -euo pipefail
+if [[ "$(id -u)" != 0 || "$(dpkg --print-architecture)" != amd64 ]]; then
+    echo 'Run on an amd64 Debian 13 build host as root.' >&2
+    exit 2
+fi
+root=$(cd -- "$(dirname -- "$0")/.." && pwd)
+output_dir=$(realpath -m -- "${1:-$root/dist}")
+mkdir -p -- "$output_dir"
+build_dir=$(mktemp -d)
+cleanup() {
+    status=$?
+    trap - EXIT
+    cd "$build_dir"
+    if lb clean && ! mountpoint -q chroot/proc && ! mountpoint -q chroot/sys && ! mountpoint -q chroot/dev; then
+        rm -rf -- "$build_dir"
+    else
+        echo "Build directory retained for cleanup: $build_dir" >&2
+    fi
+    exit "$status"
+}
+trap cleanup EXIT
+cd "$build_dir"
+lb config --mode debian --distribution trixie --architectures amd64 \
+    --archive-areas 'main contrib non-free-firmware' --binary-images iso-hybrid \
+    --bootloaders 'grub-pc grub-efi' --debian-installer none --firmware-chroot true \
+    --apt-recommends false --security true --updates true --memtest none \
+    --iso-application 'INTA Rescue' --iso-volume 'INTA_RESCUE' \
+    --bootappend-live 'boot=live components username=inta hostname=inta quiet'
+cp -a "$root/live/." config/
+chmod 755 config/includes.chroot/usr/local/bin/*
+lb build
+shopt -s nullglob
+images=( *.iso )
+[[ ${#images[@]} -eq 1 ]]
+cp -- "${images[0]}" "$output_dir/inta-rescue-amd64.iso"
+for manifest in *.packages; do
+    cp -- "$manifest" "$output_dir/inta-rescue-amd64.packages"
+    break
+done
+cd "$output_dir"
+sha256sum inta-rescue-amd64.iso > SHA256SUMS

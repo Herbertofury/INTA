@@ -1,0 +1,9 @@
+live-boot live-config live-config-systemd
+linux-image-amd64 firmware-linux-free firmware-misc-nonfree firmware-realtek firmware-iwlwifi firmware-amd-graphics
+lightdm lightdm-gtk-greeter xfce4 xfce4-terminal dbus-x11 network-manager network-manager-gnome firefox-esr python3-tk
+gparted gsmartcontrol smartmontools nvme-cli hdparm lshw dmidecode pciutils usbutils inxi lm-sensors memtester stress-ng
+clonezilla partclone testdisk gddrescue rsync
+ntfs-3g exfatprogs dosfstools e2fsprogs btrfs-progs xfsprogs cryptsetup dislocker lvm2 mdadm
+sleuthkit libhivex-bin libevtx-utils clamav yara
+tcpdump ethtool iputils-ping dnsutils traceroute
+curl ca-certificates git jq nodejs npm xdg-utils

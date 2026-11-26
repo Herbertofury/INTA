@@ -1,0 +1,12 @@
+[Unit]
+Description=INTA boot test
+ConditionVirtualization=qemu
+After=display-manager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/inta-boot-smoke
+TimeoutStartSec=210
+
+[Install]
+WantedBy=multi-user.target

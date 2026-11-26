@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+mkdir -p /opt/inta-ai
+# Registry integrity is recorded in the shipped npm lockfile. Installed binaries are
+# checked as the live user by the boot smoke test.
+cd /opt/inta-ai
+npm init --yes >/dev/null
+npm install --save-exact --ignore-scripts --no-audit --no-fund \
+    @openai/codex @anthropic-ai/claude-code
