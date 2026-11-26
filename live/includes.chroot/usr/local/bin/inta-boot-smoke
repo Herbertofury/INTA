@@ -2,14 +2,25 @@
 set -eu
 [ "$(cat /sys/class/dmi/id/product_serial 2>/dev/null || true)" = INTA_CI_SMOKE ] || exit 0
 exec >/dev/ttyS0 2>&1
-trap 'printf "\nINTA_SMOKE_FAIL\n"' EXIT
-for delay in $(seq 1 90); do
-    if pgrep -u inta -x xfce4-session >/dev/null 2>&1; then
-        if ! pgrep -u inta -f "/usr/local/bin/inta-rescue" >/dev/null; then sleep 2; continue; fi
-        runuser -u inta -- env HOME=/home/inta /usr/local/bin/inta-self-test
-        trap - EXIT
+finish() {
+    status=$?
+    trap - EXIT
+    if [ "$status" -eq 0 ]; then
         printf '\nINTA_SMOKE_PASS\n'
-        systemctl poweroff --no-block
+    else
+        printf '\nINTA_SMOKE_FAIL (%s)\n' "$status"
+        systemctl --no-pager status lightdm live-config || true
+        journalctl --no-pager -b -u lightdm -u live-config -n 80 || true
+    fi
+    systemctl poweroff --no-block || true
+    exit "$status"
+}
+trap finish EXIT
+printf '\nINTA_SMOKE_START\n'
+for attempt in $(seq 1 90); do
+    if pgrep -u inta -x xfce4-session >/dev/null 2>&1 &&
+       pgrep -u inta -f '/usr/local/bin/inta-rescue' >/dev/null 2>&1; then
+        runuser -u inta -- env HOME=/home/inta /usr/local/bin/inta-self-test
         exit 0
     fi
     sleep 2
