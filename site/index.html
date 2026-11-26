@@ -120,7 +120,7 @@
   const search = document.getElementById('global-search');
   const searchResults = document.getElementById('search-results');
   const $ = selector => document.querySelector(selector);
-  const $ = selector => Array.from(document.querySelectorAll(selector));
+  const $$ = selector => Array.from(document.querySelectorAll(selector));
   const repo = 'https://github.com/Herbertofury/INTA';
   const reviewDate = meta.reviewedAt || meta.reviewed_at || '2026-11-26';
   const savedKey = 'inta:favorite-tools:v1';
@@ -448,7 +448,7 @@
     const route = parseRoute();
     const names = { home: 'Overview', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', job: 'Job playbooks', tool: 'Tool library' };
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
-    $('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
+    $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
     $('#breadcrumb').innerHTML = `Workspace <span>/</span> <strong>${esc(names[route.name] || 'Overview')}</strong>`;
     if (route.name === 'home') app.innerHTML = home();
     else if (route.name === 'tools') app.innerHTML = library(false, route.params);
@@ -470,7 +470,7 @@
     $('#tool-count').textContent = tools.length;
     $('#job-count').textContent = jobs.length;
     $('#saved-count').textContent = favorites.size;
-    $('[data-save]').forEach(button => {
+    $$('[data-save]').forEach(button => {
       const saved = favorites.has(button.dataset.save);
       const tool = toolMap.get(button.dataset.save);
       button.setAttribute('aria-pressed', saved);
@@ -664,7 +664,7 @@
     if (event.key === savedKey) { const next = load(savedKey, []); favorites = new Set(Array.isArray(next) ? next.filter(id => toolMap.has(id)) : []); updateCounts(); if (parseRoute().name === 'saved') render(); }
     if (event.key === checksKey) { const next = load(checksKey, {}); if (next && typeof next === 'object' && !Array.isArray(next)) checklists = next; if (parseRoute().name === 'job') render(); }
   });
-  $('[data-icon]').forEach(element => { element.innerHTML = icon(element.dataset.icon); });
+  $$('[data-icon]').forEach(element => { element.innerHTML = icon(element.dataset.icon); });
   setTheme(); render();
 })();
 </script>
