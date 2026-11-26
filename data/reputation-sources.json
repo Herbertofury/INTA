@@ -1,0 +1,563 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "purpose": "Source registry for INTA tool reputation, technical validation, security intelligence, and technician-community discovery.",
+  "policy": {
+    "noSyntheticScores": true,
+    "preserveSourceIdentity": true,
+    "independentEvidenceRequiredForConsensus": true,
+    "userReviewsAreNotExpertReviews": true,
+    "starsAreNotQualityScores": true,
+    "staleEvidenceExpires": true
+  },
+  "sourceClasses": [
+    {
+      "id": "official-project",
+      "label": "Official project or vendor",
+      "weight": 1,
+      "role": "Identity, capabilities, supported platforms, releases, licensing, documentation and security advisories."
+    },
+    {
+      "id": "standards-government",
+      "label": "Standards and government",
+      "weight": 1,
+      "role": "Security advisories, control frameworks, vulnerability records and authoritative technical guidance."
+    },
+    {
+      "id": "independent-lab",
+      "label": "Independent testing laboratory",
+      "weight": 0.95,
+      "role": "Reproducible product testing and comparative results with methodology disclosed."
+    },
+    {
+      "id": "professional-review",
+      "label": "Professional review platform",
+      "weight": 0.8,
+      "role": "Verified business-user reviews and deployment experience; preserve vendor/product edition."
+    },
+    {
+      "id": "technical-publication",
+      "label": "Technical publication",
+      "weight": 0.8,
+      "role": "Hands-on testing, technical analysis and editorial recommendations."
+    },
+    {
+      "id": "practitioner-community",
+      "label": "Practitioner community",
+      "weight": 0.65,
+      "role": "Field experience, recurring issues, workflows and peer recommendations."
+    },
+    {
+      "id": "general-community",
+      "label": "General community",
+      "weight": 0.4,
+      "role": "Discovery and sentiment only; require corroboration before strong claims."
+    }
+  ],
+  "providers": [
+    {
+      "id": "github",
+      "name": "GitHub",
+      "kind": "code-host",
+      "url": "https://github.com/",
+      "metrics": [
+        "stars",
+        "forks",
+        "watchers",
+        "contributors",
+        "commits",
+        "releases",
+        "open_issues"
+      ],
+      "notes": "Use canonical repository identity; stars are popularity, not quality. Record checkedAt and repository URL."
+    },
+    {
+      "id": "gitlab",
+      "name": "GitLab",
+      "kind": "code-host",
+      "url": "https://gitlab.com/",
+      "metrics": [
+        "stars",
+        "forks",
+        "contributors",
+        "commits",
+        "releases"
+      ],
+      "notes": "Use official project namespace and documented API limits."
+    },
+    {
+      "id": "codeberg",
+      "name": "Codeberg",
+      "kind": "code-host",
+      "url": "https://codeberg.org/",
+      "metrics": [
+        "stars",
+        "forks",
+        "activity"
+      ],
+      "notes": "Forgejo-based projects; verify project identity and API availability."
+    },
+    {
+      "id": "sourceforge",
+      "name": "SourceForge",
+      "kind": "software-directory",
+      "url": "https://sourceforge.net/",
+      "metrics": [
+        "reviews",
+        "downloads",
+        "project_activity"
+      ],
+      "notes": "Downloads are not unique users or endorsements; retain review count and date."
+    },
+    {
+      "id": "modrinth",
+      "name": "Modrinth",
+      "kind": "software-directory",
+      "url": "https://modrinth.com/",
+      "metrics": [
+        "followers",
+        "downloads",
+        "versions"
+      ],
+      "notes": "Relevant for specialist game/creator tooling; do not treat downloads as satisfaction."
+    },
+    {
+      "id": "capterra",
+      "name": "Capterra",
+      "kind": "professional-review",
+      "url": "https://www.capterra.com/",
+      "metrics": [
+        "rating",
+        "review_count"
+      ],
+      "notes": "Capture product edition, review count, distribution and collection date."
+    },
+    {
+      "id": "g2",
+      "name": "G2",
+      "kind": "professional-review",
+      "url": "https://www.g2.com/",
+      "metrics": [
+        "rating",
+        "review_count"
+      ],
+      "notes": "Keep category and product edition; do not compare unlike categories blindly."
+    },
+    {
+      "id": "trustradius",
+      "name": "TrustRadius",
+      "kind": "professional-review",
+      "url": "https://www.trustradius.com/",
+      "metrics": [
+        "tr_score",
+        "rating",
+        "review_count"
+      ],
+      "notes": "Use published methodology and review count where available."
+    },
+    {
+      "id": "gartner-peer-insights",
+      "name": "Gartner Peer Insights",
+      "kind": "professional-review",
+      "url": "https://www.gartner.com/reviews/home",
+      "metrics": [
+        "rating",
+        "review_count"
+      ],
+      "notes": "Enterprise products; access and review availability vary."
+    },
+    {
+      "id": "sourceforge-reviews",
+      "name": "SourceForge Reviews",
+      "kind": "professional-review",
+      "url": "https://sourceforge.net/software/",
+      "metrics": [
+        "rating",
+        "review_count"
+      ],
+      "notes": "Do not confuse project download statistics with user ratings."
+    },
+    {
+      "id": "alternativeto",
+      "name": "AlternativeTo",
+      "kind": "software-directory",
+      "url": "https://alternativeto.net/",
+      "metrics": [
+        "likes",
+        "alternatives"
+      ],
+      "notes": "Useful for discovery and community preference; not a verified expert rating."
+    },
+    {
+      "id": "reddit",
+      "name": "Reddit",
+      "kind": "practitioner-community",
+      "url": "https://www.reddit.com/",
+      "communities": [
+        "r/sysadmin",
+        "r/msp",
+        "r/techsupport",
+        "r/datarecovery",
+        "r/cybersecurity",
+        "r/netsec",
+        "r/homelab",
+        "r/Windows",
+        "r/WindowsHelp",
+        "r/pcmasterrace"
+      ],
+      "metrics": [
+        "distinct_recommenders",
+        "recommendation_posts",
+        "comment_sentiment"
+      ],
+      "notes": "Count distinct authors and independent threads; deduplicate crossposts, brigading and repeated promotion."
+    },
+    {
+      "id": "spiceworks",
+      "name": "Spiceworks Community",
+      "kind": "practitioner-community",
+      "url": "https://community.spiceworks.com/",
+      "metrics": [
+        "distinct_recommenders",
+        "recommendation_threads"
+      ],
+      "notes": "Prioritize practitioner use cases, dates and role context."
+    },
+    {
+      "id": "serverfault",
+      "name": "Server Fault",
+      "kind": "practitioner-community",
+      "url": "https://serverfault.com/",
+      "metrics": [
+        "answers",
+        "votes",
+        "accepted_answers"
+      ],
+      "notes": "Technical answers are evidence for specific tasks, not blanket product endorsements."
+    },
+    {
+      "id": "superuser",
+      "name": "Super User",
+      "kind": "practitioner-community",
+      "url": "https://superuser.com/",
+      "metrics": [
+        "answers",
+        "votes",
+        "accepted_answers"
+      ],
+      "notes": "Use for desktop administration and troubleshooting evidence."
+    },
+    {
+      "id": "stack-overflow",
+      "name": "Stack Overflow",
+      "kind": "practitioner-community",
+      "url": "https://stackoverflow.com/",
+      "metrics": [
+        "answers",
+        "votes",
+        "accepted_answers"
+      ],
+      "notes": "Use for implementation support and compatibility issues, not product popularity alone."
+    },
+    {
+      "id": "hacker-news",
+      "name": "Hacker News",
+      "kind": "general-community",
+      "url": "https://news.ycombinator.com/",
+      "metrics": [
+        "distinct_threads",
+        "points",
+        "comments"
+      ],
+      "notes": "Discovery and discussion signal; score is not a review rating."
+    },
+    {
+      "id": "lobsters",
+      "name": "Lobsters",
+      "kind": "general-community",
+      "url": "https://lobste.rs/",
+      "metrics": [
+        "stories",
+        "votes",
+        "comments"
+      ],
+      "notes": "Technical community discovery; preserve story context."
+    },
+    {
+      "id": "bleepingcomputer",
+      "name": "BleepingComputer",
+      "kind": "technical-publication",
+      "url": "https://www.bleepingcomputer.com/",
+      "metrics": [
+        "editorial_reviews",
+        "technical_articles"
+      ],
+      "notes": "High-value malware, incident response and Windows security reporting; distinguish news from hands-on review."
+    },
+    {
+      "id": "ars-technica",
+      "name": "Ars Technica",
+      "kind": "technical-publication",
+      "url": "https://arstechnica.com/",
+      "metrics": [
+        "editorial_reviews",
+        "technical_articles"
+      ],
+      "notes": "Use technical reviews and analysis with article dates."
+    },
+    {
+      "id": "theregister",
+      "name": "The Register",
+      "kind": "technical-publication",
+      "url": "https://www.theregister.com/",
+      "metrics": [
+        "editorial_reviews",
+        "technical_articles"
+      ],
+      "notes": "Useful industry reporting; separate news coverage from product testing."
+    },
+    {
+      "id": "servethehome",
+      "name": "ServeTheHome",
+      "kind": "technical-publication",
+      "url": "https://www.servethehome.com/",
+      "metrics": [
+        "hands_on_reviews",
+        "benchmarks"
+      ],
+      "notes": "Hardware, networking, storage and infrastructure testing."
+    },
+    {
+      "id": "level1techs",
+      "name": "Level1Techs",
+      "kind": "technical-publication",
+      "url": "https://www.level1techs.com/",
+      "metrics": [
+        "hands_on_reviews",
+        "community_discussions"
+      ],
+      "notes": "Hardware, workstation, networking and storage expertise; classify editorial vs forum evidence."
+    },
+    {
+      "id": "tomshardware",
+      "name": "Tom's Hardware",
+      "kind": "technical-publication",
+      "url": "https://www.tomshardware.com/",
+      "metrics": [
+        "reviews",
+        "benchmarks"
+      ],
+      "notes": "Hardware testing; capture exact model, test platform and methodology."
+    },
+    {
+      "id": "pcmag",
+      "name": "PCMag",
+      "kind": "technical-publication",
+      "url": "https://www.pcmag.com/",
+      "metrics": [
+        "editor_ratings",
+        "reviews"
+      ],
+      "notes": "Consumer and business software reviews; record test date and edition."
+    },
+    {
+      "id": "av-comparatives",
+      "name": "AV-Comparatives",
+      "kind": "independent-lab",
+      "url": "https://www.av-comparatives.org/",
+      "metrics": [
+        "test_results",
+        "certifications"
+      ],
+      "notes": "Use exact test, product version, date and methodology; do not generalize one test to all protection."
+    },
+    {
+      "id": "av-test",
+      "name": "AV-TEST",
+      "kind": "independent-lab",
+      "url": "https://www.av-test.org/",
+      "metrics": [
+        "protection_score",
+        "performance_score",
+        "usability_score"
+      ],
+      "notes": "Preserve month, platform, product version and test category."
+    },
+    {
+      "id": "mitre-attack",
+      "name": "MITRE ATT&CK",
+      "kind": "standards-government",
+      "url": "https://attack.mitre.org/",
+      "metrics": [
+        "technique_coverage"
+      ],
+      "notes": "Technique mapping is not a vendor score or proof of detection effectiveness."
+    },
+    {
+      "id": "nist-nvd",
+      "name": "NIST National Vulnerability Database",
+      "kind": "standards-government",
+      "url": "https://nvd.nist.gov/",
+      "metrics": [
+        "cve_records",
+        "cvss",
+        "cpe"
+      ],
+      "notes": "Match exact product and affected version; CVSS is severity, not product quality."
+    },
+    {
+      "id": "cisa-kev",
+      "name": "CISA Known Exploited Vulnerabilities",
+      "kind": "standards-government",
+      "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "metrics": [
+        "kev_matches"
+      ],
+      "notes": "A matching KEV entry is a risk signal requiring version and remediation context."
+    },
+    {
+      "id": "cisa",
+      "name": "CISA",
+      "kind": "standards-government",
+      "url": "https://www.cisa.gov/",
+      "metrics": [
+        "advisories",
+        "alerts",
+        "guidance"
+      ],
+      "notes": "Authoritative defensive guidance and advisories."
+    },
+    {
+      "id": "microsoft-learn",
+      "name": "Microsoft Learn",
+      "kind": "official-project",
+      "url": "https://learn.microsoft.com/",
+      "metrics": [
+        "official_docs",
+        "support_lifecycle"
+      ],
+      "notes": "Primary source for Windows, Defender, Microsoft 365 and Azure behavior."
+    },
+    {
+      "id": "redhat-docs",
+      "name": "Red Hat Documentation",
+      "kind": "official-project",
+      "url": "https://docs.redhat.com/",
+      "metrics": [
+        "official_docs",
+        "lifecycle"
+      ],
+      "notes": "Primary source for RHEL and supported infrastructure workflows."
+    },
+    {
+      "id": "debian-docs",
+      "name": "Debian Documentation",
+      "kind": "official-project",
+      "url": "https://www.debian.org/doc/",
+      "metrics": [
+        "official_docs",
+        "security_advisories"
+      ],
+      "notes": "Primary source for Debian packages and rescue environment behavior."
+    },
+    {
+      "id": "wireshark",
+      "name": "Wireshark Documentation",
+      "kind": "official-project",
+      "url": "https://www.wireshark.org/docs/",
+      "metrics": [
+        "official_docs",
+        "release_notes"
+      ],
+      "notes": "Primary protocol-analysis documentation."
+    },
+    {
+      "id": "owasp",
+      "name": "OWASP",
+      "kind": "standards-government",
+      "url": "https://owasp.org/",
+      "metrics": [
+        "projects",
+        "standards"
+      ],
+      "notes": "Security testing and application security references."
+    },
+    {
+      "id": "sans",
+      "name": "SANS",
+      "kind": "technical-publication",
+      "url": "https://www.sans.org/",
+      "metrics": [
+        "research",
+        "training",
+        "whitepapers"
+      ],
+      "notes": "Professional security research and practitioner guidance; distinguish research from vendor marketing."
+    },
+    {
+      "id": "virustotal",
+      "name": "VirusTotal",
+      "kind": "standards-government",
+      "url": "https://www.virustotal.com/",
+      "metrics": [
+        "detection_consensus",
+        "community_comments"
+      ],
+      "notes": "File/URL reputation is time- and sample-dependent; never treat as an absolute verdict."
+    },
+    {
+      "id": "urlhaus",
+      "name": "URLhaus",
+      "kind": "standards-government",
+      "url": "https://urlhaus.abuse.ch/",
+      "metrics": [
+        "malicious_url_records"
+      ],
+      "notes": "Threat-intelligence feed, not a software review source."
+    },
+    {
+      "id": "malwarebazaar",
+      "name": "MalwareBazaar",
+      "kind": "standards-government",
+      "url": "https://bazaar.abuse.ch/",
+      "metrics": [
+        "sample_records"
+      ],
+      "notes": "Malware research corpus; access and handling must follow safe lab procedures."
+    },
+    {
+      "id": "sigmahq",
+      "name": "SigmaHQ",
+      "kind": "official-project",
+      "url": "https://github.com/SigmaHQ/sigma",
+      "metrics": [
+        "rules",
+        "contributors",
+        "releases"
+      ],
+      "notes": "Detection content provenance and rule quality require independent review."
+    },
+    {
+      "id": "yara",
+      "name": "YARA",
+      "kind": "official-project",
+      "url": "https://github.com/VirusTotal/yara",
+      "metrics": [
+        "releases",
+        "contributors"
+      ],
+      "notes": "Rule engine project; rulesets are separate products with separate licenses and provenance."
+    },
+    {
+      "id": "nexus",
+      "name": "Nexus Mods",
+      "kind": "software-directory",
+      "url": "https://www.nexusmods.com/",
+      "metrics": [
+        "endorsements",
+        "downloads"
+      ],
+      "notes": "Only relevant where INTA catalogs modding/creator tools; do not transfer endorsement counts into IT-tool ratings."
+    }
+  ]
+}
