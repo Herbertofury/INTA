@@ -7,10 +7,17 @@ trap 'cat "$log"; rm -f "$log"' EXIT
 args=()
 case "$mode" in
     bios) ;;
-    uefi) args=(-drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE_4M.fd) ;;
+    uefi)
+        firmware=/usr/share/OVMF
+        vars=$(mktemp)
+        trap 'cat "$log"; rm -f "$log" "$vars"' EXIT
+        cp "$firmware/OVMF_VARS_4M.fd" "$vars"
+        args=(-drive "if=pflash,unit=0,format=raw,readonly=on,file=$firmware/OVMF_CODE_4M.fd"
+              -drive "if=pflash,unit=1,format=raw,file=$vars")
+        ;;
     *) exit 2 ;;
 esac
 timeout 380 qemu-system-x86_64 -machine q35,accel=tcg -cpu max -smp 2 -m 3072 \
     -nic none -display none -monitor none -serial "file:$log" -boot d \
     -smbios type=1,serial=INTA_CI_SMOKE -cdrom "$iso" "${args[@]}"
-grep -Fxq INTA_SMOKE_PASS "$log"
+tr -d '\r' < "$log" | grep -Fx INTA_SMOKE_PASS

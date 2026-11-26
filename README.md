@@ -8,7 +8,7 @@ A live x86-64 recovery desktop for INTA Computer Services. Boot from USB to diag
 
 1. Start **INTA Media Creator** with `python media/inta-media.py` on Windows or `python3 media/inta-media.py` on Linux. Use Python 3.11 or later with Tk installed.
 2. Choose **Download or update INTA ISO**. The app verifies the published SHA-256 checksum before replacing the local image.
-3. For **Ventoy**, use the Media Creator link to install Ventoy on the USB once. Select **Install or update ISO on Ventoy USB** and choose the mounted data volume. The verified ISO replaces the existing INTA file and leaves other Ventoy images in place.
+3. For **Ventoy**, open the upstream Ventoy utility from the Media Creator to install Ventoy on the USB once. Select **Install or update ISO on Ventoy USB** and choose the mounted data volume. The verified ISO replaces the existing INTA file and leaves other Ventoy images in place.
 4. For **Rufus**, open the official Windows utility from the Media Creator, choose the verified ISO and select your USB. Rufus writes the disk and erases its current contents.
 
 The Actions workflow is configured to rebuild every Tuesday and on demand. Each build resolves updated packages through the Debian archive and resolves both AI clients through the npm registry. It publishes a new ISO only after the desktop and tools pass BIOS and UEFI VM checks. The Media Creator updates the local ISO or Ventoy copy on demand. The package list lives in the source tree, while the installed npm versions and integrity data live in `/opt/inta-ai/package-lock.json` inside each image.

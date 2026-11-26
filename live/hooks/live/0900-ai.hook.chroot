@@ -7,3 +7,10 @@ cd /opt/inta-ai
 npm init --yes >/dev/null
 npm install --save-exact --ignore-scripts --no-audit --no-fund \
     @openai/codex @anthropic-ai/claude-code
+# Claude's official package needs its installer to link the platform binary.
+claude_installer=node_modules/@anthropic-ai/claude-code/install.cjs
+if [ -f "$claude_installer" ]; then
+    node "$claude_installer"
+fi
+node_modules/.bin/codex --version
+node_modules/.bin/claude --version

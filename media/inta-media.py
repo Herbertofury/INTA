@@ -6,6 +6,7 @@ import os
 import queue
 import re
 import shutil
+import subprocess
 import tempfile
 import threading
 import tkinter as tk
@@ -148,6 +149,43 @@ def main():
         if target and messagebox.askokcancel("Copy to Ventoy", f"Install or replace {ISO} on {target}?"):
             run("Verifying and copying ISO", copy_to_ventoy, Path(source), Path(target))
 
+    def official_tool(tool):
+        if tool == "Ventoy":
+            names = ("Ventoy2Disk.exe",) if os.name == "nt" else ("VentoyGUI.x86_64",)
+            url = "https://www.ventoy.net/en/download.html"
+        else:
+            if os.name != "nt":
+                webbrowser.open("https://rufus.ie/en/")
+                return
+            names = ()
+            url = "https://rufus.ie/en/"
+        choice = messagebox.askyesnocancel(
+            f"Open {tool}", f"Yes: choose a downloaded official {tool} executable.\n"
+            f"No: open the official {tool} download page."
+        )
+        if choice is None:
+            return
+        if not choice:
+            webbrowser.open(url)
+            return
+        selected = filedialog.askopenfilename(title=f"Select your official {tool} executable")
+        if not selected:
+            return
+        binary = Path(selected)
+        was_expected = binary.name in names if names else bool(
+            re.fullmatch(r"rufus(?:-[0-9.]+p?)?\.exe", binary.name, re.IGNORECASE)
+        )
+        if not was_expected:
+            messagebox.showerror(tool, f"Choose an official {tool} executable.")
+            return
+        try:
+            if os.name == "nt":
+                os.startfile(str(binary), cwd=str(binary.parent))
+            else:
+                subprocess.Popen([str(binary)], cwd=binary.parent, start_new_session=True)
+        except OSError as error:
+            messagebox.showerror(tool, str(error))
+
     def close():
         if busy:
             messagebox.showinfo("Transfer in progress", "Wait for the verification and transfer to finish.")
@@ -157,8 +195,8 @@ def main():
     actions = [
         ("Download or update INTA ISO", download),
         ("Install or update ISO on Ventoy USB", ventoy),
-        ("Get Ventoy USB setup utility", lambda: webbrowser.open("https://www.ventoy.net/en/download.html")),
-        ("Get Rufus for Windows", lambda: webbrowser.open("https://rufus.ie/en/")),
+        ("Open or download Ventoy", lambda: official_tool("Ventoy")),
+        ("Open or download Rufus", lambda: official_tool("Rufus")),
     ]
     for label, callback in actions:
         button = ttk.Button(panel, text=label, command=callback)
