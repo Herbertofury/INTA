@@ -108,6 +108,17 @@ The ongoing **Grow the INTA Wiki** maintenance task runs on weekday mornings, ar
 
 <a id="-contribute-to-the-bench"></a>
 
+
+## Reputation, recommendations & source intelligence
+
+Every catalog entry has a planned, auditable reputation profile: GitHub stars and maintenance signals where a verified repository exists; native ratings and review counts from professional review platforms; independent lab results; and recommendations from technical publications and practitioner communities. These remain separate evidence streams rather than an opaque blended score.
+
+- [Tool reputation specification](docs/tool-reputation.md) — data model, evidence rules, ranking, deduplication, freshness, safeguards and acceptance criteria.
+- [Reputation source registry](data/reputation-sources.json) — curated code forges, review platforms, technical publications, IT communities, independent labs, standards bodies and official documentation hubs.
+
+The registry is a discovery and implementation baseline, not a claim that every provider is already integrated or every score has been collected. Missing, stale, unavailable and not-applicable values must remain explicit. Popularity is not technical quality, and a recommendation is only as strong as its source and context.
+
+
 ## Contribute
 
 ```sh
