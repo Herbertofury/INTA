@@ -1,21 +1,26 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# 🔄 [Fix a failing Windows update](https://github.com/Herbertofury/INTA/wiki/Job-windows-update)
+<a id="-fix-a-failing-windows-update"></a>
+
+# [Fix a failing Windows update](https://github.com/Herbertofury/INTA/wiki/Job-windows-update)
 
 Diagnose the update code, servicing state, and available space before broad reset scripts.
 
-| Work area | Experience | Plan your time | Workflow |
-| --- | --- | --- | --- |
-| [Windows](https://www.microsoft.com/windows) & performance | Intermediate | 20–60 min plus installation | 6 steps + acceptance |
+**[Windows](https://www.microsoft.com/windows) & performance** · Intermediate · 20–60 min plus installation · 6 steps
 
-**[▶ Open the interactive checklist](https://herbertofury.github.io/INTA/#job/windows-update)** · [Decision route](#decision-route) · [Toolkit](#toolkit) · [Walkthrough](#walkthrough) · [Acceptance](#acceptance) · [Sources](#sources)
+[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/windows-update)
 
-> [!TIP]
-> **Your starting move:** Write down the exact KB or feature update, error code, [Windows](https://www.microsoft.com/windows) edition/build, and whether the device is centrally managed.
+> [!NOTE]
+> **Start here.** Write down the exact KB or feature update, error code, [Windows](https://www.microsoft.com/windows) edition/build, and whether the device is centrally managed.
 
 <a id="decision-route"></a>
 
-## 🧭 Choose the right branch
+<a id="-choose-the-right-branch"></a>
+
+## 🧭 Choose a route
+
+<details>
+<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -30,13 +35,15 @@ flowchart TD
     H -->|"Driver or prerequisite"| J["Correct that dependency"]:::action
     I --> G
     J --> G
-    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa
-    classDef action fill:#172033,stroke:#64748b,color:#f8fafc
-    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2
-    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5
+    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46
+    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445
+    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137
+    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449
 ```
 
-**Diagram routes:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Repair Windows component or system-file corruption](windows-repair.md) · [Diagnose crashes, blue screens, and overheating](hardware-bsod.md) · [Run a useful workstation maintenance visit](preventive-maintenance.md)
+**Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Repair Windows component or system-file corruption](windows-repair.md) · [Diagnose crashes, blue screens, and overheating](hardware-bsod.md) · [Run a useful workstation maintenance visit](preventive-maintenance.md)
+
+</details>
 
 | Checkpoint | What to carry forward |
 | --- | --- |
@@ -46,9 +53,11 @@ flowchart TD
 
 <a id="toolkit"></a>
 
-## 🧰 Build the right toolkit
+<a id="-build-the-right-toolkit"></a>
 
-Choose the tools that answer the case’s next question. Opening a tool is a separate decision from changing the customer’s system.
+## Recommended tools
+
+Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
 | Tool / official download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
@@ -56,7 +65,9 @@ Choose the tools that answer the case’s next question. Opening a tool is a sep
 
 <a id="walkthrough"></a>
 
-## 🪜 Work the case
+<a id="-work-the-case"></a>
+
+## Procedure
 
 Work in order, record the result of each step, and change route when the evidence calls for it.
 
@@ -98,7 +109,9 @@ Work in order, record the result of each step, and change route when the evidenc
 
 <a id="acceptance"></a>
 
-## ✅ Prove the result
+<a id="-prove-the-result"></a>
+
+## Verification
 
 - [ ] The target update is installed or the remaining blocker is explicitly documented.
 - [ ] Update history and the OS build agree.
@@ -109,7 +122,9 @@ Work in order, record the result of each step, and change route when the evidenc
 > - The device is in an organization-managed change freeze.
 > - Repeated rollback or storage symptoms point to a deeper problem.
 
-## 🔀 Continue with the evidence
+<a id="-continue-with-the-evidence"></a>
+
+## Related playbooks
 
 | Next playbook | What it resolves |
 | --- | --- |
@@ -117,14 +132,14 @@ Work in order, record the result of each step, and change route when the evidenc
 | [Diagnose crashes, blue screens, and overheating](hardware-bsod.md) | Correlate crash evidence with memory, storage, temperature, power, and driver changes. |
 | [Run a useful workstation maintenance visit](preventive-maintenance.md) | Check security, updates, hardware, backups, and usability without unnecessary cleanup rituals. |
 
-Found a reusable improvement? [Contribute the correction](https://github.com/Herbertofury/INTA/wiki/Contribute) and include the test that proved it.
-
 <a id="sources"></a>
 
-## 🔎 Source trail
+<a id="-source-trail"></a>
+
+## Official sources
 
 <details>
-<summary>Official references and editorial review</summary>
+<summary>References and review notes</summary>
 
 - [Microsoft: Windows Update troubleshooter](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter)
 - [Microsoft: troubleshooting Windows updates](https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows)
@@ -135,6 +150,6 @@ Reviewed **2026-11-26**. Timing is a planning range. A successful command is evi
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)
 
 [← All playbooks](README.md) · [Live Wiki](https://github.com/Herbertofury/INTA/wiki) · [Contribution guide](https://github.com/Herbertofury/INTA/blob/main/CONTRIBUTING.md)

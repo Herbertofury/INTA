@@ -8,6 +8,7 @@ import importlib.util
 import html
 import json
 import re
+import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
 from urllib.parse import urlparse
@@ -84,8 +85,12 @@ def validate(tools: list[dict], jobs: list[dict]) -> None:
         missing = set(job.get("related", [])) - job_ids
         if missing:
             raise ValueError(f"{job['id']}: unknown related jobs {sorted(missing)}")
-        for step in job["steps"]:
+        step_ids = []
+        for number, step in enumerate(job["steps"], 1):
             required(step, ["title", "detail"])
+            step_ids.append(step_anchor(step, number))
+        if len(set(step_ids)) != len(step_ids):
+            raise ValueError(f"{job['id']}: duplicate step anchors")
         for source in job["sources"]:
             required(source, ["title", "url"])
             if urlparse(source["url"]).scheme != "https":
@@ -121,14 +126,14 @@ def validate_layout(layout: dict, jobs: list[dict]) -> None:
 
 
 def page_nav() -> str:
-    return (f"[🏠 Home]({WIKI}) · [🧭 Decision desk]({WIKI}/Decision-Desk) · "
-            f"[📚 Playbooks]({WIKI}/Playbooks) · [🧰 Tool directory]({WIKI}/Tool-Directory) · "
-            f"[✨ Open interactive hub]({HUB})")
+    return (f"[INTA]({WIKI}) / [Decision desk]({WIKI}/Decision-Desk) · "
+            f"[Playbooks]({WIKI}/Playbooks) · [Tools]({WIKI}/Tool-Directory) · "
+            f"[Methods]({WIKI}/Methods) · [Open hub]({HUB})")
 
 
 def page_footer(reviewed: str, wiki: bool = True) -> list[str]:
-    lines = ["", "---", "", f"**Source review: {reviewed}.** Guidance review and tool release versions are separate. "
-             f"[Report a correction]({REPO}/issues/new/choose) · [How we maintain this guide]({WIKI}/Knowledge-Standards)", ""]
+    lines = ["", "---", "", f"Editorial review: **{reviewed}** · "
+             f"[Review standard]({WIKI}/Knowledge-Standards) · [Suggest a correction]({REPO}/issues/new/choose)", ""]
     if not wiki:
         lines += [f"[← All playbooks](README.md) · [Live Wiki]({WIKI}) · [Contribution guide]({REPO}/blob/main/CONTRIBUTING.md)", ""]
     return lines
@@ -140,6 +145,27 @@ def diagram_block(source: str) -> list[str]:
 
 def anchor(identity: str) -> str:
     return f'<a id="{identity}"></a>'
+
+
+def step_anchor(step: dict, number: int) -> str:
+    identity = step.get("anchor", f"step-{number:02d}")
+    if not isinstance(identity, str) or not re.fullmatch(r"step-[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+        raise ValueError(f"Invalid step anchor: {identity!r}")
+    return identity
+
+
+def legacy_anchors(title: str) -> list[str]:
+    """Retain prior heading destinations when presentation wording changes."""
+    title = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", title).lower()
+    value = "".join(c for c in title if unicodedata.category(c)[0] in "LNM" or c in "_ -").replace(" ", "-")
+    # Hosts differ in whether emoji variation selectors survive slug creation.
+    alternatives = [value, value.replace("\ufe0f", "").replace("\ufe0e", "")]
+    return [anchor(identity) for identity in dict.fromkeys(alternatives) if identity]
+
+
+def heading(level: int, title: str, previous: str | None = None) -> list[str]:
+    aliases = legacy_anchors(previous) + [""] if previous and previous != title else []
+    return [*aliases, "#" * level + " " + title, ""]
 
 
 def command_reference(step: dict, by_id: dict) -> str:
@@ -176,22 +202,22 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
     config = layout["jobs"][job["id"]]
     jobs_by_id = jobs_by_id or {j["id"]: j for j in records(ROOT / "data/jobs.json", "jobs")}
     destination = lambda identity: f"{WIKI}/Job-{identity}" if wiki else f"{identity}.md"
-    lines = [page_nav(), "", f"# {config['icon']} {job['title']}", "", job["summary"], "",
-             "| Work area | Experience | Plan your time | Workflow |", "| --- | --- | --- | --- |",
-             f"| {cell(job['category'])} | {cell(job['difficulty'])} | {cell(job['estimatedTime'])} | {len(job['steps'])} steps + acceptance |", "",
-             f"**[▶ Open the interactive checklist]({HUB}#job/{job['id']})** · [Decision route](#decision-route) · "
-             "[Toolkit](#toolkit) · [Walkthrough](#walkthrough) · [Acceptance](#acceptance) · [Sources](#sources)", "",
-             "> [!TIP]", f"> **Your starting move:** {job['startHere']}", "",
-             anchor("decision-route"), "", "## 🧭 Choose the right branch", ""]
+    lines = [page_nav(), "", *heading(1, job["title"], f"{config['icon']} {job['title']}"), job["summary"], "",
+             f"**{cell(job['category'])}** · {cell(job['difficulty'])} · {cell(job['estimatedTime'])} · {len(job['steps'])} steps", "",
+             "[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · "
+             f"[Verification](#acceptance) · [Sources](#sources) · [Interactive checklist]({HUB}#job/{job['id']})", "",
+             "> [!NOTE]", f"> **Start here.** {job['startHere']}", "",
+             anchor("decision-route"), "", *heading(2, "🧭 Choose a route", "🧭 Choose the right branch"),
+             "<details>", "<summary>View the decision map and escalation routes</summary>", ""]
     lines += diagram_block(config["diagram"])
     routes = ["[Continue this workflow](#walkthrough)", "[Acceptance checks](#acceptance)"]
     routes += [f"[{jobs_by_id[identity]['title']}]({destination(identity)})" for identity in job.get("related", [])]
-    lines += ["**Diagram routes:** " + " · ".join(routes), ""]
+    lines += ["**Route links:** " + " · ".join(routes), "", "</details>", ""]
     lines += ["| Checkpoint | What to carry forward |", "| --- | --- |"]
     lines += [f"| **{cell(label)}** | {cell(detail)} |" for label, detail in config["checkpoints"].items()]
-    lines += ["", anchor("toolkit"), "", "## 🧰 Build the right toolkit", ""]
+    lines += ["", anchor("toolkit"), "", *heading(2, "Recommended tools", "🧰 Build the right toolkit")]
     if job["tools"]:
-        lines += ["Choose the tools that answer the case’s next question. Opening a tool is a separate decision from changing the customer’s system.", "",
+        lines += ["Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.", "",
                   "| Tool / official download | Use it for | Platform & access | Documentation |", "| --- | --- | --- | --- |"]
         for tool_id in job["tools"]:
             tool = by_id[tool_id]
@@ -199,25 +225,29 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
                       f"{cell(tool['platforms'])}; {cell(tool['pricing'])} | [Open guide]({tool['docsUrl']}) |"]
     else:
         lines += [f"Use the approved private service record and the [intake and handoff template]({WIKI}/Technician-Handoff). No specialist application is required."]
-    lines += ["", anchor("walkthrough"), "", "## 🪜 Work the case", "",
+    lines += ["", anchor("walkthrough"), "", *heading(2, "Procedure", "🪜 Work the case"),
               "Work in order, record the result of each step, and change route when the evidence calls for it.", ""]
     for number, step in enumerate(job["steps"], 1):
-        lines += [anchor(f"step-{number:02d}"), "", f"### {number:02d} · {step['title']}", "", f"- [ ] {step['detail']}", ""]
+        identity = step_anchor(step, number)
+        old_number = re.fullmatch(r"step-(\d+)", identity)
+        old_title = f"{int(old_number[1]):02d} · {step['title']}" if old_number else None
+        lines += [anchor(identity), "", *heading(3, f"{number:02d} · {step['title']}", old_title),
+                  f"- [ ] {step['detail']}", ""]
         if step.get("command"):
             lines += ["**Command for the environment described above:**", "", "```text", step["command"], "```", ""]
-            lines += [f"**Command legend:** {command_reference(step, by_id)} · [Return to the step context](#step-{number:02d}).", ""]
-    lines += [anchor("acceptance"), "", "## ✅ Prove the result", ""]
+            lines += [f"**Command legend:** {command_reference(step, by_id)} · [Return to the step context](#{identity}).", ""]
+    lines += [anchor("acceptance"), "", *heading(2, "Verification", "✅ Prove the result")]
     lines += [f"- [ ] {item}" for item in job["verify"]]
     lines += ["", "> [!WARNING]", "> **Pause this route and escalate when:**"]
     lines += [f"> - {item}" for item in job["stopIf"]]
-    lines += ["", "## 🔀 Continue with the evidence", ""]
+    lines += ["", *heading(2, "Related playbooks", "🔀 Continue with the evidence")]
     if job.get("related"):
         lines += ["| Next playbook | What it resolves |", "| --- | --- |"]
         for identity in job["related"]:
             other = jobs_by_id[identity]
             lines += [f"| [{other['title']}]({destination(identity)}) | {cell(other['summary'])} |"]
-    lines += ["", f"Found a reusable improvement? [Contribute the correction]({WIKI}/Contribute) and include the test that proved it.", "",
-              anchor("sources"), "", "## 🔎 Source trail", "", "<details>", "<summary>Official references and editorial review</summary>", ""]
+    lines += ["", anchor("sources"), "", *heading(2, "Official sources", "🔎 Source trail"),
+              "<details>", "<summary>References and review notes</summary>", ""]
     lines += [f"- [{source['title']}]({source['url']})" for source in job["sources"]]
     lines += ["", f"Reviewed **{job.get('reviewedAt', reviewed)}**. Timing is a planning range. "
               "A successful command is evidence about that operation; acceptance belongs to the user’s original task.", "", "</details>"]
@@ -226,24 +256,25 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
 
 
 def tier_label(value: str) -> str:
-    return {"core": "🟢 Core", "specialist": "🔬 Specialist", "evaluate": "🧪 Evaluate"}[value]
+    return {"core": "Core", "specialist": "Specialist", "evaluate": "Evaluate"}[value]
 
 
 def category_markdown(category: str, tools: list[dict], layout: dict, jobs: dict, reviewed: str) -> str:
     info = layout["categories"].get(category, {"icon": "🧰", "intro": "Choose a tool for the observed job.", "jobs": [], "question": "What result do you need?"})
     label = CATEGORY_NAMES.get(category, category)
     ordered = sorted(tools, key=lambda t: ({"core": 0, "specialist": 1, "evaluate": 2}[t["tier"]], t["name"].casefold()))
-    lines = [page_nav(), "", f"# {info['icon']} {label}", "", info["intro"], "",
-             f"**{len(tools)} tools** · [All disciplines]({WIKI}/Tool-Directory) · [Selection standards]({WIKI}/Knowledge-Standards)", "",
-             "> [!TIP]", f"> **Choose by the job:** {info['question']}", "", "## 🧭 Start with a workflow", ""]
+    lines = [page_nav(), "", *heading(1, label, f"{info['icon']} {label}"), info["intro"], "",
+             f"**{len(tools)} tools** · [All categories]({WIKI}/Tool-Directory) · [Selection standards]({WIKI}/Knowledge-Standards)", "",
+             f"**Selection question:** {info['question']}", "", *heading(2, "Related playbooks", "🧭 Start with a workflow")]
     lines += [f"- [{jobs[identity]['title']}]({WIKI}/Job-{identity})" for identity in info["jobs"]]
-    lines += ["", "## ⚖️ Compare the options", "", "| Tool | Choose it for | Platforms | Role |", "| --- | --- | --- | --- |"]
+    lines += ["", anchor("compare-options"), "", *heading(2, "Tool comparison", "⚖️ Compare the options"),
+              "| Tool | Choose it for | Platforms | Role |", "| --- | --- | --- | --- |"]
     for tool in ordered:
         lines += [f"| [{tool['name']}](#{tool['id']}) | {cell(tool['bestFor'])} | {cell(tool['platforms'])} | {tier_label(tool['tier'])} |"]
     lines += ["", "Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.", ""]
     for tool in ordered:
-        lines += ["---", "", anchor(tool["id"]), "", f"## {tool['name']}", "", tool["summary"], "",
-                  f"**[{tool['name']}: official download →]({tool['downloadUrl']})** · [Documentation]({tool['docsUrl']}) · [Publisher]({tool['homepage']})", "",
+        lines += [anchor(tool["id"]), "", f"## {tool['name']}", "", tool["summary"], "",
+                  f"[Official download]({tool['downloadUrl']}) · [Documentation]({tool['docsUrl']}) · [Publisher]({tool['homepage']})", "",
                   "| Decision | Detail |", "| --- | --- |",
                   f"| **Choose it for** | {cell(tool['bestFor'])} |",
                   f"| **Where it runs** | {cell(tool['platforms'])} |",
@@ -259,8 +290,7 @@ def category_markdown(category: str, tools: list[dict], layout: dict, jobs: dict
                   "- **Selection provenance:**"]
         provenance = tool["provenance"] if isinstance(tool["provenance"], list) else [tool["provenance"]]
         lines += [f"  - {text}" for text in provenance]
-        lines += ["", "</details>", "", "[↑ Compare the options](#compare-options)", ""]
-    lines = [line.replace("## ⚖️ Compare the options", anchor("compare-options") + "\n\n## ⚖️ Compare the options") for line in lines]
+        lines += ["", "</details>", "", "[Back to comparison](#compare-options)", ""]
     lines += page_footer(reviewed)
     return "\n".join(lines)
 
@@ -268,18 +298,18 @@ def category_markdown(category: str, tools: list[dict], layout: dict, jobs: dict
 def playbook_index(jobs: list[dict], layout: dict, wiki: bool, reviewed: str) -> str:
     by_id = {job["id"]: job for job in jobs}
     destination = lambda identity: f"{WIKI}/Job-{identity}" if wiki else f"{identity}.md"
-    lines = [page_nav(), "", "# 📚 The playbook library", "",
-             "Find the symptom, follow the evidence, and leave a tested result. Every playbook includes a decision route, the right toolkit, a numbered walkthrough, and handoff checks.", "",
-             f"**{len(jobs)} complete playbooks** · [Choose at the decision desk]({WIKI}/Decision-Desk) · [Browse methods]({WIKI}/Methods)", "",
-             " · ".join(f"[{group['icon']} {group['title']}](#{group['id']})" for group in layout["groups"]), ""]
+    lines = [page_nav(), "", *heading(1, "Playbooks", "📚 The playbook library"),
+             "Procedures for common service jobs, with decision diagrams, tool selection, ordered steps, verification and escalation criteria.", "",
+             f"**{len(jobs)} playbooks** · [Identify the right route]({WIKI}/Decision-Desk) · [Troubleshooting methods]({WIKI}/Methods)", "",
+             " · ".join(f"[{group['title']}](#{group['id']})" for group in layout["groups"]), ""]
     for group in layout["groups"]:
-        lines += [anchor(group["id"]), "", f"## {group['icon']} {group['title']}", "", group["summary"], "",
+        lines += [anchor(group["id"]), "", *heading(2, f"{group['icon']} {group['title']}"), group["summary"], "",
                   "| Playbook | Outcome | Experience | Plan your time |", "| --- | --- | --- | --- |"]
         for identity in group["jobs"]:
             job = by_id[identity]
             lines += [f"| [{job['title']}]({destination(identity)}) | {cell(job['summary'])} | {job['difficulty']} | {cell(job['estimatedTime'])} |"]
         lines += [""]
-    lines += ["## 🤝 Make the next case easier", "", f"Use the [contribution template]({WIKI}/Templates) when a case reveals a better sequence, a changed tool, or a missing stop condition. "
+    lines += [*heading(2, "Corrections and additions", "🤝 Make the next case easier"), f"Use the [contribution template]({WIKI}/Templates) when a case reveals a better sequence, a changed tool, or a missing stop condition. "
               f"Keep customer evidence in the private service record and add only the reusable method to the [shared knowledge process]({WIKI}/Continuous-Improvement)."]
     lines += page_footer(reviewed, wiki)
     return "\n".join(lines)
@@ -287,42 +317,49 @@ def playbook_index(jobs: list[dict], layout: dict, wiki: bool, reviewed: str) ->
 
 def home_markdown(tools: list[dict], jobs: list[dict], categories: dict, layout: dict, meta: dict) -> str:
     by_id = {job["id"]: job for job in jobs}
-    lines = [f"![INTA Service Atlas: find the right path, leave a better one]({REPO}/raw/main/docs/assets/wiki-hero.svg)", "",
-             "# 🧭 Your next good fix starts here.", "",
-             "The shared home for INTA Computer Services: a clear route through the job, the tools to do it, and the proof that it worked.", "",
-             f"**[✨ Open the interactive technician hub]({HUB})** · [Find a playbook](Playbooks) · [Browse every tool](Tool-Directory) · [Contribute a better way](Contribute)", "",
-             "| Ready on the bench | Knowledge with a path | Built to keep improving |", "| --- | --- | --- |",
-             f"| **{len(tools)} selected tools** across {len(categories)} disciplines | **{len(jobs)} complete job guides** with decision maps | [Standards](Knowledge-Standards), [templates](Templates), and [manual review](Continuous-Improvement) |", "",
-             "> [!TIP]", "> **New case?** Start at the [decision desk](Decision-Desk). **Already know the job?** Open its [playbook](Playbooks). **Need a download?** Use the [tool directory](Tool-Directory).", "",
-             "## 🚦 First, choose the right route", ""]
+    lines = [f"![INTA Computer Services — technical knowledge base]({REPO}/raw/main/docs/assets/wiki-hero.svg)", "",
+             *heading(1, "INTA knowledge base", "🧭 Your next good fix starts here."),
+             "Service procedures, tool references and troubleshooting methods for the INTA team.", "",
+             f"[Open technician hub]({HUB}) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
+             f"**{len(tools)} tools · {len(jobs)} playbooks · {len(categories)} tool categories**", "",
+             *heading(2, "🧭 Start a job", "🚦 First, choose the right route"),
+             "| Observed situation | First route |", "| --- | --- |",
+             "| Encryption spreading, unusual privileged access, or several affected machines | [Contain a wider compromise](Job-ransomware-response) |",
+             "| Clicking storage, disappearing volumes, or data with no other copy | [Protect and recover the source](Job-failing-drive) |",
+             "| The whole office or a shared service is down | [Restore office dependencies](Job-outage-recovery) |",
+             "| The cause is still unclear | [Scope and triage the problem](Job-intake-triage) |", "",
+             "<details>", "<summary>Decision map: from first observation to verified handoff</summary>", ""]
     lines += diagram_block(layout["homeDiagram"])
-    lines += ["| What you see | Open this route first |", "| --- | --- |",
-              "| Encryption spreading, unusual privileged access, or several affected machines | [🚨 Contain a wider compromise](Job-ransomware-response) |",
-              "| Clicking storage, disappearing volumes, or data with no other copy | [💾 Protect and recover the source](Job-failing-drive) |",
-              "| The whole office or a shared service is down | [🔌 Restore office dependencies](Job-outage-recovery) |",
-              "| The cause is still unclear | [🧭 Scope and triage the problem](Job-intake-triage) |", "",
-              "## 🗂️ Find your work area", "", "| Work area | Pick a playbook |", "| --- | --- |"]
+    lines += ["**Map routes:** [Containment](Job-ransomware-response) · [Data preservation](Job-failing-drive) · "
+              "[Outage recovery](Job-outage-recovery) · [Triage](Job-intake-triage) · "
+              "[Verification and handoff](Job-client-handoff) · [Contributions](Contribute)", "", "</details>", "",
+              *heading(2, "Playbooks by work area", "🗂️ Find your work area"),
+              "| Work area | Playbooks |", "| --- | --- |"]
     for group in layout["groups"]:
         links = " · ".join(f"[{by_id[identity]['title']}]({WIKI}/Job-{identity})" for identity in group["jobs"])
-        lines += [f"| **{group['icon']} {group['title']}** | {links} |"]
-    lines += ["", "## 🧰 Put the right resource within reach", "",
-              "| Resource | What you can do here |", "| --- | --- |",
-              "| [🧰 Tool directory](Tool-Directory) | Compare use cases, platforms, access, official downloads, and documentation. |",
-              "| [🧠 Method library](Methods) | Learn repeatable ways to isolate a cause, protect the source, and prove the result. |",
-              "| [🥾 Rescue media](Rescue-Media) | Choose and maintain the boot environment for the task. |",
-              "| [🤝 Intake and handoff](Technician-Handoff) | Start a clear private service record and leave the next technician a useful checkpoint. |",
-              "| [📏 Knowledge standards](Knowledge-Standards) | Follow the shared rules for clear instructions, evidence, links, and review. |",
-              "| [🛠️ Contribute](Contribute) | Submit a tested correction or a useful new guide with the [template](Templates). |", "",
-              "## 📐 The INTA working standard", "",
-              "| At the start | While you work | Before you close |", "| --- | --- | --- |",
-              "| Establish scope and protect unique data. | Follow one evidence-led test and keep the result. | Repeat the real task and document the handoff. |",
-              "| Choose the appropriate recovery or incident route early. | Preserve a usable rollback and avoid repeating unchanged failures. | Turn a proven improvement into a reusable contribution. |", "",
-              "## 🎒 Take the whole bench guide offline", "",
-              f"Download the [complete repository]({REPO}/archive/refs/heads/main.zip) and open `site/index.html`. The hub keeps search, filters, saved tools, and checklists available without a connection. "
-              "Official downloads and external reference pages need internet access. Keep customer records outside this public guide.", "",
-              "## 🌱 Improve it after the next real case", "",
-              "A changed download, a clearer branch, a newly proven tool, or a missing verification step is a useful contribution. "
-              "[See the review loop](Continuous-Improvement), [use the template](Templates), and [check the publication workflow](Maintaining-the-Hub)."]
+        lines += [f"| **{group['title']}** | {links} |"]
+    lines += ["", *heading(2, "Reference", "🧰 Put the right resource within reach"),
+              "| Resource | Contents |", "| --- | --- |",
+              "| [Tool directory](Tool-Directory) | Use cases, supported platforms, access, official downloads and documentation. |",
+              "| [Method library](Methods) | Reusable diagnostic methods, selection criteria and expected evidence. |",
+              "| [Rescue media](Rescue-Media) | Boot environments, media preparation and readiness checks. |",
+              "| [Intake and handoff](Technician-Handoff) | A private service record template and technician handoff criteria. |",
+              "| [Service evidence](Service-Evidence) | Before-and-after measurements, validation records and useful evidence limits. |",
+              "| [Tool selection](Tool-Selection) | Match a utility to the job, operating environment and commercial-use requirements. |",
+              "| [Knowledge standards](Knowledge-Standards) | Authoring rules for instructions, links, diagrams, evidence and review. |",
+              "| [Interface design](Interface-Design) | Visual standards for the hub, Wiki and documentation. |",
+              "| [Contribution guide](Contribute) | Review and publication workflow, with a [submission template](Templates). |", "",
+              *heading(2, "Service checkpoints", "📐 The INTA working standard"),
+              "| Before work | During work | Before closure |", "| --- | --- | --- |",
+              "| Establish scope and protect unique data. | Record the result of each purposeful test. | Repeat the real task and document the handoff. |",
+              "| Choose recovery or incident response early when indicated. | Preserve rollback and investigate unchanged failures. | Contribute a proven reusable improvement. |", "",
+              *heading(2, "Offline access", "🎒 Take the whole bench guide offline"),
+              f"Download the [complete repository]({REPO}/archive/refs/heads/main.zip) and open `site/index.html`. Search, filters, saved tools and checklists remain available without a connection. "
+              "Official downloads and external references require internet access. Keep customer records outside this public guide.", "",
+              *heading(2, "Contributing", "🌱 Improve it after the next real case"),
+              "Submit a corrected download, improved diagnostic branch, evaluated tool or missing verification step through the "
+              "[contribution guide](Contribute). Follow the [review process](Continuous-Improvement), "
+              "[record the evidence](Templates), and [publish the matching outputs](Maintaining-the-Hub)."]
     lines += page_footer(meta["reviewedAt"])
     return "\n".join(lines)
 
@@ -369,20 +406,21 @@ def build_outputs() -> dict[str, str]:
         outputs[f"docs/runbooks/{job['id']}.md"] = job_markdown(job, by_id, False, layout, jobs_by_id, meta["reviewedAt"])
     outputs["wiki/Playbooks.md"] = playbook_index(jobs, layout, True, meta["reviewedAt"])
     outputs["docs/runbooks/README.md"] = playbook_index(jobs, layout, False, meta["reviewedAt"])
-    tool_index = [page_nav(), "", "# 🧰 The tool directory", "",
-                  "Find the tool that fits the job, compare its role, and go straight to its official source.", "",
-                  f"**{len(tools)} tools · {len(categories)} disciplines · Official publisher links**", "",
-                  "| 🟢 Core | 🔬 Specialist | 🧪 Evaluate |", "| --- | --- | --- |",
+    tool_index = [page_nav(), "", *heading(1, "Tool directory", "🧰 The tool directory"),
+                  "Compare use cases, platform support and access requirements. Each entry links to the official publisher, download and documentation.", "",
+                  f"**{len(tools)} tools · {len(categories)} categories** · [Category list](#disciplines) · [Complete catalog](#complete-catalog)", "",
+                  "| Core | Specialist | Evaluate |", "| --- | --- | --- |",
                   "| Everyday candidates for common work. | Focused tools for a defined advanced task. | Research candidates requiring comparative proof. |", "",
                   "> [!NOTE]", "> A catalog entry describes a selection, not an installed component or a certification. "
                   "Check the [selection standards](Knowledge-Standards) and the current official offering before deployment.", "",
-                  anchor("disciplines"), "", "## 🗂️ Browse by discipline", "", "| Discipline | Start by asking | Tools |", "| --- | --- | --- |"]
+                  anchor("disciplines"), "", *heading(2, "🧰 Categories", "🗂️ Browse by discipline"),
+                  "| Category | Selection question | Tools |", "| --- | --- | --- |"]
     for category, items in sorted(categories.items()):
         info = layout["categories"].get(category, {"icon": "🧰", "question": "What result do you need?"})
         label = CATEGORY_NAMES.get(category, category)
-        tool_index += [f"| [{info['icon']} {label}]({WIKI}/Tools-{slug(category)}) | {cell(info['question'])} | {len(items)} |"]
+        tool_index += [f"| [{label}]({WIKI}/Tools-{slug(category)}) | {cell(info['question'])} | {len(items)} |"]
         outputs[f"wiki/Tools-{slug(category)}.md"] = category_markdown(category, items, layout, jobs_by_id, meta["reviewedAt"])
-    tool_index += ["", anchor("complete-catalog"), "", "## 📇 Every tool, one place", "",
+    tool_index += ["", anchor("complete-catalog"), "", *heading(2, "Complete catalog", "📇 Every tool, one place"),
                   "| Tool | Discipline | Choose it for |", "| --- | --- | --- |"]
     for tool in sorted(tools, key=lambda item: item["name"].casefold()):
         tool_index += [f"| [{tool['name']}]({WIKI}/Tools-{slug(tool['category'])}#{tool['id']}) | "
@@ -390,28 +428,34 @@ def build_outputs() -> dict[str, str]:
     tool_index += page_footer(meta["reviewedAt"])
     outputs["wiki/Tool-Directory.md"] = "\n".join(tool_index)
     outputs["wiki/Home.md"] = home_markdown(tools, jobs, categories, layout, meta)
-    sidebar = ["## 🧭 INTA / Service Atlas", "", f"**[✨ Open interactive hub]({HUB})**", "",
-               "- [🏠 Home](Home)", "- [🚦 Decision desk](Decision-Desk)", "- [📚 All playbooks](Playbooks)", "- [🧰 Tool directory](Tool-Directory)",
-               "- [🧠 Method library](Methods)", "- [🥾 Rescue & USB media](Rescue-Media)", "- [🤝 Intake & handoff](Technician-Handoff)", "",
-               "### 📏 The shared standard", "", "- [Start here](Start-Here)", "- [Knowledge standards](Knowledge-Standards)",
-               "- [Contribute an improvement](Contribute)", "- [Contribution templates](Templates)",
-               "- [Continuous improvement](Continuous-Improvement)", "- [Maintain and publish](Maintaining-the-Hub)", ""]
+    sidebar = [*heading(2, "INTA knowledge base", "🧭 INTA / Service Atlas"), f"[Open technician hub]({HUB})", "",
+               "- [Home](Home)", "- [Decision desk](Decision-Desk)", "- [Playbooks](Playbooks)", "- [Tool directory](Tool-Directory)",
+               "- [Methods](Methods)", "- [Rescue media](Rescue-Media)", "- [Intake and handoff](Technician-Handoff)",
+               "- [Service evidence](Service-Evidence)", "- [Tool selection](Tool-Selection)", "",
+               *legacy_anchors("📏 The shared standard"), "", "<details>", "<summary>Standards and contributions</summary>", "",
+               "- [Start here](Start-Here)", "- [Knowledge standards](Knowledge-Standards)", "- [Interface design](Interface-Design)",
+               "- [Contribute](Contribute)", "- [Contribution templates](Templates)",
+               "- [Continuous improvement](Continuous-Improvement)", "- [Maintain and publish](Maintaining-the-Hub)", "", "</details>", "",
+               "### Playbook groups", ""]
     for group in layout["groups"]:
-        sidebar += [f"### {group['icon']} {group['title']}", ""]
+        sidebar += [*legacy_anchors(f"{group['icon']} {group['title']}"), "", "<details>",
+                    f"<summary>{group.get('navigationLabel', group['title'])}</summary>", ""]
         sidebar += [f"- [{jobs_by_id[identity]['title']}](Job-{identity})" for identity in group["jobs"]]
-        sidebar += [""]
-    sidebar += ["### 🧰 Tool disciplines", ""]
-    sidebar += [f"- [{layout['categories'].get(category, {}).get('icon', '🧰')} {CATEGORY_NAMES.get(category, category)}](Tools-{slug(category)})" for category in sorted(categories)]
-    outputs["wiki/_Sidebar.md"] = "\n".join(sidebar) + "\n"
-    outputs["wiki/_Footer.md"] = (f"**🧭 INTA Computer Services · Service Atlas**\n\n"
-        f"[Hub]({HUB}) · [Decision desk]({WIKI}/Decision-Desk) · [Tools]({WIKI}/Tool-Directory) · "
-        f"[Standards]({WIKI}/Knowledge-Standards) · [Contribute]({WIKI}/Contribute)\n\n"
-        "**Find the right path. Leave a better one.**\n")
+        sidebar += ["", "</details>", ""]
+    sidebar += [*legacy_anchors("🧰 Tool disciplines"), "", "<details>", "<summary>Tool categories</summary>", ""]
+    sidebar += [f"- [{CATEGORY_NAMES.get(category, category)}](Tools-{slug(category)})" for category in sorted(categories)]
+    sidebar += ["", "</details>", ""]
+    outputs["wiki/_Sidebar.md"] = "\n".join(sidebar).rstrip() + "\n"
+    outputs["wiki/_Footer.md"] = (f"**INTA Computer Services**\n\n"
+        f"[Hub]({HUB}) · [Standards]({WIKI}/Knowledge-Standards) · "
+        f"[Interface design]({WIKI}/Interface-Design) · [Contribute]({WIKI}/Contribute)\n")
     mirrors = {"Start-Here": "start-here.md", "Maintaining-the-Hub": "maintaining-the-hub.md",
                "Rescue-Media": "rescue-media.md", "Technician-Handoff": "technician-handoff.md",
                "Knowledge-Standards": "knowledge-standards.md", "Contribute": "contribute.md",
                "Templates": "contribution-template.md", "Continuous-Improvement": "continuous-improvement.md",
-               "Methods": "methods.md", "Decision-Desk": "decision-desk.md"}
+               "Methods": "methods.md", "Decision-Desk": "decision-desk.md",
+               "Interface-Design": "interface-design.md", "Service-Evidence": "service-evidence.md",
+               "Tool-Selection": "tool-selection.md"}
     for title, filename in mirrors.items():
         outputs[f"wiki/{title}.md"] = mirror_markdown((ROOT / "docs" / filename).read_text(encoding="utf-8"), mirrors, meta["reviewedAt"])
     for path, content in list(outputs.items()):

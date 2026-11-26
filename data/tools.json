@@ -25,7 +25,7 @@
       "Official project or vendor documentation"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "Save work and obtain the BitLocker recovery key before the reboot. Verify recovery environment availability."
+    "cautions": "Microsoft excludes Windows on ARM and Windows Server. The update path requires Microsoft Defender Antivirus as primary. Confirm recovery environment availability, save work and follow the documented BitLocker preparation; keep the recovery key available and verify protection is restored afterward."
   },
   {
     "id": "safety-scanner",
@@ -1056,6 +1056,45 @@
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
     "cautions": "Inspection is safe; deletion is a separate decision. Protected system files and application caches need context."
+  },
+  {
+    "id": "wiztree",
+    "name": "WizTree",
+    "category": "windows",
+    "summary": "Disk-space analysis with a folder tree, visual treemap and largest-file view.",
+    "bestFor": "Finding the folders and files responsible for a capacity problem before selecting an approved cleanup.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "mode": "portable / installed",
+    "pricing": "Free for personal use; commercial supporter or enterprise license required by business site and staff size.",
+    "homepage": "https://diskanalyzer.com/",
+    "downloadUrl": "https://diskanalyzer.com/download",
+    "docsUrl": "https://diskanalyzer.com/about",
+    "sourceUrl": "https://diskanalyzer.com/eula",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "disk space",
+      "treemap",
+      "capacity",
+      "cleanup",
+      "portable"
+    ],
+    "aliases": [
+      "WizTreeMac",
+      "WizTreeNix"
+    ],
+    "cautions": "Choose the correct platform build: the macOS and Linux editions are WizTreeMac and WizTreeNix. Size and duplicate-name/size/date matches are inspection evidence, not approval to delete. Use a suitably licensed technician copy for client work; client staff use has its own license boundary.",
+    "provenance": [
+      "Official project or vendor documentation",
+      "Explicit INTA user request",
+      "https://diskanalyzer.com/download",
+      "https://diskanalyzer.com/eula"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification"
   },
   {
     "id": "bcuninstaller",
@@ -2403,6 +2442,40 @@
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
     "cautions": "The index and optional service are persistent components; avoid indexing sensitive client data unnecessarily."
+  },
+  {
+    "id": "wizfile",
+    "name": "WizFile",
+    "category": "productivity",
+    "summary": "Fast filename and path lookup with size, date and other filters on Windows.",
+    "bestFor": "Locating a known file, log or recently changed group of files without guessing its folder.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable / installed",
+    "pricing": "Free for personal use; commercial supporter or enterprise license required by business site and staff size.",
+    "homepage": "https://antibody-software.com/wizfile/",
+    "downloadUrl": "https://antibody-software.com/wizfile/download",
+    "docsUrl": "https://antibody-software.com/wizfile/quick-start",
+    "sourceUrl": "https://antibody-software.com/wizfile/eula",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "file search",
+      "filenames",
+      "paths",
+      "filters",
+      "portable"
+    ],
+    "cautions": "Search results do not establish that a file is safe or disposable. The close button can leave monitoring active in the tray; use File > Exit for a finished one-time job and remove any case-only startup setting. Consult the current EULA for commercial scope; older FAQ wording differs.",
+    "provenance": [
+      "Official project or vendor documentation",
+      "Explicit INTA user request",
+      "https://antibody-software.com/wizfile/download",
+      "https://antibody-software.com/wizfile/eula",
+      "https://antibody-software.com/wizfile/quick-start"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification"
   },
   {
     "id": "sharex",

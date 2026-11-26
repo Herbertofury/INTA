@@ -1,4 +1,4 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 # 🌱 Keep making the hub better
 
@@ -55,6 +55,7 @@ A recurring contribution run should:
 1. Resume the latest known checkpoint and inspect only genuinely changed or unresolved state.
 2. Choose meaningful work from current evidence, incoming corrections or the remaining queue.
 3. Implement the complete selected improvement in canonical source, following [Knowledge Standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards).
+   Visual work also follows [Interface Design](https://github.com/Herbertofury/INTA/wiki/Interface-Design) and the linked [Athena design study](https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/ui-reference-comparison-2026-11-21/README.md). Preserve the compact neutral workspace and readable rows; maintain every tool and interaction as content grows.
 4. Verify content, links, generation and the affected user path; perform a material challenge pass.
 5. Publish the source checkpoint, matching site, actual live wiki and complete deliverable to connected [Google Drive](https://drive.google.com/), then read back the relevant remote identities.
 6. Report the useful change, proof, exact published destinations and any unresolved gate with its next action.
@@ -85,4 +86,4 @@ Use [the contribution record](https://github.com/Herbertofury/INTA/wiki/Template
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

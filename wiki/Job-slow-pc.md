@@ -1,21 +1,26 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# ⚡ [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)
+<a id="-diagnose-a-slow-freezing-or-hitching-pc"></a>
+
+# [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)
 
 Find the actual bottleneck and prove the improvement with the same workload.
 
-| Work area | Experience | Plan your time | Workflow |
-| --- | --- | --- | --- |
-| [Windows](https://www.microsoft.com/windows) & performance | Intermediate | 20–60 min | 6 steps + acceptance |
+**[Windows](https://www.microsoft.com/windows) & performance** · Intermediate · 20–60 min · 6 steps
 
-**[▶ Open the interactive checklist](https://herbertofury.github.io/INTA/#job/slow-pc)** · [Decision route](#decision-route) · [Toolkit](#toolkit) · [Walkthrough](#walkthrough) · [Acceptance](#acceptance) · [Sources](#sources)
+[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/slow-pc)
 
-> [!TIP]
-> **Your starting move:** Reproduce the exact slow action and measure it before changing anything. Ask whether the slowdown began after an update, new drive, app, or security product.
+> [!NOTE]
+> **Start here.** Reproduce the exact slow action and measure it before changing anything. Ask whether the slowdown began after an update, new drive, app, or security product.
 
 <a id="decision-route"></a>
 
-## 🧭 Choose the right branch
+<a id="-choose-the-right-branch"></a>
+
+## 🧭 Choose a route
+
+<details>
+<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -30,13 +35,15 @@ flowchart TD
     H -->|"No"| I["Undo and revise the hypothesis"]:::action
     I --> D
     H -->|"Yes, features preserved"| J["Record the measured result"]:::done
-    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa
-    classDef action fill:#172033,stroke:#64748b,color:#f8fafc
-    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2
-    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5
+    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46
+    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445
+    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137
+    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449
 ```
 
-**Diagram routes:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) · [Diagnose crashes, blue screens, and overheating](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod) · [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) · [Run a useful workstation maintenance visit](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)
+**Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) · [Diagnose crashes, blue screens, and overheating](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod) · [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) · [Run a useful workstation maintenance visit](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)
+
+</details>
 
 | Checkpoint | What to carry forward |
 | --- | --- |
@@ -46,9 +53,11 @@ flowchart TD
 
 <a id="toolkit"></a>
 
-## 🧰 Build the right toolkit
+<a id="-build-the-right-toolkit"></a>
 
-Choose the tools that answer the case’s next question. Opening a tool is a separate decision from changing the customer’s system.
+## Recommended tools
+
+Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
 | Tool / official download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
@@ -56,10 +65,14 @@ Choose the tools that answer the case’s next question. Opening a tool is a sep
 | [CrystalDiskInfo](https://crystalmark.info/en/download/) | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
 | [HWiNFO](https://www.hwinfo.com/download/) | Investigating temperatures, clocks, power and component identity. | [Windows](https://www.microsoft.com/windows); Pro license for commercial use of 64/ARM64 editions | [Open guide](https://www.hwinfo.com/licenses/) |
 | [Windows Performance Toolkit](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install) | Investigating intermittent CPU, storage or application responsiveness problems with evidence. | [Windows](https://www.microsoft.com/windows); Free Microsoft toolkit | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/) |
+| [WizTree](https://diskanalyzer.com/download) | Finding the folders and files responsible for a capacity problem before selecting an approved cleanup. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/); Free for personal use; commercial supporter or enterprise license required by business site and staff size. | [Open guide](https://diskanalyzer.com/about) |
+| [WizFile](https://antibody-software.com/wizfile/download) | Locating a known file, log or recently changed group of files without guessing its folder. | [Windows](https://www.microsoft.com/windows); Free for personal use; commercial supporter or enterprise license required by business site and staff size. | [Open guide](https://antibody-software.com/wizfile/quick-start) |
 
 <a id="walkthrough"></a>
 
-## 🪜 Work the case
+<a id="-work-the-case"></a>
+
+## Procedure
 
 Work in order, record the result of each step, and change route when the evidence calls for it.
 
@@ -87,13 +100,13 @@ resmon
 
 ### 03 · Check storage and hardware first
 
-- [ ] Review drive health and temperatures. If a disk disappears, clicks, reports I/O errors, or stalls the system when accessed, stop repair scans and use the failing-drive guide. Check a suspect external drive separately after outstanding writes have finished; preserve the user’s files.
+- [ ] Review drive health and temperatures. If a disk disappears, clicks, reports I/O errors, or stalls the system when accessed, stop repair scans and use the failing-drive guide. Check a suspect external drive separately after outstanding writes have finished; preserve the user’s files. For a healthy drive with a capacity problem, use [WizTree](https://diskanalyzer.com/) to identify the largest folders and distinguish allocation from the specific files the user needs. Use [WizFile](https://antibody-software.com/wizfile/) when the question is where a named file, log or recently changed file lives. Neither lookup proves that an item should be deleted; record the owner and retention need before using supported cleanup controls.
 
 <a id="step-04"></a>
 
 ### 04 · Trace the responsible application
 
-- [ ] Use [Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) for process detail and a short, filtered [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) capture for file or registry stalls. Capture only the affected interval, stop recording, and save the trace privately. Inspect missing paths, repeated failures, or excessive work before choosing a fix.
+- [ ] Use [Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) for process detail and a short, filtered [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) capture for file or registry stalls. Capture only the affected interval, stop recording, and save the trace privately. Inspect missing paths, repeated failures, or excessive work before choosing a fix. [Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/) supplies these process and I/O diagnostics; it answers a different question from a disk-space treemap or filename lookup.
 
 <a id="step-05"></a>
 
@@ -109,18 +122,23 @@ resmon
 
 <a id="acceptance"></a>
 
-## ✅ Prove the result
+<a id="-prove-the-result"></a>
+
+## Verification
 
 - [ ] The original task is measurably faster or the root cause is clearly identified.
 - [ ] Required applications, protection, backup, and peripherals still work.
 - [ ] The improvement survives a restart and the normal user workload.
+- [ ] If capacity or file location was part of the problem, the identified path, ownership decision and before/after free-space or task result are recorded.
 
 > [!WARNING]
 > **Pause this route and escalate when:**
 > - Storage-health symptoms appear during testing.
 > - A proposed optimization removes required functionality or only hides the symptom.
 
-## 🔀 Continue with the evidence
+<a id="-continue-with-the-evidence"></a>
+
+## Related playbooks
 
 | Next playbook | What it resolves |
 | --- | --- |
@@ -129,17 +147,20 @@ resmon
 | [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) | Use [Windows](https://www.microsoft.com/windows) servicing tools in a sensible order and validate the specific broken feature. |
 | [Run a useful workstation maintenance visit](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) | Check security, updates, hardware, backups, and usability without unnecessary cleanup rituals. |
 
-Found a reusable improvement? [Contribute the correction](https://github.com/Herbertofury/INTA/wiki/Contribute) and include the test that proved it.
-
 <a id="sources"></a>
 
-## 🔎 Source trail
+<a id="-source-trail"></a>
+
+## Official sources
 
 <details>
-<summary>Official references and editorial review</summary>
+<summary>References and review notes</summary>
 
 - [Microsoft Sysinternals: Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/)
 - [Microsoft Sysinternals: Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)
+- [Microsoft: Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)
+- [WizTree: disk-space analysis and export](https://diskanalyzer.com/about)
+- [WizFile: search filters and shutdown](https://antibody-software.com/wizfile/quick-start)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
@@ -147,4 +168,4 @@ Reviewed **2026-11-26**. Timing is a planning range. A successful command is evi
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

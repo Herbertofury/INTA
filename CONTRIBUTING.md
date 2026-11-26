@@ -1,6 +1,6 @@
 # 🛠 Contribute to the INTA technician home
 
-**Start with [Knowledge Standards](docs/knowledge-standards.md), then use the [Contribution Guide](docs/contribute.md) and [Contribution Template](docs/contribution-template.md).**
+**Start with [Knowledge Standards](docs/knowledge-standards.md) and [Interface Design](docs/interface-design.md), then use the [Contribution Guide](docs/contribute.md) and [Contribution Template](docs/contribution-template.md).**
 
 Contributions should help a technician choose a suitable tool, understand the next action, or prove that the customer's original task works. A small verified correction is useful. A large addition needs the same clear sources, navigation and proof.
 

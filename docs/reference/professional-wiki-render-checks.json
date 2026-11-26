@@ -1,0 +1,73 @@
+{
+  "verifiedAtUtc": "2026-11-26T23:00:34.905935+00:00",
+  "result": "pass",
+  "scope": "Final generated Wiki and source identity; local preview and diagram rendering only; no repository changes or publication",
+  "counts": {
+    "tools": 113,
+    "jobs": 22,
+    "methods": 45,
+    "steps": 140,
+    "verificationChecks": 83,
+    "commands": 9,
+    "wikiPages": 48,
+    "wikiFiles": 50,
+    "registeredNames": 332,
+    "mermaidDiagrams": 27
+  },
+  "manifestFilesMatched": 50,
+  "all27DiagramSourceHashesMatchGeneratedWiki": true,
+  "allPreviewMarkdownHashesMatchGeneratedWiki": true,
+  "mermaidVersion": "12.3.0",
+  "diagramNodeRange": [
+    6,
+    12
+  ],
+  "viewports": [
+    {
+      "width": 1280,
+      "height": 1000
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "mobileDocumentOverflow": false,
+  "disclosuresOpenedAndClosed": true,
+  "visualInspection": [
+    "Home mobile: 113 tool count visible, clear routing and navigation, readable tables, no page overflow.",
+    "Malware playbook mobile: procedure, checkpoints and stop criteria readable; comparison table scrolls within the page.",
+    "Failing-drive diagram: source protection and specialist escalation branches remain clear, with no label collision observed."
+  ],
+  "evidenceLimit": "Local Markdown preview approximates GitHub host styling; live GitHub rendering remains a separate publication/readback gate.",
+  "sourceSha256": {
+    "scripts/build-hub.py": "cd1464e4ecc435b751b385fb8931efed1ed5f619f3926aa34e6c0c58df15baf5",
+    "data/tools.json": "5a67051c6d405628b450c7c51c51aed8b4ee28b1a04b3e0750acfe603379c782",
+    "data/jobs.json": "9c08541bd245c424e5566d5b7bfc5e91e4351fbcec3aa2dbd2788440c9c10832",
+    "data/methods.json": "f835e11fbd298ec851113921c1660426021418a47b6df1df1f8059c4da37baca",
+    "data/wiki-layout.json": "f172cc63d8bf652808a8068556f7ac4bcf1df71d678b65eb6a42c4947fa66280",
+    "docs/assets/wiki-hero.svg": "afdf90ea5076d28677f0b40b05a0cf67684f5a644d4cfe90c26a6a1de207e42e",
+    "docs/assets/inta-banner.svg": "4d044604ea097e9d4fbc6dd5e940cb4b8a5a8e85416ddf1217e77871d2dae035",
+    "site/build-manifest.json": "a22290413e32f089c221145da04fadd726c2f50ff8c561ee4a4a564dac048bd5",
+    "wiki/Home.md": "c16a6deb6089fe3c2e2c3348ea05aa4573d1f3df662cef23f972a07ea001b093",
+    "wiki/Job-failing-drive.md": "7f825b34c4adfdbc24b4ed9408b5a7e260d65028fb4bd4dc96a44bbe26ebb795",
+    "wiki/Job-malware-removal.md": "f50428f8e7bafe07a93535b6ded28421e6c6f599c751aeb92d47705aeac1229b"
+  },
+  "artifactSha256": {
+    "Home-desktop.png": "1955b8b0bf6bb2fbe0d09d9db0b00d122f223be343319aafb9fde3b682b5f0bd",
+    "Home-mobile.png": "225f41b7d3b04a64319aa6e9bdb168152d044595c62d0df3cac27b0d769d7a32",
+    "Job-malware-removal-desktop.png": "02a32bf43d31ca587ef87786ba1fba37912077dd62c7698557a3e5458e16a17c",
+    "Job-malware-removal-mobile.png": "c969ca0e43baa1243d0d3b0bd71cc10bab4ec9f2d8bc651686076e7abbd3ec1b",
+    "mermaid/Job-failing-drive-1.png": "2870656ff60a14a7ed6a4065fe97a9826b1cda32042890bc9db15e026cdccc3e",
+    "mermaid-report.json": "8a21cfbaf23cbe4e250fea0e29c4d7fe4b45b2dd784cb405efef85cc5a379164",
+    "preview-report.json": "671978d022779acaf9aa0019a4515db41995cbc7a1204df5f4a41d0d822d32a4"
+  },
+  "diagramReport": "mermaid-report.json",
+  "previewReport": "preview-report.json",
+  "postPortalCopyPolish": {
+    "currentBuildManifestSha256": "97e4237a1cf5bcb924f3c0abbd37493177b7edaaf9ade23512bc132d81eee857",
+    "diagramPageBytesUnchanged": true,
+    "verifiedDiagramPages": 27,
+    "note": "Portal-only copy change altered the build manifest. All diagram-page bytes remain identical to the rendered source; no re-render required."
+  }
+}

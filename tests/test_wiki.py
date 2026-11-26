@@ -105,6 +105,41 @@ A["Windows"] --> B["PowerShell"]
                     for path in ['wiki/Job-' + job['id'] + '.md', 'docs/runbooks/' + job['id'] + '.md']:
                         self.assertIn('\n' + step['command'] + '\n```', output[path], path)
 
+    def test_published_step_destinations_survive_new_steps(self):
+        # These destinations were published before the procedures grew.
+        # Numbering may change; a saved link must still reach the same action.
+        published = {
+            'malware-removal': {
+                'Prepare trustworthy scanners': 'step-02',
+                'Close the entry point and retest': 'step-06',
+            },
+            'failing-drive': {
+                'Recover from a working copy': 'step-05',
+                'Validate what was actually recovered': 'step-06',
+            },
+            'remote-support': {
+                'Connect with the user present': 'step-03',
+                'Close and verify': 'step-06',
+            },
+        }
+        output = build.build_outputs()
+        for job in self.jobs:
+            if job['id'] not in published:
+                continue
+            page = output['wiki/Job-' + job['id'] + '.md']
+            for title, destination in published[job['id']].items():
+                step = next(s for s in job['steps'] if s['title'] == title)
+                self.assertEqual(step.get('anchor'), destination)
+                section = page.split(f'<a id="{destination}"></a>', 1)[1]
+                section = section.split('\n### ', 1)[1].split('\n', 1)[0]
+                self.assertIn(title, section)
+
+    def test_step_destinations_reject_collisions(self):
+        jobs = copy.deepcopy(self.jobs)
+        jobs[0]['steps'][1]['anchor'] = jobs[0]['steps'][0]['anchor']
+        with self.assertRaisesRegex(ValueError, 'duplicate step anchors'):
+            build.validate(self.tools, jobs)
+
 
 if __name__ == '__main__':
     unittest.main()

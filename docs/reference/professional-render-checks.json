@@ -1,0 +1,81 @@
+{
+  "before": {
+    "home": {
+      "domNodes": 2741,
+      "toolRows": 111,
+      "visibleToolRows": 111,
+      "catalogTools": 111,
+      "jobs": 22,
+      "bodyFont": "14px",
+      "headingFont": "47.52px",
+      "bodyBackground": "rgb(16, 23, 25)",
+      "nodesWithGradient": 3,
+      "domContentLoadedMs": 258,
+      "resources": 0
+    },
+    "library": {
+      "domNodes": 2949,
+      "toolRows": 111,
+      "visibleToolRows": 111,
+      "controlFontMinimum": 7.5
+    },
+    "httpRequests": []
+  },
+  "after": {
+    "home": {
+      "domNodes": 3311,
+      "toolRows": 113,
+      "visibleToolRows": 113,
+      "catalogTools": 113,
+      "jobs": 22,
+      "bodyFont": "16px",
+      "headingFont": "30px",
+      "bodyBackground": "rgb(17, 18, 20)",
+      "nodesWithGradient": 0,
+      "domContentLoadedMs": 217,
+      "resources": 0
+    },
+    "library": {
+      "domNodes": 3073,
+      "toolRows": 113,
+      "visibleToolRows": 113,
+      "controlFontMinimum": 14
+    },
+    "httpRequests": []
+  },
+  "measurementNote": "Single headless local-file observation; timings are descriptive, not a controlled performance benchmark. New catalog content may increase DOM count; all records remain present.",
+  "all22GuidesAndCommandsVerified": 22,
+  "commandsBytePreserved": 9,
+  "keyboardSearchNavigation": true,
+  "inputFocusState": {
+    "outline": "none",
+    "parentBorder": "rgb(112, 167, 250)"
+  },
+  "hashes": {
+    "portal/app.js": "94cc5ceadc717dc331c9f07ffa3797355ed567198f24f8e543eef15dc8f49174",
+    "portal/styles.css": "c2f4dd0b6f442b199177e0531061df60d24add73471cb01ac29d1aacc5bd01d3",
+    "portal/index.template.html": "06e2ea5e5e2e244bd50cb8325bdba9ca94df671fa4600484b008041450d89033",
+    "site/index.html": "3431842ebcf5f4f02806ba7561c7c4e6e6b0ce2d3e9360bef5e5212ca2915c3c"
+  },
+  "errors": [],
+  "fullRegressionCandidateHashes": {
+    "portal/app.js": "de87f8365d96ab5f2a972d3ec83df0251c9794199e603fbea033b7ebb7965397",
+    "portal/styles.css": "c2f4dd0b6f442b199177e0531061df60d24add73471cb01ac29d1aacc5bd01d3",
+    "portal/index.template.html": "06e2ea5e5e2e244bd50cb8325bdba9ca94df671fa4600484b008041450d89033",
+    "site/index.html": "ebdcfe2e71a7889e68f7e94880dcb86c1462d36c8880ed883d96d2e4b46aacde"
+  },
+  "targetedPostPolishVerification": {
+    "report": "detail-polish-results.json",
+    "scope": "Targeted final detail-text and link polish; full unchanged-feature suite already passed the preceding candidate.",
+    "tools": [
+      "Microsoft Sysinternals Suite",
+      "WizTree",
+      "Everything",
+      "WizFile"
+    ],
+    "selectionHeadingLinks": true,
+    "officialDestinationsPreserved": true,
+    "oldSlogansAbsent": true,
+    "errors": []
+  }
+}

@@ -1,21 +1,26 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# 🧭 [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage)
+<a id="-start-here-triage-any-computer-problem"></a>
+
+# [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage)
 
 Turn a vague symptom into a clear next action, a protected data set, and a useful service record.
 
-| Work area | Experience | Plan your time | Workflow |
-| --- | --- | --- | --- |
-| Getting started | Starter | 10–20 min | 6 steps + acceptance |
+**Getting started** · Starter · 10–20 min · 6 steps
 
-**[▶ Open the interactive checklist](https://herbertofury.github.io/INTA/#job/intake-triage)** · [Decision route](#decision-route) · [Toolkit](#toolkit) · [Walkthrough](#walkthrough) · [Acceptance](#acceptance) · [Sources](#sources)
+[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/intake-triage)
 
-> [!TIP]
-> **Your starting move:** Ask the user to show the exact failing task once. Record what they expected, what happened, and when it last worked.
+> [!NOTE]
+> **Start here.** Ask the user to show the exact failing task once. Record what they expected, what happened, and when it last worked.
 
 <a id="decision-route"></a>
 
-## 🧭 Choose the right branch
+<a id="-choose-the-right-branch"></a>
+
+## 🧭 Choose a route
+
+<details>
+<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -27,13 +32,15 @@ flowchart TD
     E -->|"One user or device"| G["Capture a local baseline"]:::action
     F --> H["Choose a guide and acceptance test"]:::done
     G --> H
-    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa
-    classDef action fill:#172033,stroke:#64748b,color:#f8fafc
-    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2
-    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5
+    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46
+    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445
+    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137
+    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449
 ```
 
-**Diagram routes:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Remove malware and browser hijackers](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) · [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) · [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) · [Bring an office back after a power outage](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
+**Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Remove malware and browser hijackers](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) · [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) · [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) · [Bring an office back after a power outage](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
+
+</details>
 
 | Checkpoint | What to carry forward |
 | --- | --- |
@@ -43,9 +50,11 @@ flowchart TD
 
 <a id="toolkit"></a>
 
-## 🧰 Build the right toolkit
+<a id="-build-the-right-toolkit"></a>
 
-Choose the tools that answer the case’s next question. Opening a tool is a separate decision from changing the customer’s system.
+## Recommended tools
+
+Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
 | Tool / official download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
@@ -55,7 +64,9 @@ Choose the tools that answer the case’s next question. Opening a tool is a sep
 
 <a id="walkthrough"></a>
 
-## 🪜 Work the case
+<a id="-work-the-case"></a>
+
+## Procedure
 
 Work in order, record the result of each step, and change route when the evidence calls for it.
 
@@ -105,7 +116,9 @@ perfmon /rel
 
 <a id="acceptance"></a>
 
-## ✅ Prove the result
+<a id="-prove-the-result"></a>
+
+## Verification
 
 - [ ] The original symptom and business impact are recorded.
 - [ ] The next guide matches observed evidence.
@@ -116,7 +129,9 @@ perfmon /rel
 > - There is active encryption, physical damage, or storage failure.
 > - The only copy of important data would be put at risk by the next action.
 
-## 🔀 Continue with the evidence
+<a id="-continue-with-the-evidence"></a>
+
+## Related playbooks
 
 | Next playbook | What it resolves |
 | --- | --- |
@@ -126,14 +141,14 @@ perfmon /rel
 | [Bring an office back after a power outage](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery) | Restore dependencies in order and verify services before releasing the office back to work. |
 | [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff) | Turn completed technical work into proof the customer can use, with clean access and an actionable service record. |
 
-Found a reusable improvement? [Contribute the correction](https://github.com/Herbertofury/INTA/wiki/Contribute) and include the test that proved it.
-
 <a id="sources"></a>
 
-## 🔎 Source trail
+<a id="-source-trail"></a>
+
+## Official sources
 
 <details>
-<summary>Official references and editorial review</summary>
+<summary>References and review notes</summary>
 
 - [Microsoft: recovery options in Windows](https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows)
 - [Microsoft Sysinternals: Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/)
@@ -144,4 +159,4 @@ Reviewed **2026-11-26**. Timing is a planning range. A successful command is evi
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

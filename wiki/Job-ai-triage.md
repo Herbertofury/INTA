@@ -1,21 +1,26 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# ✨ [Use AI as a careful troubleshooting copilot](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage)
+<a id="-use-ai-as-a-careful-troubleshooting-copilot"></a>
+
+# [Use AI as a careful troubleshooting copilot](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage)
 
 Use AI to organize evidence, compare hypotheses, and explain findings while the technician controls execution.
 
-| Work area | Experience | Plan your time | Workflow |
-| --- | --- | --- | --- |
-| AI assistance | Intermediate | 5–20 min per analysis | 6 steps + acceptance |
+**AI assistance** · Intermediate · 5–20 min per analysis · 6 steps
 
-**[▶ Open the interactive checklist](https://herbertofury.github.io/INTA/#job/ai-triage)** · [Decision route](#decision-route) · [Toolkit](#toolkit) · [Walkthrough](#walkthrough) · [Acceptance](#acceptance) · [Sources](#sources)
+[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ai-triage)
 
-> [!TIP]
-> **Your starting move:** Start with a concrete symptom and sanitized evidence. Decide whether the task is explanation, log analysis, script review, or a proposed diagnostic plan.
+> [!NOTE]
+> **Start here.** Start with a concrete symptom and sanitized evidence. Decide whether the task is explanation, log analysis, script review, or a proposed diagnostic plan.
 
 <a id="decision-route"></a>
 
-## 🧭 Choose the right branch
+<a id="-choose-the-right-branch"></a>
+
+## 🧭 Choose a route
+
+<details>
+<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -31,13 +36,15 @@ flowchart TD
     H --> I{"Result supports the diagnosis?"}:::decision
     I -->|"No"| D
     I -->|"Yes"| J["Write a verified, private handoff"]:::done
-    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa
-    classDef action fill:#172033,stroke:#64748b,color:#f8fafc
-    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2
-    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5
+    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46
+    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445
+    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137
+    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449
 ```
 
-**Diagram routes:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) · [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
+**Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) · [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
+
+</details>
 
 | Checkpoint | What to carry forward |
 | --- | --- |
@@ -47,9 +54,11 @@ flowchart TD
 
 <a id="toolkit"></a>
 
-## 🧰 Build the right toolkit
+<a id="-build-the-right-toolkit"></a>
 
-Choose the tools that answer the case’s next question. Opening a tool is a separate decision from changing the customer’s system.
+## Recommended tools
+
+Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
 | Tool / official download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
@@ -59,7 +68,9 @@ Choose the tools that answer the case’s next question. Opening a tool is a sep
 
 <a id="walkthrough"></a>
 
-## 🪜 Work the case
+<a id="-work-the-case"></a>
+
+## Procedure
 
 Work in order, record the result of each step, and change route when the evidence calls for it.
 
@@ -101,7 +112,9 @@ Work in order, record the result of each step, and change route when the evidenc
 
 <a id="acceptance"></a>
 
-## ✅ Prove the result
+<a id="-prove-the-result"></a>
+
+## Verification
 
 - [ ] The final diagnosis is supported by observed evidence and a successful test.
 - [ ] No secret or unnecessary customer content was shared.
@@ -112,7 +125,9 @@ Work in order, record the result of each step, and change route when the evidenc
 > - The assistant proposes destructive action without a verified target and recovery plan.
 > - A source is missing, the command is unsupported, or the recommendation conflicts with the evidence.
 
-## 🔀 Continue with the evidence
+<a id="-continue-with-the-evidence"></a>
+
+## Related playbooks
 
 | Next playbook | What it resolves |
 | --- | --- |
@@ -120,14 +135,14 @@ Work in order, record the result of each step, and change route when the evidenc
 | [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) | Use [Windows](https://www.microsoft.com/windows) servicing tools in a sensible order and validate the specific broken feature. |
 | [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff) | Turn completed technical work into proof the customer can use, with clean access and an actionable service record. |
 
-Found a reusable improvement? [Contribute the correction](https://github.com/Herbertofury/INTA/wiki/Contribute) and include the test that proved it.
-
 <a id="sources"></a>
 
-## 🔎 Source trail
+<a id="-source-trail"></a>
+
+## Official sources
 
 <details>
-<summary>Official references and editorial review</summary>
+<summary>References and review notes</summary>
 
 - [INTA Rescue source and build workflow](https://github.com/Herbertofury/INTA)
 - [NIST: Generative AI Profile, AI 600-1](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
@@ -138,4 +153,4 @@ Reviewed **2026-11-26**. Timing is a planning range. A successful command is evi
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

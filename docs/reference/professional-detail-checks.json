@@ -1,0 +1,42 @@
+{
+  "scope": "Targeted final detail-text and link polish; full unchanged-feature suite already passed the preceding candidate.",
+  "tools": [
+    {
+      "id": "sysinternals",
+      "name": "Microsoft Sysinternals Suite",
+      "selectionHref": "https://github.com/Herbertofury/INTA/wiki/Tool-Selection",
+      "officialHref": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite"
+    },
+    {
+      "id": "wiztree",
+      "name": "WizTree",
+      "selectionHref": "https://github.com/Herbertofury/INTA/wiki/Tool-Selection",
+      "officialHref": "https://diskanalyzer.com/download"
+    },
+    {
+      "id": "everything",
+      "name": "Everything",
+      "selectionHref": "https://github.com/Herbertofury/INTA/wiki/Tool-Selection",
+      "officialHref": "https://www.voidtools.com/downloads/"
+    },
+    {
+      "id": "wizfile",
+      "name": "WizFile",
+      "selectionHref": "https://github.com/Herbertofury/INTA/wiki/Tool-Selection",
+      "officialHref": "https://antibody-software.com/wizfile/download"
+    }
+  ],
+  "selectionHeadingLinks": true,
+  "functionalCopy": true,
+  "oldSlogansAbsent": true,
+  "officialDestinationsPreserved": true,
+  "noNestedAnchors": true,
+  "hashes": {
+    "portal/app.js": "94cc5ceadc717dc331c9f07ffa3797355ed567198f24f8e543eef15dc8f49174",
+    "portal/styles.css": "c2f4dd0b6f442b199177e0531061df60d24add73471cb01ac29d1aacc5bd01d3",
+    "portal/index.template.html": "06e2ea5e5e2e244bd50cb8325bdba9ca94df671fa4600484b008041450d89033",
+    "site/index.html": "3431842ebcf5f4f02806ba7561c7c4e6e6b0ce2d3e9360bef5e5212ca2915c3c"
+  },
+  "errors": [],
+  "networkRequests": []
+}

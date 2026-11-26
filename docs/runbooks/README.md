@@ -1,12 +1,14 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# 📚 The playbook library
+<a id="-the-playbook-library"></a>
 
-Find the symptom, follow the evidence, and leave a tested result. Every playbook includes a decision route, the right toolkit, a numbered walkthrough, and handoff checks.
+# Playbooks
 
-**22 complete playbooks** · [Choose at the decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Browse methods](https://github.com/Herbertofury/INTA/wiki/Methods)
+Procedures for common service jobs, with decision diagrams, [tool selection](https://github.com/Herbertofury/INTA/wiki/Tool-Selection), ordered steps, verification and escalation criteria.
 
-[🧭 First response & handoff](#first-response) · [🛡️ Security & incident response](#security) · [🪟 Windows & system stability](#windows) · [💾 Storage, backup & rescue](#recovery) · [🌐 Network & office continuity](#office) · [🖨️ Everyday workplace fixes](#workplace) · [🧰 Deployment & maintenance](#deployment) · [✨ AI-assisted investigation](#ai)
+**22 playbooks** · [Identify the right route](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Troubleshooting methods](https://github.com/Herbertofury/INTA/wiki/Methods)
+
+[First response & handoff](#first-response) · [Security & incident response](#security) · [Windows & system stability](#windows) · [Storage, backup & rescue](#recovery) · [Network & office continuity](#office) · [Everyday workplace fixes](#workplace) · [Deployment & maintenance](#deployment) · [AI-assisted investigation](#ai)
 
 <a id="first-response"></a>
 
@@ -94,7 +96,7 @@ Build a dependable workstation and keep it dependable.
 
 <a id="ai"></a>
 
-## ✨ AI-assisted investigation
+## 🧠 AI-assisted investigation
 
 Turn sanitized evidence into a reviewed next test.
 
@@ -102,12 +104,14 @@ Turn sanitized evidence into a reviewed next test.
 | --- | --- | --- | --- |
 | [Use AI as a careful troubleshooting copilot](ai-triage.md) | Use AI to organize evidence, compare hypotheses, and explain findings while the technician controls execution. | Intermediate | 5–20 min per analysis |
 
-## 🤝 Make the next case easier
+<a id="-make-the-next-case-easier"></a>
+
+## Corrections and additions
 
 Use the [contribution template](https://github.com/Herbertofury/INTA/wiki/Templates) when a case reveals a better sequence, a changed tool, or a missing stop condition. Keep customer evidence in the private service record and add only the reusable method to the [shared knowledge process](https://github.com/Herbertofury/INTA/wiki/Continuous-Improvement).
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)
 
 [← All playbooks](README.md) · [Live Wiki](https://github.com/Herbertofury/INTA/wiki) · [Contribution guide](https://github.com/Herbertofury/INTA/blob/main/CONTRIBUTING.md)

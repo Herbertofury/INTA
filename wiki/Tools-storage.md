@@ -1,15 +1,18 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# 💾 Storage, recovery & backup
+<a id="-storage-recovery--backup"></a>
+
+# Storage, recovery & backup
 
 Keep the source safe, select the right copy or recovery operation, and test the restored result.
 
-**20 tools** · [All disciplines](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**20 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
-> [!TIP]
-> **Choose by the job:** Healthy migration, missing files, or failing media?
+**Selection question:** Healthy migration, missing files, or failing media?
 
-## 🧭 Start with a workflow
+<a id="-start-with-a-workflow"></a>
+
+## Related playbooks
 
 - [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)
 - [Clone a healthy system or migrate to a new SSD](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration)
@@ -17,34 +20,35 @@ Keep the source safe, select the right copy or recovery operation, and test the 
 
 <a id="compare-options"></a>
 
-## ⚖️ Compare the options
+<a id="️-compare-the-options"></a>
+<a id="-compare-the-options"></a>
+
+## Tool comparison
 
 | Tool | Choose it for | Platforms | Role |
 | --- | --- | --- | --- |
-| [Clonezilla](#clonezilla) | Capturing or restoring a supported disk image with a repeatable procedure. | Bootable PC, [Linux](https://www.kernel.org/) | 🟢 Core |
-| [CrystalDiskInfo](#crystaldiskinfo) | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows) | 🟢 Core |
-| [FreeFileSync](#freefilesync) | Reviewed file migration when technicians need to see proposed differences. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🟢 Core |
-| [GSmartControl](#gsmartcontrol) | A visual SMART investigation in the rescue desktop. | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows) | 🟢 Core |
-| [Kopia](#kopia) | A visual backup workflow with repository policies and restore browsing. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🟢 Core |
-| [rclone](#rclone) | Cloud migrations, verifiable copies and controlled provider-to-provider transfers. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🟢 Core |
-| [Rescuezilla](#rescuezilla) | A visual bare-metal backup or restore workflow at the bench. | Bootable PC | 🟢 Core |
-| [restic](#restic) | Repeatable file backups with explicit integrity and restore checks. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🟢 Core |
-| [Robocopy](#robocopy) | A documented migration between accessible [Windows](https://www.microsoft.com/windows) folders or shares. | [Windows](https://www.microsoft.com/windows) | 🟢 Core |
-| [rsync](#rsync) | A logged file copy from [Linux](https://www.kernel.org/) rescue to a separate destination. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), BSD | 🟢 Core |
-| [smartmontools](#smartmontools) | Reading SMART and NVMe health from a rescue environment or supported host OS. | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) | 🟢 Core |
-| [Veeam Agent for Microsoft Windows](#veeam-agent) | Image backup and recovery media for a supported [Windows](https://www.microsoft.com/windows) endpoint. | [Windows](https://www.microsoft.com/windows) | 🟢 Core |
-| [cryptsetup](#cryptsetup) | Opening a supported encrypted volume using the correct recovery material. | [Linux](https://www.kernel.org/) | 🔬 Specialist |
-| [Dislocker](#dislocker) | Reading an encrypted client volume with its valid key or recovery material. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🔬 Specialist |
-| [DMDE](#dmde) | Complex partition and file recovery where a specialist needs detailed filesystem views. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🔬 Specialist |
-| [GNU ddrescue](#ddrescue) | Creating an image of a failing disk before recovery or repair attempts. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🔬 Specialist |
-| [GParted](#gparted) | A planned partition resize or layout change after backup and health checks. | [Linux](https://www.kernel.org/), Bootable PC | 🔬 Specialist |
-| [nvme-cli](#nvme-cli) | Reading NVMe identity and health information from [INTA Rescue](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md). | [Linux](https://www.kernel.org/) | 🔬 Specialist |
-| [PhotoRec](#photorec) | Recovering files from an image when directory-based recovery is unsuccessful. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🔬 Specialist |
-| [TestDisk](#testdisk) | Investigating missing partitions on an image or safely copied disk. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🔬 Specialist |
+| [Clonezilla](#clonezilla) | Capturing or restoring a supported disk image with a repeatable procedure. | Bootable PC, [Linux](https://www.kernel.org/) | Core |
+| [CrystalDiskInfo](#crystaldiskinfo) | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows) | Core |
+| [FreeFileSync](#freefilesync) | Reviewed file migration when technicians need to see proposed differences. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
+| [GSmartControl](#gsmartcontrol) | A visual SMART investigation in the rescue desktop. | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows) | Core |
+| [Kopia](#kopia) | A visual backup workflow with repository policies and restore browsing. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
+| [rclone](#rclone) | Cloud migrations, verifiable copies and controlled provider-to-provider transfers. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
+| [Rescuezilla](#rescuezilla) | A visual bare-metal backup or restore workflow at the bench. | Bootable PC | Core |
+| [restic](#restic) | Repeatable file backups with explicit integrity and restore checks. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
+| [Robocopy](#robocopy) | A documented migration between accessible [Windows](https://www.microsoft.com/windows) folders or shares. | [Windows](https://www.microsoft.com/windows) | Core |
+| [rsync](#rsync) | A logged file copy from [Linux](https://www.kernel.org/) rescue to a separate destination. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), BSD | Core |
+| [smartmontools](#smartmontools) | Reading SMART and NVMe health from a rescue environment or supported host OS. | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) | Core |
+| [Veeam Agent for Microsoft Windows](#veeam-agent) | Image backup and recovery media for a supported [Windows](https://www.microsoft.com/windows) endpoint. | [Windows](https://www.microsoft.com/windows) | Core |
+| [cryptsetup](#cryptsetup) | Opening a supported encrypted volume using the correct recovery material. | [Linux](https://www.kernel.org/) | Specialist |
+| [Dislocker](#dislocker) | Reading an encrypted client volume with its valid key or recovery material. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
+| [DMDE](#dmde) | Complex partition and file recovery where a specialist needs detailed filesystem views. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
+| [GNU ddrescue](#ddrescue) | Creating an image of a failing disk before recovery or repair attempts. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
+| [GParted](#gparted) | A planned partition resize or layout change after backup and health checks. | [Linux](https://www.kernel.org/), Bootable PC | Specialist |
+| [nvme-cli](#nvme-cli) | Reading NVMe identity and health information from [INTA Rescue](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md). | [Linux](https://www.kernel.org/) | Specialist |
+| [PhotoRec](#photorec) | Recovering files from an image when directory-based recovery is unsuccessful. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
+| [TestDisk](#testdisk) | Investigating missing partitions on an image or safely copied disk. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
-
----
 
 <a id="clonezilla"></a>
 
@@ -52,7 +56,7 @@ Core means an everyday candidate; Specialist means a focused advanced use; Evalu
 
 Bootable disk and partition imaging with multiple deployment modes.
 
-**[Clonezilla: official download →](https://clonezilla.org/downloads.php)** · [Documentation](https://clonezilla.org/clonezilla-live-doc.php) · [Publisher](https://clonezilla.org/)
+[Official download](https://clonezilla.org/downloads.php) · [Documentation](https://clonezilla.org/clonezilla-live-doc.php) · [Publisher](https://clonezilla.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -60,7 +64,7 @@ Bootable disk and partition imaging with multiple deployment modes.
 | **Where it runs** | Bootable PC, [Linux](https://www.kernel.org/) |
 | **How you use it** | boot |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Source and target selection must be verified; check filesystem and target-size constraints for the chosen operation.
 
@@ -76,9 +80,7 @@ Bootable disk and partition imaging with multiple deployment modes.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="crystaldiskinfo"></a>
 
@@ -86,7 +88,7 @@ Bootable disk and partition imaging with multiple deployment modes.
 
 Displays supported drive health indicators, temperatures and SMART attributes.
 
-**[CrystalDiskInfo: official download →](https://crystalmark.info/en/download/)** · [Documentation](https://crystalmark.info/en/software/crystaldiskinfo/) · [Publisher](https://crystalmark.info/en/software/crystaldiskinfo/)
+[Official download](https://crystalmark.info/en/download/) · [Documentation](https://crystalmark.info/en/software/crystaldiskinfo/) · [Publisher](https://crystalmark.info/en/software/crystaldiskinfo/)
 
 | Decision | Detail |
 | --- | --- |
@@ -94,7 +96,7 @@ Displays supported drive health indicators, temperatures and SMART attributes.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | portable |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** SMART is incomplete through some USB bridges and cannot rule out impending failure.
 
@@ -110,9 +112,7 @@ Displays supported drive health indicators, temperatures and SMART attributes.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="freefilesync"></a>
 
@@ -120,7 +120,7 @@ Displays supported drive health indicators, temperatures and SMART attributes.
 
 Visual folder comparison and synchronization with configurable directions.
 
-**[FreeFileSync: official download →](https://freefilesync.org/download.php)** · [Documentation](https://freefilesync.org/faq.php) · [Publisher](https://freefilesync.org/)
+[Official download](https://freefilesync.org/download.php) · [Documentation](https://freefilesync.org/faq.php) · [Publisher](https://freefilesync.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -128,7 +128,7 @@ Visual folder comparison and synchronization with configurable directions.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | installed |
 | **Access / pricing** | Business Edition for commercial use |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Choose the intended direction and preview deletions. Synchronization alone does not retain independent history.
 
@@ -144,9 +144,7 @@ Visual folder comparison and synchronization with configurable directions.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="gsmartcontrol"></a>
 
@@ -154,7 +152,7 @@ Visual folder comparison and synchronization with configurable directions.
 
 Graphical frontend for drive health inspection and smartctl self-tests.
 
-**[GSmartControl: official download →](https://gsmartcontrol.shaduri.dev/downloads)** · [Documentation](https://gsmartcontrol.shaduri.dev/) · [Publisher](https://gsmartcontrol.shaduri.dev/)
+[Official download](https://gsmartcontrol.shaduri.dev/downloads) · [Documentation](https://gsmartcontrol.shaduri.dev/) · [Publisher](https://gsmartcontrol.shaduri.dev/)
 
 | Decision | Detail |
 | --- | --- |
@@ -162,7 +160,7 @@ Graphical frontend for drive health inspection and smartctl self-tests.
 | **Where it runs** | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Health reads may not pass through every USB adapter. Avoid lengthy self-tests on a failing drive.
 
@@ -178,9 +176,7 @@ Graphical frontend for drive health inspection and smartctl self-tests.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="kopia"></a>
 
@@ -188,7 +184,7 @@ Graphical frontend for drive health inspection and smartctl self-tests.
 
 Encrypted snapshot backups with both desktop and command-line interfaces.
 
-**[Kopia: official download →](https://kopia.io/docs/installation/)** · [Documentation](https://kopia.io/docs/) · [Publisher](https://kopia.io/)
+[Official download](https://kopia.io/docs/installation/) · [Documentation](https://kopia.io/docs/) · [Publisher](https://kopia.io/)
 
 | Decision | Detail |
 | --- | --- |
@@ -196,7 +192,7 @@ Encrypted snapshot backups with both desktop and command-line interfaces.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Record credentials and verify a restore before relying on the repository.
 
@@ -212,9 +208,7 @@ Encrypted snapshot backups with both desktop and command-line interfaces.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="rclone"></a>
 
@@ -222,7 +216,7 @@ Encrypted snapshot backups with both desktop and command-line interfaces.
 
 Transfers, checks and synchronizes files across many storage providers.
 
-**[rclone: official download →](https://rclone.org/downloads/)** · [Documentation](https://rclone.org/docs/) · [Publisher](https://rclone.org/)
+[Official download](https://rclone.org/downloads/) · [Documentation](https://rclone.org/docs/) · [Publisher](https://rclone.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -230,7 +224,7 @@ Transfers, checks and synchronizes files across many storage providers.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | portable |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Start with copy and dry-run where applicable. sync can remove destination files and is not versioned backup by itself.
 
@@ -246,9 +240,7 @@ Transfers, checks and synchronizes files across many storage providers.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="rescuezilla"></a>
 
@@ -256,7 +248,7 @@ Transfers, checks and synchronizes files across many storage providers.
 
 Bootable graphical disk-imaging and recovery environment compatible with [Clonezilla](https://clonezilla.org/) images.
 
-**[Rescuezilla: official download →](https://rescuezilla.com/download)** · [Documentation](https://rescuezilla.com/help) · [Publisher](https://rescuezilla.com/)
+[Official download](https://rescuezilla.com/download) · [Documentation](https://rescuezilla.com/help) · [Publisher](https://rescuezilla.com/)
 
 | Decision | Detail |
 | --- | --- |
@@ -264,7 +256,7 @@ Bootable graphical disk-imaging and recovery environment compatible with [Clonez
 | **Where it runs** | Bootable PC |
 | **How you use it** | boot |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Verify the destination model, serial and capacity before a restore overwrites it.
 
@@ -279,9 +271,7 @@ Bootable graphical disk-imaging and recovery environment compatible with [Clonez
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="restic"></a>
 
@@ -289,7 +279,7 @@ Bootable graphical disk-imaging and recovery environment compatible with [Clonez
 
 Encrypted, deduplicating file-backup snapshots across local and remote storage.
 
-**[restic: official download →](https://github.com/restic/restic/releases/latest)** · [Documentation](https://restic.readthedocs.io/en/stable/) · [Publisher](https://restic.net/)
+[Official download](https://github.com/restic/restic/releases/latest) · [Documentation](https://restic.readthedocs.io/en/stable/) · [Publisher](https://restic.net/)
 
 | Decision | Detail |
 | --- | --- |
@@ -297,7 +287,7 @@ Encrypted, deduplicating file-backup snapshots across local and remote storage.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | portable |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Keep the repository password recoverable and test restoration of real files. A snapshot is not a full bare-metal image.
 
@@ -313,9 +303,7 @@ Encrypted, deduplicating file-backup snapshots across local and remote storage.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="robocopy"></a>
 
@@ -323,7 +311,7 @@ Encrypted, deduplicating file-backup snapshots across local and remote storage.
 
 [Windows](https://www.microsoft.com/windows) file-copy utility with restart, retry, metadata and logging controls.
 
-**[Robocopy: official download →](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** · [Documentation](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · [Publisher](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)
+[Official download](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · [Documentation](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · [Publisher](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)
 
 | Decision | Detail |
 | --- | --- |
@@ -331,7 +319,7 @@ Encrypted, deduplicating file-backup snapshots across local and remote storage.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | built-in |
 | **Access / pricing** | Included with [Windows](https://www.microsoft.com/windows) |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Mirror and purge options delete destination content. Check exit-code semantics and verify the copied data.
 
@@ -346,9 +334,7 @@ Encrypted, deduplicating file-backup snapshots across local and remote storage.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="rsync"></a>
 
@@ -356,7 +342,7 @@ Encrypted, deduplicating file-backup snapshots across local and remote storage.
 
 Incremental file transfer with explicit preservation and comparison controls.
 
-**[rsync: official download →](https://rsync.samba.org/download.html)** · [Documentation](https://download.samba.org/pub/rsync/rsync.1) · [Publisher](https://rsync.samba.org/)
+[Official download](https://rsync.samba.org/download.html) · [Documentation](https://download.samba.org/pub/rsync/rsync.1) · [Publisher](https://rsync.samba.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -364,7 +350,7 @@ Incremental file transfer with explicit preservation and comparison controls.
 | **Where it runs** | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), BSD |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Check trailing-slash semantics and avoid delete options unless deletion is part of the reviewed plan.
 
@@ -380,9 +366,7 @@ Incremental file transfer with explicit preservation and comparison controls.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="smartmontools"></a>
 
@@ -390,7 +374,7 @@ Incremental file transfer with explicit preservation and comparison controls.
 
 smartctl and smartd tools for drive health information and supported self-tests.
 
-**[smartmontools: official download →](https://github.com/smartmontools/smartmontools/releases)** · [Documentation](https://github.com/smartmontools/smartmontools) · [Publisher](https://www.smartmontools.org/)
+[Official download](https://github.com/smartmontools/smartmontools/releases) · [Documentation](https://github.com/smartmontools/smartmontools) · [Publisher](https://www.smartmontools.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -398,7 +382,7 @@ smartctl and smartd tools for drive health information and supported self-tests.
 | **Where it runs** | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Read health before long tests; if a drive is failing, preserve data before stressing it.
 
@@ -414,9 +398,7 @@ smartctl and smartd tools for drive health information and supported self-tests.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="veeam-agent"></a>
 
@@ -424,7 +406,7 @@ smartctl and smartd tools for drive health information and supported self-tests.
 
 [Windows](https://www.microsoft.com/windows) backup with file, volume and full-machine recovery options.
 
-**[Veeam Agent for Microsoft Windows: official download →](https://www.veeam.com/products/free/microsoft-windows)** · [Documentation](https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html) · [Publisher](https://www.veeam.com/products/free/microsoft-windows)
+[Official download](https://www.veeam.com/products/free/microsoft-windows) · [Documentation](https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html) · [Publisher](https://www.veeam.com/products/free/microsoft-windows)
 
 | Decision | Detail |
 | --- | --- |
@@ -432,7 +414,7 @@ smartctl and smartd tools for drive health information and supported self-tests.
 | **Where it runs** | [Windows](https://www.microsoft.com/windows) |
 | **How you use it** | installed |
 | **Access / pricing** | Free and paid editions; service-provider terms differ |
-| **Selection role** | 🟢 Core |
+| **Selection role** | Core |
 
 > **Before using it:** Use the licensing appropriate to managed client services; test recovery media and a restore path.
 
@@ -447,9 +429,7 @@ smartctl and smartd tools for drive health information and supported self-tests.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="cryptsetup"></a>
 
@@ -457,7 +437,7 @@ smartctl and smartd tools for drive health information and supported self-tests.
 
 [Linux](https://www.kernel.org/) tooling for encrypted-volume management and supported unlock workflows.
 
-**[cryptsetup: official download →](https://gitlab.com/cryptsetup/cryptsetup/-/releases)** · [Documentation](https://gitlab.com/cryptsetup/cryptsetup) · [Publisher](https://gitlab.com/cryptsetup/cryptsetup)
+[Official download](https://gitlab.com/cryptsetup/cryptsetup/-/releases) · [Documentation](https://gitlab.com/cryptsetup/cryptsetup) · [Publisher](https://gitlab.com/cryptsetup/cryptsetup)
 
 | Decision | Detail |
 | --- | --- |
@@ -465,7 +445,7 @@ smartctl and smartd tools for drive health information and supported self-tests.
 | **Where it runs** | [Linux](https://www.kernel.org/) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🔬 Specialist |
+| **Selection role** | Specialist |
 
 > **Before using it:** Unlocking and formatting are different operations. Never format or alter headers as a troubleshooting shortcut.
 
@@ -481,9 +461,7 @@ smartctl and smartd tools for drive health information and supported self-tests.
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="dislocker"></a>
 
@@ -491,7 +469,7 @@ smartctl and smartd tools for drive health information and supported self-tests.
 
 Access to supported [BitLocker](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/)-encrypted volumes from a non-[Windows](https://www.microsoft.com/windows) environment.
 
-**[Dislocker: official download →](https://github.com/Aorimn/dislocker/releases)** · [Documentation](https://github.com/Aorimn/dislocker) · [Publisher](https://github.com/Aorimn/dislocker)
+[Official download](https://github.com/Aorimn/dislocker/releases) · [Documentation](https://github.com/Aorimn/dislocker) · [Publisher](https://github.com/Aorimn/dislocker)
 
 | Decision | Detail |
 | --- | --- |
@@ -499,7 +477,7 @@ Access to supported [BitLocker](https://learn.microsoft.com/en-us/windows/securi
 | **Where it runs** | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🔬 Specialist |
+| **Selection role** | Specialist |
 
 > **Before using it:** Use read-only access for recovery when possible. It does not bypass the need for authorized key material.
 
@@ -515,9 +493,7 @@ Access to supported [BitLocker](https://learn.microsoft.com/en-us/windows/securi
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="dmde"></a>
 
@@ -525,7 +501,7 @@ Access to supported [BitLocker](https://learn.microsoft.com/en-us/windows/securi
 
 Disk inspection, filesystem reconstruction and [data recovery](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) software.
 
-**[DMDE: official download →](https://dmde.com/download.html)** · [Documentation](https://dmde.com/manual.html) · [Publisher](https://dmde.com/)
+[Official download](https://dmde.com/download.html) · [Documentation](https://dmde.com/manual.html) · [Publisher](https://dmde.com/)
 
 | Decision | Detail |
 | --- | --- |
@@ -533,7 +509,7 @@ Disk inspection, filesystem reconstruction and [data recovery](https://github.co
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | portable |
 | **Access / pricing** | Free edition with limits; paid editions |
-| **Selection role** | 🔬 Specialist |
+| **Selection role** | Specialist |
 
 > **Before using it:** Prefer read-only investigation on an image. Disk-editor writes require a verified plan.
 
@@ -548,9 +524,7 @@ Disk inspection, filesystem reconstruction and [data recovery](https://github.co
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="ddrescue"></a>
 
@@ -558,7 +532,7 @@ Disk inspection, filesystem reconstruction and [data recovery](https://github.co
 
 Copies readable areas from damaged media and records progress in a resumable mapfile.
 
-**[GNU ddrescue: official download →](https://ftp.gnu.org/gnu/ddrescue/)** · [Documentation](https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html) · [Publisher](https://www.gnu.org/software/ddrescue/)
+[Official download](https://ftp.gnu.org/gnu/ddrescue/) · [Documentation](https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html) · [Publisher](https://www.gnu.org/software/ddrescue/)
 
 | Decision | Detail |
 | --- | --- |
@@ -566,7 +540,7 @@ Copies readable areas from damaged media and records progress in a resumable map
 | **Where it runs** | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🔬 Specialist |
+| **Selection role** | Specialist |
 
 > **Before using it:** Source and destination direction is critical. Keep the mapfile and never recover files back onto the failing source.
 
@@ -582,9 +556,7 @@ Copies readable areas from damaged media and records progress in a resumable map
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="gparted"></a>
 
@@ -592,7 +564,7 @@ Copies readable areas from damaged media and records progress in a resumable map
 
 Graphical partition editor available as a [Linux](https://www.kernel.org/) application and bootable live image.
 
-**[GParted: official download →](https://gparted.org/download.php)** · [Documentation](https://gparted.org/documentation.php) · [Publisher](https://gparted.org/)
+[Official download](https://gparted.org/download.php) · [Documentation](https://gparted.org/documentation.php) · [Publisher](https://gparted.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -600,7 +572,7 @@ Graphical partition editor available as a [Linux](https://www.kernel.org/) appli
 | **Where it runs** | [Linux](https://www.kernel.org/), Bootable PC |
 | **How you use it** | boot |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🔬 Specialist |
+| **Selection role** | Specialist |
 
 > **Before using it:** Partition moves and resizing can lose data if interrupted; confirm a recoverable backup and stable power.
 
@@ -616,9 +588,7 @@ Graphical partition editor available as a [Linux](https://www.kernel.org/) appli
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="nvme-cli"></a>
 
@@ -626,7 +596,7 @@ Graphical partition editor available as a [Linux](https://www.kernel.org/) appli
 
 [Linux](https://www.kernel.org/) NVMe controller and namespace inspection utilities.
 
-**[nvme-cli: official download →](https://github.com/linux-nvme/nvme-cli/releases/latest)** · [Documentation](https://github.com/linux-nvme/nvme-cli) · [Publisher](https://github.com/linux-nvme/nvme-cli)
+[Official download](https://github.com/linux-nvme/nvme-cli/releases/latest) · [Documentation](https://github.com/linux-nvme/nvme-cli) · [Publisher](https://github.com/linux-nvme/nvme-cli)
 
 | Decision | Detail |
 | --- | --- |
@@ -634,7 +604,7 @@ Graphical partition editor available as a [Linux](https://www.kernel.org/) appli
 | **Where it runs** | [Linux](https://www.kernel.org/) |
 | **How you use it** | installed |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🔬 Specialist |
+| **Selection role** | Specialist |
 
 > **Before using it:** Inventory and health commands differ from format, sanitize and firmware commands; keep those write operations separate.
 
@@ -650,9 +620,7 @@ Graphical partition editor available as a [Linux](https://www.kernel.org/) appli
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="photorec"></a>
 
@@ -660,7 +628,7 @@ Graphical partition editor available as a [Linux](https://www.kernel.org/) appli
 
 File carving that can recover supported file content when filesystem metadata is unavailable.
 
-**[PhotoRec: official download →](https://www.cgsecurity.org/wiki/TestDisk_Download)** · [Documentation](https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step) · [Publisher](https://www.cgsecurity.org/wiki/PhotoRec)
+[Official download](https://www.cgsecurity.org/wiki/TestDisk_Download) · [Documentation](https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step) · [Publisher](https://www.cgsecurity.org/wiki/PhotoRec)
 
 | Decision | Detail |
 | --- | --- |
@@ -668,7 +636,7 @@ File carving that can recover supported file content when filesystem metadata is
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | portable |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🔬 Specialist |
+| **Selection role** | Specialist |
 
 > **Before using it:** Recovered filenames and folder structure may be lost; write results to a different disk.
 
@@ -684,9 +652,7 @@ File carving that can recover supported file content when filesystem metadata is
 
 </details>
 
-[↑ Compare the options](#compare-options)
-
----
+[Back to comparison](#compare-options)
 
 <a id="testdisk"></a>
 
@@ -694,7 +660,7 @@ File carving that can recover supported file content when filesystem metadata is
 
 Partition and filesystem recovery tool for diagnosing lost partitions and recovering some files.
 
-**[TestDisk: official download →](https://www.cgsecurity.org/wiki/TestDisk_Download)** · [Documentation](https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step) · [Publisher](https://www.cgsecurity.org/wiki/TestDisk)
+[Official download](https://www.cgsecurity.org/wiki/TestDisk_Download) · [Documentation](https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step) · [Publisher](https://www.cgsecurity.org/wiki/TestDisk)
 
 | Decision | Detail |
 | --- | --- |
@@ -702,7 +668,7 @@ Partition and filesystem recovery tool for diagnosing lost partitions and recove
 | **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
 | **How you use it** | portable |
 | **Access / pricing** | Free / open source |
-| **Selection role** | 🔬 Specialist |
+| **Selection role** | Specialist |
 
 > **Before using it:** Image first when data matters; writing a partition table changes the evidence and can worsen an incorrect diagnosis.
 
@@ -718,9 +684,9 @@ Partition and filesystem recovery tool for diagnosing lost partitions and recove
 
 </details>
 
-[↑ Compare the options](#compare-options)
+[Back to comparison](#compare-options)
 
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

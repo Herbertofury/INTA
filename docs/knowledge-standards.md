@@ -7,6 +7,8 @@
 
 **Editorial review: November 26, 2026.** These are the durable authoring and implementation rules for the [technician hub](https://herbertofury.github.io/INTA/), its [live wiki](https://github.com/Herbertofury/INTA/wiki), and its offline build.
 
+The owner's current visual direction is documented in [Interface Design](https://github.com/Herbertofury/INTA/wiki/Interface-Design): a compact professional workspace with neutral charcoal surfaces, restrained blue interaction accents, readable rows and document layouts. Replace the previous green, oversized-card treatment. Keep sparse useful emoji in the Wiki, direct links and decision diagrams while reducing repetitive decoration.
+
 ## 🧭 1. One home, predictable paths
 
 Use a stable page title, a short breadcrumb, a one-sentence purpose and an immediately useful entry point. Group guidance by the technician's job. Preserve the [Decision Desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk), [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks), [Tool Directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) and [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) as distinct, cross-linked ways into the same knowledge.

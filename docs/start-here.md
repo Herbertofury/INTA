@@ -1,8 +1,8 @@
-# 🧭 Welcome to the INTA bench
+# 🧭 Start here
 
 [Home](https://github.com/Herbertofury/INTA/wiki) › **Start here**
 
-**One place to choose the right job, reach the official tools and follow the repair through to proof.** Open the [interactive technician hub](https://herbertofury.github.io/INTA/) for search and checklists, or stay in the wiki for the complete field guides.
+**Find a tool, choose a procedure, and record the result.** Open the [interactive technician hub](https://herbertofury.github.io/INTA/) for search and checklists, or stay in the wiki for the complete field guides.
 
 | I want to… | Open |
 | --- | --- |
@@ -38,9 +38,10 @@ The levels describe editorial selection. They do not certify that every tool was
 
 | Tab | Use it for |
 | --- | --- |
-| **Home** | Choose a job and reach the everyday kit quickly. |
+| **Home** | Browse the complete tool directory and jump to a discipline. |
 | **Tool library** | Search the complete catalog and combine discipline, platform and kit-level filters. |
 | **Playbooks** | Follow steps, tick progress, copy a scoped diagnostic command and verify the result. |
+| **Knowledge desk** | Find methods, tool-selection guidance, service evidence, and contribution standards. |
 | **Saved** | Keep personal preferred tools close at hand. |
 | **Resources** | Reach this wiki, releases, canonical source and original documentation. |
 

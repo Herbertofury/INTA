@@ -1,29 +1,40 @@
-<p align="center"><img src="docs/assets/inta-banner.svg" alt="INTA Computer Services: Every fix starts here" width="100%"></p>
+<img src="docs/assets/inta-banner.svg" alt="INTA Computer Services technical reference" width="100%">
 
-<p align="center"><strong>The shared technician home for INTA Computer Services.</strong><br>Choose the job. Find the tool. Follow the method. Verify the fix.</p>
+# INTA Computer Services
 
-<p align="center"><a href="https://herbertofury.github.io/INTA/"><strong>OPEN THE TECHNICIAN HUB →</strong></a> · <a href="https://github.com/Herbertofury/INTA/wiki">Read the Wiki</a> · <a href="https://github.com/Herbertofury/INTA/releases">Rescue releases</a></p>
+Tools, procedures, and service knowledge for the INTA team.
+
+**[Technician workspace](https://herbertofury.github.io/INTA/)** · [Wiki](https://github.com/Herbertofury/INTA/wiki) · [Tool selection](https://github.com/Herbertofury/INTA/wiki/Tool-Selection) · [Rescue releases](https://github.com/Herbertofury/INTA/releases)
 
 ---
 
-## 🧭 A home for the whole service desk
+<a id="-a-home-for-the-whole-service-desk"></a>
 
-INTA brings **111 purpose-selected tools**, **22 complete job playbooks**, **40 named troubleshooting methods**, official downloads, and practical field knowledge into one searchable workspace. It covers everyday [Windows](https://www.microsoft.com/windows) service, [malware removal](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal), [remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support), [hardware diagnostics](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod), [data recovery](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive), networking, boot media, backup, productivity and AI-assisted troubleshooting. Selected discoveries from **[Athena](https://github.com/Herbertofury/Athena)** retain their provenance and evaluation status.
+## Service reference
+
+INTA brings **113 tools**, **22 job playbooks**, a library of named troubleshooting methods, official downloads, and practical field knowledge into one searchable workspace. It covers everyday [Windows](https://www.microsoft.com/windows) service, [malware removal](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal), [remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support), [hardware diagnostics](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod), [data recovery](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive), networking, boot media, backup, productivity and AI-assisted troubleshooting. Selected discoveries from **[Athena](https://github.com/Herbertofury/Athena)** retain their provenance and evaluation status.
 
 The browser hub works online and as a single offline HTML file. The live [Wiki](https://github.com/Herbertofury/INTA/wiki) provides the same job guidance with a coordinated navigation system, job-specific [Mermaid](https://mermaid.js.org/) decision diagrams, evidence checkpoints, linked tools, and a clear path to the next guide. [INTA Rescue](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md) and its [Media Creator](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md) remain in this repository as the bootable recovery side of the toolkit.
 
-## ✨ Your knowledge desk
+<a id="-your-knowledge-desk"></a>
+
+## Knowledge desk
 
 | Open this | When it helps |
 | --- | --- |
-| 🧭 [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) | Turn a symptom into the right guide, with clear branches and linked next steps. |
-| 🧠 [Methods library](https://github.com/Herbertofury/INTA/wiki/Methods) | Learn 40 reusable diagnostic approaches, when to choose them, and what proves they worked. |
-| 📐 [Knowledge standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) | Keep page layouts, direct links, emoji, diagrams, sources and verification consistent. |
-| ✍️ [Contribution guide](https://github.com/Herbertofury/INTA/wiki/Contribute) | Improve the canonical content and publish it across every surface. |
-| 🧩 [Ready-to-use templates](https://github.com/Herbertofury/INTA/wiki/Templates) | Start a tool recommendation, complete playbook, method note or evidence record. |
-| 🌱 [Continuous improvement](https://github.com/Herbertofury/INTA/wiki/Continuous-Improvement) | Follow the contribution priorities and the ongoing editorial workflow. |
+| [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) | Turn a symptom into the right guide, with clear branches and linked next steps. |
+| [Methods library](https://github.com/Herbertofury/INTA/wiki/Methods) | Learn reusable diagnostic approaches, when to choose them, and what proves they worked. |
+| [Knowledge standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) | Keep page layouts, direct links, emoji, diagrams, sources and verification consistent. |
+| [Contribution guide](https://github.com/Herbertofury/INTA/wiki/Contribute) | Improve the canonical content and publish it across every surface. |
+| [Templates](https://github.com/Herbertofury/INTA/wiki/Templates) | Start a tool recommendation, complete playbook, method note or evidence record. |
+| [Continuous improvement](https://github.com/Herbertofury/INTA/wiki/Continuous-Improvement) | Follow the contribution priorities and the ongoing editorial workflow. |
+| [Tool selection](https://github.com/Herbertofury/INTA/wiki/Tool-Selection) | Choose diagnostics, disk-space analysis, file search, or remote access for the job. |
+| [Service evidence](https://github.com/Herbertofury/INTA/wiki/Service-Evidence) | Record scan coverage, session closure, and recovery acceptance. |
+| [Interface design](https://github.com/Herbertofury/INTA/wiki/Interface-Design) | Maintain the compact professional layout and its source-informed design decisions. |
 
-## 🛠️ What are you fixing?
+<a id="-what-are-you-fixing"></a>
+
+## 🛠 Choose a job
 
 | Your job | Open the guide | The result you are aiming for |
 | --- | --- | --- |
@@ -40,9 +51,11 @@ The browser hub works online and as a single offline HTML file. The live [Wiki](
 | Office and workplace issues | [Outlook](https://github.com/Herbertofury/INTA/wiki/Job-outlook-email) · [Printers](https://github.com/Herbertofury/INTA/wiki/Job-printer-repair) · [AD trust](https://github.com/Herbertofury/INTA/wiki/Job-ad-trust) | Diagnosis at the correct device, account or service layer. |
 | Preparing the next job | [New PC](https://github.com/Herbertofury/INTA/wiki/Job-new-pc) · [Maintenance](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) · [USB media](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) | A ready kit and a machine that is ready for real use. |
 
-**[Browse all 22 playbooks →](https://github.com/Herbertofury/INTA/wiki/Playbooks)**
+**[Browse all 22 playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks)**
 
-## 🧰 Your workspace, with the useful details built in
+<a id="-your-workspace-with-the-useful-details-built-in"></a>
+
+## Workspace capabilities
 
 - **Search the complete catalog.** Filter by discipline, platform and kit level. Every matching tool remains available.
 - **Choose with context.** Each tool has a best-use case, delivery type, platform details, pricing notes, official download, documentation and source.
@@ -55,7 +68,9 @@ The browser hub works online and as a single offline HTML file. The live [Wiki](
 
 Saved tools and checklist progress live in your browser. Keep the actual customer ticket and evidence in the team's approved private system. External downloads, documentation and online AI still need a connection.
 
-## 🔎 The toolkit
+<a id="-the-toolkit"></a>
+
+## Tool disciplines
 
 | Discipline | Examples |
 | --- | --- |
@@ -87,11 +102,13 @@ python3 scripts/check-upstreams.py --output reports/upstreams.json
 
 Command guide: [Python](https://www.python.org/) runs the [upstream checker](scripts/check-upstreams.py) to produce a review report.
 
-The existing weekly Rescue image build remains separate from hub publication. Documentation-only changes do not cancel an in-progress ISO build. **[Read the maintenance workflow →](docs/maintaining-the-hub.md)**
+The existing weekly Rescue image build remains separate from hub publication. Documentation-only changes do not cancel an in-progress ISO build. **[Read the maintenance workflow](docs/maintaining-the-hub.md)**
 
 The ongoing **Grow the INTA Wiki** maintenance task runs on weekday mornings, around **8:00 a.m. America/Denver**. It researches meaningful improvements, follows the contribution rules, validates changes, and verifies publication. The task's run result is the evidence of what actually changed; a schedule by itself does not prove a contribution was completed.
 
-## ✍️ Contribute to the bench
+<a id="-contribute-to-the-bench"></a>
+
+## Contribute
 
 ```sh
 python3 scripts/build-hub.py
@@ -102,11 +119,11 @@ python3 scripts/check-wiki.py
 
 Command guide: [Python](https://www.python.org/) runs the [builder](scripts/build-hub.py), [regression suite](tests/), and [complete Wiki audit](scripts/check-wiki.py).
 
-Start with [CONTRIBUTING.md](CONTRIBUTING.md) and the [knowledge standards](docs/knowledge-standards.md). Edit the canonical catalogs, method definitions, layout data or authored guidance, regenerate the outputs, review the changed guidance and publish. The hub deploys through [GitHub Pages](https://docs.github.com/en/pages); `scripts/publish-wiki.py` synchronizes the generated pages to the real Wiki with an authenticated maintainer [Git](https://git-scm.com/) session.
+Start with [CONTRIBUTING.md](CONTRIBUTING.md), [Knowledge Standards](docs/knowledge-standards.md), and [Interface Design](docs/interface-design.md). Edit the canonical catalogs, method definitions, layout data or authored guidance, regenerate the outputs, review the changed guidance and publish. The hub deploys through [GitHub Pages](https://docs.github.com/en/pages); `scripts/publish-wiki.py` synchronizes the generated pages to the real Wiki with an authenticated maintainer [Git](https://git-scm.com/) session.
 
 **[Suggest a tool or correction](https://github.com/Herbertofury/INTA/issues/new/choose)** · **[New technician orientation](docs/start-here.md)** · **[Intake & handoff template](docs/technician-handoff.md)**
 
 ---
 
-**INTA Computer Services** · Built for the people behind the fix.  
+**INTA Computer Services** · Technical reference
 Editorial review: **November 26, 2026**. Complete source and provenance remain in this repository.

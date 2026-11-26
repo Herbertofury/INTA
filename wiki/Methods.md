@@ -1,4 +1,4 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 # 🧠 Methods that turn symptoms into proof
 
@@ -6,7 +6,7 @@
 
 **Choose a method by the question it answers.** A tool collects or changes something; a method explains why that action is useful and what evidence should change the next step. Open a linked method to reach its complete field guide.
 
-The registry contains **40 named methods**: a method for each of the **22 job guides**, plus **18 reusable diagnostic concepts**. These are INTA operating methods supported by the linked platform sources. They are not a claim that every technique was invented, standardized or independently benchmarked here.
+The registry contains **45 named methods**: a method for each of the **22 job guides**, plus **18 reusable diagnostic concepts** and **five service-evidence methods**. These are INTA operating methods supported by the linked platform sources. They are not a claim that every technique was invented, standardized or independently benchmarked here.
 
 ## 🧭 Choose the right level
 
@@ -92,6 +92,18 @@ The registry contains **40 named methods**: a method for each of the **22 job gu
 | [Manual freshness review](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) | Use when a checker reports a new release, changed URL or outdated review. | Release identity, applicable changes, compatibility and a dated editorial decision are recorded. |
 | [Stable-release promotion](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) | Use when evaluating a new tool version or a research candidate. | Equivalent work, relevant behavior, resource cost and rollback evidence support the promotion. |
 
+## 🧾 Close the [service evidence](https://github.com/Herbertofury/INTA/wiki/Service-Evidence) gap
+
+| Method | When it helps | What proves progress |
+| --- | --- | --- |
+| [Remote capability preflight](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) | Before choosing or starting a one-time or managed support connection. | Both platforms, user presence, permissions, transfer route and reconnect plan are recorded and the required capabilities are exercised. |
+| [Temporary access revocation](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) | At the end of remote work or when ownership and scope change. | Session end, closed channels and removed credentials/enrollments are recorded, or continuing access has a named owner and review date. |
+| [Scan coverage reconciliation](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) | After each malware scan and before a cleanup or escalation decision. | The case has scan mode, version, scope, completion, exclusions or errors, findings and disposition with the product report. |
+| [Clean rebuild acceptance](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) | When the trusted endpoint baseline cannot be established or the incident owner requires rebuilding. | Pre-wipe target and data decisions, media provenance, patch/protection state, restore checks, account-response ownership and customer-task evidence are recorded. |
+| [Image and mapfile reconciliation](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) | At an imaging checkpoint and before filesystem repair or extraction from a working copy. | Saved mapfile states, remaining unreadable ranges, matching image/mapfile checkpoint and healthy-storage copy checks are recorded separately from file usability. |
+
+Use [Service Evidence](https://github.com/Herbertofury/INTA/wiki/Service-Evidence) for the concrete acceptance records and [Tool Selection](https://github.com/Herbertofury/INTA/wiki/Tool-Selection) for diagnostic and remote-support choices.
+
 ## 📚 Sources and evidence boundaries
 
 Each method record retains its exact destination, aliases, purpose, use conditions, proof and original sources in [the method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json). The full field guides retain their own source lists and escalation boundaries.
@@ -109,4 +121,4 @@ Editorial review: **November 26, 2026**. A method tells you how to seek evidence
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

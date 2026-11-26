@@ -1,21 +1,26 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# 🥾 [Recover a Windows PC that will not boot](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery)
+<a id="-recover-a-windows-pc-that-will-not-boot"></a>
+
+# [Recover a Windows PC that will not boot](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery)
 
 Separate firmware, storage, encryption, and [Windows](https://www.microsoft.com/windows) startup faults before changing the boot configuration.
 
-| Work area | Experience | Plan your time | Workflow |
-| --- | --- | --- | --- |
-| Recovery & boot | Advanced | 30–120 min | 6 steps + acceptance |
+**Recovery & boot** · Advanced · 30–120 min · 6 steps
 
-**[▶ Open the interactive checklist](https://herbertofury.github.io/INTA/#job/boot-recovery)** · [Decision route](#decision-route) · [Toolkit](#toolkit) · [Walkthrough](#walkthrough) · [Acceptance](#acceptance) · [Sources](#sources)
+[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/boot-recovery)
 
-> [!TIP]
-> **Your starting move:** Record the exact screen and failure stage. Obtain the device’s recovery-key access path before any firmware, TPM, or boot changes.
+> [!NOTE]
+> **Start here.** Record the exact screen and failure stage. Obtain the device’s recovery-key access path before any firmware, TPM, or boot changes.
 
 <a id="decision-route"></a>
 
-## 🧭 Choose the right branch
+<a id="-choose-the-right-branch"></a>
+
+## 🧭 Choose a route
+
+<details>
+<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -31,13 +36,15 @@ flowchart TD
     I --> J
     J -->|"No"| K["Protect data before advanced repair"]:::stop
     J -->|"Yes"| L["Verify another restart and encryption"]:::done
-    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa
-    classDef action fill:#172033,stroke:#64748b,color:#f8fafc
-    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2
-    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5
+    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46
+    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445
+    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137
+    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449
 ```
 
-**Diagram routes:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) · [Build and refresh a technician rescue USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) · [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) · [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)
+**Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) · [Build and refresh a technician rescue USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) · [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) · [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)
+
+</details>
 
 | Checkpoint | What to carry forward |
 | --- | --- |
@@ -47,9 +54,11 @@ flowchart TD
 
 <a id="toolkit"></a>
 
-## 🧰 Build the right toolkit
+<a id="-build-the-right-toolkit"></a>
 
-Choose the tools that answer the case’s next question. Opening a tool is a separate decision from changing the customer’s system.
+## Recommended tools
+
+Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
 | Tool / official download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
@@ -62,7 +71,9 @@ Choose the tools that answer the case’s next question. Opening a tool is a sep
 
 <a id="walkthrough"></a>
 
-## 🪜 Work the case
+<a id="-work-the-case"></a>
+
+## Procedure
 
 Work in order, record the result of each step, and change route when the evidence calls for it.
 
@@ -104,7 +115,9 @@ Work in order, record the result of each step, and change route when the evidenc
 
 <a id="acceptance"></a>
 
-## ✅ Prove the result
+<a id="-prove-the-result"></a>
+
+## Verification
 
 - [ ] The correct [Windows](https://www.microsoft.com/windows) installation boots reliably twice.
 - [ ] User data, required applications, and encryption remain accessible.
@@ -115,7 +128,9 @@ Work in order, record the result of each step, and change route when the evidenc
 > - The recovery key or correct target disk cannot be established.
 > - The drive shows physical failure or the proposed action would overwrite the only copy.
 
-## 🔀 Continue with the evidence
+<a id="-continue-with-the-evidence"></a>
+
+## Related playbooks
 
 | Next playbook | What it resolves |
 | --- | --- |
@@ -124,14 +139,14 @@ Work in order, record the result of each step, and change route when the evidenc
 | [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) | Use [Windows](https://www.microsoft.com/windows) servicing tools in a sensible order and validate the specific broken feature. |
 | [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) | Validate recovery credentials, data integrity, application usability, and recovery time. |
 
-Found a reusable improvement? [Contribute the correction](https://github.com/Herbertofury/INTA/wiki/Contribute) and include the test that proved it.
-
 <a id="sources"></a>
 
-## 🔎 Source trail
+<a id="-source-trail"></a>
+
+## Official sources
 
 <details>
-<summary>Official references and editorial review</summary>
+<summary>References and review notes</summary>
 
 - [Microsoft: Windows recovery environment](https://support.microsoft.com/en-us/windows/experience/backup-recovery/windows-recovery-environment)
 - [Microsoft: startup troubleshooting](https://learn.microsoft.com/en-us/windows/client-management/advanced-troubleshooting-boot-problems)
@@ -142,4 +157,4 @@ Reviewed **2026-11-26**. Timing is a planning range. A successful command is evi
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

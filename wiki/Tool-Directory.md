@@ -1,12 +1,14 @@
-[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
-# 🧰 The tool directory
+<a id="-the-tool-directory"></a>
 
-Find the tool that fits the job, compare its role, and go straight to its official source.
+# Tool directory
 
-**111 tools · 10 disciplines · Official publisher links**
+Compare use cases, platform support and access requirements. Each entry links to the official publisher, download and documentation.
 
-| 🟢 Core | 🔬 Specialist | 🧪 Evaluate |
+**113 tools · 10 categories** · [Category list](#disciplines) · [Complete catalog](#complete-catalog)
+
+| Core | Specialist | Evaluate |
 | --- | --- | --- |
 | Everyday candidates for common work. | Focused tools for a defined advanced task. | Research candidates requiring comparative proof. |
 
@@ -15,24 +17,29 @@ Find the tool that fits the job, compare its role, and go straight to its offici
 
 <a id="disciplines"></a>
 
-## 🗂️ Browse by discipline
+<a id="️-browse-by-discipline"></a>
+<a id="-browse-by-discipline"></a>
 
-| Discipline | Start by asking | Tools |
+## 🧰 Categories
+
+| Category | Selection question | Tools |
 | --- | --- | --- |
-| [✨ AI assistance](https://github.com/Herbertofury/INTA/wiki/Tools-ai) | Explain evidence, review a script, or compare hypotheses? | 5 |
-| [🥾 Bootable media](https://github.com/Herbertofury/INTA/wiki/Tools-boot) | Create media, recover startup, or rescue data? | 7 |
-| [🔬 Hardware diagnostics](https://github.com/Herbertofury/INTA/wiki/Tools-hardware) | Load-related fault, idle crash, or unhealthy hardware? | 7 |
-| [🛡️ Malware removal & endpoint protection](https://github.com/Herbertofury/INTA/wiki/Tools-malware) | Routine unwanted software or a wider compromise? | 12 |
-| [🌐 Networking](https://github.com/Herbertofury/INTA/wiki/Tools-network) | One device, one service, or the whole office? | 9 |
-| [🧰 Technician productivity](https://github.com/Herbertofury/INTA/wiki/Tools-productivity) | Inspect, document, transfer, or improve your own workspace? | 8 |
-| [🖥️ Remote support](https://github.com/Herbertofury/INTA/wiki/Tools-remote) | One-time help or recurring managed access? | 8 |
-| [🧪 Advanced defensive security](https://github.com/Herbertofury/INTA/wiki/Tools-security) | Collect evidence, analyze a capture, or evaluate a candidate? | 15 |
-| [💾 Storage, recovery & backup](https://github.com/Herbertofury/INTA/wiki/Tools-storage) | Healthy migration, missing files, or failing media? | 20 |
-| [🪟 Windows diagnosis & repair](https://github.com/Herbertofury/INTA/wiki/Tools-windows) | Performance, servicing, startup, or application failure? | 20 |
+| [AI assistance](https://github.com/Herbertofury/INTA/wiki/Tools-ai) | Explain evidence, review a script, or compare hypotheses? | 5 |
+| [Bootable media](https://github.com/Herbertofury/INTA/wiki/Tools-boot) | Create media, recover startup, or rescue data? | 7 |
+| [Hardware diagnostics](https://github.com/Herbertofury/INTA/wiki/Tools-hardware) | Load-related fault, idle crash, or unhealthy hardware? | 7 |
+| [Malware removal & endpoint protection](https://github.com/Herbertofury/INTA/wiki/Tools-malware) | Routine unwanted software or a wider compromise? | 12 |
+| [Networking](https://github.com/Herbertofury/INTA/wiki/Tools-network) | One device, one service, or the whole office? | 9 |
+| [Technician productivity](https://github.com/Herbertofury/INTA/wiki/Tools-productivity) | Inspect, document, transfer, or improve your own workspace? | 9 |
+| [Remote support](https://github.com/Herbertofury/INTA/wiki/Tools-remote) | One-time help or recurring managed access? | 8 |
+| [Advanced defensive security](https://github.com/Herbertofury/INTA/wiki/Tools-security) | Collect evidence, analyze a capture, or evaluate a candidate? | 15 |
+| [Storage, recovery & backup](https://github.com/Herbertofury/INTA/wiki/Tools-storage) | Healthy migration, missing files, or failing media? | 20 |
+| [Windows diagnosis & repair](https://github.com/Herbertofury/INTA/wiki/Tools-windows) | Performance, servicing, startup, or application failure? | 21 |
 
 <a id="complete-catalog"></a>
 
-## 📇 Every tool, one place
+<a id="-every-tool-one-place"></a>
+
+## Complete catalog
 
 | Tool | Discipline | Choose it for |
 | --- | --- | --- |
@@ -146,8 +153,10 @@ Find the tool that fits the job, compare its role, and go straight to its offici
 | [WinSAT (legacy)](https://github.com/Herbertofury/INTA/wiki/Tools-windows#winsat) | [Windows](https://www.microsoft.com/windows) diagnosis & repair | Understanding a legacy assessment when the target system still provides it; prefer WPR/WPA for current investigations. |
 | [WinSCP](https://github.com/Herbertofury/INTA/wiki/Tools-network#winscp) | Networking | Transferring support logs and configuration files to an approved host. |
 | [Wireshark](https://github.com/Herbertofury/INTA/wiki/Tools-network#wireshark) | Networking | Explaining DNS, TCP and application-protocol failures from a bounded capture. |
+| [WizFile](https://github.com/Herbertofury/INTA/wiki/Tools-productivity#wizfile) | Technician productivity | Locating a known file, log or recently changed group of files without guessing its folder. |
+| [WizTree](https://github.com/Herbertofury/INTA/wiki/Tools-windows#wiztree) | [Windows](https://www.microsoft.com/windows) diagnosis & repair | Finding the folders and files responsible for a capacity problem before selecting an approved cleanup. |
 | [YARA-X](https://github.com/Herbertofury/INTA/wiki/Tools-security#yara-x) | Advanced defensive security | Scanning selected evidence files with reviewed detection rules. |
 
 ---
 
-**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)
