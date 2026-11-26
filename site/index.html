@@ -17,6 +17,45 @@
 @media(max-width:480px){.hero{display:block;padding:25px;min-height:322px}.hero-content{max-width:100%}.hero h1{font-size:38px;max-width:280px}.hero p{max-width:280px;font-size:11px}.hero-visual{display:none}.hero-actions{gap:8px;margin-top:23px}.hero-actions .button{font-size:10px}.hero-label{font-size:7px}.stat-card{padding:12px 10px}.stat-card .stat-date{font-size:12px}.stat-card strong{font-size:19px}.stat-card p{font-size:7px;letter-spacing:0}.home-jobs{gap:10px}.home-jobs .job-card{padding:14px;gap:9px}.home-jobs .job-card h3{font-size:11px}.home-jobs .job-card p{font-size:9px}.home-jobs .job-card-bottom{font-size:7px}.home-jobs .job-card-bottom>svg{display:none}.home-jobs .job-card-icon{padding:7px}.home-jobs .job-card-index{font-size:8px}.section-title h2{font-size:16px}.section-title p{font-size:9px;max-width:230px}.section-title a{font-size:8px;gap:4px}.section-title a svg{width:11px}.tool-grid:not(.home-tools){grid-template-columns:1fr}.home-tools .tool-card{padding:13px}.home-tools .tool-card h3{font-size:11px}.home-tools .tool-card-summary{font-size:9px}.home-tools .tool-card-category{font-size:7px}.home-tools .tool-card-footer{flex-wrap:wrap;gap:8px}.home-tools .tool-card-footer a{font-size:8px}.tool-meta-row{gap:4px}.pill{font-size:7px;padding:3px 5px}.home-tools .tool-card-header .tool-letter{height:28px;width:28px}.home-tools .save-tool{padding:5px}.home-tools .save-tool svg{height:13px;width:13px}.job-grid:not(.home-jobs){grid-template-columns:1fr}.job-card h3{font-size:14px}.job-card p{font-size:11px}.job-card-bottom{font-size:9px}.page-heading h1{font-size:28px}.page-heading p{font-size:11px}.page-eyebrow{font-size:8px}.detail-header h1{font-size:26px}.detail-tool-title{gap:13px}.detail-tool-title .tool-letter{height:45px;width:45px;font-size:16px}.detail-tool-title .page-eyebrow{font-size:7px}.detail-tool-title h1{font-size:26px}.tool-info-grid{grid-template-columns:1fr}.resource-grid{grid-template-columns:1fr}.detail-related{grid-template-columns:1fr}.command-block{margin-left:0}.step .step-detail{margin-left:0}.step h3{font-size:13px}.step-number{display:block;margin-bottom:4px}.callout{padding:16px;gap:10px}.callout p{font-size:10px}.routine-banner{padding:18px}.routine-banner h3{font-size:13px}.routine-banner p{font-size:9px}.main-footer{align-items:flex-start;padding:18px 0;min-height:70px}.main-footer>span{font-size:7px}.main-footer a{font-size:7px;max-width:113px}.main-footer a svg{display:none}.back-link{font-size:9px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 @media print{html,body{background:white!important;color:#111!important;font-size:11pt}.sidebar,.topbar,.main-footer,.detail-actions,.back-link,.toast,.checklist-reset,.copy-command,.nav-backdrop{display:none!important}.app-shell,.workspace{display:block}#main{max-width:none;padding:0;margin:0}.detail-layout{display:block}.detail-aside{display:block;margin-top:20px}.detail-header{margin-bottom:20px;padding-bottom:15px}.detail-header h1{font-size:25pt}.detail-header .summary{color:#333!important}.step,.aside-card,.callout,.verify-item,.source-list a,.info-block{background:white!important;border:1px solid #ccc!important;break-inside:avoid;box-shadow:none;margin-bottom:10px;color:#111!important}.step .step-detail,.prose,.aside-card p,.stop-list,.callout p,.source-list a,.verify-item,.sources-note{color:#333!important}.command-block{background:#fafafa!important;border-color:#bbb!important}.command-block pre{color:#111!important;white-space:pre-wrap}.command-bar{color:#444!important}.step-label input:checked{background:#444!important}.step-label input:checked::after{color:white!important}.pill{color:#333!important;border-color:#bbb!important}.detail-related,.aside-tools{display:none}.source-list a::after{content:" (" attr(href) ")";font-size:8pt;word-break:break-all;color:#555}.source-list a svg{display:none}.hero{background:#f5f5f5!important;color:#111!important}.hero h1 em{color:#333!important}.button{display:none!important}.progress-track{border:1px solid #888!important}.progress-track>span{background:#777!important}h2,h3{break-after:avoid}}
+
+/* Compact all-tools front-page directory */
+.all-tools-section{margin:54px 0 8px}
+.all-tools-section>.section-title{align-items:flex-end;margin-bottom:19px}
+.all-tools-section>.section-title>div{max-width:760px}
+.all-tools-section>.section-title h2{font-size:clamp(24px,3vw,31px);margin:5px 0 8px}
+.all-tools-section>.section-title p{color:var(--muted);max-width:720px}
+.directory-callout{display:flex;align-items:center;gap:12px;padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);margin-bottom:15px}
+.directory-callout>span:first-child{color:var(--lime)}
+.directory-callout>span:first-child svg{width:19px;height:19px}
+.directory-callout p{color:var(--muted);font-size:12px;flex:1}
+.directory-callout p strong{color:var(--text)}
+.directory-callout kbd{font:11px var(--mono);padding:2px 5px;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.directory-total,.directory-count{font:10px var(--mono);color:var(--lime);white-space:nowrap}
+.discipline-jump{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px}
+.discipline-jump a{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--muted);font-size:11px}
+.discipline-jump a:hover{border-color:var(--lime);color:var(--lime)}
+.discipline-jump a span{font:9px var(--mono);color:var(--dim)}
+.directory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;align-items:start}
+.directory-card{min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:13px;background:var(--panel)}
+.directory-card-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px;background:var(--panel2);border-bottom:1px solid var(--line)}
+.directory-card-header .page-eyebrow{font-size:8px}
+.directory-card-header h3{font-size:16px;margin-top:3px}
+.directory-tool-list{display:grid}
+.directory-tool-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:11px 14px;border-bottom:1px solid var(--line-soft)}
+.directory-tool-row:last-child{border-bottom:0}
+.directory-tool-main{min-width:0}
+.directory-tool-name{display:inline-block;font-size:12px;font-weight:700;color:var(--text);line-height:1.35}
+.directory-tool-main>p{font-size:10.5px;line-height:1.45;color:var(--muted);margin-top:3px;max-width:560px}
+.directory-tool-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.directory-tool-tags .pill{font-size:8px;padding:2px 6px}
+.directory-tool-actions{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;white-space:nowrap}
+.directory-tool-actions a,.directory-wiki-link{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--green)}
+.directory-tool-actions a:hover,.directory-wiki-link:hover{color:var(--lime)}
+.directory-tool-actions svg,.directory-wiki-link svg{width:12px;height:12px}
+.directory-wiki-link{padding:10px 14px;border-top:1px solid var(--line-soft);font-weight:650}
+.directory-footnote{font-size:10px;color:var(--dim);margin:14px 2px 0;line-height:1.6}
+@media(max-width:1080px){.directory-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.all-tools-section{margin-top:38px}.directory-callout{align-items:flex-start;flex-wrap:wrap}.directory-total{width:100%;padding-left:31px}.directory-tool-row{grid-template-columns:minmax(0,1fr) auto;padding:10px}.directory-tool-actions{gap:7px}.directory-tool-actions a{font-size:9px}.directory-card-header{padding:13px}.discipline-jump{gap:5px}.discipline-jump a{font-size:10px;padding:5px 7px}}
 </style>
 </head>
 <body>
@@ -81,7 +120,7 @@
   const search = document.getElementById('global-search');
   const searchResults = document.getElementById('search-results');
   const $ = selector => document.querySelector(selector);
-  const $$ = selector => Array.from(document.querySelectorAll(selector));
+  const $ = selector => Array.from(document.querySelectorAll(selector));
   const repo = 'https://github.com/Herbertofury/INTA';
   const reviewDate = meta.reviewedAt || meta.reviewed_at || '2026-11-26';
   const savedKey = 'inta:favorite-tools:v1';
@@ -229,12 +268,57 @@
   function heroGraphic() {
     return `<div class="hero-visual" aria-hidden="true"><svg viewBox="0 0 350 290" fill="none"><defs><linearGradient id="screenG" x1="120" y1="85" x2="250" y2="220" gradientUnits="userSpaceOnUse"><stop stop-color="#365846"/><stop offset="1" stop-color="#172d27"/></linearGradient></defs><ellipse cx="178" cy="248" rx="115" ry="14" fill="#0d211b" opacity=".25"/><path d="M43 143h32M283 143h29M178 37v28M178 228v22" stroke="#77976c" stroke-opacity=".5" stroke-dasharray="3 5"/><path d="M45 84v-9h9M302 84v-9h-9M45 208v9h9M302 208v9h-9" stroke="#84a573" stroke-opacity=".6"/><rect x="71" y="67" width="209" height="157" rx="14" fill="#20382e" stroke="#89ac72" stroke-opacity=".5"/><rect x="79" y="75" width="193" height="141" rx="9" fill="url(#screenG)" stroke="#96b681" stroke-opacity=".2"/><path d="M79 102h193" stroke="#719660" stroke-opacity=".3"/><circle cx="92" cy="89" r="2.5" fill="#c9ec83"/><circle cx="102" cy="89" r="2.5" fill="#789765"/><circle cx="112" cy="89" r="2.5" fill="#546f47"/><text x="258" y="91" text-anchor="end" fill="#b7cfa4" font-family="Consolas,monospace" font-size="6" letter-spacing="1">INTA / SERVICE DESK</text><rect x="94" y="115" width="70" height="86" rx="5" fill="#173329" stroke="#759c61" stroke-opacity=".3"/><path d="M108 134h41M108 141h28M108 154h41M108 161h23M108 174h41M108 181h33" stroke="#628054" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/><path d="M108 134h16M108 154h24M108 174h10" stroke="#c9ec83" stroke-width="3" stroke-linecap="round"/><circle cx="214" cy="152" r="30" fill="#304c34" stroke="#a8cd7f" stroke-opacity=".4"/><circle cx="214" cy="152" r="23" fill="#3b5c38" stroke="#c9ec83" stroke-opacity=".7"/><path d="m203 152 7 7 15-16" stroke="#d6f0ac" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="214" y="195" text-anchor="middle" fill="#bbd3ab" font-family="Consolas,monospace" font-size="6" letter-spacing="1">VERIFY THE FIX</text><rect x="26" y="112" width="84" height="37" rx="7" fill="#283d30" stroke="#91b778" stroke-opacity=".5"/><rect x="36" y="122" width="16" height="16" rx="4" fill="#415b35"/><path d="m40 130 3 3 5-6" stroke="#d2ef8a" stroke-width="1.5" stroke-linecap="round"/><text x="59" y="126" fill="#d6e6c9" font-family="Arial,sans-serif" font-size="7">Clear methods</text><text x="59" y="136" fill="#9db68e" font-family="Arial,sans-serif" font-size="5">One step at a time</text><rect x="237" y="180" width="88" height="39" rx="7" fill="#c9ec83"/><path d="M249 192h10v13h-10zM252 195h4M252 199h4" stroke="#456434" stroke-width="1.1"/><text x="266" y="196" fill="#233c23" font-family="Arial,sans-serif" font-weight="bold" font-size="7">FIELD READY</text><text x="266" y="206" fill="#50663e" font-family="Arial,sans-serif" font-size="5">Your next fix starts here</text><circle cx="294" cy="85" r="4" fill="#c9ec83"/><circle cx="57" cy="205" r="3" fill="#6d9858"/><path d="M158 231h38l8 11h-54Z" fill="#365139" stroke="#86aa6d" stroke-opacity=".4"/></svg><div class="floating-label">TOOLS · METHODS · CONFIDENCE</div></div>`;
   }
+  function compactToolDirectory() {
+    const grouped = new Map();
+    tools.forEach(tool => {
+      if (!grouped.has(tool.category)) grouped.set(tool.category, []);
+      grouped.get(tool.category).push(tool);
+    });
+    const preferred = ['malware', 'security', 'remote', 'windows', 'storage', 'hardware', 'network', 'boot', 'productivity', 'ai'];
+    const categories = [...grouped.keys()].sort((a, b) => {
+      const ai = preferred.indexOf(a), bi = preferred.indexOf(b);
+      return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi) || categoryLabel(a).localeCompare(categoryLabel(b));
+    });
+    const cards = categories.map(category => {
+      const items = grouped.get(category).slice().sort((a, b) => a.name.localeCompare(b.name));
+      const rows = items.map(tool => {
+        const related = jobs.find(job => array(job.tools).includes(tool.id));
+        return `<article class="directory-tool-row">
+          <div class="directory-tool-main">
+            <a class="directory-tool-name" href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a>
+            <p>${esc(tool.bestFor || tool.summary)}</p>
+            <div class="directory-tool-tags">${array(tool.platforms).map(platform => `<span class="pill">${esc(platform)}</span>`).join('')}${tierPill(tool.tier)}</div>
+          </div>
+          <div class="directory-tool-actions">
+            <a href="#tool/${encodeURIComponent(tool.id)}">Details</a>
+            ${external(tool.downloadUrl || tool.homepage, 'Official source ' + icon('external'))}
+            ${related ? `<a href="#job/${encodeURIComponent(related.id)}">Job guide ${icon('arrow')}</a>` : `<a href="${repo}/wiki/Tools-${encodeURIComponent(category)}" target="_blank" rel="noopener noreferrer">Wiki ${icon('external')}</a>`}
+          </div>
+        </article>`;
+      }).join('');
+      return `<section class="directory-card" id="discipline-${esc(category)}">
+        <header class="directory-card-header">
+          <div><span class="page-eyebrow">DISCIPLINE</span><h3>${esc(categoryLabel(category))}</h3></div>
+          <span class="directory-count">${items.length} ${items.length === 1 ? 'tool' : 'tools'}</span>
+        </header>
+        <div class="directory-tool-list">${rows}</div>
+        <a class="directory-wiki-link" href="${repo}/wiki/Tools-${encodeURIComponent(category)}" target="_blank" rel="noopener noreferrer">Open the full discipline wiki ${icon('arrow')}</a>
+      </section>`;
+    }).join('');
+    const jumps = categories.map(category => `<a href="#discipline-${esc(category)}">${esc(categoryLabel(category))}<span>${grouped.get(category).length}</span></a>`).join('');
+    return `<section class="all-tools-section">
+      <div class="section-title"><div><div class="page-eyebrow">${icon('grid')}THE COMPLETE BENCH</div><h2>Every tool. Every discipline.</h2><p>One compact front-page directory, from endpoint protection to disk recovery. Open a tool for its details, official source and recommended job guides.</p></div><a href="#tools">Advanced filters ${icon('arrow')}</a></div>
+      <div class="directory-callout"><span>${icon('search')}</span><p><strong>Looking for something specific?</strong> Use the search above or press <kbd>/</kbd> or <kbd>Ctrl</kbd> + <kbd>K</kbd> to search every tool and playbook.</p><span class="directory-total">${tools.length} tools · ${categories.length} disciplines</span></div>
+      <nav class="discipline-jump" aria-label="Jump to a tool discipline">${jumps}</nav>
+      <div class="directory-grid">${cards}</div>
+      <p class="directory-footnote">Core = practical everyday starting point · Specialist = focused advanced use · Evaluate = research candidate awaiting local validation. Official links may change; confirm the current release, license and compatibility before deployment.</p>
+    </section>`;
+  }
   function home() {
     const featuredJobs = selectFeatured(jobs, [/malware|virus/i, /slow|performance/i, /network|internet|dns/i, /backup|restore/i, /boot|bitlocker/i, /remote/i], 6);
     const kit = selectFeatured(tools, [/sysinternals/i, /rustdesk/i, /crystaldiskinfo/i, /ventoy/i], 4);
-    const everyday = selectFeatured(tools, [/adwcleaner/i, /process.explorer/i, /rescuezilla/i, /quick.assist/i], 4);
     const intake = jobs.find(job => /intake|triage/i.test(job.id + ' ' + job.title));
-    return `<section class="hero"><div class="hero-content"><div class="hero-label"><span class="status-dot"></span>THE INTA COMPUTER SERVICES TOOLKIT</div><h1>Every fix<br>starts <em>here.</em></h1><p>The right tools. A clear next step. Your team's home for fixing, maintaining, and making computers work better.</p><div class="hero-actions"><a class="button primary" href="#playbooks">Find a job playbook ${icon('arrow')}</a><a class="button ghost" href="#tools">Explore the toolkit ${icon('grid')}</a></div></div>${heroGraphic()}</section><div class="stat-strip"><a class="stat-card" href="#tools"><span class="stat-icon">${icon('grid')}</span><div><strong>${tools.length}</strong><p>Tools, thoughtfully organized</p></div><span class="stat-index">01 / LIBRARY</span></a><a class="stat-card" href="#playbooks"><span class="stat-icon">${icon('book')}</span><div><strong>${jobs.length}</strong><p>Step-by-step job playbooks</p></div><span class="stat-index">02 / METHODS</span></a><a class="stat-card" href="#resources"><span class="stat-icon">${icon('refresh')}</span><div><strong class="stat-date">${esc(dateLabel())}</strong><p>Latest source review · ${esc(String(reviewDate).slice(0, 4))}</p></div><span class="stat-index">03 / SOURCES</span></a></div><div class="home-columns"><section><div class="section-title"><div><h2>What are you working on?</h2><p>Pick a common job. We'll help you find your next step.</p></div><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-grid home-jobs">${featuredJobs.map(jobCard).join('')}</div></section><aside class="quick-kit"><div class="quick-kit-header"><h2>The daily toolkit</h2>${icon('zap')}</div><p class="quick-kit-subtitle">A few familiar starting points.<br>Save your own favorites as you go.</p><div>${kit.map(quickTool).join('')}</div><div class="quick-kit-footer">${icon('info')}<span>Every download takes you to an official source. Check the tool's fit before you start.</span></div></aside></div><section><div class="section-title"><div><h2>Good tools to have close</h2><p>From a quick diagnosis to a thoughtful recovery.</p></div><a href="#tools">Browse the library ${icon('arrow')}</a></div><div class="tool-grid home-tools">${everyday.map(toolCard).join('')}</div></section><section class="routine-banner"><span>${icon('route')}</span><div><h3>A repeatable fix. A clean handoff.</h3><p>Start with the symptom, follow the evidence, and finish with a verification.</p></div><a class="button ghost" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">Start a service visit ${icon('arrow')}</a></section>`;
+    return `<section class="hero"><div class="hero-content"><div class="hero-label"><span class="status-dot"></span>THE INTA COMPUTER SERVICES TOOLKIT</div><h1>Every fix<br>starts <em>here.</em></h1><p>The right tools. A clear next step. Your team's home for fixing, maintaining, and making computers work better.</p><div class="hero-actions"><a class="button primary" href="#playbooks">Find a job playbook ${icon('arrow')}</a><a class="button ghost" href="#discipline-malware">Explore all tools ${icon('grid')}</a></div></div>${heroGraphic()}</section><div class="stat-strip"><a class="stat-card" href="#tools"><span class="stat-icon">${icon('grid')}</span><div><strong>${tools.length}</strong><p>Tools, thoughtfully organized</p></div><span class="stat-index">01 / LIBRARY</span></a><a class="stat-card" href="#playbooks"><span class="stat-icon">${icon('book')}</span><div><strong>${jobs.length}</strong><p>Step-by-step job playbooks</p></div><span class="stat-index">02 / METHODS</span></a><a class="stat-card" href="#resources"><span class="stat-icon">${icon('refresh')}</span><div><strong class="stat-date">${esc(dateLabel())}</strong><p>Latest source review · ${esc(String(reviewDate).slice(0, 4))}</p></div><span class="stat-index">03 / SOURCES</span></a></div><div class="home-columns"><section><div class="section-title"><div><h2>What are you working on?</h2><p>Pick a common job. We'll help you find your next step.</p></div><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-grid home-jobs">${featuredJobs.map(jobCard).join('')}</div></section><aside class="quick-kit"><div class="quick-kit-header"><h2>The daily toolkit</h2>${icon('zap')}</div><p class="quick-kit-subtitle">A few familiar starting points.<br>Save your own favorites as you go.</p><div>${kit.map(quickTool).join('')}</div><div class="quick-kit-footer">${icon('info')}<span>Every download takes you to an official source. Check the tool's fit before you start.</span></div></aside></div>${compactToolDirectory()}<section class="routine-banner"><span>${icon('route')}</span><div><h3>A repeatable fix. A clean handoff.</h3><p>Start with the symptom, follow the evidence, and finish with a verification.</p></div><a class="button ghost" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">Start a service visit ${icon('arrow')}</a></section>`;
   }
   function selectOptions(values, label, selected = '') {
     return `<option value="">${esc(label)}</option>${[...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b)).map(value => `<option value="${esc(value)}"${selected === value ? ' selected' : ''}>${esc(categoryLabel(value))}</option>`).join('')}`;
@@ -364,7 +448,7 @@
     const route = parseRoute();
     const names = { home: 'Overview', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', job: 'Job playbooks', tool: 'Tool library' };
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
-    $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
+    $('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
     $('#breadcrumb').innerHTML = `Workspace <span>/</span> <strong>${esc(names[route.name] || 'Overview')}</strong>`;
     if (route.name === 'home') app.innerHTML = home();
     else if (route.name === 'tools') app.innerHTML = library(false, route.params);
@@ -386,7 +470,7 @@
     $('#tool-count').textContent = tools.length;
     $('#job-count').textContent = jobs.length;
     $('#saved-count').textContent = favorites.size;
-    $$('[data-save]').forEach(button => {
+    $('[data-save]').forEach(button => {
       const saved = favorites.has(button.dataset.save);
       const tool = toolMap.get(button.dataset.save);
       button.setAttribute('aria-pressed', saved);
@@ -580,7 +664,7 @@
     if (event.key === savedKey) { const next = load(savedKey, []); favorites = new Set(Array.isArray(next) ? next.filter(id => toolMap.has(id)) : []); updateCounts(); if (parseRoute().name === 'saved') render(); }
     if (event.key === checksKey) { const next = load(checksKey, {}); if (next && typeof next === 'object' && !Array.isArray(next)) checklists = next; if (parseRoute().name === 'job') render(); }
   });
-  $$('[data-icon]').forEach(element => { element.innerHTML = icon(element.dataset.icon); });
+  $('[data-icon]').forEach(element => { element.innerHTML = icon(element.dataset.icon); });
   setTheme(); render();
 })();
 </script>
