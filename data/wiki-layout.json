@@ -77,7 +77,8 @@
       "summary": "Build a dependable workstation and keep it dependable.",
       "jobs": [
         "new-pc",
-        "preventive-maintenance"
+        "preventive-maintenance",
+        "microsoft-activation"
       ]
     },
     {
@@ -116,7 +117,8 @@
         "slow-pc",
         "windows-repair",
         "windows-update",
-        "hardware-bsod"
+        "hardware-bsod",
+        "microsoft-activation"
       ],
       "question": "Performance, servicing, startup, or application failure?"
     },
@@ -165,7 +167,8 @@
       "jobs": [
         "new-pc",
         "preventive-maintenance",
-        "client-handoff"
+        "client-handoff",
+        "microsoft-activation"
       ],
       "question": "Inspect, document, transfer, or improve your own workspace?"
     },
@@ -386,6 +389,15 @@
         "Before changing anything": "Agree the window and preserve normal-workload evidence.",
         "Keep during the job": "Health findings, reviewed updates, restore result, and deferred changes.",
         "Before handing back": "Normal work passes after restart and every open item has an owner."
+      }
+    },
+    "microsoft-activation": {
+      "icon": "🔑",
+      "diagram": "flowchart TD\n    A[\"Identify product, edition and entitlement\"]:::action --> B{\"Existing entitlement confirmed?\"}:::decision\n    B -->|\"No\"| C[\"Resolve entitlement before activation\"]:::stop\n    B -->|\"Yes\"| D{\"Windows or Office?\"}:::decision\n    D -->|\"Windows\"| E[\"Activation settings and license diagnostics\"]:::action\n    D -->|\"Office or Microsoft 365\"| F{\"Subscription or volume license?\"}:::decision\n    F -->|\"Subscription\"| G[\"Account and subscription diagnostics\"]:::action\n    F -->|\"Volume\"| H[\"Approved volume activation tools\"]:::action\n    E --> I{\"Intended product activated?\"}:::decision\n    G --> I\n    H --> I\n    I -->|\"No\"| J[\"Capture error and escalate\"]:::stop\n    I -->|\"Yes\"| K[\"Test real task and record outcome\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Record product, edition, license channel and entitlement without recording secrets.",
+        "Keep during the job": "Record exact error, supported route, private entitlement reference and redacted diagnostic output.",
+        "Before handing back": "Verify activation and the representative user task; document unresolved issues."
       }
     }
   }

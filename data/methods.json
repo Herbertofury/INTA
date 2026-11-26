@@ -593,6 +593,25 @@
         "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
         "https://restic.readthedocs.io/en/stable/050_restore.html"
       ]
+    },
+    {
+      "id": "entitlement-led-microsoft-activation",
+      "name": "Entitlement-led Microsoft activation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-microsoft-activation",
+      "aliases": [
+        "Microsoft activation troubleshooting",
+        "Microsoft licensing recovery"
+      ],
+      "summary": "Match the installed product and license channel to a valid entitlement, then choose the supported activation or recovery path.",
+      "when": "Use after new PC setup, a reinstall, hardware replacement, an Office unlicensed warning, or a managed license error.",
+      "proof": "The intended edition or subscription reports activation, the authorized entitlement is documented, and a representative user task works.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/activation/using-the-windows-activation-troubleshooter",
+        "https://learn.microsoft.com/en-us/windows/deployment/volume-activation/use-the-volume-activation-management-tool-client",
+        "https://learn.microsoft.com/en-us/office/volume-license-activation/tools-to-manage-volume-activation-of-office",
+        "https://learn.microsoft.com/en-us/deployoffice/licensing-activation/vnextdiag",
+        "https://support.microsoft.com/en-us/support/get-help/microsoft-365-troubleshooters"
+      ]
     }
   ]
 }

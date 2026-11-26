@@ -341,7 +341,8 @@
       "windows-update",
       "boot-recovery",
       "hardware-bsod",
-      "backup-restore"
+      "backup-restore",
+      "microsoft-activation"
     ],
     "reviewedAt": "2026-11-26"
   },
@@ -1209,7 +1210,8 @@
       "disk-migration",
       "backup-restore",
       "remote-support",
-      "client-handoff"
+      "client-handoff",
+      "microsoft-activation"
     ],
     "reviewedAt": "2026-11-26"
   },
@@ -1477,6 +1479,117 @@
       "slow-pc",
       "windows-update",
       "backup-restore",
+      "client-handoff"
+    ],
+    "reviewedAt": "2026-11-26"
+  },
+  {
+    "id": "microsoft-activation",
+    "title": "Activate and troubleshoot Microsoft products",
+    "category": "Deployment",
+    "summary": "Restore or verify Windows, Windows Server, Office and Microsoft 365 activation using the correct existing entitlement and the fastest supported path; recognize unsupported third-party activation artifacts separately.",
+    "estimatedTime": "5–30 min per device; longer for tenant or volume issues",
+    "difficulty": "Intermediate",
+    "tools": [
+      "windows-activation-troubleshooter",
+      "slmgr",
+      "showkeyplus",
+      "vamt",
+      "ospp-vbs",
+      "vnextdiag",
+      "m365-activation-help"
+    ],
+    "startHere": "Identify the product, exact edition, installed license channel, activation error, existing entitlement and whether the device is managed by an organization. Do not mistake an activated status for license ownership.",
+    "steps": [
+      {
+        "title": "Choose the correct activation route",
+        "detail": "For a consumer or OEM Windows installation, open Settings > System > Activation and compare the edition against the existing digital license or product key. Run the Windows Activation troubleshooter for an existing license that is not recognized. Check time, network and the exact error code before changing anything."
+      },
+      {
+        "title": "Check the Windows license state",
+        "detail": "Use Slmgr.vbs to inspect the installed Windows license channel and expiry: slmgr.vbs /dlv and slmgr.vbs /xpr. Record a redacted result. For an entitled device, use the Activation settings Change product key route or the approved organizational activation service. The existing license may require the matching edition or authorized hardware-change recovery."
+      },
+      {
+        "title": "Recover the existing key when appropriate",
+        "detail": "Use ShowKeyPlus to inspect available OEM or installed key information before reinstalling. An installed generic key may not represent a transferable license. Keep full keys out of public notes, screenshots and shared tickets."
+      },
+      {
+        "title": "Handle Microsoft 365 subscriptions",
+        "detail": "Open an Office app and choose File > Account. Sign in with the account that holds the subscription or confirm that the tenant administrator assigned the required license. Run the Microsoft 365 activation troubleshooter in Get Help on the affected PC; inspect the subscription state with Vnextdiag.ps1 when needed."
+      },
+      {
+        "title": "Handle Office LTSC, Project, Visio and organizational activation",
+        "detail": "For supported volume-licensed Office, inspect status using Ospp.vbs /dstatus in the correct Office installation directory. For volume-licensed Windows, Windows Server and applicable Office products, use the Volume Activation Management Tool with the organization's approved MAK or KMS infrastructure. Do not use the volume Office script for Microsoft 365 Apps subscription status."
+      },
+      {
+        "title": "Recognize third-party activators and preserve the baseline",
+        "detail": "Microsoft Activation Scripts is an independent project, also known as Massgrave. Its upstream release is v3.14 dated November 11, 2026. Keep it as an evaluate-only research reference for understanding licensing modifications and troubleshooting evidence, not a supported client activation procedure. If an endpoint contains unknown licensing modifications, preserve the evidence, check the legitimate entitlement and route unexpected persistence or detections to the malware-removal playbook."
+      },
+      {
+        "title": "Verify and hand back",
+        "detail": "Recheck Windows Activation settings and expiry after restart when appropriate. In Office, verify File > Account reports the intended activated product and that editing works. Record the edition, authorized entitlement route, activation state and unresolved error in the private case record without exposing keys, user emails or tenant identifiers."
+      }
+    ],
+    "verify": [
+      "Windows reports the intended edition and activation state; the authorized entitlement is documented separately.",
+      "The intended Office or Microsoft 365 product reports the correct license and the user can open and edit a representative document.",
+      "Activation status and error codes are recorded without exposing full keys or account/tenant identifiers."
+    ],
+    "stopIf": [
+      "No evidence of an appropriate entitlement, or the installed edition does not match it.",
+      "An activation action would use an unapproved service, modify security controls, or execute an unreviewed third-party script.",
+      "Unknown persistence or signs of compromise require separate investigation."
+    ],
+    "sources": [
+      {
+        "title": "Microsoft: Windows activation troubleshooting",
+        "url": "https://support.microsoft.com/en-us/windows/activation/using-the-windows-activation-troubleshooter"
+      },
+      {
+        "title": "Microsoft: activation errors",
+        "url": "https://support.microsoft.com/en-us/windows/activation/get-help-with-windows-activation-errors"
+      },
+      {
+        "title": "Microsoft: Windows licensing status",
+        "url": "https://learn.microsoft.com/en-us/windows/deployment/volume-activation/monitor-activation-client"
+      },
+      {
+        "title": "ShowKeyPlus upstream",
+        "url": "https://github.com/Superfly-Inc/ShowKeyPlus"
+      },
+      {
+        "title": "Microsoft: VAMT management",
+        "url": "https://learn.microsoft.com/en-us/windows/deployment/volume-activation/use-the-volume-activation-management-tool-client"
+      },
+      {
+        "title": "Microsoft: Office volume activation tools",
+        "url": "https://learn.microsoft.com/en-us/office/volume-license-activation/tools-to-manage-volume-activation-of-office"
+      },
+      {
+        "title": "Microsoft: Microsoft 365 license diagnostics",
+        "url": "https://learn.microsoft.com/en-us/deployoffice/licensing-activation/vnextdiag"
+      },
+      {
+        "title": "Microsoft: Get Help troubleshooters",
+        "url": "https://support.microsoft.com/en-us/support/get-help/microsoft-365-troubleshooters"
+      },
+      {
+        "title": "Microsoft: Office activation",
+        "url": "https://support.microsoft.com/en-us/microsoft-365-activation-licensing/office-install/activate-office-for-windows"
+      },
+      {
+        "title": "Massgrave: independent project documentation",
+        "url": "https://massgrave.dev/"
+      },
+      {
+        "title": "Microsoft Activation Scripts upstream release history",
+        "url": "https://github.com/massgravel/Microsoft-Activation-Scripts/releases"
+      }
+    ],
+    "related": [
+      "new-pc",
+      "windows-repair",
+      "malware-removal",
       "client-handoff"
     ],
     "reviewedAt": "2026-11-26"

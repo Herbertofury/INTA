@@ -570,6 +570,18 @@
       "url": "https://github.com/Herbertofury/INTA/wiki/Job-boot-usb",
       "aliases": [],
       "kind": "method"
+    },
+    {
+      "name": "Massgrave",
+      "aliases": [
+        "Massgrave MAS"
+      ],
+      "toolId": "massgrave-mas"
+    },
+    {
+      "name": "VAMT",
+      "aliases": [],
+      "toolId": "vamt"
     }
   ]
 }

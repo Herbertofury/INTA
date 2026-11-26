@@ -3326,5 +3326,240 @@
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
     "cautions": "Check trailing-slash semantics and avoid delete options unless deletion is part of the reviewed plan."
+  },
+  {
+    "id": "massgrave-mas",
+    "name": "Microsoft Activation Scripts",
+    "category": "windows",
+    "summary": "Independent open-source Windows and Office activation and troubleshooting project. Upstream reports version 3.14, released November 11, 2026.",
+    "bestFor": "Recognizing third-party activation artifacts and reviewing upstream troubleshooting references in a lab.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free source code; does not grant a Microsoft license",
+    "homepage": "https://massgrave.dev/",
+    "downloadUrl": "https://github.com/massgravel/Microsoft-Activation-Scripts",
+    "docsUrl": "https://github.com/massgravel/Microsoft-Activation-Scripts/releases",
+    "sourceUrl": "https://github.com/massgravel/Microsoft-Activation-Scripts/releases",
+    "reviewedAt": "2026-11-26",
+    "tier": "evaluate",
+    "tags": [
+      "activation",
+      "massgrave",
+      "licensing",
+      "third-party",
+      "research"
+    ],
+    "provenance": [
+      "https://github.com/massgravel/Microsoft-Activation-Scripts",
+      "https://github.com/massgravel/Microsoft-Activation-Scripts/releases",
+      "https://github.com/massgravel/massgrave.dev/blob/main/docs/intro.md"
+    ],
+    "evidenceStatus": "Upstream v3.14 release metadata and documentation reviewed on 2026-11-26; no artifact or runtime verification.",
+    "cautions": "Independent of Microsoft; not approved for production activation or distribution in the rescue image. Do not execute remote scripts or disable endpoint protection. Activation state alone is not proof of entitlement."
+  },
+  {
+    "id": "windows-activation-troubleshooter",
+    "name": "Windows Activation troubleshooter",
+    "category": "windows",
+    "summary": "Built-in Microsoft diagnostic and repair path for digital licenses, edition mismatch and activation errors.",
+    "bestFor": "Recovering an existing Windows entitlement after reinstall or hardware replacement.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with Windows",
+    "homepage": "https://support.microsoft.com/en-us/windows/activation/using-the-windows-activation-troubleshooter",
+    "downloadUrl": "https://support.microsoft.com/en-us/windows/activation/using-the-windows-activation-troubleshooter",
+    "docsUrl": "https://support.microsoft.com/en-us/windows/activation/get-help-with-windows-activation-errors",
+    "sourceUrl": "https://support.microsoft.com/en-us/windows/activation/get-help-with-windows-activation-errors",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "activation",
+      "digital license",
+      "windows"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Use the matching licensed edition and authorized account; preserve exact error codes."
+  },
+  {
+    "id": "slmgr",
+    "name": "Slmgr.vbs",
+    "category": "windows",
+    "summary": "Built-in Windows licensing status and activation management script.",
+    "bestFor": "Inspecting license channel, expiry and activation status; activating with an authorized key or organizational service.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with Windows",
+    "homepage": "https://learn.microsoft.com/en-us/windows/deployment/volume-activation/monitor-activation-client",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "activation",
+      "licensing",
+      "windows",
+      "server"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Read status before changes; keep keys and installation identifiers private. Never redirect to an unapproved KMS server."
+  },
+  {
+    "id": "showkeyplus",
+    "name": "ShowKeyPlus",
+    "category": "windows",
+    "summary": "Windows product-key finder and validation utility from its independent publisher.",
+    "bestFor": "Recovering OEM or installed key information and comparing edition before a reinstall.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free publisher utility",
+    "homepage": "https://github.com/Superfly-Inc/ShowKeyPlus",
+    "downloadUrl": "https://github.com/Superfly-Inc/ShowKeyPlus/releases",
+    "docsUrl": "https://github.com/Superfly-Inc/ShowKeyPlus",
+    "sourceUrl": "https://github.com/Superfly-Inc/ShowKeyPlus",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "product key",
+      "oem",
+      "reinstall",
+      "activation"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "A displayed generic or installed key is not necessarily transferable or sufficient for activation; store any recovered secret privately."
+  },
+  {
+    "id": "vamt",
+    "name": "Volume Activation Management Tool",
+    "category": "windows",
+    "summary": "Microsoft centralized inventory and authorized activation management for Windows, Office and selected Microsoft products.",
+    "bestFor": "Managing legitimate retail, MAK and organizational KMS activation across multiple devices.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "install",
+    "pricing": "Free management component; appropriate licenses required",
+    "homepage": "https://learn.microsoft.com/en-us/windows/deployment/volume-activation/use-the-volume-activation-management-tool-client",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/deployment/volume-activation/install-vamt",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/deployment/volume-activation/install-vamt",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "activation",
+      "licensing",
+      "volume",
+      "deployment",
+      "server"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Requires approved licensing infrastructure and access. Protect the key inventory and select a compatible Windows ADK."
+  },
+  {
+    "id": "ospp-vbs",
+    "name": "Ospp.vbs",
+    "category": "productivity",
+    "summary": "Office Software Protection Platform script for volume-licensed Office, including supported LTSC editions, Project and Visio.",
+    "bestFor": "Diagnosing and managing authorized Office volume activation.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with applicable Office installations",
+    "homepage": "https://learn.microsoft.com/en-us/office/volume-license-activation/tools-to-manage-volume-activation-of-office",
+    "downloadUrl": "https://learn.microsoft.com/en-us/office/volume-license-activation/tools-to-manage-volume-activation-of-office",
+    "docsUrl": "https://learn.microsoft.com/en-us/office/volume-license-activation/tools-to-manage-volume-activation-of-office",
+    "sourceUrl": "https://learn.microsoft.com/en-us/office/volume-license-activation/tools-to-manage-volume-activation-of-office",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "office",
+      "lt sc",
+      "volume",
+      "activation"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Not the status tool for Microsoft 365 Apps subscriptions; use the appropriate subscription diagnostic."
+  },
+  {
+    "id": "vnextdiag",
+    "name": "Vnextdiag.ps1",
+    "category": "productivity",
+    "summary": "Microsoft 365 Apps licensing diagnostic script included in applicable Office installations.",
+    "bestFor": "Inspecting subscription activation, license type and the associated account or tenant.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with applicable Microsoft 365 Apps installations",
+    "homepage": "https://learn.microsoft.com/en-us/deployoffice/licensing-activation/vnextdiag",
+    "downloadUrl": "https://learn.microsoft.com/en-us/deployoffice/licensing-activation/vnextdiag",
+    "docsUrl": "https://learn.microsoft.com/en-us/deployoffice/licensing-activation/vnextdiag",
+    "sourceUrl": "https://learn.microsoft.com/en-us/deployoffice/licensing-activation/vnextdiag",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "microsoft 365",
+      "activation",
+      "subscription",
+      "office"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Diagnostic output contains account and tenant information; redact private identifiers and do not reset licenses indiscriminately."
+  },
+  {
+    "id": "m365-activation-help",
+    "name": "Microsoft 365 activation troubleshooter",
+    "category": "productivity",
+    "summary": "Microsoft Get Help workflow for diagnosing subscription activation problems.",
+    "bestFor": "Resolving unlicensed product and sign-in issues on the affected Windows endpoint.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included Microsoft support utility; subscription entitlement required",
+    "homepage": "https://support.microsoft.com/en-us/support/get-help/microsoft-365-troubleshooters",
+    "downloadUrl": "https://support.microsoft.com/en-us/support/get-help/microsoft-365-troubleshooters",
+    "docsUrl": "https://support.microsoft.com/en-us/support/get-help/microsoft-365-troubleshooters",
+    "sourceUrl": "https://support.microsoft.com/en-us/support/get-help/microsoft-365-troubleshooters",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "microsoft 365",
+      "office",
+      "activation",
+      "get help"
+    ],
+    "provenance": [
+      "Official project or vendor documentation"
+    ],
+    "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
+    "cautions": "Confirm the correct work, school or personal subscription and run on the affected PC."
   }
 ]
