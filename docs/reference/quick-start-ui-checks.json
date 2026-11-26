@@ -1,0 +1,120 @@
+{
+  "quickStartRows": 12,
+  "allCatalogTools": 113,
+  "allRowsUncappedAndVisible": true,
+  "beforeFullDirectory": true,
+  "officialPrimaryLinks": [
+    {
+      "id": "suspected-malware",
+      "jobId": "malware-removal",
+      "toolId": "safety-scanner",
+      "officialUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download"
+    },
+    {
+      "id": "deleted-files",
+      "jobId": "failing-drive",
+      "toolId": "photorec",
+      "officialUrl": "https://www.cgsecurity.org/wiki/TestDisk_Download"
+    },
+    {
+      "id": "failing-drive",
+      "jobId": "failing-drive",
+      "toolId": "ddrescue",
+      "officialUrl": "https://ftp.gnu.org/gnu/ddrescue/"
+    },
+    {
+      "id": "slow-pc",
+      "jobId": "slow-pc",
+      "toolId": "sysinternals",
+      "officialUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite"
+    },
+    {
+      "id": "disk-space",
+      "jobId": "slow-pc",
+      "toolId": "windirstat",
+      "officialUrl": "https://github.com/windirstat/windirstat/releases/latest"
+    },
+    {
+      "id": "find-a-file",
+      "jobId": "preventive-maintenance",
+      "toolId": "everything",
+      "officialUrl": "https://www.voidtools.com/downloads/"
+    },
+    {
+      "id": "remote-help",
+      "jobId": "remote-support",
+      "toolId": "quick-assist",
+      "officialUrl": "https://apps.microsoft.com/detail/9P7BP5VNWKX5"
+    },
+    {
+      "id": "boot-usb",
+      "jobId": "boot-usb",
+      "toolId": "rufus",
+      "officialUrl": "https://rufus.ie/#download"
+    },
+    {
+      "id": "windows-repair",
+      "jobId": "windows-repair",
+      "toolId": "dism",
+      "officialUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
+    },
+    {
+      "id": "inspect-network-traffic",
+      "jobId": "network-dns",
+      "toolId": "wireshark",
+      "officialUrl": "https://www.wireshark.org/download.html"
+    },
+    {
+      "id": "suspected-ram-fault",
+      "jobId": "hardware-bsod",
+      "toolId": "memtest86plus",
+      "officialUrl": "https://www.memtest.org/#download"
+    },
+    {
+      "id": "file-backup",
+      "jobId": "backup-restore",
+      "toolId": "restic",
+      "officialUrl": "https://github.com/restic/restic/releases/latest"
+    }
+  ],
+  "freeUseAndBoundariesVisible": true,
+  "uniqueIdsSupportSharedJobs": true,
+  "selectionRationaleLink": true,
+  "guideNavigation": true,
+  "checklistReload": true,
+  "favoriteReload": true,
+  "libraryFilter": true,
+  "globalKeyboardSearch": true,
+  "themes": [
+    "dark",
+    "light"
+  ],
+  "mobile": [
+    {
+      "width": 390,
+      "quickRows": 12,
+      "fullCatalog": 113,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "quickRows": 12,
+      "fullCatalog": 113,
+      "noOverflow": true
+    }
+  ],
+  "noNestedAnchors": true,
+  "noRuntimeRequests": true,
+  "offlineQuickStartAndFullCatalog": true,
+  "errors": [],
+  "hashes": {
+    "portal/app.js": "df407a79bbd03ea4d9ab1107394dbbc5f48a547b34c54491424ac70cc4f5bb99",
+    "portal/styles.css": "638a570837eec2c7aa5a9f4325b993266c3998e3f4c1dc90e42201120beb6673",
+    "portal/index.template.html": "06e2ea5e5e2e244bd50cb8325bdba9ca94df671fa4600484b008041450d89033",
+    "site/index.html": "564a5dab754dc35e0836209ae3c79a4519edeae20f97cfe2ed97c21eaa410bdf"
+  },
+  "reviewedAt": "2026-11-26",
+  "scope": "Recorded local browser checks for the generated portal, including complete quick selections and catalog, navigation, state persistence, themes and offline use.",
+  "currentHashesMatchRecordedBrowserRun": true,
+  "browserRerunDuringReceiptUpdate": false
+}

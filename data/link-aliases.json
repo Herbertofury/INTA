@@ -591,6 +591,20 @@
       "url": "https://github.com/Herbertofury/INTA/wiki/Tool-Selection",
       "kind": "reference",
       "aliases": []
+    },
+    {
+      "id": "everything-server",
+      "name": "Everything Server",
+      "url": "https://www.voidtools.com/everything/server/buy/",
+      "kind": "application",
+      "aliases": []
+    },
+    {
+      "id": "npcap",
+      "name": "Npcap",
+      "url": "https://npcap.com/",
+      "kind": "application",
+      "aliases": []
     }
   ]
 }

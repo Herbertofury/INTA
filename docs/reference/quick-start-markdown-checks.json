@@ -1,0 +1,106 @@
+{
+  "reviewedAt": "2026-11-26",
+  "scope": "Current two-column quick-start content on the repository front page and Wiki; local Markdown rendering approximates host styling.",
+  "consistency": {
+    "verifiedAtUtc": "2026-11-26T23:29:59.649425+00:00",
+    "result": "pass",
+    "quickStartRows": 12,
+    "columns": 2,
+    "surfaces": [
+      "README.md",
+      "docs/start-here.md",
+      "wiki/Home.md",
+      "wiki/Start-Here.md"
+    ],
+    "allSharedBlocksIdentical": true,
+    "homeContainsIdenticalBlock": true,
+    "outsideManagedMarkersUnchanged": true,
+    "wikiStartHereUsesSameBuildContent": true,
+    "payloadPreservesCompleteQuickStartObject": true,
+    "everyPrimaryToolAndAbsoluteGuideLinkPresent": true,
+    "frontTableScope": "Direct scenario and official-tool routes; why, boundary, free-use terms and evidence remain in the unchanged shared data, full selection guide and portal UI.",
+    "manifestSha256": "b354c204d46919e2805f649b5ed0b6a40e1e3fed7466ae413d4bfd2e4a1a06a9",
+    "quickStartSha256": "91483322b49376b94b2daee5cc1ed83471cda678efa64fe274ed9ceab84c230c",
+    "sourceSha256": {
+      "README.md": "967c5e3da5ce15cde2bd90ed7a403074556fb23fc9746f11e15b50806f71e8aa",
+      "docs/start-here.md": "0916294e159638d751aad956b023f706b1bca808612f799b79d4375b18abbb61",
+      "wiki/Home.md": "c6c65bbb9024a4c8785a17e5b12452aa0c0544c707d3f3fa2761ef3859e46d40",
+      "wiki/Start-Here.md": "482664c6d0be0f45bb9d7b3d6534e3ef05062a4e10252b501fe2f617272bf30c"
+    },
+    "selectionPageSha256": "d67bc53f462203933de06948f8ec74fb2f16327d2441d6304fc4d55d980f748b"
+  },
+  "renderedPreview": {
+    "scope": "Changed quick-start content only; local Markdown host approximation",
+    "quickStartSha256": "91483322b49376b94b2daee5cc1ed83471cda678efa64fe274ed9ceab84c230c",
+    "results": [
+      {
+        "name": "Home",
+        "sourcePath": "wiki/Home.md",
+        "sourceSha256": "c6c65bbb9024a4c8785a17e5b12452aa0c0544c707d3f3fa2761ef3859e46d40",
+        "rows": 12,
+        "columns": 2,
+        "errors": [],
+        "mobile": {
+          "viewport": 390,
+          "document": 390
+        }
+      },
+      {
+        "name": "README",
+        "sourcePath": "README.md",
+        "sourceSha256": "748b2a5cfd88d6d0c231587cae1da9d2d35b5176ca1d919273782719d955cb46",
+        "rows": 12,
+        "columns": 2,
+        "errors": [],
+        "mobile": {
+          "viewport": 390,
+          "document": 390
+        }
+      },
+      {
+        "name": "Start-Here",
+        "sourcePath": "wiki/Start-Here.md",
+        "sourceSha256": "482664c6d0be0f45bb9d7b3d6534e3ef05062a4e10252b501fe2f617272bf30c",
+        "rows": 12,
+        "columns": 2,
+        "errors": [],
+        "mobile": {
+          "viewport": 390,
+          "document": 390
+        }
+      }
+    ]
+  },
+  "currentInputHashesMatchReports": true,
+  "visualReview": {
+    "reviewedAt": "2026-11-26",
+    "manuallyInspectedCurrentPreviews": [
+      "Home mobile",
+      "README desktop",
+      "README mobile"
+    ],
+    "desktopViewport": {
+      "width": 1280,
+      "height": 1000
+    },
+    "mobileViewport": {
+      "width": 390,
+      "height": 844
+    },
+    "observed": "The compact table exposes multiple emergency choices within the mobile first viewport and all twelve selections in the README desktop first viewport. No page-level horizontal overflow was observed.",
+    "hostedWikiScreenshot": false
+  },
+  "evidenceLimit": "These are local Markdown/Chromium checks, not a claim of hosted GitHub rendering or third-party tool runtime certification.",
+  "finalFormattingVerification": {
+    "priorVisualReviewManifestSha256": "66415a42c9d53d48da22a59f45e6a9f281997d56d57dc3e2d94429803e77ed68",
+    "allReviewedFrontPageBytesUnchanged": true,
+    "onlyGeneratedPageChanged": "wiki/Free-Tool-Picks.md",
+    "reason": "Paragraph whitespace and explicit official link; selection meaning unchanged."
+  },
+  "concurrentIntegrationVerification": {
+    "sourceCommit": "85d6480740476c7a4494534f6bbfd2b7a4018554",
+    "readmeFrontMatterThroughQuickStartUnchanged": true,
+    "preservedAddition": "Reputation specification links below the reviewed first-screen content",
+    "all12ToolAndGuideLinksRetained": true
+  }
+}

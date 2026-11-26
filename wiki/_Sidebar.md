@@ -2,22 +2,82 @@
 
 ## INTA knowledge base
 
-[Open technician hub](https://herbertofury.github.io/INTA/)
+**[🏠 Home](Home)** · **[🧰 Open hub](https://herbertofury.github.io/INTA/)**
 
-- [Home](Home)
+<a id="playbook-groups"></a>
+
+### Fix a problem
+
+- <a id="️-security--incident-response"></a><a id="-security--incident-response"></a>**[🦠 Remove viruses](Job-malware-removal)**
+- **[💾 Recover data](Job-failing-drive)**
+- <a id="-windows--system-stability"></a>**[🐢 Fix a slow PC](Job-slow-pc)**
+- **[🖥️ Help remotely](Job-remote-support)**
+- <a id="-first-response--handoff"></a>**[🧭 Triage a new issue](Job-intake-triage)**
+- <a id="-network--office-continuity"></a>**[🌐 Fix internet & DNS](Job-network-dns)**
+- <a id="-storage-backup--rescue"></a>**[🚑 Fix boot failure](Job-boot-recovery)**
+- **[🛠️ Repair Windows](Job-windows-repair)**
+- **[🔄 Fix Windows updates](Job-windows-update)**
+- **[🌡️ Diagnose crashes / BSOD](Job-hardware-bsod)**
+- <a id="️-everyday-workplace-fixes"></a><a id="-everyday-workplace-fixes"></a>**[📧 Fix email](Job-outlook-email)**
+- **[🖨️ Fix printing](Job-printer-repair)**
+- **[🚨 Contain ransomware](Job-ransomware-response)**
+- **[🗄️ Test a backup restore](Job-backup-restore)**
+- **[💽 Clone or migrate a disk](Job-disk-migration)**
+- <a id="-deployment--maintenance"></a>**[🆕 Set up a new PC](Job-new-pc)**
+- **[🔌 Build a rescue USB](Job-boot-usb)**
+- **[⚡ Recover from an outage](Job-outage-recovery)**
+- **[🔑 Repair domain trust](Job-ad-trust)**
+- **[🧹 Maintain a workstation](Job-preventive-maintenance)**
+- <a id="-ai-assisted-investigation"></a>**[🧠 Troubleshoot with AI](Job-ai-triage)**
+- **[📋 Complete the handoff](Job-client-handoff)**
+
+### Quick tool downloads
+
+Official download pages; built-in tools link to setup instructions.
+
+- **[🧰 Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)**
+- **[📊 WizTree](https://diskanalyzer.com/download)**
+- **[🔎 WizFile](https://antibody-software.com/wizfile/download)**
+- **[🧹 AdwCleaner](https://www.malwarebytes.com/adwcleaner)**
+- **[🛡️ HitmanPro](https://www.sophos.com/en-us/products/hitmanpro)**
+- **[🔐 Defender Offline setup](https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline)**
+- **[💽 CrystalDiskInfo](https://crystalmark.info/en/download/)**
+- **[🖥️ RustDesk](https://github.com/rustdesk/rustdesk/releases/latest)**
+- **[🔌 Ventoy](https://www.ventoy.net/en/download.html)**
+- **[💿 Rufus](https://rufus.ie/#download)**
+- **[🗂️ TestDisk](https://www.cgsecurity.org/wiki/TestDisk_Download)**
+- **[📷 PhotoRec](https://www.cgsecurity.org/wiki/TestDisk_Download)**
+
+<a id="-tool-disciplines"></a>
+
+### Tool categories
+
+- **[🛡️ Malware & protection](Tools-malware)**
+- **[💾 Storage & recovery](Tools-storage)**
+- **[🪟 Windows repair](Tools-windows)**
+- **[🖥️ Remote support](Tools-remote)**
+- **[🔬 Hardware diagnostics](Tools-hardware)**
+- **[🌐 Networking](Tools-network)**
+- **[🔌 Boot & USB media](Tools-boot)**
+- **[🧰 Technician utilities](Tools-productivity)**
+- **[🔎 Security investigation](Tools-security)**
+- **[🧠 AI assistance](Tools-ai)**
+
+### Reference
+
 - [Decision desk](Decision-Desk)
-- [Playbooks](Playbooks)
-- [Tool directory](Tool-Directory)
+- [All playbooks](Playbooks)
+- [Complete tool directory](Tool-Directory)
 - [Methods](Methods)
 - [Rescue media](Rescue-Media)
 - [Intake and handoff](Technician-Handoff)
 - [Service evidence](Service-Evidence)
 - [Tool selection](Tool-Selection)
+- [Free Tool Picks](Free-Tool-Picks)
 
 <a id="-the-shared-standard"></a>
 
-<details>
-<summary>Standards and contributions</summary>
+### Standards and contributions
 
 - [Start here](Start-Here)
 - [Knowledge standards](Knowledge-Standards)
@@ -26,113 +86,3 @@
 - [Contribution templates](Templates)
 - [Continuous improvement](Continuous-Improvement)
 - [Maintain and publish](Maintaining-the-Hub)
-
-</details>
-
-### Playbook groups
-
-<a id="-first-response--handoff"></a>
-
-<details>
-<summary>Intake and handoff</summary>
-
-- [Start here: triage any computer problem](Job-intake-triage)
-- [Start and finish a clean remote-support session](Job-remote-support)
-- [Close a repair with a clear client handoff](Job-client-handoff)
-
-</details>
-
-<a id="️-security--incident-response"></a>
-<a id="-security--incident-response"></a>
-
-<details>
-<summary>Security incidents</summary>
-
-- [Remove malware and browser hijackers](Job-malware-removal)
-- [Contain ransomware or a wider compromise](Job-ransomware-response)
-
-</details>
-
-<a id="-windows--system-stability"></a>
-
-<details>
-<summary>System repair</summary>
-
-- [Diagnose a slow, freezing, or hitching PC](Job-slow-pc)
-- [Repair Windows component or system-file corruption](Job-windows-repair)
-- [Fix a failing Windows update](Job-windows-update)
-- [Diagnose crashes, blue screens, and overheating](Job-hardware-bsod)
-
-</details>
-
-<a id="-storage-backup--rescue"></a>
-
-<details>
-<summary>Storage and recovery</summary>
-
-- [Recover a Windows PC that will not boot](Job-boot-recovery)
-- [Rescue data from a failing or unreadable drive](Job-failing-drive)
-- [Clone a healthy system or migrate to a new SSD](Job-disk-migration)
-- [Prove a backup can actually restore](Job-backup-restore)
-- [Build and refresh a technician rescue USB](Job-boot-usb)
-
-</details>
-
-<a id="-network--office-continuity"></a>
-
-<details>
-<summary>Network and services</summary>
-
-- [Fix internet, DNS, or local-network problems](Job-network-dns)
-- [Bring an office back after a power outage](Job-outage-recovery)
-- [Repair a workstation’s domain trust relationship](Job-ad-trust)
-
-</details>
-
-<a id="️-everyday-workplace-fixes"></a>
-<a id="-everyday-workplace-fixes"></a>
-
-<details>
-<summary>Email and printing</summary>
-
-- [Fix Outlook or email send/receive problems](Job-outlook-email)
-- [Restore printing without breaking other queues](Job-printer-repair)
-
-</details>
-
-<a id="-deployment--maintenance"></a>
-
-<details>
-<summary>Deployment and maintenance</summary>
-
-- [Set up a dependable new workstation](Job-new-pc)
-- [Run a useful workstation maintenance visit](Job-preventive-maintenance)
-
-</details>
-
-<a id="-ai-assisted-investigation"></a>
-
-<details>
-<summary>Assisted troubleshooting</summary>
-
-- [Use AI as a careful troubleshooting copilot](Job-ai-triage)
-
-</details>
-
-<a id="-tool-disciplines"></a>
-
-<details>
-<summary>Tool categories</summary>
-
-- [AI assistance](Tools-ai)
-- [Bootable media](Tools-boot)
-- [Hardware diagnostics](Tools-hardware)
-- [Malware removal & endpoint protection](Tools-malware)
-- [Networking](Tools-network)
-- [Technician productivity](Tools-productivity)
-- [Remote support](Tools-remote)
-- [Advanced defensive security](Tools-security)
-- [Storage, recovery & backup](Tools-storage)
-- [Windows diagnosis & repair](Tools-windows)
-
-</details>

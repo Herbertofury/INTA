@@ -1,0 +1,265 @@
+{
+  "reviewedAt": "2026-11-26",
+  "scope": "Twelve practical no-cost starting picks; source and workflow review, not local runtime certification or a universal product ranking.",
+  "canonicalData": "data/quick-start.json",
+  "canonicalGuide": "docs/free-tool-picks.md",
+  "selections": [
+    {
+      "id": "suspected-malware",
+      "toolId": "safety-scanner",
+      "reviewedSources": [
+        {
+          "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+          "retrieval": "full primary article",
+          "supports": "Portable on-demand scanning, removal attempt, 10-day expiry, detailed msert log and no real-time replacement."
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/security/blog/2012/03/22/free-pc-safety-scan/",
+          "retrieval": "primary indexed article",
+          "supports": "Vendor identifies the scanner as a free download; historical 2012 article is used only for the no-cost description, not current platform or detection claims."
+        }
+      ],
+      "decision": "Useful one-shot scan in an existing documented cleanup workflow. No independent cleanup efficacy score claimed."
+    },
+    {
+      "id": "deleted-files",
+      "toolId": "photorec",
+      "reviewedSources": [
+        {
+          "url": "https://www.cgsecurity.org/wiki/PhotoRec",
+          "retrieval": "full primary article",
+          "supports": "GPL, signature-based recovery, read-only source access and recovering to separate media."
+        }
+      ],
+      "decision": "Recover contents from healthy media or an image after checking backups; no guaranteed recovery or original filenames promised."
+    },
+    {
+      "id": "failing-drive",
+      "toolId": "ddrescue",
+      "reviewedSources": [
+        {
+          "url": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+          "retrieval": "primary indexed manual; direct fetch timed out",
+          "supports": "Mapfile resume, recovery phases, successfully read ranges and unreadable-range accounting."
+        }
+      ],
+      "decision": "Image first with mapfile and clear physical-damage/escalation limits. Existing same-day catalog proof supplies upstream identity and license context."
+    },
+    {
+      "id": "slow-pc",
+      "toolId": "sysinternals",
+      "reviewedSources": [
+        {
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+          "retrieval": "full primary article",
+          "supports": "Process ownership, handles, DLLs and client/server platform boundaries."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+          "retrieval": "full primary article",
+          "supports": "Startup entry inspection, disable/delete distinction and optional third-party submissions."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/sysinternals/license-terms",
+          "retrieval": "full primary license",
+          "supports": "Installation/use rights and restrictions; no unlimited redistribution or commercial hosting permission asserted."
+        }
+      ],
+      "decision": "Observe before changing process/startup state; use utilities supported on the actual client release."
+    },
+    {
+      "id": "disk-space",
+      "toolId": "windirstat",
+      "reviewedSources": [
+        {
+          "url": "https://github.com/windirstat/windirstat",
+          "retrieval": "full primary project README",
+          "supports": "GPL-3.0 license identification, size/file-type statistics, treemaps and cleanup capabilities."
+        }
+      ],
+      "decision": "No-cost business-suitable allocation inspection on healthy storage. Deletion remains a separate approved decision."
+    },
+    {
+      "id": "find-a-file",
+      "toolId": "everything",
+      "reviewedSources": [
+        {
+          "url": "https://www.voidtools.com/faq/",
+          "retrieval": "full primary FAQ",
+          "supports": "Filename indexing, update behavior, NTFS privilege/service requirements and freeware status."
+        },
+        {
+          "url": "https://www.voidtools.com/License.txt",
+          "retrieval": "full primary license",
+          "supports": "No-charge use and distribution rights subject to notices."
+        },
+        {
+          "url": "https://www.voidtools.com/forum/viewtopic.php?t=7508",
+          "retrieval": "indexed developer reply",
+          "supports": "Developer explicitly permits commercial desktop use."
+        },
+        {
+          "url": "https://www.voidtools.com/everything/server/buy/",
+          "retrieval": "primary indexed sales page",
+          "supports": "Separate server product requires business/enterprise site licensing."
+        }
+      ],
+      "decision": "Desktop product only. The server product's paid business terms are kept visible and are not generalized to desktop search."
+    },
+    {
+      "id": "remote-help",
+      "toolId": "quick-assist",
+      "reviewedSources": [
+        {
+          "url": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+          "retrieval": "full primary IT article",
+          "supports": "Documented support-staff use, helper account, attended approval, internet need, local log limits and macOS restriction."
+        },
+        {
+          "url": "https://apps.microsoft.com/detail/9P7BP5VNWKX5",
+          "retrieval": "primary Store page metadata; body requires JavaScript",
+          "supports": "Official app identity and free-download title."
+        }
+      ],
+      "decision": "One-time attended Windows support; managed policy/audit or unattended requirements route to the approved organizational tool."
+    },
+    {
+      "id": "boot-usb",
+      "toolId": "rufus",
+      "reviewedSources": [
+        {
+          "url": "https://github.com/pbatard/rufus",
+          "retrieval": "full primary project README",
+          "supports": "GPLv3, BIOS/UEFI media creation, image checksums and portable operation."
+        },
+        {
+          "url": "https://rufus.ie/en/",
+          "retrieval": "primary indexed English vendor page; root yielded no readable lines",
+          "supports": "GPL distribution/use terms, official route identity."
+        }
+      ],
+      "decision": "Trusted image plus explicit target identification. No installation licensing or firmware-boot success inferred from the writer's license."
+    },
+    {
+      "id": "windows-repair",
+      "toolId": "dism",
+      "reviewedSources": [
+        {
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+          "retrieval": "full primary article",
+          "supports": "Online/offline target, repair-source selection and corruption states."
+        },
+        {
+          "url": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/using-system-file-checker-in-windows",
+          "retrieval": "full primary support article; canonical redirect retained",
+          "supports": "Built-in repair path and subsequent system-file verification."
+        }
+      ],
+      "decision": "Included with Windows, link opens instructions. Storage health/recoverability check precedes repair writes."
+    },
+    {
+      "id": "inspect-network-traffic",
+      "toolId": "wireshark",
+      "reviewedSources": [
+        {
+          "url": "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIntroduction.html",
+          "retrieval": "full primary guide",
+          "supports": "Packet inspection/filtering and GPL use without per-seat fees."
+        },
+        {
+          "url": "https://npcap.com/guide/index.html",
+          "retrieval": "primary indexed reference guide",
+          "supports": "Free-driver installation exception for copies used only with permitted products including Wireshark."
+        },
+        {
+          "url": "https://www.wireshark.org/docs/wsdg_html_chunked/ChLibsPcap",
+          "retrieval": "primary indexed developer guide",
+          "supports": "Official installers have distribution rights; making a new distribution can require separate permission."
+        }
+      ],
+      "decision": "Only after basic address/gateway/DNS tests. Bounded approved capture; no claim that packet capture is the first response to every internet failure."
+    },
+    {
+      "id": "suspected-ram-fault",
+      "toolId": "memtest86plus",
+      "reviewedSources": [
+        {
+          "url": "https://www.memtest.org/",
+          "retrieval": "full primary project page",
+          "supports": "GPLv2, independent boot testing, firmware requirements, error investigation and test-loop behavior."
+        }
+      ],
+      "decision": "Suspected memory instability only. No blanket all-hardware diagnostic or conclusive passing-test claim."
+    },
+    {
+      "id": "file-backup",
+      "toolId": "restic",
+      "reviewedSources": [
+        {
+          "url": "https://restic.net/",
+          "retrieval": "full primary project page",
+          "supports": "No-cost BSD-2-Clause licensing, encrypted file backup and supported hosts/destinations."
+        },
+        {
+          "url": "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
+          "retrieval": "primary documentation",
+          "supports": "Repository management and verification workflow."
+        },
+        {
+          "url": "https://restic.readthedocs.io/en/stable/050_restore.html",
+          "retrieval": "full primary restore documentation",
+          "supports": "Specific snapshots, separate restore target and Windows privilege constraints."
+        }
+      ],
+      "decision": "File snapshots with demonstrated restore; no full bare-metal recovery claim. Password and storage costs are explicit."
+    }
+  ],
+  "comparativeEvidence": [
+    {
+      "url": "https://www.av-test.org/en/antivirus/home-windows/windows-11/october-2026/microsoft-defender-antivirus-consumer-4.18-261516/",
+      "retrieval": "Exact original report indexed content; direct open unavailable",
+      "testedProduct": "Microsoft Defender Antivirus (Consumer) 4.18",
+      "period": "September–October 2026",
+      "platform": "Windows 11 Professional 64-bit",
+      "resultUsed": "6/6 protection, 6/6 performance, 6/6 usability",
+      "limit": "Resident protection report, not standalone cleanup efficacy or a sole best-product ranking."
+    },
+    {
+      "url": "https://av-comparatives.org/tests/real-world-protection-test-july-october-2026/",
+      "retrieval": "Original full report including result table, ranking system and award groups",
+      "testedProduct": "Microsoft Defender Antivirus 4.18",
+      "period": "July–October 2026",
+      "released": "2026-11-16",
+      "resultUsed": "Standard award level; grouped report and scoring system support the classification",
+      "limit": "Different sample period/methodology; not transferred to Safety Scanner or Defender Offline."
+    }
+  ],
+  "sharedLicenseContext": {
+    "url": "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose",
+    "retrieval": "Primary indexed FAQ; direct page fetch timed out",
+    "use": "General free-software commercial-use and redistribution context; each upstream project's license identification is separate."
+  },
+  "materialChallengeFindings": [
+    "Kept WizTree and WizFile outside the free-business defaults because their current EULAs reserve no-charge use for personal use.",
+    "Separated free Everything desktop from the newly distinct paid-business Everything Server product.",
+    "Kept Windows capture-driver terms and redistribution limits separate from Wireshark's GPL license.",
+    "Removed a retired English Microsoft support URL that redirected to generic Windows help; used the current scanner instructions plus an explicitly historical vendor no-cost description.",
+    "Changed the broad Network fault label to Inspect network traffic and retained basic checks before capture.",
+    "Shortened front-page freeUse fields while retaining full context in the detailed guide.",
+    "H2 anchor validation strips Markdown links before deriving the slug; Windows repair remains correctly linked and navigable."
+  ],
+  "openClaims": [
+    "No INTA execution or performance certification of the selected third-party tools was performed in this research pass.",
+    "No comparable current independent score was established for every utility; documentation-based selection is labeled and no ranking is invented.",
+    "Some primary sources were reviewed through indexed original content because direct retrieval was unavailable; this is recorded per source."
+  ],
+  "canonicalDataSha256": "91483322b49376b94b2daee5cc1ed83471cda678efa64fe274ed9ceab84c230c",
+  "canonicalGuideSha256": "848d8ebd6cb82044400c8b2cab3db3bfdd99d69dfa262ba32a2f85537a4eefd7",
+  "selectionsVerified": 12,
+  "publicReceiptNote": "Public primary-source URLs and retrieval limits are retained; session-specific search references are omitted.",
+  "finalFormattingCheck": {
+    "change": "Replace Markdown hard linebreak spaces with paragraphs and explicitly link the capture-driver name.",
+    "selectionContentChanged": false,
+    "wikiLinkAuditErrors": []
+  }
+}

@@ -106,7 +106,9 @@
         "malware-removal",
         "ransomware-response"
       ],
-      "question": "Routine unwanted software or a wider compromise?"
+      "question": "Routine unwanted software or a wider compromise?",
+      "navigationLabel": "Malware & protection",
+      "navigationIcon": "🛡️"
     },
     "remote": {
       "icon": "🖥️",
@@ -115,7 +117,9 @@
         "remote-support",
         "client-handoff"
       ],
-      "question": "One-time help or recurring managed access?"
+      "question": "One-time help or recurring managed access?",
+      "navigationLabel": "Remote support",
+      "navigationIcon": "🖥️"
     },
     "windows": {
       "icon": "🪟",
@@ -126,7 +130,9 @@
         "windows-update",
         "hardware-bsod"
       ],
-      "question": "Performance, servicing, startup, or application failure?"
+      "question": "Performance, servicing, startup, or application failure?",
+      "navigationLabel": "Windows repair",
+      "navigationIcon": "🪟"
     },
     "storage": {
       "icon": "💾",
@@ -136,7 +142,9 @@
         "disk-migration",
         "backup-restore"
       ],
-      "question": "Healthy migration, missing files, or failing media?"
+      "question": "Healthy migration, missing files, or failing media?",
+      "navigationLabel": "Storage & recovery",
+      "navigationIcon": "💾"
     },
     "hardware": {
       "icon": "🔬",
@@ -145,7 +153,9 @@
         "hardware-bsod",
         "slow-pc"
       ],
-      "question": "Load-related fault, idle crash, or unhealthy hardware?"
+      "question": "Load-related fault, idle crash, or unhealthy hardware?",
+      "navigationLabel": "Hardware diagnostics",
+      "navigationIcon": "🔬"
     },
     "network": {
       "icon": "🌐",
@@ -155,7 +165,9 @@
         "outage-recovery",
         "ad-trust"
       ],
-      "question": "One device, one service, or the whole office?"
+      "question": "One device, one service, or the whole office?",
+      "navigationLabel": "Networking",
+      "navigationIcon": "🌐"
     },
     "boot": {
       "icon": "🥾",
@@ -165,7 +177,9 @@
         "boot-recovery",
         "failing-drive"
       ],
-      "question": "Create media, recover startup, or rescue data?"
+      "question": "Create media, recover startup, or rescue data?",
+      "navigationLabel": "Boot & USB media",
+      "navigationIcon": "🔌"
     },
     "productivity": {
       "icon": "🧰",
@@ -175,7 +189,9 @@
         "preventive-maintenance",
         "client-handoff"
       ],
-      "question": "Inspect, document, transfer, or improve your own workspace?"
+      "question": "Inspect, document, transfer, or improve your own workspace?",
+      "navigationLabel": "Technician utilities",
+      "navigationIcon": "🧰"
     },
     "ai": {
       "icon": "🧠",
@@ -184,7 +200,9 @@
         "ai-triage",
         "intake-triage"
       ],
-      "question": "Explain evidence, review a script, or compare hypotheses?"
+      "question": "Explain evidence, review a script, or compare hypotheses?",
+      "navigationLabel": "AI assistance",
+      "navigationIcon": "🧠"
     },
     "security": {
       "icon": "🧪",
@@ -193,7 +211,9 @@
         "ransomware-response",
         "malware-removal"
       ],
-      "question": "Collect evidence, analyze a capture, or evaluate a candidate?"
+      "question": "Collect evidence, analyze a capture, or evaluate a candidate?",
+      "navigationLabel": "Security investigation",
+      "navigationIcon": "🔎"
     }
   },
   "homeDiagram": "flowchart TD\n    A[\"Start with the observed problem\"]:::action --> B{\"Immediate risk?\"}:::decision\n    B -->|\"Active compromise\"| C[\"Contain and coordinate response\"]:::stop\n    B -->|\"Failing storage or damage\"| D[\"Protect data and choose recovery\"]:::stop\n    B -->|\"No immediate risk\"| E{\"What is the scope?\"}:::decision\n    E -->|\"Office or shared service\"| F[\"Restore dependencies in order\"]:::action\n    E -->|\"One device or application\"| G[\"Choose a focused playbook\"]:::action\n    F --> H[\"Test the real business task\"]:::done\n    G --> H\n    H --> I{\"Evidence worth reusing?\"}:::decision\n    I -->|\"New method or correction\"| J[\"Improve the shared guide\"]:::done\n    I -->|\"Case-specific details\"| K[\"Complete the private handoff\"]:::done\n    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46\n    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445\n    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137\n    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449\n",
@@ -205,7 +225,9 @@
         "Before changing anything": "Identify unique data and the working boundary.",
         "Keep during the job": "Exact error, time, scope, baseline, and failed tests.",
         "Before handing back": "A specific next guide and measurable acceptance test."
-      }
+      },
+      "navigationLabel": "Triage a new issue",
+      "navigationIcon": "🧭"
     },
     "malware-removal": {
       "icon": "🛡️",
@@ -214,7 +236,9 @@
         "Before changing anything": "Record symptoms; decide whether this is a single-endpoint cleanup.",
         "Keep during the job": "Detection names, scan versions, quarantine, persistence, and account findings.",
         "Before handing back": "Healthy protection, stable settings, and tested original work."
-      }
+      },
+      "navigationLabel": "Remove viruses",
+      "navigationIcon": "🦠"
     },
     "ransomware-response": {
       "icon": "🚨",
@@ -223,7 +247,9 @@
         "Before changing anything": "Isolate spread and protect evidence and recovery copies.",
         "Keep during the job": "Private incident timeline, affected assets, identities, and preserved logs.",
         "Before handing back": "Validated clean services and incident-lead approval to reconnect."
-      }
+      },
+      "navigationLabel": "Contain ransomware",
+      "navigationIcon": "🚨"
     },
     "slow-pc": {
       "icon": "⚡",
@@ -232,7 +258,9 @@
         "Before changing anything": "Save a comparable baseline and check storage health.",
         "Keep during the job": "Workload timings, resource evidence, trace scope, and one change at a time.",
         "Before handing back": "Repeatable improvement with all required functions retained."
-      }
+      },
+      "navigationLabel": "Fix a slow PC",
+      "navigationIcon": "🐢"
     },
     "windows-repair": {
       "icon": "🪟",
@@ -241,7 +269,9 @@
         "Before changing anything": "Confirm healthy storage, recoverable data, and the running installation.",
         "Keep during the job": "Servicing results, error codes, and relevant log excerpts.",
         "Before handing back": "The original Windows feature works after restart."
-      }
+      },
+      "navigationLabel": "Repair Windows",
+      "navigationIcon": "🛠️"
     },
     "windows-update": {
       "icon": "🔄",
@@ -250,7 +280,9 @@
         "Before changing anything": "Respect the update policy and maintenance window.",
         "Keep during the job": "Exact update, failure stage, error, logs, and each changed dependency.",
         "Before handing back": "Installed build plus the user’s normal workload pass."
-      }
+      },
+      "navigationLabel": "Fix Windows updates",
+      "navigationIcon": "🔄"
     },
     "boot-recovery": {
       "icon": "🥾",
@@ -259,7 +291,9 @@
         "Before changing anything": "Preserve recovery-key access and identify the actual Windows volume.",
         "Keep during the job": "Failure stage, volume layout, recovery action, and its result.",
         "Before handing back": "Two normal boots, accessible data, and healthy encryption."
-      }
+      },
+      "navigationLabel": "Fix boot failure",
+      "navigationIcon": "🚑"
     },
     "failing-drive": {
       "icon": "💾",
@@ -268,7 +302,9 @@
         "Before changing anything": "Stop writes; choose the recovery route based on data value and damage.",
         "Keep during the job": "Device identities, imaging mapfile, unreadable ranges, and saved output.",
         "Before handing back": "Usable recovered files and an honest record of missing data."
-      }
+      },
+      "navigationLabel": "Recover data",
+      "navigationIcon": "💾"
     },
     "disk-migration": {
       "icon": "↗️",
@@ -277,7 +313,9 @@
         "Before changing anything": "Keep the healthy source and a verified independent backup.",
         "Keep during the job": "Source/target identities, supported layout, copy log, and boot device.",
         "Before handing back": "Replacement boots alone and the business workload passes."
-      }
+      },
+      "navigationLabel": "Clone or migrate a disk",
+      "navigationIcon": "💽"
     },
     "backup-restore": {
       "icon": "🛟",
@@ -286,7 +324,9 @@
         "Before changing anything": "Identify recovery credentials, unique data, and a separate test target.",
         "Keep during the job": "Snapshot, integrity result, restore log, elapsed time, and test evidence.",
         "Before handing back": "Real restored data opens and the outage path is usable."
-      }
+      },
+      "navigationLabel": "Test a backup restore",
+      "navigationIcon": "🗄️"
     },
     "network-dns": {
       "icon": "🌐",
@@ -295,7 +335,9 @@
         "Before changing anything": "Record the current network settings and remote recovery path.",
         "Keep during the job": "Link, address, resolver, transport, and application comparisons.",
         "Before handing back": "The intended app, shares, printing, and remote access still work."
-      }
+      },
+      "navigationLabel": "Fix internet & DNS",
+      "navigationIcon": "🌐"
     },
     "outage-recovery": {
       "icon": "🔌",
@@ -304,7 +346,9 @@
         "Before changing anything": "Confirm stable power and use the private dependency plan.",
         "Keep during the job": "Alarms, startup order, outage timeline, and client-side service tests.",
         "Before handing back": "Business services, backup jobs, and remote management are healthy."
-      }
+      },
+      "navigationLabel": "Recover from an outage",
+      "navigationIcon": "⚡"
     },
     "remote-support": {
       "icon": "🖥️",
@@ -313,7 +357,9 @@
         "Before changing anything": "Confirm identity, device, scope, and a reconnection fallback.",
         "Keep during the job": "Session tool, access scope, changes, and user acceptance.",
         "Before handing back": "Session ended; temporary access removed; managed access scoped."
-      }
+      },
+      "navigationLabel": "Help remotely",
+      "navigationIcon": "🖥️"
     },
     "ad-trust": {
       "icon": "🔑",
@@ -322,7 +368,9 @@
         "Before changing anything": "Confirm a member computer, local fallback, and its unique identity.",
         "Keep during the job": "Connectivity, time, channel result, directory object, and repair evidence.",
         "Before handing back": "Fresh domain sign-in, policy, shares, and printers pass."
-      }
+      },
+      "navigationLabel": "Repair domain trust",
+      "navigationIcon": "🔑"
     },
     "outlook-email": {
       "icon": "✉️",
@@ -331,7 +379,9 @@
         "Before changing anything": "Identify the client and protect mail that exists only on this device.",
         "Keep during the job": "Exact error, webmail comparison, rejected message, and account changes.",
         "Before handing back": "Two-way mail and the normal shared-mailbox/attachment task pass."
-      }
+      },
+      "navigationLabel": "Fix email",
+      "navigationIcon": "📧"
     },
     "printer-repair": {
       "icon": "🖨️",
@@ -340,7 +390,9 @@
         "Before changing anything": "Confirm the target queue and coordinate shared-service changes.",
         "Keep during the job": "Internal page, Windows test page, port, driver, and affected users.",
         "Before handing back": "Original output, required options, scanning, and other users pass."
-      }
+      },
+      "navigationLabel": "Fix printing",
+      "navigationIcon": "🖨️"
     },
     "hardware-bsod": {
       "icon": "🔬",
@@ -349,7 +401,9 @@
         "Before changing anything": "Protect data before reproducing failure or stressing components.",
         "Keep during the job": "Stop code, dump, temperatures, configuration, and diagnostic duration.",
         "Before handing back": "Original scenario, restart, sleep, and required devices are stable."
-      }
+      },
+      "navigationLabel": "Diagnose crashes / BSOD",
+      "navigationIcon": "🌡️"
     },
     "new-pc": {
       "icon": "🆕",
@@ -358,7 +412,9 @@
         "Before changing anything": "Confirm the role, access, recovery keys, and retained migration source.",
         "Keep during the job": "Device baseline, app inventory, migrated data, and setup decisions.",
         "Before handing back": "Employee tasks, backup restore, encryption, and support access pass."
-      }
+      },
+      "navigationLabel": "Set up a new PC",
+      "navigationIcon": "🆕"
     },
     "client-handoff": {
       "icon": "🤝",
@@ -367,7 +423,9 @@
         "Before changing anything": "Return to the original acceptance test and retained rollback.",
         "Keep during the job": "Verified change summary, evidence, residual issues, and user response.",
         "Before handing back": "Acceptance recorded, temporary access closed, and follow-up owned."
-      }
+      },
+      "navigationLabel": "Complete the handoff",
+      "navigationIcon": "📋"
     },
     "boot-usb": {
       "icon": "🥾",
@@ -376,7 +434,9 @@
         "Before changing anything": "Identify the USB and save anything that must be retained.",
         "Keep during the job": "Official image, checksum, selected operation, and boot-test hardware.",
         "Before handing back": "Required tools and offline guide work on the actual boot path."
-      }
+      },
+      "navigationLabel": "Build a rescue USB",
+      "navigationIcon": "🔌"
     },
     "ai-triage": {
       "icon": "🧠",
@@ -385,7 +445,9 @@
         "Before changing anything": "Sanitize evidence and set the analysis or script-review scope.",
         "Keep during the job": "Hypotheses, source checks, reviewed commands, and observed outputs.",
         "Before handing back": "Verified facts, preserved uncertainty, and no unnecessary data exposure."
-      }
+      },
+      "navigationLabel": "Troubleshoot with AI",
+      "navigationIcon": "🧠"
     },
     "preventive-maintenance": {
       "icon": "🧰",
@@ -394,7 +456,119 @@
         "Before changing anything": "Agree the window and preserve normal-workload evidence.",
         "Keep during the job": "Health findings, reviewed updates, restore result, and deferred changes.",
         "Before handing back": "Normal work passes after restart and every open item has an owner."
-      }
+      },
+      "navigationLabel": "Maintain a workstation",
+      "navigationIcon": "🧹"
     }
-  }
+  },
+  "scenarioOrder": [
+    "malware-removal",
+    "failing-drive",
+    "slow-pc",
+    "remote-support",
+    "intake-triage",
+    "network-dns",
+    "boot-recovery",
+    "windows-repair",
+    "windows-update",
+    "hardware-bsod",
+    "outlook-email",
+    "printer-repair",
+    "ransomware-response",
+    "backup-restore",
+    "disk-migration",
+    "new-pc",
+    "boot-usb",
+    "outage-recovery",
+    "ad-trust",
+    "preventive-maintenance",
+    "ai-triage",
+    "client-handoff"
+  ],
+  "categoryOrder": [
+    "malware",
+    "storage",
+    "windows",
+    "remote",
+    "hardware",
+    "network",
+    "boot",
+    "productivity",
+    "security",
+    "ai"
+  ],
+  "quickDownloads": [
+    {
+      "toolId": "sysinternals",
+      "label": "Sysinternals Suite",
+      "icon": "🧰",
+      "routeType": "download"
+    },
+    {
+      "toolId": "wiztree",
+      "label": "WizTree",
+      "icon": "📊",
+      "routeType": "download"
+    },
+    {
+      "toolId": "wizfile",
+      "label": "WizFile",
+      "icon": "🔎",
+      "routeType": "download"
+    },
+    {
+      "toolId": "adwcleaner",
+      "label": "AdwCleaner",
+      "icon": "🧹",
+      "routeType": "download"
+    },
+    {
+      "toolId": "hitmanpro",
+      "label": "HitmanPro",
+      "icon": "🛡️",
+      "routeType": "download"
+    },
+    {
+      "toolId": "defender-offline",
+      "label": "Defender Offline setup",
+      "icon": "🔐",
+      "routeType": "setup"
+    },
+    {
+      "toolId": "crystaldiskinfo",
+      "label": "CrystalDiskInfo",
+      "icon": "💽",
+      "routeType": "download"
+    },
+    {
+      "toolId": "rustdesk",
+      "label": "RustDesk",
+      "icon": "🖥️",
+      "routeType": "download"
+    },
+    {
+      "toolId": "ventoy",
+      "label": "Ventoy",
+      "icon": "🔌",
+      "routeType": "download"
+    },
+    {
+      "toolId": "rufus",
+      "label": "Rufus",
+      "icon": "💿",
+      "routeType": "download"
+    },
+    {
+      "toolId": "testdisk",
+      "label": "TestDisk",
+      "icon": "🗂️",
+      "routeType": "download"
+    },
+    {
+      "toolId": "photorec",
+      "label": "PhotoRec",
+      "icon": "📷",
+      "routeType": "download"
+    }
+  ]
 }

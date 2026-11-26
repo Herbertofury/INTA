@@ -87,7 +87,7 @@ Record results in [the contribution template](https://github.com/Herbertofury/IN
 
 ## ⭐ Maintain tool reputation evidence
 
-The canonical reputation design lives in [Tool Reputation](tool-reputation.md), with source identities in [reputation-sources.json](../data/reputation-sources.json). Treat these as distinct evidence streams:
+The canonical reputation design lives in [Tool Reputation](https://github.com/Herbertofury/INTA/blob/main/docs/tool-reputation.md), with source identities in [reputation-sources.json](../data/reputation-sources.json). Treat these as distinct evidence streams:
 
 - GitHub stars, forks and repository activity (only after matching the exact project).
 - Native professional-review ratings with their original scale and review count.

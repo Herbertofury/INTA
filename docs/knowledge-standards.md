@@ -7,7 +7,7 @@
 
 **Editorial review: November 26, 2026.** These are the durable authoring and implementation rules for the [technician hub](https://herbertofury.github.io/INTA/), its [live wiki](https://github.com/Herbertofury/INTA/wiki), and its offline build.
 
-The owner's current visual direction is documented in [Interface Design](https://github.com/Herbertofury/INTA/wiki/Interface-Design): a compact professional workspace with neutral charcoal surfaces, restrained blue interaction accents, readable rows and document layouts. Replace the previous green, oversized-card treatment. Keep sparse useful emoji in the Wiki, direct links and decision diagrams while reducing repetitive decoration.
+The owner's current visual direction is documented in [Interface Design](https://github.com/Herbertofury/INTA/wiki/Interface-Design): a compact professional workspace with neutral charcoal surfaces, restrained blue interaction accents, readable rows and document layouts. Wiki scenario and tool navigation uses bold clickable labels and meaningful emoji, with every destination visible without expanding a group. Put frequent service jobs and official tool links first. Keep direct links and decision diagrams while avoiding the previous green, oversized-card treatment.
 
 ## 🧭 1. One home, predictable paths
 
