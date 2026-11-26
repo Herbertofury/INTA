@@ -1,0 +1,56 @@
+name: Build and boot INTA Rescue
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '39 9 * * 2'
+
+concurrency:
+  group: inta-rescue-release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Validate source
+        run: python3 -m unittest discover -s tests && bash -n scripts/build-iso && bash -n scripts/smoke-iso
+      - name: Build with Debian stable and current signed security updates
+        run: |
+          docker run --rm --privileged -v "${GITHUB_WORKSPACE}:/src:ro" -v "${RUNNER_TEMP}:/out" debian:13-slim bash -euc '
+            apt-get update
+            apt-get install -y --no-install-recommends live-build debootstrap debian-archive-keyring ca-certificates
+            /src/scripts/build-iso /out/inta-dist
+          '
+          cat "${RUNNER_TEMP}/inta-dist/SHA256SUMS"
+      - name: Verify BIOS and UEFI boot to XFCE
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends qemu-system-x86 ovmf
+          iso="${RUNNER_TEMP}/inta-dist/inta-rescue-amd64.iso"
+          scripts/smoke-iso "$iso" bios
+          scripts/smoke-iso "$iso" uefi
+      - name: Store verified image
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: inta-rescue-amd64
+          path: ${{ runner.temp }}/inta-dist/
+          if-no-files-found: error
+          compression-level: 0
+      - name: Publish verified release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          tag="rescue-${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}"
+          gh release create "$tag" "${RUNNER_TEMP}"/inta-dist/* --target "$GITHUB_SHA" --latest \
+            --title "INTA Rescue $(date -u +%F)" \
+            --notes "Built from $GITHUB_SHA. Passed offline BIOS and UEFI virtual-machine boot checks. Verify the ISO using SHA256SUMS."
+    permissions:
+      contents: write
