@@ -101,6 +101,64 @@
   function text(value) { return Array.isArray(value) ? value.join('\n') : String(value == null ? '' : value); }
   function formatted(value) { return esc(text(value)).replace(/`([^`\n]+)`/g, '<code>$1</code>').replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>'); }
   function array(value) { return Array.isArray(value) ? value : value ? [value] : []; }
+  function registryUrl(value) {
+    if (/^#[a-z0-9][a-z0-9/_?=&.%~-]*$/i.test(String(value))) return String(value);
+    try {
+      const url = new URL(String(value));
+      return url.protocol === 'https:' && !url.username && !url.password ? url.href : '';
+    } catch (_) { return ''; }
+  }
+  const proseRegistry = new Map();
+  array(data.links).forEach(entry => {
+    if (!entry || typeof entry.name !== 'string' || !entry.name.trim()) return;
+    const href = registryUrl(entry.url);
+    const key = entry.name.toLocaleLowerCase('en-US');
+    if (href && !proseRegistry.has(key)) proseRegistry.set(key, { ...entry, href });
+  });
+  const prosePattern = [...proseRegistry.values()].sort((a, b) => b.name.length - a.name.length)
+    .map(entry => entry.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+  const proseMatcher = prosePattern ? new RegExp(`(?<![\\p{L}\\p{N}_])(?:${prosePattern})(?![\\p{L}\\p{N}_])`, 'giu') : null;
+  const noProseLinks = 'a,button,code,pre,script,style,svg,textarea,select,option,kbd,samp,[data-no-link]';
+  function linkifyProse(container = app) {
+    if (!container || !proseMatcher) return;
+    const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.nodeValue.trim() && node.parentElement && !node.parentElement.closest(noProseLinks)
+          ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+      const value = node.nodeValue;
+      const protectedSpans = [];
+      if (/https?:|`|<a\b/i.test(value)) {
+        for (const span of value.matchAll(/https?:\/\/[^\s<>]+|`[^`\n]+`|<a\b[^>]*>[\s\S]*?<\/a>/gi)) {
+          protectedSpans.push([span.index, span.index + span[0].length]);
+        }
+      }
+      proseMatcher.lastIndex = 0;
+      let match, last = 0, fragment = null;
+      while ((match = proseMatcher.exec(value))) {
+        const entry = proseRegistry.get(match[0].toLocaleLowerCase('en-US'));
+        if (!entry || (entry.caseSensitive && match[0] !== entry.name)) continue;
+        if (protectedSpans.some(([start, end]) => match.index < end && match.index + match[0].length > start)) continue;
+        if (!fragment) fragment = document.createDocumentFragment();
+        fragment.append(document.createTextNode(value.slice(last, match.index)));
+        const anchor = document.createElement('a');
+        anchor.className = 'prose-link';
+        anchor.href = entry.href;
+        anchor.textContent = match[0];
+        anchor.dataset.linkName = entry.name;
+        if (entry.kind) anchor.dataset.linkKind = entry.kind;
+        if (entry.id) anchor.dataset.linkId = entry.id;
+        if (!entry.href.startsWith('#')) { anchor.target = '_blank'; anchor.rel = 'noopener noreferrer'; }
+        fragment.append(anchor);
+        last = match.index + match[0].length;
+      }
+      if (fragment) { fragment.append(document.createTextNode(value.slice(last))); node.replaceWith(fragment); }
+    });
+  }
   function dateLabel(value = reviewDate, long = false) {
     const parsed = new Date(`${String(value).slice(0, 10)}T12:00:00Z`);
     return Number.isNaN(parsed.getTime()) ? String(value) : parsed.toLocaleDateString('en-US', { month: long ? 'long' : 'short', day: 'numeric', ...(long ? { year: 'numeric' } : {}), timeZone: 'UTC' });
@@ -142,7 +200,8 @@
     return `<article class="tool-card" data-tool-card="${esc(tool.id)}"><div class="tool-card-header"><span class="tool-letter">${esc(initials(tool.name))}</span>${saveButton(tool)}</div><div class="tool-card-category">${esc(categoryLabel(tool.category))}</div><h3><a href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a></h3><p class="tool-card-summary">${esc(tool.summary)}</p><div class="tool-meta-row">${array(tool.platforms).map(platform => `<span class="pill">${esc(platform)}</span>`).join('')}${tierPill(tool.tier)}</div><div class="tool-card-footer"><a href="#tool/${encodeURIComponent(tool.id)}">Tool details ${icon('arrow')}</a>${external(tool.downloadUrl || tool.homepage, `Official source ${icon('external')}`)}</div></article>`;
   }
   function jobCard(job, index = 0) {
-    return `<a class="job-card" href="#job/${encodeURIComponent(job.id)}"><div class="job-card-top"><span class="job-card-icon">${icon(jobIcon(job))}</span><span class="job-card-index">${String(index + 1).padStart(2, '0')}</span></div><h3>${esc(job.title)}</h3><p>${esc(job.summary)}</p><div class="job-card-bottom">${icon('clock')}<span>${esc(job.estimatedTime || `${array(job.steps).length} steps`)}</span><span class="arrow-icon">${icon('arrow')}</span></div></a>`;
+    const href = `#job/${encodeURIComponent(job.id)}`;
+    return `<article class="job-card" data-job-route="${esc(href)}"><div class="job-card-top"><span class="job-card-icon">${icon(jobIcon(job))}</span><span class="job-card-index">${String(index + 1).padStart(2, '0')}</span></div><h3><a href="${href}">${esc(job.title)}</a></h3><p>${esc(job.summary)}</p><div class="job-card-bottom">${icon('clock')}<span>${esc(job.estimatedTime || `${array(job.steps).length} steps`)}</span><a class="arrow-icon" href="${href}" aria-label="Open ${esc(job.title)}">${icon('arrow')}</a></div></article>`;
   }
   function quickTool(tool) {
     return `<a class="quick-tool" href="#tool/${encodeURIComponent(tool.id)}"><span class="tool-letter">${esc(initials(tool.name))}</span><div><strong>${esc(tool.name)}</strong><p>${esc(categoryLabel(tool.category))}</p></div>${icon('arrow')}</a>`;
@@ -155,6 +214,20 @@
     });
     for (const item of items) { if (chosen.length >= count) break; if (!chosen.includes(item)) chosen.push(item); }
     return chosen;
+  }
+  const knowledgeResources = [
+    { slug: 'Decision-Desk', emoji: '🧭', title: 'Decision desk', subtitle: 'FIND YOUR NEXT STEP', body: 'Start with the symptom. Follow the decision paths to the right playbook and tool.', label: 'Choose a path' },
+    { slug: 'Methods', emoji: '📚', title: 'Methods library', subtitle: 'UNDERSTAND THE APPROACH', body: 'Learn the repeatable techniques behind a diagnosis, a repair, and a verified recovery.', label: 'Explore methods' },
+    { slug: 'Knowledge-Standards', emoji: '🧩', title: 'Knowledge standards', subtitle: 'KEEP THE QUALITY HIGH', body: 'One clear structure for evidence, links, diagrams, review dates, and useful guidance.', label: 'Read the standards' },
+    { slug: 'Templates', emoji: '🗂️', title: 'Ready-to-use templates', subtitle: 'START WITH A GOOD STRUCTURE', body: 'Turn a service visit, a tool evaluation, or a proven fix into a clean, complete record.', label: 'Choose a template' },
+    { slug: 'Contribute', emoji: '✍️', title: 'Contribute a better fix', subtitle: 'SHARE WHAT WORKS', body: 'Bring a source, explain the improvement, and help the next technician move with confidence.', label: 'Make a contribution' },
+    { slug: 'Continuous-Improvement', emoji: '🌱', title: 'Keep getting better', subtitle: 'GROW THE SHARED PLAYBOOK', body: 'Review what changed, close gaps in a method, and turn lessons from real jobs into better guidance.', label: 'See the improvement loop' }
+  ];
+  function knowledgeDesk(compact = false) {
+    return `<section class="knowledge-desk${compact ? ' knowledge-desk-home' : ''}" aria-labelledby="knowledge-heading"><div class="knowledge-desk-heading"><div><div class="page-eyebrow">${icon('layers')}THE SHARED KNOWLEDGE DESK</div><h2 id="knowledge-heading">Good answers deserve a good home.</h2><p>Clear decisions, connected methods, and a field guide that grows with your team.</p></div>${compact ? `<a class="button ghost compact" href="#knowledge">Open the desk ${icon('arrow')}</a>` : ''}</div><div class="knowledge-grid">${knowledgeResources.map(resource => `<article class="knowledge-card"><div class="knowledge-card-top"><span class="knowledge-emoji" aria-hidden="true">${resource.emoji}</span><span>${esc(resource.subtitle)}</span></div><h3>${external(`${repo}/wiki/${resource.slug}`, esc(resource.title))}</h3><p>${esc(resource.body)}</p>${external(`${repo}/wiki/${resource.slug}`, `${esc(resource.label)} ${icon('arrow')}`, 'knowledge-card-link')}</article>`).join('')}</div></section>`;
+  }
+  function knowledgePage() {
+    return heading('The INTA knowledge desk', 'Find an answer. Leave a better one.', 'A connected field guide for the whole team, with decision paths, practical methods, and a clear way to keep the work improving.') + knowledgeDesk() + `<section class="knowledge-loop"><div class="section-title"><div><h2>A useful fix becomes shared knowledge.</h2><p>Keep the evidence, the reasoning, and the outcome connected.</p></div></div><ol><li><span>01</span><strong>Choose the path</strong><p>Start at the decision desk and name the problem you need to solve.</p></li><li><span>02</span><strong>Follow the method</strong><p>Use the relevant playbook, primary references, and a measured next step.</p></li><li><span>03</span><strong>Verify the result</strong><p>Reproduce the original task and record the outcome in a private service ticket.</p></li><li><span>04</span><strong>Improve the guide</strong><p>Share the reusable lesson with a source and a clear verification.</p></li></ol></section>`;
   }
   function heroGraphic() {
     return `<div class="hero-visual" aria-hidden="true"><svg viewBox="0 0 350 290" fill="none"><defs><linearGradient id="screenG" x1="120" y1="85" x2="250" y2="220" gradientUnits="userSpaceOnUse"><stop stop-color="#365846"/><stop offset="1" stop-color="#172d27"/></linearGradient></defs><ellipse cx="178" cy="248" rx="115" ry="14" fill="#0d211b" opacity=".25"/><path d="M43 143h32M283 143h29M178 37v28M178 228v22" stroke="#77976c" stroke-opacity=".5" stroke-dasharray="3 5"/><path d="M45 84v-9h9M302 84v-9h-9M45 208v9h9M302 208v9h-9" stroke="#84a573" stroke-opacity=".6"/><rect x="71" y="67" width="209" height="157" rx="14" fill="#20382e" stroke="#89ac72" stroke-opacity=".5"/><rect x="79" y="75" width="193" height="141" rx="9" fill="url(#screenG)" stroke="#96b681" stroke-opacity=".2"/><path d="M79 102h193" stroke="#719660" stroke-opacity=".3"/><circle cx="92" cy="89" r="2.5" fill="#c9ec83"/><circle cx="102" cy="89" r="2.5" fill="#789765"/><circle cx="112" cy="89" r="2.5" fill="#546f47"/><text x="258" y="91" text-anchor="end" fill="#b7cfa4" font-family="Consolas,monospace" font-size="6" letter-spacing="1">INTA / SERVICE DESK</text><rect x="94" y="115" width="70" height="86" rx="5" fill="#173329" stroke="#759c61" stroke-opacity=".3"/><path d="M108 134h41M108 141h28M108 154h41M108 161h23M108 174h41M108 181h33" stroke="#628054" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"/><path d="M108 134h16M108 154h24M108 174h10" stroke="#c9ec83" stroke-width="3" stroke-linecap="round"/><circle cx="214" cy="152" r="30" fill="#304c34" stroke="#a8cd7f" stroke-opacity=".4"/><circle cx="214" cy="152" r="23" fill="#3b5c38" stroke="#c9ec83" stroke-opacity=".7"/><path d="m203 152 7 7 15-16" stroke="#d6f0ac" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="214" y="195" text-anchor="middle" fill="#bbd3ab" font-family="Consolas,monospace" font-size="6" letter-spacing="1">VERIFY THE FIX</text><rect x="26" y="112" width="84" height="37" rx="7" fill="#283d30" stroke="#91b778" stroke-opacity=".5"/><rect x="36" y="122" width="16" height="16" rx="4" fill="#415b35"/><path d="m40 130 3 3 5-6" stroke="#d2ef8a" stroke-width="1.5" stroke-linecap="round"/><text x="59" y="126" fill="#d6e6c9" font-family="Arial,sans-serif" font-size="7">Clear methods</text><text x="59" y="136" fill="#9db68e" font-family="Arial,sans-serif" font-size="5">One step at a time</text><rect x="237" y="180" width="88" height="39" rx="7" fill="#c9ec83"/><path d="M249 192h10v13h-10zM252 195h4M252 199h4" stroke="#456434" stroke-width="1.1"/><text x="266" y="196" fill="#233c23" font-family="Arial,sans-serif" font-weight="bold" font-size="7">FIELD READY</text><text x="266" y="206" fill="#50663e" font-family="Arial,sans-serif" font-size="5">Your next fix starts here</text><circle cx="294" cy="85" r="4" fill="#c9ec83"/><circle cx="57" cy="205" r="3" fill="#6d9858"/><path d="M158 231h38l8 11h-54Z" fill="#365139" stroke="#86aa6d" stroke-opacity=".4"/></svg><div class="floating-label">TOOLS · METHODS · CONFIDENCE</div></div>`;
@@ -209,7 +282,7 @@
     const featuredJobs = selectFeatured(jobs, [/malware|virus/i, /slow|performance/i, /network|internet|dns/i, /backup|restore/i, /boot|bitlocker/i, /remote/i], 6);
     const kit = selectFeatured(tools, [/sysinternals/i, /rustdesk/i, /crystaldiskinfo/i, /ventoy/i], 4);
     const intake = jobs.find(job => /intake|triage/i.test(job.id + ' ' + job.title));
-    return `<section class="hero"><div class="hero-content"><div class="hero-label"><span class="status-dot"></span>THE INTA COMPUTER SERVICES TOOLKIT</div><h1>Every fix<br>starts <em>here.</em></h1><p>The right tools. A clear next step. Your team's home for fixing, maintaining, and making computers work better.</p><div class="hero-actions"><a class="button primary" href="#playbooks">Find a job playbook ${icon('arrow')}</a><a class="button ghost" href="#discipline-malware">Explore all tools ${icon('grid')}</a></div></div>${heroGraphic()}</section><div class="stat-strip"><a class="stat-card" href="#tools"><span class="stat-icon">${icon('grid')}</span><div><strong>${tools.length}</strong><p>Tools, thoughtfully organized</p></div><span class="stat-index">01 / LIBRARY</span></a><a class="stat-card" href="#playbooks"><span class="stat-icon">${icon('book')}</span><div><strong>${jobs.length}</strong><p>Step-by-step job playbooks</p></div><span class="stat-index">02 / METHODS</span></a><a class="stat-card" href="#resources"><span class="stat-icon">${icon('refresh')}</span><div><strong class="stat-date">${esc(dateLabel())}</strong><p>Latest source review · ${esc(String(reviewDate).slice(0, 4))}</p></div><span class="stat-index">03 / SOURCES</span></a></div><div class="home-columns"><section><div class="section-title"><div><h2>What are you working on?</h2><p>Pick a common job. We'll help you find your next step.</p></div><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-grid home-jobs">${featuredJobs.map(jobCard).join('')}</div></section><aside class="quick-kit"><div class="quick-kit-header"><h2>The daily toolkit</h2>${icon('zap')}</div><p class="quick-kit-subtitle">A few familiar starting points.<br>Save your own favorites as you go.</p><div>${kit.map(quickTool).join('')}</div><div class="quick-kit-footer">${icon('info')}<span>Every download takes you to an official source. Check the tool's fit before you start.</span></div></aside></div>${compactToolDirectory()}<section class="routine-banner"><span>${icon('route')}</span><div><h3>A repeatable fix. A clean handoff.</h3><p>Start with the symptom, follow the evidence, and finish with a verification.</p></div><a class="button ghost" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">Start a service visit ${icon('arrow')}</a></section>`;
+    return `<section class="hero"><div class="hero-content"><div class="hero-label"><span class="status-dot"></span>THE INTA COMPUTER SERVICES TOOLKIT</div><h1>Every fix<br>starts <em>here.</em></h1><p>The right tools. A clear next step. Your team's home for fixing, maintaining, and making computers work better.</p><div class="hero-actions"><a class="button primary" href="#playbooks">Find a job playbook ${icon('arrow')}</a><a class="button ghost" href="#discipline-malware">Explore all tools ${icon('grid')}</a></div></div>${heroGraphic()}</section><div class="stat-strip"><a class="stat-card" href="#tools"><span class="stat-icon">${icon('grid')}</span><div><strong>${tools.length}</strong><p>Tools, thoughtfully organized</p></div><span class="stat-index">01 / LIBRARY</span></a><a class="stat-card" href="#playbooks"><span class="stat-icon">${icon('book')}</span><div><strong>${jobs.length}</strong><p>Step-by-step job playbooks</p></div><span class="stat-index">02 / METHODS</span></a><a class="stat-card" href="#resources"><span class="stat-icon">${icon('refresh')}</span><div><strong class="stat-date">${esc(dateLabel())}</strong><p>Latest source review · ${esc(String(reviewDate).slice(0, 4))}</p></div><span class="stat-index">03 / SOURCES</span></a></div><div class="home-columns"><section><div class="section-title"><div><h2>What are you working on?</h2><p>Pick a common job. We'll help you find your next step.</p></div><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-grid home-jobs">${featuredJobs.map(jobCard).join('')}</div></section><aside class="quick-kit"><div class="quick-kit-header"><h2>The daily toolkit</h2>${icon('zap')}</div><p class="quick-kit-subtitle">A few familiar starting points.<br>Save your own favorites as you go.</p><div>${kit.map(quickTool).join('')}</div><div class="quick-kit-footer">${icon('info')}<span>Every download takes you to an official source. Check the tool's fit before you start.</span></div></aside></div>${knowledgeDesk(true)}${compactToolDirectory()}<section class="routine-banner"><span>${icon('route')}</span><div><h3>A repeatable fix. A clean handoff.</h3><p>Start with the symptom, follow the evidence, and finish with a verification.</p></div><a class="button ghost" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">Start a service visit ${icon('arrow')}</a></section>`;
   }
   function selectOptions(values, label, selected = '') {
     return `<option value="">${esc(label)}</option>${[...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b)).map(value => `<option value="${esc(value)}"${selected === value ? ' selected' : ''}>${esc(categoryLabel(value))}</option>`).join('')}`;
@@ -225,7 +298,7 @@
     const base = savedOnly ? tools.filter(tool => favorites.has(tool.id)) : tools;
     return heading(savedOnly ? 'Your personal toolkit' : 'The INTA tool library', savedOnly ? 'Keep your best tools close.' : 'The right tool for the job.', savedOnly ? 'Your saved shortcuts live in this browser. Build the kit that fits the way you work.' : 'Official sources, clear use cases, and practical context. Find what fits the job in front of you.', !savedOnly) + (savedOnly && !base.length ? empty('bookmark', 'Your toolkit starts here.', 'Save tools with the bookmark button. They will be waiting here the next time you need them.', 'Explore the tool library', '#tools') : `<div class="filters" id="tool-filters"><label class="input-wrap">${icon('search')}<span class="sr-only">Search tools</span><input id="library-search" type="search" placeholder="Search tools, symptoms, or capabilities…" value="${esc(query)}"></label><label class="sr-only" for="category-filter">Tool category</label><select class="filter-select" id="category-filter">${selectOptions(tools.map(tool => tool.category), 'All categories', category)}</select><label class="sr-only" for="platform-filter">Platform</label><select class="filter-select" id="platform-filter">${selectOptions(tools.flatMap(tool => array(tool.platforms)), 'All platforms', platform)}</select><label class="sr-only" for="tier-filter">Recommendation level</label><select class="filter-select" id="tier-filter"><option value="">All recommendations</option><option value="core"${tier === 'core' ? ' selected' : ''}>Everyday picks</option><option value="specialist"${tier === 'specialist' ? ' selected' : ''}>Specialist tools</option><option value="evaluate"${tier === 'evaluate' ? ' selected' : ''}>Evaluate first</option></select></div><div class="filter-result"><span id="library-result-count" aria-live="polite"></span><div class="legend"><span><i class="legend-dot"></i>Everyday</span><span><i class="legend-dot specialist"></i>Specialist</span><span><i class="legend-dot evaluate"></i>Evaluate first</span></div><button data-reset-filters>Clear filters</button></div><div class="tool-grid" id="tool-results" data-saved-only="${savedOnly}"></div>`);
   }
-  function filterTools() {
+  function filterTools(linkProse = true) {
     const container = $('#tool-results');
     if (!container) return;
     const query = $('#library-search').value;
@@ -237,11 +310,12 @@
     container.innerHTML = found.length ? found.map(toolCard).join('') : `<div style="grid-column:1/-1">${empty('search', 'No tools match this combination.', 'Try a different search or clear the filters to see the full library.', 'Clear filters', '', 'reset-filters')}</div>`;
     $('#library-result-count').innerHTML = `<strong>${found.length}</strong> of ${base.length} ${base.length === 1 ? 'tool' : 'tools'}`;
     rememberFilters({ q: query, category, platform, tier });
+    if (linkProse) linkifyProse(container);
   }
   function playbooks(params = new URLSearchParams()) {
     return heading('The INTA field guide', 'A clear path from problem to fix.', 'Practical workflows for the service desk and the workbench. Each guide includes the tools, the steps, and the checks that show the job is done.') + `<div class="filters"><label class="input-wrap">${icon('search')}<span class="sr-only">Search playbooks</span><input id="jobs-search" type="search" value="${esc(params.get('q') || '')}" placeholder="Describe the job or the symptom…"></label><label class="sr-only" for="jobs-category">Playbook category</label><select class="filter-select" id="jobs-category">${selectOptions(jobs.map(job => job.category), 'All job types', params.get('category') || '')}</select></div><div class="filter-result"><span id="jobs-result-count" aria-live="polite"></span><button data-reset-jobs>Clear filters</button></div><div class="job-grid" id="job-results"></div>`;
   }
-  function filterJobs() {
+  function filterJobs(linkProse = true) {
     const container = $('#job-results');
     if (!container) return;
     const query = $('#jobs-search').value;
@@ -250,6 +324,7 @@
     container.innerHTML = found.length ? found.map(jobCard).join('') : `<div style="grid-column:1/-1">${empty('search', 'Let’s try another symptom.', 'Search by a broad term such as network, boot, backup, or malware.', 'Clear filters', '', 'reset-jobs')}</div>`;
     $('#jobs-result-count').innerHTML = `<strong>${found.length}</strong> of ${jobs.length} playbooks`;
     rememberFilters({ q: query, category });
+    if (linkProse) linkifyProse(container);
   }
   function rememberFilters(values) {
     const route = parseRoute();
@@ -328,7 +403,8 @@
     const [name, ...parts] = path.split('/');
     let id = parts.join('/');
     try { id = decodeURIComponent(id); } catch (_) { id = ''; }
-    return { name, id, params: new URLSearchParams(query), raw };
+    const anchor = path.startsWith('discipline-') ? path : '';
+    return { name: anchor ? 'home' : name, id, params: new URLSearchParams(query), raw, anchor };
   }
   function closeNavigation() {
     $('#sidebar').classList.remove('is-open');
@@ -337,7 +413,7 @@
   }
   function render() {
     const route = parseRoute();
-    const names = { home: 'Overview', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', job: 'Job playbooks', tool: 'Tool library' };
+    const names = { home: 'Overview', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
     $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
     $('#breadcrumb').innerHTML = `Workspace <span>/</span> <strong>${esc(names[route.name] || 'Overview')}</strong>`;
@@ -348,12 +424,14 @@
     else if (route.name === 'job') app.innerHTML = jobDetail(route.id);
     else if (route.name === 'tool') app.innerHTML = toolDetail(route.id);
     else if (route.name === 'resources') app.innerHTML = resources();
+    else if (route.name === 'knowledge') app.innerHTML = knowledgePage();
     else app.innerHTML = notFound('page');
     const title = route.name === 'job' ? jobMap.get(route.id)?.title : route.name === 'tool' ? toolMap.get(route.id)?.name : names[route.name];
     document.title = `${title || 'Technician workspace'} | INTA Computer Services`;
-    filterTools(); filterJobs(); filterSources(); updateCounts();
+    filterTools(false); filterJobs(false); filterSources(); linkifyProse(app); updateCounts();
     closeNavigation(); closeSearch();
-    if (lastRoute !== route.raw) window.scrollTo({ top: 0, behavior: 'instant' });
+    if (route.anchor && document.getElementById(route.anchor)) document.getElementById(route.anchor).scrollIntoView({ block: 'start', behavior: 'instant' });
+    else if (lastRoute !== route.raw) window.scrollTo({ top: 0, behavior: 'instant' });
     if (lastRoute) $('#main').focus({ preventScroll: true });
     lastRoute = route.raw;
   }
@@ -485,6 +563,8 @@
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
     if (target.closest('.skip-link')) { event.preventDefault(); $('#main').focus(); return; }
+    const jobCardTarget = target.closest('[data-job-route]');
+    if (jobCardTarget && !target.closest('a,button,input,select,textarea') && !window.getSelection()?.toString()) { location.hash = jobCardTarget.dataset.jobRoute; return; }
     const save = target.closest('[data-save]'); if (save) return toggleFavorite(save.dataset.save);
     const exportButton = target.closest('[data-export-job]'); if (exportButton) return exportJob(exportButton.dataset.exportJob);
     if (target.closest('[data-download-offline]')) return downloadOffline();

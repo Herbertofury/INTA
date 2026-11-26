@@ -1,62 +1,85 @@
-![INTA technician field guide](https://github.com/Herbertofury/INTA/raw/main/docs/assets/inta-banner.svg)
+![INTA Service Atlas: find the right path, leave a better one](https://github.com/Herbertofury/INTA/raw/main/docs/assets/wiki-hero.svg)
 
-# Every fix starts here.
+# 🧭 Your next good fix starts here.
 
-### The shared technician home for INTA Computer Services.
+The shared home for INTA Computer Services: a clear route through the job, the tools to do it, and the proof that it worked.
 
-**[Open the interactive hub →](https://herbertofury.github.io/INTA/)** · [Choose a playbook](Playbooks) · [Browse tools](Tool-Directory) · [Rescue & USB media](Rescue-Media)
+**[✨ Open the interactive technician hub](https://herbertofury.github.io/INTA/)** · [Find a playbook](Playbooks) · [Browse every tool](Tool-Directory) · [Contribute a better way](Contribute)
 
-**111 curated tools** · **22 complete job guides** · **10 tool disciplines**
+| Ready on the bench | Knowledge with a path | Built to keep improving |
+| --- | --- | --- |
+| **111 selected tools** across 10 disciplines | **22 complete job guides** with decision maps | [Standards](Knowledge-Standards), [templates](Templates), and [manual review](Continuous-Improvement) |
 
-> **Start with the job.** Find the symptom below, open its playbook, choose the recommended tools, and tick through the workflow. The interactive hub remembers checklist progress and your saved tools in your browser.
+> [!TIP]
+> **New case?** Start at the [decision desk](Decision-Desk). **Already know the job?** Open its [playbook](Playbooks). **Need a download?** Use the [tool directory](Tool-Directory).
 
-## What are you working on?
+## 🚦 First, choose the right route
 
-| Job | Start here |
+```mermaid
+flowchart TD
+    A["Start with the observed problem"]:::action --> B{"Immediate risk?"}:::decision
+    B -->|"Active compromise"| C["Contain and coordinate response"]:::stop
+    B -->|"Failing storage or damage"| D["Protect data and choose recovery"]:::stop
+    B -->|"No immediate risk"| E{"What is the scope?"}:::decision
+    E -->|"Office or shared service"| F["Restore dependencies in order"]:::action
+    E -->|"One device or application"| G["Choose a focused playbook"]:::action
+    F --> H["Test the real business task"]:::done
+    G --> H
+    H --> I{"Evidence worth reusing?"}:::decision
+    I -->|"New method or correction"| J["Improve the shared guide"]:::done
+    I -->|"Case-specific details"| K["Complete the private handoff"]:::done
+    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa
+    classDef action fill:#172033,stroke:#64748b,color:#f8fafc
+    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2
+    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5
+```
+
+| What you see | Open this route first |
 | --- | --- |
-| [Start here: triage any computer problem](Job-intake-triage) | Turn a vague symptom into a clear next action, a protected data set, and a useful service record. |
-| [Remove malware and browser hijackers](Job-malware-removal) | A measured cleanup workflow for a single Windows endpoint, with a separate path for a wider compromise. |
-| [Contain ransomware or a wider compromise](Job-ransomware-response) | Stop spread, preserve useful evidence, and restore services through a clean recovery path. |
-| [Diagnose a slow, freezing, or hitching PC](Job-slow-pc) | Find the actual bottleneck and prove the improvement with the same workload. |
-| [Repair Windows component or system-file corruption](Job-windows-repair) | Use Windows servicing tools in a sensible order and validate the specific broken feature. |
-| [Fix a failing Windows update](Job-windows-update) | Diagnose the update code, servicing state, and available space before broad reset scripts. |
-| [Recover a Windows PC that will not boot](Job-boot-recovery) | Separate firmware, storage, encryption, and Windows startup faults before changing the boot configuration. |
-| [Rescue data from a failing or unreadable drive](Job-failing-drive) | Preserve the source, create a recoverable image, and perform recovery on a copy. |
-| [Clone a healthy system or migrate to a new SSD](Job-disk-migration) | Move a working system with clear source/destination control and a rollback copy. |
-| [Prove a backup can actually restore](Job-backup-restore) | Validate recovery credentials, data integrity, application usability, and recovery time. |
-| [Fix internet, DNS, or local-network problems](Job-network-dns) | Locate the failing layer before resetting adapters or changing the whole network. |
-| [Bring an office back after a power outage](Job-outage-recovery) | Restore dependencies in order and verify services before releasing the office back to work. |
-| [Start and finish a clean remote-support session](Job-remote-support) | Choose the right attended or managed tool and leave a clear, auditable handoff. |
-| [Repair a workstation’s domain trust relationship](Job-ad-trust) | Check connectivity, time, and computer identity before repairing a member computer’s secure channel. |
-| [Fix Outlook or email send/receive problems](Job-outlook-email) | Separate service, authentication, mailbox, network, and local-client faults. |
-| [Restore printing without breaking other queues](Job-printer-repair) | Isolate printer hardware, network reachability, queue state, driver, and application behavior. |
-| [Diagnose crashes, blue screens, and overheating](Job-hardware-bsod) | Correlate crash evidence with memory, storage, temperature, power, and driver changes. |
-| [Set up a dependable new workstation](Job-new-pc) | Build a usable, recoverable workstation around the employee’s actual job. |
-| [Close a repair with a clear client handoff](Job-client-handoff) | Turn completed technical work into proof the customer can use, with clean access and an actionable service record. |
-| [Build and refresh a technician rescue USB](Job-boot-usb) | Keep verified recovery images, Windows repair media, and the INTA knowledge hub ready for offline use. |
-| [Use AI as a careful troubleshooting copilot](Job-ai-triage) | Use AI to organize evidence, compare hypotheses, and explain findings while the technician controls execution. |
-| [Run a useful workstation maintenance visit](Job-preventive-maintenance) | Check security, updates, hardware, backups, and usability without unnecessary cleanup rituals. |
+| Encryption spreading, unusual privileged access, or several affected machines | [🚨 Contain a wider compromise](Job-ransomware-response) |
+| Clicking storage, disappearing volumes, or data with no other copy | [💾 Protect and recover the source](Job-failing-drive) |
+| The whole office or a shared service is down | [🔌 Restore office dependencies](Job-outage-recovery) |
+| The cause is still unclear | [🧭 Scope and triage the problem](Job-intake-triage) |
 
-## Your bench, organized
+## 🗂️ Find your work area
 
-| Section | What you get |
+| Work area | Pick a playbook |
 | --- | --- |
-| [Tool directory](Tool-Directory) | Official downloads, when to choose each tool, platforms, pricing and selection notes. |
-| [Start here](Start-Here) | The triage workflow, toolkit tiers and a clear path for a new technician. |
-| [Rescue media](Rescue-Media) | INTA Rescue, Windows recovery, Rufus and Ventoy, with environment boundaries. |
-| [Keeping the hub current](Maintaining-the-Hub) | On-demand checks, source review, testing and publication. |
-| [Intake and handoff template](Technician-Handoff) | A reusable service record without publishing customer data. |
+| **🧭 First response & handoff** | [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) · [Start and finish a clean remote-support session](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff) |
+| **🛡️ Security & [incident response](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response)** | [Remove malware and browser hijackers](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) · [Contain ransomware or a wider compromise](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response) |
+| **🪟 [Windows](https://www.microsoft.com/windows) & system stability** | [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) · [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) · [Fix a failing Windows update](https://github.com/Herbertofury/INTA/wiki/Job-windows-update) · [Diagnose crashes, blue screens, and overheating](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod) |
+| **💾 Storage, backup & rescue** | [Recover a Windows PC that will not boot](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery) · [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) · [Clone a healthy system or migrate to a new SSD](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration) · [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) · [Build and refresh a technician rescue USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) |
+| **🌐 Network & office continuity** | [Fix internet, DNS, or local-network problems](https://github.com/Herbertofury/INTA/wiki/Job-network-dns) · [Bring an office back after a power outage](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery) · [Repair a workstation’s domain trust relationship](https://github.com/Herbertofury/INTA/wiki/Job-ad-trust) |
+| **🖨️ Everyday workplace fixes** | [Fix Outlook or email send/receive problems](https://github.com/Herbertofury/INTA/wiki/Job-outlook-email) · [Restore printing without breaking other queues](https://github.com/Herbertofury/INTA/wiki/Job-printer-repair) |
+| **🧰 Deployment & maintenance** | [Set up a dependable new workstation](https://github.com/Herbertofury/INTA/wiki/Job-new-pc) · [Run a useful workstation maintenance visit](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) |
+| **✨ AI-assisted investigation** | [Use AI as a careful troubleshooting copilot](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage) |
 
-## The INTA way
+## 🧰 Put the right resource within reach
 
-**Understand → protect → diagnose → repair → verify → hand off.**
+| Resource | What you can do here |
+| --- | --- |
+| [🧰 Tool directory](Tool-Directory) | Compare use cases, platforms, access, official downloads, and documentation. |
+| [🧠 Method library](Methods) | Learn repeatable ways to isolate a cause, protect the source, and prove the result. |
+| [🥾 Rescue media](Rescue-Media) | Choose and maintain the boot environment for the task. |
+| [🤝 Intake and handoff](Technician-Handoff) | Start a clear private service record and leave the next technician a useful checkpoint. |
+| [📏 Knowledge standards](Knowledge-Standards) | Follow the shared rules for clear instructions, evidence, links, and review. |
+| [🛠️ Contribute](Contribute) | Submit a tested correction or a useful new guide with the [template](Templates). |
 
-Use evidence to choose one scoped change at a time. For a failing drive, preserve data before repair attempts. For a compromised system, contain first and decide whether to rebuild. A quiet scan alone does not prove a machine is clean.
+## 📐 The INTA working standard
 
-## Take it offline
+| At the start | While you work | Before you close |
+| --- | --- | --- |
+| Establish scope and protect unique data. | Follow one evidence-led test and keep the result. | Repeat the real task and document the handoff. |
+| Choose the appropriate recovery or incident route early. | Preserve a usable rollback and avoid repeating unchanged failures. | Turn a proven improvement into a reusable contribution. |
 
-Download the complete source from [Code](https://github.com/Herbertofury/INTA) and open `site/index.html`. Search, filters, favorites and checklists work without a connection. Official downloads and external references need internet access. Keep the HTML on your technician drive beside your rescue images.
+## 🎒 Take the whole bench guide offline
+
+Download the [complete repository](https://github.com/Herbertofury/INTA/archive/refs/heads/main.zip) and open `site/index.html`. The hub keeps search, filters, saved tools, and checklists available without a connection. Official downloads and external reference pages need internet access. Keep customer records outside this public guide.
+
+## 🌱 Improve it after the next real case
+
+A changed download, a clearer branch, a newly proven tool, or a missing verification step is a useful contribution. [See the review loop](Continuous-Improvement), [use the template](Templates), and [check the publication workflow](Maintaining-the-Hub).
 
 ---
 
-Editorial review: **2026-11-26**. Review date describes the guidance, not the installed version of a downloaded tool. [Contribute an improvement](https://github.com/Herbertofury/INTA/issues/new/choose).
+**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)

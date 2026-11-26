@@ -1,77 +1,143 @@
-[Home](https://github.com/Herbertofury/INTA/wiki) · [All playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/backup-restore)
+[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
 
-# Prove a backup can actually restore
+# 🛟 [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)
 
-> Validate recovery credentials, data integrity, application usability, and recovery time.
+Validate recovery credentials, data integrity, application usability, and recovery time.
 
-| Job profile | Details |
+| Work area | Experience | Plan your time | Workflow |
+| --- | --- | --- | --- |
+| Backup & continuity | Intermediate | 30–90 min; full restore varies | 6 steps + acceptance |
+
+**[▶ Open the interactive checklist](https://herbertofury.github.io/INTA/#job/backup-restore)** · [Decision route](#decision-route) · [Toolkit](#toolkit) · [Walkthrough](#walkthrough) · [Acceptance](#acceptance) · [Sources](#sources)
+
+> [!TIP]
+> **Your starting move:** Identify what must be recovered, the acceptable data-loss window, and the target recovery time. A green backup status is only the starting point.
+
+<a id="decision-route"></a>
+
+## 🧭 Choose the right branch
+
+```mermaid
+flowchart TD
+    A["Define recovery data and time targets"]:::action --> B{"Credentials and backup accessible?"}:::decision
+    B -->|"No"| C["Resolve recovery access now"]:::stop
+    B -->|"Yes"| D["Inspect job health and repository integrity"]:::action
+    D --> E{"Integrity errors?"}:::decision
+    E -->|"Yes"| F["Protect copies and repair the backup path"]:::stop
+    E -->|"No"| G["Restore to a separate empty target"]:::action
+    G --> H{"Real application opens restored data?"}:::decision
+    H -->|"No"| F
+    H -->|"Yes"| I["Test outage access and measure recovery"]:::action
+    I --> J["Record coverage, timing, and remaining gaps"]:::done
+    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa
+    classDef action fill:#172033,stroke:#64748b,color:#f8fafc
+    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2
+    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5
+```
+
+**Diagram routes:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Clone a healthy system or migrate to a new SSD](disk-migration.md) · [Bring an office back after a power outage](outage-recovery.md) · [Contain ransomware or a wider compromise](ransomware-response.md) · [Run a useful workstation maintenance visit](preventive-maintenance.md)
+
+| Checkpoint | What to carry forward |
 | --- | --- |
-| Category | Backup & continuity |
-| Working time | 30–90 min; full restore varies |
-| Experience | Intermediate |
+| **Before changing anything** | Identify recovery credentials, unique data, and a separate test target. |
+| **Keep during the job** | Snapshot, integrity result, restore log, elapsed time, and test evidence. |
+| **Before handing back** | Real restored data opens and the outage path is usable. |
 
-## Start here
+<a id="toolkit"></a>
 
-Identify what must be recovered, the acceptable data-loss window, and the target recovery time. A green backup status is only the starting point.
+## 🧰 Build the right toolkit
 
-## Your toolkit
+Choose the tools that answer the case’s next question. Opening a tool is a separate decision from changing the customer’s system.
 
-| Tool | Why it belongs here |
-| --- | --- |
-| [restic](https://github.com/restic/restic/releases/latest) | Repeatable file backups with explicit integrity and restore checks. |
-| [Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows) | Image backup and recovery media for a supported Windows endpoint. |
-| [Rescuezilla](https://rescuezilla.com/download) | A visual bare-metal backup or restore workflow at the bench. |
+| Tool / official download | Use it for | Platform & access | Documentation |
+| --- | --- | --- | --- |
+| [restic](https://github.com/restic/restic/releases/latest) | Repeatable file backups with explicit integrity and restore checks. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://restic.readthedocs.io/en/stable/) |
+| [Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows) | Image backup and recovery media for a supported [Windows](https://www.microsoft.com/windows) endpoint. | [Windows](https://www.microsoft.com/windows); Free and paid editions; service-provider terms differ | [Open guide](https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html) |
+| [Rescuezilla](https://rescuezilla.com/download) | A visual bare-metal backup or restore workflow at the bench. | Bootable PC; Free / open source | [Open guide](https://rescuezilla.com/help) |
 
-## Follow the workflow
+<a id="walkthrough"></a>
 
-### 01. Inventory the recovery set
+## 🪜 Work the case
+
+Work in order, record the result of each step, and change route when the evidence calls for it.
+
+<a id="step-01"></a>
+
+### 01 · Inventory the recovery set
 
 - [ ] List protected devices, folders, application data, backup destination, retention, encryption keys, and the last successful job. Confirm the person covering an outage can obtain the credentials. Identify data that lives outside the usual Documents/Desktop folders.
 
-### 02. Inspect repository and job health
+<a id="step-02"></a>
 
-- [ ] Read recent backup logs, skipped-file reports, capacity, and retention errors. Use the product’s integrity check. For restic, a normal check validates repository structure; reading and verifying stored data requires the additional data-check option and an appropriate maintenance window.
+### 02 · Inspect repository and job health
 
-### 03. Select a representative restore
+- [ ] Read recent backup logs, skipped-file reports, capacity, and retention errors. Use the product’s integrity check. For [restic](https://restic.net/), a normal check validates repository structure; reading and verifying stored data requires the additional data-check option and an appropriate maintenance window.
+
+<a id="step-03"></a>
+
+### 03 · Select a representative restore
 
 - [ ] Choose a known snapshot and business-relevant files, including a large file and a format used by the client. Restore to an empty separate folder or isolated test machine. Avoid restoring directly over live files during a routine verification.
 
-### 04. Test the content with the real application
+<a id="step-04"></a>
+
+### 04 · Test the content with the real application
 
 - [ ] Open documents, photos, archives, and business data in their intended applications. Check permissions and required metadata. For databases or server workloads, follow the application’s supported recovery procedure and confirm consistency, not just file presence.
 
-### 05. Exercise the outage path
+<a id="step-05"></a>
+
+### 05 · Exercise the outage path
 
 - [ ] For system recovery, boot the recovery media in a test environment and confirm it can see the backup destination and required storage/network hardware. Measure restore time. Verify recovery still works when the original PC or ordinary sign-in method is unavailable.
 
-### 06. Record and resolve gaps
+<a id="step-06"></a>
+
+### 06 · Record and resolve gaps
 
 - [ ] Save the restore date, snapshot, scope, integrity result, elapsed time, and evidence in the private service record. Assign an owner to missing data, inaccessible keys, slow restore paths, or capacity problems. Keep backup copies isolated from ordinary endpoint write access where supported.
 
-## Verify before handoff
+<a id="acceptance"></a>
+
+## ✅ Prove the result
 
 - [ ] A real restore has completed to a separate target.
 - [ ] Restored data opens correctly and required permissions work.
 - [ ] Recovery keys, media, network access, and time expectations were tested.
 - [ ] Any integrity or coverage gap has an owner and corrective action.
 
-## Stop and escalate when
+> [!WARNING]
+> **Pause this route and escalate when:**
+> - A repository check reports corruption or essential credentials are missing.
+> - The restore plan would overwrite the only good copy or live production data.
 
-- A repository check reports corruption or essential credentials are missing.
-- The restore plan would overwrite the only good copy or live production data.
+## 🔀 Continue with the evidence
 
-## Related playbooks
+| Next playbook | What it resolves |
+| --- | --- |
+| [Clone a healthy system or migrate to a new SSD](disk-migration.md) | Move a working system with clear source/destination control and a rollback copy. |
+| [Bring an office back after a power outage](outage-recovery.md) | Restore dependencies in order and verify services before releasing the office back to work. |
+| [Contain ransomware or a wider compromise](ransomware-response.md) | Stop spread, preserve useful evidence, and restore services through a clean recovery path. |
+| [Run a useful workstation maintenance visit](preventive-maintenance.md) | Check security, updates, hardware, backups, and usability without unnecessary cleanup rituals. |
 
-- [Disk Migration](disk-migration.md)
-- [Outage Recovery](outage-recovery.md)
-- [Ransomware Response](ransomware-response.md)
-- [Preventive Maintenance](preventive-maintenance.md)
+Found a reusable improvement? [Contribute the correction](https://github.com/Herbertofury/INTA/wiki/Contribute) and include the test that proved it.
 
-## Official references
+<a id="sources"></a>
+
+## 🔎 Source trail
+
+<details>
+<summary>Official references and editorial review</summary>
 
 - [restic: repository consistency and integrity](https://restic.readthedocs.io/en/stable/045_working_with_repos.html)
 - [restic: restore a backup](https://restic.readthedocs.io/en/stable/050_restore.html)
 
+Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
+
+</details>
+
 ---
 
-INTA Computer Services · Editorial review: 2026-11-26. Timing is an estimate; stop conditions take priority.
+**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+
+[← All playbooks](README.md) · [Live Wiki](https://github.com/Herbertofury/INTA/wiki) · [Contribution guide](https://github.com/Herbertofury/INTA/blob/main/CONTRIBUTING.md)

@@ -1,0 +1,76 @@
+[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
+
+# 🛠 Make a useful contribution
+
+[Home](https://github.com/Herbertofury/INTA/wiki) › **Contribute**
+
+**Improve one complete technician outcome, then publish the evidence with it.** Use [Knowledge Standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) for the writing and linking rules, and [Templates](https://github.com/Herbertofury/INTA/wiki/Templates) to keep the change reviewable.
+
+## 🧭 Choose the kind of improvement
+
+| You found… | Make this contribution | Show this proof |
+| --- | --- | --- |
+| A moved or misleading official link | Correct its canonical catalog or method entry and all affected routes. | The destination is the intended publisher page and rendered mentions point there. |
+| A confusing step | Rewrite the starting condition, action, expected observation and fallback. | A technician can select the next action without guessing the environment. |
+| A better tool candidate | Add its job fit, platform, operating mode, pricing context, sources and limits. | The documented capability is accurate; any claimed runtime advantage has a real comparison. |
+| A missing decision | Add a small decision table or [Mermaid](https://mermaid.js.org/intro/) diagram. | Every branch has a useful next guide and no branch implies an unverified repair. |
+| A new release | Perform a [manual freshness review](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance). | The applicable release and compatibility decision are recorded separately from URL reachability. |
+| A repeated field lesson | Generalize it into a guide or named method. | The public example is sanitized, the original evidence stays private, and the method has an acceptance test. |
+
+## 🗂 Edit once, improve every surface
+
+| Canonical file | Author here |
+| --- | --- |
+| [Tool catalog](https://github.com/Herbertofury/INTA/blob/main/data/tools.json) | Tool identity, official links, usage boundary, tier, tags and review evidence |
+| [Job guides](https://github.com/Herbertofury/INTA/blob/main/data/jobs.json) | Procedures, selected tool IDs, verification, escalation and sources |
+| [Method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json) | Precise method names, aliases, canonical destinations and proof |
+| [Link aliases](https://github.com/Herbertofury/INTA/blob/main/data/link-aliases.json) and [linking helper](https://github.com/Herbertofury/INTA/blob/main/scripts/wiki_links.py) | Additional precise application names and linking of every repeated mention |
+| [Wiki layout](https://github.com/Herbertofury/INTA/blob/main/data/wiki-layout.json) | Page presentation and job decision diagrams |
+| [Authored documentation](https://github.com/Herbertofury/INTA/tree/main/docs) | Onboarding, decisions, standards, contribution guidance and service templates |
+| [Portal source](https://github.com/Herbertofury/INTA/tree/main/portal) | Actual interface and interaction changes |
+| [Hub builder](https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py) | Consistent generation of the site, wiki and rendered guides |
+
+Keep existing stable IDs when the identity is unchanged. A product rename may need an alias and a moved official URL; it does not justify breaking saved references. Generated `site/`, `wiki/` and `docs/runbooks/` are outputs, so repair their source instead of leaving a one-surface patch.
+
+## 🧪 Follow the evidence path
+
+1. **Record the actual problem.** State the affected job and what a technician cannot currently do or understand. Identify the canonical source revision and reuse the known project state.
+2. **Check the decisive source.** Read the original project, publisher or platform documentation. Separate observed capability, your inference and an untested candidate. Avoid broad rediscovery once the next edit is known.
+3. **Make a coherent change.** Include the complete procedure or catalog entry, the appropriate links and the actual success test. Preserve existing useful content.
+4. **Review every named route.** Repeated tool, application and method mentions must remain clickable. Check aliases, headings, tables, lists and the linked legends immediately following command blocks and diagrams.
+5. **Build and target the risk.** Check generation and the meaningful behavior affected by the change. A link edit needs destination and generated-output checks; a UI interaction needs a real browser exercise; a new operational claim needs corresponding evidence.
+6. **Challenge once.** Look for one material omitted platform boundary, stale source, incorrect next step, missing recovery path or rendering regression. Resolve significant findings, then finish the accepted scope.
+7. **Publish and read back.** Preserve the source checkpoint and matching complete outputs, then confirm the deployed destinations show the intended content.
+
+## 🧰 Local build commands
+
+```sh
+python3 scripts/build-hub.py
+python3 -m unittest discover -s tests
+python3 scripts/build-hub.py --check
+python3 scripts/check-wiki.py
+```
+
+Command legend: [Python](https://www.python.org/) runs the [hub builder](https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py), [test suite](https://github.com/Herbertofury/INTA/tree/main/tests) and [wiki checker](https://github.com/Herbertofury/INTA/blob/main/scripts/check-wiki.py). The checks verify generated outputs, known named links, routes and linked diagram or command legends.
+
+For a content change, inspect the relevant rendered page and follow its actual links. For a visual or interaction change, check desktop and narrow layouts, keyboard navigation, both themes, complete search results, checklists, saved items and exports where affected. Check the offline build as well as the hosted surface when the change touches offline behavior.
+
+## 🚀 Definition of finished
+
+- [ ] The user-visible improvement is complete in canonical source.
+- [ ] Every factual claim has an appropriate source and its evidence level is clear.
+- [ ] Named links, commands, diagram legends and navigation were reviewed.
+- [ ] Generation and the relevant behavior checks passed.
+- [ ] Significant challenge findings were resolved.
+- [ ] The exact source checkpoint is on the canonical remote.
+- [ ] The matching site and actual live wiki were published and read back.
+- [ ] The complete deliverable was saved to the project's connected [Google Drive](https://drive.google.com/) destination and its identity verified.
+- [ ] The contribution record includes proof, limits, published locations and any remaining next action.
+
+Use [Maintaining the Hub](https://github.com/Herbertofury/INTA/wiki/Maintaining-the-Hub) for publication commands and [Continuous Improvement](https://github.com/Herbertofury/INTA/wiki/Continuous-Improvement) for recurring work. If an external gate fails, retain the last verified checkpoint and continue on a materially different supported route. Do not label an unpublished or unverified required surface complete.
+
+**➜ Continue:** [Copy the contribution template](https://github.com/Herbertofury/INTA/wiki/Templates) · [Choose a method](https://github.com/Herbertofury/INTA/wiki/Methods) · [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose)
+
+---
+
+**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)

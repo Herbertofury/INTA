@@ -1,79 +1,147 @@
-[Home](https://github.com/Herbertofury/INTA/wiki) · [All playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/boot-recovery)
+[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
 
-# Recover a Windows PC that will not boot
+# 🥾 [Recover a Windows PC that will not boot](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery)
 
-> Separate firmware, storage, encryption, and Windows startup faults before changing the boot configuration.
+Separate firmware, storage, encryption, and [Windows](https://www.microsoft.com/windows) startup faults before changing the boot configuration.
 
-| Job profile | Details |
+| Work area | Experience | Plan your time | Workflow |
+| --- | --- | --- | --- |
+| Recovery & boot | Advanced | 30–120 min | 6 steps + acceptance |
+
+**[▶ Open the interactive checklist](https://herbertofury.github.io/INTA/#job/boot-recovery)** · [Decision route](#decision-route) · [Toolkit](#toolkit) · [Walkthrough](#walkthrough) · [Acceptance](#acceptance) · [Sources](#sources)
+
+> [!TIP]
+> **Your starting move:** Record the exact screen and failure stage. Obtain the device’s recovery-key access path before any firmware, TPM, or boot changes.
+
+<a id="decision-route"></a>
+
+## 🧭 Choose the right branch
+
+```mermaid
+flowchart TD
+    A["Identify the startup failure stage"]:::action --> B{"Drive detected and stable?"}:::decision
+    B -->|"No"| C["Follow hardware or data recovery"]:::stop
+    B -->|"Yes"| D{"Recovery access available?"}:::decision
+    D -->|"No"| E["Obtain the recovery-key path"]:::stop
+    D -->|"Yes"| F["Enter the supported recovery environment"]:::action
+    F --> G{"Known recent change?"}:::decision
+    G -->|"Yes"| H["Choose the narrow rollback"]:::action
+    G -->|"No"| I["Run startup diagnosis"]:::action
+    H --> J{"Normal boot and data test pass?"}:::decision
+    I --> J
+    J -->|"No"| K["Protect data before advanced repair"]:::stop
+    J -->|"Yes"| L["Verify another restart and encryption"]:::done
+    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa
+    classDef action fill:#172033,stroke:#64748b,color:#f8fafc
+    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2
+    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5
+```
+
+**Diagram routes:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Rescue data from a failing or unreadable drive](failing-drive.md) · [Build and refresh a technician rescue USB](boot-usb.md) · [Repair Windows component or system-file corruption](windows-repair.md) · [Prove a backup can actually restore](backup-restore.md)
+
+| Checkpoint | What to carry forward |
 | --- | --- |
-| Category | Recovery & boot |
-| Working time | 30–120 min |
-| Experience | Advanced |
+| **Before changing anything** | Preserve recovery-key access and identify the actual [Windows](https://www.microsoft.com/windows) volume. |
+| **Keep during the job** | Failure stage, volume layout, recovery action, and its result. |
+| **Before handing back** | Two normal boots, accessible data, and healthy encryption. |
 
-## Start here
+<a id="toolkit"></a>
 
-Record the exact screen and failure stage. Obtain the device’s recovery-key access path before any firmware, TPM, or boot changes.
+## 🧰 Build the right toolkit
 
-## Your toolkit
+Choose the tools that answer the case’s next question. Opening a tool is a separate decision from changing the customer’s system.
 
-| Tool | Why it belongs here |
-| --- | --- |
-| [Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) | A Windows machine that will not boot or needs supported recovery options. |
-| [Windows 11 installation media](https://www.microsoft.com/software-download/windows11) | A clean installation or supported repair using the correct Windows edition and architecture. |
-| [Ventoy](https://www.ventoy.net/en/download.html) | Maintaining a technician USB with several independently updated rescue images. |
-| [Rufus](https://rufus.ie/#download) | Preparing one ISO on a dedicated USB drive. |
-| [SystemRescue](https://www.system-rescue.org/Download/) | A ready-made Linux recovery environment for an unbootable or damaged machine. |
-| [Hiren's BootCD PE](https://www.hirensbootcd.org/download/) | A familiar Windows-oriented offline bench toolkit. |
+| Tool / official download | Use it for | Platform & access | Documentation |
+| --- | --- | --- | --- |
+| [Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) | A [Windows](https://www.microsoft.com/windows) machine that will not boot or needs supported recovery options. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) |
+| [Windows 11 installation media](https://www.microsoft.com/software-download/windows11) | A clean installation or supported repair using the correct [Windows](https://www.microsoft.com/windows) edition and architecture. | [Windows](https://www.microsoft.com/windows), Bootable PC; Download available; [Windows](https://www.microsoft.com/windows) license required | [Open guide](https://www.microsoft.com/software-download/windows11) |
+| [Ventoy](https://www.ventoy.net/en/download.html) | Maintaining a technician USB with several independently updated rescue images. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/); Free / open source | [Open guide](https://www.ventoy.net/en/doc_start.html) |
+| [Rufus](https://rufus.ie/#download) | Preparing one ISO on a dedicated USB drive. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://github.com/pbatard/rufus/wiki/FAQ) |
+| [SystemRescue](https://www.system-rescue.org/Download/) | A ready-made [Linux](https://www.kernel.org/) recovery environment for an unbootable or damaged machine. | Bootable PC; Free / open source | [Open guide](https://www.system-rescue.org/manual/) |
+| [Hiren's BootCD PE](https://www.hirensbootcd.org/download/) | A familiar [Windows](https://www.microsoft.com/windows)-oriented offline bench toolkit. | Bootable PC; Free distribution; bundled tools have individual terms | [Open guide](https://www.hirensbootcd.org/howtos/) |
 
-## Follow the workflow
+<a id="walkthrough"></a>
 
-### 01. Identify the failure stage
+## 🪜 Work the case
 
-- [ ] Check whether the system powers on, completes firmware POST, detects its drive, reaches Windows Boot Manager, or fails after the Windows logo. Disconnect only nonessential peripherals. A missing drive or hardware error goes to hardware or failing-drive diagnosis.
+Work in order, record the result of each step, and change route when the evidence calls for it.
 
-### 02. Protect data and encryption access
+<a id="step-01"></a>
 
-- [ ] Confirm the BitLocker recovery key is available through the customer’s approved account or management system. Never publish it in the wiki or ticket attachments visible to unrelated staff. Do not clear the TPM, initialize the disk, or reinstall over the only data copy.
+### 01 · Identify the failure stage
 
-### 03. Enter Windows Recovery Environment
+- [ ] Check whether the system powers on, completes firmware POST, detects its drive, reaches [Windows](https://www.microsoft.com/windows) Boot Manager, or fails after the [Windows](https://www.microsoft.com/windows) logo. Disconnect only nonessential peripherals. A missing drive or hardware error goes to hardware or failing-drive diagnosis.
 
-- [ ] Use the built-in recovery environment or official Windows installation media and select Repair my PC. Check the actual volume layout and encryption status before working on an offline installation; drive letters can differ from the normal Windows session.
+<a id="step-02"></a>
 
-### 04. Try the narrow recovery option
+### 02 · Protect data and encryption access
 
-- [ ] Use Startup Repair for a startup fault. If the failure follows a known update or driver change, consider the relevant update removal or restore option after checking its effect on data. Review the result before trying another repair.
+- [ ] Confirm the [BitLocker](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/) recovery key is available through the customer’s approved account or management system. Never publish it in the wiki or ticket attachments visible to unrelated staff. Do not clear the TPM, initialize the disk, or reinstall over the only data copy.
 
-### 05. Reserve manual boot edits for a confirmed diagnosis
+<a id="step-03"></a>
 
-- [ ] If boot files or the EFI partition require repair, follow Microsoft’s procedure for the observed firmware mode, disk layout, and Windows installation. Have another technician verify the selected partitions. Do not paste generic bootrec, bcdboot, diskpart, or format sequences.
+### 03 · Enter [Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)
 
-### 06. Boot, validate, and preserve a recovery path
+- [ ] Use the built-in recovery environment or official [Windows installation media](https://www.microsoft.com/software-download/windows11) and select Repair my PC. Check the actual volume layout and encryption status before working on an offline installation; drive letters can differ from the normal [Windows](https://www.microsoft.com/windows) session.
+
+<a id="step-04"></a>
+
+### 04 · Try the narrow recovery option
+
+- [ ] Use [Startup Repair](https://support.microsoft.com/en-us/windows/experience/startup-boot/startup-repair) for a startup fault. If the failure follows a known update or driver change, consider the relevant update removal or restore option after checking its effect on data. Review the result before trying another repair.
+
+<a id="step-05"></a>
+
+### 05 · Reserve manual boot edits for a confirmed diagnosis
+
+- [ ] If boot files or the EFI partition require repair, follow Microsoft’s procedure for the observed firmware mode, disk layout, and [Windows](https://www.microsoft.com/windows) installation. Have another technician verify the selected partitions. Do not paste generic bootrec, [bcdboot](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di), [diskpart](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart), or format sequences.
+
+<a id="step-06"></a>
+
+### 06 · Boot, validate, and preserve a recovery path
 
 - [ ] Test a normal boot and a second restart, confirm encryption is healthy, and run the real business workflow. Record the root cause and boot changes. If recovery remains uncertain, export or image the data before planning a supported reinstall.
 
-## Verify before handoff
+<a id="acceptance"></a>
 
-- [ ] The correct Windows installation boots reliably twice.
+## ✅ Prove the result
+
+- [ ] The correct [Windows](https://www.microsoft.com/windows) installation boots reliably twice.
 - [ ] User data, required applications, and encryption remain accessible.
 - [ ] Recovery-key escrow and backup status are confirmed.
 
-## Stop and escalate when
+> [!WARNING]
+> **Pause this route and escalate when:**
+> - The recovery key or correct target disk cannot be established.
+> - The drive shows physical failure or the proposed action would overwrite the only copy.
 
-- The recovery key or correct target disk cannot be established.
-- The drive shows physical failure or the proposed action would overwrite the only copy.
+## 🔀 Continue with the evidence
 
-## Related playbooks
+| Next playbook | What it resolves |
+| --- | --- |
+| [Rescue data from a failing or unreadable drive](failing-drive.md) | Preserve the source, create a recoverable image, and perform recovery on a copy. |
+| [Build and refresh a technician rescue USB](boot-usb.md) | Keep verified recovery images, [Windows repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) media, and the INTA knowledge hub ready for offline use. |
+| [Repair Windows component or system-file corruption](windows-repair.md) | Use [Windows](https://www.microsoft.com/windows) servicing tools in a sensible order and validate the specific broken feature. |
+| [Prove a backup can actually restore](backup-restore.md) | Validate recovery credentials, data integrity, application usability, and recovery time. |
 
-- [Failing Drive](failing-drive.md)
-- [Boot Usb](boot-usb.md)
-- [Windows Repair](windows-repair.md)
-- [Backup Restore](backup-restore.md)
+Found a reusable improvement? [Contribute the correction](https://github.com/Herbertofury/INTA/wiki/Contribute) and include the test that proved it.
 
-## Official references
+<a id="sources"></a>
+
+## 🔎 Source trail
+
+<details>
+<summary>Official references and editorial review</summary>
 
 - [Microsoft: Windows recovery environment](https://support.microsoft.com/en-us/windows/experience/backup-recovery/windows-recovery-environment)
 - [Microsoft: startup troubleshooting](https://learn.microsoft.com/en-us/windows/client-management/advanced-troubleshooting-boot-problems)
 
+Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
+
+</details>
+
 ---
 
-INTA Computer Services · Editorial review: 2026-11-26. Timing is an estimate; stop conditions take priority.
+**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+
+[← All playbooks](README.md) · [Live Wiki](https://github.com/Herbertofury/INTA/wiki) · [Contribution guide](https://github.com/Herbertofury/INTA/blob/main/CONTRIBUTING.md)

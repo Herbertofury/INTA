@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "title": "INTA Service Atlas",
+  "subtitle": "Find the right path. Leave a better one.",
+  "groups": [
+    {
+      "id": "first-response",
+      "icon": "🧭",
+      "title": "First response & handoff",
+      "summary": "Frame the case, connect to the right device, and close with evidence.",
+      "jobs": [
+        "intake-triage",
+        "remote-support",
+        "client-handoff"
+      ]
+    },
+    {
+      "id": "security",
+      "icon": "🛡️",
+      "title": "Security & incident response",
+      "summary": "Separate a routine cleanup from a wider compromise.",
+      "jobs": [
+        "malware-removal",
+        "ransomware-response"
+      ]
+    },
+    {
+      "id": "windows",
+      "icon": "🪟",
+      "title": "Windows & system stability",
+      "summary": "Find the bottleneck, repair the cause, and verify the workload.",
+      "jobs": [
+        "slow-pc",
+        "windows-repair",
+        "windows-update",
+        "hardware-bsod"
+      ]
+    },
+    {
+      "id": "recovery",
+      "icon": "💾",
+      "title": "Storage, backup & rescue",
+      "summary": "Protect the source and prove the recovery path.",
+      "jobs": [
+        "boot-recovery",
+        "failing-drive",
+        "disk-migration",
+        "backup-restore",
+        "boot-usb"
+      ]
+    },
+    {
+      "id": "office",
+      "icon": "🌐",
+      "title": "Network & office continuity",
+      "summary": "Restore dependencies in the right order.",
+      "jobs": [
+        "network-dns",
+        "outage-recovery",
+        "ad-trust"
+      ]
+    },
+    {
+      "id": "workplace",
+      "icon": "🖨️",
+      "title": "Everyday workplace fixes",
+      "summary": "Get the actual mail, document, and printing workflow working.",
+      "jobs": [
+        "outlook-email",
+        "printer-repair"
+      ]
+    },
+    {
+      "id": "deployment",
+      "icon": "🧰",
+      "title": "Deployment & maintenance",
+      "summary": "Build a dependable workstation and keep it dependable.",
+      "jobs": [
+        "new-pc",
+        "preventive-maintenance"
+      ]
+    },
+    {
+      "id": "ai",
+      "icon": "✨",
+      "title": "AI-assisted investigation",
+      "summary": "Turn sanitized evidence into a reviewed next test.",
+      "jobs": [
+        "ai-triage"
+      ]
+    }
+  ],
+  "categories": {
+    "malware": {
+      "icon": "🛡️",
+      "intro": "Choose a scanner for the evidence in front of you, then confirm persistence and account exposure are resolved.",
+      "jobs": [
+        "malware-removal",
+        "ransomware-response"
+      ],
+      "question": "Routine unwanted software or a wider compromise?"
+    },
+    "remote": {
+      "icon": "🖥️",
+      "intro": "Match an attended support session or a managed endpoint to the right access model.",
+      "jobs": [
+        "remote-support",
+        "client-handoff"
+      ],
+      "question": "One-time help or recurring managed access?"
+    },
+    "windows": {
+      "icon": "🪟",
+      "intro": "Inspect first, change a confirmed cause, and repeat the original workload.",
+      "jobs": [
+        "slow-pc",
+        "windows-repair",
+        "windows-update",
+        "hardware-bsod"
+      ],
+      "question": "Performance, servicing, startup, or application failure?"
+    },
+    "storage": {
+      "icon": "💾",
+      "intro": "Keep the source safe, select the right copy or recovery operation, and test the restored result.",
+      "jobs": [
+        "failing-drive",
+        "disk-migration",
+        "backup-restore"
+      ],
+      "question": "Healthy migration, missing files, or failing media?"
+    },
+    "hardware": {
+      "icon": "🔬",
+      "intro": "Use readings and repeatable tests to distinguish the component, driver, cooling, and power paths.",
+      "jobs": [
+        "hardware-bsod",
+        "slow-pc"
+      ],
+      "question": "Load-related fault, idle crash, or unhealthy hardware?"
+    },
+    "network": {
+      "icon": "🌐",
+      "intro": "Separate link, addressing, name resolution, transport, and application evidence.",
+      "jobs": [
+        "network-dns",
+        "outage-recovery",
+        "ad-trust"
+      ],
+      "question": "One device, one service, or the whole office?"
+    },
+    "boot": {
+      "icon": "🥾",
+      "intro": "Keep independent rescue environments ready and test the exact hardware boot path.",
+      "jobs": [
+        "boot-usb",
+        "boot-recovery",
+        "failing-drive"
+      ],
+      "question": "Create media, recover startup, or rescue data?"
+    },
+    "productivity": {
+      "icon": "🧰",
+      "intro": "Make everyday technician work clearer without leaving unnecessary software on customer machines.",
+      "jobs": [
+        "new-pc",
+        "preventive-maintenance",
+        "client-handoff"
+      ],
+      "question": "Inspect, document, transfer, or improve your own workspace?"
+    },
+    "ai": {
+      "icon": "✨",
+      "intro": "Use sanitized evidence, verified sources, and reviewed commands throughout an assisted investigation.",
+      "jobs": [
+        "ai-triage",
+        "intake-triage"
+      ],
+      "question": "Explain evidence, review a script, or compare hypotheses?"
+    },
+    "security": {
+      "icon": "🧪",
+      "intro": "Specialist investigation and research candidates belong to an explicit scope and a proven evidence workflow.",
+      "jobs": [
+        "ransomware-response",
+        "malware-removal"
+      ],
+      "question": "Collect evidence, analyze a capture, or evaluate a candidate?"
+    }
+  },
+  "homeDiagram": "flowchart TD\n    A[\"Start with the observed problem\"]:::action --> B{\"Immediate risk?\"}:::decision\n    B -->|\"Active compromise\"| C[\"Contain and coordinate response\"]:::stop\n    B -->|\"Failing storage or damage\"| D[\"Protect data and choose recovery\"]:::stop\n    B -->|\"No immediate risk\"| E{\"What is the scope?\"}:::decision\n    E -->|\"Office or shared service\"| F[\"Restore dependencies in order\"]:::action\n    E -->|\"One device or application\"| G[\"Choose a focused playbook\"]:::action\n    F --> H[\"Test the real business task\"]:::done\n    G --> H\n    H --> I{\"Evidence worth reusing?\"}:::decision\n    I -->|\"New method or correction\"| J[\"Improve the shared guide\"]:::done\n    I -->|\"Case-specific details\"| K[\"Complete the private handoff\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+  "jobs": {
+    "intake-triage": {
+      "icon": "🧭",
+      "diagram": "flowchart TD\n    A[\"Observe the failing task\"]:::action --> B{\"Immediate risk?\"}:::decision\n    B -->|\"Active compromise\"| C[\"Contain the incident\"]:::stop\n    B -->|\"Storage or physical damage\"| D[\"Protect the source\"]:::stop\n    B -->|\"No\"| E{\"Who is affected?\"}:::decision\n    E -->|\"Many devices\"| F[\"Check shared dependencies\"]:::action\n    E -->|\"One user or device\"| G[\"Capture a local baseline\"]:::action\n    F --> H[\"Choose a guide and acceptance test\"]:::done\n    G --> H\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Identify unique data and the working boundary.",
+        "Keep during the job": "Exact error, time, scope, baseline, and failed tests.",
+        "Before handing back": "A specific next guide and measurable acceptance test."
+      }
+    },
+    "malware-removal": {
+      "icon": "🛡️",
+      "diagram": "flowchart TD\n    A[\"Record symptoms and isolate\"]:::action --> B{\"Wider compromise?\"}:::decision\n    B -->|\"Yes\"| C[\"Switch to incident response\"]:::stop\n    B -->|\"No evidence of spread\"| D[\"Run updated primary cleanup\"]:::action\n    D --> E{\"Persistence suspected?\"}:::decision\n    E -->|\"Yes\"| F[\"Use an outside-session check\"]:::action\n    E -->|\"No\"| G[\"Review startup and browser changes\"]:::action\n    F --> G\n    G --> H{\"Integrity established?\"}:::decision\n    H -->|\"No\"| I[\"Rebuild through trusted recovery\"]:::stop\n    H -->|\"Yes\"| J[\"Close entry point and retest\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Record symptoms; decide whether this is a single-endpoint cleanup.",
+        "Keep during the job": "Detection names, scan versions, quarantine, persistence, and account findings.",
+        "Before handing back": "Healthy protection, stable settings, and tested original work."
+      }
+    },
+    "ransomware-response": {
+      "icon": "🚨",
+      "diagram": "flowchart TD\n    A[\"Confirm incident and start timeline\"]:::action --> B{\"Can network access be isolated?\"}:::decision\n    B -->|\"Yes\"| C[\"Isolate while preserving volatile evidence\"]:::action\n    B -->|\"No, harm continues\"| D[\"Contain spread with incident lead\"]:::stop\n    C --> E[\"Map affected systems and identities\"]:::action\n    D --> E\n    E --> F{\"Trusted recovery path available?\"}:::decision\n    F -->|\"No\"| G[\"Protect remaining copies and escalate\"]:::stop\n    F -->|\"Yes\"| H[\"Rebuild on a clean network\"]:::action\n    H --> I{\"Identity and business tests pass?\"}:::decision\n    I -->|\"No\"| E\n    I -->|\"Yes\"| J[\"Incident lead authorizes reconnection\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Isolate spread and protect evidence and recovery copies.",
+        "Keep during the job": "Private incident timeline, affected assets, identities, and preserved logs.",
+        "Before handing back": "Validated clean services and incident-lead approval to reconnect."
+      }
+    },
+    "slow-pc": {
+      "icon": "⚡",
+      "diagram": "flowchart TD\n    A[\"Time the real slow task\"]:::action --> B{\"Storage or heat warning?\"}:::decision\n    B -->|\"Yes\"| C[\"Switch to hardware or recovery\"]:::stop\n    B -->|\"No\"| D[\"Observe resource pressure during lag\"]:::action\n    D --> E{\"Responsible path identified?\"}:::decision\n    E -->|\"No\"| F[\"Capture a focused short trace\"]:::action\n    F --> D\n    E -->|\"Yes\"| G[\"Apply one reversible correction\"]:::action\n    G --> H{\"Same workload improves?\"}:::decision\n    H -->|\"No\"| I[\"Undo and revise the hypothesis\"]:::action\n    I --> D\n    H -->|\"Yes, features preserved\"| J[\"Record the measured result\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Save a comparable baseline and check storage health.",
+        "Keep during the job": "Workload timings, resource evidence, trace scope, and one change at a time.",
+        "Before handing back": "Repeatable improvement with all required functions retained."
+      }
+    },
+    "windows-repair": {
+      "icon": "🪟",
+      "diagram": "flowchart TD\n    A[\"Confirm the broken system feature\"]:::action --> B{\"Storage and memory stable?\"}:::decision\n    B -->|\"No\"| C[\"Diagnose hardware first\"]:::stop\n    B -->|\"Yes\"| D[\"Repair the component store\"]:::action\n    D --> E{\"Servicing completed?\"}:::decision\n    E -->|\"No\"| F[\"Resolve exact error and matching source\"]:::action\n    E -->|\"Yes\"| G[\"Check protected system files\"]:::action\n    G --> H{\"Original feature works after restart?\"}:::decision\n    H -->|\"Yes\"| I[\"Record servicing and task evidence\"]:::done\n    H -->|\"No\"| J[\"Assess supported repair reinstall\"]:::action\n    F --> J\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Confirm healthy storage, recoverable data, and the running installation.",
+        "Keep during the job": "Servicing results, error codes, and relevant log excerpts.",
+        "Before handing back": "The original Windows feature works after restart."
+      }
+    },
+    "windows-update": {
+      "icon": "🔄",
+      "diagram": "flowchart TD\n    A[\"Record update, build, and error\"]:::action --> B{\"Managed policy blocks the change?\"}:::decision\n    B -->|\"Yes\"| C[\"Coordinate the approved update path\"]:::stop\n    B -->|\"No\"| D[\"Check space, power, time, and network\"]:::action\n    D --> E[\"Run supported diagnostics and retry once\"]:::action\n    E --> F{\"Same failure returns?\"}:::decision\n    F -->|\"No\"| G[\"Verify installed build and business apps\"]:::done\n    F -->|\"Yes\"| H{\"What does the evidence identify?\"}:::decision\n    H -->|\"Servicing corruption\"| I[\"Follow system repair\"]:::action\n    H -->|\"Driver or prerequisite\"| J[\"Correct that dependency\"]:::action\n    I --> G\n    J --> G\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Respect the update policy and maintenance window.",
+        "Keep during the job": "Exact update, failure stage, error, logs, and each changed dependency.",
+        "Before handing back": "Installed build plus the user’s normal workload pass."
+      }
+    },
+    "boot-recovery": {
+      "icon": "🥾",
+      "diagram": "flowchart TD\n    A[\"Identify the startup failure stage\"]:::action --> B{\"Drive detected and stable?\"}:::decision\n    B -->|\"No\"| C[\"Follow hardware or data recovery\"]:::stop\n    B -->|\"Yes\"| D{\"Recovery access available?\"}:::decision\n    D -->|\"No\"| E[\"Obtain the recovery-key path\"]:::stop\n    D -->|\"Yes\"| F[\"Enter the supported recovery environment\"]:::action\n    F --> G{\"Known recent change?\"}:::decision\n    G -->|\"Yes\"| H[\"Choose the narrow rollback\"]:::action\n    G -->|\"No\"| I[\"Run startup diagnosis\"]:::action\n    H --> J{\"Normal boot and data test pass?\"}:::decision\n    I --> J\n    J -->|\"No\"| K[\"Protect data before advanced repair\"]:::stop\n    J -->|\"Yes\"| L[\"Verify another restart and encryption\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Preserve recovery-key access and identify the actual Windows volume.",
+        "Keep during the job": "Failure stage, volume layout, recovery action, and its result.",
+        "Before handing back": "Two normal boots, accessible data, and healthy encryption."
+      }
+    },
+    "failing-drive": {
+      "icon": "💾",
+      "diagram": "flowchart TD\n    A[\"Stop ordinary use of the source\"]:::action --> B{\"Physical damage or irreplaceable data?\"}:::decision\n    B -->|\"Yes\"| C[\"Choose specialist recovery first\"]:::stop\n    B -->|\"Bench recovery appropriate\"| D[\"Verify source and separate destination\"]:::action\n    D --> E[\"Image with a persistent progress record\"]:::action\n    E --> F{\"Source deteriorating?\"}:::decision\n    F -->|\"Yes\"| C\n    F -->|\"No\"| G[\"Preserve image and work on a copy\"]:::action\n    G --> H{\"Filesystem structure usable?\"}:::decision\n    H -->|\"Yes\"| I[\"Recover files through the structure\"]:::action\n    H -->|\"No\"| J[\"Carve recoverable file content\"]:::action\n    I --> K[\"Validate recovered data and gaps\"]:::done\n    J --> K\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Stop writes; choose the recovery route based on data value and damage.",
+        "Keep during the job": "Device identities, imaging mapfile, unreadable ranges, and saved output.",
+        "Before handing back": "Usable recovered files and an honest record of missing data."
+      }
+    },
+    "disk-migration": {
+      "icon": "↗️",
+      "diagram": "flowchart TD\n    A[\"Inventory source, target, and encryption\"]:::action --> B{\"Source healthy?\"}:::decision\n    B -->|\"No\"| C[\"Use failing-drive recovery\"]:::stop\n    B -->|\"Yes\"| D{\"Tool supports this layout and size?\"}:::decision\n    D -->|\"No\"| E[\"Choose a supported migration route\"]:::action\n    D -->|\"Yes\"| F[\"Preserve rollback and confirm target\"]:::action\n    E --> F\n    F --> G[\"Clone or restore the selected image\"]:::action\n    G --> H[\"Boot replacement without the old disk\"]:::action\n    H --> I{\"Apps, data, and restart pass?\"}:::decision\n    I -->|\"No\"| J[\"Retain source and diagnose the result\"]:::stop\n    I -->|\"Yes\"| K[\"Accept migration and retain rollback\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Keep the healthy source and a verified independent backup.",
+        "Keep during the job": "Source/target identities, supported layout, copy log, and boot device.",
+        "Before handing back": "Replacement boots alone and the business workload passes."
+      }
+    },
+    "backup-restore": {
+      "icon": "🛟",
+      "diagram": "flowchart TD\n    A[\"Define recovery data and time targets\"]:::action --> B{\"Credentials and backup accessible?\"}:::decision\n    B -->|\"No\"| C[\"Resolve recovery access now\"]:::stop\n    B -->|\"Yes\"| D[\"Inspect job health and repository integrity\"]:::action\n    D --> E{\"Integrity errors?\"}:::decision\n    E -->|\"Yes\"| F[\"Protect copies and repair the backup path\"]:::stop\n    E -->|\"No\"| G[\"Restore to a separate empty target\"]:::action\n    G --> H{\"Real application opens restored data?\"}:::decision\n    H -->|\"No\"| F\n    H -->|\"Yes\"| I[\"Test outage access and measure recovery\"]:::action\n    I --> J[\"Record coverage, timing, and remaining gaps\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Identify recovery credentials, unique data, and a separate test target.",
+        "Keep during the job": "Snapshot, integrity result, restore log, elapsed time, and test evidence.",
+        "Before handing back": "Real restored data opens and the outage path is usable."
+      }
+    },
+    "network-dns": {
+      "icon": "🌐",
+      "diagram": "flowchart TD\n    A[\"Compare failing and working cases\"]:::action --> B{\"Many devices affected?\"}:::decision\n    B -->|\"Yes\"| C[\"Check shared network dependencies\"]:::action\n    B -->|\"No\"| D[\"Inspect local link and configuration\"]:::action\n    C --> E{\"Link and addressing correct?\"}:::decision\n    D --> E\n    E -->|\"No\"| F[\"Correct the observed local fault\"]:::action\n    E -->|\"Yes\"| G{\"Name lookup and transport agree?\"}:::decision\n    G -->|\"No\"| H[\"Isolate resolver or route failure\"]:::action\n    G -->|\"Yes\"| I[\"Check application, proxy, and service\"]:::action\n    F --> J[\"Retest business access and adjacent services\"]:::done\n    H --> J\n    I --> J\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Record the current network settings and remote recovery path.",
+        "Keep during the job": "Link, address, resolver, transport, and application comparisons.",
+        "Before handing back": "The intended app, shares, printing, and remote access still work."
+      }
+    },
+    "outage-recovery": {
+      "icon": "🔌",
+      "diagram": "flowchart TD\n    A[\"Confirm stable power and scope\"]:::action --> B{\"Damage or unstable power?\"}:::decision\n    B -->|\"Yes\"| C[\"Keep affected equipment out of service\"]:::stop\n    B -->|\"No\"| D[\"Restore network dependencies\"]:::action\n    D --> E{\"Storage and core services healthy?\"}:::decision\n    E -->|\"No\"| F[\"Follow the approved recovery plan\"]:::stop\n    E -->|\"Yes\"| G[\"Test business services from one client\"]:::action\n    G --> H{\"End-to-end tests pass?\"}:::decision\n    H -->|\"No\"| I[\"Diagnose the first failing dependency\"]:::action\n    I --> E\n    H -->|\"Yes\"| J[\"Resume users and confirm backups\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Confirm stable power and use the private dependency plan.",
+        "Keep during the job": "Alarms, startup order, outage timeline, and client-side service tests.",
+        "Before handing back": "Business services, backup jobs, and remote management are healthy."
+      }
+    },
+    "remote-support": {
+      "icon": "🖥️",
+      "diagram": "flowchart TD\n    A[\"Confirm requester, device, and task\"]:::action --> B{\"Session type?\"}:::decision\n    B -->|\"One-time attended\"| C[\"Share code and obtain screen permission\"]:::action\n    B -->|\"Recurring managed\"| D[\"Use the approved device and access role\"]:::action\n    C --> E[\"Request only the control needed\"]:::action\n    D --> E\n    E --> F{\"Next change may cut the connection?\"}:::decision\n    F -->|\"Yes\"| G[\"Confirm local or reconnect fallback\"]:::action\n    F -->|\"No\"| H[\"Complete and verify the task\"]:::action\n    G --> H\n    H --> I{\"Temporary access created?\"}:::decision\n    I -->|\"Yes\"| J[\"Remove it and end the session\"]:::done\n    I -->|\"No\"| K[\"End session and retain approved management\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Confirm identity, device, scope, and a reconnection fallback.",
+        "Keep during the job": "Session tool, access scope, changes, and user acceptance.",
+        "Before handing back": "Session ended; temporary access removed; managed access scoped."
+      }
+    },
+    "ad-trust": {
+      "icon": "🔑",
+      "diagram": "flowchart TD\n    A[\"Confirm membership and exact trust error\"]:::action --> B{\"Domain controller?\"}:::decision\n    B -->|\"Yes\"| C[\"Use the controller-specific procedure\"]:::stop\n    B -->|\"No, member computer\"| D{\"Network, name resolution, and time healthy?\"}:::decision\n    D -->|\"No\"| E[\"Correct connectivity first\"]:::action\n    D -->|\"Yes\"| F[\"Test the secure channel\"]:::action\n    E --> F\n    F --> G{\"Trust fault confirmed?\"}:::decision\n    G -->|\"No\"| H[\"Investigate sign-in or resource access\"]:::action\n    G -->|\"Yes\"| I[\"Resolve duplicate identity and repair\"]:::action\n    I --> J[\"Restart and test fresh domain sign-in\"]:::done\n    H --> J\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Confirm a member computer, local fallback, and its unique identity.",
+        "Keep during the job": "Connectivity, time, channel result, directory object, and repair evidence.",
+        "Before handing back": "Fresh domain sign-in, policy, shares, and printers pass."
+      }
+    },
+    "outlook-email": {
+      "icon": "✉️",
+      "diagram": "flowchart TD\n    A[\"Identify client, provider, and exact error\"]:::action --> B{\"Official webmail works?\"}:::decision\n    B -->|\"No\"| C[\"Check service, identity, and mailbox state\"]:::action\n    B -->|\"Yes\"| D{\"Which desktop client?\"}:::decision\n    D -->|\"Classic client\"| E[\"Isolate add-ins and preserve local archives\"]:::action\n    D -->|\"New client\"| F[\"Use its current support workflow\"]:::action\n    C --> G{\"Local data could be affected?\"}:::decision\n    E --> G\n    F --> G\n    G -->|\"Yes\"| H[\"Back up before account or profile changes\"]:::action\n    G -->|\"No\"| I[\"Apply the targeted repair\"]:::action\n    H --> I\n    I --> J[\"Prove send, receive, and normal attachments\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Identify the client and protect mail that exists only on this device.",
+        "Keep during the job": "Exact error, webmail comparison, rejected message, and account changes.",
+        "Before handing back": "Two-way mail and the normal shared-mailbox/attachment task pass."
+      }
+    },
+    "printer-repair": {
+      "icon": "🖨️",
+      "diagram": "flowchart TD\n    A[\"Identify exact device and queue\"]:::action --> B{\"Printer internal page works?\"}:::decision\n    B -->|\"No\"| C[\"Resolve device hardware or supplies\"]:::stop\n    B -->|\"Yes\"| D{\"Connection and queue target correct?\"}:::decision\n    D -->|\"No\"| E[\"Correct the identified connection\"]:::action\n    D -->|\"Yes\"| F{\"Only one application fails?\"}:::decision\n    F -->|\"Yes\"| G[\"Repair application printing path\"]:::action\n    F -->|\"No\"| H[\"Inspect job, queue, and supported driver\"]:::action\n    E --> I[\"Test original output and shared users\"]:::done\n    G --> I\n    H --> I\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Confirm the target queue and coordinate shared-service changes.",
+        "Keep during the job": "Internal page, Windows test page, port, driver, and affected users.",
+        "Before handing back": "Original output, required options, scanning, and other users pass."
+      }
+    },
+    "hardware-bsod": {
+      "icon": "🔬",
+      "diagram": "flowchart TD\n    A[\"Record crash time, code, and workload\"]:::action --> B{\"Physical, heat, or storage warning?\"}:::decision\n    B -->|\"Yes\"| C[\"Stop load and protect hardware or data\"]:::stop\n    B -->|\"No\"| D[\"Correlate recent changes and dump evidence\"]:::action\n    D --> E{\"Leading hypothesis?\"}:::decision\n    E -->|\"Memory or component\"| F[\"Run a scoped diagnostic\"]:::action\n    E -->|\"Driver or configuration\"| G[\"Use supported update or rollback\"]:::action\n    F --> H{\"Evidence supports a cause?\"}:::decision\n    G --> H\n    H -->|\"No\"| D\n    H -->|\"Yes\"| I[\"Repeat the original crash scenario\"]:::action\n    I --> J[\"Record confidence and stability result\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Protect data before reproducing failure or stressing components.",
+        "Keep during the job": "Stop code, dump, temperatures, configuration, and diagnostic duration.",
+        "Before handing back": "Original scenario, restart, sleep, and required devices are stable."
+      }
+    },
+    "new-pc": {
+      "icon": "🆕",
+      "diagram": "flowchart TD\n    A[\"Define role and acceptance tasks\"]:::action --> B{\"Identity, licenses, and data ready?\"}:::decision\n    B -->|\"No\"| C[\"Resolve the provisioning dependency\"]:::stop\n    B -->|\"Yes\"| D[\"Establish unique device identity and recovery\"]:::action\n    D --> E[\"Install the reviewed application set\"]:::action\n    E --> F[\"Migrate and open representative data\"]:::action\n    F --> G{\"User-led acceptance passes?\"}:::decision\n    G -->|\"No\"| H[\"Fix the specific access or application gap\"]:::action\n    H --> G\n    G -->|\"Yes\"| I[\"Prove backup restore and retain old source\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Confirm the role, access, recovery keys, and retained migration source.",
+        "Keep during the job": "Device baseline, app inventory, migrated data, and setup decisions.",
+        "Before handing back": "Employee tasks, backup restore, encryption, and support access pass."
+      }
+    },
+    "client-handoff": {
+      "icon": "🤝",
+      "diagram": "flowchart TD\n    A[\"Repeat the intake acceptance task\"]:::action --> B{\"Original task works?\"}:::decision\n    B -->|\"No\"| C[\"Record blocker and exact next action\"]:::stop\n    B -->|\"Yes\"| D[\"Check adjacent essential functions\"]:::action\n    D --> E{\"Temporary access or settings remain?\"}:::decision\n    E -->|\"Yes\"| F[\"Resolve temporary changes\"]:::action\n    E -->|\"No\"| G[\"Explain cause, changes, and proof\"]:::action\n    F --> G\n    G --> H{\"Follow-up needed?\"}:::decision\n    H -->|\"Yes\"| I[\"Assign owner and next action\"]:::action\n    H -->|\"No\"| J[\"Complete the accepted service record\"]:::done\n    I --> J\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Return to the original acceptance test and retained rollback.",
+        "Keep during the job": "Verified change summary, evidence, residual issues, and user response.",
+        "Before handing back": "Acceptance recorded, temporary access closed, and follow-up owned."
+      }
+    },
+    "boot-usb": {
+      "icon": "🥾",
+      "diagram": "flowchart TD\n    A[\"Identify USB and preserve its contents\"]:::action --> B{\"One image or a multiboot kit?\"}:::decision\n    B -->|\"One image\"| C[\"Choose the dedicated writing path\"]:::action\n    B -->|\"Several images\"| D[\"Choose the multiboot path\"]:::action\n    C --> E[\"Get official image and verify checksum\"]:::action\n    D --> E\n    E --> F{\"Correct target and operation confirmed?\"}:::decision\n    F -->|\"No\"| G[\"Stop before writing\"]:::stop\n    F -->|\"Yes\"| H[\"Write media or update the intended image\"]:::action\n    H --> I{\"Actual hardware boot succeeds?\"}:::decision\n    I -->|\"No\"| J[\"Check firmware and image compatibility\"]:::action\n    I -->|\"Yes\"| K[\"Record manifest and tested hardware\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Identify the USB and save anything that must be retained.",
+        "Keep during the job": "Official image, checksum, selected operation, and boot-test hardware.",
+        "Before handing back": "Required tools and offline guide work on the actual boot path."
+      }
+    },
+    "ai-triage": {
+      "icon": "✨",
+      "diagram": "flowchart TD\n    A[\"Prepare sanitized case evidence\"]:::action --> B{\"Sensitive data still present?\"}:::decision\n    B -->|\"Yes\"| C[\"Remove it before sharing\"]:::action\n    B -->|\"No\"| D[\"Request ranked, sourced hypotheses\"]:::action\n    C --> D\n    D --> E{\"Proposal matches environment and evidence?\"}:::decision\n    E -->|\"No\"| F[\"Reject the claim and resolve the gap\"]:::action\n    E -->|\"Yes\"| G[\"Review target, effects, and rollback\"]:::action\n    F --> D\n    G --> H[\"Run one approved diagnostic\"]:::action\n    H --> I{\"Result supports the diagnosis?\"}:::decision\n    I -->|\"No\"| D\n    I -->|\"Yes\"| J[\"Write a verified, private handoff\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Sanitize evidence and set the analysis or script-review scope.",
+        "Keep during the job": "Hypotheses, source checks, reviewed commands, and observed outputs.",
+        "Before handing back": "Verified facts, preserved uncertainty, and no unnecessary data exposure."
+      }
+    },
+    "preventive-maintenance": {
+      "icon": "🧰",
+      "diagram": "flowchart TD\n    A[\"Agree window and capture normal baseline\"]:::action --> B{\"Active compromise or failing storage?\"}:::decision\n    B -->|\"Yes\"| C[\"Switch to incident or recovery work\"]:::stop\n    B -->|\"No\"| D[\"Review security, health, and updates\"]:::action\n    D --> E{\"Update fits the business workload?\"}:::decision\n    E -->|\"No\"| F[\"Defer with cause and owner\"]:::action\n    E -->|\"Yes\"| G[\"Apply reviewed, scoped updates\"]:::action\n    F --> H[\"Prove a restore and check physical upkeep\"]:::action\n    G --> H\n    H --> I{\"Normal workload passes after restart?\"}:::decision\n    I -->|\"No\"| J[\"Resolve or roll back the change\"]:::action\n    I -->|\"Yes\"| K[\"Record health and owned follow-up\"]:::done\n    classDef decision fill:#16323d,stroke:#5eead4,color:#f0fdfa\n    classDef action fill:#172033,stroke:#64748b,color:#f8fafc\n    classDef stop fill:#3b222b,stroke:#fb7185,color:#fff1f2\n    classDef done fill:#12352d,stroke:#34d399,color:#ecfdf5\n",
+      "checkpoints": {
+        "Before changing anything": "Agree the window and preserve normal-workload evidence.",
+        "Keep during the job": "Health findings, reviewed updates, restore result, and deferred changes.",
+        "Before handing back": "Normal work passes after restart and every open item has an owner."
+      }
+    }
+  }
+}

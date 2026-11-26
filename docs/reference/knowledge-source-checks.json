@@ -1,0 +1,241 @@
+{
+  "reviewDate": "2026-11-26",
+  "scope": "New named application/format/utility destinations; link reachability only",
+  "results": [
+    {
+      "url": "https://docs.github.com/en/actions",
+      "status": 200,
+      "resolvedUrl": "https://docs.github.com/en/actions"
+    },
+    {
+      "url": "https://docs.github.com/en/communities/documenting-your-project-with-wikis",
+      "status": 200,
+      "resolvedUrl": "https://docs.github.com/en/communities/documenting-your-project-with-wikis"
+    },
+    {
+      "url": "https://docs.github.com/en/pages",
+      "status": 200,
+      "resolvedUrl": "https://docs.github.com/en/pages"
+    },
+    {
+      "url": "https://drive.google.com/",
+      "status": 200,
+      "resolvedUrl": "https://accounts.google.com/v3/signin/identifier?continue=https://drive.google.com/&emr=1&followup=https://drive.google.com/&osid=1&passive=1209600&service=wise&flowName=WebLiteSignIn&flowEntry=ServiceLogin&dsh=S-1104078801:1795731972496172"
+    },
+    {
+      "url": "https://git-scm.com/",
+      "status": 200,
+      "resolvedUrl": "https://git-scm.com/"
+    },
+    {
+      "url": "https://github.com/",
+      "status": 200,
+      "resolvedUrl": "https://github.com/"
+    },
+    {
+      "url": "https://github.com/Herbertofury/Athena",
+      "status": 200,
+      "resolvedUrl": "https://github.com/Herbertofury/Athena"
+    },
+    {
+      "url": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+      "status": 200,
+      "resolvedUrl": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md"
+    },
+    {
+      "url": "https://github.github.com/gfm/",
+      "status": 200,
+      "resolvedUrl": "https://github.github.com/gfm/"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-windows",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-windows"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di?view=windows-11"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro?view=windows-11"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows-server/"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/overview",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/overview"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows/deployment/"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/",
+      "status": 200,
+      "resolvedUrl": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/"
+    },
+    {
+      "url": "https://mermaid.js.org/",
+      "status": 200,
+      "resolvedUrl": "https://mermaid.js.org/"
+    },
+    {
+      "url": "https://support.apple.com/macos",
+      "status": 200,
+      "resolvedUrl": "https://support.apple.com/macos"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/system-restore",
+      "status": 200,
+      "resolvedUrl": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/system-restore"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/startup-boot/startup-repair",
+      "status": 200,
+      "resolvedUrl": "https://support.microsoft.com/en-us/windows/experience/startup-boot/startup-repair"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/startup-boot/windows-startup-settings",
+      "status": 200,
+      "resolvedUrl": "https://support.microsoft.com/en-us/windows/experience/startup-boot/windows-startup-settings"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+      "status": 200,
+      "resolvedUrl": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+      "status": 200,
+      "resolvedUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/security/windows-security/windows-security-app-overview",
+      "status": 200,
+      "resolvedUrl": "https://support.microsoft.com/en-us/windows/security/windows-security/windows-security-app-overview"
+    },
+    {
+      "url": "https://support.microsoft.com/outlook",
+      "status": 200,
+      "resolvedUrl": "https://support.microsoft.com/en-us/outlook/"
+    },
+    {
+      "url": "https://ubuntu.com/",
+      "status": 200,
+      "resolvedUrl": "https://ubuntu.com/"
+    },
+    {
+      "url": "https://www.debian.org/",
+      "status": 200,
+      "resolvedUrl": "https://www.debian.org/"
+    },
+    {
+      "url": "https://www.google.com/chrome/",
+      "status": 200,
+      "resolvedUrl": "https://www.google.com/chrome/"
+    },
+    {
+      "url": "https://www.kernel.org/",
+      "status": 200,
+      "resolvedUrl": "https://www.kernel.org/"
+    },
+    {
+      "url": "https://www.microsoft.com/edge",
+      "status": 200,
+      "resolvedUrl": "https://explore.microsoft.com/en-us/edge/?cs=3006738600&form=MA13FJ"
+    },
+    {
+      "url": "https://www.microsoft.com/microsoft-365",
+      "status": 200,
+      "resolvedUrl": "https://www.microsoft.com/en-us/microsoft-365"
+    },
+    {
+      "url": "https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage",
+      "status": 200,
+      "resolvedUrl": "https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage"
+    },
+    {
+      "url": "https://www.microsoft.com/windows",
+      "status": 200,
+      "resolvedUrl": "https://www.microsoft.com/en-us/windows/"
+    },
+    {
+      "url": "https://www.microsoft.com/windows/end-of-support",
+      "status": 200,
+      "resolvedUrl": "https://www.microsoft.com/en-us/windows/end-of-support"
+    },
+    {
+      "url": "https://www.microsoft.com/windows/windows-11",
+      "status": 200,
+      "resolvedUrl": "https://www.microsoft.com/en-us/windows/windows-11"
+    },
+    {
+      "url": "https://www.mozilla.org/firefox/",
+      "status": 200,
+      "resolvedUrl": "https://www.firefox.com/"
+    },
+    {
+      "url": "https://www.proxmox.com/en/proxmox-virtual-environment/overview",
+      "status": 403,
+      "resolvedUrl": "https://www.proxmox.com/en/proxmox-virtual-environment/overview"
+    },
+    {
+      "url": "https://www.python.org/",
+      "status": 200,
+      "resolvedUrl": "https://www.python.org/"
+    },
+    {
+      "url": "https://www.virtualbox.org/",
+      "status": 200,
+      "resolvedUrl": "https://www.virtualbox.org/"
+    },
+    {
+      "url": "https://www.xfce.org/",
+      "status": 200,
+      "resolvedUrl": "https://www.xfce.org/"
+    }
+  ],
+  "notes": [
+    "Proxmox route returned HTTP403; official primary-source search resolved its current product page at https://www.proxmox.com/en/products/proxmox-virtual-environment/overview. Canonical registry updated.",
+    "Existing catalog tool destinations were preserved from the same-day verified source catalog.",
+    "These checks establish source routing/reachability, not installed version or binary execution."
+  ]
+}

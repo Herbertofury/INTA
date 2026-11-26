@@ -1,61 +1,72 @@
-# Technician intake and handoff
+[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
 
-> **INTA service record template** · Copy into the approved private ticket system before entering customer information.
+# 🤝 A service record the next technician can use
 
-This template keeps the next action, the data-protection plan, and the proof of repair together. Leave passwords, recovery keys, access tokens, and other secrets in the approved credential store; record a reference to that store instead of copying the secret here.
+[Home](https://github.com/Herbertofury/INTA/wiki) › **Technician handoff**
 
-## 1. Intake
+> **Copy this template into the approved private ticket system before entering customer information.** Keep passwords, recovery keys and tokens in the approved credential store; record a reference here.
+
+This record keeps the problem, protected data, exact change and evidence of repair together. Use [structured intake and triage](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) at arrival and [verified client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff) at closure.
+
+## 🧭 1 · Understand the job
 
 | Field | Case entry |
 | --- | --- |
 | Ticket and technician | |
-| Date, local time, and timezone | |
+| Date, local time and timezone | |
 | Customer contact and preferred contact method | |
 | Device / asset reference | |
-| OS edition and build | |
+| Operating-system edition and build | |
 | Exact failing task | |
 | Expected result / observed result | |
 | First occurrence / last known good state | |
-| Recent software, account, hardware, or network changes | |
+| Recent software, account, hardware or network changes | |
 | Business impact and affected users | |
 | Maintenance window and interruption constraints | |
 | Recovery contact or on-site fallback | |
 
-### Initial decision
+- [ ] The symptom was demonstrated or the exact error supplied.
+- [ ] Affected scope is recorded: application, user, device, site or service.
+- [ ] Active compromise, unsafe hardware and failing storage were considered first.
+- [ ] The selected guide and measurable success test match the observed evidence.
 
-- [ ] The user demonstrated the symptom or supplied the exact error.
-- [ ] Scope is recorded: one app, one user, one device, a site, or a wider service.
-- [ ] Active compromise, unsafe hardware, and failing storage were considered first.
-- [ ] A specific job guide and success test have been selected.
+**Selected job:**
 
-## 2. Protect the data and recovery path
+**Agreed success test:**
+
+## 🛟 2 · Preserve data and a way back
 
 | Field | Case entry |
 | --- | --- |
 | Important or unique data that could be affected | |
-| Last verified backup / restore evidence | |
+| Last verified [backup and restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) evidence | |
 | Encryption and recovery-key reference | |
-| Source and destination device identities, if copying storage | |
+| Source and destination storage identities, if copying | |
 | Configuration export or rollback method | |
-| Required restart or loss of remote access | |
+| Required restart or possible loss of remote access | |
+| Agreed recovery contact and fallback access | |
 
-- [ ] The next action’s target is confirmed.
-- [ ] A usable rollback or recovery route exists for the planned change.
-- [ ] Any required user or service-owner coordination is recorded.
+- [ ] The next action's target is confirmed.
+- [ ] A usable recovery or rollback route exists for the planned change.
+- [ ] Required service-owner coordination is recorded.
 
-## 3. Evidence and working hypothesis
+Useful methods: [Source and destination verification](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration), [restore verification](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore), [BitLocker recovery readiness](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery), and [rollback rehearsal](https://github.com/Herbertofury/INTA/wiki/Job-new-pc).
 
-**Observed facts:**
+## 🔎 3 · Keep facts separate from the hypothesis
+
+**Observed facts, with relevant time and scope:**
 
 **Current hypothesis and confidence:**
 
-**Smallest next test that can distinguish likely causes:**
+**Smallest next test that distinguishes likely causes:**
 
-**Private evidence locations:**
+**Expected observation if the hypothesis is correct:**
 
-Record only the evidence needed for this case. Logs and dumps may contain usernames, file contents, tokens, or other sensitive information. Keep them in the case’s approved private location.
+**Private evidence locations and coverage limits:**
 
-## 4. Change and test log
+Use [read-only evidence collection](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) and [timestamp correlation](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod) where useful. Record the evidence needed for the case. Logs and dumps may contain private data; preserve them in the approved private location.
+
+## 🛠 4 · Record each meaningful change and test
 
 | Time | Observation or exact change | Why this step | Result / evidence | Rollback |
 | --- | --- | --- | --- | --- |
@@ -65,28 +76,41 @@ Record only the evidence needed for this case. Logs and dumps may contain userna
 
 **Failed routes not to repeat without new evidence:**
 
-**Current configuration/version after the last change:**
+**Current configuration and exact version after the last change:**
 
-## 5. Acceptance
+**Latest working checkpoint:**
+
+A [single-change experiment](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) is easier to interpret when the prediction and actual result are both retained. If several changes were necessary, identify their order and the evidence each contributed.
+
+## 🧪 5 · Prove the result
 
 - [ ] The original task works with representative customer data.
-- [ ] The device restarts and signs in normally, if affected.
-- [ ] Network, email, printing, and required peripherals work, if affected.
+- [ ] Restart and fresh sign-in work where affected.
+- [ ] Network, mail, printing and required peripherals work where affected.
 - [ ] The intended security product is healthy.
 - [ ] Backup operation and a suitable restore check are recorded.
-- [ ] Restored or migrated data has been opened in the intended applications.
-- [ ] Temporary access, logging, test accounts, and files are resolved.
-- [ ] The customer understands the result and any remaining work.
+- [ ] Restored or migrated data opens in the intended applications.
+- [ ] Temporary access, logging, test accounts and files are resolved.
+- [ ] The customer understands the result and remaining work.
+
+| Acceptance item | Actual observation | Evidence reference | Performed by / date |
+| --- | --- | --- | --- |
+| Original task | | | |
+| Relevant neighboring functions | | | |
+| Restart or reconnection | | | |
+| Recovery or backup | | | |
 
 **Measured or observed before/after result:**
 
-**Acceptance performed by / date:**
+**Unverified limit, unresolved item or deferred decision:**
 
-## 6. Handoff to the customer
+Use [post-change acceptance](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff). Keep an unchecked item open rather than interpreting a successful command as complete proof.
+
+## 💬 6 · Explain the outcome to the customer
 
 **Problem:**
 
-**Cause, distinguishing confirmed evidence from remaining uncertainty:**
+**Confirmed cause, with remaining uncertainty identified:**
 
 **What changed:**
 
@@ -96,7 +120,9 @@ Record only the evidence needed for this case. Logs and dumps may contain userna
 
 **How to contact INTA if the symptom returns:**
 
-## 7. Continuation for the next technician
+Keep the explanation short enough to use and specific enough to distinguish the fix from a guess. Link any reusable instructions to the relevant [field guide](https://github.com/Herbertofury/INTA/wiki/Playbooks); retain customer-specific details in the private case.
+
+## ➜ 7 · Leave an executable continuation
 
 | Remaining item | Owner | Exact next action | Evidence or dependency | Target date |
 | --- | --- | --- | --- | --- |
@@ -104,12 +130,28 @@ Record only the evidence needed for this case. Logs and dumps may contain userna
 
 **Current blocker:**
 
-**Latest working checkpoint:**
+**Latest verified checkpoint and retained source location:**
 
-**Rollback or retained source location:**
+**Running job identity, if work is still in progress:**
 
-**Next action, written so another technician can perform it without rediscovery:**
+**Recovery or rollback location:**
+
+**Rejected routes that should not be repeated unchanged:**
+
+**Literal next action another technician can perform without rediscovery:**
+
+## 🌱 8 · Turn a useful lesson into shared knowledge
+
+**Reusable lesson, sanitized of customer details:**
+
+**Guide, tool or named method that needs improvement:**
+
+**Official source or generic reproduction that supports the change:**
+
+Use [Contribute](https://github.com/Herbertofury/INTA/wiki/Contribute) and [the contribution template](https://github.com/Herbertofury/INTA/wiki/Templates) to improve the public guidance. Keep the private service record as the evidence owner.
+
+**➜ Continue:** [Decision Desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Start with triage](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) · [Client closure guide](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
 
 ---
 
-[All field guides](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Start with triage](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) · [Client handoff guide](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
+**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)

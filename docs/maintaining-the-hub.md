@@ -1,67 +1,94 @@
-# Keeping the INTA hub current
+# 🔧 Keep the hub current and consistent
 
-The hub, Markdown playbooks and GitHub Wiki share canonical content. A correction should improve every surface instead of leaving several slightly different versions behind.
+[Home](https://github.com/Herbertofury/INTA/wiki) › [Contribute](https://github.com/Herbertofury/INTA/wiki/Contribute) › **Maintaining the hub**
 
-## The content map
+**Change canonical content once, verify the affected behavior and publish matching surfaces.** Follow [Knowledge Standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) for editorial decisions and [Continuous Improvement](https://github.com/Herbertofury/INTA/wiki/Continuous-Improvement) for recurring contribution work.
 
-| Source | Purpose |
+## 🗂 The content map
+
+| Canonical source | Owns |
 | --- | --- |
-| `data/tools.json` | Complete tool catalog, official URLs, platforms, selection tier, source and review date. |
-| `data/jobs.json` | Complete workflows, recommended tools, steps, verification, escalation and sources. |
-| `data/meta.json` | Hub identity and review metadata. |
-| `portal/` | Accessible offline-ready interface. |
-| `docs/` | Maintainer and rescue documentation, research provenance and service templates. |
-| `scripts/build-hub.py` | Deterministic builder for `site/`, `wiki/` and Markdown playbooks. |
-| `scripts/check-upstreams.py` | On-demand upstream release and official-link status report. |
-| `scripts/publish-wiki.py` | Publishes generated pages into the actual GitHub Wiki using an authenticated Git checkout. |
+| [Tool catalog](https://github.com/Herbertofury/INTA/blob/main/data/tools.json) | Names, official URLs, platforms, selection tier, source and review date |
+| [Job guides](https://github.com/Herbertofury/INTA/blob/main/data/jobs.json) | Workflows, recommended tools, actions, verification, escalation and sources |
+| [Method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json) | Precise named methods, aliases, canonical destinations and proof |
+| [Link aliases](https://github.com/Herbertofury/INTA/blob/main/data/link-aliases.json) | Additional explicit application and platform names used by the linker |
+| [Linking helper](https://github.com/Herbertofury/INTA/blob/main/scripts/wiki_links.py) | Protected [Markdown](https://github.github.com/gfm/) handling and links on every repeated known name |
+| [Wiki layout](https://github.com/Herbertofury/INTA/blob/main/data/wiki-layout.json) | Structured wiki presentation and the decision diagrams for all 22 jobs |
+| [Hub metadata](https://github.com/Herbertofury/INTA/blob/main/data/meta.json) | Identity and editorial metadata |
+| [Portal source](https://github.com/Herbertofury/INTA/tree/main/portal) | Accessible interactive interface |
+| [Authored documentation](https://github.com/Herbertofury/INTA/tree/main/docs) | Onboarding, contribution rules, rescue guidance and templates |
+| [Hub builder](https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py) | Generated site, live-wiki source and rendered playbooks |
+| [Wiki checker](https://github.com/Herbertofury/INTA/blob/main/scripts/check-wiki.py) | Wiki integrity, routes and editorial validation |
+| [Upstream checker](https://github.com/Herbertofury/INTA/blob/main/scripts/check-upstreams.py) | On-demand official-link and release-status report |
+| [Wiki publisher](https://github.com/Herbertofury/INTA/blob/main/scripts/publish-wiki.py) | Synchronization with the actual live wiki repository |
 
-## Before adopting a tool update
+Generated `site/`, `wiki/` and `docs/runbooks/` are reproducible outputs. Preserve stable IDs and useful existing content. Add an explicit alias for a renamed product only when it cannot collide with ordinary language.
 
-1. Open the original publisher's release notes and official download. Confirm the operating system and CPU architecture.
-2. Check the publisher signature and/or published cryptographic checksum where available. Record the resolved version in the team's private kit inventory.
-3. Test the specific job path on a disposable or agreed test system. For disk tools, use disposable images and unambiguous source/destination labels.
-4. Compare the outcome, compatibility, startup cost and resource use with the current kit. A newer release is a candidate until it passes the job.
-5. Update the catalog guidance and `reviewedAt` only after editorial review. Do not change that date just because a URL responded.
-6. Rebuild, review the diff, run the focused tests, then publish. Keep the previous working installer or image in the team's approved artifact store when practical.
+## 📅 Before adopting an update
 
-## Run an update check on demand
+1. Open the original release notes and download route. Confirm edition, operating system and CPU architecture.
+2. Apply [publisher and checksum verification](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) to the exact acquired artifact. Record the resolved version in the private kit inventory.
+3. Exercise the specific job on a disposable or agreed test system. Use disposable images for disk-writing tools and verify both endpoints.
+4. Compare the result, compatibility, startup behavior and relevant resource cost with the current kit. Apply [stable-release promotion](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) only when the applicable evidence supports it.
+5. Update guidance and `reviewedAt` after real editorial review. Keep release date, retrieval date and runtime-test date distinct.
+6. Rebuild, test and publish. Retain a usable previous installer, image or source when needed for recovery.
+
+## 🔎 Run a freshness check on demand
 
 ```sh
 python3 scripts/check-upstreams.py --output reports/upstreams.json
 ```
 
-The checker reports each tool. For GitHub release projects it queries the latest stable release metadata, with an explicit result when no release exists or access fails. Other vendors receive an official-link reachability check and a **manual version review** status. A responding URL never becomes an invented version number. The script neither installs software nor silently rewrites the catalog.
+Command legend: [Python](https://www.python.org/) runs the [upstream checker](https://github.com/Herbertofury/INTA/blob/main/scripts/check-upstreams.py). The resulting report supports [manual freshness review](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance).
 
-The **Check tool upstreams** Actions workflow provides the same report on request. It has no recurring schedule. INTA Rescue retains its existing weekly rebuild and on-demand Media Creator refresh workflow.
+The checker reports each tool. For projects with [GitHub releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases), it queries stable-release metadata and preserves explicit results when no release exists or access fails. Other vendors receive official-link reachability and a manual-version-review status. A reachable URL never becomes an invented version, and the report does not install software or silently rewrite the catalog.
 
-## Build and verify the hub
+The **Check tool upstreams** [workflow](https://github.com/Herbertofury/INTA/actions/workflows/upstreams.yml) remains on demand. The enabled weekday knowledge-maintenance task is documented separately in [Continuous Improvement](https://github.com/Herbertofury/INTA/wiki/Continuous-Improvement). The existing [rescue build workflow](https://github.com/Herbertofury/INTA/actions/workflows/rescue.yml) and [INTA Media Creator](https://github.com/Herbertofury/INTA/blob/main/media/inta-media.py) retain their own image and refresh lifecycles.
+
+## 🧪 Build and inspect the affected path
 
 ```sh
 python3 scripts/build-hub.py
 python3 -m unittest discover -s tests
 python3 scripts/build-hub.py --check
+python3 scripts/check-wiki.py
 ```
 
-Open `site/index.html` directly or serve the `site` folder locally. Verify search, filters, the entire catalog, job checkboxes, saved tools, exports, light/dark themes and a narrow screen. All tools remain reachable; do not add quantity caps or viewport virtualization.
+Command legend: [Python](https://www.python.org/) runs the [hub builder](https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py), [test suite](https://github.com/Herbertofury/INTA/tree/main/tests) and [wiki checker](https://github.com/Herbertofury/INTA/blob/main/scripts/check-wiki.py). Preserve any failed result as an open gate until resolved.
 
-## Publish the actual Wiki
+Open `site/index.html` directly or serve the `site` folder locally. Review the changed page in the actual rendered interface. Where affected, exercise full-catalog search, combined filters, job checkboxes, saved tools, export/print, both themes, keyboard focus and a narrow screen. Follow repeated named links and inspect diagrams and their linked legends. Keep every entry available; do not add quantity caps, viewport virtualization or content culling.
 
-Use a Git session authorized for `Herbertofury/INTA.wiki.git`:
+## 🚀 Publish the actual wiki
+
+Use a [Git](https://git-scm.com/) session authorized for the canonical wiki remote:
 
 ```sh
 python3 scripts/publish-wiki.py --checkout ../INTA.wiki
 ```
 
-The script checks the exact wiki remote, fetches the current wiki, copies only generated pages, preserves unrelated pages, and creates a normal fast-forward commit. It never force-pushes. Authentication stays with Git; do not put tokens into documentation or repository files. The initial wiki has already been created. If an Actions token cannot access a wiki repository, publish through an authenticated maintainer checkout instead of weakening repository permissions.
+Command legend: [Python](https://www.python.org/) runs the [wiki publisher](https://github.com/Herbertofury/INTA/blob/main/scripts/publish-wiki.py); [Git](https://git-scm.com/) supplies the authenticated checkout of the [live wiki](https://github.com/Herbertofury/INTA/wiki).
 
-The hub workflow deploys the validated `site/` artifact to GitHub Pages. Canonical content lives in `main`; downloaded offline copies represent their build's content snapshot and need to be replaced when you want newer guidance.
+The publisher checks the exact remote, fetches current content, copies generated pages while preserving unrelated pages, and uses a normal fast-forward commit. Keep authentication with the credential mechanism, never inside source or documentation. Use an authorized maintainer checkout if an automated token cannot reach the wiki repository.
 
-## Suggest an improvement
+The [hub workflow](https://github.com/Herbertofury/INTA/actions/workflows/hub.yml) deploys the validated site to [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages). Publish the exact tested source checkpoint, matching generated site and live-wiki source. Save the complete deliverable to the project's connected [Google Drive](https://drive.google.com/) destination, then verify the returned identity and relevant content.
 
-Use the repository's **Tool recommendation** or **Playbook correction** issue form. Supply the original source, job fit, tested environment, known limitations and a reproduction or verification method. Keep customer-specific information out of a public issue.
+## ✅ Read back before closure
 
-## References
+| Surface | What to verify |
+| --- | --- |
+| Canonical repository | The published commit is the tested source revision. |
+| Hosted hub | The changed page or interaction shows the intended content. |
+| Actual live wiki | The pages, navigation, links and diagrams match generated source. |
+| Complete artifact copy | The archive contains the full deliverable and belongs to the same revision. |
+| Offline copy | The full embedded content works without requiring a network just to read it. |
+
+Record results in [the contribution template](https://github.com/Herbertofury/INTA/wiki/Templates). Downloaded offline copies retain their build snapshot; replace the HTML when you want updated guidance.
+
+## 📚 Maintainer references
 
 - [GitHub: adding and editing wiki pages](https://docs.github.com/en/communities/documenting-your-project-with-wikis/adding-or-editing-wiki-pages)
-- [GitHub: custom workflows for Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
-- [GitHub: configuring the publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+- [GitHub: custom Pages workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
+- [GitHub: diagram support](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)
+- [GitHub: writing and formatting](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+
+**➜ Continue:** [Contribution Guide](https://github.com/Herbertofury/INTA/wiki/Contribute) · [Continuous Improvement](https://github.com/Herbertofury/INTA/wiki/Continuous-Improvement) · [Knowledge Standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)

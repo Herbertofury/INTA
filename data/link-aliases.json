@@ -1,0 +1,575 @@
+{
+  "schemaVersion": 1,
+  "description": "Explicit aliases and named applications. Tool names and workflow titles are added from their canonical catalogs.",
+  "links": [
+    {
+      "name": "Defender Offline",
+      "aliases": [],
+      "toolId": "defender-offline"
+    },
+    {
+      "name": "Safety Scanner",
+      "aliases": [],
+      "toolId": "safety-scanner"
+    },
+    {
+      "name": "AdwCleaner",
+      "aliases": [],
+      "toolId": "adwcleaner"
+    },
+    {
+      "name": "HitmanPro",
+      "aliases": [],
+      "toolId": "hitmanpro"
+    },
+    {
+      "name": "Quick Assist",
+      "aliases": [],
+      "toolId": "quick-assist"
+    },
+    {
+      "name": "TeamViewer",
+      "aliases": [],
+      "toolId": "teamviewer"
+    },
+    {
+      "name": "Sysinternals",
+      "aliases": [
+        "Sysinternals Suite"
+      ],
+      "toolId": "sysinternals"
+    },
+    {
+      "name": "SFC",
+      "aliases": [],
+      "toolId": "sfc"
+    },
+    {
+      "name": "WinRE",
+      "aliases": [
+        "Windows RE"
+      ],
+      "toolId": "windows-recovery"
+    },
+    {
+      "name": "WPT",
+      "aliases": [],
+      "toolId": "windows-performance-toolkit"
+    },
+    {
+      "name": "Procmon",
+      "aliases": [],
+      "toolId": "procmon"
+    },
+    {
+      "name": "WinSAT",
+      "aliases": [],
+      "toolId": "winsat"
+    },
+    {
+      "name": "ddrescue",
+      "aliases": [],
+      "toolId": "ddrescue"
+    },
+    {
+      "name": "Veeam Agent",
+      "aliases": [],
+      "toolId": "veeam-agent"
+    },
+    {
+      "name": "HWiNFO64",
+      "aliases": [],
+      "toolId": "hwinfo"
+    },
+    {
+      "name": "MemTest86",
+      "aliases": [],
+      "toolId": "memtest86"
+    },
+    {
+      "name": "Pktmon",
+      "aliases": [
+        "Packet Monitor"
+      ],
+      "toolId": "pktmon"
+    },
+    {
+      "name": "Hiren’s BootCD PE",
+      "aliases": [
+        "Hiren’s BootCD",
+        "Hiren's BootCD"
+      ],
+      "toolId": "hirens-bootcd-pe"
+    },
+    {
+      "name": "Windows installation media",
+      "aliases": [],
+      "toolId": "microsoft-windows11-media"
+    },
+    {
+      "name": "Ubuntu live media",
+      "aliases": [],
+      "toolId": "ubuntu-live"
+    },
+    {
+      "name": "PowerToys",
+      "aliases": [],
+      "toolId": "powertoys"
+    },
+    {
+      "name": "Codex CLI",
+      "aliases": [],
+      "toolId": "codex-cli"
+    },
+    {
+      "name": "Volatility",
+      "aliases": [],
+      "toolId": "volatility"
+    },
+    {
+      "name": "Sigma detection rules",
+      "aliases": [],
+      "toolId": "sigma"
+    },
+    {
+      "name": "BCUninstaller",
+      "aliases": [],
+      "toolId": "bcuninstaller"
+    },
+    {
+      "name": "7zip",
+      "aliases": [],
+      "toolId": "7zip"
+    },
+    {
+      "name": "Malwarebytes Premium",
+      "aliases": [],
+      "toolId": "malwarebytes"
+    },
+    {
+      "name": "Defender for Business",
+      "aliases": [],
+      "toolId": "defender-business"
+    },
+    {
+      "id": "inta-rescue",
+      "name": "INTA Rescue",
+      "url": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "media-creator",
+      "name": "Media Creator",
+      "url": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "athena",
+      "name": "Athena",
+      "url": "https://github.com/Herbertofury/Athena",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "mermaid",
+      "name": "Mermaid",
+      "url": "https://mermaid.js.org/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "markdown",
+      "name": "Markdown",
+      "url": "https://github.github.com/gfm/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "github-wiki",
+      "name": "GitHub Wiki",
+      "url": "https://docs.github.com/en/communities/documenting-your-project-with-wikis",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "github-pages",
+      "name": "GitHub Pages",
+      "url": "https://docs.github.com/en/pages",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "github-actions",
+      "name": "GitHub Actions",
+      "url": "https://docs.github.com/en/actions",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "url": "https://github.com/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "git",
+      "name": "Git",
+      "url": "https://git-scm.com/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "url": "https://www.python.org/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "windows",
+      "name": "Windows",
+      "url": "https://www.microsoft.com/windows",
+      "aliases": [],
+      "kind": "application",
+      "caseSensitive": true
+    },
+    {
+      "id": "windows11",
+      "name": "Windows 11",
+      "url": "https://www.microsoft.com/windows/windows-11",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "windows10",
+      "name": "Windows 10",
+      "url": "https://www.microsoft.com/windows/end-of-support",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "macos",
+      "name": "macOS",
+      "url": "https://support.apple.com/macos",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "linux",
+      "name": "Linux",
+      "url": "https://www.kernel.org/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "bitlocker",
+      "name": "BitLocker",
+      "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "active-directory",
+      "name": "Active Directory",
+      "url": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "outlook",
+      "name": "Outlook",
+      "url": "https://support.microsoft.com/outlook",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "microsoft365",
+      "name": "Microsoft 365",
+      "url": "https://www.microsoft.com/microsoft-365",
+      "aliases": [
+        "M365"
+      ],
+      "kind": "application"
+    },
+    {
+      "id": "onedrive",
+      "name": "OneDrive",
+      "url": "https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "windows-update",
+      "name": "Windows Update",
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "winpe",
+      "name": "Windows PE",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro",
+      "aliases": [
+        "WinPE"
+      ],
+      "kind": "application"
+    },
+    {
+      "id": "defender-antivirus",
+      "name": "Microsoft Defender Antivirus",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-windows",
+      "aliases": [
+        "Defender Antivirus"
+      ],
+      "kind": "application"
+    },
+    {
+      "id": "chkdsk",
+      "name": "chkdsk",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "diskpart",
+      "name": "DiskPart",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "bcdboot",
+      "name": "BCDBoot",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "url": "https://www.debian.org/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "url": "https://ubuntu.com/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "google-drive",
+      "name": "Google Drive",
+      "url": "https://drive.google.com/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "proxmox",
+      "name": "Proxmox VE",
+      "url": "https://www.proxmox.com/en/products/proxmox-virtual-environment/overview",
+      "aliases": [
+        "Proxmox"
+      ],
+      "kind": "application"
+    },
+    {
+      "id": "virtualbox",
+      "name": "VirtualBox",
+      "url": "https://www.virtualbox.org/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "xfce",
+      "name": "XFCE",
+      "url": "https://www.xfce.org/",
+      "aliases": [],
+      "kind": "application"
+    },
+    {
+      "id": "task-manager",
+      "name": "Task Manager",
+      "url": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+      "kind": "application"
+    },
+    {
+      "id": "event-viewer",
+      "name": "Event Viewer",
+      "url": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+      "kind": "application"
+    },
+    {
+      "id": "reliability-monitor",
+      "name": "Reliability Monitor",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+      "kind": "application"
+    },
+    {
+      "id": "resource-monitor",
+      "name": "Resource Monitor",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+      "kind": "application"
+    },
+    {
+      "id": "performance-monitor",
+      "name": "Performance Monitor",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor",
+      "kind": "application"
+    },
+    {
+      "id": "device-manager",
+      "name": "Device Manager",
+      "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+      "kind": "application"
+    },
+    {
+      "id": "startup-repair",
+      "name": "Startup Repair",
+      "url": "https://support.microsoft.com/en-us/windows/experience/startup-boot/startup-repair",
+      "kind": "application"
+    },
+    {
+      "id": "system-restore",
+      "name": "System Restore",
+      "url": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/system-restore",
+      "kind": "application"
+    },
+    {
+      "id": "safe-mode",
+      "name": "Safe Mode",
+      "url": "https://support.microsoft.com/en-us/windows/experience/startup-boot/windows-startup-settings",
+      "kind": "application"
+    },
+    {
+      "id": "windows-security",
+      "name": "Windows Security",
+      "url": "https://support.microsoft.com/en-us/windows/security/windows-security/windows-security-app-overview",
+      "kind": "application"
+    },
+    {
+      "id": "command-prompt",
+      "name": "Command Prompt",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd",
+      "kind": "application"
+    },
+    {
+      "id": "hyper-v",
+      "name": "Hyper-V",
+      "url": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/overview",
+      "kind": "application"
+    },
+    {
+      "id": "windows-server",
+      "name": "Windows Server",
+      "url": "https://learn.microsoft.com/en-us/windows-server/",
+      "kind": "application"
+    },
+    {
+      "id": "google-chrome",
+      "name": "Google Chrome",
+      "url": "https://www.google.com/chrome/",
+      "kind": "application"
+    },
+    {
+      "id": "firefox",
+      "name": "Firefox",
+      "url": "https://www.mozilla.org/firefox/",
+      "kind": "application"
+    },
+    {
+      "id": "microsoft-edge",
+      "name": "Microsoft Edge",
+      "url": "https://www.microsoft.com/edge",
+      "kind": "application"
+    },
+    {
+      "id": "incident-response",
+      "name": "incident response",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response",
+      "aliases": [
+        "incident-response guide",
+        "incident response guide",
+        "ransomware response"
+      ],
+      "kind": "method"
+    },
+    {
+      "id": "malware-removal",
+      "name": "malware removal",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-malware-removal",
+      "aliases": [
+        "malware cleanup",
+        "persistence review"
+      ],
+      "kind": "method"
+    },
+    {
+      "id": "remote-support",
+      "name": "remote support",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-remote-support",
+      "aliases": [],
+      "kind": "method"
+    },
+    {
+      "id": "hardware-diagnostics",
+      "name": "hardware diagnostics",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod",
+      "aliases": [],
+      "kind": "method"
+    },
+    {
+      "id": "data-recovery",
+      "name": "data recovery",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-failing-drive",
+      "aliases": [],
+      "kind": "method"
+    },
+    {
+      "id": "network-diagnostics",
+      "name": "network diagnostics",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-network-dns",
+      "aliases": [],
+      "kind": "method"
+    },
+    {
+      "id": "windows-repair",
+      "name": "Windows repair",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-windows-repair",
+      "aliases": [
+        "system-file repair"
+      ],
+      "kind": "method"
+    },
+    {
+      "id": "boot-repair",
+      "name": "boot repair",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery",
+      "aliases": [
+        "boot recovery"
+      ],
+      "kind": "method"
+    },
+    {
+      "id": "backup-and-restore",
+      "name": "backup and restore",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-backup-restore",
+      "aliases": [
+        "backup / restore",
+        "backup/restore"
+      ],
+      "kind": "method"
+    },
+    {
+      "id": "usb-media",
+      "name": "rescue USB",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-boot-usb",
+      "aliases": [],
+      "kind": "method"
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "mermaidVersion": "12.3.0",
+  "diagrams": 27,
+  "results": [
+    {
+      "id": "Continuous-Improvement-1",
+      "sourceSha256": "3cc5ffbf79f9a402778dc11338e70011f0f4667fb550c840dbb3d6c3e970baab",
+      "width": 360,
+      "height": 715,
+      "nodes": 7,
+      "edges": 7
+    },
+    {
+      "id": "Decision-Desk-1",
+      "sourceSha256": "976688b9b88cae4ae60ab98aa9fe944b8fb1360a84ecad8b7718795dce554be9",
+      "width": 790.625,
+      "height": 586,
+      "nodes": 8,
+      "edges": 9
+    },
+    {
+      "id": "Home-1",
+      "sourceSha256": "e3940e619c6ff6c74047dc5e796b0b4cdb6b88ce1b4273d595f4ab87271102d2",
+      "width": 660.5,
+      "height": 1258,
+      "nodes": 11,
+      "edges": 11
+    },
+    {
+      "id": "Job-ad-trust-1",
+      "sourceSha256": "34f8be58d91d956316ec38365161a7e74425cf7d501c62dbb49f6ff94dbe0349",
+      "width": 486.5,
+      "height": 1427,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Job-ai-triage-1",
+      "sourceSha256": "3c09e7ce33c26ad77f3c76a2db44bfc7b9d9ca52de222927edd0b3515f96c39f",
+      "width": 388.90625,
+      "height": 1554,
+      "nodes": 10,
+      "edges": 12
+    },
+    {
+      "id": "Job-backup-restore-1",
+      "sourceSha256": "90e78f514c7e34885e067f12fca821574b19a823671cbe7f048c942ce4c94fad",
+      "width": 483.078125,
+      "height": 1510.96875,
+      "nodes": 10,
+      "edges": 10
+    },
+    {
+      "id": "Job-boot-recovery-1",
+      "sourceSha256": "59f651868c8393e1830e2b2380ad45edc9c250309db6eaf2f8287b8425178468",
+      "width": 572,
+      "height": 1635,
+      "nodes": 12,
+      "edges": 12
+    },
+    {
+      "id": "Job-boot-usb-1",
+      "sourceSha256": "be49200ae8ea59a004a028e2c134b0d96896e6c3dab928aedccdfd2ea9617bc4",
+      "width": 456,
+      "height": 1511,
+      "nodes": 11,
+      "edges": 11
+    },
+    {
+      "id": "Job-client-handoff-1",
+      "sourceSha256": "aaaeef1511c68bb2089ca916b21e471c9c3652b22a1b3da7485e38e32d99d2f8",
+      "width": 380.5,
+      "height": 1512,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Job-disk-migration-1",
+      "sourceSha256": "7866ead71ef6484d8f886b300541727a0cff0dbb0cef7c89b1056256460ecfae",
+      "width": 476,
+      "height": 1512,
+      "nodes": 11,
+      "edges": 11
+    },
+    {
+      "id": "Job-failing-drive-1",
+      "sourceSha256": "28444365e4559c1529460a9be5927b66e10af75966856668efd0ac4dc49d9bbb",
+      "width": 456,
+      "height": 1596,
+      "nodes": 11,
+      "edges": 12
+    },
+    {
+      "id": "Job-hardware-bsod-1",
+      "sourceSha256": "bee9c07b9c373ef07b1a7183742785466439bc23b530d06e880ec5c874e1a11d",
+      "width": 423.4375,
+      "height": 1488.984375,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Job-intake-triage-1",
+      "sourceSha256": "4ddb8091a6b39a5220ed6b68642d926ea692cf8ac31ecc23d903a29fee36de6d",
+      "width": 657.5,
+      "height": 859,
+      "nodes": 8,
+      "edges": 8
+    },
+    {
+      "id": "Job-malware-removal-1",
+      "sourceSha256": "143a8345936d6096359a06437a8d5f89f5e769de4b068805227052a6d9f18bcc",
+      "width": 456,
+      "height": 1406,
+      "nodes": 10,
+      "edges": 10
+    },
+    {
+      "id": "Job-network-dns-1",
+      "sourceSha256": "d2bda792c7f7cca2e0caf5f9600ea44a7a7eae7e9ffc6afb0520f4f6e4ea5e41",
+      "width": 500.15625,
+      "height": 1341.953125,
+      "nodes": 10,
+      "edges": 12
+    },
+    {
+      "id": "Job-new-pc-1",
+      "sourceSha256": "959bb4ed6769e5d3a06978c9fd43461d318dc075b37afbe5fe30949ae3e377b2",
+      "width": 467,
+      "height": 1196,
+      "nodes": 9,
+      "edges": 9
+    },
+    {
+      "id": "Job-outage-recovery-1",
+      "sourceSha256": "9e0fcd3fd6c8f3903c5751dcc0ab008b3b00f91b0df3d969192da036a554a91e",
+      "width": 488.65625,
+      "height": 1341.96875,
+      "nodes": 10,
+      "edges": 10
+    },
+    {
+      "id": "Job-outlook-email-1",
+      "sourceSha256": "16409863eb4f6168bc997713f4111e5dd87d4aaa14edbed25ed687f017d89fe4",
+      "width": 500.15625,
+      "height": 1489.953125,
+      "nodes": 10,
+      "edges": 12
+    },
+    {
+      "id": "Job-preventive-maintenance-1",
+      "sourceSha256": "9a0771d7d3a1144e83de68330908161add5d3b4875c82b520935f71fe9e7822a",
+      "width": 456,
+      "height": 1511,
+      "nodes": 11,
+      "edges": 11
+    },
+    {
+      "id": "Job-printer-repair-1",
+      "sourceSha256": "592c6afe5a2d280da7597068cade35db27d2069765e6572326629cdffb884c8b",
+      "width": 592.5,
+      "height": 1236,
+      "nodes": 9,
+      "edges": 10
+    },
+    {
+      "id": "Job-ransomware-response-1",
+      "sourceSha256": "690da65104b84539fcf6b57a366433fc23f0894dbd50564e8100718b91a765c5",
+      "width": 439,
+      "height": 1511,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Job-remote-support-1",
+      "sourceSha256": "50a98490646315b2ee79d952c4a68abfddd0ef6f87b8c6fc89ba2e1da53dd7b4",
+      "width": 360,
+      "height": 1533,
+      "nodes": 11,
+      "edges": 12
+    },
+    {
+      "id": "Job-slow-pc-1",
+      "sourceSha256": "070861c8e273e10e6fbbc4fc70fd6286a288bbd6bd67db39cd26790336ab725e",
+      "width": 537.15625,
+      "height": 1320.96875,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Job-windows-repair-1",
+      "sourceSha256": "c60aa58b2e0b627bef8973eaa47f94f7ad67c0d6f6ffcda4d85338e805264602",
+      "width": 494.65625,
+      "height": 1299.96875,
+      "nodes": 10,
+      "edges": 10
+    },
+    {
+      "id": "Job-windows-update-1",
+      "sourceSha256": "a713d7c4441fcfce6c3b1524ded5e6c78374e9f8934a77918b3299d718b1b948",
+      "width": 528.453125,
+      "height": 1489,
+      "nodes": 10,
+      "edges": 11
+    },
+    {
+      "id": "Knowledge-Standards-1",
+      "sourceSha256": "6eb52f2294a5dc5057d4cfcb8fc025c8a257c8a7ccd6562d3041653de121b6ef",
+      "width": 552,
+      "height": 566,
+      "nodes": 6,
+      "edges": 5
+    },
+    {
+      "id": "Rescue-Media-1",
+      "sourceSha256": "4df6ca7f1c1a437b757f05a35621627936ea1289d523fce94e4d503c07a6c04c",
+      "width": 360,
+      "height": 358,
+      "nodes": 7,
+      "edges": 6
+    }
+  ]
+}

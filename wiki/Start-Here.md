@@ -1,48 +1,72 @@
-# Welcome to the INTA bench
+[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
 
-**[Open the technician hub](https://herbertofury.github.io/INTA/)** · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory)
+# 🧭 Welcome to the INTA bench
 
-## Your first five minutes
+[Home](https://github.com/Herbertofury/INTA/wiki) › **Start here**
 
-1. **Describe the failure.** Ask what the person was trying to do, exactly what happened, when it last worked, and what changed. Record the error text and affected users or devices.
-2. **Choose the environment.** A working Windows session, Windows Recovery Environment and the INTA Linux rescue desktop solve different jobs. Match the tool to the environment before downloading anything.
-3. **Protect what matters.** Confirm the backup and recovery-key situation. Unexpected drive noise, repeated disconnects, or growing read errors changes the plan to recovery first.
-4. **Open the matching playbook.** Read its start conditions and stop conditions before the checklist. Use its tool list as a short, purposeful kit.
-5. **Define success.** Agree on a real task to repeat after the repair: open the affected file, sign in, send and receive mail, reconnect to the share, print, or restore a file.
+**One place to choose the right job, reach the official tools and follow the repair through to proof.** Open the [interactive technician hub](https://herbertofury.github.io/INTA/) for search and checklists, or stay in the wiki for the complete field guides.
 
-## Understand the toolkit levels
+| I want to… | Open |
+| --- | --- |
+| Find the right guide from a symptom | [Decision Desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) |
+| Follow an ordered job from start to finish | [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) |
+| Find an official download or compare job fit | [Tool Directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) |
+| Understand the next diagnostic test | [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) |
+| Prepare a bench USB | [Rescue Media](https://github.com/Herbertofury/INTA/wiki/Rescue-Media) |
+| Record or hand over a service case | [Technician Handoff](https://github.com/Herbertofury/INTA/wiki/Technician-Handoff) |
 
-| Level | How to use it | Promotion evidence |
+## 🕔 Your first five minutes
+
+1. **Describe the actual failure.** Ask what the person was trying to do, exactly what happened, when it last worked and what changed. Record the error text and affected users/devices through [structured intake and triage](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage).
+2. **Choose the right environment.** A running [Windows](https://support.microsoft.com/windows) session, [Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) and [INTA Rescue](https://github.com/Herbertofury/INTA/wiki/Rescue-Media) serve different jobs. Match the selected application to the environment.
+3. **Protect what matters.** Confirm backup and recovery-key access. Drive noise, repeated disconnects or growing read errors route to [image-first recovery](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive). Spreading encryption or a wider compromise routes to [incident containment](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response).
+4. **Open the matching playbook.** Use the [Decision Desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk), read the starting and stop conditions, then choose a small purposeful kit from its linked tools.
+5. **Define success.** Choose the real task to repeat after the repair: open the affected file, sign in, send and receive mail, reconnect to the share, print or restore a file. That task anchors [post-change acceptance](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff).
+
+> [!IMPORTANT]
+> A green indicator is an observation. A completed repair needs the original task to work and the relevant neighboring functions to remain healthy.
+
+## 🧰 Understand the toolkit levels
+
+| Level | How to use it | Evidence needed for routine use |
 | --- | --- | --- |
-| **Core** | A practical first choice for an everyday INTA service workflow. | Official documentation, a clear job fit and an understood rollback or removal path. |
-| **Specialist** | An advanced or environment-specific option. | A technician who understands its output, prerequisites and effect on the machine. |
-| **Evaluate** | A promising research candidate, including selected Athena discoveries. | Isolated testing, compatibility checks, measured behavior and review before client deployment. |
+| **Core** | A practical starting point for an everyday service job. | Official documentation, a clear fit and an understood removal or recovery path. |
+| **Specialist** | An advanced or environment-specific option. | Correct prerequisites and a technician who understands its output and effect on the machine. |
+| **Evaluate** | A promising research candidate or a retained legacy reference. | Isolated testing, compatibility checks and actual job evidence before deployment. |
 
-These labels describe our selection, not a vendor certification or a claim that every tool was executed in this project. Tool prices, features and distribution terms can change; open the official link before preparing a paid-service kit.
+The levels describe editorial selection. They do not certify that every tool was executed or that one is universally fastest. Open the linked official route before preparing a kit, and use [manual freshness review](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) when its version or suitability matters.
 
-## Navigate the hub
+## 🖥 Find your way around the hub
 
 | Tab | Use it for |
 | --- | --- |
 | **Home** | Choose a job and reach the everyday kit quickly. |
-| **Tool library** | Search the full catalog and combine discipline, platform and kit-level filters. |
-| **Playbooks** | Follow steps, tick completion, copy a scoped diagnostic command, and verify the result. |
-| **Saved** | Keep your own preferred tools close at hand. |
-| **Resources** | Reach the wiki, source repository, releases and original documentation. |
+| **Tool library** | Search the complete catalog and combine discipline, platform and kit-level filters. |
+| **Playbooks** | Follow steps, tick progress, copy a scoped diagnostic command and verify the result. |
+| **Saved** | Keep personal preferred tools close at hand. |
+| **Resources** | Reach this wiki, releases, canonical source and original documentation. |
 
-Press **/** or **Ctrl+K** to reach search. Use the theme control for a lighter workspace. Print or export a job checklist for a service record. Checklist progress is browser-local convenience, not a shared ticket database or proof that work was performed.
+Press **/** or **Ctrl+K** to reach search. Use the theme control for a lighter workspace. Print or export a job checklist when useful. Progress and saved tools are browser-local convenience; the shared customer record remains in the approved private service system.
 
-## Repeatable work beats mystery fixes
+## 🧪 A repeatable way to work
 
-- Take a baseline before making changes.
-- Change one cause at a time when diagnosing an unknown fault.
-- Explain what a command will read or change before running it.
-- Keep original logs and a short timeline; sanitize them before sharing outside the approved case system.
-- Do not treat a single green health indicator or a clean malware scan as complete proof.
-- Finish by repeating the customer's original workflow and recording the outcome.
+- Establish a [reproducible baseline](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) before claiming improvement.
+- Use [scope isolation](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) and a [known-good comparison](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) to narrow an unclear fault.
+- Prefer a [single-change experiment](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) when several explanations fit.
+- Explain the target and read/write effect of a command before running it.
+- Retain the original evidence and a short timeline in the private case record.
+- Finish with [post-change acceptance](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff) and an understandable [verified client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff).
 
-## Public hub, private case record
+## 🔒 Public knowledge, private case record
 
-The public repository and wiki contain reusable guidance. Put customer names, access credentials, device serials, recovery keys, remote-management addresses and collected evidence in the approved private service record. The hub deliberately does not ask technicians to type client data into public forms.
+This project contains reusable guidance. Keep customer names, credentials, serials, recovery keys, internal remote-management addresses and collected evidence in the approved private record. Use [Technician Handoff](https://github.com/Herbertofury/INTA/wiki/Technician-Handoff) for references to that evidence. The public hub does not need customer details to help choose the next job.
 
-**Next:** [Choose a playbook](https://github.com/Herbertofury/INTA/wiki/Playbooks) or [prepare rescue media](https://github.com/Herbertofury/INTA/wiki/Rescue-Media).
+## 🌱 Make the next visit easier
+
+When a guide lacks a useful branch or a link moves, follow [Contribute](https://github.com/Herbertofury/INTA/wiki/Contribute). Apply [Knowledge Standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) so every named application and method remains a direct route and every new claim has appropriate proof.
+
+**➜ Continue:** [Choose a job](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Browse the kit](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Prepare media](https://github.com/Herbertofury/INTA/wiki/Rescue-Media)
+
+---
+
+**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)

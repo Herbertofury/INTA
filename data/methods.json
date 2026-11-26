@@ -1,0 +1,598 @@
+{
+  "methods": [
+    {
+      "id": "structured-intake",
+      "name": "Structured intake and triage",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-intake-triage",
+      "aliases": [
+        "structured intake",
+        "intake triage"
+      ],
+      "summary": "Turn the reported symptom into a scoped case, a data-protection decision and a measurable next test.",
+      "when": "Use at the beginning of a job or when ownership changes.",
+      "proof": "Exact failure, affected scope, protected data and next action are recorded.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/"
+      ]
+    },
+    {
+      "id": "layered-malware-assessment",
+      "name": "Layered malware assessment",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-malware-removal",
+      "aliases": [
+        "malware cleanup workflow"
+      ],
+      "summary": "Combine an updated primary product, purposeful second-opinion checks and persistence review.",
+      "when": "Use for suspected local malware when active spread has been addressed.",
+      "proof": "Detections, coverage, account exposure and the original user task have a documented outcome.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+        "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+      ]
+    },
+    {
+      "id": "incident-containment",
+      "name": "Incident containment",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response",
+      "aliases": [
+        "ransomware containment"
+      ],
+      "summary": "Limit spread while preserving the evidence and coordination needed for recovery.",
+      "when": "Use for active encryption, wider compromise or credible spreading-threat evidence.",
+      "proof": "Isolation, incident ownership, affected scope and controlled reconnection criteria are recorded.",
+      "sourceUrls": [
+        "https://www.cisa.gov/sites/default/files/publications/CISA_MS-ISAC_Ransomware%20Guide_S508C_.pdf",
+        "https://learn.microsoft.com/en-us/security/compass/incident-response-playbook-dart-ransomware-approach",
+        "https://learn.microsoft.com/en-us/defender-xdr/playbook-responding-ransomware-m365-defender"
+      ]
+    },
+    {
+      "id": "performance-diagnosis",
+      "name": "Evidence-led performance diagnosis",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-slow-pc",
+      "aliases": [
+        "performance diagnosis"
+      ],
+      "summary": "Tie a repeatable slow task to a measured resource or dependency before changing settings.",
+      "when": "Use for slowness, freezes or hitching with an observable workload.",
+      "proof": "The same workload improves and required applications, protection and devices still work.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon"
+      ]
+    },
+    {
+      "id": "windows-image-repair",
+      "name": "Windows image and system-file repair",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-windows-repair",
+      "aliases": [
+        "component-store repair"
+      ],
+      "summary": "Use the supported servicing path for verified component or protected-system-file corruption.",
+      "when": "Use after storage health and the intended online or offline installation are established.",
+      "proof": "Servicing results and the originally failing function both pass after restart.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/using-system-file-checker-in-windows",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      ]
+    },
+    {
+      "id": "controlled-update-repair",
+      "name": "Controlled update repair",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-windows-update",
+      "aliases": [
+        "update failure isolation"
+      ],
+      "summary": "Identify the failed update and its actual blocker before resetting or replacing components.",
+      "when": "Use when an update fails repeatedly or cannot complete its restart phase.",
+      "proof": "Update history, installed build and the affected workload agree.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+        "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows"
+      ]
+    },
+    {
+      "id": "startup-recovery",
+      "name": "Windows startup recovery",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery",
+      "aliases": [
+        "startup recovery"
+      ],
+      "summary": "Follow the observed boot stage and recover the correct installation through supported options.",
+      "when": "Use when the operating system will not start normally.",
+      "proof": "The intended installation boots repeatedly with data, encryption and applications intact.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/windows-recovery-environment",
+        "https://learn.microsoft.com/en-us/windows/client-management/advanced-troubleshooting-boot-problems"
+      ]
+    },
+    {
+      "id": "image-first-recovery",
+      "name": "Image-first recovery",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-failing-drive",
+      "aliases": [
+        "image first recovery"
+      ],
+      "summary": "Preserve readable data from failing media before attempting repairs on the source.",
+      "when": "Use for repeated I/O errors, disappearing drives or credible physical-failure evidence.",
+      "proof": "Source identity, image, mapfile, unreadable regions and recovered-file usability are recorded.",
+      "sourceUrls": [
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+        "https://www.cgsecurity.org/wiki/PhotoRec"
+      ]
+    },
+    {
+      "id": "verified-disk-migration",
+      "name": "Verified disk migration",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-disk-migration",
+      "aliases": [
+        "healthy-disk migration"
+      ],
+      "summary": "Move a healthy system or its data while retaining a recoverable original.",
+      "when": "Use when replacing a healthy disk or moving to a new workstation.",
+      "proof": "The destination boots or opens the required data independently and the source remains available through acceptance.",
+      "sourceUrls": [
+        "https://clonezilla.org/clonezilla-live-doc.php",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/export"
+      ]
+    },
+    {
+      "id": "backup-restore-proof",
+      "name": "Backup and restore proof",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-backup-restore",
+      "aliases": [
+        "backup restore proof"
+      ],
+      "summary": "Prove recovery by restoring representative data to a separate destination.",
+      "when": "Use before relying on a backup and after a material backup configuration change.",
+      "proof": "Restored data opens with correct permissions and recorded recovery dependencies.",
+      "sourceUrls": [
+        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
+        "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ]
+    },
+    {
+      "id": "layered-network-diagnosis",
+      "name": "Layered network diagnosis",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-network-dns",
+      "aliases": [
+        "network path diagnosis"
+      ],
+      "summary": "Separate physical link, addressing, name resolution, transport and application failures.",
+      "when": "Use when connectivity fails or behaves differently across devices or services.",
+      "proof": "The original application works through the intended path and adjacent services remain healthy.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+        "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters",
+        "https://software.es.net/iperf/"
+      ]
+    },
+    {
+      "id": "dependency-ordered-recovery",
+      "name": "Dependency-ordered outage recovery",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery",
+      "aliases": [
+        "dependency ordered recovery"
+      ],
+      "summary": "Restore foundational services before the systems that depend on them.",
+      "when": "Use after an office power failure or a multi-service interruption.",
+      "proof": "A client workstation completes the real business workflow and degraded dependencies have owners.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart",
+        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html"
+      ]
+    },
+    {
+      "id": "attended-remote-support",
+      "name": "Attended remote support",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-remote-support",
+      "aliases": [
+        "attended support session"
+      ],
+      "summary": "Reach the intended device with the person present and close temporary access when finished.",
+      "when": "Use for an agreed one-time support session.",
+      "proof": "Device identity, session outcome and access closure are documented.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/apps/solve-pc-problems-remotely-using-quick-assist"
+      ]
+    },
+    {
+      "id": "directory-trust-diagnosis",
+      "name": "Directory trust diagnosis",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-ad-trust",
+      "aliases": [
+        "domain trust diagnosis"
+      ],
+      "summary": "Check identity, connectivity and the member-machine secure channel before a scoped repair.",
+      "when": "Use for a domain trust error on a member workstation.",
+      "proof": "Fresh sign-in and required resources work with a unique active computer identity.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1",
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/broken-trust-relationship-domain-joined-device-its-domain-secure-channel-issues"
+      ]
+    },
+    {
+      "id": "mail-flow-isolation",
+      "name": "Mail-flow isolation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-outlook-email",
+      "aliases": [
+        "mail flow isolation"
+      ],
+      "summary": "Distinguish service/account delivery failures from a local mail-client problem.",
+      "when": "Use when sending, receiving or a specific mailbox workflow fails.",
+      "proof": "A message arrives, a reply returns and required archives or shared-mailbox behavior still work.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/outlook/classic-outlook-not-responding-stuck-at-processing-stopped-working-or-freezes",
+        "https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/administration/architecture-changes-new-outlook"
+      ]
+    },
+    {
+      "id": "print-path-isolation",
+      "name": "Print-path isolation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-printer-repair",
+      "aliases": [
+        "print path isolation"
+      ],
+      "summary": "Separate printer hardware, network reachability, queue, driver and application output.",
+      "when": "Use when printing fails or output is wrong.",
+      "proof": "Internal and application test pages pass without breaking other users or queues.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows"
+      ]
+    },
+    {
+      "id": "crash-hardware-isolation",
+      "name": "Crash and hardware isolation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod",
+      "aliases": [
+        "crash isolation"
+      ],
+      "summary": "Correlate the failure with evidence and test one plausible hardware or software cause.",
+      "when": "Use for stop errors, unexpected restarts, overheating or reproducible instability.",
+      "proof": "The original failure scenario and the relevant diagnostics have recorded outcomes.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/client-management/troubleshoot-stop-errors",
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart"
+      ]
+    },
+    {
+      "id": "baseline-deployment",
+      "name": "Baseline workstation deployment",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-new-pc",
+      "aliases": [
+        "workstation deployment"
+      ],
+      "summary": "Prepare a workstation around the employee's required tasks and a verified recovery route.",
+      "when": "Use for a new or replacement computer.",
+      "proof": "The employee completes agreed tasks and recovery, backup and remote-support arrangements are verified.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/export",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/import"
+      ]
+    },
+    {
+      "id": "verified-client-handoff",
+      "name": "Verified client handoff",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-client-handoff",
+      "aliases": [
+        "client handoff"
+      ],
+      "summary": "Close the job with observed proof, clear changes and explicit remaining work.",
+      "when": "Use after repair or when responsibility moves to another technician.",
+      "proof": "The user accepts the result or the remaining-work plan and the next action is unambiguous.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      ]
+    },
+    {
+      "id": "boot-media-preparation",
+      "name": "Boot-media preparation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-boot-usb",
+      "aliases": [
+        "boot media preparation"
+      ],
+      "summary": "Acquire, verify, write and boot-test the media intended for the job.",
+      "when": "Use before relying on a new image or refreshed technician USB.",
+      "proof": "Image identity, checksum result, intended USB and actual boot evidence are recorded separately.",
+      "sourceUrls": [
+        "https://www.ventoy.net/en/doc_start.html",
+        "https://www.ventoy.net/en/doc_checksum.html",
+        "https://www.ventoy.net/en/doc_secure.html",
+        "https://github.com/Herbertofury/INTA"
+      ]
+    },
+    {
+      "id": "redacted-ai-triage",
+      "name": "Redacted AI-assisted triage",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-ai-triage",
+      "aliases": [
+        "AI-assisted triage"
+      ],
+      "summary": "Use an assistant to reason about minimal sanitized evidence, then independently verify its proposal.",
+      "when": "Use when explaining a log or comparing possible next tests.",
+      "proof": "No unnecessary secrets were shared and executed actions match verified documentation and observed evidence.",
+      "sourceUrls": [
+        "https://github.com/Herbertofury/INTA",
+        "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+      ]
+    },
+    {
+      "id": "preventive-maintenance-method",
+      "name": "Evidence-led preventive maintenance",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance",
+      "aliases": [
+        "preventive maintenance"
+      ],
+      "summary": "Review actual protection, updates, recovery and hardware needs before changing the workstation.",
+      "when": "Use for a planned maintenance visit.",
+      "proof": "The normal workload passes and each failed or deferred item has an owner and next action.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+        "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ]
+    },
+    {
+      "id": "scope-isolation",
+      "name": "Scope isolation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-intake-triage",
+      "aliases": [],
+      "summary": "Vary the user, device, application or service boundary to locate the smallest failing scope.",
+      "when": "Use when the symptom is vague or reported as affecting everything.",
+      "proof": "A failing and a working comparison establish the next investigation boundary.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/"
+      ]
+    },
+    {
+      "id": "known-good-comparison",
+      "name": "Known-good comparison",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-intake-triage",
+      "aliases": [
+        "known good comparison"
+      ],
+      "summary": "Compare with a verified working device, account, cable or configuration under matching conditions.",
+      "when": "Use when an interchangeable component can distinguish likely causes.",
+      "proof": "The compared conditions and the result for both paths are recorded.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/"
+      ]
+    },
+    {
+      "id": "single-change-experiment",
+      "name": "Single-change experiment",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-slow-pc",
+      "aliases": [
+        "single change experiment"
+      ],
+      "summary": "Make one reversible change that tests a stated hypothesis.",
+      "when": "Use when several explanations could fit the current evidence.",
+      "proof": "The predicted result, actual result and rollback are recorded before another variable changes.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon"
+      ]
+    },
+    {
+      "id": "reproducible-baseline",
+      "name": "Reproducible baseline",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-slow-pc",
+      "aliases": [],
+      "summary": "Record the failing task, input, configuration and measurement before changing the system.",
+      "when": "Use before claiming a repair or performance improvement.",
+      "proof": "Another technician can repeat the same workload and compare equivalent observations.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon"
+      ]
+    },
+    {
+      "id": "rollback-rehearsal",
+      "name": "Rollback rehearsal",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-new-pc",
+      "aliases": [],
+      "summary": "Confirm how to restore the previous working configuration before a disruptive change.",
+      "when": "Use for upgrades, migrations and other changes that can interrupt service.",
+      "proof": "The retained source, access method and restoration steps are usable.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/export",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/import"
+      ]
+    },
+    {
+      "id": "restore-verification",
+      "name": "Restore verification",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-backup-restore",
+      "aliases": [
+        "restore test"
+      ],
+      "summary": "Recover representative files to a separate target and open them in their real application.",
+      "when": "Use when a backup report is the only existing assurance.",
+      "proof": "Content, permissions, application usability and recovery time are recorded.",
+      "sourceUrls": [
+        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
+        "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ]
+    },
+    {
+      "id": "source-destination-verification",
+      "name": "Source and destination verification",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-disk-migration",
+      "aliases": [
+        "source/destination verification"
+      ],
+      "summary": "Identify both storage endpoints by stable device details and intended read/write direction.",
+      "when": "Use before imaging, cloning, writing boot media or recovering files.",
+      "proof": "The source is preserved and the intended destination is the one that changed.",
+      "sourceUrls": [
+        "https://clonezilla.org/clonezilla-live-doc.php",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/export"
+      ]
+    },
+    {
+      "id": "recovery-key-readiness",
+      "name": "BitLocker recovery readiness",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery",
+      "aliases": [
+        "recovery-key readiness"
+      ],
+      "summary": "Locate the correct recovery material and match the key identifier before a change that can affect startup.",
+      "when": "Use before boot, firmware, storage or recovery changes on an encrypted device.",
+      "proof": "The authorized recovery path is reachable from another device and the matching key reference is recorded privately.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/security/encryption/find-your-bitlocker-recovery-key"
+      ]
+    },
+    {
+      "id": "publisher-checksum-verification",
+      "name": "Publisher and checksum verification",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-boot-usb",
+      "aliases": [
+        "publisher verification",
+        "checksum verification"
+      ],
+      "summary": "Check the official distribution route, expected publisher signature and provided cryptographic digest.",
+      "when": "Use before introducing an installer, executable or boot image into the technician kit.",
+      "proof": "The exact file, publisher/check result, expected digest and source are recorded; a mismatch remains unresolved.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash",
+        "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/get-authenticodesignature"
+      ]
+    },
+    {
+      "id": "cold-warm-comparison",
+      "name": "Cold and warm comparison",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-slow-pc",
+      "aliases": [
+        "cold/warm comparison"
+      ],
+      "summary": "Measure the same workload with documented initial and repeated-run conditions.",
+      "when": "Use when caches or initialization could explain a claimed speed improvement.",
+      "proof": "Input and configuration match and both first-run and repeated-run outcomes are retained.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/",
+        "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/logging-mode"
+      ]
+    },
+    {
+      "id": "timestamp-correlation",
+      "name": "Timestamp correlation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod",
+      "aliases": [],
+      "summary": "Align the symptom time with relevant logs and recent changes without equating correlation to cause.",
+      "when": "Use for intermittent crashes, update failures or incidents.",
+      "proof": "Timezones, clock uncertainty and the supporting sequence are recorded.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/client-management/troubleshoot-stop-errors",
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart"
+      ]
+    },
+    {
+      "id": "read-only-evidence-collection",
+      "name": "Read-only evidence collection",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-intake-triage",
+      "aliases": [
+        "read only evidence collection"
+      ],
+      "summary": "Collect the smallest useful observation before applying a change to the target.",
+      "when": "Use when the next action could overwrite diagnostic or recovery evidence.",
+      "proof": "Original observations remain available and any gaps in coverage are visible.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/"
+      ]
+    },
+    {
+      "id": "least-privilege-remote-access",
+      "name": "Least-privilege remote access",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-remote-support",
+      "aliases": [],
+      "summary": "Limit a support session or persistent agent to the identities, devices and duration actually needed.",
+      "when": "Use when selecting a remote-support access model.",
+      "proof": "Access ownership, scope, duration and removal or continuing-management decision are documented.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/apps/solve-pc-problems-remotely-using-quick-assist"
+      ]
+    },
+    {
+      "id": "dns-connectivity-isolation",
+      "name": "DNS-versus-connectivity isolation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-network-dns",
+      "aliases": [
+        "DNS versus connectivity isolation"
+      ],
+      "summary": "Test name resolution separately from address reachability and the application connection.",
+      "when": "Use when an address works but a name fails, or different resolvers give different results.",
+      "proof": "The failing layer is identified without replacing organization-specific DNS blindly.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/troubleshoot-dns-client-resolution-issues",
+        "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection"
+      ]
+    },
+    {
+      "id": "application-profile-isolation",
+      "name": "Application-profile isolation",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-outlook-email",
+      "aliases": [
+        "application profile isolation"
+      ],
+      "summary": "Compare the affected application configuration with a clean or known-working profile while retaining the original.",
+      "when": "Use after service/account checks point toward local application state.",
+      "proof": "Required local data is preserved and the same task is compared in both profiles.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/outlook/classic-outlook-not-responding-stuck-at-processing-stopped-working-or-freezes",
+        "https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/administration/architecture-changes-new-outlook"
+      ]
+    },
+    {
+      "id": "post-change-acceptance",
+      "name": "Post-change acceptance",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-client-handoff",
+      "aliases": [
+        "post change acceptance"
+      ],
+      "summary": "Repeat the original workflow and relevant neighboring functions after a change.",
+      "when": "Use before calling a repair complete or promoting a new kit component.",
+      "proof": "Observed results meet the agreed success criteria and remaining issues have owners.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      ]
+    },
+    {
+      "id": "manual-freshness-review",
+      "name": "Manual freshness review",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance",
+      "aliases": [
+        "freshness review"
+      ],
+      "summary": "Read the official release and compatibility evidence before changing a catalog review date or installing an update.",
+      "when": "Use when a checker reports a new release, changed URL or outdated review.",
+      "proof": "Release identity, applicable changes, compatibility and a dated editorial decision are recorded.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+        "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ]
+    },
+    {
+      "id": "stable-release-promotion",
+      "name": "Stable-release promotion",
+      "url": "https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance",
+      "aliases": [
+        "stable release promotion"
+      ],
+      "summary": "Move a candidate into routine use only after its defined job and recovery path are exercised.",
+      "when": "Use when evaluating a new tool version or a research candidate.",
+      "proof": "Equivalent work, relevant behavior, resource cost and rollback evidence support the promotion.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+        "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ]
+    }
+  ]
+}

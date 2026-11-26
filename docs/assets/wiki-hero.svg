@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="360" viewBox="0 0 1440 360" role="img" aria-labelledby="title desc">
+  <title id="title">INTA Service Atlas</title>
+  <desc id="desc">A shared field guide for the people who keep computers working. Find the right path. Leave a better one.</desc>
+  <defs>
+    <linearGradient id="base" x2="1" y2="1"><stop stop-color="#081319"/><stop offset="1" stop-color="#102a31"/></linearGradient>
+    <linearGradient id="line" x2="1"><stop stop-color="#2dd4bf"/><stop offset="1" stop-color="#a7f3d0"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#22d3b5" stop-opacity=".15"/><stop offset="1" stop-color="#22d3b5" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#d1fae5" stroke-opacity=".035"/></pattern>
+  </defs>
+  <rect width="1440" height="360" rx="18" fill="url(#base)"/>
+  <rect width="1440" height="360" rx="18" fill="url(#grid)"/>
+  <ellipse cx="1115" cy="170" rx="370" ry="270" fill="url(#glow)"/>
+  <path d="M0 0H1440" stroke="#5eead4" stroke-width="4"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="56" y="44" width="46" height="46" rx="12" fill="#102f35" stroke="#4fd1bd"/>
+    <path d="M69 57H90M79.5 57V78M69 78H90" stroke="#99f6e4" stroke-width="3" stroke-linecap="round"/>
+    <text x="120" y="64" fill="#99f6e4" font-size="15" font-weight="700" letter-spacing="3">INTA COMPUTER SERVICES</text>
+    <text x="120" y="85" fill="#8ca9ad" font-size="12" letter-spacing="2">THE SHARED TECHNICIAN FIELD GUIDE</text>
+    <text x="56" y="166" fill="#f0fdfa" font-size="60" font-weight="700" letter-spacing="-2">Service Atlas</text>
+    <text x="58" y="210" fill="#b4d6d5" font-size="25">Find the right path. Leave a better one.</text>
+    <rect x="58" y="261" width="108" height="31" rx="15.5" fill="#123c3b" stroke="#2f7067"/>
+    <text x="112" y="281" text-anchor="middle" fill="#b9f5e8" font-size="12" font-weight="700" letter-spacing="1">DIAGNOSE</text>
+    <rect x="178" y="261" width="96" height="31" rx="15.5" fill="#123c3b" stroke="#2f7067"/>
+    <text x="226" y="281" text-anchor="middle" fill="#b9f5e8" font-size="12" font-weight="700" letter-spacing="1">REPAIR</text>
+    <rect x="286" y="261" width="96" height="31" rx="15.5" fill="#123c3b" stroke="#2f7067"/>
+    <text x="334" y="281" text-anchor="middle" fill="#b9f5e8" font-size="12" font-weight="700" letter-spacing="1">VERIFY</text>
+    <rect x="394" y="261" width="108" height="31" rx="15.5" fill="#123c3b" stroke="#2f7067"/>
+    <text x="448" y="281" text-anchor="middle" fill="#b9f5e8" font-size="12" font-weight="700" letter-spacing="1">IMPROVE</text>
+  </g>
+  <g fill="none" stroke="url(#line)" stroke-width="2">
+    <path d="M970 92H1060L1110 142H1215M970 92V216L1030 276H1150M1110 142V218H1242" opacity=".6"/>
+    <path d="M1215 142L1272 85H1330M1150 276L1210 218" stroke-dasharray="5 7" opacity=".4"/>
+    <circle cx="970" cy="92" r="29" fill="#123139"/>
+    <circle cx="1110" cy="142" r="19" fill="#123139"/>
+    <rect x="1196" y="123" width="38" height="38" rx="10" fill="#123139"/>
+    <circle cx="1242" cy="218" r="24" fill="#123139"/>
+    <rect x="1128" y="254" width="44" height="44" rx="12" fill="#123139"/>
+    <path d="M958 92L966 100L982 84M1230 218L1238 226L1254 210M1140 276L1147 283L1160 270" stroke="#b6ffdc" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1102 142H1118M1110 134V150M1207 142H1223" stroke="#b6ffdc" stroke-linecap="round"/>
+    <circle cx="1330" cy="85" r="5" fill="#99f6e4"/>
+  </g>
+  <text x="1340" y="320" text-anchor="end" fill="#749a9e" font-family="Arial, Helvetica, sans-serif" font-size="12" letter-spacing="2">BUILT BY TECHNICIANS. BETTER WITH EVERY CASE.</text>
+</svg>

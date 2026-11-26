@@ -1,179 +1,297 @@
-[Open the technician hub](https://herbertofury.github.io/INTA/) · [Wiki home](https://github.com/Herbertofury/INTA/wiki) · [Source repository](https://github.com/Herbertofury/INTA)
+[🏠 Home](https://github.com/Herbertofury/INTA/wiki) · [🧭 Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [📚 Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [🧰 Tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [✨ Open interactive hub](https://herbertofury.github.io/INTA/)
 
-# Remote support
+# 🖥️ [Remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)
 
-8 purpose-selected tools. Use the official download link for the current publisher offering; check architecture and release notes before installing.
+Match an [attended support session](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) or a managed endpoint to the right access model.
 
-| Tool | Best use | Platform | Kit level |
+**8 tools** · [All disciplines](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+
+> [!TIP]
+> **Choose by the job:** One-time help or recurring managed access?
+
+## 🧭 Start with a workflow
+
+- [Start and finish a clean remote-support session](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)
+- [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
+
+<a id="compare-options"></a>
+
+## ⚖️ Compare the options
+
+| Tool | Choose it for | Platforms | Role |
 | --- | --- | --- | --- |
-| [MeshCentral](#meshcentral) | INTA-managed unattended support with its own server and device groups. | Windows, Linux, macOS | Core |
-| [RustDesk](#rustdesk) | A flexible remote-control option across mixed client platforms. | Windows, Linux, macOS | Core |
-| [Microsoft Quick Assist](#quick-assist) | A quick one-time Windows support session without deploying an RMM agent. | Windows | Core |
-| [Chrome Remote Desktop](#chrome-remote-desktop) | Attended support or an explicitly configured personal remote-access endpoint. | Windows, Linux, macOS | Core |
-| [AnyDesk](#anydesk) | Client support when the customer already standardizes on AnyDesk. | Windows, Linux, macOS | Specialist |
-| [TeamViewer Remote](#teamviewer) | Supporting customers whose approved remote-access stack uses TeamViewer. | Windows, Linux, macOS | Specialist |
-| [ScreenConnect](#screenconnect) | A ticket-oriented remote-support workflow with technician administration. | Windows, Linux, macOS | Specialist |
-| [Tailscale](#tailscale) | Remote administration of private services without exposing them directly to the internet. | Windows, Linux, macOS | Core |
+| [Chrome Remote Desktop](#chrome-remote-desktop) | Attended support or an explicitly configured personal remote-access endpoint. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🟢 Core |
+| [MeshCentral](#meshcentral) | INTA-managed unattended support with its own server and device groups. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🟢 Core |
+| [Microsoft Quick Assist](#quick-assist) | A quick one-time [Windows](https://www.microsoft.com/windows) support session without deploying an RMM agent. | [Windows](https://www.microsoft.com/windows) | 🟢 Core |
+| [RustDesk](#rustdesk) | A flexible remote-control option across mixed client platforms. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🟢 Core |
+| [Tailscale](#tailscale) | Remote administration of private services without exposing them directly to the internet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🟢 Core |
+| [AnyDesk](#anydesk) | Client support when the customer already standardizes on [AnyDesk](https://anydesk.com/). | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🔬 Specialist |
+| [ScreenConnect](#screenconnect) | A ticket-oriented remote-support workflow with technician administration. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🔬 Specialist |
+| [TeamViewer Remote](#teamviewer) | Supporting customers whose approved remote-access stack uses [TeamViewer](https://www.teamviewer.com/). | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | 🔬 Specialist |
 
-<a name="meshcentral"></a>
+Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
-## MeshCentral
+---
 
-Self-hosted remote management with browser-based desktop, terminal and file access.
+<a id="chrome-remote-desktop"></a>
 
-**Choose it for:** INTA-managed unattended support with its own server and device groups.
-
-**Platforms:** Windows, Linux, macOS · **Delivery:** installed · **Kit level:** Core
-
-**Access / pricing:** Free / open source; hosting has a cost
-
-[Official download](https://github.com/Ylianst/MeshCentral) · [Documentation](https://docs.meshcentral.com/) · [Publisher](https://meshcentral.com/)
-
-> **Before you use it:** Use the agent generated by the correct INTA server; configure account MFA and scoped device access.
-
-**Source:** https://docs.meshcentral.com/  
-**Editorial review:** 2026-11-26  
-**Selection provenance:** Official project or vendor documentation
-
-
-<a name="rustdesk"></a>
-
-## RustDesk
-
-Cross-platform remote desktop with self-hosted server options.
-
-**Choose it for:** A flexible remote-control option across mixed client platforms.
-
-**Platforms:** Windows, Linux, macOS · **Delivery:** installed · **Kit level:** Core
-
-**Access / pricing:** Open-source components; paid Server Pro features
-
-[Official download](https://github.com/rustdesk/rustdesk/releases/latest) · [Documentation](https://rustdesk.com/docs/en/) · [Publisher](https://rustdesk.com/)
-
-> **Before you use it:** Match the client to the intended server and key. Persistent access must be a deliberate managed configuration.
-
-**Source:** https://rustdesk.com/docs/en/  
-**Editorial review:** 2026-11-26  
-**Selection provenance:** Official project or vendor documentation
-
-
-<a name="quick-assist"></a>
-
-## Microsoft Quick Assist
-
-Windows attended screen sharing using a support code and user-approved control.
-
-**Choose it for:** A quick one-time Windows support session without deploying an RMM agent.
-
-**Platforms:** Windows · **Delivery:** installed · **Kit level:** Core
-
-**Access / pricing:** Free Microsoft app
-
-[Official download](https://apps.microsoft.com/detail/9P7BP5VNWKX5) · [Documentation](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · [Publisher](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)
-
-> **Before you use it:** The helper signs in; the user approves the session. The macOS edition is restricted to Microsoft Support interactions.
-
-**Source:** https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist  
-**Editorial review:** 2026-11-26  
-**Selection provenance:** Official project or vendor documentation
-
-
-<a name="chrome-remote-desktop"></a>
-
-## Chrome Remote Desktop
+## [Chrome Remote Desktop](https://remotedesktop.google.com/)
 
 Browser-led remote access with separate temporary support and persistent access flows.
 
-**Choose it for:** Attended support or an explicitly configured personal remote-access endpoint.
+**[Chrome Remote Desktop: official download →](https://remotedesktop.google.com/support)** · [Documentation](https://support.google.com/chrome/answer/1649523) · [Publisher](https://remotedesktop.google.com/)
 
-**Platforms:** Windows, Linux, macOS · **Delivery:** installed · **Kit level:** Core
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Attended support or an explicitly configured personal remote-access endpoint. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
+| **How you use it** | installed |
+| **Access / pricing** | Free service |
+| **Selection role** | 🟢 Core |
 
-**Access / pricing:** Free service
+> **Before using it:** Support codes are one-time. Do not confuse temporary sharing with persistent PIN-based access.
 
-[Official download](https://remotedesktop.google.com/support) · [Documentation](https://support.google.com/chrome/answer/1649523) · [Publisher](https://remotedesktop.google.com/)
+<details>
+<summary>Source, review date, and selection history</summary>
 
-> **Before you use it:** Support codes are one-time. Do not confuse temporary sharing with persistent PIN-based access.
+- **Primary source:** [Open the source](https://support.google.com/chrome/answer/1649523)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Documentation reviewed; not an INTA runtime certification
+- **Selection provenance:**
+  - Official project or vendor documentation
 
-**Source:** https://support.google.com/chrome/answer/1649523  
-**Editorial review:** 2026-11-26  
-**Selection provenance:** Official project or vendor documentation
+</details>
 
+[↑ Compare the options](#compare-options)
 
-<a name="anydesk"></a>
+---
 
-## AnyDesk
+<a id="meshcentral"></a>
 
-Remote desktop and support software with business plans and portable client options.
+## [MeshCentral](https://meshcentral.com/)
 
-**Choose it for:** Client support when the customer already standardizes on AnyDesk.
+Self-hosted remote management with browser-based desktop, terminal and file access.
 
-**Platforms:** Windows, Linux, macOS · **Delivery:** portable · **Kit level:** Specialist
+**[MeshCentral: official download →](https://github.com/Ylianst/MeshCentral)** · [Documentation](https://docs.meshcentral.com/) · [Publisher](https://meshcentral.com/)
 
-**Access / pricing:** Commercial license for professional use
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | INTA-managed unattended support with its own server and device groups. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
+| **How you use it** | installed |
+| **Access / pricing** | Free / open source; hosting has a cost |
+| **Selection role** | 🟢 Core |
 
-[Official download](https://anydesk.com/en/downloads) · [Documentation](https://support.anydesk.com/) · [Publisher](https://anydesk.com/)
+> **Before using it:** Use the agent generated by the correct INTA server; configure account MFA and scoped device access.
 
-**Source:** https://support.anydesk.com/  
-**Editorial review:** 2026-11-26  
-**Selection provenance:** Official project or vendor documentation
+<details>
+<summary>Source, review date, and selection history</summary>
 
+- **Primary source:** [Open the source](https://docs.meshcentral.com/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Documentation reviewed; not an INTA runtime certification
+- **Selection provenance:**
+  - Official project or vendor documentation
 
-<a name="teamviewer"></a>
+</details>
 
-## TeamViewer Remote
+[↑ Compare the options](#compare-options)
 
-Commercial remote support and device-access platform.
+---
 
-**Choose it for:** Supporting customers whose approved remote-access stack uses TeamViewer.
+<a id="quick-assist"></a>
 
-**Platforms:** Windows, Linux, macOS · **Delivery:** installed · **Kit level:** Specialist
+## [Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)
 
-**Access / pricing:** Commercial license for professional use
+[Windows](https://www.microsoft.com/windows) attended screen sharing using a support code and user-approved control.
 
-[Official download](https://www.teamviewer.com/en/download/) · [Documentation](https://www.teamviewer.com/en/global/support/knowledge-base/) · [Publisher](https://www.teamviewer.com/)
+**[Microsoft Quick Assist: official download →](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** · [Documentation](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · [Publisher](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)
 
-**Source:** https://www.teamviewer.com/en/global/support/knowledge-base/  
-**Editorial review:** 2026-11-26  
-**Selection provenance:** Official project or vendor documentation
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | A quick one-time [Windows](https://www.microsoft.com/windows) support session without deploying an RMM agent. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows) |
+| **How you use it** | installed |
+| **Access / pricing** | Free Microsoft app |
+| **Selection role** | 🟢 Core |
 
+> **Before using it:** The helper signs in; the user approves the session. The [macOS](https://support.apple.com/macos) edition is restricted to Microsoft Support interactions.
 
-<a name="screenconnect"></a>
+<details>
+<summary>Source, review date, and selection history</summary>
 
-## ScreenConnect
+- **Primary source:** [Open the source](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Documentation reviewed; not an INTA runtime certification
+- **Selection provenance:**
+  - Official project or vendor documentation
 
-Remote support sessions and managed access for service teams.
+</details>
 
-**Choose it for:** A ticket-oriented remote-support workflow with technician administration.
+[↑ Compare the options](#compare-options)
 
-**Platforms:** Windows, Linux, macOS · **Delivery:** installed · **Kit level:** Specialist
+---
 
-**Access / pricing:** Paid service or licensed deployment
+<a id="rustdesk"></a>
 
-[Official download](https://www.screenconnect.com/Download) · [Documentation](https://www.screenconnect.com/Download) · [Publisher](https://www.screenconnect.com/)
+## [RustDesk](https://rustdesk.com/)
 
-> **Before you use it:** Keep the server and agents current and restrict administrative access.
+Cross-platform remote desktop with self-hosted server options.
 
-**Source:** https://www.screenconnect.com/Download  
-**Editorial review:** 2026-11-26  
-**Selection provenance:** Official project or vendor documentation
+**[RustDesk: official download →](https://github.com/rustdesk/rustdesk/releases/latest)** · [Documentation](https://rustdesk.com/docs/en/) · [Publisher](https://rustdesk.com/)
 
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | A flexible remote-control option across mixed client platforms. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
+| **How you use it** | installed |
+| **Access / pricing** | Open-source components; paid Server Pro features |
+| **Selection role** | 🟢 Core |
 
-<a name="tailscale"></a>
+> **Before using it:** Match the client to the intended server and key. Persistent access must be a deliberate managed configuration.
 
-## Tailscale
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://rustdesk.com/docs/en/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Documentation reviewed; not an INTA runtime certification
+- **Selection provenance:**
+  - Official project or vendor documentation
+
+</details>
+
+[↑ Compare the options](#compare-options)
+
+---
+
+<a id="tailscale"></a>
+
+## [Tailscale](https://tailscale.com/)
 
 Identity-based private connectivity for reaching approved devices and services.
 
-**Choose it for:** Remote administration of private services without exposing them directly to the internet.
+**[Tailscale: official download →](https://tailscale.com/download)** · [Documentation](https://tailscale.com/docs) · [Publisher](https://tailscale.com/)
 
-**Platforms:** Windows, Linux, macOS · **Delivery:** installed · **Kit level:** Core
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Remote administration of private services without exposing them directly to the internet. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
+| **How you use it** | installed |
+| **Access / pricing** | Personal and paid business plans |
+| **Selection role** | 🟢 Core |
 
-**Access / pricing:** Personal and paid business plans
+> **Before using it:** It provides connectivity rather than a remote-desktop interface; apply device and access policies.
 
-[Official download](https://tailscale.com/download) · [Documentation](https://tailscale.com/docs) · [Publisher](https://tailscale.com/)
+<details>
+<summary>Source, review date, and selection history</summary>
 
-> **Before you use it:** It provides connectivity rather than a remote-desktop interface; apply device and access policies.
+- **Primary source:** [Open the source](https://tailscale.com/docs)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Documentation reviewed; not an INTA runtime certification
+- **Selection provenance:**
+  - Official project or vendor documentation
 
-**Source:** https://tailscale.com/docs  
-**Editorial review:** 2026-11-26  
-**Selection provenance:** Official project or vendor documentation
+</details>
+
+[↑ Compare the options](#compare-options)
+
+---
+
+<a id="anydesk"></a>
+
+## [AnyDesk](https://anydesk.com/)
+
+Remote desktop and support software with business plans and portable client options.
+
+**[AnyDesk: official download →](https://anydesk.com/en/downloads)** · [Documentation](https://support.anydesk.com/) · [Publisher](https://anydesk.com/)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Client support when the customer already standardizes on [AnyDesk](https://anydesk.com/). |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
+| **How you use it** | portable |
+| **Access / pricing** | Commercial license for professional use |
+| **Selection role** | 🔬 Specialist |
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://support.anydesk.com/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Documentation reviewed; not an INTA runtime certification
+- **Selection provenance:**
+  - Official project or vendor documentation
+
+</details>
+
+[↑ Compare the options](#compare-options)
+
+---
+
+<a id="screenconnect"></a>
+
+## [ScreenConnect](https://www.screenconnect.com/)
+
+[Remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) sessions and managed access for service teams.
+
+**[ScreenConnect: official download →](https://www.screenconnect.com/Download)** · [Documentation](https://www.screenconnect.com/Download) · [Publisher](https://www.screenconnect.com/)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | A ticket-oriented remote-support workflow with technician administration. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
+| **How you use it** | installed |
+| **Access / pricing** | Paid service or licensed deployment |
+| **Selection role** | 🔬 Specialist |
+
+> **Before using it:** Keep the server and agents current and restrict administrative access.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://www.screenconnect.com/Download)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Documentation reviewed; not an INTA runtime certification
+- **Selection provenance:**
+  - Official project or vendor documentation
+
+</details>
+
+[↑ Compare the options](#compare-options)
+
+---
+
+<a id="teamviewer"></a>
+
+## [TeamViewer Remote](https://www.teamviewer.com/)
+
+Commercial [remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) and device-access platform.
+
+**[TeamViewer Remote: official download →](https://www.teamviewer.com/en/download/)** · [Documentation](https://www.teamviewer.com/en/global/support/knowledge-base/) · [Publisher](https://www.teamviewer.com/)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Supporting customers whose approved remote-access stack uses [TeamViewer](https://www.teamviewer.com/). |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) |
+| **How you use it** | installed |
+| **Access / pricing** | Commercial license for professional use |
+| **Selection role** | 🔬 Specialist |
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://www.teamviewer.com/en/global/support/knowledge-base/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Documentation reviewed; not an INTA runtime certification
+- **Selection provenance:**
+  - Official project or vendor documentation
+
+</details>
+
+[↑ Compare the options](#compare-options)
+
+
+---
+
+**Source review: 2026-11-26.** Guidance review and tool release versions are separate. [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose) · [How we maintain this guide](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)

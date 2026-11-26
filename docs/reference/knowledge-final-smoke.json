@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-26",
+  "buildSha256": "f144f9a80d8a929688372f15ce115030e14c9970f6d18b7dc7bfaa439c293c42",
+  "freshCopy": true,
+  "homeTools": 111,
+  "disciplines": 10,
+  "libraryTools": 111,
+  "knowledgeDestinations": 6,
+  "toolTitleDestination": true,
+  "canonicalCommandsUnchanged": true,
+  "singleHomeHero": true,
+  "mobileWidth": 390,
+  "mobileOverflow": false,
+  "caseSensitiveWindows": true,
+  "errors": [],
+  "requests": []
+}
