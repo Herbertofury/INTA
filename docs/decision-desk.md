@@ -2,7 +2,7 @@
 
 [Home](https://github.com/Herbertofury/INTA/wiki) › **Decision desk**
 
-**Start with the symptom. Choose the next useful observation. Finish with the customer's task working.** This desk routes all 22 current jobs into their complete playbooks, without requiring you to choose a product first.
+**Start with the symptom. Choose the next useful observation. Finish with the customer's task working.** This desk routes all 23 current jobs into their complete playbooks, without requiring you to choose a product first.
 
 > [!TIP]
 > If the scope is still unclear, open [structured intake and triage](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage). Record the exact failing task, last known good state, affected users/devices and the next test.
@@ -60,6 +60,7 @@ Diagram legend: [Incident containment](https://github.com/Herbertofury/INTA/wiki
 | Confidence in a backup. | Required data, recovery dependencies and a separate restore destination. | [Prove a backup can restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) | Restored files open with the expected permissions and application behavior. |
 | A new disk or migration. | Source health, endpoint identities and a retained rollback. | [Clone or migrate a healthy system](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration) | The destination works independently before the source is retired. |
 | A dependable new workstation. | The employee's real tasks, application access and migration requirements. | [Set up a new workstation](https://github.com/Herbertofury/INTA/wiki/Job-new-pc) | Work, recovery, protection and backup are exercised. |
+| Windows or Office reports that it is not activated. | Product edition, license channel, entitlement and exact error. | [Restore Microsoft activation](https://github.com/Herbertofury/INTA/wiki/Job-microsoft-activation) | The intended product is licensed and the user's real task works. |
 | A [rescue USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) ready for the bench. | Intended firmware/platform, verified images and the actual target USB. | [Build or refresh rescue media](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) | Image identity and actual boot evidence are recorded separately. |
 | A worthwhile maintenance visit. | Actual health, update, protection and recovery gaps. | [Run preventive maintenance](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) | Normal work passes; every deferred item has an owner. |
 

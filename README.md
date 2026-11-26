@@ -8,7 +8,7 @@
 
 ## 🧭 A home for the whole service desk
 
-INTA brings **111 purpose-selected tools**, **22 complete job playbooks**, **40 named troubleshooting methods**, official downloads, and practical field knowledge into one searchable workspace. It covers everyday [Windows](https://www.microsoft.com/windows) service, [malware removal](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal), [remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support), [hardware diagnostics](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod), [data recovery](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive), networking, boot media, backup, productivity and AI-assisted troubleshooting. Selected discoveries from **[Athena](https://github.com/Herbertofury/Athena)** retain their provenance and evaluation status.
+INTA brings **119 purpose-selected tools**, **23 complete job playbooks**, **41 named troubleshooting methods**, official downloads, and practical field knowledge into one searchable workspace. It covers everyday [Windows](https://www.microsoft.com/windows) service, [malware removal](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal), [remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support), [hardware diagnostics](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod), [data recovery](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive), networking, boot media, backup, productivity and AI-assisted troubleshooting. Selected discoveries from **[Athena](https://github.com/Herbertofury/Athena)** retain their provenance and evaluation status.
 
 The browser hub works online and as a single offline HTML file. The live [Wiki](https://github.com/Herbertofury/INTA/wiki) provides the same job guidance with a coordinated navigation system, job-specific [Mermaid](https://mermaid.js.org/) decision diagrams, evidence checkpoints, linked tools, and a clear path to the next guide. [INTA Rescue](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md) and its [Media Creator](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md) remain in this repository as the bootable recovery side of the toolkit.
 
@@ -40,7 +40,9 @@ The browser hub works online and as a single offline HTML file. The live [Wiki](
 | Office and workplace issues | [Outlook](https://github.com/Herbertofury/INTA/wiki/Job-outlook-email) · [Printers](https://github.com/Herbertofury/INTA/wiki/Job-printer-repair) · [AD trust](https://github.com/Herbertofury/INTA/wiki/Job-ad-trust) | Diagnosis at the correct device, account or service layer. |
 | Preparing the next job | [New PC](https://github.com/Herbertofury/INTA/wiki/Job-new-pc) · [Maintenance](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) · [USB media](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) | A ready kit and a machine that is ready for real use. |
 
-**[Browse all 22 playbooks →](https://github.com/Herbertofury/INTA/wiki/Playbooks)**
+- 🔑 [Microsoft activation and licensing](https://github.com/Herbertofury/INTA/wiki/Job-microsoft-activation) — Windows, Office and Microsoft 365 entitlement recovery, license diagnostics and third-party activator recognition.
+
+**[Browse all 23 playbooks →](https://github.com/Herbertofury/INTA/wiki/Playbooks)**
 
 ## 🧰 Your workspace, with the useful details built in
 

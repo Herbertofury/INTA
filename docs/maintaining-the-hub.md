@@ -13,7 +13,7 @@
 | [Method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json) | Precise named methods, aliases, canonical destinations and proof |
 | [Link aliases](https://github.com/Herbertofury/INTA/blob/main/data/link-aliases.json) | Additional explicit application and platform names used by the linker |
 | [Linking helper](https://github.com/Herbertofury/INTA/blob/main/scripts/wiki_links.py) | Protected [Markdown](https://github.github.com/gfm/) handling and links on every repeated known name |
-| [Wiki layout](https://github.com/Herbertofury/INTA/blob/main/data/wiki-layout.json) | Structured wiki presentation and the decision diagrams for all 22 jobs |
+| [Wiki layout](https://github.com/Herbertofury/INTA/blob/main/data/wiki-layout.json) | Structured wiki presentation and the decision diagrams for all 23 jobs |
 | [Hub metadata](https://github.com/Herbertofury/INTA/blob/main/data/meta.json) | Identity and editorial metadata |
 | [Portal source](https://github.com/Herbertofury/INTA/tree/main/portal) | Accessible interactive interface |
 | [Authored documentation](https://github.com/Herbertofury/INTA/tree/main/docs) | Onboarding, contribution rules, rescue guidance and templates |

@@ -4,7 +4,7 @@
 
 **Choose a method by the question it answers.** A tool collects or changes something; a method explains why that action is useful and what evidence should change the next step. Open a linked method to reach its complete field guide.
 
-The registry contains **40 named methods**: a method for each of the **22 job guides**, plus **18 reusable diagnostic concepts**. These are INTA operating methods supported by the linked platform sources. They are not a claim that every technique was invented, standardized or independently benchmarked here.
+The registry contains **41 named methods**: a method for each of the **23 job guides**, plus **18 reusable diagnostic concepts**. These are INTA operating methods supported by the linked platform sources. They are not a claim that every technique was invented, standardized or independently benchmarked here.
 
 ## 🧭 Choose the right level
 
@@ -53,6 +53,7 @@ The registry contains **40 named methods**: a method for each of the **22 job gu
 | --- | --- | --- |
 | [Attended remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) | Use for an agreed one-time support session. | Device identity, session outcome and access closure are documented. |
 | [Baseline workstation deployment](https://github.com/Herbertofury/INTA/wiki/Job-new-pc) | Use for a new or replacement computer. | The employee completes agreed tasks and recovery, backup and remote-support arrangements are verified. |
+| [Entitlement-led Microsoft activation](https://github.com/Herbertofury/INTA/wiki/Job-microsoft-activation) | Use after provisioning, reinstall, hardware replacement or an Office license error. | The intended product is activated with its existing entitlement and a representative task works. |
 | [Redacted AI-assisted triage](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage) | Use when explaining a log or comparing possible next tests. | No unnecessary secrets were shared and executed actions match verified documentation and observed evidence. |
 | [Evidence-led preventive maintenance](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) | Use for a planned maintenance visit. | The normal workload passes and each failed or deferred item has an owner and next action. |
 | [Verified client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff) | Use after repair or when responsibility moves to another technician. | The user accepts the result or the remaining-work plan and the next action is unambiguous. |
