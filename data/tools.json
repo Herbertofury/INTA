@@ -7053,5 +7053,112 @@
     ],
     "evidenceStatus": "Official documentation and release reviewed; no runtime or performance certification",
     "cautions": "The publisher reports unsigned executables. Do not bypass Windows security warnings or apply presets that disable Windows Update or endpoint protection. Approve one applicable change, verify reversibility and repeat the original workload; built-in Windows controls remain the fallback."
+  },
+  {
+    "id": "ublock-origin",
+    "name": "uBlock Origin",
+    "category": "security",
+    "summary": "Free, open-source wide-spectrum content blocker for ads, trackers, popups and known malicious URL lists, with detailed per-site controls.",
+    "bestFor": "The full extension on Firefox and compatible Firefox-based browsers. Use the official Mozilla Add-ons listing and confirm the publisher is Raymond Hill.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux",
+      "Android (Firefox)"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source (GPL-3.0)",
+    "homepage": "https://github.com/gorhill/uBlock",
+    "downloadUrl": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
+    "docsUrl": "https://github.com/gorhill/uBlock/wiki",
+    "sourceUrl": "https://github.com/gorhill/uBlock",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "browser",
+      "Firefox",
+      "Firefox-based",
+      "content blocker",
+      "ad blocking",
+      "tracker blocking",
+      "malicious URL filtering"
+    ],
+    "provenance": [
+      "Official Mozilla Add-ons listing: https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
+      "Official project repository and GPL-3.0 license: https://github.com/gorhill/uBlock"
+    ],
+    "evidenceStatus": "Official Mozilla Add-ons and project sources reviewed; not an INTA runtime certification.",
+    "cautions": "Use the full uBlock Origin extension on Firefox/compatible Gecko browsers. Chrome no longer supports Manifest V2 extensions; do not recommend the full uBO extension for Chrome/Edge. Keep one content blocker per browser. This is browser-layer protection, not endpoint antivirus."
+  },
+  {
+    "id": "adguard-browser-extension",
+    "name": "AdGuard Browser Extension",
+    "category": "security",
+    "summary": "Free, open-source browser extension for ad, tracker and popup blocking, with optional security filtering for known malicious domains.",
+    "bestFor": "Chrome and Edge using the supported Manifest V3 build, plus Opera and Opera GX using AdGuard's official Opera MV3 release. It is also available for Yandex Browser through AdGuard's documented installation route.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "Free / open source (GPL-3.0)",
+    "homepage": "https://adguard.com/en/adguard-browser-extension/overview.html",
+    "downloadUrl": "https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg",
+    "docsUrl": "https://adguard.com/kb/adguard-browser-extension/installation/",
+    "sourceUrl": "https://github.com/AdguardTeam/AdguardBrowserExtension",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "browser",
+      "Chrome",
+      "Edge",
+      "Opera",
+      "Opera GX",
+      "Yandex Browser",
+      "Chromium",
+      "Manifest V3",
+      "ad blocking",
+      "tracker blocking",
+      "security filter"
+    ],
+    "provenance": [
+      "Official browser installation matrix: https://adguard.com/kb/adguard-browser-extension/installation/",
+      "Official Manifest V3 compatibility and limitations: https://adguard.com/kb/adguard-browser-extension/mv3-version/",
+      "Official source repository: https://github.com/AdguardTeam/AdguardBrowserExtension"
+    ],
+    "evidenceStatus": "Official installation, MV3 and source-repository documentation reviewed; not an INTA runtime certification.",
+    "cautions": "Use MV3 on Chrome and Edge. MV3 has rule/filter limits compared with older MV2 builds. AdGuard's current documentation permits installing the Chrome Web Store build in Edge; enable Edge's 'Allow extensions from other stores' only when Edge presents that official prompt. For Opera/Opera GX use the official opera-mv3.zip from GitHub Releases; manual installs need an assigned update owner. For Yandex use AdGuard's official installation instructions. Enable AdGuard Security filters if malicious-domain filtering is needed. Do not stack content blockers or treat this as antivirus."
+  },
+  {
+    "id": "adguard-mini-mac",
+    "name": "AdGuard Mini for Mac",
+    "category": "security",
+    "summary": "Safari-specific ad and tracker blocker app for macOS, distributed through the Mac App Store.",
+    "bestFor": "Safari on macOS 12 or later. Use this Safari-specific app rather than a Chromium or Firefox extension.",
+    "platforms": [
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Free core ad/tracker blocking; optional paid in-app purchase for advanced features and real-time filter updates",
+    "homepage": "https://adguard.com/en/adguard-mini-mac/overview.html",
+    "downloadUrl": "https://apps.apple.com/us/app/adguard-ad-blocker-for-safari/id1440147259?mt=12",
+    "docsUrl": "https://adguard.com/kb/adguard-mini-for-mac/installation/",
+    "sourceUrl": "https://adguard.com/en/adguard-mini-mac/overview.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "browser",
+      "Safari",
+      "macOS",
+      "ad blocking",
+      "tracker blocking"
+    ],
+    "provenance": [
+      "Official AdGuard Mini product and feature page: https://adguard.com/en/adguard-mini-mac/overview.html",
+      "Official installation instructions and macOS requirement: https://adguard.com/kb/adguard-mini-for-mac/installation/"
+    ],
+    "evidenceStatus": "Official product and installation documentation reviewed; not an INTA runtime certification.",
+    "cautions": "Requires macOS 12 or later and protects Safari specifically. Core ad/tracker blocking is free; advanced features require an in-app purchase. Not applicable to Windows."
   }
 ]
