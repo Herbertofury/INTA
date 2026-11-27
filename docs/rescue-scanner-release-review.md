@@ -7,3 +7,9 @@ If the Debian stable package remains affected in the [Debian security tracker](h
 Only after the maintainer independently confirms that Debian stable supplies the fixed, signed packages, add `.github/rescue-scanner-review.json`. Include suite `trixie`, architecture `amd64`, source `clamav`, UTC `reviewed_on`, the Debian tracker and authoritative dated package provenance under `evidence`, and both exact installed package records under `packages`. Each record includes package, architecture, source, source version, and binary version. An absent or stale review, changed exact tuple, or the known affected package branch must fail the gate. No review is provided with this gate, and no candidate has been declared fixed.
 
 After proving the gate, continue the existing BIOS/UEFI, recovery, checksum, and package reconstruction acceptance. Preserve earlier public releases for audit; do not replace one or announce an update until the current candidate qualifies.
+
+## Historical download status
+
+The [27 November Rescue image](https://github.com/Herbertofury/INTA/releases/tag/rescue-45951274984.1) is a historical build. Its boot and reconstructed checksum checks passed. Do not rely on its bundled scanner for untrusted files. The [publication job](https://github.com/Herbertofury/INTA/actions/runs/45951274984/job/140347454599) recorded the affected stable package version and the checksum listed on the release. A qualified replacement requires fixed signed stable packages and a fresh review of the exact ISO.
+
+[Release history](https://github.com/Herbertofury/INTA/releases) remains available for audit. The Media Creator may report a missing checksum when GitHub’s latest release is an unrelated toolbox release. This does not indicate a damaged local Rescue image. Do not fall back to an older scanner image to work around that message.
