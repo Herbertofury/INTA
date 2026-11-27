@@ -8,6 +8,8 @@ const int Port = 47821;
 var allowedOrigins = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
 {
     "https://herbertofury.github.io",
+    "https://intacomputerservices.com",
+    "https://www.intacomputerservices.com",
     "http://localhost:5173",
     "http://127.0.0.1:5173"
 };
