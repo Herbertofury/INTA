@@ -20,7 +20,7 @@
         "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner",
         "https://www.malwarebytes.com/adwcleaner/eula",
         "https://www.bitdefender.com/en-us/consumer/free-antivirus",
-        "https://www.bitdefender.com/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions.html",
+        "https://www.bitdefender.com/en-us/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions",
         "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline"
       ],
       "firstStep": "Disconnect a suspected compromised PC from the network before scanning; use the incident guide if encryption is spreading.",
@@ -68,7 +68,7 @@
           "freeUse": "Personal/non-commercial only; account required.",
           "evidenceUrls": [
             "https://www.bitdefender.com/en-us/consumer/free-antivirus",
-            "https://www.bitdefender.com/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions.html"
+            "https://www.bitdefender.com/en-us/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions"
           ],
           "reviewedAt": "2026-11-26",
           "actionId": "windows-installer"

@@ -1,0 +1,413 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "checkedAtUtc": "2026-11-27T02:12:33.004562+00:00",
+  "scope": "Only choice source URLs without an already verified result in the two current cached evidence sets. HTTP retrieval proves route behavior, not suitability or technician-machine operation.",
+  "results": [
+    {
+      "url": "https://antibody-software.com/wizfile/eula",
+      "status": 200,
+      "finalUrl": "https://antibody-software.com/wizfile/eula",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 21352,
+      "sampleSha256": "b1c09687edbb755e367efbaa70342ab47be44eb5520dead59f3dea9a044b69fa",
+      "title": "EULA - WizFile"
+    },
+    {
+      "url": "https://antibody-software.com/wizfile/quick-start",
+      "status": 200,
+      "finalUrl": "https://antibody-software.com/wizfile/quick-start",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 21861,
+      "sampleSha256": "9b8955f567a914c1697f09dc34f25b0aeefd76d8adbdff940f4d502ccb9528bd",
+      "title": "WizFile Quick Start Guide"
+    },
+    {
+      "url": "https://clonezilla.org/clonezilla-live-doc.php",
+      "status": 200,
+      "finalUrl": "https://clonezilla.org/clonezilla-live-doc.php",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 33290,
+      "sampleSha256": "c810d61e302ff9aa30f85316181255131515f4e44215c093de5dbb3ce40eba46",
+      "title": "Clonezilla - Live Doc"
+    },
+    {
+      "url": "https://crystalmark.info/en/software/crystaldiskinfo/",
+      "status": 200,
+      "finalUrl": "https://crystalmark.info/en/software/crystaldiskinfo/",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 63756,
+      "sampleSha256": "8ea4dc810eae3fa5dbcd115a4e622e5a21da2229b0f5403472fd8e23bc322ba2",
+      "title": "CrystalDiskInfo &#8211; Crystal Dew World"
+    },
+    {
+      "url": "https://curl.se/docs/manpage.html",
+      "status": 200,
+      "finalUrl": "https://curl.se/docs/manpage.html",
+      "contentType": "text/html",
+      "sampleBytes": 467901,
+      "sampleSha256": "f441245c4c32257db283435d18c9f4231e9e1a3a013942158c7b98413dc8b77a",
+      "title": "curl - How To Use"
+    },
+    {
+      "url": "https://diskanalyzer.com/",
+      "status": 200,
+      "finalUrl": "https://diskanalyzer.com/",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 47949,
+      "sampleSha256": "4925252bc93d5dbf2dc591dcd24681793e7e7b39aeadecb5b00f7992463cb23d",
+      "title": "WizTree - The Fastest Disk Space Analyzer"
+    },
+    {
+      "url": "https://diskanalyzer.com/eula",
+      "status": 200,
+      "finalUrl": "https://diskanalyzer.com/eula",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 25054,
+      "sampleSha256": "985cb81efa47f323d2e80c903f5c53d2b81840fc8367bb23f06df739917cef7b",
+      "title": "EULA - WizTree"
+    },
+    {
+      "url": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+      "status": 200,
+      "finalUrl": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 288178,
+      "sampleSha256": "52958696f8c3dc41049e49323ec0dcc9da009f69c8cc64ae879cc42be2389683",
+      "title": "GitHub - LibreHardwareMonitor/LibreHardwareMonitor: Libre Hardware Monitor is free software that can monitor the temperature sensors, fan speeds, voltages, load and clock speeds of your computer. · GitHub"
+    },
+    {
+      "url": "https://github.com/openai/codex",
+      "status": 200,
+      "finalUrl": "https://github.com/openai/codex",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 320512,
+      "sampleSha256": "b93e25b5909161eaff0057d5d5b6c1f92c734a5004eeae8b94f0b14fc894240f",
+      "title": "GitHub - openai/codex: Lightweight coding agent that runs in your terminal · GitHub"
+    },
+    {
+      "url": "https://github.com/traviscross/mtr",
+      "status": 200,
+      "finalUrl": "https://github.com/traviscross/mtr",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 276047,
+      "sampleSha256": "255975070eeb9b04360dffb2b9e23303857016143e48aa8174b7cc9f65ef2ff5",
+      "title": "GitHub - traviscross/mtr: Official repository for mtr, a network diagnostic tool · GitHub"
+    },
+    {
+      "url": "https://github.com/windirstat/windirstat",
+      "status": 200,
+      "finalUrl": "https://github.com/windirstat/windirstat",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 276419,
+      "sampleSha256": "5387cf2934f22026041b48ba7cf5610247cb56ff472268520099ae534c3b746c",
+      "title": "GitHub - windirstat/windirstat: Windows disk usage analyzer and cleanup tool with interactive treemaps, large-file discovery, duplicate detection, and file-system monitoring. · GitHub"
+    },
+    {
+      "url": "https://help.openai.com/en/articles/9275245-using-chatgpt-s-free-tier-faq",
+      "status": 200,
+      "finalUrl": "https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 66959,
+      "sampleSha256": "f5c2e926f9fbbaf66c1dabd4a6bb3e4a9a9f11b9eac62e2ee9aa7a62bec316e0",
+      "title": "ChatGPT Free Tier FAQ | OpenAI Help Center"
+    },
+    {
+      "url": "https://kopia.io/docs/",
+      "status": 200,
+      "finalUrl": "https://kopia.io/docs/",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 28247,
+      "sampleSha256": "782bf151327b5417bc1f75a291df10b3499bd0e47e227e3ce993f02affe0fd20",
+      "title": "What is Kopia? | Kopia"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname?view=windowsserver2025-ps",
+      "contentType": "text/html",
+      "sampleBytes": 73488,
+      "sampleSha256": "5ac700ccfcb3a90b4b7166bdec45f4e94186e70cccfa09bbf3b4d7e7ff8c6e8a",
+      "title": "Resolve-DnsName (DnsClient) | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/",
+      "contentType": "text/html",
+      "sampleBytes": 52335,
+      "sampleSha256": "e15299ff0e8cdbd4e77bfbc47b76d6885fa3678cfed327fb382ceabdc3a2e5e4",
+      "title": "Sysinternals Utilities - Sysinternals | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+      "contentType": "text/html",
+      "sampleBytes": 41544,
+      "sampleSha256": "89a12065d21b8a4cafa135c1b7139d4e07b1b19780555e8bcf94440d70ab668d",
+      "title": "Process Explorer - Sysinternals | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+      "contentType": "text/html",
+      "sampleBytes": 51239,
+      "sampleSha256": "316bf7eccc0545db4f45082d80a380ac15bcc6520d511956f40c1b34d832c56a",
+      "title": "Install WinDbg - Windows drivers | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference?view=windows-11",
+      "contentType": "text/html",
+      "sampleBytes": 64593,
+      "sampleSha256": "4ebdb6573f0451f597e4629f30856bf17c7e67a1806cc55ca48a9e50389e2b21",
+      "title": "Windows Recovery Environment (Windows RE) | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+      "contentType": "text/html",
+      "sampleBytes": 49866,
+      "sampleSha256": "ed4473572ec58be6a6327abf9a6b5f0c12c872ee77856de54a253f0585a3db4c",
+      "title": "sfc | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+      "contentType": "text/html",
+      "sampleBytes": 66029,
+      "sampleSha256": "1fcf6e0414681fcf3bb50b9c41949e13ca58c32d37aa6ad97ce830f7b54f085e",
+      "title": "Quick machine recovery | Microsoft Learn"
+    },
+    {
+      "url": "https://npcap.com/guide/index.html",
+      "status": 200,
+      "finalUrl": "https://npcap.com/guide/index.html",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 31878,
+      "sampleSha256": "1a30fd7a78b0f0f9c9f8b48fab93a715300582ea01ac8c24db9f19a41ab7d9de",
+      "title": "Npcap Reference Guide"
+    },
+    {
+      "url": "https://remmina.org/",
+      "status": 200,
+      "finalUrl": "https://remmina.org/",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 14648,
+      "sampleSha256": "b6f343d5f3809d922f772d3a33e95352dfbc68223c517e9db96a38108085025e",
+      "title": "Remmina remote desktop client"
+    },
+    {
+      "url": "https://rescuezilla.com/help",
+      "status": 200,
+      "finalUrl": "https://rescuezilla.com/help",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 11153,
+      "sampleSha256": "ceceaeedad52ee1659f50ad2940c3aa02be740be8aa233f5605964f705552f70",
+      "title": "Help | Rescuezilla (Clonezilla GUI)"
+    },
+    {
+      "url": "https://rustdesk.com/docs/en/",
+      "status": 200,
+      "finalUrl": "https://rustdesk.com/docs/en/",
+      "contentType": "text/html",
+      "sampleBytes": 162150,
+      "sampleSha256": "8917b260898b2b8f76c3df3611ce200521c574287c8b5fed6ecc304aa6a1a54f",
+      "title": "RustDesk Documentation"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 89157,
+      "sampleSha256": "96f21ed058f7d7782e044dd6ebbced74128ce4fe8f3cb04a336d7f3863019edf",
+      "title": "Classic Outlook troubleshooters | Microsoft Support"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 92734,
+      "sampleSha256": "2e8da7254d8ced06f98ebac050d05db5952ac4e04cf387e3607be3f9952d90ae",
+      "title": "Fix issues by reinstalling the current version of Windows | Microsoft Support"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 88735,
+      "sampleSha256": "b2c7d3799df81d8f33f43715fcf2c15dfce08b03f2503660f6dac6dc156f082c",
+      "title": "Windows Update Troubleshooter | Microsoft Support"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 93441,
+      "sampleSha256": "d64183a959583abf7c3b8e2b8fb0b387f68e42ec2b7ad3c193d60ca1380b60fa",
+      "title": "Update drivers through Device Manager in Windows | Microsoft Support"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 110391,
+      "sampleSha256": "3bc277154185c81958a301a13c9a6a155e5f070dbfc083180ed5a2f0f3f824e7",
+      "title": "Download and install the latest printer drivers | Microsoft Support"
+    },
+    {
+      "url": "https://www.advanced-ip-scanner.com/",
+      "status": 200,
+      "finalUrl": "https://www.advanced-ip-scanner.com/",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 12397,
+      "sampleSha256": "7b4648de39303a1ddd17c8cd9f71f91c0b1fda0646bcab4714e2903d99ec4bb4",
+      "title": "Advanced IP Scanner - Download Free Network Scanner"
+    },
+    {
+      "url": "https://www.advanced-ip-scanner.com/help/",
+      "status": 200,
+      "finalUrl": "https://www.advanced-ip-scanner.com/help/",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 33992,
+      "sampleSha256": "0c009ee30c4aa9f6d96996f5b83446d885ad2b140f3b2be2d63c0e75cc3feabc",
+      "title": "Help"
+    },
+    {
+      "url": "https://www.cgsecurity.org/wiki/TestDisk",
+      "status": 200,
+      "finalUrl": "https://www.cgsecurity.org/wiki/TestDisk",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 30670,
+      "sampleSha256": "719daf0326d79e60e94ce2f581438fdb16e667acd42a1a10d9a2e72641516a02",
+      "title": "Partition Recovery and File Undelete"
+    },
+    {
+      "url": "https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step",
+      "status": 200,
+      "finalUrl": "https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 45756,
+      "sampleSha256": "59d31f4d5fefdc5b4c05a3da89e7481b7f6997ab49b074f76c2eec0e80a19849",
+      "title": "TestDisk Step By Step - CGSecurity"
+    },
+    {
+      "url": "https://www.memtest.org/",
+      "status": 200,
+      "finalUrl": "https://www.memtest.org/",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 108953,
+      "sampleSha256": "aa7b0e0964580a9ecfa12e94ac5aa1ec69ca377a06612bdad29c630e45536847",
+      "title": "Memtest86+ | The Open-Source Memory Testing Tool"
+    },
+    {
+      "url": "https://www.microsoft.com/software-download/windows11",
+      "status": 200,
+      "finalUrl": "https://www.microsoft.com/en-us/software-download/windows11",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 162533,
+      "sampleSha256": "efce12cdd65b9f745fa416f23050041d8035059b3309568ebe14f23c47c55989",
+      "title": "Download Windows 11"
+    },
+    {
+      "url": "https://www.naps2.com/",
+      "status": 200,
+      "finalUrl": "https://www.naps2.com/",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 15314,
+      "sampleSha256": "418a57b144bd5d05dce6f67cd7034932dd546c355b6c423576d05df9207ab463",
+      "title": "NAPS2 - Scan documents to PDF and more"
+    },
+    {
+      "url": "https://www.remmina.org/how-to-install-remmina/",
+      "status": 200,
+      "finalUrl": "https://www.remmina.org/how-to-install-remmina/",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 27197,
+      "sampleSha256": "df2d4181c5f73a3d933ea50f321f3e1ffcace90e09ce86edcf8f4edcebf935ea",
+      "title": "How to install Remmina"
+    },
+    {
+      "url": "https://www.system-rescue.org/",
+      "status": 200,
+      "finalUrl": "https://www.system-rescue.org/",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 11198,
+      "sampleSha256": "493ea4b1049d42d85f91125e21a7761423b04dbba984d316f3ef973f7ae34c2e",
+      "title": "SystemRescue - System Rescue Homepage"
+    },
+    {
+      "url": "https://www.system-rescue.org/System-tools/",
+      "status": 200,
+      "finalUrl": "https://www.system-rescue.org/System-tools/",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 14125,
+      "sampleSha256": "1cf25de0d49dd532653d174665afb45b8373c7f1c7aa0fef50bbfc8921227fc7",
+      "title": "SystemRescue - System tools"
+    },
+    {
+      "url": "https://www.system-rescue.org/manual/",
+      "status": 200,
+      "finalUrl": "https://www.system-rescue.org/manual/",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 8591,
+      "sampleSha256": "fb91a640af2744d34e3776faef94306fe319145b813dedac1aa88c43f103e7b4",
+      "title": "SystemRescue - Manual"
+    },
+    {
+      "url": "https://www.veeam.com/legal/licensing-policy.html",
+      "status": 200,
+      "finalUrl": "https://www.veeam.com/legal/licensing-policy.html",
+      "contentType": "text/html; charset=UTF-8",
+      "sampleBytes": 401952,
+      "sampleSha256": "e9d4bf38a395846e7ae7fcda39fa3d5bc36adeb37da6df329566e6bbdc25e875",
+      "title": "Veeam Licensing Policy"
+    },
+    {
+      "url": "https://www.ventoy.net/en/doc_start.html",
+      "status": 200,
+      "finalUrl": "https://www.ventoy.net/en/doc_start.html",
+      "contentType": "text/html",
+      "sampleBytes": 18331,
+      "sampleSha256": "ae9dff9b53e603503ec16a1320b30ae769bca7e3ca9fbc0677678b18800d394c",
+      "title": "Get start . Ventoy"
+    },
+    {
+      "url": "https://www.voidtools.com/License.txt",
+      "status": 200,
+      "finalUrl": "https://www.voidtools.com/License.txt",
+      "contentType": "text/plain",
+      "sampleBytes": 2699,
+      "sampleSha256": "c13d19adcbfd5d07e9512de9df99956a3423399ed1fadc5fd33186697ad8df2f",
+      "title": null
+    },
+    {
+      "url": "https://www.voidtools.com/faq/",
+      "status": 200,
+      "finalUrl": "https://www.voidtools.com/faq/",
+      "contentType": "text/html",
+      "sampleBytes": 43669,
+      "sampleSha256": "c0e197afadb7ab7038ac1c88430f7908d692f5f117dcb259d1022c80084f182c",
+      "title": "FAQ - voidtools"
+    },
+    {
+      "url": "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIntroduction.html",
+      "status": 200,
+      "finalUrl": "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIntroduction.html",
+      "contentType": "text/html; charset=utf-8",
+      "sampleBytes": 13864,
+      "sampleSha256": "985cbff3f59a04788303593ae58b36ae946d2fb5f9191304934bd5d898006716",
+      "title": "Chapter 1. Introduction"
+    }
+  ]
+}

@@ -1876,9 +1876,19 @@
           "url": "https://www.malwarebytes.com/mwb-download",
           "evidenceUrl": "https://www.malwarebytes.com/mwb-download",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "macos-installer",
+          "kind": "file",
+          "label": "Download macOS installer · PKG",
+          "url": "https://downloads.malwarebytes.com/file/mb-mac",
+          "evidenceUrl": "https://help.malwarebytes.com/hc/en-us/articles/31589208690715-Install-Malwarebytes-for-Mac",
+          "checkedAt": "2026-11-26",
+          "platform": "macOS",
+          "format": "PKG"
         }
       ],
-      "note": "The Windows installer supports free scans and offers paid protection. Free/paid scan features and business servicing rights differ."
+      "note": "The Windows bootstrapper downloads setup components; a separate macOS package is available. Free scans, paid protection and commercial servicing rights differ."
     },
     "hitmanpro": {
       "officialUrl": "https://www.sophos.com/en-us/products/hitmanpro",
@@ -1943,7 +1953,7 @@
       "officialUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
       "primary": {
         "kind": "file",
-        "label": "Download Windows antivirus · EXE",
+        "label": "Download Windows setup · EXE",
         "url": "https://download.bitdefender.com/windows/installer/en-us/bitdefender_avfree.exe",
         "evidenceUrl": "https://www.bitdefender.com/en-us/consumer/thank-you",
         "checkedAt": "2026-11-26",
@@ -1960,7 +1970,7 @@
           "checkedAt": "2026-11-26"
         }
       ],
-      "note": "Installed ongoing protection for personal/non-commercial use; a Bitdefender account is required."
+      "note": "Online setup for personal/non-commercial ongoing protection; a Bitdefender account is required."
     },
     "freefilesync": {
       "officialUrl": "https://freefilesync.org/",

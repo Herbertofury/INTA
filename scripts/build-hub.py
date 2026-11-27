@@ -851,13 +851,17 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
     lines += ["| Checkpoint | What to carry forward |", "| --- | --- |"]
     lines += [f"| **{cell(label)}** | {cell(detail)} |" for label, detail in config["checkpoints"].items()]
     lines += ["", anchor("toolkit"), "", *heading(2, "Recommended tools", "🧰 Build the right toolkit")]
-    recommended_ids = list(dict.fromkeys([*job["tools"], *[item["toolId"] for item in (workspace or {}).get("tools", [])]]))
-    if recommended_ids:
+    selections = []
+    for tool_id in job["tools"]:
+        selections.extend([item for item in (workspace or {}).get("tools", []) if item["toolId"] == tool_id]
+                          or [{"toolId": tool_id}])
+    selections.extend(item for item in (workspace or {}).get("tools", []) if item["toolId"] not in job["tools"])
+    if selections:
         lines += ["Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.", "",
                   "| Tool / official page + download | Use it for | Platform & access | Documentation |", "| --- | --- | --- | --- |"]
-        for tool_id in recommended_ids:
+        for selection in selections:
+            tool_id = selection["toolId"]
             tool = by_id[tool_id]
-            selection = next((item for item in (workspace or {}).get("tools", []) if item["toolId"] == tool_id), {})
             lines += [f"| **[{tool['name']}]({access[tool_id]['officialUrl']})** · {tool_access_links(tool, access, action_id=selection.get('actionId'))} | {cell(selection.get('why', tool['bestFor']))} | "
                       f"{cell(tool['platforms'])}; {cell(tool['pricing'])} | [Open guide]({tool['docsUrl']}) |"]
     else:

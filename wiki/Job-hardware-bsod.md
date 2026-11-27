@@ -260,6 +260,22 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Confirm that the page file or dedicated dump file meets the selected dump’s requirements; a disabled or undersized page file can prevent capture.
 3. After the next naturally occurring crash, preserve the resulting dump privately and analyze it with the crash time and recent changes.
 
+#### ⚡ Quick commands
+
+**Inspect crash dump configuration and free space** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Check whether <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) is configured to write a crash dump and whether the system volume has free space.
+
+```powershell
+Get-CimInstance Win32_OSRecoveryConfiguration | Select-Object DebugInfoType,DebugFilePath,AutoReboot,OverwriteExistingDebugFile
+Get-Volume -DriveLetter C | Select-Object DriveLetter,HealthStatus,SizeRemaining,Size
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft kernel-mode dump files](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/varieties-of-kernel-mode-dump-files)
+
+
 **Prove it worked:** A usable dump and matching event evidence are available for the specific crash.
 
 **If this does not resolve it:** Do not force a production crash just to test logging without a separate authorized plan; dumps can contain customer data.

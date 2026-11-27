@@ -1,0 +1,144 @@
+{
+  "passed": true,
+  "verifiedAt": "2026-11-27T04:37:55.744Z",
+  "html": {
+    "path": "site/index.html",
+    "bytes": 2552839,
+    "sha256": "bc57fc7c1c2e982ec1c9fcf63bc00da08ed2d77eacebc2be188feff4ccd8fc63"
+  },
+  "source": {
+    "app": "6d213725698e1eb0f1feb8a721dfd2d5b40468b6e6972a6fb14ff1df62302039",
+    "styles": "0933fdc713bf7bce38dc0357ead7841751f0a94585a00a9488fe149c9cf4829b",
+    "template": "4808042851d69d3339de7d16c6de3c48865aa049651f8d73c5bcb5cb4a586f67"
+  },
+  "changes": [
+    {
+      "before": "$('.command-category-tabs [data-command-category]').forEach",
+      "after": "$$('.command-category-tabs [data-command-category]').forEach"
+    },
+    {
+      "before": "foundCommands.slice(0,8).map(item =>",
+      "after": "foundCommands.map(item =>"
+    },
+    {
+      "before": "matches([item.title,item.summary,item.code,item.safety,item.shell,item.sourceTitle,item.category].join(' '), query)",
+      "after": "matches([item.title,item.summary,item.code,item.safety,item.shell,item.sourceTitle,item.category].join(' ').toLowerCase(), query)"
+    }
+  ],
+  "unchangedSourceHashes": {
+    "portal/styles.css": "0933fdc713bf7bce38dc0357ead7841751f0a94585a00a9488fe149c9cf4829b",
+    "portal/index.template.html": "4808042851d69d3339de7d16c6de3c48865aa049651f8d73c5bcb5cb4a586f67",
+    "data/quick-start.json": "12979675a7ed2c59d49e8b41bd87742b2926d3e5ebd757299bae8744ec690617",
+    "data/job-workspaces.json": "ed1513c6aa742577d1d47bf9f91ae2366481c19d78994e323ee6269d79b53c2b",
+    "data/tools.json": "1e5172557f0e4d7aa2294b5103d0275991fb336fcee92af960dd2e2becdcc464",
+    "data/tool-access.json": "460c45474b84df23a6e9fcc510442bd93ebeb785bf70ec4033ff6f92b73a1f97",
+    "data/online-tools.json": "de8363b9f00e50a18b7b4d22fa3f0ba7ec25b923bdd6832639f2691b6b9464cf",
+    "data/news-sources.json": "1ea7086af4cb3f14dd08244b8c96915456c70aa7f7a19ed21036214f4525c971",
+    "data/command-center.json": "c01556d5beca0b40cdc8e2123b9dc86dec1a80ff1cfc1cbe4df93d5fa389bca0",
+    "data/brand-icons.json": "0057c6d6d5ac685151cf97bb60dd3b4cbf281b43a380dbe9a2a53c059f3e84ef"
+  },
+  "fullChoiceProof": {
+    "path": "portal-choices-results.json",
+    "sha256": "9a581d5d52b9a8184656c393a1b895e68e51aebc94684b2cc62070814599d163",
+    "reviewedHtmlSha256": "50fcae163d3aba7d7307c6c38217c5192ad117acf0c94c074e9938fbde18acf7",
+    "counts": {
+      "tools": 218,
+      "jobs": 22,
+      "cases": 29,
+      "authoredChoices": 72,
+      "visibleChoices": 72,
+      "fieldNotes": 95,
+      "actions": 382
+    },
+    "incomingPreservation": {
+      "sourceCommit": "4a64052ed0c93406f290eb5ede9b8e569ae8ee5d",
+      "originalChoices": 67,
+      "originalToolIds": 133,
+      "incomingTools": 218,
+      "incomingCases": 29,
+      "incomingNotes": 95,
+      "onlineTools": 85,
+      "onlineWorkflows": 9,
+      "newsSources": 58,
+      "commands": 37,
+      "commandWorkflows": 6,
+      "commandToolkits": 9,
+      "brands": 684
+    },
+    "exportedGuides": 22
+  },
+  "currentIncomingFeatureProof": {
+    "path": "portal-incoming-results.json",
+    "sha256": "c58ea62761f6e89a5960ce44fb103f1612c35ee8ddf9155acfce645eebc8da4a",
+    "checks": [
+      "Home preserves the Command Center CTA, complete online shortcuts and all four primary routes",
+      "Global command search is case-insensitive and uncapped; counts match every result and every exact command title resolves",
+      "Every Command Center command, workflow and toolkit survives; shell/impact/category/search/direct routes and actual copy readback work",
+      "Job and specific-fix command controls copy exact data without executing it",
+      "All online service actions and sources, every task workflow, category filtering and search reload remain accessible",
+      "All dated News sources/briefings render; source save, reload, search and category controls work",
+      "Dedicated technician checklist and full handoff guide share persistent completion state",
+      "Every library sort retains all tools, ranks known values before unknowns, persists its URL and exposes dated source evidence",
+      "Incoming routes fit 390/320px, preserve inline icons and work in light/dark themes",
+      "Brand assets render locally with no nested destinations",
+      "Fresh offline export includes the corrected Command Center and all incoming directories"
+    ],
+    "clipboard": [
+      {
+        "label": "Command Center single command",
+        "characters": 442,
+        "sha256": "1222b3b899c6ed3480c3a865e0765eb4cc974eddab5810825f6497d686b50f8a",
+        "method": "Native Clipboard API write and read back; command was not executed"
+      },
+      {
+        "label": "Command Center ordered workflow",
+        "characters": 2197,
+        "sha256": "33f0bc572f0492ea7c77eaf9589c1ceae0ab01b3e31af4b41c27e973484ad0b6",
+        "method": "Native Clipboard API write and read back; command was not executed"
+      },
+      {
+        "label": "Job quick command",
+        "characters": 12,
+        "sha256": "4c363f608799041bf1ca2657463ee090efb168135521c0e5c003478dc1fcd337",
+        "method": "Native Clipboard API write and read back; command was not executed"
+      },
+      {
+        "label": "Specific-fix command",
+        "characters": 442,
+        "sha256": "1222b3b899c6ed3480c3a865e0765eb4cc974eddab5810825f6497d686b50f8a",
+        "method": "Native Clipboard API write and read back; command was not executed"
+      }
+    ],
+    "offline": {
+      "path": "portal-incoming-offline.html",
+      "bytes": 2567309,
+      "sha256": "473b5b699a73feb9ab3c95b07a60b06abae5c57815e67be64efe573bf243f362"
+    }
+  },
+  "markdownProof": {
+    "path": "markdown-choices-results.json",
+    "sha256": "cc6c952024c43ced86f213eb30203c1f31f7228a33356ea56fc8ed41889cc0d2",
+    "pages": [
+      "README",
+      "Home",
+      "Start-Here",
+      "Job-malware-removal"
+    ],
+    "views": 8,
+    "counts": {
+      "cases": 29,
+      "choices": 72
+    },
+    "sourceHashes": {
+      "README.md": "65cb1cd4fd54b560b627faeb47e5f8fa09427d04d5fe147a2fc40527c1340eab",
+      "wiki/Home.md": "f5f5b525236062babef11d8e9c0e212ec2a42f9558b7f94ec0951db8588798e7",
+      "wiki/Start-Here.md": "30e3e66db277e6a84f035184cd4de974e07b3a4a49e94aefd868af8747f491e0",
+      "wiki/Job-malware-removal.md": "37e7fb53224786899824fbf7a8730dfc36bc2566cf0a2a53e411f1a1cefa2fe2"
+    }
+  },
+  "limits": [
+    "Local Markdown preview approximates host styling; live GitHub Wiki publication and clicks belong to the root review.",
+    "External publisher content and executable downloads were not fetched or run by these UI tests.",
+    "Unchanged full choice/export/layout checks are preserved from the reviewed pre-fix artifact and bound by an exact whole-file diff; the corrected controls and fresh offline export were tested on this final artifact."
+  ]
+}

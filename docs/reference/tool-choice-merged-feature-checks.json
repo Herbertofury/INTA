@@ -1,0 +1,211 @@
+{
+  "startedAt": "2026-11-27T04:36:53.727Z",
+  "htmlSha256": "bc57fc7c1c2e982ec1c9fcf63bc00da08ed2d77eacebc2be188feff4ccd8fc63",
+  "bytes": 2552839,
+  "checks": [
+    {
+      "name": "Home preserves the Command Center CTA, complete online shortcuts and all four primary routes"
+    },
+    {
+      "name": "Global command search is case-insensitive and uncapped; counts match every result and every exact command title resolves",
+      "exactTitles": 37
+    },
+    {
+      "name": "Every Command Center command, workflow and toolkit survives; shell/impact/category/search/direct routes and actual copy readback work",
+      "commands": 37,
+      "workflows": 6,
+      "toolkits": 9
+    },
+    {
+      "name": "Job and specific-fix command controls copy exact data without executing it"
+    },
+    {
+      "name": "All online service actions and sources, every task workflow, category filtering and search reload remain accessible",
+      "tools": 85,
+      "workflows": 9
+    },
+    {
+      "name": "All dated News sources/briefings render; source save, reload, search and category controls work",
+      "sources": 58,
+      "briefings": 2
+    },
+    {
+      "name": "Dedicated technician checklist and full handoff guide share persistent completion state",
+      "closeoutSteps": 9
+    },
+    {
+      "name": "Every library sort retains all tools, ranks known values before unknowns, persists its URL and exposes dated source evidence",
+      "sorts": [
+        "catalog",
+        "name",
+        "name-desc",
+        "recommendation",
+        "reviewed",
+        "stars",
+        "rating",
+        "reviews",
+        "popularity",
+        "users",
+        "forks"
+      ],
+      "tools": 218
+    },
+    {
+      "name": "Incoming routes fit 390/320px, preserve inline icons and work in light/dark themes"
+    },
+    {
+      "name": "Brand assets render locally with no nested destinations",
+      "count": 814,
+      "inline": true,
+      "loaded": true
+    },
+    {
+      "name": "Fresh offline export includes the corrected Command Center and all incoming directories"
+    }
+  ],
+  "screenshots": [
+    "incoming-command-center-desktop.png",
+    "incoming-online-desktop.png",
+    "incoming-news-desktop.png",
+    "incoming-checklist-desktop.png",
+    "incoming-library-stars-desktop.png",
+    "incoming-command-center-390.png",
+    "incoming-online-390.png",
+    "incoming-news-390.png",
+    "incoming-checklist-390.png",
+    "incoming-online-light.png"
+  ],
+  "layouts": [
+    {
+      "route": "command-center",
+      "viewport": 390,
+      "documentWidth": 390,
+      "nestedAnchors": 0,
+      "brokenIcons": 0
+    },
+    {
+      "route": "online",
+      "viewport": 390,
+      "documentWidth": 390,
+      "nestedAnchors": 0,
+      "brokenIcons": 0
+    },
+    {
+      "route": "news",
+      "viewport": 390,
+      "documentWidth": 390,
+      "nestedAnchors": 0,
+      "brokenIcons": 0
+    },
+    {
+      "route": "checklist",
+      "viewport": 390,
+      "documentWidth": 390,
+      "nestedAnchors": 0,
+      "brokenIcons": 0
+    },
+    {
+      "route": "command-center",
+      "viewport": 320,
+      "documentWidth": 320,
+      "nestedAnchors": 0,
+      "brokenIcons": 0
+    },
+    {
+      "route": "online",
+      "viewport": 320,
+      "documentWidth": 320,
+      "nestedAnchors": 0,
+      "brokenIcons": 0
+    },
+    {
+      "route": "news",
+      "viewport": 320,
+      "documentWidth": 320,
+      "nestedAnchors": 0,
+      "brokenIcons": 0
+    },
+    {
+      "route": "checklist",
+      "viewport": 320,
+      "documentWidth": 320,
+      "nestedAnchors": 0,
+      "brokenIcons": 0
+    }
+  ],
+  "clipboard": [
+    {
+      "label": "Command Center single command",
+      "characters": 442,
+      "sha256": "1222b3b899c6ed3480c3a865e0765eb4cc974eddab5810825f6497d686b50f8a",
+      "method": "Native Clipboard API write and read back; command was not executed"
+    },
+    {
+      "label": "Command Center ordered workflow",
+      "characters": 2197,
+      "sha256": "33f0bc572f0492ea7c77eaf9589c1ceae0ab01b3e31af4b41c27e973484ad0b6",
+      "method": "Native Clipboard API write and read back; command was not executed"
+    },
+    {
+      "label": "Job quick command",
+      "characters": 12,
+      "sha256": "4c363f608799041bf1ca2657463ee090efb168135521c0e5c003478dc1fcd337",
+      "method": "Native Clipboard API write and read back; command was not executed"
+    },
+    {
+      "label": "Specific-fix command",
+      "characters": 442,
+      "sha256": "1222b3b899c6ed3480c3a865e0765eb4cc974eddab5810825f6497d686b50f8a",
+      "method": "Native Clipboard API write and read back; command was not executed"
+    }
+  ],
+  "offline": {
+    "path": "portal-incoming-offline.html",
+    "bytes": 2567309,
+    "sha256": "473b5b699a73feb9ab3c95b07a60b06abae5c57815e67be64efe573bf243f362"
+  },
+  "errors": [],
+  "externalRuntimeRequests": [],
+  "passed": true,
+  "finishedAt": "2026-11-27T04:37:11.615Z",
+  "sourceHashes": {
+    "portal/app.js": "6d213725698e1eb0f1feb8a721dfd2d5b40468b6e6972a6fb14ff1df62302039",
+    "portal/styles.css": "0933fdc713bf7bce38dc0357ead7841751f0a94585a00a9488fe149c9cf4829b",
+    "portal/index.template.html": "4808042851d69d3339de7d16c6de3c48865aa049651f8d73c5bcb5cb4a586f67",
+    "data/online-tools.json": "de8363b9f00e50a18b7b4d22fa3f0ba7ec25b923bdd6832639f2691b6b9464cf",
+    "data/news-sources.json": "1ea7086af4cb3f14dd08244b8c96915456c70aa7f7a19ed21036214f4525c971",
+    "data/command-center.json": "c01556d5beca0b40cdc8e2123b9dc86dec1a80ff1cfc1cbe4df93d5fa389bca0",
+    "data/brand-icons.json": "0057c6d6d5ac685151cf97bb60dd3b4cbf281b43a380dbe9a2a53c059f3e84ef"
+  },
+  "artifactHashes": {
+    "incoming-command-center-desktop.png": "8c65c7689156551a7a5220d2c9fce8ac9148a02cfd080e26763660b71629d2dd",
+    "incoming-online-desktop.png": "e53825bd5030e4cbf0567349f7f80b2b96c82162fbf3200d39c710064ca40364",
+    "incoming-news-desktop.png": "dfb440ebe387f5b1a32cfb523ba2699ac00f83c8680daddb250cd88ae2803bcc",
+    "incoming-checklist-desktop.png": "ee5ee62e686a9e5552c5193c2c746f2d41789b04348e20a027f7adabc321f624",
+    "incoming-library-stars-desktop.png": "e8a4a1e211a34a1ee31943e58ca11b7da5a2e18c521ab5fe83c0843d31d9b4c1",
+    "incoming-command-center-390.png": "f61810a780b9a2601a2f23038bd01a0fcb97a6b837fad2bc4a124f604fc56a51",
+    "incoming-online-390.png": "a323b09d91234d8b021ccf0fc9c1376fefe6017baa8903cf786de31b8d3c840e",
+    "incoming-news-390.png": "8a0ea512270791295cf0e2d602e7955f26361ab907bded6c94008bc04f5ec5a9",
+    "incoming-checklist-390.png": "6f880abd359bda5a6cfe1225ae5ad6458d3300ec19d092785f5d7a6517a821fe",
+    "incoming-online-light.png": "213397d15c3388d45181da7806c49cd234edb4fa0e833c25cadd87541e365231"
+  },
+  "visualReview": {
+    "reviewed": true,
+    "files": [
+      "incoming-command-center-desktop.png",
+      "incoming-command-center-390.png",
+      "incoming-online-light.png",
+      "incoming-online-390.png",
+      "incoming-library-stars-desktop.png",
+      "incoming-checklist-390.png",
+      "incoming-news-desktop.png",
+      "incoming-news-390.png"
+    ],
+    "findings": [
+      "Incoming routes retain their existing visual structure and all controls fit 390/320 widths without document overflow.",
+      "Command Center commands are never executed by the app; four real clipboard writes were read back exactly.",
+      "News states that its briefing is a dated snapshot and keeps source follow state local.",
+      "Library sort results retain all 218 tools and show dated evidence or explicit unknown states."
+    ]
+  }
+}

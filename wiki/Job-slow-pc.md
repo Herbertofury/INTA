@@ -277,7 +277,7 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 
 #### ⚡ Quick commands
 
-**Capture memory pressure and top working sets** · PowerShell
+**Capture memory pressure and top working sets** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
 
 Compare available memory and top processes while the slowdown is occurring.
 
@@ -289,7 +289,8 @@ resmon
 
 > **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
 
-**Official reference:** [Microsoft Get-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-process)
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Get-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-process)
+
 
 **Prove it worked:** The evidence identifies actual workload pressure or a growing process, rather than treating every cached page as lost RAM.
 
@@ -315,18 +316,19 @@ resmon
 
 #### ⚡ Quick commands
 
-**Open startup impact and capture boot timing** · PowerShell
+**Open startup impact and capture boot timing** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
 
-Open Task Manager's Startup Apps page and Reliability Monitor to correlate slow sign-in with startup changes.
+Open <a href="https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows" title="Open Task Manager official download or service page" aria-label="Open Task Manager official download or service page" data-inta-brand="app-task-manager"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Task Manager official page" width="18" height="18" valign="middle" /></a> [Task Manager](https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows)'s Startup Apps page and <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon" title="Open Reliability Monitor official download or service page" aria-label="Open Reliability Monitor official download or service page" data-inta-brand="app-reliability-monitor"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Reliability Monitor official page" width="18" height="18" valign="middle" /></a> [Reliability Monitor](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon) to correlate slow sign-in with startup changes.
 
 ```powershell
 Start-Process 'ms-settings:startupapps'
 perfmon /rel
 ```
 
-> **Before running:** Opens Windows utilities and reads diagnostic history. Do not disable security, backup, management or accessibility services as a performance shortcut.
+> **Before running:** Opens <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) utilities and reads diagnostic history. Do not disable security, backup, management or accessibility services as a performance shortcut.
 
-**Official reference:** [Microsoft Performance Monitor](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon)
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor" title="Open Performance Monitor official download or service page" aria-label="Open Performance Monitor official download or service page" data-inta-brand="app-performance-monitor"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Performance Monitor official page" width="18" height="18" valign="middle" /></a> [Microsoft Performance Monitor](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon)
+
 
 **Prove it worked:** The user’s real ready-to-work time improves and required background functions still run.
 
@@ -354,9 +356,9 @@ perfmon /rel
 
 #### ⚡ Quick commands
 
-**Find and launch Process Monitor from the Sysinternals Suite** · PowerShell
+**Find and launch <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/procmon" title="Open Process Monitor official download or service page" aria-label="Open Process Monitor official download or service page" data-inta-brand="procmon"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Process Monitor official page" width="18" height="18" valign="middle" /></a> [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) from the <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite" title="Open Microsoft Sysinternals Suite official download or service page" aria-label="Open Microsoft Sysinternals Suite official download or service page" data-inta-brand="sysinternals"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Microsoft Sysinternals Suite official page" width="18" height="18" valign="middle" /></a> [Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
 
-Check for the portable Procmon executable in the technician toolbox and open the official download page if it is not present.
+Check for the portable <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/procmon" title="Open Process Monitor official download or service page" aria-label="Open Process Monitor official download or service page" data-inta-brand="procmon"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Process Monitor official page" width="18" height="18" valign="middle" /></a> [Procmon](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) executable in the technician toolbox and open the official download page if it is not present.
 
 ```powershell
 $candidates = @('$env:ProgramFiles\SysinternalsSuite\Procmon64.exe', '$env:LOCALAPPDATA\INTA Toolbox\SysinternalsSuite\Procmon64.exe', '$env:USERPROFILE\Downloads\SysinternalsSuite\Procmon64.exe') | ForEach-Object { [Environment]::ExpandEnvironmentVariables($_) }
@@ -364,9 +366,10 @@ $procmon = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
 if ($procmon) { Start-Process $procmon } else { Start-Process 'https://learn.microsoft.com/en-us/sysinternals/downloads/procmon' }
 ```
 
-> **Before running:** Process Monitor can capture paths, process names and user activity. Use a short, narrowly filtered trace; store it privately and sanitize before sharing. The command does not download or execute an unverified binary.
+> **Before running:** <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/procmon" title="Open Process Monitor official download or service page" aria-label="Open Process Monitor official download or service page" data-inta-brand="procmon"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Process Monitor official page" width="18" height="18" valign="middle" /></a> [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) can capture paths, process names and user activity. Use a short, narrowly filtered trace; store it privately and sanitize before sharing. The command does not download or execute an unverified binary.
 
-**Official reference:** [Microsoft Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/procmon" title="Open Process Monitor official download or service page" aria-label="Open Process Monitor official download or service page" data-inta-brand="procmon"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Process Monitor official page" width="18" height="18" valign="middle" /></a> [Microsoft Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)
+
 
 **Prove it worked:** A particular wait or repeated failing operation correlates with the freeze and the corrected task is measurably better.
 
@@ -394,9 +397,9 @@ if ($procmon) { Start-Process $procmon } else { Start-Process 'https://learn.mic
 
 #### ⚡ Quick commands
 
-**Generate a battery health report** · PowerShell (Run as Administrator)
+**Generate a battery health report** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/) (Run as Administrator)
 
-Create a Windows battery report to compare design capacity, full-charge capacity and recent usage.
+Create a <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) battery report to compare design capacity, full-charge capacity and recent usage.
 
 ```powershell
 powercfg /batteryreport /output "$env:USERPROFILE\Desktop\battery-report.html"
@@ -405,7 +408,8 @@ Start-Process "$env:USERPROFILE\Desktop\battery-report.html"
 
 > **Before running:** Writes an HTML report to the specified path. Review it locally; the report may include device and usage history. Do not infer battery failure from one metric alone.
 
-**Official reference:** [Microsoft powercfg command-line options](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options" title="Open powercfg official download or service page" aria-label="Open powercfg official download or service page" data-inta-brand="powercfg"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="powercfg official page" width="18" height="18" valign="middle" /></a> [Microsoft powercfg command-line options](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)
+
 
 **Prove it worked:** The performance difference is tied to an observed power state, charger issue or policy rather than an unexplained cleanup change.
 

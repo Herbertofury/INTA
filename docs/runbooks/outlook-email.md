@@ -271,6 +271,22 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Send/receive again and compare the account in webmail if the client still shows Disconnected.
 3. Verify one agreed test message is sent and received and that queued mail is reconciled.
 
+#### ⚡ Quick commands
+
+**Inspect <a href="https://support.microsoft.com/outlook" title="Open Outlook official download or service page" aria-label="Open Outlook official download or service page" data-inta-brand="app-outlook"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Outlook official page" width="18" height="18" valign="middle" /></a> [Outlook](https://support.microsoft.com/outlook) process and <a href="https://www.microsoft.com/microsoft-365" title="Open Microsoft 365 official download or service page" aria-label="Open Microsoft 365 official download or service page" data-inta-brand="app-microsoft365"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Microsoft 365 official page" width="18" height="18" valign="middle" /></a> [Microsoft 365](https://www.microsoft.com/microsoft-365) HTTPS reachability** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Separate a local <a href="https://support.microsoft.com/outlook" title="Open Outlook official download or service page" aria-label="Open Outlook official download or service page" data-inta-brand="app-outlook"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Outlook official page" width="18" height="18" valign="middle" /></a> [Outlook](https://support.microsoft.com/outlook) process issue from a basic outbound HTTPS connectivity issue.
+
+```powershell
+Get-Process OUTLOOK -ErrorAction SilentlyContinue | Select-Object ProcessName,Id,StartTime
+Test-NetConnection outlook.office365.com -Port 443
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Test-NetConnection](https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection)
+
+
 **Prove it worked:** The client shows a connected state and messages leave the Outbox normally.
 
 **If this does not resolve it:** If webmail also fails or the client is new <a href="https://support.microsoft.com/outlook" title="Open Outlook official download or service page" aria-label="Open Outlook official download or service page" data-inta-brand="app-outlook"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Outlook official page" width="18" height="18" valign="middle" /></a> [Outlook](https://support.microsoft.com/outlook), use the appropriate account/service or new-client route instead of classic-only controls.

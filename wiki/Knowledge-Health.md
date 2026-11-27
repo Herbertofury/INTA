@@ -4,7 +4,7 @@
 
 **Published coverage snapshot: 2026-11-26.** Structural checks passed for this build. This is an editorial-age report, not live vendor monitoring or proof that a repair worked on client hardware.
 
-**8 service areas · 22 complete guides · 94 specific fixes · 218 tools · 58 research tasks**
+**8 service areas · 22 complete guides · 95 specific fixes · 218 tools · 58 research tasks**
 
 **[Find your job](Service-Map)** · **[Next research](Research-Queue)** · **[Organization rules](Knowledge-Organization)**
 
@@ -12,7 +12,7 @@
 
 | Job | Specific fixes | Official resources | Diagnostic branches |
 | --- | --- | --- | --- |
-| [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) | 3 | 4 | 4 |
+| [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) | 4 | 4 | 4 |
 | [Remove malware and browser hijackers](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) | 6 | 8 | 4 |
 | [Contain ransomware or a wider compromise](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response) | 3 | 3 | 4 |
 | [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) | 4 | 3 | 5 |
@@ -52,7 +52,7 @@ Review intervals are editorial targets. Passing a link or build check never chan
 
 **72 scenario tool choices** are included in the review schedule. Their task fit, edition and access boundaries are reviewed alongside the tool itself.
 
-**Reviews due in this snapshot: 0 of 904 dated records.**
+**Reviews due in this snapshot: 0 of 906 dated records.**
 
 The [scheduled organization check](https://github.com/Herbertofury/INTA/actions/workflows/knowledge-health.yml) recalculates age using the run date and preserves the complete report as an artifact. The weekday contribution task uses that evidence to prioritize work.
 

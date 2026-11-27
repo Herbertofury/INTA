@@ -1,0 +1,125 @@
+{
+  "featureInputs": {
+    "base": "4a64052ed0c93406f290eb5ede9b8e569ae8ee5d",
+    "byteIdentical": {
+      "data/jobs.json": true,
+      "data/field-notes.json": true,
+      "data/methods.json": true,
+      "data/wiki-layout.json": true,
+      "data/command-center.json": true,
+      "portal/index.template.html": true,
+      ".github/workflows/hub.yml": true,
+      ".github/workflows/rescue.yml": true
+    }
+  },
+  "portal": {
+    "resolvedAt": "2026-11-27T04:27:04.864482+00:00",
+    "conflictBlocks": 5,
+    "choices": [
+      "Kept latest brand-aware choice title or reputation-aware search plus authored choice terms.",
+      "Kept latest brand-aware choice title or reputation-aware search plus authored choice terms.",
+      "Kept latest brand-aware choice title or reputation-aware search plus authored choice terms.",
+      "Preserved cached direct scenario label/alias ranking.",
+      "Preserved discovery/driver-first layout and all choice rows; integrated latest brand-aware toolName in discovery, priority and supporting tools."
+    ],
+    "appSha256": "54804c1106467c6f2da1a940653963e20be674e6438f8a5d09b95531763cde12",
+    "next": "Syntax and semantic preservation checks; stage only app.js/styles.css. Parent owns generated build and runtime gate.",
+    "checks": [
+      "node --check portal/app.js passed",
+      "git diff --check passed",
+      "Every named function from incoming main is retained",
+      "Incoming main differs only by direct-label ranking and preserved driver/discovery priority; all other merged app logic retained",
+      "Authored choice caches, normalization, rendering, search and exports present"
+    ],
+    "incomingFunctionCount": 136,
+    "mergedFunctionCount": 136,
+    "hashes": {
+      "portal/app.js": "54804c1106467c6f2da1a940653963e20be674e6438f8a5d09b95531763cde12",
+      "portal/styles.css": "0933fdc713bf7bce38dc0357ead7841751f0a94585a00a9488fe149c9cf4829b"
+    }
+  },
+  "scenario": {
+    "schemaVersion": 1,
+    "result": "passed",
+    "oursCommit": "c13c11e",
+    "latestMain": "4a64052ed0c93406f290eb5ede9b8e569ae8ee5d",
+    "ownedFiles": [
+      "data/quick-start.json",
+      "data/job-workspaces.json",
+      "docs/reference/scenario-tool-review-2026-11-26.md"
+    ],
+    "quickCases": 29,
+    "originalCasesPreservedExactly": 27,
+    "newCasesPreservedExactly": [
+      "check-file",
+      "check-link"
+    ],
+    "choices": 72,
+    "originalChoicesPreservedExactly": 67,
+    "explicitEmptyChoicesPreserved": [
+      "start-a-repair",
+      "contain-ransomware",
+      "recover-an-outage",
+      "complete-a-handoff"
+    ],
+    "workspaceJobs": 22,
+    "workspaceTools": 141,
+    "workspaceResources": 117,
+    "workspaceIsExactLatestMainObject": true,
+    "originalWorkspaceEntriesPreserved": true,
+    "reviewBrandIconsPreserved": 320,
+    "reviewCoverageUpdatedTo": 29,
+    "conflictResolution": "Retained latest-main additions and review markup; restored the current verified Bitdefender terms URL; did not duplicate shared choices.",
+    "files": [
+      {
+        "path": "data/quick-start.json",
+        "sha256": "12979675a7ed2c59d49e8b41bd87742b2926d3e5ebd757299bae8744ec690617"
+      },
+      {
+        "path": "data/job-workspaces.json",
+        "sha256": "ed1513c6aa742577d1d47bf9f91ae2366481c19d78994e323ee6269d79b53c2b"
+      },
+      {
+        "path": "docs/reference/scenario-tool-review-2026-11-26.md",
+        "sha256": "8911acef8782a5431b5da850e29c3eedfddafa9ddb4e1da6eeee162a22f8b33e"
+      }
+    ]
+  },
+  "catalog": {
+    "status": "pass",
+    "oursCommit": "c13c11e65229ace407611b2b410423bf85ed4c4e",
+    "remoteCommit": "4a64052ed0c93406f290eb5ede9b8e569ae8ee5d",
+    "scope": [
+      "data/tools.json",
+      "data/tool-access.json",
+      "docs/reference/malware-tool-review-2026-11-26.md"
+    ],
+    "tools": 218,
+    "actions": 382,
+    "actionKinds": {
+      "builtin": 25,
+      "file": 123,
+      "release-page": 121,
+      "account": 7,
+      "package": 4,
+      "store": 1,
+      "web": 92,
+      "source": 9
+    },
+    "remoteIdsAndOrderPreserved": true,
+    "remoteOnlyToolsAndAccessUnchanged": 85,
+    "auditedOriginalToolRecordsPreservedExactly": 133,
+    "auditedOriginalAccessRecordsPreservedExactly": 133,
+    "allRemoteActionIdentitiesPreserved": 381,
+    "remoteBrandAnchorsRetained": 61,
+    "semantics": "Remote catalog/online additions retained; precise audited Malwarebytes terms/provenance/macOS PKG and Bitdefender setup wording restored; all original IDs and remote route identities preserved.",
+    "hashes": {
+      "data/tools.json": "1e5172557f0e4d7aa2294b5103d0275991fb336fcee92af960dd2e2becdcc464",
+      "data/tool-access.json": "460c45474b84df23a6e9fcc510442bd93ebeb785bf70ec4033ff6f92b73a1f97",
+      "docs/reference/malware-tool-review-2026-11-26.md": "501b5bebbf51ac1d32a7e94a1653433706395136d78727c58d69f25138202722"
+    },
+    "limits": [
+      "Targeted owned-file merge validation only; no generator, app runtime, publication or release packaging performed."
+    ]
+  }
+}

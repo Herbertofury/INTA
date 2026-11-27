@@ -337,6 +337,23 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Compare the current device address with the configured TCP/IP port; use the supported queue/port settings to correct only the proven mismatch.
 3. Test the <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) page and original document, then coordinate any reservation or managed-address correction with the network owner.
 
+#### ⚡ Quick commands
+
+**Inspect printer port and current adapter address** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Compare the queue's configured port with the printer's current address after a router or DHCP change.
+
+```powershell
+Get-Printer | Format-Table Name,DriverName,PortName -AutoSize
+Get-PrinterPort | Format-List Name,PrinterHostAddress,PortNumber
+Get-NetIPConfiguration
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Get-PrinterPort](https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport)
+
+
 **Prove it worked:** The intended queue reaches the correct physical device and keeps its trays, duplex and other required options.
 
 **If this does not resolve it:** WSD, shared-server and USB queues use different bindings. Do not rewrite all ports or assign an arbitrary static address.

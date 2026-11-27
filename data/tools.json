@@ -114,10 +114,13 @@
     "provenance": [
       "Official project or vendor documentation",
       "2026-11-26 role and edition review: https://help.malwarebytes.com/hc/en-us/articles/49849786059035-Free-vs-Paid-Malwarebytes-Security-features",
-      "2026-11-26 role and edition review: https://www.malwarebytes.com/eula"
+      "2026-11-26 role and edition review: https://www.malwarebytes.com/eula",
+      "Previous official free-tool reference retained: https://www.malwarebytes.com/free-tools",
+      "2026-11-26 platform and installer review: https://help.malwarebytes.com/hc/en-us/articles/31589243089307-System-Requirements-for-Malwarebytes-on-Windows-and-Mac",
+      "2026-11-26 macOS acquisition review: https://help.malwarebytes.com/hc/en-us/articles/31589208690715-Install-Malwarebytes-for-Mac"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "The October 2026 feature matrix lists Quick Scan and Custom Scan as free, with Threat Scan and real-time protection paid. Home editions are personal/non-commercial; use appropriate servicing or business rights for client work. A clean scan does not establish complete incident containment."
+    "cautions": "The October 2026 feature matrix lists Quick Scan and Custom Scan as free, with Threat Scan and real-time protection paid. Free Home is personal/non-commercial and does not grant remote or commercial third-party servicing rights; use an agreement that covers that work. A clean scan does not establish complete incident containment."
   },
   {
     "id": "hitmanpro",

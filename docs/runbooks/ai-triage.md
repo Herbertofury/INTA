@@ -242,6 +242,23 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Review the excerpt for credentials, authorization headers, private paths and embedded file contents before sending it to an approved AI service.
 3. Check the applicable workspace data controls and retain a private mapping only when the case needs it.
 
+#### ⚡ Quick commands
+
+**Create a small system summary for a troubleshooting handoff** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Collect OS edition, build, architecture and uptime without exporting customer files, credentials or a full event log.
+
+```powershell
+Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture,CsSystemType
+(Get-Date).ToString('o')
+(Get-CimInstance Win32_OperatingSystem).LastBootUpTime
+```
+
+> **Before running:** Review and sanitize the output before sending it to any external AI service. Never include passwords, tokens, recovery keys, personal files, customer names or raw full logs.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Get-ComputerInfo](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo)
+
+
 **Prove it worked:** The shared excerpt still supports diagnosis without exposing the original customer identity or secrets.
 
 **If this does not resolve it:** If useful analysis requires restricted raw data, use an approved environment or specialist instead of assuming a privacy toggle makes disclosure acceptable.
