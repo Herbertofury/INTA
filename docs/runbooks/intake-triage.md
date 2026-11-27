@@ -92,6 +92,7 @@ Turn a vague symptom into a clear next action, a protected data set, and a usefu
 - **[Choose the correct model and architecture](#fix-triage-confirm-model-and-architecture)** — A driver or repair package says it is incompatible, or the device model is uncertain.
 - **[Find the background program blocking an app](#fix-triage-isolate-background-conflict)** — An application fails in normal startup but works when optional background software is absent.
 - **[Correct a bad clock before chasing sign-in errors](#fix-triage-clock-breaks-signin)** — Several secure sites or sign-ins fail and the displayed date or time is wrong.
+- **[Run a PowerShell first-response diagnostic and tool-launch kit](#fix-triage-powershell-first-response-toolkit)** — A technician needs a fast, repeatable Windows baseline, common diagnostic windows, and trusted utilities without hunting through menus or downloading unknown scripts.
 
 > [!NOTE]
 > **Start here.** Ask the user to show the exact failing task once. Record what they expected, what happened, and when it last worked.
