@@ -20,6 +20,7 @@ jobs:
       - name: Validate complete content and generated outputs
         run: |
           python3 -m unittest discover -s tests
+          node --check portal/app.js
           python3 scripts/build-hub.py
           python3 scripts/check-wiki.py
           python3 scripts/check-knowledge.py --output reports/knowledge-health.json
