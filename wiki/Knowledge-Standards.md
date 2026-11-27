@@ -124,6 +124,11 @@ Use [the contribution template](https://github.com/Herbertofury/INTA/wiki/Templa
 
 Every playbook must include at least one practical command in the step where it belongs. Identify the shell, privilege, purpose, safety boundary and official reference. Give technicians a copy action, never automatic execution. Prefer read-only discovery first; present a repair only when the evidence, prerequisites and rollback path support it. Pair state-changing commands with a verification step and explicit stop conditions. Follow the [Quick Command Standards](https://github.com/Herbertofury/INTA/blob/main/docs/quick-commands.md).
 
+
+## ⚡ Commands in specific-fix articles
+
+Specific fixes should carry a copy-ready shell block whenever a real command materially shortens diagnosis, repair or verification. Keep the command attached to the exact symptom, with shell, purpose, safety boundary and official source. The app and Wiki must expose an accessible copy button; copying never executes. Do not force a command into GUI-only, physical or non-<a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) cases where it adds no value. See [Quick Commands](https://github.com/Herbertofury/INTA/wiki/Quick-Commands).
+
 ---
 
 Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

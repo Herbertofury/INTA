@@ -242,6 +242,23 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Restore the managed DNS/VPN route before running a secure-channel diagnostic.
 3. Use <a href="https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell" title="Open Windows PowerShell 5.1 official download or service page" aria-label="Open Windows PowerShell 5.1 official download or service page" data-inta-brand="app-windows-powershell-51"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows PowerShell 5.1 official page" width="18" height="18" valign="middle" /></a> [Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell) to repeat the member-only Test-ComputerSecureChannel check and test a normal sign-in.
 
+#### ⚡ Quick commands
+
+**Test domain controller discovery** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Verify the workstation can locate a domain controller using the configured domain DNS before attempting trust repair.
+
+```powershell
+$env:USERDNSDOMAIN
+nltest /dsgetdc:$env:USERDNSDOMAIN /force
+w32tm /query /status
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft DC Locator](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/dc-locator)
+
+
 **Prove it worked:** Domain discovery works and the trust test now gives a meaningful result over a working network path.
 
 **If this does not resolve it:** Do not rejoin the domain or point the member at public DNS to work around missing domain connectivity.
@@ -263,6 +280,23 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 1. Check the reported time source and whether the member can reach the intended domain synchronization path.
 2. Have the domain owner correct the configuration or connectivity under the organization’s policy, preserving evidence of the old state.
 3. After synchronization, retry domain authentication and the required share/application.
+
+#### ⚡ Quick commands
+
+**Inspect domain time source and synchronization** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Read current time service state before restoring the organization's approved domain time hierarchy.
+
+```powershell
+w32tm /query /status
+w32tm /query /source
+w32tm /monitor
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Microsoft Windows Time service](https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings)
+
 
 **Prove it worked:** The member follows the approved time hierarchy and authentication succeeds without bypassing policy.
 

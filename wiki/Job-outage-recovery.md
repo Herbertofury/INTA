@@ -243,6 +243,21 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Check power/UPS and hardware evidence when there is no useful bug check; follow the crash-dump route when a stop code and dump exist.
 3. After the scoped correction, observe a normal shutdown/startup and the affected business service.
 
+#### ⚡ Quick commands
+
+**Inspect shutdown and bugcheck events** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Correlate unexpected shutdown events with the outage timeline; event 41 reports an unclean shutdown, not its root cause.
+
+```powershell
+Get-WinEvent -FilterHashtable @{LogName='System'; Id=41,6008,1001} -MaxEvents 40 | Select-Object TimeCreated,Id,ProviderName,Message | Format-List
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Get-WinEvent](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent)
+
+
 **Prove it worked:** The case distinguishes a recorded unclean shutdown from evidence for power, hardware or software cause.
 
 **If this does not resolve it:** Stop repeated power cycling when storage, electrical safety or thermal symptoms appear.

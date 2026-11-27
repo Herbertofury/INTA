@@ -251,6 +251,23 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Use <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft](https://www.microsoft.com/)’s repair-source guidance to match the installed image and required language/servicing level; identify the correct image index when the source contains several editions.
 3. Retry only the documented repair against the confirmed running installation or explicitly identified offline image, then retain its final result.
 
+#### ⚡ Quick commands
+
+**Inspect component-store health before selecting a repair source** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/) (Run as Administrator)
+
+Read component-store health and <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) build details before sourcing matching installation media.
+
+```powershell
+DISM.exe /Online /Cleanup-Image /CheckHealth
+DISM.exe /Online /Get-CurrentEdition
+Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture
+```
+
+> **Before running:** Read-only inspection. Do not mount an arbitrary ISO or use a mismatched edition, language, architecture or build as a repair source.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Microsoft repair a Windows image](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)
+
+
 **Prove it worked:** <a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image" title="Open DISM official download or service page" aria-label="Open DISM official download or service page" data-inta-brand="dism"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="DISM official page" width="18" height="18" valign="middle" /></a> [DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) accepts the compatible source and finishes, or returns a narrower actionable error.
 
 **If this does not resolve it:** Do not substitute random DLLs or use an unrelated ISO. Recurring corruption with I/O faults belongs to storage recovery.
@@ -276,6 +293,21 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 1. Open the current CBS log through <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft](https://www.microsoft.com/)’s documented <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc" title="Open System File Checker official download or service page" aria-label="Open System File Checker official download or service page" data-inta-brand="sfc"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="System File Checker official page" width="18" height="18" valign="middle" /></a> [SFC](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) detail workflow and inspect entries marked [SR] for that run.
 2. Record the unresolved component names and servicing errors privately; distinguish old repaired entries from current failures.
 3. Use the matching supported servicing or repair-install route, then rerun the relevant verification and the original failing feature.
+
+#### ⚡ Quick commands
+
+**Extract recent <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc" title="Open System File Checker official download or service page" aria-label="Open System File Checker official download or service page" data-inta-brand="sfc"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="System File Checker official page" width="18" height="18" valign="middle" /></a> [SFC](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) repair details** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Read the <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc" title="Open System File Checker official download or service page" aria-label="Open System File Checker official download or service page" data-inta-brand="sfc"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="System File Checker official page" width="18" height="18" valign="middle" /></a> [SFC](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) result log to identify files that could not be repaired, rather than repeating the scan without diagnosis.
+
+```powershell
+Select-String -Path "$env:windir\Logs\CBS\CBS.log" -Pattern '\[SR\]' | Select-Object -Last 80
+```
+
+> **Before running:** Read-only log extraction. CBS logs can contain paths and machine context; keep the output in the private service record.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc" title="Open System File Checker official download or service page" aria-label="Open System File Checker official download or service page" data-inta-brand="sfc"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="System File Checker official page" width="18" height="18" valign="middle" /></a> [Microsoft System File Checker](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)
+
 
 **Prove it worked:** The case identifies the current unresolved component or records a clean final scan and working feature.
 

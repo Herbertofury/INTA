@@ -80,6 +80,11 @@ Use [Maintaining the Hub](https://github.com/Herbertofury/INTA/wiki/Maintaining-
 
 Every playbook needs at least one command placed in the step where it belongs. Add shell, purpose, safety, official reference URL and reference title beside the command in `data/jobs.json`. Prefer read-only discovery before state changes; include the condition that justifies a repair, its prerequisites, rollback and a verification step. The interactive hub surfaces the first relevant command at the top of the guide and keeps the full command at its procedure step. Follow [Quick Command Standards](https://github.com/Herbertofury/INTA/blob/main/docs/quick-commands.md).
 
+
+## ⚡ Commands inside specific fixes
+
+When a shell action helps a specific symptom, add a `commands` array to that exact record in `data/field-notes.json`. Keep each block focused and include shell, purpose, safety, code and official source. The interactive article and generated Wiki render the same copyable block. Use the [Quick Commands Wiki](https://github.com/Herbertofury/INTA/wiki/Quick-Commands) for standards and trusted tool installation patterns.
+
 ---
 
 Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

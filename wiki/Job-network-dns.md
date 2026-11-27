@@ -321,6 +321,23 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Inspect the DHCP Client service and its Admin/Operational event logs; distinguish one-PC failure from a VLAN, scope or server problem.
 3. Restore the proven DHCP path, then renew only the affected adapter when a local or alternate access path is available.
 
+#### ⚡ Quick commands
+
+**Renew a DHCP lease after confirming the link and DHCP path** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/) (Run as Administrator)
+
+Request a new DHCP lease when the adapter is connected and the network's DHCP service is expected to be available.
+
+```powershell
+ipconfig /release
+ipconfig /renew
+ipconfig /all
+```
+
+> **Before running:** Changes the active network lease and may briefly interrupt connectivity. Do not use on static-IP, VPN, server or managed network interfaces without confirming the configuration and maintenance impact.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft ipconfig](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig)
+
+
 **Prove it worked:** The adapter receives the intended lease, gateway and DNS settings and reaches the required service.
 
 **If this does not resolve it:** Do not invent a static address or release the adapter carrying the only remote session. Escalate shared lease failures to the network owner.
@@ -344,6 +361,23 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 1. Run Resolve-DnsName for the actual service name and note the answer or error and the configured resolver.
 2. Check whether the approved VPN installed the intended DNS server, suffix and route to that server; distinguish a short-name problem from a full-name problem.
 3. Correct the managed DNS/VPN setting through its owner and retest the original application, not only a DNS query.
+
+#### ⚡ Quick commands
+
+**Inspect VPN adapter DNS suffixes and resolver configuration** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Compare VPN and physical adapter DNS settings and resolve an organization-approved internal hostname.
+
+```powershell
+Get-DnsClientServerAddress | Format-Table InterfaceAlias,AddressFamily,ServerAddresses -AutoSize
+Get-DnsClient | Format-Table InterfaceAlias,ConnectionSpecificSuffix,RegisterThisConnectionsAddress -AutoSize
+Resolve-DnsName intranet.example -ErrorAction Continue
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Get-DnsClientServerAddress](https://learn.microsoft.com/en-us/powershell/module/dnsclient/get-dnsclientserveraddress)
+
 
 **Prove it worked:** The intended internal name resolves through the correct path and the user can access the service.
 
@@ -390,6 +424,21 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 1. Run Test-NetConnection with the actual ComputerName and Port values; record the chosen interface and TcpTestSucceeded result.
 2. Compare the same test from an approved working client and the intended VPN/proxy state.
 3. If TCP succeeds, test authentication, certificates and the application itself; if it fails, have the network/service owner inspect that specific path.
+
+#### ⚡ Quick commands
+
+**Test the exact service port** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Test TCP reachability to the real service host and port after name resolution succeeds.
+
+```powershell
+Test-NetConnection -ComputerName server.example -Port 443 -InformationLevel Detailed
+```
+
+> **Before running:** Read-only network test. Replace the example host and port with the approved service endpoint; do not scan unrelated networks.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Test-NetConnection](https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection)
+
 
 **Prove it worked:** The evidence isolates transport reachability from application behavior without changing unrelated network settings.
 
