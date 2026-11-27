@@ -11,7 +11,7 @@ Contributions should help a technician choose a suitable tool, understand the ne
 | Tool, official download, platform, pricing or review evidence | [Tool catalog](data/tools.json) |
 | Exact file downloads, built-in launches, Store routes or acquisition evidence | [Tool acquisition routes](data/tool-access.json) |
 | Plain-language problem links, first actions or a scenario-specific tool action | [Quick-start answers](data/quick-start.json) |
-| Procedure, tool selection, commands, success checks or escalation | [Job guides](data/jobs.json) |
+| Procedure, [tool selection](https://github.com/Herbertofury/INTA/wiki/Tool-Selection), commands, success checks or escalation | [Job guides](data/jobs.json) |
 | Named troubleshooting method and its canonical destination | [Method registry](data/methods.json) |
 | Additional precise application names or repeated-mention linking | [Link aliases](data/link-aliases.json) and [linking helper](scripts/wiki_links.py) |
 | Wiki page presentation or job decision diagrams | [Wiki layout](data/wiki-layout.json) |
@@ -39,7 +39,7 @@ python3 scripts/build-hub.py --check
 python3 scripts/check-wiki.py
 ```
 
-Command legend: [Python](https://www.python.org/) runs the [hub builder](scripts/build-hub.py), [test suite](tests/) and [wiki checker](scripts/check-wiki.py). Inspect the changed rendered path as described in the [Contribution Guide](docs/contribute.md).
+Command legend: <a href="https://www.python.org/" title="Open Python official download or service page" aria-label="Open Python official download or service page" data-inta-brand="app-python"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/e3ea97f62e4259df2d67.png" alt="" width="18" height="18" valign="middle" /></a> [Python](https://www.python.org/) runs the [hub builder](scripts/build-hub.py), [test suite](tests/) and [wiki checker](scripts/check-wiki.py). Inspect the changed rendered path as described in the [Contribution Guide](docs/contribute.md).
 
 ## 🚀 Finish the whole contribution
 
