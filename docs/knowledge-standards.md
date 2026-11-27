@@ -116,3 +116,8 @@ Follow [Contribute](https://github.com/Herbertofury/INTA/wiki/Contribute) and [M
 Use [the contribution template](https://github.com/Herbertofury/INTA/wiki/Templates) to retain source revision, changed scope, proof, limits, publication locations and the exact next action. Required unfinished gates remain open. [Continuous Improvement](https://github.com/Herbertofury/INTA/wiki/Continuous-Improvement) governs repeat contributions without restarting settled work.
 
 **➜ Continue:** [Decision Desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Contribution Guide](https://github.com/Herbertofury/INTA/wiki/Contribute) · [Templates](https://github.com/Herbertofury/INTA/wiki/Templates)
+
+
+## ⚡ 10. Copy-ready commands are part of every job
+
+Every playbook must include at least one practical command in the step where it belongs. Identify the shell, privilege, purpose, safety boundary and official reference. Give technicians a copy action, never automatic execution. Prefer read-only discovery first; present a repair only when the evidence, prerequisites and rollback path support it. Pair state-changing commands with a verification step and explicit stop conditions. Follow the [Quick Command Standards](https://github.com/Herbertofury/INTA/blob/main/docs/quick-commands.md).
