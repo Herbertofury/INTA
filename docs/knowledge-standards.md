@@ -121,3 +121,8 @@ Use [the contribution template](https://github.com/Herbertofury/INTA/wiki/Templa
 ## ⚡ 10. Copy-ready commands are part of every job
 
 Every playbook must include at least one practical command in the step where it belongs. Identify the shell, privilege, purpose, safety boundary and official reference. Give technicians a copy action, never automatic execution. Prefer read-only discovery first; present a repair only when the evidence, prerequisites and rollback path support it. Pair state-changing commands with a verification step and explicit stop conditions. Follow the [Quick Command Standards](https://github.com/Herbertofury/INTA/blob/main/docs/quick-commands.md).
+
+
+## ⚡ Commands in specific-fix articles
+
+Specific fixes should carry a copy-ready shell block whenever a real command materially shortens diagnosis, repair or verification. Keep the command attached to the exact symptom, with shell, purpose, safety boundary and official source. The app and Wiki must expose an accessible copy button; copying never executes. Do not force a command into GUI-only, physical or non-Windows cases where it adds no value. See [Quick Commands](https://github.com/Herbertofury/INTA/wiki/Quick-Commands).
