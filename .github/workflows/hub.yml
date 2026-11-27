@@ -2,9 +2,9 @@ name: Validate and publish technician hub
 on:
   push:
     branches: [main]
-    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
+    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/refresh-news.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
   pull_request:
-    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
+    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/refresh-news.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
   workflow_dispatch:
 permissions:
   contents: read
