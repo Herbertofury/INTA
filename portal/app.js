@@ -187,6 +187,8 @@
     catch (_) { return null; }
   }
   function brandIcon(brand, className = '') {
+    // Platform names stay clickable without consuming a second icon/target.
+    if (brand?.inlineIcon === false) return '';
     const value = brand && brandAssets[brand.assetId];
     const src = typeof value === 'string' ? value : value?.dataUri;
     if (!src || !/^data:image\/(?:png|svg\+xml|x-icon|vnd\.microsoft\.icon|webp|jpeg|gif);/i.test(src)) return '';
@@ -217,10 +219,10 @@
       const brand = brandFor({ toolId, name: label }) || namedMentions[0] || brandFor({ url: href });
       if (!brand) return;
       const markup = brandIcon(brand);
-      if (!markup) return;
+      if (!markup && !namedMentions.some(identity => identity.inlineIcon !== false)) return;
       // Existing anchors keep their exact meaning and destination. Product-name
       // links created by toolName/linkifyProse already target the hosted page.
-      if (namedMentions.length <= 1 && brandUrlKey(href) === brandUrlKey(brand.downloadPage)) {
+      if (markup && namedMentions.length <= 1 && brandUrlKey(href) === brandUrlKey(brand.downloadPage)) {
         anchor.insertAdjacentHTML('afterbegin', markup);
         anchor.classList.add('brand-link'); anchor.dataset.brandLink = brand.id;
         return;
@@ -245,7 +247,7 @@
         iconLink.innerHTML = mark;
         return iconLink;
       }).filter(Boolean);
-      anchor.before(wrapper); wrapper.append(...iconLinks, anchor);
+      if (iconLinks.length) { anchor.before(wrapper); wrapper.append(...iconLinks, anchor); }
     });
   }
   const proseRegistry = new Map();
@@ -292,8 +294,12 @@
         anchor.href = entry.href;
         const brand = brandFor({ toolId: entry.kind === 'tool' ? entry.id : '', name: entry.name, url: entry.href });
         if (brand && ['tool', 'application', 'website', 'project'].includes(entry.kind)) {
-          anchor.innerHTML = brandIcon(brand) + `<span>${esc(match[0])}</span>`;
-          anchor.classList.add('brand-link'); anchor.dataset.brandLink = brand.id; anchor.dataset.brandDecorated = 'true';
+          const mark = brandIcon(brand);
+          if (mark) {
+            anchor.innerHTML = mark + `<span>${esc(match[0])}</span>`;
+            anchor.classList.add('brand-link'); anchor.dataset.brandLink = brand.id;
+          } else anchor.textContent = match[0];
+          anchor.dataset.brandDecorated = 'true';
         } else anchor.textContent = match[0];
         anchor.dataset.linkName = entry.name;
         if (entry.kind) anchor.dataset.linkKind = entry.kind;
@@ -1576,7 +1582,7 @@
     setTimeout(() => URL.revokeObjectURL(href), 5000);
   }
   function markdownBrandIcon(brand) {
-    const url = brand && safeUrl(brandData.assetUrls?.[brand.assetId]);
+    const url = brand && brand.inlineIcon !== false && safeUrl(brandData.assetUrls?.[brand.assetId]);
     return url ? `<img src="${esc(url)}" width="18" height="18" alt="">` : '';
   }
   function markdownBrandName(brand, label) {
