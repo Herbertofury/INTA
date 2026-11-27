@@ -558,6 +558,73 @@
         "downloads"
       ],
       "notes": "Only relevant where INTA catalogs modding/creator tools; do not transfer endorsement counts into IT-tool ratings."
+    },
+    {
+      "id": "mozilla-addons",
+      "name": "Mozilla Add-ons",
+      "kind": "browser-extension-store",
+      "url": "https://addons.mozilla.org/",
+      "metrics": [
+        "rating",
+        "reviews",
+        "users"
+      ],
+      "notes": "Keep the exact add-on listing, rating sample, user count and checked date together. Store counts are snapshots and must not be merged with ratings from other providers."
+    },
+    {
+      "id": "chrome-web-store",
+      "name": "Chrome Web Store",
+      "kind": "browser-extension-store",
+      "url": "https://chromewebstore.google.com/",
+      "metrics": [
+        "rating",
+        "ratings_count",
+        "users",
+        "version",
+        "updated"
+      ],
+      "notes": "Record the exact extension listing, publisher, rating, sample size and user count. Mark rounded counts approximate."
+    },
+    {
+      "id": "edge-addons",
+      "name": "Microsoft Edge Add-ons",
+      "kind": "browser-extension-store",
+      "url": "https://microsoftedge.microsoft.com/addons/",
+      "metrics": [
+        "rating",
+        "reviews",
+        "users",
+        "version",
+        "updated"
+      ],
+      "notes": "Preserve compatibility/removal warnings. Mark metrics unreported when the listing is flagged or the rating is unavailable."
+    },
+    {
+      "id": "opera-addons",
+      "name": "Opera Add-ons",
+      "kind": "browser-extension-store",
+      "url": "https://addons.opera.com/",
+      "metrics": [
+        "rating",
+        "ratings_count",
+        "downloads",
+        "version",
+        "last_update"
+      ],
+      "notes": "Keep Opera store metrics separate from Chrome and Edge. Downloads are not unique users or endorsements."
+    },
+    {
+      "id": "apple-app-store",
+      "name": "Apple App Store",
+      "kind": "app-store",
+      "url": "https://apps.apple.com/",
+      "metrics": [
+        "rating",
+        "reviews",
+        "version",
+        "updated"
+      ],
+      "notes": "Record when the store does not publish a verified rating summary; do not substitute publisher-hosted reviews."
     }
   ]
 }
