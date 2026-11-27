@@ -1260,7 +1260,7 @@ def build_outputs() -> dict[str, str]:
         sidebar += [f"- **[{info['navigationIcon']} {info['navigationLabel']}](Tools-{slug(category)})**"]
     sidebar += ["", "### Reference", "",
                 "- [Decision desk](Decision-Desk)", "- [All playbooks](Playbooks)", "- [Complete tool directory](Tool-Directory)",
-                " - [Command Center](Command-Center)", "- [Quick commands](Quick-Commands)",
+                "- [Command Center](Command-Center)", "- [Quick commands](Quick-Commands)",
                 "- [Methods](Methods)", "- [Rescue media](Rescue-Media)", "- [Intake and handoff](Technician-Handoff)",
                 "- [Service evidence](Service-Evidence)", "- [Tool selection](Tool-Selection)",
                 "- [Free Tool Picks](Free-Tool-Picks)", "- [Current tool choices](Current-Tool-Choices)",
@@ -1302,6 +1302,9 @@ def build_outputs() -> dict[str, str]:
                 "scenariosWithToolChoices": sum(bool(resolved_tool_choices(item, access)) for item in quick_start["items"]),
                 "quickStartSha256": hashlib.sha256(json.dumps(quick_start, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
                 "onlineTools": len(online_data["tools"]),
+                "commandCenterCommands": len(command_center["commands"]),
+                "commandCenterWorkflows": len(command_center["workflows"]),
+                "commandCenterToolkits": len(command_center["toolkits"]),
                 "onlineGroups": len(online_data["groups"]),
                 "onlineWorkflows": len(online_data["workflows"]),
                 "toolAccessEntries": len(access),
