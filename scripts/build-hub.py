@@ -1260,7 +1260,7 @@ def build_outputs() -> dict[str, str]:
         sidebar += [f"- **[{info['navigationIcon']} {info['navigationLabel']}](Tools-{slug(category)})**"]
     sidebar += ["", "### Reference", "",
                 "- [Decision desk](Decision-Desk)", "- [All playbooks](Playbooks)", "- [Complete tool directory](Tool-Directory)",
-                "- [Command Center](Command-Center)", "- [Quick commands](Quick-Commands)",
+                "- [⚡ Command Center](Command-Center)", "- [Quick commands](Quick-Commands)",
                 "- [Methods](Methods)", "- [Rescue media](Rescue-Media)", "- [Intake and handoff](Technician-Handoff)",
                 "- [Service evidence](Service-Evidence)", "- [Tool selection](Tool-Selection)",
                 "- [Free Tool Picks](Free-Tool-Picks)", "- [Current tool choices](Current-Tool-Choices)",

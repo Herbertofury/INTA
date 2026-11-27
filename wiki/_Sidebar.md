@@ -82,7 +82,7 @@ Tool name = official page. File buttons name the platform; built-in tools open i
 - [Decision desk](Decision-Desk)
 - [All playbooks](Playbooks)
 - [Complete tool directory](Tool-Directory)
-- [Command Center](Command-Center)
+- [⚡ Command Center](Command-Center)
 - [Quick commands](Quick-Commands)
 - [Methods](Methods)
 - [Rescue media](Rescue-Media)

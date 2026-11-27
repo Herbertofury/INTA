@@ -53,7 +53,7 @@
     "AGENTS.md": "a9541de6539dde297a4954d48046be575ff075e6a7fd3d8f5690a17c20636e41",
     "CONTRIBUTING.md": "2e859cced02ece344497ca8e0ca366470bf8c81133b7450fd1370d0fe47a3ce9",
     "README.md": "226f3ab7df75242754bcdb5c88bf791b2c5757579e4d973dd0a1b4b12fbbf01c",
-    "docs/command-center.md": "5bb8ffe675e09cba1ebaa0d10bf30d79ce886ac281d89d746a27d1e42a3eaffe",
+    "docs/command-center.md": "c5c8c54fadd4eea934e41e995396428f3347bb8539de5c5751111a24dba58afd",
     "docs/continuous-improvement.md": "172e4f3439f5662f334ac82c0c92201dfbc24d270b3c9aaa9ac39148a0db9967",
     "docs/contribute.md": "dd60a0c190047920f8fad8ab7ca3f96d400dc0bcd9c9f7bdb8ee8a16a19a5c20",
     "docs/contribution-template.md": "38330cb6bde87d117e6abe7e9db34d88294d58bce523f0b2b712fc941d8c21d2",
@@ -115,7 +115,7 @@
     "wiki/Check-a-suspicious-file.md": "b197cd598b731823b3d1e66918861a3f488add0d444249b8b1c4441005e79cee",
     "wiki/Check-a-suspicious-link.md": "4415e29026aaa0741f40ec13c9ee4ff667294da99761e8b694d5b867fad28ab2",
     "wiki/Clone-or-move-a-drive.md": "80df943e911a1319f8120b232f55e93895c27d4d4f7e17b11a9c3b7e9e6ff0e3",
-    "wiki/Command-Center.md": "9c76069b2f003c64c90d9688f6491c87e0fff4b24361e0b697f076f8835136af",
+    "wiki/Command-Center.md": "df8f17b4fcb0ace47209b3a045ebede4c840c30e60f5bda8c9914e0e414668f6",
     "wiki/Contain-ransomware.md": "93afc077b66d6aacf815fa348a185cb91272349d66d793e339b18e8814a4fa81",
     "wiki/Continuous-Improvement.md": "e5028066ae1f0c7ad9c50e8ab5114232be3179712afd459f757364a9ff87586a",
     "wiki/Contribute.md": "15749de38e0033a7c5c9b42c0019a181b0b6195fce8fd2af35d1e4dac9fac1b4",
@@ -212,6 +212,6 @@
     "wiki/Tools-windows.md": "e994c83c839bb5f80d1378b1ec0e73e3c13f0c71aceb030672805acea8df5d48",
     "wiki/Troubleshoot-with-AI.md": "1d83d579838b255e836e12de861cd36b3bd1b6f13999a5283a68ff6d19d27adb",
     "wiki/_Footer.md": "dcbec2532ddc232cc942df66729fc7a72beb293a28a4d0f4413371d9d696ab27",
-    "wiki/_Sidebar.md": "966233edd8d7d269fd4a543ace05d98ff20cc13bb15a5d1e8bb289e02162c14f"
+    "wiki/_Sidebar.md": "c7cbfe09343bb16b0b0fa8947944cfc09420215d4d5e9bd4490669082d0637f6"
   }
 }

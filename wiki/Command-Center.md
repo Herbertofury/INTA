@@ -152,6 +152,8 @@ Ninite Pro offers commercial application deployment and update workflows. Its do
 
 Home Updater is a consumer product and is restricted to non-commercial use. <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) lists it only as a reference and must not recommend it for technician/customer deployments. Use Patch My PC's commercial offerings for business endpoints. [Home Updater licensing and FAQ](https://patchmypc.com/faq/category/home-updater/).
 
+**[Open interactive Command Center](https://herbertofury.github.io/INTA/#command-center)** · **[Back to all playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks)**
+
 ---
 
 Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)
