@@ -101,9 +101,18 @@ def validate(tools: list[dict], jobs: list[dict]) -> None:
         if missing:
             raise ValueError(f"{job['id']}: unknown related jobs {sorted(missing)}")
         step_ids = []
+        command_count = 0
         for number, step in enumerate(job["steps"], 1):
             required(step, ["title", "detail"])
             step_ids.append(step_anchor(step, number))
+            if step.get("command"):
+                command_count += 1
+                required(step, ["commandShell", "commandPurpose", "commandSafety", "commandUrl", "commandName"])
+                if step["commandShell"] not in {"CMD", "PowerShell", "CMD or PowerShell", "PowerShell or CMD (Run as Administrator)", "CMD (Run as Administrator)", "PowerShell (Run as Administrator)", "Linux shell (INTA Rescue)"}:
+                    raise ValueError(f"{job['id']}: unsupported command shell label")
+                command_url = urlparse(step["commandUrl"])
+                if command_url.scheme != "https" or not command_url.hostname or command_url.username or command_url.password:
+                    raise ValueError(f"{job['id']}: command reference must be public HTTPS")
             for shortcut in step.get("shortcuts", []):
                 required(shortcut, ["label"])
                 kind = set(shortcut) - {"label"}
@@ -116,6 +125,8 @@ def validate(tools: list[dict], jobs: list[dict]) -> None:
                     if url.scheme == "https" and url.hostname and not (url.username or url.password):
                         continue
                 raise ValueError(f"{job['id']}: invalid step shortcut: {shortcut}")
+        if command_count == 0:
+            raise ValueError(f"{job['id']}: every playbook needs at least one copy-ready diagnostic or action command")
         if len(set(step_ids)) != len(step_ids):
             raise ValueError(f"{job['id']}: duplicate step anchors")
         for source in job["sources"]:
