@@ -1,0 +1,47 @@
+name: Prepare canonical generated checkpoint
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/generated-checkpoint.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Rebuild and verify authored guidance metadata
+        run: |
+          python3 scripts/build-hub.py
+          python3 scripts/build-hub.py --check
+          python3 scripts/check-wiki.py
+      - name: Export exact generated checkpoint for reviewed publication
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          import subprocess
+          def git(*args):
+              return subprocess.run(["git", *args], check=True, text=True, stdout=subprocess.PIPE).stdout.strip()
+          changed = git("diff", "--name-only").splitlines()
+          allowed = {"AGENTS.md", "site/build-manifest.json"}
+          unexpected = sorted(set(changed) - allowed)
+          if unexpected:
+              raise RuntimeError("Unexpected generated changes: " + ", ".join(unexpected))
+          report = {
+              "sourceCommit": git("rev-parse", "HEAD"),
+              "sourceTree": git("rev-parse", "HEAD^{tree}"),
+              "files": [{
+                  "path": name,
+                  "baseBlob": git("rev-parse", "HEAD:" + name),
+                  "content": Path(name).read_text(encoding="utf-8"),
+              } for name in changed],
+          }
+          print("INTA_GENERATED_CHECKPOINT_BEGIN")
+          print(json.dumps(report, indent=2))
+          print("INTA_GENERATED_CHECKPOINT_END")
+          PY
