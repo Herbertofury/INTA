@@ -4,6 +4,8 @@
   const data = window.INTA_DATA || { tools: [], jobs: [], meta: {} };
   const tools = Array.isArray(data.tools) ? data.tools : [];
   const jobs = Array.isArray(data.jobs) ? data.jobs : [];
+  const commandCenter = data.commandCenter || { commands: [], workflows: [], toolkits: [], categories: [] };
+  const commandCenterCommands = new Map(array(commandCenter.commands).map(item => [item.id, item]));
   const meta = data.meta || {};
   const toolMap = new Map(tools.map(tool => [tool.id, tool]));
   const jobMap = new Map(jobs.map(job => [job.id, job]));
@@ -853,6 +855,59 @@
     { icon: 'activity', title: 'Build & publication checks', body: 'Follow the repository workflows and review the result of each build. Release and source history remain easy to inspect.', label: 'View workflow runs', url: `${repo}/actions` },
     { icon: 'download', title: 'Offline workspace', body: 'Save a complete copy of this workspace. The catalog and playbooks work offline; vendor downloads and external references need a connection.', label: 'Save offline workspace', action: 'offline' }
   ];
+
+  function commandRiskLabel(risk) {
+    return ({ 'read-only': 'Read only', 'long-running': 'Long-running', 'downloads-file': 'Downloads file', 'installs-software': 'Installs software', 'changes-system': 'Changes system' })[risk] || 'Review first';
+  }
+  function commandCard(item) {
+    const risk = item.risk || 'changes-system';
+    return `<article class="command-card" data-command-item="${esc(item.id)}" data-command-category-value="${esc(item.category)}" data-command-shell-value="${esc(item.shell)}" data-command-risk-value="${esc(risk)}">
+      <header class="command-card-header"><div><p class="command-card-kicker">${esc(item.shell)} · ${esc(item.privilege)}</p><h3>${esc(item.title)}</h3></div><span class="command-risk command-risk-${esc(risk)}">${esc(commandRiskLabel(risk))}</span></header>
+      <p class="command-card-summary">${formatted(item.summary)}</p>
+      <div class="command-code-toolbar"><span>${esc(item.shell)}</span><button class="copy-command" data-copy-center-command="${esc(item.id)}">${icon('copy')}Copy command</button></div>
+      <pre class="command-center-code"><code>${esc(item.code)}</code></pre>
+      <p class="command-safety">${icon('info')}<span>${formatted(item.safety)}</span></p>
+      <footer class="command-card-footer">${external(item.sourceUrl, `Official reference: ${esc(item.sourceTitle)} ${icon('external')}`)}<span>${esc(item.category)}</span></footer>
+    </article>`;
+  }
+  function commandCenterPage(params = new URLSearchParams()) {
+    const selected = params.get('category') || 'all';
+    const shell = params.get('shell') || '';
+    const query = params.get('q') || '';
+    const categories = array(commandCenter.categories);
+    const workflows = array(commandCenter.workflows);
+    const toolkits = array(commandCenter.toolkits);
+    const commands = array(commandCenter.commands);
+    return heading('Technician workspace', 'Command Center', 'One searchable command library for PowerShell, CMD and Linux — plus trusted technician toolkits, package managers, diagnostics, repairs and software maintenance.') +
+      `<section class="command-center-hero"><div><p class="page-label">DIAGNOSE · INSTALL · UPDATE · REPAIR · VERIFY</p><h2>Your command bench</h2><p>Find the exact command, understand what it changes, copy it, then inspect the result. INTA never runs a command automatically.</p></div><div class="command-center-stats"><div><strong>${commands.length}</strong><span>commands</span></div><div><strong>${workflows.length}</strong><span>workflows</span></div><div><strong>${toolkits.length}</strong><span>toolkits</span></div></div></section>
+      <section class="command-center-workflows"><div class="section-heading-row"><div><p class="page-label">GUIDED JOBS</p><h2>Ready-made workflows</h2><p>Run the steps in order; preview before applying changes.</p></div></div><div class="command-workflow-grid">${workflows.map(workflow => `<article class="command-workflow-card"><p class="command-card-kicker">${esc(workflow.category)}</p><h3>${esc(workflow.title)}</h3><p>${formatted(workflow.description)}</p><ol>${array(workflow.commandIds).map(id => { const item = commandCenterCommands.get(id); return item ? `<li><a href="#command-center?category=${encodeURIComponent(item.category)}&q=${encodeURIComponent(item.title)}">${esc(item.title)}</a></li>` : ''; }).join('')}</ol><p class="command-workflow-sequence">${formatted(workflow.sequence)}</p><p class="command-safety">${icon('alert-triangle')}<span>${formatted(workflow.warning)}</span></p><button class="secondary-button" data-copy-center-workflow="${esc(workflow.id)}">${icon('copy')}Copy workflow commands</button></article>`).join('')}</div></section>
+      <section class="command-center-toolkit"><div class="section-heading-row"><div><p class="page-label">TRUSTED TECHNICIAN TOOLKITS</p><h2>Powerful tools other technicians already build</h2><p>Use their maintained utilities as tools, not as mystery scripts. Verify the release and read the changes before running.</p></div></div><div class="command-toolkit-grid">${toolkits.map(toolkit => { const install = toolkit.installCommandId && commandCenterCommands.get(toolkit.installCommandId); return `<article class="command-toolkit-card"><div class="command-toolkit-top"><span class="command-toolkit-kind">${esc(toolkit.kind.replace(/-/g,' '))}</span><span>${esc(toolkit.platform)}</span></div><h3>${external(toolkit.url, esc(toolkit.name))}</h3><p>${formatted(toolkit.summary)}</p><p class="command-safety">${icon('shield-alert')}<span>${formatted(toolkit.trust)}</span></p><div class="command-toolkit-actions">${external(toolkit.repository || toolkit.url, `Project / documentation ${icon('external')}`)}${install ? `<button class="copy-command" data-copy-center-command="${esc(install.id)}">${icon('copy')}Copy setup / launch</button>` : ''}</div></article>`; }).join('')}</div></section>
+      <section class="command-center-library"><div class="section-heading-row"><div><p class="page-label">COMMAND LIBRARY</p><h2>Find a command</h2><p>Search by task, symptom, command name, shell or tool. Filter by platform and risk.</p></div></div>
+        <div class="command-center-filters"><label class="input-wrap">${icon('search')}<span class="sr-only">Search commands</span><input id="command-center-search" type="search" placeholder="Search diagnostics, DISM, Defender, Chocolatey, updates…" value="${esc(query)}"></label><label class="sr-only" for="command-center-shell">Shell</label><select id="command-center-shell" class="filter-select"><option value="">All shells</option>${array(commandCenter.shells).map(x => `<option value="${esc(x)}"${shell===x?' selected':''}>${esc(x)}</option>`).join('')}</select><label class="sr-only" for="command-center-risk">Impact</label><select id="command-center-risk" class="filter-select"><option value="">All impact levels</option><option value="read-only">Read only</option><option value="long-running">Long-running</option><option value="downloads-file">Downloads file</option><option value="installs-software">Installs software</option><option value="changes-system">Changes system</option></select></div>
+        <nav class="command-category-tabs" aria-label="Command categories"><button class="${selected==='all'?'active':''}" data-command-category="all">All commands</button>${categories.map(cat=>`<button class="${selected===cat.id?'active':''}" data-command-category="${esc(cat.id)}">${esc(cat.label)}</button>`).join('')}</nav>
+        <div class="command-center-result" id="command-center-count" aria-live="polite"></div>
+        <div class="command-center-list" id="command-center-list">${commands.map(commandCard).join('')}</div>
+      </section>
+      <section class="command-center-maintenance"><p class="page-label">IMPORTANT DISTINCTIONS</p><h2>Application updates are not Windows updates</h2><div class="command-maintenance-grid"><div><h3>WinGet</h3><p>Microsoft package manager; preview with <code>winget upgrade</code>, then choose whether to update all identified apps.</p></div><div><h3>Chocolatey</h3><p>Separate package database and sources. Preview with <code>choco outdated</code> and <code>choco upgrade all --noop</code> before applying.</p></div><div><h3>Scoop</h3><p>User-oriented bucket manager. Only updates apps it manages.</p></div><div><h3>Windows Update / Store</h3><p>OS servicing and Store apps need their own update paths. A clean WinGet report does not mean Windows is fully patched.</p></div></div></section>`;
+  }
+  function filterCommandCenter() {
+    const root = $('#command-center-list');
+    if (!root) return;
+    const query = ($('#command-center-search')?.value || '').trim().toLocaleLowerCase();
+    const shell = $('#command-center-shell')?.value || '';
+    const risk = $('#command-center-risk')?.value || '';
+    const active = $('.command-category-tabs [data-command-category].active')?.dataset.commandCategory || 'all';
+    let visible = 0;
+    root.querySelectorAll('[data-command-item]').forEach(card => {
+      const item = commandCenterCommands.get(card.dataset.commandItem);
+      const haystack = [item?.title,item?.summary,item?.code,item?.safety,item?.shell,item?.sourceTitle,item?.category].join(' ').toLocaleLowerCase();
+      const show = (!query || haystack.includes(query)) && (!shell || item?.shell===shell) && (!risk || item?.risk===risk) && (active==='all' || item?.category===active);
+      card.hidden = !show;
+      if (show) visible++;
+    });
+    const count=$('#command-center-count');
+    if(count) count.textContent = `${visible} of ${commandCenter.commands.length} commands`;
+  }
   function resources() {
     return heading('INTA references', 'Resources', 'Official references, project releases, research, and an offline copy of the workspace.') + `<div class="resource-list" role="list">${projectResources.map(resource => `<article class="resource-row" role="listitem"><span class="reference-icon">${icon(resource.icon)}</span><div><h2>${esc(resource.title)}</h2><p>${esc(resource.body)}</p></div>${resource.action ? `<button class="button ghost" data-download-offline>${esc(resource.label)} ${icon('download')}</button>` : external(resource.url, `${esc(resource.label)} ${icon('external')}`, 'button ghost')}</article>`).join('')}</div><section class="resource-note"><h2>Current sources, honest expectations.</h2><p>The source review date tells you when this collection was checked. It does not mean every program was installed or tested on every system. Official download pages are used so you can check the current release and compatibility before a job.</p><p><strong>Everyday picks</strong> are practical first choices. <strong>Specialist</strong> tools serve a more focused need. <strong>Evaluate first</strong> entries are candidates to test before they become part of a routine workflow.</p><p>Favorites and checklist progress stay in this browser. Use your team's private ticketing system for client records. ${storageAvailable ? 'Export a checklist when you need a portable handoff.' : 'Browser storage is unavailable in this session; export a checklist to preserve it.'}</p></section><section class="section-space"><div class="section-title"><div><h2>Official reference desk</h2><p>The primary references used by the job playbooks.</p></div></div><label class="input-wrap">${icon('search')}<span class="sr-only">Filter official references</span><input type="search" id="source-search" placeholder="Find a vendor, document, or reference…"></label><div class="filter-result"><span id="source-count" aria-live="polite"></span></div><div class="source-directory" id="source-directory"></div></section>`;
   }
@@ -1014,7 +1069,7 @@
   }
   function render() {
     const route = parseRoute();
-    const names = { home: 'Technician home', online: 'Online tools', checklist: 'Technician checklist', news: 'Technician News', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
+    const names = { home: 'Technician home', online: 'Online tools', checklist: 'Technician checklist', news: 'Technician News', 'command-center': 'Command Center', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
     $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
     $('#breadcrumb').innerHTML = `Workspace <span>/</span> <strong>${esc(names[route.name] || 'Technician home')}</strong>`;
@@ -1022,6 +1077,7 @@
     else if (route.name === 'online') app.innerHTML = online(route.params);
     else if (route.name === 'checklist') app.innerHTML = checklistPage();
     else if (route.name === 'news') app.innerHTML = newsPage();
+    else if (route.name === 'command-center') app.innerHTML = commandCenterPage(route.params);
     else if (route.name === 'services') app.innerHTML = serviceMap();
     else if (route.name === 'tools') app.innerHTML = library(false, route.params);
     else if (route.name === 'saved') app.innerHTML = library(true, route.params);
@@ -1391,6 +1447,26 @@
       if (commandItem) copy(text(commandItem.code), 'Command copied. Review its safety note before running it.');
       return;
     }
+    const centerCommand = target.closest('[data-copy-center-command]');
+    if (centerCommand) {
+      const item = commandCenterCommands.get(centerCommand.dataset.copyCenterCommand);
+      if (item) copy(item.code, 'Command copied. Review its shell and safety notes before running.');
+      return;
+    }
+    const centerWorkflow = target.closest('[data-copy-center-workflow]');
+    if (centerWorkflow) {
+      const workflow = array(commandCenter.workflows).find(item => item.id === centerWorkflow.dataset.copyCenterWorkflow);
+      if (workflow) copy(workflow.commandIds.map(id => { const item=commandCenterCommands.get(id); return item ? `# ${item.title} [${item.shell}]
+${item.code}
+# Safety: ${item.safety}` : ''; }).filter(Boolean).join('\n\n'), 'Workflow commands copied. Review each step before running.');
+      return;
+    }
+    const categoryTab = target.closest('[data-command-category]');
+    if (categoryTab) {
+      $('.command-category-tabs [data-command-category]').forEach(button => { const active=button===categoryTab; button.classList.toggle('active',active); button.setAttribute('aria-pressed',String(active)); });
+      filterCommandCenter();
+      return;
+    }
     const clearFilter = target.closest('[data-clear-tool-filter]');
     if (clearFilter) { const field = document.getElementById(clearFilter.dataset.clearToolFilter); if (field) { field.value = ''; filterTools(); field.focus(); } return; }
     if (target.closest('[data-reset-filters]')) return resetToolFilters();
@@ -1418,12 +1494,14 @@
     }
   });
   document.addEventListener('input', event => {
+    if (event.target.id === 'command-center-search') filterCommandCenter();
     if (event.target.id === 'online-search') filterOnline();
     else if (event.target.id === 'library-search') filterTools();
     else if (event.target.id === 'jobs-search') filterJobs();
     else if (event.target.id === 'source-search') filterSources();
   });
   document.addEventListener('change', event => {
+    if (['command-center-shell', 'command-center-risk'].includes(event.target.id)) filterCommandCenter();
     if (event.target.id === 'online-group') filterOnline();
     else if (['category-filter', 'platform-filter', 'tier-filter', 'tool-sort'].includes(event.target.id)) filterTools();
     else if (event.target.id === 'jobs-category') filterJobs();
