@@ -915,6 +915,70 @@ def mirror_markdown(content: str, mirrors: dict[str, str], reviewed: str) -> str
     return "\n".join([page_nav(), "", content.rstrip(), *page_footer(reviewed)])
 
 
+def validate_reputation(snapshot: dict, tools: list[dict]) -> None:
+    def day(value):
+        try:
+            return isinstance(value, str) and date.fromisoformat(value).isoformat() == value
+        except ValueError:
+            return False
+
+    def count(value):
+        return type(value) is int and 0 <= value <= 2**53 - 1
+
+    def source(value, host=None):
+        value = urlparse(value) if isinstance(value, str) else None
+        return (value and value.scheme == "https" and value.hostname and
+                not value.username and not value.password and
+                (not host or value.hostname == host))
+
+    states = {"observed", "unverified", "unreported", "not-applicable", "unavailable"}
+    entries = snapshot.get("tools")
+    if (snapshot.get("schemaVersion") != 1 or not day(snapshot.get("reviewedAt")) or
+            not isinstance(entries, dict) or set(entries) != {tool["id"] for tool in tools}):
+        raise ValueError("Reputation requires a dated evidence or explicit gap record for every catalog tool")
+
+    for tool_id, record in entries.items():
+        if not isinstance(record, dict) or set(record) != {"github", "sourceforge", "usage"}:
+            raise ValueError(f"{tool_id}: invalid reputation evidence streams")
+        for kind, evidence in record.items():
+            if not isinstance(evidence, dict) or evidence.get("status") not in states:
+                raise ValueError(f"{tool_id}: invalid {kind} observation status")
+            status = evidence["status"]
+            host = {"github": "github.com", "sourceforge": "sourceforge.net"}.get(kind)
+            observed = status == "observed"
+            metrics = {"github": {"stars", "forks"}, "sourceforge": {"rating", "weeklyDownloads"},
+                       "usage": {"weeklyActiveUsers", "approximate", "reportedAt"}}[kind]
+            if (not observed and metrics.intersection(evidence)) or (
+                status in {"observed", "unavailable", "unreported"} and (
+                    not source(evidence.get("url"), host) or not day(evidence.get("checkedAt"))
+                    or evidence["checkedAt"] > snapshot["reviewedAt"]
+                    or (kind != "usage" and not source(evidence.get("identitySource")))
+                )
+            ):
+                raise ValueError(f"{tool_id}: invalid dated {kind} evidence or unknown metric set to a value")
+            if not observed:
+                continue
+            if kind == "github":
+                if (not re.fullmatch(r"/[\w.-]+/[\w.-]+/?", urlparse(evidence["url"]).path)
+                        or not all(count(evidence.get(k)) for k in metrics)):
+                    raise ValueError(f"{tool_id}: invalid GitHub repository metrics")
+            elif kind == "sourceforge":
+                if (not re.fullmatch(r"/projects/[\w.-]+/?", urlparse(evidence["url"]).path)
+                        or not set(evidence).intersection(metrics)
+                        or ("weeklyDownloads" in evidence and not count(evidence["weeklyDownloads"]))):
+                    raise ValueError(f"{tool_id}: invalid SourceForge popularity evidence")
+                if "rating" in evidence:
+                    rating = evidence["rating"]
+                    if (not isinstance(rating, dict) or set(rating) != {"value", "scale", "reviews"}
+                            or type(rating["value"]) not in (int, float) or type(rating["scale"]) not in (int, float)
+                            or rating["scale"] != 5 or not 1 <= rating["value"] <= 5
+                            or not count(rating["reviews"]) or not rating["reviews"]):
+                        raise ValueError(f"{tool_id}: invalid native rating or sample size")
+            elif (not count(evidence.get("weeklyActiveUsers")) or type(evidence.get("approximate")) is not bool
+                  or not day(evidence.get("reportedAt")) or evidence["reportedAt"] > evidence["checkedAt"]):
+                raise ValueError(f"{tool_id}: invalid weekly active user evidence")
+
+
 def build_outputs() -> dict[str, str]:
     tools = records(ROOT / "data/tools.json", "tools")
     jobs = records(ROOT / "data/jobs.json", "jobs")
@@ -926,7 +990,9 @@ def build_outputs() -> dict[str, str]:
     field_notes = json.loads((ROOT / "data/field-notes.json").read_text(encoding="utf-8"))
     knowledge_policy = json.loads((ROOT / "data/knowledge-policy.json").read_text(encoding="utf-8"))
     research_queue = json.loads((ROOT / "data/research-queue.json").read_text(encoding="utf-8"))
+    reputation = json.loads((ROOT / "data/tool-reputation.json").read_text(encoding="utf-8"))
     validate(tools, jobs)
+    validate_reputation(reputation, tools)
     validate_layout(layout, jobs, tools)
     validate_tool_access(tool_access, tools)
     validate_quick_start(quick_start, tools, jobs, tool_access["tools"])
@@ -937,7 +1003,7 @@ def build_outputs() -> dict[str, str]:
         raise ValueError("Quick-start selections require docs/free-tool-picks.md for their evidence and limits")
     linker = link_module()
     registry = linker.build_registry(tools, jobs)
-    data = {"tools": tools, "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
+    data = {"tools": [{**tool, "reputation": reputation["tools"][tool["id"]]} for tool in tools], "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
             "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces,
             "layout": layout, "fieldNotes": field_notes}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
