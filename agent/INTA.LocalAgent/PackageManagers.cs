@@ -8,7 +8,9 @@ public sealed class PackageManagers(ProcessRunner runner)
     public string[] Detect()
     {
         var candidates = OperatingSystem.IsWindows() ? WindowsManagers : OperatingSystem.IsMacOS() ? MacManagers : LinuxManagers;
-        return candidates.Where(Available).ToArray();
+        var detected = candidates.Where(Available).ToList();
+        if (OperatingSystem.IsWindows()) detected.Add("windows-update");
+        return detected.ToArray();
     }
     public async Task<IReadOnlyList<ManagerPreview>> PreviewAsync(string[] managers, CancellationToken ct = default)
     {
@@ -70,13 +72,16 @@ public sealed class PackageManagers(ProcessRunner runner)
             var preview = previews.FirstOrDefault();
             return (false, preview?.Output ?? "No post-update preview was available.", true);
         }
-        if (request.Action == "rollback")
+        if (request.Action == "rollback" || (request.Manager == "windows-update" && request.Action == "uninstall"))
         {
             var (verifyFile, verifyArgs) = VerificationCommand(request.Manager, ValidateId(request.PackageId));
             if (verifyFile is null) return (false, "No rollback verification is available.", true);
             var rollbackCheck = await runner.RunAsync(verifyFile, verifyArgs, TimeSpan.FromMinutes(3), ct);
-            return (false, rollbackCheck.Output, true);
+            var verified = request.Manager == "windows-update" && rollbackCheck.ExitCode == 0 && rollbackCheck.Output.Contains("no longer installed", StringComparison.OrdinalIgnoreCase);
+            return (verified, rollbackCheck.Output, !verified);
         }
+        if (request.Manager == "windows-update" && request.Action == "repair")
+            return (false, "DISM and SFC completed. Review the command output and Windows Update history.", true);
         var package = ValidateId(request.PackageId);
         if (request.Action == "update")
         {
@@ -104,6 +109,7 @@ public sealed class PackageManagers(ProcessRunner runner)
 
     private static (string? File, string[] Args) VerificationCommand(string manager, string package) => manager switch
     {
+        "windows-update" => ("powershell.exe", ["-NoProfile", "-Command", "if (Get-HotFix -Id " + NormalizeHotFixId(package) + " -ErrorAction SilentlyContinue) { Write-Output 'Update is still installed'; exit 1 } else { Write-Output 'Update is no longer installed'; exit 0 }"]),
         "winget" => ("winget", ["list", "--id", package, "--exact", "--disable-interactivity"]),
         "choco" => ("choco", ["list", "--limit-output", "--exact", package]),
         "scoop" => ("scoop", ["list", package]),
@@ -141,6 +147,7 @@ public sealed class PackageManagers(ProcessRunner runner)
 
     private static (string? File, string[] Args) PreviewCommand(string manager) => manager switch
     {
+        "windows-update" => ("powershell.exe", ["-NoProfile", "-Command", "Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 40 HotFixID,Description,InstalledOn | Format-Table -AutoSize"]),
         "winget" => ("winget", ["upgrade", "--accept-source-agreements", "--disable-interactivity"]),
         "choco" => ("choco", ["outdated", "--limit-output"]),
         "scoop" => ("scoop", ["status"]),
@@ -153,8 +160,25 @@ public sealed class PackageManagers(ProcessRunner runner)
         "brew" => ("brew", ["outdated", "--verbose"]),
         _ => (null, [])
     };
-    private static (string File, string[] Args) BuildCommand(string manager, string action, string package) => (manager, action) switch
+    private static string NormalizeHotFixId(string value)
     {
+        var digits = value.StartsWith("KB", StringComparison.OrdinalIgnoreCase) ? value[2..] : value;
+        if (!Regex.IsMatch(digits, @"^\d{6,8}$")) throw new ArgumentException("Windows Update rollback requires an exact KB number, such as KB5035845.");
+        return "KB" + digits;
+    }
+
+    private static (string File, string[] Args) BuildCommand(string manager, string action, string package)
+    {
+        if (manager == "windows-update")
+        {
+            if (action == "repair")
+                return ("powershell.exe", ["-NoProfile", "-Command", "DISM.exe /Online /Cleanup-Image /RestoreHealth; if ($LASTEXITCODE -eq 0) { sfc /scannow }"]);
+            if (action is "rollback" or "uninstall")
+                return ("wusa.exe", ["/uninstall", "/kb:" + NormalizeHotFixId(package)[2..], "/quiet", "/norestart"]);
+            throw new ArgumentException("Windows OS updates are installed through Windows Update Settings. Use Settings to check/install; INTA can inspect, repair servicing files and uninstall a specific KB.");
+        }
+        return (manager, action) switch
+        {
         ("winget", "update-all") => ("winget", ["upgrade", "--all", "--silent", "--accept-source-agreements", "--accept-package-agreements"]),
         ("winget", "update") => ("winget", ["upgrade", "--id", package, "--exact", "--silent", "--accept-source-agreements", "--accept-package-agreements"]),
         ("winget", "repair") => ("winget", ["repair", "--id", package, "--exact", "--silent"]),
@@ -193,7 +217,8 @@ public sealed class PackageManagers(ProcessRunner runner)
         ("snap", "uninstall") => ("snap", ["remove", package]),
         ("uniget", "update-all") => ("uniget.exe", ["package", "update-all", "--wait", "true", "--timeout", "3600"]),
         _ => throw new ArgumentException($"The {manager} manager does not support the {action} operation.")
-    };
+        };
+    }
     private static string ValidatePackageId(string value)
     {
         if (string.IsNullOrWhiteSpace(value) || value.Length > 180 || value.StartsWith('-') || !Regex.IsMatch(value, @"^[A-Za-z0-9][A-Za-z0-9._+@:/-]*$"))
