@@ -33,6 +33,8 @@
 9. Test keyboard-only operation, screen reader labels, narrow mobile width, reduced motion and muted device audio.
 10. Confirm customer-facing handback content does not show XP or badges and that the original checklist export and print actions still work.
 
+The detailed provider-neutral API, identity, tenant, offline conflict and server-authoritative reward design is in [Progression synchronization contract](progression-sync-contract.md). The broader product direction remains in [Guided progress and rewards](guided-progress-and-rewards.md).
+
 ## Next engineering gate: real account sync
 
 Before adding a login button or claiming sync, inspect the selected identity provider and server architecture. Define authenticated user and organization scopes, server-authoritative idempotent event writes, conflict-safe checklist revisions, account recovery, export/deletion, offline queue replay and tenant isolation. Keep customer service records in the approved ticketing system, separate from personal learning rewards. Do not store secrets or customer data in local storage.
