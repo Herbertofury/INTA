@@ -2,3 +2,6 @@ interface:
   display_name: "Permission Command Center"
   short_description: "Auto-preflight GitHub and Drive access, then resume."
   default_prompt: "Quickly preflight GitHub, Drive, or the providers this task needs; surface approvals early and continue."
+
+policy:
+  allow_implicit_invocation: true
