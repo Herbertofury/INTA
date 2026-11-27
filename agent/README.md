@@ -34,20 +34,21 @@ The installer verifies SHA-256, installs to the current user's LocalAppData, cre
 
 ## Supported manager actions
 
-| Manager | Preview | Update one | Update all | Repair/reinstall | Uninstall |
-|---|---:|---:|---:|---:|---:|
-| WinGet | Yes | Yes | Yes | Yes, if supported | Yes |
-| Chocolatey | Yes | Yes | Yes | Reinstall | Yes |
-| Scoop | Yes | Yes | Yes | Reinstall | Yes |
-| APT | Yes | Yes | Yes | Reinstall | Yes |
-| DNF | Yes | Yes | Yes | Reinstall | Yes |
-| Pacman | Yes | Yes | Yes | Reinstall | Yes |
-| Homebrew | Yes | Yes | Yes | Reinstall | Yes |
-| Flatpak | Yes | Yes | Yes | Repository repair | Yes |
-| Snap | Yes | Yes | Yes | Not generic | Yes |
-| UniGetUI | Yes | Yes | Yes | Not yet | Not yet |
+| Manager | Preview | Update one | Update all | Repair/reinstall | Uninstall | Rollback |
+|---|---:|---:|---:|---:|---:|---:|
+| Windows Update | Installed KB history | Open Settings | Open Settings | DISM + SFC | Exact KB via WUSA | Exact KB via WUSA |
+| WinGet | Yes | Yes | Yes | If package supports it | Yes | No generic rollback |
+| Chocolatey | Yes | Yes | Yes | Reinstall | Yes | Requires an explicit previous package version |
+| Scoop | Yes | Yes | Yes | Reinstall | Yes | Requires an explicit previous version |
+| APT | Yes | Yes | Yes | Reinstall | Yes | Requires a selected package version |
+| DNF | Yes | Yes | Yes | Reinstall | Yes | Requires a selected package version |
+| Pacman | Yes | Yes | Yes | Reinstall | Yes | Requires a cached package archive |
+| Homebrew | Yes | Yes | Yes | Reinstall | Yes | Requires a pinned/formula-specific prior version |
+| Flatpak | Yes | Yes | Yes | Repository repair | Yes | Commit-specific rollback is not automated |
+| Snap | Yes | Yes | Yes | Not generic | Yes | Native previous-revision revert |
+| UniGetUI | Yes | Yes | Yes | Not yet | Not yet | Not yet |
 
-The agent currently collects Windows installed applications from the uninstall registry. Linux/macOS currently provide manager detection and update previews; richer unified installed-app inventory is not included in the first release. Package IDs are copied from the selected manager's preview. Native rollback is currently exposed for Snap via `snap revert`; other package managers require a separately identified previous version or vendor-supported rollback procedure.
+The agent currently collects Windows installed applications from the uninstall registry. Linux/macOS currently provide manager detection and update previews; richer unified installed-app inventory is not included in the first release. Package IDs are copied from the selected manager's preview. Native rollback is currently exposed for Snap via `snap revert` and for Windows Update through an exact KB uninstall. Other package managers require a separately identified previous version or vendor-supported rollback procedure. Windows Update inventory is installed-hotfix history, not a complete list of offered OS updates; installation opens the supported Settings interface. Windows servicing repair runs DISM then SFC.
 
 ## Build locally
 
@@ -59,4 +60,4 @@ Other runtime identifiers: linux-x64, osx-arm64, osx-x64.
 
 ## Boundaries
 
-Windows OS servicing and Microsoft Store updates remain in their supported Windows UI and repair workflows; the agent does not silently manipulate servicing internals. The website and PWA can only connect to the agent on the same device. Phone-to-desktop management through a remote account relay is not available yet because this repository currently has a static GitHub Pages frontend and no authenticated relay service.
+Windows OS update installation and Microsoft Store updates remain in their supported Windows UI. The agent can inspect installed KB history, run DISM/SFC repair, and uninstall a specific uninstallable KB through WUSA; it does not silently manipulate Windows servicing internals. The website and PWA can only connect to the agent on the same device. Phone-to-desktop management through a remote account relay is not available yet because this repository currently has a static GitHub Pages frontend and no authenticated relay service.
