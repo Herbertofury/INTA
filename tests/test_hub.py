@@ -72,6 +72,9 @@ class HubIntegrity(unittest.TestCase):
     def test_updates_center_catalog_and_app_are_integrated(self):
         catalog = json.loads((ROOT / 'data/updates-center.json').read_text())
         build.validate_updates_center(catalog)
+        self.assertGreaterEqual(len(catalog['commands']), 50)
+        self.assertGreaterEqual(len(catalog['channels']), 12)
+        self.assertGreaterEqual(len(catalog['platforms']), 4)
         output = build.build_outputs()
         embedded = json.loads(output['site/catalog.json'])
         self.assertEqual(embedded['updatesCenter']['commands'], catalog['commands'])
@@ -81,6 +84,9 @@ class HubIntegrity(unittest.TestCase):
         self.assertIn('winget repair --id Publisher.Package --exact --interactive', output['site/index.html'])
         self.assertIn('uniget.exe package repair', output['site/index.html'])
         self.assertIn('choco upgrade all --noop', output['site/index.html'])
+        self.assertIn('Patch My PC Cloud', output['site/index.html'])
+        self.assertIn('flatpak repair', output['site/index.html'])
+        self.assertIn('brew upgrade', output['site/index.html'])
         self.assertIn('updatesCenterCommands', output['site/build-manifest.json'])
 
     def test_updates_center_rejects_unknown_channel_command(self):
