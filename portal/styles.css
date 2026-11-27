@@ -242,6 +242,21 @@ main { min-height: calc(100vh - 125px); padding: 30px 32px 48px; outline: none; 
 .field-note-outcomes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin: 0 0 20px; }
 .field-note-outcomes dt { margin-bottom: 6px; color: var(--text); font-size: 14px; font-weight: 600; }
 .field-note-outcomes dd { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.65; }
+
+.field-note-commands { margin:18px 0 20px; border-top:1px solid var(--line-soft); }
+.field-note-commands > h4 { display:flex; align-items:center; gap:8px; margin:12px 0; font-size:15px; }
+.field-note-command { margin:12px 0 16px; border:1px solid var(--line); border-radius:5px; background:var(--surface); overflow:hidden; }
+.field-note-command-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:11px 13px; border-bottom:1px solid var(--line-soft); }
+.field-note-command-heading > div { display:grid; gap:3px; min-width:0; }
+.field-note-command-heading strong { font-size:14px; }
+.field-note-command-heading span { color:var(--muted); font-size:12px; line-height:1.5; }
+.field-note-command-heading .copy-command { flex:0 0 auto; min-height:36px; padding:5px 9px; border:1px solid var(--line); border-radius:4px; }
+.field-note-command pre { border-bottom:1px solid var(--line-soft); }
+.field-note-command .command-safety,.field-note-command .command-source,.field-note-command .command-copy-note { padding-inline:13px; }
+@media (max-width:640px) {
+  .field-note-command-heading { display:block; }
+  .field-note-command-heading .copy-command { margin-top:9px; }
+}
 .field-note-tools { border-top: 1px solid var(--line-soft); }
 .field-note-tool { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
 .field-note-tool h4 { margin: 0; font-size: 16px; font-weight: 600; }
