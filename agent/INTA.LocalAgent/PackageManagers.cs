@@ -78,8 +78,8 @@ public sealed class PackageManagers(ProcessRunner runner)
             var (verifyFile, verifyArgs) = VerificationCommand(request.Manager, ValidateId(request.PackageId));
             if (verifyFile is null) return (false, "No rollback verification is available.", true);
             var rollbackCheck = await runner.RunAsync(verifyFile, verifyArgs, TimeSpan.FromMinutes(3), ct);
-            var verified = request.Manager == "windows-update" && rollbackCheck.ExitCode == 0 && rollbackCheck.Output.Contains("no longer installed", StringComparison.OrdinalIgnoreCase);
-            return (verified, rollbackCheck.Output, !verified);
+            var hotfixRemoved = request.Manager == "windows-update" && rollbackCheck.ExitCode == 0 && rollbackCheck.Output.Contains("no longer installed", StringComparison.OrdinalIgnoreCase);
+            return (hotfixRemoved, rollbackCheck.Output, !hotfixRemoved);
         }
         if (request.Manager == "windows-update" && request.Action == "repair")
             return (false, "DISM and SFC completed. Review the command output and Windows Update history.", true);
