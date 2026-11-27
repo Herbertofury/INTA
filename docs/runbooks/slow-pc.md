@@ -275,6 +275,23 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Close one agreed nonessential application and repeat the same task, keeping the before/after observations.
 3. If one process grows repeatedly without releasing memory, collect its identity and reproduction for the application owner rather than routinely emptying caches.
 
+#### ⚡ Quick commands
+
+**Capture memory pressure and top working sets** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Compare available memory and top processes while the slowdown is occurring.
+
+```powershell
+Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize,FreePhysicalMemory,TotalVirtualMemorySize,FreeVirtualMemory
+Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 15 ProcessName,Id,@{N='WorkingSetMiB';E={[math]::Round($_.WorkingSet64/1MB,1)}}
+resmon
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Get-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-process)
+
+
 **Prove it worked:** The evidence identifies actual workload pressure or a growing process, rather than treating every cached page as lost RAM.
 
 **If this does not resolve it:** If memory pressure does not correlate with the delay, return to CPU, storage and network evidence.
@@ -296,6 +313,22 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 1. Open <a href="https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows" title="Open Task Manager official download or service page" aria-label="Open Task Manager official download or service page" data-inta-brand="app-task-manager"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Task Manager official page" width="18" height="18" valign="middle" /></a> [Task Manager](https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows) > Startup apps and record enabled entries and their reported impact.
 2. Disable one agreed optional item, keeping required security, accessibility and managed-support software in place, then repeat the same restart/sign-in test.
 3. Keep only the evidenced change, and re-enable entries that did not improve the measured task.
+
+#### ⚡ Quick commands
+
+**Open startup impact and capture boot timing** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Open <a href="https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows" title="Open Task Manager official download or service page" aria-label="Open Task Manager official download or service page" data-inta-brand="app-task-manager"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Task Manager official page" width="18" height="18" valign="middle" /></a> [Task Manager](https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows)'s Startup Apps page and <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon" title="Open Reliability Monitor official download or service page" aria-label="Open Reliability Monitor official download or service page" data-inta-brand="app-reliability-monitor"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Reliability Monitor official page" width="18" height="18" valign="middle" /></a> [Reliability Monitor](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon) to correlate slow sign-in with startup changes.
+
+```powershell
+Start-Process 'ms-settings:startupapps'
+perfmon /rel
+```
+
+> **Before running:** Opens <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) utilities and reads diagnostic history. Do not disable security, backup, management or accessibility services as a performance shortcut.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor" title="Open Performance Monitor official download or service page" aria-label="Open Performance Monitor official download or service page" data-inta-brand="app-performance-monitor"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Performance Monitor official page" width="18" height="18" valign="middle" /></a> [Microsoft Performance Monitor](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon)
+
 
 **Prove it worked:** The user’s real ready-to-work time improves and required background functions still run.
 
@@ -321,6 +354,23 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Compare the pause time with repeated file, registry or network-path operations and their durations; a single ACCESS DENIED or NAME NOT FOUND is not automatically the cause.
 3. Test the specific blocked path or dependency, then repeat the same application action with the scoped correction.
 
+#### ⚡ Quick commands
+
+**Find and launch <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/procmon" title="Open Process Monitor official download or service page" aria-label="Open Process Monitor official download or service page" data-inta-brand="procmon"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Process Monitor official page" width="18" height="18" valign="middle" /></a> [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) from the <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite" title="Open Microsoft Sysinternals Suite official download or service page" aria-label="Open Microsoft Sysinternals Suite official download or service page" data-inta-brand="sysinternals"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Microsoft Sysinternals Suite official page" width="18" height="18" valign="middle" /></a> [Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Check for the portable <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/procmon" title="Open Process Monitor official download or service page" aria-label="Open Process Monitor official download or service page" data-inta-brand="procmon"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Process Monitor official page" width="18" height="18" valign="middle" /></a> [Procmon](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) executable in the technician toolbox and open the official download page if it is not present.
+
+```powershell
+$candidates = @('$env:ProgramFiles\SysinternalsSuite\Procmon64.exe', '$env:LOCALAPPDATA\INTA Toolbox\SysinternalsSuite\Procmon64.exe', '$env:USERPROFILE\Downloads\SysinternalsSuite\Procmon64.exe') | ForEach-Object { [Environment]::ExpandEnvironmentVariables($_) }
+$procmon = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+if ($procmon) { Start-Process $procmon } else { Start-Process 'https://learn.microsoft.com/en-us/sysinternals/downloads/procmon' }
+```
+
+> **Before running:** <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/procmon" title="Open Process Monitor official download or service page" aria-label="Open Process Monitor official download or service page" data-inta-brand="procmon"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Process Monitor official page" width="18" height="18" valign="middle" /></a> [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) can capture paths, process names and user activity. Use a short, narrowly filtered trace; store it privately and sanitize before sharing. The command does not download or execute an unverified binary.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/procmon" title="Open Process Monitor official download or service page" aria-label="Open Process Monitor official download or service page" data-inta-brand="procmon"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Process Monitor official page" width="18" height="18" valign="middle" /></a> [Microsoft Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)
+
+
 **Prove it worked:** A particular wait or repeated failing operation correlates with the freeze and the corrected task is measurably better.
 
 **If this does not resolve it:** Escalate an unresolved trace to the application owner with a private, bounded capture; stop tracing if the disk becomes unstable.
@@ -344,6 +394,22 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 1. Inspect Settings > System > Power & battery for the active power mode and energy-saving state.
 2. Check whether the charger is recognized and suitable for the model; record any low-power or charging warning.
 3. Choose an approved power mode for the workload and retest without disabling thermal or battery protections.
+
+#### ⚡ Quick commands
+
+**Generate a battery health report** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/) (Run as Administrator)
+
+Create a <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) battery report to compare design capacity, full-charge capacity and recent usage.
+
+```powershell
+powercfg /batteryreport /output "$env:USERPROFILE\Desktop\battery-report.html"
+Start-Process "$env:USERPROFILE\Desktop\battery-report.html"
+```
+
+> **Before running:** Writes an HTML report to the specified path. Review it locally; the report may include device and usage history. Do not infer battery failure from one metric alone.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options" title="Open powercfg official download or service page" aria-label="Open powercfg official download or service page" data-inta-brand="powercfg"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="powercfg official page" width="18" height="18" valign="middle" /></a> [Microsoft powercfg command-line options](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)
+
 
 **Prove it worked:** The performance difference is tied to an observed power state, charger issue or policy rather than an unexplained cleanup change.
 

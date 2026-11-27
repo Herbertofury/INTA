@@ -280,6 +280,23 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Update or repair the approved App Installer deployment through its supported source and open a fresh user terminal.
 3. Run <a href="https://github.com/microsoft/winget-cli/releases/latest" title="Open WinGet official download or service page" aria-label="Open WinGet official download or service page" data-inta-brand="winget"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="WinGet official page" width="18" height="18" valign="middle" /></a> [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) --info, then inspect one approved package before starting the workstation’s application install list.
 
+#### ⚡ Quick commands
+
+**Check <a href="https://github.com/microsoft/winget-cli/releases/latest" title="Open WinGet official download or service page" aria-label="Open WinGet official download or service page" data-inta-brand="winget"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="WinGet official page" width="18" height="18" valign="middle" /></a> [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) availability and package sources** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
+
+Check whether App Installer exposes <a href="https://github.com/microsoft/winget-cli/releases/latest" title="Open WinGet official download or service page" aria-label="Open WinGet official download or service page" data-inta-brand="winget"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="WinGet official page" width="18" height="18" valign="middle" /></a> [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) and whether the package sources are configured.
+
+```powershell
+Get-Command winget.exe -ErrorAction SilentlyContinue
+winget --info
+winget source list
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Microsoft Windows Package Manager](https://learn.microsoft.com/en-us/windows/package-manager/winget/)
+
+
 **Prove it worked:** The actual user can invoke <a href="https://github.com/microsoft/winget-cli/releases/latest" title="Open WinGet official download or service page" aria-label="Open WinGet official download or service page" data-inta-brand="winget"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="WinGet official page" width="18" height="18" valign="middle" /></a> [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) and its configured sources are the intended ones.
 
 **If this does not resolve it:** If store access is managed or the platform is unsupported, use the organization’s deployment route instead of downloading a random replacement executable.
