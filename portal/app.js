@@ -961,7 +961,7 @@
   }
   const projectResources = [
     { icon: 'layers', title: 'The INTA wiki', body: 'Browse the complete technician field guide on GitHub. Read a procedure, follow its sources, or propose an improvement.', label: 'Open the wiki', url: `${repo}/wiki` },
-    { icon: 'usb', title: 'Rescue & boot media', body: 'Find INTA Rescue releases and the Media Creator. Keep a recovery workspace ready for systems that need attention.', label: 'View releases', url: `${repo}/releases` },
+    { icon: 'usb', title: 'Rescue & boot media', body: 'Historical boot and checksum checks do not qualify the bundled scanner. Read the Rescue status before choosing media for a scan.', label: 'Check Rescue status', url: `${repo}/blob/main/docs/rescue-scanner-release-review.md#historical-download-status` },
     { icon: 'book', title: 'Athena research', body: 'Explore the research collection behind specialist additions to the toolkit. Bring proven findings into a practical workflow.', label: 'Explore Athena', url: 'https://github.com/Herbertofury/Athena' },
     { icon: 'github', title: 'Source repository', body: 'The repository holds the hub, guides, source catalog, and rescue tooling. Share a reproducible fix or suggest a useful tool.', label: 'Open the repository', url: repo },
     { icon: 'activity', title: 'Build & publication checks', body: 'Follow the repository workflows and review the result of each build. Release and source history remain easy to inspect.', label: 'View workflow runs', url: `${repo}/actions` },
