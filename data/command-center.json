@@ -1,0 +1,679 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "title": "INTA Command Center",
+  "description": "Searchable, cross-shell command library, package-manager maintenance, trusted technician toolkits and guided update workflows.",
+  "shells": [
+    "PowerShell",
+    "CMD",
+    "Bash"
+  ],
+  "categories": [
+    {
+      "id": "diagnostics",
+      "label": "Diagnostics",
+      "description": "Collect a baseline, inspect events, hardware, network and performance."
+    },
+    {
+      "id": "repair",
+      "label": "Repair & recovery",
+      "description": "Run evidence-led Windows repairs and verify the result."
+    },
+    {
+      "id": "security",
+      "label": "Security & response",
+      "description": "Inspect Defender, update signatures and launch defensive tools."
+    },
+    {
+      "id": "install",
+      "label": "Install & toolkits",
+      "description": "Discover package managers and acquire trusted utilities."
+    },
+    {
+      "id": "updates",
+      "label": "Software & OS updates",
+      "description": "Inventory and update applications through the package managers already in use."
+    },
+    {
+      "id": "linux",
+      "label": "Linux & rescue",
+      "description": "Inspect and maintain Debian/Ubuntu, Fedora/RHEL and Arch systems."
+    }
+  ],
+  "commands": [
+    {
+      "id": "win-baseline",
+      "title": "Collect a Windows technician baseline",
+      "category": "diagnostics",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Capture OS, device, uptime, memory, volume, disk and network details.",
+      "code": "Get-ComputerInfo | Select-Object CsName,WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture,CsManufacturer,CsModel\nGet-CimInstance Win32_OperatingSystem | Select-Object LastBootUpTime,TotalVisibleMemorySize,FreePhysicalMemory\nGet-Volume | Select-Object DriveLetter,FileSystem,HealthStatus,SizeRemaining,Size\nGet-PhysicalDisk | Format-Table FriendlyName,MediaType,HealthStatus,OperationalStatus,Size -AutoSize\nGet-NetIPConfiguration",
+      "safety": "Read-only inventory. Output may expose customer hostnames, serials, usernames and IP addresses. Sanitize before sharing outside the private service record.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo",
+      "sourceTitle": "Microsoft Get-ComputerInfo"
+    },
+    {
+      "id": "win-open-diagnostics",
+      "title": "Open the built-in Windows diagnostic consoles",
+      "category": "diagnostics",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Open Resource Monitor, Reliability Monitor, System Information, Event Viewer and DirectX diagnostics.",
+      "code": "Start-Process resmon\nStart-Process perfmon.exe -ArgumentList '/rel'\nStart-Process msinfo32.exe\nStart-Process eventvwr.msc\nStart-Process dxdiag.exe",
+      "safety": "Opens local diagnostic utilities; no repair is performed. Logs and reports can contain identifying system information.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+      "sourceTitle": "Microsoft Performance Monitor"
+    },
+    {
+      "id": "win-top-processes",
+      "title": "Find processes using the most CPU and memory",
+      "category": "diagnostics",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Capture current top CPU and working-set consumers and open Resource Monitor.",
+      "code": "Get-Process | Sort-Object CPU -Descending | Select-Object -First 15 ProcessName,Id,CPU\nGet-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 15 ProcessName,Id,@{N='WorkingSetMiB';E={[math]::Round($_.WorkingSet64/1MB,1)}}\nresmon",
+      "safety": "A point-in-time snapshot, not proof of a leak. Repeat while the user reproduces the slowdown; do not terminate processes solely from this ranking.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process",
+      "sourceTitle": "Microsoft Get-Process"
+    },
+    {
+      "id": "win-reliability-events",
+      "title": "Inspect recent crashes and unexpected shutdowns",
+      "category": "diagnostics",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Read recent Kernel-Power, unexpected-shutdown and bugcheck events.",
+      "code": "Get-WinEvent -FilterHashtable @{LogName='System'; Id=41,6008,1001} -MaxEvents 40 | Select-Object TimeCreated,Id,ProviderName,Message | Format-List",
+      "safety": "Read-only. Event IDs are symptoms and timeline evidence, not a root-cause diagnosis. Sanitize host and path details before sharing.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent",
+      "sourceTitle": "Microsoft Get-WinEvent"
+    },
+    {
+      "id": "win-storage-inventory",
+      "title": "Inventory disks before cloning or recovery",
+      "category": "diagnostics",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Identify disks by model, serial, capacity, bus type and health before selecting a source or target.",
+      "code": "Get-Disk | Format-Table Number,FriendlyName,SerialNumber,BusType,PartitionStyle,OperationalStatus,Size -AutoSize\nGet-PhysicalDisk | Format-Table FriendlyName,SerialNumber,MediaType,HealthStatus,OperationalStatus,Size -AutoSize",
+      "safety": "Read-only inventory. Physically verify disk identity before imaging or formatting. For a failing source, avoid stress tests and write repairs; follow image-first recovery.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/storage/get-disk",
+      "sourceTitle": "Microsoft Get-Disk"
+    },
+    {
+      "id": "win-network-diagnostics",
+      "title": "Diagnose IP, DNS and HTTPS reachability",
+      "category": "diagnostics",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Separate adapter configuration, DNS resolution and TCP connectivity checks.",
+      "code": "Get-NetIPConfiguration\nResolve-DnsName learn.microsoft.com\nTest-NetConnection learn.microsoft.com -Port 443 -InformationLevel Detailed",
+      "safety": "Read-only network tests. Replace the example host with an approved endpoint when testing internal services. A successful public test does not prove internal DNS or VPN health.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection",
+      "sourceTitle": "Microsoft Test-NetConnection"
+    },
+    {
+      "id": "win-dism-sfc",
+      "title": "Repair Windows component store and system files",
+      "category": "repair",
+      "shell": "PowerShell",
+      "privilege": "Administrator",
+      "risk": "changes-system",
+      "summary": "Run supported DISM component-store repair followed by System File Checker.",
+      "code": "DISM.exe /Online /Cleanup-Image /RestoreHealth\nsfc /scannow",
+      "safety": "State-changing repair. Use a stable power connection and an appropriate repair source if DISM requests one. Run DISM first, let it finish, then SFC. Review exit results and logs; reboot only when indicated.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+      "sourceTitle": "Microsoft Repair a Windows Image"
+    },
+    {
+      "id": "win-dism-check",
+      "title": "Check component-store health without repairing",
+      "category": "diagnostics",
+      "shell": "CMD",
+      "privilege": "Administrator",
+      "risk": "read-only",
+      "summary": "Inspect Windows component-store health before choosing a repair path.",
+      "code": "DISM.exe /Online /Cleanup-Image /CheckHealth\nDISM.exe /Online /Cleanup-Image /ScanHealth",
+      "safety": "Diagnostic scan. It may take time but does not apply the RestoreHealth repair. Run on a stable machine and retain relevant logs.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+      "sourceTitle": "Microsoft DISM repair documentation"
+    },
+    {
+      "id": "win-sfc-log",
+      "title": "Extract recent SFC repair findings",
+      "category": "diagnostics",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Inspect System File Checker entries from the CBS log.",
+      "code": "Select-String -Path \"$env:windir\\Logs\\CBS\\CBS.log\" -Pattern '\\[SR\\]' | Select-Object -Last 80",
+      "safety": "Read-only log extraction. CBS entries may include paths and machine context; keep raw logs private and redact before external sharing.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+      "sourceTitle": "Microsoft System File Checker"
+    },
+    {
+      "id": "win-disk-scan",
+      "title": "Scan an NTFS volume for file-system errors",
+      "category": "diagnostics",
+      "shell": "CMD",
+      "privilege": "Administrator",
+      "risk": "read-only",
+      "summary": "Run an online scan of the C: volume without requesting an offline repair.",
+      "code": "chkdsk C: /scan",
+      "safety": "Online scan, not a substitute for imaging a failing disk. If SMART or hardware symptoms indicate imminent failure, stop and image first. Do not add /f or /r without a recovery plan and backup.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk",
+      "sourceTitle": "Microsoft chkdsk"
+    },
+    {
+      "id": "defender-status",
+      "title": "Inspect Microsoft Defender protection and signatures",
+      "category": "security",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Check antivirus, real-time protection and signature freshness.",
+      "code": "Get-MpComputerStatus | Select-Object AMServiceEnabled,AntivirusEnabled,RealTimeProtectionEnabled,AntivirusSignatureVersion,AntivirusSignatureLastUpdated",
+      "safety": "Read-only. Defender cmdlets and fields vary by Windows edition and security-provider ownership. A healthy status is not proof that a device is uncompromised.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/defender/get-mpcomputerstatus",
+      "sourceTitle": "Microsoft Get-MpComputerStatus"
+    },
+    {
+      "id": "defender-update-signatures",
+      "title": "Update Microsoft Defender security intelligence",
+      "category": "security",
+      "shell": "PowerShell",
+      "privilege": "Administrator",
+      "risk": "changes-system",
+      "summary": "Request the latest Defender security intelligence updates.",
+      "code": "Update-MpSignature",
+      "safety": "Changes security intelligence on the endpoint and requires Defender to be available. Confirm the endpoint's active security product and management policy first; verify signature time afterward.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/defender/update-mpsignature",
+      "sourceTitle": "Microsoft Update-MpSignature"
+    },
+    {
+      "id": "defender-full-scan",
+      "title": "Start a Microsoft Defender full scan",
+      "category": "security",
+      "shell": "PowerShell",
+      "privilege": "Administrator",
+      "risk": "long-running",
+      "summary": "Run a full scan after confirming Defender is the active primary antivirus product.",
+      "code": "Start-MpScan -ScanType FullScan",
+      "safety": "Starts a potentially long scan. This does not replace incident containment or offline analysis. Record scope, completion and detections; third-party AV ownership can limit Defender cmdlets.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/defender/start-mpscan",
+      "sourceTitle": "Microsoft Start-MpScan"
+    },
+    {
+      "id": "win-get-updates",
+      "title": "List WinGet application updates",
+      "category": "updates",
+      "shell": "CMD",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Preview applications WinGet can identify for update.",
+      "code": "winget upgrade",
+      "safety": "Inventory only. Review package identity, publisher, version, source and pins before choosing updates. Some apps are not managed by WinGet.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+      "sourceTitle": "Microsoft WinGet upgrade"
+    },
+    {
+      "id": "win-winget-update-all",
+      "title": "Update all identified WinGet applications",
+      "category": "updates",
+      "shell": "CMD",
+      "privilege": "User or Administrator as required",
+      "risk": "changes-system",
+      "summary": "Apply available WinGet updates with interactive installers where supported.",
+      "code": "winget upgrade --all --interactive",
+      "safety": "Changes installed software. Preview with `winget upgrade` first, check business app compatibility, close affected apps, confirm maintenance window and retain installer prompts. Some packages may require separate vendor update mechanisms.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+      "sourceTitle": "Microsoft WinGet upgrade"
+    },
+    {
+      "id": "win-winget-update-unknown",
+      "title": "Include packages with unknown installed versions",
+      "category": "updates",
+      "shell": "CMD",
+      "privilege": "User or Administrator as required",
+      "risk": "changes-system",
+      "summary": "Update WinGet packages even when WinGet cannot determine their installed version.",
+      "code": "winget upgrade --all --include-unknown --interactive",
+      "safety": "Higher uncertainty than a normal upgrade-all run. Preview first, review each candidate and avoid using this as a blind unattended fleet update. Pinned packages remain governed by their pin policy.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+      "sourceTitle": "Microsoft WinGet upgrade"
+    },
+    {
+      "id": "win-choco-detect",
+      "title": "Check Chocolatey installation and outdated packages",
+      "category": "updates",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Check whether Chocolatey is installed and list packages with updates.",
+      "code": "Get-Command choco -ErrorAction SilentlyContinue\nif (Get-Command choco -ErrorAction SilentlyContinue) { choco outdated }",
+      "safety": "Read-only package inventory. Package visibility depends on configured sources, licenses, pins and Chocolatey edition.",
+      "sourceUrl": "https://docs.chocolatey.org/docs/commands-outdated/",
+      "sourceTitle": "Chocolatey outdated"
+    },
+    {
+      "id": "win-choco-preview",
+      "title": "Preview a Chocolatey upgrade-all operation",
+      "category": "updates",
+      "shell": "PowerShell",
+      "privilege": "Administrator",
+      "risk": "read-only",
+      "summary": "Use Chocolatey's no-operation mode to inspect the upgrade-all plan.",
+      "code": "choco upgrade all --noop",
+      "safety": "No-op preview. Review package IDs, sources, pins and package scripts. Chocolatey package install scripts are code and can make system-wide changes during an actual upgrade.",
+      "sourceUrl": "https://docs.chocolatey.org/en-us/choco/commands/",
+      "sourceTitle": "Chocolatey command reference"
+    },
+    {
+      "id": "win-choco-update-all",
+      "title": "Upgrade all Chocolatey-managed packages",
+      "category": "updates",
+      "shell": "PowerShell",
+      "privilege": "Administrator",
+      "risk": "changes-system",
+      "summary": "Apply Chocolatey package updates after reviewing the no-op preview.",
+      "code": "choco upgrade all --yes",
+      "safety": "State-changing operation. Run `choco outdated` and `choco upgrade all --noop` first. Review sources, package scripts, exclusions and pins; use a maintenance window and keep recovery options. Do not add --force or --ignore-pinned by default.",
+      "sourceUrl": "https://docs.chocolatey.org/en-us/choco/commands/",
+      "sourceTitle": "Chocolatey command reference"
+    },
+    {
+      "id": "win-scoop-status",
+      "title": "Check Scoop package updates",
+      "category": "updates",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Show Scoop-managed apps and their available update status.",
+      "code": "scoop status",
+      "safety": "Read-only package inventory. Scoop manages only packages installed through its buckets; it does not cover all Windows applications.",
+      "sourceUrl": "https://github.com/ScoopInstaller/Scoop",
+      "sourceTitle": "Scoop official project"
+    },
+    {
+      "id": "win-scoop-update",
+      "title": "Update Scoop apps",
+      "category": "updates",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "changes-system",
+      "summary": "Refresh Scoop manifests and update Scoop-managed applications.",
+      "code": "scoop update\nscoop update *",
+      "safety": "Changes user-installed software. Preview with `scoop status`, check app compatibility and use a backup/rollback route for important developer tools.",
+      "sourceUrl": "https://github.com/ScoopInstaller/Scoop",
+      "sourceTitle": "Scoop official project"
+    },
+    {
+      "id": "win-open-windows-update",
+      "title": "Open Windows Update settings",
+      "category": "updates",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Open the supported Windows Update interface for OS servicing.",
+      "code": "Start-Process 'ms-settings:windowsupdate'",
+      "safety": "Opens Settings only. Review update policy, safeguard holds, active hours and reboot requirements. Do not bypass organizational update management.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+      "sourceTitle": "Microsoft Windows Update"
+    },
+    {
+      "id": "win-open-store-updates",
+      "title": "Open Microsoft Store app updates",
+      "category": "updates",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Open the Store downloads and updates page.",
+      "code": "Start-Process 'ms-windows-store://downloadsandupdates'",
+      "safety": "Opens the Store UI. Review pending updates and managed-device policy before applying.",
+      "sourceUrl": "https://support.microsoft.com/en-us/account-billing/get-updates-for-apps-and-games-in-microsoft-store-2daed4e5-4c7f-4e7b-9d09-6b4b5c8e9f6a",
+      "sourceTitle": "Microsoft Store app updates"
+    },
+    {
+      "id": "win-choco-install",
+      "title": "Install Chocolatey CLI through WinGet",
+      "category": "install",
+      "shell": "PowerShell",
+      "privilege": "Administrator",
+      "risk": "installs-software",
+      "summary": "Install Chocolatey using its documented WinGet package ID rather than executing a downloaded bootstrap script.",
+      "code": "winget show --id chocolatey.chocolatey --exact --source winget\nwinget install --id chocolatey.chocolatey --exact --source winget --interactive",
+      "safety": "Installs a machine-level package manager. Verify publisher, package ID, source and organization policy first. Chocolatey packages can run installer scripts; inspect package metadata and sources before use.",
+      "sourceUrl": "https://docs.chocolatey.org/en-us/choco/setup/",
+      "sourceTitle": "Chocolatey installation"
+    },
+    {
+      "id": "win-install-sysinternals",
+      "title": "Install Microsoft Sysinternals Suite",
+      "category": "install",
+      "shell": "PowerShell",
+      "privilege": "User",
+      "risk": "installs-software",
+      "summary": "Install Microsoft's Sysinternals Suite through WinGet after checking its package identity.",
+      "code": "winget show --id Microsoft.SysinternalsSuite --exact --source winget\nwinget install --id Microsoft.SysinternalsSuite --exact --source winget --interactive",
+      "safety": "Installs a suite of powerful diagnostic utilities. Verify the Microsoft publisher and package metadata; Sysinternals tools can inspect process, file, registry and network activity.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+      "sourceTitle": "Microsoft Sysinternals Suite"
+    },
+    {
+      "id": "win-install-powertoys",
+      "title": "Install Microsoft PowerToys",
+      "category": "install",
+      "shell": "PowerShell",
+      "privilege": "User or Administrator as required",
+      "risk": "installs-software",
+      "summary": "Install Microsoft's utility collection through WinGet.",
+      "code": "winget show --id Microsoft.PowerToys --exact --source winget\nwinget install --id Microsoft.PowerToys --exact --source winget --interactive",
+      "safety": "Installs software after package details are displayed. Check architecture, scope and managed-device policy first.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/powertoys/install",
+      "sourceTitle": "Microsoft PowerToys installation"
+    },
+    {
+      "id": "win-download-winutil-review",
+      "title": "Download Chris Titus Tech WinUtil for inspection",
+      "category": "install",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "downloads-file",
+      "summary": "Download the upstream WinUtil launcher to a review folder instead of piping remote code directly into the current PowerShell process.",
+      "code": "$review = Join-Path $env:USERPROFILE 'Downloads\\INTA-Toolkit-Review'\nNew-Item -ItemType Directory -Path $review -Force | Out-Null\nInvoke-WebRequest -Uri 'https://christitus.com/win' -OutFile (Join-Path $review 'winutil.ps1')\nGet-FileHash (Join-Path $review 'winutil.ps1') -Algorithm SHA256\nnotepad (Join-Path $review 'winutil.ps1')",
+      "safety": "Downloads but does not execute the script. Review the entire script and upstream repository/release before running. WinUtil requires Administrator for system-wide changes and includes tweak/update controls; inspect each selected change and its undo path.",
+      "sourceUrl": "https://github.com/ChrisTitusTech/winutil",
+      "sourceTitle": "Chris Titus Tech WinUtil"
+    },
+    {
+      "id": "winutil-launch-reviewed",
+      "title": "Launch a reviewed local WinUtil script",
+      "category": "install",
+      "shell": "PowerShell",
+      "privilege": "Administrator",
+      "risk": "changes-system",
+      "summary": "Run the local WinUtil script only after inspecting it and confirming the upstream source.",
+      "code": "$script = Join-Path $env:USERPROFILE 'Downloads\\INTA-Toolkit-Review\\winutil.ps1'\nif (-not (Test-Path $script)) { throw 'Download and inspect WinUtil first.' }\nGet-FileHash $script -Algorithm SHA256\nnotepad $script\n# After inspection, run explicitly:\n& $script",
+      "safety": "Runs a third-party administrator utility that can install apps, change Windows settings, apply tweaks and manage updates. Confirm current upstream source, read selected actions, create a recovery point where appropriate, and never blindly apply debloat/privacy presets to customer or managed devices.",
+      "sourceUrl": "https://github.com/ChrisTitusTech/winutil",
+      "sourceTitle": "Chris Titus Tech WinUtil"
+    },
+    {
+      "id": "win-tron-source",
+      "title": "Open the official Tron Script distribution instructions",
+      "category": "security",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "downloads-file",
+      "summary": "Open the Tron Script maintainer's distribution instructions; do not download the GitHub source repository as if it were the full runnable package.",
+      "code": "Start-Process 'https://www.reddit.com/r/TronScript/'",
+      "safety": "Tron is a long-running, invasive multi-stage repair/cleanup script. The maintainer explicitly warns that GitHub source alone is not the runnable package. Review current instructions, verify the release's SHA-256/PGP integrity, read stage actions and logs, preserve data, and use only with explicit customer authorization. It can take hours and changes/deletes system state.",
+      "sourceUrl": "https://github.com/bmrf/tron",
+      "sourceTitle": "Tron Script source and usage notes"
+    },
+    {
+      "id": "linux-apt-preview",
+      "title": "List Debian/Ubuntu package updates",
+      "category": "linux",
+      "shell": "Bash",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Refresh package metadata and list upgradable packages.",
+      "code": "sudo apt update\napt list --upgradable",
+      "safety": "Refreshes package metadata and displays candidates; does not install package upgrades. Confirm repositories and held packages.",
+      "sourceUrl": "https://manpages.ubuntu.com/manpages/noble/en/man8/apt.8.html",
+      "sourceTitle": "Ubuntu apt manual"
+    },
+    {
+      "id": "linux-apt-upgrade",
+      "title": "Upgrade Debian/Ubuntu packages",
+      "category": "linux",
+      "shell": "Bash",
+      "privilege": "sudo",
+      "risk": "changes-system",
+      "summary": "Apply available package upgrades after reviewing the package list.",
+      "code": "sudo apt update\nsudo apt upgrade",
+      "safety": "Changes installed packages. Review removals and dependency changes before confirming; avoid `full-upgrade` on production systems without a planned change and recovery route.",
+      "sourceUrl": "https://manpages.ubuntu.com/manpages/noble/en/man8/apt.8.html",
+      "sourceTitle": "Ubuntu apt manual"
+    },
+    {
+      "id": "linux-dnf-check",
+      "title": "Check Fedora/RHEL package updates",
+      "category": "linux",
+      "shell": "Bash",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Check available updates without applying them.",
+      "code": "sudo dnf check-update",
+      "safety": "Returns update availability; exit code 100 can indicate updates are available and is not necessarily an error.",
+      "sourceUrl": "https://dnf.readthedocs.io/en/latest/command_ref.html",
+      "sourceTitle": "DNF command reference"
+    },
+    {
+      "id": "linux-dnf-upgrade",
+      "title": "Upgrade Fedora/RHEL packages",
+      "category": "linux",
+      "shell": "Bash",
+      "privilege": "sudo",
+      "risk": "changes-system",
+      "summary": "Apply package updates after reviewing repository and package changes.",
+      "code": "sudo dnf upgrade --refresh",
+      "safety": "Changes installed packages. Review transaction summary, kernel changes and service restart/reboot requirements before confirming.",
+      "sourceUrl": "https://dnf.readthedocs.io/en/latest/command_ref.html",
+      "sourceTitle": "DNF command reference"
+    },
+    {
+      "id": "linux-pacman-check",
+      "title": "Check Arch Linux package updates",
+      "category": "linux",
+      "shell": "Bash",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Refresh package database and inspect pending updates using the package manager's supported query path.",
+      "code": "checkupdates",
+      "safety": "Requires the checkupdates helper from pacman-contrib on many systems. Do not partially upgrade Arch systems; read the news and follow full-upgrade guidance.",
+      "sourceUrl": "https://wiki.archlinux.org/title/System_maintenance",
+      "sourceTitle": "Arch Linux system maintenance"
+    },
+    {
+      "id": "linux-pacman-upgrade",
+      "title": "Perform a full Arch Linux upgrade",
+      "category": "linux",
+      "shell": "Bash",
+      "privilege": "sudo",
+      "risk": "changes-system",
+      "summary": "Synchronize repositories and perform the supported full system upgrade.",
+      "code": "sudo pacman -Syu",
+      "safety": "Changes the entire installed system. Arch does not support partial upgrades; read Arch news first and avoid interrupting package transactions.",
+      "sourceUrl": "https://wiki.archlinux.org/title/System_maintenance",
+      "sourceTitle": "Arch Linux system maintenance"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "windows-first-response",
+      "title": "Windows first-response diagnostics",
+      "category": "diagnostics",
+      "description": "Build a compact evidence baseline before making changes.",
+      "commandIds": [
+        "win-baseline",
+        "win-open-diagnostics",
+        "win-reliability-events",
+        "win-storage-inventory",
+        "win-network-diagnostics"
+      ],
+      "sequence": "Run the baseline, open the relevant diagnostic console, then collect only the evidence related to the symptom.",
+      "warning": "Sanitize diagnostic output before sharing it."
+    },
+    {
+      "id": "windows-repair",
+      "title": "Windows component repair",
+      "category": "repair",
+      "description": "Inspect component health, repair Windows and verify protected files.",
+      "commandIds": [
+        "win-dism-check",
+        "win-dism-sfc",
+        "win-sfc-log"
+      ],
+      "sequence": "Run the read-only health checks first. Run DISM RestoreHealth only when appropriate, then SFC. Review the CBS log if SFC reports unresolved corruption.",
+      "warning": "Requires administrator privileges and can change Windows servicing state."
+    },
+    {
+      "id": "windows-security-baseline",
+      "title": "Defender security check",
+      "category": "security",
+      "description": "Check protection, update signatures and launch a full scan when Defender is the active provider.",
+      "commandIds": [
+        "defender-status",
+        "defender-update-signatures",
+        "defender-full-scan"
+      ],
+      "sequence": "Check the active AV provider first. Update signatures, then run a full scan if justified. For active incidents, follow the ransomware/incident playbook.",
+      "warning": "A scan is not a substitute for containment, forensic preservation or a clean rebuild when compromise is confirmed."
+    },
+    {
+      "id": "windows-app-maintenance",
+      "title": "Windows application maintenance",
+      "category": "updates",
+      "description": "Inventory WinGet, Chocolatey and Scoop updates before applying a controlled update batch.",
+      "commandIds": [
+        "win-get-updates",
+        "win-choco-detect",
+        "win-choco-preview",
+        "win-scoop-status",
+        "win-winget-update-all",
+        "win-choco-update-all",
+        "win-scoop-update"
+      ],
+      "sequence": "Preview each manager separately. Confirm package IDs, publishers, pinned/excluded packages, app compatibility and maintenance window. Apply only the manager(s) actually used on this device.",
+      "warning": "Do not assume one package manager sees every installed application. Do not blindly combine managers or bypass pins."
+    },
+    {
+      "id": "toolbox-essentials",
+      "title": "Install a technician essentials kit",
+      "category": "install",
+      "description": "Install trusted diagnostic utilities after checking package metadata.",
+      "commandIds": [
+        "win-install-sysinternals",
+        "win-install-powertoys",
+        "win-choco-install"
+      ],
+      "sequence": "Check each exact package ID and publisher. Install only the tools needed for this job. Keep portable utilities in the INTA Toolbox where licensing and publisher distribution permit.",
+      "warning": "Installing software changes the endpoint. HWiNFO, commercial utilities and third-party tools may have technician-use licensing restrictions."
+    },
+    {
+      "id": "cross-platform-maintenance",
+      "title": "Cross-platform package maintenance",
+      "category": "linux",
+      "description": "Use the correct full-upgrade workflow for the Linux distribution.",
+      "commandIds": [
+        "linux-apt-preview",
+        "linux-apt-upgrade",
+        "linux-dnf-check",
+        "linux-dnf-upgrade",
+        "linux-pacman-check",
+        "linux-pacman-upgrade"
+      ],
+      "sequence": "Identify the distribution first. Run only its matching package-manager commands. Do not mix package managers or partially upgrade Arch Linux.",
+      "warning": "Package upgrades can restart services or require a reboot. Use an approved maintenance window."
+    }
+  ],
+  "toolkits": [
+    {
+      "id": "sysinternals",
+      "name": "Microsoft Sysinternals Suite",
+      "kind": "official-suite",
+      "platform": "Windows",
+      "summary": "Process Explorer, Process Monitor, Autoruns, RAMMap, TCPView and more for deep Windows diagnosis.",
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+      "repository": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+      "installCommandId": "win-install-sysinternals",
+      "trust": "Microsoft publisher; verify the package source and signature."
+    },
+    {
+      "id": "winutil",
+      "name": "Chris Titus Tech WinUtil",
+      "kind": "community-toolkit",
+      "platform": "Windows 11",
+      "summary": "All-in-one app installation, tweaks, fixes, configuration and Windows update management. Powerful; review every selected change.",
+      "url": "https://github.com/ChrisTitusTech/winutil",
+      "repository": "https://github.com/ChrisTitusTech/winutil",
+      "installCommandId": "win-download-winutil-review",
+      "trust": "Community-maintained PowerShell utility. Administrator required for system-wide changes; do not blindly apply presets."
+    },
+    {
+      "id": "tron",
+      "name": "Tron Script",
+      "kind": "community-toolkit",
+      "platform": "Windows",
+      "summary": "Multi-stage PC cleanup, disinfection, repair and patch workflow. Long-running and invasive; use only after reading current stage documentation.",
+      "url": "https://github.com/bmrf/tron",
+      "repository": "https://github.com/bmrf/tron",
+      "installCommandId": "win-tron-source",
+      "trust": "Maintainer says GitHub source is not the complete runnable package. Obtain the full package through the maintainer's distribution instructions and verify integrity."
+    },
+    {
+      "id": "chocolatey",
+      "name": "Chocolatey CLI",
+      "kind": "package-manager",
+      "platform": "Windows",
+      "summary": "Package manager with package inventory, no-op previews, install and upgrade operations.",
+      "url": "https://docs.chocolatey.org/en-us/choco/",
+      "repository": "https://github.com/chocolatey/choco",
+      "installCommandId": "win-choco-install",
+      "trust": "Review package source, package scripts, pins and license/edition."
+    },
+    {
+      "id": "winget",
+      "name": "Windows Package Manager (WinGet)",
+      "kind": "package-manager",
+      "platform": "Windows",
+      "summary": "Microsoft package manager for searching, inspecting, installing and updating Windows apps.",
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/",
+      "repository": "https://github.com/microsoft/winget-cli",
+      "installCommandId": null,
+      "trust": "Prefer exact package IDs and source/publisher verification."
+    },
+    {
+      "id": "scoop",
+      "name": "Scoop",
+      "kind": "package-manager",
+      "platform": "Windows",
+      "summary": "User-oriented command-line package manager, useful for developer and portable app workflows.",
+      "url": "https://scoop.sh/",
+      "repository": "https://github.com/ScoopInstaller/Scoop",
+      "installCommandId": "win-scoop-status",
+      "trust": "Review bucket source and manifest scripts; do not add unknown buckets blindly."
+    },
+    {
+      "id": "unigetui",
+      "name": "UniGetUI",
+      "kind": "package-manager-ui",
+      "platform": "Windows",
+      "summary": "Graphical package-manager front end for supported package managers; useful when a technician wants a visual review of package updates.",
+      "url": "https://github.com/Devolutions/UniGetUI",
+      "repository": "https://github.com/Devolutions/UniGetUI",
+      "installCommandId": null,
+      "trust": "Use its official release page and verify the publisher; package coverage depends on configured managers."
+    }
+  ],
+  "policies": {
+    "noAutoExecution": true,
+    "requireExplicitUserCopyOrRun": true,
+    "noRemoteScriptPipeToInterpreter": true,
+    "requirePreviewBeforeBulkUpdates": true,
+    "neverBypassPackagePinsByDefault": true,
+    "requireOfficialSourceAndSafetyNotes": true,
+    "doNotMixPackageManagersBlindly": true,
+    "separateOsUpdatesFromApplicationUpdates": true,
+    "requireRollbackOrRecoveryPlanForDestructiveActions": true
+  }
+}
