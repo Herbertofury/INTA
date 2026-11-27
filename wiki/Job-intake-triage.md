@@ -238,6 +238,21 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Match the package to that model, <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) version and processor architecture. An x64 application running under emulation does not make an x64 hardware driver suitable for an ARM device.
 3. Keep the model/build record in the private ticket and choose the matching manufacturer download before retrying.
 
+#### ⚡ Quick commands
+
+**Collect device model and Windows architecture** · PowerShell
+
+Capture the exact model, Windows edition/build and architecture before selecting a driver or installer.
+
+```powershell
+Get-ComputerInfo | Select-Object CsManufacturer,CsModel,CsSystemType,WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture
+msinfo32
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** [Microsoft Get-ComputerInfo](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo)
+
 **Prove it worked:** The selected package explicitly supports the actual model and architecture and opens without the compatibility error.
 
 **If this does not resolve it:** If no supported driver exists, use a supported class-driver/device path or escalate compatibility; do not force an unrelated INF.
@@ -257,6 +272,21 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 1. Use <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft](https://www.microsoft.com/)’s clean-boot procedure in an agreed service window: hide <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft](https://www.microsoft.com/) services and identify the optional services/startup items under test. Coordinate any managed security or remote-access dependency.
 2. Retest the same application. If the failure disappears, re-enable a recorded subset at a time and restart to narrow the conflict.
 3. Restore the normal configuration after the test; repair or update the identified conflicting product instead of leaving unrelated services disabled.
+
+#### ⚡ Quick commands
+
+**List startup commands and enabled services** · PowerShell
+
+Capture a baseline before a controlled clean-boot investigation.
+
+```powershell
+Get-CimInstance Win32_StartupCommand | Select-Object Name,Command,Location,User
+Get-Service | Where-Object StartType -eq 'Automatic' | Sort-Object Status,Name | Format-Table Status,Name,DisplayName -AutoSize
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** [Microsoft Get-CimInstance](https://learn.microsoft.com/en-us/powershell/module/cimcmdlets/get-ciminstance)
 
 **Prove it worked:** A specific enabled item reproducibly changes the result, and normal startup is restored with the resolved configuration.
 
@@ -279,6 +309,21 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 1. Open Settings > Time & language > Date & time and distinguish an incorrect time zone from an incorrect clock.
 2. On a managed domain PC, read w32tm /query /status to identify the existing synchronization source; restore the organization’s time path rather than choosing an arbitrary public server.
 3. On an unmanaged PC, correct the supported automatic-time settings, synchronize, then reopen the affected sign-in or site.
+
+#### ⚡ Quick commands
+
+**Inspect current Windows time synchronization** · PowerShell
+
+Read the configured time source and synchronization status before changing clock settings.
+
+```powershell
+w32tm /query /status
+w32tm /query /source
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** [Microsoft Windows Time tools](https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings)
 
 **Prove it worked:** The clock stays correct and the original authentication or certificate-date failure no longer occurs.
 
