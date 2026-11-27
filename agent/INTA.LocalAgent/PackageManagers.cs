@@ -25,8 +25,29 @@ public sealed class PackageManagers(ProcessRunner runner)
     public async Task<(int ExitCode, string Output)> ExecuteAsync(OperationRequest request, CancellationToken ct = default)
     {
         var package = request.Action == "update-all" ? "*" : ValidateId(request.PackageId);
+        var output = new List<string>();
+        if (request.Manager == "apt" && request.Action is "update" or "update-all")
+        {
+            var refresh = await runner.RunAsync("apt-get", ["update"], TimeSpan.FromMinutes(15), ct);
+            output.Add("===== apt package index refresh =====" + Environment.NewLine + refresh.Output);
+            if (refresh.ExitCode != 0) return (refresh.ExitCode, string.Join(Environment.NewLine, output));
+        }
+        if (request.Manager == "brew" && request.Action is "update" or "update-all")
+        {
+            var refresh = await runner.RunAsync("brew", ["update"], TimeSpan.FromMinutes(20), ct);
+            output.Add("===== Homebrew metadata refresh =====" + Environment.NewLine + refresh.Output);
+            if (refresh.ExitCode != 0) return (refresh.ExitCode, string.Join(Environment.NewLine, output));
+        }
+        if (request.Manager == "scoop" && request.Action is "update" or "update-all")
+        {
+            var refresh = await runner.RunAsync("scoop", ["update"], TimeSpan.FromMinutes(10), ct);
+            output.Add("===== Scoop bucket refresh =====" + Environment.NewLine + refresh.Output);
+            if (refresh.ExitCode != 0) return (refresh.ExitCode, string.Join(Environment.NewLine, output));
+        }
         var (file, args) = BuildCommand(request.Manager, request.Action, package);
-        return await runner.RunAsync(file, args, TimeSpan.FromMinutes(60), ct);
+        var result = await runner.RunAsync(file, args, TimeSpan.FromMinutes(60), ct);
+        output.Add(result.Output);
+        return (result.ExitCode, string.Join(Environment.NewLine, output));
     }
 
     public static string ValidateId(string value)
