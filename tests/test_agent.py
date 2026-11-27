@@ -40,11 +40,13 @@ class LocalAgentContract(unittest.TestCase):
 
     def test_manager_operations_are_allowlisted(self):
         source = (AGENT / "PackageManagers.cs").read_text()
-        for manager in ("winget", "choco", "scoop", "apt", "dnf", "pacman", "brew", "flatpak", "snap", "uniget"):
+        for manager in ("winget", "choco", "scoop", "apt", "dnf", "pacman", "brew", "flatpak", "snap", "uniget", "windows-update"):
             self.assertIn(f'"{manager}"', source)
         self.assertIn("public static string ValidateId", source)
         self.assertIn("VerifyAsync", source)
         self.assertIn('("snap", "rollback")', source)
+        self.assertIn("windows-update", source)
+        self.assertIn("NormalizeHotFixId", source)
 
     def test_agent_artifact_packaging_creates_sha256_sidecar(self):
         with tempfile.TemporaryDirectory() as temp:
