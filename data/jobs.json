@@ -106,7 +106,10 @@
       "triage",
       "urlscan",
       "google-safe-browsing",
-      "checkphish"
+      "checkphish",
+      "ublock-origin",
+      "adguard-browser-extension",
+      "adguard-mini-mac"
     ],
     "startHere": "Check for active encryption, credential theft, unusual administrator accounts, or more affected machines before treating this as a routine cleanup.",
     "steps": [
@@ -158,6 +161,17 @@
         "anchor": "step-05"
       },
       {
+        "title": "Clean browser profiles and install browser protection",
+        "anchor": "step-browser-cleanup-and-protection",
+        "detail": "Treat browser cleanup as a required handback task, not an optional add-on. Check every installed browser and every profile: revoke unknown website notification grants, remove unauthorized extensions, restore the intended home/start/search settings, and inspect proxy or management-policy changes. Use the PowerShell commands in the 'Remove malicious browser notifications and popups' specific fix to inventory Chromium notification Allow entries and open settings for detected browsers. Firefox uses its own permissions database, so review it in Settings > Privacy & Security > Permissions > Notifications. Install one supported blocker per browser: Firefox and compatible Gecko browsers use full uBlock Origin; Chrome and Edge use AdGuard MV3 from the Chrome Web Store; Opera/Opera GX use AdGuard's official opera-mv3.zip release; Yandex uses AdGuard's documented install route; Brave uses native Shields; Vivaldi uses its built-in Tracker and Ad Blocker; Safari on macOS uses AdGuard Mini. Tor Browser should retain its standard protections rather than adding extensions. Keep Safe Browsing/SmartScreen and browser security updates enabled. Browser blockers supplement, never replace, endpoint protection.",
+        "command": "$pf = [Environment]::GetEnvironmentVariable('ProgramFiles')\n$pf86 = [Environment]::GetEnvironmentVariable('ProgramFiles(x86)')\n$local = $env:LOCALAPPDATA\n$roaming = $env:APPDATA\n\n$targets = @(\n    [pscustomobject]@{ Name='Google Chrome'; Exe='chrome.exe'; Paths=@(\"$pf\\Google\\Chrome\\Application\\chrome.exe\", \"$pf86\\Google\\Chrome\\Application\\chrome.exe\", \"$local\\Google\\Chrome\\Application\\chrome.exe\"); Notifications='chrome://settings/content/notifications'; Extensions='chrome://extensions/' }\n    [pscustomobject]@{ Name='Microsoft Edge'; Exe='msedge.exe'; Paths=@(\"$pf86\\Microsoft\\Edge\\Application\\msedge.exe\", \"$pf\\Microsoft\\Edge\\Application\\msedge.exe\", \"$local\\Microsoft\\Edge\\Application\\msedge.exe\"); Notifications='edge://settings/content/notifications'; Extensions='edge://extensions/' }\n    [pscustomobject]@{ Name='Brave'; Exe='brave.exe'; Paths=@(\"$pf\\BraveSoftware\\Brave-Browser\\Application\\brave.exe\", \"$pf86\\BraveSoftware\\Brave-Browser\\Application\\brave.exe\", \"$local\\BraveSoftware\\Brave-Browser\\Application\\brave.exe\"); Notifications='brave://settings/content/notifications'; Extensions='brave://extensions/' }\n    [pscustomobject]@{ Name='Vivaldi'; Exe='vivaldi.exe'; Paths=@(\"$local\\Vivaldi\\Application\\vivaldi.exe\", \"$pf\\Vivaldi\\Application\\vivaldi.exe\", \"$pf86\\Vivaldi\\Application\\vivaldi.exe\"); Notifications='vivaldi://settings/content/notifications'; Extensions='vivaldi://extensions/' }\n    [pscustomobject]@{ Name='Opera'; Exe='launcher.exe'; Paths=@(\"$roaming\\Opera Software\\Opera Stable\\launcher.exe\", \"$local\\Programs\\Opera\\launcher.exe\", \"$pf\\Opera\\launcher.exe\", \"$pf86\\Opera\\launcher.exe\"); Notifications='opera://settings/content/notifications'; Extensions='opera://extensions/' }\n    [pscustomobject]@{ Name='Opera GX'; Exe='launcher.exe'; Paths=@(\"$roaming\\Opera Software\\Opera GX Stable\\launcher.exe\", \"$local\\Programs\\Opera GX\\launcher.exe\", \"$pf\\Opera GX\\launcher.exe\", \"$pf86\\Opera GX\\launcher.exe\"); Notifications='opera://settings/content/notifications'; Extensions='opera://extensions/' }\n    [pscustomobject]@{ Name='Mozilla Firefox'; Exe='firefox.exe'; Paths=@(\"$pf\\Mozilla Firefox\\firefox.exe\", \"$pf86\\Mozilla Firefox\\firefox.exe\", \"$local\\Programs\\Mozilla Firefox\\firefox.exe\"); Notifications='about:preferences#privacy'; Extensions='about:addons' }\n    [pscustomobject]@{ Name='Yandex Browser'; Exe='browser.exe'; Paths=@(\"$local\\Yandex\\YandexBrowser\\Application\\browser.exe\", \"$pf\\Yandex\\YandexBrowser\\Application\\browser.exe\", \"$pf86\\Yandex\\YandexBrowser\\Application\\browser.exe\"); Notifications='browser://settings/content/notifications'; Extensions='browser://extensions/' }\n    [pscustomobject]@{ Name='LibreWolf'; Exe='librewolf.exe'; Paths=@(\"$pf\\LibreWolf\\librewolf.exe\", \"$pf86\\LibreWolf\\librewolf.exe\", \"$local\\Programs\\LibreWolf\\librewolf.exe\"); Notifications='about:preferences#privacy'; Extensions='about:addons' }\n    [pscustomobject]@{ Name='Waterfox'; Exe='waterfox.exe'; Paths=@(\"$pf\\Waterfox\\waterfox.exe\", \"$pf86\\Waterfox\\waterfox.exe\", \"$local\\Programs\\Waterfox\\waterfox.exe\"); Notifications='about:preferences#privacy'; Extensions='about:addons' }\n    [pscustomobject]@{ Name='Floorp'; Exe='floorp.exe'; Paths=@(\"$local\\Programs\\Floorp\\floorp.exe\", \"$pf\\Floorp\\floorp.exe\", \"$pf86\\Floorp\\floorp.exe\"); Notifications='about:preferences#privacy'; Extensions='about:addons' }\n)\n\nforeach ($target in $targets) {\n    $exe = $target.Paths | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -First 1\n    if (-not $exe) {\n        $appPathKeys = @(\n            \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\$($target.Exe)\"\n            \"HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\$($target.Exe)\"\n            \"HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\App Paths\\$($target.Exe)\"\n        )\n        foreach ($key in $appPathKeys) {\n            try {\n                $item = Get-Item -LiteralPath $key -ErrorAction Stop\n                $candidate = $item.GetValue('')\n                if ($candidate -and (Test-Path -LiteralPath $candidate)) {\n                    $exe = $candidate\n                    break\n                }\n            } catch {}\n        }\n    }\n    if (-not $exe) {\n        $command = Get-Command $target.Exe -ErrorAction SilentlyContinue | Select-Object -First 1\n        if ($command) { $exe = $command.Source }\n    }\n    if ($exe) {\n        Write-Host \"Opening $($target.Name) notification permissions and extension manager...\"\n        Start-Process -FilePath $exe -ArgumentList @($target.Notifications, $target.Extensions)\n    } else {\n        Write-Host \"$($target.Name) not detected; skipped.\" -ForegroundColor DarkGray\n    }\n}\nWrite-Host 'Review each profile in the browser profile menu. This helper opens settings only; it does not change permissions or delete extensions.' -ForegroundColor Yellow",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Detect common installed browsers and open each browser's notification-permission page and extension manager.",
+        "commandSafety": "Run as the affected Windows user; no elevation and no profile modification. The helper only opens settings pages. Review every profile, remove only untrusted notification Allow entries and unauthorized extensions, and preserve approved organization-managed items.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process",
+        "commandName": "Microsoft PowerShell Start-Process documentation"
+      },
+      {
         "title": "Close the entry point and retest",
         "detail": "Patch the affected software, restore the intended browser/search settings, and remove unwanted software. From a known-clean device, rotate affected credentials and revoke suspect sessions as appropriate. If you cannot establish system integrity, rebuild from trusted media and restore validated data.",
         "anchor": "step-06"
@@ -175,7 +189,11 @@
       "Any account exposure has a documented response, not only a clean scan.",
       "Each scan has a completion state, scope, findings and explicit coverage limits; incomplete work is not recorded as clean.",
       "If rebuilt, the target, preserved data/evidence, trusted media, restored applications, endpoint health and customer task test are recorded.",
-      "Reconnection and restored data have been assessed against the original entry point; credentials and cloud sessions have a separate resolution owner."
+      "Reconnection and restored data have been assessed against the original entry point; credentials and cloud sessions have a separate resolution owner.",
+      "Every installed browser profile has been checked for untrusted notification permissions and unauthorized extensions.",
+      "Home, startup, search, proxy and browser policy settings are correct and remain stable after restart.",
+      "Exactly one supported browser content blocker is active per browser, or the browser's native protection is verified.",
+      "Browser phishing and safe-browsing protections remain enabled; ad blocking is not counted as antivirus."
     ],
     "stopIf": [
       "Ransomware, privileged account compromise, or lateral spread is suspected.",
@@ -213,6 +231,46 @@
       {
         "title": "INTA: Service Evidence",
         "url": "https://github.com/Herbertofury/INTA/wiki/Service-Evidence"
+      },
+      {
+        "title": "Chrome site permissions and notifications",
+        "url": "https://support.google.com/chrome/answer/114662?hl=en"
+      },
+      {
+        "title": "Microsoft Edge website notification permissions",
+        "url": "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge"
+      },
+      {
+        "title": "Firefox web-push notification permissions",
+        "url": "https://support.mozilla.org/en-US/kb/push-notifications-firefox"
+      },
+      {
+        "title": "PowerShell Start-Process",
+        "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process"
+      },
+      {
+        "title": "AdGuard Browser Extension installation",
+        "url": "https://adguard.com/kb/adguard-browser-extension/installation/"
+      },
+      {
+        "title": "AdGuard Browser Extension Manifest V3 compatibility and limits",
+        "url": "https://adguard.com/kb/adguard-browser-extension/mv3-version/"
+      },
+      {
+        "title": "Brave Shields configuration",
+        "url": "https://support.brave.app/hc/en-us/articles/360023646212-How-do-I-configure-global-and-site-specific-Shields-settings"
+      },
+      {
+        "title": "Brave filter-list management",
+        "url": "https://support.brave.app/hc/en-us/articles/6449369961741-How-do-I-manage-adblock-filters-in-Brave"
+      },
+      {
+        "title": "Vivaldi Tracker and Ad Blocker",
+        "url": "https://help.vivaldi.com/desktop/privacy/tracking-and-ad-blocking/"
+      },
+      {
+        "title": "AdGuard Mini for Mac installation",
+        "url": "https://adguard.com/kb/adguard-mini-for-mac/installation/"
       }
     ],
     "related": [

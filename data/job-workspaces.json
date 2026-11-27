@@ -184,6 +184,21 @@
           "toolId": "checkphish",
           "why": "Investigate a possible brand-impersonation or phishing landing page.",
           "actionId": "open-service"
+        },
+        {
+          "toolId": "ublock-origin",
+          "why": "Full uBlock Origin for Firefox/compatible Gecko browsers; install only from Mozilla Add-ons.",
+          "actionId": "firefox-addons"
+        },
+        {
+          "toolId": "adguard-browser-extension",
+          "why": "AdGuard MV3 for Chrome.",
+          "actionId": "chrome-store"
+        },
+        {
+          "toolId": "adguard-mini-mac",
+          "why": "Safari-specific protection on macOS 12 or later.",
+          "actionId": "safari-app-store"
         }
       ],
       "resources": [
@@ -266,6 +281,126 @@
           "description": "Combine reputation with redirects and page behavior without opening the destination on the customer’s workstation.",
           "sourceUrl": "https://docs.urlscan.io/pages/faq",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-notifications-chrome",
+          "label": "Chrome site permissions and notifications",
+          "url": "https://support.google.com/chrome/answer/114662?hl=en",
+          "kind": "guide",
+          "group": "Browser cleanup",
+          "description": "Review notification permissions, remove unknown sites and block future unsolicited requests.",
+          "sourceUrl": "https://support.google.com/chrome/answer/114662?hl=en",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-notifications-edge",
+          "label": "Microsoft Edge website notification permissions",
+          "url": "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge",
+          "kind": "guide",
+          "group": "Browser cleanup",
+          "description": "Inspect and block unwanted website notification senders in Edge.",
+          "sourceUrl": "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-notifications-firefox",
+          "label": "Firefox web-push notification permissions",
+          "url": "https://support.mozilla.org/en-US/kb/push-notifications-firefox",
+          "kind": "guide",
+          "group": "Browser cleanup",
+          "description": "Remove or block unwanted sites in Firefox's separate notification permissions list.",
+          "sourceUrl": "https://support.mozilla.org/en-US/kb/push-notifications-firefox",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-notifications-windows",
+          "label": "Windows notification sender settings",
+          "url": "https://support.microsoft.com/en-us/windows/experience/notifications-and-do-not-disturb-in-windows",
+          "kind": "guide",
+          "group": "Browser cleanup",
+          "description": "Identify whether the sender is a browser or a separate Windows app; disable only the confirmed unwanted sender.",
+          "sourceUrl": "https://support.microsoft.com/en-us/windows/experience/notifications-and-do-not-disturb-in-windows",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-protection-adguard-mv3",
+          "label": "AdGuard MV3 installation and limitations",
+          "url": "https://adguard.com/kb/adguard-browser-extension/mv3-version/",
+          "kind": "guide",
+          "group": "Browser protection",
+          "description": "Use supported MV3 builds on Chromium browsers and note the official Opera MV3 package and rule limits.",
+          "sourceUrl": "https://adguard.com/kb/adguard-browser-extension/mv3-version/",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-protection-brave",
+          "label": "Brave Shields and filter lists",
+          "url": "https://support.brave.app/hc/en-us/articles/6449369961741-How-do-I-manage-adblock-filters-in-Brave",
+          "kind": "guide",
+          "group": "Browser protection",
+          "description": "Keep native Shields enabled and update filter lists instead of stacking another blocker.",
+          "sourceUrl": "https://support.brave.app/hc/en-us/articles/360023646212-How-do-I-configure-global-and-site-specific-Shields-settings",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-protection-vivaldi",
+          "label": "Vivaldi Tracker and Ad Blocker",
+          "url": "https://help.vivaldi.com/desktop/privacy/tracking-and-ad-blocking/",
+          "kind": "guide",
+          "group": "Browser protection",
+          "description": "Enable Vivaldi's built-in blocker; test Strong/Aggressive settings against required business sites.",
+          "sourceUrl": "https://help.vivaldi.com/desktop/privacy/tracking-and-ad-blocking/",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-protection-safari",
+          "label": "AdGuard Mini for Mac installation",
+          "url": "https://adguard.com/kb/adguard-mini-for-mac/installation/",
+          "kind": "guide",
+          "group": "Browser protection",
+          "description": "Safari-only option for macOS 12 or later; core ad/tracker blocking is free.",
+          "sourceUrl": "https://adguard.com/kb/adguard-mini-for-mac/installation/",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-protection-ublock",
+          "label": "uBlock Origin on Firefox",
+          "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
+          "kind": "store",
+          "group": "Browser protection",
+          "description": "Use the full Mozilla Add-ons version on Firefox and confirm the publisher is Raymond Hill.",
+          "sourceUrl": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-protection-adguard",
+          "label": "AdGuard Browser Extension installation",
+          "url": "https://adguard.com/kb/adguard-browser-extension/installation/",
+          "kind": "guide",
+          "group": "Browser protection",
+          "description": "Official installation instructions for Chrome, Edge, Opera, Yandex and Safari's separate Mini product.",
+          "sourceUrl": "https://adguard.com/kb/adguard-browser-extension/installation/",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-protection-adguard-opera-mv3",
+          "label": "AdGuard official Opera MV3 release",
+          "url": "https://github.com/AdguardTeam/AdguardBrowserExtension/releases",
+          "kind": "release",
+          "group": "Browser protection",
+          "description": "For Opera and Opera GX, choose the official opera-mv3.zip release. Manual installation needs an assigned update owner.",
+          "sourceUrl": "https://adguard.com/kb/adguard-browser-extension/mv3-version/",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "browser-protection-adguard-yandex",
+          "label": "AdGuard Yandex Browser installation instructions",
+          "url": "https://adguard.com/kb/adguard-browser-extension/installation/",
+          "kind": "guide",
+          "group": "Browser protection",
+          "description": "Follow AdGuard's documented Yandex Browser installation route and verify the extension publisher.",
+          "sourceUrl": "https://adguard.com/kb/adguard-browser-extension/installation/",
+          "checkedAt": "2026-11-26"
         }
       ],
       "decisions": [
@@ -288,16 +423,30 @@
           "symptom": "The same detection returns after reboot",
           "action": "Inspect the relevant Autoruns entry and documented offline-scan prerequisites; use the rebuild decision if integrity remains uncertain.",
           "expected": "The persistence cause is explained or a clean recovery plan replaces repeated scanner loops."
+        },
+        {
+          "symptom": "A website is sending fake infection or security notifications",
+          "action": "Use the PowerShell notification audit and browser-settings launcher. Review every profile and remove only unknown website Allow entries. Set new notification requests to Block when the user does not need web push; otherwise keep Ask and allowlist trusted services.",
+          "expected": "Untrusted websites can no longer send browser notifications and approved business notifications still work."
+        },
+        {
+          "symptom": "A browser has unknown extensions, redirects or no effective content protection",
+          "action": "Verify each extension's publisher and management policy, remove unauthorized extensions, restore expected search/home/start settings, and install one supported blocker per browser: Firefox uBlock Origin; Chrome/Edge AdGuard MV3; Opera/Opera GX official AdGuard MV3; Yandex AdGuard documented route; Brave Shields; Vivaldi built-in blocker; Safari on macOS AdGuard Mini.",
+          "expected": "The original browser task works, no unwanted redirect returns, and one supported blocker or native protection layer is active."
         }
       ],
       "doneWhen": [
         "Protection is healthy after reboot and there are no unresolved detections.",
         "The original task and browser behavior remain correct.",
-        "Compromised accounts and sessions have a separate documented resolution."
+        "Compromised accounts and sessions have a separate documented resolution.",
+        "Unknown browser notification grants and unauthorized extensions are removed; approved business extensions and notifications are retained.",
+        "The selected browser protection is active and updated, with no duplicate blockers."
       ],
       "escalateWhen": [
         "Ransomware, lateral spread or privileged access is suspected.",
-        "Detections recur or scan coverage and system integrity cannot be established."
+        "Detections recur or scan coverage and system integrity cannot be established.",
+        "A browser policy re-adds an extension or permission, or the browser is organization-managed and its policy owner must approve the change.",
+        "Redirects or notification permissions return after restart, indicating persistence or profile/sync compromise."
       ]
     },
     "ransomware-response": {

@@ -1,6 +1,6 @@
 # Brand icons: coverage, sources and maintenance
 
-**Acquisition review: November 26, 2026.** The shared icon registry covers all **218 catalog tools** and **644 tool, application, project and website identities**, with **268 distinct cached images**. Repeated mentions reuse the same image bytes. The registry reports no unresolved identity.
+**Acquisition review: November 27, 2026.** The shared icon registry covers all **223 catalog tools** and **693 tool, application, project and website identities**, with **308 distinct cached images**. Repeated mentions reuse the same image bytes. The registry reports no unresolved identity.
 
 ## Canonical inputs
 
@@ -16,13 +16,16 @@ Each asset records the observed acquisition URL, final response URL, source-imag
 
 ## Source choices
 
-**232 distinct assets came directly from publisher websites or existing project assets.** Another **36 are recorded publisher favicons retrieved through Google's favicon cache** where the publisher's direct route was inaccessible or did not expose a usable image. These are clearly identified by `sourceKind` and the exact cache request. The cache provider's generic missing-icon response is rejected.
+**251 assets are publisher or first-party supplied.** Another **55 are recorded publisher favicons retrieved through Google's favicon cache**, and **2 use DuckDuckGo's favicon cache** where the publisher's direct route was inaccessible or did not expose a usable image. These are clearly identified by `sourceKind` and the exact cache request. The cache provider's generic missing-icon response is rejected.
 
 The application can show a publisher's website icon when a product does not expose a separate app icon. Several products may therefore share the same legitimate publisher identity. This is explicit website identity, not an assertion that each image is a product-specific logo.
 
 The <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) image reuses the existing four-square interface mark from [its native SVG source](../assets/inta-mark.svg). Its geometry remains consistent with the application header. <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" title="Open PuTTY official download or service page" aria-label="Open PuTTY official download or service page" data-inta-brand="putty"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/49b089e806453bcf9a60.png" alt="PuTTY official page" width="18" height="18" valign="middle" /></a> [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/)'s image came from the icon explicitly declared in the <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" title="Open PuTTY official download or service page" aria-label="Open PuTTY official download or service page" data-inta-brand="putty"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/49b089e806453bcf9a60.png" alt="PuTTY official page" width="18" height="18" valign="middle" /></a> [publisher's page](https://www.chiark.greenend.org.uk/~sgtatham/putty/).
 
 The 268 normalized images total **601,338 bytes**. The generated offline application embeds each unique image once and refers to its asset ID for every repeated mention. Reading the downloaded application therefore needs no favicon service, third-party request or network connection.
+
+
+The browser-protection expansion adds three publisher-sourced marks: [uBlock Origin's official project SVG](https://github.com/gorhill/uBlock/blob/master/src/img/ublock.svg), [AdGuard Browser Extension's official shield SVG](https://github.com/AdguardTeam/AdguardBrowserExtension/blob/master/Extension/assets/images/logo-shield.svg), and [Opera Software's official logo SVG](https://github.com/operasoftware/logo/blob/master/dest/logo/flat-red.svg). Each is cached as a 64×64 PNG with both source-SVG and normalized-PNG SHA-256 hashes; the AdGuard shield is reused for its Safari companion app, not substituted with a browser vendor mark.
 
 ## Match the right identity and destination
 

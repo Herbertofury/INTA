@@ -520,7 +520,7 @@
   function selectOptions(values, label, selected = '') {
     return `<option value="">${esc(label)}</option>${[...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b)).map(value => `<option value="${esc(value)}"${selected === value ? ' selected' : ''}>${esc(categoryLabel(value))}</option>`).join('')}`;
   }
-  const toolSearchText = new Map(tools.map(tool => [tool.id, text([tool.name, tool.category, categoryLabel(tool.category), tool.summary, tool.bestFor, tool.reputation?.github?.url, tool.reputation?.sourceforge?.url, tool.reputation?.usage?.url, ...array(tool.tags), ...array(tool.platforms), ...(quickByTool.get(tool.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases), ...quickChoices(item).filter(choice => choice.toolId === tool.id).flatMap(choiceTerms)])]).toLowerCase()]));
+  const toolSearchText = new Map(tools.map(tool => [tool.id, text([tool.name, tool.category, categoryLabel(tool.category), tool.summary, tool.bestFor, tool.reputation?.github?.url, tool.reputation?.sourceforge?.url, tool.reputation?.usage?.url, ...array(tool.reputation?.browserStores).flatMap(store => [store.name, store.provider, store.url, store.reason, store.rating?.value, store.rating?.reviews, store.users, store.downloads, store.version]), ...array(tool.tags), ...array(tool.platforms), ...(quickByTool.get(tool.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases), ...quickChoices(item).filter(choice => choice.toolId === tool.id).flatMap(choiceTerms)])]).toLowerCase()]));
   const workspaceSearchText = new Map(jobs.map(job => [job.id, text(workspaceSearchTerms(job)).toLowerCase()]));
   const fieldNoteSearchText = new Map(fieldNotes.map(note => [note.id, text(fieldNoteTerms(note)).toLowerCase()]));
   const jobSearchText = new Map(jobs.map(job => [job.id, text([job.title, job.category, job.summary, job.startHere, ...array(job.steps).map(step => step.title), workspaceSearchText.get(job.id), ...(fieldNotesByJob.get(job.id) || []).flatMap(fieldNoteTerms), ...(quickByJob.get(job.id) || []).flatMap(quickTerms)]).toLowerCase()]));
@@ -528,6 +528,26 @@
   function matches(haystack, query) { return query.trim().toLowerCase().split(/\s+/).filter(Boolean).every(term => haystack.includes(term)); }
   const recommendationOrder = {core: 3, specialist: 2, evaluate: 1};
   const numberFormat = new Intl.NumberFormat();
+  function browserStoreEvidence(tool, provider) {
+    return array(tool.reputation?.browserStores).find(item => item.provider === provider) || null;
+  }
+  function observedBrowserStore(tool, provider) {
+    const evidence = browserStoreEvidence(tool, provider);
+    return evidence?.status === 'observed' ? evidence : null;
+  }
+  function browserStoreSort(provider, label) {
+    return {
+      label: `${label} rating`,
+      description: `Highest rating on the exact ${label} listing; ratings from other stores are not mixed.`,
+      metric: tool => observedBrowserStore(tool, provider)?.rating?.value,
+      tie: tool => observedBrowserStore(tool, provider)?.rating?.reviews || 0,
+      show: (tool, value) => {
+        const store = observedBrowserStore(tool, provider);
+        return {label: `${value}/${store.rating.scale} · ${numberFormat.format(store.rating.reviews)}${store.approximate ? ' approx.' : ''} ratings`, url: store.url, date: store.checkedAt};
+      }
+    };
+  }
+  const storeSortProviders = {'mozilla-rating':'mozilla-addons', 'chrome-store-rating':'chrome-web-store', 'opera-store-rating':'opera-addons'};
   const toolSorts = {
     catalog: {label: 'Catalog order', description: 'Original library order.'},
     name: {label: 'Name · A to Z', description: 'Alphabetical by tool name.'},
@@ -535,7 +555,10 @@
     recommendation: {label: 'INTA recommendation', description: 'Everyday picks first, then Specialist and Evaluate first. INTA tiers are editorial, not user ratings.', metric: t => recommendationOrder[t.tier], show: t => ({label: tierLabel(t.tier)})},
     reviewed: {label: 'Recently reviewed', description: 'Most recently reviewed INTA tool records first.', metric: t => Date.parse(t.reviewedAt || ''), show: t => ({label: 'Source reviewed', date: t.reviewedAt})},
     stars: {label: 'GitHub stars', description: 'Most stars on the matched project repository. Stars measure interest, not quality.', metric: t => githubEvidence(t)?.stars, show: (t, value) => githubDisplay(t, value, 'GitHub stars')},
-    rating: {label: 'User rating', description: 'Highest SourceForge user rating, then more reviews for ties. Ratings from different providers are not mixed.', metric: t => sourceForgeEvidence(t)?.rating?.value, tie: t => sourceForgeEvidence(t)?.rating?.reviews || 0, show: (t, value) => { const sf = sourceForgeEvidence(t); return {label: `${value}/${sf.rating.scale} · ${numberFormat.format(sf.rating.reviews)} SourceForge ratings`, url: sf.url, date: sf.checkedAt}; }},
+    rating: {label: 'SourceForge user rating', description: 'Highest SourceForge user rating, then more reviews for ties. Ratings from different providers are not mixed.', metric: t => sourceForgeEvidence(t)?.rating?.value, tie: t => sourceForgeEvidence(t)?.rating?.reviews || 0, show: (t, value) => { const sf = sourceForgeEvidence(t); return {label: `${value}/${sf.rating.scale} · ${numberFormat.format(sf.rating.reviews)} SourceForge ratings`, url: sf.url, date: sf.checkedAt}; }},
+    'mozilla-rating': browserStoreSort('mozilla-addons', 'Mozilla Add-ons'),
+    'chrome-store-rating': browserStoreSort('chrome-web-store', 'Chrome Web Store'),
+    'opera-store-rating': browserStoreSort('opera-addons', 'Opera Add-ons'),
     reviews: {label: 'User review count', description: 'Most SourceForge user ratings. Sample size is not sentiment.', metric: t => sourceForgeEvidence(t)?.rating?.reviews, show: (t, value) => sourceForgeDisplay(t, value, 'SourceForge ratings')},
     popularity: {label: 'Popularity · downloads', description: 'Most downloads this week as reported by SourceForge. Downloads are not unique users or endorsements.', metric: t => sourceForgeEvidence(t)?.weeklyDownloads, show: (t, value) => sourceForgeDisplay(t, value, 'SourceForge downloads this week')},
     users: {label: 'Weekly active users', description: 'Publisher-reported weekly active users for the exact product, as of the linked report. Unmeasured tools stay visible.', metric: t => usageEvidence(t)?.weeklyActiveUsers, show: (t, value) => { const usage = usageEvidence(t); return {label: `${usage.approximate ? '≈' : ''}${numberFormat.format(value)} reported weekly active users`, url: usage.url, date: usage.reportedAt}; }},
@@ -574,7 +597,7 @@
   }
   function amountAvailability(tool, key) {
     if (key === 'reviewed') return 'Review date unavailable';
-    const provider = ['stars', 'forks'].includes(key) ? tool.reputation?.github : key === 'users' ? tool.reputation?.usage : tool.reputation?.sourceforge;
+    const provider = storeSortProviders[key] ? browserStoreEvidence(tool, storeSortProviders[key]) : ['stars', 'forks'].includes(key) ? tool.reputation?.github : key === 'users' ? tool.reputation?.usage : tool.reputation?.sourceforge;
     return ({
       unavailable: 'Source unavailable',
       unreported: 'Not reported by source',
@@ -589,11 +612,22 @@
     return `<div class="tool-sort-signal${Number.isFinite(value) ? '' : ' unknown'}">${Number.isFinite(value) ? toolSortLabel(spec.show(tool, value), true) : esc(amountAvailability(tool, key))}</div>`;
   }
   function toolEvidence(tool) {
-    const metrics = [['stars', 'GitHub stars'], ['forks', 'GitHub forks'], ['rating', 'User rating'], ['popularity', 'Weekly downloads'], ['users', 'Weekly active users']];
-    return `<section class="tool-evidence" aria-labelledby="tool-evidence-heading"><h2 class="block-heading" id="tool-evidence-heading">${icon('activity')}Tool reputation</h2><dl>${metrics.map(([key, title]) => {
+    const metrics = [['stars', 'GitHub stars'], ['forks', 'GitHub forks'], ['rating', 'SourceForge user rating'], ['popularity', 'SourceForge weekly downloads'], ['users', 'Weekly active users']];
+    const browserStoreRows = array(tool.reputation?.browserStores).map(store => {
+      const rating = store.rating
+        ? `${store.rating.value}/${store.rating.scale} · ${store.approximate ? 'about ' : ''}${numberFormat.format(store.rating.reviews)} ratings`
+        : (store.reason || 'No rating reported by this store');
+      const audience = Number.isFinite(store.users) ? `${numberFormat.format(store.users)} users`
+        : Number.isFinite(store.downloads) ? `${numberFormat.format(store.downloads)} downloads` : '';
+      const version = store.version ? ` · v${store.version}` : '';
+      const updated = store.lastUpdated ? ` · updated ${dateLabel(store.lastUpdated, true)}` : '';
+      const label = `${rating}${audience ? ` · ${audience}` : ''}${version}${updated}`;
+      return `<div><dt>${esc(store.name)} ${store.rating ? 'rating' : 'status'}</dt><dd>${toolSortLabel({label, url:store.url, date:store.checkedAt}, true)}</dd></div>`;
+    }).join('');
+    return `<section class='tool-evidence' aria-labelledby='tool-evidence-heading'><h2 class='block-heading' id='tool-evidence-heading'>${icon('activity')}Tool reputation</h2><dl>${metrics.map(([key, title]) => {
       const spec = toolSorts[key], value = spec.metric(tool);
       return `<div><dt>${esc(title)}</dt><dd>${Number.isFinite(value) ? toolSortLabel(spec.show(tool, value), true) : esc(amountAvailability(tool, key))}</dd></div>`;
-    }).join('')}</dl><p>These signals are independent, dated snapshots. Review the source and the tool’s job fit before choosing.</p></section>`;
+    }).join('')}${browserStoreRows}</dl><p>These are independent, dated snapshots. Store ratings, review counts and download/user counts stay tied to their exact provider; publisher-hosted feedback is labeled separately. Popularity is not proof of protection quality.</p></section>`;
   }
   function library(savedOnly = false, params = new URLSearchParams()) {
     const query = params.get('q') || '';

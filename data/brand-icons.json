@@ -3967,6 +3967,45 @@
       "height": 32,
       "checkedAt": "2026-11-27",
       "sourceSha256": "f7b7b5c218773ef6cbb4cff2568a5c2b026c77f9e0f23bc3b2d3efef062cc4f1"
+    },
+    "i83361ed4352aac117192": {
+      "path": "assets/brand-icons/inta-ublock-origin.png",
+      "sourceUrl": "https://github.com/gorhill/uBlock/blob/master/src/img/ublock.svg",
+      "resolvedSourceUrl": "https://raw.githubusercontent.com/gorhill/uBlock/master/src/img/ublock.svg",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "github.com",
+      "sha256": "83361ed4352aac11719297cdb006d900161c10bdc727d03fb17bdf9e1b2ee6a5",
+      "mimeType": "image/png",
+      "width": 64,
+      "height": 64,
+      "checkedAt": "2026-11-27",
+      "sourceSha256": "5d2f419354f620d440aef33449afa19a1822e83cfe4682cef5395aac6f156a94"
+    },
+    "ic61adbeb9d62e43219df": {
+      "path": "assets/brand-icons/inta-adguard.png",
+      "sourceUrl": "https://github.com/AdguardTeam/AdguardBrowserExtension/blob/master/Extension/assets/images/logo-shield.svg",
+      "resolvedSourceUrl": "https://raw.githubusercontent.com/AdguardTeam/AdguardBrowserExtension/master/Extension/assets/images/logo-shield.svg",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "github.com",
+      "sha256": "c61adbeb9d62e43219df25a370da9a1b04a36312cacc11e0e9b32afa1bec1a73",
+      "mimeType": "image/png",
+      "width": 64,
+      "height": 64,
+      "checkedAt": "2026-11-27",
+      "sourceSha256": "59ce0d8a519ae8528b2a1ba39401679db988c8193a1d349caffbcb8a12a8dad7"
+    },
+    "if9ed4305c7a92cb2d93d": {
+      "path": "assets/brand-icons/inta-opera.png",
+      "sourceUrl": "https://github.com/operasoftware/logo/blob/master/dest/logo/flat-red.svg",
+      "resolvedSourceUrl": "https://raw.githubusercontent.com/operasoftware/logo/master/dest/logo/flat-red.svg",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "github.com",
+      "sha256": "f9ed4305c7a92cb2d93d857184678751b7af07941922be08a269c4331319fc03",
+      "mimeType": "image/png",
+      "width": 64,
+      "height": 64,
+      "checkedAt": "2026-11-27",
+      "sourceSha256": "80a89c1c28c0f235aec8d3f719f04c587a2f4c113369e0e93eb2714cac5ab756"
     }
   },
   "brands": [
@@ -16062,12 +16101,159 @@
       "downloadPage": "https://github.com/itsfatduck/optimizerDuck/releases/tag/v2.29.0",
       "kind": "tool",
       "assetId": "i4a18f27159a99d3e342"
+    },
+    {
+      "id": "ublock-origin",
+      "toolId": "ublock-origin",
+      "name": "uBlock Origin",
+      "names": [
+        "uBlock Origin",
+        "uBO"
+      ],
+      "urls": [
+        "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
+        "https://github.com/gorhill/uBlock"
+      ],
+      "hosts": [
+        "addons.mozilla.org"
+      ],
+      "downloadPage": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
+      "kind": "tool",
+      "assetId": "i83361ed4352aac117192"
+    },
+    {
+      "id": "adguard-browser-extension",
+      "toolId": "adguard-browser-extension",
+      "name": "AdGuard Browser Extension",
+      "names": [
+        "AdGuard Browser Extension",
+        "AdGuard AdBlocker",
+        "AdGuard extension"
+      ],
+      "urls": [
+        "https://adguard.com/en/adguard-browser-extension/overview.html",
+        "https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg",
+        "https://github.com/AdguardTeam/AdguardBrowserExtension"
+      ],
+      "hosts": [
+        "adguard.com",
+        "chromewebstore.google.com"
+      ],
+      "downloadPage": "https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg",
+      "kind": "tool",
+      "assetId": "ic61adbeb9d62e43219df"
+    },
+    {
+      "id": "adguard-mini-mac",
+      "toolId": "adguard-mini-mac",
+      "name": "AdGuard Mini for Mac",
+      "names": [
+        "AdGuard Mini for Mac",
+        "AdGuard Mini",
+        "AdGuard for Safari"
+      ],
+      "urls": [
+        "https://adguard.com/en/adguard-mini-mac/overview.html",
+        "https://apps.apple.com/us/app/adguard-ad-blocker-for-safari/id1440147259?mt=12"
+      ],
+      "hosts": [
+        "adguard.com",
+        "apps.apple.com"
+      ],
+      "downloadPage": "https://apps.apple.com/us/app/adguard-ad-blocker-for-safari/id1440147259?mt=12",
+      "kind": "tool",
+      "assetId": "ic61adbeb9d62e43219df"
+    },
+    {
+      "id": "site-mozilla-addons",
+      "name": "Mozilla Add-ons",
+      "names": [
+        "Mozilla Add-ons",
+        "addons.mozilla.org"
+      ],
+      "urls": [
+        "https://addons.mozilla.org/"
+      ],
+      "hosts": [
+        "addons.mozilla.org"
+      ],
+      "downloadPage": "https://addons.mozilla.org/",
+      "kind": "website",
+      "assetId": "if0f07a3554818e96b83f"
+    },
+    {
+      "id": "site-chrome-web-store",
+      "name": "Chrome Web Store",
+      "names": [
+        "Chrome Web Store",
+        "chromewebstore.google.com"
+      ],
+      "urls": [
+        "https://chromewebstore.google.com/"
+      ],
+      "hosts": [
+        "chromewebstore.google.com"
+      ],
+      "downloadPage": "https://chromewebstore.google.com/",
+      "kind": "website",
+      "assetId": "i4a3cfc17be3f4e8ad2c8"
+    },
+    {
+      "id": "site-edge-addons",
+      "name": "Microsoft Edge Add-ons",
+      "names": [
+        "Microsoft Edge Add-ons",
+        "microsoftedge.microsoft.com"
+      ],
+      "urls": [
+        "https://microsoftedge.microsoft.com/addons/"
+      ],
+      "hosts": [
+        "microsoftedge.microsoft.com"
+      ],
+      "downloadPage": "https://microsoftedge.microsoft.com/addons/",
+      "kind": "website",
+      "assetId": "i4538691198fe0ea7526e"
+    },
+    {
+      "id": "site-opera-addons",
+      "name": "Opera Add-ons",
+      "names": [
+        "Opera Add-ons",
+        "addons.opera.com"
+      ],
+      "urls": [
+        "https://addons.opera.com/"
+      ],
+      "hosts": [
+        "addons.opera.com"
+      ],
+      "downloadPage": "https://addons.opera.com/",
+      "kind": "website",
+      "assetId": "if9ed4305c7a92cb2d93d"
+    },
+    {
+      "id": "site-apple-app-store",
+      "name": "Apple App Store",
+      "names": [
+        "Apple App Store",
+        "apps.apple.com"
+      ],
+      "urls": [
+        "https://apps.apple.com/"
+      ],
+      "hosts": [
+        "apps.apple.com"
+      ],
+      "downloadPage": "https://apps.apple.com/",
+      "kind": "website",
+      "assetId": "ic5a768356b120989e4c1"
     }
   ],
   "coverage": {
-    "tools": 218,
-    "brands": 684,
-    "assets": 303,
+    "tools": 223,
+    "brands": 693,
+    "assets": 308,
     "unresolved": []
   },
   "failures": [

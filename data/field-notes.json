@@ -188,31 +188,69 @@
     {
       "id": "malware-browser-notification-popups",
       "jobId": "malware-removal",
-      "title": "Stop website notification popups",
-      "symptom": "Desktop alerts claim the PC is infected, but the alerts identify a browser or website sender.",
-      "firstAction": "Record the sender and close the alert without opening its link.",
+      "title": "Remove malicious browser notifications and popups",
+      "symptom": "Desktop alerts claim the PC is infected, show fake virus warnings, or repeatedly open sites; the sender may be a browser website permission or a separate Windows app.",
+      "firstAction": "Record the sender and visible domain, then close the alert without clicking its link, downloading anything, or calling a number shown in the notification.",
       "steps": [
-        "In Microsoft Edge open Settings > Privacy, search, and services > Site permissions > All sites; choose the unwanted site and select See more.",
-        "Set that site’s Notifications permission to Block; inspect related extensions and recent downloads if the alerts began with an installation.",
-        "Retest with the browser restarted. Use the malware route if executable detections, persistence or other compromise evidence remains."
+        "Run the Chromium notification-audit PowerShell command below. It reads Chrome, Edge, Brave, Vivaldi, Opera, Opera GX and Yandex profile Preferences files and lists notification origins explicitly set to Allow. It does not change any browser data. Firefox uses a separate permissions database and is reviewed through its settings page.",
+        "Run the all-browser settings launcher. It opens notification-permission pages and extension managers for detected Chrome, Edge, Brave, Vivaldi, Opera/Opera GX, Firefox, Yandex, LibreWolf, Waterfox and Floorp installations. It does not modify profiles; repeat the review for every browser profile.",
+        "In each browser's Notifications settings, remove unknown or suspicious sites from the Allowed list. If the user does not need web-push notifications, set the default to Block/Don't allow; otherwise leave prompts on and allow only explicitly trusted services. In Firefox, open Settings > Privacy & Security > Permissions > Notifications, select unknown origins, choose Remove Website or Block, and save changes.",
+        "Open the extension manager and verify each extension's publisher, purpose and source. Remove unknown or unauthorized extensions, but preserve approved business and organization-managed extensions. Check home page, startup pages, default search, proxy and sync settings for changes.",
+        "Install one protection layer per browser: full uBlock Origin on Firefox/compatible Gecko browsers; AdGuard MV3 on Chrome and Edge; official AdGuard Opera MV3 release on Opera/Opera GX; AdGuard's documented route on Yandex; Brave Shields on Brave; Vivaldi's built-in Tracker and Ad Blocker on Vivaldi; AdGuard Mini for Safari on macOS 12 or later. Do not add extensions to Tor Browser; keep its standard protections. Keep browser Safe Browsing/SmartScreen protections enabled.",
+        "If the sender is not a browser, run the Windows notification-settings command below to identify the actual app sender and disable only that unwanted sender. Restart the browser and confirm notifications, redirects and extensions stay clean."
       ],
-      "expected": "The unwanted site can no longer send notifications and normal browsing still works.",
-      "ifUnresolved": "If the sender is not the browser, or alerts persist after permission removal, identify the actual installed application before removing anything.",
-      "toolIds": [],
+      "expected": "Untrusted websites can no longer send notifications, unknown extensions are gone, browser home/search settings are correct, one supported blocker or native protection layer is active, and fake alerts or redirects do not return after restart.",
+      "ifUnresolved": "If permissions or extensions reappear, the browser is marked managed, or redirects persist, inspect the responsible policy, browser sync and endpoint persistence with the incident owner. Do not wipe browser profiles, saved passwords or all site data as a first response.",
+      "toolIds": [
+        "ublock-origin",
+        "adguard-browser-extension",
+        "adguard-mini-mac"
+      ],
       "sourceUrls": [
-        "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge"
+        "https://support.google.com/chrome/answer/114662?hl=en",
+        "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge",
+        "https://support.mozilla.org/en-US/kb/push-notifications-firefox",
+        "https://support.microsoft.com/en-us/windows/experience/notifications-and-do-not-disturb-in-windows",
+        "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process",
+        "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
+        "https://adguard.com/kb/adguard-browser-extension/installation/",
+        "https://adguard.com/kb/adguard-browser-extension/mv3-version/",
+        "https://support.brave.app/hc/en-us/articles/360023646212-How-do-I-configure-global-and-site-specific-Shields-settings",
+        "https://support.brave.app/hc/en-us/articles/6449369961741-How-do-I-manage-adblock-filters-in-Brave",
+        "https://help.vivaldi.com/desktop/privacy/tracking-and-ad-blocking/",
+        "https://adguard.com/kb/adguard-mini-for-mac/installation/"
       ],
       "reviewedAt": "2026-11-26",
       "commands": [
         {
-          "id": "edge-notifications",
-          "label": "Open Edge site notification settings",
-          "shell": "CMD or PowerShell",
-          "purpose": "Open the browser's site-permission page so the technician can revoke the exact unwanted notification permission.",
-          "safety": "Opens a browser settings page; inspect the sender and revoke only the identified site permission. This does not scan or prove the endpoint is clean.",
-          "code": "Start-Process 'msedge.exe' 'edge://settings/content/notifications'",
-          "sourceUrl": "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge",
-          "sourceTitle": "Microsoft Edge notification permissions"
+          "id": "audit-chromium-notification-permissions",
+          "label": "Audit allowed notification origins across Chromium browser profiles",
+          "shell": "PowerShell",
+          "purpose": "Read Chromium browser profile Preferences files and list website origins explicitly granted notification permission.",
+          "safety": "Read-only. Does not remove permissions or alter browser files. Close browsers if a profile file cannot be read. Firefox uses a separate permissions database and is not included in this report; review Firefox through its settings page. The report can reveal visited site origins and should stay in the private service ticket.",
+          "code": "$profiles = @(\n    [pscustomobject]@{ Browser = 'Chrome'; Pattern = (Join-Path $env:LOCALAPPDATA 'Google\\Chrome\\User Data\\*\\Preferences') }\n    [pscustomobject]@{ Browser = 'Edge'; Pattern = (Join-Path $env:LOCALAPPDATA 'Microsoft\\Edge\\User Data\\*\\Preferences') }\n    [pscustomobject]@{ Browser = 'Brave'; Pattern = (Join-Path $env:LOCALAPPDATA 'BraveSoftware\\Brave-Browser\\User Data\\*\\Preferences') }\n    [pscustomobject]@{ Browser = 'Vivaldi'; Pattern = (Join-Path $env:LOCALAPPDATA 'Vivaldi\\User Data\\*\\Preferences') }\n    [pscustomobject]@{ Browser = 'Opera'; Pattern = (Join-Path $env:APPDATA 'Opera Software\\Opera Stable\\Preferences') }\n    [pscustomobject]@{ Browser = 'Opera GX'; Pattern = (Join-Path $env:APPDATA 'Opera Software\\Opera GX Stable\\Preferences') }\n    [pscustomobject]@{ Browser = 'Yandex'; Pattern = (Join-Path $env:LOCALAPPDATA 'Yandex\\YandexBrowser\\User Data\\*\\Preferences') }\n)\n$allowed = @()\nforeach ($profile in $profiles) {\n    $files = Get-ChildItem -Path $profile.Pattern -File -ErrorAction SilentlyContinue\n    foreach ($file in $files) {\n        try {\n            $prefs = Get-Content -LiteralPath $file.FullName -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop\n            $exceptions = $prefs.profile.content_settings.exceptions.notifications\n            if ($exceptions) {\n                foreach ($entry in $exceptions.PSObject.Properties) {\n                    $setting = $entry.Value.setting\n                    if ($setting -eq 1 -or \"$setting\" -eq 'allow') {\n                        $allowed += [pscustomobject]@{\n                            Browser = $profile.Browser\n                            Profile = $file.Directory.Name\n                            Origin = $entry.Name\n                            Permission = 'Allow'\n                            PreferencesFile = $file.FullName\n                        }\n                    }\n                }\n            }\n        } catch {\n            Write-Warning \"Could not read $($file.FullName): $($_.Exception.Message)\"\n        }\n    }\n}\nif ($allowed.Count -gt 0) {\n    $allowed | Sort-Object Browser, Profile, Origin | Format-Table Browser, Profile, Origin -AutoSize -Wrap\n    Write-Host ''\n    Write-Host 'Review these origins in the matching browser profile and remove only untrusted entries.' -ForegroundColor Yellow\n} else {\n    Write-Host 'No Chromium notification Allow entries were found in the scanned profile files.'\n}\nWrite-Host 'Firefox uses a separate permissions database; use about:preferences#privacy to review its notification list.'",
+          "sourceUrl": "https://support.google.com/chrome/answer/114662?hl=en",
+          "sourceTitle": "Google Chrome site notification permissions"
+        },
+        {
+          "id": "open-all-browser-cleanup-pages",
+          "label": "Open notification permissions and extension managers for detected browsers",
+          "shell": "PowerShell",
+          "purpose": "Find common installed browsers and open each browser's notification-permission page and extension manager.",
+          "safety": "Run as the affected Windows user; no elevation and no profile modification. Opens settings pages only. Review every browser profile, remove only untrusted notification Allow entries and unauthorized extensions, and preserve approved organization-managed items.",
+          "code": "$pf = [Environment]::GetEnvironmentVariable('ProgramFiles')\n$pf86 = [Environment]::GetEnvironmentVariable('ProgramFiles(x86)')\n$local = $env:LOCALAPPDATA\n$roaming = $env:APPDATA\n\n$targets = @(\n    [pscustomobject]@{ Name='Google Chrome'; Exe='chrome.exe'; Paths=@(\"$pf\\Google\\Chrome\\Application\\chrome.exe\", \"$pf86\\Google\\Chrome\\Application\\chrome.exe\", \"$local\\Google\\Chrome\\Application\\chrome.exe\"); Notifications='chrome://settings/content/notifications'; Extensions='chrome://extensions/' }\n    [pscustomobject]@{ Name='Microsoft Edge'; Exe='msedge.exe'; Paths=@(\"$pf86\\Microsoft\\Edge\\Application\\msedge.exe\", \"$pf\\Microsoft\\Edge\\Application\\msedge.exe\", \"$local\\Microsoft\\Edge\\Application\\msedge.exe\"); Notifications='edge://settings/content/notifications'; Extensions='edge://extensions/' }\n    [pscustomobject]@{ Name='Brave'; Exe='brave.exe'; Paths=@(\"$pf\\BraveSoftware\\Brave-Browser\\Application\\brave.exe\", \"$pf86\\BraveSoftware\\Brave-Browser\\Application\\brave.exe\", \"$local\\BraveSoftware\\Brave-Browser\\Application\\brave.exe\"); Notifications='brave://settings/content/notifications'; Extensions='brave://extensions/' }\n    [pscustomobject]@{ Name='Vivaldi'; Exe='vivaldi.exe'; Paths=@(\"$local\\Vivaldi\\Application\\vivaldi.exe\", \"$pf\\Vivaldi\\Application\\vivaldi.exe\", \"$pf86\\Vivaldi\\Application\\vivaldi.exe\"); Notifications='vivaldi://settings/content/notifications'; Extensions='vivaldi://extensions/' }\n    [pscustomobject]@{ Name='Opera'; Exe='launcher.exe'; Paths=@(\"$roaming\\Opera Software\\Opera Stable\\launcher.exe\", \"$local\\Programs\\Opera\\launcher.exe\", \"$pf\\Opera\\launcher.exe\", \"$pf86\\Opera\\launcher.exe\"); Notifications='opera://settings/content/notifications'; Extensions='opera://extensions/' }\n    [pscustomobject]@{ Name='Opera GX'; Exe='launcher.exe'; Paths=@(\"$roaming\\Opera Software\\Opera GX Stable\\launcher.exe\", \"$local\\Programs\\Opera GX\\launcher.exe\", \"$pf\\Opera GX\\launcher.exe\", \"$pf86\\Opera GX\\launcher.exe\"); Notifications='opera://settings/content/notifications'; Extensions='opera://extensions/' }\n    [pscustomobject]@{ Name='Mozilla Firefox'; Exe='firefox.exe'; Paths=@(\"$pf\\Mozilla Firefox\\firefox.exe\", \"$pf86\\Mozilla Firefox\\firefox.exe\", \"$local\\Programs\\Mozilla Firefox\\firefox.exe\"); Notifications='about:preferences#privacy'; Extensions='about:addons' }\n    [pscustomobject]@{ Name='Yandex Browser'; Exe='browser.exe'; Paths=@(\"$local\\Yandex\\YandexBrowser\\Application\\browser.exe\", \"$pf\\Yandex\\YandexBrowser\\Application\\browser.exe\", \"$pf86\\Yandex\\YandexBrowser\\Application\\browser.exe\"); Notifications='browser://settings/content/notifications'; Extensions='browser://extensions/' }\n    [pscustomobject]@{ Name='LibreWolf'; Exe='librewolf.exe'; Paths=@(\"$pf\\LibreWolf\\librewolf.exe\", \"$pf86\\LibreWolf\\librewolf.exe\", \"$local\\Programs\\LibreWolf\\librewolf.exe\"); Notifications='about:preferences#privacy'; Extensions='about:addons' }\n    [pscustomobject]@{ Name='Waterfox'; Exe='waterfox.exe'; Paths=@(\"$pf\\Waterfox\\waterfox.exe\", \"$pf86\\Waterfox\\waterfox.exe\", \"$local\\Programs\\Waterfox\\waterfox.exe\"); Notifications='about:preferences#privacy'; Extensions='about:addons' }\n    [pscustomobject]@{ Name='Floorp'; Exe='floorp.exe'; Paths=@(\"$local\\Programs\\Floorp\\floorp.exe\", \"$pf\\Floorp\\floorp.exe\", \"$pf86\\Floorp\\floorp.exe\"); Notifications='about:preferences#privacy'; Extensions='about:addons' }\n)\n\nforeach ($target in $targets) {\n    $exe = $target.Paths | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -First 1\n    if (-not $exe) {\n        $appPathKeys = @(\n            \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\$($target.Exe)\"\n            \"HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\$($target.Exe)\"\n            \"HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\App Paths\\$($target.Exe)\"\n        )\n        foreach ($key in $appPathKeys) {\n            try {\n                $item = Get-Item -LiteralPath $key -ErrorAction Stop\n                $candidate = $item.GetValue('')\n                if ($candidate -and (Test-Path -LiteralPath $candidate)) {\n                    $exe = $candidate\n                    break\n                }\n            } catch {}\n        }\n    }\n    if (-not $exe) {\n        $command = Get-Command $target.Exe -ErrorAction SilentlyContinue | Select-Object -First 1\n        if ($command) { $exe = $command.Source }\n    }\n    if ($exe) {\n        Write-Host \"Opening $($target.Name) notification permissions and extension manager...\"\n        Start-Process -FilePath $exe -ArgumentList @($target.Notifications, $target.Extensions)\n    } else {\n        Write-Host \"$($target.Name) not detected; skipped.\" -ForegroundColor DarkGray\n    }\n}\nWrite-Host 'Review each profile in the browser profile menu. This helper opens settings only; it does not change permissions or delete extensions.' -ForegroundColor Yellow",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process",
+          "sourceTitle": "Microsoft PowerShell Start-Process documentation"
+        },
+        {
+          "id": "open-windows-notification-senders",
+          "label": "Identify the Windows notification sender",
+          "shell": "PowerShell",
+          "purpose": "Open Windows notification settings to identify whether the alert came from a browser or another installed application.",
+          "safety": "Opens Windows Settings only. Disable only the confirmed unwanted sender; do not turn off all Windows notifications or mistake legitimate Windows Security alerts for browser spam.",
+          "code": "Start-Process 'ms-settings:notifications'",
+          "sourceUrl": "https://support.microsoft.com/en-us/windows/experience/notifications-and-do-not-disturb-in-windows",
+          "sourceTitle": "Microsoft Windows notifications and Do Not Disturb"
         }
       ]
     },

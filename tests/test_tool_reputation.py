@@ -55,5 +55,52 @@ class ReputationEvidence(unittest.TestCase):
                 build.validate_reputation(snapshot, self.tools)
 
 
+    def test_browser_store_ratings_keep_provider_identity_and_native_scale(self):
+        snapshot = copy.deepcopy(self.snapshot)
+        entry = snapshot['tools'][self.tools[0]['id']]
+        entry['browserStores'] = [dict(
+            provider='mozilla-addons', name='Mozilla Add-ons',
+            url='https://addons.mozilla.org/en-US/firefox/addon/test/',
+            checkedAt=self.checked_at, status='observed',
+            rating=dict(value=4.8, scale=5, reviews=100), users=1000
+        )]
+        build.validate_reputation(snapshot, self.tools)
+        for invalid in (
+            dict(provider='unknown-store', name='Wrong provider',
+                 url='https://addons.mozilla.org/en-US/firefox/addon/test/',
+                 checkedAt=self.checked_at, status='observed',
+                 rating=dict(value=4.8, scale=5, reviews=100)),
+            dict(provider='mozilla-addons', name='Wrong host',
+                 url='https://example.com/addon/test/',
+                 checkedAt=self.checked_at, status='observed',
+                 rating=dict(value=4.8, scale=5, reviews=100)),
+            dict(provider='mozilla-addons', name='Invalid rating',
+                 url='https://addons.mozilla.org/en-US/firefox/addon/test/',
+                 checkedAt=self.checked_at, status='observed',
+                 rating=dict(value=4.8, scale=10, reviews=100)),
+            dict(provider='mozilla-addons', name='Missing sample',
+                 url='https://addons.mozilla.org/en-US/firefox/addon/test/',
+                 checkedAt=self.checked_at, status='observed',
+                 rating=dict(value=4.8, scale=5, reviews=0)),
+            dict(provider='mozilla-addons', name='Future observation',
+                 url='https://addons.mozilla.org/en-US/firefox/addon/test/',
+                 checkedAt='2027-01-01', status='observed',
+                 rating=dict(value=4.8, scale=5, reviews=100)),
+        ):
+            entry['browserStores'] = [invalid]
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                build.validate_reputation(snapshot, self.tools)
+
+    def test_unreported_browser_store_rating_is_explicit_not_inferred(self):
+        snapshot = copy.deepcopy(self.snapshot)
+        entry = snapshot['tools'][self.tools[0]['id']]
+        entry['browserStores'] = [dict(
+            provider='apple-app-store', name='Apple App Store',
+            url='https://apps.apple.com/us/app/test/id123456789',
+            checkedAt=self.checked_at, status='unreported',
+            reason='No rating was verified.'
+        )]
+        build.validate_reputation(snapshot, self.tools)
+
 if __name__ == '__main__':
     unittest.main()
