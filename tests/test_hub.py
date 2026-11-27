@@ -41,6 +41,23 @@ class HubIntegrity(unittest.TestCase):
             with self.assertRaises(ValueError):
                 build.validate(tools, self.jobs)
 
+    def test_specific_fix_commands_are_valid_and_rendered_with_copy_controls(self):
+        field_notes = json.loads((ROOT / 'data/field-notes.json').read_text())
+        build.validate_field_note_commands(field_notes)
+        commands = [command for note in field_notes['notes'] for command in note.get('commands', [])]
+        self.assertGreaterEqual(len(commands), 25)
+        self.assertTrue(all(command['sourceUrl'].startswith('https://') for command in commands))
+        output = build.build_outputs()
+        catalog = json.loads(output['site/catalog.json'])
+        self.assertTrue(any(note.get('commands') for note in catalog['fieldNotes']['notes']))
+        self.assertIn('data-copy-field-command', output['site/index.html'])
+        for note in field_notes['notes']:
+            if note.get('commands'):
+                guide = output[f"wiki/Job-{note['jobId']}.md"]
+                self.assertIn(note['title'], guide)
+                self.assertIn(note['commands'][0]['label'], guide)
+                self.assertIn(note['commands'][0]['code'], guide)
+
     def test_every_guide_and_tool_reaches_generated_output(self):
         output = build.build_outputs()
         catalog = json.loads(output['site/catalog.json'])
