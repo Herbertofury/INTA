@@ -24,9 +24,17 @@ public sealed class PackageManagers(ProcessRunner runner)
     }
     public async Task<(int ExitCode, string Output)> ExecuteAsync(OperationRequest request, CancellationToken ct = default)
     {
-        var package = ValidatePackageId(request.PackageId);
+        var package = request.Action == "update-all" ? "*" : ValidateId(request.PackageId);
         var (file, args) = BuildCommand(request.Manager, request.Action, package);
         return await runner.RunAsync(file, args, TimeSpan.FromMinutes(60), ct);
+    }
+
+    public static string ValidateId(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value) || value.Length > 180 || value.StartsWith('-') ||
+            !Regex.IsMatch(value, @"^[A-Za-z0-9][A-Za-z0-9._+@:/-]*$"))
+            throw new ArgumentException("Enter the exact package ID shown by the selected package manager. Shell syntax and command-line switches are not accepted.");
+        return value;
     }
     private static (string? File, string[] Args) PreviewCommand(string manager) => manager switch
     {
@@ -44,32 +52,42 @@ public sealed class PackageManagers(ProcessRunner runner)
     };
     private static (string File, string[] Args) BuildCommand(string manager, string action, string package) => (manager, action) switch
     {
+        ("winget", "update-all") => ("winget", ["upgrade", "--all", "--interactive", "--accept-source-agreements"]),
         ("winget", "update") => ("winget", ["upgrade", "--id", package, "--exact", "--interactive", "--accept-source-agreements"]),
         ("winget", "repair") => ("winget", ["repair", "--id", package, "--exact", "--interactive"]),
         ("winget", "uninstall") => ("winget", ["uninstall", "--id", package, "--exact", "--interactive"]),
+        ("choco", "update-all") => ("choco", ["upgrade", "all", "--yes"]),
         ("choco", "update") => ("choco", ["upgrade", package, "--yes"]),
         ("choco", "repair") => ("choco", ["install", package, "--force", "--yes"]),
         ("choco", "uninstall") => ("choco", ["uninstall", package, "--confirm"]),
+        ("scoop", "update-all") => ("scoop", ["update", "*"]),
         ("scoop", "update") => ("scoop", ["update", package]),
         ("scoop", "repair") => ("scoop", ["reinstall", package]),
         ("scoop", "uninstall") => ("scoop", ["uninstall", package]),
+        ("apt", "update-all") => ("apt-get", ["upgrade", "-y"]),
         ("apt", "update") => ("apt-get", ["install", "--only-upgrade", "-y", package]),
         ("apt", "repair") => ("apt-get", ["install", "--reinstall", "-y", package]),
         ("apt", "uninstall") => ("apt-get", ["remove", "-y", package]),
+        ("dnf", "update-all") => ("dnf", ["upgrade", "-y"]),
         ("dnf", "update") => ("dnf", ["upgrade", "-y", package]),
         ("dnf", "repair") => ("dnf", ["reinstall", "-y", package]),
         ("dnf", "uninstall") => ("dnf", ["remove", "-y", package]),
+        ("pacman", "update-all") => ("pacman", ["-Syu", "--noconfirm"]),
         ("pacman", "update") => ("pacman", ["-S", "--needed", "--noconfirm", package]),
         ("pacman", "repair") => ("pacman", ["-S", "--noconfirm", package]),
         ("pacman", "uninstall") => ("pacman", ["-R", "--noconfirm", package]),
+        ("brew", "update-all") => ("brew", ["upgrade"]),
         ("brew", "update") => ("brew", ["upgrade", package]),
         ("brew", "repair") => ("brew", ["reinstall", package]),
         ("brew", "uninstall") => ("brew", ["uninstall", package]),
+        ("flatpak", "update-all") => ("flatpak", ["update", "-y"]),
         ("flatpak", "update") => ("flatpak", ["update", "-y", package]),
         ("flatpak", "repair") => ("flatpak", ["repair"]),
         ("flatpak", "uninstall") => ("flatpak", ["uninstall", package]),
+        ("snap", "update-all") => ("snap", ["refresh"]),
         ("snap", "update") => ("snap", ["refresh", package]),
         ("snap", "uninstall") => ("snap", ["remove", package]),
+        ("uniget", "update-all") => ("uniget.exe", ["package", "update-all", "--wait", "true", "--timeout", "3600"]),
         _ => throw new ArgumentException($"The {manager} manager does not support the {action} operation.")
     };
     private static string ValidatePackageId(string value)
