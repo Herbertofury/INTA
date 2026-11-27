@@ -117,13 +117,59 @@ class NewsRefresh(unittest.TestCase):
             obj = m.refresh(path,sources=(source,broken),fetcher=get,now=now)
             self.assertEqual(obj["schemaVersion"],1)
             self.assertEqual(obj["generatedAt"],"2026-11-27T03:00:00Z")
-            self.assertEqual(obj["sources"],[{"id":"primary","status":"ok"},{"id":"broken","status":"unavailable"}])
+            self.assertEqual(obj["sources"],[{"id":"primary","status":"ok","origin":"feed","lastSuccessfulCheckAt":"2026-11-27T03:00:00Z"},{"id":"broken","status":"unavailable","origin":"feed"}])
             self.assertEqual(obj["items"][-1]["title"],"Preserved")
             self.assertEqual(obj["items"][-1]["media"],[])
             before = path.read_bytes()
             with self.assertRaisesRegex(m.Unsafe,"previous output left unchanged"):
                 m.refresh(path,sources=(broken,),fetcher=get)
             self.assertEqual(before,path.read_bytes())
+
+    def test_feed_freshness_survives_partial_failure_and_recovers(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "digest.json"
+            seed = Path(tmp) / "seed.json"
+            seed.write_text(json.dumps({"items":[{"sourceId":"windows-health","title":"Reviewed",
+                "url":"https://learn.microsoft.com/en-us/windows/release-health/","date":"2026-11-26","media":[]}]}))
+            phase = set()
+            broken_rss = b"""<rss version="2.0"><channel><title>Fixture</title><item>
+                <title>Kept article</title><link>https://broken.example/item</link>
+                <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate></item></channel></rss>"""
+            def get(url,*unused,**ignored):
+                if url in phase:
+                    raise OSError("publisher down")
+                return (broken_rss if url==broken.feed else RSS), url
+            def run(hour):
+                return m.refresh(path,sources=(source,broken),fetcher=get,seed=seed,
+                                 now=dt.datetime(2026,11,27,hour,tzinfo=dt.timezone.utc))
+            def states(obj):
+                return {row["id"]:row for row in obj["sources"]}
+            first=run(1); ids=[row["id"] for row in first["items"]]
+            self.assertEqual(len(ids),5)
+            self.assertEqual(states(first)["broken"]["lastSuccessfulCheckAt"],"2026-11-27T01:00:00Z")
+            self.assertEqual(states(first)["windows-health"],{"id":"windows-health","status":"ok","origin":"editorial"})
+            phase.add(broken.feed)
+            partial=run(2)
+            self.assertEqual(states(partial)["broken"],{"id":"broken","status":"unavailable","origin":"feed",
+                                                       "lastSuccessfulCheckAt":"2026-11-27T01:00:00Z"})
+            self.assertEqual(states(partial)["primary"]["lastSuccessfulCheckAt"],"2026-11-27T02:00:00Z")
+            self.assertEqual([row["id"] for row in partial["items"]],ids)
+            before=path.read_bytes()
+            phase.add(source.feed)
+            with self.assertRaisesRegex(m.Unsafe,"previous output left unchanged"):
+                run(3)
+            self.assertEqual(path.read_bytes(),before)
+            phase.clear()
+            recovered=run(4)
+            self.assertEqual(states(recovered)["broken"]["status"],"ok")
+            self.assertEqual(states(recovered)["broken"]["lastSuccessfulCheckAt"],"2026-11-27T04:00:00Z")
+            self.assertEqual([row["id"] for row in recovered["items"]],ids)
+            def empty(url,*unused,**ignored):
+                return b'<rss><channel><title>Empty on purpose</title></channel></rss>',url
+            obj=m.refresh(path,sources=(broken,),fetcher=empty,
+                          now=dt.datetime(2026,11,27,5,tzinfo=dt.timezone.utc))
+            self.assertEqual(obj["items"],[])
+            self.assertEqual(states(obj)["broken"]["lastSuccessfulCheckAt"],"2026-11-27T05:00:00Z")
 
     def test_editorial_seed_is_approved_normalized_and_optional(self):
         with tempfile.TemporaryDirectory() as tmp:
