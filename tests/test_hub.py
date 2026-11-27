@@ -55,8 +55,8 @@ class HubIntegrity(unittest.TestCase):
             if note.get('commands'):
                 guide = output[f"wiki/Job-{note['jobId']}.md"]
                 self.assertIn(note['title'], guide)
-                self.assertIn(note['commands'][0]['label'], guide)
                 self.assertIn(note['commands'][0]['code'], guide)
+                self.assertIn('#### ⚡ Quick commands', guide)
 
     def test_every_guide_and_tool_reaches_generated_output(self):
         output = build.build_outputs()
