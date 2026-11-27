@@ -243,6 +243,74 @@ main { min-height: calc(100vh - 125px); padding: 30px 32px 48px; outline: none; 
 .field-note-outcomes dt { margin-bottom: 6px; color: var(--text); font-size: 14px; font-weight: 600; }
 .field-note-outcomes dd { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.65; }
 
+
+/* Command Center */
+.command-center-hero { display:flex; justify-content:space-between; align-items:center; gap:28px; margin:0 0 28px; padding:24px 26px; border:1px solid var(--line); border-radius:8px; background:linear-gradient(115deg,var(--surface),var(--subtle)); }
+.command-center-hero h2 { margin:5px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:-.035em; }
+.command-center-hero p:not(.page-label) { max-width:720px; margin:0; color:var(--muted); line-height:1.6; }
+.command-center-stats { display:flex; gap:22px; flex:0 0 auto; }
+.command-center-stats div { display:grid; gap:2px; text-align:center; }
+.command-center-stats strong { font-size:27px; font-variant-numeric:tabular-nums; }
+.command-center-stats span { color:var(--dim); font-size:11px; text-transform:uppercase; letter-spacing:.07em; }
+.command-center-workflows,.command-center-toolkit,.command-center-library,.command-center-maintenance { margin:30px 0; }
+.section-heading-row { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin:0 0 14px; }
+.section-heading-row h2 { margin:3px 0 5px; font-size:21px; }
+.section-heading-row p:not(.page-label) { margin:0; color:var(--muted); font-size:13px; }
+.command-workflow-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; }
+.command-workflow-card,.command-toolkit-card { min-width:0; padding:16px; border:1px solid var(--line); border-radius:6px; background:var(--surface); }
+.command-card-kicker,.command-toolkit-kind { margin:0 0 7px; color:var(--accent); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.09em; }
+.command-workflow-card h3,.command-toolkit-card h3 { margin:0 0 8px; font-size:16px; }
+.command-workflow-card > p,.command-toolkit-card > p { margin:0 0 11px; color:var(--muted); font-size:13px; line-height:1.6; }
+.command-workflow-card ol { margin:10px 0 14px; padding-left:22px; color:var(--muted); font-size:12px; line-height:1.7; }
+.command-workflow-card ol a { color:var(--text); text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:3px; }
+.command-workflow-sequence { padding-top:10px; border-top:1px solid var(--line-soft); }
+.command-workflow-card .secondary-button { display:inline-flex; align-items:center; gap:7px; min-height:35px; padding:6px 10px; border:1px solid var(--line); border-radius:4px; background:var(--subtle); color:var(--text); font-size:12px; }
+.command-toolkit-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.command-toolkit-top { display:flex; justify-content:space-between; gap:10px; margin-bottom:9px; color:var(--dim); font-size:10px; text-transform:uppercase; letter-spacing:.07em; }
+.command-toolkit-card h3 a { color:var(--text); text-decoration:none; }
+.command-toolkit-card h3 a:hover { color:var(--accent); }
+.command-toolkit-actions { display:flex; align-items:center; flex-wrap:wrap; gap:9px 14px; margin-top:13px; }
+.command-toolkit-actions > a { color:var(--muted); font-size:12px; }
+.command-toolkit-actions .copy-command { min-height:33px; padding:5px 8px; border:1px solid var(--line); border-radius:4px; font-size:11px; }
+.command-center-filters { display:grid; grid-template-columns:minmax(240px,1fr) 180px 180px; gap:10px; margin:14px 0 12px; }
+.command-category-tabs { display:flex; gap:6px; flex-wrap:wrap; margin:0 0 13px; padding-bottom:10px; border-bottom:1px solid var(--line); }
+.command-category-tabs button { min-height:34px; padding:6px 11px; border:1px solid var(--line); border-radius:4px; background:var(--surface); color:var(--muted); font-size:12px; }
+.command-category-tabs button.active { border-color:var(--focus); background:var(--selected); color:var(--text); }
+.command-center-result { margin:0 0 12px; color:var(--dim); font-size:12px; font-variant-numeric:tabular-nums; }
+.command-center-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; align-items:start; }
+.command-card { min-width:0; border:1px solid var(--line); border-radius:6px; background:var(--surface); overflow:hidden; }
+.command-card[hidden] { display:none; }
+.command-card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding:13px 14px 7px; }
+.command-card-header h3 { margin:0; font-size:15px; line-height:1.35; }
+.command-card-kicker { margin:0 0 5px; color:var(--dim); font-size:10px; }
+.command-risk { flex:0 0 auto; padding:4px 7px; border:1px solid var(--line); border-radius:3px; color:var(--muted); font-size:10px; white-space:nowrap; }
+.command-risk-read-only { color:var(--success,var(--text)); }
+.command-risk-changes-system,.command-risk-installs-software { border-color:var(--warning); color:var(--warning); }
+.command-risk-long-running { color:var(--accent); }
+.command-card-summary { margin:0; padding:0 14px 12px; color:var(--muted); font-size:12px; line-height:1.55; }
+.command-code-toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:7px 11px; border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); background:var(--subtle); color:var(--dim); font-size:10px; text-transform:uppercase; letter-spacing:.07em; }
+.command-code-toolbar .copy-command { display:inline-flex; align-items:center; gap:6px; min-height:30px; padding:4px 8px; border:1px solid var(--line); border-radius:4px; background:var(--surface); color:var(--text); font-size:11px; text-transform:none; letter-spacing:0; }
+.command-center-code { max-height:270px; overflow:auto; margin:0; padding:12px 14px; background:var(--bg); color:var(--text); font-size:11px; line-height:1.6; white-space:pre; tab-size:2; }
+.command-card .command-safety { padding:9px 13px; border-top:1px solid var(--line-soft); font-size:11px; }
+.command-card-footer { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:8px 13px; border-top:1px solid var(--line-soft); color:var(--dim); font-size:10px; }
+.command-card-footer a { color:var(--muted); }
+.command-center-maintenance { padding:17px; border:1px solid var(--line); border-radius:6px; background:var(--surface); }
+.command-center-maintenance h2 { margin:3px 0 14px; font-size:19px; }
+.command-maintenance-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.command-maintenance-grid > div { padding:12px; border-left:2px solid var(--line); background:var(--subtle); }
+.command-maintenance-grid h3 { margin:0 0 6px; font-size:13px; }
+.command-maintenance-grid p { margin:0; color:var(--muted); font-size:11px; line-height:1.55; }
+@media (max-width:1000px) { .command-toolkit-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .command-maintenance-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:700px) {
+ .command-center-hero { display:block; padding:17px; }
+ .command-center-stats { justify-content:flex-start; margin-top:17px; }
+ .command-workflow-grid,.command-center-list { grid-template-columns:1fr; }
+ .command-toolkit-grid { grid-template-columns:1fr; }
+ .command-center-filters { grid-template-columns:1fr; }
+ .command-maintenance-grid { grid-template-columns:1fr 1fr; }
+ .command-card-footer { align-items:flex-start; flex-direction:column; }
+}
+
 .field-note-commands { margin:18px 0 20px; border-top:1px solid var(--line-soft); }
 .field-note-commands > h4 { display:flex; align-items:center; gap:8px; margin:12px 0; font-size:15px; }
 .field-note-command { margin:12px 0 16px; border:1px solid var(--line); border-radius:5px; background:var(--surface); overflow:hidden; }
