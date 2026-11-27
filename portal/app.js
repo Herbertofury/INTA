@@ -58,8 +58,10 @@
   let xpLedger = load(xpKey, []);
   if (!Array.isArray(xpLedger)) xpLedger = [];
   xpLedger = xpLedger.filter(event => event && typeof event.id === 'string' && typeof event.jobId === 'string' && Number.isFinite(event.xp));
-  const feedbackPreferences = load(feedbackKey, { sound: false });
-  if (!feedbackPreferences || typeof feedbackPreferences !== 'object') feedbackPreferences.sound = false;
+  const storedFeedbackPreferences = load(feedbackKey, { sound: false });
+  const feedbackPreferences = storedFeedbackPreferences && typeof storedFeedbackPreferences === 'object' && !Array.isArray(storedFeedbackPreferences)
+    ? { sound: storedFeedbackPreferences.sound === true }
+    : { sound: false };
   const theme = load(themeKey, 'dark');
   document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
 
