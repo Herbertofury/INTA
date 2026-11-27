@@ -73,3 +73,7 @@ For a content change, inspect the relevant rendered page and follow its actual l
 Use [Maintaining the Hub](https://github.com/Herbertofury/INTA/wiki/Maintaining-the-Hub) for publication commands and [Continuous Improvement](https://github.com/Herbertofury/INTA/wiki/Continuous-Improvement) for recurring work. If an external gate fails, retain the last verified checkpoint and continue on a materially different supported route. Do not label an unpublished or unverified required surface complete.
 
 **➜ Continue:** [Copy the contribution template](https://github.com/Herbertofury/INTA/wiki/Templates) · [Choose a method](https://github.com/Herbertofury/INTA/wiki/Methods) · [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose)
+
+## ⚡ Add a useful quick command
+
+Every playbook needs at least one command placed in the step where it belongs. Add shell, purpose, safety, official reference URL and reference title beside the command in `data/jobs.json`. Prefer read-only discovery before state changes; include the condition that justifies a repair, its prerequisites, rollback and a verification step. The interactive hub surfaces the first relevant command at the top of the guide and keeps the full command at its procedure step. Follow [Quick Command Standards](quick-commands.md).
