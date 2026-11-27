@@ -4591,6 +4591,103 @@
       },
       "alternates": [],
       "note": "Recommended as a specialist for inspection and individually reviewed settings; manual release page only, no unattended install or automatic tuning."
+    },
+    "ublock-origin": {
+      "officialUrl": "https://github.com/gorhill/uBlock",
+      "primary": {
+        "kind": "store",
+        "id": "firefox-addons",
+        "label": "Install full uBlock Origin from Mozilla Add-ons",
+        "url": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
+        "evidenceUrl": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/",
+        "checkedAt": "2026-11-26",
+        "platform": "Firefox desktop and Android"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "id": "github-releases",
+          "label": "Official source and release history",
+          "url": "https://github.com/gorhill/uBlock/releases",
+          "evidenceUrl": "https://github.com/gorhill/uBlock",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Use the full Mozilla Add-ons version on Firefox and compatible Gecko browsers. Confirm the publisher is Raymond Hill; do not install similarly named copies or pair it with another content blocker."
+    },
+    "adguard-browser-extension": {
+      "officialUrl": "https://adguard.com/en/adguard-browser-extension/overview.html",
+      "primary": {
+        "kind": "store",
+        "id": "chrome-store",
+        "label": "Install AdGuard from Chrome Web Store · MV3",
+        "url": "https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg",
+        "evidenceUrl": "https://adguard.com/kb/adguard-browser-extension/mv3-version/",
+        "checkedAt": "2026-11-26",
+        "platform": "Chrome"
+      },
+      "alternates": [
+        {
+          "kind": "store",
+          "id": "edge-chrome-store",
+          "label": "Install the supported Chrome Web Store MV3 build in Edge",
+          "url": "https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg",
+          "evidenceUrl": "https://adguard.com/kb/adguard-browser-extension/installation/",
+          "checkedAt": "2026-11-26",
+          "platform": "Microsoft Edge"
+        },
+        {
+          "kind": "release-page",
+          "id": "opera-mv3",
+          "label": "Official Opera MV3 release · opera-mv3.zip",
+          "url": "https://github.com/AdguardTeam/AdguardBrowserExtension/releases",
+          "evidenceUrl": "https://adguard.com/kb/adguard-browser-extension/mv3-version/",
+          "checkedAt": "2026-11-26",
+          "platform": "Opera and Opera GX"
+        },
+        {
+          "kind": "store",
+          "id": "opera-addons",
+          "label": "Opera Add-ons listing · check current MV3 compatibility",
+          "url": "https://addons.opera.com/en/extensions/details/adguard/",
+          "evidenceUrl": "https://adguard.com/kb/adguard-browser-extension/installation/",
+          "checkedAt": "2026-11-26",
+          "platform": "Opera and Opera GX"
+        },
+        {
+          "kind": "web",
+          "id": "yandex-install",
+          "label": "AdGuard's official Yandex Browser installation instructions",
+          "url": "https://adguard.com/kb/adguard-browser-extension/installation/",
+          "evidenceUrl": "https://adguard.com/kb/adguard-browser-extension/installation/",
+          "checkedAt": "2026-11-26",
+          "platform": "Yandex Browser"
+        }
+      ],
+      "note": "Use MV3 on Chrome and Edge. AdGuard's official documentation permits the Chrome Web Store build in Edge; enable the Edge prompt for extensions from other stores only for this verified listing. For Opera/Opera GX, prefer the official opera-mv3.zip release if the store listing is not current; manually loaded builds need a named update owner. The older Edge Add-ons listing currently carries a compatibility/removal warning, so do not use it as the preferred route. Keep one blocker per browser and enable Security filters when malicious-domain filtering is required."
+    },
+    "adguard-mini-mac": {
+      "officialUrl": "https://adguard.com/en/adguard-mini-mac/overview.html",
+      "primary": {
+        "kind": "store",
+        "id": "safari-app-store",
+        "label": "Install AdGuard Mini from the Mac App Store",
+        "url": "https://apps.apple.com/us/app/adguard-ad-blocker-for-safari/id1440147259?mt=12",
+        "evidenceUrl": "https://adguard.com/kb/adguard-mini-for-mac/installation/",
+        "checkedAt": "2026-11-26",
+        "platform": "macOS 12 or later · Safari"
+      },
+      "alternates": [
+        {
+          "kind": "web",
+          "id": "product-page",
+          "label": "AdGuard Mini for Mac product details",
+          "url": "https://adguard.com/en/adguard-mini-mac/overview.html",
+          "evidenceUrl": "https://adguard.com/kb/adguard-mini-for-mac/installation/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Safari-only. Core ad and tracker blocking is free; advanced features require a license. Not applicable to Windows."
     }
   }
 }
