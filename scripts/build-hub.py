@@ -25,6 +25,7 @@ WIKI_MIRRORS = {
     "Start-Here": "start-here.md", "Maintaining-the-Hub": "maintaining-the-hub.md",
     "Rescue-Media": "rescue-media.md", "Technician-Handoff": "technician-handoff.md",
     "Knowledge-Standards": "knowledge-standards.md", "Contribute": "contribute.md",
+    "Quick-Commands": "quick-commands.md",
     "Templates": "contribution-template.md", "Continuous-Improvement": "continuous-improvement.md",
     "Methods": "methods.md", "Decision-Desk": "decision-desk.md",
     "Interface-Design": "interface-design.md", "Service-Evidence": "service-evidence.md",
