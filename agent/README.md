@@ -61,3 +61,9 @@ Other runtime identifiers: linux-x64, osx-arm64, osx-x64.
 ## Boundaries
 
 Windows OS update installation and Microsoft Store updates remain in their supported Windows UI. The agent can inspect installed KB history, run DISM/SFC repair, and uninstall a specific uninstallable KB through WUSA; it does not silently manipulate Windows servicing internals. The website and PWA can only connect to the agent on the same device. Phone-to-desktop management through a remote account relay is not available yet because this repository currently has a static GitHub Pages frontend and no authenticated relay service.
+
+## Storage Preview
+
+Run `inta-agent --storage-preview "<local-folder>" [minimum-age-days] [entry-limit]` as an explicit one-shot diagnostic. Defaults: 7 days and 100,000 entries. The preview rejects drive roots, Windows UNC/device paths, and roots passing through a link. The scan skips link, device and offline entries marked by the filesystem and reports entry/depth caps or read errors as `partial`. It never starts the local server.
+
+The JSON reports counts and **logical file bytes**. Hard links can be counted multiple times; compression, sparse files and allocation overhead mean this is not the space a cleanup would free. The preview is not a filesystem snapshot, and file age is not authorization to remove anything. It does not open file contents, modify the folder, include paths in the JSON or send results elsewhere.
