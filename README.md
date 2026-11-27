@@ -208,3 +208,7 @@ Start with [CONTRIBUTING.md](CONTRIBUTING.md), [Knowledge Standards](docs/knowle
 
 **<a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA Computer Services](https://herbertofury.github.io/INTA/)** · Technical reference
 Editorial review: **November 26, 2026**. Complete source and provenance remain in this repository.
+
+## Copy-ready field commands
+
+Specific-fix articles now support contextual PowerShell/CMD/Linux command cards with copy buttons, safety notes, and official references. See [Quick Commands](https://github.com/Herbertofury/INTA/wiki/Quick-Commands).
