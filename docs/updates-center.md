@@ -145,3 +145,5 @@ These are commercial fleet-management platforms, not generic local shell command
 The site is generated as an installable Progressive Web App (PWA): mobile browsers can add INTA to the home screen, launch it in a standalone window and cache the app shell after the first successful visit. The same responsive Updates tab and canonical catalog are used by desktop and phone layouts. The service worker performs no periodic background polling or automatic update execution; it only maintains the cached app shell and uses network-first navigation with an offline fallback.
 
 The PWA does not grant the website access to installed applications. Live update inventory and repair still require the local INTA agent or an approved management integration.
+
+The Windows Update cache recovery workflow also includes a matching rollback command. It requires the exact timestamp and both backup folders created by the INTA reset command; it preserves any newly generated cache folders under rollback names and restores the original folders. This is specific to the INTA reversible cache-reset procedure, not a general-purpose Windows Update fix.
