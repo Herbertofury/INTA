@@ -426,8 +426,8 @@
         "checkedAt": "2026-11-27",
         "identitySource": "https://sourceforge.net/projects/systeminformer/",
         "rating": {
-          "value": 5.0,
-          "scale": 5.0,
+          "value": 5,
+          "scale": 5,
           "reviews": 7
         },
         "weeklyDownloads": 16957
@@ -523,7 +523,7 @@
         "identitySource": "https://sourceforge.net/projects/crystaldiskinfo/",
         "rating": {
           "value": 4.8,
-          "scale": 5.0,
+          "scale": 5,
           "reviews": 20
         },
         "weeklyDownloads": 700132
@@ -603,7 +603,7 @@
         "identitySource": "https://sourceforge.net/projects/gparted/",
         "rating": {
           "value": 4.7,
-          "scale": 5.0,
+          "scale": 5,
           "reviews": 115
         },
         "weeklyDownloads": 39303
@@ -639,7 +639,7 @@
         "identitySource": "https://clonezilla.org/",
         "rating": {
           "value": 4.6,
-          "scale": 5.0,
+          "scale": 5,
           "reviews": 130
         },
         "weeklyDownloads": 39999
@@ -892,7 +892,7 @@
         "identitySource": "https://winscp.net/",
         "rating": {
           "value": 4.8,
-          "scale": 5.0,
+          "scale": 5,
           "reviews": 210
         },
         "weeklyDownloads": 596379
@@ -1026,7 +1026,7 @@
         "identitySource": "https://www.7-zip.org/",
         "rating": {
           "value": 4.8,
-          "scale": 5.0,
+          "scale": 5,
           "reviews": 833
         },
         "weeklyDownloads": 32562
@@ -1754,7 +1754,7 @@
         "identitySource": "https://winmerge.org/",
         "rating": {
           "value": 4.8,
-          "scale": 5.0,
+          "scale": 5,
           "reviews": 193
         },
         "weeklyDownloads": 31714
@@ -1823,6 +1823,17 @@
       }
     },
     "sysmon": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "crystaldiskmark": {
       "github": {
         "status": "unverified"
       },

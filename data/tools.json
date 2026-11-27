@@ -1240,7 +1240,47 @@
       "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "SMART is incomplete through some USB bridges and cannot rule out impending failure."
+    "cautions": "SMART is incomplete through some USB bridges and cannot rule out impending failure. A good SMART indicator does not establish that all data is readable. Use CrystalDiskMark only to measure performance on healthy media; never benchmark a suspected failing drive."
+  },
+  {
+    "id": "crystaldiskmark",
+    "name": "CrystalDiskMark",
+    "category": "storage",
+    "summary": "Measures sequential and random storage read/write throughput and I/O performance using a configurable test file.",
+    "bestFor": "Quick Windows SSD, NVMe, HDD or USB performance checks on healthy storage after a health review; compare equivalent before/after profiles.",
+    "platforms": [
+      "Windows",
+      "Windows Server"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source Standard Edition; optional paid Microsoft Store edition",
+    "homepage": "https://crystalmark.info/en/software/crystaldiskmark/",
+    "downloadUrl": "https://crystalmark.info/en/download/",
+    "docsUrl": "https://crystalmark.info/en/software/crystaldiskmark/",
+    "sourceUrl": "https://crystalmark.info/en/software/crystaldiskmark/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "ssd",
+      "nvme",
+      "hdd",
+      "usb",
+      "disk benchmark",
+      "storage performance",
+      "throughput",
+      "iops",
+      "sequential",
+      "random"
+    ],
+    "provenance": [
+      "Official publisher product and download documentation",
+      "https://crystalmark.info/en/software/crystaldiskmark/",
+      "https://crystalmark.info/en/download/",
+      "https://sourceforge.net/projects/crystaldiskmark/files/9.0.3/CrystalDiskMark9_0_3.zip/download",
+      "https://sourceforge.net/projects/crystaldiskmark/files/9.0.3/CrystalDiskMark9_0_3.exe/download"
+    ],
+    "evidenceStatus": "Publisher documentation and exact Standard Edition file-host routes reviewed; no INTA installation, hardware or benchmark certification claimed.",
+    "cautions": "Not a SMART or health test. Back up important data and review health first; never benchmark a failing or unstable source. Run a bounded test only on the intended healthy drive. Writes can consume SSD/USB endurance. Record drive, version, profile, test size, count, and connection; compare equivalent settings."
   },
   {
     "id": "smartmontools",

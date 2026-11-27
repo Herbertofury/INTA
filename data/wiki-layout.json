@@ -541,6 +541,12 @@
       "routeType": "download"
     },
     {
+      "toolId": "crystaldiskmark",
+      "label": "CrystalDiskMark",
+      "icon": "💽",
+      "routeType": "download"
+    },
+    {
       "toolId": "rustdesk",
       "label": "RustDesk",
       "icon": "🖥️",

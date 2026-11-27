@@ -3217,6 +3217,40 @@
         }
       ],
       "note": "This is a focused entry for the persistent telemetry component also distributed in Sysinternals Suite. The catalog links to the publisher; it does not redistribute the utility."
+    },
+    "crystaldiskmark": {
+      "officialUrl": "https://crystalmark.info/en/software/crystaldiskmark/",
+      "primary": {
+        "kind": "release-page",
+        "label": "Get Windows portable · ZIP · 9.0.3",
+        "url": "https://sourceforge.net/projects/crystaldiskmark/files/9.0.3/CrystalDiskMark9_0_3.zip/download",
+        "evidenceUrl": "https://crystalmark.info/en/download/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows x86/x64/ARM64",
+        "format": "ZIP",
+        "version": "9.0.3"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "Get Windows installer · EXE · 9.0.3",
+          "url": "https://sourceforge.net/projects/crystaldiskmark/files/9.0.3/CrystalDiskMark9_0_3.exe/download",
+          "evidenceUrl": "https://crystalmark.info/en/download/",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows x86/x64/ARM64",
+          "format": "EXE",
+          "version": "9.0.3",
+          "id": "installer"
+        },
+        {
+          "kind": "release-page",
+          "label": "All editions and download options",
+          "url": "https://crystalmark.info/en/download/",
+          "evidenceUrl": "https://crystalmark.info/en/download/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Publisher links point to exact Standard Edition file-host pages that start a download; mirror URLs are temporary. Windows only; phone users can open the product/download page for their Windows workstation. Do not treat a benchmark as a health test."
     }
   }
 }

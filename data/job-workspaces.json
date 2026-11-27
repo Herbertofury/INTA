@@ -289,6 +289,10 @@
           "why": "Separate storage warnings from ordinary software lag."
         },
         {
+          "toolId": "crystaldiskmark",
+          "why": "Optional quick storage performance baseline on healthy media only; choose the intended drive and record comparable settings."
+        },
+        {
           "toolId": "powercfg",
           "why": "Collecting battery and sleep evidence before changing hardware or power policy."
         },
@@ -354,6 +358,11 @@
           "symptom": "Only a task using a share or online service is slow",
           "action": "Compare an approved local equivalent and follow the network guide for the remote dependency.",
           "expected": "The evidence separates local performance from service or network latency."
+        },
+        {
+          "symptom": "Storage is healthy but unusually slow, or a replacement drive needs a baseline",
+          "action": "Check CrystalDiskInfo first. If storage is stable and backed up, use CrystalDiskMark with a bounded test file on the intended drive; compare the same profile, test size, count, connection and software version. Stop on disconnects or I/O errors.",
+          "expected": "A reproducible read/write baseline for that drive, separate from SMART health; abnormal results lead to cable, port, controller or workload investigation, not a health diagnosis."
         }
       ],
       "doneWhen": [
@@ -702,6 +711,10 @@
           "why": "Boot a ready recovery environment containing GNU ddrescue."
         },
         {
+          "toolId": "crystaldiskinfo",
+          "why": "Optional quick health read on a stable device only if it will not delay image-first recovery; stop if instability appears."
+        },
+        {
           "toolId": "photorec",
           "why": "Recover file contents from healthy media or an image."
         },
@@ -781,7 +794,8 @@
       ],
       "escalateWhen": [
         "There is physical damage or an unstable connection that prevents controlled imaging.",
-        "A proposed repair would write to the only source or overwrite an unverified destination."
+        "A proposed repair would write to the only source or overwrite an unverified destination.",
+        "Do not benchmark a suspected failing drive with CrystalDiskMark; preserve recoverability instead."
       ]
     },
     "disk-migration": {
@@ -799,6 +813,14 @@
         {
           "toolId": "winget",
           "why": "Inventory and reapply approved application packages."
+        },
+        {
+          "toolId": "crystaldiskinfo",
+          "why": "Check SMART warnings, temperature and available health data before any performance test."
+        },
+        {
+          "toolId": "crystaldiskmark",
+          "why": "Optional quick storage performance baseline on healthy media only; choose the intended drive and record comparable settings."
         },
         {
           "toolId": "syncthing",
@@ -876,6 +898,11 @@
           "symptom": "The copied system is ready for release",
           "action": "Boot with the old disk disconnected and test sign-in, applications, encryption recovery and backup.",
           "expected": "The new system works independently and the old disk remains the agreed rollback copy."
+        },
+        {
+          "symptom": "Storage is healthy but unusually slow, or a replacement drive needs a baseline",
+          "action": "Check CrystalDiskInfo first. If storage is stable and backed up, use CrystalDiskMark with a bounded test file on the intended drive; compare the same profile, test size, count, connection and software version. Stop on disconnects or I/O errors.",
+          "expected": "A reproducible read/write baseline for that drive, separate from SMART health; abnormal results lead to cable, port, controller or workload investigation, not a health diagnosis."
         }
       ],
       "doneWhen": [
@@ -1713,6 +1740,10 @@
           "why": "Check storage warnings before further stress."
         },
         {
+          "toolId": "crystaldiskmark",
+          "why": "Optional quick storage performance baseline on healthy media only; choose the intended drive and record comparable settings."
+        },
+        {
           "toolId": "usb-device-tree-view",
           "why": "Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly."
         },
@@ -1787,6 +1818,11 @@
           "symptom": "The system overheats, loses power or storage disappears",
           "action": "Stop stress testing and inspect the indicated cooling, power or storage path with the appropriate service guidance.",
           "expected": "The physical fault is addressed before further workload testing."
+        },
+        {
+          "symptom": "Storage is healthy but unusually slow, or a replacement drive needs a baseline",
+          "action": "Check CrystalDiskInfo first. If storage is stable and backed up, use CrystalDiskMark with a bounded test file on the intended drive; compare the same profile, test size, count, connection and software version. Stop on disconnects or I/O errors.",
+          "expected": "A reproducible read/write baseline for that drive, separate from SMART health; abnormal results lead to cable, port, controller or workload investigation, not a health diagnosis."
         }
       ],
       "doneWhen": [
@@ -1805,6 +1841,14 @@
         {
           "toolId": "winget",
           "why": "Identify and install approved application packages."
+        },
+        {
+          "toolId": "crystaldiskinfo",
+          "why": "Check SMART warnings, temperature and available health data before any performance test."
+        },
+        {
+          "toolId": "crystaldiskmark",
+          "why": "Optional quick storage performance baseline on healthy media only; choose the intended drive and record comparable settings."
         },
         {
           "toolId": "oem-drivers",
@@ -1893,6 +1937,11 @@
           "symptom": "Setup is nearly complete",
           "action": "Verify encryption recovery storage, a backup restore, printing and the user’s daily workflow before handoff.",
           "expected": "The workstation is usable and recoverable, with acceptance evidence recorded."
+        },
+        {
+          "symptom": "Storage is healthy but unusually slow, or a replacement drive needs a baseline",
+          "action": "Check CrystalDiskInfo first. If storage is stable and backed up, use CrystalDiskMark with a bounded test file on the intended drive; compare the same profile, test size, count, connection and software version. Stop on disconnects or I/O errors.",
+          "expected": "A reproducible read/write baseline for that drive, separate from SMART health; abnormal results lead to cable, port, controller or workload investigation, not a health diagnosis."
         }
       ],
       "doneWhen": [
@@ -2171,6 +2220,10 @@
           "why": "Review storage warnings before cleanup."
         },
         {
+          "toolId": "crystaldiskmark",
+          "why": "Optional quick storage performance baseline on healthy media only; choose the intended drive and record comparable settings."
+        },
+        {
           "toolId": "windirstat",
           "why": "Find capacity use on a healthy drive."
         },
@@ -2258,6 +2311,11 @@
           "symptom": "Changes are complete",
           "action": "Restart as planned and repeat the user’s main app, network, printing and backup checks.",
           "expected": "Normal work succeeds and all deferred issues have owners."
+        },
+        {
+          "symptom": "Storage is healthy but unusually slow, or a replacement drive needs a baseline",
+          "action": "Check CrystalDiskInfo first. If storage is stable and backed up, use CrystalDiskMark with a bounded test file on the intended drive; compare the same profile, test size, count, connection and software version. Stop on disconnects or I/O errors.",
+          "expected": "A reproducible read/write baseline for that drive, separate from SMART health; abnormal results lead to cable, port, controller or workload investigation, not a health diagnosis."
         }
       ],
       "doneWhen": [

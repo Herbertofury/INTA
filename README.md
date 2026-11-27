@@ -10,6 +10,12 @@ Choose a repair scenario below for a free starting tool and a step-by-step guide
 
 <a id="free-tools"></a>
 
+
+### Drive health and performance
+
+- **[💽 CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** — [Windows downloads](https://crystalmark.info/en/download/); inspect SMART, temperature and health first.
+- **[💽 CrystalDiskMark](https://crystalmark.info/en/software/crystaldiskmark/)** — [Windows portable ZIP 9.0.3](https://sourceforge.net/projects/crystaldiskmark/files/9.0.3/CrystalDiskMark9_0_3.zip/download) · [Windows installer EXE](https://sourceforge.net/projects/crystaldiskmark/files/9.0.3/CrystalDiskMark9_0_3.exe/download); benchmark only healthy, backed-up drives. Use [the failing-drive guide](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) instead if storage is unstable.
+
 ## ⚡ What do you need to fix?
 
 **Choose your problem for the first three actions.** Tool names open the official page; download links identify the file and platform. Built-in features link to their instructions.
