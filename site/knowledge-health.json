@@ -7,16 +7,16 @@
     "jobs": 22,
     "tools": 218,
     "toolCategories": 11,
-    "fieldNotes": 94,
+    "fieldNotes": 95,
     "researchItems": 58,
     "scenarioToolChoices": 72,
-    "reviewedRecords": 904,
+    "reviewedRecords": 905,
     "dueReviews": 0
   },
   "coverage": [
     {
       "jobId": "intake-triage",
-      "fieldNotes": 3,
+      "fieldNotes": 4,
       "resources": 4,
       "decisions": 4
     },
@@ -6358,6 +6358,16 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance"
+    },
+    {
+      "kind": "field-note",
+      "id": "triage-powershell-first-response-toolkit",
+      "title": "Run a PowerShell first-response diagnostic and tool-launch kit",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo"
     },
     {
       "kind": "field-note",
