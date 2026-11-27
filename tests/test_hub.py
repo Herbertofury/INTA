@@ -130,6 +130,7 @@ class HubIntegrity(unittest.TestCase):
         script = r'''
 const input = JSON.parse(require('fs').readFileSync(0, 'utf8'));
 const commandCenter = input.catalog;
+const updatesCenter = {commands: []};
 const array = value => Array.isArray(value) ? value : [];
 const quickItems = [], jobs = [], fieldNotes = [], tools = [];
 const quickByJob = new Map();
