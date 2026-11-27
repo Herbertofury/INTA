@@ -50,6 +50,12 @@ jobs:
         run: python agent/power_plans_test.py agent/INTA.LocalAgent/bin/Release/net10.0/inta-agent.dll -v
       - name: Publish self-contained single-file agent
         run: dotnet publish agent/INTA.LocalAgent/INTA.LocalAgent.csproj -c Release -r ${{ matrix.rid }} --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
+      - name: Exercise packaged Windows startup inventory (no startup writes)
+        if: matrix.rid == 'win-x64'
+        run: python agent/startup_inventory_test.py publish/inta-agent.exe
+      - name: Verify packaged startup inventory rejects unsupported platform
+        if: matrix.rid == 'linux-x64'
+        run: python agent/startup_inventory_test.py publish/inta-agent
       - name: Package release archive
         run: python agent/package.py publish dist/inta-agent-${{ matrix.rid }}.zip
       - name: Include Windows installer helper
