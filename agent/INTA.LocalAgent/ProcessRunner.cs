@@ -19,8 +19,10 @@ public sealed class ProcessRunner
         timeoutCts.CancelAfter(timeout);
         try { await process.WaitForExitAsync(timeoutCts.Token); }
         catch (OperationCanceledException)
-        { throw new TimeoutException($"{file} exceeded the {timeout.TotalMinutes:0}-minute observation window. The process was left running; inspect its installer UI and logs before retrying."); }
-        await process.WaitForExitAsync();
+        {
+            // Keep observing the original process. Never terminate an installer because the UI stopped waiting.
+            await process.WaitForExitAsync(CancellationToken.None);
+        }
         return (process.ExitCode, output.ToString());
     }
     private static void Append(StringBuilder output, string? line)
