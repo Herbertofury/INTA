@@ -360,7 +360,7 @@ process.stdout.write(JSON.stringify(results));
 
     def test_repair_quick_starts_precede_online_tools_on_all_front_pages(self):
         output = build.build_outputs()
-        self.assertIn("+ quickStartSection() + onlineStartSection() +", output["site/index.html"])
+        self.assertIn("+ quickStartSection() + compactToolDirectory() + onlineStartSection() +", output["site/index.html"])
         for path in ("README.md", "docs/start-here.md", "docs/free-tool-picks.md",
                      "wiki/Home.md", "wiki/Start-Here.md", "wiki/Free-Tool-Picks.md"):
             page = output[path]
