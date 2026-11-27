@@ -1005,3 +1005,11 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 .news-source-group { margin:1.15rem 0; }
 .news-source-group > h3 { margin:0; }
 .news-source-group > p { margin:.22rem 0 .6rem; }
+/* Digest players are created only after an explicit click. */
+.news-story[hidden] { display:none; }
+.news-media { display:grid; gap:.4rem; min-width:0; }
+.news-media img,.news-media video,.news-media iframe { width:100%; max-width:100%; border:0; border-radius:8px; background:var(--sidebar); }
+.news-media iframe { aspect-ratio:16/9; }
+.news-media audio { width:100%; }
+.news-media a { font-size:.85rem; }
+#news-digest { margin-bottom:1.5rem; }
