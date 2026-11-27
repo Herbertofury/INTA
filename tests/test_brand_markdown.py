@@ -72,6 +72,40 @@ A["Example Tool"] --> B["Done"]
         render = icons.BrandMarkdown(self.registry, links)
         self.assertEqual(render.decorate('[everything](#complete-catalog)'), '[everything](#complete-catalog)')
 
+    def test_link_only_windows_drops_only_decoration_and_keeps_contextual_urls(self):
+        self.registry['brands'].append(dict(
+            self.registry['brands'][0], id='app-windows', name='Windows', names=['Windows'],
+            inlineIcon=False, downloadPage='https://www.microsoft.com/windows',
+            urls=['https://www.microsoft.com/windows']))
+        render = icons.BrandMarkdown(self.registry, links)
+        original = ('[Windows](https://www.microsoft.com/windows), '
+                    '[Windows and Example Tool installer](https://publisher.example/tools.zip), '
+                    '<a href="https://publisher.example/support">Download for Windows</a>, '
+                    '[System guide](https://www.microsoft.com/windows).')
+        old_icon = '<a href="https://www.microsoft.com/windows" data-inta-brand="app-windows"><img src="old.png"></a> '
+        result = render.decorate(old_icon + original)
+        self.assertNotIn('data-inta-brand="app-windows"', result)
+        self.assertEqual(result.count('data-inta-brand="sample"'), 1)
+        self.assertEqual(icons.strip_icons(result), original)
+        self.assertEqual(render.decorate(result), result)
+
+    def test_current_windows_products_keep_authentic_icons(self):
+        from json import loads
+        registry = loads((ROOT / 'data' / 'brand-icons.json').read_text(encoding='utf-8'))
+        render = icons.BrandMarkdown(registry, links)
+        original = ('[Windows 10](https://example.com/example) / '
+                    '[Windows 11](https://example.com/example) / '
+                    '[Windows Server](https://example.com/example) / '
+                    '[Windows Terminal](https://example.com/example) / '
+                    '[Windows Update](https://example.com/example) / '
+                    '[Windows 11 installation media](https://example.com/example)')
+        result = render.decorate(original)
+        for generic in ('windows', 'windows10', 'windows11', 'windows-server'):
+            self.assertNotIn(f'data-inta-brand="app-{generic}"', result)
+        for product in ('windows-terminal', 'app-windows-update', 'microsoft-windows11-media'):
+            self.assertIn(f'data-inta-brand="{product}"', result)
+        self.assertEqual(icons.strip_icons(result), original)
+
     def test_executable_download_destination_is_rejected(self):
         self.registry['brands'][0]['downloadPage'] = 'javascript:alert(1)'
         with self.assertRaisesRegex(ValueError, 'public HTTPS'):
