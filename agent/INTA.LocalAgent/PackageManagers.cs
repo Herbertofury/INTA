@@ -49,15 +49,22 @@ public sealed class PackageManagers(ProcessRunner runner)
         {
             var previews = await PreviewAsync([request.Manager], ct);
             var preview = previews.FirstOrDefault();
-            var stillPending = preview is not null && preview.ExitCode == 0 && preview.Output.Contains(package, StringComparison.OrdinalIgnoreCase);
-            return (preview is not null && preview.ExitCode == 0 && !stillPending,
-                preview?.Output ?? "No post-update preview was available.", preview is null || preview.ExitCode != 0);
+            var previewSucceeded = preview is not null && (preview.ExitCode == 0 ||
+                (request.Manager == "dnf" && preview.ExitCode == 100) ||
+                (request.Manager == "pacman" && preview.ExitCode == 2));
+            var stillPending = previewSucceeded && preview!.Output.Contains(package, StringComparison.OrdinalIgnoreCase);
+            return (previewSucceeded && !stillPending,
+                preview?.Output ?? "No post-update preview was available.", !previewSucceeded);
         }
         var (file, args) = VerificationCommand(request.Manager, package);
         if (file is null) return (false, "This package manager does not expose a reliable post-operation verification query.", true);
         var result = await runner.RunAsync(file, args, TimeSpan.FromMinutes(3), ct);
         var present = result.ExitCode == 0 && result.Output.Contains(package, StringComparison.OrdinalIgnoreCase);
-        var verified = request.Action == "repair" ? present : request.Action == "uninstall" && result.ExitCode != 0;
+        var absentMarker = result.Output.Contains("not installed", StringComparison.OrdinalIgnoreCase) ||
+            result.Output.Contains("no installed package", StringComparison.OrdinalIgnoreCase) ||
+            result.Output.Contains("no matching package", StringComparison.OrdinalIgnoreCase);
+        var verified = request.Action == "repair" ? present :
+            request.Action == "uninstall" && (absentMarker || (result.ExitCode != 0 && string.IsNullOrWhiteSpace(result.Output)));
         return (verified, result.Output, false);
     }
 
@@ -91,10 +98,10 @@ public sealed class PackageManagers(ProcessRunner runner)
     };
     private static (string File, string[] Args) BuildCommand(string manager, string action, string package) => (manager, action) switch
     {
-        ("winget", "update-all") => ("winget", ["upgrade", "--all", "--interactive", "--accept-source-agreements"]),
-        ("winget", "update") => ("winget", ["upgrade", "--id", package, "--exact", "--interactive", "--accept-source-agreements"]),
-        ("winget", "repair") => ("winget", ["repair", "--id", package, "--exact", "--interactive"]),
-        ("winget", "uninstall") => ("winget", ["uninstall", "--id", package, "--exact", "--interactive"]),
+        ("winget", "update-all") => ("winget", ["upgrade", "--all", "--silent", "--accept-source-agreements", "--accept-package-agreements"]),
+        ("winget", "update") => ("winget", ["upgrade", "--id", package, "--exact", "--silent", "--accept-source-agreements", "--accept-package-agreements"]),
+        ("winget", "repair") => ("winget", ["repair", "--id", package, "--exact", "--silent"]),
+        ("winget", "uninstall") => ("winget", ["uninstall", "--id", package, "--exact", "--silent"]),
         ("choco", "update-all") => ("choco", ["upgrade", "all", "--yes"]),
         ("choco", "update") => ("choco", ["upgrade", package, "--yes"]),
         ("choco", "repair") => ("choco", ["install", package, "--force", "--yes"]),
