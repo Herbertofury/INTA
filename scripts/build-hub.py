@@ -1138,6 +1138,8 @@ def build_outputs() -> dict[str, str]:
     knowledge_policy = json.loads((ROOT / "data/knowledge-policy.json").read_text(encoding="utf-8"))
     research_queue = json.loads((ROOT / "data/research-queue.json").read_text(encoding="utf-8"))
     online_data = json.loads((ROOT / "data/online-tools.json").read_text(encoding="utf-8"))
+    command_center = json.loads((ROOT / "data/command-center.json").read_text(encoding="utf-8"))
+    validate_command_center(command_center)
     online_module = brand_module("online_tools.py")
     online_module.validate_online(online_data, tools, jobs)
     reputation = json.loads((ROOT / "data/tool-reputation.json").read_text(encoding="utf-8"))
@@ -1165,7 +1167,7 @@ def build_outputs() -> dict[str, str]:
     brand_markdown = brand_module("brand_markdown.py")
     decorator = brand_markdown.BrandMarkdown(brands, linker)
     data = {"tools": [{**tool, "reputation": reputation["tools"][tool["id"]]} for tool in tools], "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
-            "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces,
+            "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces, "commandCenter": command_center,
             "layout": layout, "fieldNotes": field_notes, "onlineTools": online_data, "brands": brands_module.portal_icons(brands), "news": news}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
