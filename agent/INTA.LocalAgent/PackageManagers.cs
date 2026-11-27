@@ -17,7 +17,12 @@ public sealed class PackageManagers(ProcessRunner runner)
         {
             var (file, args) = PreviewCommand(manager);
             if (file is null) continue;
-            try { var result = await runner.RunAsync(file, args, TimeSpan.FromMinutes(3), ct); results.Add(new(manager, file + " " + string.Join(' ', args), result.ExitCode, result.Output, DateTimeOffset.UtcNow)); }
+            try
+            {
+                (file, args) = ResolveCommand(manager, file, args);
+                var result = await runner.RunAsync(file, args, TimeSpan.FromMinutes(3), ct);
+                results.Add(new(manager, file + " " + string.Join(' ', args), result.ExitCode, result.Output, DateTimeOffset.UtcNow));
+            }
             catch (Exception ex) { results.Add(new(manager, file + " " + string.Join(' ', args), -1, ex.Message, DateTimeOffset.UtcNow)); }
         }
         return results;
@@ -79,6 +84,7 @@ public sealed class PackageManagers(ProcessRunner runner)
         }
         var (file, args) = VerificationCommand(request.Manager, package);
         if (file is null) return (false, "This package manager does not expose a reliable post-operation verification query.", true);
+        (file, args) = ResolveCommand(request.Manager, file, args);
         var result = await runner.RunAsync(file, args, TimeSpan.FromMinutes(3), ct);
         var present = result.ExitCode == 0 && result.Output.Contains(package, StringComparison.OrdinalIgnoreCase);
         var absentMarker = result.Output.Contains("not installed", StringComparison.OrdinalIgnoreCase) ||
