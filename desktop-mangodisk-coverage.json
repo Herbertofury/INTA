@@ -1,0 +1,1103 @@
+{
+  "schemaVersion": 1,
+  "intent": "Pinned behavioral reference and native acceptance backlog, not native completion evidence",
+  "mango": {
+    "repository": "https://github.com/harry0703/MangoDisk",
+    "tag": "v2.1.2",
+    "commit": "d2a4fd6597524eb77b0687cfe1c9e6f533fae7c9",
+    "publishedAt": "2026-11-27T01:29:41Z",
+    "release": "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2",
+    "officialAssetsNotExecuted": [
+      "MangoDisk-2.1.2-linux-arm64.AppImage",
+      "MangoDisk-2.1.2-linux-arm64.deb",
+      "MangoDisk-2.1.2-linux-x64.AppImage",
+      "MangoDisk-2.1.2-linux-x64.deb",
+      "MangoDisk-2.1.2-macos-cli.tar.gz",
+      "MangoDisk-2.1.2-macos.dmg",
+      "MangoDisk-2.1.2-windows-cli.exe",
+      "MangoDisk-2.1.2-windows-portable.exe",
+      "MangoDisk-2.1.2-windows.exe"
+    ]
+  },
+  "inta": {
+    "repository": "https://github.com/Herbertofury/INTA",
+    "publicCommit": "7d4a2a4ac8747422d82285a94ebeed4dca773166",
+    "publicAgentFiles": {
+      "agent/INTA.LocalAgent/Program.cs": "8979432cdac672f5306cba5ed9b17fea0263d1f410e189ad73c160866d885bfa",
+      "agent/INTA.LocalAgent/Inventory.cs": "0c781da655c990132ae0a7de726b438d88f963882605ae406eee53c9c8418929",
+      "agent/INTA.LocalAgent/PackageManagers.cs": "d9599796f43072fbbb3d68c3e3914dc36e0f35d342810abd45f8f88c9d73850f",
+      "agent/INTA.LocalAgent/OperationStore.cs": "bfe269a7a15e3ba0f5703eb8abe7cb4e4547542d1193475c01ae632bd6d6073d",
+      "agent/INTA.LocalAgent/Models.cs": "25dbef68234e47719cdbada1264bdd35db15594071ffd10e5f60a4dff6b4c0d6",
+      "agent/README.md": "888d413c7001395be8f1be1dc2a0f98f211ee8a0c6cbfe310ccca5285a53a3f5"
+    },
+    "nativeDesktopSourceVerified": false,
+    "nativeDesktopRuntimeVerified": false
+  },
+  "features": [
+    {
+      "id": "overview.workspace",
+      "feature": "Overview & quick cleanup",
+      "nativeLane": "triage",
+      "publicBridge": "unknown-native",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/cleanup/components/md-system-disk-usage.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/tray-panel/components/md-resource-overview.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/layouts/md-app-shell.vue",
+          "kind": "blob"
+        }
+      ],
+      "expected": "Current device status, hardware, quick cleanup summary, volumes, space and activity/history. Show timestamps, unavailable readings, what runs in the background and current work on this device.",
+      "windowsAcceptance": "Cold-launch Windows actual app 100% and 150% DPI; one-click jump from device, volume, quick scan and latest history; opening does not launch mutation or heavy automatic storage traversal."
+    },
+    {
+      "id": "cleanup.deep",
+      "feature": "Deep Cleanup & custom rules",
+      "nativeLane": "storage",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/cleanup/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/cleanup/components/md-custom-cleanup-dialog.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/cleanup/components/md-cleanup-plan-dialog.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/cleanup/plan.rs",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/rules",
+          "kind": "tree"
+        }
+      ],
+      "expected": "Role-backed cache/log/temp/update cleanup plus app/browser/dev/container/AI and rebuildable project artifacts; custom rule editor, risk/recommendation, volume scope, incomplete scan reporting and explicit prior installation boundary.",
+      "windowsAcceptance": "Fixture paths copied from synthetic disk only; inspect locked app and inaccessible paths; validate target IDs, paths and content immediately before any change; report per-item actual bytes and failures. No risky candidates selected automatically."
+    },
+    {
+      "id": "cleanup.app-optimization",
+      "feature": "App binary optimization & local AI artifacts",
+      "nativeLane": "storage",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/applications/binary_optimization",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/cleanup/cleaners/ai_model_storage",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/linux/ai_models.rs",
+          "kind": "blob"
+        }
+      ],
+      "expected": "Separate safe app optimization and manual-only selection of removable local model downloads. Treat the source app-variant-specific binary feature as platform-bound, never as a generic Windows optimizer.",
+      "windowsAcceptance": "Prove license continuity, launchability and unchanged documented runtime asset behavior before release; model files require model-aware scope and explicit confirmation; fixture verify all model error/no-op states."
+    },
+    {
+      "id": "storage.large",
+      "feature": "Large files",
+      "nativeLane": "storage",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/large-files/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/large-files/components/md-large-file-list.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/storage/large_files",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/windows/large_files.rs",
+          "kind": "blob"
+        }
+      ],
+      "expected": "Folder and volume selection, largest-first discovery, thresholds and exclusions, partial/cancelled results, exact recoverable file operation.",
+      "windowsAcceptance": "Measured cold/warm large-volume fixtures; largest order stable, zero unrequested traversal, no destructive fallback for locked/sparse/reparse targets, current bytes before and after."
+    },
+    {
+      "id": "storage.duplicates",
+      "feature": "Exact duplicate files",
+      "nativeLane": "storage",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/duplicate-files/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/duplicate-files/components/md-duplicate-file-groups.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/storage/duplicates",
+          "kind": "tree"
+        }
+      ],
+      "expected": "Exact-content groups, exclusions, streamed progress and smart survivor selection; names/sizes alone do not prove equivalence.",
+      "windowsAcceptance": "Same-size distinct files never merge; hard links never count as bytes reclaimed twice, stale/changed candidate cannot execute, cannot remove every copy, and dry-run/CLI/UI yield same group IDs."
+    },
+    {
+      "id": "storage.analysis",
+      "feature": "Disk analysis & exports",
+      "nativeLane": "storage",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/analysis/components/md-analysis-visual-pane.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/analysis/components/md-analysis-treemap.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/analysis/components/md-analysis-sunburst.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/analysis/components/md-analysis-export-dialog.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/storage/analysis",
+          "kind": "tree"
+        }
+      ],
+      "expected": "Drilldown folders + sorted detail list, treemap/sunburst/depth, logical size versus allocated bytes, coverage and changed space, cached navigation, frozen snapshot export.",
+      "windowsAcceptance": "Use 1M-entry synthetic fixtures and limited-access/reparse samples; compare allocation against expected fixture, always report excluded/inaccessible items, rapid scroll and navigation while scanning, deterministic scan-ID-bound export."
+    },
+    {
+      "id": "privacy.cleanup",
+      "feature": "Privacy cleanup",
+      "nativeLane": "triage",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/privacy/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/privacy/components/md-privacy-plan-dialog.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/privacy",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/windows/privacy",
+          "kind": "tree"
+        }
+      ],
+      "expected": "System/app/browser profiles with independent data categories, current/browser-close state, individual review and plan; browser caches, histories, cookies and sign-in consequences separated.",
+      "windowsAcceptance": "Isolated profile tests only; defaults leave passwords, bookmarks, sessions and unselected profiles intact; locking yields actionable retry or no change, never forced close as an opening step."
+    },
+    {
+      "id": "apps.uninstall",
+      "feature": "App management, uninstall & leftovers",
+      "nativeLane": "apps",
+      "publicBridge": "partial-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/application-uninstall/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/application-uninstall/components/md-application-uninstall-plan-dialog.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/applications/uninstall",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/windows/native_uninstall",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/windows/inventory",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/windows/registration_removal",
+          "kind": "tree"
+        }
+      ],
+      "expected": "Local agent has Windows installed registry rows and typed manager uninstall, not generic native app action parity. MangoDisk reconciles native registrations/package evidence, application source and running state, prepares batch, displays related leftovers, and separates registration removal from uninstall.",
+      "windowsAcceptance": "Windows fixture MSI, vendor uninstall, Store, no uninstaller, stale registry, multi-user 32/64 view, paths with spaces and same display names; preserve ownership/source keys and personal data; require visible exact uninstall target and verified post-state."
+    },
+    {
+      "id": "apps.startup",
+      "feature": "Startup Items & reversible controls",
+      "nativeLane": "apps",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/startup/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/startup/startup-change-queue.ts",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/windows/startup",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/macos/startup",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/linux/startup.rs",
+          "kind": "blob"
+        }
+      ],
+      "expected": "Source-aware list and supported enable/disable; Windows registry/folder/scheduled tasks/packaged startup/eligible services and advanced autoruns discovery; protected/native-managed policy; platform-specific macOS/Linux mechanisms.",
+      "windowsAcceptance": "Source ID and effective state surfaced; quote/nonquote paths fixture; safe policy for critical/system items; disabled item can be restored to exact original registration/settings; reconcile after reboot."
+    },
+    {
+      "id": "system.optimization",
+      "feature": "System Optimization profiles",
+      "nativeLane": "system",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/system-optimization/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/system-optimization/components/md-system-setting-risk-dialog.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/system_settings/catalog.rs",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/system_settings/service.rs",
+          "kind": "blob"
+        }
+      ],
+      "expected": "Smart/Performance/Privacy/custom policy, setting-level availability/reasons/risk, admin/restart badges, before/after verify resets; source catalog is platform/build dependent.",
+      "windowsAcceptance": "Read only before preview; no raw commands/registry input; profile sets change exactly intended keys, protects managed/unsupported settings and includes actionable original-value undo."
+    },
+    {
+      "id": "system.maintenance",
+      "feature": "System Maintenance & targeted repair",
+      "nativeLane": "system",
+      "publicBridge": "partial-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/system-maintenance/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/system_maintenance/catalog.rs",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/system_maintenance/service.rs",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/windows/system_maintenance",
+          "kind": "tree"
+        }
+      ],
+      "expected": "System repair, search/index/interface, printer, audio, disk, Store, Windows Update, DNS, time and performance counter tasks. Local Agent only overlaps in typed package repair and DISM/SFC. Linux maintenance scope differs (font cache, package integrity).",
+      "windowsAcceptance": "Native launch checks actual symptoms and prints expected benefit, then opt-in start with resource locking, bounded off-UI workers, verified results, reboot/pending/rollback statuses. No broad automatic repair against a client PC."
+    },
+    {
+      "id": "windows.explorer",
+      "feature": "Explorer context menu & integration",
+      "nativeLane": "system",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/settings/components/md-explorer-integration-settings.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/src/services/explorer_integration.rs",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/src/commands/explorer_integration.rs",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/windows/system_settings.rs",
+          "kind": "blob"
+        }
+      ],
+      "expected": "Existing shell item inspection by extension/entry point; enable/disable/restore/remove supported entries, action shortcuts, file/folder integration and analyze launch; copy text only for supported files inside limits.",
+      "windowsAcceptance": "Test Explorer menus at OS-supported versions, file path spaces and context scopes, text versus binary/oversize, stale links, uninstall removes only INTA-owned registrations."
+    },
+    {
+      "id": "activity.history",
+      "feature": "History, scan snapshots & reports",
+      "nativeLane": "receipts",
+      "publicBridge": "partial-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/history/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/history/components/md-history-detail-dialog.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/history",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/reporting",
+          "kind": "tree"
+        }
+      ],
+      "expected": "Local agent has bounded package-operation history; MangoDisk includes typed cleanup/system changes, affected items, reclaimed space, result details, and locale-aware dates with immutable snapshot export.",
+      "windowsAcceptance": "Durable typed receipts under portable root created before mutating; preserve across restart/cancellation; exported redacted client copy omits personal paths, account details and credentials, with scope and verification explicit."
+    },
+    {
+      "id": "monitoring.resources",
+      "feature": "Device / app resource monitor",
+      "nativeLane": "monitor",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/tray-panel/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/tray-panel/components/md-resource-overview.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-platform/src/system_resources",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/src/resident/runtime/demand.rs",
+          "kind": "blob"
+        }
+      ],
+      "expected": "CPU/GPU/RAM, disk/IO, network/trends and capability-gated temperature/fan/power/battery/SMART; process view and deliberate app quit; Linux NVIDIA added in v2.1.2.",
+      "windowsAcceptance": "Unsupported sensor distinct from zero, measured readings timestamped, no fallback subprocess polling when monitoring is off, foreground responsiveness benchmark and host app isolation verified."
+    },
+    {
+      "id": "monitoring.surfaces",
+      "feature": "Tray, taskbar, floating monitor, memory & settings",
+      "nativeLane": "monitor",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/pages/floating-monitor/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/memory-settings/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src/pages/settings/index.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/src/resident/taskbar_display",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/src/resident/floating_monitor",
+          "kind": "tree"
+        },
+        {
+          "path": "src-tauri/src/resident/memory_automatic.rs",
+          "kind": "blob"
+        }
+      ],
+      "expected": "Custom metric order/colors/position, native display options, autostart and memory management, keyboard/window handling; Windows high-DPI fix and independent app-frame snap triggers in release.",
+      "windowsAcceptance": "100/125/150/200% scale and multiple monitor moves; close removes optional background workers/shell effects unless opted in, bounded sampling only enabled surfaces, memory release not default and prove actual workload outcome instead of rewarding cache churn."
+    },
+    {
+      "id": "ai.explanations",
+      "feature": "Context explanations and privacy",
+      "nativeLane": "assist",
+      "publicBridge": "absent-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src/layouts/components/md-ai-workspace.vue",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/ai/context.rs",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-core/src/ai/configuration.rs",
+          "kind": "blob"
+        }
+      ],
+      "expected": "In-context explanation for built-in cleanup, privacy, startup, optimization and maintenance; v2.1.2 hosted cloud AI is supporter-only while custom providers remain available.",
+      "windowsAcceptance": "Local explanations as baseline and no auto-send; bound/redact context and credentials before opt-in provider approval, identity and purpose visible; useful offline behavior with precise unknowns."
+    },
+    {
+      "id": "distribution.packaging",
+      "feature": "Native distribution, portable mode & application updates",
+      "nativeLane": "release",
+      "publicBridge": "unknown-native",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src-tauri/tauri.windows.conf.json",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/tauri.macos.conf.json",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/tauri.linux.conf.json",
+          "kind": "blob"
+        },
+        {
+          "path": "src/stores/app-update-store.ts",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/src/commands/app_updates.rs",
+          "kind": "blob"
+        }
+      ],
+      "expected": "MangoDisk ships distinct Windows installer/portable/CLI, macOS app/CLI, Linux AppImage/deb; platform-aware updates/screens and source releases. Local Agent packaging is separate from INTA Desktop.",
+      "windowsAcceptance": "Release-specific native signed artifact, run without Program Files/AppData state where supported, settings/receipts beside portable root, exit cleans owned processes, uninstall leaves approved repairs and unrelated apps intact, validate clean system upgrade and SHA-256."
+    },
+    {
+      "id": "runtime.workers",
+      "feature": "One-shot native workers, concurrency & CLI",
+      "nativeLane": "release",
+      "publicBridge": "partial-bridge",
+      "nativeState": "not-verified",
+      "mangoSource": [
+        {
+          "path": "src-tauri/src/commands/cleanup.rs",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/src/commands/analysis.rs",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/crates/mangodisk-cli/src/arguments.rs",
+          "kind": "blob"
+        },
+        {
+          "path": "src-tauri/src/resident/sampling-architecture.md",
+          "kind": "blob"
+        }
+      ],
+      "expected": "MangoDisk has typed sibling GUI/CLI paths for cleanup plus cancellation/progress and unrelated concurrent tasks. INTA Agent package manager serialization is useful but not a Desktop worker engine.",
+      "windowsAcceptance": "CLI and native entry points share domain state, read-only default, frozen plans; worker budgets with explicit per-resource locks; cancel/replay/restart preserve provenance and elapsed action independently of view switching."
+    }
+  ],
+  "ruleSourcePaths": {
+    "filesystem/windows": [
+      "filesystem/windows/ai/ai.claude-code-cache.toml",
+      "filesystem/windows/ai/ai.huggingface-xet-cache.toml",
+      "filesystem/windows/application/app.adobe-media-cache.toml",
+      "filesystem/windows/application/app.battlenet-cache.toml",
+      "filesystem/windows/application/app.chatgpt-cache.toml",
+      "filesystem/windows/application/app.discord-cache.toml",
+      "filesystem/windows/application/app.douyin-live-updater-cache.toml",
+      "filesystem/windows/application/app.dropbox-rendering-cache.toml",
+      "filesystem/windows/application/app.ea-rendering-cache.toml",
+      "filesystem/windows/application/app.electron-cache.toml",
+      "filesystem/windows/application/app.electron-updater-cache.toml",
+      "filesystem/windows/application/app.flashvoice-cache.toml",
+      "filesystem/windows/application/app.game-launcher-cache.toml",
+      "filesystem/windows/application/app.gitmind-rendering-cache.toml",
+      "filesystem/windows/application/app.iqiyi-rendering-cache.toml",
+      "filesystem/windows/application/app.netease-cloud-music-cache.toml",
+      "filesystem/windows/application/app.netease-music-playback-cache.toml",
+      "filesystem/windows/application/app.notion-cache.toml",
+      "filesystem/windows/application/app.notion-service-worker-cache.toml",
+      "filesystem/windows/application/app.obs-diagnostic-cache.toml",
+      "filesystem/windows/application/app.postman-cache.toml",
+      "filesystem/windows/application/app.qq-rendering-cache.toml",
+      "filesystem/windows/application/app.qqlive-rendering-cache.toml",
+      "filesystem/windows/application/app.signal-cache.toml",
+      "filesystem/windows/application/app.sogou-input-cache.toml",
+      "filesystem/windows/application/app.spotify-rendering-cache.toml",
+      "filesystem/windows/application/app.steam-rendering-cache.toml",
+      "filesystem/windows/application/app.teams-msix-cache.toml",
+      "filesystem/windows/application/app.telegram-temporary-cache.toml",
+      "filesystem/windows/application/app.tencent-meeting-cache.toml",
+      "filesystem/windows/application/app.vesktop-cache.toml",
+      "filesystem/windows/application/app.vlc-cache.toml",
+      "filesystem/windows/application/app.wechat-diagnostic-cache.toml",
+      "filesystem/windows/application/app.wechat-rendering-cache.toml",
+      "filesystem/windows/application/app.wecom-diagnostic-cache.toml",
+      "filesystem/windows/application/app.whatsapp-rendering-cache.toml",
+      "filesystem/windows/application/app.wps-cache.toml",
+      "filesystem/windows/application/app.wps-diagnostic-cache.toml",
+      "filesystem/windows/application/app.wps-rendering-cache.toml",
+      "filesystem/windows/application/app.youku-rendering-cache.toml",
+      "filesystem/windows/application/app.zenaion-cache.toml",
+      "filesystem/windows/application/app.zoom-diagnostic-cache.toml",
+      "filesystem/windows/browser/browser.2345-cache.toml",
+      "filesystem/windows/browser/browser.360-safe-cache.toml",
+      "filesystem/windows/browser/browser.360-speed-cache.toml",
+      "filesystem/windows/browser/browser.arc-cache.toml",
+      "filesystem/windows/browser/browser.brave-cache.toml",
+      "filesystem/windows/browser/browser.brave-origin-cache.toml",
+      "filesystem/windows/browser/browser.chrome-cache.toml",
+      "filesystem/windows/browser/browser.chrome-offline-cache.toml",
+      "filesystem/windows/browser/browser.chromium-cache.toml",
+      "filesystem/windows/browser/browser.duckduckgo-cache.toml",
+      "filesystem/windows/browser/browser.edge-cache.toml",
+      "filesystem/windows/browser/browser.edge-offline-cache.toml",
+      "filesystem/windows/browser/browser.firefox-cache.toml",
+      "filesystem/windows/browser/browser.gecko-family-cache.toml",
+      "filesystem/windows/browser/browser.helium-cache.toml",
+      "filesystem/windows/browser/browser.opera-cache.toml",
+      "filesystem/windows/browser/browser.sogou-cache.toml",
+      "filesystem/windows/browser/browser.uc-cache.toml",
+      "filesystem/windows/browser/browser.vivaldi-cache.toml",
+      "filesystem/windows/browser/browser.zen-cache.toml",
+      "filesystem/windows/container/container.docker-desktop-rendering-cache.toml",
+      "filesystem/windows/development/dev.android-cache.toml",
+      "filesystem/windows/development/dev.android-user-cache.toml",
+      "filesystem/windows/development/dev.browser-automation-cache.toml",
+      "filesystem/windows/development/dev.build-accelerator-cache.toml",
+      "filesystem/windows/development/dev.cargo-cache.toml",
+      "filesystem/windows/development/dev.ccache-cache.toml",
+      "filesystem/windows/development/dev.copilot-cli-cache.toml",
+      "filesystem/windows/development/dev.dart-analysis-cache.toml",
+      "filesystem/windows/development/dev.editor-cache.toml",
+      "filesystem/windows/development/dev.electron-builder-cache.toml",
+      "filesystem/windows/development/dev.go-cache.toml",
+      "filesystem/windows/development/dev.go-module-cache.toml",
+      "filesystem/windows/development/dev.gradle-cache.toml",
+      "filesystem/windows/development/dev.hex-cache.toml",
+      "filesystem/windows/development/dev.jetbrains-cache.toml",
+      "filesystem/windows/development/dev.jvm-tooling-cache.toml",
+      "filesystem/windows/development/dev.maven-cache.toml",
+      "filesystem/windows/development/dev.node-tooling-cache.toml",
+      "filesystem/windows/development/dev.npm-cache.toml",
+      "filesystem/windows/development/dev.nuget-cache.toml",
+      "filesystem/windows/development/dev.package-manager-cache.toml",
+      "filesystem/windows/development/dev.pip-cache.toml",
+      "filesystem/windows/development/dev.pnpm-cache.toml",
+      "filesystem/windows/development/dev.puppeteer-cache.toml",
+      "filesystem/windows/development/dev.python-tooling-cache.toml",
+      "filesystem/windows/development/dev.sccache-cache.toml",
+      "filesystem/windows/development/dev.user-tool-cache.toml",
+      "filesystem/windows/development/dev.uv-cache.toml",
+      "filesystem/windows/development/dev.visual-studio-cache.toml",
+      "filesystem/windows/development/dev.yarn-cache.toml",
+      "filesystem/windows/system/system.crash-dumps.toml",
+      "filesystem/windows/system/system.directx-shader-cache.toml",
+      "filesystem/windows/system/system.error-reports.toml",
+      "filesystem/windows/system/system.stale-partial-downloads.toml",
+      "filesystem/windows/system/system.thumbnail-cache.toml",
+      "filesystem/windows/system/system.user-temp.toml"
+    ],
+    "filesystem/macos": [
+      "filesystem/macos/ai/ai.claude-code-cache.toml",
+      "filesystem/macos/ai/ai.huggingface-xet-cache.toml",
+      "filesystem/macos/application/app.adobe-media-cache.toml",
+      "filesystem/macos/application/app.apple-mail-cache.toml",
+      "filesystem/macos/application/app.baidu-netdisk-rendering-cache.toml",
+      "filesystem/macos/application/app.chatgpt-cache.toml",
+      "filesystem/macos/application/app.clash-verge-diagnostic-cache.toml",
+      "filesystem/macos/application/app.claude-cache.toml",
+      "filesystem/macos/application/app.codex-diagnostic-cache.toml",
+      "filesystem/macos/application/app.core-device-cache.toml",
+      "filesystem/macos/application/app.dingtalk-content-cache.toml",
+      "filesystem/macos/application/app.dingtalk-diagnostic-cache.toml",
+      "filesystem/macos/application/app.discord-cache.toml",
+      "filesystem/macos/application/app.electron-productivity-cache.toml",
+      "filesystem/macos/application/app.figma-cache.toml",
+      "filesystem/macos/application/app.flashvoice-cache.toml",
+      "filesystem/macos/application/app.game-launcher-cache.toml",
+      "filesystem/macos/application/app.google-updater-cache.toml",
+      "filesystem/macos/application/app.iqiyi-rendering-cache.toml",
+      "filesystem/macos/application/app.iwork-cache.toml",
+      "filesystem/macos/application/app.lark-renderer-cache.toml",
+      "filesystem/macos/application/app.lm-studio-cache.toml",
+      "filesystem/macos/application/app.lobsterai-update-cache.toml",
+      "filesystem/macos/application/app.manus-rendering-cache.toml",
+      "filesystem/macos/application/app.manus-update-cache.toml",
+      "filesystem/macos/application/app.media-analysis-cache.toml",
+      "filesystem/macos/application/app.media-cache.toml",
+      "filesystem/macos/application/app.netease-music-playback-cache.toml",
+      "filesystem/macos/application/app.notion-service-worker-cache.toml",
+      "filesystem/macos/application/app.obs-diagnostic-cache.toml",
+      "filesystem/macos/application/app.office-cache.toml",
+      "filesystem/macos/application/app.ollama-update-cache.toml",
+      "filesystem/macos/application/app.outlook-cache.toml",
+      "filesystem/macos/application/app.parallels-windows-image-cache.toml",
+      "filesystem/macos/application/app.postman-cache.toml",
+      "filesystem/macos/application/app.qq-cache.toml",
+      "filesystem/macos/application/app.qq-update-cache.toml",
+      "filesystem/macos/application/app.qqlive-rendering-cache.toml",
+      "filesystem/macos/application/app.qqlive-update-cache.toml",
+      "filesystem/macos/application/app.qwenwork-cache.toml",
+      "filesystem/macos/application/app.slack-cache.toml",
+      "filesystem/macos/application/app.teams-cache.toml",
+      "filesystem/macos/application/app.telegram-cache.toml",
+      "filesystem/macos/application/app.telegram-temporary-cache.toml",
+      "filesystem/macos/application/app.tencent-lemon-cache.toml",
+      "filesystem/macos/application/app.tencent-meeting-cache.toml",
+      "filesystem/macos/application/app.thunder-cache.toml",
+      "filesystem/macos/application/app.thunderbird-cache.toml",
+      "filesystem/macos/application/app.utools-rendering-cache.toml",
+      "filesystem/macos/application/app.vesktop-cache.toml",
+      "filesystem/macos/application/app.vlc-cache.toml",
+      "filesystem/macos/application/app.wallpaper-agent-cache.toml",
+      "filesystem/macos/application/app.wechat-cache.toml",
+      "filesystem/macos/application/app.wechat-diagnostic-cache.toml",
+      "filesystem/macos/application/app.wecom-cache.toml",
+      "filesystem/macos/application/app.whatsapp-cache.toml",
+      "filesystem/macos/application/app.workbuddy-rendering-cache.toml",
+      "filesystem/macos/application/app.wps-cache.toml",
+      "filesystem/macos/application/app.wps-diagnostic-cache.toml",
+      "filesystem/macos/application/app.xmind-rendering-cache.toml",
+      "filesystem/macos/application/app.ynote-cache.toml",
+      "filesystem/macos/application/app.youdao-translation-cache.toml",
+      "filesystem/macos/application/app.youku-rendering-cache.toml",
+      "filesystem/macos/application/app.zenaion-cache.toml",
+      "filesystem/macos/application/app.zoom-cache.toml",
+      "filesystem/macos/browser/browser.360-speed-cache.toml",
+      "filesystem/macos/browser/browser.arc-cache.toml",
+      "filesystem/macos/browser/browser.brave-cache.toml",
+      "filesystem/macos/browser/browser.brave-origin-cache.toml",
+      "filesystem/macos/browser/browser.chrome-cache.toml",
+      "filesystem/macos/browser/browser.chrome-offline-cache.toml",
+      "filesystem/macos/browser/browser.chromium-cache.toml",
+      "filesystem/macos/browser/browser.edge-cache.toml",
+      "filesystem/macos/browser/browser.edge-offline-cache.toml",
+      "filesystem/macos/browser/browser.firefox-cache.toml",
+      "filesystem/macos/browser/browser.helium-cache.toml",
+      "filesystem/macos/browser/browser.opera-cache.toml",
+      "filesystem/macos/browser/browser.uc-cache.toml",
+      "filesystem/macos/browser/browser.vivaldi-cache.toml",
+      "filesystem/macos/browser/browser.zen-cache.toml",
+      "filesystem/macos/container/container.docker-desktop-diagnostic-cache.toml",
+      "filesystem/macos/development/dev.android-cache.toml",
+      "filesystem/macos/development/dev.android-user-cache.toml",
+      "filesystem/macos/development/dev.browser-automation-cache.toml",
+      "filesystem/macos/development/dev.bun-cache.toml",
+      "filesystem/macos/development/dev.cargo-cache.toml",
+      "filesystem/macos/development/dev.cargo-extracted-sources.toml",
+      "filesystem/macos/development/dev.ccache-cache.toml",
+      "filesystem/macos/development/dev.cocoapods-cache.toml",
+      "filesystem/macos/development/dev.composer-cache.toml",
+      "filesystem/macos/development/dev.copilot-cli-cache.toml",
+      "filesystem/macos/development/dev.dart-analysis-cache.toml",
+      "filesystem/macos/development/dev.deno-cache.toml",
+      "filesystem/macos/development/dev.electron-builder-cache.toml",
+      "filesystem/macos/development/dev.go-cache.toml",
+      "filesystem/macos/development/dev.gradle-cache.toml",
+      "filesystem/macos/development/dev.hex-cache.toml",
+      "filesystem/macos/development/dev.homebrew-cache.toml",
+      "filesystem/macos/development/dev.jetbrains-cache.toml",
+      "filesystem/macos/development/dev.jvm-tooling-cache.toml",
+      "filesystem/macos/development/dev.maven-cache.toml",
+      "filesystem/macos/development/dev.mise-cache.toml",
+      "filesystem/macos/development/dev.node-gyp-cache.toml",
+      "filesystem/macos/development/dev.node-tooling-cache.toml",
+      "filesystem/macos/development/dev.npm-cache.toml",
+      "filesystem/macos/development/dev.npx-cache.toml",
+      "filesystem/macos/development/dev.nuget-cache.toml",
+      "filesystem/macos/development/dev.pnpm-cache.toml",
+      "filesystem/macos/development/dev.puppeteer-cache.toml",
+      "filesystem/macos/development/dev.pyinstaller-cache.toml",
+      "filesystem/macos/development/dev.python-cache.toml",
+      "filesystem/macos/development/dev.qclaw-compile-cache.toml",
+      "filesystem/macos/development/dev.qoder-rendering-cache.toml",
+      "filesystem/macos/development/dev.rubygems-cache.toml",
+      "filesystem/macos/development/dev.sccache-cache.toml",
+      "filesystem/macos/development/dev.swiftpm-cache.toml",
+      "filesystem/macos/development/dev.uv-cache.toml",
+      "filesystem/macos/development/dev.vscode-cache.toml",
+      "filesystem/macos/development/dev.xcode-auxiliary-cache.toml",
+      "filesystem/macos/development/dev.xcode-derived-data.toml",
+      "filesystem/macos/development/dev.xcode-simulator-cache.toml",
+      "filesystem/macos/development/dev.yarn-cache.toml",
+      "filesystem/macos/system/system.aerial-video-downloads.toml",
+      "filesystem/macos/system/system.apple-intelligence-cache.toml",
+      "filesystem/macos/system/system.apple-media-cache.toml",
+      "filesystem/macos/system/system.darwin-user-cache.toml",
+      "filesystem/macos/system/system.geo-services-cache.toml",
+      "filesystem/macos/system/system.help-cache.toml",
+      "filesystem/macos/system/system.ios-firmware-downloads.toml",
+      "filesystem/macos/system/system.old-diagnostic-logs.toml",
+      "filesystem/macos/system/system.parsecd-cache.toml",
+      "filesystem/macos/system/system.quicklook-cache.toml",
+      "filesystem/macos/system/system.stale-partial-downloads.toml",
+      "filesystem/macos/system/system.user-temp.toml"
+    ],
+    "filesystem/linux": [
+      "filesystem/linux/application/app.blender-cache.toml",
+      "filesystem/linux/application/app.cargo-cache.toml",
+      "filesystem/linux/application/app.chrome-cache.toml",
+      "filesystem/linux/application/app.discord-cache.toml",
+      "filesystem/linux/application/app.docker-build-cache.toml",
+      "filesystem/linux/application/app.electron-cache.toml",
+      "filesystem/linux/application/app.firefox-cache.toml",
+      "filesystem/linux/application/app.gimp-cache.toml",
+      "filesystem/linux/application/app.gradle-cache.toml",
+      "filesystem/linux/application/app.gtk-doc-cache.toml",
+      "filesystem/linux/application/app.jetbrains-cache.toml",
+      "filesystem/linux/application/app.maven-cache.toml",
+      "filesystem/linux/application/app.minecraft-cache.toml",
+      "filesystem/linux/application/app.npm-cache.toml",
+      "filesystem/linux/application/app.pip-cache.toml",
+      "filesystem/linux/application/app.slack-cache.toml",
+      "filesystem/linux/application/app.spotify-cache.toml",
+      "filesystem/linux/application/app.vscode-cache.toml",
+      "filesystem/linux/application/app.wine-prefix-cache.toml",
+      "filesystem/linux/application/app.yarn-cache.toml",
+      "filesystem/linux/application/app.zoom-cache.toml",
+      "filesystem/linux/system/system.crash-dumps.toml",
+      "filesystem/linux/system/system.dns-cache.toml",
+      "filesystem/linux/system/system.font-cache.toml",
+      "filesystem/linux/system/system.gtk-icon-cache.toml",
+      "filesystem/linux/system/system.thumbnail-cache.toml",
+      "filesystem/linux/system/system.user-temp.toml"
+    ],
+    "project-artifacts": [
+      "project-artifacts/autoconf.toml",
+      "project-artifacts/clojure.toml",
+      "project-artifacts/cmake.toml",
+      "project-artifacts/cocoapods.toml",
+      "project-artifacts/composer.toml",
+      "project-artifacts/dotnet.toml",
+      "project-artifacts/dune.toml",
+      "project-artifacts/elixir.toml",
+      "project-artifacts/flutter.toml",
+      "project-artifacts/godot.toml",
+      "project-artifacts/gradle.toml",
+      "project-artifacts/haskell.toml",
+      "project-artifacts/jupyter.toml",
+      "project-artifacts/leiningen.toml",
+      "project-artifacts/maven.toml",
+      "project-artifacts/meson.toml",
+      "project-artifacts/mill.toml",
+      "project-artifacts/node.toml",
+      "project-artifacts/pants.toml",
+      "project-artifacts/pixi.toml",
+      "project-artifacts/python.toml",
+      "project-artifacts/rails.toml",
+      "project-artifacts/react-native.toml",
+      "project-artifacts/rebar.toml",
+      "project-artifacts/rust.toml",
+      "project-artifacts/sbt.toml",
+      "project-artifacts/swift.toml",
+      "project-artifacts/terraform.toml",
+      "project-artifacts/unity.toml",
+      "project-artifacts/unreal.toml",
+      "project-artifacts/zig.toml"
+    ]
+  },
+  "systemSettingsSourceIDs": {
+    "windows": [
+      "windows.accessibility.disable-filter-keys-shortcut",
+      "windows.accessibility.disable-sticky-keys-shortcut",
+      "windows.accessibility.disable-toggle-keys-shortcut",
+      "windows.ai.disable-copilot",
+      "windows.ai.disable-recall-snapshots",
+      "windows.clipboard.disable-cross-device-policy",
+      "windows.clipboard.disable-history",
+      "windows.cloud.disable-onedrive-sync",
+      "windows.compatibility.disable-camera-frame-server",
+      "windows.content.disable-device-setup-suggestions",
+      "windows.content.disable-lock-screen-tips",
+      "windows.content.disable-notification-suggestions",
+      "windows.content.disable-phone-link-suggestions",
+      "windows.content.disable-preinstalled-app-suggestions",
+      "windows.content.disable-service-suggestions",
+      "windows.content.disable-silent-app-installs",
+      "windows.content.disable-spotlight",
+      "windows.content.disable-suggestions",
+      "windows.content.disable-usage-tips",
+      "windows.content.disable-welcome-experience",
+      "windows.desktop.prefer-performance-effects",
+      "windows.desktop.reduce-hover-delay",
+      "windows.desktop.reduce-menu-delay",
+      "windows.edge.disable-personalization",
+      "windows.edge.disable-recommendations",
+      "windows.edge.disable-sidebar",
+      "windows.edge.disable-web-widget",
+      "windows.edge.limit-diagnostic-data",
+      "windows.explorer.classic-context-menu",
+      "windows.explorer.compact-mode",
+      "windows.explorer.confirm-file-delete",
+      "windows.explorer.disable-aero-shake",
+      "windows.explorer.disable-sharing-wizard",
+      "windows.explorer.enable-auto-suggest",
+      "windows.explorer.hide-frequent-folders",
+      "windows.explorer.hide-recent-files",
+      "windows.explorer.hide-shortcut-arrows",
+      "windows.explorer.hide-sync-notifications",
+      "windows.explorer.launch-this-pc",
+      "windows.explorer.remove-cast-to-device",
+      "windows.explorer.remove-shortcut-suffix",
+      "windows.explorer.restore-folders-at-login",
+      "windows.explorer.separate-process",
+      "windows.explorer.show-file-extensions",
+      "windows.explorer.show-full-path",
+      "windows.explorer.show-hidden-files",
+      "windows.explorer.show-item-checkboxes",
+      "windows.explorer.show-operation-details",
+      "windows.explorer.show-status-bar",
+      "windows.explorer.use-manual-default-printer",
+      "windows.filesystem.enable-long-paths",
+      "windows.firefox.disable-telemetry",
+      "windows.gaming.disable-app-lighting-control",
+      "windows.gaming.disable-capture",
+      "windows.gaming.disable-dynamic-lighting",
+      "windows.gaming.disable-game-bar-controller",
+      "windows.gaming.disable-game-bar-tips",
+      "windows.gaming.disable-game-dvr",
+      "windows.gaming.enable-game-mode",
+      "windows.gaming.enable-hardware-gpu-scheduling",
+      "windows.gaming.optimize-windowed-games",
+      "windows.input.disable-windows-ink",
+      "windows.login.enable-verbose-status",
+      "windows.network.disable-llmnr",
+      "windows.network.disable-smb1",
+      "windows.network.disable-smb2",
+      "windows.office.disable-optional-telemetry",
+      "windows.performance.disable-background-store-apps",
+      "windows.performance.disable-network-throttling",
+      "windows.performance.multimedia-always-on",
+      "windows.performance.multimedia-no-lazy-mode",
+      "windows.performance.multimedia-responsiveness",
+      "windows.performance.reduce-crash-dump",
+      "windows.performance.reduce-service-shutdown-timeout",
+      "windows.performance.remove-reserved-bandwidth",
+      "windows.personalization.dark-apps",
+      "windows.personalization.dark-system",
+      "windows.personalization.disable-transparency",
+      "windows.power.disable-hibernation",
+      "windows.power.disable-modern-standby",
+      "windows.privacy.disable-activity-publishing",
+      "windows.privacy.disable-activity-upload",
+      "windows.privacy.disable-advertising-id",
+      "windows.privacy.disable-cross-device-experiences",
+      "windows.privacy.disable-feedback-requests",
+      "windows.privacy.disable-ink-personalization",
+      "windows.privacy.disable-input-personalization",
+      "windows.privacy.disable-language-list-sharing",
+      "windows.privacy.disable-nearby-sharing",
+      "windows.privacy.disable-remote-assistance",
+      "windows.privacy.disable-tailored-experiences",
+      "windows.privacy.limit-diagnostic-data",
+      "windows.recovery.enable-registry-backups",
+      "windows.search.disable-cortana-policy",
+      "windows.search.disable-highlights",
+      "windows.search.disable-web-suggestions",
+      "windows.security.disable-autorun",
+      "windows.security.disable-defender",
+      "windows.security.disable-smartscreen",
+      "windows.security.disable-system-restore",
+      "windows.security.disable-vbs",
+      "windows.services.disable-compatibility-assistant",
+      "windows.services.disable-diagnostic-tracking",
+      "windows.services.disable-error-reporting",
+      "windows.services.disable-fax",
+      "windows.services.disable-insider",
+      "windows.services.disable-media-player-sharing",
+      "windows.services.disable-search-indexing",
+      "windows.services.disable-sensors",
+      "windows.services.disable-sysmain",
+      "windows.services.disable-xbox-auth",
+      "windows.services.print-spooler-manual",
+      "windows.setup.bypass-hardware-checks",
+      "windows.start.disable-account-notifications",
+      "windows.start.disable-recommendations",
+      "windows.start.hide-most-used-apps",
+      "windows.start.hide-recent-items",
+      "windows.start.hide-recently-added-apps",
+      "windows.storage.disable-ntfs-last-access",
+      "windows.storage.enable-storage-sense",
+      "windows.taskbar.align-left",
+      "windows.taskbar.disable-animations",
+      "windows.taskbar.disable-flashing",
+      "windows.taskbar.disable-widgets-board",
+      "windows.taskbar.enable-end-task",
+      "windows.taskbar.hide-badges",
+      "windows.taskbar.hide-chat",
+      "windows.taskbar.hide-copilot",
+      "windows.taskbar.hide-search",
+      "windows.taskbar.hide-search-policy",
+      "windows.taskbar.hide-task-view",
+      "windows.taskbar.hide-weather",
+      "windows.taskbar.hide-widgets",
+      "windows.taskbar.hide-window-sharing",
+      "windows.taskbar.show-all-tray-icons",
+      "windows.taskbar.show-desktop-corner",
+      "windows.taskbar.show-on-all-displays",
+      "windows.taskbar.show-seconds",
+      "windows.time.use-utc-hardware-clock",
+      "windows.typing.disable-autocorrect",
+      "windows.typing.disable-double-space-period",
+      "windows.typing.disable-spellcheck",
+      "windows.typing.disable-text-prediction",
+      "windows.update.disable-automatic-updates",
+      "windows.update.disable-peer-sharing",
+      "windows.update.disable-preview-builds",
+      "windows.update.disable-store-auto-updates",
+      "windows.update.enable-microsoft-product-updates",
+      "windows.update.enable-restart-notifications",
+      "windows.update.exclude-driver-updates",
+      "windows.update.notify-before-download",
+      "windows.update.prevent-restart-when-logged-on",
+      "windows.windowing.disable-snap-assist"
+    ],
+    "macos": [
+      "macos.activity-monitor.show-all-processes",
+      "macos.app-store.enable-auto-updates",
+      "macos.desktop.prevent-network-ds-store",
+      "macos.desktop.prevent-usb-ds-store",
+      "macos.dock.auto-hide",
+      "macos.dock.dim-hidden-apps",
+      "macos.dock.disable-launch-animation",
+      "macos.dock.enable-magnification",
+      "macos.dock.enable-spring-loading",
+      "macos.dock.fast-auto-hide-animation",
+      "macos.dock.hide-recent-apps",
+      "macos.dock.minimize-to-application",
+      "macos.dock.remove-auto-hide-delay",
+      "macos.dock.scroll-to-expose",
+      "macos.dock.show-only-open-apps",
+      "macos.dock.use-scale-effect",
+      "macos.documents.save-locally",
+      "macos.finder.default-list-view",
+      "macos.finder.disable-animations",
+      "macos.finder.disable-extension-warning",
+      "macos.finder.enable-quit-menu",
+      "macos.finder.folders-first-on-desktop",
+      "macos.finder.keep-folders-on-top",
+      "macos.finder.remove-old-trash-items",
+      "macos.finder.search-current-folder",
+      "macos.finder.show-external-drives-on-desktop",
+      "macos.finder.show-file-extensions",
+      "macos.finder.show-hard-drives-on-desktop",
+      "macos.finder.show-hidden-files",
+      "macos.finder.show-path-bar",
+      "macos.finder.show-posix-path",
+      "macos.finder.show-removable-media-on-desktop",
+      "macos.finder.show-status-bar",
+      "macos.finder.warn-before-empty-trash",
+      "macos.keyboard.disable-press-and-hold",
+      "macos.keyboard.fast-key-repeat",
+      "macos.keyboard.full-navigation",
+      "macos.keyboard.short-repeat-delay",
+      "macos.keyboard.use-standard-function-keys",
+      "macos.mission-control.group-windows-by-app",
+      "macos.mission-control.keep-space-order",
+      "macos.panels.expand-print",
+      "macos.panels.expand-save",
+      "macos.photos.disable-auto-open",
+      "macos.printing.quit-after-finish",
+      "macos.privacy.disable-personalized-ads",
+      "macos.safari.disable-safe-download-auto-open",
+      "macos.safari.disable-search-suggestions",
+      "macos.safari.disable-top-hit-preload",
+      "macos.safari.enable-develop-menu",
+      "macos.safari.show-full-url",
+      "macos.safari.show-status-bar",
+      "macos.screenshots.disable-shadow",
+      "macos.screenshots.disable-thumbnail",
+      "macos.screenshots.use-png",
+      "macos.security.lock-immediately-after-sleep",
+      "macos.security.require-password-after-sleep",
+      "macos.sharing.disable-airdrop",
+      "macos.sound.disable-volume-feedback",
+      "macos.text.disable-auto-capitalization",
+      "macos.text.disable-auto-correct",
+      "macos.text.disable-inline-predictions",
+      "macos.text.disable-period-substitution",
+      "macos.text.disable-smart-dashes",
+      "macos.text.disable-smart-quotes",
+      "macos.text.disable-text-completion",
+      "macos.textedit.plain-text-default",
+      "macos.time-machine.hide-new-disk-prompts",
+      "macos.window.close-app-windows",
+      "macos.window.disable-animations",
+      "macos.window.double-click-titlebar-minimize"
+    ],
+    "linux": []
+  },
+  "systemMaintenanceSourceIDs": {
+    "windows": [
+      "windows.maintenance.audio-service",
+      "windows.maintenance.dns-cache",
+      "windows.maintenance.explorer-cache",
+      "windows.maintenance.performance-counters",
+      "windows.maintenance.print-queue",
+      "windows.maintenance.search-index",
+      "windows.maintenance.store-cache",
+      "windows.maintenance.system-disk",
+      "windows.maintenance.system-integrity",
+      "windows.maintenance.time-sync",
+      "windows.maintenance.update-components"
+    ],
+    "macos": [
+      "macos.maintenance.audio-service",
+      "macos.maintenance.dns-cache",
+      "macos.maintenance.finder-service",
+      "macos.maintenance.icon-cache",
+      "macos.maintenance.launch-services",
+      "macos.maintenance.legacy-overrides",
+      "macos.maintenance.quicklook-cache",
+      "macos.maintenance.spotlight-index",
+      "macos.maintenance.startup-disk",
+      "macos.maintenance.user-permissions"
+    ],
+    "linux": [
+      "linux.maintenance.font-cache",
+      "linux.maintenance.package-integrity"
+    ]
+  }
+}
