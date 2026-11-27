@@ -1103,7 +1103,6 @@
     const save = target.closest('[data-save]'); if (save) return toggleFavorite(save.dataset.save);
     const exportButton = target.closest('[data-export-job]'); if (exportButton) return exportJob(exportButton.dataset.exportJob);
     if (target.closest('[data-download-offline]')) return downloadOffline();
-    const feedback = target.closest('[data-feedback-sound]'); if (feedback) { feedbackPreferences.sound = feedback.checked; store(feedbackKey, feedbackPreferences); notify(`Award sounds ${feedback.checked ? 'enabled' : 'disabled'}.`); if (feedback.checked) rewardTone(); return; }
     if (target.closest('[data-print]')) return window.print();
     if (target.closest('[data-copy-link]')) return copy(location.href, location.protocol === 'file:' ? 'Local file link copied. Share the offline file with teammates to use it.' : 'Playbook link copied.');
     const command = target.closest('[data-copy-command]'); if (command) {
@@ -1144,6 +1143,7 @@
   document.addEventListener('change', event => {
     if (['category-filter', 'platform-filter', 'tier-filter', 'tool-sort'].includes(event.target.id)) filterTools();
     else if (event.target.id === 'jobs-category') filterJobs();
+    else if (event.target.matches('[data-feedback-sound]')) { feedbackPreferences.sound = event.target.checked; store(feedbackKey, feedbackPreferences); notify(`Award sounds ${event.target.checked ? 'enabled' : 'disabled'}.`); if (event.target.checked) rewardTone(); }
     else if (event.target.matches('[data-check-job]')) changeCheck(event.target);
   });
   search.addEventListener('input', updateSearch);
