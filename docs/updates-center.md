@@ -4,9 +4,9 @@
 
 ## Important status boundary
 
-The public website and installed responsive web app contain a searchable, reviewed command catalog. They do not have access to a customer's local package database or installer process. They must never display "up to date", "failed" or a live progress bar without a connected local INTA agent or an explicitly authorized package-manager integration.
+The website and installed PWA contain the searchable command catalog. The **INTA Local Maintenance Agent** is now implemented as a separately installed, loopback-only companion. When installed and connected on the same computer, it can inventory Windows uninstall-registry entries, detect supported package managers, collect update previews, execute approved package operations and save operation history. The canonical source is `data/updates-center.json`; the agent implementation and installation guide are in [agent/README.md](../agent/README.md).
 
-The canonical source is `data/updates-center.json`. The UI is `#updates` and is designed for desktop and narrow mobile screens. All commands are copy-only in this build.
+The browser never claims live status until the local agent is connected. The mobile PWA can manage the device on which its own local agent is installed; phone-to-desktop control is not available without a future authenticated relay service. Windows Update and Microsoft Store remain in their supported UI/repair workflows. Linux/macOS agent builds currently provide manager detection and update previews, but not a complete unified installed-app inventory.
 
 ## Keep update channels separate
 
@@ -90,27 +90,29 @@ Ninite Pro Classic documents audit, update-only and repair switches. The CLI is 
 - Use a vendor's official cleanup utility only when its scope and supported versions are documented.
 - After reinstall, verify app launch, version, sign-in, plugins and user data.
 
-## Future local agent architecture
+## Local agent implementation and remaining scope
 
-The website, desktop wrapper and phone-sized view should share the same canonical catalog and normalized package/operation model. Live machine access must be supplied by a separately installed, signed local agent that:
+The initial cross-platform .NET 10 Local Agent is implemented in `agent/INTA.LocalAgent` and packaged by `.github/workflows/local-agent.yml`. It binds only to loopback port 47821, checks the browser Origin and Host, pairs with one in-memory bearer token per tab session, and exposes typed operations rather than a shell.
 
-- inventories package managers only on request or an explicitly configured schedule;
-- runs with least privilege and requests elevation only for a specific approved action;
-- never exposes an arbitrary shell endpoint to the public website;
-- accepts typed, allowlisted operations (inventory, preview, update one, update approved set, repair, uninstall);
-- validates package IDs, source, version, scope and policy on the local machine;
-- shows a dry-run plan before state changes;
-- records stdout/stderr, exit codes, installer logs and timestamps;
-- tracks operation states: queued, running, awaiting-reboot, succeeded, failed, cancelled, rollback-needed, verification-failed;
-- prevents concurrent operations against the same package/installer lock;
-- detects stale/partial operations after restart and resumes only when safe;
-- supports cancellation only when the underlying manager safely supports it;
-- creates a rollback or recovery plan when the installer exposes one, without promising universal rollback;
-- verifies post-install versions and application health;
-- stores customer data locally or in the approved account workspace with access controls and retention.
+Implemented now:
+- Connect/disconnect from the Updates page.
+- On-demand inventory and package-manager update previews.
+- Windows installed-app inventory from uninstall registry entries.
+- WinGet, Chocolatey, Scoop, APT, DNF, Pacman, Homebrew, Flatpak, Snap and UniGetUI manager detection/preview.
+- One-package update, repair/reinstall and uninstall where the manager exposes the operation.
+- One-confirmation update-all for a selected package manager.
+- Per-manager operation serialization, persistent local history, exit codes, output capture and post-operation checks.
+- Installer processes are not terminated when the UI observation window elapses; the agent keeps the operation lock until the process exits.
+- Self-contained win-x64, linux-x64, osx-arm64 and osx-x64 build artifacts.
 
-A public website cannot reliably enumerate or control arbitrary local apps without this agent. Do not fake live state with static catalog data.
+Remaining limitations:
+- The first build is unsigned. Release signing requires a trusted code-signing certificate and protected CI secret that are not present in this repository.
+- Windows Update and Microsoft Store are still guided through their supported Windows interfaces; the agent does not manipulate Windows servicing internals.
+- Linux/macOS currently have manager detection and update previews, not a complete normalized installed-app inventory.
+- Manager-wide updates are followed by a refreshed preview and marked for technician review; individual update/repair/uninstall operations use manager-specific post-checks where available.
+- The static GitHub Pages frontend has no authenticated account relay. A phone cannot remotely control a separate desktop's local agent. Do not expose the agent on the LAN or internet as a workaround.
 
+Installation, platform support and the current user flow are documented in [the Local Agent guide](../agent/README.md). The latest build artifacts are published by [the Local Agent workflow](https://github.com/Herbertofury/INTA/actions/workflows/local-agent.yml).
 ## Acceptance tests
 
 - One dedicated Updates & Maintenance tab is visible in the primary app navigation and technician home.
