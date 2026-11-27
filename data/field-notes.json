@@ -3,6 +3,91 @@
   "reviewedAt": "2026-11-26",
   "notes": [
     {
+      "id": "triage-powershell-first-response-toolkit",
+      "jobId": "intake-triage",
+      "title": "Run a PowerShell first-response diagnostic and tool-launch kit",
+      "symptom": "A technician needs a fast, repeatable Windows baseline, common diagnostic windows, and trusted utilities without hunting through menus or downloading unknown scripts.",
+      "firstAction": "Open Windows Terminal or PowerShell. Use a standard user session for read-only inventory; elevate only when the specific command requires it.",
+      "steps": [
+        "Collect a minimal OS, model, architecture, uptime, volume and network baseline. Review and sanitize it before attaching it to a private ticket.",
+        "Launch the built-in diagnostics that match the symptom: Resource Monitor, Reliability Monitor, Event Viewer, System Information and DirectX Diagnostic Tool.",
+        "For deeper work, acquire Microsoft Sysinternals Suite from its official publisher page or install the verified Microsoft PowerToys package through WinGet. Inspect package identity and publisher before installing.",
+        "Use dedicated hardware tools only when relevant. CrystalDiskInfo and HWiNFO have separate licensing, distribution and platform constraints; do not assume every freeware license permits commercial technician use.",
+        "Capture a narrow diagnostic trace, export only the relevant evidence, then verify the original customer workflow after any repair."
+      ],
+      "expected": "The ticket contains a concise baseline, the exact diagnostic used, sanitized relevant evidence, and a verified result for the original user task.",
+      "ifUnresolved": "If the baseline indicates active compromise, failing storage, physical damage, encryption, or a wider outage, stop routine diagnostics and use the relevant incident or recovery playbook.",
+      "toolIds": [
+        "sysinternals",
+        "process-explorer",
+        "autoruns",
+        "crystaldiskinfo",
+        "hwinfo",
+        "powertoys"
+      ],
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+        "https://learn.microsoft.com/en-us/windows/powertoys/install",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/install",
+        "https://crystalmark.info/en/software/crystaldiskinfo/",
+        "https://www.hwinfo.com/licenses/"
+      ],
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "windows-baseline",
+          "label": "Collect a compact Windows diagnostic baseline",
+          "shell": "PowerShell",
+          "purpose": "Capture OS/build, manufacturer/model, uptime, free space, physical disks and active network configuration.",
+          "safety": "Read-only inventory. Output can contain device names, serials, network addresses and organization details; review and redact before sharing.",
+          "code": "Get-ComputerInfo | Select-Object CsName,WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture,CsManufacturer,CsModel\nGet-CimInstance Win32_OperatingSystem | Select-Object LastBootUpTime,TotalVisibleMemorySize,FreePhysicalMemory\nGet-Volume | Select-Object DriveLetter,FileSystem,HealthStatus,SizeRemaining,Size\nGet-PhysicalDisk | Format-Table FriendlyName,MediaType,HealthStatus,OperationalStatus,Size -AutoSize\nGet-NetIPConfiguration",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo",
+          "sourceTitle": "Microsoft Get-ComputerInfo"
+        },
+        {
+          "id": "launch-diagnostics",
+          "label": "Open the built-in Windows diagnostic consoles",
+          "shell": "PowerShell",
+          "purpose": "Launch common diagnostic utilities without installing third-party software.",
+          "safety": "Opens Windows tools only. Event Viewer and diagnostic reports can expose usernames, hostnames, software and device details; retain exports privately.",
+          "code": "Start-Process resmon\nStart-Process perfmon.exe -ArgumentList '/rel'\nStart-Process msinfo32.exe\nStart-Process eventvwr.msc\nStart-Process dxdiag.exe",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+          "sourceTitle": "Microsoft Performance Monitor"
+        },
+        {
+          "id": "install-sysinternals",
+          "label": "Install Microsoft Sysinternals Suite from WinGet",
+          "shell": "PowerShell",
+          "purpose": "Check the exact package and publisher, then install the Microsoft Sysinternals Suite interactively.",
+          "safety": "Requires WinGet and user approval. Confirm the exact Microsoft package ID and source in the search/show results before running install; do not silently install. Sysinternals tools can expose sensitive process, network and account data.",
+          "code": "winget search --id Microsoft.SysinternalsSuite --exact\nwinget show --id Microsoft.SysinternalsSuite --exact --source winget\nwinget install --id Microsoft.SysinternalsSuite --exact --source winget --interactive",
+          "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+          "sourceTitle": "Microsoft Sysinternals Suite"
+        },
+        {
+          "id": "install-powertoys",
+          "label": "Install Microsoft PowerToys interactively",
+          "shell": "PowerShell",
+          "purpose": "Install Microsoft's utility collection through the documented WinGet package ID.",
+          "safety": "Requires WinGet and explicit user approval. Review package details and scope; do not use silent install on a customer endpoint without change authorization.",
+          "code": "winget show --id Microsoft.PowerToys --exact --source winget\nwinget install --id Microsoft.PowerToys --exact --source winget --interactive",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows/powertoys/install",
+          "sourceTitle": "Microsoft PowerToys installation"
+        },
+        {
+          "id": "install-hardware-tools",
+          "label": "Find trusted hardware-monitoring utilities",
+          "shell": "PowerShell",
+          "purpose": "Search WinGet for CrystalDiskInfo and HWiNFO, then inspect the exact package metadata before installing either tool.",
+          "safety": "Discovery only. Do not blindly install from an unverified source. HWiNFO commercial-use terms must be checked for technician/customer work; hardware monitoring may require elevation for full sensor access.",
+          "code": "winget search --id CrystalDewWorld.CrystalDiskInfo --exact\nwinget show --id CrystalDewWorld.CrystalDiskInfo --exact --source winget\nwinget search --id REALiX.HWiNFO --exact\nwinget show --id REALiX.HWiNFO --exact --source winget",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/search",
+          "sourceTitle": "Microsoft WinGet search"
+        }
+      ]
+    },
+    {
       "id": "triage-confirm-model-and-architecture",
       "jobId": "intake-triage",
       "title": "Choose the correct model and architecture",
@@ -22,7 +107,19 @@
         "https://support.microsoft.com/en-us/windows/experience/find-information-about-your-windows-device",
         "https://support.microsoft.com/en-us/windows/experience/platform-variants/windows-arm-based-pcs-faq"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "device-identity",
+          "label": "Collect device model and Windows architecture",
+          "shell": "PowerShell",
+          "purpose": "Capture the exact model, Windows edition/build and architecture before selecting a driver or installer.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-ComputerInfo | Select-Object CsManufacturer,CsModel,CsSystemType,WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture\nmsinfo32",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo",
+          "sourceTitle": "Microsoft Get-ComputerInfo"
+        }
+      ]
     },
     {
       "id": "triage-isolate-background-conflict",
@@ -41,7 +138,19 @@
       "sourceUrls": [
         "https://support.microsoft.com/en-us/windows/experience/startup-boot/how-to-perform-a-clean-boot-in-windows"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "startup-inventory",
+          "label": "List startup commands and enabled services",
+          "shell": "PowerShell",
+          "purpose": "Capture a baseline before a controlled clean-boot investigation.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-CimInstance Win32_StartupCommand | Select-Object Name,Command,Location,User\nGet-Service | Where-Object StartType -eq 'Automatic' | Sort-Object Status,Name | Format-Table Status,Name,DisplayName -AutoSize",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/cimcmdlets/get-ciminstance",
+          "sourceTitle": "Microsoft Get-CimInstance"
+        }
+      ]
     },
     {
       "id": "triage-clock-breaks-signin",
@@ -62,7 +171,19 @@
       "sourceUrls": [
         "https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "time-source",
+          "label": "Inspect current Windows time synchronization",
+          "shell": "PowerShell",
+          "purpose": "Read the configured time source and synchronization status before changing clock settings.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "w32tm /query /status\nw32tm /query /source",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings",
+          "sourceTitle": "Microsoft Windows Time tools"
+        }
+      ]
     },
     {
       "id": "malware-browser-notification-popups",
@@ -81,7 +202,19 @@
       "sourceUrls": [
         "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "edge-notifications",
+          "label": "Open Edge site notification settings",
+          "shell": "CMD or PowerShell",
+          "purpose": "Open the browser's site-permission page so the technician can revoke the exact unwanted notification permission.",
+          "safety": "Opens a browser settings page; inspect the sender and revoke only the identified site permission. This does not scan or prove the endpoint is clean.",
+          "code": "Start-Process 'msedge.exe' 'edge://settings/content/notifications'",
+          "sourceUrl": "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge",
+          "sourceTitle": "Microsoft Edge notification permissions"
+        }
+      ]
     },
     {
       "id": "malware-allowed-threat-keeps-returning",
@@ -100,7 +233,19 @@
       "sourceUrls": [
         "https://support.microsoft.com/en-us/windows/security/windows-security/protection-history-in-the-windows-security-app"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "defender-history",
+          "label": "Inspect Defender status and recent threat history",
+          "shell": "PowerShell",
+          "purpose": "Review protection status and recent detections before changing an allowed-threat disposition.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-MpComputerStatus | Select-Object AntivirusEnabled,RealTimeProtectionEnabled,AntivirusSignatureVersion,AntivirusSignatureLastUpdated\nGet-MpThreatDetection | Select-Object InitialDetectionTime,ThreatID,ActionSuccess,Resources",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/defender/get-mpthreatdetection",
+          "sourceTitle": "Microsoft Get-MpThreatDetection"
+        }
+      ]
     },
     {
       "id": "malware-offline-scan-does-not-start",
@@ -123,7 +268,19 @@
         "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
         "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/reagentc-command-line-options"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "winre-status",
+          "label": "Check Windows Recovery Environment prerequisites",
+          "shell": "PowerShell (Run as Administrator)",
+          "purpose": "Inspect WinRE registration and BitLocker protection state before requesting an offline restart.",
+          "safety": "Read-only inspection. Never expose or paste BitLocker recovery keys into a ticket, chat or external service. Confirm the recovery key is available through the approved secure process.",
+          "code": "reagentc /info\nGet-BitLockerVolume | Select-Object MountPoint,VolumeStatus,ProtectionStatus,EncryptionMethod",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/reagentc-command-line-options",
+          "sourceTitle": "Microsoft REAgentC command-line options"
+        }
+      ]
     },
     {
       "id": "ransomware-protect-recovery-copies",
@@ -142,7 +299,19 @@
       "sourceUrls": [
         "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "backup-service-status",
+          "label": "Inspect backup-related services",
+          "shell": "PowerShell",
+          "purpose": "Capture backup service status without mounting or connecting backup media to a suspected compromised endpoint.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-Service -Name wbengine,VSS,swprv -ErrorAction SilentlyContinue | Format-Table Name,Status,StartType -AutoSize",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service",
+          "sourceTitle": "Microsoft Get-Service"
+        }
+      ]
     },
     {
       "id": "ransomware-compromised-admin-account",
@@ -204,7 +373,19 @@
       "sourceUrls": [
         "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "memory-pressure",
+          "label": "Capture memory pressure and top working sets",
+          "shell": "PowerShell",
+          "purpose": "Compare available memory and top processes while the slowdown is occurring.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize,FreePhysicalMemory,TotalVirtualMemorySize,FreeVirtualMemory\nGet-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 15 ProcessName,Id,@{N='WorkingSetMiB';E={[math]::Round($_.WorkingSet64/1MB,1)}}\nresmon",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-process",
+          "sourceTitle": "Microsoft Get-Process"
+        }
+      ]
     },
     {
       "id": "slow-pc-startup-app-delay",
@@ -225,7 +406,19 @@
       "sourceUrls": [
         "https://support.microsoft.com/en-us/windows/experience/startup-boot/configure-startup-applications-in-windows"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "startup-processes",
+          "label": "Open startup impact and capture boot timing",
+          "shell": "PowerShell",
+          "purpose": "Open Task Manager's Startup Apps page and Reliability Monitor to correlate slow sign-in with startup changes.",
+          "safety": "Opens Windows utilities and reads diagnostic history. Do not disable security, backup, management or accessibility services as a performance shortcut.",
+          "code": "Start-Process 'ms-settings:startupapps'\nperfmon /rel",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+          "sourceTitle": "Microsoft Performance Monitor"
+        }
+      ]
     },
     {
       "id": "slow-pc-filter-a-short-io-trace",
@@ -247,7 +440,19 @@
       "sourceUrls": [
         "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "procmon-download",
+          "label": "Find and launch Process Monitor from the Sysinternals Suite",
+          "shell": "PowerShell",
+          "purpose": "Check for the portable Procmon executable in the technician toolbox and open the official download page if it is not present.",
+          "safety": "Process Monitor can capture paths, process names and user activity. Use a short, narrowly filtered trace; store it privately and sanitize before sharing. The command does not download or execute an unverified binary.",
+          "code": "$candidates = @('$env:ProgramFiles\\SysinternalsSuite\\Procmon64.exe', '$env:LOCALAPPDATA\\INTA Toolbox\\SysinternalsSuite\\Procmon64.exe', '$env:USERPROFILE\\Downloads\\SysinternalsSuite\\Procmon64.exe') | ForEach-Object { [Environment]::ExpandEnvironmentVariables($_) }\n$procmon = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1\nif ($procmon) { Start-Process $procmon } else { Start-Process 'https://learn.microsoft.com/en-us/sysinternals/downloads/procmon' }",
+          "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+          "sourceTitle": "Microsoft Process Monitor"
+        }
+      ]
     },
     {
       "id": "slow-pc-only-on-battery",
@@ -269,7 +474,19 @@
       "sourceUrls": [
         "https://support.microsoft.com/en-us/windows/experience/change-the-power-mode-for-your-windows-pc"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "power-report",
+          "label": "Generate a battery health report",
+          "shell": "PowerShell (Run as Administrator)",
+          "purpose": "Create a Windows battery report to compare design capacity, full-charge capacity and recent usage.",
+          "safety": "Writes an HTML report to the specified path. Review it locally; the report may include device and usage history. Do not infer battery failure from one metric alone.",
+          "code": "powercfg /batteryreport /output \"$env:USERPROFILE\\Desktop\\battery-report.html\"\nStart-Process \"$env:USERPROFILE\\Desktop\\battery-report.html\"",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+          "sourceTitle": "Microsoft powercfg command-line options"
+        }
+      ]
     },
     {
       "id": "repair-dism-source-not-found",
@@ -291,7 +508,19 @@
         "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-a-windows-repair-source",
         "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "dism-health",
+          "label": "Inspect component-store health before selecting a repair source",
+          "shell": "PowerShell (Run as Administrator)",
+          "purpose": "Read component-store health and Windows build details before sourcing matching installation media.",
+          "safety": "Read-only inspection. Do not mount an arbitrary ISO or use a mismatched edition, language, architecture or build as a repair source.",
+          "code": "DISM.exe /Online /Cleanup-Image /CheckHealth\nDISM.exe /Online /Get-CurrentEdition\nGet-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+          "sourceTitle": "Microsoft repair a Windows image"
+        }
+      ]
     },
     {
       "id": "repair-read-the-current-sfc-result",
@@ -314,7 +543,19 @@
       "sourceUrls": [
         "https://support.microsoft.com/en-gb/windows/experience/backup-recovery/use-the-system-file-checker-tool-to-repair-missing-or-corrupted-system-files"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "sfc-log",
+          "label": "Extract recent SFC repair details",
+          "shell": "PowerShell",
+          "purpose": "Read the SFC result log to identify files that could not be repaired, rather than repeating the scan without diagnosis.",
+          "safety": "Read-only log extraction. CBS logs can contain paths and machine context; keep the output in the private service record.",
+          "code": "Select-String -Path \"$env:windir\\Logs\\CBS\\CBS.log\" -Pattern '\\[SR\\]' | Select-Object -Last 80",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+          "sourceTitle": "Microsoft System File Checker"
+        }
+      ]
     },
     {
       "id": "repair-one-app-without-resetting-windows",
@@ -377,7 +618,19 @@
         "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
         "https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "setupdiag",
+          "label": "Check for SetupDiag and open official guidance",
+          "shell": "PowerShell",
+          "purpose": "Locate an existing SetupDiag executable or open Microsoft's official SetupDiag instructions for upgrade rollback analysis.",
+          "safety": "Do not download and run a random executable. Use the official Microsoft download and review the generated logs for personal or device identifiers before sharing.",
+          "code": "$setupDiag = Get-Command SetupDiag.exe -ErrorAction SilentlyContinue\nif ($setupDiag) { & $setupDiag.Source } else { Start-Process 'https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag' }",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+          "sourceTitle": "Microsoft SetupDiag"
+        }
+      ]
     },
     {
       "id": "update-respect-a-safeguard-hold",
@@ -711,7 +964,19 @@
         "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/troubleshoot-problems-dhcp-client",
         "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "dhcp-renew",
+          "label": "Renew a DHCP lease after confirming the link and DHCP path",
+          "shell": "PowerShell (Run as Administrator)",
+          "purpose": "Request a new DHCP lease when the adapter is connected and the network's DHCP service is expected to be available.",
+          "safety": "Changes the active network lease and may briefly interrupt connectivity. Do not use on static-IP, VPN, server or managed network interfaces without confirming the configuration and maintenance impact.",
+          "code": "ipconfig /release\nipconfig /renew\nipconfig /all",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig",
+          "sourceTitle": "Microsoft ipconfig"
+        }
+      ]
     },
     {
       "id": "network-internal-names-fail-on-vpn",
@@ -734,7 +999,19 @@
         "https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/troubleshoot-dns-client-resolution-issues",
         "https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/firewall-profile-not-switch-to-domain"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "vpn-dns",
+          "label": "Inspect VPN adapter DNS suffixes and resolver configuration",
+          "shell": "PowerShell",
+          "purpose": "Compare VPN and physical adapter DNS settings and resolve an organization-approved internal hostname.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-DnsClientServerAddress | Format-Table InterfaceAlias,AddressFamily,ServerAddresses -AutoSize\nGet-DnsClient | Format-Table InterfaceAlias,ConnectionSpecificSuffix,RegisterThisConnectionsAddress -AutoSize\nResolve-DnsName intranet.example -ErrorAction Continue",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/dnsclient/get-dnsclientserveraddress",
+          "sourceTitle": "Microsoft Get-DnsClientServerAddress"
+        }
+      ]
     },
     {
       "id": "network-captive-portal-signin",
@@ -778,7 +1055,19 @@
       "sourceUrls": [
         "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "port-test",
+          "label": "Test the exact service port",
+          "shell": "PowerShell",
+          "purpose": "Test TCP reachability to the real service host and port after name resolution succeeds.",
+          "safety": "Read-only network test. Replace the example host and port with the approved service endpoint; do not scan unrelated networks.",
+          "code": "Test-NetConnection -ComputerName server.example -Port 443 -InformationLevel Detailed",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection",
+          "sourceTitle": "Microsoft Test-NetConnection"
+        }
+      ]
     },
     {
       "id": "network-measure-lan-before-blaming-isp",
@@ -821,7 +1110,19 @@
       "sourceUrls": [
         "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "unexpected-shutdown",
+          "label": "Inspect shutdown and bugcheck events",
+          "shell": "PowerShell",
+          "purpose": "Correlate unexpected shutdown events with the outage timeline; event 41 reports an unclean shutdown, not its root cause.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-WinEvent -FilterHashtable @{LogName='System'; Id=41,6008,1001} -MaxEvents 40 | Select-Object TimeCreated,Id,ProviderName,Message | Format-List",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent",
+          "sourceTitle": "Microsoft Get-WinEvent"
+        }
+      ]
     },
     {
       "id": "outage-one-service-did-not-recover",
@@ -955,7 +1256,19 @@
         "https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/broken-trust-relationship-domain-joined-device-its-domain-secure-channel-issues",
         "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "domain-discovery",
+          "label": "Test domain controller discovery",
+          "shell": "PowerShell",
+          "purpose": "Verify the workstation can locate a domain controller using the configured domain DNS before attempting trust repair.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "$env:USERDNSDOMAIN\nnltest /dsgetdc:$env:USERDNSDOMAIN /force\nw32tm /query /status",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/dc-locator",
+          "sourceTitle": "Microsoft DC Locator"
+        }
+      ]
     },
     {
       "id": "trust-clock-skew-blocks-authentication",
@@ -976,7 +1289,19 @@
       "sourceUrls": [
         "https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "domain-time",
+          "label": "Inspect domain time source and synchronization",
+          "shell": "PowerShell",
+          "purpose": "Read current time service state before restoring the organization's approved domain time hierarchy.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "w32tm /query /status\nw32tm /query /source\nw32tm /monitor",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings",
+          "sourceTitle": "Microsoft Windows Time service"
+        }
+      ]
     },
     {
       "id": "trust-error-after-old-image-restore",
@@ -1018,7 +1343,19 @@
       "sourceUrls": [
         "https://support.microsoft.com/en-us/outlook/getstarted/how-to-work-offline-in-outlook-for-windows"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "outlook-process",
+          "label": "Inspect Outlook process and Microsoft 365 HTTPS reachability",
+          "shell": "PowerShell",
+          "purpose": "Separate a local Outlook process issue from a basic outbound HTTPS connectivity issue.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-Process OUTLOOK -ErrorAction SilentlyContinue | Select-Object ProcessName,Id,StartTime\nTest-NetConnection outlook.office365.com -Port 443",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection",
+          "sourceTitle": "Microsoft Test-NetConnection"
+        }
+      ]
     },
     {
       "id": "email-large-attachment-stuck-outbox",
@@ -1106,7 +1443,19 @@
         "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport",
         "https://support.microsoft.com/en-us/windows/hardware/printer/troubleshooting-offline-printer-problems-in-windows"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "printer-address",
+          "label": "Inspect printer port and current adapter address",
+          "shell": "PowerShell",
+          "purpose": "Compare the queue's configured port with the printer's current address after a router or DHCP change.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-Printer | Format-Table Name,DriverName,PortName -AutoSize\nGet-PrinterPort | Format-List Name,PrinterHostAddress,PortNumber\nGet-NetIPConfiguration",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport",
+          "sourceTitle": "Microsoft Get-PrinterPort"
+        }
+      ]
     },
     {
       "id": "printer-driver-rejected-on-arm-or-wpp",
@@ -1217,7 +1566,19 @@
         "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options",
         "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/how-to-determine-the-appropriate-page-file-size-for-64-bit-versions-of-windows"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "dump-settings",
+          "label": "Inspect crash dump configuration and free space",
+          "shell": "PowerShell",
+          "purpose": "Check whether Windows is configured to write a crash dump and whether the system volume has free space.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-CimInstance Win32_OSRecoveryConfiguration | Select-Object DebugInfoType,DebugFilePath,AutoReboot,OverwriteExistingDebugFile\nGet-Volume -DriveLetter C | Select-Object DriveLetter,HealthStatus,SizeRemaining,Size",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/varieties-of-kernel-mode-dump-files",
+          "sourceTitle": "Microsoft kernel-mode dump files"
+        }
+      ]
     },
     {
       "id": "hardware-memory-errors-after-upgrade",
@@ -1304,7 +1665,19 @@
       "sourceUrls": [
         "https://learn.microsoft.com/en-us/windows/package-manager/winget/"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "winget-status",
+          "label": "Check WinGet availability and package sources",
+          "shell": "PowerShell",
+          "purpose": "Check whether App Installer exposes WinGet and whether the package sources are configured.",
+          "safety": "Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.",
+          "code": "Get-Command winget.exe -ErrorAction SilentlyContinue\nwinget --info\nwinget source list",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+          "sourceTitle": "Microsoft Windows Package Manager"
+        }
+      ]
     },
     {
       "id": "newpc-registered-is-not-joined",
@@ -1480,7 +1853,19 @@
         "https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt",
         "https://openai.com/enterprise-privacy/"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "safe-system-summary",
+          "label": "Create a small system summary for a troubleshooting handoff",
+          "shell": "PowerShell",
+          "purpose": "Collect OS edition, build, architecture and uptime without exporting customer files, credentials or a full event log.",
+          "safety": "Review and sanitize the output before sending it to any external AI service. Never include passwords, tokens, recovery keys, personal files, customer names or raw full logs.",
+          "code": "Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture,CsSystemType\n(Get-Date).ToString('o')\n(Get-CimInstance Win32_OperatingSystem).LastBootUpTime",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo",
+          "sourceTitle": "Microsoft Get-ComputerInfo"
+        }
+      ]
     },
     {
       "id": "ai-command-does-not-match-the-machine",
@@ -1547,7 +1932,19 @@
       "sourceUrls": [
         "https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/defragment-optimize-your-data-drives-in-windows"
       ],
-      "reviewedAt": "2026-11-26"
+      "reviewedAt": "2026-11-26",
+      "commands": [
+        {
+          "id": "media-type",
+          "label": "Identify volume and physical media type",
+          "shell": "PowerShell",
+          "purpose": "Inspect volume layout and physical media type before choosing Optimize-Volume behavior.",
+          "safety": "Read-only inventory. Do not force defragmentation on an unknown or failing device; Windows chooses an optimization appropriate to the media type.",
+          "code": "Get-Volume | Select-Object DriveLetter,FileSystem,HealthStatus,SizeRemaining,Size\nGet-PhysicalDisk | Format-Table FriendlyName,MediaType,HealthStatus,OperationalStatus -AutoSize\nGet-Command Optimize-Volume -Syntax",
+          "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/storage/optimize-volume",
+          "sourceTitle": "Microsoft Optimize-Volume"
+        }
+      ]
     },
     {
       "id": "maintenance-package-not-in-upgrade-list",
