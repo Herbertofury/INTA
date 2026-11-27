@@ -206,7 +206,9 @@ def main():
         brands.append({'id':t['id'],'toolId':t['id'],'name':t['name'],'names':list(dict.fromkeys(names)),'urls':urls,'hosts':sorted(set(urlsplit(u).hostname for u in urls)),'downloadPage':route,'kind':'tool'})
     for a in aliases:
         if 'toolId' in a or a.get('kind') in ('method','reference'):continue
-        brands.append({'id':'app-'+a['id'],'name':a['name'],'names':[a['name'],*a.get('aliases',[])],'urls':[a['url']],'hosts':[urlsplit(a['url']).hostname],'downloadPage':a['url'],'kind':'application'})
+        brand = {'id':'app-'+a['id'],'name':a['name'],'names':[a['name'],*a.get('aliases',[])],'urls':[a['url']],'hosts':[urlsplit(a['url']).hostname],'downloadPage':a['url'],'kind':'application'}
+        if 'inlineIcon' in a: brand['inlineIcon'] = a['inlineIcon']
+        brands.append(brand)
     brands.append({'id':'app-inta','name':'INTA','names':['INTA','INTA Computer Services'],'urls':['https://herbertofury.github.io/INTA/','https://github.com/Herbertofury/INTA'],'hosts':['herbertofury.github.io','github.com'],'downloadPage':'https://herbertofury.github.io/INTA/','kind':'application'})
     for brand in brands:
         if brand['id']=='app-inta-rescue':brand['downloadPage']='https://github.com/Herbertofury/INTA/releases'
@@ -272,7 +274,9 @@ def main():
         if 'www.libreoffice.org' in brand['hosts'] or 'download.documentfoundation.org' in brand['hosts']:brand['downloadPage']='https://www.libreoffice.org/download/'
     def update(b):
         if args.only and b['id'] not in args.only:
-            old=prevby.get(b['id']);return old or b,None
+            old=prevby.get(b['id'])
+            if old and 'inlineIcon' in b:return {**old,'inlineIcon':b['inlineIcon']},None
+            return old or b,None
         if b['id'] in ('app-inta','app-inta-rescue','app-media-creator','site-herbertofury-github-io'):
             source=ROOT/'docs/assets/inta-mark.svg'
             raw=source.read_bytes();png,w,h=normalize(raw,'image/svg+xml');digest=hashlib.sha256(png).hexdigest();aid='i'+digest[:20];path=OUT/(digest[:20]+'.png');path.write_bytes(png)
