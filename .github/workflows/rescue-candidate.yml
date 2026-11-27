@@ -1,0 +1,120 @@
+name: Retest and publish INTA Rescue candidate
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_run_id:
+        description: Completed Rescue workflow run that built the image
+        required: true
+        type: string
+      candidate_artifact_id:
+        description: Immutable inta-rescue-amd64 artifact ID from that run
+        required: true
+        type: string
+      candidate_source_sha:
+        description: Full source commit SHA recorded by that build
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: inta-rescue-candidate-${{ inputs.candidate_artifact_id }}
+  cancel-in-progress: false
+
+jobs:
+  retest:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      actions: read
+    env:
+      CANDIDATE_RUN_ID: ${{ inputs.candidate_run_id }}
+      CANDIDATE_ARTIFACT_ID: ${{ inputs.candidate_artifact_id }}
+      CANDIDATE_SOURCE_SHA: ${{ inputs.candidate_source_sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - name: Verify original build and unchanged native source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          [[ "$CANDIDATE_RUN_ID" =~ ^[0-9]+$ ]]
+          [[ "$CANDIDATE_ARTIFACT_ID" =~ ^[0-9]+$ ]]
+          [[ "$CANDIDATE_SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          metadata="$RUNNER_TEMP/inta-candidate-proof"
+          mkdir -p "$metadata"
+          gh api "repos/$GH_REPO/actions/runs/$CANDIDATE_RUN_ID" > "$metadata/run.json"
+          gh api "repos/$GH_REPO/actions/artifacts/$CANDIDATE_ARTIFACT_ID" > "$metadata/artifact.json"
+          gh api "repos/$GH_REPO/actions/runs/$CANDIDATE_RUN_ID/jobs?per_page=100" > "$metadata/jobs.json"
+          python3 scripts/verify-rescue-candidate.py --metadata "$metadata" \
+            --repository "$GH_REPO" --run-id "$CANDIDATE_RUN_ID" \
+            --artifact-id "$CANDIDATE_ARTIFACT_ID" --source "$CANDIDATE_SOURCE_SHA"
+      - name: Validate current source and boot harness
+        run: |
+          python3 -m unittest discover -s tests
+          bash -n scripts/build-iso
+          bash -n scripts/smoke-iso
+      - name: Retrieve the exact existing candidate
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          artifact-ids: ${{ inputs.candidate_artifact_id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/inta-dist
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.candidate_run_id }}
+      - name: Verify candidate checksums
+        working-directory: ${{ runner.temp }}/inta-dist
+        run: |
+          test -f inta-rescue-amd64.iso
+          test -f INTA-Media-Creator.pyz
+          sha256sum --check --strict SHA256SUMS
+      - name: Verify BIOS and UEFI boot to XFCE
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends qemu-system-x86 ovmf
+          iso="$RUNNER_TEMP/inta-dist/inta-rescue-amd64.iso"
+          scripts/smoke-iso "$iso" bios "$RUNNER_TEMP/inta-diagnostics"
+          scripts/smoke-iso "$iso" uefi "$RUNNER_TEMP/inta-diagnostics"
+      - name: Preserve runtime proof and candidate provenance
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: inta-candidate-verification
+          path: |
+            ${{ runner.temp }}/inta-diagnostics/
+            ${{ runner.temp }}/inta-candidate-proof/
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Publish the verified candidate with exact source provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          git fetch origin main
+          python3 scripts/verify-rescue-candidate.py --inputs-only --target FETCH_HEAD \
+            --repository "$GH_REPO" --run-id "$CANDIDATE_RUN_ID" \
+            --artifact-id "$CANDIDATE_ARTIFACT_ID" --source "$CANDIDATE_SOURCE_SHA"
+          notes="$RUNNER_TEMP/inta-release-notes.md"
+          python3 - "$notes" <<'PY'
+          import os
+          import pathlib
+          import sys
+          e = os.environ
+          pathlib.Path(sys.argv[1]).write_text(
+              f"ISO and portable app built from {e['CANDIDATE_SOURCE_SHA']} in "
+              f"workflow run {e['CANDIDATE_RUN_ID']} (artifact {e['CANDIDATE_ARTIFACT_ID']}).\n\n"
+              f"Native build inputs are unchanged in {e['GITHUB_SHA']}. Both BIOS and UEFI "
+              f"virtual machines passed the offline desktop and application checks using "
+              f"that boot harness in run {e['GITHUB_RUN_ID']}.\n\n"
+              "The original ISO and portable app checksums were verified before testing. "
+              "Verify downloads with SHA256SUMS.\n")
+          PY
+          tag="rescue-${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}"
+          gh release create "$tag" "$RUNNER_TEMP"/inta-dist/* --target "$GITHUB_SHA" --latest \
+            --title "INTA Rescue $(date -u +%F)" --notes-file "$notes"

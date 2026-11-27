@@ -39,6 +39,34 @@ for ((second = 0; second < 340; second += 5)); do
         tr -d '\r' < "$log" | grep -Fx INTA_SMOKE_PASS
         exit
     fi
+    if ((second == 35)); then
+        # Debian's live menu waits for input. Select its default entry once;
+        # desktop readiness and clean guest shutdown are still required below.
+        printf 'Selecting the default %s live boot entry.\n' "$mode"
+        python3 - "$work/monitor" <<'PY_SELECT_BOOT'
+import socket
+import sys
+
+with socket.socket(socket.AF_UNIX) as monitor:
+    monitor.settimeout(3)
+    monitor.connect(sys.argv[1])
+
+    def prompt():
+        response = bytearray()
+        while b"(qemu)" not in response:
+            part = monitor.recv(4096)
+            if not part:
+                raise RuntimeError("QEMU monitor closed before acknowledging boot selection")
+            response.extend(part)
+        return bytes(response)
+
+    prompt()
+    monitor.sendall(b"sendkey ret\n")
+    response = prompt()
+    if any(word in response.lower() for word in (b"error", b"unknown", b"invalid")):
+        raise RuntimeError("QEMU rejected the default boot selection: " + response.decode(errors="replace"))
+PY_SELECT_BOOT
+    fi
     if ((second == 35 || second == 175 || second == 325)); then
         python3 - "$work/monitor" "$diagnostics/$mode-$second.ppm" <<'PY' || true
 import pathlib
