@@ -1,7 +1,15 @@
 # Tool reputation, recommendations and source intelligence
 
 **Status:** canonical implementation specification for the INTA tool reputation layer.  
-**Reviewed:** 2026-11-26.
+**Reviewed:** 2026-11-27.
+
+## What is available now
+
+The [Tools tab](https://herbertofury.github.io/INTA/#tools) sorts by [GitHub stars](https://docs.github.com/en/rest/activity/starring), GitHub forks, [SourceForge](https://sourceforge.net/) user rating or rating count, SourceForge downloads this week, publisher-reported weekly active users, INTA recommendation tier and tool name. Counts are not combined, and tools without comparable evidence remain listed after measured tools. The current evidence count is shown for the matching list. Each tool's details retain the provider link and observation or report date. The offline hub includes the same snapshot and does not contact providers to sort.
+
+Maintain the [dated evidence snapshot](https://github.com/Herbertofury/INTA/blob/main/data/tool-reputation.json) separately from the editorial catalog. Keep one row per catalog ID, including explicit gaps, and update all provider-specific fields together. Confirm the publisher-to-project link before recording repository counts: an unrelated fork, downstream package or repository with a matching name is not evidence. Use the [GitHub repository API](https://docs.github.com/en/rest/repos/repos#get-a-repository) for a routine refresh or an exact native count shown on a matched public repository page when that documented endpoint is unavailable. Use SourceForge's own public project review aggregate and `Downloads This Week` label; review counts, downloads, installations, devices and organizations are not substitutes for people. Record a publisher's active-user figure only when the exact product, time window and report date are clear. Use `unverified` if no matching evidence has been established, `unavailable` for a known source that fails to load, `unreported` for a checked source without the measure, and `not-applicable` when the metric does not apply. Do not write a zero unless the source measured zero.
+
+Additional provider integrations, independent recommendation counts, evidence deduplication and the more detailed filters below remain planned.
 
 ## Goal
 
@@ -9,7 +17,7 @@ Give every catalog tool a transparent reputation profile that technicians can se
 
 ## Per-tool profile
 
-Every record in `data/tools.json` receives a stable `reputation` object. The object is an evidence ledger, not a manually invented score:
+The generated catalog joins the evidence snapshot to every tool by stable ID. The following is the proposed extended shape, not a requirement to invent missing observations:
 
 ```json
 {
