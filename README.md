@@ -212,3 +212,8 @@ Editorial review: **November 26, 2026**. Complete source and provenance remain i
 ## Copy-ready field commands
 
 Specific-fix articles now support contextual PowerShell/CMD/Linux command cards with copy buttons, safety notes, and official references. See [Quick Commands](https://github.com/Herbertofury/INTA/wiki/Quick-Commands).
+
+
+## ⚡ Command Center
+
+INTA now has a dedicated cross-platform [Command Center](https://herbertofury.github.io/INTA/#command-center) for searchable PowerShell, CMD and Linux commands, copyable workflows, trusted technician toolkits, WinGet/Chocolatey/Scoop maintenance and OS-update paths. The canonical catalog is [data/command-center.json](data/command-center.json); the architecture and safety model are in [docs/command-center.md](docs/command-center.md).
