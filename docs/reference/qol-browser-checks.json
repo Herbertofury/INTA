@@ -61,6 +61,9 @@
     },
     {
       "name": "Final presentation binding: bold blue scenario links, plain-language search prompt, dark/light/mobile visibility and refreshed offline export"
+    },
+    {
+      "name": "Standalone Wiki answer-page metadata added; all prior embedded data and portal code unchanged; routes, mobile and offline export verified"
     }
   ],
   "counts": {
@@ -79,7 +82,7 @@
         {
           "href": "https://go.microsoft.com/fwlink/?LinkId=212732",
           "kind": "file",
-          "label": "Download Windows x64 scanner · EXE",
+          "label": "Download Windows x64 scanner \u00b7 EXE",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -144,7 +147,7 @@
         {
           "href": "https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso",
           "kind": "file",
-          "label": "Download x64 rescue image · ISO",
+          "label": "Download x64 rescue image \u00b7 ISO",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -164,7 +167,7 @@
         {
           "href": "https://www.cgsecurity.org/testdisk-7.2.win64.zip",
           "kind": "file",
-          "label": "Download PhotoRec / TestDisk · ZIP",
+          "label": "Download PhotoRec / TestDisk \u00b7 ZIP",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -184,7 +187,7 @@
         {
           "href": "https://download.sysinternals.com/files/SysinternalsSuite.zip",
           "kind": "file",
-          "label": "Download Windows portable · ZIP",
+          "label": "Download Windows portable \u00b7 ZIP",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -278,7 +281,7 @@
         {
           "href": "https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi",
           "kind": "file",
-          "label": "Download Windows x64 · MSI",
+          "label": "Download Windows x64 \u00b7 MSI",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -298,7 +301,7 @@
         {
           "href": "https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso",
           "kind": "file",
-          "label": "Download x64 rescue image · ISO",
+          "label": "Download x64 rescue image \u00b7 ISO",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -318,7 +321,7 @@
         {
           "href": "https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip",
           "kind": "file",
-          "label": "Download Windows x64 · ZIP",
+          "label": "Download Windows x64 \u00b7 ZIP",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -338,7 +341,7 @@
         {
           "href": "https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe",
           "kind": "file",
-          "label": "Download Windows x64 portable · EXE",
+          "label": "Download Windows x64 portable \u00b7 EXE",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -358,7 +361,7 @@
         {
           "href": "https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
           "kind": "file",
-          "label": "Download App Installer · MSIXBUNDLE",
+          "label": "Download App Installer \u00b7 MSIXBUNDLE",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -378,7 +381,7 @@
         {
           "href": "https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
           "kind": "file",
-          "label": "Download App Installer · MSIXBUNDLE",
+          "label": "Download App Installer \u00b7 MSIXBUNDLE",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -460,7 +463,7 @@
         {
           "href": "https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe",
           "kind": "file",
-          "label": "Download Windows x64 · EXE",
+          "label": "Download Windows x64 \u00b7 EXE",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -480,7 +483,7 @@
         {
           "href": "https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip",
           "kind": "file",
-          "label": "Download x64 memory-test ISO · ZIP",
+          "label": "Download x64 memory-test ISO \u00b7 ZIP",
           "target": "_blank",
           "rel": "noopener noreferrer"
         },
@@ -521,12 +524,12 @@
     "portal/app.js": "7c8a9d465366ffd6c581a6a5b18855f75047ed810bdd279e5f2bdfa24b6d476e",
     "portal/styles.css": "407d29e9a2ced0756160e58b7867ff6d2704090b6e37f74c9c0b295bdb50672c",
     "portal/index.template.html": "1aa7143d9b8d8ca28cd239d2fb6d87af408d88ca5c3fca0a30fb1e2f026478ab",
-    "site/index.html": "e641f3a79d06c4ff9e18859ec70e9516e2a89a5572e05ce530db5f7c958aad41",
-    "data/quick-start.json": "04538e2ebe2296187a56b2e8b2b4949e092909fcc6c115432c18a89496bee1a4",
+    "site/index.html": "5cd33ffb6003f9bdbd6a910690026aa6a18d1f6ce0953220dd801b43441bc124",
+    "data/quick-start.json": "3cb71071c3bb338dd00fee02d55f99c0a2fb784cadc0c6d377cac80d8ed96367",
     "data/tool-access.json": "0cebb762113b497877f9a7afd0f38304d6a4698e57710c5e0aefcfa4d1cb8031"
   },
   "passed": true,
-  "finishedAt": "2026-11-27T00:04:45.798Z",
+  "finishedAt": "2026-11-27T00:18:40.121Z",
   "behavioralArtifactHash": "f3582750c602b687bc9b212c79c6c740823e41d4ddf5d1290a6aff3e4ef76605",
   "presentationBinding": {
     "checkedAt": "2026-11-27T00:04:45.798Z",
@@ -571,5 +574,222 @@
     ],
     "offlineExportRefreshed": true,
     "errors": []
-  }
+  },
+  "wikiAnswerRoutingBinding": {
+    "passed": true,
+    "checkedAt": "2026-11-27T00:18:40.121Z",
+    "baselineCommit": "f4c830dd3c46ec58c810ccbc109f81c3d30cad0a",
+    "baselineHtmlSha256": "e641f3a79d06c4ff9e18859ec70e9516e2a89a5572e05ce530db5f7c958aad41",
+    "onlyWikiPageMetadataChanged": true,
+    "existingScenarioAndToolDataUnchanged": true,
+    "portalSourceUnchanged": true,
+    "counts": {
+      "tools": 114,
+      "jobs": 22,
+      "answers": 27
+    },
+    "destinations": [
+      {
+        "id": "suspected-malware",
+        "jobId": "malware-removal",
+        "wikiPage": "Remove-viruses",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Remove-viruses",
+        "portalRoute": "#job/malware-removal/quick/suspected-malware"
+      },
+      {
+        "id": "fix-a-printer",
+        "jobId": "printer-repair",
+        "wikiPage": "Fix-a-printer",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-a-printer",
+        "portalRoute": "#job/printer-repair/quick/fix-a-printer"
+      },
+      {
+        "id": "fix-internet",
+        "jobId": "network-dns",
+        "wikiPage": "Fix-internet",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-internet",
+        "portalRoute": "#job/network-dns/quick/fix-internet"
+      },
+      {
+        "id": "fix-email",
+        "jobId": "outlook-email",
+        "wikiPage": "Fix-email",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-email",
+        "portalRoute": "#job/outlook-email/quick/fix-email"
+      },
+      {
+        "id": "failing-drive",
+        "jobId": "failing-drive",
+        "wikiPage": "Recover-a-failing-drive",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Recover-a-failing-drive",
+        "portalRoute": "#job/failing-drive/quick/failing-drive"
+      },
+      {
+        "id": "deleted-files",
+        "jobId": "failing-drive",
+        "wikiPage": "Recover-deleted-files",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Recover-deleted-files",
+        "portalRoute": "#job/failing-drive/quick/deleted-files"
+      },
+      {
+        "id": "slow-pc",
+        "jobId": "slow-pc",
+        "wikiPage": "Fix-a-slow-PC",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-a-slow-PC",
+        "portalRoute": "#job/slow-pc/quick/slow-pc"
+      },
+      {
+        "id": "remote-help",
+        "jobId": "remote-support",
+        "wikiPage": "Help-remotely",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Help-remotely",
+        "portalRoute": "#job/remote-support/quick/remote-help"
+      },
+      {
+        "id": "fix-windows-updates",
+        "jobId": "windows-update",
+        "wikiPage": "Fix-Windows-updates",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-Windows-updates",
+        "portalRoute": "#job/windows-update/quick/fix-windows-updates"
+      },
+      {
+        "id": "windows-repair",
+        "jobId": "windows-repair",
+        "wikiPage": "Repair-Windows-files",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Repair-Windows-files",
+        "portalRoute": "#job/windows-repair/quick/windows-repair"
+      },
+      {
+        "id": "fix-boot-failure",
+        "jobId": "boot-recovery",
+        "wikiPage": "Fix-a-PC-that-will-not-boot",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-a-PC-that-will-not-boot",
+        "portalRoute": "#job/boot-recovery/quick/fix-boot-failure"
+      },
+      {
+        "id": "diagnose-crashes",
+        "jobId": "hardware-bsod",
+        "wikiPage": "Diagnose-crashes",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Diagnose-crashes",
+        "portalRoute": "#job/hardware-bsod/quick/diagnose-crashes"
+      },
+      {
+        "id": "disk-space",
+        "jobId": "slow-pc",
+        "wikiPage": "Free-disk-space",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Free-disk-space",
+        "portalRoute": "#job/slow-pc/quick/disk-space"
+      },
+      {
+        "id": "clone-a-drive",
+        "jobId": "disk-migration",
+        "wikiPage": "Clone-or-move-a-drive",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Clone-or-move-a-drive",
+        "portalRoute": "#job/disk-migration/quick/clone-a-drive"
+      },
+      {
+        "id": "file-backup",
+        "jobId": "backup-restore",
+        "wikiPage": "Restore-a-file-backup",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Restore-a-file-backup",
+        "portalRoute": "#job/backup-restore/quick/file-backup"
+      },
+      {
+        "id": "boot-usb",
+        "jobId": "boot-usb",
+        "wikiPage": "Make-a-boot-USB",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Make-a-boot-USB",
+        "portalRoute": "#job/boot-usb/quick/boot-usb"
+      },
+      {
+        "id": "set-up-a-new-pc",
+        "jobId": "new-pc",
+        "wikiPage": "Set-up-a-new-PC",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Set-up-a-new-PC",
+        "portalRoute": "#job/new-pc/quick/set-up-a-new-pc"
+      },
+      {
+        "id": "maintain-a-pc",
+        "jobId": "preventive-maintenance",
+        "wikiPage": "Maintain-a-PC",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Maintain-a-PC",
+        "portalRoute": "#job/preventive-maintenance/quick/maintain-a-pc"
+      },
+      {
+        "id": "start-a-repair",
+        "jobId": "intake-triage",
+        "wikiPage": "Start-a-repair",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Start-a-repair",
+        "portalRoute": "#job/intake-triage/quick/start-a-repair"
+      },
+      {
+        "id": "contain-ransomware",
+        "jobId": "ransomware-response",
+        "wikiPage": "Contain-ransomware",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Contain-ransomware",
+        "portalRoute": "#job/ransomware-response/quick/contain-ransomware"
+      },
+      {
+        "id": "recover-an-outage",
+        "jobId": "outage-recovery",
+        "wikiPage": "Recover-an-office-outage",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Recover-an-office-outage",
+        "portalRoute": "#job/outage-recovery/quick/recover-an-outage"
+      },
+      {
+        "id": "repair-domain-trust",
+        "jobId": "ad-trust",
+        "wikiPage": "Repair-domain-sign-in",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Repair-domain-sign-in",
+        "portalRoute": "#job/ad-trust/quick/repair-domain-trust"
+      },
+      {
+        "id": "troubleshoot-with-ai",
+        "jobId": "ai-triage",
+        "wikiPage": "Troubleshoot-with-AI",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Troubleshoot-with-AI",
+        "portalRoute": "#job/ai-triage/quick/troubleshoot-with-ai"
+      },
+      {
+        "id": "complete-a-handoff",
+        "jobId": "client-handoff",
+        "wikiPage": "Finish-the-job-and-hand-over",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Finish-the-job-and-hand-over",
+        "portalRoute": "#job/client-handoff/quick/complete-a-handoff"
+      },
+      {
+        "id": "find-a-file",
+        "jobId": "preventive-maintenance",
+        "wikiPage": "Find-a-file",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Find-a-file",
+        "portalRoute": "#job/preventive-maintenance/quick/find-a-file"
+      },
+      {
+        "id": "inspect-network-traffic",
+        "jobId": "network-dns",
+        "wikiPage": "Inspect-network-traffic",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Inspect-network-traffic",
+        "portalRoute": "#job/network-dns/quick/inspect-network-traffic"
+      },
+      {
+        "id": "suspected-ram-fault",
+        "jobId": "hardware-bsod",
+        "wikiPage": "Test-memory",
+        "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Test-memory",
+        "portalRoute": "#job/hardware-bsod/quick/suspected-ram-fault"
+      }
+    ],
+    "offlineExportRefreshed": true,
+    "errors": [],
+    "hashes": {
+      "portal/app.js": "7c8a9d465366ffd6c581a6a5b18855f75047ed810bdd279e5f2bdfa24b6d476e",
+      "portal/styles.css": "407d29e9a2ced0756160e58b7867ff6d2704090b6e37f74c9c0b295bdb50672c",
+      "portal/index.template.html": "1aa7143d9b8d8ca28cd239d2fb6d87af408d88ca5c3fca0a30fb1e2f026478ab",
+      "site/index.html": "5cd33ffb6003f9bdbd6a910690026aa6a18d1f6ce0953220dd801b43441bc124",
+      "data/quick-start.json": "3cb71071c3bb338dd00fee02d55f99c0a2fb784cadc0c6d377cac80d8ed96367",
+      "data/tool-access.json": "0cebb762113b497877f9a7afd0f38304d6a4698e57710c5e0aefcfa4d1cb8031"
+    },
+    "htmlBytes": 473070
+  },
+  "htmlBytes": 473070
 }

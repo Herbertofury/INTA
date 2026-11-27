@@ -91,11 +91,17 @@ A["Windows"] --> B["PowerShell"]
         self.assertTrue(any('missing Wiki page' in x for x in result['errors']))
 
     def test_sidebar_exposes_every_scenario_and_tool_category_without_expansion(self):
-        sidebar = build.build_outputs()['wiki/_Sidebar.md']
+        output = build.build_outputs()
+        sidebar = output['wiki/_Sidebar.md']
+        defaults = {}
+        for row in json.loads((ROOT / 'data/quick-start.json').read_text())['items']:
+            defaults.setdefault(row['jobId'], row['wikiPage'])
         self.assertNotRegex(sidebar.lower(), r'<(?:details|summary)\b')
         for job in self.jobs:
-            destination = re.escape('Job-' + job['id'])
+            destination = re.escape(defaults[job['id']])
             self.assertRegex(sidebar, r'\*\*\[[^\]]+\]\((?:' + re.escape(build.WIKI) + r'/)?' + destination + r'\)\*\*')
+            self.assertIn('wiki/Job-' + job['id'] + '.md', output)
+        self.assertIn('[All playbooks](Playbooks)', sidebar)
         for category in {tool['category'] for tool in self.tools}:
             self.assertIn('(Tools-' + build.slug(category) + ')', sidebar)
 
@@ -139,10 +145,101 @@ A["Windows"] --> B["PowerShell"]
                     action = build.selected_tool_action(route, row.get('toolAction'))
                     for url in [route['officialUrl'], action['url']]:
                         self.assertIn('](' + url + ')', page, path + ': ' + row['id'])
-                self.assertIn('](' + build.WIKI + '/Job-' + row['jobId'] + '#' + anchor + ')', page, path + ': ' + row['id'])
+                self.assertIn('](' + build.WIKI + '/' + row['wikiPage'] + ')', page, path + ': ' + row['id'])
+                self.assertNotIn('](' + build.WIKI + '/Job-' + row['jobId'] + '#' + anchor + ')', page, path + ': ' + row['id'])
         for path in ['README.md', 'docs/start-here.md']:
             self.assertEqual(output[path].count('<!-- INTA:QUICK-START:START -->'), 1)
             self.assertEqual(output[path].count('<!-- INTA:QUICK-START:END -->'), 1)
+
+    def test_each_quick_answer_has_a_complete_page_with_exact_steps_and_tool_action(self):
+        rows = json.loads((ROOT / 'data/quick-start.json').read_text())['items']
+        access = json.loads((ROOT / 'data/tool-access.json').read_text())['tools']
+        output = build.build_outputs()
+        manifest = json.loads(output['site/build-manifest.json'])
+        self.assertEqual(manifest['quickAnswerPages'], len(rows))
+
+        def plain(value):
+            return re.sub(r'\[([^\]]+)\]\([^)]*\)', r'\1', value).replace('**', '')
+
+        for row in rows:
+            page_path = 'wiki/' + row['wikiPage'] + '.md'
+            self.assertIn(page_path, output, row['id'])
+            page = output[page_path]
+            self.assertIn(plain(row['firstStep']), plain(page), row['id'])
+            numbered = re.findall(r'^\d+\. (.+)$', page, flags=re.M)
+            self.assertEqual([plain(line) for line in numbered], row['quickSteps'], row['id'])
+            self.assertIn('**[Complete procedure](' + build.WIKI + '/Job-' + row['jobId'] + ')**', page)
+            self.assertIn('**[Selection evidence](' + build.WIKI + '/Free-Tool-Picks)**', page)
+            self.assertNotIn('#quick-', page)
+            self.assertNotIn('```mermaid', page)
+            self.assertNotRegex(page.lower(), r'<(?:details|summary)\b')
+            if row.get('guideOnly'):
+                self.assertIn('**No extra download needed.**', page)
+            else:
+                route = access[row['toolId']]
+                selected = build.selected_tool_action(route, row.get('toolAction'))
+                self.assertIn('](' + route['officialUrl'] + ')', page)
+                self.assertIn('](' + selected['url'] + ')', page)
+            for path in ['docs/free-tool-picks.md', 'wiki/Free-Tool-Picks.md']:
+                evidence = output[path] if path in output else (ROOT / path).read_text()
+                self.assertIn('[Quick answer](' + build.WIKI + '/' + row['wikiPage'] + ')', evidence)
+                self.assertIn('[Complete procedure](' + build.WIKI + '/Job-' + row['jobId'] + ')', evidence)
+
+    def test_quick_answer_slugs_are_stable_public_destinations(self):
+        # Keep these public page names stable when display labels are edited.
+        published = {
+            'suspected-malware': 'Remove-viruses',
+            'fix-a-printer': 'Fix-a-printer',
+            'fix-internet': 'Fix-internet',
+            'fix-email': 'Fix-email',
+            'failing-drive': 'Recover-a-failing-drive',
+            'deleted-files': 'Recover-deleted-files',
+            'slow-pc': 'Fix-a-slow-PC',
+            'remote-help': 'Help-remotely',
+            'fix-windows-updates': 'Fix-Windows-updates',
+            'windows-repair': 'Repair-Windows-files',
+            'fix-boot-failure': 'Fix-a-PC-that-will-not-boot',
+            'diagnose-crashes': 'Diagnose-crashes',
+            'disk-space': 'Free-disk-space',
+            'clone-a-drive': 'Clone-or-move-a-drive',
+            'file-backup': 'Restore-a-file-backup',
+            'boot-usb': 'Make-a-boot-USB',
+            'set-up-a-new-pc': 'Set-up-a-new-PC',
+            'maintain-a-pc': 'Maintain-a-PC',
+            'start-a-repair': 'Start-a-repair',
+            'contain-ransomware': 'Contain-ransomware',
+            'recover-an-outage': 'Recover-an-office-outage',
+            'repair-domain-trust': 'Repair-domain-sign-in',
+            'troubleshoot-with-ai': 'Troubleshoot-with-AI',
+            'complete-a-handoff': 'Finish-the-job-and-hand-over',
+            'find-a-file': 'Find-a-file',
+            'inspect-network-traffic': 'Inspect-network-traffic',
+            'suspected-ram-fault': 'Test-memory',
+        }
+        rows = {row['id']: row for row in json.loads((ROOT / 'data/quick-start.json').read_text())['items']}
+        for identity, page in published.items():
+            self.assertEqual(rows[identity]['wikiPage'], page, identity)
+        self.assertEqual(len({row['wikiPage'].casefold() for row in rows.values()}), len(rows))
+
+    def test_quick_answer_slugs_reject_missing_unsafe_duplicate_and_reserved_names(self):
+        quick = json.loads((ROOT / 'data/quick-start.json').read_text())
+        access = json.loads((ROOT / 'data/tool-access.json').read_text())['tools']
+        build.validate_quick_start(quick, self.tools, self.jobs, access)
+        for invalid in ['', '../outside', 'Page#case', 'Page with spaces', 'Réparer',
+                        'https://example.com/page', 'Home', 'start-here', 'Job-intake-triage', 'Tools-malware']:
+            with self.subTest(slug=invalid):
+                changed = copy.deepcopy(quick)
+                changed['items'][0]['wikiPage'] = invalid
+                with self.assertRaises(ValueError):
+                    build.validate_quick_start(changed, self.tools, self.jobs, access)
+        missing = copy.deepcopy(quick)
+        del missing['items'][0]['wikiPage']
+        with self.assertRaisesRegex(ValueError, 'requires wikiPage'):
+            build.validate_quick_start(missing, self.tools, self.jobs, access)
+        duplicate = copy.deepcopy(quick)
+        duplicate['items'][1]['wikiPage'] = duplicate['items'][0]['wikiPage'].lower()
+        with self.assertRaisesRegex(ValueError, 'duplicate quick-answer Wiki page'):
+            build.validate_quick_start(duplicate, self.tools, self.jobs, access)
 
     def test_methods_have_sources_and_complete_operating_guidance(self):
         methods = json.loads((ROOT / 'data/methods.json').read_text())['methods']

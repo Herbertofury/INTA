@@ -20,6 +20,15 @@ WIKI = REPO + "/wiki"
 HUB = "https://herbertofury.github.io/INTA/"
 QUICK_START_START = "<!-- INTA:QUICK-START:START -->"
 QUICK_START_END = "<!-- INTA:QUICK-START:END -->"
+WIKI_MIRRORS = {
+    "Start-Here": "start-here.md", "Maintaining-the-Hub": "maintaining-the-hub.md",
+    "Rescue-Media": "rescue-media.md", "Technician-Handoff": "technician-handoff.md",
+    "Knowledge-Standards": "knowledge-standards.md", "Contribute": "contribute.md",
+    "Templates": "contribution-template.md", "Continuous-Improvement": "continuous-improvement.md",
+    "Methods": "methods.md", "Decision-Desk": "decision-desk.md",
+    "Interface-Design": "interface-design.md", "Service-Evidence": "service-evidence.md",
+    "Tool-Selection": "tool-selection.md", "Free-Tool-Picks": "free-tool-picks.md",
+}
 CATEGORY_NAMES = {
     "malware": "Malware removal & endpoint protection", "remote": "Remote support",
     "windows": "Windows diagnosis & repair", "storage": "Storage, recovery & backup",
@@ -191,8 +200,12 @@ def validate_quick_start(quick_start: dict, tools: list[dict], jobs: list[dict],
     if not isinstance(items, list) or not items:
         raise ValueError("Quick start requires reviewed tool selections")
     tool_ids, job_ids = {tool["id"] for tool in tools}, {job["id"] for job in jobs}
-    seen_ids = set()
-    required = ("id", "jobId", "label", "firstStep", "why", "boundary", "freeUse", "qualityBasis")
+    seen_ids, seen_pages = set(), set()
+    reserved_pages = {"Home", "Playbooks", "Tool-Directory", "_Sidebar", "_Footer", *WIKI_MIRRORS}
+    reserved_pages.update(f"Job-{identity}" for identity in job_ids)
+    reserved_pages.update(f"Tools-{slug(tool['category'])}" for tool in tools)
+    reserved_pages = {name.casefold() for name in reserved_pages}
+    required = ("id", "jobId", "label", "wikiPage", "firstStep", "why", "boundary", "freeUse", "qualityBasis")
     for item in items:
         if not isinstance(item, dict):
             raise ValueError("Quick-start entries must be objects")
@@ -203,6 +216,12 @@ def validate_quick_start(quick_start: dict, tools: list[dict], jobs: list[dict],
         if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity) or identity in seen_ids:
             raise ValueError(f"Invalid or duplicate quick-start id: {identity}")
         seen_ids.add(identity)
+        page = item["wikiPage"]
+        if not re.fullmatch(r"[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*", page) or page.casefold() in seen_pages:
+            raise ValueError(f"{identity}: invalid or duplicate quick-answer Wiki page: {page}")
+        if page.casefold() in reserved_pages:
+            raise ValueError(f"{identity}: quick-answer slug collides with a reserved Wiki page: {page}")
+        seen_pages.add(page.casefold())
         if item["jobId"] not in job_ids or (item.get("toolId") not in tool_ids and not
                 (item.get("guideOnly") is True and item.get("toolId") is None)):
             raise ValueError(f"{identity}: quick start references an unknown tool or playbook")
@@ -241,7 +260,7 @@ def quick_start_markdown(quick_start: dict, tools_by_id: dict, layout: dict, acc
     for item in quick_start["items"]:
         job_id = item["jobId"]
         icon = item.get("icon") or layout["jobs"][job_id]["navigationIcon"]
-        guide = f"{WIKI}/Job-{job_id}#quick-{item['id']}"
+        guide = f"{WIKI}/{item['wikiPage']}"
         if item.get("guideOnly"):
             action = f"No extra download needed · **[Open checklist]({guide})**"
         else:
@@ -252,6 +271,26 @@ def quick_start_markdown(quick_start: dict, tools_by_id: dict, layout: dict, acc
         lines += [f"| **[{icon} {cell(item['label'])}]({guide})** | {action} |"]
     lines += ["", f"Selection review: **{quick_start['reviewedAt']}** · "
               f"[Complete tool directory]({WIKI}/Tool-Directory) · [Why these tools]({WIKI}/Free-Tool-Picks)", ""]
+    return "\n".join(lines)
+
+
+def quick_answer_markdown(item: dict, tools_by_id: dict, access: dict, reviewed: str) -> str:
+    """Give a scenario its own reliable Wiki destination, independent of fragments."""
+    lines = [page_nav(), "", f"# {item.get('icon', '🛠️')} {item['label']}", "",
+             f"**{item['firstStep']}**", ""]
+    lines += [f"{number}. {step}" for number, step in enumerate(item["quickSteps"], 1)]
+    lines += [""]
+    if item.get("guideOnly"):
+        lines += ["**No extra download needed.**", ""]
+    else:
+        tool = tools_by_id[item["toolId"]]
+        entry = access[tool["id"]]
+        action = selected_tool_action(entry, item.get("toolAction"))
+        lines += [f"**[{tool['name']}]({entry['officialUrl']})** · "
+                  f"**[{cell(action['label'])}]({action['url']})**", ""]
+    lines += [f"**[Complete procedure]({WIKI}/Job-{item['jobId']})** · "
+              f"**[Selection evidence]({WIKI}/Free-Tool-Picks)**"]
+    lines += page_footer(reviewed)
     return "\n".join(lines)
 
 
@@ -346,9 +385,12 @@ def anchor(identity: str) -> str:
     return f'<a id="{identity}"></a>'
 
 
-def scenario_link(identity: str, layout: dict, absolute: bool = False) -> str:
+def scenario_link(identity: str, layout: dict, absolute: bool = False,
+                  wiki_page: str | None = None) -> str:
     config = layout["jobs"][identity]
-    destination = f"{WIKI}/Job-{identity}" if absolute else f"Job-{identity}"
+    destination = wiki_page or f"Job-{identity}"
+    if absolute:
+        destination = f"{WIKI}/{destination}"
     return f"**[{config['navigationIcon']} {config['navigationLabel']}]({destination})**"
 
 
@@ -671,13 +713,17 @@ def build_outputs() -> dict[str, str]:
     tool_index += page_footer(meta["reviewedAt"])
     outputs["wiki/Tool-Directory.md"] = "\n".join(tool_index)
     outputs["wiki/Home.md"] = home_markdown(tools, jobs, categories, layout, meta, quick_start_block)
+    default_answers = {}
+    for item in quick_start["items"]:
+        default_answers.setdefault(item["jobId"], item)
     sidebar = [*heading(2, "INTA knowledge base", "🧭 INTA / Service Atlas"),
                f"**[🏠 Home](Home)** · **[🧰 Open hub]({HUB})**", "",
                *heading(3, "Fix a problem", "Playbook groups")]
     group_anchors = {group["jobs"][0]: "".join(legacy_anchors(f"{group['icon']} {group['title']}"))
                      for group in layout["groups"]}
     for identity in layout["scenarioOrder"]:
-        sidebar += [f"- {group_anchors.get(identity, '')}{scenario_link(identity, layout)}"]
+        sidebar += [f"- {group_anchors.get(identity, '')}"
+                    f"{scenario_link(identity, layout, wiki_page=default_answers[identity]['wikiPage'])}"]
     sidebar += ["", "### Quick tool downloads", "",
                 "Tool name = official page. File buttons name the platform; built-in tools open instructions.", ""]
     for shortcut in layout["quickDownloads"]:
@@ -702,23 +748,20 @@ def build_outputs() -> dict[str, str]:
     outputs["wiki/_Footer.md"] = (f"**INTA Computer Services**\n\n"
         f"[Hub]({HUB}) · [Standards]({WIKI}/Knowledge-Standards) · "
         f"[Interface design]({WIKI}/Interface-Design) · [Contribute]({WIKI}/Contribute)\n")
-    mirrors = {"Start-Here": "start-here.md", "Maintaining-the-Hub": "maintaining-the-hub.md",
-               "Rescue-Media": "rescue-media.md", "Technician-Handoff": "technician-handoff.md",
-               "Knowledge-Standards": "knowledge-standards.md", "Contribute": "contribute.md",
-               "Templates": "contribution-template.md", "Continuous-Improvement": "continuous-improvement.md",
-               "Methods": "methods.md", "Decision-Desk": "decision-desk.md",
-               "Interface-Design": "interface-design.md", "Service-Evidence": "service-evidence.md",
-               "Tool-Selection": "tool-selection.md", "Free-Tool-Picks": "free-tool-picks.md"}
+    mirrors = WIKI_MIRRORS
     for title, filename in mirrors.items():
         source_name = f"docs/{filename}"
         source = managed_sources[source_name] if source_name in managed_sources else (ROOT / source_name).read_text(encoding="utf-8")
         outputs[f"wiki/{title}.md"] = mirror_markdown(source, mirrors, meta["reviewedAt"])
+    for item in quick_start["items"]:
+        outputs[f"wiki/{item['wikiPage']}.md"] = quick_answer_markdown(item, by_id, access, quick_start["reviewedAt"])
     for path, content in list(outputs.items()):
         if path.endswith(".md") and path not in managed_sources:
             outputs[path] = linker.link_markdown(content, registry)
     manifest = {"schemaVersion": 2, "tools": len(tools), "jobs": len(jobs),
                 "methods": len(records(ROOT / "data/methods.json", "methods")),
                 "quickStartItems": len(quick_start["items"]),
+                "quickAnswerPages": len(quick_start["items"]),
                 "quickStartSha256": hashlib.sha256(json.dumps(quick_start, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
                 "toolAccessEntries": len(access),
                 "directFileDownloads": sum(entry["primary"]["kind"] == "file" for entry in access.values()),

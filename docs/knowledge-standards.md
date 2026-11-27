@@ -24,7 +24,7 @@ Use a stable page title, a short breadcrumb, a one-sentence purpose and an immed
 
 Use icons consistently and sparingly. Do not substitute icon-only instructions for readable labels. Tables suit comparisons; numbered steps suit actions; callouts suit a decision that materially changes the plan. Avoid dense walls of decorative badges or repeated banners.
 
-Every service scenario appears in the front-page answers. Name the problem in ordinary language, including **Remove viruses** and **Fix a printer**. Start the guide with exactly three practical actions, then retain its complete diagnosis, repair, verification and escalation procedure. Distinct cases that share a guide receive their own direct anchors. Do not repeat lengthy selection notes in each Home row.
+Every service scenario appears in the front-page answers. Name the problem in ordinary language, including **Remove viruses** and **Fix a printer**. Start the guide with exactly three practical actions, then retain its complete diagnosis, repair, verification and escalation procedure. Distinct cases receive stable dedicated Wiki answer pages, with links to their complete guides. Preserve existing guide anchors for compatibility, but do not depend on fragments to distinguish the answer reached from another page. Do not repeat lengthy selection notes in each Home row.
 
 ## 🔗 2. Every named mention is a route
 

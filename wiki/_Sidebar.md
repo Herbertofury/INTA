@@ -8,28 +8,28 @@
 
 ### Fix a problem
 
-- <a id="️-security--incident-response"></a><a id="-security--incident-response"></a>**[🦠 Remove viruses](Job-malware-removal)**
-- **[🖨️ Fix a printer](Job-printer-repair)**
-- <a id="-network--office-continuity"></a>**[🌐 Fix internet & DNS](Job-network-dns)**
-- <a id="️-everyday-workplace-fixes"></a><a id="-everyday-workplace-fixes"></a>**[📧 Fix email](Job-outlook-email)**
-- <a id="-windows--system-stability"></a>**[🐢 Fix a slow PC](Job-slow-pc)**
-- **[💾 Recover data](Job-failing-drive)**
-- **[🖥️ Help remotely](Job-remote-support)**
-- <a id="-storage-backup--rescue"></a>**[🚑 Fix boot failure](Job-boot-recovery)**
-- **[🔄 Fix Windows updates](Job-windows-update)**
-- **[🛠️ Repair Windows](Job-windows-repair)**
-- **[🌡️ Diagnose crashes / BSOD](Job-hardware-bsod)**
-- **[🗄️ Test a backup restore](Job-backup-restore)**
-- **[🔌 Build a rescue USB](Job-boot-usb)**
-- **[💽 Clone or migrate a disk](Job-disk-migration)**
-- **[⚡ Recover from an outage](Job-outage-recovery)**
-- **[🚨 Contain ransomware](Job-ransomware-response)**
-- **[🧹 Maintain a workstation](Job-preventive-maintenance)**
-- <a id="-deployment--maintenance"></a>**[🆕 Set up a new PC](Job-new-pc)**
-- <a id="-first-response--handoff"></a>**[🧭 Triage a new issue](Job-intake-triage)**
-- **[🔑 Repair domain trust](Job-ad-trust)**
-- <a id="-ai-assisted-investigation"></a>**[🧠 Troubleshoot with AI](Job-ai-triage)**
-- **[📋 Complete the handoff](Job-client-handoff)**
+- <a id="️-security--incident-response"></a><a id="-security--incident-response"></a>**[🦠 Remove viruses](Remove-viruses)**
+- **[🖨️ Fix a printer](Fix-a-printer)**
+- <a id="-network--office-continuity"></a>**[🌐 Fix internet & DNS](Fix-internet)**
+- <a id="️-everyday-workplace-fixes"></a><a id="-everyday-workplace-fixes"></a>**[📧 Fix email](Fix-email)**
+- <a id="-windows--system-stability"></a>**[🐢 Fix a slow PC](Fix-a-slow-PC)**
+- **[💾 Recover data](Recover-a-failing-drive)**
+- **[🖥️ Help remotely](Help-remotely)**
+- <a id="-storage-backup--rescue"></a>**[🚑 Fix boot failure](Fix-a-PC-that-will-not-boot)**
+- **[🔄 Fix Windows updates](Fix-Windows-updates)**
+- **[🛠️ Repair Windows](Repair-Windows-files)**
+- **[🌡️ Diagnose crashes / BSOD](Diagnose-crashes)**
+- **[🗄️ Test a backup restore](Restore-a-file-backup)**
+- **[🔌 Build a rescue USB](Make-a-boot-USB)**
+- **[💽 Clone or migrate a disk](Clone-or-move-a-drive)**
+- **[⚡ Recover from an outage](Recover-an-office-outage)**
+- **[🚨 Contain ransomware](Contain-ransomware)**
+- **[🧹 Maintain a workstation](Maintain-a-PC)**
+- <a id="-deployment--maintenance"></a>**[🆕 Set up a new PC](Set-up-a-new-PC)**
+- <a id="-first-response--handoff"></a>**[🧭 Triage a new issue](Start-a-repair)**
+- **[🔑 Repair domain trust](Repair-domain-sign-in)**
+- <a id="-ai-assisted-investigation"></a>**[🧠 Troubleshoot with AI](Troubleshoot-with-AI)**
+- **[📋 Complete the handoff](Finish-the-job-and-hand-over)**
 
 ### Quick tool downloads
 

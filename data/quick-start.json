@@ -27,7 +27,8 @@
         "malware",
         "infected PC",
         "pop-ups"
-      ]
+      ],
+      "wikiPage": "Remove-viruses"
     },
     {
       "id": "fix-a-printer",
@@ -54,7 +55,8 @@
         "cannot print",
         "stuck print queue"
       ],
-      "toolAction": "printer"
+      "toolAction": "printer",
+      "wikiPage": "Fix-a-printer"
     },
     {
       "id": "fix-internet",
@@ -82,7 +84,8 @@
         "DNS problem",
         "network connection"
       ],
-      "toolAction": "network"
+      "toolAction": "network",
+      "wikiPage": "Fix-internet"
     },
     {
       "id": "fix-email",
@@ -112,7 +115,8 @@
         "email not syncing",
         "mailbox"
       ],
-      "toolAction": "outlook"
+      "toolAction": "outlook",
+      "wikiPage": "Fix-email"
     },
     {
       "id": "failing-drive",
@@ -142,7 +146,8 @@
         "bad sectors",
         "disk recovery",
         "recover data"
-      ]
+      ],
+      "wikiPage": "Recover-a-failing-drive"
     },
     {
       "id": "deleted-files",
@@ -169,7 +174,8 @@
         "undelete",
         "lost files",
         "deleted photos"
-      ]
+      ],
+      "wikiPage": "Recover-deleted-files"
     },
     {
       "id": "slow-pc",
@@ -198,7 +204,8 @@
         "lag",
         "high CPU",
         "slow startup"
-      ]
+      ],
+      "wikiPage": "Fix-a-slow-PC"
     },
     {
       "id": "remote-help",
@@ -224,7 +231,8 @@
         "remote assistance",
         "remote desktop",
         "attended support"
-      ]
+      ],
+      "wikiPage": "Help-remotely"
     },
     {
       "id": "fix-windows-updates",
@@ -252,7 +260,8 @@
         "failed KB",
         "update loop"
       ],
-      "toolAction": "update"
+      "toolAction": "update",
+      "wikiPage": "Fix-Windows-updates"
     },
     {
       "id": "windows-repair",
@@ -278,7 +287,8 @@
         "corrupt Windows",
         "SFC",
         "component store"
-      ]
+      ],
+      "wikiPage": "Repair-Windows-files"
     },
     {
       "id": "fix-boot-failure",
@@ -306,7 +316,8 @@
         "startup repair",
         "black screen at boot",
         "BitLocker recovery"
-      ]
+      ],
+      "wikiPage": "Fix-a-PC-that-will-not-boot"
     },
     {
       "id": "diagnose-crashes",
@@ -333,7 +344,8 @@
         "BSOD",
         "random restart",
         "PC crash"
-      ]
+      ],
+      "wikiPage": "Diagnose-crashes"
     },
     {
       "id": "disk-space",
@@ -360,7 +372,8 @@
         "disk full",
         "storage cleanup",
         "low disk space"
-      ]
+      ],
+      "wikiPage": "Free-disk-space"
     },
     {
       "id": "clone-a-drive",
@@ -388,7 +401,8 @@
         "SSD migration",
         "disk clone",
         "replace hard drive"
-      ]
+      ],
+      "wikiPage": "Clone-or-move-a-drive"
     },
     {
       "id": "file-backup",
@@ -415,7 +429,8 @@
         "backup restore",
         "verify backup",
         "restore files"
-      ]
+      ],
+      "wikiPage": "Restore-a-file-backup"
     },
     {
       "id": "boot-usb",
@@ -442,7 +457,8 @@
         "rescue USB",
         "installation USB",
         "bootable media"
-      ]
+      ],
+      "wikiPage": "Make-a-boot-USB"
     },
     {
       "id": "set-up-a-new-pc",
@@ -469,7 +485,8 @@
         "new computer",
         "PC setup",
         "workstation deployment"
-      ]
+      ],
+      "wikiPage": "Set-up-a-new-PC"
     },
     {
       "id": "maintain-a-pc",
@@ -495,7 +512,8 @@
         "routine maintenance",
         "PC health check",
         "application updates"
-      ]
+      ],
+      "wikiPage": "Maintain-a-PC"
     },
     {
       "id": "start-a-repair",
@@ -522,7 +540,8 @@
         "diagnose a computer",
         "new service job"
       ],
-      "guideOnly": true
+      "guideOnly": true,
+      "wikiPage": "Start-a-repair"
     },
     {
       "id": "contain-ransomware",
@@ -549,7 +568,8 @@
         "encrypted files",
         "active compromise"
       ],
-      "guideOnly": true
+      "guideOnly": true,
+      "wikiPage": "Contain-ransomware"
     },
     {
       "id": "recover-an-outage",
@@ -577,7 +597,8 @@
         "office offline",
         "service outage"
       ],
-      "guideOnly": true
+      "guideOnly": true,
+      "wikiPage": "Recover-an-office-outage"
     },
     {
       "id": "repair-domain-trust",
@@ -604,7 +625,8 @@
         "domain login",
         "secure channel"
       ],
-      "toolAction": "windows-powershell"
+      "toolAction": "windows-powershell",
+      "wikiPage": "Repair-domain-sign-in"
     },
     {
       "id": "troubleshoot-with-ai",
@@ -631,7 +653,8 @@
         "AI troubleshooting",
         "explain an error",
         "diagnostic hypotheses"
-      ]
+      ],
+      "wikiPage": "Troubleshoot-with-AI"
     },
     {
       "id": "complete-a-handoff",
@@ -659,7 +682,8 @@
         "service acceptance",
         "offboarding"
       ],
-      "guideOnly": true
+      "guideOnly": true,
+      "wikiPage": "Finish-the-job-and-hand-over"
     },
     {
       "id": "find-a-file",
@@ -687,7 +711,8 @@
         "file search",
         "missing document",
         "filename"
-      ]
+      ],
+      "wikiPage": "Find-a-file"
     },
     {
       "id": "inspect-network-traffic",
@@ -714,7 +739,8 @@
         "packet capture",
         "DNS packets",
         "TCP troubleshooting"
-      ]
+      ],
+      "wikiPage": "Inspect-network-traffic"
     },
     {
       "id": "suspected-ram-fault",
@@ -741,7 +767,8 @@
         "RAM test",
         "memory errors",
         "memory diagnostics"
-      ]
+      ],
+      "wikiPage": "Test-memory"
     }
   ]
 }

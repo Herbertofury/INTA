@@ -11,33 +11,33 @@ Choose a job for a first action, three short steps and the matching tool. Every 
 
 | What do you need to do? | Tool or starting route |
 | --- | --- |
-| **🛡️ [Remove viruses](#suspected-malware)** | **[Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download)** |
-| **🖨️ [Fix a printer](#fix-a-printer)** | **[Windows Get Help](https://aka.ms/PrinterConnection)** |
-| **🌐 [Fix internet](#fix-internet)** | **[Windows Get Help](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows)** |
-| **✉️ [Fix email](#fix-email)** | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)** |
-| **💾 [Recover a failing drive](#failing-drive)** | **[SystemRescue](https://www.system-rescue.org/Download/)** |
-| **📁 [Recover deleted files](#deleted-files)** | **[PhotoRec](https://www.cgsecurity.org/wiki/TestDisk_Download)** |
-| **🐢 [Fix a slow PC](#slow-pc)** | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)** |
-| **🖥️ [Help remotely](#remote-help)** | **[Microsoft Quick Assist](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** |
-| **🔄 [Fix Windows updates](#fix-windows-updates)** | **[Windows Get Help](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter)** |
-| **🧰 [Repair Windows files](#windows-repair)** | **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** |
-| **🚀 [Fix a PC that will not boot](#fix-boot-failure)** | **[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** |
-| **🧩 [Diagnose crashes](#diagnose-crashes)** | **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** |
-| **📊 [Free disk space](#disk-space)** | **[WinDirStat](https://github.com/windirstat/windirstat/releases/latest)** |
-| **🔁 [Clone or move a drive](#clone-a-drive)** | **[Rescuezilla](https://rescuezilla.com/download)** |
-| **🗄️ [Restore a file backup](#file-backup)** | **[restic](https://github.com/restic/restic/releases/latest)** |
-| **🔌 [Make a boot USB](#boot-usb)** | **[Rufus](https://rufus.ie/#download)** |
-| **💻 [Set up a new PC](#set-up-a-new-pc)** | **[WinGet](https://github.com/microsoft/winget-cli/releases/latest)** |
-| **🛠️ [Maintain a PC](#maintain-a-pc)** | **[WinGet](https://github.com/microsoft/winget-cli/releases/latest)** |
-| **🧭 [Start a repair](#start-a-repair)** | **[No extra download needed](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage#quick-start-a-repair)** |
-| **🚨 [Contain ransomware](#contain-ransomware)** | **[No extra download needed](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response#quick-contain-ransomware)** |
-| **🏢 [Recover an office outage](#recover-an-outage)** | **[No extra download needed](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery#quick-recover-an-outage)** |
-| **🔐 [Repair domain sign-in](#repair-domain-trust)** | **[PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** |
-| **💡 [Troubleshoot with AI](#troubleshoot-with-ai)** | **[ChatGPT](https://chatgpt.com/)** |
-| **✅ [Finish the job and hand over](#complete-a-handoff)** | **[No extra download needed](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff#quick-complete-a-handoff)** |
-| **🔎 [Find a file](#find-a-file)** | **[Everything](https://www.voidtools.com/downloads/)** |
-| **🌐 [Inspect network traffic](#inspect-network-traffic)** | **[Wireshark](https://www.wireshark.org/download.html)** |
-| **🧪 [Test memory](#suspected-ram-fault)** | **[Memtest86+](https://www.memtest.org/#download)** |
+| **🛡️ [Remove viruses](https://github.com/Herbertofury/INTA/wiki/Remove-viruses)** | **[Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download)** |
+| **🖨️ [Fix a printer](https://github.com/Herbertofury/INTA/wiki/Fix-a-printer)** | **[Windows Get Help](https://aka.ms/PrinterConnection)** |
+| **🌐 [Fix internet](https://github.com/Herbertofury/INTA/wiki/Fix-internet)** | **[Windows Get Help](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows)** |
+| **✉️ [Fix email](https://github.com/Herbertofury/INTA/wiki/Fix-email)** | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)** |
+| **💾 [Recover a failing drive](https://github.com/Herbertofury/INTA/wiki/Recover-a-failing-drive)** | **[SystemRescue](https://www.system-rescue.org/Download/)** |
+| **📁 [Recover deleted files](https://github.com/Herbertofury/INTA/wiki/Recover-deleted-files)** | **[PhotoRec](https://www.cgsecurity.org/wiki/TestDisk_Download)** |
+| **🐢 [Fix a slow PC](https://github.com/Herbertofury/INTA/wiki/Fix-a-slow-PC)** | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)** |
+| **🖥️ [Help remotely](https://github.com/Herbertofury/INTA/wiki/Help-remotely)** | **[Microsoft Quick Assist](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** |
+| **🔄 [Fix Windows updates](https://github.com/Herbertofury/INTA/wiki/Fix-Windows-updates)** | **[Windows Get Help](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter)** |
+| **🧰 [Repair Windows files](https://github.com/Herbertofury/INTA/wiki/Repair-Windows-files)** | **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** |
+| **🚀 [Fix a PC that will not boot](https://github.com/Herbertofury/INTA/wiki/Fix-a-PC-that-will-not-boot)** | **[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** |
+| **🧩 [Diagnose crashes](https://github.com/Herbertofury/INTA/wiki/Diagnose-crashes)** | **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** |
+| **📊 [Free disk space](https://github.com/Herbertofury/INTA/wiki/Free-disk-space)** | **[WinDirStat](https://github.com/windirstat/windirstat/releases/latest)** |
+| **🔁 [Clone or move a drive](https://github.com/Herbertofury/INTA/wiki/Clone-or-move-a-drive)** | **[Rescuezilla](https://rescuezilla.com/download)** |
+| **🗄️ [Restore a file backup](https://github.com/Herbertofury/INTA/wiki/Restore-a-file-backup)** | **[restic](https://github.com/restic/restic/releases/latest)** |
+| **🔌 [Make a boot USB](https://github.com/Herbertofury/INTA/wiki/Make-a-boot-USB)** | **[Rufus](https://rufus.ie/#download)** |
+| **💻 [Set up a new PC](https://github.com/Herbertofury/INTA/wiki/Set-up-a-new-PC)** | **[WinGet](https://github.com/microsoft/winget-cli/releases/latest)** |
+| **🛠️ [Maintain a PC](https://github.com/Herbertofury/INTA/wiki/Maintain-a-PC)** | **[WinGet](https://github.com/microsoft/winget-cli/releases/latest)** |
+| **🧭 [Start a repair](https://github.com/Herbertofury/INTA/wiki/Start-a-repair)** | **[No extra download needed](https://github.com/Herbertofury/INTA/wiki/Start-a-repair)** |
+| **🚨 [Contain ransomware](https://github.com/Herbertofury/INTA/wiki/Contain-ransomware)** | **[No extra download needed](https://github.com/Herbertofury/INTA/wiki/Contain-ransomware)** |
+| **🏢 [Recover an office outage](https://github.com/Herbertofury/INTA/wiki/Recover-an-office-outage)** | **[No extra download needed](https://github.com/Herbertofury/INTA/wiki/Recover-an-office-outage)** |
+| **🔐 [Repair domain sign-in](https://github.com/Herbertofury/INTA/wiki/Repair-domain-sign-in)** | **[PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** |
+| **💡 [Troubleshoot with AI](https://github.com/Herbertofury/INTA/wiki/Troubleshoot-with-AI)** | **[ChatGPT](https://chatgpt.com/)** |
+| **✅ [Finish the job and hand over](https://github.com/Herbertofury/INTA/wiki/Finish-the-job-and-hand-over)** | **[No extra download needed](https://github.com/Herbertofury/INTA/wiki/Finish-the-job-and-hand-over)** |
+| **🔎 [Find a file](https://github.com/Herbertofury/INTA/wiki/Find-a-file)** | **[Everything](https://www.voidtools.com/downloads/)** |
+| **🌐 [Inspect network traffic](https://github.com/Herbertofury/INTA/wiki/Inspect-network-traffic)** | **[Wireshark](https://www.wireshark.org/download.html)** |
+| **🧪 [Test memory](https://github.com/Herbertofury/INTA/wiki/Test-memory)** | **[Memtest86+](https://www.memtest.org/#download)** |
 
 ## 🧪 How the picks were chosen
 
@@ -55,7 +55,7 @@ Those are resident-antivirus protection results. They do not rate the standalone
 
 ## Remove viruses
 
-**🛡️ [Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal#quick-suspected-malware)**
+**🛡️ [Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Remove-viruses) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal)**
 
 **First action:** Disconnect a suspected compromised PC from the network before scanning; use the incident guide if encryption is spreading.
 
@@ -77,7 +77,7 @@ Save the detailed log and follow the guide’s [cleanup decision ladder](https:/
 
 ## Fix a printer
 
-**🖨️ [Windows Get Help](https://aka.ms/PrinterConnection) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-printer-repair#quick-fix-a-printer)**
+**🖨️ [Windows Get Help](https://aka.ms/PrinterConnection) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Fix-a-printer) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-printer-repair)**
 
 **First action:** Check that the intended printer is powered on, ready and connected before changing its queue or driver.
 
@@ -97,7 +97,7 @@ Use the supported [Windows](https://www.microsoft.com/windows) printer diagnosti
 
 ## Fix internet
 
-**🌐 [Windows Get Help](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-network-dns#quick-fix-internet)**
+**🌐 [Windows Get Help](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Fix-internet) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-network-dns)**
 
 **First action:** Check whether one device, one connection or the whole office has lost access.
 
@@ -117,7 +117,7 @@ Start with supported connection diagnostics before escalating to packet capture 
 
 ## Fix email
 
-**✉️ [Windows Get Help](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-outlook-email#quick-fix-email)**
+**✉️ [Windows Get Help](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Fix-email) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-outlook-email)**
 
 **First action:** Check webmail and identify whether the affected app is classic [Outlook](https://support.microsoft.com/outlook) or new [Outlook](https://support.microsoft.com/outlook) before changing a profile.
 
@@ -139,7 +139,7 @@ For new [Outlook](https://support.microsoft.com/outlook), use the [version-speci
 
 ## Recover a failing drive
 
-**💾 [SystemRescue](https://www.system-rescue.org/Download/) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive#quick-failing-drive)**
+**💾 [SystemRescue](https://www.system-rescue.org/Download/) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Recover-a-failing-drive) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)**
 
 **First action:** Stop using the source disk; clicking, physical damage or irreplaceable data needs a recovery-specialist decision first.
 
@@ -165,7 +165,7 @@ Keep the image and mapfile together. The [image completeness check](https://gith
 
 ## Recover deleted files
 
-**📁 [PhotoRec](https://www.cgsecurity.org/wiki/TestDisk_Download) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive#quick-deleted-files)**
+**📁 [PhotoRec](https://www.cgsecurity.org/wiki/TestDisk_Download) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Recover-deleted-files) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)**
 
 **First action:** Stop writing to the affected disk and check the backup or recycle bin before attempting recovery.
 
@@ -187,7 +187,7 @@ Check an existing backup first. Work from a stable image when needed, then open 
 
 ## Fix a slow PC
 
-**🐢 [Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc#quick-slow-pc)**
+**🐢 [Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Fix-a-slow-PC) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)**
 
 **First action:** Reproduce one slow task and check storage health before applying cleanup or startup changes.
 
@@ -209,7 +209,7 @@ Use [Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/
 
 ## Help remotely
 
-**🖥️ [Microsoft Quick Assist](https://apps.microsoft.com/detail/9P7BP5VNWKX5) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-remote-support#quick-remote-help)**
+**🖥️ [Microsoft Quick Assist](https://apps.microsoft.com/detail/9P7BP5VNWKX5) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Help-remotely) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)**
 
 **First action:** Confirm the user and support technician through the existing support channel before sharing a session code.
 
@@ -231,7 +231,7 @@ Confirm the helper’s identity through the existing support channel. End the se
 
 ## Fix [Windows](https://www.microsoft.com/windows) updates
 
-**🔄 [Windows Get Help](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-windows-update#quick-fix-windows-updates)**
+**🔄 [Windows Get Help](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Fix-Windows-updates) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-windows-update)**
 
 **First action:** Record the failing update or KB number, error code and pending restart before retrying it.
 
@@ -251,7 +251,7 @@ Use Microsoft’s supported update diagnostic before manual component resets.
 
 ## Repair [Windows](https://www.microsoft.com/windows) files
 
-**🧰 [DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair#quick-windows-repair)**
+**🧰 [DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Repair-Windows-files) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair)**
 
 **First action:** Confirm storage health, a recovery route and the intended [Windows](https://www.microsoft.com/windows) installation before repair writes.
 
@@ -273,7 +273,7 @@ The primary link opens the built-in repair instructions. Follow the guide throug
 
 ## Fix a PC that will not boot
 
-**🚀 [Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery#quick-fix-boot-failure)**
+**🚀 [Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Fix-a-PC-that-will-not-boot) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery)**
 
 **First action:** Record the startup error and confirm disk health and [BitLocker](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/) recovery access before attempting repairs.
 
@@ -293,7 +293,7 @@ Use the built-in recovery environment to distinguish [startup repair](https://su
 
 ## Diagnose crashes
 
-**🧩 [WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod#quick-diagnose-crashes)**
+**🧩 [WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Diagnose-crashes) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod)**
 
 **First action:** Record the stop code, failure time and recent hardware or driver changes before replacing components.
 
@@ -313,7 +313,7 @@ Use crash evidence to select the appropriate hardware or driver test.
 
 ## Free disk space
 
-**📊 [WinDirStat](https://github.com/windirstat/windirstat/releases/latest) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc#quick-disk-space)**
+**📊 [WinDirStat](https://github.com/windirstat/windirstat/releases/latest) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Free-disk-space) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)**
 
 **First action:** Confirm the disk is healthy and choose the drive to inspect before deleting any files.
 
@@ -335,7 +335,7 @@ Inspection and deletion are separate actions. Select a specific folder or drive,
 
 ## Clone or move a drive
 
-**🔁 [Rescuezilla](https://rescuezilla.com/download) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration#quick-clone-a-drive)**
+**🔁 [Rescuezilla](https://rescuezilla.com/download) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Clone-or-move-a-drive) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration)**
 
 **First action:** Confirm a healthy source, a verified backup and a destination large enough for the selected clone or restore.
 
@@ -355,7 +355,7 @@ Use a graphical bootable imaging tool for planned migration of healthy storage.
 
 ## Restore a file backup
 
-**🗄️ [restic](https://github.com/restic/restic/releases/latest) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore#quick-file-backup)**
+**🗄️ [restic](https://github.com/restic/restic/releases/latest) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Restore-a-file-backup) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)**
 
 **First action:** Identify the backup format, snapshot date and recoverable credentials before choosing the restore tool.
 
@@ -379,7 +379,7 @@ Choose an existing or separate destination with enough capacity. Keep credential
 
 ## Make a boot USB
 
-**🔌 [Rufus](https://rufus.ie/#download) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb#quick-boot-usb)**
+**🔌 [Rufus](https://rufus.ie/#download) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Make-a-boot-USB) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb)**
 
 **First action:** Choose the official ISO and identify a USB drive that may be erased.
 
@@ -401,7 +401,7 @@ Read the tool’s log and test the finished media on a suitable machine. A compl
 
 ## Set up a new PC
 
-**💻 [WinGet](https://github.com/microsoft/winget-cli/releases/latest) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-new-pc#quick-set-up-a-new-pc)**
+**💻 [WinGet](https://github.com/microsoft/winget-cli/releases/latest) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Set-up-a-new-PC) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-new-pc)**
 
 **First action:** Confirm the owner, approved applications, identity setup and recovery requirements before installing software.
 
@@ -421,7 +421,7 @@ Make approved application setup repeatable while checking the complete workstati
 
 ## Maintain a PC
 
-**🛠️ [WinGet](https://github.com/microsoft/winget-cli/releases/latest) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance#quick-maintain-a-pc)**
+**🛠️ [WinGet](https://github.com/microsoft/winget-cli/releases/latest) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Maintain-a-PC) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)**
 
 **First action:** Agree a maintenance window and confirm the backup can restore files before changing software.
 
@@ -441,7 +441,7 @@ Review and apply justified updates as part of a measured maintenance visit.
 
 ## Start a repair
 
-**🧭 [No extra download needed](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage#quick-start-a-repair) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage#quick-start-a-repair)**
+**🧭 No extra download needed · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Start-a-repair) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage)**
 
 **First action:** Record the exact symptom, affected device and desired result before making changes.
 
@@ -461,7 +461,7 @@ Choose the right service path and preserve recoverability before downloading uti
 
 ## Contain ransomware
 
-**🚨 [No extra download needed](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response#quick-contain-ransomware) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response#quick-contain-ransomware)**
+**🚨 No extra download needed · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Contain-ransomware) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response)**
 
 **First action:** Isolate affected connections and alert the incident owner immediately if files are being encrypted or compromise is spreading.
 
@@ -481,7 +481,7 @@ Contain the incident and protect recovery options before routine cleanup.
 
 ## Recover an office outage
 
-**🏢 [No extra download needed](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery#quick-recover-an-outage) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery#quick-recover-an-outage)**
+**🏢 No extra download needed · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Recover-an-office-outage) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery)**
 
 **First action:** Confirm safe power and the affected business services, then assign one recovery owner.
 
@@ -501,7 +501,7 @@ Restore dependencies in a controlled order instead of installing an unrelated re
 
 ## Repair domain sign-in
 
-**🔐 [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-ad-trust#quick-repair-domain-trust)**
+**🔐 [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Repair-domain-sign-in) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-ad-trust)**
 
 **First action:** On the affected domain-member PC, check the domain DNS, time and domain-controller reachability first.
 
@@ -523,7 +523,7 @@ Use the [Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/sc
 
 ## Troubleshoot with AI
 
-**💡 [ChatGPT](https://chatgpt.com/) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage#quick-troubleshoot-with-ai)**
+**💡 [ChatGPT](https://chatgpt.com/) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Troubleshoot-with-AI) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage)**
 
 **First action:** Prepare a redacted error, timeline and environment summary that your organization permits you to share.
 
@@ -543,7 +543,7 @@ Use AI to structure hypotheses and explain evidence while the technician owns ex
 
 ## Finish the job and hand over
 
-**✅ [No extra download needed](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff#quick-complete-a-handoff) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff#quick-complete-a-handoff)**
+**✅ No extra download needed · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Finish-the-job-and-hand-over) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)**
 
 **First action:** Repeat the original user task and collect acceptance evidence before closing the case.
 
@@ -563,7 +563,7 @@ Close the service job with proof, clear ownership and recoverable records.
 
 ## Find a file
 
-**🔎 [Everything](https://www.voidtools.com/downloads/) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance#quick-find-a-file)**
+**🔎 [Everything](https://www.voidtools.com/downloads/) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Find-a-file) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)**
 
 **First action:** Search by the known filename or extension in approved local folders.
 
@@ -585,7 +585,7 @@ This recommendation covers local desktop search. [Everything Server](https://www
 
 ## Inspect network traffic
 
-**🌐 [Wireshark](https://www.wireshark.org/download.html) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-network-dns#quick-inspect-network-traffic)**
+**🌐 [Wireshark](https://www.wireshark.org/download.html) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Inspect-network-traffic) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-network-dns)**
 
 **First action:** Use packet capture only after basic link, address, gateway and DNS checks have narrowed the fault.
 
@@ -607,7 +607,7 @@ Use the official package with its supported [capture driver](https://npcap.com/g
 
 ## Test memory
 
-**🧪 [Memtest86+](https://www.memtest.org/#download) · [Open the full guide](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod#quick-suspected-ram-fault)**
+**🧪 [Memtest86+](https://www.memtest.org/#download) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Test-memory) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod)**
 
 **First action:** Use this branch when crash evidence suggests memory instability, after recording firmware and overclock settings.
 

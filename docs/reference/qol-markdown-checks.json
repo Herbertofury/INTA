@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-11-27",
-  "scope": "Changed Markdown front pages and three requested quick-answer fragments; local Chromium rendering with approximated GitHub styling.",
+  "scope": "Fragment-independent quick-answer routes: three front pages and three dedicated answer pages; local Chromium rendering with approximated GitHub styling.",
   "limits": [
     "This is not a live GitHub visual readback.",
     "Existing diagrams are outside this targeted rendering pass; their source is unchanged and the local preview omits their rendering.",
@@ -16,15 +16,185 @@
       "height": 844
     }
   ],
-  "quickStartSha256": "04538e2ebe2296187a56b2e8b2b4949e092909fcc6c115432c18a89496bee1a4",
+  "quickStartSha256": "3cb71071c3bb338dd00fee02d55f99c0a2fb784cadc0c6d377cac80d8ed96367",
   "toolAccessSha256": "0cebb762113b497877f9a7afd0f38304d6a4698e57710c5e0aefcfa4d1cb8031",
   "sourceHashes": {
-    "wiki/Home.md": "09aad7e692bff3e9576f05aedbaad50d7f3db7d9126875e771de752aba7a0f61",
-    "README.md": "1b336ae89c3e63b587324f7f5f22df95de54516ba6c2edcda53958cbe6003627",
-    "wiki/Start-Here.md": "9d1435dad12b87a30652dba49ad3316bf319141ed318a21acf4bfe504e868397",
-    "wiki/Job-printer-repair.md": "2f2affa3646b03b46eb071751562e791f89e794db4330419ceec11dba77b431e",
-    "wiki/Job-malware-removal.md": "9814dd0a8f668b09a1b8ac095b9be3cd106ade08ccf89a525c8969b507a6c098",
-    "wiki/Job-failing-drive.md": "7d3f770f9713e3c718c972cb72b42b39e952d7285dc1c9588303e7c07fc369a2"
+    "wiki/Home.md": "2eb8dd723b9f335436e232d632de40713253409abc63ca07962df64687f7663c",
+    "README.md": "af626fe20b60ff1a3dab95a75959af64b57d32f7de4abe3cdd5e5f7c4fff2df7",
+    "wiki/Start-Here.md": "49ff3ee2fe6750dd431f85cc20ec6468010b6f6e63de129102ef505bd9106150",
+    "wiki/Fix-a-printer.md": "13089e0a971ff75c8fe33e2404f55e1bc23766f5883d23b7570492e99b6ed6b1",
+    "wiki/Remove-viruses.md": "0f11e8b3c9fa9a1dda573363022c84f0db83edc9c9d09c010948f6f48883a072",
+    "wiki/Recover-deleted-files.md": "8aba6b3914602a2cab1957a198a807088f14d11fc0ad1cdbdaa2ecb8e7cdc568"
+  },
+  "allAnswerPages": [
+    {
+      "id": "suspected-malware",
+      "wikiPage": "Remove-viruses",
+      "sourcePath": "wiki/Remove-viruses.md",
+      "sha256": "0f11e8b3c9fa9a1dda573363022c84f0db83edc9c9d09c010948f6f48883a072"
+    },
+    {
+      "id": "fix-a-printer",
+      "wikiPage": "Fix-a-printer",
+      "sourcePath": "wiki/Fix-a-printer.md",
+      "sha256": "13089e0a971ff75c8fe33e2404f55e1bc23766f5883d23b7570492e99b6ed6b1"
+    },
+    {
+      "id": "fix-internet",
+      "wikiPage": "Fix-internet",
+      "sourcePath": "wiki/Fix-internet.md",
+      "sha256": "84b7e9983ca556316b511592ad35d410bd6096b78578a7a2d891a928590f6052"
+    },
+    {
+      "id": "fix-email",
+      "wikiPage": "Fix-email",
+      "sourcePath": "wiki/Fix-email.md",
+      "sha256": "3b27fce13fbe909a911e25e58594eb16a73ac0afa07ffa788db57deaf3326b76"
+    },
+    {
+      "id": "failing-drive",
+      "wikiPage": "Recover-a-failing-drive",
+      "sourcePath": "wiki/Recover-a-failing-drive.md",
+      "sha256": "e013b8065da48a3f3a93bbe7c26c1b0555278f6f36f20889fb9200cc63589c97"
+    },
+    {
+      "id": "deleted-files",
+      "wikiPage": "Recover-deleted-files",
+      "sourcePath": "wiki/Recover-deleted-files.md",
+      "sha256": "8aba6b3914602a2cab1957a198a807088f14d11fc0ad1cdbdaa2ecb8e7cdc568"
+    },
+    {
+      "id": "slow-pc",
+      "wikiPage": "Fix-a-slow-PC",
+      "sourcePath": "wiki/Fix-a-slow-PC.md",
+      "sha256": "0c795ae0b7d56735366c18fd6bada6eb6155ea4f3e347340dd3c13aaaa1e79bc"
+    },
+    {
+      "id": "remote-help",
+      "wikiPage": "Help-remotely",
+      "sourcePath": "wiki/Help-remotely.md",
+      "sha256": "75b15374e0118a2b912f4b3370d3b3f885192a68e34eaa6d6fe3be5b959afd65"
+    },
+    {
+      "id": "fix-windows-updates",
+      "wikiPage": "Fix-Windows-updates",
+      "sourcePath": "wiki/Fix-Windows-updates.md",
+      "sha256": "f04ccd5aeb517a177d318aaa30633a3e68c1ddc75e0cac9a63bd80eb64521f77"
+    },
+    {
+      "id": "windows-repair",
+      "wikiPage": "Repair-Windows-files",
+      "sourcePath": "wiki/Repair-Windows-files.md",
+      "sha256": "30ff9c41f47d361555d8b39a9bd95587995bd14a5991f2c9f51cb45be12c28c9"
+    },
+    {
+      "id": "fix-boot-failure",
+      "wikiPage": "Fix-a-PC-that-will-not-boot",
+      "sourcePath": "wiki/Fix-a-PC-that-will-not-boot.md",
+      "sha256": "939d07e5ef0e3367c3a8a4f8a04e6306ab4344ac159823d578b0cbeaa5ae3fdc"
+    },
+    {
+      "id": "diagnose-crashes",
+      "wikiPage": "Diagnose-crashes",
+      "sourcePath": "wiki/Diagnose-crashes.md",
+      "sha256": "b3f7de82c6d817ad84d3d620e5021232ec0dc3da13af97c0c268028f06bc3830"
+    },
+    {
+      "id": "disk-space",
+      "wikiPage": "Free-disk-space",
+      "sourcePath": "wiki/Free-disk-space.md",
+      "sha256": "8ab19830f5bb0179be1b43d1f16596cb794267de8add49db82d0d318083e5a20"
+    },
+    {
+      "id": "clone-a-drive",
+      "wikiPage": "Clone-or-move-a-drive",
+      "sourcePath": "wiki/Clone-or-move-a-drive.md",
+      "sha256": "0e5945419b3508b49e76204a2c032d9c144bfc7240d1edbc799616665b31fce2"
+    },
+    {
+      "id": "file-backup",
+      "wikiPage": "Restore-a-file-backup",
+      "sourcePath": "wiki/Restore-a-file-backup.md",
+      "sha256": "e8d21f6c17da28efc92bc920e46e7d7a38cb128786e30e4a28f38e892ff67dc7"
+    },
+    {
+      "id": "boot-usb",
+      "wikiPage": "Make-a-boot-USB",
+      "sourcePath": "wiki/Make-a-boot-USB.md",
+      "sha256": "8873b9f51dc0aaf0ca09e060f8e6b1daaff5ca82c6c621be077196e129210e4d"
+    },
+    {
+      "id": "set-up-a-new-pc",
+      "wikiPage": "Set-up-a-new-PC",
+      "sourcePath": "wiki/Set-up-a-new-PC.md",
+      "sha256": "66e7b4cf504fd8a717a77601187f2a2efb26c851c9d9b946d40e6f0ed2f2502f"
+    },
+    {
+      "id": "maintain-a-pc",
+      "wikiPage": "Maintain-a-PC",
+      "sourcePath": "wiki/Maintain-a-PC.md",
+      "sha256": "832fe08d63ae76fc7d357c45ce41a14ec1c67b1f1587d0d3adf5496c0227b64a"
+    },
+    {
+      "id": "start-a-repair",
+      "wikiPage": "Start-a-repair",
+      "sourcePath": "wiki/Start-a-repair.md",
+      "sha256": "dcd986cfa1d9a5ba80f51e44f2c90f8d04b9162f5180864a73b8e3103b92e42e"
+    },
+    {
+      "id": "contain-ransomware",
+      "wikiPage": "Contain-ransomware",
+      "sourcePath": "wiki/Contain-ransomware.md",
+      "sha256": "e6b2ee002029e3f32c4eab185f8d4cb046e321e19056838c79702693758c5eac"
+    },
+    {
+      "id": "recover-an-outage",
+      "wikiPage": "Recover-an-office-outage",
+      "sourcePath": "wiki/Recover-an-office-outage.md",
+      "sha256": "5d38868af8ca944db6b263657edbb9eb7fef194eb68bf099b9dbd63a05b185e1"
+    },
+    {
+      "id": "repair-domain-trust",
+      "wikiPage": "Repair-domain-sign-in",
+      "sourcePath": "wiki/Repair-domain-sign-in.md",
+      "sha256": "1d0b7473450bc34d04e23831938fea748adc9a7e726fa88f44e5189e0749055c"
+    },
+    {
+      "id": "troubleshoot-with-ai",
+      "wikiPage": "Troubleshoot-with-AI",
+      "sourcePath": "wiki/Troubleshoot-with-AI.md",
+      "sha256": "71a66f7a26b5c0259161f6f4f4e92ed1eb6776baacb2e169117fc75d8531a3f6"
+    },
+    {
+      "id": "complete-a-handoff",
+      "wikiPage": "Finish-the-job-and-hand-over",
+      "sourcePath": "wiki/Finish-the-job-and-hand-over.md",
+      "sha256": "dc16e7b461bfdfd509f4041965dd4070eb6b8d7099f00209f77d50037e52ac01"
+    },
+    {
+      "id": "find-a-file",
+      "wikiPage": "Find-a-file",
+      "sourcePath": "wiki/Find-a-file.md",
+      "sha256": "2922e5f4304892470f73523d4f94ae3c62f9d4c6dbd1995500f5feee2048bae3"
+    },
+    {
+      "id": "inspect-network-traffic",
+      "wikiPage": "Inspect-network-traffic",
+      "sourcePath": "wiki/Inspect-network-traffic.md",
+      "sha256": "f9b5c2859b8dcf475658f15b778ad8cf64c214341e6e99c604fb98af025ca393"
+    },
+    {
+      "id": "suspected-ram-fault",
+      "wikiPage": "Test-memory",
+      "sourcePath": "wiki/Test-memory.md",
+      "sha256": "38b0848d593584c0f9d161c59513c9bd2b5b0b869ed1f2efc797ae801189cfc1"
+    }
+  ],
+  "sidebar": {
+    "defaultScenarios": 22,
+    "allDefaultRoutesVisible": true,
+    "allPlaybooksRetained": true,
+    "sha256": "f6401a236c3d19697efcaf7c313395ebd6209ed7f80f25161bdce2cc74d1ee63"
   },
   "results": [
     {
@@ -98,6 +268,83 @@
               "top": 887,
               "height": 85,
               "bottom": 972
+            }
+          ],
+          "brokenImages": 0
+        }
+      ]
+    },
+    {
+      "name": "README",
+      "source": "README.md",
+      "kind": "front page",
+      "rowCount": 27,
+      "columnCount": 2,
+      "errors": [],
+      "allQuickRowsOutsideDisclosure": true,
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "tableTop": 498,
+          "firstRows": [
+            {
+              "label": "🛡️ Remove viruses",
+              "top": 535,
+              "height": 37,
+              "bottom": 572
+            },
+            {
+              "label": "🖨️ Fix a printer",
+              "top": 572,
+              "height": 37,
+              "bottom": 609
+            },
+            {
+              "label": "🌐 Fix internet",
+              "top": 609,
+              "height": 37,
+              "bottom": 646
+            },
+            {
+              "label": "✉️ Fix email",
+              "top": 646,
+              "height": 37,
+              "bottom": 683
+            }
+          ],
+          "brokenImages": 0
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "tableTop": 535,
+          "firstRows": [
+            {
+              "label": "🛡️ Remove viruses",
+              "top": 596,
+              "height": 109,
+              "bottom": 705
+            },
+            {
+              "label": "🖨️ Fix a printer",
+              "top": 705,
+              "height": 85,
+              "bottom": 790
+            },
+            {
+              "label": "🌐 Fix internet",
+              "top": 790,
+              "height": 85,
+              "bottom": 875
+            },
+            {
+              "label": "✉️ Fix email",
+              "top": 875,
+              "height": 85,
+              "bottom": 960
             }
           ],
           "brokenImages": 0
@@ -183,10 +430,10 @@
     },
     {
       "name": "Printer",
-      "source": "wiki/Job-printer-repair.md",
+      "source": "wiki/Fix-a-printer.md",
       "itemId": "fix-a-printer",
-      "kind": "quick-answer fragment",
-      "anchor": "quick-fix-a-printer",
+      "kind": "dedicated quick-answer page",
+      "wikiPage": "Fix-a-printer",
       "heading": "🖨️ Fix a printer",
       "firstAction": "Check that the intended printer is powered on, ready and connected before changing its queue or driver.",
       "steps": [
@@ -196,6 +443,7 @@
       ],
       "actionPresent": true,
       "officialPresent": true,
+      "completeProcedurePresent": true,
       "outsideDisclosure": true,
       "errors": [],
       "views": [
@@ -203,24 +451,24 @@
           "label": "desktop",
           "viewport": 1280,
           "document": 1280,
-          "quickAnchorTop": 0,
-          "sourceLinkCount": 64
+          "answerHeadingTop": 122,
+          "sourceLinkCount": 13
         },
         {
           "label": "mobile",
           "viewport": 390,
           "document": 390,
-          "quickAnchorTop": 0,
-          "sourceLinkCount": 64
+          "answerHeadingTop": 148,
+          "sourceLinkCount": 13
         }
       ]
     },
     {
       "name": "Malware",
-      "source": "wiki/Job-malware-removal.md",
+      "source": "wiki/Remove-viruses.md",
       "itemId": "suspected-malware",
-      "kind": "quick-answer fragment",
-      "anchor": "quick-suspected-malware",
+      "kind": "dedicated quick-answer page",
+      "wikiPage": "Remove-viruses",
       "heading": "🛡️ Remove viruses",
       "firstAction": "Disconnect a suspected compromised PC from the network before scanning; use the incident guide if encryption is spreading.",
       "steps": [
@@ -230,6 +478,7 @@
       ],
       "actionPresent": true,
       "officialPresent": true,
+      "completeProcedurePresent": true,
       "outsideDisclosure": true,
       "errors": [],
       "views": [
@@ -237,24 +486,24 @@
           "label": "desktop",
           "viewport": 1280,
           "document": 1280,
-          "quickAnchorTop": 0,
-          "sourceLinkCount": 112
+          "answerHeadingTop": 122,
+          "sourceLinkCount": 13
         },
         {
           "label": "mobile",
           "viewport": 390,
           "document": 390,
-          "quickAnchorTop": 0,
-          "sourceLinkCount": 112
+          "answerHeadingTop": 148,
+          "sourceLinkCount": 13
         }
       ]
     },
     {
       "name": "Deleted-Files",
-      "source": "wiki/Job-failing-drive.md",
+      "source": "wiki/Recover-deleted-files.md",
       "itemId": "deleted-files",
-      "kind": "quick-answer fragment",
-      "anchor": "quick-deleted-files",
+      "kind": "dedicated quick-answer page",
+      "wikiPage": "Recover-deleted-files",
       "heading": "📁 Recover deleted files",
       "firstAction": "Stop writing to the affected disk and check the backup or recycle bin before attempting recovery.",
       "steps": [
@@ -264,6 +513,7 @@
       ],
       "actionPresent": true,
       "officialPresent": true,
+      "completeProcedurePresent": true,
       "outsideDisclosure": true,
       "errors": [],
       "views": [
@@ -271,92 +521,15 @@
           "label": "desktop",
           "viewport": 1280,
           "document": 1280,
-          "quickAnchorTop": 0,
-          "sourceLinkCount": 107
+          "answerHeadingTop": 122,
+          "sourceLinkCount": 14
         },
         {
           "label": "mobile",
           "viewport": 390,
           "document": 390,
-          "quickAnchorTop": 0,
-          "sourceLinkCount": 107
-        }
-      ]
-    },
-    {
-      "name": "README",
-      "source": "README.md",
-      "kind": "front page",
-      "rowCount": 27,
-      "columnCount": 2,
-      "errors": [],
-      "allQuickRowsOutsideDisclosure": true,
-      "views": [
-        {
-          "label": "desktop",
-          "viewport": 1280,
-          "document": 1280,
-          "tableTop": 498,
-          "firstRows": [
-            {
-              "label": "🛡️ Remove viruses",
-              "top": 535,
-              "height": 37,
-              "bottom": 572
-            },
-            {
-              "label": "🖨️ Fix a printer",
-              "top": 572,
-              "height": 37,
-              "bottom": 609
-            },
-            {
-              "label": "🌐 Fix internet",
-              "top": 609,
-              "height": 37,
-              "bottom": 646
-            },
-            {
-              "label": "✉️ Fix email",
-              "top": 646,
-              "height": 37,
-              "bottom": 683
-            }
-          ],
-          "brokenImages": 0
-        },
-        {
-          "label": "mobile",
-          "viewport": 390,
-          "document": 390,
-          "tableTop": 535,
-          "firstRows": [
-            {
-              "label": "🛡️ Remove viruses",
-              "top": 596,
-              "height": 109,
-              "bottom": 705
-            },
-            {
-              "label": "🖨️ Fix a printer",
-              "top": 705,
-              "height": 85,
-              "bottom": 790
-            },
-            {
-              "label": "🌐 Fix internet",
-              "top": 790,
-              "height": 85,
-              "bottom": 875
-            },
-            {
-              "label": "✉️ Fix email",
-              "top": 875,
-              "height": 85,
-              "bottom": 960
-            }
-          ],
-          "brokenImages": 0
+          "answerHeadingTop": 148,
+          "sourceLinkCount": 14
         }
       ]
     }
@@ -364,24 +537,18 @@
   "visualReview": {
     "result": "passed",
     "imagesInspected": [
-      "Home-mobile-top.png",
-      "README-mobile-quick-answers.png",
-      "Printer-mobile-answer.png",
-      "Home-desktop-top.png",
-      "Malware-mobile-answer.png",
-      "Deleted-Files-mobile-answer.png",
-      "README-mobile-top.png",
-      "README-desktop-top.png"
+      "Printer-mobile-top.png",
+      "Malware-mobile-top.png",
+      "Deleted-Files-mobile-top.png",
+      "Deleted-Files-desktop-top.png",
+      "Home-mobile-top.png"
     ],
     "observations": [
-      "Desktop Home exposes priority scenarios and separate official/download actions in compact rows.",
-      "At390px, Remove viruses and Fix a printer are fully visible in the first screen; all27 rows remain in each front page without disclosure controls.",
-      "The focused mobile table keeps action labels and acquisition routes readable without page overflow.",
-      "Printer, malware and deleted-file fragments begin at the exact selected answer and show the first action, three steps and matching tool route together.",
-      "Printer/network/Outlook action separation and data-preservation ordering are visible in rendered content."
+      "All three sampled dedicated answers fit their first action, three steps, tool action and complete-procedure link within the390px mobile screen.",
+      "Front-page appearance remains compact and the rendered scenario hrefs now have dedicated page destinations without fragments.",
+      "No navigation expansion or page overflow is required."
     ],
     "materialFindings": []
   },
-  "renderedSourceHashesStillCurrent": true,
-  "finalRefresh": "README only rerendered after the final authored count correction to114; the other five Markdown sources remained byte-identical to their reviewed render."
+  "allRenderedSourcesStillCurrent": true
 }

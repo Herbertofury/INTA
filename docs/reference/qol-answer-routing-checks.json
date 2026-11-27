@@ -1,0 +1,216 @@
+{
+  "passed": true,
+  "checkedAt": "2026-11-27T00:18:40.121Z",
+  "baselineCommit": "f4c830dd3c46ec58c810ccbc109f81c3d30cad0a",
+  "baselineHtmlSha256": "e641f3a79d06c4ff9e18859ec70e9516e2a89a5572e05ce530db5f7c958aad41",
+  "onlyWikiPageMetadataChanged": true,
+  "existingScenarioAndToolDataUnchanged": true,
+  "portalSourceUnchanged": true,
+  "counts": {
+    "tools": 114,
+    "jobs": 22,
+    "answers": 27
+  },
+  "destinations": [
+    {
+      "id": "suspected-malware",
+      "jobId": "malware-removal",
+      "wikiPage": "Remove-viruses",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Remove-viruses",
+      "portalRoute": "#job/malware-removal/quick/suspected-malware"
+    },
+    {
+      "id": "fix-a-printer",
+      "jobId": "printer-repair",
+      "wikiPage": "Fix-a-printer",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-a-printer",
+      "portalRoute": "#job/printer-repair/quick/fix-a-printer"
+    },
+    {
+      "id": "fix-internet",
+      "jobId": "network-dns",
+      "wikiPage": "Fix-internet",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-internet",
+      "portalRoute": "#job/network-dns/quick/fix-internet"
+    },
+    {
+      "id": "fix-email",
+      "jobId": "outlook-email",
+      "wikiPage": "Fix-email",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-email",
+      "portalRoute": "#job/outlook-email/quick/fix-email"
+    },
+    {
+      "id": "failing-drive",
+      "jobId": "failing-drive",
+      "wikiPage": "Recover-a-failing-drive",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Recover-a-failing-drive",
+      "portalRoute": "#job/failing-drive/quick/failing-drive"
+    },
+    {
+      "id": "deleted-files",
+      "jobId": "failing-drive",
+      "wikiPage": "Recover-deleted-files",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Recover-deleted-files",
+      "portalRoute": "#job/failing-drive/quick/deleted-files"
+    },
+    {
+      "id": "slow-pc",
+      "jobId": "slow-pc",
+      "wikiPage": "Fix-a-slow-PC",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-a-slow-PC",
+      "portalRoute": "#job/slow-pc/quick/slow-pc"
+    },
+    {
+      "id": "remote-help",
+      "jobId": "remote-support",
+      "wikiPage": "Help-remotely",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Help-remotely",
+      "portalRoute": "#job/remote-support/quick/remote-help"
+    },
+    {
+      "id": "fix-windows-updates",
+      "jobId": "windows-update",
+      "wikiPage": "Fix-Windows-updates",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-Windows-updates",
+      "portalRoute": "#job/windows-update/quick/fix-windows-updates"
+    },
+    {
+      "id": "windows-repair",
+      "jobId": "windows-repair",
+      "wikiPage": "Repair-Windows-files",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Repair-Windows-files",
+      "portalRoute": "#job/windows-repair/quick/windows-repair"
+    },
+    {
+      "id": "fix-boot-failure",
+      "jobId": "boot-recovery",
+      "wikiPage": "Fix-a-PC-that-will-not-boot",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Fix-a-PC-that-will-not-boot",
+      "portalRoute": "#job/boot-recovery/quick/fix-boot-failure"
+    },
+    {
+      "id": "diagnose-crashes",
+      "jobId": "hardware-bsod",
+      "wikiPage": "Diagnose-crashes",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Diagnose-crashes",
+      "portalRoute": "#job/hardware-bsod/quick/diagnose-crashes"
+    },
+    {
+      "id": "disk-space",
+      "jobId": "slow-pc",
+      "wikiPage": "Free-disk-space",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Free-disk-space",
+      "portalRoute": "#job/slow-pc/quick/disk-space"
+    },
+    {
+      "id": "clone-a-drive",
+      "jobId": "disk-migration",
+      "wikiPage": "Clone-or-move-a-drive",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Clone-or-move-a-drive",
+      "portalRoute": "#job/disk-migration/quick/clone-a-drive"
+    },
+    {
+      "id": "file-backup",
+      "jobId": "backup-restore",
+      "wikiPage": "Restore-a-file-backup",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Restore-a-file-backup",
+      "portalRoute": "#job/backup-restore/quick/file-backup"
+    },
+    {
+      "id": "boot-usb",
+      "jobId": "boot-usb",
+      "wikiPage": "Make-a-boot-USB",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Make-a-boot-USB",
+      "portalRoute": "#job/boot-usb/quick/boot-usb"
+    },
+    {
+      "id": "set-up-a-new-pc",
+      "jobId": "new-pc",
+      "wikiPage": "Set-up-a-new-PC",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Set-up-a-new-PC",
+      "portalRoute": "#job/new-pc/quick/set-up-a-new-pc"
+    },
+    {
+      "id": "maintain-a-pc",
+      "jobId": "preventive-maintenance",
+      "wikiPage": "Maintain-a-PC",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Maintain-a-PC",
+      "portalRoute": "#job/preventive-maintenance/quick/maintain-a-pc"
+    },
+    {
+      "id": "start-a-repair",
+      "jobId": "intake-triage",
+      "wikiPage": "Start-a-repair",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Start-a-repair",
+      "portalRoute": "#job/intake-triage/quick/start-a-repair"
+    },
+    {
+      "id": "contain-ransomware",
+      "jobId": "ransomware-response",
+      "wikiPage": "Contain-ransomware",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Contain-ransomware",
+      "portalRoute": "#job/ransomware-response/quick/contain-ransomware"
+    },
+    {
+      "id": "recover-an-outage",
+      "jobId": "outage-recovery",
+      "wikiPage": "Recover-an-office-outage",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Recover-an-office-outage",
+      "portalRoute": "#job/outage-recovery/quick/recover-an-outage"
+    },
+    {
+      "id": "repair-domain-trust",
+      "jobId": "ad-trust",
+      "wikiPage": "Repair-domain-sign-in",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Repair-domain-sign-in",
+      "portalRoute": "#job/ad-trust/quick/repair-domain-trust"
+    },
+    {
+      "id": "troubleshoot-with-ai",
+      "jobId": "ai-triage",
+      "wikiPage": "Troubleshoot-with-AI",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Troubleshoot-with-AI",
+      "portalRoute": "#job/ai-triage/quick/troubleshoot-with-ai"
+    },
+    {
+      "id": "complete-a-handoff",
+      "jobId": "client-handoff",
+      "wikiPage": "Finish-the-job-and-hand-over",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Finish-the-job-and-hand-over",
+      "portalRoute": "#job/client-handoff/quick/complete-a-handoff"
+    },
+    {
+      "id": "find-a-file",
+      "jobId": "preventive-maintenance",
+      "wikiPage": "Find-a-file",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Find-a-file",
+      "portalRoute": "#job/preventive-maintenance/quick/find-a-file"
+    },
+    {
+      "id": "inspect-network-traffic",
+      "jobId": "network-dns",
+      "wikiPage": "Inspect-network-traffic",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Inspect-network-traffic",
+      "portalRoute": "#job/network-dns/quick/inspect-network-traffic"
+    },
+    {
+      "id": "suspected-ram-fault",
+      "jobId": "hardware-bsod",
+      "wikiPage": "Test-memory",
+      "wikiUrl": "https://github.com/Herbertofury/INTA/wiki/Test-memory",
+      "portalRoute": "#job/hardware-bsod/quick/suspected-ram-fault"
+    }
+  ],
+  "offlineExportRefreshed": true,
+  "errors": [],
+  "hashes": {
+    "portal/app.js": "7c8a9d465366ffd6c581a6a5b18855f75047ed810bdd279e5f2bdfa24b6d476e",
+    "portal/styles.css": "407d29e9a2ced0756160e58b7867ff6d2704090b6e37f74c9c0b295bdb50672c",
+    "portal/index.template.html": "1aa7143d9b8d8ca28cd239d2fb6d87af408d88ca5c3fca0a30fb1e2f026478ab",
+    "site/index.html": "5cd33ffb6003f9bdbd6a910690026aa6a18d1f6ce0953220dd801b43441bc124",
+    "data/quick-start.json": "3cb71071c3bb338dd00fee02d55f99c0a2fb784cadc0c6d377cac80d8ed96367",
+    "data/tool-access.json": "0cebb762113b497877f9a7afd0f38304d6a4698e57710c5e0aefcfa4d1cb8031"
+  },
+  "htmlBytes": 473070
+}
