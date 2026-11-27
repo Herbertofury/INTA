@@ -14,6 +14,8 @@ def run(exe):
     if sys.platform != 'win32':
         unsupported = invoke(command)
         assert unsupported.returncode == 3 and not unsupported.stdout and 'not supported' in unsupported.stderr
+        extended = invoke(command + ['--include-folders'])
+        assert extended.returncode == 3 and not extended.stdout
         print('Unsupported platform and unrelated arguments rejected with no inventory output.')
         return
 
@@ -73,6 +75,65 @@ ConvertTo-Json -InputObject @($rows) -Compress -Depth 4
         assert observed['truncated'] is False, 'Expected a bounded fixture host'
         assert sorted(observed['entryNames']) == sorted(expected['entryNames'])
     print('Native read-only inventory agrees with all probed registry views; sampled name inventories unchanged.')
+
+    def read_folders():
+        result = invoke(['powershell.exe', '-NoProfile', '-NonInteractive', '-Command', r'''
+$ErrorActionPreference = 'Stop'
+[Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
+$rows = foreach ($kind in @('Startup','CommonStartup')) {
+    $loc = [Environment]::GetFolderPath($kind,[Environment+SpecialFolderOption]::DoNotVerify)
+    $scope = if ($kind -eq 'Startup') {'current-user'} else {'all-users'}
+    if (-not $loc) { @{scope=$scope;status='unavailable';entryNames=@()}; continue }
+    $root = [IO.Path]::GetPathRoot($loc)
+    if (-not $root -or $root.Length -ne 3 -or ([IO.DriveInfo]::new($root)).DriveType -notin @('Fixed','Removable','Ram')) {
+        @{scope=$scope;status='location-not-scanned';entryNames=@()}; continue
+    }
+    $parts = [Collections.Generic.Stack[IO.DirectoryInfo]]::new()
+    for ($node = [IO.DirectoryInfo]::new($loc); $null -ne $node; $node = $node.Parent) { $parts.Push($node) }
+    $status = 'read'
+    while ($parts.Count) {
+        $node = $parts.Pop()
+        try { $atts = [IO.File]::GetAttributes($node.FullName) }
+        catch {
+            $cause = $_.Exception.GetBaseException()
+            if ($cause -is [IO.DirectoryNotFoundException] -or $cause -is [IO.FileNotFoundException]) { $status='not-present' }
+            elseif ($cause -is [IO.IOException] -or $cause -is [UnauthorizedAccessException] -or $cause -is [Security.SecurityException]) { $status='unavailable' }
+            else { throw }
+            break
+        }
+        if ($atts -band [IO.FileAttributes]::ReparsePoint) { $status='location-not-scanned'; break }
+        if (-not ($atts -band [IO.FileAttributes]::Directory)) { $status='unavailable'; break }
+    }
+    $names = @()
+    if ($status -eq 'read') {
+        $names = @(Get-ChildItem -LiteralPath $loc -Force | ForEach-Object { $_.Name } | Sort-Object -CaseSensitive)
+    }
+    @{scope=$scope;status=$status;entryNames=$names}
+}
+ConvertTo-Json -InputObject @($rows) -Compress -Depth 4
+'''])
+        assert result.returncode == 0 and not result.stderr, 'Windows Startup folder reference read failed'
+        return json.loads(result.stdout)
+
+    folders_before = read_folders()
+    extended = invoke(command + ['--include-folders'])
+    after = read_folders()
+    assert after == folders_before
+    assert extended.returncode == 0 and not extended.stderr
+    new = json.loads(extended.stdout)
+    assert set(new) == set(report) | {'startupFolders', 'startupSettingsUri'}
+    assert new['schema'] == 2 and new['scope'] == 'windows-logon-registrations-and-local-startup-folders'
+    assert new['startupSettingsUri'] == 'ms-settings:startupapps'
+    for key in ('readOnly', 'enabledState', 'argumentsCollected', 'sources'):
+        assert new[key] == report[key]
+    assert [x['scope'] for x in new['startupFolders']] == ['current-user', 'all-users']
+    for observed, expected in zip(new['startupFolders'], folders_before):
+        assert set(observed) == set(expected) | {'truncated'}
+        assert not observed['truncated']
+        assert observed['scope'] == expected['scope'] and observed['status'] == expected['status']
+        assert sorted(observed['entryNames']) == sorted(expected['entryNames'])
+        assert all(not ('/' in v or chr(92) in v or ':' in v) for v in observed['entryNames'])
+    print('Packaged combined inventory matches two OS-resolved Startup folder name snapshots. Legacy response unchanged.')
 
 if __name__ == '__main__':
     run(pathlib.Path(sys.argv[1]).resolve(strict=True))

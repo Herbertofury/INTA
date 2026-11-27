@@ -93,3 +93,17 @@ Treat names as local user data and do not share output unless intended.
 
 Sources: [Microsoft Run and RunOnce](https://learn.microsoft.com/windows/win32/setupapi/run-and-runonce-registry-keys)
 and [registry view scope](https://learn.microsoft.com/windows/win32/winprog64/shared-registry-keys).
+
+Add `--include-folders` to include the two Windows-resolved Startup folders in
+the same local output. The original command and schema 1 stay unchanged. The
+optional schema 2 returns each folder's scope, status and immediate names, never
+the absolute folder path, shortcut target, content, or command line. Matching
+names in two scopes remain separate. An empty folder is an observed source,
+not a missing source. Network drives, redirected network locations and
+junctions are not traversed. A very large folder returns a bounded sample with
+`truncated` set. Treat displayed names as private to the machine.
+
+Schema 2 includes the Windows Startup Apps Settings link for explicit use by a
+later Desktop interface or by the technician. The command does not open
+Settings or change enabled state. See Microsoft's [special-folder resolution](https://learn.microsoft.com/en-us/dotnet/api/system.environment.getfolderpath?view=net-10.0)
+and [Startup Apps Settings URL](https://learn.microsoft.com/en-us/windows/apps/develop/launch/launch-settings).
