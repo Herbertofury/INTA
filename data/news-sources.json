@@ -1,0 +1,432 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-27",
+  "sources": [
+    {
+      "id": "cisa-advisories",
+      "name": "CISA Cybersecurity Alerts & Advisories",
+      "category": "advisory",
+      "url": "https://www.cisa.gov/news-events/cybersecurity-advisories",
+      "description": "U.S. alerts and joint advisories; follow affected-product and mitigation details at the publisher."
+    },
+    {
+      "id": "cisa-kev",
+      "name": "CISA Known Exploited Vulnerabilities",
+      "category": "advisory",
+      "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "description": "Known in-the-wild exploitation evidence to inform patch prioritization; absence is not a safety signal."
+    },
+    {
+      "id": "fbi-cyber",
+      "name": "FBI Cyber Alerts",
+      "category": "advisory",
+      "url": "https://www.fbi.gov/investigate/cyber/alerts",
+      "description": "Public cyber advisories, campaign notices and defensive guidance."
+    },
+    {
+      "id": "certcc",
+      "name": "CERT Coordination Center Vulnerability Notes",
+      "category": "advisory",
+      "url": "https://www.kb.cert.org/vuls/",
+      "description": "Coordinated disclosure notes and vendor advisories; verify applicability and supported patches."
+    },
+    {
+      "id": "canada-cyber",
+      "name": "Canadian Centre for Cyber Security",
+      "category": "advisory",
+      "url": "https://www.cyber.gc.ca/en/alerts-advisories",
+      "description": "Canadian national cyber alerts, advisories and patch relevance."
+    },
+    {
+      "id": "uk-ncsc",
+      "name": "UK NCSC Reports & Advisories",
+      "category": "advisory",
+      "url": "https://www.ncsc.gov.uk/section/keep-up-to-date/reports-advisories",
+      "description": "UK national reporting and practical defensive guidance."
+    },
+    {
+      "id": "ncsc-nl",
+      "name": "NCSC Netherlands Security Advisories",
+      "category": "advisory",
+      "url": "https://www.ncsc.nl/en/producten-en-diensten/security-advisories",
+      "description": "Dutch national CERT security advisories and links to the underlying reports."
+    },
+    {
+      "id": "cert-fr",
+      "name": "CERT-FR",
+      "category": "advisory",
+      "url": "https://cert.cyber.gouv.fr/",
+      "description": "French national alerts and advisories, largely in French."
+    },
+    {
+      "id": "jpcert",
+      "name": "JPCERT/CC Alerts",
+      "category": "advisory",
+      "url": "https://www.jpcert.or.jp/english/at/",
+      "description": "Japanese coordination centre security alerts and vendor remediation links."
+    },
+    {
+      "id": "acsc",
+      "name": "Australian Cyber Security Centre Alerts",
+      "category": "advisory",
+      "url": "https://www.cyber.gov.au/alerts-and-advisories",
+      "description": "Australian national cyber alerts and advisories."
+    },
+    {
+      "id": "cert-eu",
+      "name": "CERT-EU Security Advisories",
+      "category": "advisory",
+      "url": "https://cert.europa.eu/publications/security-advisories/",
+      "description": "EU institution-focused advisories with affected products and recommendations."
+    },
+    {
+      "id": "nist-nvd",
+      "name": "NIST National Vulnerability Database",
+      "category": "compliance",
+      "url": "https://nvd.nist.gov/",
+      "description": "Technical reference and CVE enrichment, not proof of current exploitation or an advisory subscription."
+    },
+    {
+      "id": "cve",
+      "name": "CVE Program",
+      "category": "compliance",
+      "url": "https://www.cve.org/",
+      "description": "Canonical public vulnerability identifiers and CNA-published records."
+    },
+    {
+      "id": "nist-csrc",
+      "name": "NIST CSRC News",
+      "category": "compliance",
+      "url": "https://csrc.nist.gov/news",
+      "description": "NIST Computer Security Resource Center announcements and publication updates."
+    },
+    {
+      "id": "nist-csf",
+      "name": "NIST Cybersecurity Framework",
+      "category": "compliance",
+      "url": "https://www.nist.gov/cyberframework",
+      "description": "Framework, implementation resources and updates; not an incident news feed."
+    },
+    {
+      "id": "nist-800171",
+      "name": "NIST SP 800-171 Rev. 3",
+      "category": "compliance",
+      "url": "https://csrc.nist.gov/pubs/sp/800/171/r3/final",
+      "description": "NIST requirements for protecting CUI; use the revision and contract terms applicable to the job."
+    },
+    {
+      "id": "dod-cmmc",
+      "name": "DoD CIO CMMC Resources",
+      "category": "compliance",
+      "url": "https://dodcio.defense.gov/CMMC/Resources-Documentation/",
+      "description": "Official CMMC assessments, scoping and program documentation; verify rules against controlling sources."
+    },
+    {
+      "id": "disa-sprs",
+      "name": "DoD SPRS Resources",
+      "category": "compliance",
+      "url": "https://www.sprs.csd.disa.mil/cmmc.htm",
+      "description": "Official supplier assessment-reporting resources and access guidance, not a public news feed."
+    },
+    {
+      "id": "disa-stig",
+      "name": "DISA STIG Library",
+      "category": "compliance",
+      "url": "https://www.cyber.mil/stigs/",
+      "description": "Versioned DISA hardening guides and checklists; confirm applicable profiles."
+    },
+    {
+      "id": "cis-controls",
+      "name": "CIS Critical Security Controls",
+      "category": "compliance",
+      "url": "https://www.cisecurity.org/controls",
+      "description": "Prioritized security safeguards and implementation guidance; not a legal compliance determination."
+    },
+    {
+      "id": "msrc",
+      "name": "Microsoft Security Update Guide",
+      "category": "vendor",
+      "url": "https://msrc.microsoft.com/update-guide",
+      "description": "First-party Microsoft vulnerability, affected product and update details."
+    },
+    {
+      "id": "windows-health",
+      "name": "Windows Release Health",
+      "category": "vendor",
+      "url": "https://learn.microsoft.com/en-us/windows/release-health/",
+      "description": "Windows rollout, lifecycle and known issue guidance for real repair jobs."
+    },
+    {
+      "id": "ms-defender",
+      "name": "Microsoft Security Blog",
+      "category": "vendor",
+      "url": "https://www.microsoft.com/en-us/security/blog/",
+      "description": "Microsoft threat research, defensive practice and security product guidance."
+    },
+    {
+      "id": "apple-security",
+      "name": "Apple Security Releases",
+      "category": "vendor",
+      "url": "https://support.apple.com/en-us/100100",
+      "description": "Apple OS and software security release information and supported versions."
+    },
+    {
+      "id": "chrome-releases",
+      "name": "Chrome Releases",
+      "category": "vendor",
+      "url": "https://chromereleases.googleblog.com/",
+      "description": "First-party Chrome release channels and security fix announcements."
+    },
+    {
+      "id": "android-security",
+      "name": "Android Security Bulletins",
+      "category": "vendor",
+      "url": "https://source.android.com/docs/security/bulletin",
+      "description": "Android platform and component patch bulletins; confirm OEM patch availability separately."
+    },
+    {
+      "id": "mozilla-security",
+      "name": "Mozilla Security Advisories",
+      "category": "vendor",
+      "url": "https://www.mozilla.org/en-US/security/advisories/",
+      "description": "Firefox and Mozilla product security update advisories."
+    },
+    {
+      "id": "ubuntu-usn",
+      "name": "Ubuntu Security Notices",
+      "category": "vendor",
+      "url": "https://ubuntu.com/security/notices",
+      "description": "Ubuntu package-level notices and updated version references."
+    },
+    {
+      "id": "redhat-security",
+      "name": "Red Hat Security Updates",
+      "category": "vendor",
+      "url": "https://access.redhat.com/security/security-updates/",
+      "description": "Red Hat errata, security advisories and affected releases."
+    },
+    {
+      "id": "debian-security",
+      "name": "Debian Security Advisories",
+      "category": "vendor",
+      "url": "https://www.debian.org/security/",
+      "description": "Debian Security Team advisories and stable-security context."
+    },
+    {
+      "id": "cisco-psirt",
+      "name": "Cisco Security Advisories",
+      "category": "vendor",
+      "url": "https://sec.cloudapps.cisco.com/security/center/publicationListing.x",
+      "description": "Cisco PSIRT advisories and remediation information."
+    },
+    {
+      "id": "fortinet-psirt",
+      "name": "Fortinet PSIRT",
+      "category": "vendor",
+      "url": "https://www.fortiguard.com/psirt",
+      "description": "Fortinet first-party product notices and fixed builds."
+    },
+    {
+      "id": "broadcom-security",
+      "name": "Broadcom Security Advisories",
+      "category": "vendor",
+      "url": "https://support.broadcom.com/web/ecx/security-advisory",
+      "description": "Broadcom advisories including VMware products where covered."
+    },
+    {
+      "id": "github-advisories",
+      "name": "GitHub Advisory Database",
+      "category": "vendor",
+      "url": "https://github.com/advisories",
+      "description": "Open-source package advisories; compare package version, ecosystem and affected range."
+    },
+    {
+      "id": "dell-security",
+      "name": "Dell Security Advisories",
+      "category": "vendor",
+      "url": "https://www.dell.com/support/security/en-us",
+      "description": "Dell hardware, BIOS, firmware and software security advisories."
+    },
+    {
+      "id": "lenovo-security",
+      "name": "Lenovo Product Security Advisories",
+      "category": "vendor",
+      "url": "https://support.lenovo.com/us/en/product_security/home",
+      "description": "Lenovo firmware, platforms and software security notices."
+    },
+    {
+      "id": "hp-security",
+      "name": "HP Security Bulletins",
+      "category": "vendor",
+      "url": "https://support.hp.com/us-en/security-bulletins",
+      "description": "HP PC and printer bulletins; confirm exact product and firmware before updating."
+    },
+    {
+      "id": "sans-isc",
+      "name": "SANS Internet Storm Center Diary",
+      "category": "reporting",
+      "url": "https://isc.sans.edu/",
+      "description": "Practitioner diaries and defensive observations; corroborate before acting."
+    },
+    {
+      "id": "bleeping",
+      "name": "BleepingComputer",
+      "category": "reporting",
+      "url": "https://www.bleepingcomputer.com/",
+      "description": "Practical Windows, incident and security reporting for technicians.",
+      "feed": "https://www.bleepingcomputer.com/feed/"
+    },
+    {
+      "id": "krebs",
+      "name": "KrebsOnSecurity",
+      "category": "reporting",
+      "url": "https://krebsonsecurity.com/",
+      "description": "Independent reporting on cybercrime, fraud and breaches.",
+      "feed": "https://krebsonsecurity.com/feed/"
+    },
+    {
+      "id": "therecord",
+      "name": "The Record",
+      "category": "reporting",
+      "url": "https://therecord.media/",
+      "description": "Cyber policy, incidents and security-beat reporting from Recorded Future News."
+    },
+    {
+      "id": "securityweek",
+      "name": "SecurityWeek",
+      "category": "reporting",
+      "url": "https://www.securityweek.com/",
+      "description": "Security incidents, vendor disclosures and cybersecurity industry coverage.",
+      "feed": "https://www.securityweek.com/feed/"
+    },
+    {
+      "id": "dark-reading",
+      "name": "Dark Reading",
+      "category": "reporting",
+      "url": "https://www.darkreading.com/",
+      "description": "Enterprise security news and practitioner perspectives."
+    },
+    {
+      "id": "hacker-news",
+      "name": "The Hacker News",
+      "category": "reporting",
+      "url": "https://thehackernews.com/",
+      "description": "Cybersecurity reporting and awareness; cross-check disclosures against official advisories."
+    },
+    {
+      "id": "cyberscoop",
+      "name": "CyberScoop",
+      "category": "reporting",
+      "url": "https://cyberscoop.com/",
+      "description": "Cybersecurity policy, government and incident reporting."
+    },
+    {
+      "id": "riskybiz",
+      "name": "Risky Business",
+      "category": "reporting",
+      "url": "https://risky.biz/",
+      "description": "Cybersecurity news and interviews; editorial, not vendor advisories."
+    },
+    {
+      "id": "ars-security",
+      "name": "Ars Technica Security",
+      "category": "reporting",
+      "url": "https://arstechnica.com/security/",
+      "description": "Independent security reporting with technical context."
+    },
+    {
+      "id": "sysadmin-reddit",
+      "name": "r/sysadmin",
+      "category": "community",
+      "url": "https://www.reddit.com/r/sysadmin/",
+      "description": "Peer troubleshooting and incident leads; anecdotal content is not verified guidance."
+    },
+    {
+      "id": "microsoft-community",
+      "name": "Microsoft Security Community",
+      "category": "community",
+      "url": "https://securitycommunity.microsoft.com/",
+      "description": "Microsoft-hosted practitioner community; distinguish staff guidance from community claims."
+    },
+    {
+      "id": "cisa-social",
+      "name": "CISA LinkedIn",
+      "category": "community",
+      "url": "https://www.linkedin.com/company/cisagov/",
+      "description": "Agency announcements on a social platform; consult original CISA advisory before acting."
+    },
+    {
+      "id": "sans-podcasts",
+      "name": "SANS Cybersecurity Podcasts",
+      "category": "community",
+      "url": "https://www.sans.org/podcasts",
+      "description": "Practitioner education and discussion; publisher links to each show."
+    },
+    {
+      "id": "spiceworks",
+      "name": "Spiceworks Community",
+      "category": "community",
+      "url": "https://community.spiceworks.com/",
+      "description": "IT practitioner discussion and troubleshooting; verify recommendations independently."
+    },
+    {
+      "id": "m365-status",
+      "name": "Microsoft 365 Service Health",
+      "category": "status",
+      "url": "https://status.cloud.microsoft/",
+      "description": "Public service health overview; tenant-specific incidents may require Microsoft admin sign-in."
+    },
+    {
+      "id": "azure-status",
+      "name": "Azure Status",
+      "category": "status",
+      "url": "https://azure.status.microsoft/",
+      "description": "Public regional service status; tenant resource impact belongs in Azure Service Health."
+    },
+    {
+      "id": "aws-status",
+      "name": "AWS Health Dashboard",
+      "category": "status",
+      "url": "https://health.aws.amazon.com/health/status",
+      "description": "Public AWS service events and affected regions."
+    },
+    {
+      "id": "gcp-status",
+      "name": "Google Cloud Service Health",
+      "category": "status",
+      "url": "https://status.cloud.google.com/",
+      "description": "Google Cloud service disruptions and incident history."
+    },
+    {
+      "id": "github-status",
+      "name": "GitHub Status",
+      "category": "status",
+      "url": "https://www.githubstatus.com/",
+      "description": "GitHub component status and incident history.",
+      "feed": "https://www.githubstatus.com/history.rss"
+    },
+    {
+      "id": "cloudflare-status",
+      "name": "Cloudflare Status",
+      "category": "status",
+      "url": "https://www.cloudflarestatus.com/",
+      "description": "Cloudflare service or region interruptions and maintenance."
+    }
+  ],
+  "briefing": [
+    {
+      "sourceId": "nist-csrc",
+      "url": "https://csrc.nist.gov/news/2026/nist-will-revise-tls-guidelines",
+      "date": "2026-11-19",
+      "title": "NIST plans to revise its TLS configuration guidance",
+      "description": "Track the forthcoming draft if you maintain endpoint or server TLS baselines. This is an announcement, not a final revised standard."
+    },
+    {
+      "sourceId": "windows-health",
+      "url": "https://support.microsoft.com/en-us/servicing/os/windows-11/2026/11/kb5132061-windows-11-24h2-25h2-26h2-security-update",
+      "date": "2026-11-10",
+      "title": "Microsoft posts the November security update for Windows 11",
+      "description": "Check applicability, prerequisites and tracked known issues for 24H2, 25H2 and 26H2 before scheduling deployment."
+    }
+  ]
+}

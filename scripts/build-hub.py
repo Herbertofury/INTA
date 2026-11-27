@@ -979,6 +979,39 @@ def validate_reputation(snapshot: dict, tools: list[dict]) -> None:
                 raise ValueError(f"{tool_id}: invalid weekly active user evidence")
 
 
+def validate_news(catalog: dict) -> None:
+    def is_date(value):
+        try:
+            return isinstance(value, str) and date.fromisoformat(value).isoformat() == value
+        except ValueError:
+            return False
+    def safe_url(value):
+        if not isinstance(value, str) or any(c.isspace() for c in value):
+            return False
+        try:
+            u = urlparse(value)
+            return u.scheme == "https" and bool(u.hostname) and not u.username and not u.password
+        except ValueError:
+            return False
+    categories = {"advisory", "compliance", "vendor", "reporting", "community", "status"}
+    ids, links = set(), set()
+    if catalog.get("schemaVersion") != 1 or not is_date(catalog.get("reviewedAt")) or not isinstance(catalog.get("sources"), list) or not catalog["sources"]:
+        raise ValueError("News requires a versioned and dated source catalog")
+    for source in catalog["sources"]:
+        if (not isinstance(source, dict) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", str(source.get("id", "")))
+                or source["id"] in ids or source.get("url") in links or not safe_url(source.get("url"))
+                or source.get("category") not in categories
+                or not all(isinstance(source.get(k), str) and bool(source[k].strip()) for k in ("name","description"))
+                or ("feed" in source and not safe_url(source.get("feed")))):
+            raise ValueError("Invalid or duplicate News source")
+        ids.add(source["id"])
+        links.add(source["url"])
+    for item in catalog.get("briefing", []):
+        if (item.get("sourceId") not in ids or not safe_url(item.get("url")) or not is_date(item.get("date"))
+                or item["date"] > catalog["reviewedAt"] or not item.get("title") or not item.get("description")):
+            raise ValueError("Invalid News briefing item")
+
+
 def build_outputs() -> dict[str, str]:
     tools = records(ROOT / "data/tools.json", "tools")
     jobs = records(ROOT / "data/jobs.json", "jobs")
@@ -993,6 +1026,8 @@ def build_outputs() -> dict[str, str]:
     reputation = json.loads((ROOT / "data/tool-reputation.json").read_text(encoding="utf-8"))
     validate(tools, jobs)
     validate_reputation(reputation, tools)
+    news = json.loads((ROOT / "data/news-sources.json").read_text(encoding="utf-8"))
+    validate_news(news)
     validate_layout(layout, jobs, tools)
     validate_tool_access(tool_access, tools)
     validate_quick_start(quick_start, tools, jobs, tool_access["tools"])
@@ -1005,7 +1040,7 @@ def build_outputs() -> dict[str, str]:
     registry = linker.build_registry(tools, jobs)
     data = {"tools": [{**tool, "reputation": reputation["tools"][tool["id"]]} for tool in tools], "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
             "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces,
-            "layout": layout, "fieldNotes": field_notes}
+            "layout": layout, "fieldNotes": field_notes, "news": news}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     template = (ROOT / "portal/index.template.html").read_text(encoding="utf-8")

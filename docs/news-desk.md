@@ -1,0 +1,9 @@
+# INTA News desk
+
+The [News tab](https://herbertofury.github.io/INTA/#news) is designed for looking up a first-hand advisory before changing a device. It ships a dated snapshot, a searchable six-lane source catalog and browser-local source saves. External links go to the publisher; no syndication, polling, customer inventory or account data is required. Official advisories, standards/program references, vendor advisories, independent reporting, community channels, and service status are separate. A source inclusion is not a claim of NIST or DoD endorsement. SPRS is an assessment reporting system; use the actual contract and current program guidance to determine requirements.
+
+## Shared client input
+
+The generated catalog exposes `news` schema version 1: a review date, stable source IDs, publisher links, source classification and an optional declared feed, plus attributed and dated editorial briefing items. Use IDs (not labels or URLs) for user follows. The data is embedded in the offline Web build; it is an integration contract for Desktop, connected Rescue and Mobile, not evidence those clients have shipped it. See [issue #7](https://github.com/Herbertofury/INTA/issues/7).
+
+Do not report an old snapshot as live. Next acceptance: a bounded publisher-feed ingestion job produces a shared versioned snapshot with per-source freshness and error state; validate endpoint and link host, deduplicate by canonical URL and revision, preserve date and provenance, and allow explicit refresh. Publish only permitted metadata or editorial summaries; never auto-run updates, open executable attachments, or grant remote access. Saved and muted source state joins the shared workspace only after authenticated account sync ships. Offline Rescue should still open the cached snapshot and show its date.

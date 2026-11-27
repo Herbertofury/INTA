@@ -700,6 +700,64 @@
     directory.innerHTML = found.length ? found.map(source => `<div class="source-list">${external(source.url, `<span>${esc(source.title || source.url)}<span class="source-domain">${esc(new URL(source.url).hostname)}</span></span>${icon('external')}`)}</div>`).join('') : '<p class="prose">No references match. Try another search.</p>';
     $('#source-count').textContent = `${found.length} of ${allSources.length} official references`;
   }
+  const newsGroups = {
+    advisory: ['Official advisories', 'Government alerts and exposure triage'],
+    compliance: ['Standards & compliance', 'Frameworks, assessment and program references'],
+    vendor: ['Vendor security', 'Product updates, mitigations and release guidance'],
+    reporting: ['Independent reporting', 'Original reporting and technical analysis; verify before acting'],
+    community: ['Community & social', 'Professional discussion and public accounts; not official alerts'],
+    status: ['Service health', 'Publisher status and service incident pages']
+  };
+  function newsPage() {
+    const catalog = data.news;
+    const briefing = (catalog.briefing || []).map(item => {
+      const src = catalog.sources.find(s => s.id === item.sourceId);
+      return `<article class="news-brief"><span>${esc(src.name)} · <time datetime="${esc(item.date)}">${esc(dateLabel(item.date,true))}</time></span><h3>${external(item.url,esc(item.title))}</h3><p>${esc(item.description)}</p></article>`;
+    }).join('');
+    return heading('Technician intelligence', 'Technician News', 'Find official alerts first, then compare vendor updates, reporting, and community perspectives.', false)
+      + `<div class="news-banner"><div><strong>Start with the source</strong><p>Look up the affected version in a vendor bulletin before changing a customer system. Treat social and reporting links as leads.</p></div><span>Catalog reviewed <time datetime="${esc(catalog.reviewedAt)}">${esc(dateLabel(catalog.reviewedAt,true))}</time></span></div>`
+      + (briefing ? `<section aria-labelledby="news-brief-title"><h2 id="news-brief-title">Selected briefing</h2><p class="news-muted">Dated editorial snapshot, not a live feed. Open the publisher for the latest changes.</p><div class="news-grid">${briefing}</div></section>` : '')
+      + `<section aria-labelledby="news-sources-title"><h2 id="news-sources-title">Source directory</h2><p class="news-muted">The directory works offline. Open publisher pages for current updates; saved sources are local to this browser.</p><div class="news-controls"><label>Search sources<input id="news-search" type="search" placeholder="CISA, Microsoft, NIST…"></label><label>Category<select id="news-category"><option value="">All categories</option>${Object.entries(newsGroups).map(([id,[label]])=>`<option value="${id}">${esc(label)}</option>`).join('')}</select></label><label class="news-saved"><input id="news-saved" type="checkbox"> Saved only</label></div><p id="news-count" aria-live="polite"></p><div id="news-directory"></div></section>`;
+  }
+  function bindNews() {
+    const search = $('#news-search');
+    if (!search) return;
+    const directory = $('#news-directory');
+    const category = $('#news-category');
+    const onlySaved = $('#news-saved');
+    const key = 'inta:news-follows:v1';
+    const sources = data.news.sources;
+    const validIds = new Set(sources.map(x => x.id));
+    const previous = load(key, []);
+    const saved = new Set(Array.isArray(previous) ? previous.filter(id => validIds.has(id)) : []);
+    const normalize = value => value.toLocaleLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,' ').trim();
+    const indexes = sources.map(source => [source, normalize([source.name,source.description,source.url,newsGroups[source.category][0]].join(' '))]);
+    const paint = () => {
+      const words = normalize(search.value).split(' ').filter(Boolean);
+      let count = 0;
+      directory.innerHTML = Object.entries(newsGroups).map(([id,[label,description]]) => {
+        if (category.value && category.value !== id) return '';
+        const rows = indexes.filter(([s, searchable]) => s.category === id && (!onlySaved.checked || saved.has(s.id)) && words.every(w=>searchable.includes(w)));
+        if (!rows.length) return '';
+        count += rows.length;
+        return `<section class="news-source-group" aria-labelledby="news-group-${id}"><h3 id="news-group-${id}">${esc(label)}</h3><p class="news-muted">${esc(description)}</p><div class="news-grid">${rows.map(([s]) => `<article class="news-card" data-news-id="${esc(s.id)}"><div><h4>${external(s.url,esc(s.name))}</h4><p>${esc(s.description)}</p></div><div class="news-actions"><button class="button" type="button" data-news-save="${esc(s.id)}" aria-label="Save ${esc(s.name)}" aria-pressed="${saved.has(s.id)}">${saved.has(s.id) ? 'Saved' : 'Save'}</button>${s.feed ? external(s.feed,'Feed') : ''}</div></article>`).join('')}</div></section>`;
+      }).join('') || '<p>No sources match. Try a broader search or turn off Saved only.</p>';
+      $('#news-count').textContent = `${count} of ${sources.length} sources`;
+    };
+    search.addEventListener('input',paint);
+    category.addEventListener('change',paint);
+    onlySaved.addEventListener('change',paint);
+    directory.addEventListener('click',event => {
+      const button = event.target.closest('[data-news-save]');
+      const id = button?.dataset.newsSave;
+      if (!validIds.has(id)) return;
+      if (saved.has(id)) saved.delete(id); else saved.add(id);
+      store(key,[...saved]);
+      paint();
+      (directory.querySelector(`[data-news-save="${id}"]`) || onlySaved).focus();
+    });
+    paint();
+  }
   function notFound(type) { return empty('compass', `That ${type} is not in this edition.`, 'The link may have changed. The full library and playbooks are still available.', 'Go to the workspace', '#home'); }
   function parseRoute() {
     const raw = location.hash.slice(1) || 'home';
@@ -721,12 +779,13 @@
   }
   function render() {
     const route = parseRoute();
-    const names = { home: 'Technician home', checklist: 'Technician checklist', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
+    const names = { home: 'Technician home', checklist: 'Technician checklist', news: 'Technician News', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
     $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
     $('#breadcrumb').innerHTML = `Workspace <span>/</span> <strong>${esc(names[route.name] || 'Technician home')}</strong>`;
     if (route.name === 'home') app.innerHTML = home();
     else if (route.name === 'checklist') app.innerHTML = checklistPage();
+    else if (route.name === 'news') app.innerHTML = newsPage();
     else if (route.name === 'services') app.innerHTML = serviceMap();
     else if (route.name === 'tools') app.innerHTML = library(false, route.params);
     else if (route.name === 'saved') app.innerHTML = library(true, route.params);
@@ -738,7 +797,7 @@
     else app.innerHTML = notFound('page');
     const title = route.name === 'job' ? jobMap.get(route.id)?.title : route.name === 'tool' ? toolMap.get(route.id)?.name : names[route.name];
     document.title = `${title || 'Technician workspace'} | INTA Computer Services`;
-    filterTools(false); filterJobs(false); filterSources(); linkifyProse(app); updateCounts();
+    filterTools(false); filterJobs(false); filterSources(); bindNews(); linkifyProse(app); updateCounts();
     closeNavigation(); closeSearch();
     if (route.anchor && document.getElementById(route.anchor)) document.getElementById(route.anchor).scrollIntoView({ block: 'start', behavior: 'instant' });
     else if (lastRoute !== route.raw) window.scrollTo({ top: 0, behavior: 'instant' });
