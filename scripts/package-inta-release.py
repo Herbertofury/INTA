@@ -8,6 +8,9 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import time
+import urllib.error
+import urllib.request
 import zipfile
 
 def require(condition, message):
@@ -33,6 +36,25 @@ def main():
     wiki = json.loads((root / "reports/wiki-publish.json").read_text())
     build = json.loads((root / "site/build-manifest.json").read_text())
     html = (root / "site/index.html").read_bytes()
+    deployment = {}
+    for name in ("index.html", "manifest.webmanifest", "sw.js", "inta-app-icon.svg"):
+        expected_bytes = (root / "site" / name).read_bytes()
+        url = "https://herbertofury.github.io/INTA/" + ("" if name == "index.html" else name) + "?verify=" + commit
+        actual_hash = None
+        for attempt in range(6):
+            try:
+                request = urllib.request.Request(url, headers={"Cache-Control": "no-cache"})
+                with urllib.request.urlopen(request, timeout=30) as response:
+                    actual_bytes = response.read()
+                actual_hash = sha(actual_bytes)
+                if actual_hash == sha(expected_bytes):
+                    break
+            except (urllib.error.URLError, TimeoutError):
+                actual_hash = None
+            if attempt < 5:
+                time.sleep(10)
+        require(actual_hash == sha(expected_bytes), "Deployed bytes do not yet match the verified source: " + name)
+        deployment[name] = {"url": url, "sha256": actual_hash, "bytes": len(expected_bytes)}
     require(runtime.get("status") == "passed" and runtime.get("sha256") == sha(html),
             "Browser evidence does not cover this exact HTML")
     require(not runtime.get("javascriptErrors") and not runtime.get("externalRequests"),
@@ -95,7 +117,7 @@ def main():
             "browser": runtime.get("browser"), "runtimeStatus": runtime["status"],
             "wikiVerifiedHead": wiki["verified_head"], "wikiReadbackStatus": wiki["status"],
             "catalogCounts": {k: v for k, v in build.items() if isinstance(v, int)},
-            "files": inventory, "evidence": evidence,
+            "files": inventory, "evidence": evidence, "deploymentChecks": deployment,
             "validationRun": os.environ.get("VALIDATION_RUN_URL", ""),
             "publicationRun": os.environ.get("GITHUB_SERVER_URL", "https://github.com") + "/" + os.environ.get("GITHUB_REPOSITORY", "Herbertofury/INTA") + "/actions/runs/" + os.environ.get("GITHUB_RUN_ID", ""),
         }
