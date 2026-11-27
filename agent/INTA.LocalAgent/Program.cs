@@ -105,8 +105,17 @@ async Task ExecuteOperation(OperationRequest request, OperationRecord initial)
     {
         var result = await managers.ExecuteAsync(request);
         var reboot = OperatingSystem.IsWindows() && PendingReboot();
-        current = current with { State = result.ExitCode == 0 ? (reboot ? "awaiting-reboot" : "succeeded") : "failed",
-            FinishedAt = DateTimeOffset.UtcNow, ExitCode = result.ExitCode, Output = result.Output, RebootLikely = reboot };
+        var state = result.ExitCode == 0 ? "completed-review" : "failed";
+        var output = result.Output;
+        if (result.ExitCode == 0)
+        {
+            var verification = await managers.VerifyAsync(request);
+            output += Environment.NewLine + Environment.NewLine + "===== INTA POST-CHECK =====" + Environment.NewLine + verification.Output;
+            state = reboot ? "awaiting-reboot" : verification.Verified ? "verified" : "completed-review";
+        }
+        current = current with { State = state, FinishedAt = DateTimeOffset.UtcNow,
+            ExitCode = result.ExitCode, Output = output, RebootLikely = reboot,
+            Error = result.ExitCode == 0 && state == "completed-review" ? "Operation exited successfully. Review the post-check output; this manager does not expose a definitive verification for this operation." : null };
     }
     catch (Exception ex)
     {
