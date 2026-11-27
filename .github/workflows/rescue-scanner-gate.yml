@@ -1,0 +1,21 @@
+name: Verify the INTA Rescue scanner release gate
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/rescue*.yml'
+      - 'scripts/check-rescue*scanner.py'
+      - 'tests/test_rescue*scanner.py'
+      - '.github/rescue-scanner-review.json'
+      - 'docs/rescue-scanner-release-review.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends xorriso squashfs-tools
+      - name: Verify the gate on inert ISO fixtures
+        run: python3 -m unittest discover -s tests -p 'test_rescue*scanner.py' -v

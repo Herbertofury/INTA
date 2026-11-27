@@ -86,6 +86,18 @@ jobs:
           path: ${{ runner.temp }}/inta-diagnostics/
           if-no-files-found: ignore
           retention-days: 7
+      - name: Require an exact reviewed scanner in the verified ISO
+        run: |
+          test -f .github/rescue-scanner-review.json || {
+            echo "::error::Scanner review not present. Keep this boot-verified image as a candidate only."
+            exit 1
+          }
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends xorriso squashfs-tools
+          python3 scripts/check-rescue-image-scanner.py \
+            --iso "$RUNNER_TEMP/inta-dist/inta-rescue-amd64.iso" \
+            --expected-sha256 "$ORIGINAL_ISO_SHA256" \
+            --review .github/rescue-scanner-review.json
       - name: Publish verified release
         env:
           GH_TOKEN: ${{ github.token }}
