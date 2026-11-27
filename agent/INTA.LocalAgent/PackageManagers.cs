@@ -45,17 +45,19 @@ public sealed class PackageManagers(ProcessRunner runner)
             return (false, preview?.Output ?? "No post-update preview was available.", true);
         }
         var package = ValidateId(request.PackageId);
+        if (request.Action == "update")
+        {
+            var previews = await PreviewAsync([request.Manager], ct);
+            var preview = previews.FirstOrDefault();
+            var stillPending = preview is not null && preview.ExitCode == 0 && preview.Output.Contains(package, StringComparison.OrdinalIgnoreCase);
+            return (preview is not null && preview.ExitCode == 0 && !stillPending,
+                preview?.Output ?? "No post-update preview was available.", preview is null || preview.ExitCode != 0);
+        }
         var (file, args) = VerificationCommand(request.Manager, package);
         if (file is null) return (false, "This package manager does not expose a reliable post-operation verification query.", true);
         var result = await runner.RunAsync(file, args, TimeSpan.FromMinutes(3), ct);
         var present = result.ExitCode == 0 && result.Output.Contains(package, StringComparison.OrdinalIgnoreCase);
-        var verified = request.Action switch
-        {
-            "update" => result.ExitCode == 0 && !present,
-            "repair" => result.ExitCode == 0 && present,
-            "uninstall" => result.ExitCode != 0 || !present,
-            _ => false
-        };
+        var verified = request.Action == "repair" ? present : request.Action == "uninstall" && result.ExitCode != 0;
         return (verified, result.Output, false);
     }
 
