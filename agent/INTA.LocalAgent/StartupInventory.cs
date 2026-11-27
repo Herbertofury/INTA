@@ -14,15 +14,32 @@ internal static class StartupInventory
 
     internal static int Run(ReadOnlySpan<string> args, TextWriter output, TextWriter error)
     {
-        if (!args.IsEmpty)
+        var includeFolders = args.Length == 1 && args[0] == "--include-folders";
+        if (!args.IsEmpty && !includeFolders)
         {
-            error.WriteLine("Usage: inta-agent --startup-inventory");
+            error.WriteLine("Usage: inta-agent --startup-inventory [--include-folders]");
             return 2;
         }
         if (!OperatingSystem.IsWindows())
         {
             error.WriteLine("Windows logon registration inventory is not supported on this platform.");
             return 3;
+        }
+
+        if (includeFolders)
+        {
+            output.WriteLine(JsonSerializer.Serialize(new
+            {
+                schema = 2,
+                scope = "windows-logon-registrations-and-local-startup-folders",
+                readOnly = true,
+                enabledState = "not-evaluated",
+                argumentsCollected = false,
+                sources = ReadWindowsSources(),
+                startupFolders = StartupFolders.ReadWindowsFolders(),
+                startupSettingsUri = StartupFolders.SettingsUri
+            }, Json));
+            return 0;
         }
 
         output.WriteLine(JsonSerializer.Serialize(new
