@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-11-26",
+  "asOf": "2026-11-27",
   "structuralStatus": "passed",
   "counts": {
     "serviceAreas": 8,
     "jobs": 22,
-    "tools": 218,
+    "tools": 260,
     "toolCategories": 11,
     "fieldNotes": 95,
     "researchItems": 58,
     "scenarioToolChoices": 72,
-    "reviewedRecords": 905,
+    "reviewedRecords": 996,
     "dueReviews": 0
   },
   "coverage": [
@@ -144,7 +144,7 @@
       "jobId": "preventive-maintenance",
       "fieldNotes": 7,
       "resources": 8,
-      "decisions": 5
+      "decisions": 6
     }
   ],
   "dueReviews": [],
@@ -6138,6 +6138,916 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://hoppscotch.com/releases"
+    },
+    {
+      "kind": "tool",
+      "id": "magika-web",
+      "title": "Google Magika Web Demo",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://securityresearch.google/magika/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "magika-web/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://securityresearch.google/magika/introduction/overview/"
+    },
+    {
+      "kind": "tool",
+      "id": "koodous",
+      "title": "Koodous",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://koodous.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "koodous/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://koodous.com/about-us"
+    },
+    {
+      "kind": "tool",
+      "id": "crowdsec-cti",
+      "title": "CrowdSec IP Reputation / CTI",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.crowdsec.net/ip-reputation"
+    },
+    {
+      "kind": "acquisition",
+      "id": "crowdsec-cti/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.crowdsec.net/u/cti_api/intro/"
+    },
+    {
+      "kind": "tool",
+      "id": "validin",
+      "title": "Validin",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.validin.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "validin/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.validin.com/docs/what-is-validin"
+    },
+    {
+      "kind": "tool",
+      "id": "silent-push",
+      "title": "Silent Push Community Edition",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.silentpush.com/community-edition/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "silent-push/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.silentpush.com/community-edition/"
+    },
+    {
+      "kind": "tool",
+      "id": "phishtank",
+      "title": "PhishTank",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.phishtank.org/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "phishtank/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.phishtank.org/faq.php"
+    },
+    {
+      "kind": "tool",
+      "id": "phishly",
+      "title": "phish.ly",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://phish.ly/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "phishly/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://phish.ly/"
+    },
+    {
+      "kind": "tool",
+      "id": "msrc-update-guide",
+      "title": "Microsoft Security Update Guide",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.microsoft.com/en-us/msrc"
+    },
+    {
+      "kind": "acquisition",
+      "id": "msrc-update-guide/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.microsoft.com/en-us/msrc/faqs-security-update-guide"
+    },
+    {
+      "kind": "tool",
+      "id": "paloalto-test-a-site",
+      "title": "Palo Alto Networks Test A Site",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://urlfiltering.paloaltonetworks.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "paloalto-test-a-site/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://urlfiltering.paloaltonetworks.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "fortiguard-webfilter",
+      "title": "FortiGuard Web Filter Lookup",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.fortiguard.com/webfilter"
+    },
+    {
+      "kind": "acquisition",
+      "id": "fortiguard-webfilter/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.fortinet.com/document/fortiproxy/7.6.0/administration-guide/636363/url-lookup"
+    },
+    {
+      "kind": "tool",
+      "id": "symantec-site-review",
+      "title": "Symantec WebPulse Site Review",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://sitereview.bluecoat.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "symantec-site-review/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://sitereview.bluecoat.com/index.html"
+    },
+    {
+      "kind": "tool",
+      "id": "trendmicro-site-safety",
+      "title": "Trend Micro Site Safety Center",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://global.sitesafety.trendmicro.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "trendmicro-site-safety/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://global.sitesafety.trendmicro.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "criminal-ip",
+      "title": "Criminal IP Search",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.criminalip.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "criminal-ip/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.criminalip.io/"
+    },
+    {
+      "kind": "tool",
+      "id": "loldrivers",
+      "title": "LOLDrivers",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.loldrivers.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "loldrivers/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.loldrivers.io/"
+    },
+    {
+      "kind": "tool",
+      "id": "lolbas",
+      "title": "LOLBAS",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://lolbas-project.github.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "lolbas/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://lolbas-project.github.io/"
+    },
+    {
+      "kind": "tool",
+      "id": "mitre-d3fend",
+      "title": "MITRE D3FEND",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://d3fend.mitre.org/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mitre-d3fend/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://d3fend.mitre.org/"
+    },
+    {
+      "kind": "tool",
+      "id": "tlsref-configurator",
+      "title": "TLSRef TLS Configurator",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://configurator.tlsref.org/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "tlsref-configurator/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://configurator.tlsref.org/"
+    },
+    {
+      "kind": "tool",
+      "id": "lets-debug",
+      "title": "Let's Debug",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://letsdebug.net/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "lets-debug/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://letsdebug.net/"
+    },
+    {
+      "kind": "tool",
+      "id": "csp-evaluator",
+      "title": "CSP Evaluator",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://csp-evaluator.withgoogle.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "csp-evaluator/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://csp-evaluator.withgoogle.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "crt-sh",
+      "title": "crt.sh Certificate Search",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://crt.sh/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "crt-sh/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://crt.sh/"
+    },
+    {
+      "kind": "tool",
+      "id": "uriports-tools",
+      "title": "URIports Web and Mail Validators",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.uriports.com/tools"
+    },
+    {
+      "kind": "acquisition",
+      "id": "uriports-tools/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.uriports.com/tools?method=mta-sts"
+    },
+    {
+      "kind": "tool",
+      "id": "google-public-dns",
+      "title": "Google Public DNS Web Lookup",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dns.google/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "google-public-dns/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dns.google/"
+    },
+    {
+      "kind": "tool",
+      "id": "cloudflare-dns-help",
+      "title": "Cloudflare 1.1.1.1 Connection Check",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://one.one.one.one/help/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "cloudflare-dns-help/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://developers.cloudflare.com/1.1.1.1/check/"
+    },
+    {
+      "kind": "tool",
+      "id": "mlab-speed",
+      "title": "M-Lab NDT Speed Test",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.measurementlab.net/tests/ndt/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mlab-speed/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.measurementlab.net/tests/"
+    },
+    {
+      "kind": "tool",
+      "id": "twilio-network-test",
+      "title": "Twilio WebRTC Diagnostics",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://networktest.twilio.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "twilio-network-test/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://networktest.twilio.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "bgp-tools",
+      "title": "bgp.tools",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://bgp.tools/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "bgp-tools/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://bgp.tools/"
+    },
+    {
+      "kind": "tool",
+      "id": "ioda",
+      "title": "IODA Internet Outage Dashboard",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://ioda.inetintel.cc.gatech.edu/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "ioda/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://ioda.inetintel.cc.gatech.edu/reports/"
+    },
+    {
+      "kind": "tool",
+      "id": "aws-health",
+      "title": "AWS Health Dashboard",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://health.aws.amazon.com/health/status"
+    },
+    {
+      "kind": "acquisition",
+      "id": "aws-health/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.aws.amazon.com/health/latest/ug/aws-health-dashboard-status.html"
+    },
+    {
+      "kind": "tool",
+      "id": "azure-status",
+      "title": "Azure Status",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://azure.status.microsoft/en-us/status"
+    },
+    {
+      "kind": "acquisition",
+      "id": "azure-status/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://azure.status.microsoft/en-us/status"
+    },
+    {
+      "kind": "tool",
+      "id": "google-cloud-status",
+      "title": "Google Cloud Service Health",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://status.cloud.google.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "google-cloud-status/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://status.cloud.google.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "cloudflare-status",
+      "title": "Cloudflare System Status",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cloudflarestatus.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "cloudflare-status/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cloudflarestatus.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "github-status",
+      "title": "GitHub Status",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.githubstatus.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "github-status/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.githubstatus.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "it-tools",
+      "title": "IT-Tools",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://it-tools.tech/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "it-tools/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/CorentinTh/it-tools"
+    },
+    {
+      "kind": "tool",
+      "id": "vert",
+      "title": "VERT",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://vert.sh/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "vert/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://vert.sh/privacy/"
+    },
+    {
+      "kind": "tool",
+      "id": "webhook-site",
+      "title": "Webhook.site",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://webhook.site/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "webhook-site/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.webhook.site/"
+    },
+    {
+      "kind": "tool",
+      "id": "pairdrop",
+      "title": "PairDrop",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://pairdrop.net/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "pairdrop/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/schlagmichdoch/PairDrop"
+    },
+    {
+      "kind": "tool",
+      "id": "w3c-html-checker",
+      "title": "W3C Nu HTML Checker",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://validator.w3.org/nu/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "w3c-html-checker/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://validator.w3.org/nu/"
+    },
+    {
+      "kind": "tool",
+      "id": "w3c-link-checker",
+      "title": "W3C Link Checker",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://validator.w3.org/checklink"
+    },
+    {
+      "kind": "acquisition",
+      "id": "w3c-link-checker/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://validator.w3.org/checklink"
+    },
+    {
+      "kind": "tool",
+      "id": "caniuse",
+      "title": "Can I use",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://caniuse.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "caniuse/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://caniuse.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "endoflife-date",
+      "title": "endoflife.date",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://endoflife.date/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "endoflife-date/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://endoflife.date/"
+    },
+    {
+      "kind": "tool",
+      "id": "mangodisk",
+      "title": "MangoDisk",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2027-01-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://mangodisk.app/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/windows-portable",
+      "title": "Download Windows portable · EXE",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/windows-installer",
+      "title": "Download Windows installer · EXE",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/macos-dmg",
+      "title": "Download macOS · DMG",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/linux-x64-appimage",
+      "title": "Download Linux x64 · AppImage",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/linux-x64-deb",
+      "title": "Download Linux x64 · deb",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/linux-arm64-appimage",
+      "title": "Download Linux arm64 · AppImage",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/linux-arm64-deb",
+      "title": "Download Linux arm64 · deb",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/publisher-release",
+      "title": "Review publisher release v2.1.2",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2"
+    },
+    {
+      "kind": "tool",
+      "id": "optimizerduck",
+      "title": "optimizerDuck",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2027-01-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/itsfatduck/optimizerDuck"
+    },
+    {
+      "kind": "acquisition",
+      "id": "optimizerduck/publisher-release",
+      "title": "Review publisher release v2.29.0",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/itsfatduck/optimizerDuck/releases/tag/v2.29.0"
     },
     {
       "kind": "guide",

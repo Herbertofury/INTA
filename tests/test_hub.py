@@ -88,6 +88,7 @@ class HubIntegrity(unittest.TestCase):
         self.assertIn('flatpak repair', output['site/index.html'])
         self.assertIn('brew upgrade', output['site/index.html'])
         self.assertIn('updatesCenterCommands', output['site/build-manifest.json'])
+        self.assertIn('[Updates & Maintenance](Updates-and-Maintenance)', output['wiki/Home.md'])
 
     def test_updates_center_rejects_unknown_channel_command(self):
         catalog = json.loads((ROOT / 'data/updates-center.json').read_text())
@@ -98,10 +99,22 @@ class HubIntegrity(unittest.TestCase):
 
     def test_updates_center_rejects_remote_pipe_execution(self):
         catalog = json.loads((ROOT / 'data/updates-center.json').read_text())
-        broken = copy.deepcopy(catalog)
-        broken['commands'][0]['code'] = 'irm https://example.invalid/a.ps1 | iex'
-        with self.assertRaisesRegex(ValueError, 'remote download-and-execute'):
-            build.validate_updates_center(broken)
+        for code in ('irm https://example.invalid/a.ps1 | iex',
+                     'Invoke-WebRequest https://example.invalid/a.ps1 | Invoke-Expression',
+                     'curl -fsSL https://example.invalid/a.sh | bash',
+                     'wget -qO- https://example.invalid/a.sh | sudo sh',
+                     'iwr https://example.invalid/a.ps1 |\niex',
+                     'curl https://example.invalid/a.sh ' + '\\' + '\n' + '| sh',
+                     'iex (irm https://example.invalid/a.ps1)'):
+            with self.subTest(code=code):
+                broken = copy.deepcopy(catalog)
+                broken['commands'][0]['code'] = code
+                with self.assertRaisesRegex(ValueError, 'remote download-and-execute'):
+                    build.validate_updates_center(broken)
+        reviewed = copy.deepcopy(catalog)
+        reviewed['commands'][0]['code'] = "Invoke-WebRequest https://example.invalid/a.ps1 -OutFile reviewed.ps1\nGet-FileHash reviewed.ps1"
+        build.validate_updates_center(reviewed)
+
     def test_command_center_catalog_and_app_are_integrated(self):
         catalog = json.loads((ROOT / 'data/command-center.json').read_text())
         build.validate_command_center(catalog)
@@ -120,17 +133,21 @@ class HubIntegrity(unittest.TestCase):
         self.assertIn('Tron Script', output['site/index.html'])
         self.assertIn('WinUtil', output['site/index.html'])
         self.assertIn('commandCenterCommands', output['site/build-manifest.json'])
+        self.assertIn('[⚡ Command Center](Command-Center)', output['wiki/Home.md'])
+        self.assertIn('[⚡ Quick commands](Quick-Commands)', output['wiki/Home.md'])
 
     def test_global_command_search_is_case_insensitive_and_uncapped(self):
         catalog = json.loads((ROOT / 'data/command-center.json').read_text())
+        updates_catalog = json.loads((ROOT / 'data/updates-center.json').read_text())
         source = (ROOT / 'portal/app.js').read_text()
+        search_index = 'const commandCenterSearch =' + source.split('  const commandCenterSearch =', 1)[1].split(';', 1)[0] + ';'
         matches = next(line.strip() for line in source.splitlines() if line.startswith('  function matches('))
         search_function = 'function updateSearch()' + source.split('  function updateSearch()', 1)[1].split('  function closeSearch()', 1)[0]
-        queries = ['PowerShell', 'powershell', 'PoWeRsHeLl', 'NINITE', 'choco noop', 'technician baseline']
+        queries = ['PowerShell', 'powershell', 'PoWeRsHeLl', 'NINITE', 'choco noop', 'technician baseline', 'Installer recovery', 'WiNgEt RePaIr']
         script = r'''
 const input = JSON.parse(require('fs').readFileSync(0, 'utf8'));
 const commandCenter = input.catalog;
-const updatesCenter = {commands: []};
+const updatesCenter = input.updatesCatalog;
 const array = value => Array.isArray(value) ? value : [];
 const quickItems = [], jobs = [], fieldNotes = [], tools = [];
 const quickByJob = new Map();
@@ -138,7 +155,7 @@ const searchResults = {innerHTML: '', hidden: true};
 const search = {value: '', setAttribute() {}};
 const esc = value => String(value), icon = () => '';
 const decorateBrandLinks = () => {}, closeSearch = () => {};
-''' + matches + '\n' + search_function + r'''
+''' + search_index + '\n' + matches + '\n' + search_function + r'''
 const results = input.queries.map(query => {
   search.value = query;
   updateSearch();
@@ -146,12 +163,12 @@ const results = input.queries.map(query => {
 });
 process.stdout.write(JSON.stringify(results));
 '''
-        result = subprocess.run(['node', '-e', script], input=json.dumps({'catalog': catalog, 'queries': queries}), text=True, capture_output=True, check=True)
+        result = subprocess.run(['node', '-e', script], input=json.dumps({'catalog': catalog, 'updatesCatalog': updates_catalog, 'queries': queries}), text=True, capture_output=True, check=True)
         fields = ('title', 'summary', 'code', 'safety', 'shell', 'sourceTitle', 'category')
         for row in json.loads(result.stdout):
             with self.subTest(query=row['query']):
                 terms = row['query'].lower().split()
-                expected = [item['title'] for item in catalog['commands']
+                expected = [item['title'] for item in [*catalog['commands'], *updates_catalog['commands']]
                             if all(term in ' '.join(item[field] for field in fields).lower() for term in terms)]
                 self.assertEqual(row['titles'], expected)
                 self.assertFalse(row['hidden'])

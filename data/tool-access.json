@@ -4481,6 +4481,566 @@
       "alternates": [],
       "note": "Free personal workspace; paid cloud plans add shared workspaces and organizational features. Basic client opens without login; sign-in enables cloud workspace features."
     },
+    "magika-web": {
+      "officialUrl": "https://securityresearch.google/magika/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://securityresearch.google/magika/demo/magika-demo/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://securityresearch.google/magika/introduction/overview/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free, open-source web demo; separate CLI and language bindings are available. No service account is required for the public web demo."
+    },
+    "koodous": {
+      "officialUrl": "https://koodous.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://koodous.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://koodous.com/about-us",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free web/API access has quotas; paid API plans add requests and downloads. Public portal supports APK search; sign-in and plan determine further capabilities. Free API quotas do not include sample downloads or analysis requests."
+    },
+    "crowdsec-cti": {
+      "officialUrl": "https://www.crowdsec.net/ip-reputation",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://app.crowdsec.net/cti",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.crowdsec.net/u/cti_api/intro/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Web lookup and free API allocation available; API and web quotas are separate, with paid options for more access. The browser workflow needs no API key; account and plan control available data and quotas."
+    },
+    "validin": {
+      "officialUrl": "https://www.validin.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://app.validin.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.validin.com/docs/what-is-validin",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free Community account has 10 daily and 50 monthly queries; paid tiers expand data and workflow capabilities. An account is required. Community lookup is distinct from Enterprise live scanning and collaboration."
+    },
+    "silent-push": {
+      "officialUrl": "https://www.silentpush.com/community-edition/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://explore.silentpush.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.silentpush.com/community-edition/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free Community includes 100 web-console requests per month for evaluation, testing and research; production use requires an appropriate offering. Register a free Community account or sign in to the current console."
+    },
+    "phishtank": {
+      "officialUrl": "https://www.phishtank.org/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.phishtank.org/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.phishtank.org/faq.php",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public phishing lookup remains available. Existing accounts can sign in; new user registration is temporarily disabled. API usage has its own request limits."
+    },
+    "phishly": {
+      "officialUrl": "https://phish.ly/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://phish.ly/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://phish.ly/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free hosted email-analysis workflow; the provider may throttle abuse. Use the email address and instructions on the official page; no separate portal account is advertised."
+    },
+    "msrc-update-guide": {
+      "officialUrl": "https://www.microsoft.com/en-us/msrc",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://msrc.microsoft.com/update-guide/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.microsoft.com/en-us/msrc/faqs-security-update-guide",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public security-update reference and API. Public browser access; JavaScript is required for the guide interface."
+    },
+    "paloalto-test-a-site": {
+      "officialUrl": "https://urlfiltering.paloaltonetworks.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://urlfiltering.paloaltonetworks.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://urlfiltering.paloaltonetworks.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public vendor lookup; request and portal controls apply. Public lookup page; additional challenge or request fields may be required."
+    },
+    "fortiguard-webfilter": {
+      "officialUrl": "https://www.fortiguard.com/webfilter",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.fortiguard.com/webfilter",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.fortinet.com/document/fortiproxy/7.6.0/administration-guide/636363/url-lookup",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public vendor category lookup and review route. Public lookup; provider challenge and review-form requirements may apply."
+    },
+    "symantec-site-review": {
+      "officialUrl": "https://sitereview.bluecoat.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://sitereview.bluecoat.com/index.html",
+        "platform": "Web browser",
+        "evidenceUrl": "https://sitereview.bluecoat.com/index.html",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public category lookup and review request. Public check form; optional review contact details depend on the request."
+    },
+    "trendmicro-site-safety": {
+      "officialUrl": "https://global.sitesafety.trendmicro.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://global.sitesafety.trendmicro.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://global.sitesafety.trendmicro.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public lookup; bulk automated submissions may be blocked. Public browser form without a separate account requirement shown."
+    },
+    "criminal-ip": {
+      "officialUrl": "https://www.criminalip.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://search.criminalip.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.criminalip.io/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free accounts have limited credits. Register or sign in to the Search Engine; private domain reports require a paid plan and selected private mode."
+    },
+    "loldrivers": {
+      "officialUrl": "https://www.loldrivers.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.loldrivers.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.loldrivers.io/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public catalog and detection references. No account required for the public directory."
+    },
+    "lolbas": {
+      "officialUrl": "https://lolbas-project.github.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://lolbas-project.github.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://lolbas-project.github.io/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free, open-source reference website. No account required for the searchable public catalog."
+    },
+    "mitre-d3fend": {
+      "officialUrl": "https://d3fend.mitre.org/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://d3fend.mitre.org/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://d3fend.mitre.org/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public knowledge graph and browser reference tools. Public browsing requires no account."
+    },
+    "tlsref-configurator": {
+      "officialUrl": "https://configurator.tlsref.org/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://configurator.tlsref.org/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://configurator.tlsref.org/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public configurator; open-source project No account is required for the public configurator."
+    },
+    "lets-debug": {
+      "officialUrl": "https://letsdebug.net/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://letsdebug.net/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://letsdebug.net/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public diagnostics; open-source project The public diagnostic form is available without an account."
+    },
+    "csp-evaluator": {
+      "officialUrl": "https://csp-evaluator.withgoogle.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://csp-evaluator.withgoogle.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://csp-evaluator.withgoogle.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public tool; open-source library No account is required for the public policy checker."
+    },
+    "crt-sh": {
+      "officialUrl": "https://crt.sh/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://crt.sh/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://crt.sh/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public certificate search The public search form is available without an account."
+    },
+    "uriports-tools": {
+      "officialUrl": "https://www.uriports.com/tools",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.uriports.com/tools",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.uriports.com/tools?method=mta-sts",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public validators; monitoring and hosted policy plans are separate Public checks are available without a paid monitoring plan."
+    },
+    "google-public-dns": {
+      "officialUrl": "https://dns.google/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://dns.google/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://dns.google/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public resolver lookup No account is required for the public lookup form."
+    },
+    "cloudflare-dns-help": {
+      "officialUrl": "https://one.one.one.one/help/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://one.one.one.one/help/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://developers.cloudflare.com/1.1.1.1/check/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public connection check No account is required for the public connection check."
+    },
+    "mlab-speed": {
+      "officialUrl": "https://www.measurementlab.net/tests/ndt/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://speed.measurementlab.net/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.measurementlab.net/tests/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public measurement test No account is required; starting a test contributes to M-Lab’s public measurement dataset."
+    },
+    "twilio-network-test": {
+      "officialUrl": "https://networktest.twilio.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://networktest.twilio.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://networktest.twilio.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public diagnostic page The diagnostic page is public; individual tests can request browser microphone permission."
+    },
+    "bgp-tools": {
+      "officialUrl": "https://bgp.tools/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://bgp.tools/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://bgp.tools/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public BGP data; commercial monitoring and additional APIs are separate Public search is available without a monitoring subscription."
+    },
+    "ioda": {
+      "officialUrl": "https://ioda.inetintel.cc.gatech.edu/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://ioda.inetintel.cc.gatech.edu/dashboard/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://ioda.inetintel.cc.gatech.edu/reports/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public research dashboard and data Public dashboards can be consulted without configuring a customer monitoring agent."
+    },
+    "aws-health": {
+      "officialUrl": "https://health.aws.amazon.com/health/status",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://health.aws.amazon.com/health/status",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.aws.amazon.com/health/latest/ug/aws-health-dashboard-status.html",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public status dashboard No AWS account is required for public service health; signed-in account health provides targeted events."
+    },
+    "azure-status": {
+      "officialUrl": "https://azure.status.microsoft/en-us/status",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://azure.status.microsoft/en-us/status",
+        "platform": "Web browser",
+        "evidenceUrl": "https://azure.status.microsoft/en-us/status",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public status dashboard The global status page is public; Azure Service Health requires access to the affected subscription."
+    },
+    "google-cloud-status": {
+      "officialUrl": "https://status.cloud.google.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://status.cloud.google.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://status.cloud.google.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public status dashboard The public dashboard is open; Personalized Service Health provides project-specific information after sign-in."
+    },
+    "cloudflare-status": {
+      "officialUrl": "https://www.cloudflarestatus.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.cloudflarestatus.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.cloudflarestatus.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public status dashboard The public status page is open; optional notification subscriptions are separate."
+    },
+    "github-status": {
+      "officialUrl": "https://www.githubstatus.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.githubstatus.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.githubstatus.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public status dashboard Public status and history are open; optional notification subscriptions collect the chosen contact details."
+    },
+    "it-tools": {
+      "officialUrl": "https://it-tools.tech/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://it-tools.tech/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://github.com/CorentinTh/it-tools",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public toolbox; self-hosting available No account is required for the public tools; a self-hosted deployment is also documented."
+    },
+    "vert": {
+      "officialUrl": "https://vert.sh/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://vert.sh/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://vert.sh/privacy/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free open-source converter; self-hosting available The hosted converter does not require an account; server video processing has its own configuration."
+    },
+    "webhook-site": {
+      "officialUrl": "https://webhook.site/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://webhook.site/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.webhook.site/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Limited free temporary endpoints; paid accounts add protected storage and workflow features The free endpoint works without signup; quotas and expiry apply. Paid subscriptions protect account URLs with login by default."
+    },
+    "pairdrop": {
+      "officialUrl": "https://pairdrop.net/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://pairdrop.net/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://github.com/schlagmichdoch/PairDrop",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free open-source service; self-hosting available No signup is required; pairing and transfer acceptance happen in the browser."
+    },
+    "w3c-html-checker": {
+      "officialUrl": "https://validator.w3.org/nu/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://validator.w3.org/nu/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://validator.w3.org/nu/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public checker; local execution available The public checker does not require an account; the project documents local web and command-line use."
+    },
+    "w3c-link-checker": {
+      "officialUrl": "https://validator.w3.org/checklink",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://validator.w3.org/checklink",
+        "platform": "Web browser",
+        "evidenceUrl": "https://validator.w3.org/checklink",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public link checker The public checker does not require an account."
+    },
+    "caniuse": {
+      "officialUrl": "https://caniuse.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://caniuse.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://caniuse.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public support tables; optional supporter features No account is required to read the public browser-support data."
+    },
+    "endoflife-date": {
+      "officialUrl": "https://endoflife.date/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://endoflife.date/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://endoflife.date/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public lifecycle reference and API No account is required for public product pages."
+    },
     "mangodisk": {
       "officialUrl": "https://mangodisk.app/",
       "primary": {

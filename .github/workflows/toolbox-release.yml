@@ -1,0 +1,94 @@
+name: Publish verified toolbox Wiki and release
+on:
+  workflow_run:
+    workflows: ["Validate and publish technician hub"]
+    types: [completed]
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: inta-canonical-wiki-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      actions: read
+    env:
+      SOURCE_COMMIT: ${{ github.event.workflow_run.head_sha }}
+      VALIDATION_RUN_URL: ${{ github.event.workflow_run.html_url }}
+      RELEASE_TAG: online-toolbox-2026-11-26
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - name: Check current main revision
+        id: freshness
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/check-release-publication.py freshness
+      - name: Verify committed generated files
+        if: steps.freshness.outputs.current == 'true'
+        run: |
+          python3 -m py_compile scripts/publish-wiki.py scripts/package-inta-release.py scripts/check-release-publication.py
+          python3 scripts/build-hub.py --check
+      - name: Publish and read back every canonical Wiki page
+        if: steps.freshness.outputs.current == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/publish-wiki.py --report reports/wiki-publish.json
+      - name: Preserve Wiki publication evidence
+        if: always() && steps.freshness.outputs.current == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: wiki-publication-evidence
+          path: reports/wiki-publish.json
+          if-no-files-found: error
+      - name: Check the release checkpoint
+        if: steps.freshness.outputs.current == 'true'
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/check-release-publication.py prepare
+      - name: Download exact browser evidence
+        if: steps.release.outputs.pending == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: online-runtime-evidence
+          path: reports/online-runtime
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+      - name: Package complete source and offline app
+        if: steps.release.outputs.pending == 'true'
+        run: python3 scripts/package-inta-release.py --output dist/release
+      - name: Preserve complete release assets
+        if: steps.release.outputs.pending == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: complete-online-toolbox-release
+          path: dist/release
+          if-no-files-found: error
+      - name: Publish the verified release
+        if: steps.release.outputs.pending == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/check-release-publication.py before
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" dist/release/INTA-online-toolbox-2026-11-26-* --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$RELEASE_TAG" dist/release/INTA-online-toolbox-2026-11-26-* --repo "$GITHUB_REPOSITORY" --target "$SOURCE_COMMIT" --title "INTA online toolbox — 2026-11-26" --notes-file dist/release/release-notes.md --draft
+          fi
+          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false
+          python3 scripts/check-release-publication.py after
+      - name: Preserve release readback evidence
+        if: always() && steps.release.outputs.pending == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-publication-evidence
+          path: reports/release-publish.json
+          if-no-files-found: ignore

@@ -25,7 +25,8 @@ class LocalAgentContract(unittest.TestCase):
         source = (AGENT / "Program.cs").read_text()
         self.assertIn('request.Confirmed', source)
         self.assertIn('"update-all"', source)
-        self.assertIn('request.Action is not ("update" or "update-all" or "repair" or "uninstall")', source)
+        self.assertIn('request.Action is not ("update" or "update-all" or "repair" or "uninstall" or "rollback")', source)
+        self.assertIn('request.Action == "rollback" && request.Manager is not ("snap" or "windows-update")', source)
         self.assertIn("PackageManagers.ValidateId", source)
         self.assertNotIn("ProcessStartInfo", source)
 

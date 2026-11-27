@@ -244,8 +244,8 @@
       "summary": "Run the supported Store cache reset utility when Store downloads or updates are stuck.",
       "code": "wsreset.exe",
       "safety": "Clears the Store cache and opens Microsoft Store. Does not uninstall apps or guarantee a repair; use only for Store-specific symptoms.",
-      "sourceUrl": "https://support.microsoft.com/en-us/account-billing/get-updates-for-apps-and-games-in-microsoft-store-2daed4e5-4c7f-4e7b-9d09-6b4b5c8e9f6a",
-      "sourceTitle": "Microsoft Store app updates"
+      "sourceUrl": "https://support.microsoft.com/en-us/accounts-billing/i-can-t-find-or-install-an-app-from-microsoft-store",
+      "sourceTitle": "Microsoft Store reset and installation troubleshooting"
     },
     {
       "id": "windows-installer-health",
@@ -881,8 +881,8 @@
       "summary": "Open the Store Downloads and updates page to review available app updates.",
       "code": "Start-Process 'ms-windows-store://downloadsandupdates'",
       "safety": "Opens Store UI only. Review managed-device policy and app identity before applying updates.",
-      "sourceUrl": "https://support.microsoft.com/en-us/account-billing/get-updates-for-apps-and-games-in-microsoft-store-2daed4e5-4c7f-4e7b-9d09-6b4b5c8e9f6a",
-      "sourceTitle": "Microsoft Store app updates"
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/apps/develop/launch/launch-store-app",
+      "sourceTitle": "Microsoft Store URI reference"
     },
     {
       "id": "windows-update-cache-restore",
