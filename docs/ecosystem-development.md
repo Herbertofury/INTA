@@ -17,6 +17,8 @@ Build the native technician workspace and exercise its portable data behavior on
 
 Build the native phone companion and prove authenticated job sync on a real mobile device.
 
+Desktop maintenance has its own [native parity acceptance matrix](https://github.com/Herbertofury/INTA/blob/main/docs/desktop-maintenance-parity.md), including coverage pinned to both reference releases and distinct runtime gates for Windows, mobile, and recovery. A catalog link, package manager action, or storage preview is not an entire maintenance workspace.
+
 ## Tool Library across clients
 
 The Site’s [Tool Library](https://herbertofury.github.io/INTA/#tools) is the public browser entry. Desktop, Mobile and Rescue should use the same catalog IDs, approved acquisition roles, source evidence and search/sort behavior. Preserve both compact list and gallery choices. Native views should keep filters and selection when changing layouts; a <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows)-only download viewed on Mobile is a device-targeted reference, not a phone installer. In offline Rescue, show the local or bundled-tool state and keep links available without implying internet or installation.
