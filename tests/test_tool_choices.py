@@ -103,8 +103,6 @@ class ScenarioToolChoices(unittest.TestCase):
 
     def test_all_reviewed_choices_reach_front_pages_and_answer_pages(self):
         outputs = build.build_outputs()
-        visible = {path: visible_text(page) for path, page in outputs.items()
-                   if path.endswith('.md')}
         for row in self.quick['items']:
             self.assertIn('choices', row, row['id'] + ' needs an explicit reviewed choice disposition')
             choices = build.resolved_tool_choices(row, self.access)
@@ -113,12 +111,19 @@ class ScenarioToolChoices(unittest.TestCase):
             for choice in choices:
                 official = self.access[choice['toolId']]['officialUrl']
                 download = build.selected_tool_action(self.access[choice['toolId']], choice.get('actionId'))['url']
-                for path in ['README.md', 'docs/start-here.md', 'wiki/Home.md', 'wiki/Start-Here.md', 'wiki/' + row['wikiPage'] + '.md']:
+                fronts = ['README.md', 'docs/start-here.md', 'docs/free-tool-picks.md', 'wiki/Home.md', 'wiki/Start-Here.md', 'wiki/Free-Tool-Picks.md']
+                for path in [*fronts, 'wiki/' + row['wikiPage'] + '.md']:
                     with self.subTest(scenario=row['id'], tool=choice['toolId'], page=path):
-                        self.assertIn('](' + official + ')', outputs[path])
-                        self.assertIn('](' + download + ')', outputs[path])
-                        self.assertTrue(choice['role'] in visible[path],
-                                        'Missing visible role: ' + choice['role'])
+                        if path in fronts:
+                            context = next(line for line in outputs[path].splitlines()
+                                           if line.startswith('| ') and
+                                           '](' + build.WIKI + '/' + row['wikiPage'] + ')** |' in line)
+                        else:
+                            context = outputs[path].split('<a id="working-kit"></a>', 1)[0]
+                        plain = visible_text(context)
+                        self.assertTrue('](' + official + ')' in context, 'Official page absent from the scenario choices')
+                        self.assertTrue('](' + download + ')' in context, 'Exact acquisition absent from the scenario choices')
+                        self.assertTrue(choice['role'] in plain, 'Visible task role absent from the scenario choices')
 
     def test_named_malware_tools_precede_the_long_toolkit(self):
         outputs = build.build_outputs()

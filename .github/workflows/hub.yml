@@ -2,9 +2,9 @@ name: Validate and publish technician hub
 on:
   push:
     branches: [main]
-    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
+    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/check-online-runtime.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
   pull_request:
-    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
+    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/check-online-runtime.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -14,7 +14,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Validate complete content and generated outputs
@@ -23,6 +23,20 @@ jobs:
           python3 scripts/build-hub.py
           python3 scripts/check-wiki.py
           python3 scripts/check-knowledge.py --output reports/knowledge-health.json
+      - name: Verify desktop, mobile and offline online-tool workflows
+        run: |
+          python3 -m pip install --disable-pip-version-check playwright==1.62.0
+          python3 -m playwright install --with-deps chromium
+          python3 scripts/check-online-runtime.py --html site/index.html --output reports/online-runtime
+          mkdir -p site/validation
+          cp -R reports/online-runtime site/validation/online-runtime
+      - name: Preserve browser verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: online-runtime-evidence
+          path: reports/online-runtime
+          if-no-files-found: ignore
       - uses: actions/upload-pages-artifact@v4
         with:
           path: site

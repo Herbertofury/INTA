@@ -10,6 +10,8 @@
   const updatesCenter = data.updatesCenter || { commands: [], workflows: [], channels: [], principles: [] };
   const updateCommandMap = new Map(array(updatesCenter.commands).map(item => [item.id, item]));
   const commandCenterCommands = new Map(array(commandCenter.commands).map(item => [item.id, item]));
+  const commandCenterSearch = new Map(array(commandCenter.commands).map(item => [item.id,
+    [item.title, item.summary, item.code, item.safety, item.shell, item.sourceTitle, item.category].join(' ').toLowerCase()]));
   const meta = data.meta || {};
   const toolMap = new Map(tools.map(tool => [tool.id, tool]));
   const jobMap = new Map(jobs.map(job => [job.id, job]));
@@ -525,6 +527,7 @@
   const fieldNoteSearchText = new Map(fieldNotes.map(note => [note.id, text(fieldNoteTerms(note)).toLowerCase()]));
   const jobSearchText = new Map(jobs.map(job => [job.id, text([job.title, job.category, job.summary, job.startHere, ...array(job.steps).map(step => step.title), workspaceSearchText.get(job.id), ...(fieldNotesByJob.get(job.id) || []).flatMap(fieldNoteTerms), ...(quickByJob.get(job.id) || []).flatMap(quickTerms)]).toLowerCase()]));
   const quickSearchText = new Map(quickItems.map(item => [item.id, text(quickTerms(item)).toLowerCase()]));
+  const quickDirectSearchText = new Map(quickItems.map(item => [item.id, text([item.label, ...array(item.aliases)]).toLowerCase()]));
   function matches(haystack, query) { return query.trim().toLowerCase().split(/\s+/).filter(Boolean).every(term => haystack.includes(term)); }
   const recommendationOrder = {core: 3, specialist: 2, evaluate: 1};
   const numberFormat = new Intl.NumberFormat();
@@ -790,7 +793,10 @@
       if (!groups.has(group)) groups.set(group, []);
       groups.get(group).push(resource);
     });
-    return `<aside class="job-tool-panel" id="job-tools" aria-labelledby="job-tools-heading"><header class="job-tool-panel-heading"><div><h2 id="job-tools-heading" tabindex="-1">${icon('wrench')}Tools &amp; resources</h2><p>${toolCount} ${toolCount === 1 ? 'tool' : 'tools'} · ${resources.length} ${resources.length === 1 ? 'resource' : 'resources'}</p></div><a class="panel-procedure-link" href="${jobSectionHref(job, quickId, 'procedure')}" aria-label="Go to the procedure">${icon('route')}Steps</a></header><div class="job-panel-content" tabindex="0" role="region" aria-label="All tools and official resources for this job">${priority.length ? `<section class="job-priority-section" aria-labelledby="job-priority-heading"><h3 class="panel-group-heading" id="job-priority-heading">${selected?.guideOnly ? 'Optional tools for this job' : 'Choose by role'}</h3>${selected?.guideOnly ? '<p class="no-extra-tool">No extra application is required.</p>' : ''}<div class="job-priority-tools${priority.length === 1 ? ' single-priority-tool' : ''}">${priority.map(entry => `<article class="job-priority-tool" data-priority-tool="${esc(entry.toolId)}" data-priority-action="${esc(entry.actionId || '')}"><h4>${toolName(entry.tool)}</h4>${entry.choice?.role ? `<p class="choice-role">${formatted(entry.choice.role)}</p>` : ''}${entry.choice?.freeUse ? `<p class="choice-use">${formatted(entry.choice.freeUse)}</p>` : ''}${accessActions(entry.tool, 'workspace-access', entry.actionId, true)}</article>`).join('')}</div></section>` : '<p class="no-extra-tool">No extra application is required for this job.</p>'}${drivers.length ? `<nav class="job-driver-shortcuts" aria-labelledby="job-driver-shortcuts-heading"><h3 class="panel-group-heading" id="job-driver-shortcuts-heading">Get the driver</h3><div>${drivers.map(resource => external(resource.url, `<span>${esc(resource.label)}</span>${icon('external')}`, 'driver-shortcut')).join('')}</div></nav>` : ''}${entries.length ? `<section class="job-panel-tools" aria-labelledby="job-tools-list-heading"><h3 class="panel-group-heading" id="job-tools-list-heading">Supporting tools &amp; usage</h3>${entries.map((entry, index) => `<article class="job-workspace-tool" data-workspace-tool="${esc(entry.toolId)}" data-workspace-action="${esc(entry.actionId || '')}"${entries.findIndex(other => other.toolId === entry.toolId) === index ? ` data-recommended-tool="${esc(entry.toolId)}"` : ''}><h4>${toolName(entry.tool)}</h4>${entry.why ? `<p>${formatted(entry.why)}</p>` : ''}${contextToolAccess(entry)}</article>`).join('')}</section>` : ''}${[...groups.entries()].map(([group, items], index) => `<section class="job-resource-group" data-resource-group="${esc(group)}" aria-labelledby="job-resource-group-${index}"><h3 class="panel-group-heading" id="job-resource-group-${index}">${esc(resourceGroupLabel(group))}</h3><div class="job-resource-list${/driver|manufacturer|oem/i.test(group) ? ' driver-resource-list' : ''}">${items.map(resource => `<article class="job-resource" id="job-resource-${esc(resource.id)}" data-workspace-resource="${esc(resource.id)}">${external(resource.url, `<span>${esc(resource.label)}</span>${icon('external')}`, 'job-resource-link')}<p>${formatted(resource.description)}</p><div class="job-resource-meta">${resource.kind ? `<span>${esc(resourceGroupLabel(resource.kind))}</span>` : ''}${resource.sourceUrl && resource.sourceUrl !== resource.url ? external(resource.sourceUrl, 'Source', 'resource-source') : ''}${resource.checkedAt ? `<time datetime="${esc(resource.checkedAt)}">Checked ${esc(dateLabel(resource.checkedAt, true))}</time>` : ''}</div></article>`).join('')}</div></section>`).join('')}</div></aside>`;
+    const discovery = priority.filter(entry => authoredTools.has(entry.toolId) && array(entry.tool.tags).includes('discovery'));
+    const driverContent = drivers.length ? `<nav class="job-driver-shortcuts" aria-labelledby="job-driver-shortcuts-heading"><h3 class="panel-group-heading" id="job-driver-shortcuts-heading">Get the driver</h3>${discovery.length ? `<div class="driver-discovery-tools">${discovery.map(entry => `<article class="driver-discovery-tool" data-discovery-tool="${esc(entry.toolId)}"><h4>${toolName(entry.tool)}</h4>${entry.choice?.role ? `<p class="choice-role">${formatted(entry.choice.role)}</p>` : ''}${entry.choice?.freeUse ? `<p class="choice-use">${formatted(entry.choice.freeUse)}</p>` : ''}${accessActions(entry.tool, 'driver-discovery-access', entry.actionId, true)}</article>`).join('')}</div>` : ''}<div>${drivers.map(resource => external(resource.url, `<span>${esc(resource.label)}</span>${icon('external')}`, 'driver-shortcut')).join('')}</div></nav>` : '';
+    const priorityContent = priority.length ? `<section class="job-priority-section" aria-labelledby="job-priority-heading"><h3 class="panel-group-heading" id="job-priority-heading">${selected?.guideOnly ? 'Optional tools for this job' : 'Choose by role'}</h3>${selected?.guideOnly ? '<p class="no-extra-tool">No extra application is required.</p>' : ''}<div class="job-priority-tools${priority.length === 1 ? ' single-priority-tool' : ''}">${priority.map(entry => `<article class="job-priority-tool" data-priority-tool="${esc(entry.toolId)}" data-priority-action="${esc(entry.actionId || '')}"><h4>${toolName(entry.tool)}</h4>${entry.choice?.role ? `<p class="choice-role">${formatted(entry.choice.role)}</p>` : ''}${entry.choice?.freeUse ? `<p class="choice-use">${formatted(entry.choice.freeUse)}</p>` : ''}${accessActions(entry.tool, 'workspace-access', entry.actionId, true)}</article>`).join('')}</div></section>` : '<p class="no-extra-tool">No extra application is required for this job.</p>';
+    return `<aside class="job-tool-panel" id="job-tools" aria-labelledby="job-tools-heading"><header class="job-tool-panel-heading"><div><h2 id="job-tools-heading" tabindex="-1">${icon('wrench')}Tools &amp; resources</h2><p>${toolCount} ${toolCount === 1 ? 'tool' : 'tools'} · ${resources.length} ${resources.length === 1 ? 'resource' : 'resources'}</p></div><a class="panel-procedure-link" href="${jobSectionHref(job, quickId, 'procedure')}" aria-label="Go to the procedure">${icon('route')}Steps</a></header><div class="job-panel-content" tabindex="0" role="region" aria-label="All tools and official resources for this job">${driverContent}${priorityContent}${entries.length ? `<section class="job-panel-tools" aria-labelledby="job-tools-list-heading"><h3 class="panel-group-heading" id="job-tools-list-heading">Supporting tools &amp; usage</h3>${entries.map((entry, index) => `<article class="job-workspace-tool" data-workspace-tool="${esc(entry.toolId)}" data-workspace-action="${esc(entry.actionId || '')}"${entries.findIndex(other => other.toolId === entry.toolId) === index ? ` data-recommended-tool="${esc(entry.toolId)}"` : ''}><h4>${toolName(entry.tool)}</h4>${entry.why ? `<p>${formatted(entry.why)}</p>` : ''}${contextToolAccess(entry)}</article>`).join('')}</section>` : ''}${[...groups.entries()].map(([group, items], index) => `<section class="job-resource-group" data-resource-group="${esc(group)}" aria-labelledby="job-resource-group-${index}"><h3 class="panel-group-heading" id="job-resource-group-${index}">${esc(resourceGroupLabel(group))}</h3><div class="job-resource-list${/driver|manufacturer|oem/i.test(group) ? ' driver-resource-list' : ''}">${items.map(resource => `<article class="job-resource" id="job-resource-${esc(resource.id)}" data-workspace-resource="${esc(resource.id)}">${external(resource.url, `<span>${esc(resource.label)}</span>${icon('external')}`, 'job-resource-link')}<p>${formatted(resource.description)}</p><div class="job-resource-meta">${resource.kind ? `<span>${esc(resourceGroupLabel(resource.kind))}</span>` : ''}${resource.sourceUrl && resource.sourceUrl !== resource.url ? external(resource.sourceUrl, 'Source', 'resource-source') : ''}${resource.checkedAt ? `<time datetime="${esc(resource.checkedAt)}">Checked ${esc(dateLabel(resource.checkedAt, true))}</time>` : ''}</div></article>`).join('')}</div></section>`).join('')}</div></aside>`;
   }
   function jobNavigation(job, workspace, quickId) {
     const sections = [['tools', 'Tools & resources'], ...(array(workspace?.decisions).length ? [['decisions', 'Decisions']] : []), ['procedure', 'Procedure'], ['verify', 'Verify'], ...(fieldNotesByJob.get(job.id)?.length ? [['fixes', 'Specific fixes']] : []), ...(array(job.sources).length ? [['references', 'Sources']] : [])];
@@ -904,7 +910,7 @@
     let visible = 0;
     root.querySelectorAll('[data-command-item]').forEach(card => {
       const item = commandCenterCommands.get(card.dataset.commandItem);
-      const haystack = [item?.title,item?.summary,item?.code,item?.safety,item?.shell,item?.sourceTitle,item?.category].join(' ').toLocaleLowerCase();
+      const haystack = commandCenterSearch.get(item?.id) || '';
       const show = (!query || haystack.includes(query)) && (!shell || item?.shell===shell) && (!risk || item?.risk===risk) && (active==='all' || item?.category===active);
       card.hidden = !show;
       if (show) visible++;
@@ -981,12 +987,30 @@
   const onlineGroups = new Map(array(onlineData.groups).map(group => [group.id, group]));
   const onlineEntries = array(onlineData.tools).filter(entry => toolMap.has(entry.toolId));
   const onlineByTool = new Map(onlineEntries.map(entry => [entry.toolId, entry]));
+  const onlineWorkflows = array(onlineData.workflows);
+  const onlineWorkflowById = new Map(onlineWorkflows.map(flow => [flow.id, flow]));
+  const onlineWorkflowTools = new Map(onlineWorkflows.map(flow => [flow.id, new Set(array(flow.toolIds))]));
+  const onlineGroupCounts = new Map(array(onlineData.groups).map(group => [group.id, 0]));
+  onlineEntries.forEach(entry => onlineGroupCounts.set(entry.group, (onlineGroupCounts.get(entry.group) || 0) + 1));
   const onlineIndex = new Map(onlineEntries.map(entry => {
     const tool = toolMap.get(entry.toolId);
     return [entry.toolId, text([tool.name, tool.summary, tool.bestFor, ...array(tool.tags),
       onlineGroups.get(entry.group)?.label, entry.firstAction, entry.expectedResult, entry.account,
       entry.sharing, tool.pricing]).toLowerCase()];
   }));
+
+  function onlineTask(params) {
+    return onlineWorkflowById.get(params.get('task')) || onlineWorkflows[0];
+  }
+  function onlineHref(params = new URLSearchParams(), changes = {}) {
+    const next = new URLSearchParams(params);
+    Object.entries(changes).forEach(([key, value]) => { if (value) next.set(key, value); else next.delete(key); });
+    const query = next.toString();
+    return `#online${query ? '?' + query : ''}`;
+  }
+  function onlineServiceHref(toolId) {
+    return onlineHref(new URLSearchParams(), { tool: toolId });
+  }
 
   function onlineStartSection() {
     if (!onlineEntries.length) return '';
@@ -996,22 +1020,21 @@
 
   function onlineWorkflow(workflow) {
     if (!workflow) return '';
-    return `<section class="online-workflow" aria-labelledby="online-workflow-heading" data-online-workflow="${esc(workflow.id)}"><div><h2 id="online-workflow-heading">${esc(workflow.title)}</h2><p>${formatted(workflow.summary)}</p><ol>${array(workflow.steps).map(step => `<li>${formatted(step)}</li>`).join('')}</ol><a href="#job/${encodeURIComponent(workflow.jobId)}">Complete job guide ${icon('book')}</a></div><div class="online-workflow-kit" aria-label="Tools for this task">${array(workflow.toolIds).map(id => toolMap.get(id)).filter(Boolean).map(tool => `<div>${toolName(tool)}<p>${esc(onlineByTool.get(tool.id)?.shortRole || tool.bestFor)}</p>${accessActions(tool, 'online-access', '', true)}</div>`).join('')}</div></section>`;
+    return `<section class="online-workflow" aria-labelledby="online-workflow-heading" data-online-workflow="${esc(workflow.id)}"><div><h2 id="online-workflow-heading">${esc(workflow.title)}</h2><p>${formatted(workflow.summary)}</p><ol>${array(workflow.steps).map(step => `<li>${formatted(step)}</li>`).join('')}</ol><a href="#job/${encodeURIComponent(workflow.jobId)}">Complete job guide ${icon('book')}</a></div><div class="online-workflow-kit" aria-label="Tools for this task">${array(workflow.toolIds).map(id => toolMap.get(id)).filter(Boolean).map(tool => `<div>${toolName(tool)}<p>${esc(onlineByTool.get(tool.id)?.shortRole || tool.bestFor)}</p>${accessActions(tool, 'online-access', '', true)}<a class="online-notes-link" href="${onlineServiceHref(tool.id)}" data-online-inspect="${esc(tool.id)}">Access &amp; submission behavior ${icon('arrow')}</a></div>`).join('')}</div></section>`;
   }
 
   function onlineServiceRow(entry) {
     const tool = toolMap.get(entry.toolId);
-    return `<article class="online-tool-row" role="listitem" data-online-tool="${esc(tool.id)}"><div class="online-tool-identity"><span class="row-meta">${esc(onlineGroups.get(entry.group)?.label || entry.group)}</span><h3>${toolName(tool)}</h3><p>${formatted(tool.summary)}</p><div class="online-service-actions">${accessActions(tool, 'online-access', '', true)}<a href="#tool/${encodeURIComponent(tool.id)}">Full reference</a>${saveButton(tool)}</div></div><div class="online-tool-guidance"><p><strong>Start here</strong> ${formatted(entry.firstAction)}</p><p><strong>Read the result</strong> ${formatted(entry.expectedResult)}</p><dl class="online-access-notes"><div><dt>Access</dt><dd>${formatted(tool.pricing)} ${formatted(entry.account)}</dd></div><div><dt>Submission behavior</dt><dd>${formatted(entry.sharing)}</dd></div></dl><details class="online-evidence"><summary>Official evidence · reviewed ${esc(dateLabel(entry.reviewedAt))}</summary><ul>${array(entry.sources).map(source => `<li>${external(source.url, esc(source.title))}<span>${formatted(source.evidence)}</span></li>`).join('')}</ul></details></div></article>`;
+    return `<article class="online-tool-row" id="online-service-${esc(tool.id)}" role="listitem" data-online-tool="${esc(tool.id)}" aria-labelledby="online-heading-${esc(tool.id)}"><div class="online-tool-identity"><span class="row-meta">${esc(onlineGroups.get(entry.group)?.label || entry.group)}</span><h3 id="online-heading-${esc(tool.id)}" tabindex="-1">${toolName(tool)}</h3><p>${formatted(tool.summary)}</p><div class="online-service-actions">${accessActions(tool, 'online-access', '', true)}<a href="#tool/${encodeURIComponent(tool.id)}">Full reference</a><a href="${onlineServiceHref(tool.id)}" aria-label="Link to ${esc(tool.name)} in the online directory">Service link ${icon('link')}</a>${saveButton(tool)}</div></div><div class="online-tool-guidance"><p><strong>Start here</strong> ${formatted(entry.firstAction)}</p><p><strong>Read the result</strong> ${formatted(entry.expectedResult)}</p><dl class="online-access-notes"><div><dt>Access</dt><dd>${formatted(tool.pricing)} ${formatted(entry.account)}</dd></div><div><dt>Submission behavior</dt><dd>${formatted(entry.sharing)}</dd></div></dl><details class="online-evidence"><summary>Official evidence · reviewed ${esc(dateLabel(entry.reviewedAt))}</summary><ul>${array(entry.sources).map(source => `<li>${external(source.url, esc(source.title))}<span>${formatted(source.evidence)}</span></li>`).join('')}</ul></details></div></article>`;
   }
 
   function online(params = new URLSearchParams()) {
-    const taskId = params.get('task') || onlineData.workflows[0]?.id;
-    const task = array(onlineData.workflows).find(flow => flow.id === taskId) || onlineData.workflows[0];
+    const task = onlineTask(params);
     const group = onlineGroups.has(params.get('group')) ? params.get('group') : '';
     return heading('INTA web toolkit', 'Online tools', `${onlineEntries.length} source-reviewed services. Open the right site, follow the first action, and understand the result.`)
-      + `<nav class="online-task-nav" aria-label="Choose an online task">${array(onlineData.workflows).map(flow => `<a class="${flow.id === task?.id ? 'selected' : ''}" href="#online?task=${encodeURIComponent(flow.id)}"${flow.id === task?.id ? ' aria-current="true"' : ''}>${esc(flow.title)}</a>`).join('')}</nav>`
+      + `<nav class="online-task-nav" aria-label="Choose an online task">${onlineWorkflows.map(flow => `<a class="${flow.id === task?.id ? 'selected' : ''}" data-online-task="${esc(flow.id)}" href="${esc(onlineHref(params, { task: flow.id, tool: '' }))}"${flow.id === task?.id ? ' aria-current="true"' : ''}>${esc(flow.title)}</a>`).join('')}</nav>`
       + onlineWorkflow(task)
-      + `<section class="online-directory" aria-labelledby="online-directory-heading"><div class="section-title"><div><h2 id="online-directory-heading">All online services</h2><p>Every entry stays available. Search names, tasks, account requirements, or capabilities.</p></div>${external(`${repo}/wiki/Online-Tools`, 'Read the Wiki')}</div><div class="filters online-filters"><label class="input-wrap">${icon('search')}<span class="sr-only">Search online tools</span><input id="online-search" type="search" placeholder="Try hash, phishing, DMARC, TLS, CVE…" value="${esc(params.get('q') || '')}"></label><label class="sr-only" for="online-group">Online tool category</label><select class="filter-select" id="online-group"><option value="">All ${onlineGroups.size} groups</option>${array(onlineData.groups).map(item => `<option value="${esc(item.id)}"${item.id === group ? ' selected' : ''}>${esc(item.label)}</option>`).join('')}</select><button data-reset-online>Clear filters</button></div><nav class="online-group-nav" aria-label="Filter online tools by task"><button data-online-group="" aria-pressed="${!group}">All services <span>${onlineEntries.length}</span></button>${array(onlineData.groups).map(item => `<button data-online-group="${esc(item.id)}" aria-pressed="${group === item.id}">${esc(item.label)} <span>${onlineEntries.filter(entry => entry.group === item.id).length}</span></button>`).join('')}</nav><div class="filter-result"><span id="online-result-count" aria-live="polite"></span><span>Sources reviewed ${esc(dateLabel(onlineData.reviewedAt, true))}</span></div><div id="online-results" class="online-tool-list" role="list"></div></section>`;
+      + `<section class="online-directory" aria-labelledby="online-directory-heading"><div class="section-title"><div><h2 id="online-directory-heading">All online services</h2><p>Search names, tasks, account requirements, or capabilities. Clear filters to return to the complete directory.</p></div>${external(`${repo}/wiki/Online-Tools`, 'Read the Wiki')}</div><div class="filters online-filters"><label class="input-wrap">${icon('search')}<span class="sr-only">Search online tools</span><input id="online-search" type="search" placeholder="Try hash, phishing, DMARC, TLS, CVE…" value="${esc(params.get('q') || '')}"></label><label class="sr-only" for="online-group">Online tool category</label><select class="filter-select" id="online-group"><option value="">All ${onlineGroups.size} groups</option>${array(onlineData.groups).map(item => `<option value="${esc(item.id)}"${item.id === group ? ' selected' : ''}>${esc(item.label)}</option>`).join('')}</select><button data-reset-online>Clear filters</button></div><div class="online-scope-filters" role="group" aria-label="Narrow the online directory"><label><input type="checkbox" id="online-task-only"${params.get('scope') === 'task' ? ' checked' : ''}> Tools for this task</label><label><input type="checkbox" id="online-saved-only"${params.get('saved') === '1' ? ' checked' : ''}> Saved only</label><span>Both options work with search and group filters.</span></div><nav class="online-group-nav" aria-label="Filter online tools by task"><button data-online-group="" aria-pressed="${!group}">All groups <span>${onlineEntries.length}</span></button>${array(onlineData.groups).map(item => `<button data-online-group="${esc(item.id)}" aria-pressed="${group === item.id}">${esc(item.label)} <span>${onlineGroupCounts.get(item.id)}</span></button>`).join('')}</nav><div class="filter-result"><span id="online-result-count" aria-live="polite"></span><span>Sources reviewed ${esc(dateLabel(onlineData.reviewedAt, true))}</span></div><div id="online-results" class="online-tool-list" role="list"></div></section>`;
   }
 
   function filterOnline(linkProse = true) {
@@ -1019,19 +1042,33 @@
     if (!container) return;
     const query = $('#online-search').value;
     const group = $('#online-group').value;
-    const entries = onlineEntries.filter(entry => (!group || entry.group === group) && matches(onlineIndex.get(entry.toolId), query));
-    container.innerHTML = entries.length ? entries.map(onlineServiceRow).join('') : `<div class="empty-state"><h3>No matching online tools</h3><p>Try a broader task or clear the filters to see every service.</p><button data-reset-online>Show all online tools</button></div>`;
-    $('#online-result-count').textContent = `${entries.length} of ${onlineEntries.length} online services`;
-    $$('[data-online-group]').forEach(button => button.setAttribute('aria-pressed', button.dataset.onlineGroup === group));
+    const taskOnly = $('#online-task-only').checked;
+    const savedOnly = $('#online-saved-only').checked;
     const route = parseRoute();
+    const task = onlineTask(route.params);
+    const taskTools = onlineWorkflowTools.get(task?.id);
+    const entries = onlineEntries.filter(entry => (!group || entry.group === group)
+      && (!taskOnly || taskTools?.has(entry.toolId)) && (!savedOnly || favorites.has(entry.toolId))
+      && matches(onlineIndex.get(entry.toolId), query));
+    // Keep expanded evidence, keyboard focus and decoded icons when the query
+    // changes but the complete ordered result set is identical.
+    const resultKey = entries.map(entry => entry.toolId).join('|');
+    const changed = container.dataset.resultKey !== resultKey;
+    if (changed) {
+      container.innerHTML = entries.length ? entries.map(onlineServiceRow).join('') : `<div class="empty-state"><h3>No matching online tools</h3><p>Try a broader task or clear the filters to see every service.</p><button data-reset-online>Show all online tools</button></div>`;
+      container.dataset.resultKey = resultKey;
+    }
+    $('#online-result-count').textContent = `${entries.length} of ${onlineEntries.length} online services${taskOnly ? ` · Task: ${task?.title || ''}` : ''}${savedOnly ? ' · Saved tools' : ''}`;
+    $$('[data-online-group]').forEach(button => button.setAttribute('aria-pressed', button.dataset.onlineGroup === group));
     if (route.name === 'online') {
       const params = route.params;
-      for (const [key, value] of [['q', query], ['group', group]]) { if (value) params.set(key, value); else params.delete(key); }
-      const suffix = params.toString();
-      const next = `#online${suffix ? '?' + suffix : ''}`;
+      for (const [key, value] of [['q', query], ['group', group], ['scope', taskOnly ? 'task' : ''], ['saved', savedOnly ? '1' : '']]) { if (value) params.set(key, value); else params.delete(key); }
+      if (linkProse) params.delete('tool');
+      const next = onlineHref(params);
       if (location.hash !== next) history.replaceState(null, '', next);
+      $$('[data-online-task]').forEach(link => { link.href = onlineHref(params, { task: link.dataset.onlineTask, tool: '' }); });
     }
-    if (linkProse) { linkifyProse(container); updateCounts(); }
+    if (linkProse) { if (changed) linkifyProse(container); updateCounts(); }
   }
 
   function onlineDetail(toolId) {
@@ -1149,7 +1186,12 @@
     const section = route.name === 'job' && route.params.get('section');
     const sectionTarget = section && document.getElementById(`job-${section}`);
     const selectedAnswer = route.quickId && document.getElementById(`quick-${route.quickId}`);
-    if (serviceTarget) {
+    const onlineTarget = route.name === 'online' && onlineByTool.has(route.params.get('tool'))
+      && document.getElementById(`online-service-${route.params.get('tool')}`);
+    if (onlineTarget) {
+      onlineTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
+      onlineTarget.querySelector('h3[tabindex]')?.focus({ preventScroll: true });
+    } else if (serviceTarget) {
       serviceTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
       serviceTarget.querySelector('h2[tabindex]')?.focus({ preventScroll: true });
     } else if (sectionTarget) {
@@ -1192,6 +1234,10 @@
     updateCounts();
     if (parseRoute().name === 'saved') {
       if (favorites.size) filterTools(); else render();
+    }
+    if (parseRoute().name === 'online' && $('#online-saved-only')?.checked) {
+      filterOnline();
+      if (wasSaved) ($('#online-results [data-save]') || $('#online-saved-only')).focus({ preventScroll: true });
     }
     notify(`${toolMap.get(id).name} ${wasSaved ? 'removed from' : 'saved to'} your toolkit.${!storageAvailable ? ' Browser storage is unavailable; this lasts for this visit.' : ''}`);
   }
@@ -1438,7 +1484,7 @@
   function updateSearch() {
     const query = search.value.trim();
     if (!query) return closeSearch();
-    const foundScenarios = quickItems.filter(item => matches(quickSearchText.get(item.id), query));
+    const foundScenarios = quickItems.filter(item => matches(quickSearchText.get(item.id), query)).sort((a, b) => Number(matches(quickDirectSearchText.get(b.id), query)) - Number(matches(quickDirectSearchText.get(a.id), query)));
     const exactScenarioJobs = new Set(foundScenarios.map(item => item.jobId));
     jobs.forEach(job => {
       const firstAnswer = quickByJob.get(job.id)?.[0];
@@ -1447,7 +1493,7 @@
     const foundNotes = fieldNotes.filter(note => matches(fieldNoteSearchText.get(note.id), query));
     const foundJobs = jobs.filter(job => matches(jobSearchText.get(job.id), query));
     const foundTools = tools.filter(tool => matches(toolSearchText.get(tool.id), query));
-    const foundCommands = array(commandCenter.commands).filter(item => matches([item.title,item.summary,item.code,item.safety,item.shell,item.sourceTitle,item.category].join(' ').toLowerCase(), query));
+    const foundCommands = array(commandCenter.commands).filter(item => matches(commandCenterSearch.get(item.id) || '', query));
     const foundUpdateCommands = array(updatesCenter.commands).filter(item => matches([item.title,item.summary,item.code,item.safety,item.shell,item.sourceTitle,item.category].join(' ').toLowerCase(), query));
     let html = `<div class="search-summary">${foundScenarios.length + foundNotes.length + foundJobs.length + foundTools.length + foundCommands.length + foundUpdateCommands.length} results for “${esc(query)}”</div>`;
     if (foundScenarios.length) html += `<div class="search-label">First actions · ${foundScenarios.length}</div>${foundScenarios.map(item => `<a class="search-result search-scenario" data-search-scenario="${esc(item.id)}" href="${quickHref(item)}"><span class="result-icon" aria-hidden="true">${esc(item.icon || scenarioEmoji[item.jobId] || '🧰')}</span><span><strong>${esc(item.label)}</strong><small>${esc(item.firstStep)}</small></span>${icon('arrow')}</a>`).join('')}`;
@@ -1455,7 +1501,7 @@
     if (foundJobs.length) html += `<div class="search-label">Job playbooks · ${foundJobs.length}</div>${foundJobs.map(job => `<a class="search-result" href="#job/${encodeURIComponent(job.id)}"><span class="result-icon">${icon(jobIcon(job))}</span><span><strong>${esc(job.title)}</strong><small>${esc(job.category)}</small></span>${icon('arrow')}</a>`).join('')}`;
     if (foundTools.length) html += `<div class="search-label">Tools · ${foundTools.length}</div>${foundTools.map(tool => `<div class="search-tool-result" data-search-tool="${esc(tool.id)}"><div class="search-tool-main">${toolName(tool, 'search-tool-name')}<small>${esc(categoryLabel(tool.category))} · ${esc(array(tool.platforms).join(', '))}</small></div><a class="search-tool-details" href="#tool/${encodeURIComponent(tool.id)}" aria-label="Details and alternate downloads for ${esc(tool.name)}">Details ${icon('arrow')}</a></div>`).join('')}`;
     if (foundCommands.length) html += `<div class="search-label">Commands · ${foundCommands.length}</div>${foundCommands.map(item => `<a class="search-result" href="#command-center?category=${encodeURIComponent(item.category)}&q=${encodeURIComponent(item.title)}"><span class="result-icon">${icon('terminal')}</span><span><strong>${esc(item.title)}</strong><small>${esc(item.shell)} · ${esc(item.summary)}</small></span>${icon('arrow')}</a>`).join('')}`;
-    if (foundUpdateCommands.length) html += `<div class="search-label">Updates & repairs · ${foundUpdateCommands.length}</div>${foundUpdateCommands.slice(0,8).map(item => `<a class="search-result" href="#updates?q=${encodeURIComponent(item.title)}"><span class="result-icon">${icon('refresh-cw')}</span><span><strong>${esc(item.title)}</strong><small>${esc(item.shell)} · ${esc(item.summary)}</small></span>${icon('arrow')}</a>`).join('')}`;
+    if (foundUpdateCommands.length) html += `<div class="search-label">Updates & repairs · ${foundUpdateCommands.length}</div>${foundUpdateCommands.map(item => `<a class="search-result" href="#updates?q=${encodeURIComponent(item.title)}"><span class="result-icon">${icon('refresh-cw')}</span><span><strong>${esc(item.title)}</strong><small>${esc(item.shell)} · ${esc(item.summary)}</small></span>${icon('arrow')}</a>`).join('')}`;
     if (!foundScenarios.length && !foundNotes.length && !foundJobs.length && !foundTools.length && !foundCommands.length && !foundUpdateCommands.length) html += '<div class="search-empty">No results yet. Try a tool name or a symptom such as “network” or “malware”.</div>';
     searchResults.innerHTML = html;
     decorateBrandLinks(searchResults);
@@ -1484,7 +1530,11 @@
     if (jobCardTarget && !target.closest('a,button,input,select,textarea') && !window.getSelection()?.toString()) { location.hash = jobCardTarget.dataset.jobRoute; return; }
     const onlineGroup = target.closest('[data-online-group]');
     if (onlineGroup) { $('#online-group').value = onlineGroup.dataset.onlineGroup; filterOnline(); return; }
-    if (target.closest('[data-reset-online]')) { $('#online-search').value = ''; $('#online-group').value = ''; filterOnline(); $('#online-search').focus(); return; }
+    if (target.closest('[data-reset-online]')) {
+      $('#online-search').value = ''; $('#online-group').value = '';
+      $('#online-task-only').checked = false; $('#online-saved-only').checked = false;
+      filterOnline(); $('#online-search').focus(); return;
+    }
     const save = target.closest('[data-save]'); if (save) return toggleFavorite(save.dataset.save);
     const exportButton = target.closest('[data-export-job]'); if (exportButton) return exportJob(exportButton.dataset.exportJob);
     if (target.closest('[data-download-offline]')) return downloadOffline();
@@ -1518,7 +1568,7 @@ ${item.code}
 # Safety: ${item.safety}
 # Official reference: ${item.sourceUrl}`:''}).filter(Boolean).join('\n\n'),'Workflow bundle copied. Follow its sequence and review each safety note.');return;}
     const updateCategory=target.closest('[data-update-category]');
-    if(updateCategory){$('.updates-category-tabs [data-update-category]').forEach(button=>{const active=button===updateCategory;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});filterUpdatesCenter();return;}
+    if(updateCategory){$$('.updates-category-tabs [data-update-category]').forEach(button=>{const active=button===updateCategory;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});filterUpdatesCenter();return;}
     const centerCommand = target.closest('[data-copy-center-command]');
     if (centerCommand) {
       const item = commandCenterCommands.get(centerCommand.dataset.copyCenterCommand);
@@ -1556,7 +1606,7 @@ ${item.code}
     if (hashLink && hashLink.getAttribute('href') === location.hash) {
       closeSearch(); closeNavigation();
       const route = parseRoute();
-      const targetId = route.name === 'services' && route.params.get('area') ? `service-${route.params.get('area')}` : route.name === 'job' && route.params.get('section') ? `job-${route.params.get('section')}` : route.anchor;
+      const targetId = route.name === 'services' && route.params.get('area') ? `service-${route.params.get('area')}` : route.name === 'job' && route.params.get('section') ? `job-${route.params.get('section')}` : route.name === 'online' && onlineByTool.has(route.params.get('tool')) ? `online-service-${route.params.get('tool')}` : route.anchor;
       const destination = targetId && document.getElementById(targetId);
       if (destination) {
         event.preventDefault();
@@ -1576,7 +1626,7 @@ ${item.code}
   document.addEventListener('change', event => {
     if (['command-center-shell', 'command-center-risk'].includes(event.target.id)) filterCommandCenter();
     else if (['updates-shell','updates-risk'].includes(event.target.id)) filterUpdatesCenter();
-    if (event.target.id === 'online-group') filterOnline();
+    else if (['online-group', 'online-task-only', 'online-saved-only'].includes(event.target.id)) filterOnline();
     else if (['category-filter', 'platform-filter', 'tier-filter', 'tool-sort'].includes(event.target.id)) filterTools();
     else if (event.target.id === 'jobs-category') filterJobs();
     else if (event.target.matches('[data-check-job]')) changeCheck(event.target);
@@ -1613,7 +1663,7 @@ ${item.code}
   $('#nav-backdrop').addEventListener('click', closeNavigation);
   window.addEventListener('hashchange', render);
   window.addEventListener('storage', event => {
-    if (event.key === savedKey) { const next = load(savedKey, []); favorites = new Set(Array.isArray(next) ? next.filter(id => toolMap.has(id)) : []); updateCounts(); if (parseRoute().name === 'saved') render(); }
+    if (event.key === savedKey) { const next = load(savedKey, []); favorites = new Set(Array.isArray(next) ? next.filter(id => toolMap.has(id)) : []); updateCounts(); if (parseRoute().name === 'saved') render(); else if (parseRoute().name === 'online') filterOnline(); }
     if (event.key === checksKey) { const next = load(checksKey, {}); if (next && typeof next === 'object' && !Array.isArray(next)) checklists = next; migrateChecklistState(); if (['job','checklist'].includes(parseRoute().name)) render(); }
   });
   $$('[data-icon]').forEach(element => { element.innerHTML = icon(element.dataset.icon); });

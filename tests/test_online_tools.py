@@ -297,7 +297,7 @@ class OnlineCatalogTests(OnlineDataFixture, unittest.TestCase):
     def test_unavailable_or_superseded_candidates_are_not_accepted_launches(self):
         # The primary-source review held these candidates or replaced their old
         # app route. A future reintroduction requires a fresh documented review.
-        excluded = {'regexr.com', 'amiunique.org', 'crt.sh', 'euvd.enisa.europa.eu',
+        excluded = {'regexr.com', 'amiunique.org', 'euvd.enisa.europa.eu',
                     'observatory.mozilla.org', 'search.censys.io'}
         for entry in self.data['tools']:
             identity = entry['toolId']
@@ -306,6 +306,17 @@ class OnlineCatalogTests(OnlineDataFixture, unittest.TestCase):
             self.assertNotIn(hostname, {'localhost', 'example.com', 'example.org', 'example.net'}, identity)
         self.assertEqual(urlparse(self.access['censys']['primary']['url']).hostname, 'platform.censys.io')
         self.assertEqual(urlparse(self.access['mdn-observatory']['primary']['url']).hostname, 'developer.mozilla.org')
+
+    def test_continuation_keeps_every_accepted_identity_and_documents_reintroduced_routes(self):
+        review = json.loads((ROOT / 'docs/reference/online-tools-continuation-checks.json').read_text())
+        accepted = {entry['toolId'] for entry in self.data['tools']}
+        self.assertTrue(set(review['addedToolIds']) <= accepted)
+        self.assertEqual(len(review['addedToolIds']), len(set(review['addedToolIds'])))
+        check = next(item for item in review['launchChecks'] if item['url'] == 'https://crt.sh/')
+        self.assertEqual(check['status'], 200)
+        self.assertIn('Certificate Search', check['title'])
+        self.assertIn('Sectigo', check['observedMarker'])
+        self.assertEqual(self.access['crt-sh']['primary']['url'], 'https://crt.sh/')
 
     def test_review_evidence_covers_every_entry_without_future_or_missing_notes(self):
         reviewed = date.fromisoformat(self.data['reviewedAt'])
@@ -392,6 +403,7 @@ class OnlineGeneratedOutputTests(OnlineDataFixture, unittest.TestCase):
                             self.by_id[identity]['docsUrl'], *[source['url'] for source in entry['sources']]):
                     self.assertIn('](' + url + ')', page)
                 self.assertIn('Reviewed ' + entry['reviewedAt'], page)
+                self.assertIn(online.HUB + '#online?tool=' + identity, page)
                 for heading in ('**Start here:**', '**Read the result:**', '**Access:**', '**Submission behavior:**'):
                     self.assertIn(heading, page)
 

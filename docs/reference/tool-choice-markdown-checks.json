@@ -1,0 +1,437 @@
+{
+  "startedAt": "2026-11-27T02:19:37.859Z",
+  "htmlSha256": "57418a332c33a6efc41f82d612fff6ba40bc271b09460d0c4b25d33323f112e1",
+  "scope": "Current README, Wiki Home, Start Here and malware guide choices rendered at 1280px and 390px.",
+  "limits": [
+    "Local Chromium uses the previously reviewed approximate GitHub Markdown stylesheet; this is not live GitHub Wiki click proof.",
+    "Existing unchanged Mermaid source is explicitly marked omitted in this focused text/table/anchor preview."
+  ],
+  "sourceHashes": {
+    "README.md": "d174530517851eec298e24b07a029d0b1308144eacbe95d86e97ce91113ea80b",
+    "wiki/Home.md": "0ca1320647342edf868957dba002eb7cff2852a62a8e15162c819502a0092784",
+    "wiki/Start-Here.md": "5b932854471f269e0778ef912c3d536f1450aed2a2b57b1707411c8464d06986",
+    "wiki/Job-malware-removal.md": "607f0bf21bc684351b295c06d52fd0cad5d2cdbb61640f69f20133ee5d4ad6e1"
+  },
+  "pages": [
+    {
+      "name": "README",
+      "source": "README.md",
+      "explicitAnchors": 7,
+      "checks": {
+        "allExplicitAnchorsResolve": true,
+        "allInternalLinksResolve": true,
+        "choiceRows": 27,
+        "reviewedChoices": 67,
+        "noCollapsedToolDestinations": true
+      },
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "documentWidth": 1280,
+          "bodyFont": 16,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 887,
+              "scrollWidth": 887,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            }
+          ],
+          "wideTables": []
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "documentWidth": 390,
+          "bodyFont": 16,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 359,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            }
+          ],
+          "wideTables": []
+        }
+      ]
+    },
+    {
+      "name": "Home",
+      "source": "wiki/Home.md",
+      "explicitAnchors": 10,
+      "checks": {
+        "allExplicitAnchorsResolve": true,
+        "allInternalLinksResolve": true,
+        "choiceRows": 27,
+        "reviewedChoices": 67,
+        "noCollapsedToolDestinations": true
+      },
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "documentWidth": 1280,
+          "bodyFont": 16,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 829,
+              "scrollWidth": 829,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 819,
+              "scrollWidth": 819,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            }
+          ],
+          "wideTables": []
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "documentWidth": 390,
+          "bodyFont": 16,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            }
+          ],
+          "wideTables": []
+        }
+      ]
+    },
+    {
+      "name": "Start-Here",
+      "source": "wiki/Start-Here.md",
+      "explicitAnchors": 1,
+      "checks": {
+        "allExplicitAnchorsResolve": true,
+        "allInternalLinksResolve": true,
+        "choiceRows": 27,
+        "reviewedChoices": 67,
+        "noCollapsedToolDestinations": true
+      },
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "documentWidth": 1280,
+          "bodyFont": 16,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 495,
+              "scrollWidth": 495,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 782,
+              "scrollWidth": 782,
+              "overflow": "auto"
+            }
+          ],
+          "wideTables": []
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "documentWidth": 390,
+          "bodyFont": 16,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 359,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            }
+          ],
+          "wideTables": []
+        }
+      ]
+    },
+    {
+      "name": "Job-malware-removal",
+      "source": "wiki/Job-malware-removal.md",
+      "explicitAnchors": 36,
+      "checks": {
+        "allExplicitAnchorsResolve": true,
+        "allInternalLinksResolve": true,
+        "choiceRows": 5,
+        "reviewedChoices": 5,
+        "noCollapsedToolDestinations": true
+      },
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "documentWidth": 1280,
+          "bodyFont": 16,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 802,
+              "scrollWidth": 802,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 814,
+              "scrollWidth": 814,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto"
+            }
+          ],
+          "wideTables": []
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "documentWidth": 390,
+          "bodyFont": 16,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "clientWidth": 358,
+              "scrollWidth": 365,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 412,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 571,
+              "overflow": "auto"
+            },
+            {
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto"
+            }
+          ],
+          "wideTables": [
+            {
+              "scrollLeft": 7,
+              "lastColumnReached": true
+            },
+            {
+              "scrollLeft": 54,
+              "lastColumnReached": true
+            },
+            {
+              "scrollLeft": 213,
+              "lastColumnReached": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    "markdown/README-desktop.png",
+    "markdown/README-desktop-choices.png",
+    "markdown/README-mobile.png",
+    "markdown/README-mobile-choices.png",
+    "markdown/Home-desktop.png",
+    "markdown/Home-desktop-choices.png",
+    "markdown/Home-mobile.png",
+    "markdown/Home-mobile-choices.png",
+    "markdown/Start-Here-desktop.png",
+    "markdown/Start-Here-desktop-choices.png",
+    "markdown/Start-Here-mobile.png",
+    "markdown/Start-Here-mobile-choices.png",
+    "markdown/Job-malware-removal-desktop.png",
+    "markdown/Job-malware-removal-desktop-choices.png",
+    "markdown/Job-malware-removal-mobile.png",
+    "markdown/Job-malware-removal-mobile-choices.png"
+  ],
+  "errors": [],
+  "passed": true,
+  "finishedAt": "2026-11-27T02:19:41.755Z",
+  "artifactHashes": {
+    "markdown/README-desktop.png": "ac1db0aa5c431aff0f7288dd83f2f9b4ac52a049dd03d0cda06b0919d058e65e",
+    "markdown/README-desktop-choices.png": "5a44e46bac41bddb309ab938ae28477129688a934e1a6e86e99811f2957f093e",
+    "markdown/README-mobile.png": "9a7489764f8cb4440d006fd5765987c8ddc2c557ee7848cf091a8704a5216817",
+    "markdown/README-mobile-choices.png": "b5e8ee04b87a9d15a79b98feff9ed769056cf9777434232d6654ba37e89d2ba2",
+    "markdown/Home-desktop.png": "011bbd3b79c76339638da2b567a3a8c887496f5d2c84ea6b2435de40b09de7c4",
+    "markdown/Home-desktop-choices.png": "5a44e46bac41bddb309ab938ae28477129688a934e1a6e86e99811f2957f093e",
+    "markdown/Home-mobile.png": "e16f0532bf7172e51b702ceb8d7940280cf969d0b236be28e6d827a4cb4fdd2d",
+    "markdown/Home-mobile-choices.png": "798d41bf7d04653f1401ff131ed3f6e0236ad923209fa4eb0be5aad9cd4722d2",
+    "markdown/Start-Here-desktop.png": "fba350ce083f7d089080bc081aa2bb13d78fabb04b897ae46bb1a0eb244fb189",
+    "markdown/Start-Here-desktop-choices.png": "5a44e46bac41bddb309ab938ae28477129688a934e1a6e86e99811f2957f093e",
+    "markdown/Start-Here-mobile.png": "e724059f47335613f3748afe98157df5b7bc9abea8426e3c90644b7f18c34728",
+    "markdown/Start-Here-mobile-choices.png": "798d41bf7d04653f1401ff131ed3f6e0236ad923209fa4eb0be5aad9cd4722d2",
+    "markdown/Job-malware-removal-desktop.png": "8d9c28f6c980ebe247748327d53169573b4752c1f6ec78b30b97fbbb5e92cb05",
+    "markdown/Job-malware-removal-desktop-choices.png": "927b67b99feb95b70103d35c79a4e7aab3b4c15f83752cdb94386db43507e7c5",
+    "markdown/Job-malware-removal-mobile.png": "b03a477f4d0401ceccedae98d4a30b6a0d6bc2497d12fdaf17dd84cbd96dece0",
+    "markdown/Job-malware-removal-mobile-choices.png": "437889a81961b912dc29d7697ce7c1b6eb383b3527a53891d47283e78d406249"
+  },
+  "visualReview": {
+    "checkedAt": "2026-11-27T02:20:38.853535+00:00",
+    "passed": true,
+    "screenshotsInspected": [
+      "markdown/README-desktop.png",
+      "markdown/README-mobile-choices.png",
+      "markdown/Home-desktop.png",
+      "markdown/Home-mobile.png",
+      "markdown/Start-Here-desktop.png",
+      "markdown/Start-Here-mobile-choices.png",
+      "markdown/Job-malware-removal-desktop.png",
+      "markdown/Job-malware-removal-mobile-choices.png"
+    ],
+    "materialFindings": [],
+    "observations": [
+      "README, Wiki Home and Start Here display all three named malware tools and their acquisition links in the first desktop view.",
+      "All67 choices remain visible in27 scenario rows on each front page, with role labels and usage boundaries.",
+      "The malware guide begins with the five-role tool table; all three requested products are visible in the desktop view.",
+      "At390px the tables wrap into longer rows but remain readable, keep every action in ordinary document flow and produce no document overflow.",
+      "Existing precise scenario pages and explicit internal anchors remain linked without collapsed groups."
+    ]
+  }
+}

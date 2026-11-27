@@ -1,0 +1,52 @@
+{
+  "reviewedAt": "2026-11-26",
+  "checkedAtUtc": "2026-11-27T02:13:45.688941+00:00",
+  "result": "passed",
+  "counts": {
+    "tools": 133,
+    "existingToolsUnchanged": 125,
+    "reviewedTools": 8,
+    "priorActionsPreserved": 290,
+    "actions": 294,
+    "newActions": 4
+  },
+  "changedToolIds": [
+    "defender-offline",
+    "safety-scanner",
+    "adwcleaner",
+    "malwarebytes",
+    "hitmanpro",
+    "eset-online-scanner",
+    "bitdefender-free",
+    "emsisoft-emergency-kit"
+  ],
+  "newActions": [
+    "safety-scanner/windows-x86",
+    "eset-online-scanner/windows-x86",
+    "malwarebytes/macos-installer",
+    "oem-drivers/printer-drivers"
+  ],
+  "schemaChecks": [
+    "build-hub.validate passed",
+    "build-hub.validate_tool_access passed",
+    "Authored review normalized through canonical link registry"
+  ],
+  "preservation": {
+    "toolIdsAndOrder": true,
+    "oldActionUrlsAndOrder": true,
+    "oldActionKindsPlatformsFormatsAndExistingIds": true,
+    "officialToolPages": true,
+    "oldProvenance": true,
+    "untouchedRecordsAndReviewDates": true
+  },
+  "files": {
+    "data/tools.json": "959b81c9e5609765781c41f16e12843b299c7b1193d5fb1ce3b4dc841fa1391f",
+    "data/tool-access.json": "e297d646860de6d04cfebfac7eeda5a553b5e97ec4e03076e1ee482d3b8ff39c",
+    "docs/reference/malware-tool-review-2026-11-26.md": "28b52a8e661ca9bcc31d38693a4d146ef3611a2af537f55c46828e70fc3a2be8"
+  },
+  "limits": [
+    "No scanner was installed or executed.",
+    "No malware efficacy or client-remediation outcome is claimed.",
+    "A bounded initial-byte response is not a full-file hash or signature validation."
+  ]
+}

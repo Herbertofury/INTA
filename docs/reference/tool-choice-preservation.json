@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "result": "passed",
+  "scope": "Authored scenario choices and workspace preservation; no physical repair or comparative malware benchmark executed.",
+  "baselineSourceHead": "25add684156762a495dbe4d4a336ad285ee8a40a",
+  "cases": 27,
+  "jobs": 22,
+  "choices": 67,
+  "choiceTools": 48,
+  "guideOnlyCases": [
+    "start-a-repair",
+    "contain-ransomware",
+    "recover-an-outage",
+    "complete-a-handoff"
+  ],
+  "primaryRoutesPreserved": 23,
+  "allOriginalCaseFieldsRetained": true,
+  "intentionalOriginalFieldChanges": [
+    {
+      "id": "suspected-malware",
+      "field": "evidenceUrls"
+    },
+    {
+      "id": "suspected-malware",
+      "field": "quickSteps"
+    }
+  ],
+  "allOriginalEvidenceUrlsPreserved": true,
+  "originalWorkspaceTools": 95,
+  "currentWorkspaceTools": 102,
+  "oldWorkspaceEntriesPreservedExactly": true,
+  "newWorkspaceEntries": [
+    {
+      "jobId": "malware-removal",
+      "toolId": "malwarebytes",
+      "why": "Use an available Free Quick or Custom Scan for broad cleanup on an eligible personal device.",
+      "actionId": "windows-installer"
+    },
+    {
+      "jobId": "malware-removal",
+      "toolId": "bitdefender-free",
+      "why": "Choose it as the single ongoing antivirus on an eligible personal Windows PC.",
+      "actionId": "windows-installer"
+    },
+    {
+      "jobId": "slow-pc",
+      "toolId": "sysinternals",
+      "why": "Keep the full utility suite available when the next evidence-backed branch needs another component."
+    },
+    {
+      "jobId": "slow-pc",
+      "toolId": "wiztree",
+      "why": "Use its supported disk analysis when the technician has the appropriate commercial entitlement."
+    },
+    {
+      "jobId": "disk-migration",
+      "toolId": "clonezilla",
+      "why": "Use the documented imaging or cloning mode when its filesystem and destination constraints fit."
+    },
+    {
+      "jobId": "printer-repair",
+      "toolId": "oem-drivers",
+      "why": "Use the manufacturer/model/OS route when that driver path is supported; check protected print mode first.",
+      "actionId": "printer-drivers"
+    },
+    {
+      "jobId": "preventive-maintenance",
+      "toolId": "wizfile",
+      "why": "Use the supported file-search workflow when its filters and the technician’s license fit the task."
+    }
+  ],
+  "jobsFieldNotesMethodsAndDiagramsByteIdenticalToBaseline": true,
+  "sourceUrls": 76,
+  "sourceUrlsWithObservedHttp200": 76,
+  "sourceEvidenceReuse": "31 current source results reused;45 newly checked source routes.",
+  "limits": [
+    "HTTP200 proves a reachable route, not safety or fitness.",
+    "Four guide-only cases retain their existing evidence; the earlier CISA retrieval limitation is unchanged.",
+    "Commercial and free-feature boundaries are stated per tool.",
+    "No universal or measured best-tool ranking is claimed."
+  ],
+  "files": [
+    {
+      "path": "data/quick-start.json",
+      "sha256": "5ae49f6e78521d60eef985959f406a75cee2e7ca4b2693d9ef763a155cbea779"
+    },
+    {
+      "path": "data/job-workspaces.json",
+      "sha256": "54730dae07af23e15d408b146889a2e092f2017e5fb9ea888ee75381a3b4624a"
+    },
+    {
+      "path": "docs/reference/scenario-tool-review-2026-11-26.md",
+      "sha256": "3368703d6748327a1652e5c8db15e464cb4f608fbf63e1836133e0d28654d4f1"
+    }
+  ]
+}

@@ -1,0 +1,516 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "sourceBaseline": "25add684156762a495dbe4d4a336ad285ee8a40a",
+  "cases": [
+    {
+      "id": "suspected-malware",
+      "jobId": "malware-removal",
+      "wikiPage": "Remove-viruses",
+      "primaryToolId": "safety-scanner",
+      "primaryActionId": null,
+      "choiceTools": [
+        "malwarebytes",
+        "adwcleaner",
+        "bitdefender-free",
+        "safety-scanner",
+        "defender-offline"
+      ],
+      "guideOnly": false,
+      "disposition": "Separate broad on-demand cleanup, adware/PUP cleanup and ongoing protection. Keep the standalone Microsoft scan accessible for a job whose commercial or servicing scope does not fit consumer Free terms. Offline scanning is a conditional persistence branch.",
+      "sourceUrls": [
+        "https://help.malwarebytes.com/hc/en-us/articles/49849786059035-Free-vs-Paid-Malwarebytes-Security-features",
+        "https://www.malwarebytes.com/eula",
+        "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner",
+        "https://www.malwarebytes.com/adwcleaner/eula",
+        "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+        "https://www.bitdefender.com/en-us/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions",
+        "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+        "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline"
+      ]
+    },
+    {
+      "id": "fix-a-printer",
+      "jobId": "printer-repair",
+      "wikiPage": "Fix-a-printer",
+      "primaryToolId": "get-help",
+      "primaryActionId": "printer",
+      "choiceTools": [
+        "get-help",
+        "oem-drivers",
+        "advanced-ip-scanner",
+        "naps2"
+      ],
+      "guideOnly": false,
+      "disposition": "Use the printer-specific diagnostic, exact model/OS driver route, IP discovery and a separate scanner test. A generic driver-updater bundle does not establish model, architecture or protected-print compatibility.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+        "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+        "https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode",
+        "https://www.advanced-ip-scanner.com/help/",
+        "https://www.advanced-ip-scanner.com/",
+        "https://www.naps2.com/",
+        "https://www.naps2.com/windows-scanning"
+      ]
+    },
+    {
+      "id": "fix-internet",
+      "jobId": "network-dns",
+      "wikiPage": "Fix-internet",
+      "primaryToolId": "get-help",
+      "primaryActionId": "network",
+      "choiceTools": [
+        "get-help",
+        "powershell",
+        "curl"
+      ],
+      "guideOnly": false,
+      "disposition": "Use built-in connection checks first, then distinguish DNS/TCP and HTTP/TLS failures. Packet capture remains available in its more specific case instead of being the first response to every Wi-Fi fault.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+        "https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname",
+        "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection",
+        "https://curl.se/docs/manpage.html"
+      ]
+    },
+    {
+      "id": "fix-email",
+      "jobId": "outlook-email",
+      "wikiPage": "Fix-email",
+      "primaryToolId": "get-help",
+      "primaryActionId": "outlook",
+      "choiceTools": [
+        "get-help"
+      ],
+      "guideOnly": false,
+      "disposition": "Retain the classic Outlook-specific diagnostic. New Outlook follows the existing separate workflow; changing to another repair utility does not remove this edition distinction.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters"
+      ]
+    },
+    {
+      "id": "failing-drive",
+      "jobId": "failing-drive",
+      "wikiPage": "Recover-a-failing-drive",
+      "primaryToolId": "systemrescue",
+      "primaryActionId": null,
+      "choiceTools": [
+        "systemrescue",
+        "testdisk",
+        "photorec"
+      ],
+      "guideOnly": false,
+      "disposition": "Retain the ready recovery ISO as the first acquisition. The included imaging workflow preserves a failing source; metadata inspection and file carving follow on the copy. A source tarball is not presented as a Windows repair installer.",
+      "sourceUrls": [
+        "https://www.system-rescue.org/",
+        "https://www.system-rescue.org/System-tools/",
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+        "https://www.cgsecurity.org/wiki/TestDisk",
+        "https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step",
+        "https://www.cgsecurity.org/wiki/PhotoRec"
+      ]
+    },
+    {
+      "id": "deleted-files",
+      "jobId": "failing-drive",
+      "wikiPage": "Recover-deleted-files",
+      "primaryToolId": "photorec",
+      "primaryActionId": null,
+      "choiceTools": [
+        "photorec",
+        "testdisk"
+      ],
+      "guideOnly": false,
+      "disposition": "Keep signature-based recovery and add supported filesystem undelete as a distinct route when metadata and names can be retained. Both utilities ship in the same publisher bundle; recovery output still goes to a separate device.",
+      "sourceUrls": [
+        "https://www.cgsecurity.org/wiki/PhotoRec",
+        "https://www.cgsecurity.org/wiki/TestDisk:_undelete_file_for_NTFS"
+      ]
+    },
+    {
+      "id": "slow-pc",
+      "jobId": "slow-pc",
+      "wikiPage": "Fix-a-slow-PC",
+      "primaryToolId": "sysinternals",
+      "primaryActionId": null,
+      "choiceTools": [
+        "process-explorer",
+        "procmon",
+        "crystaldiskinfo",
+        "sysinternals"
+      ],
+      "guideOnly": false,
+      "disposition": "Expose the particular process and I/O tools needed to explain a symptom while preserving the full suite. Check storage warnings before treating the case as an ordinary performance problem.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+        "https://crystalmark.info/en/software/crystaldiskinfo/",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/"
+      ]
+    },
+    {
+      "id": "remote-help",
+      "jobId": "remote-support",
+      "wikiPage": "Help-remotely",
+      "primaryToolId": "quick-assist",
+      "primaryActionId": null,
+      "choiceTools": [
+        "quick-assist",
+        "rustdesk",
+        "meshcentral",
+        "remmina"
+      ],
+      "guideOnly": false,
+      "disposition": "Choose by attended Windows help, cross-platform support, an existing managed fleet, or a Linux technician client. Existing paid commercial products remain in the catalog; their personal-use grants are not assumed for INTA service work.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+        "https://rustdesk.com/docs/en/",
+        "https://github.com/Ylianst/MeshCentral",
+        "https://www.remmina.org/how-to-install-remmina/",
+        "https://remmina.org/"
+      ]
+    },
+    {
+      "id": "fix-windows-updates",
+      "jobId": "windows-update",
+      "wikiPage": "Fix-Windows-updates",
+      "primaryToolId": "get-help",
+      "primaryActionId": "update",
+      "choiceTools": [
+        "get-help",
+        "setupdiag",
+        "dism",
+        "windows-recovery"
+      ],
+      "guideOnly": false,
+      "disposition": "Differentiate the ordinary update diagnostic, a failed feature-upgrade log analysis, component-store repair and a supported same-version reinstall. New app packages do not repair the operating-system update stack.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+        "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+        "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+        "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+      ]
+    },
+    {
+      "id": "windows-repair",
+      "jobId": "windows-repair",
+      "wikiPage": "Repair-Windows-files",
+      "primaryToolId": "dism",
+      "primaryActionId": null,
+      "choiceTools": [
+        "dism",
+        "sfc",
+        "windows-recovery"
+      ],
+      "guideOnly": false,
+      "disposition": "Keep component-store repair and protected-file verification as separate operations, with the supported same-version reinstall available when appropriate. Do not invent a universal third-party Windows repair command.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+        "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+        "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+      ]
+    },
+    {
+      "id": "fix-boot-failure",
+      "jobId": "boot-recovery",
+      "wikiPage": "Fix-a-PC-that-will-not-boot",
+      "primaryToolId": "windows-recovery",
+      "primaryActionId": null,
+      "choiceTools": [
+        "windows-recovery",
+        "microsoft-windows11-media",
+        "systemrescue",
+        "quick-machine-recovery"
+      ],
+      "guideOnly": false,
+      "disposition": "Keep local recovery, official installation media and image-first recovery accessible. Cloud recovery stays conditional on an eligible configured device and an available matching remedy; preview rollback features are not the default.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+        "https://www.microsoft.com/software-download/windows11",
+        "https://www.system-rescue.org/manual/",
+        "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp"
+      ]
+    },
+    {
+      "id": "diagnose-crashes",
+      "jobId": "hardware-bsod",
+      "wikiPage": "Diagnose-crashes",
+      "primaryToolId": "windbg",
+      "primaryActionId": null,
+      "choiceTools": [
+        "windbg",
+        "memtest86plus",
+        "libre-hardware-monitor"
+      ],
+      "guideOnly": false,
+      "disposition": "Use a dump debugger for recorded crashes, a bootable test for suspected memory faults and sensor observation for a reproduced thermal/power question. A single sensor reading or guessed driver name does not settle the cause.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+        "https://github.com/memtest86plus/memtest86plus",
+        "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor"
+      ]
+    },
+    {
+      "id": "disk-space",
+      "jobId": "slow-pc",
+      "wikiPage": "Free-disk-space",
+      "primaryToolId": "windirstat",
+      "primaryActionId": null,
+      "choiceTools": [
+        "windirstat",
+        "wiztree"
+      ],
+      "guideOnly": false,
+      "disposition": "Retain the open-source capacity map and expose the licensed alternative explicitly. No benchmark was run here, so the review does not claim a measured speed winner or treat a large file as permission to delete it.",
+      "sourceUrls": [
+        "https://github.com/windirstat/windirstat",
+        "https://diskanalyzer.com/",
+        "https://diskanalyzer.com/eula"
+      ]
+    },
+    {
+      "id": "clone-a-drive",
+      "jobId": "disk-migration",
+      "wikiPage": "Clone-or-move-a-drive",
+      "primaryToolId": "rescuezilla",
+      "primaryActionId": null,
+      "choiceTools": [
+        "rescuezilla",
+        "clonezilla",
+        "robocopy"
+      ],
+      "guideOnly": false,
+      "disposition": "Offer a graphical image workflow, the more advanced imaging workflow and a files-only copy path. Folder synchronization remains elsewhere in the toolkit because it is not an interchangeable whole-disk clone or backup proof.",
+      "sourceUrls": [
+        "https://rescuezilla.com/help",
+        "https://clonezilla.org/clonezilla-live-doc.php",
+        "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
+      ]
+    },
+    {
+      "id": "file-backup",
+      "jobId": "backup-restore",
+      "wikiPage": "Restore-a-file-backup",
+      "primaryToolId": "restic",
+      "primaryActionId": null,
+      "choiceTools": [
+        "restic",
+        "kopia",
+        "veeam-agent"
+      ],
+      "guideOnly": false,
+      "disposition": "The existing repository format selects the restore tool. Keep native restore routes for the three supported backup families; a newer application cannot simply open another product’s backup format.",
+      "sourceUrls": [
+        "https://restic.readthedocs.io/en/stable/050_restore.html",
+        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
+        "https://kopia.io/docs/",
+        "https://helpcenter.veeam.com/docs/agentforwindows/userguide/files_restore.html",
+        "https://www.veeam.com/legal/licensing-policy.html"
+      ]
+    },
+    {
+      "id": "boot-usb",
+      "jobId": "boot-usb",
+      "wikiPage": "Make-a-boot-USB",
+      "primaryToolId": "rufus",
+      "primaryActionId": null,
+      "choiceTools": [
+        "rufus",
+        "ventoy",
+        "microsoft-windows11-media",
+        "systemrescue"
+      ],
+      "guideOnly": false,
+      "disposition": "Choose a single-image writer or a multiboot loader, with actual official Windows and recovery media directly available. Preserve target-drive identification and actual boot verification.",
+      "sourceUrls": [
+        "https://github.com/pbatard/rufus/wiki/FAQ",
+        "https://www.ventoy.net/en/doc_start.html",
+        "https://www.microsoft.com/software-download/windows11",
+        "https://www.system-rescue.org/manual/"
+      ]
+    },
+    {
+      "id": "set-up-a-new-pc",
+      "jobId": "new-pc",
+      "wikiPage": "Set-up-a-new-PC",
+      "primaryToolId": "winget",
+      "primaryActionId": null,
+      "choiceTools": [
+        "winget",
+        "oem-drivers",
+        "robocopy"
+      ],
+      "guideOnly": false,
+      "disposition": "Use exact approved package IDs, manufacturer-supported drivers and a logged agreed-file copy. Avoid a generic debloat/driver-updater bundle as a universal setup recipe.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+        "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+        "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
+      ]
+    },
+    {
+      "id": "maintain-a-pc",
+      "jobId": "preventive-maintenance",
+      "wikiPage": "Maintain-a-PC",
+      "primaryToolId": "winget",
+      "primaryActionId": null,
+      "choiceTools": [
+        "winget",
+        "crystaldiskinfo",
+        "windirstat"
+      ],
+      "guideOnly": false,
+      "disposition": "Separate application update review, storage-health review and capacity inspection. The retained full kit supports deeper follow-up after one of these checks identifies a real issue.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+        "https://crystalmark.info/en/software/crystaldiskinfo/",
+        "https://github.com/windirstat/windirstat"
+      ]
+    },
+    {
+      "id": "start-a-repair",
+      "jobId": "intake-triage",
+      "wikiPage": "Start-a-repair",
+      "primaryToolId": null,
+      "primaryActionId": null,
+      "choiceTools": [],
+      "guideOnly": true,
+      "disposition": "No extra application is required to establish the symptom, device identity, backup state and scope. Existing diagnostic tools remain in the job kit for the branch selected by that intake.",
+      "sourceUrls": [
+        "https://github.com/Herbertofury/INTA/wiki/Job-intake-triage",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      ]
+    },
+    {
+      "id": "contain-ransomware",
+      "jobId": "ransomware-response",
+      "wikiPage": "Contain-ransomware",
+      "primaryToolId": null,
+      "primaryActionId": null,
+      "choiceTools": [],
+      "guideOnly": true,
+      "disposition": "The first response is isolation, evidence preservation, ownership and recovery protection. Installing a new cleaner or telemetry agent first can consume time or change evidence; the incident workflow determines later tooling.",
+      "sourceUrls": [
+        "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf",
+        "https://learn.microsoft.com/en-us/security/compass/incident-response-playbook-dart-ransomware-approach"
+      ]
+    },
+    {
+      "id": "recover-an-outage",
+      "jobId": "outage-recovery",
+      "wikiPage": "Recover-an-office-outage",
+      "primaryToolId": null,
+      "primaryActionId": null,
+      "choiceTools": [],
+      "guideOnly": true,
+      "disposition": "Begin with safe power, ownership and dependency scope. Existing operating-system and service tools in the working kit support the affected service; an unrelated downloaded repair utility is not a prerequisite.",
+      "sourceUrls": [
+        "https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery",
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart"
+      ]
+    },
+    {
+      "id": "repair-domain-trust",
+      "jobId": "ad-trust",
+      "wikiPage": "Repair-domain-sign-in",
+      "primaryToolId": "powershell",
+      "primaryActionId": "windows-powershell",
+      "choiceTools": [
+        "powershell"
+      ],
+      "guideOnly": false,
+      "disposition": "Retain existing Windows PowerShell 5.1 and the documented member-computer cmdlet. A newer shell, blanket domain rejoin or local-administrator management product is not automatically the repair for a failed secure channel.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1"
+      ]
+    },
+    {
+      "id": "troubleshoot-with-ai",
+      "jobId": "ai-triage",
+      "wikiPage": "Troubleshoot-with-AI",
+      "primaryToolId": "chatgpt",
+      "primaryActionId": null,
+      "choiceTools": [
+        "chatgpt",
+        "codex-cli"
+      ],
+      "guideOnly": false,
+      "disposition": "Separate evidence-driven hypothesis assistance from a scoped code/script agent. Both need organization-approved input, human review and verification against the real target; no model benchmark or autonomous-repair certification is claimed.",
+      "sourceUrls": [
+        "https://help.openai.com/en/articles/9275245-using-chatgpt-s-free-tier-faq",
+        "https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt",
+        "https://github.com/openai/codex",
+        "https://developers.openai.com/codex/security/"
+      ]
+    },
+    {
+      "id": "complete-a-handoff",
+      "jobId": "client-handoff",
+      "wikiPage": "Finish-the-job-and-hand-over",
+      "primaryToolId": null,
+      "primaryActionId": null,
+      "choiceTools": [],
+      "guideOnly": true,
+      "disposition": "No additional download is needed to prove the original task, remove case-only access and establish ownership. The existing handoff template and working kit remain available.",
+      "sourceUrls": [
+        "https://github.com/Herbertofury/INTA/wiki/Job-client-handoff",
+        "https://github.com/Herbertofury/INTA/wiki/Technician-Handoff"
+      ]
+    },
+    {
+      "id": "find-a-file",
+      "jobId": "preventive-maintenance",
+      "wikiPage": "Find-a-file",
+      "primaryToolId": "everything",
+      "primaryActionId": null,
+      "choiceTools": [
+        "everything",
+        "wizfile"
+      ],
+      "guideOnly": false,
+      "disposition": "Keep the free local filename index and expose the alternative with its commercial-use boundary. Search results require path/time validation and do not establish that a file is safe or disposable.",
+      "sourceUrls": [
+        "https://www.voidtools.com/faq/",
+        "https://www.voidtools.com/License.txt",
+        "https://antibody-software.com/wizfile/quick-start",
+        "https://antibody-software.com/wizfile/eula"
+      ]
+    },
+    {
+      "id": "inspect-network-traffic",
+      "jobId": "network-dns",
+      "wikiPage": "Inspect-network-traffic",
+      "primaryToolId": "wireshark",
+      "primaryActionId": null,
+      "choiceTools": [
+        "wireshark",
+        "curl",
+        "mtr"
+      ],
+      "guideOnly": false,
+      "disposition": "Choose a scoped packet trace, a targeted HTTP/TLS request or a supported path comparison based on the unresolved layer. The path tool is not presented as a native Windows executable.",
+      "sourceUrls": [
+        "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIntroduction.html",
+        "https://npcap.com/guide/index.html",
+        "https://curl.se/docs/manpage.html",
+        "https://github.com/traviscross/mtr"
+      ]
+    },
+    {
+      "id": "suspected-ram-fault",
+      "jobId": "hardware-bsod",
+      "wikiPage": "Test-memory",
+      "primaryToolId": "memtest86plus",
+      "primaryActionId": null,
+      "choiceTools": [
+        "memtest86plus"
+      ],
+      "guideOnly": false,
+      "disposition": "Retain the open-source bootable memory test for this narrow case. Dump analysis is available under the broader crash case; a second memory product is not needed merely to fill a list.",
+      "sourceUrls": [
+        "https://www.memtest.org/",
+        "https://github.com/memtest86plus/memtest86plus"
+      ]
+    }
+  ]
+}

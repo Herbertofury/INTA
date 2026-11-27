@@ -1,0 +1,74 @@
+{
+  "htmlBytes": 2552839,
+  "htmlSha256": "bc57fc7c1c2e982ec1c9fcf63bc00da08ed2d77eacebc2be188feff4ccd8fc63",
+  "manifestCounts": {
+    "schemaVersion": 2,
+    "tools": 218,
+    "jobs": 22,
+    "methods": 45,
+    "quickStartItems": 29,
+    "quickAnswerPages": 29,
+    "scenarioToolChoices": 72,
+    "scenariosWithToolChoices": 25,
+    "onlineTools": 85,
+    "commandCenterCommands": 37,
+    "commandCenterWorkflows": 6,
+    "commandCenterToolkits": 9,
+    "onlineGroups": 9,
+    "onlineWorkflows": 9,
+    "toolAccessEntries": 218,
+    "directFileDownloads": 93,
+    "jobWorkspaces": 22,
+    "serviceAreas": 8,
+    "fieldNotes": 95,
+    "researchItems": 58,
+    "jobResources": 117,
+    "jobDecisionBranches": 102,
+    "linkRegistryEntries": 978,
+    "registeredLinks": 978,
+    "brandIdentities": 684,
+    "brandAssets": 303,
+    "toolsWithIcons": 218,
+    "brandedMentions": 17482,
+    "wikiPages": 99,
+    "wikiFiles": 101,
+    "wikiDiagrams": 27
+  },
+  "incomingMain": "4a64052ed0c93406f290eb5ede9b8e569ae8ee5d",
+  "priorHtmlSha256": "66289ece36dfc86db3f78fbfefd970c4fa69f84f5fa6b6187a49a304460115b0",
+  "correction": "Command category selector; complete case-insensitive command search",
+  "status": "passed",
+  "tests": 113,
+  "testDurationSeconds": 135.634,
+  "generatedOutputs": 164,
+  "wikiAudit": {
+    "wikiFiles": 101,
+    "wikiPages": 99,
+    "registeredNames": 978,
+    "inlineLinks": 14537,
+    "mermaidDiagrams": 27,
+    "playbooks": 22,
+    "errors": []
+  },
+  "knowledgeAudit": "Knowledge organization passed: 8 service areas, 22 jobs, 218 tools, 95 specific fixes, 58 research tasks.\nEditorial reviews due as of 2026-11-26: 0. Dates were not changed.",
+  "verification": "Merged Python suite, reproducible generated outputs, full Wiki and knowledge audits, current browser/feature/Markdown proof. Three final JavaScript-only corrections have exact whole-file binding plus targeted actual browser proof.",
+  "preservationReceipt": "docs/reference/tool-choice-merged-preservation.json",
+  "browserReceipts": [
+    {
+      "path": "docs/reference/tool-choice-merged-browser-checks.json",
+      "sha256": "49d5bc869adeecdab916d5f61bd3aea47ca4d8c4fadf16158aa36b45f776f519"
+    },
+    {
+      "path": "docs/reference/tool-choice-merged-workflow-checks.json",
+      "sha256": "9a581d5d52b9a8184656c393a1b895e68e51aebc94684b2cc62070814599d163"
+    },
+    {
+      "path": "docs/reference/tool-choice-merged-feature-checks.json",
+      "sha256": "c58ea62761f6e89a5960ce44fb103f1612c35ee8ddf9155acfce645eebc8da4a"
+    },
+    {
+      "path": "docs/reference/tool-choice-merged-markdown-checks.json",
+      "sha256": "cc6c952024c43ced86f213eb30203c1f31f7228a33356ea56fc8ed41889cc0d2"
+    }
+  ]
+}

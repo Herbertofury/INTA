@@ -1,5 +1,6 @@
 """Integrity and current Command Center coverage for web-only brand identities."""
 import base64
+import copy
 import hashlib
 import importlib.util
 import json
@@ -10,6 +11,9 @@ ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("web_brand_assets", ROOT / "scripts/brand_icons.py")
 BRANDS = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(BRANDS)
+BUILD_SPEC = importlib.util.spec_from_file_location("web_brand_builder", ROOT / "scripts/build-hub.py")
+BUILD = importlib.util.module_from_spec(BUILD_SPEC)
+BUILD_SPEC.loader.exec_module(BUILD)
 
 
 class WebBrandIcons(unittest.TestCase):
@@ -17,8 +21,7 @@ class WebBrandIcons(unittest.TestCase):
     def setUpClass(cls):
         cls.base = BRANDS.load_registry(ROOT)
         cls.extension = json.loads((ROOT / "data/web-brand-icons.json").read_text())
-        cls.merged = dict(cls.base, assets={**cls.base["assets"], **cls.extension["assets"]},
-                          brands=[*cls.extension["brands"], *cls.base["brands"]])
+        cls.merged = BUILD.merge_web_brands(cls.base, cls.extension)
         cls.center = json.loads((ROOT / "data/command-center.json").read_text())
 
     def test_all_cached_images_have_valid_bytes_hashes_and_provenance(self):
@@ -37,9 +40,48 @@ class WebBrandIcons(unittest.TestCase):
         for asset_id, asset in self.extension["assets"].items():
             with self.subTest(asset=asset_id):
                 if asset_id in self.base["assets"]:
-                    self.assertEqual(asset, self.base["assets"][asset_id])
+                    for key, value in self.base["assets"][asset_id].items():
+                        if key != "alternateSources":
+                            self.assertEqual(self.merged["assets"][asset_id][key], value)
                 else:
                     self.assertTrue(asset["path"].startswith("assets/web-brand-icons/"))
+
+    def test_identical_content_keeps_provenance_and_rejects_core_conflicts(self):
+        identity = "i4538691198fe0ea7526e"
+        base = copy.deepcopy(self.base)
+        extension = copy.deepcopy(self.extension)
+        original_base = copy.deepcopy(base)
+        original_extension = copy.deepcopy(extension)
+        source = {key: value for key, value in extension["assets"][identity].items()
+                  if key not in {"path", "sha256", "mimeType", "width", "height"}}
+        base["assets"][identity]["alternateSources"] = [{**source, "checkedAt": "2026-11-25"}]
+        extension["assets"][identity]["alternateSources"] = [source, {**source, "checkedAt": "2026-11-24"}]
+        expected_base = copy.deepcopy(base)
+        expected_extension = copy.deepcopy(extension)
+        merged = BUILD.merge_web_brands(base, extension)
+        combined = merged["assets"][identity]
+        self.assertEqual(combined["sourceUrl"], original_base["assets"][identity]["sourceUrl"])
+        self.assertNotEqual(combined["sourceUrl"], source["sourceUrl"])
+        self.assertEqual(combined["alternateSources"],
+                         [base["assets"][identity]["alternateSources"][0], source,
+                          extension["assets"][identity]["alternateSources"][1]])
+        self.assertEqual(base, expected_base)
+        self.assertEqual(extension, expected_extension)
+        self.assertEqual(BRANDS.validate_registry(merged, ROOT), [])
+        for key, value in (("sha256", "f" * 64), ("path", "assets/web-brand-icons/other.png"),
+                           ("path", "../outside.png"), ("mimeType", "image/jpeg"),
+                           ("width", 32), ("height", 32)):
+            with self.subTest(conflict=key, value=value):
+                broken = copy.deepcopy(original_extension)
+                broken["assets"][identity][key] = value
+                with self.assertRaisesRegex(ValueError, "Conflicting web brand asset"):
+                    BUILD.merge_web_brands(original_base, broken)
+        for source_url in ("http://www.microsoft.com/favicon.ico", "https://user:secret@example.com/icon.png"):
+            with self.subTest(unsafe_source=source_url):
+                broken = copy.deepcopy(original_extension)
+                broken["assets"][identity]["sourceUrl"] = source_url
+                with self.assertRaisesRegex(ValueError, "Invalid web brand asset provenance"):
+                    BUILD.merge_web_brands(original_base, broken)
 
     def test_every_command_center_toolkit_resolves_to_its_identity(self):
         expected = {"sysinternals": "sysinternals", "winutil": "web-app-winutil",

@@ -2767,6 +2767,446 @@
       "usage": {
         "status": "unverified"
       }
+    },
+    "magika-web": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "koodous": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "crowdsec-cti": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "validin": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "silent-push": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "phishtank": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "phishly": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "msrc-update-guide": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "paloalto-test-a-site": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "fortiguard-webfilter": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "symantec-site-review": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "trendmicro-site-safety": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "criminal-ip": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "loldrivers": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "lolbas": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "mitre-d3fend": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "caniuse": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "crt-sh": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "it-tools": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "azure-status": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "cloudflare-status": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "w3c-link-checker": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "bgp-tools": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "uriports-tools": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "w3c-html-checker": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "mlab-speed": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "google-cloud-status": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "github-status": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "google-public-dns": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "vert": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "tlsref-configurator": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "aws-health": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "endoflife-date": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "twilio-network-test": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "cloudflare-dns-help": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "ioda": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "lets-debug": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "csp-evaluator": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "webhook-site": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "pairdrop": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
     }
   }
 }

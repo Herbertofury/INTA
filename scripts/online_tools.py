@@ -140,6 +140,7 @@ def wiki_outputs(data, catalog, access):
             tool = tools[identity]
             content += [f'<a id="{identity}"></a>', '', f"## {tool_link(identity, tools, access)}", '', tool['summary'], '',
                         f"**[Open service]({access[identity]['primary']['url']})** · [Official page]({access[identity]['officialUrl']}) · [Documentation]({tool['docsUrl']})", '',
+                        f"**[Open this tool's working notes]({HUB}#online?tool={identity})**", '',
                         f"**Use for:** {tool['bestFor']}", '', f"**Start here:** {entry['firstAction']}", '',
                         f"**Read the result:** {entry['expectedResult']}", '',
                         f"**Access:** {tool['pricing']} {entry['account']}", '',

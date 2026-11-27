@@ -852,13 +852,17 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
     lines += ["| Checkpoint | What to carry forward |", "| --- | --- |"]
     lines += [f"| **{cell(label)}** | {cell(detail)} |" for label, detail in config["checkpoints"].items()]
     lines += ["", anchor("toolkit"), "", *heading(2, "Recommended tools", "🧰 Build the right toolkit")]
-    recommended_ids = list(dict.fromkeys([*job["tools"], *[item["toolId"] for item in (workspace or {}).get("tools", [])]]))
-    if recommended_ids:
+    selections = []
+    for tool_id in job["tools"]:
+        selections.extend([item for item in (workspace or {}).get("tools", []) if item["toolId"] == tool_id]
+                          or [{"toolId": tool_id}])
+    selections.extend(item for item in (workspace or {}).get("tools", []) if item["toolId"] not in job["tools"])
+    if selections:
         lines += ["Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.", "",
                   "| Tool / official page + download | Use it for | Platform & access | Documentation |", "| --- | --- | --- | --- |"]
-        for tool_id in recommended_ids:
+        for selection in selections:
+            tool_id = selection["toolId"]
             tool = by_id[tool_id]
-            selection = next((item for item in (workspace or {}).get("tools", []) if item["toolId"] == tool_id), {})
             lines += [f"| **[{tool['name']}]({access[tool_id]['officialUrl']})** · {tool_access_links(tool, access, action_id=selection.get('actionId'))} | {cell(selection.get('why', tool['bestFor']))} | "
                       f"{cell(tool['platforms'])}; {cell(tool['pricing'])} | [Open guide]({tool['docsUrl']}) |"]
     else:
@@ -976,7 +980,7 @@ def home_markdown(tools: list[dict], jobs: list[dict], categories: dict, layout:
     lines = [f"![INTA Computer Services — technical knowledge base]({REPO}/raw/main/docs/assets/wiki-hero.svg)", "",
              *heading(1, "INTA knowledge base", "🧭 Your next good fix starts here."),
              "Service procedures, tool references and troubleshooting methods for the INTA team.", "",
-             f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
+             f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [Updates & Maintenance](Updates-and-Maintenance) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
              f"**{len(tools)} tools · {len(jobs)} playbooks · {len(categories)} tool categories**", "",
              quick_start_block.rstrip(), "",
              *heading(2, "🧭 Start a job", "🚦 First, choose the right route"),
@@ -1150,7 +1154,11 @@ def validate_updates_center(catalog: dict) -> None:
             raise ValueError(f"{identity}: source must be public HTTPS")
         if len(item["code"]) > 16000:
             raise ValueError(f"{identity}: command exceeds size limit")
-        if re.search(r"(?i)(?:irm|iwr|curl)\\b[^\\n|]*\\|\\s*(?:iex|invoke-expression)", item["code"]):
+        code = item["code"].replace(chr(96) + "\n", " ").replace("\\\n", " ")
+        fetch = r"(?:irm|iwr|invoke-restmethod|invoke-webrequest|curl(?:\.exe)?|wget(?:\.exe)?)"
+        interpreter = r"(?:iex|invoke-expression|bash|sh|zsh|pwsh(?:\.exe)?|powershell(?:\.exe)?)"
+        if (re.search(rf"(?i)\b{fetch}\b[^\n;]*\|\s*(?:sudo\s+)?{interpreter}\b", code)
+                or re.search(rf"(?i)\b(?:iex|invoke-expression)\s*\(\s*{fetch}\b", code)):
             raise ValueError(f"{identity}: remote download-and-execute pipeline prohibited")
     channel_ids = set()
     for channel in catalog.get("channels", []):
@@ -1291,13 +1299,34 @@ def merge_web_brands(base: dict, extension: dict) -> dict:
             or not isinstance(extension.get("brands"), list)):
         raise ValueError("Web brand extension requires schemaVersion 1, assets and brands")
     assets = dict(base["assets"])
+    provenance = {"sourceUrl", "resolvedSourceUrl", "sourceKind", "publisherHost", "checkedAt",
+                  "sourceSha256", "transportEncoding", "transportSha256"}
     for identity, asset in extension["assets"].items():
-        if identity in assets:
-            if assets[identity] != asset:
-                raise ValueError(f"Conflicting web brand asset: {identity}")
-            continue
         if not isinstance(asset, dict):
             raise ValueError(f"Invalid web brand asset: {identity}")
+        if identity in assets:
+            original = assets[identity]
+            if ({key: value for key, value in original.items() if key not in provenance | {"alternateSources"}}
+                    != {key: value for key, value in asset.items() if key not in provenance | {"alternateSources"}}):
+                raise ValueError(f"Conflicting web brand asset: {identity}")
+            if original != asset:
+                # Identical cached bytes can be acquired from several authentic
+                # publishers. Keep native metadata and retain every source record.
+                primary = {key: value for key, value in original.items() if key in provenance}
+                sources = [*original.get("alternateSources", []),
+                           {key: value for key, value in asset.items() if key in provenance},
+                           *asset.get("alternateSources", [])]
+                alternatives = []
+                for source in sources:
+                    if not isinstance(source, dict) or not isinstance(source.get("sourceUrl"), str):
+                        raise ValueError(f"Invalid web brand asset provenance: {identity}")
+                    url = urlparse(source["sourceUrl"])
+                    if url.scheme != "https" or not url.hostname or url.username or url.password:
+                        raise ValueError(f"Invalid web brand asset provenance: {identity}")
+                    if source != primary and source not in alternatives:
+                        alternatives.append(dict(source))
+                assets[identity] = {**original, "alternateSources": alternatives}
+            continue
         if not isinstance(asset.get("path"), str):
             raise ValueError(f"Invalid web brand asset path: {identity}")
         path = Path(asset["path"])

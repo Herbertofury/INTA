@@ -79,6 +79,8 @@ OVERRIDES={
  'dnssec-debugger.verisignlabs.com':'https://www.verisign.com/favicon.ico',
  'openphish.com':'https://openphish.com/static/openphish_logo2.png',
  'www.webpagetest.org':'https://raw.githubusercontent.com/catchpoint/WebPageTest/master/www/favicon.ico',
+ # Twilio's main page declares this icon; the diagnostics subdomain has none.
+ 'networktest.twilio.com':'https://www.twilio.com/content/dam/twilio-com/core-assets/social/favicon-32x32.png',
 }
 # Personal/project directories can declare an icon that the shared host root
 # does not have. These exact publisher routes were observed on their pages.
@@ -169,6 +171,21 @@ def main():
         # Cache by the image's publisher identity only. A tool's release/docs
         # hosts may be shared providers and must never acquire that tool's logo.
         if not args.force:CACHE.setdefault(owner(a['publisherHost']),{'assetId':aid,'asset':a})
+    # A failed atomic refresh still contains useful, verified acquisitions.
+    # Resume only intact local assets; never publish its incomplete registry.
+    report_path=ROOT/'reports/brand-icon-refresh.json'
+    if not args.force and report_path.exists():
+        try:
+            report=json.loads(report_path.read_text())
+            for aid,a in report.get('assets',{}).items():
+                path=(ROOT/a['path']).resolve()
+                if (path.is_relative_to(OUT.resolve()) and path.is_file()
+                        and hashlib.sha256(path.read_bytes()).hexdigest()==a.get('sha256')):
+                    CACHE.setdefault(owner(a['publisherHost']),{'assetId':aid,'asset':a})
+            for failure in report.get('failures',[]):
+                if failure not in failure_history:failure_history.append(failure)
+        except (OSError,ValueError,KeyError):
+            pass
     prevby={b['id']:b for b in previous['brands']}
     global GENERIC
     GENERIC=set()
@@ -283,7 +300,9 @@ def main():
         pending={ex.submit(update,b):i for i,b in enumerate(brands)}
         for n,future in enumerate(concurrent.futures.as_completed(pending),1):
             b,r=future.result();out[pending[future]]=b
-            if r:assets[r['assetId']]=r['asset']
+            # Identical bytes can be declared by multiple publisher sites.
+            # Preserve the established source instead of racing to replace it.
+            if r:assets.setdefault(r['assetId'],r['asset'])
             if n%25==0:checkpoint();print('Resolved',n,'/',len(brands),flush=True)
     used={b.get('assetId') for b in out};assets={k:v for k,v in assets.items() if k in used}
     unresolved=[b['id'] for b in out if not b.get('assetId')]
