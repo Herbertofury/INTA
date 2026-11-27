@@ -1131,7 +1131,7 @@ def validate_updates_center(catalog: dict) -> None:
     """Validate update channels, copy-ready commands and recovery workflows."""
     if catalog.get("schemaVersion") != 1 or not isinstance(catalog.get("commands"), list) or not catalog["commands"]:
         raise ValueError("Updates Center requires a versioned command catalog")
-    categories = {"Windows Update", "Microsoft Store", "Installer recovery", "Application inventory", "WinGet", "Chocolatey", "Scoop", "UniGetUI", "Ninite Pro", "Update inventory", "Linux"}
+    categories = {"Windows Update", "Microsoft Store", "Installer recovery", "Application inventory", "WinGet", "Chocolatey", "Scoop", "UniGetUI", "Ninite Pro", "Update inventory", "Linux", "macOS Software Update"}
     commands = {}
     for item in catalog["commands"]:
         identity = item.get("id", "?")
