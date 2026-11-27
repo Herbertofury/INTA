@@ -60,7 +60,7 @@ app.MapPost("/api/v1/operations", async (OperationRequest request) =>
     if (request.Action is not ("update" or "update-all" or "repair" or "uninstall")) return Results.BadRequest(new { error = "Unsupported operation." });
     if (!managers.Detect().Contains(request.Manager, StringComparer.OrdinalIgnoreCase)) return Results.BadRequest(new { error = "That package manager is not installed on this computer." });
     if (request.Manager == "snap" && request.Action == "repair") return Results.BadRequest(new { error = "Snap does not expose a generic package repair operation." });
-    if (request.Manager == "uniget" && request.Action != "update") return Results.BadRequest(new { error = "UniGetUI repair/uninstall is not supported by this agent version." });
+    if (request.Manager == "uniget" && request.Action != "update-all") return Results.BadRequest(new { error = "UniGetUI currently supports manager-wide update only in this agent version." });
     if (request.Action != "update-all")
     {
         try { _ = PackageManagers.ValidateId(request.PackageId); }
