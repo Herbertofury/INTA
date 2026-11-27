@@ -1,6 +1,8 @@
 (function () {
   'use strict';
 
+  let deferredPwaInstall = null;
+  window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); deferredPwaInstall = event; const button = document.querySelector('[data-install-pwa]'); if (button) button.hidden = false; });
   const data = window.INTA_DATA || { tools: [], jobs: [], meta: {} };
   const tools = Array.isArray(data.tools) ? data.tools : [];
   const jobs = Array.isArray(data.jobs) ? data.jobs : [];
@@ -931,7 +933,7 @@
     const query=params.get('q')||'';
     const selected=params.get('category')||'all';
     return heading('INTA maintenance workspace','Updates & Maintenance','One place to audit software, preview updates, repair broken installations, recover failed updates and uninstall applications safely.')+
-      `<section class="updates-hero"><div class="updates-hero-copy"><p class="page-label">AUDIT · UPDATE · REPAIR · RECOVER · VERIFY</p><h2>Keep every machine healthy.</h2><p>One technician workflow across Windows Update, WinGet, Chocolatey, Scoop, UniGetUI, Ninite Pro, Microsoft Store and Linux package managers.</p><div class="updates-hero-actions"><a class="button primary" href="#updates?category=updates">${icon('refresh-cw')}Review update commands</a><a class="button ghost" href="#updates?category=recovery">${icon('wrench')}Fix a failed update</a></div></div><div class="updates-hero-metrics"><div><strong>${channels.length}</strong><span>update channels</span></div><div><strong>${commands.length}</strong><span>maintenance actions</span></div><div><strong>${workflows.length}</strong><span>recovery workflows</span></div></div></section>
+      `<section class="updates-hero"><div class="updates-hero-copy"><p class="page-label">AUDIT · UPDATE · REPAIR · RECOVER · VERIFY</p><h2>Keep every machine healthy.</h2><p>One technician workflow across Windows Update, WinGet, Chocolatey, Scoop, UniGetUI, Ninite Pro, Microsoft Store and Linux package managers.</p><div class="updates-hero-actions"><button class="button ghost" data-install-pwa hidden>\${icon('download')}Install INTA app</button><a class="button primary" href="#updates?category=updates">${icon('refresh-cw')}Review update commands</a><a class="button ghost" href="#updates?category=recovery">${icon('wrench')}Fix a failed update</a></div><p class="updates-install-note">On iPhone/iPad use Share → Add to Home Screen. On Android use the browser menu → Install app / Add to Home Screen.</p></div><div class="updates-hero-metrics"><div><strong>${channels.length}</strong><span>update channels</span></div><div><strong>${commands.length}</strong><span>maintenance actions</span></div><div><strong>${workflows.length}</strong><span>recovery workflows</span></div></div></section>
       <div class="updates-live-notice">${icon('activity')}<div><strong>Local inventory is not connected in this web build.</strong><span>This page provides verified commands and guided procedures. It does not claim to know which updates are pending on a customer's computer. Live inventory, operation progress and automatic recovery require the local INTA agent or a supported package-manager integration.</span></div></div>
       <section class="updates-channel-section"><div class="updates-section-heading"><div><p class="page-label">UPDATE CHANNELS</p><h2>Know what updates what</h2><p>Audit each manager separately. Never double-update an app or confuse application patches with Windows servicing.</p></div></div><div class="updates-channel-grid">${channels.map(channel=>{const audit=updateCommandMap.get(channel.auditCommand),update=updateCommandMap.get(channel.updateCommand);return `<article class="updates-channel-card"><div class="updates-channel-top"><span class="updates-channel-icon">${icon(channel.icon||'package')}</span><span class="updates-channel-manager">${esc(channel.manager)}</span></div><h3>${esc(channel.name)}</h3><p>${esc(channel.scope)}</p><p class="updates-channel-note">${formatted(channel.note)}</p><div class="updates-channel-actions">${audit?`<button class="copy-command" data-copy-update-command="${esc(audit.id)}">${icon('scan-search')}Copy audit</button>`:''}${update?`<button class="copy-command" data-copy-update-command="${esc(update.id)}">${icon('download')}Copy update</button>`:''}</div></article>`;}).join('')}</div></section>
       <section class="updates-platforms"><div class="updates-section-heading"><div><p class="page-label">FLEET PATCH MANAGEMENT</p><h2>Professional endpoint update platforms</h2><p>For managed customer fleets, these platforms add endpoint inventory, approval, deployment rings, compliance reporting and third-party patching.</p></div></div><div class="updates-platform-grid">${platforms.map(platform=>`<article class="updates-platform-card"><p class="update-command-kicker">${esc(platform.kind.replace(/-/g,' '))} · ${esc(platform.platform)}</p><h3>${external(platform.url,esc(platform.name))}</h3><p>${formatted(platform.summary)}</p><p class="command-safety">${icon('shield-alert')}<span>${formatted(platform.trust)}</span></p><a href="${esc(platform.docsUrl)}" target="_blank" rel="noopener noreferrer">Official documentation ${icon('external')}</a></article>`).join('')}</div></section>
@@ -1499,6 +1501,13 @@
       const note = fieldNotes.find(item => item.id === fieldCommand.dataset.copyFieldCommand);
       const commandItem = note && array(note.commands)[Number(fieldCommand.dataset.commandIndex)];
       if (commandItem) copy(text(commandItem.code), 'Command copied. Review its safety note before running it.');
+      return;
+    }
+    const installPwa=target.closest('[data-install-pwa]');
+    if(installPwa){
+      if(!deferredPwaInstall){notify('Use your browser menu to install INTA on this device.');return;}
+      const promptEvent=deferredPwaInstall;deferredPwaInstall=null;installPwa.hidden=true;
+      promptEvent.prompt();promptEvent.userChoice.then(choice=>notify(choice.outcome==='accepted'?'INTA install accepted.':'INTA install dismissed.')).catch(()=>notify('Use your browser menu to install INTA.'));
       return;
     }
     const updateCommand=target.closest('[data-copy-update-command]');
