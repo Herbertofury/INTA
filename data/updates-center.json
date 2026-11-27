@@ -103,6 +103,36 @@
       "updateCommand": "linux-pacman-upgrade",
       "icon": "terminal",
       "note": "Arch requires full system upgrades; never perform partial upgrades."
+    },
+    {
+      "id": "flatpak",
+      "name": "Flatpak",
+      "scope": "Linux desktop applications and runtimes",
+      "manager": "flatpak",
+      "auditCommand": "flatpak-preview",
+      "updateCommand": "flatpak-update",
+      "icon": "terminal",
+      "note": "Flatpak can repair inconsistent installations and remove apps by exact application ID. User and system scopes differ."
+    },
+    {
+      "id": "snap",
+      "name": "Snap",
+      "scope": "Linux Snap applications",
+      "manager": "snapd",
+      "auditCommand": "snap-preview",
+      "updateCommand": "snap-update",
+      "icon": "terminal",
+      "note": "Snap refresh schedules and holds may defer updates; snapd usually performs automatic refreshes."
+    },
+    {
+      "id": "homebrew",
+      "name": "Homebrew",
+      "scope": "macOS and Linux formulae and casks",
+      "manager": "brew",
+      "auditCommand": "brew-preview",
+      "updateCommand": "brew-update",
+      "icon": "terminal",
+      "note": "Homebrew only manages its own formulae/casks. Mac App Store and vendor-managed apps need separate update paths."
     }
   ],
   "commands": [
@@ -690,6 +720,123 @@
       "safety": "Requires a valid Ninite Pro Classic license. Replace Firefox with a supported exact app selection. This changes the endpoint and may remove app data; preserve browser profiles and user data first. Newer Pro web interface has different controls.",
       "sourceUrl": "https://ninite.com/help/features/switches.html",
       "sourceTitle": "Ninite Pro command-line switches"
+    },
+    {
+      "id": "flatpak-preview",
+      "title": "List Flatpak application and runtime updates",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Check installed Flatpak apps and runtimes for available updates.",
+      "code": "flatpak remote-ls --updates\nflatpak list --app",
+      "safety": "Read-only inventory. Flatpak remotes and system/user installations can differ; inspect the intended installation scope.",
+      "sourceUrl": "https://docs.flatpak.org/en/latest/using-flatpak.html",
+      "sourceTitle": "Flatpak update and troubleshooting"
+    },
+    {
+      "id": "flatpak-update",
+      "title": "Update installed Flatpak apps and runtimes",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "User or sudo depending on installation scope",
+      "risk": "changes-system",
+      "summary": "Update installed Flatpak applications and runtimes.",
+      "code": "flatpak update",
+      "safety": "Changes installed apps/runtimes. Review the transaction plan and remote before confirming. Use only for Flatpak-managed software.",
+      "sourceUrl": "https://docs.flatpak.org/en/latest/using-flatpak.html",
+      "sourceTitle": "Flatpak updating"
+    },
+    {
+      "id": "flatpak-repair",
+      "title": "Repair a Flatpak installation",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "User or sudo depending on installation scope",
+      "risk": "changes-system",
+      "summary": "Repair local Flatpak installation inconsistencies after collecting relevant logs.",
+      "code": "flatpak repair",
+      "safety": "Changes local Flatpak installation metadata/objects. Use the appropriate user or system scope; system-wide repair may require sudo. Review before running.",
+      "sourceUrl": "https://docs.flatpak.org/en/latest/using-flatpak.html",
+      "sourceTitle": "Flatpak troubleshooting"
+    },
+    {
+      "id": "flatpak-uninstall",
+      "title": "Uninstall a Flatpak application",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "User or sudo depending on installation scope",
+      "risk": "changes-system",
+      "summary": "Remove one identified Flatpak application by its exact application ID.",
+      "code": "flatpak list --app\nflatpak uninstall org.example.App",
+      "safety": "Replace with the exact application ID. Review whether application data should be retained or separately removed; do not use --delete-data unless explicitly requested.",
+      "sourceUrl": "https://docs.flatpak.org/en/latest/using-flatpak.html",
+      "sourceTitle": "Flatpak uninstall"
+    },
+    {
+      "id": "snap-preview",
+      "title": "List pending Snap refreshes",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "List Snap packages that are queued for refresh.",
+      "code": "snap refresh --list\nsnap refresh --time",
+      "safety": "Read-only. Snap refreshes are normally managed automatically by snapd; holds and refresh schedules can affect what appears.",
+      "sourceUrl": "https://snapcraft.io/docs/how-to-guides/manage-snaps/manage-updates/",
+      "sourceTitle": "Snap update management"
+    },
+    {
+      "id": "snap-update",
+      "title": "Refresh installed Snap packages",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "sudo",
+      "risk": "changes-system",
+      "summary": "Request a Snap refresh for installed packages.",
+      "code": "sudo snap refresh",
+      "safety": "Changes installed Snaps. Review refresh holds, schedule, running apps and critical services first. Snapd may defer updates or apply them according to refresh policy.",
+      "sourceUrl": "https://snapcraft.io/docs/how-to-guides/manage-snaps/manage-updates/",
+      "sourceTitle": "Snap update management"
+    },
+    {
+      "id": "snap-uninstall",
+      "title": "Remove one Snap package",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "sudo",
+      "risk": "changes-system",
+      "summary": "Remove a selected Snap after confirming the exact package name.",
+      "code": "snap list\nsudo snap remove package-name",
+      "safety": "Replace package-name with the exact installed Snap. Check snapshots and retained user data. Do not add --purge unless data removal is explicitly approved.",
+      "sourceUrl": "https://snapcraft.io/docs/how-to-guides/manage-snaps/manage-updates/",
+      "sourceTitle": "Snap package management"
+    },
+    {
+      "id": "brew-preview",
+      "title": "List outdated Homebrew formulae and casks",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Check which Homebrew-managed formulae and casks have newer versions.",
+      "code": "brew outdated --verbose\nbrew list --versions",
+      "safety": "Read-only. Homebrew is macOS/Linux package management; review pinned packages and cask behavior. This does not audit Mac App Store or all vendor apps.",
+      "sourceUrl": "https://docs.brew.sh/Manpage.html",
+      "sourceTitle": "Homebrew brew(1)"
+    },
+    {
+      "id": "brew-update",
+      "title": "Upgrade outdated Homebrew packages",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "User; Homebrew may request permissions for some locations",
+      "risk": "changes-system",
+      "summary": "Refresh Homebrew metadata and upgrade outdated, unpinned formulae and casks.",
+      "code": "brew update\nbrew outdated --verbose\nbrew upgrade",
+      "safety": "Changes installed packages. Review outdated list, pins, cask behavior and dependent packages. Homebrew may reinstall dependents with broken linkage; use a maintenance window for developer or production systems.",
+      "sourceUrl": "https://docs.brew.sh/Manpage.html",
+      "sourceTitle": "Homebrew upgrade"
     }
   ],
   "workflows": [
@@ -767,7 +914,9 @@
         "scoop-uninstall",
         "unigetui-uninstall-app",
         "windows-installer-health",
-        "ninite-uninstall"
+        "ninite-uninstall",
+        "flatpak-uninstall",
+        "snap-uninstall"
       ],
       "sequence": "Confirm app identity, publisher, uninstall scope and data-retention preference. Use the manager that owns the package. If manager metadata is missing, use the vendor's official uninstaller or Windows Apps UI. Inspect MSI logs for MSI failures.",
       "warning": "Do not delete Program Files folders, registry uninstall keys or Windows Installer cache as a substitute for uninstall. Shared dependencies and user data may be affected."
@@ -786,6 +935,27 @@
       ],
       "sequence": "Check active installer and servicing activity. Capture the original error/log. Confirm pending restart state. If the installer is still active, do not terminate it. If it exited with failure, use vendor repair or manager repair for the exact package. Verify version, app launch and event logs.",
       "warning": "Do not kill msiexec or Windows servicing processes as a quick fix. Do not start overlapping installs or force a rollback while an installer transaction is active."
+    },
+    {
+      "id": "cross-platform-package-updates",
+      "title": "Cross-platform package updates",
+      "description": "Use the native package manager for the operating system and software source.",
+      "commandIds": [
+        "linux-apt-preview",
+        "linux-apt-upgrade",
+        "linux-dnf-check",
+        "linux-dnf-upgrade",
+        "linux-pacman-check",
+        "linux-pacman-upgrade",
+        "flatpak-preview",
+        "flatpak-update",
+        "snap-preview",
+        "snap-update",
+        "brew-preview",
+        "brew-update"
+      ],
+      "sequence": "Identify OS and package manager first. Run only matching commands. Review transaction plan, pinned packages and service restart requirements. Never partially upgrade Arch Linux.",
+      "warning": "Do not mix package managers. Homebrew is primarily for macOS/Linux; Snap and Flatpak operate independently of distribution package managers."
     }
   ],
   "principles": [
@@ -799,5 +969,47 @@
     "Every operation must record manager, package ID, version, source, scope, exit code, logs, start/end time and verification.",
     "Do not claim a live update status from a static website. Live inventory requires a local INTA agent or supported manager integration.",
     "Copy controls never execute commands; a future local runner must show exact plan and request explicit confirmation."
+  ],
+  "platforms": [
+    {
+      "id": "action1",
+      "name": "Action1",
+      "kind": "cloud-patch-management",
+      "platform": "Windows, macOS and supported Linux",
+      "summary": "Cloud-native endpoint management with missing OS/third-party updates, approval, deployment rings, vulnerability remediation, inventory and remote support.",
+      "url": "https://www.action1.com/",
+      "docsUrl": "https://www.action1.com/documentation/",
+      "trust": "Commercial platform. Requires endpoint agent, account authorization and managed endpoint scope. Inventory and patch results are available only for enrolled/connected endpoints."
+    },
+    {
+      "id": "patch-my-pc-cloud",
+      "name": "Patch My PC Cloud",
+      "kind": "enterprise-third-party-patching",
+      "platform": "Windows and macOS through supported Intune workflows",
+      "summary": "Cloud portal for application deployment and updates integrated with Microsoft Intune; supports app catalog, deployments, update rings, discovery, reporting and troubleshooting.",
+      "url": "https://docs.patchmypc.com/patch-my-pc-cloud",
+      "docsUrl": "https://docs.patchmypc.com/",
+      "trust": "Commercial platform; requires supported Intune configuration and licensing. Does not replace Intune; it works with the existing device-management platform."
+    },
+    {
+      "id": "patch-my-pc-publisher",
+      "name": "Patch My PC Publisher",
+      "kind": "enterprise-third-party-patching",
+      "platform": "Windows / ConfigMgr / Intune / WSUS",
+      "summary": "On-premises third-party application publishing and patch automation with enterprise catalog, custom apps, pre/post scripts and deployment integration.",
+      "url": "https://docs.patchmypc.com/patch-my-pc-publisher",
+      "docsUrl": "https://docs.patchmypc.com/",
+      "trust": "Commercial product. Select Cloud vs Publisher based on existing management platform; capabilities are not identical."
+    },
+    {
+      "id": "pdq",
+      "name": "PDQ Deploy & Inventory",
+      "kind": "endpoint-deployment-and-inventory",
+      "platform": "Windows-first with macOS capabilities",
+      "summary": "Endpoint software inventory, package library, Windows and third-party patch deployment, schedules, deployment results and custom packages.",
+      "url": "https://www.pdq.com/pdq-overview/",
+      "docsUrl": "https://www.pdq.com/pdq-deploy/",
+      "trust": "Commercial product. Requires authorized endpoint connectivity and deployment credentials; validate package scope, schedules and maintenance windows."
+    }
   ]
 }
