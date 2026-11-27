@@ -33,7 +33,7 @@
 
 ### 🌐 Online tools
 
-- **[Open all 85 online services](Online-Tools)**
+- **[Open all 125 online services](Online-Tools)**
 - **[Files, sandboxes & ransomware](Online-file-analysis)**
 - **[Suspicious links & phishing](Online-url-phishing)**
 - **[IP, domain & threat intelligence](Online-threat-intelligence)**
@@ -80,9 +80,10 @@ Tool name = official page. File buttons name the platform; built-in tools open i
 ### Reference
 
 - [Decision desk](Decision-Desk)
-- [⚡ Quick commands](Quick-Commands)
 - [All playbooks](Playbooks)
 - [Complete tool directory](Tool-Directory)
+- [Command Center](Command-Center)
+- [Quick commands](Quick-Commands)
 - [Methods](Methods)
 - [Rescue media](Rescue-Media)
 - [Intake and handoff](Technician-Handoff)

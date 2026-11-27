@@ -83,13 +83,18 @@ svg { display: inline-block; width: 19px; height: 19px; vertical-align: middle; 
 .online-workflow-kit > div { padding-bottom: 14px; border-bottom: 1px solid var(--line-soft); }
 .online-workflow-kit > div:last-child { border-bottom: 0; padding-bottom: 0; }
 .online-workflow-kit p { margin: 4px 0 8px; font-size: .875rem; }
+.online-notes-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 4px; font-size: .875rem; }
 .online-directory { margin-top: 32px; }
 .online-filters { grid-template-columns: minmax(220px, 1fr) minmax(180px, .4fr) auto; }
 .online-filters > button, .online-tool-list .empty-state button { border: 1px solid var(--line); border-radius: 4px; background: var(--surface); padding: 9px 14px; }
+.online-scope-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; margin-top: 10px; font-size: .875rem; }
+.online-scope-filters label { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; cursor: pointer; }
+.online-scope-filters input { width: 18px; height: 18px; accent-color: var(--focus); }
+.online-scope-filters > span { color: var(--muted); }
 .online-group-nav { margin: 12px 0; gap: 7px; }
 .online-group-nav button span { margin-left: 5px; font-variant-numeric: tabular-nums; }
 .online-tool-list { border-top: 1px solid var(--line); }
-.online-tool-row { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); gap: 28px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.online-tool-row { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); gap: 28px; padding: 22px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 90px; }
 .online-tool-identity h3 { margin: 7px 0 9px; font-size: 1.1rem; }
 .online-tool-identity > p { color: var(--muted); }
 .online-service-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; font-size: .875rem; }
@@ -123,7 +128,7 @@ svg { display: inline-block; width: 19px; height: 19px; vertical-align: middle; 
   .online-start .section-title { align-items: flex-start; flex-direction: column; gap: 12px; }
 }
 @media print {
-  .online-filters, .online-group-nav, .online-task-nav { display: none; }
+  .online-filters, .online-scope-filters, .online-group-nav, .online-task-nav, .online-notes-link { display: none; }
   .online-workflow, .online-tool-row { grid-template-columns: 1fr; break-inside: avoid; }
 }
 ::selection { background: var(--selected); color: var(--text); }

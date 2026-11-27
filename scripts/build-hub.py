@@ -975,7 +975,7 @@ def home_markdown(tools: list[dict], jobs: list[dict], categories: dict, layout:
     lines = [f"![INTA Computer Services — technical knowledge base]({REPO}/raw/main/docs/assets/wiki-hero.svg)", "",
              *heading(1, "INTA knowledge base", "🧭 Your next good fix starts here."),
              "Service procedures, tool references and troubleshooting methods for the INTA team.", "",
-             f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
+             f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
              f"**{len(tools)} tools · {len(jobs)} playbooks · {len(categories)} tool categories**", "",
              quick_start_block.rstrip(), "",
              *heading(2, "🧭 Start a job", "🚦 First, choose the right route"),

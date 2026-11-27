@@ -73,6 +73,8 @@ class HubIntegrity(unittest.TestCase):
         self.assertIn('Tron Script', output['site/index.html'])
         self.assertIn('WinUtil', output['site/index.html'])
         self.assertIn('commandCenterCommands', output['site/build-manifest.json'])
+        self.assertIn('[⚡ Command Center](Command-Center)', output['wiki/Home.md'])
+        self.assertIn('[⚡ Quick commands](Quick-Commands)', output['wiki/Home.md'])
 
     def test_command_center_rejects_unknown_workflow_commands(self):
         catalog = json.loads((ROOT / 'data/command-center.json').read_text())

@@ -116,7 +116,9 @@
         "google-admin-toolbox",
         "mxtoolbox",
         "learndmarc",
-        "microsoft-remote-connectivity"
+        "microsoft-remote-connectivity",
+        "uriports-tools",
+        "google-public-dns"
       ],
       "steps": [
         "Check the domain’s MX and TXT records, the full delivery error and the provider’s service status.",
@@ -133,7 +135,11 @@
         "ssl-labs",
         "mdn-observatory",
         "internet-nl",
-        "securityheaders"
+        "securityheaders",
+        "lets-debug",
+        "tlsref-configurator",
+        "csp-evaluator",
+        "crt-sh"
       ],
       "steps": [
         "Run a TLS and certificate check against the exact public hostname you maintain.",
@@ -150,7 +156,12 @@
         "cloudflare-speed",
         "waveform-bufferbloat",
         "globalping",
-        "cloudflare-radar"
+        "cloudflare-radar",
+        "cloudflare-dns-help",
+        "mlab-speed",
+        "twilio-network-test",
+        "bgp-tools",
+        "ioda"
       ],
       "steps": [
         "Measure from one wired device and record idle latency, loaded latency, loss and the time of the symptom.",
@@ -167,7 +178,8 @@
         "cisa-kev",
         "first-epss",
         "nvd",
-        "osv"
+        "osv",
+        "endoflife-date"
       ],
       "steps": [
         "Match the advisory to the installed product and exact version; check vendor remediation and prerequisites.",
@@ -184,7 +196,10 @@
         "pagespeed-insights",
         "webpagetest",
         "wave-accessibility",
-        "squoosh"
+        "squoosh",
+        "w3c-html-checker",
+        "w3c-link-checker",
+        "caniuse"
       ],
       "steps": [
         "Test the exact affected page and device conditions; distinguish lab runs from available real-user measurements.",
@@ -201,12 +216,87 @@
         "cyberchef",
         "regex101",
         "drawio",
-        "hoppscotch"
+        "hoppscotch",
+        "it-tools",
+        "vert",
+        "webhook-site",
+        "pairdrop"
       ],
       "steps": [
         "Choose the operation for the question: decode a value, match a pattern, diagram a dependency or reproduce an API request.",
         "Check whether that operation is local, synchronized, proxied or sent to a remote service before supplying case data.",
         "Keep the original evidence and save the recipe, request or editable diagram plus the observed result."
+      ]
+    },
+    {
+      "id": "resolve-blocked-site",
+      "title": "Explain a blocked website",
+      "jobId": "network-dns",
+      "summary": "Match the blocked URL to the security product that made the decision, then separate a policy decision from a classification error.",
+      "toolIds": [
+        "paloalto-test-a-site",
+        "fortiguard-webfilter",
+        "symantec-site-review",
+        "trendmicro-site-safety"
+      ],
+      "steps": [
+        "Capture the exact public hostname, block time, security product and category from the block page or gateway log.",
+        "Look up the URL in the matching vendor portal and compare its category with the intended policy; request a category correction when the evidence supports it.",
+        "Retest the original website from the affected device after the approved category or policy change, and confirm protection for unrelated traffic remains effective."
+      ]
+    },
+    {
+      "id": "inspect-windows-alert",
+      "title": "Investigate a Windows binary or driver",
+      "jobId": "malware-removal",
+      "summary": "Use exact-file identity and observed behavior to interpret a signed-process or kernel-driver alert.",
+      "toolIds": [
+        "loldrivers",
+        "lolbas",
+        "virustotal",
+        "mitre-d3fend"
+      ],
+      "steps": [
+        "Preserve the exact file hash, signer, full path, command line, parent process and alert time from the affected endpoint.",
+        "Compare driver hashes with LOLDrivers or signed-binary behavior with LOLBAS, then corroborate with the dated file report and local telemetry.",
+        "Choose a targeted vendor fix, containment step or defensive control based on the evidence, and verify the original workload and security state after the change."
+      ]
+    },
+    {
+      "id": "check-cloud-outage",
+      "title": "Check a cloud service outage",
+      "jobId": "network-dns",
+      "summary": "Match the provider, component, region and incident time before changing a customer’s endpoint configuration.",
+      "toolIds": [
+        "microsoft-service-health",
+        "google-workspace-status",
+        "aws-health",
+        "azure-status",
+        "google-cloud-status",
+        "cloudflare-status",
+        "github-status"
+      ],
+      "steps": [
+        "Identify the failing provider, component and region, and compare the symptom time with the official incident timeline.",
+        "If public status does not explain the issue, check the authorized tenant/account health view and reproduce from a second path or device.",
+        "Record the matching incident or failed diagnostic boundary, then retest the original customer task after recovery."
+      ]
+    },
+    {
+      "id": "fix-certificate-issuance",
+      "title": "Fix a certificate renewal failure",
+      "jobId": "preventive-maintenance",
+      "summary": "Separate ACME issuance, deployed certificate and server TLS configuration before applying a repair.",
+      "toolIds": [
+        "lets-debug",
+        "crt-sh",
+        "ssl-labs",
+        "tlsref-configurator"
+      ],
+      "steps": [
+        "Read the ACME client failure and test the exact hostname with its actual HTTP-01, DNS-01 or TLS-ALPN-01 validation method.",
+        "Repair the first matching DNS, CAA, routing or challenge-path fault, then rerun the actual renewal and verify the certificate deployed to every intended endpoint.",
+        "Check the live TLS result and the real client workflow; use a configuration generator only with the correct server versions and compatibility requirements."
       ]
     }
   ],
@@ -215,7 +305,7 @@
       "toolId": "virustotal",
       "group": "file-analysis",
       "account": "Basic web lookup is available without a paid plan; community, API and premium capabilities have their own account requirements.",
-      "sharing": "Standard uploads and reports are shared with the community and partners. The paid Private Scanning form keeps analyses within the organization but excludes partner antivirus and URL-scanner verdicts.",
+      "sharing": "Standard uploads and reports are shared with the community and partners. VirusTotal also states that IoCs submitted or queried through its standard web interface are scanned and added to its community dataset. Searching a file hash avoids sending file bytes but is not a private indicator search. Paid Private Scanning is a separate form and excludes partner antivirus and URL-scanner verdicts.",
       "firstAction": "Select Search and look up the file SHA-256 before deciding whether a new upload is needed.",
       "expectedResult": "A matching hash report with analysis date, detection names, behavior and related indicators; a missing or clean report is not a guarantee.",
       "sources": [
@@ -233,6 +323,11 @@
           "url": "https://docs.virustotal.com/reference/analyse-binary",
           "title": "Analyze code blocks with Code Insights",
           "evidence": "Documents AI-assisted explanation of disassembled or decompiled code as an existing platform capability, not a separate scanner."
+        },
+        {
+          "url": "https://docs.virustotal.com/docs/searching",
+          "title": "VirusTotal searching and dataset inclusion",
+          "evidence": "Current documentation states that web-submitted or queried indicators are scanned and included in the community dataset."
         }
       ],
       "reviewedAt": "2026-11-26",
@@ -1481,7 +1576,7 @@
       "toolId": "pulsedive",
       "group": "threat-intelligence",
       "account": "Visitors can search; free registration adds submissions, comments and exports.",
-      "sharing": "Remote lookups; active analysis can contact the target. Searching existing records and submitting indicators are different actions.",
+      "sharing": "Queries reach Pulsedive. For a new indicator, scanning without submission avoids adding it to the searchable community database; scanning an existing indicator refreshes its record. Service logs are retained. Active scans contact the target; Submit contributes new intelligence.",
       "firstAction": "Search the indicator in Explore and inspect sources, timestamps and linked threats before requesting new analysis.",
       "expectedResult": "A traceable enrichment record, with paid/history limits visible in the service.",
       "sources": [
@@ -1499,6 +1594,21 @@
           "url": "https://docs.pulsedive.com/",
           "title": "Pulsedive documentation",
           "evidence": "Official lookup, investigation, API and export overview."
+        },
+        {
+          "url": "https://blog.pulsedive.com/pulsedive-cyber-threat-intelligence-faqs/",
+          "title": "Pulsedive scan-versus-submit FAQ",
+          "evidence": "Distinguishes transient Analyze operations for absent indicators from submission into community intelligence, and passive from active scans."
+        },
+        {
+          "url": "https://docs.pulsedive.com/api/scan/overview",
+          "title": "Pulsedive scan storage and network behavior",
+          "evidence": "Documents no-submit behavior, updates to already-existing indicators, submit=1 for saving new records, and the distinction between passive metadata lookup and active target contact."
+        },
+        {
+          "url": "https://pulsedive.com/privacy",
+          "title": "Pulsedive logging and retention",
+          "evidence": "Confirms retention of web/API logs and request details, so no-submit scanning is not a zero-retention guarantee."
         }
       ],
       "reviewedAt": "2026-11-26",
@@ -2060,6 +2170,876 @@
       ],
       "reviewedAt": "2026-11-26",
       "shortRole": "Reproduce an API failure and compare status, headers and response content with the documented contract."
+    },
+    {
+      "toolId": "magika-web",
+      "group": "file-analysis",
+      "account": "No service account is required for the public web demo.",
+      "sharing": "The official demo performs file identification locally in the browser. The website and model still load from Google; content-type identification does not certify that a file is safe.",
+      "firstAction": "Open the demo, select a copy of the file, and compare the detected content type with its extension and expected origin.",
+      "expectedResult": "A predicted content type or unknown result that guides further inspection; use a dedicated scanner for a malware verdict.",
+      "sources": [
+        {
+          "url": "https://securityresearch.google/magika/introduction/overview/",
+          "title": "Magika overview",
+          "evidence": "Confirms local-browser execution and distinguishes file type identification from downstream security scanning."
+        },
+        {
+          "url": "https://securityresearch.google/magika/demo/magika-demo/",
+          "title": "Official Magika Web Demo",
+          "evidence": "Current browser demonstration launch route."
+        },
+        {
+          "url": "https://github.com/google/magika",
+          "title": "Magika source repository",
+          "evidence": "Maintained source, bindings and model documentation."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Identify an unknown or mislabeled file before choosing the right inspection tool."
+    },
+    {
+      "toolId": "koodous",
+      "group": "file-analysis",
+      "account": "Public portal supports APK search; sign-in and plan determine further capabilities. Free API quotas do not include sample downloads or analysis requests.",
+      "sharing": "Uploaded APKs are shared with security partners and customers, and intended for community sharing. Search the existing hash before uploading a new APK.",
+      "firstAction": "Calculate the APK SHA-256 locally, search it in Koodous, and compare the package identity, signer, permissions and analysis evidence.",
+      "expectedResult": "An APK-specific record or no match, with metadata and available detection evidence to compare against the app origin.",
+      "sources": [
+        {
+          "url": "https://koodous.com/about-us",
+          "title": "Koodous platform overview",
+          "evidence": "Describes the Android APK repository, YARA rules and static/dynamic analysis."
+        },
+        {
+          "url": "https://docs.koodous.com/quotas.html",
+          "title": "Koodous usage limits",
+          "evidence": "Separates free and paid web/API operation quotas."
+        },
+        {
+          "url": "https://koodous.com/terms",
+          "title": "Koodous submission terms",
+          "evidence": "Confirms sample sharing and public-contribution semantics."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Investigate a suspicious sideloaded Android app by its exact APK hash."
+    },
+    {
+      "toolId": "crowdsec-cti",
+      "group": "threat-intelligence",
+      "account": "The browser workflow needs no API key; account and plan control available data and quotas.",
+      "sharing": "The searched IP and request metadata reach CrowdSec. This is an intelligence lookup; no customer log upload is needed. An unlisted IP is not proof of benign behavior.",
+      "firstAction": "Search the exact public source IP, then inspect behavior labels and observation windows against the timestamp in the local alert.",
+      "expectedResult": "A dated behavior and reputation report, or explicit lack of data, to corroborate the local connection evidence.",
+      "sources": [
+        {
+          "url": "https://docs.crowdsec.net/u/cti_api/intro/",
+          "title": "CrowdSec CTI introduction",
+          "evidence": "Documents browser lookup, observed behavior, time-windowed scores and distinct web/API quotas."
+        },
+        {
+          "url": "https://docs.crowdsec.net/u/console/ip_reputation/search_ui/",
+          "title": "CrowdSec CTI search UI",
+          "evidence": "Documents exact-IP lookup, query filters and result navigation."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Explain what a source IP was observed doing before changing a firewall or sign-in rule."
+    },
+    {
+      "toolId": "validin",
+      "group": "threat-intelligence",
+      "account": "An account is required. Community lookup is distinct from Enterprise live scanning and collaboration.",
+      "sharing": "Queries are sent to Validin. Historical lookup does not require submitting the full suspicious page or requesting a new scan; live scanning is a separately entitled operation.",
+      "firstAction": "Search the domain or IP and inspect dated DNS and host-response records before pivoting to related hosts.",
+      "expectedResult": "A time-aware infrastructure trail with source records; shared hosting alone does not establish common ownership.",
+      "sources": [
+        {
+          "url": "https://docs.validin.com/docs/what-is-validin",
+          "title": "Validin platform documentation",
+          "evidence": "Explains DNS collection, host-response records and investigation workflow."
+        },
+        {
+          "url": "https://www.validin.com/pricing/",
+          "title": "Validin current plans",
+          "evidence": "Documents Community query limits and separates live scanning and team features by tier."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Reconstruct where a suspicious domain resolved and identify related infrastructure."
+    },
+    {
+      "toolId": "silent-push",
+      "group": "threat-intelligence",
+      "account": "Register a free Community account or sign in to the current console.",
+      "sharing": "Queries and requested live scans reach Silent Push. Live scans contact the target; this review did not establish private-report guarantees for Community.",
+      "firstAction": "Use Insight Search on an IP or domain, review existing observations, and pivot through DNS or certificates before requesting a live scan.",
+      "expectedResult": "Related infrastructure and time-stamped website evidence for a research hypothesis; validate relationships independently.",
+      "sources": [
+        {
+          "url": "https://www.silentpush.com/community-edition/",
+          "title": "Silent Push Community Edition",
+          "evidence": "Confirms research/evaluation scope, current request allowance, features and console destination."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Research linked phishing infrastructure and test a threat-intelligence investigation workflow."
+    },
+    {
+      "toolId": "phishtank",
+      "group": "url-phishing",
+      "account": "Public phishing lookup remains available. Existing accounts can sign in, but new user registration is temporarily disabled as observed in this review.",
+      "sharing": "Phishing submissions and verification activity are shared through the website and API. A database lookup and a new report are separate actions.",
+      "firstAction": "Search the suspicious URL and check its verification, online status and submission time before treating it as current evidence.",
+      "expectedResult": "A community phishing record or no match; missing or not-yet-verified entries do not establish safety.",
+      "sources": [
+        {
+          "url": "https://www.phishtank.org/faq.php",
+          "title": "PhishTank FAQ",
+          "evidence": "Confirms a free web-only community service, public data sharing and the distinction from protective software."
+        },
+        {
+          "url": "https://www.phishtank.org/api_info.php",
+          "title": "PhishTank API information",
+          "evidence": "Documents database lookup and optional API keys with differentiated limits."
+        },
+        {
+          "url": "https://www.phishtank.org/register.php",
+          "title": "PhishTank registration status",
+          "evidence": "The live registration page states that new user registration is temporarily disabled and offers sign-in for existing members."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Check whether a suspicious URL has a community-verified phishing record."
+    },
+    {
+      "toolId": "phishly",
+      "group": "url-phishing",
+      "account": "Use the email address and instructions on the official page; no separate portal account is advertised.",
+      "sharing": "Tines states that email content is purged after analysis and urlscan submissions are private. The email still reaches Tines, and urlscan contacts the target. Anyone given a private scan ID can open its report. The sender joins the service mailing list; attachments are hashed rather than detonated.",
+      "firstAction": "Review the provider data behavior, then follow the published forwarding or .eml instructions for an email that may be shared with that service.",
+      "expectedResult": "An emailed URL-analysis report and attachment-hash lookup links; attachment execution requires a separate sandbox workflow.",
+      "sources": [
+        {
+          "url": "https://phish.ly/",
+          "title": "phish.ly operating and privacy notes",
+          "evidence": "Documents forwarding, URL analysis, attachment hashing, private urlscan submissions, email purge and mailing-list behavior."
+        },
+        {
+          "url": "https://docs.urlscan.io/pages/visibility",
+          "title": "urlscan private report visibility",
+          "evidence": "Private reports are visible to the submitter and can be accessed by others who receive the scan ID."
+        },
+        {
+          "url": "https://docs.urlscan.io/pages/faq",
+          "title": "urlscan report access and scanning FAQ",
+          "evidence": "Explains private scan-ID access and that scan visibility modes change discoverability rather than the analysis itself."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Get a structured report for a suspicious email through the published forwarding workflow."
+    },
+    {
+      "toolId": "msrc-update-guide",
+      "group": "vulnerability",
+      "account": "Public browser access; JavaScript is required for the guide interface.",
+      "sharing": "Searches request public Microsoft advisory data; no endpoint inventory or file upload is needed.",
+      "firstAction": "Search the CVE or product, select the installed edition and version, and open the matching update and known-issue references.",
+      "expectedResult": "Applicable vendor remediation evidence and update identifiers to combine with exposure, KEV and EPSS priority.",
+      "sources": [
+        {
+          "url": "https://www.microsoft.com/en-us/msrc/faqs-security-update-guide",
+          "title": "Microsoft Security Update Guide FAQ",
+          "evidence": "Identifies the guide as the authoritative Microsoft security-update source and describes filters, export and API access."
+        },
+        {
+          "url": "https://msrc.microsoft.com/update-guide/",
+          "title": "Microsoft Security Update Guide",
+          "evidence": "Official current application route; requires JavaScript."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Match a Microsoft CVE to the exact installed product, fixed build and applicable update."
+    },
+    {
+      "toolId": "paloalto-test-a-site",
+      "group": "url-phishing",
+      "account": "Public lookup page; additional challenge or request fields may be required.",
+      "sharing": "The queried domain, URL or IP reaches Palo Alto Networks. Recategorization is a separate submission; a category is not a full malware-analysis result.",
+      "firstAction": "Look up the exact public URL and compare its category with the firewall block log and configured policy.",
+      "expectedResult": "Current vendor classification and, where needed, a documented category-change route to resolve a false positive.",
+      "sources": [
+        {
+          "url": "https://urlfiltering.paloaltonetworks.com/",
+          "title": "Palo Alto Networks Test A Site",
+          "evidence": "Confirms domain, URL and IP lookup plus category and attribute change requests."
+        },
+        {
+          "url": "https://docs.paloaltonetworks.com/advanced-url-filtering/administration/url-filtering-basics/url-categories",
+          "title": "Palo Alto URL category documentation",
+          "evidence": "Links the lookup tool to the filtering category and recategorization workflow."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Diagnose or challenge a website block caused by Palo Alto Networks URL filtering."
+    },
+    {
+      "toolId": "fortiguard-webfilter",
+      "group": "url-phishing",
+      "account": "Public lookup; provider challenge and review-form requirements may apply.",
+      "sharing": "The URL is sent to Fortinet. Category review is a separate request, and category information does not establish that a website is safe.",
+      "firstAction": "Enter the blocked public URL, compare its category with the Fortinet event log, and request reevaluation only when evidence supports it.",
+      "expectedResult": "A FortiGuard category and classification that identifies whether policy or vendor categorization caused the block.",
+      "sources": [
+        {
+          "url": "https://docs.fortinet.com/document/fortiproxy/7.6.0/administration-guide/636363/url-lookup",
+          "title": "Fortinet URL lookup documentation",
+          "evidence": "Documents category/classification lookup and the official webfilter reevaluation route."
+        },
+        {
+          "url": "https://www.fortiguard.com/webfilter",
+          "title": "FortiGuard web filter portal",
+          "evidence": "Official launch route confirmed by Fortinet documentation; automated page retrieval returned 403 during review."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Explain a Fortinet web-filter block before altering the customer firewall policy."
+    },
+    {
+      "toolId": "symantec-site-review",
+      "group": "url-phishing",
+      "account": "Public check form; optional review contact details depend on the request.",
+      "sharing": "The entered URL and any review details reach the vendor. The portal explicitly does not perform full real-time malicious-URL or file analysis.",
+      "firstAction": "Check the affected URL category, match it to the proxy event, and use the dispute workflow for a supported correction.",
+      "expectedResult": "The current WebPulse category and a correction request route, distinct from a sandbox or antivirus verdict.",
+      "sources": [
+        {
+          "url": "https://sitereview.bluecoat.com/index.html",
+          "title": "Symantec WebPulse Site Review",
+          "evidence": "Documents category checking, disputes and the absence of full real-time malware analysis."
+        },
+        {
+          "url": "https://knowledge.broadcom.com/external/article/166098",
+          "title": "Broadcom category lookup guidance",
+          "evidence": "Explains the relationship between ProxySG and the public site-review workflow."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Resolve a Symantec or Blue Coat website-category false positive using the matching vendor record."
+    },
+    {
+      "toolId": "trendmicro-site-safety",
+      "group": "url-phishing",
+      "account": "Public browser form without a separate account requirement shown.",
+      "sharing": "The URL reaches Trend Micro; an untested URL triggers its first check. This is not guaranteed to be a passive lookup.",
+      "firstAction": "Submit a shareable public URL, inspect the safety rating and content category, and compare them with the endpoint or gateway block evidence.",
+      "expectedResult": "A vendor rating with category context; an untested or safe rating alone does not establish absence of malicious behavior.",
+      "sources": [
+        {
+          "url": "https://global.sitesafety.trendmicro.com/",
+          "title": "Trend Micro Site Safety Center",
+          "evidence": "Documents free access, ratings, category groups and the first-check behavior for an untested URL."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Cross-check a Trend Micro block or inspect its existing reputation classification for a suspicious link."
+    },
+    {
+      "toolId": "criminal-ip",
+      "group": "threat-intelligence",
+      "account": "Register or sign in to the Search Engine. Private domain reports require a paid plan; scan types and privacy modes consume different credits.",
+      "sharing": "Queries reach Criminal IP, and its FAQ says recent searches and recently scanned reports are publicly viewable. Full, phishing and lite URL scans contact the target. Private domain reports require an explicitly selected paid-plan mode.",
+      "firstAction": "Start with Asset Search or existing Domain Search records and inspect their dates; choose an explicit active/private mode only for the question that remains.",
+      "expectedResult": "An IP or domain evidence report with the selected scan mode recorded; AI phishing labels require corroboration.",
+      "sources": [
+        {
+          "url": "https://www.criminalip.io/",
+          "title": "Criminal IP platform",
+          "evidence": "Confirms the search service moved to search.criminalip.io and describes the separate products."
+        },
+        {
+          "url": "https://search.criminalip.io/pricing",
+          "title": "Criminal IP search and scan modes",
+          "evidence": "Documents free membership, active scan modes, credit distinctions and private requests."
+        },
+        {
+          "url": "https://search.criminalip.io/",
+          "title": "Criminal IP search privacy FAQ",
+          "evidence": "Distinguishes private user search history from publicly visible recent searches/reports and identifies private domain reports as a paid-plan feature."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Investigate an exposed service or suspicious domain and distinguish existing data from a new active scan."
+    },
+    {
+      "toolId": "loldrivers",
+      "group": "vulnerability",
+      "account": "No account required for the public directory.",
+      "sharing": "Browse published records or search by filename, publisher, CVE or hash; no driver upload is required. A filename match alone is insufficient, and deletion or blocking is a separate change.",
+      "firstAction": "Calculate the installed driver hash locally and compare the exact sample, signer and referenced advisory before deciding on a vendor update or block.",
+      "expectedResult": "A matching sample record with vulnerability or malicious classification and supporting evidence; preserve recovery options before changing a boot-critical driver.",
+      "sources": [
+        {
+          "url": "https://www.loldrivers.io/",
+          "title": "LOLDrivers catalog",
+          "evidence": "Shows vulnerable/malicious classifications, hash lookup and sample-specific evidence."
+        },
+        {
+          "url": "https://www.loldrivers.io/detections/",
+          "title": "LOLDrivers detection references",
+          "evidence": "Provides maintained detection and policy resources for downstream defensive use."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Correlate an unexpected kernel driver or vulnerable-driver alert with an exact known sample."
+    },
+    {
+      "toolId": "lolbas",
+      "group": "threat-intelligence",
+      "account": "No account required for the searchable public catalog.",
+      "sharing": "The reference is browsed without uploading logs or executing its examples. A listed binary is not automatically malicious; its arguments, parent process and activity determine the finding.",
+      "firstAction": "Search the observed executable name and compare documented functions and ATT&CK mappings with the collected process tree and command line.",
+      "expectedResult": "A documented behavior mapping and evidence questions for the investigation; preserve legitimate administrative use when choosing a control.",
+      "sources": [
+        {
+          "url": "https://lolbas-project.github.io/",
+          "title": "LOLBAS public catalog",
+          "evidence": "Documents searchable Microsoft-signed binaries and ATT&CK mappings."
+        },
+        {
+          "url": "https://github.com/LOLBAS-Project/LOLBAS/blob/master/README.md",
+          "title": "LOLBAS project scope",
+          "evidence": "Defines unexpected functionality and the project inclusion criteria."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Interpret a suspicious signed-binary process or command in its surrounding incident context."
+    },
+    {
+      "toolId": "mitre-d3fend",
+      "group": "threat-intelligence",
+      "account": "Public browsing requires no account.",
+      "sharing": "Public matrix browsing needs no case-data upload. Extraction tools accept pasted text; this review did not verify their processing boundary, so use technique IDs or nonsensitive examples.",
+      "firstAction": "Find the observed ATT&CK technique or artifact in the matrix and inspect the related defensive technique definitions.",
+      "expectedResult": "Candidate countermeasures with definitions and relationships to validate against the actual environment; the mapping is not proof that a control has been deployed.",
+      "sources": [
+        {
+          "url": "https://d3fend.mitre.org/",
+          "title": "MITRE D3FEND matrix",
+          "evidence": "Official defensive-technique and artifact browser."
+        },
+        {
+          "url": "https://d3fend.mitre.org/tools/",
+          "title": "D3FEND browser tools",
+          "evidence": "Documents ATT&CK, D3FEND, artifact and CWE extraction tools."
+        },
+        {
+          "url": "https://d3fend.mitre.org/dao/",
+          "title": "D3FEND artifact ontology",
+          "evidence": "Explains direct and inherited relationships between artifacts and techniques."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Turn an observed attack technique into concrete defensive countermeasure candidates."
+    },
+    {
+      "toolId": "tlsref-configurator",
+      "group": "web-security",
+      "account": "No account is required for the public configurator.",
+      "sharing": "The form produces configuration from the chosen versions and options; it does not deploy changes or scan a server.",
+      "firstAction": "Select the real server software and versions, then choose the client compatibility profile before copying the generated settings.",
+      "expectedResult": "A configuration snippet matching the chosen environment, ready for review and testing on the actual service.",
+      "sources": [
+        {
+          "url": "https://configurator.tlsref.org/",
+          "title": "TLSRef TLS Configurator",
+          "evidence": "Shows supported software, version inputs and Modern, Intermediate and Old compatibility profiles."
+        },
+        {
+          "url": "https://github.com/mozilla/ssl-config-generator",
+          "title": "Mozilla generator migration",
+          "evidence": "The archived Mozilla repository confirms the move to the community TLSRef configurator."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Server TLS configuration"
+    },
+    {
+      "toolId": "lets-debug",
+      "group": "web-security",
+      "account": "The public diagnostic form is available without an account.",
+      "sharing": "A submitted domain triggers remote DNS and validation checks. Domain results and recent tests have shareable public URLs.",
+      "firstAction": "Enter the exact hostname and the ACME challenge method used by the failing client, then compare the first failure with the client log.",
+      "expectedResult": "Named DNS, CAA, network or validation failures that identify the next configuration to inspect.",
+      "sources": [
+        {
+          "url": "https://letsdebug.net/",
+          "title": "Let's Debug public diagnostic",
+          "evidence": "Describes issuance diagnostics and offers a domain and validation-method form."
+        },
+        {
+          "url": "https://github.com/letsdebug/letsdebug",
+          "title": "Let's Debug documentation",
+          "evidence": "Lists checks, remote validation behavior and public domain/result endpoints."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "ACME certificate issuance"
+    },
+    {
+      "toolId": "csp-evaluator",
+      "group": "web-security",
+      "account": "No account is required for the public policy checker.",
+      "sharing": "Paste policy text into the checker rather than sending a full customer page or browsing session. The public frontend uses the open-source evaluator library.",
+      "firstAction": "Copy the current Content-Security-Policy header and select the CSP version used for the review.",
+      "expectedResult": "Directive-level findings that explain policy weaknesses to address and retest in the application.",
+      "sources": [
+        {
+          "url": "https://csp-evaluator.withgoogle.com/",
+          "title": "CSP Evaluator",
+          "evidence": "Documents policy review and offers a version-specific policy form."
+        },
+        {
+          "url": "https://github.com/google/csp-evaluator",
+          "title": "CSP Evaluator source",
+          "evidence": "Documents library/frontend deployment and the incomplete common-bypass list."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Content Security Policy review"
+    },
+    {
+      "toolId": "crt-sh",
+      "group": "web-security",
+      "account": "The public search form is available without an account.",
+      "sharing": "Search terms go to the service; the returned certificates are public transparency records. This is not a private hostname inventory or a live endpoint scan.",
+      "firstAction": "Search the public domain or certificate SHA-256 and inspect issuer, names, validity dates and record timing.",
+      "expectedResult": "Recorded certificates that can be compared with expected issuance and the certificate currently presented by the server.",
+      "sources": [
+        {
+          "url": "https://crt.sh/",
+          "title": "crt.sh Certificate Search",
+          "evidence": "Live public page exposes identity/fingerprint search and identifies Sectigo as the operator."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Certificate transparency lookup"
+    },
+    {
+      "toolId": "uriports-tools",
+      "group": "dns-email",
+      "account": "Public checks are available without a paid monitoring plan.",
+      "sharing": "Domain and selector inputs reach URIports; remote checks retrieve public records and published policy configuration.",
+      "firstAction": "Choose the failed policy type and enter the domain; for MTA-STS, inspect both the DNS record and HTTPS policy result.",
+      "expectedResult": "Specific syntax, record or policy findings that can be corrected and checked again.",
+      "sources": [
+        {
+          "url": "https://www.uriports.com/tools?method=mta-sts",
+          "title": "URIports validators",
+          "evidence": "Lists supported checks and explains syntax and RFC validation."
+        },
+        {
+          "url": "https://www.uriports.com/tools/mtasts-validator",
+          "title": "MTA-STS validator",
+          "evidence": "Describes policy/DNS validation and the supporting-sender limitation."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Mail transport policy checks"
+    },
+    {
+      "toolId": "google-public-dns",
+      "group": "dns-email",
+      "account": "No account is required for the public lookup form.",
+      "sharing": "The queried name and record type reach Google Public DNS; do not treat this as a lookup against private corporate DNS.",
+      "firstAction": "Enter the affected public name and record type, then inspect DNS response status, answer and DNSSEC details.",
+      "expectedResult": "The resolver’s answer or DNS error, suitable for a timestamped comparison with local and authoritative results.",
+      "sources": [
+        {
+          "url": "https://dns.google/",
+          "title": "Google Public DNS browser lookup",
+          "evidence": "Provides the public name/IP lookup form."
+        },
+        {
+          "url": "https://developers.google.com/speed/public-dns/docs/doh",
+          "title": "Google Public DNS DoH documentation",
+          "evidence": "Distinguishes browser/API URLs and explains that HTTP success can contain a DNS error."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Resolver-specific DNS evidence"
+    },
+    {
+      "toolId": "cloudflare-dns-help",
+      "group": "dns-email",
+      "account": "No account is required for the public connection check.",
+      "sharing": "Opening the page performs connection tests to Cloudflare from the current device; it is not an offline settings viewer.",
+      "firstAction": "Open the check on the actual configured device and record the resolver/connection result before and after the change.",
+      "expectedResult": "Evidence of whether that browser path reaches 1.1.1.1 and which Cloudflare location serves it.",
+      "sources": [
+        {
+          "url": "https://developers.cloudflare.com/1.1.1.1/check/",
+          "title": "Cloudflare resolver verification",
+          "evidence": "Official instructions link to the connection check and describe its tests and location result."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Verify the active DNS path"
+    },
+    {
+      "toolId": "mlab-speed",
+      "group": "connectivity",
+      "account": "No account is required; starting a test contributes to M-Lab’s public measurement dataset.",
+      "sharing": "Synthetic test traffic is exchanged with M-Lab. Measurements, timestamp and the client’s public IP are published and retained indefinitely.",
+      "firstAction": "Read the public-data notice, then test from the affected wired device while recording competing traffic and the test time.",
+      "expectedResult": "Upload/download and connection measurements that can be compared under the same conditions.",
+      "sources": [
+        {
+          "url": "https://www.measurementlab.net/tests/",
+          "title": "M-Lab test catalog",
+          "evidence": "Documents NDT and public publication of measurement results including the test IP."
+        },
+        {
+          "url": "https://www.measurementlab.net/privacy/",
+          "title": "M-Lab privacy policy",
+          "evidence": "Describes synthetic measurements, connection metadata and indefinite public retention."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Independent throughput measurement"
+    },
+    {
+      "toolId": "twilio-network-test",
+      "group": "connectivity",
+      "account": "The diagnostic page is public; individual tests can request browser microphone permission.",
+      "sharing": "Tests contact Twilio media/TURN infrastructure and may use the microphone for a test call; results describe this path.",
+      "firstAction": "Run the relevant connectivity test from the affected browser; use the test call only when checking audio and note the chosen edge.",
+      "expectedResult": "A failed connectivity or media step and log output to compare with the application’s actual call failure.",
+      "sources": [
+        {
+          "url": "https://networktest.twilio.com/",
+          "title": "Twilio WebRTC Diagnostics",
+          "evidence": "Lists UDP/TCP/TLS TURN checks, bandwidth, codec test calls and transport limitations."
+        },
+        {
+          "url": "https://help.twilio.com/hc/en-us/articles/223180908-Troubleshooting-Common-Problems-with-the-Twilio-Voice-JavaScript-SDK",
+          "title": "Twilio Voice troubleshooting",
+          "evidence": "Recommends the network test to inspect two-way audio and supported call capacity."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Browser voice-call connectivity"
+    },
+    {
+      "toolId": "bgp-tools",
+      "group": "connectivity",
+      "account": "Public search is available without a monitoring subscription.",
+      "sharing": "The searched ASN, prefix or name reaches the service. Public routing data is distinct from monitoring data attached to an account.",
+      "firstAction": "Search the affected public prefix or ASN and compare its visible routes and ownership with the ISP escalation evidence.",
+      "expectedResult": "Routing and network context that can explain which provider or prefix requires further investigation.",
+      "sources": [
+        {
+          "url": "https://bgp.tools/",
+          "title": "bgp.tools public service",
+          "evidence": "Documents public ASN/prefix/DNS search, near-realtime BGP data and separate paid monitoring."
+        },
+        {
+          "url": "https://bgp.tools/kb/api",
+          "title": "bgp.tools API information",
+          "evidence": "Distinguishes public endpoints from extended commercial APIs."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Routing and prefix context"
+    },
+    {
+      "toolId": "ioda",
+      "group": "connectivity",
+      "account": "Public dashboards can be consulted without configuring a customer monitoring agent.",
+      "sharing": "The dashboard displays existing measurement datasets; choosing an area does not upload customer logs or initiate a local LAN scan.",
+      "firstAction": "Select the affected country, region or ISP ASN and the symptom’s time window; compare the available signals rather than one chart alone.",
+      "expectedResult": "Time-aligned changes in network visibility that support an outage hypothesis and escalation timeline.",
+      "sources": [
+        {
+          "url": "https://www.caida.org/projects/ioda/",
+          "title": "IODA project overview",
+          "evidence": "Describes the measurement architecture and links to the deployed public dashboard."
+        },
+        {
+          "url": "https://ioda.inetintel.cc.gatech.edu/reports/",
+          "title": "IODA project reports",
+          "evidence": "Official project reports describe dashboard and signal interpretation developments."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Regional and ISP outage evidence"
+    },
+    {
+      "toolId": "aws-health",
+      "group": "connectivity",
+      "account": "No AWS account is required for public service health; signed-in account health provides targeted events.",
+      "sharing": "The public dashboard displays provider incident information. Reading it does not submit customer logs; account-specific views and optional subscriptions are separate.",
+      "firstAction": "Find the affected aws service and region, then compare the incident’s region, component and update time with the customer’s symptom.",
+      "expectedResult": "An incident or maintenance timeline to reference while testing the original service and deciding the next action.",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/health/latest/ug/aws-health-dashboard-status.html",
+          "title": "AWS Health Dashboard documentation",
+          "evidence": "Documents public access, event/region filters, history and the account-specific distinction."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "AWS service and region"
+    },
+    {
+      "toolId": "azure-status",
+      "group": "connectivity",
+      "account": "The global status page is public; Azure Service Health requires access to the affected subscription.",
+      "sharing": "The public dashboard displays provider incident information. Reading it does not submit customer logs; account-specific views and optional subscriptions are separate.",
+      "firstAction": "Find the affected azure service and region, then compare the incident’s region, component and update time with the customer’s symptom.",
+      "expectedResult": "An incident or maintenance timeline to reference while testing the original service and deciding the next action.",
+      "sources": [
+        {
+          "url": "https://azure.status.microsoft/en-us/status",
+          "title": "Azure Status",
+          "evidence": "Provides global service/region status and links to personalized Service Health."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/azure/service-health/azure-status-overview",
+          "title": "Azure status overview",
+          "evidence": "Explains public communication scope and targeted Service Health notifications."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Azure service and region"
+    },
+    {
+      "toolId": "google-cloud-status",
+      "group": "connectivity",
+      "account": "The public dashboard is open; Personalized Service Health provides project-specific information after sign-in.",
+      "sharing": "The public dashboard displays provider incident information. Reading it does not submit customer logs; account-specific views and optional subscriptions are separate.",
+      "firstAction": "Find the affected google cloud product and location, then compare the incident’s region, component and update time with the customer’s symptom.",
+      "expectedResult": "An incident or maintenance timeline to reference while testing the original service and deciding the next action.",
+      "sources": [
+        {
+          "url": "https://status.cloud.google.com/",
+          "title": "Google Cloud Service Health",
+          "evidence": "Provides product/region views and distinguishes broad incidents from personalized project events."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Google Cloud product and location"
+    },
+    {
+      "toolId": "cloudflare-status",
+      "group": "connectivity",
+      "account": "The public status page is open; optional notification subscriptions are separate.",
+      "sharing": "The public dashboard displays provider incident information. Reading it does not submit customer logs; account-specific views and optional subscriptions are separate.",
+      "firstAction": "Find the affected cloudflare service, then compare the incident’s region, component and update time with the customer’s symptom.",
+      "expectedResult": "An incident or maintenance timeline to reference while testing the original service and deciding the next action.",
+      "sources": [
+        {
+          "url": "https://www.cloudflarestatus.com/",
+          "title": "Cloudflare System Status",
+          "evidence": "Provides active/recent incidents, maintenance, status API and RSS links."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Cloudflare service"
+    },
+    {
+      "toolId": "github-status",
+      "group": "connectivity",
+      "account": "Public status and history are open; optional notification subscriptions collect the chosen contact details.",
+      "sharing": "The public dashboard displays provider incident information. Reading it does not submit customer logs; account-specific views and optional subscriptions are separate.",
+      "firstAction": "Find the affected github component or region, then compare the incident’s region, component and update time with the customer’s symptom.",
+      "expectedResult": "An incident or maintenance timeline to reference while testing the original service and deciding the next action.",
+      "sources": [
+        {
+          "url": "https://www.githubstatus.com/",
+          "title": "GitHub Status",
+          "evidence": "Shows component health, regional status destinations, incident history and subscription options."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "GitHub component or region"
+    },
+    {
+      "toolId": "it-tools",
+      "group": "browser-utilities",
+      "account": "No account is required for the public tools; a self-hosted deployment is also documented.",
+      "sharing": "Reviewed subnet and text-hash tools compute in the browser; subnet input is stored in browser storage. Evaluate other tools and hosted-site requests separately.",
+      "firstAction": "Choose the exact utility, enter a small known example first and verify its output before applying it to the working value.",
+      "expectedResult": "A reproducible calculation or conversion with the input, selected mode and output retained in the case notes.",
+      "sources": [
+        {
+          "url": "https://github.com/CorentinTh/it-tools",
+          "title": "IT-Tools official project",
+          "evidence": "Links the hosted toolbox and documents self-hosting."
+        },
+        {
+          "url": "https://github.com/CorentinTh/it-tools/blob/main/src/tools/ipv4-subnet-calculator/ipv4-subnet-calculator.vue",
+          "title": "Subnet calculator implementation",
+          "evidence": "Computes subnet data in the browser and persists the entered address in browser storage."
+        },
+        {
+          "url": "https://github.com/CorentinTh/it-tools/blob/main/src/tools/hash-text/hash-text.vue",
+          "title": "Text hashing implementation",
+          "evidence": "Uses local hashing functions on the entered text."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Local technical calculators"
+    },
+    {
+      "toolId": "vert",
+      "group": "browser-utilities",
+      "account": "The hosted converter does not require an account; server video processing has its own configuration.",
+      "sharing": "Most conversions run locally. Unsupported local video conversions can upload to a vertd server; the official policy deletes those uploads after download or one hour unless retention is explicitly authorized.",
+      "firstAction": "Load a copy, confirm the selected output format and whether conversion is local or uses the video server, then inspect the output before replacing anything.",
+      "expectedResult": "A converted file with its contents, visual quality and needed metadata checked against the unchanged original.",
+      "sources": [
+        {
+          "url": "https://vert.sh/privacy/",
+          "title": "VERT privacy policy, updated October 6 2026",
+          "evidence": "Documents local conversion, conditional server-video fallback, retention and anonymous analytics."
+        },
+        {
+          "url": "https://github.com/VERT-sh/vert",
+          "title": "VERT official source",
+          "evidence": "Documents the hosted service, supported conversion families and self-hosting."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Browser file conversion"
+    },
+    {
+      "toolId": "webhook-site",
+      "group": "browser-utilities",
+      "account": "The free endpoint works without signup; quotas and expiry apply. Paid subscriptions protect account URLs with login by default.",
+      "sharing": "Request bodies, headers and emails are sent to and stored by the service. Free endpoint data is accessible to anyone who knows its URL ID.",
+      "firstAction": "Create a temporary endpoint for a synthetic test payload, send one controlled event and inspect the received method, headers and body.",
+      "expectedResult": "The exact callback received by the test endpoint, including timing and payload structure.",
+      "sources": [
+        {
+          "url": "https://docs.webhook.site/",
+          "title": "Webhook.site FAQ",
+          "evidence": "Describes temporary endpoints, storage and free-ID versus paid-login access."
+        },
+        {
+          "url": "https://webhook.site/pricing",
+          "title": "Webhook.site pricing",
+          "evidence": "Shows current free endpoint expiry and limits, which differ from the FAQ count."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Inspect test callbacks"
+    },
+    {
+      "toolId": "pairdrop",
+      "group": "browser-utilities",
+      "account": "No signup is required; pairing and transfer acceptance happen in the browser.",
+      "sharing": "Same-network transfers use a direct peer connection. Cross-network transfers may use a TURN relay; WebRTC encrypts traffic in transit, while the hosted signaling server still must be trusted.",
+      "firstAction": "Open the service on both intended devices, verify the recipient or pairing code and send a harmless test file before the required copy.",
+      "expectedResult": "The recipient accepts and saves a matching file that opens correctly on the destination device.",
+      "sources": [
+        {
+          "url": "https://github.com/schlagmichdoch/PairDrop",
+          "title": "PairDrop official project",
+          "evidence": "Links the public service and documents browser file transfer and pairing."
+        },
+        {
+          "url": "https://github.com/schlagmichdoch/PairDrop/blob/master/docs/faq.md",
+          "title": "PairDrop transport FAQ",
+          "evidence": "Distinguishes local peers, TURN relay, transport encryption and signaling-server trust."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Transfer between devices"
+    },
+    {
+      "toolId": "w3c-html-checker",
+      "group": "web-quality",
+      "account": "The public checker does not require an account; the project documents local web and command-line use.",
+      "sharing": "A URL check fetches the document remotely. Pasted markup, uploads and serialized DOM sent to the hosted checker leave the browser.",
+      "firstAction": "Check the affected public document, review the earliest structural error and compare it with the actual browser DOM.",
+      "expectedResult": "Located markup findings that can be corrected and checked again alongside the real user interaction.",
+      "sources": [
+        {
+          "url": "https://validator.w3.org/nu/",
+          "title": "Nu HTML Checker",
+          "evidence": "Provides the hosted document checker."
+        },
+        {
+          "url": "https://validator.w3.org/nu/about.html",
+          "title": "About Nu HTML Checker",
+          "evidence": "Explains intended use, changing checks, DOM submission and local execution."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "HTML structure diagnostics"
+    },
+    {
+      "toolId": "w3c-link-checker",
+      "group": "web-quality",
+      "account": "The public checker does not require an account.",
+      "sharing": "Submitted URLs and linked resources are retrieved by the remote checker. Recursive mode broadens the set of pages contacted.",
+      "firstAction": "Start with the exact affected public page, inspect broken targets and redirects, and use recursion only for the intended site scope.",
+      "expectedResult": "Specific link or anchor failures to repair, followed by a repeat check and a successful click through the real route.",
+      "sources": [
+        {
+          "url": "https://validator.w3.org/checklink",
+          "title": "W3C Link Checker",
+          "evidence": "Documents link/anchor/resource checks, headers and optional recursion controls."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Broken links and anchors"
+    },
+    {
+      "toolId": "caniuse",
+      "group": "web-quality",
+      "account": "No account is required to read the public browser-support data.",
+      "sharing": "Ordinary lookup retrieves public feature data; optional analytics imports and external testing services are separate features.",
+      "firstAction": "Search the exact feature and inspect the customer’s browser/version cell plus every applicable support note.",
+      "expectedResult": "A documented support boundary that guides a fallback or a targeted reproduction on the actual device.",
+      "sources": [
+        {
+          "url": "https://caniuse.com/",
+          "title": "Can I use support tables",
+          "evidence": "Provides browser support search and links to related compatibility resources."
+        },
+        {
+          "url": "https://caniuse.com/ciu/about",
+          "title": "Can I use methodology",
+          "evidence": "Explains testing, data updates and the limits of a supported classification."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Browser capability lookup"
+    },
+    {
+      "toolId": "endoflife-date",
+      "group": "vulnerability",
+      "account": "No account is required for public product pages.",
+      "sharing": "The lookup reads public lifecycle information; it does not inventory the endpoint or upload a software list automatically.",
+      "firstAction": "Select the exact product and release line, then follow the linked vendor source to confirm edition, support contract and applicable end date.",
+      "expectedResult": "An evidence-backed lifecycle date to include in the maintenance plan with the installed version and remediation owner.",
+      "sources": [
+        {
+          "url": "https://endoflife.date/",
+          "title": "endoflife.date product directory",
+          "evidence": "Provides public release/lifecycle pages for software and devices."
+        },
+        {
+          "url": "https://github.com/endoflife-date/endoflife.date",
+          "title": "endoflife.date project",
+          "evidence": "Explains the aggregation purpose, source project and API availability."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Product support lifecycle"
     }
   ]
 }

@@ -48,7 +48,7 @@ Choose by the task shown in the first column. Each option includes its acquisiti
 
 | Open the exact resource | What to do there |
 | --- | --- |
-| **<a href="https://www.nist.gov/cyberframework" title="Open NIST Cybersecurity Framework official download or service page" aria-label="Open NIST Cybersecurity Framework official download or service page" data-inta-brand="site-www-nist-gov"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/17d61c326e7926dbccac.png" alt="NIST Cybersecurity Framework official page" width="18" height="18" valign="middle" /></a> [NIST generative-AI profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)** | Check generated claims, sources and proposed actions against evidence. |
+| **<a href="https://www.nist.gov/cyberframework" title="Open nist.gov official download or service page" aria-label="Open nist.gov official download or service page" data-inta-brand="site-www-nist-gov"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/17d61c326e7926dbccac.png" alt="nist.gov official page" width="18" height="18" valign="middle" /></a> [NIST generative-AI profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)** | Check generated claims, sources and proposed actions against evidence. |
 
 ## ⚡ First three actions
 

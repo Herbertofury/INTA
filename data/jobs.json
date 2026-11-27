@@ -16,7 +16,11 @@
       "cyberchef",
       "regex101",
       "drawio",
-      "hoppscotch"
+      "hoppscotch",
+      "it-tools",
+      "vert",
+      "webhook-site",
+      "pairdrop"
     ],
     "startHere": "Ask the user to show the exact failing task once. Record what they expected, what happened, and when it last worked.",
     "steps": [
@@ -106,7 +110,14 @@
       "triage",
       "urlscan",
       "google-safe-browsing",
-      "checkphish"
+      "checkphish",
+      "loldrivers",
+      "lolbas",
+      "mitre-d3fend",
+      "magika-web",
+      "koodous",
+      "phishtank",
+      "phishly"
     ],
     "startHere": "Check for active encryption, credential theft, unusual administrator accounts, or more affected machines before treating this as a routine cleanup.",
     "steps": [
@@ -513,7 +524,8 @@
       "sfc",
       "windows-recovery",
       "sysinternals",
-      "setupdiag"
+      "setupdiag",
+      "msrc-update-guide"
     ],
     "startHere": "Write down the exact KB or feature update, error code, Windows edition/build, and whether the device is centrally managed.",
     "steps": [
@@ -960,7 +972,27 @@
       "cloudflare-speed",
       "waveform-bufferbloat",
       "globalping",
-      "cloudflare-radar"
+      "cloudflare-radar",
+      "paloalto-test-a-site",
+      "fortiguard-webfilter",
+      "symantec-site-review",
+      "trendmicro-site-safety",
+      "crowdsec-cti",
+      "validin",
+      "silent-push",
+      "criminal-ip",
+      "cloudflare-dns-help",
+      "mlab-speed",
+      "twilio-network-test",
+      "bgp-tools",
+      "ioda",
+      "microsoft-service-health",
+      "google-workspace-status",
+      "aws-health",
+      "azure-status",
+      "google-cloud-status",
+      "cloudflare-status",
+      "github-status"
     ],
     "startHere": "Determine whether the problem affects one app, one device, one network segment, or every device. Capture the working and failing cases.",
     "steps": [
@@ -1342,7 +1374,9 @@
       "google-admin-toolbox",
       "mxtoolbox",
       "learndmarc",
-      "microsoft-remote-connectivity"
+      "microsoft-remote-connectivity",
+      "uriports-tools",
+      "google-public-dns"
     ],
     "startHere": "Identify the mail provider and whether the user is in classic Outlook, new Outlook, or a browser. Their repair paths differ.",
     "steps": [
@@ -2104,7 +2138,17 @@
       "pagespeed-insights",
       "webpagetest",
       "wave-accessibility",
-      "squoosh"
+      "squoosh",
+      "msrc-update-guide",
+      "mitre-d3fend",
+      "lets-debug",
+      "tlsref-configurator",
+      "csp-evaluator",
+      "crt-sh",
+      "endoflife-date",
+      "w3c-html-checker",
+      "w3c-link-checker",
+      "caniuse"
     ],
     "startHere": "Agree on the maintenance window and identify the user’s current pain points. Preserve a baseline of the system’s normal work.",
     "steps": [

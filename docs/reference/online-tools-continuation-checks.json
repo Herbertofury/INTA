@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "baselineCommit": "62c0c23378b18995824a8cb611c3e635f758f6dd",
+  "baseline": {
+    "catalogTools": 218,
+    "onlineTools": 85,
+    "workflows": 9
+  },
+  "candidateCoverage": {
+    "discoveredDistinctNewCandidates": 44,
+    "accepted": 40,
+    "notPromoted": 4,
+    "unresolvedWithinReviewedCandidateSet": 0
+  },
+  "current": {
+    "catalogTools": 258,
+    "onlineTools": 125,
+    "groups": 9,
+    "workflows": 13,
+    "uniqueOfficialEvidenceUrls": 246
+  },
+  "addedToolIds": [
+    "magika-web",
+    "koodous",
+    "crowdsec-cti",
+    "validin",
+    "silent-push",
+    "phishtank",
+    "phishly",
+    "msrc-update-guide",
+    "paloalto-test-a-site",
+    "fortiguard-webfilter",
+    "symantec-site-review",
+    "trendmicro-site-safety",
+    "criminal-ip",
+    "loldrivers",
+    "lolbas",
+    "mitre-d3fend",
+    "tlsref-configurator",
+    "lets-debug",
+    "csp-evaluator",
+    "crt-sh",
+    "uriports-tools",
+    "google-public-dns",
+    "cloudflare-dns-help",
+    "mlab-speed",
+    "twilio-network-test",
+    "bgp-tools",
+    "ioda",
+    "aws-health",
+    "azure-status",
+    "google-cloud-status",
+    "cloudflare-status",
+    "github-status",
+    "it-tools",
+    "vert",
+    "webhook-site",
+    "pairdrop",
+    "w3c-html-checker",
+    "w3c-link-checker",
+    "caniuse",
+    "endoflife-date"
+  ],
+  "changedExistingToolIds": [
+    "virustotal",
+    "pulsedive"
+  ],
+  "challengeRefinedNewToolIds": [
+    "phishtank",
+    "criminal-ip",
+    "phishly"
+  ],
+  "newWorkflows": [
+    "resolve-blocked-site",
+    "inspect-windows-alert",
+    "check-cloud-outage",
+    "fix-certificate-issuance"
+  ],
+  "launchChecks": [
+    {
+      "url": "https://crt.sh/",
+      "status": 200,
+      "finalUrl": "https://crt.sh/",
+      "title": "crt.sh | Certificate Search",
+      "observedMarker": "Free CT Log Certificate Search Tool from Sectigo (formerly Comodo CA)",
+      "evidence": "Fresh urllib retrieval with browser User-Agent; 5897 bytes of actual application HTML received. Web open independently returned search form and Sectigo operator. No certificate query submitted."
+    },
+    {
+      "url": "https://pairdrop.net/",
+      "status": 200,
+      "title": "PairDrop | Transfer Files Cross-Platform. No Setup, No Signup."
+    },
+    {
+      "url": "https://it-tools.tech/",
+      "status": 200,
+      "title": "IT Tools - Handy online tools for developers",
+      "recovery": "Default urllib User-Agent returned 403; browser User-Agent returned the actual 3154-byte application HTML."
+    },
+    {
+      "url": "https://configurator.tlsref.org/",
+      "status": 200,
+      "title": "TLS Configurator"
+    },
+    {
+      "url": "https://speed.measurementlab.net/",
+      "status": 200,
+      "title": "Speed Test by Measurement Lab"
+    },
+    {
+      "url": "https://vert.sh/",
+      "status": 200,
+      "title": "VERT.sh"
+    },
+    {
+      "url": "https://ioda.inetintel.cc.gatech.edu/dashboard/",
+      "evidence": "Official Reports page Dashboard link retrieved the application HTML with IODA logo. Homepage/about routes timed out; use the observed /dashboard/ application route. Interactive data population not exercised."
+    }
+  ],
+  "notPromoted": [
+    {
+      "candidate": "Malcore",
+      "status": "rejected-current-destination",
+      "observedAt": "2026-11-26",
+      "reason": "The formerly referenced https://malcore.io/ redirected to unrelated gambling content during current web retrieval. Do not promote its former service URL without a newly verified vendor-owned destination.",
+      "sourceUrl": "https://malcore.io/"
+    },
+    {
+      "candidate": "Microsoft Defender Threat Intelligence standalone portal",
+      "status": "superseded-offering",
+      "observedAt": "2026-11-26",
+      "reason": "Microsoft documents retirement of the standalone portal on August 1, 2026; use the integrated Defender Intel explorer for entitled customers instead of adding the retired service.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/defender-xdr/threat-intelligence-explorer"
+    },
+    {
+      "id": "test-webrtc-org",
+      "reason": "Twilio page references this legacy generic tool, but no independent current operational evidence was established. Use the current Twilio-specific tool without a universal WebRTC claim."
+    },
+    {
+      "id": "ittools-tech-no-hyphen",
+      "reason": "Separate product with a similar name; not used as evidence for CorentinTh/it-tools."
+    }
+  ],
+  "reviewNotes": [
+    {
+      "topic": "Mozilla TLS generator migration",
+      "finding": "Mozilla’s archived source and live redirect establish TLSRef as the current generator. Add the current project identity, preserve Mozilla wording only as an alias or migration note.",
+      "sources": [
+        "https://ssl-config.mozilla.org/",
+        "https://github.com/mozilla/ssl-config-generator",
+        "https://configurator.tlsref.org/"
+      ]
+    },
+    {
+      "topic": "VERT video privacy update",
+      "finding": "The October 6, 2026 policy supports local video conversion where possible with server fallback for unsupported conversions. Avoid the old claim that all video is remote or the stronger incorrect claim that every conversion is local.",
+      "sources": [
+        "https://vert.sh/privacy/",
+        "https://github.com/VERT-sh/vert"
+      ]
+    },
+    {
+      "topic": "Webhook.site conflicting free quotas",
+      "finding": "Pricing advertises 50 requests while FAQ advertises 100. Describe limited temporary free access without hardcoding either conflicting count. Free URL data is accessible by anyone who knows its ID.",
+      "sources": [
+        "https://webhook.site/pricing",
+        "https://docs.webhook.site/"
+      ]
+    },
+    {
+      "topic": "M-Lab data disclosure",
+      "finding": "M-Lab publishes measurement data including the public IP and keeps its research data indefinitely. State this directly next to the launch action.",
+      "sources": [
+        "https://www.measurementlab.net/privacy/"
+      ]
+    },
+    {
+      "topic": "IT-Tools name collision",
+      "finding": "CorentinTh/it-tools uses it-tools.tech with a hyphen. The unrelated ittools.tech source must not be used to substantiate claims for this project. Reviewed source confirms local subnet/text hash calculations; make no blanket claim about every tool or fork.",
+      "sources": [
+        "https://github.com/CorentinTh/it-tools"
+      ]
+    },
+    {
+      "topic": "crt.sh prior deferral",
+      "finding": "Current web retrieval returned the live certificate-search form and Sectigo operator identity. This is fresh route evidence superseding the earlier timeout, not a claim that a certificate search or TLS scan was executed.",
+      "sources": [
+        "https://crt.sh/"
+      ]
+    },
+    {
+      "topic": "IODA launch-route recovery",
+      "finding": "Homepage and about routes timed out in independent transports; the official Reports page linked a working /dashboard/ application route. Use that exact launch URL and keep proof at documentation/entry level.",
+      "sources": [
+        "https://ioda.inetintel.cc.gatech.edu/reports/",
+        "https://ioda.inetintel.cc.gatech.edu/dashboard/"
+      ]
+    }
+  ],
+  "proofBoundary": "Primary-source and application-entry review; no external scans, customer files, emails, microphone capture, or service account creation. UI/runtime proof is recorded separately."
+}

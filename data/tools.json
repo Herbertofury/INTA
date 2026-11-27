@@ -4129,7 +4129,7 @@
       "2026-11-26 primary-source review: https://docs.virustotal.com/reference/analyse-binary"
     ],
     "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
-    "cautions": "Standard uploads and reports are shared with the community and partners. The paid Private Scanning form keeps analyses within the organization but excludes partner antivirus and URL-scanner verdicts.",
+    "cautions": "Standard uploads and reports are shared with the community and partners. VirusTotal also states that IoCs submitted or queried through its standard web interface are scanned and added to its community dataset. Searching a file hash avoids sending file bytes but is not a private indicator search. Paid Private Scanning is a separate form and excludes partner antivirus and URL-scanner verdicts.",
     "aliases": [
       "Virus Total"
     ]
@@ -6109,7 +6109,7 @@
       "2026-11-26 primary-source review: https://docs.pulsedive.com/"
     ],
     "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
-    "cautions": "Remote lookups; active analysis can contact the target. Searching existing records and submitting indicators are different actions."
+    "cautions": "Queries reach Pulsedive. For a new indicator, scanning without submission avoids adding it to the searchable community database; scanning an existing indicator refreshes its record. Service logs are retained. Active scans contact the target; Submit contributes new intelligence."
   },
   {
     "id": "ipinfo",
@@ -6990,5 +6990,1346 @@
     ],
     "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
     "cautions": "Sending a request transmits it to the chosen endpoint. Proxy mode adds a proxy to that path, and signed-in synchronization can store workspace data in the cloud."
+  },
+  {
+    "id": "magika-web",
+    "name": "Google Magika Web Demo",
+    "category": "online",
+    "summary": "Identifies likely file content types using a model running locally in the browser, even when a filename extension is misleading.",
+    "bestFor": "Identify an unknown or mislabeled file before choosing the right inspection tool.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free, open-source web demo; separate CLI and language bindings are available.",
+    "homepage": "https://securityresearch.google/magika/",
+    "downloadUrl": "https://securityresearch.google/magika/demo/magika-demo/",
+    "docsUrl": "https://securityresearch.google/magika/introduction/overview/",
+    "sourceUrl": "https://securityresearch.google/magika/introduction/overview/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "file type",
+      "local processing",
+      "extension mismatch",
+      "AI classification",
+      "online",
+      "browser",
+      "file-analysis"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://securityresearch.google/magika/introduction/overview/",
+      "2026-11-26 primary-source review: https://securityresearch.google/magika/demo/magika-demo/",
+      "2026-11-26 primary-source review: https://github.com/google/magika"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "The official demo performs file identification locally in the browser. The website and model still load from Google; content-type identification does not certify that a file is safe."
+  },
+  {
+    "id": "koodous",
+    "name": "Koodous",
+    "category": "online",
+    "summary": "Searchable Android APK intelligence with static and dynamic analysis, metadata and YARA matches.",
+    "bestFor": "Investigate a suspicious sideloaded Android app by its exact APK hash.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free web/API access has quotas; paid API plans add requests and downloads.",
+    "homepage": "https://koodous.com/",
+    "downloadUrl": "https://koodous.com/",
+    "docsUrl": "https://koodous.com/about-us",
+    "sourceUrl": "https://koodous.com/about-us",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "Android",
+      "APK",
+      "mobile malware",
+      "YARA",
+      "sideloaded app",
+      "online",
+      "browser",
+      "file-analysis"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://koodous.com/about-us",
+      "2026-11-26 primary-source review: https://docs.koodous.com/quotas.html",
+      "2026-11-26 primary-source review: https://koodous.com/terms"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Uploaded APKs are shared with security partners and customers, and intended for community sharing. Search the existing hash before uploading a new APK."
+  },
+  {
+    "id": "crowdsec-cti",
+    "name": "CrowdSec IP Reputation / CTI",
+    "category": "online",
+    "summary": "Shows observed IP attack behavior, activity history, associated CVEs and time-windowed reputation from CrowdSec deployments.",
+    "bestFor": "Explain what a source IP was observed doing before changing a firewall or sign-in rule.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Web lookup and free API allocation available; API and web quotas are separate, with paid options for more access.",
+    "homepage": "https://www.crowdsec.net/ip-reputation",
+    "downloadUrl": "https://app.crowdsec.net/cti",
+    "docsUrl": "https://docs.crowdsec.net/u/cti_api/intro/",
+    "sourceUrl": "https://docs.crowdsec.net/u/cti_api/intro/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "IP reputation",
+      "observed behavior",
+      "brute force",
+      "exploit context",
+      "firewall triage",
+      "online",
+      "browser",
+      "threat-intelligence"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://docs.crowdsec.net/u/cti_api/intro/",
+      "2026-11-26 primary-source review: https://docs.crowdsec.net/u/console/ip_reputation/search_ui/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "The searched IP and request metadata reach CrowdSec. This is an intelligence lookup; no customer log upload is needed. An unlisted IP is not proof of benign behavior."
+  },
+  {
+    "id": "validin",
+    "name": "Validin",
+    "category": "online",
+    "summary": "Correlates DNS history, host responses, certificates and threat context to trace changing internet infrastructure.",
+    "bestFor": "Reconstruct where a suspicious domain resolved and identify related infrastructure.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free Community account has 10 daily and 50 monthly queries; paid tiers expand data and workflow capabilities.",
+    "homepage": "https://www.validin.com/",
+    "downloadUrl": "https://app.validin.com/",
+    "docsUrl": "https://docs.validin.com/docs/what-is-validin",
+    "sourceUrl": "https://docs.validin.com/docs/what-is-validin",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "DNS history",
+      "infrastructure",
+      "certificates",
+      "historical lookup",
+      "domain pivots",
+      "online",
+      "browser",
+      "threat-intelligence"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://docs.validin.com/docs/what-is-validin",
+      "2026-11-26 primary-source review: https://www.validin.com/pricing/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Queries are sent to Validin. Historical lookup does not require submitting the full suspicious page or requesting a new scan; live scanning is a separately entitled operation."
+  },
+  {
+    "id": "silent-push",
+    "name": "Silent Push Community Edition",
+    "category": "online",
+    "summary": "Provides introductory threat-infrastructure research across domains, IPs, DNS history, certificates and website observations.",
+    "bestFor": "Research linked phishing infrastructure and test a threat-intelligence investigation workflow.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free Community includes 100 web-console requests per month for evaluation, testing and research; production use requires an appropriate offering.",
+    "homepage": "https://www.silentpush.com/community-edition/",
+    "downloadUrl": "https://explore.silentpush.com/",
+    "docsUrl": "https://www.silentpush.com/community-edition/",
+    "sourceUrl": "https://www.silentpush.com/community-edition/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "threat research",
+      "DNS history",
+      "infrastructure graph",
+      "phishing campaigns",
+      "community edition",
+      "online",
+      "browser",
+      "threat-intelligence"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://www.silentpush.com/community-edition/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Queries and requested live scans reach Silent Push. Live scans contact the target; this review did not establish private-report guarantees for Community."
+  },
+  {
+    "id": "phishtank",
+    "name": "PhishTank",
+    "category": "online",
+    "summary": "Community database for searching, verifying and tracking reported phishing URLs.",
+    "bestFor": "Check whether a suspicious URL has a community-verified phishing record.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public website and data API; API request rates depend on identification and key usage. New account registration is currently disabled.",
+    "homepage": "https://www.phishtank.org/",
+    "downloadUrl": "https://www.phishtank.org/",
+    "docsUrl": "https://www.phishtank.org/faq.php",
+    "sourceUrl": "https://www.phishtank.org/faq.php",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "phishing",
+      "community verification",
+      "URL reputation",
+      "lookup",
+      "online",
+      "browser",
+      "url-phishing"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://www.phishtank.org/faq.php",
+      "2026-11-26 primary-source review: https://www.phishtank.org/api_info.php"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Phishing submissions and verification activity are shared through the website and API. A database lookup and a new report are separate actions."
+  },
+  {
+    "id": "phishly",
+    "name": "phish.ly",
+    "category": "online",
+    "summary": "Tines email workflow that analyzes links with urlscan and returns a report, with attachment hashes linked to VirusTotal.",
+    "bestFor": "Get a structured report for a suspicious email through the published forwarding workflow.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free hosted email-analysis workflow; the provider may throttle abuse.",
+    "homepage": "https://phish.ly/",
+    "downloadUrl": "https://phish.ly/",
+    "docsUrl": "https://phish.ly/",
+    "sourceUrl": "https://phish.ly/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "email triage",
+      "phishing",
+      "Tines",
+      "private urlscan",
+      "attachment hash",
+      "online",
+      "browser",
+      "url-phishing"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://phish.ly/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Tines states that email content is purged after analysis and urlscan submissions are private. The email still reaches Tines, and urlscan contacts the target. Anyone given a private scan ID can open its report. The sender joins the service mailing list; attachments are hashed rather than detonated."
+  },
+  {
+    "id": "msrc-update-guide",
+    "name": "Microsoft Security Update Guide",
+    "category": "online",
+    "summary": "Microsoft security-update records with affected products, CVEs, release information and remediation links.",
+    "bestFor": "Match a Microsoft CVE to the exact installed product, fixed build and applicable update.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public security-update reference and API.",
+    "homepage": "https://www.microsoft.com/en-us/msrc",
+    "downloadUrl": "https://msrc.microsoft.com/update-guide/",
+    "docsUrl": "https://www.microsoft.com/en-us/msrc/faqs-security-update-guide",
+    "sourceUrl": "https://www.microsoft.com/en-us/msrc/faqs-security-update-guide",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "Microsoft",
+      "Patch Tuesday",
+      "CVE",
+      "KB",
+      "fixed version",
+      "vendor advisory",
+      "online",
+      "browser",
+      "vulnerability"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://www.microsoft.com/en-us/msrc/faqs-security-update-guide",
+      "2026-11-26 primary-source review: https://msrc.microsoft.com/update-guide/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Searches request public Microsoft advisory data; no endpoint inventory or file upload is needed."
+  },
+  {
+    "id": "paloalto-test-a-site",
+    "name": "Palo Alto Networks Test A Site",
+    "category": "online",
+    "summary": "Checks the URL categories and IP attributes used by Palo Alto Networks, with a category-change request path.",
+    "bestFor": "Diagnose or challenge a website block caused by Palo Alto Networks URL filtering.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Public vendor lookup; request and portal controls apply.",
+    "homepage": "https://urlfiltering.paloaltonetworks.com/",
+    "downloadUrl": "https://urlfiltering.paloaltonetworks.com/",
+    "docsUrl": "https://urlfiltering.paloaltonetworks.com/",
+    "sourceUrl": "https://urlfiltering.paloaltonetworks.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "blocked website",
+      "URL category",
+      "false positive",
+      "Palo Alto",
+      "firewall",
+      "online",
+      "browser",
+      "url-phishing"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://urlfiltering.paloaltonetworks.com/",
+      "2026-11-26 primary-source review: https://docs.paloaltonetworks.com/advanced-url-filtering/administration/url-filtering-basics/url-categories"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "The queried domain, URL or IP reaches Palo Alto Networks. Recategorization is a separate submission; a category is not a full malware-analysis result."
+  },
+  {
+    "id": "fortiguard-webfilter",
+    "name": "FortiGuard Web Filter Lookup",
+    "category": "online",
+    "summary": "Checks FortiGuard website categories and provides a route to request review of an incorrect classification.",
+    "bestFor": "Explain a Fortinet web-filter block before altering the customer firewall policy.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Public vendor category lookup and review route.",
+    "homepage": "https://www.fortiguard.com/webfilter",
+    "downloadUrl": "https://www.fortiguard.com/webfilter",
+    "docsUrl": "https://docs.fortinet.com/document/fortiproxy/7.6.0/administration-guide/636363/url-lookup",
+    "sourceUrl": "https://docs.fortinet.com/document/fortiproxy/7.6.0/administration-guide/636363/url-lookup",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "blocked website",
+      "Fortinet",
+      "FortiGate",
+      "URL category",
+      "false positive",
+      "online",
+      "browser",
+      "url-phishing"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://docs.fortinet.com/document/fortiproxy/7.6.0/administration-guide/636363/url-lookup",
+      "2026-11-26 primary-source review: https://www.fortiguard.com/webfilter"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "The URL is sent to Fortinet. Category review is a separate request, and category information does not establish that a website is safe."
+  },
+  {
+    "id": "symantec-site-review",
+    "name": "Symantec WebPulse Site Review",
+    "category": "online",
+    "summary": "Checks and disputes the WebPulse category assigned to a URL by Symantec web filtering.",
+    "bestFor": "Resolve a Symantec or Blue Coat website-category false positive using the matching vendor record.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Public category lookup and review request.",
+    "homepage": "https://sitereview.bluecoat.com/",
+    "downloadUrl": "https://sitereview.bluecoat.com/index.html",
+    "docsUrl": "https://sitereview.bluecoat.com/index.html",
+    "sourceUrl": "https://sitereview.bluecoat.com/index.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "Symantec",
+      "Blue Coat",
+      "WebPulse",
+      "blocked website",
+      "category dispute",
+      "online",
+      "browser",
+      "url-phishing"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://sitereview.bluecoat.com/index.html",
+      "2026-11-26 primary-source review: https://knowledge.broadcom.com/external/article/166098"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "The entered URL and any review details reach the vendor. The portal explicitly does not perform full real-time malicious-URL or file analysis."
+  },
+  {
+    "id": "trendmicro-site-safety",
+    "name": "Trend Micro Site Safety Center",
+    "category": "online",
+    "summary": "Provides Trend Micro web-reputation and content-category findings for a submitted URL.",
+    "bestFor": "Cross-check a Trend Micro block or inspect its existing reputation classification for a suspicious link.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public lookup; bulk automated submissions may be blocked.",
+    "homepage": "https://global.sitesafety.trendmicro.com/",
+    "downloadUrl": "https://global.sitesafety.trendmicro.com/",
+    "docsUrl": "https://global.sitesafety.trendmicro.com/",
+    "sourceUrl": "https://global.sitesafety.trendmicro.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "Trend Micro",
+      "URL reputation",
+      "blocked website",
+      "content category",
+      "online",
+      "browser",
+      "url-phishing"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://global.sitesafety.trendmicro.com/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "The URL reaches Trend Micro; an untested URL triggers its first check. This is not guaranteed to be a passive lookup."
+  },
+  {
+    "id": "criminal-ip",
+    "name": "Criminal IP Search",
+    "category": "online",
+    "summary": "Correlates IP assets, exposed services and domain intelligence, with separately selected active URL-analysis modes.",
+    "bestFor": "Investigate an exposed service or suspicious domain and distinguish existing data from a new active scan.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free account includes limited credits; paid plans expand access and enable private domain reports.",
+    "homepage": "https://www.criminalip.io/",
+    "downloadUrl": "https://search.criminalip.io/",
+    "docsUrl": "https://www.criminalip.io/",
+    "sourceUrl": "https://www.criminalip.io/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "internet exposure",
+      "IP intelligence",
+      "domain analysis",
+      "phishing scan",
+      "asset search",
+      "online",
+      "browser",
+      "threat-intelligence"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://www.criminalip.io/",
+      "2026-11-26 primary-source review: https://search.criminalip.io/pricing"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Queries reach Criminal IP, and its FAQ says recent searches and recently scanned reports are publicly viewable. Full, phishing and lite URL scans contact the target. Private domain reports require an explicitly selected paid-plan mode."
+  },
+  {
+    "id": "loldrivers",
+    "name": "LOLDrivers",
+    "category": "online",
+    "summary": "Searchable evidence catalog of vulnerable and malicious Windows drivers, with sample hashes and detection references.",
+    "bestFor": "Correlate an unexpected kernel driver or vulnerable-driver alert with an exact known sample.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public catalog and detection references.",
+    "homepage": "https://www.loldrivers.io/",
+    "downloadUrl": "https://www.loldrivers.io/",
+    "docsUrl": "https://www.loldrivers.io/",
+    "sourceUrl": "https://www.loldrivers.io/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "Windows drivers",
+      "BYOVD",
+      "driver hash",
+      "vulnerable driver",
+      "kernel",
+      "online",
+      "browser",
+      "vulnerability"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://www.loldrivers.io/",
+      "2026-11-26 primary-source review: https://www.loldrivers.io/detections/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Browse published records or search by filename, publisher, CVE or hash; no driver upload is required. A filename match alone is insufficient, and deletion or blocking is a separate change."
+  },
+  {
+    "id": "lolbas",
+    "name": "LOLBAS",
+    "category": "online",
+    "summary": "Reference catalog of Microsoft-signed binaries, scripts and libraries whose unexpected functionality can be abused.",
+    "bestFor": "Interpret a suspicious signed-binary process or command in its surrounding incident context.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free, open-source reference website.",
+    "homepage": "https://lolbas-project.github.io/",
+    "downloadUrl": "https://lolbas-project.github.io/",
+    "docsUrl": "https://lolbas-project.github.io/",
+    "sourceUrl": "https://lolbas-project.github.io/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "Windows",
+      "signed binary",
+      "living off the land",
+      "ATT&CK",
+      "process triage",
+      "online",
+      "browser",
+      "threat-intelligence"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://lolbas-project.github.io/",
+      "2026-11-26 primary-source review: https://github.com/LOLBAS-Project/LOLBAS/blob/master/README.md"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "The reference is browsed without uploading logs or executing its examples. A listed binary is not automatically malicious; its arguments, parent process and activity determine the finding."
+  },
+  {
+    "id": "mitre-d3fend",
+    "name": "MITRE D3FEND",
+    "category": "online",
+    "summary": "Maps defensive techniques and digital artifacts to offensive behaviors for evidence-based security planning.",
+    "bestFor": "Turn an observed attack technique into concrete defensive countermeasure candidates.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public knowledge graph and browser reference tools.",
+    "homepage": "https://d3fend.mitre.org/",
+    "downloadUrl": "https://d3fend.mitre.org/",
+    "docsUrl": "https://d3fend.mitre.org/",
+    "sourceUrl": "https://d3fend.mitre.org/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "countermeasures",
+      "ATT&CK",
+      "defensive techniques",
+      "digital artifacts",
+      "incident planning",
+      "online",
+      "browser",
+      "threat-intelligence"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://d3fend.mitre.org/",
+      "2026-11-26 primary-source review: https://d3fend.mitre.org/tools/",
+      "2026-11-26 primary-source review: https://d3fend.mitre.org/dao/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Public matrix browsing needs no case-data upload. Extraction tools accept pasted text; this review did not verify their processing boundary, so use technique IDs or nonsensitive examples."
+  },
+  {
+    "id": "tlsref-configurator",
+    "name": "TLSRef TLS Configurator",
+    "category": "online",
+    "summary": "Generates server-specific TLS configuration from the selected software, versions and client-compatibility profile.",
+    "bestFor": "Turn a TLS finding into a configuration appropriate for the actual server and supported clients.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public configurator; open-source project",
+    "homepage": "https://configurator.tlsref.org/",
+    "downloadUrl": "https://configurator.tlsref.org/",
+    "docsUrl": "https://docs.tlsref.org/",
+    "sourceUrl": "https://docs.tlsref.org/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "TLS",
+      "server configuration",
+      "Mozilla SSL generator",
+      "compatibility",
+      "online",
+      "browser",
+      "web-security"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://configurator.tlsref.org/",
+      "2026-11-26 primary-source review: https://github.com/mozilla/ssl-config-generator"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "The former Mozilla generator now redirects here. A generated snippet is not a deployment test; verify supported clients and keep existing application settings."
+  },
+  {
+    "id": "lets-debug",
+    "name": "Let's Debug",
+    "category": "online",
+    "summary": "Runs checks for DNS, CAA, reachability and ACME validation problems that can prevent certificate issuance.",
+    "bestFor": "Find the reason a Let’s Encrypt certificate cannot be issued or renewed.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public diagnostics; open-source project",
+    "homepage": "https://letsdebug.net/",
+    "downloadUrl": "https://letsdebug.net/",
+    "docsUrl": "https://github.com/letsdebug/letsdebug",
+    "sourceUrl": "https://github.com/letsdebug/letsdebug",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "ACME",
+      "Let’s Encrypt",
+      "certificate renewal",
+      "CAA",
+      "HTTP-01",
+      "DNS-01",
+      "online",
+      "browser",
+      "web-security"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://letsdebug.net/",
+      "2026-11-26 primary-source review: https://github.com/letsdebug/letsdebug"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "This independent project is not operated by Let’s Encrypt. A successful diagnostic does not issue a certificate or prove that the client’s credentials and deployment hooks work."
+  },
+  {
+    "id": "csp-evaluator",
+    "name": "CSP Evaluator",
+    "category": "online",
+    "summary": "Checks a Content Security Policy for weaknesses and common allowlist bypasses.",
+    "bestFor": "Review the actual CSP response header when an application has a weak policy or a script-loading failure.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public tool; open-source library",
+    "homepage": "https://csp-evaluator.withgoogle.com/",
+    "downloadUrl": "https://csp-evaluator.withgoogle.com/",
+    "docsUrl": "https://github.com/google/csp-evaluator",
+    "sourceUrl": "https://github.com/google/csp-evaluator",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "CSP",
+      "XSS",
+      "headers",
+      "allowlist",
+      "online",
+      "browser",
+      "web-security"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://csp-evaluator.withgoogle.com/",
+      "2026-11-26 primary-source review: https://github.com/google/csp-evaluator"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "The built-in bypass list is intentionally incomplete. A favorable result does not establish XSS protection or prove the policy will preserve application behavior."
+  },
+  {
+    "id": "crt-sh",
+    "name": "crt.sh Certificate Search",
+    "category": "online",
+    "summary": "Searches recorded certificates by domain, organization, certificate fingerprint or certificate ID.",
+    "bestFor": "Investigate certificate issuance history and unexpected names before inspecting the live TLS endpoint.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public certificate search",
+    "homepage": "https://crt.sh/",
+    "downloadUrl": "https://crt.sh/",
+    "docsUrl": "https://crt.sh/",
+    "sourceUrl": "https://crt.sh/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "certificate transparency",
+      "certificate history",
+      "TLS",
+      "Sectigo",
+      "online",
+      "browser",
+      "web-security"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://crt.sh/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "A logged certificate may be expired, replaced or never deployed. A match does not prove a hostname is currently reachable or owned by the same party."
+  },
+  {
+    "id": "uriports-tools",
+    "name": "URIports Web and Mail Validators",
+    "category": "online",
+    "summary": "Validates public email and web records including SPF, DKIM, DMARC, MTA-STS, DANE, BIMI and MX.",
+    "bestFor": "Diagnose policy syntax and transport-security configuration before changing mail delivery settings.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public validators; monitoring and hosted policy plans are separate",
+    "homepage": "https://www.uriports.com/tools",
+    "downloadUrl": "https://www.uriports.com/tools",
+    "docsUrl": "https://www.uriports.com/tools/mtasts-validator",
+    "sourceUrl": "https://www.uriports.com/tools/mtasts-validator",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "MTA-STS",
+      "DANE",
+      "DMARC",
+      "SPF",
+      "DKIM",
+      "TLS-RPT",
+      "online",
+      "browser",
+      "dns-email"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://www.uriports.com/tools?method=mta-sts",
+      "2026-11-26 primary-source review: https://www.uriports.com/tools/mtasts-validator"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "MTA-STS protects delivery only for supporting senders; publishing an enforcing policy without matching working TLS endpoints can interrupt mail."
+  },
+  {
+    "id": "google-public-dns",
+    "name": "Google Public DNS Web Lookup",
+    "category": "online",
+    "summary": "Displays DNS answers through Google Public DNS with a browser interface and documented DoH APIs.",
+    "bestFor": "Compare the exact result from Google’s public resolver with the customer’s configured resolver.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public resolver lookup",
+    "homepage": "https://dns.google/",
+    "downloadUrl": "https://dns.google/",
+    "docsUrl": "https://developers.google.com/speed/public-dns/docs/doh",
+    "sourceUrl": "https://developers.google.com/speed/public-dns/docs/doh",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "DNS",
+      "DoH",
+      "resolver",
+      "SERVFAIL",
+      "DNSSEC",
+      "online",
+      "browser",
+      "dns-email"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://dns.google/",
+      "2026-11-26 primary-source review: https://developers.google.com/speed/public-dns/docs/doh"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "HTTP 200 can still contain a DNS failure such as SERVFAIL. The browser query page is different from the documented API endpoints."
+  },
+  {
+    "id": "cloudflare-dns-help",
+    "name": "Cloudflare 1.1.1.1 Connection Check",
+    "category": "online",
+    "summary": "Checks whether the current browser connection is using Cloudflare’s resolver and displays connection details.",
+    "bestFor": "Verify a 1.1.1.1 configuration change from the affected device instead of assuming the saved setting took effect.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public connection check",
+    "homepage": "https://one.one.one.one/help/",
+    "downloadUrl": "https://one.one.one.one/help/",
+    "docsUrl": "https://developers.cloudflare.com/1.1.1.1/check/",
+    "sourceUrl": "https://developers.cloudflare.com/1.1.1.1/check/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "Cloudflare DNS",
+      "1.1.1.1",
+      "DoH",
+      "DoT",
+      "resolver verification",
+      "online",
+      "browser",
+      "dns-email"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://developers.cloudflare.com/1.1.1.1/check/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Browser secure-DNS settings, VPNs and managed network policies can give a different path from other applications. This result does not certify every device on the LAN."
+  },
+  {
+    "id": "mlab-speed",
+    "name": "M-Lab NDT Speed Test",
+    "category": "online",
+    "summary": "Measures upload, download and connection performance against Measurement Lab infrastructure.",
+    "bestFor": "Add an independently collected connection measurement when comparing devices, providers or times of day.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public measurement test",
+    "homepage": "https://www.measurementlab.net/tests/ndt/",
+    "downloadUrl": "https://speed.measurementlab.net/",
+    "docsUrl": "https://www.measurementlab.net/frequently-asked-questions/",
+    "sourceUrl": "https://www.measurementlab.net/frequently-asked-questions/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "NDT",
+      "throughput",
+      "latency",
+      "speed test",
+      "open data",
+      "online",
+      "browser",
+      "connectivity"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://www.measurementlab.net/tests/",
+      "2026-11-26 primary-source review: https://www.measurementlab.net/privacy/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Different test methods and server paths can yield different throughput. The public dataset includes the test IP; this is not a private bandwidth benchmark."
+  },
+  {
+    "id": "twilio-network-test",
+    "name": "Twilio WebRTC Diagnostics",
+    "category": "online",
+    "summary": "Tests browser and network paths used by Twilio WebRTC voice, including TURN connectivity and test calls.",
+    "bestFor": "Separate microphone/browser failures, firewall restrictions and Twilio media connectivity problems.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public diagnostic page",
+    "homepage": "https://networktest.twilio.com/",
+    "downloadUrl": "https://networktest.twilio.com/",
+    "docsUrl": "https://help.twilio.com/hc/en-us/articles/223180908-Troubleshooting-Common-Problems-with-the-Twilio-Voice-JavaScript-SDK",
+    "sourceUrl": "https://help.twilio.com/hc/en-us/articles/223180908-Troubleshooting-Common-Problems-with-the-Twilio-Voice-JavaScript-SDK",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "WebRTC",
+      "VoIP",
+      "microphone",
+      "TURN",
+      "call diagnostics",
+      "online",
+      "browser",
+      "connectivity"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://networktest.twilio.com/",
+      "2026-11-26 primary-source review: https://help.twilio.com/hc/en-us/articles/223180908-Troubleshooting-Common-Problems-with-the-Twilio-Voice-JavaScript-SDK"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "These checks are Twilio-specific. A TURN TCP/TLS result does not mean those transports are supported by Twilio Voice; the tool documents that distinction."
+  },
+  {
+    "id": "bgp-tools",
+    "name": "bgp.tools",
+    "category": "online",
+    "summary": "Provides public ASN, prefix and routing views, with separate paid network-monitoring capabilities.",
+    "bestFor": "Identify the routed network and inspect BGP context when reachability differs across providers.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public BGP data; commercial monitoring and additional APIs are separate",
+    "homepage": "https://bgp.tools/",
+    "downloadUrl": "https://bgp.tools/",
+    "docsUrl": "https://bgp.tools/kb/",
+    "sourceUrl": "https://bgp.tools/kb/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "BGP",
+      "ASN",
+      "RPKI",
+      "routing",
+      "looking glass",
+      "online",
+      "browser",
+      "connectivity"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://bgp.tools/",
+      "2026-11-26 primary-source review: https://bgp.tools/kb/api"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "BGP visibility is an external control-plane view; it does not prove that an endpoint, application or every Internet path is working."
+  },
+  {
+    "id": "ioda",
+    "name": "IODA Internet Outage Dashboard",
+    "category": "online",
+    "summary": "Displays Internet-connectivity signals and outage indicators by country, region and autonomous system.",
+    "bestFor": "Check whether a widespread connectivity failure aligns with independently observed regional or ISP disruption.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Public research dashboard and data",
+    "homepage": "https://ioda.inetintel.cc.gatech.edu/",
+    "downloadUrl": "https://ioda.inetintel.cc.gatech.edu/dashboard/",
+    "docsUrl": "https://www.caida.org/projects/ioda/",
+    "sourceUrl": "https://www.caida.org/projects/ioda/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "outage",
+      "ISP",
+      "ASN",
+      "regional connectivity",
+      "IODA",
+      "online",
+      "browser",
+      "connectivity"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://www.caida.org/projects/ioda/",
+      "2026-11-26 primary-source review: https://ioda.inetintel.cc.gatech.edu/reports/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Macroscopic outage signals do not identify an individual office’s fault or establish the cause of a disruption. Coverage and measurement disagreement matter."
+  },
+  {
+    "id": "aws-health",
+    "name": "AWS Health Dashboard",
+    "category": "online",
+    "summary": "Shows public AWS service events and history across regions.",
+    "bestFor": "Check the matching provider and service before changing a working endpoint configuration.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public status dashboard",
+    "homepage": "https://health.aws.amazon.com/health/status",
+    "downloadUrl": "https://health.aws.amazon.com/health/status",
+    "docsUrl": "https://docs.aws.amazon.com/health/latest/ug/aws-health-dashboard-status.html",
+    "sourceUrl": "https://docs.aws.amazon.com/health/latest/ug/aws-health-dashboard-status.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "service status",
+      "outage",
+      "incident history",
+      "online",
+      "browser",
+      "connectivity"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://docs.aws.amazon.com/health/latest/ug/aws-health-dashboard-status.html"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Public events do not include every account-specific impact. Check account health when the public view does not explain the failure."
+  },
+  {
+    "id": "azure-status",
+    "name": "Azure Status",
+    "category": "online",
+    "summary": "Displays broad Azure incidents, regional service availability and incident history.",
+    "bestFor": "Check the matching provider and service before changing a working endpoint configuration.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public status dashboard",
+    "homepage": "https://azure.status.microsoft/en-us/status",
+    "downloadUrl": "https://azure.status.microsoft/en-us/status",
+    "docsUrl": "https://learn.microsoft.com/en-us/azure/service-health/azure-status-overview",
+    "sourceUrl": "https://learn.microsoft.com/en-us/azure/service-health/azure-status-overview",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "service status",
+      "outage",
+      "incident history",
+      "online",
+      "browser",
+      "connectivity"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://azure.status.microsoft/en-us/status",
+      "2026-11-26 primary-source review: https://learn.microsoft.com/en-us/azure/service-health/azure-status-overview"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "The public page focuses on broad incidents. An all-clear view does not rule out subscription-specific outages, maintenance or advisories."
+  },
+  {
+    "id": "google-cloud-status",
+    "name": "Google Cloud Service Health",
+    "category": "online",
+    "summary": "Shows broad Google Cloud incidents by product and location.",
+    "bestFor": "Check the matching provider and service before changing a working endpoint configuration.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public status dashboard",
+    "homepage": "https://status.cloud.google.com/",
+    "downloadUrl": "https://status.cloud.google.com/",
+    "docsUrl": "https://status.cloud.google.com/",
+    "sourceUrl": "https://status.cloud.google.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "service status",
+      "outage",
+      "incident history",
+      "online",
+      "browser",
+      "connectivity"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://status.cloud.google.com/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Google Cloud status is separate from Google Workspace status. No broad incident does not exclude an event affecting a specific project."
+  },
+  {
+    "id": "cloudflare-status",
+    "name": "Cloudflare System Status",
+    "category": "online",
+    "summary": "Publishes Cloudflare service incidents, maintenance and update feeds.",
+    "bestFor": "Check the matching provider and service before changing a working endpoint configuration.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public status dashboard",
+    "homepage": "https://www.cloudflarestatus.com/",
+    "downloadUrl": "https://www.cloudflarestatus.com/",
+    "docsUrl": "https://www.cloudflarestatus.com/",
+    "sourceUrl": "https://www.cloudflarestatus.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "service status",
+      "outage",
+      "incident history",
+      "online",
+      "browser",
+      "connectivity"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://www.cloudflarestatus.com/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "A provider incident may affect only particular locations or products. Compare the incident scope with the failing route and application."
+  },
+  {
+    "id": "github-status",
+    "name": "GitHub Status",
+    "category": "online",
+    "summary": "Publishes GitHub component incidents, service history and regional Enterprise Cloud status links.",
+    "bestFor": "Check the matching provider and service before changing a working endpoint configuration.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public status dashboard",
+    "homepage": "https://www.githubstatus.com/",
+    "downloadUrl": "https://www.githubstatus.com/",
+    "docsUrl": "https://www.githubstatus.com/",
+    "sourceUrl": "https://www.githubstatus.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "service status",
+      "outage",
+      "incident history",
+      "online",
+      "browser",
+      "connectivity"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://www.githubstatus.com/"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Check the exact component and hosting region. An operational summary does not prove a particular repository, workflow or credential works."
+  },
+  {
+    "id": "it-tools",
+    "name": "IT-Tools",
+    "category": "online",
+    "summary": "An open-source browser toolbox for common conversions, hashing, subnet calculations and structured-data tasks.",
+    "bestFor": "Calculate a subnet or transform a technical value without installing a separate utility for each task.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public toolbox; self-hosting available",
+    "homepage": "https://it-tools.tech/",
+    "downloadUrl": "https://it-tools.tech/",
+    "docsUrl": "https://github.com/CorentinTh/it-tools",
+    "sourceUrl": "https://github.com/CorentinTh/it-tools",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "subnet",
+      "hash",
+      "conversion",
+      "self-hosted",
+      "local utility",
+      "online",
+      "browser",
+      "browser-utilities"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://github.com/CorentinTh/it-tools",
+      "2026-11-26 primary-source review: https://github.com/CorentinTh/it-tools/blob/main/src/tools/ipv4-subnet-calculator/ipv4-subnet-calculator.vue",
+      "2026-11-26 primary-source review: https://github.com/CorentinTh/it-tools/blob/main/src/tools/hash-text/hash-text.vue"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Use the project’s exact it-tools.tech domain. Browser-local calculation does not automatically establish that every operation in every hosted fork has the same data path."
+  },
+  {
+    "id": "vert",
+    "name": "VERT",
+    "category": "online",
+    "summary": "Converts images, audio, documents and supported video formats with local browser processing and an explicit server-video fallback.",
+    "bestFor": "Convert a copy of a service document or media file while checking where that conversion runs.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free open-source converter; self-hosting available",
+    "homepage": "https://vert.sh/",
+    "downloadUrl": "https://vert.sh/",
+    "docsUrl": "https://github.com/VERT-sh/vert",
+    "sourceUrl": "https://github.com/VERT-sh/vert",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "WebAssembly",
+      "file conversion",
+      "documents",
+      "video",
+      "audio",
+      "images",
+      "online",
+      "browser",
+      "browser-utilities"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://vert.sh/privacy/",
+      "2026-11-26 primary-source review: https://github.com/VERT-sh/vert"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Do not describe all video conversion as local. The official instance uses anonymous analytics, and third-party instances can have different data policies."
+  },
+  {
+    "id": "webhook-site",
+    "name": "Webhook.site",
+    "category": "online",
+    "summary": "Provides a temporary HTTP endpoint and mailbox that display received requests for integration troubleshooting.",
+    "bestFor": "Verify what a test integration actually sends, including headers, body and timing.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Limited free temporary endpoints; paid accounts add protected storage and workflow features",
+    "homepage": "https://webhook.site/",
+    "downloadUrl": "https://webhook.site/",
+    "docsUrl": "https://docs.webhook.site/",
+    "sourceUrl": "https://docs.webhook.site/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "webhook",
+      "HTTP",
+      "callback",
+      "API debugging",
+      "request inspection",
+      "online",
+      "browser",
+      "browser-utilities"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://docs.webhook.site/",
+      "2026-11-26 primary-source review: https://webhook.site/pricing"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Use synthetic payloads without real authorization tokens. The docs and pricing page show different free request counts, so check the current endpoint limits before planning a run."
+  },
+  {
+    "id": "pairdrop",
+    "name": "PairDrop",
+    "category": "online",
+    "summary": "Transfers files and text between browsers using WebRTC, with pairing for devices on different networks.",
+    "bestFor": "Move a selected service file between a phone and workstation when installing another application is unnecessary.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free open-source service; self-hosting available",
+    "homepage": "https://pairdrop.net/",
+    "downloadUrl": "https://pairdrop.net/",
+    "docsUrl": "https://github.com/schlagmichdoch/PairDrop",
+    "sourceUrl": "https://github.com/schlagmichdoch/PairDrop",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "file transfer",
+      "WebRTC",
+      "phone",
+      "cross-platform",
+      "PWA",
+      "online",
+      "browser",
+      "browser-utilities"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://github.com/schlagmichdoch/PairDrop",
+      "2026-11-26 primary-source review: https://github.com/schlagmichdoch/PairDrop/blob/master/docs/faq.md"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "This is a transfer tool, not a backup or guaranteed offline service. Do not claim that every transfer bypasses servers or that the signaling design is zero-trust."
+  },
+  {
+    "id": "w3c-html-checker",
+    "name": "W3C Nu HTML Checker",
+    "category": "online",
+    "summary": "Reports document markup errors and warnings that can affect parsing, interoperability and usability.",
+    "bestFor": "Locate malformed HTML behind inconsistent browser behavior before changing layout or application logic.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public checker; local execution available",
+    "homepage": "https://validator.w3.org/nu/",
+    "downloadUrl": "https://validator.w3.org/nu/",
+    "docsUrl": "https://validator.w3.org/nu/about.html",
+    "sourceUrl": "https://validator.w3.org/nu/about.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "HTML",
+      "validation",
+      "markup",
+      "DOM",
+      "web compatibility",
+      "online",
+      "browser",
+      "web-quality"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://validator.w3.org/nu/",
+      "2026-11-26 primary-source review: https://validator.w3.org/nu/about.html"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Zero reported errors is not a conformance certificate or proof of accessibility. Checks evolve, and client-rendered state may differ from downloaded source."
+  },
+  {
+    "id": "w3c-link-checker",
+    "name": "W3C Link Checker",
+    "category": "online",
+    "summary": "Checks links, anchors and referenced objects in a public document, with optional recursive checking.",
+    "bestFor": "Find the actual broken navigation or resource destination after a site migration or documentation change.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public link checker",
+    "homepage": "https://validator.w3.org/checklink",
+    "downloadUrl": "https://validator.w3.org/checklink",
+    "docsUrl": "https://validator.w3.org/checklink",
+    "sourceUrl": "https://validator.w3.org/checklink",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "broken links",
+      "anchors",
+      "redirects",
+      "site migration",
+      "online",
+      "browser",
+      "web-quality"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://validator.w3.org/checklink"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "Authentication, robots rules, rate limits and transient failures can affect a remote check. Confirm ambiguous failures before deleting or replacing a valid destination."
+  },
+  {
+    "id": "caniuse",
+    "name": "Can I use",
+    "category": "online",
+    "summary": "Provides browser-version support tables and qualification notes for web platform features.",
+    "bestFor": "Explain why a UI, media format or browser API behaves differently on a customer’s actual browser version.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public support tables; optional supporter features",
+    "homepage": "https://caniuse.com/",
+    "downloadUrl": "https://caniuse.com/",
+    "docsUrl": "https://caniuse.com/ciu/about",
+    "sourceUrl": "https://caniuse.com/ciu/about",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "browser compatibility",
+      "CSS",
+      "HTML",
+      "JavaScript",
+      "Web APIs",
+      "online",
+      "browser",
+      "web-quality"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://caniuse.com/",
+      "2026-11-26 primary-source review: https://caniuse.com/ciu/about"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "A supported label does not promise complete implementation or prove your page works. Read partial-support notes and test the original interaction."
+  },
+  {
+    "id": "endoflife-date",
+    "name": "endoflife.date",
+    "category": "online",
+    "summary": "Collects product release and end-of-support dates in a searchable, linked reference.",
+    "bestFor": "Identify unsupported software or an approaching maintenance deadline before planning updates and replacements.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Free public lifecycle reference and API",
+    "homepage": "https://endoflife.date/",
+    "downloadUrl": "https://endoflife.date/",
+    "docsUrl": "https://github.com/endoflife-date/endoflife.date",
+    "sourceUrl": "https://github.com/endoflife-date/endoflife.date",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "end of life",
+      "EOL",
+      "support lifecycle",
+      "maintenance",
+      "upgrade planning",
+      "online",
+      "browser",
+      "vulnerability"
+    ],
+    "provenance": [
+      "2026-11-26 primary-source review: https://endoflife.date/",
+      "2026-11-26 primary-source review: https://github.com/endoflife-date/endoflife.date"
+    ],
+    "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
+    "cautions": "This is a community-maintained aggregation. Vendor terms, special support programs and edition differences determine the actual support boundary."
   }
 ]
