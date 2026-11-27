@@ -4,6 +4,20 @@
 
 **Confirm a healthy source, a verified backup and a destination large enough for the selected clone or restore.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Graphical image or clone** | **[Rescuezilla](https://rescuezilla.com/)** · **[Download x64 rescue image · ISO](https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso)** | Use a guided source/destination workflow for healthy storage after checking disk identity. **Access:** Free and open source |
+| **Advanced image workflow** | **[Clonezilla](https://clonezilla.org/)** · **[Get x64 rescue image · ISO](https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso)** | Use the documented imaging or cloning mode when its filesystem and destination constraints fit. **Access:** Free and open source |
+| **Files-only migration** | **[Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** · **[Open built-in copy instructions](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** | Copy the agreed file trees with logs when an entire disk image is unnecessary. **Access:** Included with supported [Windows](https://www.microsoft.com/windows) |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job
@@ -19,6 +33,7 @@
 | Inventory and reapply approved application packages. | **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** |
 | Synchronize an explicitly chosen healthy-data folder between approved machines; keep an independent backup. | **[Syncthing](https://syncthing.net/)** · [Official page](https://syncthing.net/) · **[Download Windows x64 · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip)** |
 | Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. | **[WinMerge](https://winmerge.org/)** · [Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** |
+| Use the documented imaging or cloning mode when its filesystem and destination constraints fit. | **[Clonezilla](https://clonezilla.org/)** · [Official page](https://clonezilla.org/) · **[Get x64 rescue image · ISO](https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso)** |
 
 ### Choose the move
 

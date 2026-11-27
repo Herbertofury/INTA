@@ -21,6 +21,8 @@
 
 The existing [layout groups](https://github.com/Herbertofury/INTA/blob/main/data/wiki-layout.json) are the only service taxonomy. Related cases can link across several fields without copying the procedure. Editions and platform installers stay in one acquisition record unless they are genuinely distinct products.
 
+The `choices` list in each [quick-start selection](https://github.com/Herbertofury/INTA/blob/main/data/quick-start.json) controls which tools appear immediately for that case. It references canonical tool and acquisition IDs and adds only the task role, reason, access boundary and source evidence. That same list feeds the front pages and initial job toolkit. A tool being present in the complete catalog is not enough to make it discoverable during the relevant job. See [current choices by scenario](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices).
+
 ## Add useful depth in the right place
 
 1. **Find the existing job.** Search the service map, case titles, tool IDs and official product pages.

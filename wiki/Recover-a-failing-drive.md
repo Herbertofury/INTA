@@ -4,6 +4,20 @@
 
 **Stop using the source disk; clicking, physical damage or irreplaceable data needs a recovery-specialist decision first.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Image the failing source** | **[SystemRescue](https://www.system-rescue.org/)** · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** | Boot the ready recovery environment and use its [GNU ddrescue](https://www.gnu.org/software/ddrescue/) workflow before repair writes. **Access:** Free and open source |
+| **Inspect the working copy** | **[TestDisk](https://www.cgsecurity.org/wiki/TestDisk)** · **[Download Windows x64 tools · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** | Investigate partition or filesystem metadata on the preserved image or clone. **Access:** Free and open source |
+| **Recover file contents** | **[PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec)** · **[Download PhotoRec / TestDisk · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** | Carve file contents from the preserved copy when usable filesystem metadata is unavailable. **Access:** Free and open source |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

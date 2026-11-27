@@ -1,0 +1,783 @@
+{
+  "startedAt": "2026-11-27T02:15:47.157Z",
+  "checks": [
+    {
+      "name": "Every Home case renders all reviewed role choices and the preserved primary, with exact official/acquisition links and complete catalog",
+      "tools": 133,
+      "jobs": 22,
+      "cases": 27,
+      "authoredChoices": 67,
+      "visibleChoices": 67,
+      "fieldNotes": 74,
+      "actions": 294,
+      "baseline": {
+        "tools": 133,
+        "jobs": 22,
+        "cases": 27,
+        "notes": 74
+      }
+    },
+    {
+      "name": "All default guides and all selected-case routes expose every applicable choice while preserving tools, exact actions, steps, commands and specific fixes"
+    },
+    {
+      "name": "Malwarebytes, AdwCleaner and Bitdefender names plus official/acquisition actions are visible at 1366\u00d7900 without scrolling; toolkit remains sticky",
+      "firstFold": [
+        {
+          "toolId": "malwarebytes",
+          "panelTop": 213.140625,
+          "panelBottom": 940,
+          "scrollTop": 0,
+          "links": [
+            {
+              "label": "Malwarebytes",
+              "rect": {
+                "x": 1001,
+                "y": 267.640625,
+                "width": 104.9375,
+                "height": 17,
+                "top": 267.640625,
+                "right": 1105.9375,
+                "bottom": 284.640625,
+                "left": 1001
+              }
+            },
+            {
+              "label": "Official page ",
+              "rect": {
+                "x": 1001,
+                "y": 382.828125,
+                "width": 97.578125,
+                "height": 44,
+                "top": 382.828125,
+                "right": 1098.578125,
+                "bottom": 426.828125,
+                "left": 1001
+              }
+            },
+            {
+              "label": "Download Windows installer \u00b7 EXE ",
+              "rect": {
+                "x": 1001,
+                "y": 426.828125,
+                "width": 145,
+                "height": 74.890625,
+                "top": 426.828125,
+                "right": 1146,
+                "bottom": 501.71875,
+                "left": 1001
+              }
+            }
+          ]
+        },
+        {
+          "toolId": "adwcleaner",
+          "panelTop": 213.140625,
+          "panelBottom": 940,
+          "scrollTop": 0,
+          "links": [
+            {
+              "label": "Malwarebytes AdwCleaner",
+              "rect": {
+                "x": 1162,
+                "y": 267.640625,
+                "width": 104.9375,
+                "height": 40.1875,
+                "top": 267.640625,
+                "right": 1266.9375,
+                "bottom": 307.828125,
+                "left": 1162
+              }
+            },
+            {
+              "label": "Official page ",
+              "rect": {
+                "x": 1162,
+                "y": 448.015625,
+                "width": 97.578125,
+                "height": 44,
+                "top": 448.015625,
+                "right": 1259.578125,
+                "bottom": 492.015625,
+                "left": 1162
+              }
+            },
+            {
+              "label": "Download Windows portable cleaner \u00b7 EXE ",
+              "rect": {
+                "x": 1162,
+                "y": 492.015625,
+                "width": 145,
+                "height": 74.890625,
+                "top": 492.015625,
+                "right": 1307,
+                "bottom": 566.90625,
+                "left": 1162
+              }
+            }
+          ]
+        },
+        {
+          "toolId": "bitdefender-free",
+          "panelTop": 213.140625,
+          "panelBottom": 940,
+          "scrollTop": 0,
+          "links": [
+            {
+              "label": "Bitdefender Antivirus Free",
+              "rect": {
+                "x": 1001,
+                "y": 588.90625,
+                "width": 107.59375,
+                "height": 40.1875,
+                "top": 588.90625,
+                "right": 1108.59375,
+                "bottom": 629.09375,
+                "left": 1001
+              }
+            },
+            {
+              "label": "Official page ",
+              "rect": {
+                "x": 1001,
+                "y": 727.28125,
+                "width": 97.578125,
+                "height": 44,
+                "top": 727.28125,
+                "right": 1098.578125,
+                "bottom": 771.28125,
+                "left": 1001
+              }
+            },
+            {
+              "label": "Download Windows setup \u00b7 EXE ",
+              "rect": {
+                "x": 1001,
+                "y": 771.28125,
+                "width": 145,
+                "height": 74.890625,
+                "top": 771.28125,
+                "right": 1146,
+                "bottom": 846.171875,
+                "left": 1001
+              }
+            }
+          ]
+        }
+      ],
+      "sticky": {
+        "x": 984,
+        "y": 80,
+        "width": 350,
+        "height": 804
+      },
+      "nodes": 1177
+    },
+    {
+      "name": "All printer driver shortcuts remain visible destinations and the last resource remains keyboard-accessible",
+      "drivers": 11,
+      "lastResource": {
+        "x": 1001,
+        "y": 778.421875,
+        "width": 306,
+        "height": 44
+      }
+    },
+    {
+      "name": "Every authored tool choice is indexed for scenario search, including MBAM, AdwCleaner and Bitdefender"
+    },
+    {
+      "name": "Exact case search, selected-section reload/Back, saved tools and checklist reset/Undo retain prior behavior"
+    },
+    {
+      "name": "Every guide Markdown export preserves reviewed roles, rationale, free-use boundaries, sources, actions and full procedures",
+      "exports": 22
+    },
+    {
+      "name": "Dark/light and 390/320px layouts retain every choice, 44px controls, readable labels and ordinary mobile scrolling",
+      "layouts": [
+        {
+          "width": 390,
+          "overflow": false,
+          "minActionHeight": 44,
+          "minActionFont": 14,
+          "panelOverflow": "visible"
+        },
+        {
+          "width": 320,
+          "overflow": false,
+          "minActionHeight": 44,
+          "minActionFont": 14,
+          "panelOverflow": "visible"
+        }
+      ]
+    },
+    {
+      "name": "Actual offline export preserves every choice and the default malware working kit"
+    }
+  ],
+  "screenshots": [
+    "portal-choices-home-1366.png",
+    "portal-choices-malware-1366.png",
+    "portal-choices-malware-scrolled.png",
+    "portal-choices-printer-1366.png",
+    "portal-choices-malware-light.png",
+    "portal-choices-home-390.png",
+    "portal-choices-malware-390.png",
+    "portal-choices-home-320.png",
+    "portal-choices-malware-320.png"
+  ],
+  "choiceCoverage": [
+    {
+      "itemId": "suspected-malware",
+      "choices": [
+        "malwarebytes:https://downloads.malwarebytes.com/file/mb-windows",
+        "adwcleaner:https://adwcleaner.malwarebytes.com/adwcleaner?channel=release",
+        "bitdefender-free:https://download.bitdefender.com/windows/installer/en-us/bitdefender_avfree.exe",
+        "safety-scanner:https://go.microsoft.com/fwlink/?LinkId=212732",
+        "defender-offline:https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline"
+      ]
+    },
+    {
+      "itemId": "fix-a-printer",
+      "choices": [
+        "get-help:https://aka.ms/PrinterConnection",
+        "oem-drivers:https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+        "advanced-ip-scanner:https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe",
+        "naps2:https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip"
+      ]
+    },
+    {
+      "itemId": "fix-internet",
+      "choices": [
+        "get-help:https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+        "powershell:https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell",
+        "curl:https://curl.se/windows/microsoft.html"
+      ]
+    },
+    {
+      "itemId": "fix-email",
+      "choices": [
+        "get-help:https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters"
+      ]
+    },
+    {
+      "itemId": "failing-drive",
+      "choices": [
+        "systemrescue:https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso",
+        "testdisk:https://www.cgsecurity.org/testdisk-7.2.win64.zip",
+        "photorec:https://www.cgsecurity.org/testdisk-7.2.win64.zip"
+      ]
+    },
+    {
+      "itemId": "deleted-files",
+      "choices": [
+        "photorec:https://www.cgsecurity.org/testdisk-7.2.win64.zip",
+        "testdisk:https://www.cgsecurity.org/testdisk-7.2.win64.zip"
+      ]
+    },
+    {
+      "itemId": "slow-pc",
+      "choices": [
+        "process-explorer:https://download.sysinternals.com/files/ProcessExplorer.zip",
+        "procmon:https://download.sysinternals.com/files/ProcessMonitor.zip",
+        "crystaldiskinfo:https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download",
+        "sysinternals:https://download.sysinternals.com/files/SysinternalsSuite.zip"
+      ]
+    },
+    {
+      "itemId": "remote-help",
+      "choices": [
+        "quick-assist:https://apps.microsoft.com/detail/9P7BP5VNWKX5",
+        "rustdesk:https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe",
+        "meshcentral:https://github.com/Ylianst/MeshCentral#installation",
+        "remmina:https://www.remmina.org/how-to-install-remmina/"
+      ]
+    },
+    {
+      "itemId": "fix-windows-updates",
+      "choices": [
+        "get-help:https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+        "setupdiag:https://go.microsoft.com/fwlink/?linkid=870142",
+        "dism:https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+        "windows-recovery:https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+      ]
+    },
+    {
+      "itemId": "windows-repair",
+      "choices": [
+        "dism:https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+        "sfc:https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+        "windows-recovery:https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+      ]
+    },
+    {
+      "itemId": "fix-boot-failure",
+      "choices": [
+        "windows-recovery:https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+        "microsoft-windows11-media:https://go.microsoft.com/fwlink/?linkid=2156295",
+        "systemrescue:https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso",
+        "quick-machine-recovery:https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp"
+      ]
+    },
+    {
+      "itemId": "diagnose-crashes",
+      "choices": [
+        "windbg:https://aka.ms/windbg/download",
+        "memtest86plus:https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip",
+        "libre-hardware-monitor:https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/download/v0.9.6/LibreHardwareMonitor.zip"
+      ]
+    },
+    {
+      "itemId": "disk-space",
+      "choices": [
+        "windirstat:https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi",
+        "wiztree:https://diskanalyzer.com/files/wiztree_4_34_portable.zip"
+      ]
+    },
+    {
+      "itemId": "clone-a-drive",
+      "choices": [
+        "rescuezilla:https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso",
+        "clonezilla:https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso",
+        "robocopy:https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
+      ]
+    },
+    {
+      "itemId": "file-backup",
+      "choices": [
+        "restic:https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip",
+        "kopia:https://github.com/kopia/kopia/releases/download/v0.23.1/KopiaUI-0.23.1-win.zip",
+        "veeam-agent:https://www.veeam.com/products/physical/windows-backup-recovery-download.html"
+      ]
+    },
+    {
+      "itemId": "boot-usb",
+      "choices": [
+        "rufus:https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe",
+        "ventoy:https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip",
+        "microsoft-windows11-media:https://go.microsoft.com/fwlink/?linkid=2156295",
+        "systemrescue:https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso"
+      ]
+    },
+    {
+      "itemId": "set-up-a-new-pc",
+      "choices": [
+        "winget:https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
+        "oem-drivers:https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+        "robocopy:https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
+      ]
+    },
+    {
+      "itemId": "maintain-a-pc",
+      "choices": [
+        "winget:https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
+        "crystaldiskinfo:https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download",
+        "windirstat:https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi"
+      ]
+    },
+    {
+      "itemId": "start-a-repair",
+      "choices": []
+    },
+    {
+      "itemId": "contain-ransomware",
+      "choices": []
+    },
+    {
+      "itemId": "recover-an-outage",
+      "choices": []
+    },
+    {
+      "itemId": "repair-domain-trust",
+      "choices": [
+        "powershell:https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell"
+      ]
+    },
+    {
+      "itemId": "troubleshoot-with-ai",
+      "choices": [
+        "chatgpt:https://chatgpt.com/",
+        "codex-cli:https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe"
+      ]
+    },
+    {
+      "itemId": "complete-a-handoff",
+      "choices": []
+    },
+    {
+      "itemId": "find-a-file",
+      "choices": [
+        "everything:https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe",
+        "wizfile:https://antibody-software.com/files/wizfile_3_15_portable.zip"
+      ]
+    },
+    {
+      "itemId": "inspect-network-traffic",
+      "choices": [
+        "wireshark:https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe",
+        "curl:https://curl.se/windows/microsoft.html",
+        "mtr:https://github.com/traviscross/mtr#using-mtr-on-windows"
+      ]
+    },
+    {
+      "itemId": "suspected-ram-fault",
+      "choices": [
+        "memtest86plus:https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip"
+      ]
+    }
+  ],
+  "exports": [
+    {
+      "jobId": "intake-triage",
+      "path": "exports/intake-triage.md",
+      "sha256": "2e63517a85a53a46e2e47e0570142d00b89ba908dfa0ddd283650a58c147e075"
+    },
+    {
+      "jobId": "malware-removal",
+      "path": "exports/malware-removal.md",
+      "sha256": "3ccd2ef5a393b72e25e1f6fa4583896e5b296152e32c79956615e50902338a06"
+    },
+    {
+      "jobId": "ransomware-response",
+      "path": "exports/ransomware-response.md",
+      "sha256": "c3056a1bb8b0ba5289662cafccde3c74929b2a7c77ea37f04e3bfd15d287fd0f"
+    },
+    {
+      "jobId": "slow-pc",
+      "path": "exports/slow-pc.md",
+      "sha256": "5193f3cc6b92568bce77b267ce59170fd5c9e97b00d845c58899cc9e8f22e984"
+    },
+    {
+      "jobId": "windows-repair",
+      "path": "exports/windows-repair.md",
+      "sha256": "3928612bcfd9f584e838980f2a9411443016c751f201bb029912b712e6147a4d"
+    },
+    {
+      "jobId": "windows-update",
+      "path": "exports/windows-update.md",
+      "sha256": "c4471dc812a1b08cc0087501eca450f1deae13089518a41aca80aa1b414099d9"
+    },
+    {
+      "jobId": "boot-recovery",
+      "path": "exports/boot-recovery.md",
+      "sha256": "52a9f6d07f8a06e56156d530e01f9bf90070640bb72539a9fa8e6820725d311e"
+    },
+    {
+      "jobId": "failing-drive",
+      "path": "exports/failing-drive.md",
+      "sha256": "f559fe6e7bf68a4574dba4f737912bb1d4bdb636b03ffdef09f4d3a4d1b83049"
+    },
+    {
+      "jobId": "disk-migration",
+      "path": "exports/disk-migration.md",
+      "sha256": "fe2579a31e220b6e4ad80503544c0f1535c6f17fd00862d54e2c04b25851bb3b"
+    },
+    {
+      "jobId": "backup-restore",
+      "path": "exports/backup-restore.md",
+      "sha256": "f9e6933af02d7752b73fc411ddddf27d6d90a1ce4621742c20ba226f32509a72"
+    },
+    {
+      "jobId": "network-dns",
+      "path": "exports/network-dns.md",
+      "sha256": "1bfd5d784c3c960aae5023d2bfa1a38ec71e99ed80fd22f63ecf8330fdfa53d0"
+    },
+    {
+      "jobId": "outage-recovery",
+      "path": "exports/outage-recovery.md",
+      "sha256": "9430d0361cf2a70bbc7dac49e9f5821de7c74190e6a004db45e6d6796804f202"
+    },
+    {
+      "jobId": "remote-support",
+      "path": "exports/remote-support.md",
+      "sha256": "667cb9d4ccba19d5ed2fb4471ae8431cd9700b3f3ff1f2c05ffc87e71e4d2ca8"
+    },
+    {
+      "jobId": "ad-trust",
+      "path": "exports/ad-trust.md",
+      "sha256": "f1a175d677caeb1019a9af4f63bee4a9cc6e5133ba390d496818f61958e6d956"
+    },
+    {
+      "jobId": "outlook-email",
+      "path": "exports/outlook-email.md",
+      "sha256": "4882fc6a8a17634312dfbd1af77cf6133d1dacf40a050daf165b3022117670c0"
+    },
+    {
+      "jobId": "printer-repair",
+      "path": "exports/printer-repair.md",
+      "sha256": "2becffadaf9c98bb578aef1cf7cf526b8a665a6870c44d8bc5ebaab32be4ecae"
+    },
+    {
+      "jobId": "hardware-bsod",
+      "path": "exports/hardware-bsod.md",
+      "sha256": "6261a0d5a85e9473a6ad66119d76490786215f20600d257ffbc550d789c409c5"
+    },
+    {
+      "jobId": "new-pc",
+      "path": "exports/new-pc.md",
+      "sha256": "af8a45d1f96d173a074f19c0d34151963771739feaf2b241899706fd0f540940"
+    },
+    {
+      "jobId": "client-handoff",
+      "path": "exports/client-handoff.md",
+      "sha256": "e04a812bca48768c86de53b27ce824bf2ab53b269f84d5d8a584b5f5c62bf5dc"
+    },
+    {
+      "jobId": "boot-usb",
+      "path": "exports/boot-usb.md",
+      "sha256": "7f5e6591014aef0ee5bf48e4fbd70c47dfdd95a11e6f796743b2e6a04923168b"
+    },
+    {
+      "jobId": "ai-triage",
+      "path": "exports/ai-triage.md",
+      "sha256": "7a6ebb714cbb5b377d701b9596d515176148ffabd66e82a8e586634f23d190fd"
+    },
+    {
+      "jobId": "preventive-maintenance",
+      "path": "exports/preventive-maintenance.md",
+      "sha256": "ba811f56768aa5a10c9520e015a360cb31f253814934e4aa9d1136c04a6ae996"
+    }
+  ],
+  "layouts": [
+    {
+      "width": 390,
+      "overflow": false,
+      "minActionHeight": 44,
+      "minActionFont": 14,
+      "panelOverflow": "visible"
+    },
+    {
+      "width": 320,
+      "overflow": false,
+      "minActionHeight": 44,
+      "minActionFont": 14,
+      "panelOverflow": "visible"
+    }
+  ],
+  "counts": {
+    "tools": 133,
+    "jobs": 22,
+    "cases": 27,
+    "authoredChoices": 67,
+    "visibleChoices": 67,
+    "fieldNotes": 74,
+    "actions": 294
+  },
+  "firstFold": [
+    {
+      "toolId": "malwarebytes",
+      "panelTop": 213.140625,
+      "panelBottom": 940,
+      "scrollTop": 0,
+      "links": [
+        {
+          "label": "Malwarebytes",
+          "rect": {
+            "x": 1001,
+            "y": 267.640625,
+            "width": 104.9375,
+            "height": 17,
+            "top": 267.640625,
+            "right": 1105.9375,
+            "bottom": 284.640625,
+            "left": 1001
+          }
+        },
+        {
+          "label": "Official page ",
+          "rect": {
+            "x": 1001,
+            "y": 382.828125,
+            "width": 97.578125,
+            "height": 44,
+            "top": 382.828125,
+            "right": 1098.578125,
+            "bottom": 426.828125,
+            "left": 1001
+          }
+        },
+        {
+          "label": "Download Windows installer \u00b7 EXE ",
+          "rect": {
+            "x": 1001,
+            "y": 426.828125,
+            "width": 145,
+            "height": 74.890625,
+            "top": 426.828125,
+            "right": 1146,
+            "bottom": 501.71875,
+            "left": 1001
+          }
+        }
+      ]
+    },
+    {
+      "toolId": "adwcleaner",
+      "panelTop": 213.140625,
+      "panelBottom": 940,
+      "scrollTop": 0,
+      "links": [
+        {
+          "label": "Malwarebytes AdwCleaner",
+          "rect": {
+            "x": 1162,
+            "y": 267.640625,
+            "width": 104.9375,
+            "height": 40.1875,
+            "top": 267.640625,
+            "right": 1266.9375,
+            "bottom": 307.828125,
+            "left": 1162
+          }
+        },
+        {
+          "label": "Official page ",
+          "rect": {
+            "x": 1162,
+            "y": 448.015625,
+            "width": 97.578125,
+            "height": 44,
+            "top": 448.015625,
+            "right": 1259.578125,
+            "bottom": 492.015625,
+            "left": 1162
+          }
+        },
+        {
+          "label": "Download Windows portable cleaner \u00b7 EXE ",
+          "rect": {
+            "x": 1162,
+            "y": 492.015625,
+            "width": 145,
+            "height": 74.890625,
+            "top": 492.015625,
+            "right": 1307,
+            "bottom": 566.90625,
+            "left": 1162
+          }
+        }
+      ]
+    },
+    {
+      "toolId": "bitdefender-free",
+      "panelTop": 213.140625,
+      "panelBottom": 940,
+      "scrollTop": 0,
+      "links": [
+        {
+          "label": "Bitdefender Antivirus Free",
+          "rect": {
+            "x": 1001,
+            "y": 588.90625,
+            "width": 107.59375,
+            "height": 40.1875,
+            "top": 588.90625,
+            "right": 1108.59375,
+            "bottom": 629.09375,
+            "left": 1001
+          }
+        },
+        {
+          "label": "Official page ",
+          "rect": {
+            "x": 1001,
+            "y": 727.28125,
+            "width": 97.578125,
+            "height": 44,
+            "top": 727.28125,
+            "right": 1098.578125,
+            "bottom": 771.28125,
+            "left": 1001
+          }
+        },
+        {
+          "label": "Download Windows setup \u00b7 EXE ",
+          "rect": {
+            "x": 1001,
+            "y": 771.28125,
+            "width": 145,
+            "height": 74.890625,
+            "top": 771.28125,
+            "right": 1146,
+            "bottom": 846.171875,
+            "left": 1001
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "continuation": {
+    "initialReport": "/workspace/scratch/cae750e312f3/tool-choice-qa/portal-choices-initial-results.json",
+    "initialSha256": "bd16fa9f8ac215c39b16474f0e9240f929e9e74c67fa8cae6b3a1d90fc3db0ef",
+    "resumedAt": "2026-11-27T02:17:01.104Z",
+    "reason": "Continued remaining gates in fresh tabs after the 21st same-tab download timed out; completed evidence preserved."
+  },
+  "externalRuntimeRequests": [],
+  "hashes": {
+    "portal/app.js": "c63bef8a38f676ad55caf8646ff8bed1b0801f7b37dd654516cea03773482d86",
+    "portal/styles.css": "03e38c92f6f21425c3754c94180b3c7e7807c7bbbfb7dd489f364dc34999265b",
+    "portal/index.template.html": "2a0fe317df3c822202c19dcec80f7c4c3dbaa4291dcf3d34c5c86e2a15e6e0b0",
+    "site/index.html": "57418a332c33a6efc41f82d612fff6ba40bc271b09460d0c4b25d33323f112e1",
+    "data/quick-start.json": "5ae49f6e78521d60eef985959f406a75cee2e7ca4b2693d9ef763a155cbea779",
+    "data/job-workspaces.json": "54730dae07af23e15d408b146889a2e092f2017e5fb9ea888ee75381a3b4624a",
+    "data/tools.json": "959b81c9e5609765781c41f16e12843b299c7b1193d5fb1ce3b4dc841fa1391f",
+    "data/tool-access.json": "e297d646860de6d04cfebfac7eeda5a553b5e97ec4e03076e1ee482d3b8ff39c"
+  },
+  "bytes": 817294,
+  "artifactHashes": {
+    "portal-choices-home-1366.png": "1e957bfc52cb44ee562892f40e116dfc69cb5749b9b82259036f6182bb55a7af",
+    "portal-choices-malware-1366.png": "590e8120702791c4d46f506ec1ec6992e188c57ae4b255de97c1514038d90866",
+    "portal-choices-malware-scrolled.png": "ca4bacd5752cce9fe812aeaed2791674a253c8fc1a4504b05464a79fb3156ec8",
+    "portal-choices-printer-1366.png": "d387b1c9239d4cf57c394a24a7d988d95d30a8b981c69cad30c831a700efda0f",
+    "portal-choices-malware-light.png": "00132d494becb62de0ca6b6dee070f9197b7be7760635aeb61b7af6cda79a47b",
+    "portal-choices-home-390.png": "5b46c1900de7c37fee8c4a3457074318bdcfd184e91a6724f70aa9e56421ff7e",
+    "portal-choices-malware-390.png": "80e4a8f78d676d699a6eadecf2b67cf85201dbcf4141a5aae6b17e3bd41b6222",
+    "portal-choices-home-320.png": "526cc3f8649f033a32c3e0e2ced505d3219ade476d6ba3b9cd78c81dcc2aa5f0",
+    "portal-choices-malware-320.png": "c6e218d93b0c5dd693155a84775cf27050962a2059ee12e3e519d01501761b78",
+    "portal-choices-offline.html": "4d17ab94f445cac8ded66e58a2b19a64eb09b0ac168bf11bd7f9e20b5ed79ba4",
+    "portal-choices-review.cjs": "53706aa222879eb882e10b1a45d5db8899cbab2a4af454c55268211f3fba27f0"
+  },
+  "passed": true,
+  "finishedAt": "2026-11-27T02:17:05.648Z",
+  "visualReview": {
+    "checkedAt": "2026-11-27T02:18:02.347168+00:00",
+    "passed": true,
+    "screenshotsInspected": [
+      "portal-choices-home-1366.png",
+      "portal-choices-malware-1366.png",
+      "portal-choices-malware-scrolled.png",
+      "portal-choices-printer-1366.png",
+      "portal-choices-malware-light.png",
+      "portal-choices-home-390.png",
+      "portal-choices-malware-390.png",
+      "portal-choices-malware-320.png"
+    ],
+    "findings": [],
+    "observations": [
+      "Home shows all three requested malware products and their separate official/acquisition actions in the first desktop viewport.",
+      "The full malware guide has all three requested products and both action links visible at 1366\u00d7900 without scrolling the toolkit.",
+      "The malware toolkit remains beside the document during scrolling.",
+      "Printer discovery actions and all eleven manufacturer links remain in the initial desktop toolkit view.",
+      "Light theme and 390px/320px views retain readable role/usage labels, direct links and ordinary scrolling without disclosure or horizontal overflow."
+    ]
+  },
+  "exportedProgress": {
+    "jobId": "malware-removal",
+    "firstStepTitle": "Contain and preserve the story",
+    "checked": true,
+    "verifiedIn": "exports/malware-removal.md"
+  },
+  "harnessNote": "The initial run completed all choice/navigation/state checks and 20 guide exports. The 21st same-tab download timed out without a page error. Remaining exports passed in fresh tabs; mobile/theme/offline checks then passed. The initial receipt is preserved, and the reusable script now opens a fresh tab for each guide export.",
+  "normalizationProof": {
+    "path": "choice-normalization-results.json",
+    "sha256": "648ff6889576bcf890cdd7205ace558bf6bf343138b0cb5024158dbde29aac52",
+    "passed": true
+  },
+  "offlineArtifact": {
+    "path": "portal-choices-offline.html",
+    "bytes": 822360,
+    "sha256": "4d17ab94f445cac8ded66e58a2b19a64eb09b0ac168bf11bd7f9e20b5ed79ba4"
+  }
+}

@@ -9,7 +9,8 @@
     "toolCategories": 10,
     "fieldNotes": 74,
     "researchItems": 54,
-    "reviewedRecords": 615,
+    "scenarioToolChoices": 67,
+    "reviewedRecords": 686,
     "dueReviews": 0
   },
   "coverage": [
@@ -160,7 +161,7 @@
     },
     {
       "kind": "acquisition",
-      "id": "defender-offline/0",
+      "id": "defender-offline/builtin-scan",
       "title": "Run the built-in offline scan",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -180,7 +181,7 @@
     },
     {
       "kind": "acquisition",
-      "id": "safety-scanner/0",
+      "id": "safety-scanner/windows-x64",
       "title": "Download Windows x64 scanner · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -199,6 +200,16 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download"
     },
     {
+      "kind": "acquisition",
+      "id": "safety-scanner/windows-x86",
+      "title": "Download Windows x86 scanner · EXE",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download"
+    },
+    {
       "kind": "tool",
       "id": "adwcleaner",
       "title": "Malwarebytes AdwCleaner",
@@ -210,8 +221,8 @@
     },
     {
       "kind": "acquisition",
-      "id": "adwcleaner/0",
-      "title": "Download Windows cleaner · EXE",
+      "id": "adwcleaner/windows-portable",
+      "title": "Download Windows portable cleaner · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
       "status": "current",
@@ -240,8 +251,8 @@
     },
     {
       "kind": "acquisition",
-      "id": "malwarebytes/0",
-      "title": "Download Windows EXE",
+      "id": "malwarebytes/windows-installer",
+      "title": "Download Windows installer · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
       "status": "current",
@@ -259,6 +270,16 @@
       "url": "https://www.malwarebytes.com/mwb-download"
     },
     {
+      "kind": "acquisition",
+      "id": "malwarebytes/macos-installer",
+      "title": "Download macOS installer · PKG",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://help.malwarebytes.com/hc/en-us/articles/31589208690715-Install-Malwarebytes-for-Mac"
+    },
+    {
       "kind": "tool",
       "id": "hitmanpro",
       "title": "Sophos HitmanPro",
@@ -270,7 +291,7 @@
     },
     {
       "kind": "acquisition",
-      "id": "hitmanpro/0",
+      "id": "hitmanpro/windows-x64",
       "title": "Windows x64 download · publisher check",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -280,7 +301,7 @@
     },
     {
       "kind": "acquisition",
-      "id": "hitmanpro/1",
+      "id": "hitmanpro/windows-x86",
       "title": "Windows x86 download · publisher check",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -310,7 +331,7 @@
     },
     {
       "kind": "acquisition",
-      "id": "eset-online-scanner/0",
+      "id": "eset-online-scanner/windows-x64",
       "title": "Download Windows x64 scanner · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -322,6 +343,16 @@
       "kind": "acquisition",
       "id": "eset-online-scanner/1",
       "title": "All download options",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.eset.com/us/home/online-scanner/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "eset-online-scanner/windows-x86",
+      "title": "Download Windows x86 scanner · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
       "status": "current",
@@ -460,8 +491,8 @@
     },
     {
       "kind": "acquisition",
-      "id": "bitdefender-free/0",
-      "title": "Download Windows EXE",
+      "id": "bitdefender-free/windows-installer",
+      "title": "Download Windows setup · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
       "status": "current",
@@ -490,8 +521,8 @@
     },
     {
       "kind": "acquisition",
-      "id": "emsisoft-emergency-kit/0",
-      "title": "Download Windows EXE",
+      "id": "emsisoft-emergency-kit/windows-x64",
+      "title": "Download Windows x64 kit · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
       "status": "current",
@@ -2057,6 +2088,16 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows"
+    },
+    {
+      "kind": "acquisition",
+      "id": "oem-drivers/printer-drivers",
+      "title": "Find the correct printer driver",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers"
     },
     {
       "kind": "tool",
@@ -6297,6 +6338,676 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://github.com/Herbertofury/INTA/wiki/Technician-Handoff"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-malware/malwarebytes/windows-installer",
+      "title": "Remove viruses: Malwarebytes (On-demand cleanup)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://help.malwarebytes.com/hc/en-us/articles/49849786059035-Free-vs-Paid-Malwarebytes-Security-features"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-malware/adwcleaner/windows-portable",
+      "title": "Remove viruses: Malwarebytes AdwCleaner (Adware and hijackers)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-malware/bitdefender-free/windows-installer",
+      "title": "Remove viruses: Bitdefender Antivirus Free (Personal PC protection)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.bitdefender.com/en-us/consumer/free-antivirus"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-malware/safety-scanner/windows-x64",
+      "title": "Remove viruses: Microsoft Safety Scanner (Portable second opinion)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-malware/defender-offline/primary",
+      "title": "Remove viruses: Microsoft Defender Offline (Scan outside Windows)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-a-printer/get-help/printer",
+      "title": "Fix a printer: Windows Get Help (Printer diagnostic)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-a-printer/oem-drivers/printer-drivers",
+      "title": "Fix a printer: Official OEM driver and firmware portals (Exact-model driver)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-a-printer/advanced-ip-scanner/primary",
+      "title": "Fix a printer: Advanced IP Scanner (Find the printer IP)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.advanced-ip-scanner.com/help/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-a-printer/naps2/primary",
+      "title": "Fix a printer: NAPS2 (Scanner and ADF test)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.naps2.com/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-internet/get-help/network",
+      "title": "Fix internet: Windows Get Help (Connection diagnostic)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-internet/powershell/windows-powershell",
+      "title": "Fix internet: PowerShell (DNS and port checks)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-internet/curl/windows-inbox",
+      "title": "Fix internet: curl (HTTP and TLS check)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://curl.se/docs/manpage.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-email/get-help/outlook",
+      "title": "Fix email: Windows Get Help (Classic Outlook diagnostic)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "failing-drive/systemrescue/primary",
+      "title": "Recover a failing drive: SystemRescue (Image the failing source)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.system-rescue.org/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "failing-drive/testdisk/primary",
+      "title": "Recover a failing drive: TestDisk (Inspect the working copy)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cgsecurity.org/wiki/TestDisk"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "failing-drive/photorec/primary",
+      "title": "Recover a failing drive: PhotoRec (Recover file contents)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "deleted-files/photorec/primary",
+      "title": "Recover deleted files: PhotoRec (Recover by file signature)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "deleted-files/testdisk/primary",
+      "title": "Recover deleted files: TestDisk (Undelete supported files)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cgsecurity.org/wiki/TestDisk:_undelete_file_for_NTFS"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "slow-pc/process-explorer/primary",
+      "title": "Fix a slow PC: Process Explorer (Find the busy process)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "slow-pc/procmon/primary",
+      "title": "Fix a slow PC: Process Monitor (Explain an I/O stall)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "slow-pc/crystaldiskinfo/primary",
+      "title": "Fix a slow PC: CrystalDiskInfo (Check storage warnings)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://crystalmark.info/en/software/crystaldiskinfo/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "slow-pc/sysinternals/primary",
+      "title": "Fix a slow PC: Microsoft Sysinternals Suite (Complete diagnostic kit)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "remote-help/quick-assist/primary",
+      "title": "Help remotely: Microsoft Quick Assist (Attended Windows help)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "remote-help/rustdesk/primary",
+      "title": "Help remotely: RustDesk (Cross-platform support)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://rustdesk.com/docs/en/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "remote-help/meshcentral/primary",
+      "title": "Help remotely: MeshCentral (Existing managed fleet)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/Ylianst/MeshCentral"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "remote-help/remmina/primary",
+      "title": "Help remotely: Remmina (Linux remote client)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.remmina.org/how-to-install-remmina/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-windows-updates/get-help/update",
+      "title": "Fix Windows updates: Windows Get Help (Update diagnostic)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-windows-updates/setupdiag/primary",
+      "title": "Fix Windows updates: SetupDiag (Explain an upgrade rollback)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-windows-updates/dism/primary",
+      "title": "Fix Windows updates: DISM (Component-store repair)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-windows-updates/windows-recovery/repair-reinstall",
+      "title": "Fix Windows updates: Windows Recovery Environment (Same-version reinstall)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "windows-repair/dism/primary",
+      "title": "Repair Windows files: DISM (Repair component store)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "windows-repair/sfc/primary",
+      "title": "Repair Windows files: System File Checker (Verify protected files)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "windows-repair/windows-recovery/repair-reinstall",
+      "title": "Repair Windows files: Windows Recovery Environment (Same-version reinstall)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-boot-failure/windows-recovery/primary",
+      "title": "Fix a PC that will not boot: Windows Recovery Environment (Startup recovery)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-boot-failure/microsoft-windows11-media/primary",
+      "title": "Fix a PC that will not boot: Windows 11 installation media (Trusted repair media)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.microsoft.com/software-download/windows11"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-boot-failure/systemrescue/primary",
+      "title": "Fix a PC that will not boot: SystemRescue (Preserve unstable storage)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.system-rescue.org/manual/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-boot-failure/quick-machine-recovery/primary",
+      "title": "Fix a PC that will not boot: Quick machine recovery (Eligible widespread failure)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "diagnose-crashes/windbg/primary",
+      "title": "Diagnose crashes: WinDbg (Analyze a crash dump)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "diagnose-crashes/memtest86plus/primary",
+      "title": "Diagnose crashes: Memtest86+ (Test memory stability)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/memtest86plus/memtest86plus"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "diagnose-crashes/libre-hardware-monitor/primary",
+      "title": "Diagnose crashes: Libre Hardware Monitor (Observe temperatures)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "disk-space/windirstat/primary",
+      "title": "Free disk space: WinDirStat (Free capacity map)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/windirstat/windirstat"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "disk-space/wiztree/primary",
+      "title": "Free disk space: WizTree (Licensed capacity analysis)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://diskanalyzer.com/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "clone-a-drive/rescuezilla/primary",
+      "title": "Clone or move a drive: Rescuezilla (Graphical image or clone)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://rescuezilla.com/help"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "clone-a-drive/clonezilla/primary",
+      "title": "Clone or move a drive: Clonezilla (Advanced image workflow)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://clonezilla.org/clonezilla-live-doc.php"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "clone-a-drive/robocopy/primary",
+      "title": "Clone or move a drive: Robocopy (Files-only migration)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "file-backup/restic/primary",
+      "title": "Restore a file backup: restic (Restore a restic repository)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://restic.readthedocs.io/en/stable/050_restore.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "file-backup/kopia/primary",
+      "title": "Restore a file backup: Kopia (Restore a Kopia snapshot)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://kopia.io/docs/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "file-backup/veeam-agent/primary",
+      "title": "Restore a file backup: Veeam Agent for Microsoft Windows (Restore an agent backup)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/files_restore.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "boot-usb/rufus/primary",
+      "title": "Make a boot USB: Rufus (Write one official ISO)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/pbatard/rufus/wiki/FAQ"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "boot-usb/ventoy/primary",
+      "title": "Make a boot USB: Ventoy (Maintain multiple ISOs)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.ventoy.net/en/doc_start.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "boot-usb/microsoft-windows11-media/primary",
+      "title": "Make a boot USB: Windows 11 installation media (Official Windows media)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.microsoft.com/software-download/windows11"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "boot-usb/systemrescue/primary",
+      "title": "Make a boot USB: SystemRescue (Ready recovery ISO)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.system-rescue.org/manual/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "set-up-a-new-pc/winget/primary",
+      "title": "Set up a new PC: WinGet (Approved application setup)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "set-up-a-new-pc/oem-drivers/primary",
+      "title": "Set up a new PC: Official OEM driver and firmware portals (Model-specific drivers)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "set-up-a-new-pc/robocopy/primary",
+      "title": "Set up a new PC: Robocopy (Move agreed user files)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "maintain-a-pc/winget/primary",
+      "title": "Maintain a PC: WinGet (Review app updates)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "maintain-a-pc/crystaldiskinfo/primary",
+      "title": "Maintain a PC: CrystalDiskInfo (Review storage health)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://crystalmark.info/en/software/crystaldiskinfo/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "maintain-a-pc/windirstat/primary",
+      "title": "Maintain a PC: WinDirStat (Explain capacity use)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/windirstat/windirstat"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "repair-domain-trust/powershell/windows-powershell",
+      "title": "Repair domain sign-in: PowerShell (Member secure-channel test)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "troubleshoot-with-ai/chatgpt/primary",
+      "title": "Troubleshoot with AI: ChatGPT (Compare hypotheses)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://help.openai.com/en/articles/9275245-using-chatgpt-s-free-tier-faq"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "troubleshoot-with-ai/codex-cli/primary",
+      "title": "Troubleshoot with AI: OpenAI Codex CLI (Review a scoped script)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/openai/codex"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "find-a-file/everything/primary",
+      "title": "Find a file: Everything (Find a local filename)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.voidtools.com/faq/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "find-a-file/wizfile/primary",
+      "title": "Find a file: WizFile (Licensed file search)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://antibody-software.com/wizfile/quick-start"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "inspect-network-traffic/wireshark/primary",
+      "title": "Inspect network traffic: Wireshark (Protocol evidence)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIntroduction.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "inspect-network-traffic/curl/windows-inbox",
+      "title": "Inspect network traffic: curl (HTTP/TLS comparison)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://curl.se/docs/manpage.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "inspect-network-traffic/mtr/primary",
+      "title": "Inspect network traffic: mtr (Path-loss comparison)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/traviscross/mtr"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-ram-fault/memtest86plus/primary",
+      "title": "Test memory: Memtest86+ (Bootable memory test)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.memtest.org/"
     }
   ],
   "researchQueue": [

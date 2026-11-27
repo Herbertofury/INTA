@@ -4,7 +4,7 @@
     "name": "Microsoft Defender Offline",
     "category": "malware",
     "summary": "Reboots Windows into its recovery environment to scan outside the normal Windows session.",
-    "bestFor": "Persistent malware that may interfere with an ordinary scan.",
+    "bestFor": "Persistent Windows malware or suspected rootkits that warrant a scan outside the running operating system.",
     "platforms": [
       "Windows"
     ],
@@ -22,17 +22,18 @@
       "windows security"
     ],
     "provenance": [
-      "Official project or vendor documentation"
+      "Official project or vendor documentation",
+      "2026-11-26 role and edition review: https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "Microsoft excludes Windows on ARM and Windows Server. The update path requires Microsoft Defender Antivirus as primary. Confirm recovery environment availability, save work and follow the documented BitLocker preparation; keep the recovery key available and verify protection is restored afterward."
+    "cautions": "Requires an enabled Windows Recovery Environment and administrator access; Microsoft excludes Windows on ARM and Windows Server. Defender Antivirus must be primary to receive offline updates. Save work and follow the documented BitLocker suspension/recovery-key steps, then verify protection is restored after the reboot."
   },
   {
     "id": "safety-scanner",
     "name": "Microsoft Safety Scanner",
     "category": "malware",
-    "summary": "Portable, manually triggered Microsoft malware scanner with a detailed local scan log.",
-    "bestFor": "A fresh Microsoft second-opinion scan without installing another resident antivirus.",
+    "summary": "Portable Microsoft malware scanner and removal tool that runs only when you start it.",
+    "bestFor": "A fresh portable second-opinion Windows scan without installing another resident antivirus.",
     "platforms": [
       "Windows"
     ],
@@ -50,22 +51,23 @@
       "second opinion"
     ],
     "provenance": [
-      "Official project or vendor documentation"
+      "Official project or vendor documentation",
+      "2026-11-26 role and edition review: https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "Expires 10 days after download; download a fresh copy for each job. It does not provide ongoing protection."
+    "cautions": "Expires ten days after download; obtain a fresh copy before each scan. No ongoing protection. Save the result and the local msert.log before handoff."
   },
   {
     "id": "adwcleaner",
     "name": "Malwarebytes AdwCleaner",
     "category": "malware",
-    "summary": "Focused cleanup for adware, browser hijackers and potentially unwanted applications.",
-    "bestFor": "Unexpected browser redirects, pop-ups and bundled unwanted software.",
+    "summary": "Portable Windows cleanup focused on adware, browser hijackers, potentially unwanted programs and unwanted preinstalled software.",
+    "bestFor": "Browser redirects, injected advertising and unwanted bundled software, with detections reviewed before quarantine.",
     "platforms": [
       "Windows"
     ],
     "mode": "portable",
-    "pricing": "Free tool",
+    "pricing": "Free for personal use and qualifying repair shops with at most 10 aggregate staff; other business rights differ",
     "homepage": "https://www.malwarebytes.com/adwcleaner",
     "downloadUrl": "https://www.malwarebytes.com/adwcleaner",
     "docsUrl": "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner",
@@ -79,50 +81,58 @@
       "cleanup"
     ],
     "provenance": [
-      "Official project or vendor documentation"
+      "Official project or vendor documentation",
+      "2026-11-26 role and edition review: https://www.malwarebytes.com/adwcleaner/eula",
+      "2026-11-26 role and edition review: https://help.malwarebytes.com/hc/en-us/articles/31589274807579-System-requirements-for-AdwCleaner"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "Review detections before quarantine. Keep the log and reboot when the tool requests it."
+    "cautions": "The specific requirements list Windows 11, 10 and 8.1; Windows 7/8/XP/Vista are unsupported. Review adware/PUP and preinstalled-software selections separately before quarantine, keep the log and reboot when requested. The repair-shop allowance counts staff across the entity and affiliates."
   },
   {
     "id": "malwarebytes",
     "name": "Malwarebytes",
     "category": "malware",
-    "summary": "On-demand malware cleanup and separately licensed ongoing protection.",
-    "bestFor": "An additional malware assessment after the primary endpoint product.",
+    "summary": "On-demand malware scanning and cleanup on Windows and Mac, with separately paid ongoing protection.",
+    "bestFor": "Broad on-demand malware cleanup on a personal Windows or Mac device; an additional assessment alongside the installed protection product.",
     "platforms": [
       "Windows",
       "macOS"
     ],
     "mode": "installed",
-    "pricing": "Free scan options; paid protection and business products",
+    "pricing": "Free personal-use Quick/Custom scans; paid Threat Scan and real-time protection; servicing/business rights differ",
     "homepage": "https://www.malwarebytes.com/",
     "downloadUrl": "https://www.malwarebytes.com/mwb-download",
-    "docsUrl": "https://www.malwarebytes.com/free-tools",
-    "sourceUrl": "https://www.malwarebytes.com/free-tools",
+    "docsUrl": "https://help.malwarebytes.com/hc/en-us/articles/49849786059035-Free-vs-Paid-Malwarebytes-Security-features",
+    "sourceUrl": "https://help.malwarebytes.com/hc/en-us/articles/49849786059035-Free-vs-Paid-Malwarebytes-Security-features",
     "reviewedAt": "2026-11-26",
     "tier": "core",
     "tags": [
       "virus removal",
-      "second opinion"
+      "second opinion",
+      "MBAM"
     ],
     "provenance": [
-      "Official project or vendor documentation"
+      "Official project or vendor documentation",
+      "2026-11-26 role and edition review: https://help.malwarebytes.com/hc/en-us/articles/49849786059035-Free-vs-Paid-Malwarebytes-Security-features",
+      "2026-11-26 role and edition review: https://www.malwarebytes.com/eula",
+      "Previous official free-tool reference retained: https://www.malwarebytes.com/free-tools",
+      "2026-11-26 platform and installer review: https://help.malwarebytes.com/hc/en-us/articles/31589243089307-System-Requirements-for-Malwarebytes-on-Windows-and-Mac",
+      "2026-11-26 macOS acquisition review: https://help.malwarebytes.com/hc/en-us/articles/31589208690715-Install-Malwarebytes-for-Mac"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "Use the edition and deployment rights appropriate for client servicing; a scan is not proof that an incident is fully contained."
+    "cautions": "The October 2026 feature matrix lists Quick Scan and Custom Scan as free, with Threat Scan and real-time protection paid. Free Home is personal/non-commercial and does not grant remote or commercial third-party servicing rights; use an agreement that covers that work. A clean scan does not establish complete incident containment."
   },
   {
     "id": "hitmanpro",
     "name": "Sophos HitmanPro",
     "category": "malware",
     "summary": "Portable second-opinion malware scanner and removal tool.",
-    "bestFor": "A targeted independent assessment when the first scanner leaves uncertainty.",
+    "bestFor": "A further Windows second-opinion assessment when the initial cleanup leaves a specific unresolved concern.",
     "platforms": [
       "Windows"
     ],
     "mode": "portable",
-    "pricing": "Free scanning; removal trial and paid licensing",
+    "pricing": "Free scanning; removal uses a 30-day license/trial or paid license",
     "homepage": "https://www.sophos.com/en-us/products/hitmanpro",
     "downloadUrl": "https://www.sophos.com/en-us/products/hitmanpro",
     "docsUrl": "https://www.sophos.com/en-us/free-tools",
@@ -136,22 +146,24 @@
       "scan and clean"
     ],
     "provenance": [
-      "Official project or vendor documentation"
+      "Official project or vendor documentation",
+      "2026-11-26 role and edition review: https://www.sophos.com/en-us/free-tools",
+      "2026-11-26 role and edition review: https://www.sophos.com/en-us/products/hitmanpro/downloads"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "Sophos currently routes its legacy virus-removal page to HitmanPro. Do not assume old Scan & Clean downloads remain a separate supported product."
+    "cautions": "Confirm removal entitlement before promising a free cleanup. The publisher download can pass through an export check. Sophos routes the legacy Virus Removal Tool page to this product; do not assume old Scan & Clean is a separately supported tool."
   },
   {
     "id": "eset-online-scanner",
     "name": "ESET Online Scanner",
     "category": "malware",
-    "summary": "Windows scanner that downloads detection modules and supports one-time malware checks.",
+    "summary": "Windows on-demand scanner that updates its detection modules and quarantines detected malware.",
     "bestFor": "A second-opinion scan with an independently maintained detection engine.",
     "platforms": [
       "Windows"
     ],
     "mode": "portable",
-    "pricing": "Free one-time scanner",
+    "pricing": "Free on-demand scan; commercial servicing is restricted by the published EULA",
     "homepage": "https://www.eset.com/us/home/online-scanner/",
     "downloadUrl": "https://www.eset.com/us/home/online-scanner/",
     "docsUrl": "https://support.eset.com/en/kb405-online-scanner-faq",
@@ -163,10 +175,13 @@
       "second opinion"
     ],
     "provenance": [
-      "Official project or vendor documentation"
+      "Official project or vendor documentation",
+      "2026-11-26 role and edition review: https://help.eset.com/latestVersions/?lang=en",
+      "2026-11-26 role and edition review: https://help.eset.com/eos/en-US/eula.html",
+      "2026-11-26 role and edition review: https://support.eset.com/en/kb405-online-scanner-faq"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "Internet is needed for the initial module update. This tool is not continuous endpoint protection."
+    "cautions": "Requires internet for the initial detection-module update; retained module data can support later offline scanning. It provides no continuous protection. The product EULA restricts using it to provide commercial services, so do not assume unrestricted technician servicing rights."
   },
   {
     "id": "clamav",
@@ -298,13 +313,13 @@
     "id": "bitdefender-free",
     "name": "Bitdefender Antivirus Free",
     "category": "malware",
-    "summary": "Consumer Windows antivirus with ongoing malware protection.",
-    "bestFor": "The previously discussed free Bitdefender option for a suitable home-PC use case.",
+    "summary": "Installed Windows antivirus providing ongoing real-time protection and on-demand scans for personal use.",
+    "bestFor": "Ongoing malware protection for a suitable personal Windows PC that needs a free resident antivirus.",
     "platforms": [
       "Windows"
     ],
     "mode": "installed",
-    "pricing": "Free consumer product; account required",
+    "pricing": "Free for personal or non-commercial use; Bitdefender account required",
     "homepage": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
     "downloadUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
     "docsUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
@@ -318,22 +333,24 @@
       "free"
     ],
     "provenance": [
-      "Official project or vendor documentation"
+      "Official project or vendor documentation",
+      "2026-11-26 role and edition review: https://www.bitdefender.com/en-us/consumer/free-antivirus",
+      "2026-11-26 role and edition review: https://www.bitdefender.com/en-us/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "This consumer product is separate from GravityZone business management; check the deployment terms for the intended customer."
+    "cautions": "Consumer ongoing protection, not a portable technician scanner. Current free-subscription terms limit use to personal or non-commercial purposes. An account and installation are required; choose one primary resident protection product for the endpoint."
   },
   {
     "id": "emsisoft-emergency-kit",
     "name": "Emsisoft Emergency Kit",
     "category": "malware",
     "summary": "Portable graphical and command-line malware-removal toolkit with detection updates.",
-    "bestFor": "A professional portable second-opinion cleanup workflow.",
+    "bestFor": "Portable Windows second-opinion cleanup; use the licensed professional offering for commercial servicing.",
     "platforms": [
       "Windows"
     ],
     "mode": "portable",
-    "pricing": "Free private use; Pro for business and for-profit use",
+    "pricing": "Free private use; licensed Pro/Remediation offering for business and for-profit use",
     "homepage": "https://www.emsisoft.com/en/emergency-kit/",
     "downloadUrl": "https://www.emsisoft.com/en/emergency-kit/",
     "docsUrl": "https://www.emsisoft.com/en/help/1702/getting-started/",
@@ -346,10 +363,13 @@
       "second opinion"
     ],
     "provenance": [
-      "Official project or vendor documentation"
+      "Official project or vendor documentation",
+      "2026-11-26 role and edition review: https://www.emsisoft.com/en/help/1702/getting-started/",
+      "2026-11-26 role and edition review: https://www.emsisoft.com/en/emergency-kit/",
+      "2026-11-26 role and edition review: https://www.emsisoft.com/en/remediation-kit/"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "Update the program and detection data before scanning and review the quarantine record. INTA client servicing needs the applicable Pro rights."
+    "cautions": "The current product page requires 64-bit Windows 10 or later, or Server 2016 or later. Update the program and detection modules before scanning and review quarantine. The business path is now presented as Remediation Kit; do not assume the free private-use terms cover paid client work."
   },
   {
     "id": "meshcentral",

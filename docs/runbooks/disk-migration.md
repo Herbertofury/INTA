@@ -11,6 +11,20 @@ Move a working system with clear source/destination control and a rollback copy.
 
 [Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/disk-migration)
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Graphical image or clone** | **[Rescuezilla](https://rescuezilla.com/)** · **[Download x64 rescue image · ISO](https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso)** | Use a guided source/destination workflow for healthy storage after checking disk identity. **Access:** Free and open source |
+| **Advanced image workflow** | **[Clonezilla](https://clonezilla.org/)** · **[Get x64 rescue image · ISO](https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso)** | Use the documented imaging or cloning mode when its filesystem and destination constraints fit. **Access:** Free and open source |
+| **Files-only migration** | **[Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** · **[Open built-in copy instructions](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** | Copy the agreed file trees with logs when an entire disk image is unnecessary. **Access:** Included with supported [Windows](https://www.microsoft.com/windows) |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job
@@ -26,6 +40,7 @@ Move a working system with clear source/destination control and a rollback copy.
 | Inventory and reapply approved application packages. | **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** |
 | Synchronize an explicitly chosen healthy-data folder between approved machines; keep an independent backup. | **[Syncthing](https://syncthing.net/)** · [Official page](https://syncthing.net/) · **[Download Windows x64 · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip)** |
 | Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. | **[WinMerge](https://winmerge.org/)** · [Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** |
+| Use the documented imaging or cloning mode when its filesystem and destination constraints fit. | **[Clonezilla](https://clonezilla.org/)** · [Official page](https://clonezilla.org/) · **[Get x64 rescue image · ISO](https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso)** |
 
 ### Choose the move
 
@@ -136,7 +151,7 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[Rescuezilla](https://rescuezilla.com/)** · [Official page](https://rescuezilla.com/) · **[Download x64 rescue image · ISO](https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso)** | Graphical image or clone workflow for healthy storage. | Bootable PC; Free / open source | [Open guide](https://rescuezilla.com/help) |
 | **[Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · **[Open built-in copy instructions](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** | Copy approved file trees with an inspectable log. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) |
 | **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** | Inventory and reapply approved application packages. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://learn.microsoft.com/en-us/windows/package-manager/winget/) |
-| **[Clonezilla](https://clonezilla.org/)** · [Official page](https://clonezilla.org/) · **[Get x64 rescue image · ISO](https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso)** | Capturing or restoring a supported disk image with a repeatable procedure. | Bootable PC, [Linux](https://www.kernel.org/); Free / open source | [Open guide](https://clonezilla.org/clonezilla-live-doc.php) |
+| **[Clonezilla](https://clonezilla.org/)** · [Official page](https://clonezilla.org/) · **[Get x64 rescue image · ISO](https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso)** | Use the documented imaging or cloning mode when its filesystem and destination constraints fit. | Bootable PC, [Linux](https://www.kernel.org/); Free / open source | [Open guide](https://clonezilla.org/clonezilla-live-doc.php) |
 | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
 | **[Syncthing](https://syncthing.net/)** · [Official page](https://syncthing.net/) · **[Download Windows x64 · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip)** | Synchronize an explicitly chosen healthy-data folder between approved machines; keep an independent backup. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/), BSD; Free and open source under MPL-2.0 | [Open guide](https://docs.syncthing.net/) |
 | **[WinMerge](https://winmerge.org/)** · [Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** | Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. | [Windows](https://www.microsoft.com/windows); Free and open source under GPL-2.0-or-later | [Open guide](https://manual.winmerge.org/en/) |

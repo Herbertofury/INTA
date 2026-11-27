@@ -48,8 +48,11 @@ Review intervals are editorial targets. Passing a link or build check never chan
 | Specific fix | 60 days |
 | Workspace resource | 60 days |
 | Download or acquisition route | 30 days |
+| Scenario tool choice | 30 days |
 
-**Reviews due in this snapshot: 0 of 615 dated records.**
+**67 scenario tool choices** are included in the review schedule. Their task fit, edition and access boundaries are reviewed alongside the tool itself.
+
+**Reviews due in this snapshot: 0 of 686 dated records.**
 
 The [scheduled organization check](https://github.com/Herbertofury/INTA/actions/workflows/knowledge-health.yml) recalculates age using the run date and preserves the complete report as an artifact. The weekday contribution task uses that evidence to prioritize work.
 

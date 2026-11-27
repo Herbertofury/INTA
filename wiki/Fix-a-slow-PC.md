@@ -4,6 +4,21 @@
 
 **Reproduce one slow task and check storage health before applying cleanup or startup changes.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Find the busy process** | **[Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer)** · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/ProcessExplorer.zip)** | Identify the process responsible for sustained CPU, memory or handle pressure before changing software. **Access:** Free Microsoft utility |
+| **Explain an I/O stall** | **[Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)** · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/ProcessMonitor.zip)** | Capture a short filtered trace of the reproducible file or registry delay. **Access:** Free Microsoft utility |
+| **Check storage warnings** | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | Check supported drive-health indicators before ordinary performance repair or stress tests. **Access:** Free and open source |
+| **Complete diagnostic kit** | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | Keep the full utility suite available when the next evidence-backed branch needs another component. **Access:** Free Microsoft utilities |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job
@@ -21,6 +36,7 @@
 | Separate storage warnings from ordinary software lag. | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** |
 | Collecting battery and sleep evidence before changing hardware or power policy. | **[powercfg](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) · **[Open built-in battery and sleep diagnostics](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** |
 | Measure a reproducible storage-performance problem on healthy media with a bounded test file. | **[DiskSpd](https://github.com/microsoft/diskspd)** · [Official page](https://github.com/microsoft/diskspd) · **[Download Windows x64/ARM64 tools · ZIP](https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP)** |
+| Use its supported disk analysis when the technician has the appropriate commercial entitlement. | **[WizTree](https://diskanalyzer.com/)** · [Official page](https://diskanalyzer.com/) · **[Download Windows portable · ZIP](https://diskanalyzer.com/files/wiztree_4_34_portable.zip)** |
 
 ### Find the cause
 

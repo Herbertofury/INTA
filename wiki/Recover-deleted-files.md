@@ -4,6 +4,19 @@
 
 **Stop writing to the affected disk and check the backup or recycle bin before attempting recovery.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Recover by file signature** | **[PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec)** · **[Download PhotoRec / TestDisk · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** | Recover recognizable file contents to a separate device when directory metadata cannot be used. **Access:** Free and open source |
+| **Undelete supported files** | **[TestDisk](https://www.cgsecurity.org/wiki/TestDisk)** · **[Download Windows x64 tools · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** | Try supported filesystem undelete on healthy media or a copy when retaining names is possible. **Access:** Free and open source |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

@@ -57,6 +57,8 @@ The Wiki uses meaningful emoji on scenario, category and quick-tool navigation. 
 
 **Two destinations, clearly named.** Keep the official product page beside the exact download action in Home, tool lists, details and recommended tool sections. File labels identify the platform and format. Built-in features offer their specific troubleshooter or instructions; Store, web, package and account-generated routes say what opens. Do not add a Details click to reach a download. Full tool details preserve alternate platforms and the original setup route.
 
+**Prominent choices follow the job.** The shared quick-start choices define the visible shortlist for each case. Render every choice as a compact flat row with a task role, a bold linked tool name, its official page and exact acquisition. Show the short access boundary next to the action. Keep detailed comparison evidence in the linked selection review. The same choices appear on the application Home, repository front page, Wiki Home, quick answer and initial job toolkit. Preserve each original primary acquisition and case-specific launch action. Choose prominence from authored task evidence, not the first full-catalog entry or a fixed quantity limit.
+
 Use [Mermaid](https://mermaid.js.org/) only where a branch, dependency, or sequence benefits from a diagram. Preserve plain labels and provide linked legends immediately afterward. A table is usually better for selecting a tool from a small set.
 
 ## Interaction and accessibility

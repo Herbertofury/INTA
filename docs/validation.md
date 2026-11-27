@@ -1,8 +1,24 @@
 # Technician workspace validation
 
-**Review date: November 26, 2026 (America/Denver).** The organized-growth update uses `0e70d341169fc5975fd98fc3e072b44e0285cd26` as its preservation baseline. Earlier releases remain below as history.
+**Review date: November 26, 2026 (America/Denver).** The current tool-choice update uses `25add684156762a495dbe4d4a336ad285ee8a40a` as its preservation baseline. Earlier releases remain below as history.
 
-## Current organized growth and specific fixes
+## Current visible, researched tool choices
+
+All **27 quick answers covering 22 service guides** now have an explicit selection disposition. **67 reviewed choices across 48 tools** appear in the same authored order on application Home, the default and selected-case working kits, the repository README, Wiki Home, Start Here, Free Tool Picks and the relevant answer pages. Four cases intentionally start with their existing operational checklist. There is no arbitrary result cap or collapsed choice group. Each tool choice has a role, an official page, an exact acquisition or launch action, a short free-use boundary, supporting sources and a review date.
+
+The malware first view directly exposes [Malwarebytes](https://www.malwarebytes.com/), [AdwCleaner](https://www.malwarebytes.com/adwcleaner) and [Bitdefender Antivirus Free](https://www.bitdefender.com/en-us/consumer/free-antivirus). The roles distinguish on-demand cleanup, adware removal and ongoing personal-PC protection. [Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download) and [Microsoft Defender Offline](https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline) retain their separate routes. The printer working kit keeps IP discovery and all **11 manufacturer driver links** ahead of its complete tool selection. [Scenario decisions](reference/scenario-tool-review-2026-11-26.md) and the [malware comparison](reference/malware-tool-review-2026-11-26.md) explain the current fit and limits.
+
+The catalog contains **133 tools and 294 acquisition actions**. All 133 tool identities, all 290 previous actions and all 95 previous working-kit entries remain; seven contextual additions bring the working kits to **102 entries**. The original job records, field notes, methods and diagram inputs remain byte-identical to the baseline. The [scenario preservation receipt](reference/tool-choice-preservation.json) and [catalog comparison](reference/tool-choice-catalog-checks.json) record these checks.
+
+The source review records successful responses for **76 unique scenario-evidence URLs**, with 31 current checks reused and 45 additional routes checked. The malware review includes 25 primary source checks, seven additional official reviews, eight bounded Windows executable responses and one bounded macOS installer response. Two publisher export-check routes remain explicitly labeled rather than represented as verified binaries. The [scenario source evidence](reference/tool-choice-source-checks.json), [per-scenario dispositions](reference/tool-choice-dispositions.json) and [malware research evidence](reference/tool-choice-malware-research.json) preserve the observations. These are source and delivery checks, not client-hardware testing or a universal comparative ranking.
+
+**54 tests passed; 116 generated outputs and all 85 Wiki files passed verification.** The Wiki audit covers 83 content pages, 361 registered names, 10,422 inline links and all 27 diagrams. The [build receipt](reference/tool-choice-build-checks.json) binds these results to the generated HTML hash. Selection records now participate in the existing 30-day review policy; the checker reports overdue choices without silently changing their dates.
+
+The [browser review](reference/tool-choice-browser-checks.json) verifies all 67 visible Home choices, all 22 default guides, all 27 selected-case routes, exact acquisition actions, complete retained procedures, search aliases, saved tools, checklist state, history, all 22 Markdown exports and the actual offline export. At 1366 by 900, the three requested malware tools and their official/download links are visible without scrolling. All printer manufacturer shortcuts remain in the first desktop view. Dark/light and 320/390px layouts retain every choice without document overflow; acquisition controls retain at least 44px height. The [rendered Markdown review](reference/tool-choice-markdown-checks.json) checks README, Wiki Home, Start Here and the full malware guide at 1280/390 widths; the local preview approximates GitHub styling and retains all links. Actual live deployment and Wiki readback are recorded separately against the published source revision.
+
+## Earlier organized growth and specific fixes
+
+This update used `0e70d341169fc5975fd98fc3e072b44e0285cd26` as its preservation baseline.
 
 The [Service map](https://herbertofury.github.io/INTA/#services) uses the existing **eight service areas** and shows every one of **22 guides** exactly once. **74 directly linked cases** add **222 concrete steps**, with symptoms, first actions, observable results, fallback routes, contextual tools and sources. Each case title is visible on the map and has an exact search destination. All 27 existing quick answers and the complete original procedures remain available.
 

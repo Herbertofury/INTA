@@ -4,6 +4,22 @@
 
 **Disconnect a suspected compromised PC from the network before scanning; use the [incident guide](https://github.com/Herbertofury/INTA/wiki/Contain-ransomware) if encryption is spreading.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **On-demand cleanup** | **[Malwarebytes](https://www.malwarebytes.com/)** · **[Download Windows installer · EXE](https://downloads.malwarebytes.com/file/mb-windows)** | Use an available Free Quick or Custom Scan for broad cleanup on an eligible personal device. **Access:** Free personal-use scans; business servicing rights differ. |
+| **Adware and hijackers** | **[Malwarebytes AdwCleaner](https://www.malwarebytes.com/adwcleaner)** · **[Download Windows portable cleaner · EXE](https://adwcleaner.malwarebytes.com/adwcleaner?channel=release)** | Target adware, unwanted software and browser hijackers, then review findings before quarantine. **Access:** Free for qualifying repair firms with ≤10 total staff; other business use needs rights. |
+| **Personal PC protection** | **[Bitdefender Antivirus Free](https://www.bitdefender.com/en-us/consumer/free-antivirus)** · **[Download Windows setup · EXE](https://download.bitdefender.com/windows/installer/en-us/bitdefender_avfree.exe)** | Choose it as the single ongoing antivirus on an eligible personal [Windows](https://www.microsoft.com/windows) PC. **Access:** Personal/non-commercial only; account required. |
+| **Portable second opinion** | **[Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download)** · **[Download Windows x64 scanner · EXE](https://go.microsoft.com/fwlink/?LinkId=212732)** | Download a fresh standalone scanner for a logged on-demand check without replacing existing protection. **Access:** Free Microsoft scanner; download expires after 10 days. |
+| **Scan outside [Windows](https://www.microsoft.com/windows)** | **[Microsoft Defender Offline](https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline)** · **[Run the built-in offline scan](https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline)** | Use the built-in offline scan when persistence warrants it and the supported platform and recovery prerequisites are met. **Access:** Included with supported [Windows](https://www.microsoft.com/windows) |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job
@@ -15,7 +31,9 @@
 | Use this for | Official tool + exact action |
 | --- | --- |
 | Remove viruses | **[Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download)** · [Official page](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download) · **[Download Windows x64 scanner · EXE](https://go.microsoft.com/fwlink/?LinkId=212732)** |
-| Focused adware and browser-hijacker cleanup. | **[Malwarebytes AdwCleaner](https://www.malwarebytes.com/adwcleaner)** · [Official page](https://www.malwarebytes.com/adwcleaner) · **[Download Windows cleaner · EXE](https://adwcleaner.malwarebytes.com/adwcleaner?channel=release)** |
+| Use an available Free Quick or Custom Scan for broad cleanup on an eligible personal device. | **[Malwarebytes](https://www.malwarebytes.com/)** · [Official page](https://www.malwarebytes.com/) · **[Download Windows installer · EXE](https://downloads.malwarebytes.com/file/mb-windows)** |
+| Focused adware and browser-hijacker cleanup. | **[Malwarebytes AdwCleaner](https://www.malwarebytes.com/adwcleaner)** · [Official page](https://www.malwarebytes.com/adwcleaner) · **[Download Windows portable cleaner · EXE](https://adwcleaner.malwarebytes.com/adwcleaner?channel=release)** |
+| Choose it as the single ongoing antivirus on an eligible personal [Windows](https://www.microsoft.com/windows) PC. | **[Bitdefender Antivirus Free](https://www.bitdefender.com/en-us/consumer/free-antivirus)** · [Official page](https://www.bitdefender.com/en-us/consumer/free-antivirus) · **[Download Windows setup · EXE](https://download.bitdefender.com/windows/installer/en-us/bitdefender_avfree.exe)** |
 | Inspect evidence-backed startup persistence. | **[Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/Autoruns.zip)** |
 | Offline scan when the documented platform and recovery requirements are met. | **[Microsoft Defender Offline](https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline)** · [Official page](https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline) · **[Run the built-in offline scan](https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline)** |
 | Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved. | **[Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) · **[Download Windows monitoring tools · ZIP](https://download.sysinternals.com/files/Sysmon.zip)** |
@@ -37,8 +55,8 @@
 
 ## ⚡ First three actions
 
-1. Record the symptoms and isolate affected connections; keep the existing real-time protection in place.
-2. On a trusted PC, download a fresh [Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download); transfer it safely and run a Full scan.
+1. Record the symptoms, isolate affected connections and keep a single approved real-time protector.
+2. Choose an authorized on-demand scan: [Malwarebytes](https://www.malwarebytes.com/) Free Quick/Custom Scan on an eligible personal PC, [AdwCleaner](https://www.malwarebytes.com/adwcleaner) for qualifying adware cleanup, or a fresh [Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download) Full scan.
 3. Save the scan log, review remaining symptoms and persistence, then follow the guide’s cleanup or rebuild decision.
 
 **[Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download)** · **[Download Windows x64 scanner · EXE](https://go.microsoft.com/fwlink/?LinkId=212732)**

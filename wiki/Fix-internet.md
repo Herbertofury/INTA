@@ -4,6 +4,20 @@
 
 **Check whether one device, one connection or the whole office has lost access.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Connection diagnostic** | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · **[Open network troubleshooting](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows)** | Run the supported network diagnostic after checking link, address, gateway and DNS. **Access:** Included with supported [Windows](https://www.microsoft.com/windows) |
+| **DNS and port checks** | **[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** | Use existing commands to separate name resolution, routing and a required TCP service. **Access:** Included with supported [Windows](https://www.microsoft.com/windows) |
+| **HTTP and TLS check** | **[curl](https://curl.se/)** · **[Use the Windows-included curl.exe](https://curl.se/windows/microsoft.html)** | Test the documented endpoint when ordinary connectivity works but an application request fails. **Access:** Included with supported [Windows](https://www.microsoft.com/windows) |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

@@ -4,6 +4,18 @@
 
 **Use this branch when crash evidence suggests memory instability, after recording firmware and overclock settings.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Bootable memory test** | **[Memtest86+](https://www.memtest.org/)** · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** | Test the documented hardware configuration and use module/slot comparisons to isolate repeatable errors. **Access:** Free and open source |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

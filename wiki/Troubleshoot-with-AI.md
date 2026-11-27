@@ -4,6 +4,19 @@
 
 **Prepare a redacted error, timeline and environment summary that your organization permits you to share.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Compare hypotheses** | **[ChatGPT](https://chatgpt.com/)** · **[Open ChatGPT](https://chatgpt.com/)** | Use approved redacted evidence to request competing explanations and one discriminating test. **Access:** Free tier available; account and organization limits apply. |
+| **Review a scoped script** | **[OpenAI Codex CLI](https://github.com/openai/codex)** · **[Download Windows x64 CLI · EXE](https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe)** | Review or test an authorized code change inside a bounded workspace with execution controls. **Access:** Open-source client; account/API usage terms apply. |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

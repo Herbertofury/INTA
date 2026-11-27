@@ -4,6 +4,20 @@
 
 **Record the stop code, failure time and recent hardware or driver changes before replacing components.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Analyze a crash dump** | **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · **[Download Windows debugger · APPINSTALLER](https://aka.ms/windbg/download)** | Inspect the recorded dump and stack before blaming a driver or replacing hardware. **Access:** Free Microsoft debugger |
+| **Test memory stability** | **[Memtest86+](https://www.memtest.org/)** · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** | Boot a memory test when evidence points to RAM or its configuration. **Access:** Free and open source |
+| **Observe temperatures** | **[Libre Hardware Monitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)** · **[Download Windows portable · ZIP](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/download/v0.9.6/LibreHardwareMonitor.zip)** | Log relevant sensors during the reproduced workload and validate labels against the hardware. **Access:** Free and open source |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

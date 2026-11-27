@@ -4,6 +4,19 @@
 
 **Search by the known filename or extension in approved local folders.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Find a local filename** | **[Everything](https://www.voidtools.com/)** · **[Download Windows x64 EXE](https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe)** | Search the approved local index by name, then confirm path and modification time. **Access:** Free desktop edition, including business use. |
+| **Licensed file search** | **[WizFile](https://antibody-software.com/wizfile/)** · **[Download Windows portable · ZIP](https://antibody-software.com/files/wizfile_3_15_portable.zip)** | Use the supported file-search workflow when its filters and the technician’s license fit the task. **Access:** Personal use is free; business use requires a license. |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job
@@ -21,6 +34,7 @@
 | Collecting battery and sleep evidence before changing hardware or power policy. | **[powercfg](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) · **[Open built-in battery and sleep diagnostics](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** |
 | Establishing recoverable, per-device administrator access during managed workstation setup and support planning. | **[Windows LAPS](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** · [Official page](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) · **[Configure built-in administrator password management](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** |
 | Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved. | **[Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) · **[Download Windows monitoring tools · ZIP](https://download.sysinternals.com/files/Sysmon.zip)** |
+| Use the supported file-search workflow when its filters and the technician’s license fit the task. | **[WizFile](https://antibody-software.com/wizfile/)** · [Official page](https://antibody-software.com/wizfile/) · **[Download Windows portable · ZIP](https://antibody-software.com/files/wizfile_3_15_portable.zip)** |
 
 ### Updates
 

@@ -10,6 +10,21 @@ Separate firmware, storage, encryption, and [Windows](https://www.microsoft.com/
 
 [Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/boot-recovery)
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **[Startup recovery](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery)** | **[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · **[Open recovery instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** | Use the least disruptive applicable recovery option after preserving data and recovery keys. **Access:** Included with supported [Windows](https://www.microsoft.com/windows) |
+| **Trusted repair media** | **[Windows 11 installation media](https://www.microsoft.com/software-download/windows11)** · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)** | Create official matching-architecture media on a working PC when local recovery is unavailable. **Access:** Media is free; [Windows](https://www.microsoft.com/windows) licensing remains separate. |
+| **Preserve unstable storage** | **[SystemRescue](https://www.system-rescue.org/)** · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** | Use a separate recovery environment for image-first work when the disk may be failing. **Access:** Free and open source |
+| **Eligible widespread failure** | **[Quick machine recovery](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)** · **[Check supported recovery setup](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)** | Check the configured cloud recovery option on a supported device when a matching widespread boot remedy exists. **Access:** Included on eligible, configured [Windows](https://www.microsoft.com/windows) devices. |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

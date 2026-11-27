@@ -14,12 +14,19 @@
       "qualityBasis": "Microsoft documents malware detection/removal, a detailed scan log and a 10-day download expiry; this is a workflow-based pick, not a comparative cleanup rating.",
       "evidenceUrls": [
         "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
-        "https://www.microsoft.com/en-us/security/blog/2012/03/22/free-pc-safety-scan/"
+        "https://www.microsoft.com/en-us/security/blog/2012/03/22/free-pc-safety-scan/",
+        "https://help.malwarebytes.com/hc/en-us/articles/49849786059035-Free-vs-Paid-Malwarebytes-Security-features",
+        "https://www.malwarebytes.com/eula",
+        "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner",
+        "https://www.malwarebytes.com/adwcleaner/eula",
+        "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+        "https://www.bitdefender.com/en-us/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions",
+        "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline"
       ],
       "firstStep": "Disconnect a suspected compromised PC from the network before scanning; use the incident guide if encryption is spreading.",
       "quickSteps": [
-        "Record the symptoms and isolate affected connections; keep the existing real-time protection in place.",
-        "On a trusted PC, download a fresh Microsoft Safety Scanner; transfer it safely and run a Full scan.",
+        "Record the symptoms, isolate affected connections and keep a single approved real-time protector.",
+        "Choose an authorized on-demand scan: Malwarebytes Free Quick/Custom Scan on an eligible personal PC, AdwCleaner for qualifying adware cleanup, or a fresh Microsoft Safety Scanner Full scan.",
         "Save the scan log, review remaining symptoms and persistence, then follow the guide’s cleanup or rebuild decision."
       ],
       "aliases": [
@@ -28,7 +35,66 @@
         "infected PC",
         "pop-ups"
       ],
-      "wikiPage": "Remove-viruses"
+      "wikiPage": "Remove-viruses",
+      "choices": [
+        {
+          "toolId": "malwarebytes",
+          "role": "On-demand cleanup",
+          "why": "Use an available Free Quick or Custom Scan for broad cleanup on an eligible personal device.",
+          "freeUse": "Free personal-use scans; business servicing rights differ.",
+          "evidenceUrls": [
+            "https://help.malwarebytes.com/hc/en-us/articles/49849786059035-Free-vs-Paid-Malwarebytes-Security-features",
+            "https://www.malwarebytes.com/eula"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "windows-installer"
+        },
+        {
+          "toolId": "adwcleaner",
+          "role": "Adware and hijackers",
+          "why": "Target adware, unwanted software and browser hijackers, then review findings before quarantine.",
+          "freeUse": "Free for qualifying repair firms with ≤10 total staff; other business use needs rights.",
+          "evidenceUrls": [
+            "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner",
+            "https://www.malwarebytes.com/adwcleaner/eula"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "windows-portable"
+        },
+        {
+          "toolId": "bitdefender-free",
+          "role": "Personal PC protection",
+          "why": "Choose it as the single ongoing antivirus on an eligible personal Windows PC.",
+          "freeUse": "Personal/non-commercial only; account required.",
+          "evidenceUrls": [
+            "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+            "https://www.bitdefender.com/en-us/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "windows-installer"
+        },
+        {
+          "toolId": "safety-scanner",
+          "role": "Portable second opinion",
+          "why": "Download a fresh standalone scanner for a logged on-demand check without replacing existing protection.",
+          "freeUse": "Free Microsoft scanner; download expires after 10 days.",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "windows-x64"
+        },
+        {
+          "toolId": "defender-offline",
+          "role": "Scan outside Windows",
+          "why": "Use the built-in offline scan when persistence warrants it and the supported platform and recovery prerequisites are met.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "fix-a-printer",
@@ -56,7 +122,54 @@
         "stuck print queue"
       ],
       "toolAction": "printer",
-      "wikiPage": "Fix-a-printer"
+      "wikiPage": "Fix-a-printer",
+      "choices": [
+        {
+          "toolId": "get-help",
+          "role": "Printer diagnostic",
+          "why": "Start the printer-specific diagnostic after confirming the physical device and connection.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "printer"
+        },
+        {
+          "toolId": "oem-drivers",
+          "role": "Exact-model driver",
+          "why": "Use the manufacturer/model/OS route when that driver path is supported; check protected print mode first.",
+          "freeUse": "Vendor downloads; match model, architecture and policy.",
+          "evidenceUrls": [
+            "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+            "https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "printer-drivers"
+        },
+        {
+          "toolId": "advanced-ip-scanner",
+          "role": "Find the printer IP",
+          "why": "Identify the printer on the authorized local subnet, then match its model or MAC to the queue.",
+          "freeUse": "Free Windows tool; scan only an approved subnet.",
+          "evidenceUrls": [
+            "https://www.advanced-ip-scanner.com/help/",
+            "https://www.advanced-ip-scanner.com/"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "naps2",
+          "role": "Scanner and ADF test",
+          "why": "Test flatbed, feeder and multipage output independently of the printer queue.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.naps2.com/",
+            "https://www.naps2.com/windows-scanning"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "fix-internet",
@@ -85,7 +198,43 @@
         "network connection"
       ],
       "toolAction": "network",
-      "wikiPage": "Fix-internet"
+      "wikiPage": "Fix-internet",
+      "choices": [
+        {
+          "toolId": "get-help",
+          "role": "Connection diagnostic",
+          "why": "Run the supported network diagnostic after checking link, address, gateway and DNS.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "network"
+        },
+        {
+          "toolId": "powershell",
+          "role": "DNS and port checks",
+          "why": "Use existing commands to separate name resolution, routing and a required TCP service.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname",
+            "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "windows-powershell"
+        },
+        {
+          "toolId": "curl",
+          "role": "HTTP and TLS check",
+          "why": "Test the documented endpoint when ordinary connectivity works but an application request fails.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://curl.se/docs/manpage.html"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "windows-inbox"
+        }
+      ]
     },
     {
       "id": "fix-email",
@@ -116,7 +265,20 @@
         "mailbox"
       ],
       "toolAction": "outlook",
-      "wikiPage": "Fix-email"
+      "wikiPage": "Fix-email",
+      "choices": [
+        {
+          "toolId": "get-help",
+          "role": "Classic Outlook diagnostic",
+          "why": "Choose the matching classic Outlook test after comparing webmail; new Outlook uses its separate branch.",
+          "freeUse": "Included diagnostics; email service licensing is separate.",
+          "evidenceUrls": [
+            "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "outlook"
+        }
+      ]
     },
     {
       "id": "failing-drive",
@@ -147,7 +309,42 @@
         "disk recovery",
         "recover data"
       ],
-      "wikiPage": "Recover-a-failing-drive"
+      "wikiPage": "Recover-a-failing-drive",
+      "choices": [
+        {
+          "toolId": "systemrescue",
+          "role": "Image the failing source",
+          "why": "Boot the ready recovery environment and use its GNU ddrescue workflow before repair writes.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.system-rescue.org/",
+            "https://www.system-rescue.org/System-tools/",
+            "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "testdisk",
+          "role": "Inspect the working copy",
+          "why": "Investigate partition or filesystem metadata on the preserved image or clone.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.cgsecurity.org/wiki/TestDisk",
+            "https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "photorec",
+          "role": "Recover file contents",
+          "why": "Carve file contents from the preserved copy when usable filesystem metadata is unavailable.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.cgsecurity.org/wiki/PhotoRec"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "deleted-files",
@@ -175,7 +372,29 @@
         "lost files",
         "deleted photos"
       ],
-      "wikiPage": "Recover-deleted-files"
+      "wikiPage": "Recover-deleted-files",
+      "choices": [
+        {
+          "toolId": "photorec",
+          "role": "Recover by file signature",
+          "why": "Recover recognizable file contents to a separate device when directory metadata cannot be used.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.cgsecurity.org/wiki/PhotoRec"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "testdisk",
+          "role": "Undelete supported files",
+          "why": "Try supported filesystem undelete on healthy media or a copy when retaining names is possible.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.cgsecurity.org/wiki/TestDisk:_undelete_file_for_NTFS"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "slow-pc",
@@ -205,7 +424,49 @@
         "high CPU",
         "slow startup"
       ],
-      "wikiPage": "Fix-a-slow-PC"
+      "wikiPage": "Fix-a-slow-PC",
+      "choices": [
+        {
+          "toolId": "process-explorer",
+          "role": "Find the busy process",
+          "why": "Identify the process responsible for sustained CPU, memory or handle pressure before changing software.",
+          "freeUse": "Free Microsoft utility",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "procmon",
+          "role": "Explain an I/O stall",
+          "why": "Capture a short filtered trace of the reproducible file or registry delay.",
+          "freeUse": "Free Microsoft utility",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "crystaldiskinfo",
+          "role": "Check storage warnings",
+          "why": "Check supported drive-health indicators before ordinary performance repair or stress tests.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://crystalmark.info/en/software/crystaldiskinfo/"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "sysinternals",
+          "role": "Complete diagnostic kit",
+          "why": "Keep the full utility suite available when the next evidence-backed branch needs another component.",
+          "freeUse": "Free Microsoft utilities",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/sysinternals/downloads/"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "remote-help",
@@ -232,7 +493,50 @@
         "remote desktop",
         "attended support"
       ],
-      "wikiPage": "Help-remotely"
+      "wikiPage": "Help-remotely",
+      "choices": [
+        {
+          "toolId": "quick-assist",
+          "role": "Attended Windows help",
+          "why": "Use a short-lived approved session with a user present to share and authorize control.",
+          "freeUse": "Included app; helper Microsoft account required.",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "rustdesk",
+          "role": "Cross-platform support",
+          "why": "Use the approved client/server configuration for cross-platform desktop support.",
+          "freeUse": "Open-source components; Pro and hosting costs vary.",
+          "evidenceUrls": [
+            "https://rustdesk.com/docs/en/"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "meshcentral",
+          "role": "Existing managed fleet",
+          "why": "Use the organization’s existing server and enrolled device for managed access.",
+          "freeUse": "Open source; hosting and operation are separate.",
+          "evidenceUrls": [
+            "https://github.com/Ylianst/MeshCentral"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "remmina",
+          "role": "Linux remote client",
+          "why": "Connect a Linux technician workstation to an already configured RDP, VNC or SSH service.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.remmina.org/how-to-install-remmina/",
+            "https://remmina.org/"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "fix-windows-updates",
@@ -261,7 +565,51 @@
         "update loop"
       ],
       "toolAction": "update",
-      "wikiPage": "Fix-Windows-updates"
+      "wikiPage": "Fix-Windows-updates",
+      "choices": [
+        {
+          "toolId": "get-help",
+          "role": "Update diagnostic",
+          "why": "Start with the current Windows Update diagnostic and record the exact error.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "update"
+        },
+        {
+          "toolId": "setupdiag",
+          "role": "Explain an upgrade rollback",
+          "why": "Analyze preserved setup logs for the failed upgrade phase and matching failure rule.",
+          "freeUse": "Free Microsoft diagnostic",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "dism",
+          "role": "Component-store repair",
+          "why": "Use the supported servicing workflow when update evidence points to component-store damage.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "windows-recovery",
+          "role": "Same-version reinstall",
+          "why": "Use the Windows Update repair reinstall if available and the machine can still run Windows.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "repair-reinstall"
+        }
+      ]
     },
     {
       "id": "windows-repair",
@@ -288,7 +636,40 @@
         "SFC",
         "component store"
       ],
-      "wikiPage": "Repair-Windows-files"
+      "wikiPage": "Repair-Windows-files",
+      "choices": [
+        {
+          "toolId": "dism",
+          "role": "Repair component store",
+          "why": "Repair the supported running or explicitly identified offline image using a matching source.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "sfc",
+          "role": "Verify protected files",
+          "why": "Check and repair protected system files after the component store is healthy.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "windows-recovery",
+          "role": "Same-version reinstall",
+          "why": "Use the supported current-version repair path when ordinary servicing does not resolve the fault.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "repair-reinstall"
+        }
+      ]
     },
     {
       "id": "fix-boot-failure",
@@ -317,7 +698,49 @@
         "black screen at boot",
         "BitLocker recovery"
       ],
-      "wikiPage": "Fix-a-PC-that-will-not-boot"
+      "wikiPage": "Fix-a-PC-that-will-not-boot",
+      "choices": [
+        {
+          "toolId": "windows-recovery",
+          "role": "Startup recovery",
+          "why": "Use the least disruptive applicable recovery option after preserving data and recovery keys.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "microsoft-windows11-media",
+          "role": "Trusted repair media",
+          "why": "Create official matching-architecture media on a working PC when local recovery is unavailable.",
+          "freeUse": "Media is free; Windows licensing remains separate.",
+          "evidenceUrls": [
+            "https://www.microsoft.com/software-download/windows11"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "systemrescue",
+          "role": "Preserve unstable storage",
+          "why": "Use a separate recovery environment for image-first work when the disk may be failing.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.system-rescue.org/manual/"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "quick-machine-recovery",
+          "role": "Eligible widespread failure",
+          "why": "Check the configured cloud recovery option on a supported device when a matching widespread boot remedy exists.",
+          "freeUse": "Included on eligible, configured Windows devices.",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "diagnose-crashes",
@@ -345,7 +768,39 @@
         "random restart",
         "PC crash"
       ],
-      "wikiPage": "Diagnose-crashes"
+      "wikiPage": "Diagnose-crashes",
+      "choices": [
+        {
+          "toolId": "windbg",
+          "role": "Analyze a crash dump",
+          "why": "Inspect the recorded dump and stack before blaming a driver or replacing hardware.",
+          "freeUse": "Free Microsoft debugger",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "memtest86plus",
+          "role": "Test memory stability",
+          "why": "Boot a memory test when evidence points to RAM or its configuration.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://github.com/memtest86plus/memtest86plus"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "libre-hardware-monitor",
+          "role": "Observe temperatures",
+          "why": "Log relevant sensors during the reproduced workload and validate labels against the hardware.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "disk-space",
@@ -373,7 +828,30 @@
         "storage cleanup",
         "low disk space"
       ],
-      "wikiPage": "Free-disk-space"
+      "wikiPage": "Free-disk-space",
+      "choices": [
+        {
+          "toolId": "windirstat",
+          "role": "Free capacity map",
+          "why": "Inspect directory and file-type usage on healthy storage before choosing a supported cleanup.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://github.com/windirstat/windirstat"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "wiztree",
+          "role": "Licensed capacity analysis",
+          "why": "Use its supported disk analysis when the technician has the appropriate commercial entitlement.",
+          "freeUse": "Personal use is free; business use requires a license.",
+          "evidenceUrls": [
+            "https://diskanalyzer.com/",
+            "https://diskanalyzer.com/eula"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "clone-a-drive",
@@ -402,7 +880,39 @@
         "disk clone",
         "replace hard drive"
       ],
-      "wikiPage": "Clone-or-move-a-drive"
+      "wikiPage": "Clone-or-move-a-drive",
+      "choices": [
+        {
+          "toolId": "rescuezilla",
+          "role": "Graphical image or clone",
+          "why": "Use a guided source/destination workflow for healthy storage after checking disk identity.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://rescuezilla.com/help"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "clonezilla",
+          "role": "Advanced image workflow",
+          "why": "Use the documented imaging or cloning mode when its filesystem and destination constraints fit.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://clonezilla.org/clonezilla-live-doc.php"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "robocopy",
+          "role": "Files-only migration",
+          "why": "Copy the agreed file trees with logs when an entire disk image is unnecessary.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "file-backup",
@@ -430,7 +940,41 @@
         "verify backup",
         "restore files"
       ],
-      "wikiPage": "Restore-a-file-backup"
+      "wikiPage": "Restore-a-file-backup",
+      "choices": [
+        {
+          "toolId": "restic",
+          "role": "Restore a restic repository",
+          "why": "Use its native snapshot and restore commands for an existing restic backup.",
+          "freeUse": "Free software; repository storage is separate.",
+          "evidenceUrls": [
+            "https://restic.readthedocs.io/en/stable/050_restore.html",
+            "https://restic.readthedocs.io/en/stable/045_working_with_repos.html"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "kopia",
+          "role": "Restore a Kopia snapshot",
+          "why": "Open the existing repository and restore the selected snapshot into a separate location.",
+          "freeUse": "Free software; repository storage is separate.",
+          "evidenceUrls": [
+            "https://kopia.io/docs/"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "veeam-agent",
+          "role": "Restore an agent backup",
+          "why": "Use the matching agent recovery workflow for an existing supported Windows backup.",
+          "freeUse": "Free edition exists; service-provider terms differ.",
+          "evidenceUrls": [
+            "https://helpcenter.veeam.com/docs/agentforwindows/userguide/files_restore.html",
+            "https://www.veeam.com/legal/licensing-policy.html"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "boot-usb",
@@ -458,7 +1002,49 @@
         "installation USB",
         "bootable media"
       ],
-      "wikiPage": "Make-a-boot-USB"
+      "wikiPage": "Make-a-boot-USB",
+      "choices": [
+        {
+          "toolId": "rufus",
+          "role": "Write one official ISO",
+          "why": "Write the selected supported image to the verified USB and test the actual target boot.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://github.com/pbatard/rufus/wiki/FAQ"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "ventoy",
+          "role": "Maintain multiple ISOs",
+          "why": "Install the multiboot loader on the verified USB and keep each image independently sourced and tested.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.ventoy.net/en/doc_start.html"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "microsoft-windows11-media",
+          "role": "Official Windows media",
+          "why": "Obtain the supported Windows installer or media-creation route for the target architecture.",
+          "freeUse": "Media is free; Windows licensing remains separate.",
+          "evidenceUrls": [
+            "https://www.microsoft.com/software-download/windows11"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "systemrescue",
+          "role": "Ready recovery ISO",
+          "why": "Add an independent recovery environment when the job requires disk imaging or recovery.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.system-rescue.org/manual/"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "set-up-a-new-pc",
@@ -486,7 +1072,39 @@
         "PC setup",
         "workstation deployment"
       ],
-      "wikiPage": "Set-up-a-new-PC"
+      "wikiPage": "Set-up-a-new-PC",
+      "choices": [
+        {
+          "toolId": "winget",
+          "role": "Approved application setup",
+          "why": "Identify exact packages and sources before installing the agreed applications.",
+          "freeUse": "Included App Installer; each app keeps its own license.",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows/package-manager/winget/"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "oem-drivers",
+          "role": "Model-specific drivers",
+          "why": "Use the device manufacturer’s supported drivers and firmware for the exact model and OS.",
+          "freeUse": "Vendor downloads; support terms vary.",
+          "evidenceUrls": [
+            "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "robocopy",
+          "role": "Move agreed user files",
+          "why": "Copy the approved data with an inspectable log and verify it as the target user.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "maintain-a-pc",
@@ -513,7 +1131,39 @@
         "PC health check",
         "application updates"
       ],
-      "wikiPage": "Maintain-a-PC"
+      "wikiPage": "Maintain-a-PC",
+      "choices": [
+        {
+          "toolId": "winget",
+          "role": "Review app updates",
+          "why": "Review package identity, source and available upgrades before approved changes.",
+          "freeUse": "Included App Installer; each app keeps its own license.",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/windows/package-manager/winget/"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "crystaldiskinfo",
+          "role": "Review storage health",
+          "why": "Check supported health indicators and route new warnings to recovery before cleanup.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://crystalmark.info/en/software/crystaldiskinfo/"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "windirstat",
+          "role": "Explain capacity use",
+          "why": "Identify where space went on healthy storage without assuming large files are disposable.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://github.com/windirstat/windirstat"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "start-a-repair",
@@ -541,7 +1191,8 @@
         "new service job"
       ],
       "guideOnly": true,
-      "wikiPage": "Start-a-repair"
+      "wikiPage": "Start-a-repair",
+      "choices": []
     },
     {
       "id": "contain-ransomware",
@@ -569,7 +1220,8 @@
         "active compromise"
       ],
       "guideOnly": true,
-      "wikiPage": "Contain-ransomware"
+      "wikiPage": "Contain-ransomware",
+      "choices": []
     },
     {
       "id": "recover-an-outage",
@@ -598,7 +1250,8 @@
         "service outage"
       ],
       "guideOnly": true,
-      "wikiPage": "Recover-an-office-outage"
+      "wikiPage": "Recover-an-office-outage",
+      "choices": []
     },
     {
       "id": "repair-domain-trust",
@@ -626,7 +1279,20 @@
         "secure channel"
       ],
       "toolAction": "windows-powershell",
-      "wikiPage": "Repair-domain-sign-in"
+      "wikiPage": "Repair-domain-sign-in",
+      "choices": [
+        {
+          "toolId": "powershell",
+          "role": "Member secure-channel test",
+          "why": "Use existing Windows PowerShell 5.1 on the domain member after DNS, time and connectivity checks.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "windows-powershell"
+        }
+      ]
     },
     {
       "id": "troubleshoot-with-ai",
@@ -654,7 +1320,31 @@
         "explain an error",
         "diagnostic hypotheses"
       ],
-      "wikiPage": "Troubleshoot-with-AI"
+      "wikiPage": "Troubleshoot-with-AI",
+      "choices": [
+        {
+          "toolId": "chatgpt",
+          "role": "Compare hypotheses",
+          "why": "Use approved redacted evidence to request competing explanations and one discriminating test.",
+          "freeUse": "Free tier available; account and organization limits apply.",
+          "evidenceUrls": [
+            "https://help.openai.com/en/articles/9275245-using-chatgpt-s-free-tier-faq",
+            "https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "codex-cli",
+          "role": "Review a scoped script",
+          "why": "Review or test an authorized code change inside a bounded workspace with execution controls.",
+          "freeUse": "Open-source client; account/API usage terms apply.",
+          "evidenceUrls": [
+            "https://github.com/openai/codex",
+            "https://developers.openai.com/codex/security/"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "complete-a-handoff",
@@ -683,7 +1373,8 @@
         "offboarding"
       ],
       "guideOnly": true,
-      "wikiPage": "Finish-the-job-and-hand-over"
+      "wikiPage": "Finish-the-job-and-hand-over",
+      "choices": []
     },
     {
       "id": "find-a-file",
@@ -712,7 +1403,31 @@
         "missing document",
         "filename"
       ],
-      "wikiPage": "Find-a-file"
+      "wikiPage": "Find-a-file",
+      "choices": [
+        {
+          "toolId": "everything",
+          "role": "Find a local filename",
+          "why": "Search the approved local index by name, then confirm path and modification time.",
+          "freeUse": "Free desktop edition, including business use.",
+          "evidenceUrls": [
+            "https://www.voidtools.com/faq/",
+            "https://www.voidtools.com/License.txt"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "wizfile",
+          "role": "Licensed file search",
+          "why": "Use the supported file-search workflow when its filters and the technician’s license fit the task.",
+          "freeUse": "Personal use is free; business use requires a license.",
+          "evidenceUrls": [
+            "https://antibody-software.com/wizfile/quick-start",
+            "https://antibody-software.com/wizfile/eula"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "inspect-network-traffic",
@@ -740,7 +1455,41 @@
         "DNS packets",
         "TCP troubleshooting"
       ],
-      "wikiPage": "Inspect-network-traffic"
+      "wikiPage": "Inspect-network-traffic",
+      "choices": [
+        {
+          "toolId": "wireshark",
+          "role": "Protocol evidence",
+          "why": "Capture the smallest authorized exchange that reproduces the unresolved failure.",
+          "freeUse": "Free; Windows capture-driver terms apply.",
+          "evidenceUrls": [
+            "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIntroduction.html",
+            "https://npcap.com/guide/index.html"
+          ],
+          "reviewedAt": "2026-11-26"
+        },
+        {
+          "toolId": "curl",
+          "role": "HTTP/TLS comparison",
+          "why": "Inspect the specific HTTP or TLS failure when a full packet capture is unnecessary.",
+          "freeUse": "Included with supported Windows",
+          "evidenceUrls": [
+            "https://curl.se/docs/manpage.html"
+          ],
+          "reviewedAt": "2026-11-26",
+          "actionId": "windows-inbox"
+        },
+        {
+          "toolId": "mtr",
+          "role": "Path-loss comparison",
+          "why": "Compare a reproducible path problem from a supported Linux or macOS bench or a configured WSL environment.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://github.com/traviscross/mtr"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     },
     {
       "id": "suspected-ram-fault",
@@ -768,7 +1517,20 @@
         "memory errors",
         "memory diagnostics"
       ],
-      "wikiPage": "Test-memory"
+      "wikiPage": "Test-memory",
+      "choices": [
+        {
+          "toolId": "memtest86plus",
+          "role": "Bootable memory test",
+          "why": "Test the documented hardware configuration and use module/slot comparisons to isolate repeatable errors.",
+          "freeUse": "Free and open source",
+          "evidenceUrls": [
+            "https://www.memtest.org/",
+            "https://github.com/memtest86plus/memtest86plus"
+          ],
+          "reviewedAt": "2026-11-26"
+        }
+      ]
     }
   ]
 }

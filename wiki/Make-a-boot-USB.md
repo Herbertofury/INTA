@@ -4,6 +4,21 @@
 
 **Choose the official ISO and identify a USB drive that may be erased.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Write one official ISO** | **[Rufus](https://rufus.ie/)** · **[Download Windows x64 portable · EXE](https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe)** | Write the selected supported image to the verified USB and test the actual target boot. **Access:** Free and open source |
+| **Maintain multiple ISOs** | **[Ventoy](https://www.ventoy.net/)** · **[Download Windows package · ZIP](https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip)** | Install the multiboot loader on the verified USB and keep each image independently sourced and tested. **Access:** Free and open source |
+| **Official [Windows](https://www.microsoft.com/windows) media** | **[Windows 11 installation media](https://www.microsoft.com/software-download/windows11)** · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)** | Obtain the supported [Windows](https://www.microsoft.com/windows) installer or media-creation route for the target architecture. **Access:** Media is free; [Windows](https://www.microsoft.com/windows) licensing remains separate. |
+| **Ready recovery ISO** | **[SystemRescue](https://www.system-rescue.org/)** · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** | Add an independent recovery environment when the job requires disk imaging or recovery. **Access:** Free and open source |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

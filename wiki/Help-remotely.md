@@ -4,6 +4,21 @@
 
 **Confirm the user and support technician through the existing support channel before sharing a session code.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Attended [Windows](https://www.microsoft.com/windows) help** | **[Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)** · **[Get Quick Assist in Microsoft Store](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** | Use a short-lived approved session with a user present to share and authorize control. **Access:** Included app; helper Microsoft account required. |
+| **Cross-platform support** | **[RustDesk](https://rustdesk.com/)** · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)** | Use the approved client/server configuration for cross-platform desktop support. **Access:** Open-source components; Pro and hosting costs vary. |
+| **Existing managed fleet** | **[MeshCentral](https://meshcentral.com/)** · **[Open server installation instructions](https://github.com/Ylianst/MeshCentral#installation)** | Use the organization’s existing server and enrolled device for managed access. **Access:** Open source; hosting and operation are separate. |
+| **[Linux](https://www.kernel.org/) remote client** | **[Remmina](https://remmina.org/)** · **[Install Linux package · Flatpak or distribution](https://www.remmina.org/how-to-install-remmina/)** | Connect a [Linux](https://www.kernel.org/) technician workstation to an already configured RDP, VNC or SSH service. **Access:** Free and open source |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

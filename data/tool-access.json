@@ -10,10 +10,11 @@
         "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
         "evidenceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
         "checkedAt": "2026-11-26",
-        "platform": "Windows"
+        "platform": "Windows",
+        "id": "builtin-scan"
       },
       "alternates": [],
-      "note": "Included with supported Windows; no separate installer."
+      "note": "Included on supported Windows x64/x86; requires enabled recovery environment. Windows on ARM and Windows Server are excluded."
     },
     "dism": {
       "officialUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
@@ -156,7 +157,17 @@
         "evidenceUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
         "checkedAt": "2026-11-26"
       },
-      "alternates": [],
+      "alternates": [
+        {
+          "id": "printer-drivers",
+          "kind": "web",
+          "label": "Find the correct printer driver",
+          "url": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+          "evidenceUrl": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows"
+        }
+      ],
       "note": "Choose the device manufacturer, exact model and operating system before downloading firmware or drivers."
     },
     "rustdesk": {
@@ -940,7 +951,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "architecture": "x64",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-x64"
       },
       "alternates": [
         {
@@ -949,6 +961,17 @@
           "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
           "evidenceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "windows-x86",
+          "kind": "file",
+          "label": "Download Windows x86 scanner · EXE",
+          "url": "https://go.microsoft.com/fwlink/?LinkId=212733",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "x86",
+          "format": "EXE"
         }
       ],
       "note": "Download a fresh copy for each job; the scanner expires after ten days."
@@ -957,12 +980,13 @@
       "officialUrl": "https://www.malwarebytes.com/adwcleaner",
       "primary": {
         "kind": "file",
-        "label": "Download Windows cleaner · EXE",
+        "label": "Download Windows portable cleaner · EXE",
         "url": "https://adwcleaner.malwarebytes.com/adwcleaner?channel=release",
         "evidenceUrl": "https://www.malwarebytes.com/adwcleaner",
         "checkedAt": "2026-11-26",
         "platform": "Windows",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-portable"
       },
       "alternates": [
         {
@@ -972,7 +996,8 @@
           "evidenceUrl": "https://www.malwarebytes.com/adwcleaner",
           "checkedAt": "2026-11-26"
         }
-      ]
+      ],
+      "note": "Portable targeted cleanup; inspect unwanted-software selections before quarantine and restart when requested."
     },
     "eset-online-scanner": {
       "officialUrl": "https://www.eset.com/us/home/online-scanner/",
@@ -984,7 +1009,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "architecture": "x64",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-x64"
       },
       "alternates": [
         {
@@ -993,8 +1019,20 @@
           "url": "https://www.eset.com/us/home/online-scanner/",
           "evidenceUrl": "https://www.eset.com/us/home/online-scanner/",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "windows-x86",
+          "kind": "file",
+          "label": "Download Windows x86 scanner · EXE",
+          "url": "https://download.eset.com/com/eset/tools/online_scanner/latest/esetonlinescanner.exe",
+          "evidenceUrl": "https://www.eset.com/us/home/online-scanner/",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "x86",
+          "format": "EXE"
         }
-      ]
+      ],
+      "note": "Initial detection-module update requires internet; this is an on-demand scanner, not continuous protection."
     },
     "wiztree": {
       "officialUrl": "https://diskanalyzer.com/",
@@ -1823,12 +1861,13 @@
       "officialUrl": "https://www.malwarebytes.com/",
       "primary": {
         "kind": "file",
-        "label": "Download Windows EXE",
+        "label": "Download Windows installer · EXE",
         "url": "https://downloads.malwarebytes.com/file/mb-windows",
         "evidenceUrl": "https://www.malwarebytes.com/mwb-download/thankyou",
         "checkedAt": "2026-11-26",
         "platform": "Windows",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-installer"
       },
       "alternates": [
         {
@@ -1837,9 +1876,19 @@
           "url": "https://www.malwarebytes.com/mwb-download",
           "evidenceUrl": "https://www.malwarebytes.com/mwb-download",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "macos-installer",
+          "kind": "file",
+          "label": "Download macOS installer · PKG",
+          "url": "https://downloads.malwarebytes.com/file/mb-mac",
+          "evidenceUrl": "https://help.malwarebytes.com/hc/en-us/articles/31589208690715-Install-Malwarebytes-for-Mac",
+          "checkedAt": "2026-11-26",
+          "platform": "macOS",
+          "format": "PKG"
         }
       ],
-      "note": "The Windows bootstrapper downloads the selected edition. Other platforms remain available from All downloads / setup."
+      "note": "The Windows bootstrapper downloads setup components; a separate macOS package is available. Free scans, paid protection and commercial servicing rights differ."
     },
     "hitmanpro": {
       "officialUrl": "https://www.sophos.com/en-us/products/hitmanpro",
@@ -1851,7 +1900,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "architecture": "x64",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-x64"
       },
       "alternates": [
         {
@@ -1862,7 +1912,8 @@
           "checkedAt": "2026-11-26",
           "platform": "Windows",
           "architecture": "x86",
-          "format": "EXE"
+          "format": "EXE",
+          "id": "windows-x86"
         },
         {
           "kind": "release-page",
@@ -1878,13 +1929,14 @@
       "officialUrl": "https://www.emsisoft.com/en/emergency-kit/",
       "primary": {
         "kind": "file",
-        "label": "Download Windows EXE",
+        "label": "Download Windows x64 kit · EXE",
         "url": "https://dl.emsisoft.com/EmsisoftEmergencyKit.exe",
         "evidenceUrl": "https://www.emsisoft.com/en/emergency-kit/download/",
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "architecture": "x64",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-x64"
       },
       "alternates": [
         {
@@ -1894,18 +1946,20 @@
           "evidenceUrl": "https://www.emsisoft.com/en/emergency-kit/",
           "checkedAt": "2026-11-26"
         }
-      ]
+      ],
+      "note": "The package extracts a portable toolkit. Free private use and licensed business remediation have different rights."
     },
     "bitdefender-free": {
       "officialUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
       "primary": {
         "kind": "file",
-        "label": "Download Windows EXE",
+        "label": "Download Windows setup · EXE",
         "url": "https://download.bitdefender.com/windows/installer/en-us/bitdefender_avfree.exe",
         "evidenceUrl": "https://www.bitdefender.com/en-us/consumer/thank-you",
         "checkedAt": "2026-11-26",
         "platform": "Windows",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-installer"
       },
       "alternates": [
         {
@@ -1915,7 +1969,8 @@
           "evidenceUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
           "checkedAt": "2026-11-26"
         }
-      ]
+      ],
+      "note": "Online setup for personal/non-commercial ongoing protection; a Bitdefender account is required."
     },
     "freefilesync": {
       "officialUrl": "https://freefilesync.org/",

@@ -4,6 +4,20 @@
 
 **Use packet capture only after basic link, address, gateway and DNS checks have narrowed the fault.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Protocol evidence** | **[Wireshark](https://www.wireshark.org/)** · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)** | Capture the smallest authorized exchange that reproduces the unresolved failure. **Access:** Free; [Windows](https://www.microsoft.com/windows) capture-driver terms apply. |
+| **HTTP/TLS comparison** | **[curl](https://curl.se/)** · **[Use the Windows-included curl.exe](https://curl.se/windows/microsoft.html)** | Inspect the specific HTTP or TLS failure when a full packet capture is unnecessary. **Access:** Included with supported [Windows](https://www.microsoft.com/windows) |
+| **Path-loss comparison** | **[mtr](https://www.bitwizard.nl/mtr/)** · **[Install a Linux/WSL distribution package](https://github.com/traviscross/mtr#using-mtr-on-windows)** | Compare a reproducible path problem from a supported [Linux](https://www.kernel.org/) or [macOS](https://support.apple.com/macos) bench or a configured WSL environment. **Access:** Free and open source |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

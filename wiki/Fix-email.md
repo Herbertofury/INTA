@@ -4,6 +4,18 @@
 
 **Check webmail and identify whether the affected app is classic [Outlook](https://support.microsoft.com/outlook) or new [Outlook](https://support.microsoft.com/outlook) before changing a profile.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Classic [Outlook](https://support.microsoft.com/outlook) diagnostic** | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)** | Choose the matching classic [Outlook](https://support.microsoft.com/outlook) test after comparing webmail; new [Outlook](https://support.microsoft.com/outlook) uses its separate branch. **Access:** Included diagnostics; email service licensing is separate. |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job

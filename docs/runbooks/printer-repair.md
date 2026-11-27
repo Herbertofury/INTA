@@ -11,6 +11,21 @@ Isolate printer hardware, network reachability, queue state, driver, and applica
 
 [Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/printer-repair)
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Printer diagnostic** | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · **[Start the printer troubleshooter](https://aka.ms/PrinterConnection)** | Start the printer-specific diagnostic after confirming the physical device and connection. **Access:** Included with supported [Windows](https://www.microsoft.com/windows) |
+| **Exact-model driver** | **[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · **[Find the correct printer driver](https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers)** | Use the manufacturer/model/OS route when that driver path is supported; check protected print mode first. **Access:** Vendor downloads; match model, architecture and policy. |
+| **Find the printer IP** | **[Advanced IP Scanner](https://www.advanced-ip-scanner.com/)** · **[Download Windows scanner · EXE](https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe)** | Identify the printer on the authorized local subnet, then match its model or MAC to the queue. **Access:** Free [Windows](https://www.microsoft.com/windows) tool; scan only an approved subnet. |
+| **Scanner and ADF test** | **[NAPS2](https://www.naps2.com/)** · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)** | Test flatbed, feeder and multipage output independently of the printer queue. **Access:** Free and open source |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job
@@ -29,6 +44,7 @@ Isolate printer hardware, network reachability, queue state, driver, and applica
 | Test scanner, feeder and multipage PDF output. | **[NAPS2](https://www.naps2.com/)** · [Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)** |
 | Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly. | **[USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html)** · [Official page](https://www.uwe-sieber.de/usbtreeview_e.html) · **[Download Windows x64 portable · ZIP](https://www.uwe-sieber.de/files/UsbTreeView_x64.zip)** |
 | Testing the same known-good PDF through an independent renderer to separate an application-specific print fault from the queue or printer. | **[SumatraPDF](https://www.sumatrapdfreader.org/)** · [Official page](https://www.sumatrapdfreader.org/) · **[Download Windows x64 portable · ZIP](https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64.zip)** |
+| Use the manufacturer/model/OS route when that driver path is supported; check protected print mode first. | **[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct printer driver](https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers)** |
 
 ### Before driver changes
 
@@ -164,6 +180,7 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
 | **[USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html)** · [Official page](https://www.uwe-sieber.de/usbtreeview_e.html) · **[Download Windows x64 portable · ZIP](https://www.uwe-sieber.de/files/UsbTreeView_x64.zip)** | Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly. | [Windows](https://www.microsoft.com/windows); Freeware; publisher explicitly permits use in commercial environments | [Open guide](https://www.uwe-sieber.de/usbtreeview_e.html) |
 | **[SumatraPDF](https://www.sumatrapdfreader.org/)** · [Official page](https://www.sumatrapdfreader.org/) · **[Download Windows x64 portable · ZIP](https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64.zip)** | Testing the same known-good PDF through an independent renderer to separate an application-specific print fault from the queue or printer. | [Windows](https://www.microsoft.com/windows); Free and open source under GPL-3.0 | [Open guide](https://www.sumatrapdfreader.org/docs/SumatraPDF-documentation) |
+| **[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct printer driver](https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers)** | Use the manufacturer/model/OS route when that driver path is supported; check protected print mode first. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Vendor downloads; support terms vary | [Open guide](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) |
 
 <a id="walkthrough"></a>
 
@@ -300,7 +317,7 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 
 **Start here:** Check Settings > System > About and the active [Windows protected print mode](https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode) policy.
 
-**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct printer driver](https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers)**
 
 **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Start the printer troubleshooter](https://aka.ms/PrinterConnection)**
 
@@ -348,7 +365,7 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 
 **[NAPS2](https://www.naps2.com/)** · [Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)**
 
-**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct printer driver](https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers)**
 
 1. In [NAPS2](https://www.naps2.com/) choose New Profile > Choose device and inspect the supported WIA, TWAIN and eSCL choices.
 2. Use the correct manufacturer scan driver for WIA/TWAIN, or eSCL for a compatible network scanner; do not assume a working print driver supplies scanning.

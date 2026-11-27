@@ -230,8 +230,15 @@ main { min-height: calc(100vh - 125px); padding: 30px 32px 48px; outline: none; 
 .job-priority-tool h4 { margin: 0 0 4px; font-size: 16px; font-weight: 600; line-height: 1.45; }
 .job-priority-tool h4 a { color: var(--accent); }
 .job-priority-tool .workspace-access { flex-direction: column; gap: 0; }
+.job-priority-tool .choice-role { margin: 0 0 3px; }
+.job-priority-tool .choice-use { margin: 0 0 4px; }
 .job-driver-shortcuts { margin: 18px 0 23px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
 .job-driver-shortcuts > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
+.job-driver-shortcuts > .driver-discovery-tools { display: block; padding: 8px 0 10px; border-bottom: 1px solid var(--line-soft); }
+.driver-discovery-tool h4 { margin-bottom: 3px; font-size: 16px; line-height: 1.45; }
+.driver-discovery-tool h4 a { color: var(--accent); }
+.driver-discovery-tool .choice-use { margin-bottom: 2px; }
+.driver-discovery-access { gap: 0 16px; }
 .driver-shortcut { display: flex; align-items: center; justify-content: space-between; gap: 7px; min-height: 44px; padding: 6px 0; color: var(--accent); font-size: 14px; font-weight: 500; line-height: 1.45; overflow-wrap: anywhere; }
 .driver-shortcut svg { width: 13px; height: 13px; flex: 0 0 auto; }
 .job-resource-group { margin-top: 21px; }
@@ -303,6 +310,7 @@ main { min-height: calc(100vh - 125px); padding: 30px 32px 48px; outline: none; 
   .job-tool-panel-heading h2 { font-size: 16px; }
   .job-panel-content { padding-left: 13px; padding-right: 13px; }
   .job-panel-tools { display: block; }
+  .job-priority-tools { grid-template-columns: minmax(0, 1fr); }
   .driver-resource-list { column-gap: 15px; }
   .job-resource-link { font-size: 14px; }
   .job-resource-meta { display: block; }
@@ -328,6 +336,20 @@ main { min-height: calc(100vh - 125px); padding: 30px 32px 48px; outline: none; 
 .quick-first-step { margin: 2px 0 9px; color: var(--muted); font-size: 16px; line-height: 1.5; }
 .quick-tool-name { font-size: 16px; font-weight: 600; line-height: 1.45; }
 .quick-tool-name > a { color: var(--text); }
+.quick-choice-list { border-top: 1px solid var(--line-soft); }
+.quick-choice { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; column-gap: 18px; padding: 11px 0 10px; border-bottom: 1px solid var(--line-soft); }
+.quick-choice:last-child { border-bottom: 0; }
+.choice-description { min-width: 0; }
+.quick-choice h4 { margin: 0 0 3px; font-size: 16px; font-weight: 600; line-height: 1.45; }
+.quick-choice h4 a { color: var(--accent); }
+.choice-role { color: var(--text); font-size: 14px; font-weight: 500; line-height: 1.5; overflow-wrap: anywhere; }
+.choice-use { margin-top: 3px; color: var(--muted); font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.quick-choice .tool-access { display: flex; flex-direction: column; gap: 0; margin: 0; }
+.selection-choice { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line-soft); }
+.selection-choice h4 { margin-bottom: 10px; font-size: 16px; line-height: 1.5; }
+.selection-choice h4 > a { color: var(--accent); }
+.selection-choice h4 > span { color: var(--muted); font-weight: 400; }
+.selection-choice .sources-note { margin-bottom: 0; }
 .no-extra-tool { margin: 6px 0; color: var(--muted); font-size: 16px; }
 .tool-access { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 0 16px; min-width: 0; }
 .access-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; max-width: 100%; padding: 7px 0; font-size: 14px; line-height: 1.45; overflow-wrap: anywhere; }
@@ -655,6 +677,8 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
   .quick-start-title > a { min-height: 44px; }
   .quick-start-list { grid-template-columns: minmax(0, 1fr); }
   .quick-start-row { padding: 12px 0 16px; }
+  .quick-choice { display: block; }
+  .quick-choice .tool-access { flex-direction: row; column-gap: 16px; margin-top: 4px; }
   .quick-scenario-link { min-height: 44px; }
   .quick-first-step { margin-top: 0; }
   .quick-answer { display: block; padding: 17px 0; }

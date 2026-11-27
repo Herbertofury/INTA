@@ -38,7 +38,7 @@ Tool name = official page. File buttons name the platform; built-in tools open i
 - **[🧰 Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)**
 - **[📊 WizTree](https://diskanalyzer.com/)** · **[Download Windows portable · ZIP](https://diskanalyzer.com/files/wiztree_4_34_portable.zip)**
 - **[🔎 WizFile](https://antibody-software.com/wizfile/)** · **[Download Windows portable · ZIP](https://antibody-software.com/files/wizfile_3_15_portable.zip)**
-- **[🧹 AdwCleaner](https://www.malwarebytes.com/adwcleaner)** · **[Download Windows cleaner · EXE](https://adwcleaner.malwarebytes.com/adwcleaner?channel=release)**
+- **[🧹 AdwCleaner](https://www.malwarebytes.com/adwcleaner)** · **[Download Windows portable cleaner · EXE](https://adwcleaner.malwarebytes.com/adwcleaner?channel=release)**
 - **[🛡️ HitmanPro](https://www.sophos.com/en-us/products/hitmanpro)** · **[Windows x64 download · publisher check](https://download.sophos.com/endpoint/clients/HitmanPro_x64.exe)**
 - **[🔐 Defender Offline setup](https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline)** · **[Run the built-in offline scan](https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline)**
 - **[💽 CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)**
@@ -75,6 +75,7 @@ Tool name = official page. File buttons name the platform; built-in tools open i
 - [Tool selection](Tool-Selection)
 - [Free Tool Picks](Free-Tool-Picks)
 - [Current tool choices](Current-Tool-Choices)
+- [Malware tool choices](Malware-Tool-Choices)
 
 <a id="-the-shared-standard"></a>
 

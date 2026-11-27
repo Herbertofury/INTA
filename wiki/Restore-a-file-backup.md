@@ -4,6 +4,20 @@
 
 **Identify the backup format, snapshot date and recoverable credentials before choosing the restore tool.**
 
+<a id="tool-choices"></a>
+
+## 🧰 Choose the tool for this job
+
+Choose by the task shown in the first column. Each option includes its acquisition route and access boundary.
+
+| Need | Official tool + exact action | Why this choice / access |
+| --- | --- | --- |
+| **Restore a [restic](https://restic.net/) repository** | **[restic](https://restic.net/)** · **[Download Windows x64 · ZIP](https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip)** | Use its native snapshot and restore commands for an existing [restic](https://restic.net/) backup. **Access:** Free software; repository storage is separate. |
+| **Restore a [Kopia](https://kopia.io/) snapshot** | **[Kopia](https://kopia.io/)** · **[Download Windows desktop · ZIP](https://github.com/kopia/kopia/releases/download/v0.23.1/KopiaUI-0.23.1-win.zip)** | Open the existing repository and restore the selected snapshot into a separate location. **Access:** Free software; repository storage is separate. |
+| **Restore an agent backup** | **[Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows)** · **[Sign in for the Windows download](https://www.veeam.com/products/physical/windows-backup-recovery-download.html)** | Use the matching agent recovery workflow for an existing supported [Windows](https://www.microsoft.com/windows) backup. **Access:** Free edition exists; service-provider terms differ. |
+
+**[Current selection evidence](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)**
+
 <a id="working-kit"></a>
 
 ## 🧰 Tools and links for this job
