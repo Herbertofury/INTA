@@ -141,3 +141,11 @@ Add it to a workflow only by referencing its ID. The build validates command met
 6. Bulk updates have preview-first instructions and explicit safety boundaries.
 7. The app, generated site, Wiki and offline artifact use the same canonical catalog.
 8. Tests validate IDs, shells, categories, risk levels, source URLs, workflow references and toolkit references.
+
+### Ninite Pro
+
+Ninite Pro offers commercial application deployment and update workflows. Its documented Pro Classic command-line features include app selection, audit, update-only, exclusions and reports. The newer Pro web interface may differ; verify the current account documentation before automation. [Ninite Pro command-line reference](https://ninite.com/help/features/selection.html) · [Ninite help](https://ninite.com/help/).
+
+### Patch My PC Home Updater
+
+Home Updater is a consumer product and is restricted to non-commercial use. INTA lists it only as a reference and must not recommend it for technician/customer deployments. Use Patch My PC's commercial offerings for business endpoints. [Home Updater licensing and FAQ](https://patchmypc.com/faq/category/home-updater/).
