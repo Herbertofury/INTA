@@ -245,12 +245,12 @@ main { min-height: calc(100vh - 125px); padding: 30px 32px 48px; outline: none; 
 
 
 /* Command Center */
-.command-center-hero { display:flex; justify-content:space-between; align-items:center; gap:28px; margin:0 0 28px; padding:24px 26px; border:1px solid var(--line); border-radius:8px; background:linear-gradient(115deg,var(--surface),var(--subtle)); }
-.command-center-hero h2 { margin:5px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:-.035em; }
+.command-center-hero { display:flex; justify-content:space-between; align-items:center; gap:24px; margin:0 0 24px; padding:18px 0; border-block:1px solid var(--line); }
+.command-center-hero h2 { margin:4px 0 7px; font-size:21px; letter-spacing:-.025em; }
 .command-center-hero p:not(.page-label) { max-width:720px; margin:0; color:var(--muted); line-height:1.6; }
 .command-center-stats { display:flex; gap:22px; flex:0 0 auto; }
 .command-center-stats div { display:grid; gap:2px; text-align:center; }
-.command-center-stats strong { font-size:27px; font-variant-numeric:tabular-nums; }
+.command-center-stats strong { font-size:23px; font-variant-numeric:tabular-nums; }
 .command-center-stats span { color:var(--dim); font-size:11px; text-transform:uppercase; letter-spacing:.07em; }
 .command-center-workflows,.command-center-toolkit,.command-center-library,.command-center-maintenance { margin:30px 0; }
 .section-heading-row { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin:0 0 14px; }
@@ -281,16 +281,17 @@ main { min-height: calc(100vh - 125px); padding: 30px 32px 48px; outline: none; 
 .command-card { min-width:0; border:1px solid var(--line); border-radius:6px; background:var(--surface); overflow:hidden; }
 .command-card[hidden] { display:none; }
 .command-card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding:13px 14px 7px; }
-.command-card-header h3 { margin:0; font-size:15px; line-height:1.35; }
+.command-card-header > div { min-width:0; }
+.command-card-header h3 { margin:0; font-size:15px; line-height:1.35; overflow-wrap:anywhere; }
 .command-card-kicker { margin:0 0 5px; color:var(--dim); font-size:10px; }
 .command-risk { flex:0 0 auto; padding:4px 7px; border:1px solid var(--line); border-radius:3px; color:var(--muted); font-size:10px; white-space:nowrap; }
-.command-risk-read-only { color:var(--success,var(--text)); }
+.command-risk-read-only { color:var(--text); }
 .command-risk-changes-system,.command-risk-installs-software { border-color:var(--warning); color:var(--warning); }
 .command-risk-long-running { color:var(--accent); }
 .command-card-summary { margin:0; padding:0 14px 12px; color:var(--muted); font-size:12px; line-height:1.55; }
 .command-code-toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:7px 11px; border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); background:var(--subtle); color:var(--dim); font-size:10px; text-transform:uppercase; letter-spacing:.07em; }
 .command-code-toolbar .copy-command { display:inline-flex; align-items:center; gap:6px; min-height:30px; padding:4px 8px; border:1px solid var(--line); border-radius:4px; background:var(--surface); color:var(--text); font-size:11px; text-transform:none; letter-spacing:0; }
-.command-center-code { max-height:270px; overflow:auto; margin:0; padding:12px 14px; background:var(--bg); color:var(--text); font-size:11px; line-height:1.6; white-space:pre; tab-size:2; }
+.command-center-code { max-height:270px; overflow:auto; margin:0; padding:12px 14px; background:var(--bg); color:var(--text); font-size:12px; line-height:1.6; white-space:pre; tab-size:2; }
 .command-card .command-safety { padding:9px 13px; border-top:1px solid var(--line-soft); font-size:11px; }
 .command-card-footer { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:8px 13px; border-top:1px solid var(--line-soft); color:var(--dim); font-size:10px; }
 .command-card-footer a { color:var(--muted); }
@@ -302,7 +303,7 @@ main { min-height: calc(100vh - 125px); padding: 30px 32px 48px; outline: none; 
 .command-maintenance-grid p { margin:0; color:var(--muted); font-size:11px; line-height:1.55; }
 @media (max-width:1000px) { .command-toolkit-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .command-maintenance-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media (max-width:700px) {
- .command-center-hero { display:block; padding:17px; }
+ .command-center-hero { display:block; padding:16px 0; }
  .command-center-stats { justify-content:flex-start; margin-top:17px; }
  .command-workflow-grid,.command-center-list { grid-template-columns:1fr; }
  .command-toolkit-grid { grid-template-columns:1fr; }

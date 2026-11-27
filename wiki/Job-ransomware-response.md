@@ -227,7 +227,7 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 
 #### ⚡ Quick commands
 
-**Inspect backup-related services** · PowerShell
+**Inspect backup-related services** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
 
 Capture backup service status without mounting or connecting backup media to a suspected compromised endpoint.
 
@@ -237,7 +237,8 @@ Get-Service -Name wbengine,VSS,swprv -ErrorAction SilentlyContinue | Format-Tabl
 
 > **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
 
-**Official reference:** [Microsoft Get-Service](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service)
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Get-Service](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service)
+
 
 **Prove it worked:** A usable recovery point is demonstrated and remains outside the attacker’s current access path.
 

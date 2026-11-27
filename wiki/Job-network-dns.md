@@ -323,7 +323,7 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 
 #### ⚡ Quick commands
 
-**Renew a DHCP lease after confirming the link and DHCP path** · PowerShell (Run as Administrator)
+**Renew a DHCP lease after confirming the link and DHCP path** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/) (Run as Administrator)
 
 Request a new DHCP lease when the adapter is connected and the network's DHCP service is expected to be available.
 
@@ -335,7 +335,8 @@ ipconfig /all
 
 > **Before running:** Changes the active network lease and may briefly interrupt connectivity. Do not use on static-IP, VPN, server or managed network interfaces without confirming the configuration and maintenance impact.
 
-**Official reference:** [Microsoft ipconfig](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig)
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft ipconfig](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig)
+
 
 **Prove it worked:** The adapter receives the intended lease, gateway and DNS settings and reaches the required service.
 
@@ -363,7 +364,7 @@ ipconfig /all
 
 #### ⚡ Quick commands
 
-**Inspect VPN adapter DNS suffixes and resolver configuration** · PowerShell
+**Inspect VPN adapter DNS suffixes and resolver configuration** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
 
 Compare VPN and physical adapter DNS settings and resolve an organization-approved internal hostname.
 
@@ -375,7 +376,8 @@ Resolve-DnsName intranet.example -ErrorAction Continue
 
 > **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
 
-**Official reference:** [Microsoft Get-DnsClientServerAddress](https://learn.microsoft.com/en-us/powershell/module/dnsclient/get-dnsclientserveraddress)
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Get-DnsClientServerAddress](https://learn.microsoft.com/en-us/powershell/module/dnsclient/get-dnsclientserveraddress)
+
 
 **Prove it worked:** The intended internal name resolves through the correct path and the user can access the service.
 
@@ -425,7 +427,7 @@ Resolve-DnsName intranet.example -ErrorAction Continue
 
 #### ⚡ Quick commands
 
-**Test the exact service port** · PowerShell
+**Test the exact service port** · <a href="https://github.com/PowerShell/PowerShell/releases/latest" title="Open PowerShell official download or service page" aria-label="Open PowerShell official download or service page" data-inta-brand="powershell"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="PowerShell official page" width="18" height="18" valign="middle" /></a> [PowerShell](https://learn.microsoft.com/en-us/powershell/)
 
 Test TCP reachability to the real service host and port after name resolution succeeds.
 
@@ -435,7 +437,8 @@ Test-NetConnection -ComputerName server.example -Port 443 -InformationLevel Deta
 
 > **Before running:** Read-only network test. Replace the example host and port with the approved service endpoint; do not scan unrelated networks.
 
-**Official reference:** [Microsoft Test-NetConnection](https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection)
+**Official reference:** <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft Test-NetConnection](https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection)
+
 
 **Prove it worked:** The evidence isolates transport reachability from application behavior without changing unrelated network settings.
 

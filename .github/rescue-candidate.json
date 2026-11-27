@@ -1,5 +1,12 @@
 {
   "run_id": 45933841993,
   "artifact_id": 15170227937,
-  "source_sha": "64f3e0c234164c26ac7f0d8ff56284263436494d"
+  "source_sha": "64f3e0c234164c26ac7f0d8ff56284263436494d",
+  "artifact_sha256": "0eff193efc5267d6d8d6b83c994471b82a2b11075da18110a3fadcf571d49d59",
+  "iso_sha256": "3a3f50e6610cb94c6ab156da7ed6285c750564efa4a56e110811d313f9a1a8f4",
+  "iso_bytes": 2254991360,
+  "boot_proof_run_id": 45936607841,
+  "boot_proof_artifact_id": 15170624557,
+  "boot_proof_source_sha": "62c0c23378b18995824a8cb611c3e635f758f6dd",
+  "boot_proof_sha256": "89c43175a3175eb47b73e416b8cb70513520b3b2a9ad9b19f9ceb373ef525eb1"
 }

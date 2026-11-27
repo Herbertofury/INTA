@@ -139,7 +139,7 @@
   }
   brandRecords.forEach(brand => {
     if (!brand || !brand.id || !safeUrl(brand.downloadPage)) return;
-    if (brand.toolId) brandsByTool.set(brand.toolId, brand);
+    if (brand.toolId && !brandsByTool.has(brand.toolId)) brandsByTool.set(brand.toolId, brand);
     for (const name of array(brand.names).concat(brand.name || [])) {
       const key = String(name).toLocaleLowerCase('en-US');
       if (key && !brandsByName.has(key)) brandsByName.set(key, brand);
@@ -884,7 +884,7 @@
       <section class="command-center-toolkit"><div class="section-heading-row"><div><p class="page-label">TRUSTED TECHNICIAN TOOLKITS</p><h2>Powerful tools other technicians already build</h2><p>Use their maintained utilities as tools, not as mystery scripts. Verify the release and read the changes before running.</p></div></div><div class="command-toolkit-grid">${toolkits.map(toolkit => { const install = toolkit.installCommandId && commandCenterCommands.get(toolkit.installCommandId); return `<article class="command-toolkit-card"><div class="command-toolkit-top"><span class="command-toolkit-kind">${esc(toolkit.kind.replace(/-/g,' '))}</span><span>${esc(toolkit.platform)}</span></div><h3>${external(toolkit.url, esc(toolkit.name))}</h3><p>${formatted(toolkit.summary)}</p><p class="command-safety">${icon('shield-alert')}<span>${formatted(toolkit.trust)}</span></p><div class="command-toolkit-actions">${external(toolkit.repository || toolkit.url, `Project / documentation ${icon('external')}`)}${install ? `<button class="copy-command" data-copy-center-command="${esc(install.id)}">${icon('copy')}Copy setup / launch</button>` : ''}</div></article>`; }).join('')}</div></section>
       <section class="command-center-library"><div class="section-heading-row"><div><p class="page-label">COMMAND LIBRARY</p><h2>Find a command</h2><p>Search by task, symptom, command name, shell or tool. Filter by platform and risk.</p></div></div>
         <div class="command-center-filters"><label class="input-wrap">${icon('search')}<span class="sr-only">Search commands</span><input id="command-center-search" type="search" placeholder="Search diagnostics, DISM, Defender, Chocolatey, updates…" value="${esc(query)}"></label><label class="sr-only" for="command-center-shell">Shell</label><select id="command-center-shell" class="filter-select"><option value="">All shells</option>${array(commandCenter.shells).map(x => `<option value="${esc(x)}"${shell===x?' selected':''}>${esc(x)}</option>`).join('')}</select><label class="sr-only" for="command-center-risk">Impact</label><select id="command-center-risk" class="filter-select"><option value="">All impact levels</option><option value="read-only">Read only</option><option value="long-running">Long-running</option><option value="downloads-file">Downloads file</option><option value="installs-software">Installs software</option><option value="changes-system">Changes system</option></select></div>
-        <nav class="command-category-tabs" aria-label="Command categories"><button class="${selected==='all'?'active':''}" data-command-category="all">All commands</button>${categories.map(cat=>`<button class="${selected===cat.id?'active':''}" data-command-category="${esc(cat.id)}">${esc(cat.label)}</button>`).join('')}</nav>
+        <nav class="command-category-tabs" aria-label="Command categories"><button class="${selected==='all'?'active':''}" data-command-category="all" aria-pressed="${selected==='all'}">All commands</button>${categories.map(cat=>`<button class="${selected===cat.id?'active':''}" data-command-category="${esc(cat.id)}" aria-pressed="${selected===cat.id}">${esc(cat.label)}</button>`).join('')}</nav>
         <div class="command-center-result" id="command-center-count" aria-live="polite"></div>
         <div class="command-center-list" id="command-center-list">${commands.map(commandCard).join('')}</div>
       </section>
@@ -1395,13 +1395,13 @@
     const foundNotes = fieldNotes.filter(note => matches(fieldNoteSearchText.get(note.id), query));
     const foundJobs = jobs.filter(job => matches(jobSearchText.get(job.id), query));
     const foundTools = tools.filter(tool => matches(toolSearchText.get(tool.id), query));
-    const foundCommands = array(commandCenter.commands).filter(item => matches([item.title,item.summary,item.code,item.safety,item.shell,item.sourceTitle,item.category].join(' '), query));
+    const foundCommands = array(commandCenter.commands).filter(item => matches([item.title,item.summary,item.code,item.safety,item.shell,item.sourceTitle,item.category].join(' ').toLowerCase(), query));
     let html = `<div class="search-summary">${foundScenarios.length + foundNotes.length + foundJobs.length + foundTools.length + foundCommands.length} results for “${esc(query)}”</div>`;
     if (foundScenarios.length) html += `<div class="search-label">First actions · ${foundScenarios.length}</div>${foundScenarios.map(item => `<a class="search-result search-scenario" data-search-scenario="${esc(item.id)}" href="${quickHref(item)}"><span class="result-icon" aria-hidden="true">${esc(item.icon || scenarioEmoji[item.jobId] || '🧰')}</span><span><strong>${esc(item.label)}</strong><small>${esc(item.firstStep)}</small></span>${icon('arrow')}</a>`).join('')}`;
     if (foundNotes.length) html += `<div class="search-label">Specific fixes · ${foundNotes.length}</div>${foundNotes.map(note => `<a class="search-result" data-search-fix="${esc(note.id)}" href="${fieldNoteHref(note)}"><span class="result-icon">${icon('wrench')}</span><span><strong>${esc(note.title)}</strong><small>${esc(note.symptom)}</small></span>${icon('arrow')}</a>`).join('')}`;
     if (foundJobs.length) html += `<div class="search-label">Job playbooks · ${foundJobs.length}</div>${foundJobs.map(job => `<a class="search-result" href="#job/${encodeURIComponent(job.id)}"><span class="result-icon">${icon(jobIcon(job))}</span><span><strong>${esc(job.title)}</strong><small>${esc(job.category)}</small></span>${icon('arrow')}</a>`).join('')}`;
     if (foundTools.length) html += `<div class="search-label">Tools · ${foundTools.length}</div>${foundTools.map(tool => `<div class="search-tool-result" data-search-tool="${esc(tool.id)}"><div class="search-tool-main">${toolName(tool, 'search-tool-name')}<small>${esc(categoryLabel(tool.category))} · ${esc(array(tool.platforms).join(', '))}</small></div><a class="search-tool-details" href="#tool/${encodeURIComponent(tool.id)}" aria-label="Details and alternate downloads for ${esc(tool.name)}">Details ${icon('arrow')}</a></div>`).join('')}`;
-    if (foundCommands.length) html += `<div class="search-label">Commands · ${foundCommands.length}</div>${foundCommands.slice(0,8).map(item => `<a class="search-result" href="#command-center?category=${encodeURIComponent(item.category)}&q=${encodeURIComponent(item.title)}"><span class="result-icon">${icon('terminal')}</span><span><strong>${esc(item.title)}</strong><small>${esc(item.shell)} · ${esc(item.summary)}</small></span>${icon('arrow')}</a>`).join('')}`;
+    if (foundCommands.length) html += `<div class="search-label">Commands · ${foundCommands.length}</div>${foundCommands.map(item => `<a class="search-result" href="#command-center?category=${encodeURIComponent(item.category)}&q=${encodeURIComponent(item.title)}"><span class="result-icon">${icon('terminal')}</span><span><strong>${esc(item.title)}</strong><small>${esc(item.shell)} · ${esc(item.summary)}</small></span>${icon('arrow')}</a>`).join('')}`;
     if (!foundScenarios.length && !foundNotes.length && !foundJobs.length && !foundTools.length && !foundCommands.length) html += '<div class="search-empty">No results yet. Try a tool name or a symptom such as “network” or “malware”.</div>';
     searchResults.innerHTML = html;
     decorateBrandLinks(searchResults);
@@ -1465,7 +1465,7 @@ ${item.code}
     }
     const categoryTab = target.closest('[data-command-category]');
     if (categoryTab) {
-      $('.command-category-tabs [data-command-category]').forEach(button => { const active=button===categoryTab; button.classList.toggle('active',active); button.setAttribute('aria-pressed',String(active)); });
+      $$('.command-category-tabs [data-command-category]').forEach(button => { const active=button===categoryTab; button.classList.toggle('active',active); button.setAttribute('aria-pressed',String(active)); });
       filterCommandCenter();
       return;
     }

@@ -975,7 +975,7 @@ def home_markdown(tools: list[dict], jobs: list[dict], categories: dict, layout:
     lines = [f"![INTA Computer Services — technical knowledge base]({REPO}/raw/main/docs/assets/wiki-hero.svg)", "",
              *heading(1, "INTA knowledge base", "🧭 Your next good fix starts here."),
              "Service procedures, tool references and troubleshooting methods for the INTA team.", "",
-             f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
+             f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
              f"**{len(tools)} tools · {len(jobs)} playbooks · {len(categories)} tool categories**", "",
              quick_start_block.rstrip(), "",
              *heading(2, "🧭 Start a job", "🚦 First, choose the right route"),
@@ -1126,6 +1126,146 @@ def validate_news(catalog: dict) -> None:
             raise ValueError("Invalid News briefing item")
 
 
+def validate_command_center(catalog: dict) -> None:
+    """Validate the complete authored command library and its relationships."""
+    def text_fields(item, fields, label):
+        if not isinstance(item, dict):
+            raise ValueError(f"{label}: expected an object")
+        for field in fields:
+            if not isinstance(item.get(field), str) or not item[field].strip():
+                raise ValueError(f"{label}: missing {field}")
+
+    def records_by_id(items, kind, fields):
+        if not isinstance(items, list) or not items:
+            raise ValueError(f"Command Center requires a nonempty {kind} list")
+        found = {}
+        for item in items:
+            text_fields(item, ("id", *fields), kind)
+            identity = item["id"]
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity) or identity in found:
+                raise ValueError(f"Invalid or duplicate Command Center {kind} ID: {identity}")
+            found[identity] = item
+        return found
+
+    def source_url(value, label):
+        if not isinstance(value, str) or any(character.isspace() for character in value):
+            raise ValueError(f"{label}: reference must be public HTTPS")
+        try:
+            parsed = urlparse(value)
+            valid = (parsed.scheme == "https" and parsed.hostname
+                     and not parsed.username and not parsed.password)
+        except ValueError:
+            valid = False
+        if not valid or any(key in parsed.query.lower() for key in ("utm_", "fbclid=", "gclid=")):
+            raise ValueError(f"{label}: reference must be public HTTPS without tracking parameters")
+
+    text_fields(catalog, ("title", "description", "reviewedAt"), "Command Center")
+    if type(catalog.get("schemaVersion")) is not int or catalog["schemaVersion"] != 1:
+        raise ValueError("Command Center requires schemaVersion 1")
+    try:
+        valid_date = date.fromisoformat(catalog["reviewedAt"]).isoformat() == catalog["reviewedAt"]
+    except ValueError:
+        valid_date = False
+    if not valid_date:
+        raise ValueError("Command Center requires a valid review date")
+    shells = catalog.get("shells")
+    if (not isinstance(shells, list) or not shells
+            or any(not isinstance(shell, str) or shell not in {"PowerShell", "CMD", "Bash"} for shell in shells)
+            or len(set(shells)) != len(shells)):
+        raise ValueError("Command Center requires unique supported shell labels")
+    policies = catalog.get("policies")
+    required_policies = {
+        "noAutoExecution", "requireExplicitUserCopyOrRun", "noRemoteScriptPipeToInterpreter",
+        "requirePreviewBeforeBulkUpdates", "neverBypassPackagePinsByDefault",
+        "requireOfficialSourceAndSafetyNotes", "doNotMixPackageManagersBlindly",
+        "separateOsUpdatesFromApplicationUpdates", "requireRollbackOrRecoveryPlanForDestructiveActions",
+    }
+    if not isinstance(policies, dict) or any(policies.get(key) is not True for key in required_policies):
+        raise ValueError("Command Center safety policies must remain enabled")
+    categories = records_by_id(catalog.get("categories"), "categories", ("label", "description"))
+    if "all" in categories:
+        raise ValueError("Command Center category 'all' is reserved for the complete library")
+    commands = records_by_id(catalog.get("commands"), "commands",
+                             ("title", "category", "shell", "privilege", "risk", "summary",
+                              "code", "safety", "sourceUrl", "sourceTitle"))
+    risks = {"read-only", "long-running", "downloads-file", "installs-software", "changes-system"}
+    for identity, command in commands.items():
+        if command["category"] not in categories or command["shell"] not in shells or command["risk"] not in risks:
+            raise ValueError(f"{identity}: unknown command category, shell or risk")
+        source_url(command["sourceUrl"], identity)
+        if len(command["code"]) > 16000:
+            raise ValueError(f"{identity}: command block exceeds size limit")
+        code = command["code"].replace(chr(96) + "\n", " ").replace("\\\n", " ")
+        fetch = r"(?:irm|iwr|invoke-restmethod|invoke-webrequest|curl(?:\.exe)?|wget(?:\.exe)?)"
+        interpreter = r"(?:iex|invoke-expression|bash|sh|zsh|pwsh(?:\.exe)?|powershell(?:\.exe)?)"
+        if (re.search(rf"(?i)\b{fetch}\b[^\n;]*\|\s*(?:sudo\s+)?{interpreter}\b", code)
+                or re.search(rf"(?i)\b(?:iex|invoke-expression)\s*\(\s*{fetch}\b", code)):
+            raise ValueError(f"{identity}: remote download-and-execute commands are prohibited")
+    workflows = records_by_id(catalog.get("workflows"), "workflows",
+                              ("title", "category", "description", "sequence", "warning"))
+    for identity, workflow in workflows.items():
+        ids = workflow.get("commandIds")
+        if (not isinstance(ids, list) or not ids
+                or any(not isinstance(command_id, str) or command_id not in commands for command_id in ids)
+                or len(ids) != len(set(ids))):
+            raise ValueError(f"{identity}: unknown or missing command, or duplicate workflow command")
+        if workflow["category"] not in categories:
+            raise ValueError(f"{identity}: unknown workflow category")
+    toolkits = records_by_id(catalog.get("toolkits"), "toolkits",
+                             ("name", "kind", "platform", "summary", "url", "trust"))
+    for identity, toolkit in toolkits.items():
+        source_url(toolkit["url"], identity)
+        if "repository" in toolkit:
+            source_url(toolkit["repository"], identity)
+        install = toolkit.get("installCommandId")
+        if install is not None and (not isinstance(install, str) or install not in commands):
+            raise ValueError(f"{identity}: unknown or missing command for toolkit setup")
+
+
+def merge_web_brands(base: dict, extension: dict) -> dict:
+    """Extend web/document identities without mutating the native icon registry."""
+    if (not isinstance(extension, dict) or type(extension.get("schemaVersion")) is not int
+            or extension["schemaVersion"] != 1 or not isinstance(extension.get("assets"), dict)
+            or not isinstance(extension.get("brands"), list)):
+        raise ValueError("Web brand extension requires schemaVersion 1, assets and brands")
+    assets = dict(base["assets"])
+    for identity, asset in extension["assets"].items():
+        if identity in assets:
+            if assets[identity] != asset:
+                raise ValueError(f"Conflicting web brand asset: {identity}")
+            continue
+        if not isinstance(asset, dict):
+            raise ValueError(f"Invalid web brand asset: {identity}")
+        if not isinstance(asset.get("path"), str):
+            raise ValueError(f"Invalid web brand asset path: {identity}")
+        path = Path(asset["path"])
+        if path.parts[:2] != ("assets", "web-brand-icons") or ".." in path.parts or path.suffix != ".png":
+            raise ValueError(f"Web brand asset must stay in assets/web-brand-icons: {identity}")
+        assets[identity] = asset
+    seen = {brand["id"] for brand in base["brands"]}
+    for brand in extension["brands"]:
+        if not isinstance(brand, dict) or not isinstance(brand.get("id"), str) or not brand["id"] or brand["id"] in seen:
+            raise ValueError("Invalid or duplicate web brand identity")
+        seen.add(brand["id"])
+    # Web refinements win resolver precedence; the complete native registry stays
+    # present, including its original paths and immutable Media Creator inputs.
+    return {**base, "assets": assets, "brands": [*extension["brands"], *base["brands"]]}
+
+
+def extend_web_brand_links(registry: list[dict], brands: list[dict]) -> list[dict]:
+    """Link new web aliases while preserving every existing deliberate route."""
+    entries = {entry["name"].casefold(): entry for entry in registry}
+    ordinary = {"home", "support", "download", "downloads", "documentation", "source", "help", "free", "tools", "media"}
+    for brand in brands:
+        for name in [brand.get("name", ""), *brand.get("names", [])]:
+            if not name or len(name) < 2 or name.casefold() in entries or name.casefold() in ordinary:
+                continue
+            entries[name.casefold()] = {"name": name, "url": brand["downloadPage"],
+                                       "kind": brand.get("kind", "application"), "id": brand["id"],
+                                       "caseSensitive": True}
+    return sorted(entries.values(), key=lambda item: (-len(item["name"]), item["name"].casefold()))
+
+
 def build_outputs() -> dict[str, str]:
     tools = records(ROOT / "data/tools.json", "tools")
     jobs = records(ROOT / "data/jobs.json", "jobs")
@@ -1159,12 +1299,16 @@ def build_outputs() -> dict[str, str]:
     linker = link_module()
     registry = linker.build_registry(tools, jobs)
     brands_module = brand_module()
-    brands = brands_module.load_registry(ROOT)
+    web_brand_path = ROOT / "data/web-brand-icons.json"
+    web_brands = (json.loads(web_brand_path.read_text(encoding="utf-8")) if web_brand_path.is_file()
+                  else {"schemaVersion": 1, "assets": {}, "brands": []})
+    brands = merge_web_brands(brands_module.load_registry(ROOT), web_brands)
     brand_errors = brands_module.validate_registry(brands, ROOT)
     if brand_errors:
         raise ValueError("Brand icon validation failed: " + "; ".join(brand_errors))
     if {entry.get("toolId") for entry in brands["brands"] if entry.get("toolId")} != {tool["id"] for tool in tools}:
         raise ValueError("Every catalog tool requires one authentic brand icon")
+    registry = extend_web_brand_links(registry, web_brands["brands"])
     brand_markdown = brand_module("brand_markdown.py")
     decorator = brand_markdown.BrandMarkdown(brands, linker)
     data = {"tools": [{**tool, "reputation": reputation["tools"][tool["id"]]} for tool in tools], "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
@@ -1259,8 +1403,8 @@ def build_outputs() -> dict[str, str]:
         info = layout["categories"][category]
         sidebar += [f"- **[{info['navigationIcon']} {info['navigationLabel']}](Tools-{slug(category)})**"]
     sidebar += ["", "### Reference", "",
-                "- [Decision desk](Decision-Desk)", "- [All playbooks](Playbooks)", "- [Complete tool directory](Tool-Directory)",
-                "- [Command Center](Command-Center)", "- [Quick commands](Quick-Commands)",
+                "- [Decision desk](Decision-Desk)", "- [⚡ Command Center](Command-Center)", "- [⚡ Quick commands](Quick-Commands)",
+                "- [All playbooks](Playbooks)", "- [Complete tool directory](Tool-Directory)",
                 "- [Methods](Methods)", "- [Rescue media](Rescue-Media)", "- [Intake and handoff](Technician-Handoff)",
                 "- [Service evidence](Service-Evidence)", "- [Tool selection](Tool-Selection)",
                 "- [Free Tool Picks](Free-Tool-Picks)", "- [Current tool choices](Current-Tool-Choices)",
@@ -1324,7 +1468,7 @@ def build_outputs() -> dict[str, str]:
                 "registeredLinks": len(registry),
                 "brandIdentities": len(brands["brands"]),
                 "brandAssets": len(brands["assets"]),
-                "toolsWithIcons": sum(bool(item.get("toolId")) for item in brands["brands"]),
+                "toolsWithIcons": len({item["toolId"] for item in brands["brands"] if item.get("toolId")}),
                 "brandedMentions": sum(content.count('data-inta-brand="') for path, content in outputs.items() if path.endswith(".md")),
                 "brandRegistrySha256": hashlib.sha256(json.dumps(brands, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
                 "wikiPages": len([x for x in outputs if x.startswith("wiki/") and not Path(x).name.startswith("_")]),
@@ -1336,56 +1480,6 @@ def build_outputs() -> dict[str, str]:
 
 
 
-def validate_command_center(catalog: dict) -> None:
-    """Validate the searchable command library, workflows and toolkit links."""
-    if catalog.get("schemaVersion") != 1 or not isinstance(catalog.get("commands"), list) or not catalog["commands"]:
-        raise ValueError("Command Center requires a versioned non-empty command catalog")
-    shells = set(catalog.get("shells", []))
-    categories = {item.get("id") for item in catalog.get("categories", []) if isinstance(item, dict)}
-    commands = {}
-    for item in catalog["commands"]:
-        identity = item.get("id", "?")
-        if identity in commands or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
-            raise ValueError(f"{identity}: invalid or duplicate Command Center command ID")
-        commands[identity] = item
-        for field in ("title", "category", "shell", "privilege", "risk", "summary", "code", "safety", "sourceUrl", "sourceTitle"):
-            if not isinstance(item.get(field), str) or not item[field].strip():
-                raise ValueError(f"{identity}: Command Center command requires {field}")
-        if item["shell"] not in shells or item["category"] not in categories:
-            raise ValueError(f"{identity}: unsupported shell or category")
-        if item["risk"] not in {"read-only", "long-running", "downloads-file", "installs-software", "changes-system"}:
-            raise ValueError(f"{identity}: unsupported risk level")
-        if len(item["code"]) > 16000:
-            raise ValueError(f"{identity}: command block exceeds size limit")
-        source = urlparse(item["sourceUrl"])
-        if source.scheme != "https" or not source.hostname or source.username or source.password:
-            raise ValueError(f"{identity}: source must be a public HTTPS URL")
-        if re.search(r"(?i)(?:irm|iwr|curl)\b[^\n|]*\|\s*(?:iex|invoke-expression)", item["code"]):
-            raise ValueError(f"{identity}: direct remote download-and-execute pipelines are prohibited")
-    workflow_ids = set()
-    for workflow in catalog.get("workflows", []):
-        identity = workflow.get("id", "?")
-        if identity in workflow_ids or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
-            raise ValueError(f"{identity}: invalid or duplicate Command Center workflow ID")
-        workflow_ids.add(identity)
-        if not workflow.get("commandIds") or any(command_id not in commands for command_id in workflow["commandIds"]):
-            raise ValueError(f"{identity}: workflow references an unknown or missing command")
-    toolkit_ids = set()
-    for toolkit in catalog.get("toolkits", []):
-        identity = toolkit.get("id", "?")
-        if identity in toolkit_ids or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
-            raise ValueError(f"{identity}: invalid or duplicate toolkit ID")
-        toolkit_ids.add(identity)
-        for field in ("name", "kind", "platform", "summary", "url", "trust"):
-            if not isinstance(toolkit.get(field), str) or not toolkit[field].strip():
-                raise ValueError(f"{identity}: toolkit requires {field}")
-        for field in ("url", "repository"):
-            if toolkit.get(field):
-                parsed = urlparse(toolkit[field])
-                if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
-                    raise ValueError(f"{identity}: toolkit {field} must be public HTTPS")
-        if toolkit.get("installCommandId") and toolkit["installCommandId"] not in commands:
-            raise ValueError(f"{identity}: unknown toolkit install command")
 
 def validate_field_note_commands(field_notes: dict) -> None:
     """Validate every copy-ready command embedded in a specific-fix article."""

@@ -11,6 +11,7 @@ import tempfile
 import threading
 import urllib.request
 import webbrowser
+from contextlib import closing
 from pathlib import Path
 
 REPO = "Herbertofury/INTA"
@@ -18,6 +19,9 @@ RELEASE_API = f"https://api.github.com/repos/{REPO}/releases/latest"
 ASSET_ROOT = f"https://github.com/{REPO}/releases/download/"
 ISO = "inta-rescue-amd64.iso"
 SUMS = "SHA256SUMS"
+PARTS = ISO + ".parts.json"
+MAX_PART_SIZE = 1024 * 1024 * 1024
+MAX_MANIFEST_SIZE = 1024 * 1024
 
 
 def expected_digest(data):
@@ -54,25 +58,133 @@ def stream_verified(source, target, expected, expected_size=None):
 
 
 def release_asset(assets, name):
+    if name not in assets:
+        raise ValueError(f"The release is missing {name}.")
     asset = assets[name]
     url = asset["browser_download_url"]
-    if not url.startswith(ASSET_ROOT) or not url.endswith("/" + name):
+    if not isinstance(url, str) or not url.startswith(ASSET_ROOT) or not url.endswith("/" + name):
         raise ValueError("Unexpected release asset URL.")
+    if type(asset["size"]) is not int or asset["size"] < 0:
+        raise ValueError("Invalid release asset size.")
     return url, asset["size"]
+
+
+def _unique_manifest_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"Duplicate parts manifest field: {key}.")
+        result[key] = value
+    return result
+
+
+def verified_parts(manifest, assets, expected):
+    """Resolve an ordered manifest exclusively through this release's asset map."""
+    fields = {"schemaVersion", "filename", "size", "sha256", "parts"}
+    if not isinstance(manifest, dict) or set(manifest) != fields:
+        raise ValueError("Invalid ISO parts manifest fields.")
+    if type(manifest["schemaVersion"]) is not int or manifest["schemaVersion"] != 1:
+        raise ValueError("Unsupported ISO parts manifest version.")
+    if manifest["filename"] != ISO or type(manifest["size"]) is not int or manifest["size"] <= 0:
+        raise ValueError("Invalid original ISO name or size in parts manifest.")
+    digest = manifest["sha256"]
+    if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", digest):
+        raise ValueError("Invalid original ISO checksum in parts manifest.")
+    if digest.lower() != expected:
+        raise ValueError("The parts manifest disagrees with SHA256SUMS.")
+    if not isinstance(manifest["parts"], list) or not manifest["parts"]:
+        raise ValueError("The ISO parts manifest has no parts.")
+    resolved = []
+    total = 0
+    for index, part in enumerate(manifest["parts"], 1):
+        if not isinstance(part, dict) or set(part) != {"name", "size", "sha256"}:
+            raise ValueError("Invalid ISO part fields; URLs and paths are not accepted.")
+        name = f"{ISO}.part{index:03d}"
+        if part["name"] != name:
+            raise ValueError(f"Expected the next ISO part to be {name}.")
+        size = part["size"]
+        if type(size) is not int or not 0 < size <= MAX_PART_SIZE:
+            raise ValueError(f"Invalid size for {name}; each part must be at most 1 GiB.")
+        digest = part["sha256"]
+        if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", digest):
+            raise ValueError(f"Invalid checksum for {name}.")
+        url, asset_size = release_asset(assets, name)
+        if asset_size != size:
+            raise ValueError(f"The release asset size disagrees with the manifest for {name}.")
+        resolved.append((name, url, size, digest.lower()))
+        total += size
+    if total != manifest["size"]:
+        raise ValueError("ISO part sizes do not add up to the original ISO size.")
+    return total, resolved
+
+
+class _VerifiedPartsReader:
+    """Read one response at a time without buffering or saving whole parts."""
+
+    def __init__(self, parts):
+        self.parts = iter(parts)
+        self.response = None
+
+    def close(self):
+        if self.response is not None:
+            self.response.close()
+            self.response = None
+
+    def read(self, size):
+        while True:
+            if self.response is None:
+                part = next(self.parts, None)
+                if part is None:
+                    return b""
+                self.name, url, self.expected_size, self.expected_digest = part
+                self.total = 0
+                self.digest = hashlib.sha256()
+                self.response = urllib.request.urlopen(url, timeout=45)
+            chunk = self.response.read(size)
+            if chunk:
+                self.total += len(chunk)
+                if self.total > self.expected_size:
+                    raise ValueError(f"The download exceeds the size of {self.name}.")
+                self.digest.update(chunk)
+                return chunk
+            self.close()
+            if self.total != self.expected_size or self.digest.hexdigest() != self.expected_digest:
+                raise ValueError(f"Verification failed for {self.name}. Any previous ISO is intact.")
 
 
 def download_release(folder):
     with urllib.request.urlopen(RELEASE_API, timeout=30) as reply:
         release = json.load(reply)
-    assets = {asset["name"]: asset for asset in release["assets"]}
+    assets = {}
+    for asset in release["assets"]:
+        name = asset["name"]
+        if name in assets:
+            raise ValueError(f"The release contains duplicate assets named {name}.")
+        assets[name] = asset
     sums_url, _ = release_asset(assets, SUMS)
-    image_url, image_size = release_asset(assets, ISO)
     with urllib.request.urlopen(sums_url, timeout=30) as reply:
         expected = expected_digest(reply.read(65_536).decode("ascii"))
+    parts = None
+    if ISO in assets:
+        image_url, image_size = release_asset(assets, ISO)
+    else:
+        manifest_url, manifest_size = release_asset(assets, PARTS)
+        if not 0 < manifest_size <= MAX_MANIFEST_SIZE:
+            raise ValueError("The ISO parts manifest must be nonempty and at most 1 MiB.")
+        with urllib.request.urlopen(manifest_url, timeout=30) as reply:
+            content = reply.read(manifest_size + 1)
+        if len(content) != manifest_size:
+            raise ValueError("The parts manifest size differs from its release asset.")
+        manifest = json.loads(content, object_pairs_hook=_unique_manifest_object)
+        image_size, parts = verified_parts(manifest, assets, expected)
     if shutil.disk_usage(folder).free < image_size:
         raise ValueError("The destination has insufficient free space for a safe replacement.")
-    with urllib.request.urlopen(image_url, timeout=45) as reply:
-        stream_verified(reply, folder / ISO, expected, image_size)
+    if parts is None:
+        with urllib.request.urlopen(image_url, timeout=45) as reply:
+            stream_verified(reply, folder / ISO, expected, image_size)
+    else:
+        with closing(_VerifiedPartsReader(parts)) as reply:
+            stream_verified(reply, folder / ISO, expected, image_size)
     (folder / SUMS).write_text(f"{expected}  {ISO}\n", encoding="ascii")
 
 
