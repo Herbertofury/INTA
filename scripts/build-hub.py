@@ -1126,6 +1126,51 @@ def validate_news(catalog: dict) -> None:
             raise ValueError("Invalid News briefing item")
 
 
+def validate_updates_center(catalog: dict) -> None:
+    """Validate update channels, copy-ready commands and recovery workflows."""
+    if catalog.get("schemaVersion") != 1 or not isinstance(catalog.get("commands"), list) or not catalog["commands"]:
+        raise ValueError("Updates Center requires a versioned command catalog")
+    categories = {"Windows Update", "Microsoft Store", "Installer recovery", "Application inventory", "WinGet", "Chocolatey", "Scoop", "UniGetUI", "Ninite Pro", "Update inventory", "Linux"}
+    commands = {}
+    for item in catalog["commands"]:
+        identity = item.get("id", "?")
+        if identity in commands or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+            raise ValueError(f"{identity}: invalid or duplicate update command ID")
+        commands[identity] = item
+        for field in ("title", "category", "shell", "privilege", "risk", "summary", "code", "safety", "sourceUrl", "sourceTitle"):
+            if not isinstance(item.get(field), str) or not item[field].strip():
+                raise ValueError(f"{identity}: update command requires {field}")
+        if item["category"] not in categories or item["shell"] not in {"PowerShell", "CMD", "Bash"}:
+            raise ValueError(f"{identity}: unsupported update category or shell")
+        if item["risk"] not in {"read-only", "long-running", "downloads-file", "installs-software", "changes-system"}:
+            raise ValueError(f"{identity}: unsupported update risk")
+        source = urlparse(item["sourceUrl"])
+        if source.scheme != "https" or not source.hostname or source.username or source.password:
+            raise ValueError(f"{identity}: source must be public HTTPS")
+        if len(item["code"]) > 16000:
+            raise ValueError(f"{identity}: command exceeds size limit")
+        if re.search(r"(?i)(?:irm|iwr|curl)\\b[^\\n|]*\\|\\s*(?:iex|invoke-expression)", item["code"]):
+            raise ValueError(f"{identity}: remote download-and-execute pipeline prohibited")
+    channel_ids = set()
+    for channel in catalog.get("channels", []):
+        identity = channel.get("id", "?")
+        if identity in channel_ids or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+            raise ValueError(f"{identity}: invalid or duplicate update channel")
+        channel_ids.add(identity)
+        for field in ("name", "scope", "manager", "auditCommand", "updateCommand", "note"):
+            if not channel.get(field):
+                raise ValueError(f"{identity}: update channel requires {field}")
+        if channel["auditCommand"] not in commands or channel["updateCommand"] not in commands:
+            raise ValueError(f"{identity}: update channel references an unknown command")
+    workflow_ids = set()
+    for workflow in catalog.get("workflows", []):
+        identity = workflow.get("id", "?")
+        if identity in workflow_ids or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+            raise ValueError(f"{identity}: invalid or duplicate update workflow")
+        workflow_ids.add(identity)
+        if not workflow.get("commandIds") or any(command_id not in commands for command_id in workflow["commandIds"]):
+            raise ValueError(f"{identity}: workflow references an unknown command")
+
 def validate_command_center(catalog: dict) -> None:
     """Validate the complete authored command library and its relationships."""
     def text_fields(item, fields, label):
@@ -1280,6 +1325,8 @@ def build_outputs() -> dict[str, str]:
     research_queue = json.loads((ROOT / "data/research-queue.json").read_text(encoding="utf-8"))
     online_data = json.loads((ROOT / "data/online-tools.json").read_text(encoding="utf-8"))
     command_center = json.loads((ROOT / "data/command-center.json").read_text(encoding="utf-8"))
+    updates_center = json.loads((ROOT / "data/updates-center.json").read_text(encoding="utf-8"))
+    validate_updates_center(updates_center)
     validate_command_center(command_center)
     online_module = brand_module("online_tools.py")
     online_module.validate_online(online_data, tools, jobs)
@@ -1312,7 +1359,7 @@ def build_outputs() -> dict[str, str]:
     brand_markdown = brand_module("brand_markdown.py")
     decorator = brand_markdown.BrandMarkdown(brands, linker)
     data = {"tools": [{**tool, "reputation": reputation["tools"][tool["id"]]} for tool in tools], "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
-            "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces, "commandCenter": command_center,
+            "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces, "commandCenter": command_center, "updatesCenter": updates_center,
             "layout": layout, "fieldNotes": field_notes, "onlineTools": online_data, "brands": brands_module.portal_icons(brands), "news": news}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
@@ -1447,6 +1494,9 @@ def build_outputs() -> dict[str, str]:
                 "quickStartSha256": hashlib.sha256(json.dumps(quick_start, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
                 "onlineTools": len(online_data["tools"]),
                 "commandCenterCommands": len(command_center["commands"]),
+                "updatesCenterCommands": len(updates_center["commands"]),
+                "updatesCenterChannels": len(updates_center["channels"]),
+                "updatesCenterWorkflows": len(updates_center["workflows"]),
                 "commandCenterWorkflows": len(command_center["workflows"]),
                 "commandCenterToolkits": len(command_center["toolkits"]),
                 "onlineGroups": len(online_data["groups"]),
