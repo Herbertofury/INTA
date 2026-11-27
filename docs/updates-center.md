@@ -125,3 +125,23 @@ A public website cannot reliably enumerate or control arbitrary local apps witho
 - No "all up to date" or live progress claims without a connected local agent.
 - Narrow screens remain usable; cards stack and code scrolls horizontally.
 - Generated site, Wiki and offline guide use the canonical catalog.
+
+## More package managers and managed-fleet platforms
+
+The Updates tab also includes Flatpak, Snap and Homebrew. Their inventories and transactions are independent:
+- Flatpak: `flatpak remote-ls --updates`, `flatpak update`, `flatpak repair`, `flatpak uninstall <app-id>`. [Flatpak docs](https://docs.flatpak.org/en/latest/using-flatpak.html).
+- Snap: `snap refresh --list`, `snap refresh --time`, `sudo snap refresh`. Snap normally refreshes automatically; holds and schedules matter. [Snap update management](https://snapcraft.io/docs/how-to-guides/manage-snaps/manage-updates/).
+- Homebrew: `brew outdated --verbose`, then review before `brew upgrade`. Homebrew is not a complete Mac App Store or vendor updater. [Homebrew manual](https://docs.brew.sh/Manpage.html).
+
+For managed customer fleets, the page now links to:
+- **Action1** — cloud patching, missing updates, approvals, update rings, deployment results and endpoint inventory. [Managed endpoint updates](https://www.action1.com/documentation/managed-endpoints/) · [Roll out updates](https://www.action1.com/documentation/roll-out-and-deploy-updates/).
+- **Patch My PC Cloud** — Intune-integrated app deployment and update rings; **Publisher** — ConfigMgr/Intune/WSUS third-party update publishing. These are distinct products with different capabilities. [Cloud vs Publisher](https://patchmypc.com/faq/should-i-use-patch-my-pc-cloud-or-publisher/).
+- **PDQ Deploy & Inventory** — software inventory, package library, Windows and third-party update deployment and result reporting. [PDQ overview](https://www.pdq.com/pdq-overview/).
+
+These are commercial fleet-management platforms, not generic local shell commands. Live data requires an authorized account, agent and managed endpoint enrollment.
+
+## Mobile installation
+
+The site is generated as an installable Progressive Web App (PWA): mobile browsers can add INTA to the home screen, launch it in a standalone window and cache the app shell after the first successful visit. The same responsive Updates tab and canonical catalog are used by desktop and phone layouts. The service worker performs no periodic background polling or automatic update execution; it only maintains the cached app shell and uses network-first navigation with an offline fallback.
+
+The PWA does not grant the website access to installed applications. Live update inventory and repair still require the local INTA agent or an approved management integration.
