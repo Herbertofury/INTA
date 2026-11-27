@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
   <link rel="icon" type="image/svg+xml" href="{{FAVICON}}">
-  <meta name="theme-color" content="#111214">
+  <meta name="theme-color" content="#101113">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="apple-touch-icon" href="./inta-app-icon.svg">
   <meta name="mobile-web-app-capable" content="yes">
@@ -23,29 +23,37 @@
         <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M8 8h8v8H8zM20 8h8v8h-8zM8 20h8v8H8z" fill="currentColor"/><path d="M20 20h8v8h-8z" stroke="currentColor" stroke-width="2"/></svg></span>
         <span class="brand-wordmark">INTA<span>COMPUTER SERVICES</span></span>
       </a>
-      <div class="workspace-label">Workspace</div>
+      <div class="workspace-label">Find &amp; use</div>
       <nav id="primary-nav">
         <a href="#home" data-nav="home"><span data-icon="home"></span>Technician home</a>
-        <a href="#news" data-nav="news"><span data-icon="activity"></span>News</a>
-        <a href="#checklist" data-nav="checklist"><span data-icon="checkCircle"></span>Checklist</a>
-        <a href="#updates" data-nav="updates"><span data-icon="refresh-cw"></span>Updates &amp; Maintenance</a>
-        <a href="#command-center" data-nav="command-center"><span data-icon="terminal"></span>Command Center</a>
-        <a href="#services" data-nav="services"><span data-icon="route"></span>Service map</a>
-        <a href="#online" data-nav="online"><span data-icon="globe"></span>Online tools</a>
         <a href="#tools" data-nav="tools"><span data-icon="grid"></span>Tool library<span class="nav-count" id="tool-count"></span></a>
-        <a href="#playbooks" data-nav="playbooks"><span data-icon="book"></span>Job playbooks<span class="nav-count" id="job-count"></span></a>
-        <a href="#knowledge" data-nav="knowledge"><span data-icon="layers"></span>Knowledge desk</a>
+        <a href="#online" data-nav="online"><span data-icon="globe"></span>Online tools</a>
         <a href="#saved" data-nav="saved"><span data-icon="bookmark"></span>Saved tools<span class="nav-count" id="saved-count">0</span></a>
+        <div class="nav-group-label">Service workspace</div>
+        <a href="#checklist" data-nav="checklist"><span data-icon="checkCircle"></span>Checklist</a>
+        <a href="#playbooks" data-nav="playbooks"><span data-icon="book"></span>Job playbooks<span class="nav-count" id="job-count"></span></a>
+        <a href="#services" data-nav="services"><span data-icon="route"></span>Service map</a>
+        <a href="#command-center" data-nav="command-center"><span data-icon="terminal"></span>Command Center</a>
+        <a href="#updates" data-nav="updates"><span data-icon="refresh"></span>Updates &amp; maintenance</a>
+        <div class="nav-group-label">Reference</div>
+        <a href="#news" data-nav="news"><span data-icon="activity"></span>News</a>
+        <a href="#knowledge" data-nav="knowledge"><span data-icon="layers"></span>Knowledge desk</a>
         <a href="#resources" data-nav="resources"><span data-icon="compass"></span>Resources &amp; wiki</a>
       </nav>
       <div class="sidebar-divider"></div>
-      <div class="nav-section-label">Project &amp; references</div>
+      <div class="nav-section-label">Project</div>
       <nav class="secondary-nav">
         <a href="https://github.com/Herbertofury/INTA/releases" target="_blank" rel="noopener noreferrer"><span data-icon="usb"></span>Rescue &amp; boot media<span data-icon="external" class="small-icon"></span></a>
         <a href="https://github.com/Herbertofury/INTA/wiki" target="_blank" rel="noopener noreferrer"><span data-icon="layers"></span>GitHub wiki<span data-icon="external" class="small-icon"></span></a>
         <a href="https://github.com/Herbertofury/Athena" target="_blank" rel="noopener noreferrer"><span data-icon="book"></span>Athena research<span data-icon="external" class="small-icon"></span></a>
       </nav>
       <div class="sidebar-bottom">
+        <div class="ecosystem-nav" aria-label="INTA products">
+          <a href="https://github.com/Herbertofury/INTA/blob/main/docs/ecosystem-development.md#inta-desktop" target="_blank" rel="noopener noreferrer">Desktop</a>
+          <a href="https://github.com/Herbertofury/INTA/blob/main/docs/ecosystem-development.md#inta-mobile" target="_blank" rel="noopener noreferrer">Mobile</a>
+          <a href="https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md" target="_blank" rel="noopener noreferrer">Rescue</a>
+          <a href="#home">Site</a>
+        </div>
         <div class="sidebar-footer"><span>Appearance</span><button id="theme-toggle" class="icon-button" aria-label="Switch to light theme" title="Switch theme"><span data-icon="sun"></span></button></div>
       </div>
     </aside>
@@ -55,7 +63,7 @@
         <div class="breadcrumb" id="breadcrumb">Workspace <span>/</span> Technician home</div>
         <div class="global-search-wrap">
           <span data-icon="search"></span>
-          <input id="global-search" type="search" placeholder="Search a problem or tool" aria-label="Search all problems, tools and playbooks" aria-controls="search-results" aria-expanded="false" autocomplete="off">
+          <input id="global-search" type="search" placeholder="Find a tool, problem, or guide…" aria-label="Search all problems, tools and playbooks" aria-controls="search-results" aria-expanded="false" autocomplete="off" spellcheck="false">
           <kbd>/</kbd>
           <div id="search-results" class="search-results" hidden></div>
         </div>
@@ -67,9 +75,8 @@
   </div>
   <button id="nav-backdrop" class="nav-backdrop" aria-label="Close navigation" hidden></button>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-  <noscript><div class="noscript">This interactive workspace needs JavaScript. The complete guides are also available in the <a href="https://github.com/Herbertofury/INTA/wiki">INTA GitHub wiki</a>.</div></noscript>
+  <noscript><div class="noscript">Enable browser scripting to use this interactive workspace. The complete guides are also available in the <a href="https://github.com/Herbertofury/INTA/wiki">INTA GitHub wiki</a>.</div></noscript>
   <script id="inta-data">{{DATA}}</script>
   <script id="inta-app">{{APP}}</script>
-  <script>if ("serviceWorker" in navigator && location.protocol !== "file:") { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(() => {})); }</script>
 </body>
 </html>

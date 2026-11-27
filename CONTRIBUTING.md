@@ -1,5 +1,12 @@
 # 🛠 Contribute to the <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) ecosystem
 
+## Required language: Rust
+
+All first-party application functions and executable utilities must use [Rust](https://www.rust-lang.org/) across Desktop, Mobile, Rescue and Site. A non-Rust implementation is allowed only when a reproducible comparison proves Rust slower for the same actual workload and supported target. Follow [Rust Policy](docs/rust-policy.md) and record the exact source, benchmark, correctness and scope evidence in [Language exceptions](data/language-exceptions.json). No approved performance exceptions currently exist.
+
+Existing non-Rust files are explicitly tracked migration debt. Keeping them available to avoid data or feature loss does not satisfy the rule; new or modified behavior must move into Rust. Declarative content and generated platform interop must not conceal application logic. Use the migration guard for changed-source checks and the strict gate before claiming full Rust compliance.
+
+
 **Start with [Knowledge Standards](docs/knowledge-standards.md) and [Interface Design](docs/interface-design.md), then use the [Contribution Guide](docs/contribute.md) and [Contribution Template](docs/contribution-template.md).**
 
 Start by selecting the affected lane in [Ecosystem Development](docs/ecosystem-development.md): <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) Desktop, <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) Mobile, <a href="https://github.com/Herbertofury/INTA/releases" title="Open INTA Rescue official download or service page" aria-label="Open INTA Rescue official download or service page" data-inta-brand="app-inta-rescue"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA Rescue official page" width="18" height="18" valign="middle" /></a> [INTA Rescue](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md), or <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) Site. For shared changes, name all affected surfaces and test their real integration before calling the milestone done.
@@ -24,10 +31,10 @@ Generated `wiki/`, `site/` and `docs/runbooks/` are build outputs. Change the ap
 
 ## 🧪 Make the change reviewable
 
-1. Describe the technician problem and the smallest complete improvement.
+1. Describe the technician problem and the complete outcome. Confirm the implementation follows [Rust Policy](docs/rust-policy.md), naming every affected product lane.
 2. Use original publisher or project documentation for factual claims. Record what was inspected and what was exercised.
 3. Apply the [Knowledge Standards](docs/knowledge-standards.md), including links on repeated tool and method mentions, meaningful section icons, a clear next action and honest evidence dates.
-4. Rebuild and run the checks that prove the changed behavior. For visual changes, inspect the rendered page on desktop and a narrow screen.
+4. Run the Rust language policy guard, then rebuild and run the checks that prove the changed behavior. For visual changes, inspect the rendered page on desktop and a narrow screen.
 5. Record the source revision, test result, remaining limits and publication evidence using the [Contribution Template](docs/contribution-template.md).
 
 Walk the changed route as a person who needs an answer now: recognize the problem, open the exact tool or built-in action, and follow the first three steps. Keep official-page and acquisition actions visible together. Check the response destination and file identity before labelling a link a direct download. Test scenario-specific launch links independently when several jobs use the same application.

@@ -1,0 +1,22 @@
+{
+  "adapterSha256": "19d4112280c4fdccdfb4bc6ed4f1bdf599d1e0d08409b4fcc63cee2300d3d94c",
+  "applicationLanguage": "Rust",
+  "command": "cargo run --locked -p inta-build -- portal",
+  "generatedAdapterOnly": true,
+  "generator": "wasm-bindgen --target no-modules + inta-build",
+  "schemaVersion": 1,
+  "sources": {
+    "Cargo.lock": "305330cdf42534e0838beba45a933d5ae8fcf309ae1940fb0e0599711bf2d830",
+    "crates/inta-build/src/main.rs": "01968a9c6a8c02ff3f46a3daba0957cb43a5aa04393b0bc8a7fa64358fa57d7a",
+    "crates/inta-ui/Cargo.toml": "04c46718640e8bb4af847f5a3a68a3ba11abbcc7fea463f5d5dab7d0d273dbfe",
+    "crates/inta-ui/src/bench.rs": "80362ce48a9dd94c5d2eb535b53d4ac2d85bc33adc3b32a455141e7060d32da3",
+    "crates/inta-ui/src/browser.rs": "b3bb9fabb569de3a6d97386f32410547e132d790027a40e7ca6e2b85a2033041",
+    "crates/inta-ui/src/catalog.rs": "329b5c5b73985d6c90d6b704fc30fc466a9c3d0ee95a7e2806954e689ad407d4",
+    "crates/inta-ui/src/common.rs": "34554d3d693a55f537b32f118e917499177f86cc53d1c4aa88d867bd1564ffda",
+    "crates/inta-ui/src/guides.rs": "73d5a904940e96dd2440ffb809fb88c2014c4a735c73ad6c090b19ea3a469938",
+    "crates/inta-ui/src/lib.rs": "eab6ce08a75e91eaba5428b8cbf9b841084d639e1a89c9c0e7948808b7938b7d",
+    "crates/inta-worker/src/lib.rs": "30e133e2d52d415e2cc6dbc4a535381e0488f043012d90e242b17b38f5e7c5e1",
+    "portal/icons.json": "8489268821cf68221595fc8ffaa0503bba8ddaa20a777ad4bbac21b0c5279a9f"
+  },
+  "wasmSha256": "3657ea2d2bf891e2bd801ff294c826bd072fe7f04b26ece0ed96994d444a7210"
+}

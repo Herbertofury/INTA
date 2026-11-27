@@ -1,0 +1,204 @@
+name: Build and exercise INTA Rust native clients
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'crates/**'
+      - 'site/catalog.json'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - '.github/workflows/rust-clients.yml'
+  pull_request:
+    paths:
+      - 'crates/**'
+      - 'site/catalog.json'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - '.github/workflows/rust-clients.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: inta-native-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  desktop:
+    name: Native Desktop · ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+            binary: inta-desktop
+            package: linux-x64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            binary: inta-desktop.exe
+            package: windows-x64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install Linux graphics build dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libxkbcommon-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libwayland-dev libgl1-mesa-dev xvfb
+      - name: Install target
+        run: rustup target add ${{ matrix.target }}
+      - name: Test shared behavior and native persistence
+        run: cargo test --locked -p inta-ui -p inta-native --lib
+      - name: Build native Desktop executable
+        run: cargo build --locked --release -p inta-native --bin inta-desktop --target ${{ matrix.target }}
+      - name: Capture real Linux desktop tools view
+        if: runner.os == 'Linux'
+        env:
+          INTA_SMOKE_SCREENSHOT: reports/native/desktop-tools.png
+          INTA_DATA_DIR: reports/native/state
+        run: timeout 90s xvfb-run -a target/${{ matrix.target }}/release/inta-desktop
+      - name: Capture narrow native view
+        if: runner.os == 'Linux'
+        env:
+          INTA_SMOKE_SCREENSHOT: reports/native/narrow-tools.png
+          INTA_SMOKE_WIDTH: '390'
+          INTA_DATA_DIR: reports/native/state
+        run: timeout 90s xvfb-run -a target/${{ matrix.target }}/release/inta-desktop
+      - name: Capture real Linux job view
+        if: runner.os == 'Linux'
+        env:
+          INTA_SMOKE_SCREENSHOT: reports/native/desktop-job.png
+          INTA_SMOKE_PAGE: job
+          INTA_SMOKE_JOB: printer-repair
+          INTA_DATA_DIR: reports/native/state
+        run: timeout 90s xvfb-run -a target/${{ matrix.target }}/release/inta-desktop
+      - name: Package native executable, catalog and usage documentation
+        run: |
+          mkdir -p publish/INTA-Data
+          cp target/${{ matrix.target }}/release/${{ matrix.binary }} publish/
+          cp site/catalog.json publish/INTA-Data/catalog.json
+          cp docs/native-clients.md publish/README.md
+          cargo run --locked --release -p inta-agent --bin inta-agent-package -- publish dist/INTA-Desktop-${{ matrix.package }}.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: INTA-Desktop-${{ matrix.package }}
+          path: dist/*
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always() && runner.os == 'Linux'
+        with:
+          name: INTA-Native-render-evidence
+          path: reports/native/*.png
+          if-no-files-found: warn
+  android:
+    name: Native Android Mobile · ARM64 and x86_64
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: android-actions/setup-android@v3
+      - name: Install Android native toolchain
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0' 'ndk;27.2.12479018'
+      - name: Install Rust Android targets
+        run: rustup target add aarch64-linux-android x86_64-linux-android
+      - name: Install Rust APK packager
+        run: cargo install cargo-apk --version 0.10.0 --locked
+      - name: Build debug-signed native APK for device acceptance
+        env:
+          ANDROID_NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.2.12479018
+        run: cargo apk build --locked -p inta-native --lib
+      - name: Enable emulator acceleration
+        run: sudo chmod a+rw /dev/kvm
+      - name: Exercise actual native Activity on Android emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_7
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          disable-animations: true
+          script: cargo run --locked -p inta-policy --bin inta-android-smoke -- target/debug/apk reports/android
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: INTA-Mobile-Android-emulator-evidence
+          path: reports/android/
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        with:
+          name: INTA-Mobile-Android-device-test-APK
+          path: target/debug/apk/*.apk
+          if-no-files-found: error
+  rescue:
+    name: Native Rescue · Linux
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install native graphics dependencies
+        run: sudo apt-get update && sudo apt-get install -y libxkbcommon-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libwayland-dev libgl1-mesa-dev xvfb
+      - name: Test Rust platform contracts
+        run: cargo test --locked -p inta-agent -p inta-rescue -p inta-media
+      - name: Build native Rescue workspace
+        run: cargo build --locked --release -p inta-rescue --bin inta-rescue
+      - name: Verify embedded native resources
+        run: target/release/inta-rescue --self-test
+      - name: Capture actual Rescue interface
+        run: timeout 90s xvfb-run -a target/release/inta-rescue --screenshot reports/native/rescue.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: INTA-Rescue-native-workspace-linux
+          path: |
+            target/release/inta-rescue
+            reports/native/rescue.png
+          if-no-files-found: error
+  media:
+    name: Native Media Creator · ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            binary: inta-media
+            package: linux-x64
+          - os: windows-latest
+            binary: inta-media.exe
+            package: windows-x64
+          - os: macos-latest
+            binary: inta-media
+            package: macos-arm64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install Linux graphics build dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libxkbcommon-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libwayland-dev libgl1-mesa-dev xvfb
+      - name: Test Media Creator contracts
+        run: cargo test --locked -p inta-media
+      - name: Build native Media Creator
+        run: cargo build --locked --release -p inta-media --bin inta-media
+      - name: Capture actual Media Creator interface
+        if: runner.os == 'Linux'
+        run: timeout 90s xvfb-run -a target/release/inta-media --screenshot reports/native/media.png
+      - name: Package native Media Creator
+        run: |
+          mkdir -p publish
+          cp target/release/${{ matrix.binary }} publish/
+          cargo run --locked --release -p inta-agent --bin inta-agent-package -- publish dist/INTA-Media-Creator-${{ matrix.package }}.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: INTA-Media-Creator-${{ matrix.package }}
+          path: dist/*
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always() && runner.os == 'Linux'
+        with:
+          name: INTA-Media-render-evidence
+          path: reports/native/media.png
+          if-no-files-found: warn

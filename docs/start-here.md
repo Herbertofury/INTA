@@ -8,6 +8,8 @@
 
 <!-- INTA:QUICK-START:START -->
 
+<a id="free-tools"></a>
+
 ## ⚡ What do you need to fix?
 
 **Choose your problem for the first three actions.** Tool names open the official page; download links identify the file and platform. Each role has its own visible choice. Built-in features link to their instructions.
@@ -67,8 +69,6 @@ Selection review: **2026-11-26** · [Complete tool directory](https://github.com
 | **[Fix a certificate renewal failure](https://herbertofury.github.io/INTA/#online?task=fix-certificate-issuance)** | <a href="https://letsdebug.net/" title="Open Let&#x27;s Debug official download or service page" aria-label="Open Let&#x27;s Debug official download or service page" data-inta-brand="lets-debug"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/344d137ca87600b26279.png" alt="Let&#x27;s Debug official page" width="18" height="18" valign="middle" /></a> [Let's Debug](https://letsdebug.net/) · <a href="https://crt.sh/" title="Open crt.sh Certificate Search official download or service page" aria-label="Open crt.sh Certificate Search official download or service page" data-inta-brand="crt-sh"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/d54b1328f67574b49d39.png" alt="crt.sh Certificate Search official page" width="18" height="18" valign="middle" /></a> [crt.sh Certificate Search](https://crt.sh/) · <a href="https://www.ssllabs.com/ssltest/" title="Open Qualys SSL Labs official download or service page" aria-label="Open Qualys SSL Labs official download or service page" data-inta-brand="ssl-labs"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/92513facfe1fbecbaf16.png" alt="Qualys SSL Labs official page" width="18" height="18" valign="middle" /></a> [Qualys SSL Labs](https://www.ssllabs.com/ssltest/) · <a href="https://configurator.tlsref.org/" title="Open TLSRef TLS Configurator official download or service page" aria-label="Open TLSRef TLS Configurator official download or service page" data-inta-brand="tlsref-configurator"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/23ff0436d1ed36cf512b.png" alt="TLSRef TLS Configurator official page" width="18" height="18" valign="middle" /></a> [TLSRef TLS Configurator](https://configurator.tlsref.org/) | Read the ACME client failure and test the exact hostname with its actual HTTP-01, DNS-01 or TLS-ALPN-01 validation method. |
 
 Service links open their official websites. Account, access and submission visibility are shown beside the tools in the directory.
-
-<a id="free-tools"></a>
 
 <!-- INTA:QUICK-START:END -->
 

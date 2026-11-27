@@ -1,0 +1,18 @@
+[package]
+name = "inta-content"
+version.workspace = true
+edition = "2021"
+rust-version.workspace = true
+
+[dependencies]
+base64 = "0.22"
+chrono = "0.4"
+regex = "1"
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
+url = "2"
+inta-knowledge = { path = "../inta-knowledge" }
+inta-news = { path = "../inta-news" }
+
+[dev-dependencies]
+inta-ui = { path = "../inta-ui" }

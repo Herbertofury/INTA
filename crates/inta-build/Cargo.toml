@@ -1,0 +1,11 @@
+[package]
+name = "inta-build"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+serde_json = "1"
+base64 = "0.22"
+sha2 = "0.10"
+

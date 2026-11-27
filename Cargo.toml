@@ -1,0 +1,17 @@
+[workspace]
+members = ["crates/inta-ui", "crates/inta-agent", "crates/inta-policy", "crates/inta-build", "crates/inta-native", "crates/inta-rescue", "crates/inta-media", "crates/inta-worker", "crates/inta-browser-tests", "crates/inta-rescue-ops", "crates/inta-news", "crates/inta-content", "crates/inta-release", "crates/inta-knowledge"]
+default-members = ["crates/inta-ui", "crates/inta-agent", "crates/inta-policy", "crates/inta-build"]
+resolver = "2"
+
+[workspace.package]
+version = "0.2.0"
+edition = "2021"
+license = "MIT"
+rust-version = "1.88"
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = "debuginfo"
+

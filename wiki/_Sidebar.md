@@ -102,6 +102,7 @@ Tool name = official page. File buttons name the platform; built-in tools open i
 - [Knowledge standards](Knowledge-Standards)
 - [Interface design](Interface-Design)
 - [Contribute](Contribute)
+- [Ecosystem development](Ecosystem-Development)
 - [Contribution templates](Templates)
 - [Organization rules](Knowledge-Organization)
 - [Coverage and review health](Knowledge-Health)

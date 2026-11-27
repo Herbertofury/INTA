@@ -1,0 +1,15 @@
+[package]
+name = "inta-rescue-ops"
+version = "0.2.0"
+edition = "2021"
+license = "MIT"
+description = "Rust ISO build and boot verification for INTA Rescue"
+
+[dependencies]
+sha2 = "0.10"
+serde_json = "1"
+tempfile = "3"
+
+[[bin]]
+name = "inta-rescue-ops"
+path = "src/main.rs"

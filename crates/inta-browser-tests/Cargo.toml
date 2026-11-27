@@ -1,0 +1,16 @@
+[package]
+name = "inta-browser-tests"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Rust browser acceptance and visual evidence for the shipped INTA workspace"
+
+[dependencies]
+anyhow = "1"
+headless_chrome = "1.0.22"
+serde_json = "1"
+sha2 = "0.10"
+
+[[bin]]
+name = "inta-browser-tests"
+path = "src/main.rs"

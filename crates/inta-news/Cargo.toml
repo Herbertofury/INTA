@@ -1,0 +1,19 @@
+[package]
+name = "inta-news"
+version = "0.2.0"
+edition = "2021"
+license = "MIT"
+description = "Bounded Rust public news metadata and upstream freshness collection"
+
+[dependencies]
+serde_json = "1"
+sha2 = "0.10"
+chrono = "0.4"
+url = "2"
+regex = "1"
+roxmltree = "0.20"
+scraper = "0.24"
+html-escape = "0.2"
+ureq = { version = "2.12", features = ["json"] }
+tempfile = "3"
+

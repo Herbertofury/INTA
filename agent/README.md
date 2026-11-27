@@ -1,69 +1,62 @@
 # INTA Local Maintenance Agent
 
-The Local Maintenance Agent is the small, user-installed bridge between the INTA website/PWA and package managers on the same computer. It exposes typed operations only; it is not a remote shell.
+The Rust Local Maintenance Agent connects the [INTA workspace](https://herbertofury.github.io/INTA/#updates) to package managers on the **same computer**. Its source is [crates/inta-agent](../crates/inta-agent). It preserves the versioned API and existing operation history while replacing the previous C#/.NET implementation.
 
-## Install on Windows
+## Run or install
 
-Download the successful Windows build artifact from [INTA Local Agent build 45947359692](https://github.com/Herbertofury/INTA/actions/runs/45947359692) (or check [the workflow page](https://github.com/Herbertofury/INTA/actions/workflows/local-agent.yml) for newer builds). Extract the Actions artifact ZIP, then run the included installer script with the Windows package ZIP and its `.sha256` sidecar in the same folder:
+Download the matching archive and its `.sha256` sidecar from the [Local Agent builds](https://github.com/Herbertofury/INTA/actions/workflows/local-agent.yml). Verify the archive against the published SHA-256 before extracting it. Run `inta-agent.exe` on Windows or `inta-agent` on Linux/macOS. The executable is portable and requires no .NET or Python runtime.
 
-    powershell -NoProfile -ExecutionPolicy Bypass -File .\\install-agent.ps1 -PackagePath .\\inta-agent-win-x64.zip
+For a current-user install, run the verified executable with `--install`. On Windows, this copies it into `%LOCALAPPDATA%\Programs\INTA\Agent` and creates normal and administrator Start menu shortcuts using native Windows APIs. On Linux/macOS it copies the executable to `~/.local/bin`; launch it explicitly. Installation does not launch the agent or register a background service. The release is unsigned unless its release notes explicitly state otherwise.
 
-The installer verifies SHA-256, installs to the current user's LocalAppData, creates normal and administrator Start menu shortcuts, and starts the agent. The first build is not code-signed; Windows may show a SmartScreen warning. Only use artifacts from the official INTA workflow and verify the checksum.
+Open **INTA → Updates & Maintenance → Connect this computer**. Connect once, then request inventory or progress when needed. Read-only inventory and previews need no extra confirmation. Each update, repair, uninstall or rollback needs one clear confirmation. Closing the browser does not cancel an installer. The agent keeps observing the original process and retains the manager lock until it exits.
 
-## User experience
+### Portable workspace
 
-1. Install and start the agent once on the computer.
-2. Open INTA → Updates & Maintenance → Connect this computer.
-3. Click Connect once. The browser receives an in-memory pairing token from the loopback-only agent and stores it in session storage for this tab.
-4. Inventory and previews are read-only and do not ask for confirmation.
-5. Updating, repair and uninstall require one clear confirmation in the INTA UI. Update-all has one confirmation for the selected manager.
-6. Refresh progress when needed. The agent does not poll in the background.
-7. Operation history is saved locally and remains available after restarting the agent.
+Use `inta-agent --data-dir /path/to/INTA/agent` to keep history in an explicit portable directory. Without this option, Windows continues using `%LOCALAPPDATA%\INTA\agent\operations.jsonl`; Linux/macOS use the local XDG data directory. Existing camelCase JSONL history is readable. Queued/running records found after restart become **interrupted**, retaining their output and requiring inspection before retrying.
 
-## Security and scope
+Use `inta-agent --serve-site /path/to/INTA/site --open` to open a bundled Site build in the local browser. This host serves only that directory on loopback port 5173 and works with the same maintenance bridge. It is a local browser workspace, not evidence of a native Mobile application or authenticated remote device management.
 
-- Binds only to IPv4/IPv6 loopback at port 47821.
-- Requires the official INTA GitHub Pages Origin (or local development origins), validates loopback peer and Host, and answers browser private-network preflights.
-- Uses one in-memory bearer token per agent session. The token is not written to disk.
-- Exposes typed inventory, preview, update, repair, uninstall and history endpoints. There is no arbitrary command or shell endpoint.
-- Uses ProcessStartInfo.ArgumentList; commands are not passed through a shell.
-- Validates package IDs; only fixed manager/action combinations are accepted.
-- Does not kill an installer if the observation window elapses; it continues waiting and keeps the package-manager lock.
-- Runs with the user's current privilege level. If an operation needs elevation, start the agent from the administrator shortcut; there are no repeated agent authorization prompts.
-- Stores operation history under the user's local INTA application data directory.
+## Security and behavior
 
-## Supported manager actions
+- Binds exclusively to IPv4/IPv6 loopback on port 47821. The process rejects non-loopback peers and unexpected Host headers.
+- Only the official INTA origins and exact local development origins may pair. Other origins receive no CORS grant. Browser private-network preflights are supported.
+- Keeps a cryptographically random bearer token in memory for the current agent session. Restart invalidates previous tokens; credentials never enter history or release files.
+- Accepts only typed manager/action/package requests. Exact executable/argument vectors are selected in Rust. There is no arbitrary shell endpoint.
+- Validates the complete operation before queueing it. Batch validation is atomic: an unsupported Windows Update request or malformed package ID prevents the whole batch from launching.
+- Serializes operations per manager, saves accepted requests before launch, drains both process output streams, and never kills an installer because a browser times out.
+- Reports **queued**, **running**, **failed**, **completed-review**, **verified**, **awaiting-reboot**, and **interrupted** separately. Exit code zero alone does not establish a successful repair or rollback.
+- Performs no background inventory, update checks or web polling. Refreshes are explicit user actions.
 
-| Manager | Preview | Update one | Update all | Repair/reinstall | Uninstall | Rollback |
-|---|---:|---:|---:|---:|---:|---:|
-| Windows Update | Installed KB history | Open Settings | Open Settings | DISM + SFC | Exact KB via WUSA | Exact KB via WUSA |
-| WinGet | Yes | Yes | Yes | If package supports it | Yes | No generic rollback |
-| Chocolatey | Yes | Yes | Yes | Reinstall | Yes | Requires an explicit previous package version |
-| Scoop | Yes | Yes | Yes | Reinstall | Yes | Requires an explicit previous version |
-| APT | Yes | Yes | Yes | Reinstall | Yes | Requires a selected package version |
-| DNF | Yes | Yes | Yes | Reinstall | Yes | Requires a selected package version |
-| Pacman | Yes | Yes | Yes | Reinstall | Yes | Requires a cached package archive |
-| Homebrew | Yes | Yes | Yes | Reinstall | Yes | Requires a pinned/formula-specific prior version |
-| Flatpak | Yes | Yes | Yes | Repository repair | Yes | Commit-specific rollback is not automated |
-| Snap | Yes | Yes | Yes | Not generic | Yes | Native previous-revision revert |
-| UniGetUI | Yes | Yes | Yes | Not yet | Not yet | Not yet |
+## Supported operations
 
-The agent currently collects Windows installed applications from the uninstall registry. Linux/macOS currently provide manager detection and update previews; richer unified installed-app inventory is not included in the first release. Package IDs are copied from the selected manager's preview. Native rollback is currently exposed for Snap via `snap revert` and for Windows Update through an exact KB uninstall. Other package managers require a separately identified previous version or vendor-supported rollback procedure. Windows Update inventory is installed-hotfix history, not a complete list of offered OS updates; installation opens the supported Settings interface. Windows servicing repair runs DISM then SFC.
+| Manager | Preview | Update one/all | Repair | Uninstall | Rollback |
+| --- | --- | --- | --- | --- | --- |
+| Windows Update | Installed hotfix history | Use Windows Settings | DISM, then SFC if DISM succeeds | Exact KB via WUSA | Exact KB via WUSA |
+| WinGet | Yes | Yes / yes | Manager-supported repair | Yes | Not generic |
+| Chocolatey | Yes | Yes / yes | Reinstall | Yes | Needs a selected prior version |
+| Scoop | Yes | Yes / yes | Reinstall | Yes | Needs a selected prior version |
+| APT | Yes | Yes / yes | Reinstall | Yes | Needs a selected prior version |
+| DNF | Yes | Yes / yes | Reinstall | Yes | Needs a selected prior version |
+| Pacman | Yes | Yes / yes | Reinstall | Yes | Needs a selected cached archive |
+| Homebrew | Yes | Yes / yes | Reinstall | Yes | Formula/version specific |
+| Flatpak | Yes | Yes / yes | Repository repair | Yes | Commit specific; not automated |
+| Snap | Yes | Yes / yes | No generic repair | Yes | Native previous-revision revert |
+| UniGetUI | Yes | No / yes | Not supported | Not supported | Not supported |
 
-## Build locally
+Windows app inventory reads the installed-app registry. Other platforms currently expose manager detection and read-only update previews rather than a claimed unified installed-app inventory. Windows hotfix history is not a complete list of offered OS updates. Store updates remain in the supported Windows interface. APT updates can be marked verified only when a successful complete query proves the exact package installed and a successful update preview no longer lists it; other post-checks remain visible for review where definitive evidence is unavailable.
 
-Requires .NET 10 SDK.
+## Build and proof
 
-    dotnet publish agent/INTA.LocalAgent/INTA.LocalAgent.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o dist/inta-agent
+```sh
+cargo test -p inta-agent
+cargo build --release -p inta-agent --bin inta-agent
+cargo run --release -p inta-agent --bin inta-agent-package -- publish dist/inta-agent.zip
+```
 
-Other runtime identifiers: linux-x64, osx-arm64, osx-x64.
+Command legend: [Cargo](https://doc.rust-lang.org/cargo/) compiles and tests the Rust [agent](../crates/inta-agent) and its Rust archive/checksum packager. The platform workflow builds Windows x64, Linux x64, macOS ARM64 and macOS x64 artifacts. A platform build does not establish real package-manager repair success on that platform.
 
-## Boundaries
+The integration tests exercise live loopback HTTP pairing/CORS/authentication, invalid origins and Host values, typed-action rejection, unsafe-batch atomicity, real binary process capture, per-manager serialization, history restart/migration, and conservative verification. Test execution uses an explicit fixture backend and never updates this machine's packages.
 
-Windows OS update installation and Microsoft Store updates remain in their supported Windows UI. The agent can inspect installed KB history, run DISM/SFC repair, and uninstall a specific uninstallable KB through WUSA; it does not silently manipulate Windows servicing internals. The website and PWA can only connect to the agent on the same device. Phone-to-desktop management through a remote account relay is not available yet because this repository currently has a static GitHub Pages frontend and no authenticated relay service.
+## Product boundary
 
-## Storage Preview
-
-Run `inta-agent --storage-preview "<local-folder>" [minimum-age-days] [entry-limit]` as an explicit one-shot diagnostic. Defaults: 7 days and 100,000 entries. The preview rejects drive roots, Windows UNC/device paths, and roots passing through a link. The scan skips link, device and offline entries marked by the filesystem and reports entry/depth caps or read errors as `partial`. It never starts the local server.
-
-The JSON reports counts and **logical file bytes**. Hard links can be counted multiple times; compression, sparse files and allocation overhead mean this is not the space a cleanup would free. The preview is not a filesystem snapshot, and file age is not authorization to remove anything. It does not open file contents, modify the folder, include paths in the JSON or send results elsewhere.
+This agent and its local browser host complement the four product lanes. They do not supply account login, a remote relay, native phone screens, synced billing or device enrollment. [Ecosystem Development](../docs/ecosystem-development.md) tracks those acceptance gates separately.

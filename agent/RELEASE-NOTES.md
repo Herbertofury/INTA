@@ -1,18 +1,13 @@
-# INTA Local Agent release notes
+# INTA Rust Local Agent 0.2.0
 
-The first Local Agent release provides a loopback-only, typed package-maintenance API for INTA.
+Replaces the C#/.NET local maintenance bridge with Rust while keeping `/api/v1`, camelCase response fields, port 47821, and existing local operation history.
 
-- Local pairing from the official INTA GitHub Pages origin.
-- Windows installed-application inventory from uninstall registry entries.
-- Package-manager detection and update previews.
-- One-package update, repair/reinstall and uninstall operations.
-- One-confirmation update-all per selected package manager.
-- Local operation history and exit-code/output reporting.
-- Self-contained Windows, Linux and macOS binaries.
-- No arbitrary shell endpoint and no background inventory polling.
+- Preserves 40 supported typed manager actions across 11 manager integrations, with exact package-ID validation and one confirmation per modifying request.
+- Uses Rust for manager orchestration, process capture, operation state, history, origin/host checks, session pairing, portable hosting, installation, and release packaging.
+- Adds atomic batch validation, including the Windows Update restriction that previously differed between single and batch requests.
+- Keeps manager locks until the original installer exits; browser disconnects never kill installers.
+- Replaces optimistic post-check claims with explicit completed-review states unless concrete verification evidence exists.
+- Provides a current-user native installer (`--install`), portable data directory (`--data-dir`), and bundled local browser workspace (`--serve-site … --open`).
+- Produces platform ZIPs and SHA-256 sidecars with the Rust packager.
 
-Limitations:
-- Windows Update and Microsoft Store remain in their supported Windows UI / repair workflows; they are not silently serviced by the agent.
-- Windows currently has the richest installed-app inventory. Linux/macOS currently expose installed package-manager previews but not a complete unified inventory.
-- The first release is not code-signed. Verify the published SHA-256 checksum and obtain the installer only from the official INTA repository release.
-- Remote phone-to-desktop management and cloud account synchronization are not part of this local-only agent release.
+Read the [agent guide](README.md) for supported operations and platform limits. Linux fixture and HTTP integration tests do not prove real Windows/macOS package-manager behavior. The local browser host does not constitute a native Mobile client or authenticated remote relay. Downloaded binaries remain unsigned unless the published release explicitly says otherwise.

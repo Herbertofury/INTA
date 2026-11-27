@@ -1,0 +1,414 @@
+{
+  "schemaVersion": 1,
+  "defaultLanguage": "Rust",
+  "exceptions": [],
+  "generatedInterop": [],
+  "legacyInventory": [
+    {
+      "path": "agent/INTA.LocalAgent/Inventory.cs",
+      "language": "C#",
+      "sha256": "0c781da655c990132ae0a7de726b438d88f963882605ae406eee53c9c8418929",
+      "migrationTarget": "Rust local maintenance service and packaging",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "agent/INTA.LocalAgent/Models.cs",
+      "language": "C#",
+      "sha256": "25dbef68234e47719cdbada1264bdd35db15594071ffd10e5f60a4dff6b4c0d6",
+      "migrationTarget": "Rust local maintenance service and packaging",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "agent/INTA.LocalAgent/OperationStore.cs",
+      "language": "C#",
+      "sha256": "bfe269a7a15e3ba0f5703eb8abe7cb4e4547542d1193475c01ae632bd6d6073d",
+      "migrationTarget": "Rust local maintenance service and packaging",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "agent/INTA.LocalAgent/PackageManagers.cs",
+      "language": "C#",
+      "sha256": "d9599796f43072fbbb3d68c3e3914dc36e0f35d342810abd45f8f88c9d73850f",
+      "migrationTarget": "Rust local maintenance service and packaging",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "agent/INTA.LocalAgent/ProcessRunner.cs",
+      "language": "C#",
+      "sha256": "87325613be908bdc3c25af7ae51a4bf9f966c36404e39d2e5e6870ee4cb69202",
+      "migrationTarget": "Rust local maintenance service and packaging",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "agent/INTA.LocalAgent/Program.cs",
+      "language": "C#",
+      "sha256": "8979432cdac672f5306cba5ed9b17fea0263d1f410e189ad73c160866d885bfa",
+      "migrationTarget": "Rust local maintenance service and packaging",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "agent/install-agent.ps1",
+      "language": "PowerShell",
+      "sha256": "7ad8a0d5d5cdf77cbad2fc5ab962c5748b57c29ee4ec80fb781067d88046b3c3",
+      "migrationTarget": "Rust local maintenance service and packaging",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "agent/package.py",
+      "language": "Python",
+      "sha256": "ee85c24470787c7c6813e3c50a12d649f22ac011a56d241b86cc0e8a28661d00",
+      "migrationTarget": "Rust local maintenance service and packaging",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "live/hooks/live/0900-ai.hook.chroot",
+      "language": "Shell",
+      "sha256": "c1cac3908c064e1433a780171e7ab38aa22aae2f10d4c3cb3e1bb4caa1f524df",
+      "migrationTarget": "Rust Rescue and media utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "live/hooks/live/0950-session.hook.chroot",
+      "language": "Shell",
+      "sha256": "0fc919f925c14068d45d5f8c695aa214f50563b7b7d947e52c16ea707b6d7427",
+      "migrationTarget": "Rust Rescue and media utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "live/includes.chroot/usr/local/bin/inta-boot-smoke",
+      "language": "Shell",
+      "sha256": "34f82c33ed1bff82b11151ddb5367c35d7d2aafd82bc5737087c7e6e63315079",
+      "migrationTarget": "Rust Rescue and media utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "live/includes.chroot/usr/local/bin/inta-rescue",
+      "language": "Python",
+      "sha256": "723d1bd6ec820bf0eb5019a35ea53c0c713604b0704cc944dfecb6d5efeceb5c",
+      "migrationTarget": "Rust Rescue and media utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "live/includes.chroot/usr/local/bin/inta-self-test",
+      "language": "Shell",
+      "sha256": "44f5e7fa650b4d2fd0808082542a87525247056767c51c4294486b9097743b70",
+      "migrationTarget": "Rust Rescue and media utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "media/inta-media.py",
+      "language": "Python",
+      "sha256": "6ac7fe59a6785d73c451d53c6ebd1518bc1fd3add3346e6a2f6ff3a6fbda5ecf",
+      "migrationTarget": "Rust Rescue and media utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "media/inta_brand_ui.py",
+      "language": "Python",
+      "sha256": "0f9d6bf28bd62c42e2e333780b4b2467ed7d64947ba8b3498f16357d7f7269d2",
+      "migrationTarget": "Rust Rescue and media utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "portal/app.js",
+      "language": "JavaScript",
+      "sha256": "3cddd6534410bc076e1bfc4d322e38fe60777c9053a0302b68e1a29d5be3f349",
+      "migrationTarget": "Rust application runtime compiled to WebAssembly",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "portal/index.template.html",
+      "language": "HTML-embedded JavaScript",
+      "sha256": "ba03885839b13e4e28e33f7fe685c9d65d3ca916fc67222ea599432e620c938c",
+      "migrationTarget": "Rust application runtime compiled to WebAssembly",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/brand_icons.py",
+      "language": "Python",
+      "sha256": "b21a01bae30f878e18d3b52400a8bad6d0c9a558d3a20d31c0362975a331d1c9",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/brand_markdown.py",
+      "language": "Python",
+      "sha256": "eadc007db21141b21d083fdc59f382aec9851a4b3cf913bacc28c62b40db7b5d",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/build-hub.py",
+      "language": "Python",
+      "sha256": "042a5c1feb76f66d21a7bd97a788fc2c6f443eb8c823eab8d51c69bac6715aed",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/build-iso",
+      "language": "Shell",
+      "sha256": "b9351fb68cd3808ea49a76e2f29a7f5c88ce733d169cf30384bb227ce33aa7d3",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/check-knowledge.py",
+      "language": "Python",
+      "sha256": "6220a948fed6783ee4b083acf9f208ca8d8ec04c450815b44561d1e5e52d3b11",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/check-online-runtime.py",
+      "language": "Python",
+      "sha256": "60dbcda9d9d09aa84531bea4a4cd898500806cb5edc2d4be151732ad8d34ce0d",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/check-release-publication.py",
+      "language": "Python",
+      "sha256": "d38858fda72b35ee6d74120ce2323aa4d8d60fed2feccd89739baebd02ab66d4",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/check-upstreams.py",
+      "language": "Python",
+      "sha256": "b6ca1ee44752113f080543f7e8de752b761ea51465c83080003213bbeb233584",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/check-wiki.py",
+      "language": "Python",
+      "sha256": "a76ec20656be8a2cb41bf48375a17b931eafdf3461bcfca674d68e90b232f4e7",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/knowledge_health.py",
+      "language": "Python",
+      "sha256": "bf59a46708a32952195faf0237350635b9fde3f3408d9f59b965eedd2b363594",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/online_tools.py",
+      "language": "Python",
+      "sha256": "521e69e72c4bfe9bb0f0817407a099584f77eb59fab27440bd1f681c488114f9",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/package-inta-release.py",
+      "language": "Python",
+      "sha256": "79762286a344c23b65cc9483341e78e7824ff5996a7a17071294eecfa9dbcf35",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/package-media.py",
+      "language": "Python",
+      "sha256": "37105d254beb2cf32b1ac27c66b0ca99ab041b4dc3dd391dcb4fc51a7bfa08b4",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/package-rescue-release.py",
+      "language": "Python",
+      "sha256": "23cd7bfb66b020f40c5869063f125c63535b109cc28b6416925b5ee8a8c34657",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/publish-wiki.py",
+      "language": "Python",
+      "sha256": "c8b1867ca8da931e191d118d5b7e7d7bf5ef7c6bb1b6cecaa730efed8d7e299c",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/reconcile-toolbox.py",
+      "language": "Python",
+      "sha256": "e282d07212b87cc76dbbf13c75c67580e49dd4c55df719042116f244edfe8524",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/refresh-brand-icons.py",
+      "language": "Python",
+      "sha256": "d736eaaac1015c5d473f9804f168f90e3474ebaf7b379f508bce64f853404058",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/refresh-news.py",
+      "language": "Python",
+      "sha256": "dfd4f730cd57dec5f94a443f108a69aa1a886840adc275965c7f551f358403ca",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/smoke-iso",
+      "language": "Shell",
+      "sha256": "18f191e4cc062b721911e1dc5591f64574a88c7a87ec92994d607085438d6090",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/verify-rescue-candidate.py",
+      "language": "Python",
+      "sha256": "046f2a6808651660a6b8a7043d6993ee7187a03c80f89bccc562d47b3c404d8b",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "scripts/wiki_links.py",
+      "language": "Python",
+      "sha256": "c86750cb3bc949d71d6a62772bf9ec01f5eb47f9606f5b6a1fda3300e20bff5b",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "site/index.html",
+      "language": "HTML-embedded JavaScript",
+      "sha256": "3df4664872778914b9c8b1b4e9c4696bb6735cc8e3ba07c5250a312f103d2911",
+      "migrationTarget": "Rust application runtime compiled to WebAssembly",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "site/sw.js",
+      "language": "JavaScript",
+      "sha256": "cbf33fa224b614048533d726fe77a9731be2b69efc10d28522a5ece07dc86c40",
+      "migrationTarget": "Rust application runtime compiled to WebAssembly",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_agent.py",
+      "language": "Python",
+      "sha256": "300b57985aae43d4255cdcfbe36bedb2d3c390aab35badd0dcbf601896025174",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_brand_icons.py",
+      "language": "Python",
+      "sha256": "edc08fdce4e6bac8192149d3ec6e7eed33fe21b5f117aac6cb49da611cc4cc83",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_brand_markdown.py",
+      "language": "Python",
+      "sha256": "8baadfa9c26763a7edb5c339f1d61b56c2b183eb596f25f9507fd605ac3124a0",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_hub.py",
+      "language": "Python",
+      "sha256": "4ac6f95fbf1707fb39f122ab046df539521e82b8d68061b107dfb1f4bfeca068",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_knowledge.py",
+      "language": "Python",
+      "sha256": "571279c3003bb257a0933748745d7bee97953b4e9713056bd57d7586b4312d12",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_maintenance_recommendations.py",
+      "language": "Python",
+      "sha256": "c5ae802ac66cc1dd68b290f2a845a84416160bd73b66f05c8212e2354b921d3d",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_media.py",
+      "language": "Python",
+      "sha256": "11adf25b0b230d435a196fec03d14dac69660e7ee77f69ddc7d85e159fe553a5",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_media_parts.py",
+      "language": "Python",
+      "sha256": "e6a73d37756f057fdefe381aca97999fadf64d979e71fec12cb96ddc25254fa6",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_news.py",
+      "language": "Python",
+      "sha256": "d8222a9149c38b611ee078e68045e2aaba1a6e75b51cbb4282f52e24f7f916d5",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_news_digest.py",
+      "language": "Python",
+      "sha256": "d3b8e05a0a6ea7b7cb9586d153c441fa2c803eaa0f4b495836475a1f90e25ce9",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_online_tools.py",
+      "language": "Python",
+      "sha256": "58e787d0986b9b60f7321852e96528253fe1e2a474214fc35c5473e63e991543",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_refresh_news.py",
+      "language": "Python",
+      "sha256": "1de555e9c85da4efdd0e093498f54be67a513474cc364b82c688406ec197efb9",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_rescue_candidate.py",
+      "language": "Python",
+      "sha256": "9a55d3aa740efd415f35c0768cae26407af78196c2ab69f61b4cae004b05569e",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_rescue_release.py",
+      "language": "Python",
+      "sha256": "11d4bdf42966a0a3fddf54c05a4d91ba2515b4a7ee6d850569af523db174c754",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_tool_choices.py",
+      "language": "Python",
+      "sha256": "b5ce8c991b6fa1d79e36d2de7f80bb9c8c93680ebf87287ee08c7c9f6b025886",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_tool_reputation.py",
+      "language": "Python",
+      "sha256": "6dc221d81660aae76670f0f4ff8464a84e486036c857336c7317c7e9064123e8",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_web_brand_icons.py",
+      "language": "Python",
+      "sha256": "131ea92fde04b5f3f6a080239eb310b34c9da41e5f4c95a695cd1721b56bc9b9",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    },
+    {
+      "path": "tests/test_wiki.py",
+      "language": "Python",
+      "sha256": "2a7e6af29a8a04e0c90873484c41977106368200c7b84616bd35d66701c3dad4",
+      "migrationTarget": "Rust build and validation utilities",
+      "status": "unapproved-legacy"
+    }
+  ]
+}

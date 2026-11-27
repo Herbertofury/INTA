@@ -1,0 +1,23 @@
+[package]
+name = "inta-knowledge"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Canonical INTA knowledge links, authentic brand assets, Wiki audits and editorial health"
+
+[dependencies]
+anyhow = "1"
+base64 = "0.22"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+html-escape = "0.2"
+regex = "1"
+serde_json = "1"
+sha2 = "0.10"
+unicode-normalization = "0.1"
+unicode-casefold = "0.2"
+url = "2"
+percent-encoding = "2"
+
+[[bin]]
+name = "inta-knowledge"
+path = "src/main.rs"

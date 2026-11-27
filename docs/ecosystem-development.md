@@ -1,5 +1,12 @@
 # <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) ecosystem development
 
+## Mandatory Rust implementation
+
+**Desktop, Mobile, Rescue and Site must implement all first-party executable functions in [Rust](https://www.rust-lang.org/), including shared behavior, client UI logic, native services, local agents, account/sync services, build utilities and test utilities.** The only alternate-language implementation exception is workload-specific evidence proving the Rust implementation slower under an equivalent reproducible comparison. See [Rust Policy](https://github.com/Herbertofury/INTA/blob/main/docs/rust-policy.md) for the required evidence and [Language exceptions](https://github.com/Herbertofury/INTA/blob/main/data/language-exceptions.json) for the actual register.
+
+An existing non-Rust implementation is migration work, not an implicit exemption. A Rust launcher around a non-Rust application does not meet this requirement. Declarative documents, styles and catalog records are content; generated platform interop must remain a verified mechanical boundary with no first-party application behavior. Each lane must report its real code language and remaining migration work separately from its visual redesign and runtime acceptance.
+
+
 <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) is one technician workflow across four first-class products. Troubleshooting content is a feature of <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) Site, not the boundary of the repository or the development program. Use [the shared workspace roadmap](https://github.com/Herbertofury/INTA/issues/6) to coordinate implementation across clients.
 
 | Lane | Product responsibility | Next acceptance gate |
@@ -17,13 +24,15 @@ Build the native technician workspace and exercise its portable data behavior on
 
 Build the native phone companion and prove authenticated job sync on a real mobile device.
 
-Desktop maintenance has its own [native parity acceptance matrix](https://github.com/Herbertofury/INTA/blob/main/docs/desktop-maintenance-parity.md), including coverage pinned to both reference releases and distinct runtime gates for Windows, mobile, and recovery. A catalog link, package manager action, or storage preview is not an entire maintenance workspace.
-
 ## Tool Library across clients
 
 The Site’s [Tool Library](https://herbertofury.github.io/INTA/#tools) is the public browser entry. Desktop, Mobile and Rescue should use the same catalog IDs, approved acquisition roles, source evidence and search/sort behavior. Preserve both compact list and gallery choices. Native views should keep filters and selection when changing layouts; a <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows)-only download viewed on Mobile is a device-targeted reference, not a phone installer. In offline Rescue, show the local or bundled-tool state and keep links available without implying internet or installation.
 
 Keep category, platform, recommendation, acquisition/use, and saved tools independently filterable where supported. Distinguish unknown provider metrics from a measured zero; do not mix popularity, user ratings, <a href="https://github.com/" title="Open GitHub official download or service page" aria-label="Open GitHub official download or service page" data-inta-brand="app-github"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/99f4edb33272b70febb8.png" alt="GitHub official page" width="18" height="18" valign="middle" /></a> [GitHub](https://github.com/) stars or editorial recommendation into one score. Verify identical result IDs when switching list/gallery for the same query, and check a real device before marking a native client complete.
+
+## Discovery order
+
+Put the tool library before online tools in primary navigation and front-page composition. Keep both list and gallery layouts, complete filters, saved tools, direct acquisition links and the full catalog. Quick answers remain directly available with their authored tool choices; an older Online tools-first instruction does not override the current order.
 
 ## Shared milestones
 
