@@ -26,6 +26,7 @@ WIKI_MIRRORS = {
     "Rescue-Media": "rescue-media.md", "Technician-Handoff": "technician-handoff.md",
     "Knowledge-Standards": "knowledge-standards.md", "Contribute": "contribute.md",
     "Quick-Commands": "quick-commands.md",
+    "Command-Center": "command-center.md",
     "Templates": "contribution-template.md", "Continuous-Improvement": "continuous-improvement.md",
     "Methods": "methods.md", "Decision-Desk": "decision-desk.md",
     "Interface-Design": "interface-design.md", "Service-Evidence": "service-evidence.md",
@@ -1259,6 +1260,7 @@ def build_outputs() -> dict[str, str]:
         sidebar += [f"- **[{info['navigationIcon']} {info['navigationLabel']}](Tools-{slug(category)})**"]
     sidebar += ["", "### Reference", "",
                 "- [Decision desk](Decision-Desk)", "- [All playbooks](Playbooks)", "- [Complete tool directory](Tool-Directory)",
+                " - [Command Center](Command-Center)", "- [Quick commands](Quick-Commands)",
                 "- [Methods](Methods)", "- [Rescue media](Rescue-Media)", "- [Intake and handoff](Technician-Handoff)",
                 "- [Service evidence](Service-Evidence)", "- [Tool selection](Tool-Selection)",
                 "- [Free Tool Picks](Free-Tool-Picks)", "- [Current tool choices](Current-Tool-Choices)",
