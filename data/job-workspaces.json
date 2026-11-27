@@ -21,6 +21,26 @@
         {
           "toolId": "powercfg",
           "why": "Collecting battery and sleep evidence before changing hardware or power policy."
+        },
+        {
+          "toolId": "cyberchef",
+          "why": "Decode and transform evidence locally",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "regex101",
+          "why": "Develop a log or indicator extraction pattern with positive and negative cases.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "drawio",
+          "why": "Document an office network or hand off a clear map of dependencies and ports.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "hoppscotch",
+          "why": "Reproduce an API failure and compare status, headers and response content with the documented contract.",
+          "actionId": "open-service"
         }
       ],
       "resources": [
@@ -52,6 +72,16 @@
           "group": "Protect data",
           "description": "Check which recovery action preserves files and applications.",
           "sourceUrl": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "online-decode-and-document",
+          "label": "Decode and document evidence",
+          "url": "https://herbertofury.github.io/INTA/#online?task=decode-and-document",
+          "kind": "guide",
+          "group": "Online working tools",
+          "description": "Use purpose-specific browser tools to understand a sample of evidence and leave a clear handoff.",
+          "sourceUrl": "https://github.com/gchq/CyberChef",
           "checkedAt": "2026-11-26"
         }
       ],
@@ -91,12 +121,22 @@
       "startHere": "If encryption, privileged-account compromise or multiple affected devices are present, isolate and use the incident route. Otherwise record detections and keep one real-time protection product.",
       "tools": [
         {
-          "toolId": "safety-scanner",
-          "why": "Fresh on-demand scan and a readable result log."
+          "toolId": "malwarebytes",
+          "why": "Use an available Free Quick or Custom Scan for broad cleanup on an eligible personal device.",
+          "actionId": "windows-installer"
         },
         {
           "toolId": "adwcleaner",
           "why": "Focused adware and browser-hijacker cleanup."
+        },
+        {
+          "toolId": "bitdefender-free",
+          "why": "Choose it as the single ongoing antivirus on an eligible personal Windows PC.",
+          "actionId": "windows-installer"
+        },
+        {
+          "toolId": "safety-scanner",
+          "why": "Fresh on-demand scan and a readable result log."
         },
         {
           "toolId": "autoruns",
@@ -109,6 +149,41 @@
         {
           "toolId": "sysmon",
           "why": "Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved."
+        },
+        {
+          "toolId": "virustotal",
+          "why": "File and URL reputation",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "metadefender-cloud",
+          "why": "Independent multiscanner evidence",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "anyrun",
+          "why": "Interactive behavior analysis",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "triage",
+          "why": "Sandbox behavior and reports",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "urlscan",
+          "why": "Redirects and page requests",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "google-safe-browsing",
+          "why": "Confirm the Google classification behind a browser warning.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "checkphish",
+          "why": "Investigate a possible brand-impersonation or phishing landing page.",
+          "actionId": "open-service"
         }
       ],
       "resources": [
@@ -161,6 +236,36 @@
           "description": "Preserve required evidence and data before a clean installation.",
           "sourceUrl": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/reinstall-windows-with-the-installation-media",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "managed-tamper-policy",
+          "label": "Managed protection troubleshooting",
+          "url": "https://learn.microsoft.com/en-us/defender-endpoint/tamper-protection-troubleshoot",
+          "kind": "guide",
+          "group": "Managed endpoint",
+          "description": "Resolve a reverting protected setting through its endpoint policy owner.",
+          "sourceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/tamper-protection-troubleshoot",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "online-check-file",
+          "label": "Check a suspicious file",
+          "url": "https://herbertofury.github.io/INTA/#online?task=check-file",
+          "kind": "guide",
+          "group": "Online working tools",
+          "description": "Start with an existing hash report, then choose static or behavioral analysis for the question that remains.",
+          "sourceUrl": "https://docs.virustotal.com/docs/how-it-works",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "online-check-link",
+          "label": "Inspect a suspicious link",
+          "url": "https://herbertofury.github.io/INTA/#online?task=check-link",
+          "kind": "guide",
+          "group": "Online working tools",
+          "description": "Combine reputation with redirects and page behavior without opening the destination on the customer’s workstation.",
+          "sourceUrl": "https://docs.urlscan.io/pages/faq",
+          "checkedAt": "2026-11-26"
         }
       ],
       "decisions": [
@@ -202,6 +307,26 @@
         {
           "toolId": "sysmon",
           "why": "Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved."
+        },
+        {
+          "toolId": "id-ransomware",
+          "why": "A quick ransomware-family identification and a pointer toward known recovery information.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "no-more-ransom",
+          "why": "Finding the correct public recovery utility after isolating an encrypted system and preserving the original files.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "malwarebazaar",
+          "why": "Correlating a known hash with malware-family evidence and research reports without uploading an unknown document.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "threatfox",
+          "why": "Checking whether a connection, domain or hash from endpoint/network logs matches reported malware infrastructure.",
+          "actionId": "open-service"
         }
       ],
       "resources": [
@@ -295,6 +420,14 @@
         {
           "toolId": "diskspd",
           "why": "Measure a reproducible storage-performance problem on healthy media with a bounded test file."
+        },
+        {
+          "toolId": "sysinternals",
+          "why": "Keep the full utility suite available when the next evidence-backed branch needs another component."
+        },
+        {
+          "toolId": "wiztree",
+          "why": "Use its supported disk analysis when the technician has the appropriate commercial entitlement."
         }
       ],
       "resources": [
@@ -807,6 +940,10 @@
         {
           "toolId": "winmerge",
           "why": "Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration."
+        },
+        {
+          "toolId": "clonezilla",
+          "why": "Use the documented imaging or cloning mode when its filesystem and destination constraints fit."
         }
       ],
       "resources": [
@@ -954,6 +1091,16 @@
           "description": "Use compatible recovery media for an existing image backup; verify the target before overwrite.",
           "sourceUrl": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/recovery_media.html",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "vss-writer-owner",
+          "label": "VSS writer and service map",
+          "url": "https://www.veeam.com/kb2041",
+          "kind": "guide",
+          "group": "Snapshot failures",
+          "description": "Match the failed writer to its service and coordinate any restart with the application owner.",
+          "sourceUrl": "https://www.veeam.com/kb2041",
+          "checkedAt": "2026-11-26"
         }
       ],
       "decisions": [
@@ -1024,6 +1171,46 @@
         {
           "toolId": "mtr",
           "why": "Comparing a reproducible path problem from a Linux or macOS bench, or Windows through WSL."
+        },
+        {
+          "toolId": "greynoise",
+          "why": "Distinguish widespread scanning noise from an alert needing closer investigation.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "abuseipdb",
+          "why": "Add report history and recency to a suspicious connection or mail-server IP.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "censys",
+          "why": "Trace a domain, certificate or exposed service across related infrastructure.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "shodan",
+          "why": "Find unexpected public services on a known business IP.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "cloudflare-speed",
+          "why": "Latency, loss and connection quality",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "waveform-bufferbloat",
+          "why": "Latency while the connection is busy",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "globalping",
+          "why": "Separate a local problem from regional routing, DNS or CDN behavior.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "cloudflare-radar",
+          "why": "Check whether an apparent local outage coincides with a regional or network-wide event.",
+          "actionId": "open-service"
         }
       ],
       "resources": [
@@ -1065,6 +1252,46 @@
           "group": "Read-only diagnostics",
           "description": "Test the service’s documented TCP port.",
           "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "winhttp-proxy-state",
+          "label": "Inspect a service proxy",
+          "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-winhttp",
+          "kind": "guide",
+          "group": "Application connectivity",
+          "description": "Read the WinHTTP configuration before changing a service connection path.",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-winhttp",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "network-reset-recovery",
+          "label": "Network reset and adapter recovery",
+          "url": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-ethernet-connection-problems-in-windows",
+          "kind": "guide",
+          "group": "Recovery planning",
+          "description": "Prepare required drivers, VPN and virtual-switch recovery before a network reset.",
+          "sourceUrl": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-ethernet-connection-problems-in-windows",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "online-check-ip",
+          "label": "Investigate an IP or domain",
+          "url": "https://herbertofury.github.io/INTA/#online?task=check-ip",
+          "kind": "guide",
+          "group": "Online working tools",
+          "description": "Use several dated sources to explain reputation, exposed services and ownership.",
+          "sourceUrl": "https://docs.greynoise.io/docs/getting-started",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "online-test-connection",
+          "label": "Find latency or an outage",
+          "url": "https://herbertofury.github.io/INTA/#online?task=test-connection",
+          "kind": "guide",
+          "group": "Online working tools",
+          "description": "Separate bandwidth, latency under load, local faults and regional reachability.",
+          "sourceUrl": "https://speed.cloudflare.com/",
           "checkedAt": "2026-11-26"
         }
       ],
@@ -1166,6 +1393,16 @@
           "group": "Case record",
           "description": "Keep the service timeline and next actions in the private record.",
           "sourceUrl": "https://github.com/Herbertofury/INTA/wiki/Technician-Handoff",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "power-recovery-setting",
+          "label": "Dell power-restoration behavior",
+          "url": "https://dl.dell.com/manuals/common/dell-emc-remote-wake-up-config-dell-client-cmd-suite.pdf",
+          "kind": "guide",
+          "group": "Power recovery",
+          "description": "Use the exact model manual to plan AC Recovery and a controlled verification.",
+          "sourceUrl": "https://dl.dell.com/manuals/common/dell-emc-remote-wake-up-config-dell-client-cmd-suite.pdf",
           "checkedAt": "2026-11-26"
         }
       ],
@@ -1381,6 +1618,26 @@
           "toolId": "curl",
           "why": "Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable.",
           "actionId": "windows-inbox"
+        },
+        {
+          "toolId": "google-admin-toolbox",
+          "why": "DNS, mail and header checks",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "mxtoolbox",
+          "why": "Mail routing and authentication",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "learndmarc",
+          "why": "Explain why passing SPF or DKIM still fails DMARC alignment.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "microsoft-remote-connectivity",
+          "why": "Find the failed step in a Microsoft cloud or Exchange connectivity workflow.",
+          "actionId": "open-service"
         }
       ],
       "resources": [
@@ -1412,6 +1669,46 @@
           "group": "Compatibility",
           "description": "Check the client’s supported behavior before applying a classic-only fix.",
           "sourceUrl": "https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/administration/architecture-changes-new-outlook",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "mail-search-branches",
+          "label": "New and classic Outlook search",
+          "url": "https://support.microsoft.com/en-us/outlook/troubleshooting-outlook-search-issues",
+          "kind": "guide",
+          "group": "Search and sync",
+          "description": "Use the client-specific scope or indexing branch for a known missing result.",
+          "sourceUrl": "https://support.microsoft.com/en-us/outlook/troubleshooting-outlook-search-issues",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "gmail-client-signin",
+          "label": "Gmail supported client sign-in",
+          "url": "https://support.google.com/mail/answer/7126229?hl=en",
+          "kind": "guide",
+          "group": "Account connection",
+          "description": "Use the supported Google authorization route; personal Gmail no longer has an Enable IMAP switch.",
+          "sourceUrl": "https://support.google.com/mail/answer/7126229?hl=en",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "outlook-com-storage",
+          "label": "Outlook.com mailbox and cloud quotas",
+          "url": "https://support.microsoft.com/en-us/outlook/storage-limits-in-outlook-com",
+          "kind": "guide",
+          "group": "Send and receive",
+          "description": "Inspect both account storage limits when webmail stops sending or receiving.",
+          "sourceUrl": "https://support.microsoft.com/en-us/outlook/storage-limits-in-outlook-com",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "online-fix-email",
+          "label": "Diagnose email and DNS",
+          "url": "https://herbertofury.github.io/INTA/#online?task=fix-email",
+          "kind": "guide",
+          "group": "Online working tools",
+          "description": "Separate DNS, sender authentication and service availability before changing a mailbox.",
+          "sourceUrl": "https://toolbox.googleapps.com/apps/main/",
           "checkedAt": "2026-11-26"
         }
       ],
@@ -1481,6 +1778,11 @@
         {
           "toolId": "sumatrapdf",
           "why": "Testing the same known-good PDF through an independent renderer to separate an application-specific print fault from the queue or printer."
+        },
+        {
+          "toolId": "oem-drivers",
+          "why": "Use the manufacturer/model/OS route when that driver path is supported; check protected print mode first.",
+          "actionId": "printer-drivers"
         }
       ],
       "resources": [
@@ -1642,6 +1944,26 @@
           "group": "Scan verification",
           "description": "Create a profile; use supported WIA/TWAIN drivers or an eSCL-capable network scanner.",
           "sourceUrl": "https://www.naps2.com/windows-scanning",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "stuck-print-queue",
+          "label": "Clear a blocked print queue",
+          "url": "https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows",
+          "kind": "guide",
+          "group": "Queue repair",
+          "description": "Cancel the affected job, then use the documented spooler recovery only if needed.",
+          "sourceUrl": "https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "printer-ap-isolation",
+          "label": "Printer discovery and Wi-Fi isolation",
+          "url": "https://support.hp.com/us-en/document/ish_8085688-8063994-16",
+          "kind": "guide",
+          "group": "Connection diagnosis",
+          "description": "Check trusted versus guest networking when both devices have internet but cannot reach each other.",
+          "sourceUrl": "https://support.hp.com/us-en/document/ish_8085688-8063994-16",
           "checkedAt": "2026-11-26"
         }
       ],
@@ -1870,6 +2192,16 @@
           "group": "Handoff",
           "description": "Record identity, encryption recovery, backup and daily-task proof.",
           "sourceUrl": "https://github.com/Herbertofury/INTA/wiki/Technician-Handoff",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "smb-signing-compatibility",
+          "label": "Current SMB signing requirements",
+          "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing",
+          "kind": "guide",
+          "group": "Shared storage",
+          "description": "Match the client edition and server signing/account support before changing a share.",
+          "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing",
           "checkedAt": "2026-11-26"
         }
       ],
@@ -2189,6 +2521,70 @@
         {
           "toolId": "sysmon",
           "why": "Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved."
+        },
+        {
+          "toolId": "wizfile",
+          "why": "Use the supported file-search workflow when its filters and the technician’s license fit the task."
+        },
+        {
+          "toolId": "ssl-labs",
+          "why": "TLS and certificate configuration",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "mdn-observatory",
+          "why": "HTTP security configuration",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "internet-nl",
+          "why": "Check a domain across web and mail standards in one report, including DNS and transport dependencies.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "securityheaders",
+          "why": "Spot missing response headers and inspect redirects during a web-server change.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "cisa-kev",
+          "why": "Confirmed exploited vulnerabilities",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "first-epss",
+          "why": "Daily exploitation likelihood",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "nvd",
+          "why": "Check the exact CVE and affected product range before choosing a patch.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "osv",
+          "why": "Determine whether a particular dependency version is affected and which fix applies.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "pagespeed-insights",
+          "why": "Prioritize website performance fixes while separating current lab results from historical visitor experience.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "webpagetest",
+          "why": "Identify slow requests and rendering delays under repeatable browser and network conditions.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "wave-accessibility",
+          "why": "Find missing labels, contrast issues and structural problems in a public page.",
+          "actionId": "open-service"
+        },
+        {
+          "toolId": "squoosh",
+          "why": "Reduce screenshot and web-image size while checking text and visual detail.",
+          "actionId": "open-service"
         }
       ],
       "resources": [
@@ -2230,6 +2626,46 @@
           "group": "Handoff",
           "description": "Capture the observed result and follow-up owner.",
           "sourceUrl": "https://github.com/Herbertofury/INTA/wiki/Technician-Handoff",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "firmware-encryption-recovery",
+          "label": "BitLocker and firmware maintenance",
+          "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/windows-security/bitlocker-recovery-known-issues",
+          "kind": "guide",
+          "group": "Firmware readiness",
+          "description": "Prepare recovery access and verify protection resumes after firmware changes.",
+          "sourceUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/windows-security/bitlocker-recovery-known-issues",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "online-test-website",
+          "label": "Check website security",
+          "url": "https://herbertofury.github.io/INTA/#online?task=test-website",
+          "kind": "guide",
+          "group": "Online working tools",
+          "description": "Combine complementary configuration tests for a public site.",
+          "sourceUrl": "https://www.ssllabs.com/ssltest/",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "online-prioritize-patches",
+          "label": "Prioritize a vulnerability",
+          "url": "https://herbertofury.github.io/INTA/#online?task=prioritize-patches",
+          "kind": "guide",
+          "group": "Online working tools",
+          "description": "Combine affected-version evidence, known exploitation and likely exploitation without treating them as the same metric.",
+          "sourceUrl": "https://github.com/cisagov/kev-data",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "online-improve-site",
+          "label": "Improve a slow website",
+          "url": "https://herbertofury.github.io/INTA/#online?task=improve-site",
+          "kind": "guide",
+          "group": "Online working tools",
+          "description": "Turn performance and accessibility reports into changes with a visible user result.",
+          "sourceUrl": "https://pagespeed.web.dev/",
           "checkedAt": "2026-11-26"
         }
       ],
