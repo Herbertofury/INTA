@@ -3,7 +3,7 @@
  * Install in either INTA Quick Invoice or Invoice Studio PRO.
  * No automatic sending, triggers, public sharing or client data at installation.
  */
-const INTA_VERSION = '2.0.0';
+const INTA_VERSION = '2.1.0';
 const INTA_RANGES = {
   quick: ['B6','B7','B8','B9','B10','B11','B12','B13','G6','G7','G10','G11','G12','B14','G14','B27','G27','A29','A33','G73'],
   studio: ['A6','C6','E6','G6','I6','K6','M6','B7','F7','B10','D10','F10','H10','J10','L10','A25','C25','A28','H28']
@@ -60,7 +60,8 @@ function intaLock(fn){const l=LockService.getDocumentLock()||LockService.getScri
 function intaNumber(){return intaRun(()=>{const c=intaCfg();if(intaText(c.editor,c.id)&&!intaYes('Replace invoice number?','Generate a new unique number for the current draft?'))return;intaLock(()=>intaSet(c.editor,c.id,intaNewId(c)));if(!intaGet(c.editor,c.date))intaSet(c.editor,c.date,new Date());});}
 function intaHasDraft(c){const sh=c.editor,a=c.kind==='quick'?sh.getRange('A17:A26').getDisplayValues():sh.getRange('A13:B22').getDisplayValues();return Boolean(intaText(sh,c.id)||a.some(r=>r.some(Boolean)));}
 function intaClear(c){
-  const s=c.editor;
+  const s=c.editor, comparison=c.book.getSheetByName('Comparable Rates');
+  if(comparison)comparison.getRange('E5:H14').setValues(Array.from({length:10},()=>['','Auto','','']));
   if(c.kind==='quick'){
     ['B6','B7','B8','B9','B10','B11','B12','B13','A29','G73'].forEach(a=>intaSet(s,a,''));
     s.getRange('A17:F26').setValues(Array.from({length:10},()=>['','','Auto','Auto',0,'Auto']));
@@ -80,14 +81,15 @@ function intaCapture(c){
   const s=c.editor, cells={};
   INTA_RANGES[c.kind].forEach(a=>cells[a]=intaEncode(intaGet(s,a)));
   const rows=c.kind==='quick'?'A17:F26':'A13:G22',cost=c.kind==='quick'?'G53:H62':'B40:C49';
-  return {version:INTA_VERSION,kind:c.kind,cells:cells,rows:s.getRange(rows).getValues().map(r=>r.map(intaEncode)),cost:s.getRange(cost).getValues().map(r=>r.map(intaEncode))};
+  const comp=c.book.getSheetByName('Comparable Rates');
+  return {version:INTA_VERSION,kind:c.kind,cells:cells,rows:s.getRange(rows).getValues().map(r=>r.map(intaEncode)),cost:s.getRange(cost).getValues().map(r=>r.map(intaEncode)),comparison:comp?{lines:comp.getRange('A5:K14').getValues().map(r=>r.map(intaEncode)),matchedNet:intaGet(comp,'A17'),estimate:intaGet(comp,'D17'),savings:intaGet(comp,'G17'),source:intaText(comp,'A19'),sourcePages:intaText(comp,'A21')}:null,payee:intaText(c.invoice,'B33')};
 }
 function intaDuplicate(){return intaRun(()=>{
   const c=intaCfg(),h=c.book.getSheetByName('_Invoice History');if(!h)throw new Error('Archive an invoice first.');
   const id=intaAsk('Duplicate invoice','Enter an archived invoice number.');if(id===null)return;
   const r=intaFindKey(h,id,2);if(!r)throw new Error('Invoice is not in this workbook history.');
   const d=JSON.parse(h.getRange(r,4).getValue());if(d.kind!==c.kind)throw new Error('Archive belongs to a different workbook type.');
-  if(intaHasDraft(c)&&!intaYes('Duplicate invoice','Replace the current draft with a new copy of '+id+'?'))return;
+  if(intaHasDraft(c)&&!intaYes('Duplicate invoice','Replace the current draft with a new copy of '+id+'? Comparable-rate selections reset; reselect only estimates that still match the work.'))return;
   intaLock(()=>{intaClear(c);Object.keys(d.cells).forEach(a=>intaSet(c.editor,a,intaDecode(d.cells[a])));
     c.editor.getRange(c.kind==='quick'?'A17:F26':'A13:G22').setValues(d.rows.map(r=>r.map(intaDecode)));
     c.editor.getRange(c.kind==='quick'?'G53:H62':'B40:C49').setValues(d.cost.map(r=>r.map(intaDecode)));
@@ -155,6 +157,9 @@ function intaReady(c,sh){
   const out=sh.getRange('H17:H26').getValues();let count=0;
   input.forEach((r,i)=>{if(r.some(x=>x!=='')){if(typeof out[i][0]!=='number'||!Number.isFinite(out[i][0]))throw new Error('Complete service line '+(i+1)+', including quantity and rate.');count++;}});
   if(!count)throw new Error('Add at least one service line.');
+  if(!intaText(sh,'B33'))throw new Error('Enter the payee and payment instructions.');
+  const comp=c.book.getSheetByName('Comparable Rates');
+  if(comp){const inputs=comp.getRange('E5:I14').getValues();inputs.forEach((r,i)=>{if((r[0]!==''||r[2]!==''||r[3]!=='')&&(typeof r[4]!=='number'||!Number.isFinite(r[4])))throw new Error('Complete or clear comparable estimate on line '+(i+1)+'.');});}
   if(c.kind==='studio'&&intaText(s,'B7')&&intaText(s,'N7')!=='Active')throw new Error('Contract status or client does not match.');
   if(c.kind==='studio'){
     const reg=c.book.getSheetByName('Register'),row=intaFindKey(reg,intaText(sh,'G2'),5);
