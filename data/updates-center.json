@@ -926,7 +926,7 @@
     {
       "id": "macos-software-update-audit",
       "title": "List available macOS system updates",
-      "category": "Linux",
+      "category": "macOS Software Update",
       "shell": "Bash",
       "privilege": "Standard user",
       "risk": "read-only",
@@ -939,7 +939,7 @@
     {
       "id": "macos-software-update-all",
       "title": "Install available macOS system updates",
-      "category": "Linux",
+      "category": "macOS Software Update",
       "shell": "Bash",
       "privilege": "sudo",
       "risk": "changes-system",
