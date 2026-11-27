@@ -15,6 +15,12 @@ if (args.Length > 0 && args[0] == "--power-plans")
     return;
 }
 
+if (args.Length > 0 && args[0] == "--startup-inventory")
+{
+    Environment.ExitCode = StartupInventory.Run(args.AsSpan(1), Console.Out, Console.Error);
+    return;
+}
+
 const string Version = "0.1.0";
 const int Port = 47821;
 var allowedOrigins = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
