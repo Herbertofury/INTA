@@ -955,7 +955,7 @@
       manager.disabled=!status.managers.length;
     }
     const caps=$('#agent-capabilities');
-    if(caps) caps.textContent=status ? ('Available: '+status.managers.join(', ')) : 'Connect this computer to inspect installed package managers.';
+    if(caps) caps.textContent=status ? ('Available: '+status.managers.join(', ')+(status.elevated?' · elevated session':' · standard session; relaunch from the INTA Local Agent (Administrator) Start menu shortcut for system-wide changes')) : 'Connect this computer to inspect installed package managers.';
   }
   async function connectLocalAgent() {
     try {
