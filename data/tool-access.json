@@ -5040,6 +5040,117 @@
       },
       "alternates": [],
       "note": "Free public lifecycle reference and API No account is required for public product pages."
+    },
+    "mangodisk": {
+      "officialUrl": "https://mangodisk.app/",
+      "primary": {
+        "id": "windows-portable",
+        "kind": "file",
+        "label": "Download Windows portable · EXE",
+        "url": "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-windows-portable.exe",
+        "evidenceUrl": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest",
+        "checkedAt": "2026-11-27",
+        "platform": "Windows",
+        "format": "EXE",
+        "version": "v2.1.2",
+        "sha256": "7e9613f3fcd3d13bd93d394c2ec8799f53763fd3f2bea95f64b6e1c9dc39bb63"
+      },
+      "alternates": [
+        {
+          "id": "windows-installer",
+          "kind": "file",
+          "label": "Download Windows installer · EXE",
+          "url": "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-windows.exe",
+          "evidenceUrl": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "format": "EXE",
+          "version": "v2.1.2",
+          "sha256": "c92245618d9c2caf95ec16119a09f875e5ab7984b244ce2762b38b89f76b08ff"
+        },
+        {
+          "id": "macos-dmg",
+          "kind": "file",
+          "label": "Download macOS · DMG",
+          "url": "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-macos.dmg",
+          "evidenceUrl": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest",
+          "checkedAt": "2026-11-27",
+          "platform": "macOS",
+          "format": "DMG",
+          "version": "v2.1.2",
+          "sha256": "7e80fcc53e1ac7e9300690c9bf12522442ebca508afb2a3837939a11be688c88"
+        },
+        {
+          "id": "linux-x64-appimage",
+          "kind": "file",
+          "label": "Download Linux x64 · AppImage",
+          "url": "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-x64.AppImage",
+          "evidenceUrl": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest",
+          "checkedAt": "2026-11-27",
+          "platform": "Linux x64",
+          "format": "AppImage",
+          "version": "v2.1.2",
+          "sha256": "ef6284b4745723df9cd2452053a170414d95beeb882c07ec32837b1e833e1af9"
+        },
+        {
+          "id": "linux-x64-deb",
+          "kind": "file",
+          "label": "Download Linux x64 · deb",
+          "url": "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-x64.deb",
+          "evidenceUrl": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest",
+          "checkedAt": "2026-11-27",
+          "platform": "Linux x64",
+          "format": "deb",
+          "version": "v2.1.2",
+          "sha256": "82b55eba70f6ad9019545ae638311b4034478132d2167d782f8bfbc1f24facf6"
+        },
+        {
+          "id": "linux-arm64-appimage",
+          "kind": "file",
+          "label": "Download Linux arm64 · AppImage",
+          "url": "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-arm64.AppImage",
+          "evidenceUrl": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest",
+          "checkedAt": "2026-11-27",
+          "platform": "Linux arm64",
+          "format": "AppImage",
+          "version": "v2.1.2",
+          "sha256": "81bded31cde94419d9b9249448aaaf85ad368c77bfe4ae3094c08858242d281f"
+        },
+        {
+          "id": "linux-arm64-deb",
+          "kind": "file",
+          "label": "Download Linux arm64 · deb",
+          "url": "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-arm64.deb",
+          "evidenceUrl": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest",
+          "checkedAt": "2026-11-27",
+          "platform": "Linux arm64",
+          "format": "deb",
+          "version": "v2.1.2",
+          "sha256": "058a48e223433310ab47231b155e81d805db2c9a5be90518477477a4370b2ffd"
+        },
+        {
+          "id": "publisher-release",
+          "kind": "release-page",
+          "label": "Review publisher release v2.1.2",
+          "url": "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2",
+          "evidenceUrl": "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2",
+          "checkedAt": "2026-11-27"
+        }
+      ],
+      "note": "Recommended for healthy-drive space and duplicate-file review; uses platform-specific tools. Direct acquisition is not a verified automatic installer."
+    },
+    "optimizerduck": {
+      "officialUrl": "https://github.com/itsfatduck/optimizerDuck",
+      "primary": {
+        "id": "publisher-release",
+        "kind": "release-page",
+        "label": "Review publisher release v2.29.0",
+        "url": "https://github.com/itsfatduck/optimizerDuck/releases/tag/v2.29.0",
+        "evidenceUrl": "https://github.com/itsfatduck/optimizerDuck/releases/tag/v2.29.0",
+        "checkedAt": "2026-11-27"
+      },
+      "alternates": [],
+      "note": "Recommended as a specialist for inspection and individually reviewed settings; manual release page only, no unattended install or automatic tuning."
     }
   }
 }

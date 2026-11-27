@@ -10,7 +10,7 @@
       "scope": "Operating system, cumulative updates, servicing stack, feature upgrades",
       "manager": "Windows Update / Get Help",
       "auditCommand": "windows-update-audit",
-      "updateCommand": "windows-update-troubleshooter",
+      "updateCommand": "windows-update-open",
       "icon": "monitor",
       "note": "OS servicing is separate from third-party app package managers. Feature upgrades, drivers and firmware require separate checks."
     },
@@ -69,8 +69,8 @@
       "name": "Microsoft Store",
       "scope": "Store-delivered apps",
       "manager": "Store UI",
-      "auditCommand": "windows-store-cache",
-      "updateCommand": "windows-store-cache",
+      "auditCommand": "store-open-updates",
+      "updateCommand": "store-open-updates",
       "icon": "shopping-bag",
       "note": "Store updates are separate from WinGet and Windows Update."
     },
@@ -133,6 +133,26 @@
       "updateCommand": "brew-update",
       "icon": "terminal",
       "note": "Homebrew only manages its own formulae/casks. Mac App Store and vendor-managed apps need separate update paths."
+    },
+    {
+      "id": "windows-drivers",
+      "name": "Windows device drivers",
+      "scope": "Optional Windows Update driver offers; OEM drivers are separate",
+      "manager": "Windows Update",
+      "auditCommand": "windows-driver-inventory",
+      "updateCommand": "windows-driver-updates",
+      "icon": "monitor",
+      "note": "Compare hardware model and installed driver against OEM release notes. Optional updates are not always newer or better; BIOS/firmware requires the manufacturer's exact supported tool and procedure."
+    },
+    {
+      "id": "macos-software-update",
+      "name": "macOS Software Update",
+      "scope": "macOS system, security and Apple-delivered updates",
+      "manager": "softwareupdate",
+      "auditCommand": "macos-software-update-audit",
+      "updateCommand": "macos-software-update-all",
+      "icon": "monitor",
+      "note": "Separate from Homebrew, Mac App Store and vendor application updates. Follow MDM policy and backup/restart guidance."
     }
   ],
   "commands": [
@@ -183,7 +203,7 @@
       "privilege": "Administrator",
       "risk": "changes-system",
       "summary": "Stop update services, rename SoftwareDistribution and catroot2 to timestamped backup folders, then restart services to allow Windows to rebuild caches.",
-      "code": "$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'\n$services = 'bits','wuauserv','cryptsvc'\ntry {\n  foreach ($service in $services) { Stop-Service -Name $service -Force -ErrorAction Stop }\n  Rename-Item \"$env:windir\\SoftwareDistribution\" \"SoftwareDistribution.INTA-$stamp\" -ErrorAction Stop\n  Rename-Item \"$env:windir\\System32\\catroot2\" \"catroot2.INTA-$stamp\" -ErrorAction Stop\n} finally {\n  foreach ($service in $services) { Start-Service -Name $service -ErrorAction SilentlyContinue }\n}\nGet-Service -Name bits,wuauserv,cryptsvc | Format-Table Name,Status -AutoSize",
+      "code": "$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'\n$services = 'bits','wuauserv','cryptsvc'\n$wasRunning = @(Get-Service -Name $services -ErrorAction Stop | Where-Object Status -eq 'Running' | Select-Object -ExpandProperty Name)\ntry {\n  foreach ($service in $services) { Stop-Service -Name $service -Force -ErrorAction Stop }\n  Rename-Item \"$env:windir\\SoftwareDistribution\" \"SoftwareDistribution.INTA-$stamp\" -ErrorAction Stop\n  Rename-Item \"$env:windir\\System32\\catroot2\" \"catroot2.INTA-$stamp\" -ErrorAction Stop\n} finally {\n  foreach ($service in $wasRunning) { Start-Service -Name $service -ErrorAction SilentlyContinue }\n}\nGet-Service -Name $services | Format-Table Name,Status -AutoSize",
       "safety": "State-changing recovery action. Use only after collecting the update error and trying the supported troubleshooter. Requires admin and a maintenance window; temporarily stops update services, causes update history/download cache to be rebuilt, and can require another download. If either rename fails, stop and inspect service state before proceeding. Do not delete the timestamped backups until Windows Update succeeds and retention is approved.",
       "sourceUrl": "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows",
       "sourceTitle": "Microsoft Troubleshoot Windows updates"
@@ -224,8 +244,8 @@
       "summary": "Run the supported Store cache reset utility when Store downloads or updates are stuck.",
       "code": "wsreset.exe",
       "safety": "Clears the Store cache and opens Microsoft Store. Does not uninstall apps or guarantee a repair; use only for Store-specific symptoms.",
-      "sourceUrl": "https://support.microsoft.com/en-us/account-billing/get-updates-for-apps-and-games-in-microsoft-store-2daed4e5-4c7f-4e7b-9d09-6b4b5c8e9f6a",
-      "sourceTitle": "Microsoft Store app updates"
+      "sourceUrl": "https://support.microsoft.com/en-us/accounts-billing/i-can-t-find-or-install-an-app-from-microsoft-store",
+      "sourceTitle": "Microsoft Store reset and installation troubleshooting"
     },
     {
       "id": "windows-installer-health",
@@ -837,6 +857,97 @@
       "safety": "Changes installed packages. Review outdated list, pins, cask behavior and dependent packages. Homebrew may reinstall dependents with broken linkage; use a maintenance window for developer or production systems.",
       "sourceUrl": "https://docs.brew.sh/Manpage.html",
       "sourceTitle": "Homebrew upgrade"
+    },
+    {
+      "id": "windows-update-open",
+      "title": "Open Windows Update",
+      "category": "Windows Update",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Open the supported Windows Update page to check for and review operating-system updates.",
+      "code": "Start-Process 'ms-settings:windowsupdate'",
+      "safety": "Opens Settings only. Review managed policy, safeguard holds, active hours and reboot requirements before installing.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+      "sourceTitle": "Microsoft Windows Update"
+    },
+    {
+      "id": "store-open-updates",
+      "title": "Open Microsoft Store app updates",
+      "category": "Microsoft Store",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Open the Store Downloads and updates page to review available app updates.",
+      "code": "Start-Process 'ms-windows-store://downloadsandupdates'",
+      "safety": "Opens Store UI only. Review managed-device policy and app identity before applying updates.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/apps/develop/launch/launch-store-app",
+      "sourceTitle": "Microsoft Store URI reference"
+    },
+    {
+      "id": "windows-update-cache-restore",
+      "title": "Restore the previous Windows Update cache folders",
+      "category": "Windows Update",
+      "shell": "PowerShell",
+      "privilege": "Administrator",
+      "risk": "changes-system",
+      "summary": "Restore timestamped SoftwareDistribution and catroot2 backups created by the INTA cache-reset workflow if the reset itself must be rolled back.",
+      "code": "$backupStamp = Read-Host 'Enter the exact INTA backup timestamp (yyyyMMdd-HHmmss)'\n$softwareBackup = Join-Path $env:windir \"SoftwareDistribution.INTA-$backupStamp\"\n$catrootBackup = Join-Path $env:windir \"System32\\catroot2.INTA-$backupStamp\"\nif (-not (Test-Path $softwareBackup) -or -not (Test-Path $catrootBackup)) { throw 'Both matching backup folders must exist. No changes made.' }\n$services = 'bits','wuauserv','cryptsvc'\n$wasRunning = @(Get-Service -Name $services -ErrorAction Stop | Where-Object Status -eq 'Running' | Select-Object -ExpandProperty Name)\n$rollbackStamp = Get-Date -Format 'yyyyMMdd-HHmmss'\ntry {\n  foreach ($service in $services) { Stop-Service -Name $service -Force -ErrorAction Stop }\n  if (Test-Path \"$env:windir\\SoftwareDistribution\") { Rename-Item \"$env:windir\\SoftwareDistribution\" \"SoftwareDistribution.INTA-rollback-$rollbackStamp\" -ErrorAction Stop }\n  if (Test-Path \"$env:windir\\System32\\catroot2\") { Rename-Item \"$env:windir\\System32\\catroot2\" \"catroot2.INTA-rollback-$rollbackStamp\" -ErrorAction Stop }\n  Rename-Item $softwareBackup 'SoftwareDistribution' -ErrorAction Stop\n  Rename-Item $catrootBackup 'catroot2' -ErrorAction Stop\n} finally {\n  foreach ($service in $wasRunning) { Start-Service -Name $service -ErrorAction SilentlyContinue }\n}\nGet-Service -Name $services | Format-Table Name,Status -AutoSize",
+      "safety": "Only use to roll back the matching INTA cache reset, not as a general Windows Update repair. Confirm the exact timestamp and both backup folders before running. Requires administrator privileges and stops update services. Current cache folders are preserved under rollback names. If the prior command only partially completed, inspect all folder names before proceeding; do not guess the timestamp.",
+      "sourceUrl": "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows",
+      "sourceTitle": "Microsoft Troubleshoot Windows updates"
+    },
+    {
+      "id": "windows-driver-inventory",
+      "title": "Inventory installed Windows device drivers",
+      "category": "Update inventory",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Capture signed driver provider, version, date and INF identity before considering a driver update.",
+      "code": "Get-CimInstance Win32_PnPSignedDriver | Select-Object DeviceName,Manufacturer,DriverVersion,DriverDate,InfName | Sort-Object DeviceName | Format-Table -AutoSize",
+      "safety": "Read-only inventory. Driver dates are not a reliable quality ranking. Match hardware IDs, OEM support guidance and device model before changing drivers.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/cimcmdlets/get-ciminstance",
+      "sourceTitle": "Microsoft Get-CimInstance"
+    },
+    {
+      "id": "windows-driver-updates",
+      "title": "Open Windows optional driver updates",
+      "category": "Windows Update",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Open the supported Windows Update optional updates page to inspect offered driver updates.",
+      "code": "Start-Process 'ms-settings:windowsupdate-optionalupdates'",
+      "safety": "Opens Settings only. Optional drivers are not always the newest or best OEM driver. Confirm hardware model, current driver, release notes and rollback path before installing.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+      "sourceTitle": "Microsoft Windows Update"
+    },
+    {
+      "id": "macos-software-update-audit",
+      "title": "List available macOS system updates",
+      "category": "macOS Software Update",
+      "shell": "Bash",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Query Apple's Software Update service for available macOS system and security updates.",
+      "code": "softwareupdate --list",
+      "safety": "Read-only update inventory. Review compatibility, managed update policy, backup status and reboot requirements before installing.",
+      "sourceUrl": "https://support.apple.com/guide/mac-help/get-macos-updates-mchlpx1065/mac",
+      "sourceTitle": "Apple macOS updates"
+    },
+    {
+      "id": "macos-software-update-all",
+      "title": "Install available macOS system updates",
+      "category": "macOS Software Update",
+      "shell": "Bash",
+      "privilege": "sudo",
+      "risk": "changes-system",
+      "summary": "Install available macOS updates through Apple's built-in Software Update command-line tool.",
+      "code": "softwareupdate --list\nsudo softwareupdate --install --all",
+      "safety": "Changes OS components and may require a restart. Review the list first, confirm a current backup, power and maintenance window, and follow MDM deferrals on managed Macs. This does not update every third-party app.",
+      "sourceUrl": "https://support.apple.com/guide/mac-help/get-macos-updates-mchlpx1065/mac",
+      "sourceTitle": "Apple macOS updates"
     }
   ],
   "workflows": [
@@ -852,7 +963,9 @@
         "scoop-preview",
         "unigetui-update-audit",
         "windows-update-audit",
-        "update-reboot-check"
+        "update-reboot-check",
+        "windows-update-open",
+        "store-open-updates"
       ],
       "sequence": "Identify package managers first. Run only the matching manager's preview. Compare duplicate package ownership before updating. Record exclusions and pins. Schedule installation and reboot separately.",
       "warning": "The commands do not provide one universal all-app inventory. A package can appear in more than one manager; avoid double updates. OS, Store, firmware and drivers are separate channels."
@@ -867,7 +980,8 @@
         "windows-update-troubleshooter",
         "windows-update-component-repair",
         "windows-update-cache-reset",
-        "windows-update-logs"
+        "windows-update-logs",
+        "windows-update-cache-restore"
       ],
       "sequence": "Preserve the error code and logs first. Check free space and services. Run Get Help troubleshooter. If corruption is indicated, use DISM then SFC. Use reversible cache rename only after earlier steps fail. Re-run update check and verify history.",
       "warning": "Cache reset changes state and re-downloads updates. Do not delete cache folders blindly or reset components while servicing is active."
@@ -883,7 +997,10 @@
         "unigetui-repair-app",
         "ninite-repair",
         "windows-msi-repair",
-        "winget-uninstall-app"
+        "winget-uninstall-app",
+        "flatpak-repair",
+        "appx-store-repair",
+        "windows-store-cache"
       ],
       "sequence": "Find exact app, manager, source, version and scope. Preserve app data/config. Use native repair if supported. If repair unavailable, back up app data then use manager-specific reinstall. Uninstall only after user approval and data-retention check. Verify launch and version.",
       "warning": "Repair may reinstall or uninstall/reinstall. Never assume user data survives. Do not use generic registry cleaners or guessed MSI product codes."

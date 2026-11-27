@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-11-26",
+  "asOf": "2026-11-27",
   "structuralStatus": "passed",
   "counts": {
     "serviceAreas": 8,
     "jobs": 22,
-    "tools": 258,
+    "tools": 260,
     "toolCategories": 11,
     "fieldNotes": 95,
     "researchItems": 58,
     "scenarioToolChoices": 72,
-    "reviewedRecords": 985,
+    "reviewedRecords": 996,
     "dueReviews": 0
   },
   "coverage": [
@@ -144,7 +144,7 @@
       "jobId": "preventive-maintenance",
       "fieldNotes": 7,
       "resources": 8,
-      "decisions": 5
+      "decisions": 6
     }
   ],
   "dueReviews": [],
@@ -6938,6 +6938,116 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://endoflife.date/"
+    },
+    {
+      "kind": "tool",
+      "id": "mangodisk",
+      "title": "MangoDisk",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2027-01-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://mangodisk.app/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/windows-portable",
+      "title": "Download Windows portable · EXE",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/windows-installer",
+      "title": "Download Windows installer · EXE",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/macos-dmg",
+      "title": "Download macOS · DMG",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/linux-x64-appimage",
+      "title": "Download Linux x64 · AppImage",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/linux-x64-deb",
+      "title": "Download Linux x64 · deb",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/linux-arm64-appimage",
+      "title": "Download Linux arm64 · AppImage",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/linux-arm64-deb",
+      "title": "Download Linux arm64 · deb",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/harry0703/MangoDisk/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mangodisk/publisher-release",
+      "title": "Review publisher release v2.1.2",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2"
+    },
+    {
+      "kind": "tool",
+      "id": "optimizerduck",
+      "title": "optimizerDuck",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2027-01-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/itsfatduck/optimizerDuck"
+    },
+    {
+      "kind": "acquisition",
+      "id": "optimizerduck/publisher-release",
+      "title": "Review publisher release v2.29.0",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/itsfatduck/optimizerDuck/releases/tag/v2.29.0"
     },
     {
       "kind": "guide",

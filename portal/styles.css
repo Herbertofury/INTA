@@ -1143,3 +1143,59 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 .updates-principle-grid p { margin:0; color:var(--muted); font-size:10px; line-height:1.55; }
 @media (max-width:1000px) { .updates-channel-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .updates-principle-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media (max-width:680px) { .updates-hero { display:block; padding:16px; } .updates-hero-metrics { justify-content:flex-start; margin-top:17px; } .updates-channel-grid,.updates-workflow-grid,.updates-command-grid { grid-template-columns:1fr; } .updates-filters { grid-template-columns:1fr; } .updates-principle-grid { grid-template-columns:1fr; } .updates-channel-note { min-height:0; } }
+
+
+.updates-platforms { margin:28px 0; }
+.updates-platform-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+.updates-platform-card { min-width:0; padding:13px; border:1px solid var(--line); border-radius:5px; background:var(--surface); }
+.updates-platform-card h3 { margin:4px 0 8px; font-size:14px; }
+.updates-platform-card h3 a { color:var(--text); }
+.updates-platform-card > p:not(.update-command-kicker) { margin:0 0 9px; color:var(--muted); font-size:10px; line-height:1.55; }
+.updates-platform-card > a { display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:10px; }
+.updates-platform-card > a svg { width:12px; height:12px; }
+@media (max-width:1000px) { .updates-platform-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:680px) { .updates-platform-grid { grid-template-columns:1fr; } }
+
+.updates-install-note { margin-top:9px; color:var(--dim); font-size:10px; line-height:1.5; }
+.updates-hero-actions [data-install-pwa] { display:inline-flex; align-items:center; gap:7px; }
+
+
+/* Local maintenance agent panel */
+.updates-agent-panel { margin:28px 0; padding:17px; border:1px solid var(--line); border-radius:6px; background:var(--surface); }
+.agent-status-chip { display:inline-flex; align-items:center; gap:8px; max-width:45%; padding:7px 10px; border:1px solid var(--line); border-radius:4px; color:var(--muted); font-size:11px; overflow-wrap:anywhere; }
+.agent-status-dot { width:8px; height:8px; border-radius:50%; background:var(--dim); }
+.agent-connect-actions { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+.agent-capabilities { color:var(--muted); font-size:11px; line-height:1.55; }
+.agent-operation-controls { display:grid; grid-template-columns:minmax(120px,.8fr) minmax(180px,1.2fr) minmax(140px,.7fr) auto; align-items:end; gap:9px; margin:16px 0; padding:12px; border:1px solid var(--line-soft); background:var(--subtle); }
+.agent-operation-controls label { display:grid; gap:5px; color:var(--muted); font-size:10px; }
+.agent-operation-controls input,.agent-operation-controls select { width:100%; min-width:0; min-height:37px; padding:7px 9px; border:1px solid var(--line); border-radius:4px; background:var(--bg); color:var(--text); font-size:12px; }
+.agent-action-buttons { display:flex; flex-wrap:wrap; gap:6px; }
+.agent-action-buttons .button { min-height:37px; padding:6px 9px; font-size:11px; white-space:nowrap; }
+.agent-live-data { margin-top:15px; padding-top:13px; border-top:1px solid var(--line-soft); }
+.agent-data-heading { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:9px; }
+.agent-data-heading h3 { font-size:13px; }
+.agent-data-heading span { color:var(--dim); font-size:10px; }
+.agent-inventory-summary { margin-bottom:9px; color:var(--muted); font-size:11px; }
+.agent-preview-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+.agent-preview-card,.agent-app-inventory { min-width:0; border:1px solid var(--line); border-radius:4px; background:var(--bg); }
+.agent-preview-card summary,.agent-app-inventory summary { display:flex; justify-content:space-between; align-items:center; gap:8px; padding:9px 10px; cursor:pointer; color:var(--text); font-size:11px; }
+.agent-preview-card summary span { color:var(--dim); font-size:10px; }
+.agent-preview-card pre,.agent-operation-row pre { max-height:240px; overflow:auto; margin:0; padding:10px; border-top:1px solid var(--line-soft); color:var(--muted); font-size:10px; line-height:1.5; white-space:pre; }
+.agent-app-inventory { margin-top:8px; }
+.agent-app-list { max-height:300px; overflow:auto; border-top:1px solid var(--line-soft); }
+.agent-app-list > div { display:flex; justify-content:space-between; gap:12px; padding:6px 9px; border-bottom:1px solid var(--line-soft); font-size:10px; }
+.agent-app-list > div span { color:var(--dim); text-align:right; }
+.agent-operation-row { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:10px; padding:9px 0; border-top:1px solid var(--line-soft); }
+.agent-operation-row > div { display:grid; gap:3px; min-width:0; }
+.agent-operation-row strong { font-size:11px; overflow-wrap:anywhere; }
+.agent-operation-row span { color:var(--muted); font-size:10px; }
+.agent-operation-row details summary { cursor:pointer; color:var(--accent); font-size:10px; }
+.agent-operation-row pre { grid-column:1/-1; max-width:min(650px,70vw); }
+@media(max-width:1000px) { .agent-operation-controls { grid-template-columns:repeat(2,minmax(0,1fr)); } .agent-action-buttons { grid-column:1/-1; } }
+@media(max-width:650px) { .updates-agent-panel { padding:12px; } .agent-status-chip { max-width:100%; } .agent-operation-controls,.agent-preview-grid { grid-template-columns:1fr; } .agent-action-buttons { grid-column:auto; } .agent-action-buttons .button { flex:1; } .agent-app-list > div { display:grid; gap:2px; } .agent-app-list > div span { text-align:left; } .agent-operation-row { grid-template-columns:1fr; } .agent-operation-row pre { max-width:100%; } }
+
+
+.agent-candidate-list { max-height:190px; overflow:auto; border-top:1px solid var(--line-soft); }
+.agent-candidate-list > div { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:5px 8px; border-bottom:1px solid var(--line-soft); }
+.agent-candidate-list code { min-width:0; overflow-wrap:anywhere; color:var(--muted); font-size:10px; }
+.agent-candidate-list button { flex:0 0 auto; min-height:28px; padding:3px 8px; border:1px solid var(--line); border-radius:4px; background:var(--selected); color:var(--accent); font-size:10px; }

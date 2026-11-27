@@ -8,7 +8,7 @@ Service procedures, tool references and troubleshooting methods for the <a href=
 
 **[🧰 Open technician hub](https://herbertofury.github.io/INTA/)** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [Updates & Maintenance](Updates-and-Maintenance) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)
 
-**258 tools · 22 playbooks · 11 tool categories**
+**260 tools · 22 playbooks · 11 tool categories**
 
 ## 🌐 Online tools: open a service and get a result
 
@@ -180,4 +180,4 @@ Submit a corrected download, improved diagnostic branch, evaluated tool or missi
 
 ---
 
-Editorial review: **2026-11-26** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)
+Editorial review: **2026-11-27** · [Review standard](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards) · [Suggest a correction](https://github.com/Herbertofury/INTA/issues/new/choose)

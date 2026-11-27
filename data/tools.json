@@ -8331,5 +8331,68 @@
     ],
     "evidenceStatus": "Official service documentation and public entry reviewed; external analysis was not executed by INTA.",
     "cautions": "This is a community-maintained aggregation. Vendor terms, special support programs and edition differences determine the actual support boundary."
+  },
+  {
+    "id": "mangodisk",
+    "name": "MangoDisk",
+    "category": "windows",
+    "summary": "View storage usage and inspect cleanup candidates; app uninstall and startup management are documented for supported desktop platforms.",
+    "bestFor": "Preview drive use, large files and duplicate groups on healthy storage before deciding what to remove.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "mode": "portable",
+    "pricing": "Free / open source (GPL-3.0)",
+    "homepage": "https://mangodisk.app/",
+    "downloadUrl": "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2",
+    "docsUrl": "https://github.com/harry0703/MangoDisk#readme",
+    "sourceUrl": "https://github.com/harry0703/MangoDisk",
+    "reviewedAt": "2026-11-27",
+    "tier": "specialist",
+    "tags": [
+      "disk usage",
+      "duplicates",
+      "cleanup preview",
+      "startup",
+      "uninstall"
+    ],
+    "provenance": [
+      "https://github.com/harry0703/MangoDisk",
+      "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2"
+    ],
+    "evidenceStatus": "Official documentation and release reviewed; no runtime or performance certification",
+    "cautions": "Start with Preview, confirm the target path and ownership, and review every removal. Verify disk health and backup first. Do not make startup changes, uninstall apps or delete files merely because they appear in a scan."
+  },
+  {
+    "id": "optimizerduck",
+    "name": "optimizerDuck",
+    "category": "windows",
+    "summary": "Windows utility for reviewing startup and settings, with publisher-documented backup and restore workflows.",
+    "bestFor": "Inspect startup entries or evaluate one clearly justified and reversible Windows adjustment on a test machine.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Free download; see repository license for use or redistribution",
+    "homepage": "https://github.com/itsfatduck/optimizerDuck",
+    "downloadUrl": "https://github.com/itsfatduck/optimizerDuck/releases/tag/v2.29.0",
+    "docsUrl": "https://github.com/itsfatduck/optimizerDuck#readme",
+    "sourceUrl": "https://github.com/itsfatduck/optimizerDuck",
+    "reviewedAt": "2026-11-27",
+    "tier": "specialist",
+    "tags": [
+      "startup",
+      "settings",
+      "rollback",
+      "Windows"
+    ],
+    "provenance": [
+      "https://github.com/itsfatduck/optimizerDuck",
+      "https://github.com/itsfatduck/optimizerDuck/releases/tag/v2.29.0"
+    ],
+    "evidenceStatus": "Official documentation and release reviewed; no runtime or performance certification",
+    "cautions": "The publisher reports unsigned executables. Do not bypass Windows security warnings or apply presets that disable Windows Update or endpoint protection. Approve one applicable change, verify reversibility and repeat the original workload; built-in Windows controls remain the fallback."
   }
 ]

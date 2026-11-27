@@ -3207,6 +3207,38 @@
       "usage": {
         "status": "unverified"
       }
+    },
+    "mangodisk": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/harry0703/MangoDisk",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/harry0703/MangoDisk",
+        "stars": 6245,
+        "forks": 434
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "optimizerduck": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/itsfatduck/optimizerDuck",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/itsfatduck/optimizerDuck",
+        "stars": 13235,
+        "forks": 586
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
     }
   }
 }

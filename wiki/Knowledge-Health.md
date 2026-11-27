@@ -2,9 +2,9 @@
 
 # 🧭 Knowledge health
 
-**Published coverage snapshot: 2026-11-26.** Structural checks passed for this build. This is an editorial-age report, not live vendor monitoring or proof that a repair worked on client hardware.
+**Published coverage snapshot: 2026-11-27.** Structural checks passed for this build. This is an editorial-age report, not live vendor monitoring or proof that a repair worked on client hardware.
 
-**8 service areas · 22 complete guides · 95 specific fixes · 258 tools · 58 research tasks**
+**8 service areas · 22 complete guides · 95 specific fixes · 260 tools · 58 research tasks**
 
 **[Find your job](Service-Map)** · **[Next research](Research-Queue)** · **[Organization rules](Knowledge-Organization)**
 
@@ -33,7 +33,7 @@
 | [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff) | 3 | 3 | 4 |
 | [Build and refresh a technician rescue USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) | 3 | 4 | 4 |
 | [Use AI as a careful troubleshooting copilot](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage) | 3 | 3 | 4 |
-| [Run a useful workstation maintenance visit](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) | 7 | 8 | 5 |
+| [Run a useful workstation maintenance visit](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) | 7 | 8 | 6 |
 
 ## Review schedule
 
@@ -52,7 +52,7 @@ Review intervals are editorial targets. Passing a link or build check never chan
 
 **72 scenario tool choices** are included in the review schedule. Their task fit, edition and access boundaries are reviewed alongside the tool itself.
 
-**Reviews due in this snapshot: 0 of 985 dated records.**
+**Reviews due in this snapshot: 0 of 996 dated records.**
 
 The [scheduled organization check](https://github.com/Herbertofury/INTA/actions/workflows/knowledge-health.yml) recalculates age using the run date and preserves the complete report as an artifact. The weekday contribution task uses that evidence to prioritize work.
 
