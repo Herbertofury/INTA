@@ -494,6 +494,13 @@ main { min-height: calc(100vh - 125px); padding: 30px 32px 48px; outline: none; 
 .copy-command:hover { background: var(--hover); color: var(--text); }
 .copy-command svg { width: 14px; height: 14px; }
 .command-legend { margin: 9px 0 0 31px; color: var(--dim); font-size: 14px; }
+
+.command-safety,.command-source,.command-copy-note { display:flex; align-items:flex-start; gap:8px; margin:0; padding:8px 13px; border-top:1px solid var(--line-soft); color:var(--muted); font-size:12px; line-height:1.55; }
+.command-safety svg { flex:0 0 14px; width:14px; height:14px; margin-top:2px; }
+.command-source a { color:var(--muted); text-decoration:underline; text-underline-offset:3px; }
+.command-copy-note { color:var(--dim); padding-top:0; border-top:0; }
+.command-block .command-bar > span { min-width:0; overflow-wrap:anywhere; }
+
 pre { max-width: 100%; overflow-x: auto; margin: 0; padding: 14px; font-size: 14px; line-height: 1.6; tab-size: 2; }
 code { font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .9em; }
 pre code { color: var(--text); font-size: inherit; }
