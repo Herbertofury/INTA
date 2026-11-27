@@ -3941,6 +3941,32 @@
       "height": 32,
       "checkedAt": "2026-11-26",
       "sourceSha256": "d8ecf3102c60d8d89934296edfd2c09003e226568dcce72505df78cf1c33581e"
+    },
+    "i66c3073015a38e7aa1c": {
+      "path": "assets/brand-icons/66c3073015a38e7aa1c.png",
+      "sourceUrl": "https://raw.githubusercontent.com/harry0703/MangoDisk/v2.1.2/src-tauri/icons/128x128.png",
+      "resolvedSourceUrl": "https://raw.githubusercontent.com/harry0703/MangoDisk/v2.1.2/src-tauri/icons/128x128.png",
+      "sourceKind": "publisher application icon",
+      "publisherHost": "github.com",
+      "sha256": "66c3073015a38e7aa1ca14b15df42a071ba5bd32299224c1a75998d76ad40d1c",
+      "mimeType": "image/png",
+      "width": 64,
+      "height": 64,
+      "checkedAt": "2026-11-27",
+      "sourceSha256": "44ad80933d2b4928689ea1cfc0feeeab0c5ac067c9b363a270e1fa4109d5af39"
+    },
+    "i4a18f27159a99d3e342": {
+      "path": "assets/brand-icons/4a18f27159a99d3e342.png",
+      "sourceUrl": "https://raw.githubusercontent.com/itsfatduck/optimizerDuck/v2.29.0/optimizerDuck/Logo.ico",
+      "resolvedSourceUrl": "https://raw.githubusercontent.com/itsfatduck/optimizerDuck/v2.29.0/optimizerDuck/Logo.ico",
+      "sourceKind": "publisher application icon",
+      "publisherHost": "github.com",
+      "sha256": "4a18f27159a99d3e3429a4b4823bbb3e984cc678d7ada1ab0647070a51c63346",
+      "mimeType": "image/png",
+      "width": 32,
+      "height": 32,
+      "checkedAt": "2026-11-27",
+      "sourceSha256": "f7b7b5c218773ef6cbb4cff2568a5c2b026c77f9e0f23bc3b2d3efef062cc4f1"
     }
   },
   "brands": [
@@ -13214,13 +13240,24 @@
       "id": "app-mangodisk",
       "name": "MangoDisk",
       "names": [
-        "MangoDisk"
+        "MangoDisk",
+        "Mango Disk"
       ],
       "urls": [
         "https://mangodisk.app/",
         "https://mangodisk.app/download",
         "https://github.com/harry0703/MangoDisk",
-        "https://downloads.mangodisk.app/"
+        "https://downloads.mangodisk.app/",
+        "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2",
+        "https://github.com/harry0703/MangoDisk#readme",
+        "https://api.github.com/repos/harry0703/MangoDisk/releases/latest",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-windows-portable.exe",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-windows.exe",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-macos.dmg",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-x64.AppImage",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-x64.deb",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-arm64.AppImage",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-arm64.deb"
       ],
       "hosts": [
         "mangodisk.app",
@@ -13228,8 +13265,9 @@
         "downloads.mangodisk.app"
       ],
       "downloadPage": "https://mangodisk.app/download",
-      "kind": "application",
-      "assetId": "idf5a75004d3539ea0c5f"
+      "kind": "tool",
+      "assetId": "i66c3073015a38e7aa1c",
+      "toolId": "mangodisk"
     },
     {
       "id": "site-mangodisk-app",
@@ -16005,6 +16043,25 @@
       "downloadPage": "https://www.vmware.com/",
       "kind": "website",
       "assetId": "ibf098c181bb6fbff11a3"
+    },
+    {
+      "id": "optimizerduck",
+      "toolId": "optimizerduck",
+      "name": "optimizerDuck",
+      "names": [
+        "optimizerDuck",
+        "Optimizer Duck"
+      ],
+      "urls": [
+        "https://github.com/itsfatduck/optimizerDuck",
+        "https://github.com/itsfatduck/optimizerDuck/releases/tag/v2.29.0",
+        "https://github.com/itsfatduck/optimizerDuck#readme",
+        "https://api.github.com/repos/itsfatduck/optimizerDuck/releases/latest"
+      ],
+      "hosts": [],
+      "downloadPage": "https://github.com/itsfatduck/optimizerDuck/releases/tag/v2.29.0",
+      "kind": "tool",
+      "assetId": "i4a18f27159a99d3e342"
     }
   ],
   "coverage": {
