@@ -5,6 +5,7 @@ on:
       - 'desktop/INTA.Desktop/**'
       - 'agent/INTA.LocalAgent/StartupFolders.cs'
       - 'agent/INTA.LocalAgent/StartupInventory.cs'
+      - 'agent/INTA.LocalAgent/PowerPlans.cs'
       - '.github/workflows/inta-desktop-preview.yml'
   push:
     branches: [main]
@@ -12,6 +13,7 @@ on:
       - 'desktop/INTA.Desktop/**'
       - 'agent/INTA.LocalAgent/StartupFolders.cs'
       - 'agent/INTA.LocalAgent/StartupInventory.cs'
+      - 'agent/INTA.LocalAgent/PowerPlans.cs'
       - '.github/workflows/inta-desktop-preview.yml'
 permissions:
   contents: read
