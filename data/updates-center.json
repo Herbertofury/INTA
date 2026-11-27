@@ -133,6 +133,26 @@
       "updateCommand": "brew-update",
       "icon": "terminal",
       "note": "Homebrew only manages its own formulae/casks. Mac App Store and vendor-managed apps need separate update paths."
+    },
+    {
+      "id": "windows-drivers",
+      "name": "Windows device drivers",
+      "scope": "Optional Windows Update driver offers; OEM drivers are separate",
+      "manager": "Windows Update",
+      "auditCommand": "windows-driver-inventory",
+      "updateCommand": "windows-driver-updates",
+      "icon": "monitor",
+      "note": "Compare hardware model and installed driver against OEM release notes. Optional updates are not always newer or better; BIOS/firmware requires the manufacturer's exact supported tool and procedure."
+    },
+    {
+      "id": "macos-software-update",
+      "name": "macOS Software Update",
+      "scope": "macOS system, security and Apple-delivered updates",
+      "manager": "softwareupdate",
+      "auditCommand": "macos-software-update-audit",
+      "updateCommand": "macos-software-update-all",
+      "icon": "monitor",
+      "note": "Separate from Homebrew, Mac App Store and vendor application updates. Follow MDM policy and backup/restart guidance."
     }
   ],
   "commands": [
@@ -876,6 +896,58 @@
       "safety": "Only use to roll back the matching INTA cache reset, not as a general Windows Update repair. Confirm the exact timestamp and both backup folders before running. Requires administrator privileges and stops update services. Current cache folders are preserved under rollback names. If the prior command only partially completed, inspect all folder names before proceeding; do not guess the timestamp.",
       "sourceUrl": "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows",
       "sourceTitle": "Microsoft Troubleshoot Windows updates"
+    },
+    {
+      "id": "windows-driver-inventory",
+      "title": "Inventory installed Windows device drivers",
+      "category": "Update inventory",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Capture signed driver provider, version, date and INF identity before considering a driver update.",
+      "code": "Get-CimInstance Win32_PnPSignedDriver | Select-Object DeviceName,Manufacturer,DriverVersion,DriverDate,InfName | Sort-Object DeviceName | Format-Table -AutoSize",
+      "safety": "Read-only inventory. Driver dates are not a reliable quality ranking. Match hardware IDs, OEM support guidance and device model before changing drivers.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/powershell/module/cimcmdlets/get-ciminstance",
+      "sourceTitle": "Microsoft Get-CimInstance"
+    },
+    {
+      "id": "windows-driver-updates",
+      "title": "Open Windows optional driver updates",
+      "category": "Windows Update",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Open the supported Windows Update optional updates page to inspect offered driver updates.",
+      "code": "Start-Process 'ms-settings:windowsupdate-optionalupdates'",
+      "safety": "Opens Settings only. Optional drivers are not always the newest or best OEM driver. Confirm hardware model, current driver, release notes and rollback path before installing.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+      "sourceTitle": "Microsoft Windows Update"
+    },
+    {
+      "id": "macos-software-update-audit",
+      "title": "List available macOS system updates",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Query Apple's Software Update service for available macOS system and security updates.",
+      "code": "softwareupdate --list",
+      "safety": "Read-only update inventory. Review compatibility, managed update policy, backup status and reboot requirements before installing.",
+      "sourceUrl": "https://support.apple.com/guide/mac-help/get-macos-updates-mchlpx1065/mac",
+      "sourceTitle": "Apple macOS updates"
+    },
+    {
+      "id": "macos-software-update-all",
+      "title": "Install available macOS system updates",
+      "category": "Linux",
+      "shell": "Bash",
+      "privilege": "sudo",
+      "risk": "changes-system",
+      "summary": "Install available macOS updates through Apple's built-in Software Update command-line tool.",
+      "code": "softwareupdate --list\nsudo softwareupdate --install --all",
+      "safety": "Changes OS components and may require a restart. Review the list first, confirm a current backup, power and maintenance window, and follow MDM deferrals on managed Macs. This does not update every third-party app.",
+      "sourceUrl": "https://support.apple.com/guide/mac-help/get-macos-updates-mchlpx1065/mac",
+      "sourceTitle": "Apple macOS updates"
     }
   ],
   "workflows": [
