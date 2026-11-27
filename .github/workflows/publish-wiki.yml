@@ -1,0 +1,39 @@
+name: Publish canonical technician Wiki
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wiki/**'
+      - 'scripts/publish-wiki.py'
+      - '.github/workflows/publish-wiki.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: inta-wiki-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Publish canonical pages and verify a fresh readback
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p reports
+          python3 scripts/publish-wiki.py --report reports/wiki-publication.json
+      - name: Preserve publication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wiki-publication-evidence
+          path: reports/wiki-publication.json
+          if-no-files-found: ignore
