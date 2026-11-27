@@ -6,6 +6,11 @@
   <meta name="color-scheme" content="dark light">
   <link rel="icon" type="image/svg+xml" href="{{FAVICON}}">
   <meta name="theme-color" content="#111214">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./inta-app-icon.svg">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="description" content="The INTA Computer Services technician workspace. Find the right tools, follow a clear playbook, and verify every fix.">
   <title>INTA | Technician workspace</title>
   <style id="inta-styles">{{STYLES}}</style>
@@ -65,5 +70,6 @@
   <noscript><div class="noscript">This interactive workspace needs JavaScript. The complete guides are also available in the <a href="https://github.com/Herbertofury/INTA/wiki">INTA GitHub wiki</a>.</div></noscript>
   <script id="inta-data">{{DATA}}</script>
   <script id="inta-app">{{APP}}</script>
+  <script>if ("serviceWorker" in navigator && location.protocol !== "file:") { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(() => {})); }</script>
 </body>
 </html>
