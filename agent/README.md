@@ -47,7 +47,7 @@ The installer verifies SHA-256, installs to the current user's LocalAppData, cre
 | Snap | Yes | Yes | Yes | Not generic | Yes |
 | UniGetUI | Yes | Yes | Yes | Not yet | Not yet |
 
-The agent currently collects Windows installed applications from the uninstall registry. Linux/macOS currently provide manager detection and update previews; richer unified installed-app inventory is not included in the first release. Package IDs are copied from the selected manager's preview.
+The agent currently collects Windows installed applications from the uninstall registry. Linux/macOS currently provide manager detection and update previews; richer unified installed-app inventory is not included in the first release. Package IDs are copied from the selected manager's preview. Native rollback is currently exposed for Snap via `snap revert`; other package managers require a separately identified previous version or vendor-supported rollback procedure.
 
 ## Build locally
 
