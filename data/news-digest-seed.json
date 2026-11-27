@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "id": "microsoft-26h2-video",
+      "sourceId": "windows-health",
+      "title": "Microsoft video: Windows 11 2026 Update rollout guide",
+      "url": "https://techcommunity.microsoft.com/blog/windows-itpro-blog/an-it-pro%E2%80%99s-guide-to-windows-11-version-26h2/4559760",
+      "date": "2026-09-29",
+      "media": [
+        {
+          "kind": "embed",
+          "url": "https://www.youtube.com/watch?v=zFwAT04IvGA"
+        }
+      ]
+    }
+  ]
+}
