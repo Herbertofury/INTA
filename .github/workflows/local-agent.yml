@@ -45,7 +45,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: inta-agent-${{ matrix.rid }}
-          path: dist/inta-agent-${{ matrix.rid }}.zip
+          path: dist/inta-agent-${{ matrix.rid }}.zip*
           if-no-files-found: error
           retention-days: 30
 
