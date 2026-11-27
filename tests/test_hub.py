@@ -59,6 +59,16 @@ class HubIntegrity(unittest.TestCase):
                 self.assertIn(note['commands'][0]['code'], guide)
                 self.assertIn('#### ⚡ Quick commands', guide)
 
+    def test_updates_center_is_installable_on_mobile_and_offline(self):
+        output = build.build_outputs()
+        manifest = json.loads(output['site/manifest.webmanifest'])
+        self.assertEqual(manifest['display'], 'standalone')
+        self.assertIn('#updates', manifest['start_url'])
+        self.assertIn('site/inta-app-icon.svg', output)
+        self.assertIn('self.addEventListener("fetch"', output['site/sw.js'])
+        self.assertIn('navigator.serviceWorker.register', output['site/index.html'])
+        self.assertIn('rel="manifest"', output['site/index.html'])
+
     def test_updates_center_catalog_and_app_are_integrated(self):
         catalog = json.loads((ROOT / 'data/updates-center.json').read_text())
         build.validate_updates_center(catalog)
