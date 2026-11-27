@@ -1,0 +1,554 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-27",
+  "policy": "Web-only icon identities for Command Center content. Merge before base identities for web name/tool/URL resolution. Base native registry and ISO assets remain unchanged. Authentic project or publisher/distribution website icons only; no generated placeholders.",
+  "assets": {
+    "i8d513a4351abfa97ba3e": {
+      "path": "assets/web-brand-icons/8d513a4351abfa97ba3e.png",
+      "sourceUrl": "https://winutil.christitus.com/favicon.svg",
+      "resolvedSourceUrl": "https://winutil.christitus.com/favicon.svg",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "winutil.christitus.com",
+      "sha256": "8d513a4351abfa97ba3e2237ec41f4ce3c698f07feced01c808f7259fe8cf59c",
+      "sourceSha256": "4e87ecd3dea47b49bed8abcbe4e39ebda66910090a5b3de921aa51d4abce74e9",
+      "mimeType": "image/png",
+      "width": 32,
+      "height": 32,
+      "checkedAt": "2026-11-27"
+    },
+    "i41e1c79f6b45fc9704a5": {
+      "path": "assets/web-brand-icons/41e1c79f6b45fc9704a5.png",
+      "sourceUrl": "https://img.chocolatey.org/favicons/apple-touch-icon-72x72.png",
+      "resolvedSourceUrl": "https://img.chocolatey.org/favicons/apple-touch-icon-72x72.png",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "img.chocolatey.org",
+      "sha256": "41e1c79f6b45fc9704a537e79c52a7941fdaedb9a25a3e7ab55f3b95bfb67146",
+      "sourceSha256": "0c0c2bbf5090444d306f99ff55bfa6aaf63947062f700dbb439189e702d5e2b6",
+      "mimeType": "image/png",
+      "width": 64,
+      "height": 64,
+      "checkedAt": "2026-11-27"
+    },
+    "i7f2112d56fd851668771": {
+      "path": "assets/web-brand-icons/7f2112d56fd851668771.png",
+      "sourceUrl": "https://scoop.sh/favicon.ico",
+      "resolvedSourceUrl": "https://scoop.sh/favicon.ico",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "scoop.sh",
+      "sha256": "7f2112d56fd851668771f6d66b06bb7c55092bd5a70d1cf70b803d9950d5b4e1",
+      "sourceSha256": "3914b0d1867c7d42ce5b3e2f8e054c15ec6ae1b74bcdde66c66c99de617f497e",
+      "mimeType": "image/png",
+      "width": 16,
+      "height": 16,
+      "checkedAt": "2026-11-27"
+    },
+    "i607dca27726d7bc394a2": {
+      "path": "assets/web-brand-icons/607dca27726d7bc394a2.png",
+      "sourceUrl": "https://raw.githubusercontent.com/Devolutions/UniGetUI/main/media/icon.png",
+      "resolvedSourceUrl": "https://raw.githubusercontent.com/Devolutions/UniGetUI/main/media/icon.png",
+      "sourceKind": "official project icon",
+      "publisherHost": "raw.githubusercontent.com",
+      "sha256": "607dca27726d7bc394a2632a27dfabbfc725233ddde25bcfbf47bc2234120914",
+      "sourceSha256": "953492bd7e4f80900503493bd8508d3994592108a5b950271154a5057e610d4e",
+      "mimeType": "image/png",
+      "width": 64,
+      "height": 64,
+      "checkedAt": "2026-11-27"
+    },
+    "i5f3f7132768c45c993e4": {
+      "path": "assets/web-brand-icons/5f3f7132768c45c993e4.png",
+      "sourceUrl": "https://archlinux.org/favicon.ico",
+      "resolvedSourceUrl": "https://archlinux.org/favicon.ico",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "archlinux.org",
+      "sha256": "5f3f7132768c45c993e4f0c7c71552b3cda56fccd475b32647557c57889d8f05",
+      "sourceSha256": "2ab2e14c0640480220eee04497122970e0563d6593c3924feefac11871aa5eb1",
+      "mimeType": "image/png",
+      "width": 16,
+      "height": 16,
+      "checkedAt": "2026-11-27"
+    },
+    "ia9659abf12a77c437c8a": {
+      "path": "assets/web-brand-icons/a9659abf12a77c437c8a.png",
+      "sourceUrl": "https://fedoraproject.org/favicon.ico",
+      "resolvedSourceUrl": "https://fedoraproject.org/favicon.ico",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "fedoraproject.org",
+      "sha256": "a9659abf12a77c437c8a07cb0ace0ca2b4f86a1602bbef8be4276dabc9688b51",
+      "sourceSha256": "ac148e13d962c8ccc6fde3ea210118ca3b837d28301d66c6b2009a3628ce8408",
+      "mimeType": "image/png",
+      "width": 48,
+      "height": 48,
+      "checkedAt": "2026-11-27"
+    },
+    "if8f762f531fa6a64964b": {
+      "path": "assets/brand-icons/f8f762f531fa6a64964b.png",
+      "sourceUrl": "https://www.redditstatic.com/shreddit/assets/favicon/64x64.png",
+      "resolvedSourceUrl": "https://www.redditstatic.com/shreddit/assets/favicon/64x64.png",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "www.reddit.com",
+      "sha256": "f8f762f531fa6a64964bb92a3c0382477642a782833512d58f2df7f8033d1f0a",
+      "mimeType": "image/png",
+      "width": 64,
+      "height": 64,
+      "checkedAt": "2026-11-26",
+      "sourceSha256": "f60ae5a33ee8d16c71a0ff6b45e3c2524f9ccaf3cd33e6636c6493dd4ec2d953"
+    },
+    "i4538691198fe0ea7526e": {
+      "path": "assets/brand-icons/4538691198fe0ea7526e.png",
+      "sourceUrl": "https://www.microsoft.com/favicon.ico",
+      "resolvedSourceUrl": "https://www.microsoft.com/favicon.ico",
+      "sourceKind": "publisher website icon",
+      "publisherHost": "learn.microsoft.com",
+      "sha256": "4538691198fe0ea7526eadaaf5a4bf5e4425f6f8f291d42de57eb9f3ec3a39a7",
+      "mimeType": "image/png",
+      "width": 64,
+      "height": 64,
+      "checkedAt": "2026-11-26",
+      "sourceSha256": "90cdaf487716184e4034000935c605d1633926d348116d198f355a98b8c6cd21"
+    },
+    "i98c05baf7fde67ee3abe": {
+      "path": "assets/brand-icons/98c05baf7fde67ee3abe.png",
+      "sourceUrl": "https://www.debian.org/favicon.ico",
+      "resolvedSourceUrl": "https://www.debian.org/favicon.ico",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "live-team.pages.debian.net",
+      "sha256": "98c05baf7fde67ee3abe3a72c3fe445bf85f48fc590fc3e11055f460b12c4cb4",
+      "mimeType": "image/png",
+      "width": 32,
+      "height": 32,
+      "checkedAt": "2026-11-26",
+      "sourceSha256": "b7f83e026ed2bd42c631036d34566baedcab0be3eed1f0f13106e46cb7933200"
+    },
+    "if6faba46c59b19156b87": {
+      "path": "assets/brand-icons/f6faba46c59b19156b87.png",
+      "sourceUrl": "https://assets.ubuntu.com/v1/be7e4cc6-COF-favicon-32x32.png",
+      "resolvedSourceUrl": "https://assets.ubuntu.com/v1/be7e4cc6-COF-favicon-32x32.png",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "ubuntu.com",
+      "sha256": "f6faba46c59b19156b872e623d4dd6e65b1e9c4c9f2c4a74749243fcee7c7fe0",
+      "mimeType": "image/png",
+      "width": 32,
+      "height": 32,
+      "checkedAt": "2026-11-26",
+      "sourceSha256": "c8439b97eea5cd51293351018ade70508bd920a2ed35cc9ff68678a341ff4880"
+    },
+    "ia7da463b4c67842b96de": {
+      "path": "assets/brand-icons/a7da463b4c67842b96de.png",
+      "sourceUrl": "https://www.google.com/s2/favicons?domain_url=https%3A%2F%2Faccess.redhat.com%2F&sz=64",
+      "resolvedSourceUrl": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://access.redhat.com/&size=64",
+      "sourceKind": "Google favicon cache of publisher website",
+      "publisherHost": "access.redhat.com",
+      "sha256": "a7da463b4c67842b96de491cd75c3997e7af641789d15decf19d48d38bca8a0f",
+      "mimeType": "image/png",
+      "width": 48,
+      "height": 48,
+      "checkedAt": "2026-11-26",
+      "sourceSha256": "d990d0ecf077db56107eee8350cb415f9780867779755e155481b255d33753cb"
+    },
+    "i3a2aeb0e69ba91ef03c1": {
+      "path": "assets/web-brand-icons/3a2aeb0e69ba91ef03c1.png",
+      "sourceUrl": "https://ninite.com/static/favicon-50c60524c110e749f013a1ca48f80b80.png",
+      "resolvedSourceUrl": "https://ninite.com/static/favicon-50c60524c110e749f013a1ca48f80b80.png",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "ninite.com",
+      "sha256": "3a2aeb0e69ba91ef03c131ba91905e06c0b2d36126f725673cfd395b8a949d39",
+      "sourceSha256": "7557e0990d6d93912e30bf22e985cac709751b5d4425a3366332d42ef1c1c211",
+      "mimeType": "image/png",
+      "width": 16,
+      "height": 16,
+      "checkedAt": "2026-11-27",
+      "transportEncoding": "gzip",
+      "transportSha256": "2648f46a0c15c53d4285427b1f9b1ef999328f66bbe449491f8ed9e82f859aad"
+    },
+    "i95ccfccc7fa808d8cd56": {
+      "path": "assets/web-brand-icons/95ccfccc7fa808d8cd56.png",
+      "sourceUrl": "https://patchmypc.com/app/uploads/2025/06/PMPC-Logomark-WebIcon-150x150.png",
+      "resolvedSourceUrl": "https://patchmypc.com/app/uploads/2025/06/PMPC-Logomark-WebIcon-150x150.png",
+      "sourceKind": "publisher-declared website icon",
+      "publisherHost": "patchmypc.com",
+      "sha256": "95ccfccc7fa808d8cd56ccaa7e5aeead1880f53dedc69550f557b995d50de72f",
+      "sourceSha256": "0d58008d23880c96dbde95f0e7d27e6bf1453a9d6a3be55a87b014186aa14979",
+      "mimeType": "image/png",
+      "width": 64,
+      "height": 64,
+      "checkedAt": "2026-11-27"
+    }
+  },
+  "brands": [
+    {
+      "id": "web-app-winutil",
+      "name": "Chris Titus Tech WinUtil",
+      "names": [
+        "Chris Titus Tech WinUtil",
+        "WinUtil",
+        "Chris Titus Tech's Windows Utility",
+        "Chris Titus Tech Windows Utility"
+      ],
+      "urls": [
+        "https://github.com/ChrisTitusTech/winutil",
+        "https://winutil.christitus.com/",
+        "https://christitus.com/win",
+        "https://github.com/ChrisTitusTech/winutil/releases/latest"
+      ],
+      "hosts": [
+        "winutil.christitus.com"
+      ],
+      "downloadPage": "https://github.com/ChrisTitusTech/winutil/releases/latest",
+      "kind": "tool",
+      "assetId": "i8d513a4351abfa97ba3e"
+    },
+    {
+      "id": "web-app-tron",
+      "name": "Tron Script",
+      "names": [
+        "Tron Script",
+        "TronScript",
+        "Tron"
+      ],
+      "urls": [
+        "https://github.com/bmrf/tron",
+        "https://www.reddit.com/r/TronScript/",
+        "https://old.reddit.com/r/TronScript/"
+      ],
+      "hosts": [],
+      "downloadPage": "https://www.reddit.com/r/TronScript/",
+      "kind": "tool",
+      "assetId": "if8f762f531fa6a64964b",
+      "iconNote": "Genuine icon of the maintainer-designated distribution website. The upstream source tree publishes no icon assets; GitHub source is not the complete runnable package."
+    },
+    {
+      "id": "web-app-chocolatey",
+      "name": "Chocolatey CLI",
+      "names": [
+        "Chocolatey CLI",
+        "Chocolatey",
+        "Chocolatey Software"
+      ],
+      "urls": [
+        "https://docs.chocolatey.org/en-us/choco/",
+        "https://github.com/chocolatey/choco",
+        "https://docs.chocolatey.org/en-us/choco/commands/",
+        "https://docs.chocolatey.org/en-us/choco/setup/",
+        "https://docs.chocolatey.org/docs/commands-outdated/",
+        "https://chocolatey.org/install"
+      ],
+      "hosts": [
+        "chocolatey.org",
+        "community.chocolatey.org"
+      ],
+      "downloadPage": "https://chocolatey.org/install",
+      "kind": "tool",
+      "assetId": "i41e1c79f6b45fc9704a5"
+    },
+    {
+      "id": "web-app-scoop",
+      "name": "Scoop",
+      "names": [
+        "Scoop"
+      ],
+      "urls": [
+        "https://scoop.sh/",
+        "https://github.com/ScoopInstaller/Scoop",
+        "https://get.scoop.sh/"
+      ],
+      "hosts": [
+        "scoop.sh",
+        "get.scoop.sh"
+      ],
+      "downloadPage": "https://scoop.sh/",
+      "kind": "tool",
+      "assetId": "i7f2112d56fd851668771"
+    },
+    {
+      "id": "web-app-unigetui",
+      "name": "UniGetUI",
+      "names": [
+        "UniGetUI",
+        "Devolutions UniGetUI",
+        "WingetUI"
+      ],
+      "urls": [
+        "https://github.com/Devolutions/UniGetUI",
+        "https://github.com/Devolutions/UniGetUI/releases/latest",
+        "https://github.com/Devolutions/UniGetUI/releases/download/v2026.3.4/UniGetUI.x64.zip",
+        "https://api.github.com/repos/Devolutions/UniGetUI/releases/latest",
+        "https://github.com/marticliment/UniGetUI"
+      ],
+      "hosts": [],
+      "downloadPage": "https://github.com/Devolutions/UniGetUI/releases/latest",
+      "kind": "tool",
+      "assetId": "i607dca27726d7bc394a2",
+      "toolId": "unigetui"
+    },
+    {
+      "id": "web-app-winget",
+      "name": "Windows Package Manager (WinGet)",
+      "names": [
+        "Windows Package Manager (WinGet)",
+        "Windows Package Manager",
+        "Microsoft WinGet",
+        "WinGet"
+      ],
+      "urls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+        "https://github.com/microsoft/winget-cli/releases/latest",
+        "https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
+        "https://api.github.com/repos/microsoft/winget-cli/releases/latest",
+        "https://learn.microsoft.com/en-us/windows/package-manager/",
+        "https://github.com/microsoft/winget-cli",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade"
+      ],
+      "hosts": [],
+      "downloadPage": "https://github.com/microsoft/winget-cli/releases/latest",
+      "kind": "tool",
+      "assetId": "i4538691198fe0ea7526e",
+      "toolId": "winget"
+    },
+    {
+      "id": "web-app-apt",
+      "name": "APT",
+      "names": [
+        "APT",
+        "Advanced Package Tool"
+      ],
+      "urls": [
+        "https://packages.debian.org/stable/apt"
+      ],
+      "hosts": [],
+      "downloadPage": "https://packages.debian.org/stable/apt",
+      "kind": "tool",
+      "assetId": "i98c05baf7fde67ee3abe",
+      "iconNote": "Genuine Debian publisher website icon for its package management tool."
+    },
+    {
+      "id": "web-app-dnf",
+      "name": "DNF",
+      "names": [
+        "DNF"
+      ],
+      "urls": [
+        "https://dnf.readthedocs.io/en/latest/",
+        "https://dnf.readthedocs.io/en/latest/command_ref.html"
+      ],
+      "hosts": [],
+      "downloadPage": "https://dnf.readthedocs.io/en/latest/",
+      "kind": "tool",
+      "assetId": "ia9659abf12a77c437c8a",
+      "iconNote": "Genuine Fedora publisher website icon for the Fedora/RHEL package manager."
+    },
+    {
+      "id": "web-app-pacman",
+      "name": "Pacman",
+      "names": [
+        "Pacman",
+        "pacman-contrib",
+        "checkupdates"
+      ],
+      "urls": [
+        "https://archlinux.org/pacman/"
+      ],
+      "hosts": [],
+      "downloadPage": "https://archlinux.org/pacman/",
+      "kind": "tool",
+      "assetId": "i5f3f7132768c45c993e4",
+      "iconNote": "Genuine Arch Linux publisher website icon for its package manager and helpers."
+    },
+    {
+      "id": "web-app-arch-linux",
+      "name": "Arch Linux",
+      "names": [
+        "Arch Linux",
+        "Arch"
+      ],
+      "urls": [
+        "https://archlinux.org/",
+        "https://archlinux.org/download/"
+      ],
+      "hosts": [
+        "archlinux.org"
+      ],
+      "downloadPage": "https://archlinux.org/download/",
+      "kind": "application",
+      "assetId": "i5f3f7132768c45c993e4"
+    },
+    {
+      "id": "web-app-fedora",
+      "name": "Fedora",
+      "names": [
+        "Fedora",
+        "Fedora Linux"
+      ],
+      "urls": [
+        "https://fedoraproject.org/"
+      ],
+      "hosts": [
+        "fedoraproject.org"
+      ],
+      "downloadPage": "https://fedoraproject.org/",
+      "kind": "application",
+      "assetId": "ia9659abf12a77c437c8a"
+    },
+    {
+      "id": "web-app-rhel",
+      "name": "Red Hat Enterprise Linux",
+      "names": [
+        "Red Hat Enterprise Linux",
+        "RHEL",
+        "Red Hat"
+      ],
+      "urls": [
+        "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux"
+      ],
+      "hosts": [
+        "www.redhat.com"
+      ],
+      "downloadPage": "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux",
+      "kind": "application",
+      "assetId": "ia7da463b4c67842b96de"
+    },
+    {
+      "id": "web-app-microsoft-store",
+      "name": "Microsoft Store",
+      "names": [
+        "Microsoft Store"
+      ],
+      "urls": [
+        "https://apps.microsoft.com/"
+      ],
+      "hosts": [],
+      "downloadPage": "https://apps.microsoft.com/",
+      "kind": "application",
+      "assetId": "i4538691198fe0ea7526e"
+    },
+    {
+      "id": "web-site-chocolatey-docs",
+      "name": "Chocolatey Documentation",
+      "names": [
+        "Chocolatey Documentation",
+        "docs.chocolatey.org"
+      ],
+      "urls": [
+        "https://docs.chocolatey.org/",
+        "https://chocolatey.org/install"
+      ],
+      "hosts": [
+        "docs.chocolatey.org"
+      ],
+      "downloadPage": "https://chocolatey.org/install",
+      "kind": "website",
+      "assetId": "i41e1c79f6b45fc9704a5"
+    },
+    {
+      "id": "web-site-ubuntu-manpages",
+      "name": "Ubuntu Manpages",
+      "names": [
+        "Ubuntu Manpages",
+        "manpages.ubuntu.com"
+      ],
+      "urls": [
+        "https://manpages.ubuntu.com/",
+        "https://manpages.ubuntu.com/manpages/noble/en/man8/apt.8.html"
+      ],
+      "hosts": [
+        "manpages.ubuntu.com"
+      ],
+      "downloadPage": "https://manpages.ubuntu.com/",
+      "kind": "website",
+      "assetId": "if6faba46c59b19156b87"
+    },
+    {
+      "id": "web-site-archlinux-wiki",
+      "name": "ArchWiki",
+      "names": [
+        "ArchWiki",
+        "wiki.archlinux.org"
+      ],
+      "urls": [
+        "https://wiki.archlinux.org/",
+        "https://wiki.archlinux.org/title/System_maintenance"
+      ],
+      "hosts": [
+        "wiki.archlinux.org"
+      ],
+      "downloadPage": "https://wiki.archlinux.org/",
+      "kind": "website",
+      "assetId": "i5f3f7132768c45c993e4"
+    },
+    {
+      "id": "web-site-dnf-docs",
+      "name": "DNF Documentation",
+      "names": [
+        "DNF Documentation",
+        "dnf.readthedocs.io"
+      ],
+      "urls": [
+        "https://dnf.readthedocs.io/",
+        "https://dnf.readthedocs.io/en/latest/"
+      ],
+      "hosts": [
+        "dnf.readthedocs.io"
+      ],
+      "downloadPage": "https://dnf.readthedocs.io/en/latest/",
+      "kind": "website",
+      "assetId": "ia9659abf12a77c437c8a"
+    },
+    {
+      "id": "web-app-ninite-pro",
+      "name": "Ninite Pro",
+      "names": [
+        "Ninite Pro",
+        "Ninite Pro Classic",
+        "NinitePro"
+      ],
+      "urls": [
+        "https://ninite.com/pro",
+        "https://ninite.com/help/features/selection.html"
+      ],
+      "hosts": [
+        "ninite.com"
+      ],
+      "downloadPage": "https://ninite.com/pro",
+      "kind": "tool",
+      "assetId": "i3a2aeb0e69ba91ef03c1"
+    },
+    {
+      "id": "web-app-patch-my-pc-home-updater",
+      "name": "Patch My PC Home Updater",
+      "names": [
+        "Patch My PC Home Updater",
+        "Patch My PC"
+      ],
+      "urls": [
+        "https://patchmypc.com/home-updater/",
+        "https://patchmypc.com/product/home-updater/",
+        "https://patchmypc.com/faq/category/home-updater/"
+      ],
+      "hosts": [
+        "patchmypc.com",
+        "www.patchmypc.com",
+        "homeupdater.patchmypc.com"
+      ],
+      "downloadPage": "https://patchmypc.com/product/home-updater/",
+      "kind": "tool",
+      "assetId": "i95ccfccc7fa808d8cd56"
+    }
+  ],
+  "coverage": {
+    "brands": 19,
+    "assets": 13,
+    "newCachedAssets": 8,
+    "commandCenterToolkits": 9,
+    "unresolved": [],
+    "commandSources": 37
+  },
+  "evidence": {
+    "winutil": "https://github.com/ChrisTitusTech/winutil",
+    "tron": "https://github.com/bmrf/tron/blob/master/README.md",
+    "unigetui": "https://github.com/Devolutions/UniGetUI/blob/main/README.md",
+    "chocolatey": "https://docs.chocolatey.org/en-us/choco/setup/",
+    "scoop": "https://scoop.sh/",
+    "ninitePro": "https://ninite.com/pro",
+    "patchMyPCHomeUpdater": "https://patchmypc.com/product/home-updater/"
+  }
+}

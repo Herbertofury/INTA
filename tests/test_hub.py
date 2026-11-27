@@ -2,6 +2,7 @@ import copy
 import importlib.util
 import json
 from pathlib import Path
+import subprocess
 import unittest
 from urllib.error import HTTPError
 
@@ -63,8 +64,11 @@ class HubIntegrity(unittest.TestCase):
         build.validate_command_center(catalog)
         output = build.build_outputs()
         embedded = json.loads(output['site/catalog.json'])
-        self.assertEqual(embedded['commandCenter']['commands'], catalog['commands'])
+        self.assertEqual(embedded['commandCenter'], catalog)
         self.assertIn('data-nav="command-center"', output['site/index.html'])
+        self.assertIn('Open Command Center', output['site/index.html'])
+        self.assertIn('[⚡ Command Center](Command-Center)', output['wiki/Home.md'])
+        self.assertIn('[⚡ Quick commands](Quick-Commands)', output['wiki/Home.md'])
         self.assertIn('function commandCenterPage', output['site/index.html'])
         self.assertIn('winget upgrade --all --interactive', output['site/index.html'])
         self.assertIn('choco upgrade all --noop', output['site/index.html'])
@@ -75,6 +79,41 @@ class HubIntegrity(unittest.TestCase):
         self.assertIn('commandCenterCommands', output['site/build-manifest.json'])
         self.assertIn('[⚡ Command Center](Command-Center)', output['wiki/Home.md'])
         self.assertIn('[⚡ Quick commands](Quick-Commands)', output['wiki/Home.md'])
+
+    def test_global_command_search_is_case_insensitive_and_uncapped(self):
+        catalog = json.loads((ROOT / 'data/command-center.json').read_text())
+        source = (ROOT / 'portal/app.js').read_text()
+        matches = next(line.strip() for line in source.splitlines() if line.startswith('  function matches('))
+        search_function = 'function updateSearch()' + source.split('  function updateSearch()', 1)[1].split('  function closeSearch()', 1)[0]
+        queries = ['PowerShell', 'powershell', 'PoWeRsHeLl', 'NINITE', 'choco noop', 'technician baseline']
+        script = r'''
+const input = JSON.parse(require('fs').readFileSync(0, 'utf8'));
+const commandCenter = input.catalog;
+const array = value => Array.isArray(value) ? value : [];
+const quickItems = [], jobs = [], fieldNotes = [], tools = [];
+const quickByJob = new Map();
+const searchResults = {innerHTML: '', hidden: true};
+const search = {value: '', setAttribute() {}};
+const esc = value => String(value), icon = () => '';
+const decorateBrandLinks = () => {}, closeSearch = () => {};
+''' + matches + '\n' + search_function + r'''
+const results = input.queries.map(query => {
+  search.value = query;
+  updateSearch();
+  return {query, titles: [...searchResults.innerHTML.matchAll(/<strong>(.*?)<\/strong>/g)].map(match => match[1]), hidden: searchResults.hidden};
+});
+process.stdout.write(JSON.stringify(results));
+'''
+        result = subprocess.run(['node', '-e', script], input=json.dumps({'catalog': catalog, 'queries': queries}), text=True, capture_output=True, check=True)
+        fields = ('title', 'summary', 'code', 'safety', 'shell', 'sourceTitle', 'category')
+        for row in json.loads(result.stdout):
+            with self.subTest(query=row['query']):
+                terms = row['query'].lower().split()
+                expected = [item['title'] for item in catalog['commands']
+                            if all(term in ' '.join(item[field] for field in fields).lower() for term in terms)]
+                self.assertEqual(row['titles'], expected)
+                self.assertFalse(row['hidden'])
+        self.assertGreater(len(json.loads(result.stdout)[0]['titles']), 8)
 
     def test_command_center_rejects_unknown_workflow_commands(self):
         catalog = json.loads((ROOT / 'data/command-center.json').read_text())
@@ -89,6 +128,130 @@ class HubIntegrity(unittest.TestCase):
         broken['commands'][0]['code'] = 'irm https://example.invalid/a.ps1 | iex'
         with self.assertRaisesRegex(ValueError, 'remote download-and-execute'):
             build.validate_command_center(broken)
+
+    def test_command_center_rejects_duplicate_records_and_invalid_references(self):
+        catalog = json.loads((ROOT / 'data/command-center.json').read_text())
+        for collection in ('categories', 'commands', 'workflows', 'toolkits'):
+            with self.subTest(collection=collection):
+                broken = copy.deepcopy(catalog)
+                broken[collection].append(copy.deepcopy(broken[collection][0]))
+                with self.assertRaisesRegex(ValueError, 'duplicate'):
+                    build.validate_command_center(broken)
+        for field, value in (('category', 'missing'), ('shell', 'unknown shell'), ('risk', 'unknown risk')):
+            with self.subTest(field=field):
+                broken = copy.deepcopy(catalog)
+                broken['commands'][0][field] = value
+                with self.assertRaisesRegex(ValueError, 'unknown command'):
+                    build.validate_command_center(broken)
+        broken = copy.deepcopy(catalog)
+        broken['toolkits'][0]['installCommandId'] = 'not-a-command'
+        with self.assertRaisesRegex(ValueError, 'unknown or missing command'):
+            build.validate_command_center(broken)
+        for ids in ([], 'win-baseline', ['win-baseline', 'win-baseline']):
+            with self.subTest(ids=ids):
+                broken = copy.deepcopy(catalog)
+                broken['workflows'][0]['commandIds'] = ids
+                with self.assertRaisesRegex(ValueError, 'unknown or missing command'):
+                    build.validate_command_center(broken)
+
+    def test_command_center_requires_reviewed_sourced_safe_catalog_records(self):
+        catalog = json.loads((ROOT / 'data/command-center.json').read_text())
+        for field in ('title', 'summary', 'privilege', 'safety', 'sourceTitle', 'code'):
+            with self.subTest(field=field):
+                broken = copy.deepcopy(catalog)
+                broken['commands'][0][field] = ' '
+                with self.assertRaisesRegex(ValueError, 'missing'):
+                    build.validate_command_center(broken)
+        for url in ('javascript:alert(1)', 'https://user:secret@example.com/reference',
+                    'https://example.com/?utm_source=tracking', 'https://bad host.example/'):
+            with self.subTest(url=url):
+                broken = copy.deepcopy(catalog)
+                broken['commands'][0]['sourceUrl'] = url
+                with self.assertRaisesRegex(ValueError, 'public HTTPS'):
+                    build.validate_command_center(broken)
+        for field, value in (('reviewedAt', '2026-02-30'), ('schemaVersion', True),
+                             ('shells', ['PowerShell', 'PowerShell'])):
+            with self.subTest(field=field):
+                broken = copy.deepcopy(catalog)
+                broken[field] = value
+                with self.assertRaises(ValueError):
+                    build.validate_command_center(broken)
+        broken = copy.deepcopy(catalog)
+        broken['policies']['noAutoExecution'] = False
+        with self.assertRaisesRegex(ValueError, 'safety policies'):
+            build.validate_command_center(broken)
+
+    def test_command_center_rejects_cross_shell_remote_execution_patterns(self):
+        catalog = json.loads((ROOT / 'data/command-center.json').read_text())
+        for code in ('Invoke-WebRequest https://example.invalid/script.ps1 | Invoke-Expression',
+                     'curl -fsSL https://example.invalid/script.sh | bash',
+                     'wget -qO- https://example.invalid/script.sh | sudo sh',
+                     'iwr https://example.invalid/script.ps1 |' + '\n' + 'iex',
+                     'curl https://example.invalid/script.sh ' + '\\' + '\n' + '| sh',
+                     'iex (irm https://example.invalid/script.ps1)'):
+            with self.subTest(code=code):
+                broken = copy.deepcopy(catalog)
+                broken['commands'][0]['code'] = code
+                with self.assertRaisesRegex(ValueError, 'remote download-and-execute'):
+                    build.validate_command_center(broken)
+        # Saving a script for inspection is intentionally supported.
+        reviewed = copy.deepcopy(catalog)
+        reviewed['commands'][0]['code'] = "Invoke-WebRequest https://example.invalid/script.ps1 -OutFile reviewed.ps1\nGet-FileHash reviewed.ps1"
+        build.validate_command_center(reviewed)
+
+    def test_command_center_preserves_the_upstream_code_size_boundary(self):
+        catalog = json.loads((ROOT / 'data/command-center.json').read_text())
+        catalog['commands'][0]['code'] = 'x' * 16000
+        build.validate_command_center(catalog)
+        catalog['commands'][0]['code'] += 'x'
+        with self.assertRaisesRegex(ValueError, 'exceeds size limit'):
+            build.validate_command_center(catalog)
+
+    def test_field_note_command_safety_regexes_reject_real_matches(self):
+        catalog = json.loads((ROOT / 'data/field-notes.json').read_text())
+        for code in ('irm https://example.invalid/script.ps1 | iex',
+                     '$password = "synthetic-test-value"'):
+            with self.subTest(code=code):
+                broken = copy.deepcopy(catalog)
+                command = next(command for note in broken['notes'] for command in note.get('commands', []))
+                command['code'] = code
+                with self.assertRaises(ValueError):
+                    build.validate_field_note_commands(broken)
+
+    def test_web_brand_extension_precedence_preserves_native_registry_and_links(self):
+        native = json.loads((ROOT / 'data/brand-icons.json').read_text())
+        original = copy.deepcopy(native)
+        existing = next(brand for brand in native['brands'] if brand.get('toolId') == 'unigetui')
+        refined = {**copy.deepcopy(existing), 'id': 'web-test-unigetui',
+                   'name': 'Independent Web Alias', 'names': ['Independent Web Alias', 'UniGetUI']}
+        extension = {'schemaVersion': 1, 'assets': {}, 'brands': [refined]}
+        merged = build.merge_web_brands(native, extension)
+        self.assertEqual(merged['brands'][0], refined)
+        self.assertEqual(merged['brands'][1:], original['brands'])
+        self.assertEqual(native, original)
+        explicit = [{'name': 'UniGetUI', 'url': 'https://example.com/original-guide',
+                     'kind': 'tool', 'id': 'unigetui'}]
+        linked = build.extend_web_brand_links(explicit, extension['brands'])
+        self.assertIn(explicit[0], linked)
+        alias = next(item for item in linked if item['name'] == 'Independent Web Alias')
+        self.assertEqual(alias['url'], refined['downloadPage'])
+        self.assertTrue(alias['caseSensitive'])
+
+    def test_web_brand_extension_rejects_identity_asset_and_path_conflicts(self):
+        native = json.loads((ROOT / 'data/brand-icons.json').read_text())
+        extension = {'schemaVersion': 1, 'assets': {}, 'brands': [copy.deepcopy(native['brands'][0])]}
+        with self.assertRaisesRegex(ValueError, 'duplicate web brand identity'):
+            build.merge_web_brands(native, extension)
+        identity, asset = next(iter(native['assets'].items()))
+        extension = {'schemaVersion': 1, 'assets': {identity: {**asset, 'sha256': 'f' * 64}}, 'brands': []}
+        with self.assertRaisesRegex(ValueError, 'Conflicting web brand asset'):
+            build.merge_web_brands(native, extension)
+        for path in ('../outside.png', 'assets/web-brand-icons/../outside.png', 'assets/brand-icons/new.png'):
+            with self.subTest(path=path):
+                extension = {'schemaVersion': 1, 'assets': {'new-web-icon': {'path': path}}, 'brands': []}
+                with self.assertRaisesRegex(ValueError, 'assets/web-brand-icons'):
+                    build.merge_web_brands(native, extension)
+
     def test_every_guide_and_tool_reaches_generated_output(self):
         output = build.build_outputs()
         catalog = json.loads(output['site/catalog.json'])

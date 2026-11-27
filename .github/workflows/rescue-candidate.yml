@@ -1,4 +1,4 @@
-name: Retest and publish INTA Rescue candidate
+name: Publish verified INTA Rescue candidate
 on:
   push:
     branches: [main]
@@ -6,15 +6,43 @@ on:
   workflow_dispatch:
     inputs:
       candidate_run_id:
-        description: Completed Rescue workflow run that built the image
+        description: Original completed Rescue build run ID
         required: true
         type: string
       candidate_artifact_id:
-        description: Immutable inta-rescue-amd64 artifact ID from that run
+        description: Immutable inta-rescue-amd64 artifact ID
         required: true
         type: string
       candidate_source_sha:
-        description: Full source commit SHA recorded by that build
+        description: Full original ISO source SHA
+        required: true
+        type: string
+      candidate_archive_sha256:
+        description: Original candidate artifact ZIP SHA256
+        required: true
+        type: string
+      iso_sha256:
+        description: Original verified ISO SHA256
+        required: true
+        type: string
+      iso_bytes:
+        description: Original exact ISO byte count
+        required: true
+        type: string
+      boot_proof_run_id:
+        description: Completed run whose BIOS and UEFI gates passed
+        required: true
+        type: string
+      boot_proof_artifact_id:
+        description: Immutable inta-candidate-verification artifact ID
+        required: true
+        type: string
+      boot_proof_source_sha:
+        description: Full source SHA of the successful boot harness
+        required: true
+        type: string
+      boot_proof_sha256:
+        description: Immutable boot proof ZIP SHA256
         required: true
         type: string
 
@@ -26,7 +54,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  retest:
+  publish:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -37,11 +65,18 @@ jobs:
       CANDIDATE_RUN_ID: ${{ inputs.candidate_run_id }}
       CANDIDATE_ARTIFACT_ID: ${{ inputs.candidate_artifact_id }}
       CANDIDATE_SOURCE_SHA: ${{ inputs.candidate_source_sha }}
+      CANDIDATE_ARCHIVE_SHA256: ${{ inputs.candidate_archive_sha256 }}
+      ORIGINAL_ISO_SHA256: ${{ inputs.iso_sha256 }}
+      ORIGINAL_ISO_BYTES: ${{ inputs.iso_bytes }}
+      BOOT_PROOF_RUN_ID: ${{ inputs.boot_proof_run_id }}
+      BOOT_PROOF_ARTIFACT_ID: ${{ inputs.boot_proof_artifact_id }}
+      BOOT_PROOF_SOURCE_SHA: ${{ inputs.boot_proof_source_sha }}
+      BOOT_PROOF_SHA256: ${{ inputs.boot_proof_sha256 }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
-      - name: Load the reviewed candidate selected by this commit
+      - name: Load the reviewed candidate and preserved boot proof
         if: github.event_name == 'push'
         run: |
           python3 - <<'PY'
@@ -50,33 +85,61 @@ jobs:
           import pathlib
           import re
           candidate = json.loads(pathlib.Path('.github/rescue-candidate.json').read_text())
-          run_id = str(candidate['run_id'])
-          artifact_id = str(candidate['artifact_id'])
-          source = candidate['source_sha']
-          if not (re.fullmatch(r'[0-9]+', run_id) and re.fullmatch(r'[0-9]+', artifact_id)
-                  and re.fullmatch(r'[0-9a-f]{40}', source)):
-              raise SystemExit('Invalid candidate identity; no artifact was downloaded')
+          fields = {
+              'CANDIDATE_RUN_ID': ('run_id', r'[1-9][0-9]*'),
+              'CANDIDATE_ARTIFACT_ID': ('artifact_id', r'[1-9][0-9]*'),
+              'CANDIDATE_SOURCE_SHA': ('source_sha', r'[0-9a-f]{40}'),
+              'CANDIDATE_ARCHIVE_SHA256': ('artifact_sha256', r'[0-9a-f]{64}'),
+              'ORIGINAL_ISO_SHA256': ('iso_sha256', r'[0-9a-f]{64}'),
+              'ORIGINAL_ISO_BYTES': ('iso_bytes', r'[1-9][0-9]*'),
+              'BOOT_PROOF_RUN_ID': ('boot_proof_run_id', r'[1-9][0-9]*'),
+              'BOOT_PROOF_ARTIFACT_ID': ('boot_proof_artifact_id', r'[1-9][0-9]*'),
+              'BOOT_PROOF_SOURCE_SHA': ('boot_proof_source_sha', r'[0-9a-f]{40}'),
+              'BOOT_PROOF_SHA256': ('boot_proof_sha256', r'[0-9a-f]{64}'),
+          }
+          values = {}
+          for variable, (key, pattern) in fields.items():
+              value = str(candidate[key])
+              if not re.fullmatch(pattern, value):
+                  raise SystemExit('Invalid reviewed candidate identity: ' + key)
+              values[variable] = value
           with open(os.environ['GITHUB_ENV'], 'a') as output:
-              output.write(f'CANDIDATE_RUN_ID={run_id}\nCANDIDATE_ARTIFACT_ID={artifact_id}\n'
-                           f'CANDIDATE_SOURCE_SHA={source}\n')
+              for key, value in values.items():
+                  output.write(f'{key}={value}\n')
           PY
-      - name: Verify original build and unchanged native source
+      - name: Verify original build and authoritative firmware proof
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          [[ "$CANDIDATE_RUN_ID" =~ ^[0-9]+$ ]]
-          [[ "$CANDIDATE_ARTIFACT_ID" =~ ^[0-9]+$ ]]
-          [[ "$CANDIDATE_SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          for variable in CANDIDATE_RUN_ID CANDIDATE_ARTIFACT_ID ORIGINAL_ISO_BYTES BOOT_PROOF_RUN_ID BOOT_PROOF_ARTIFACT_ID; do
+            [[ "${!variable}" =~ ^[1-9][0-9]*$ ]]
+          done
+          for variable in CANDIDATE_SOURCE_SHA BOOT_PROOF_SOURCE_SHA; do
+            [[ "${!variable}" =~ ^[0-9a-f]{40}$ ]]
+          done
+          for variable in CANDIDATE_ARCHIVE_SHA256 ORIGINAL_ISO_SHA256 BOOT_PROOF_SHA256; do
+            [[ "${!variable}" =~ ^[0-9a-f]{64}$ ]]
+          done
           metadata="$RUNNER_TEMP/inta-candidate-proof"
-          mkdir -p "$metadata"
+          proof="$RUNNER_TEMP/inta-boot-api"
+          mkdir -p "$metadata" "$proof" "$RUNNER_TEMP/inta-release-verification"
           gh api "repos/$GH_REPO/actions/runs/$CANDIDATE_RUN_ID" > "$metadata/run.json"
           gh api "repos/$GH_REPO/actions/artifacts/$CANDIDATE_ARTIFACT_ID" > "$metadata/artifact.json"
           gh api "repos/$GH_REPO/actions/runs/$CANDIDATE_RUN_ID/jobs?per_page=100" > "$metadata/jobs.json"
+          gh api "repos/$GH_REPO/actions/runs/$BOOT_PROOF_RUN_ID" > "$proof/run.json"
+          gh api "repos/$GH_REPO/actions/artifacts/$BOOT_PROOF_ARTIFACT_ID" > "$proof/artifact.json"
+          gh api "repos/$GH_REPO/actions/runs/$BOOT_PROOF_RUN_ID/jobs?per_page=100" > "$proof/jobs.json"
+          gh api "repos/$GH_REPO/actions/artifacts/$BOOT_PROOF_ARTIFACT_ID/zip" > "$RUNNER_TEMP/inta-boot-proof.zip"
           python3 scripts/verify-rescue-candidate.py --metadata "$metadata" \
             --repository "$GH_REPO" --run-id "$CANDIDATE_RUN_ID" \
-            --artifact-id "$CANDIDATE_ARTIFACT_ID" --source "$CANDIDATE_SOURCE_SHA"
-      - name: Validate current source and boot harness
+            --artifact-id "$CANDIDATE_ARTIFACT_ID" --source "$CANDIDATE_SOURCE_SHA" \
+            --artifact-sha256 "$CANDIDATE_ARCHIVE_SHA256" \
+            --proof-metadata "$proof" --proof-archive "$RUNNER_TEMP/inta-boot-proof.zip" \
+            --proof-run-id "$BOOT_PROOF_RUN_ID" --proof-artifact-id "$BOOT_PROOF_ARTIFACT_ID" \
+            --proof-source "$BOOT_PROOF_SOURCE_SHA" --proof-sha256 "$BOOT_PROOF_SHA256" \
+            --receipt "$RUNNER_TEMP/inta-release-verification/provenance.json"
+      - name: Validate current source and Media Creator
         run: |
           python3 -m unittest discover -s tests
           bash -n scripts/build-iso
@@ -90,30 +153,66 @@ jobs:
           github-token: ${{ github.token }}
           repository: ${{ github.repository }}
           run-id: ${{ env.CANDIDATE_RUN_ID }}
-      - name: Verify candidate checksums
+      - name: Verify original candidate checksums and exact ISO identity
         working-directory: ${{ runner.temp }}/inta-dist
         run: |
           test -f inta-rescue-amd64.iso
           test -f INTA-Media-Creator.pyz
           sha256sum --check --strict SHA256SUMS
-      - name: Verify BIOS and UEFI boot to XFCE
+          printf '%s  inta-rescue-amd64.iso\n' "$ORIGINAL_ISO_SHA256" | sha256sum --check --strict
+          test "$(stat -c %s inta-rescue-amd64.iso)" = "$ORIGINAL_ISO_BYTES"
+      - name: Rebuild and verify the current portable Media Creator
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends qemu-system-x86 ovmf
-          iso="$RUNNER_TEMP/inta-dist/inta-rescue-amd64.iso"
-          scripts/smoke-iso "$iso" bios "$RUNNER_TEMP/inta-diagnostics"
-          scripts/smoke-iso "$iso" uefi "$RUNNER_TEMP/inta-diagnostics"
-      - name: Preserve runtime proof and candidate provenance
+          python3 scripts/package-media.py --output "$RUNNER_TEMP/inta-dist/INTA-Media-Creator.pyz"
+          python3 - <<'PY'
+          import hashlib
+          import os
+          import pathlib
+          import zipfile
+          root = pathlib.Path.cwd()
+          dist = pathlib.Path(os.environ['RUNNER_TEMP']) / 'inta-dist'
+          media = dist / 'INTA-Media-Creator.pyz'
+          with zipfile.ZipFile(media) as package:
+              if package.testzip() is not None:
+                  raise SystemExit('Portable Media Creator contains a corrupt member')
+              if package.read('__main__.py') != (root / 'media/inta-media.py').read_bytes():
+                  raise SystemExit('Portable Media Creator does not contain the tested current downloader')
+              if package.read('inta_brand_ui.py') != (root / 'media/inta_brand_ui.py').read_bytes():
+                  raise SystemExit('Portable Media Creator does not contain the current shared brand UI')
+          checksum = dist / 'SHA256SUMS'
+          lines = [line for line in checksum.read_text().splitlines()
+                   if line.split(maxsplit=1)[1].lstrip('*') != media.name]
+          rows = [line.split(maxsplit=1) for line in lines]
+          iso = [digest for digest, name in rows if name.lstrip('*') == 'inta-rescue-amd64.iso']
+          if iso != [os.environ['ORIGINAL_ISO_SHA256']]:
+              raise SystemExit('Original ISO checksum changed during Media Creator packaging')
+          digest = hashlib.sha256(media.read_bytes()).hexdigest()
+          checksum.write_text('\n'.join(lines + [f'{digest}  {media.name}']) + '\n')
+          print('Rebuilt Media Creator SHA256:', digest)
+          PY
+      - name: Package hostable release assets and prove complete ISO reconstruction
+        run: |
+          python3 scripts/package-rescue-release.py \
+            --input-dir "$RUNNER_TEMP/inta-dist" --output-dir "$RUNNER_TEMP/inta-release"
+          python3 tests/test_media_parts.py --parts-dir "$RUNNER_TEMP/inta-release" \
+            --expected-sha256 "$ORIGINAL_ISO_SHA256" \
+            > "$RUNNER_TEMP/inta-release-verification/reassembly.json"
+          cat "$RUNNER_TEMP/inta-release-verification/reassembly.json"
+      - name: Preserve verification and distribution provenance
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: inta-candidate-verification
+          name: inta-release-verification
           path: |
-            ${{ runner.temp }}/inta-diagnostics/
             ${{ runner.temp }}/inta-candidate-proof/
+            ${{ runner.temp }}/inta-boot-api/
+            ${{ runner.temp }}/inta-boot-proof.zip
+            ${{ runner.temp }}/inta-release-verification/
+            ${{ runner.temp }}/inta-release/SHA256SUMS
+            ${{ runner.temp }}/inta-release/inta-rescue-amd64.iso.parts.json
           if-no-files-found: warn
           retention-days: 7
-      - name: Publish the verified candidate with exact source provenance
+      - name: Publish the verified prepared release with exact provenance
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -121,22 +220,37 @@ jobs:
           git fetch origin main
           python3 scripts/verify-rescue-candidate.py --inputs-only --target FETCH_HEAD \
             --repository "$GH_REPO" --run-id "$CANDIDATE_RUN_ID" \
-            --artifact-id "$CANDIDATE_ARTIFACT_ID" --source "$CANDIDATE_SOURCE_SHA"
+            --artifact-id "$CANDIDATE_ARTIFACT_ID" --source "$CANDIDATE_SOURCE_SHA" \
+            --media-source "$GITHUB_SHA"
           notes="$RUNNER_TEMP/inta-release-notes.md"
           python3 - "$notes" <<'PY'
           import os
           import pathlib
           import sys
           e = os.environ
+          download = f"https://github.com/{e['GH_REPO']}/releases/latest"
+          brand_icon = f"https://raw.githubusercontent.com/{e['GH_REPO']}/main/assets/brand-icons/70ad9f0981b05341142b.png"
+          creator = (f'<a href="{download}"><img src="{brand_icon}" alt="INTA Media Creator" '
+                     f'width="18" height="18"></a> [INTA Media Creator]({download})')
           pathlib.Path(sys.argv[1]).write_text(
-              f"ISO and portable app built from {e['CANDIDATE_SOURCE_SHA']} in "
-              f"workflow run {e['CANDIDATE_RUN_ID']} (artifact {e['CANDIDATE_ARTIFACT_ID']}).\n\n"
-              f"Native build inputs are unchanged in {e['GITHUB_SHA']}. Both BIOS and UEFI "
-              f"virtual machines passed the offline desktop and application checks using "
-              f"that boot harness in run {e['GITHUB_RUN_ID']}.\n\n"
-              "The original ISO and portable app checksums were verified before testing. "
-              "Verify downloads with SHA256SUMS.\n")
+              f"ISO built from {e['CANDIDATE_SOURCE_SHA']} in workflow run "
+              f"{e['CANDIDATE_RUN_ID']} (artifact {e['CANDIDATE_ARTIFACT_ID']}). "
+              f"Its bytes are unchanged: SHA256 {e['ORIGINAL_ISO_SHA256']}.\n\n"
+              f"Both BIOS and UEFI passed the offline desktop and application gates "
+              f"under harness source {e['BOOT_PROOF_SOURCE_SHA']} in run "
+              f"{e['BOOT_PROOF_RUN_ID']} (proof artifact {e['BOOT_PROOF_ARTIFACT_ID']}). "
+              "That immutable proof was revalidated; the image was not rebuilt or rebooted.\n\n"
+              f"The current portable {creator} was rebuilt and tested from "
+              f"{e['GITHUB_SHA']}. It automatically downloads and verifies the complete ISO "
+              "from the release parts. Each part and the reconstructed ISO are verified "
+              "against their SHA256 checksums before the image is made available.\n\n"
+              "This publication also ran the actual download backend against all "
+              "prepared release bytes and verified the original ISO hash. Download "
+              "`INTA-Media-Creator.pyz`, choose **Download / update ISO**, and follow "
+              "`REASSEMBLE.txt` when parts are present. "
+              "SHA256SUMS includes the original ISO digest and each hosted asset.\n")
           PY
-          tag="rescue-${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}"
-          gh release create "$tag" "$RUNNER_TEMP"/inta-dist/* --target "$GITHUB_SHA" --latest \
+          tag="rescue-$GITHUB_RUN_ID.$GITHUB_RUN_ATTEMPT"
+          gh release create "$tag" "$RUNNER_TEMP"/inta-release/* --target "$GITHUB_SHA" --draft \
             --title "INTA Rescue $(date -u +%F)" --notes-file "$notes"
+          gh release edit "$tag" --draft=false --latest

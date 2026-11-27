@@ -4,14 +4,12 @@ on:
     branches: [main]
     paths:
       - 'live/**'
-      - 'media/**'
+      - 'media/inta_brand_ui.py'
       - 'data/brand-icons.json'
       - 'assets/brand-icons/**'
       - 'docs/assets/inta-mark.svg'
-      - 'scripts/package-media.py'
       - 'scripts/build-iso'
       - 'scripts/smoke-iso'
-      - 'tests/test_media.py'
   workflow_dispatch:
   schedule:
     - cron: '39 9 * * 2'
@@ -59,6 +57,27 @@ jobs:
           iso="${RUNNER_TEMP}/inta-dist/inta-rescue-amd64.iso"
           scripts/smoke-iso "$iso" bios "${RUNNER_TEMP}/inta-diagnostics"
           scripts/smoke-iso "$iso" uefi "${RUNNER_TEMP}/inta-diagnostics"
+      - name: Prepare size-safe verified release assets
+        run: |
+          python3 - "$RUNNER_TEMP/inta-dist/SHA256SUMS" "$GITHUB_ENV" <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+          matches = [match[1] for line in Path(sys.argv[1]).read_text(encoding="ascii").splitlines()
+                     if (match := re.fullmatch(r"([0-9a-f]{64}) [ *]inta-rescue-amd64\.iso", line))]
+          if len(matches) != 1:
+              raise SystemExit("Expected exactly one original ISO checksum")
+          with Path(sys.argv[2]).open("a", encoding="utf-8") as environment:
+              environment.write(f"ORIGINAL_ISO_SHA256={matches[0]}\n")
+          PY
+          python3 scripts/package-rescue-release.py \
+            --input-dir "$RUNNER_TEMP/inta-dist" --output-dir "$RUNNER_TEMP/inta-release"
+      - name: Verify prepared downloads through Media Creator
+        env:
+          RELEASE_DIR: ${{ runner.temp }}/inta-release
+        run: |
+          python3 tests/test_media_parts.py --parts-dir "$RELEASE_DIR" \
+            --expected-sha256 "$ORIGINAL_ISO_SHA256"
       - name: Keep failure diagnostics
         if: failure()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -72,9 +91,31 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
+          notes="$RUNNER_TEMP/inta-release-notes.md"
+          python3 - "$notes" <<'PY'
+          import os
+          from pathlib import Path
+          import sys
+          source = os.environ["GITHUB_SHA"]
+          digest = os.environ["ORIGINAL_ISO_SHA256"]
+          repository = os.environ["GH_REPO"]
+          download = f"https://github.com/{repository}/releases/latest"
+          icon = f"https://raw.githubusercontent.com/{repository}/main/docs/assets/inta-mark.svg"
+          creator = (f'<a href="{download}"><img src="{icon}" alt="INTA Media Creator" '
+                     f'width="18" height="18"></a> [INTA Media Creator]({download})')
+          Path(sys.argv[1]).write_text(
+              f"ISO and portable app built from `{source}`. The complete ISO passed offline "
+              "BIOS and UEFI desktop and application checks. Prepared release downloads "
+              "were reconstructed and checked against the original image checksum.\n\n"
+              f"Use the included {creator} and choose **Download / update ISO**. "
+              "It downloads a normal ISO or automatically assembles numbered pieces, "
+              "verifies the complete image and saves `inta-rescue-amd64.iso`. "
+              "All ISO contents are preserved. Keep `SHA256SUMS` beside the completed image.\n\n"
+              f"Original ISO SHA-256: `{digest}`.\n", encoding="utf-8")
+          PY
           tag="rescue-${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}"
-          gh release create "$tag" "${RUNNER_TEMP}"/inta-dist/* --target "$GITHUB_SHA" --latest \
-            --title "INTA Rescue $(date -u +%F)" \
-            --notes "Built from $GITHUB_SHA. Passed offline BIOS and UEFI virtual-machine boot checks. Verify the ISO using SHA256SUMS."
+          gh release create "$tag" "$RUNNER_TEMP"/inta-release/* --target "$GITHUB_SHA" --draft \
+            --title "INTA Rescue $(date -u +%F)" --notes-file "$notes"
+          gh release edit "$tag" --draft=false --latest
     permissions:
       contents: write
