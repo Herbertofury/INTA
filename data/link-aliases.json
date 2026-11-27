@@ -230,6 +230,7 @@
     },
     {
       "id": "windows",
+      "inlineIcon": false,
       "name": "Windows",
       "url": "https://www.microsoft.com/windows",
       "aliases": [],
@@ -238,6 +239,7 @@
     },
     {
       "id": "windows11",
+      "inlineIcon": false,
       "name": "Windows 11",
       "url": "https://www.microsoft.com/windows/windows-11",
       "aliases": [],
@@ -245,6 +247,7 @@
     },
     {
       "id": "windows10",
+      "inlineIcon": false,
       "name": "Windows 10",
       "url": "https://www.microsoft.com/windows/end-of-support",
       "aliases": [],
@@ -465,6 +468,7 @@
     },
     {
       "id": "windows-server",
+      "inlineIcon": false,
       "name": "Windows Server",
       "url": "https://learn.microsoft.com/en-us/windows-server/",
       "kind": "application"
