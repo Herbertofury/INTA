@@ -4,7 +4,7 @@ The Local Maintenance Agent is the small, user-installed bridge between the INTA
 
 ## Install on Windows
 
-Download the latest successful Windows build artifact from [INTA Local Agent Actions](https://github.com/Herbertofury/INTA/actions/workflows/local-agent.yml). Extract the Actions artifact ZIP, then run the included installer script with the Windows package ZIP and its `.sha256` sidecar in the same folder:
+Download the successful Windows build artifact from [INTA Local Agent build 45947359692](https://github.com/Herbertofury/INTA/actions/runs/45947359692) (or check [the workflow page](https://github.com/Herbertofury/INTA/actions/workflows/local-agent.yml) for newer builds). Extract the Actions artifact ZIP, then run the included installer script with the Windows package ZIP and its `.sha256` sidecar in the same folder:
 
     powershell -NoProfile -ExecutionPolicy Bypass -File .\\install-agent.ps1 -PackagePath .\\inta-agent-win-x64.zip
 
