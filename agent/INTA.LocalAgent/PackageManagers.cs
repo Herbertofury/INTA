@@ -109,6 +109,29 @@ public sealed class PackageManagers(ProcessRunner runner)
         _ => (null, [])
     };
 
+    private static (string File, string[] Args) ResolveCommand(string manager, string file, string[] args)
+    {
+        if (manager == "scoop" && OperatingSystem.IsWindows())
+        {
+            var script = FindOnPath("scoop.ps1");
+            if (script is not null) return ("powershell.exe", ["-NoProfile", "-File", script, .. args]);
+            throw new InvalidOperationException("Scoop was detected, but its PowerShell shim was not found on PATH. Reinstall or repair Scoop using its official installer.");
+        }
+        return (file, args);
+    }
+
+    private static string? FindOnPath(string name)
+    {
+        var path = Environment.GetEnvironmentVariable("PATH") ?? "";
+        foreach (var folder in path.Split(Path.PathSeparator))
+        {
+            if (string.IsNullOrWhiteSpace(folder)) continue;
+            var candidate = Path.Combine(folder, name);
+            if (File.Exists(candidate)) return candidate;
+        }
+        return null;
+    }
+
     private static (string? File, string[] Args) PreviewCommand(string manager) => manager switch
     {
         "winget" => ("winget", ["upgrade", "--accept-source-agreements", "--disable-interactivity"]),
