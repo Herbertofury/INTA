@@ -6,4 +6,21 @@ The [News tab](https://herbertofury.github.io/INTA/#news) is designed for lookin
 
 The generated catalog exposes `news` schema version 1: a review date, stable source IDs, publisher links, source classification and an optional declared feed, plus attributed and dated editorial briefing items. Use IDs (not labels or URLs) for user follows. The data is embedded in the offline Web build; it is an integration contract for Desktop, connected Rescue and Mobile, not evidence those clients have shipped it. See [issue #7](https://github.com/Herbertofury/INTA/issues/7).
 
-Do not report an old snapshot as live. Next acceptance: a bounded publisher-feed ingestion job produces a shared versioned snapshot with per-source freshness and error state; validate endpoint and link host, deduplicate by canonical URL and revision, preserve date and provenance, and allow explicit refresh. Publish only permitted metadata or editorial summaries; never auto-run updates, open executable attachments, or grant remote access. Saved and muted source state joins the shared workspace only after authenticated account sync ships. Offline Rescue should still open the cached snapshot and show its date.
+Do not report an old snapshot as live. The bounded publisher-feed refresh produces a shared versioned snapshot with per-source freshness and error state; validate endpoint and link host, deduplicate by canonical URL and revision, preserve date and provenance, and allow explicit refresh. Publish only permitted metadata or editorial summaries; never auto-run updates, open executable attachments, or grant remote access. Saved and muted source state joins the shared workspace only after authenticated account sync ships. Offline Rescue should still open the cached snapshot and show its date.
+
+## Publisher digest and approved media
+
+The portable JSON snapshot is available as `site/news-digest.json` and embedded in the Web bundle. A bounded, one-shot refresh tool accepts known publisher RSS/Atom feeds and explicit public page metadata adapters. It does not run in the UI, authenticate, crawl arbitrary links, mirror full articles, or install anything. Confirm the provider permits syndicating metadata. Stable IDs, dates, canonical article links and source refresh status are shared across clients.
+
+Media is loaded from the original provider only after an explicit click; no autoplay, arbitrary third-party iframe, browser scraping, or bundling of protected media. Links are kept as fallbacks for embedding restrictions and offline use. Rescue can use the existing snapshot without connectivity; live video still needs a connection. The Tech News native Desktop, Rescue and Mobile reader and following/bookmark sync are acceptance requirements in [#7](https://github.com/Herbertofury/INTA/issues/7), not delivered by a Web deployment.
+
+The <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) publisher digest is the default subscription across the clients. It does not replace personal or app-specific subscriptions. Keep the shared feed selectable alongside them; never require account linking to read this public data.
+
+Refresh a checkout explicitly, then rebuild and validate before publishing:
+
+```sh
+python3 scripts/refresh-news.py --page-media --seed data/news-digest-seed.json
+python3 scripts/build-hub.py
+python3 -m unittest discover -s tests
+python3 scripts/build-hub.py --check
+```
