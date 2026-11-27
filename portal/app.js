@@ -959,6 +959,14 @@
   }
   async function connectLocalAgent() {
     try {
+      if(localAgentToken()) {
+        try {
+          renderLocalAgentStatus(await localAgentRequest('/api/v1/status'));
+          notify('Reconnected to this computer.');
+          await refreshLocalAgentData();
+          return;
+        } catch(_) { try { sessionStorage.removeItem(localAgentTokenKey); } catch(__) {} }
+      }
       const health=await fetch(localAgentBase+'/api/v1/health',{mode:'cors',credentials:'omit',cache:'no-store'});
       if(!health.ok) throw new Error('The local agent is not responding.');
       const paired=await fetch(localAgentBase+'/api/v1/pair',{method:'POST',mode:'cors',credentials:'omit',cache:'no-store'});
