@@ -126,3 +126,8 @@ Every playbook must include at least one practical command in the step where it 
 ## ⚡ Commands in specific-fix articles
 
 Specific fixes should carry a copy-ready shell block whenever a real command materially shortens diagnosis, repair or verification. Keep the command attached to the exact symptom, with shell, purpose, safety boundary and official source. The app and Wiki must expose an accessible copy button; copying never executes. Do not force a command into GUI-only, physical or non-Windows cases where it adds no value. See [Quick Commands](https://github.com/Herbertofury/INTA/wiki/Quick-Commands).
+
+
+## ⚡ Command Center standards
+
+Commands should be searchable, shell-specific, copyable and source-backed. Separate read-only diagnostics from long-running scans, downloads, installs and system-changing repairs. Keep WinGet, Chocolatey, Scoop, Windows Update, Store updates and Linux package managers as distinct update channels. Preview package changes before applying them. The app must never execute a command merely because a guide was opened or a Copy control was clicked. See [Command Center](command-center.md).
