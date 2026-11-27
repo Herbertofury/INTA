@@ -72,7 +72,7 @@ class HubIntegrity(unittest.TestCase):
         self.assertIn('Start-MpScan -ScanType FullScan', output['site/index.html'])
         self.assertIn('Tron Script', output['site/index.html'])
         self.assertIn('WinUtil', output['site/index.html'])
-        self.assertIn('command-center', output['site/build-manifest.json'])
+        self.assertIn('commandCenterCommands', output['site/build-manifest.json'])
 
     def test_command_center_rejects_unknown_workflow_commands(self):
         catalog = json.loads((ROOT / 'data/command-center.json').read_text())
