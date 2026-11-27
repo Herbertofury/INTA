@@ -121,8 +121,10 @@ class HubIntegrity(unittest.TestCase):
         output = build.build_outputs()
         embedded = json.loads(output['site/catalog.json'])
         self.assertEqual(embedded['commandCenter'], catalog)
-        self.assertIn('data-nav="command-center"', output['site/index.html'])
-        self.assertIn('Open Command Center', output['site/index.html'])
+        # The durable entry point is the named navigation link, not a
+        # duplicate action in the Home cards.
+        self.assertRegex(output['site/index.html'],
+                         r'<a href="#command-center" data-nav="command-center">[^<]*(?:<span[^>]*></span>)?Command Center</a>')
         self.assertIn('[⚡ Command Center](Command-Center)', output['wiki/Home.md'])
         self.assertIn('[⚡ Quick commands](Quick-Commands)', output['wiki/Home.md'])
         self.assertIn('function commandCenterPage', output['site/index.html'])

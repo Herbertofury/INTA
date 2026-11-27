@@ -1289,3 +1289,5 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
   .directory-section .directory-tool-row .tool-platform-cell { font-size: 10px; }
   .directory-section .directory-tool-row .tool-links-cell { gap: 0 8px; }
 }
+
+.news-story .news-source-freshness { margin:0; font-size:.8rem; color:var(--muted); overflow-wrap:anywhere; }

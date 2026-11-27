@@ -1190,19 +1190,36 @@
     if (!digest) return '';
     const known = new Map(catalog.sources.map(s => [s.id,s]));
     const items = [...digest.items].sort((a,b)=>b.date.localeCompare(a.date));
-    const active = digest.sources.filter(s=>s.status==='ok').length;
-    const unavailable = digest.sources.filter(s=>s.status==='unavailable').map(s=>known.get(s.id)?.name).filter(Boolean);
+    const states = new Map(digest.sources.map(row => [row.id, row]));
+    // Older schema-1 snapshots omit origin. The fixed editorial-only source
+    // was already part of the original seed contract.
+    const editorial = row => row?.origin === 'editorial' || (row?.origin == null && row?.id === 'windows-health');
+    const feeds = digest.sources.filter(row => !editorial(row));
+    const active = feeds.filter(row => row.status === 'ok').length;
+    const unavailable = feeds.filter(row => row.status === 'unavailable').map(row => known.get(row.id)?.name).filter(Boolean);
+    const provenance = row => editorial(row) ? 'editorial' : row?.status === 'unavailable' ? 'retained' : 'feed';
+    const counts = {feed: 0, retained: 0, editorial: 0};
+    for (const item of items) counts[provenance(states.get(item.sourceId))]++;
+    const timeLabel = value => `<time datetime="${esc(value)}">${esc(value.slice(0,16).replace('T',' '))} UTC</time>`;
+    const sourceLabel = (row, origin) => {
+      if (origin === 'editorial') return 'Editorial selection';
+      const checked = row?.lastSuccessfulCheckAt;
+      const label = origin === 'retained' ? 'Retained · feed unavailable' : 'Publisher feed';
+      return label + ' · ' + (checked ? 'Last successful check ' + timeLabel(checked) : 'Last successful check unknown');
+    };
     const age = Date.now()-Date.parse(digest.generatedAt);
     const stale = Number.isFinite(age) && age>72*60*60*1000;
     const categories = [...new Set(items.map(item => known.get(item.sourceId)?.category))].filter(Boolean);
     return `<section id="news-digest" aria-labelledby="news-digest-title"><h2 id="news-digest-title">Publisher digest</h2>
-      <p class="news-muted">Snapshot <time datetime="${esc(digest.generatedAt)}">${esc(digest.generatedAt.slice(0,16).replace('T',' '))} UTC</time> · ${active} of ${digest.sources.length} sources available.${stale?' Snapshot may be stale.':''}${unavailable.length?` Unavailable at refresh: ${esc(unavailable.join(', '))}.`:''} Media loads only when you ask. ${external('https://herbertofury.github.io/INTA/news-digest.json','Shared feed JSON')}</p>
+      <p class="news-muted">Snapshot ${timeLabel(digest.generatedAt)} · ${active} of ${feeds.length} publisher feeds available · ${counts.retained} retained · ${counts.editorial} editorial.${stale?' Snapshot may be stale.':''}${unavailable.length?` Unavailable at refresh: ${esc(unavailable.join(', '))}.`:''} Media loads only when you ask. ${external('https://herbertofury.github.io/INTA/news-digest.json','Shared feed JSON')}</p>
       <div class="news-controls"><label>Digest category<select id="news-digest-category"><option value="">All categories</option>${categories.map(id=>`<option value="${esc(id)}">${esc(newsGroups[id][0])}</option>`).join('')}</select></label><label class="news-saved"><input id="news-media-only" type="checkbox"> With media only</label></div>
       <p id="news-digest-count" aria-live="polite"></p><div class="news-grid">${items.map(item=>{
         const source=known.get(item.sourceId);
-        return `<article class="news-brief news-story" data-digest-id="${esc(item.id)}" data-digest-category="${esc(source.category)}" data-has-media="${item.media.length>0}">
+        const row=states.get(item.sourceId), origin=provenance(row);
+        return `<article class="news-brief news-story" data-freshness="${origin}" data-digest-id="${esc(item.id)}" data-digest-category="${esc(source.category)}" data-has-media="${item.media.length>0}">
           <span>${external(source.url,esc(source.name))} · ${esc(newsGroups[source.category][0])} · <time datetime="${esc(item.date)}">${esc(dateLabel(item.date,true))}</time></span>
           <h3>${external(item.url,esc(item.title))}</h3>
+          <p class="news-source-freshness">${sourceLabel(row,origin)}</p>
           ${item.media.map((m,i)=>`<div class="news-media"><button type="button" class="button" data-media-index="${i}" aria-label="${m.kind==='image'?'Show image':m.kind==='audio'?'Load audio':'Load video'} for ${esc(item.title)}">${m.kind==='image'?'Show image':m.kind==='audio'?'Load audio':'Load video'}</button></div>`).join('')}
         </article>`;
       }).join('')}</div></section>`;
