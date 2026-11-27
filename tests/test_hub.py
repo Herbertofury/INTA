@@ -59,6 +59,33 @@ class HubIntegrity(unittest.TestCase):
                 self.assertIn(note['commands'][0]['code'], guide)
                 self.assertIn('#### ⚡ Quick commands', guide)
 
+    def test_updates_center_catalog_and_app_are_integrated(self):
+        catalog = json.loads((ROOT / 'data/updates-center.json').read_text())
+        build.validate_updates_center(catalog)
+        output = build.build_outputs()
+        embedded = json.loads(output['site/catalog.json'])
+        self.assertEqual(embedded['updatesCenter']['commands'], catalog['commands'])
+        self.assertIn('data-nav="updates"', output['site/index.html'])
+        self.assertIn('function updatesCenterPage', output['site/index.html'])
+        self.assertIn('windows-update-cache-reset', output['site/index.html'])
+        self.assertIn('winget repair --id Publisher.Package --exact --interactive', output['site/index.html'])
+        self.assertIn('uniget.exe package repair', output['site/index.html'])
+        self.assertIn('choco upgrade all --noop', output['site/index.html'])
+        self.assertIn('updatesCenterCommands', output['site/build-manifest.json'])
+
+    def test_updates_center_rejects_unknown_channel_command(self):
+        catalog = json.loads((ROOT / 'data/updates-center.json').read_text())
+        broken = copy.deepcopy(catalog)
+        broken['channels'][0]['updateCommand'] = 'missing-command'
+        with self.assertRaisesRegex(ValueError, 'unknown command'):
+            build.validate_updates_center(broken)
+
+    def test_updates_center_rejects_remote_pipe_execution(self):
+        catalog = json.loads((ROOT / 'data/updates-center.json').read_text())
+        broken = copy.deepcopy(catalog)
+        broken['commands'][0]['code'] = 'irm https://example.invalid/a.ps1 | iex'
+        with self.assertRaisesRegex(ValueError, 'remote download-and-execute'):
+            build.validate_updates_center(broken)
     def test_command_center_catalog_and_app_are_integrated(self):
         catalog = json.loads((ROOT / 'data/command-center.json').read_text())
         build.validate_command_center(catalog)
