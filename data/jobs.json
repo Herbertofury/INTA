@@ -325,7 +325,12 @@
         "title": "Inspect pressure while the lag happens",
         "detail": "Use Task Manager or Resource Monitor to identify CPU, committed memory, disk response, and network pressure. A high percentage alone is not a diagnosis: correlate it with the lag and the responsible process, path, or service.",
         "command": "resmon",
-        "anchor": "step-02"
+        "anchor": "step-02",
+        "commandShell": "CMD or PowerShell",
+        "commandPurpose": "Open Resource Monitor while reproducing the slowdown to identify the pressured resource.",
+        "commandSafety": "Read-only diagnostic.",
+        "commandUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/resmon",
+        "commandName": "Microsoft Resource Monitor command"
       },
       {
         "title": "Check storage and hardware first",
@@ -429,7 +434,12 @@
         "title": "Check protected system files",
         "detail": "After DISM completes successfully, run System File Checker. Record whether corruption was absent, repaired, or unresolved. Keep the relevant CBS and DISM log excerpts privately if escalation is needed.",
         "command": "sfc /scannow",
-        "anchor": "step-04"
+        "anchor": "step-04",
+        "commandShell": "PowerShell or CMD (Run as Administrator)",
+        "commandPurpose": "Verify and repair protected Windows system files after the component-store repair has completed.",
+        "commandSafety": "Changes protected system files. Run after DISM completes; review the final integrity message and CBS log if repairs fail.",
+        "commandUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+        "commandName": "Microsoft System File Checker documentation"
       },
       {
         "title": "Reboot and retest the original feature",
@@ -939,7 +949,12 @@
         "title": "Test reachability and name resolution separately",
         "detail": "Test the observed gateway, then an approved external destination, then the failing hostname. Use the actual gateway from the previous step. An unsuccessful ping alone does not prove an outage because ICMP may be filtered; compare the application’s required TCP connection. The PowerShell command uses a public baseline hostname; repeat it with the actual failing hostname.",
         "command": "Resolve-DnsName learn.microsoft.com",
-        "anchor": "step-03"
+        "anchor": "step-03",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Resolve the DNS name separately from testing a TCP connection to the target service.",
+        "commandSafety": "Read-only diagnostic. Use an organization-approved hostname and port; public name resolution alone does not prove internal DNS health.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname",
+        "commandName": "Microsoft Resolve-DnsName documentation"
       },
       {
         "title": "Narrow the application path",
@@ -1386,9 +1401,12 @@
         "title": "Compare the port with the current printer address",
         "detail": "Run this read-only command in the same local Windows PowerShell 5.1 session. Match the PortName from the previous output. A TCP/IP port should point to the printer’s current address from its network report; WSD and USB use different bindings. Investigate a mismatch before changing only the affected queue. The output includes local network details and belongs in the private case record.",
         "command": "Get-PrinterPort | Format-List *",
-        "commandName": "Get-PrinterPort",
+        "commandName": "Microsoft Get-PrinterPort documentation",
         "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport",
-        "anchor": "step-read-printer-port-details"
+        "anchor": "step-read-printer-port-details",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Inspect configured printer port details to compare the configured destination with the printer's current address.",
+        "commandSafety": "Read-only diagnostic. Confirm the printer identity and current address before changing a port or queue."
       },
       {
         "title": "Separate application and queue faults",
