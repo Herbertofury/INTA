@@ -250,12 +250,11 @@
   }
   const firstJobForTool = new Map();
   jobs.forEach(job => array(job.tools).forEach(id => { if (!firstJobForTool.has(id)) firstJobForTool.set(id, job); }));
-  function toolRow(tool, directory = false) {
+  function toolRow(tool, directory = false, sort = 'catalog') {
     const related = firstJobForTool.get(tool.id);
     const description = directory ? tool.bestFor || tool.summary : tool.summary;
-    return `<article class="tool-row${directory ? ' directory-tool-row' : ''}" role="listitem" data-tool-id="${esc(tool.id)}"${directory ? '' : ` data-tool-card="${esc(tool.id)}"`}><div class="tool-name-cell"><h3><a class="${directory ? 'directory-tool-name' : 'tool-name'}" href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a></h3><p>${formatted(description)}</p><span class="row-meta">${directory ? esc(modeLabel(tool.mode)) : esc(categoryLabel(tool.category)) + ' · ' + esc(modeLabel(tool.mode))}</span></div><div class="tool-platform-cell" data-label="Platforms"><span class="sr-only">Platforms: </span>${esc(array(tool.platforms).join(', '))}</div><div class="tool-tier-cell" data-label="Recommendation"><span class="sr-only">Recommendation: </span>${tierPill(tool.tier)}</div><div class="tool-links-cell" data-label="Resources">${accessActions(tool, 'catalog-access')}<a href="#tool/${encodeURIComponent(tool.id)}">Details</a>${directory ? related ? `<a href="#job/${encodeURIComponent(related.id)}">Job guide ${icon('arrow')}</a>` : external(`${repo}/wiki/Tools-${encodeURIComponent(tool.category)}`, `Wiki ${icon('external')}`) : external(tool.docsUrl, `Documentation ${icon('external')}`)}</div><div class="tool-save-cell">${saveButton(tool)}</div></article>`;
+    return `<article class="tool-row${directory ? ' directory-tool-row' : ''}" role="listitem" data-tool-id="${esc(tool.id)}"${directory ? '' : ` data-tool-card="${esc(tool.id)}"`}><div class="tool-name-cell"><h3><a class="${directory ? 'directory-tool-name' : 'tool-name'}" href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a></h3><p>${formatted(description)}</p><span class="row-meta">${directory ? esc(modeLabel(tool.mode)) : esc(categoryLabel(tool.category)) + ' · ' + esc(modeLabel(tool.mode))}</span></div><div class="tool-platform-cell" data-label="Platforms"><span class="sr-only">Platforms: </span>${esc(array(tool.platforms).join(', '))}</div><div class="tool-tier-cell" data-label="Recommendation"><span class="sr-only">Recommendation: </span>${tierPill(tool.tier)}${!directory ? toolSortSignal(tool, sort) : ''}</div><div class="tool-links-cell" data-label="Resources">${accessActions(tool, 'catalog-access')}<a href="#tool/${encodeURIComponent(tool.id)}">Details</a>${directory ? related ? `<a href="#job/${encodeURIComponent(related.id)}">Job guide ${icon('arrow')}</a>` : external(`${repo}/wiki/Tools-${encodeURIComponent(tool.category)}`, `Wiki ${icon('external')}`) : external(tool.docsUrl, `Documentation ${icon('external')}`)}</div><div class="tool-save-cell">${saveButton(tool)}</div></article>`;
   }
-  function toolCard(tool) { return toolRow(tool); }
   function jobCard(job) {
     const href = `#job/${encodeURIComponent(job.id)}`;
     return `<article class="job-row" role="listitem" data-job-route="${esc(href)}"><span class="job-row-icon">${icon(jobIcon(job))}</span><div class="job-row-main"><h3><a href="${href}">${esc(job.title)}</a></h3><p>${esc(job.summary)}</p></div><div class="job-row-meta"><span>${esc(job.estimatedTime || `${array(job.steps).length} steps`)}</span><span>${esc(job.difficulty || job.category)}</span></div><a class="job-row-open" href="${href}" aria-label="Open ${esc(job.title)}">Open guide ${icon('arrow')}</a></article>`;
@@ -368,19 +367,84 @@
   function selectOptions(values, label, selected = '') {
     return `<option value="">${esc(label)}</option>${[...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b)).map(value => `<option value="${esc(value)}"${selected === value ? ' selected' : ''}>${esc(categoryLabel(value))}</option>`).join('')}`;
   }
-  const toolSearchText = new Map(tools.map(tool => [tool.id, text([tool.name, tool.category, categoryLabel(tool.category), tool.summary, tool.bestFor, ...array(tool.tags), ...array(tool.platforms), ...(quickByTool.get(tool.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
+  const toolSearchText = new Map(tools.map(tool => [tool.id, text([tool.name, tool.category, categoryLabel(tool.category), tool.summary, tool.bestFor, tool.reputation?.github?.url, tool.reputation?.sourceforge?.url, ...array(tool.tags), ...array(tool.platforms), ...(quickByTool.get(tool.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
   const workspaceSearchText = new Map(jobs.map(job => [job.id, text(workspaceSearchTerms(job)).toLowerCase()]));
   const fieldNoteSearchText = new Map(fieldNotes.map(note => [note.id, text(fieldNoteTerms(note)).toLowerCase()]));
   const jobSearchText = new Map(jobs.map(job => [job.id, text([job.title, job.category, job.summary, job.startHere, ...array(job.steps).map(step => step.title), workspaceSearchText.get(job.id), ...(fieldNotesByJob.get(job.id) || []).flatMap(fieldNoteTerms), ...(quickByJob.get(job.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
   const quickSearchText = new Map(quickItems.map(item => [item.id, text([item.label, item.firstStep, toolMap.get(item.toolId)?.name, ...array(item.aliases)]).toLowerCase()]));
   function matches(haystack, query) { return query.trim().toLowerCase().split(/\s+/).filter(Boolean).every(term => haystack.includes(term)); }
+  const recommendationOrder = {core: 3, specialist: 2, evaluate: 1};
+  const numberFormat = new Intl.NumberFormat();
+  const toolSorts = {
+    catalog: {label: 'Catalog order', description: 'Original library order.'},
+    recommendation: {label: 'INTA recommendation', description: 'Everyday picks first, then Specialist and Evaluate first. INTA tiers are editorial, not user ratings.', metric: t => recommendationOrder[t.tier], show: t => ({label: tierLabel(t.tier)})},
+    stars: {label: 'GitHub stars', description: 'Most stars on the matched project repository. Stars measure interest, not quality.', metric: t => githubEvidence(t)?.stars, show: (t, value) => githubDisplay(t, value, 'GitHub stars')},
+    rating: {label: 'User rating', description: 'Highest SourceForge user rating, then more reviews for ties. Ratings from different providers are not mixed.', metric: t => sourceForgeEvidence(t)?.rating?.value, tie: t => sourceForgeEvidence(t)?.rating?.reviews || 0, show: (t, value) => { const sf = sourceForgeEvidence(t); return {label: `${value}/${sf.rating.scale} · ${numberFormat.format(sf.rating.reviews)} SourceForge ratings`, url: sf.url, date: sf.checkedAt}; }},
+    reviews: {label: 'User review count', description: 'Most SourceForge user ratings. Sample size is not sentiment.', metric: t => sourceForgeEvidence(t)?.rating?.reviews, show: (t, value) => sourceForgeDisplay(t, value, 'SourceForge ratings')},
+    popularity: {label: 'Popularity · downloads', description: 'Most downloads this week as reported by SourceForge. Downloads are not unique users or endorsements.', metric: t => sourceForgeEvidence(t)?.weeklyDownloads, show: (t, value) => sourceForgeDisplay(t, value, 'SourceForge downloads this week')},
+    users: {label: 'Weekly active users', description: 'Publisher-reported weekly active users for the exact product, as of the linked report. Unmeasured tools stay visible.', metric: t => usageEvidence(t)?.weeklyActiveUsers, show: (t, value) => { const usage = usageEvidence(t); return {label: `${usage.approximate ? '≈' : ''}${numberFormat.format(value)} reported weekly active users`, url: usage.url, date: usage.reportedAt}; }},
+    forks: {label: 'GitHub forks', description: 'Most forks on the matched project repository.', metric: t => githubEvidence(t)?.forks, show: (t, value) => githubDisplay(t, value, 'GitHub forks')},
+    name: {label: 'Name · A to Z', description: 'Alphabetical by tool name.'},
+    'name-desc': {label: 'Name · Z to A', description: 'Reverse alphabetical by tool name.'}
+  };
+  function githubEvidence(tool) { return tool.reputation?.github?.status === 'observed' ? tool.reputation.github : null; }
+  function sourceForgeEvidence(tool) { return tool.reputation?.sourceforge?.status === 'observed' ? tool.reputation.sourceforge : null; }
+  function usageEvidence(tool) { return tool.reputation?.usage?.status === 'observed' ? tool.reputation.usage : null; }
+  function githubDisplay(tool, value, label) {
+    const gh = githubEvidence(tool);
+    return {label: `${numberFormat.format(value)} ${label}`, url: gh.url, date: gh.checkedAt};
+  }
+  function sourceForgeDisplay(tool, value, label) {
+    const sf = sourceForgeEvidence(tool);
+    return {label: `${numberFormat.format(value)} ${label}`, url: sf.url, date: sf.checkedAt};
+  }
+  function toolSortKey(value) { return Object.hasOwn(toolSorts, value) ? value : 'catalog'; }
+  function sortToolResults(found, key) {
+    const byName = (a, b) => a.name.localeCompare(b.name) || a.id.localeCompare(b.id);
+    if (key === 'catalog') return found;
+    if (key === 'name' || key === 'name-desc') return found.sort((a, b) => key === 'name' ? byName(a, b) : byName(b, a));
+    const sort = toolSorts[key];
+    return found.sort((a, b) => {
+      const lhs = sort.metric(a), rhs = sort.metric(b);
+      if (!Number.isFinite(lhs)) return Number.isFinite(rhs) ? 1 : byName(a, b);
+      if (!Number.isFinite(rhs)) return -1;
+      return rhs - lhs || (sort.tie ? sort.tie(b) - sort.tie(a) : 0) || byName(a, b);
+    });
+  }
+  function toolSortLabel(observation, showDate = false) {
+    const label = observation.url ? external(observation.url, `${esc(observation.label)} ${icon('external')}`) : esc(observation.label);
+    return label + (showDate && observation.date ? ` <time datetime="${esc(observation.date)}">${esc(dateLabel(observation.date, true))}</time>` : '');
+  }
+  function amountAvailability(tool, key) {
+    const provider = ['stars', 'forks'].includes(key) ? tool.reputation?.github : key === 'users' ? tool.reputation?.usage : tool.reputation?.sourceforge;
+    return ({
+      unavailable: 'Source unavailable',
+      unreported: 'Not reported by source',
+      'not-applicable': 'Not applicable',
+      unverified: 'No verified data yet'
+    })[provider?.status] || (provider?.status === 'observed' ? 'Not reported by source' : 'No verified data yet');
+  }
+  function toolSortSignal(tool, key) {
+    if (!toolSorts[key]?.metric || key === 'recommendation') return '';
+    const spec = toolSorts[key];
+    const value = spec.metric(tool);
+    return `<div class="tool-sort-signal${Number.isFinite(value) ? '' : ' unknown'}">${Number.isFinite(value) ? toolSortLabel(spec.show(tool, value), true) : esc(amountAvailability(tool, key))}</div>`;
+  }
+  function toolEvidence(tool) {
+    const metrics = [['stars', 'GitHub stars'], ['forks', 'GitHub forks'], ['rating', 'User rating'], ['popularity', 'Weekly downloads'], ['users', 'Weekly active users']];
+    return `<section class="tool-evidence" aria-labelledby="tool-evidence-heading"><h2 class="block-heading" id="tool-evidence-heading">${icon('activity')}Tool reputation</h2><dl>${metrics.map(([key, title]) => {
+      const spec = toolSorts[key], value = spec.metric(tool);
+      return `<div><dt>${esc(title)}</dt><dd>${Number.isFinite(value) ? toolSortLabel(spec.show(tool, value), true) : esc(amountAvailability(tool, key))}</dd></div>`;
+    }).join('')}</dl><p>These signals are independent, dated snapshots. Review the source and the tool’s job fit before choosing.</p></section>`;
+  }
   function library(savedOnly = false, params = new URLSearchParams()) {
     const query = params.get('q') || '';
     const category = params.get('category') || '';
     const platform = params.get('platform') || '';
     const tier = params.get('tier') || '';
+    const sort = toolSortKey(params.get('sort'));
     const base = savedOnly ? tools.filter(tool => favorites.has(tool.id)) : tools;
-    return heading('INTA tools', savedOnly ? 'Saved tools' : 'Tool library', savedOnly ? 'Your saved tools, kept in this browser for the next service visit.' : 'Search the complete catalog by capability, platform, or recommendation.', !savedOnly) + (savedOnly && !base.length ? empty('bookmark', 'No saved tools yet', 'Use the bookmark control beside any tool to keep it here for your next visit.', 'Explore the tool library', '#tools') : `<div class="filters" id="tool-filters"><label class="input-wrap">${icon('search')}<span class="sr-only">Search tools</span><input id="library-search" type="search" placeholder="Search tools, symptoms, or capabilities…" value="${esc(query)}"></label><label class="sr-only" for="category-filter">Tool category</label><select class="filter-select" id="category-filter">${selectOptions(tools.map(tool => tool.category), 'All categories', category)}</select><label class="sr-only" for="platform-filter">Platform</label><select class="filter-select" id="platform-filter">${selectOptions(tools.flatMap(tool => array(tool.platforms)), 'All platforms', platform)}</select><label class="sr-only" for="tier-filter">Recommendation level</label><select class="filter-select" id="tier-filter"><option value="">All recommendations</option><option value="core"${tier === 'core' ? ' selected' : ''}>Everyday picks</option><option value="specialist"${tier === 'specialist' ? ' selected' : ''}>Specialist tools</option><option value="evaluate"${tier === 'evaluate' ? ' selected' : ''}>Evaluate first</option></select></div><div class="filter-result"><span id="library-result-count" aria-live="polite"></span><div class="legend">Everyday · Specialist · Evaluate first</div><button data-reset-filters>Clear filters</button></div>${toolTableHeader()}<div class="tool-list" id="tool-results" role="list" data-saved-only="${savedOnly}"></div>`);
+    return heading('INTA tools', savedOnly ? 'Saved tools' : 'Tool library', savedOnly ? 'Your saved tools, kept in this browser for the next service visit.' : 'Search the complete catalog by capability, platform, or recommendation, ratings, or popularity.', !savedOnly) + (savedOnly && !base.length ? empty('bookmark', 'No saved tools yet', 'Use the bookmark control beside any tool to keep it here for your next visit.', 'Explore the tool library', '#tools') : `<div class="filters" id="tool-filters"><label class="input-wrap">${icon('search')}<span class="sr-only">Search tools</span><input id="library-search" type="search" placeholder="Search tools, symptoms, or capabilities…" value="${esc(query)}"></label><label class="sr-only" for="category-filter">Tool category</label><select class="filter-select" id="category-filter">${selectOptions(tools.map(tool => tool.category), 'All categories', category)}</select><label class="sr-only" for="platform-filter">Platform</label><select class="filter-select" id="platform-filter">${selectOptions(tools.flatMap(tool => array(tool.platforms)), 'All platforms', platform)}</select><label class="sr-only" for="tier-filter">Recommendation level</label><select class="filter-select" id="tier-filter"><option value="">All recommendations</option><option value="core"${tier === 'core' ? ' selected' : ''}>Everyday picks</option><option value="specialist"${tier === 'specialist' ? ' selected' : ''}>Specialist tools</option><option value="evaluate"${tier === 'evaluate' ? ' selected' : ''}>Evaluate first</option></select><label class="tool-sort-control"><span>Sort by</span><select class="filter-select" id="tool-sort" aria-describedby="tool-sort-status">${Object.entries(toolSorts).map(([id, option]) => `<option value="${id}"${sort === id ? ' selected' : ''}>${esc(option.label)}</option>`).join('')}</select></label></div><div class="filter-result"><span id="library-result-count" aria-live="polite"></span><div class="legend">Everyday · Specialist · Evaluate first</div><button data-reset-filters>Clear filters</button></div><p id="tool-sort-status" class="tool-sort-status" aria-live="polite" hidden></p>${toolTableHeader()}<div class="tool-list" id="tool-results" role="list" data-saved-only="${savedOnly}"></div>`);
   }
   function filterTools(linkProse = true) {
     const container = $('#tool-results');
@@ -389,11 +453,19 @@
     const category = $('#category-filter').value;
     const platform = $('#platform-filter').value;
     const tier = $('#tier-filter').value;
+    const sort = toolSortKey($('#tool-sort').value);
     const base = container.dataset.savedOnly === 'true' ? tools.filter(tool => favorites.has(tool.id)) : tools;
     const found = base.filter(tool => matches(toolSearchText.get(tool.id), query) && (!category || tool.category === category) && (!platform || array(tool.platforms).includes(platform)) && (!tier || tool.tier === tier));
-    container.innerHTML = found.length ? found.map(toolCard).join('') : `<div style="grid-column:1/-1">${empty('search', 'No tools match this combination.', 'Try a different search or clear the filters to see the full library.', 'Clear filters', '', 'reset-filters')}</div>`;
+    container.innerHTML = found.length ? sortToolResults(found, sort).map(tool => toolRow(tool, false, sort)).join('') : `<div style="grid-column:1/-1">${empty('search', 'No tools match this combination.', 'Try a different search or clear the filters to see the full library.', 'Clear filters', '', 'reset-filters')}</div>`;
     $('#library-result-count').innerHTML = `<strong>${found.length}</strong> of ${base.length} ${base.length === 1 ? 'tool' : 'tools'}`;
-    rememberFilters({ q: query, category, platform, tier });
+    const status = $('#tool-sort-status');
+    status.hidden = sort === 'catalog';
+    if (!status.hidden) {
+      const spec = toolSorts[sort];
+      const measured = spec.metric ? found.filter(tool => Number.isFinite(spec.metric(tool))).length : found.length;
+      status.textContent = spec.description + (spec.metric && measured !== found.length ? ` ${measured} of ${found.length} matching tools have this data. Unknowns are last.` : '');
+    } else status.textContent = '';
+    rememberFilters({ q: query, category, platform, tier, sort: sort === 'catalog' ? '' : sort });
     if (linkProse) linkifyProse(container);
   }
   function playbooks(params = new URLSearchParams()) {
@@ -602,7 +674,7 @@
     const related = jobs.filter(job => array(job.tools).includes(tool.id));
     const access = accessInfo(tool);
     const references = [{ title: `${tool.name} · official website`, url: tool.homepage }, { title: 'Documentation & usage', url: tool.docsUrl }, { title: 'Source or upstream reference', url: tool.sourceUrl }].filter((source, i, values) => source.url && values.findIndex(value => value.url === source.url) === i);
-    return `<a class="back-link" href="#tools">${icon('back')}All tools</a><header class="detail-header"><div class="detail-tool-title"><div><div class="page-eyebrow">${esc(categoryLabel(tool.category))}</div><h1>${esc(tool.name)}</h1></div></div><p class="summary">${esc(tool.summary)}</p><div class="detail-meta">${tierPill(tool.tier)}${array(tool.platforms).map(platform => `<span class="pill">${esc(platform)}</span>`).join('')}<span class="pill">${esc(modeLabel(tool.mode))}</span></div><div class="detail-actions">${accessActions(tool, 'detail-access')}${external(tool.docsUrl, `${icon('book')}Documentation`, 'button ghost')}<button class="button ghost" data-save="${esc(tool.id)}" aria-pressed="${favorites.has(tool.id)}">${icon('bookmark')}<span>${favorites.has(tool.id) ? 'Saved to your toolkit' : 'Save to your toolkit'}</span></button></div></header><div class="detail-layout"><div class="detail-main">${access.note ? `<p class="access-note">${formatted(access.note)}</p>` : ''}<div class="callout">${icon('compass')}<div><h3>When to reach for it</h3><p>${formatted(tool.bestFor || tool.summary)}</p></div></div><div class="tool-info-grid"><section class="info-block"><span class="small-label">Platforms</span><p>${esc(array(tool.platforms).join(' · '))}</p></section><section class="info-block"><span class="small-label">How you use it</span><p>${esc(modeLabel(tool.mode) || 'See official documentation')}</p></section><section class="info-block"><span class="small-label">Availability &amp; pricing</span><p>${formatted(tool.pricing || 'See the official source for current terms.')}</p></section><section class="info-block"><span class="small-label">Recommendation</span><p>${esc(tierLabel(tool.tier))}${tool.tier === 'evaluate' ? ' · Validate it against your own workflow before relying on it.' : tool.tier === 'specialist' ? ' · Best for a specific diagnostic or recovery need.' : ' · A practical starting point for routine service work.'}</p></section></div>${tool.cautions ? `<div class="callout warning">${icon('info')}<div><h3>Before you use it</h3><p>${formatted(tool.cautions)}</p></div></div>` : ''}${array(tool.tags).length ? `<div class="detail-tags">${array(tool.tags).map(tag => `<span class="pill">${esc(tag)}</span>`).join('')}</div>` : ''}${selectionNotes(quickByTool.get(tool.id) || [], 'Used in these jobs')}<h2 class="block-heading">${icon('book')}Go to the source</h2>${sourceList(references)}<p class="sources-note">Source review: ${esc(dateLabel(tool.reviewedAt || reviewDate, true))}. Official pages and acquisition links are checked separately. File versions and availability can change after review.</p>${array(tool.provenance).length ? `<h2 class="block-heading">${icon('layers')}Why it is in the toolkit</h2><ul class="bullet-list">${array(tool.provenance).map(item => `<li>${safeUrl(item) ? external(item, `${esc(item)} ${icon('external')}`) : formatted(item)}</li>`).join('')}</ul>` : ''}</div><aside class="detail-aside"><section class="aside-card"><h3>${external(`${repo}/wiki/Tool-Selection`, 'Tool selection')}</h3><p>Compare diagnostic roles, supported systems, required access, and operating requirements before choosing a tool for the job.</p></section>${related.length ? `<section class="aside-card"><h3>Use it in a playbook</h3><div class="aside-tools">${related.map(job => `<a href="#job/${encodeURIComponent(job.id)}"><span class="aside-link-icon">${icon(jobIcon(job))}</span><span>${esc(job.title)}</span>${icon('arrow')}</a>`).join('')}</div></section>` : ''}<section class="aside-card"><h3>Contribute a correction</h3><p>Bring the official source and a short explanation of what it improves to the INTA repository.</p>${external(`${repo}/issues/new`, `Suggest an update ${icon('arrow')}`, 'button text')}</section></aside></div>`;
+    return `<a class="back-link" href="#tools">${icon('back')}All tools</a><header class="detail-header"><div class="detail-tool-title"><div><div class="page-eyebrow">${esc(categoryLabel(tool.category))}</div><h1>${esc(tool.name)}</h1></div></div><p class="summary">${esc(tool.summary)}</p><div class="detail-meta">${tierPill(tool.tier)}${array(tool.platforms).map(platform => `<span class="pill">${esc(platform)}</span>`).join('')}<span class="pill">${esc(modeLabel(tool.mode))}</span></div><div class="detail-actions">${accessActions(tool, 'detail-access')}${external(tool.docsUrl, `${icon('book')}Documentation`, 'button ghost')}<button class="button ghost" data-save="${esc(tool.id)}" aria-pressed="${favorites.has(tool.id)}">${icon('bookmark')}<span>${favorites.has(tool.id) ? 'Saved to your toolkit' : 'Save to your toolkit'}</span></button></div></header><div class="detail-layout"><div class="detail-main">${access.note ? `<p class="access-note">${formatted(access.note)}</p>` : ''}<div class="callout">${icon('compass')}<div><h3>When to reach for it</h3><p>${formatted(tool.bestFor || tool.summary)}</p></div></div><div class="tool-info-grid"><section class="info-block"><span class="small-label">Platforms</span><p>${esc(array(tool.platforms).join(' · '))}</p></section><section class="info-block"><span class="small-label">How you use it</span><p>${esc(modeLabel(tool.mode) || 'See official documentation')}</p></section><section class="info-block"><span class="small-label">Availability &amp; pricing</span><p>${formatted(tool.pricing || 'See the official source for current terms.')}</p></section><section class="info-block"><span class="small-label">Recommendation</span><p>${esc(tierLabel(tool.tier))}${tool.tier === 'evaluate' ? ' · Validate it against your own workflow before relying on it.' : tool.tier === 'specialist' ? ' · Best for a specific diagnostic or recovery need.' : ' · A practical starting point for routine service work.'}</p></section></div>${tool.cautions ? `<div class="callout warning">${icon('info')}<div><h3>Before you use it</h3><p>${formatted(tool.cautions)}</p></div></div>` : ''}${array(tool.tags).length ? `<div class="detail-tags">${array(tool.tags).map(tag => `<span class="pill">${esc(tag)}</span>`).join('')}</div>` : ''}${toolEvidence(tool)}${selectionNotes(quickByTool.get(tool.id) || [], 'Used in these jobs')}<h2 class="block-heading">${icon('book')}Go to the source</h2>${sourceList(references)}<p class="sources-note">Source review: ${esc(dateLabel(tool.reviewedAt || reviewDate, true))}. Official pages and acquisition links are checked separately. File versions and availability can change after review.</p>${array(tool.provenance).length ? `<h2 class="block-heading">${icon('layers')}Why it is in the toolkit</h2><ul class="bullet-list">${array(tool.provenance).map(item => `<li>${safeUrl(item) ? external(item, `${esc(item)} ${icon('external')}`) : formatted(item)}</li>`).join('')}</ul>` : ''}</div><aside class="detail-aside"><section class="aside-card"><h3>${external(`${repo}/wiki/Tool-Selection`, 'Tool selection')}</h3><p>Compare diagnostic roles, supported systems, required access, and operating requirements before choosing a tool for the job.</p></section>${related.length ? `<section class="aside-card"><h3>Use it in a playbook</h3><div class="aside-tools">${related.map(job => `<a href="#job/${encodeURIComponent(job.id)}"><span class="aside-link-icon">${icon(jobIcon(job))}</span><span>${esc(job.title)}</span>${icon('arrow')}</a>`).join('')}</div></section>` : ''}<section class="aside-card"><h3>Contribute a correction</h3><p>Bring the official source and a short explanation of what it improves to the INTA repository.</p>${external(`${repo}/issues/new`, `Suggest an update ${icon('arrow')}`, 'button text')}</section></aside></div>`;
   }
   const projectResources = [
     { icon: 'layers', title: 'The INTA wiki', body: 'Browse the complete technician field guide on GitHub. Read a procedure, follow its sources, or propose an improvement.', label: 'Open the wiki', url: `${repo}/wiki` },
@@ -889,6 +961,7 @@
   }
   function resetToolFilters() {
     ['library-search', 'category-filter', 'platform-filter', 'tier-filter'].forEach(id => { const field = document.getElementById(id); if (field) field.value = ''; });
+    if ($('#tool-sort')) $('#tool-sort').value = 'catalog';
     filterTools();
   }
   function resetJobFilters() { $('#jobs-search').value = ''; $('#jobs-category').value = ''; filterJobs(); }
@@ -940,7 +1013,7 @@
     else if (event.target.id === 'source-search') filterSources();
   });
   document.addEventListener('change', event => {
-    if (['category-filter', 'platform-filter', 'tier-filter'].includes(event.target.id)) filterTools();
+    if (['category-filter', 'platform-filter', 'tier-filter', 'tool-sort'].includes(event.target.id)) filterTools();
     else if (event.target.id === 'jobs-category') filterJobs();
     else if (event.target.matches('[data-check-job]')) changeCheck(event.target);
   });

@@ -772,3 +772,21 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 .closeout-rows .step { margin-block: .6rem; }
 .closeout-shortcuts { display:flex; flex-wrap:wrap; gap:.4rem; margin:.45rem 0 .12rem; }
 .closeout-shortcuts .button { white-space:normal; min-width:0; font-size:.88rem; padding:.34rem .58rem; }
+/* Keep the sort control visible with the filters, including on touch screens. */
+.tool-sort-control { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; color: var(--muted); font-size: 13px; font-weight: 650; }
+.tool-sort-control span { white-space: nowrap; }
+.tool-sort-control .filter-select { min-width: 0; font-weight: 400; }
+.tool-sort-status { margin: -4px 0 12px; padding: 8px 10px; border-inline-start: 2px solid var(--accent); background: var(--surface); color: var(--muted); font-size: 13px; }
+.tool-sort-status[hidden] { display: none; }
+.tool-sort-signal { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; margin-top: 6px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.tool-sort-signal a svg, .tool-evidence dd a svg { width: 12px; height: 12px; vertical-align: middle; }
+.tool-sort-signal time, .tool-sort-signal.unknown, .tool-evidence time, .tool-evidence > p { color: var(--muted); font-size: 12px; }
+.tool-evidence dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 175px), 1fr)); gap: 1px; border: 1px solid var(--line); background: var(--line); margin: 10px 0; }
+.tool-evidence dl div { min-width: 0; padding: 10px 12px; background: var(--surface); }
+.tool-evidence dt { color: var(--muted); font-size: 12px; }
+.tool-evidence dd { margin: 2px 0 0; font-size: 13px; overflow-wrap: anywhere; }
+.tool-evidence dd time { display: block; }
+@media (max-width: 700px) {
+  .tool-sort-control { flex: 1 1 100%; }
+  .tool-sort-control .filter-select { flex: 1; }
+}
