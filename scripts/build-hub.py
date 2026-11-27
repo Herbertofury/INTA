@@ -1388,8 +1388,47 @@ def build_outputs() -> dict[str, str]:
     categories = defaultdict(list)
     for tool in tools:
         categories[tool["category"]].append(tool)
+    pwa_manifest = {
+        "id": "./", "name": "INTA Computer Services", "short_name": "INTA",
+        "description": "INTA technician tools, diagnostics, updates and maintenance.",
+        "start_url": "./#updates", "scope": "./", "display": "standalone",
+        "background_color": "#111214", "theme_color": "#111214",
+        "categories": ["productivity", "utilities"],
+        "icons": [{"src": "./inta-app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}],
+    }
+    pwa_icon = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="104" fill="#111214"/>
+      <g fill="#e7e9ee"><path d="M104 104h128v128H104zM280 104h128v128H280zM104 280h128v128H104z"/></g>
+      <path d="M280 280h128v128H280z" fill="none" stroke="#8bb8ff" stroke-width="18"/>
+    </svg>"""
+    service_worker = """const CACHE = "inta-shell-v1";
+const SHELL = ["./", "./manifest.webmanifest", "./inta-app-icon.svg"];
+self.addEventListener("install", event => {
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
+});
+self.addEventListener("activate", event => {
+  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith("inta-shell-") && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim()));
+});
+self.addEventListener("fetch", event => {
+  const request = event.request;
+  if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
+  if (request.mode === "navigate") {
+    event.respondWith(fetch(request).then(response => {
+      if (response && response.ok) { const copy = response.clone(); caches.open(CACHE).then(cache => cache.put("./", copy)); }
+      return response;
+    }).catch(() => caches.match("./").then(cached => cached || Response.error())));
+    return;
+  }
+  event.respondWith(fetch(request).then(response => {
+    if (response && response.ok) { const copy = response.clone(); caches.open(CACHE).then(cache => cache.put(request, copy)); }
+    return response;
+  }).catch(() => caches.match(request)));
+});
+"""
     outputs = {"site/index.html": template, "site/.nojekyll": "", "site/catalog.json": data_json + "\n",
-               "site/knowledge-health.json": json.dumps(health_report, ensure_ascii=False, indent=2) + "\n"}
+               "site/knowledge-health.json": json.dumps(health_report, ensure_ascii=False, indent=2) + "\n",
+               "site/manifest.webmanifest": json.dumps(pwa_manifest, ensure_ascii=False, indent=2) + "\n",
+               "site/inta-app-icon.svg": pwa_icon + "\n", "site/sw.js": service_worker}
     outputs.update(managed_sources)
     outputs.update(online_module.wiki_outputs(online_data, tools, access))
     for job in jobs:
