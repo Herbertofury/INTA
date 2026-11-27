@@ -10,7 +10,7 @@
       "scope": "Operating system, cumulative updates, servicing stack, feature upgrades",
       "manager": "Windows Update / Get Help",
       "auditCommand": "windows-update-audit",
-      "updateCommand": "windows-update-troubleshooter",
+      "updateCommand": "windows-update-open",
       "icon": "monitor",
       "note": "OS servicing is separate from third-party app package managers. Feature upgrades, drivers and firmware require separate checks."
     },
@@ -69,8 +69,8 @@
       "name": "Microsoft Store",
       "scope": "Store-delivered apps",
       "manager": "Store UI",
-      "auditCommand": "windows-store-cache",
-      "updateCommand": "windows-store-cache",
+      "auditCommand": "store-open-updates",
+      "updateCommand": "store-open-updates",
       "icon": "shopping-bag",
       "note": "Store updates are separate from WinGet and Windows Update."
     },
@@ -837,6 +837,32 @@
       "safety": "Changes installed packages. Review outdated list, pins, cask behavior and dependent packages. Homebrew may reinstall dependents with broken linkage; use a maintenance window for developer or production systems.",
       "sourceUrl": "https://docs.brew.sh/Manpage.html",
       "sourceTitle": "Homebrew upgrade"
+    },
+    {
+      "id": "windows-update-open",
+      "title": "Open Windows Update",
+      "category": "Windows Update",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Open the supported Windows Update page to check for and review operating-system updates.",
+      "code": "Start-Process 'ms-settings:windowsupdate'",
+      "safety": "Opens Settings only. Review managed policy, safeguard holds, active hours and reboot requirements before installing.",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+      "sourceTitle": "Microsoft Windows Update"
+    },
+    {
+      "id": "store-open-updates",
+      "title": "Open Microsoft Store app updates",
+      "category": "Microsoft Store",
+      "shell": "PowerShell",
+      "privilege": "Standard user",
+      "risk": "read-only",
+      "summary": "Open the Store Downloads and updates page to review available app updates.",
+      "code": "Start-Process 'ms-windows-store://downloadsandupdates'",
+      "safety": "Opens Store UI only. Review managed-device policy and app identity before applying updates.",
+      "sourceUrl": "https://support.microsoft.com/en-us/account-billing/get-updates-for-apps-and-games-in-microsoft-store-2daed4e5-4c7f-4e7b-9d09-6b4b5c8e9f6a",
+      "sourceTitle": "Microsoft Store app updates"
     }
   ],
   "workflows": [
