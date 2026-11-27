@@ -1053,9 +1053,11 @@ def validate_reputation(snapshot: dict, tools: list[dict]) -> None:
         raise ValueError("Reputation requires a dated evidence or explicit gap record for every catalog tool")
 
     for tool_id, record in entries.items():
-        if not isinstance(record, dict) or set(record) != {"github", "sourceforge", "usage"}:
+        if (not isinstance(record, dict) or not {"github", "sourceforge", "usage"} <= set(record)
+                or set(record) - {"github", "sourceforge", "usage", "browserStores"}):
             raise ValueError(f"{tool_id}: invalid reputation evidence streams")
-        for kind, evidence in record.items():
+        for kind in ("github", "sourceforge", "usage"):
+            evidence = record[kind]
             if not isinstance(evidence, dict) or evidence.get("status") not in states:
                 raise ValueError(f"{tool_id}: invalid {kind} observation status")
             status = evidence["status"]
@@ -1092,6 +1094,52 @@ def validate_reputation(snapshot: dict, tools: list[dict]) -> None:
             elif (not count(evidence.get("weeklyActiveUsers")) or type(evidence.get("approximate")) is not bool
                   or not day(evidence.get("reportedAt")) or evidence["reportedAt"] > evidence["checkedAt"]):
                 raise ValueError(f"{tool_id}: invalid weekly active user evidence")
+
+        browser_stores = record.get("browserStores", [])
+        if not isinstance(browser_stores, list):
+            raise ValueError(f"{tool_id}: browser-store evidence must be a list")
+        store_hosts = {
+            "mozilla-addons": "addons.mozilla.org",
+            "chrome-web-store": "chromewebstore.google.com",
+            "edge-addons": "microsoftedge.microsoft.com",
+            "opera-addons": "addons.opera.com",
+            "apple-app-store": "apps.apple.com",
+            "adguard-site": "adguard.com",
+        }
+        seen_providers = set()
+        for store in browser_stores:
+            required = {"provider", "name", "url", "checkedAt", "status"}
+            allowed = required | {"rating", "approximate", "users", "downloads", "reason", "version", "lastUpdated"}
+            if not isinstance(store, dict) or not required <= set(store) or set(store) - allowed:
+                raise ValueError(f"{tool_id}: invalid browser-store evidence fields")
+            provider = store["provider"]
+            if (provider not in store_hosts or provider in seen_providers
+                    or not isinstance(store["name"], str) or not store["name"].strip()
+                    or not source(store["url"], store_hosts.get(provider))
+                    or not day(store["checkedAt"]) or store["checkedAt"] > snapshot["reviewedAt"]):
+                raise ValueError(f"{tool_id}: invalid browser-store source identity or review date")
+            seen_providers.add(provider)
+            if store["status"] == "observed":
+                rating = store.get("rating")
+                if (not isinstance(rating, dict) or set(rating) != {"value", "scale", "reviews"}
+                        or type(rating["value"]) not in (int, float) or type(rating["scale"]) not in (int, float)
+                        or rating["scale"] != 5 or not 1 <= rating["value"] <= 5
+                        or not count(rating["reviews"]) or not rating["reviews"]
+                        or ("approximate" in store and type(store["approximate"]) is not bool)
+                        or any(k in store and not count(store[k]) for k in ("users", "downloads"))):
+                    raise ValueError(f"{tool_id}: invalid browser-store rating or audience count")
+                if "version" in store and (not isinstance(store["version"], str) or not store["version"].strip()):
+                    raise ValueError(f"{tool_id}: invalid browser-store version")
+                if "lastUpdated" in store and (
+                    not day(store["lastUpdated"]) or store["lastUpdated"] > store["checkedAt"]
+                ):
+                    raise ValueError(f"{tool_id}: invalid browser-store version date")
+            elif store["status"] in {"unreported", "unavailable"}:
+                if (any(k in store for k in ("rating", "approximate", "users", "downloads"))
+                        or not isinstance(store.get("reason"), str) or not store["reason"].strip()):
+                    raise ValueError(f"{tool_id}: unreported browser-store evidence needs a reason and no metrics")
+            else:
+                raise ValueError(f"{tool_id}: invalid browser-store observation status")
 
 
 def validate_news(catalog: dict) -> None:
