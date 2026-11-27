@@ -1199,3 +1199,12 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 .agent-candidate-list > div { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:5px 8px; border-bottom:1px solid var(--line-soft); }
 .agent-candidate-list code { min-width:0; overflow-wrap:anywhere; color:var(--muted); font-size:10px; }
 .agent-candidate-list button { flex:0 0 auto; min-height:28px; padding:3px 8px; border:1px solid var(--line); border-radius:4px; background:var(--selected); color:var(--accent); font-size:10px; }
+
+/* Digest players are created only after an explicit click. */
+.news-story[hidden] { display:none; }
+.news-media { display:grid; gap:.4rem; min-width:0; }
+.news-media img,.news-media video,.news-media iframe { width:100%; max-width:100%; border:0; border-radius:8px; background:var(--sidebar); }
+.news-media iframe { aspect-ratio:16/9; }
+.news-media audio { width:100%; }
+.news-media a { font-size:.85rem; }
+#news-digest { margin-bottom:1.5rem; }

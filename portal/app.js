@@ -1185,6 +1185,75 @@
     community: ['Community & social', 'Professional discussion and public accounts; not official alerts'],
     status: ['Service health', 'Publisher status and service incident pages']
   };
+  function newsDigestPage(catalog) {
+    const digest = data.newsDigest;
+    if (!digest) return '';
+    const known = new Map(catalog.sources.map(s => [s.id,s]));
+    const items = [...digest.items].sort((a,b)=>b.date.localeCompare(a.date));
+    const active = digest.sources.filter(s=>s.status==='ok').length;
+    const unavailable = digest.sources.filter(s=>s.status==='unavailable').map(s=>known.get(s.id)?.name).filter(Boolean);
+    const age = Date.now()-Date.parse(digest.generatedAt);
+    const stale = Number.isFinite(age) && age>72*60*60*1000;
+    const categories = [...new Set(items.map(item => known.get(item.sourceId)?.category))].filter(Boolean);
+    return `<section id="news-digest" aria-labelledby="news-digest-title"><h2 id="news-digest-title">Publisher digest</h2>
+      <p class="news-muted">Snapshot <time datetime="${esc(digest.generatedAt)}">${esc(digest.generatedAt.slice(0,16).replace('T',' '))} UTC</time> · ${active} of ${digest.sources.length} sources available.${stale?' Snapshot may be stale.':''}${unavailable.length?` Unavailable at refresh: ${esc(unavailable.join(', '))}.`:''} Media loads only when you ask. ${external('https://herbertofury.github.io/INTA/news-digest.json','Shared feed JSON')}</p>
+      <div class="news-controls"><label>Digest category<select id="news-digest-category"><option value="">All categories</option>${categories.map(id=>`<option value="${esc(id)}">${esc(newsGroups[id][0])}</option>`).join('')}</select></label><label class="news-saved"><input id="news-media-only" type="checkbox"> With media only</label></div>
+      <p id="news-digest-count" aria-live="polite"></p><div class="news-grid">${items.map(item=>{
+        const source=known.get(item.sourceId);
+        return `<article class="news-brief news-story" data-digest-id="${esc(item.id)}" data-digest-category="${esc(source.category)}" data-has-media="${item.media.length>0}">
+          <span>${external(source.url,esc(source.name))} · ${esc(newsGroups[source.category][0])} · <time datetime="${esc(item.date)}">${esc(dateLabel(item.date,true))}</time></span>
+          <h3>${external(item.url,esc(item.title))}</h3>
+          ${item.media.map((m,i)=>`<div class="news-media"><button type="button" class="button" data-media-index="${i}" aria-label="${m.kind==='image'?'Show image':m.kind==='audio'?'Load audio':'Load video'} for ${esc(item.title)}">${m.kind==='image'?'Show image':m.kind==='audio'?'Load audio':'Load video'}</button></div>`).join('')}
+        </article>`;
+      }).join('')}</div></section>`;
+  }
+  function bindNewsDigest() {
+    const section=$('#news-digest');
+    if (!section) return;
+    const items=new Map(data.newsDigest.items.map(item=>[item.id,item]));
+    const cards=Array.from(section.querySelectorAll('.news-story'));
+    const category=$('#news-digest-category'), onlyMedia=$('#news-media-only');
+    const filter=()=>{
+      let count=0;
+      for(const card of cards) {
+        card.hidden=!!(category.value && card.dataset.digestCategory !== category.value) ||
+          (onlyMedia.checked && card.dataset.hasMedia!=='true');
+        if(!card.hidden)count++;
+      }
+      $('#news-digest-count').textContent=count ? `${count} of ${cards.length} items` : 'No items match these filters.';
+    };
+    category.addEventListener('change',filter);
+    onlyMedia.addEventListener('change',filter);
+    section.addEventListener('click',event=>{
+      const button=event.target.closest('[data-media-index]');
+      if(!button)return;
+      const item=items.get(button.closest('[data-digest-id]')?.dataset.digestId);
+      const media=item?.media[Number(button.dataset.mediaIndex)];
+      if(!media || !registryUrl(media.url))return;
+      const shell=button.closest('.news-media');
+      const fallback=document.createElement('a');
+      fallback.href=media.url; fallback.target='_blank';fallback.rel='noopener noreferrer'; fallback.textContent='Open original media';
+      let element;
+      if(media.kind==='embed') {
+        const source=new URL(media.url);
+        const id=source.hostname==='youtu.be'?source.pathname.slice(1):source.pathname.startsWith('/embed/')?source.pathname.split('/')[2]:source.searchParams.get('v');
+        if(!['youtu.be','youtube.com','www.youtube.com','www.youtube-nocookie.com'].includes(source.hostname) || !/^[A-Za-z0-9_-]{11}$/.test(id || ''))return;
+        element=document.createElement('iframe'); element.title=item.title;element.allowFullscreen=true;
+        element.setAttribute('sandbox','allow-scripts allow-same-origin allow-presentation');
+        element.referrerPolicy='strict-origin-when-cross-origin';
+        element.src='https://www.youtube-nocookie.com/embed/'+id;
+      } else if(media.kind==='image') {
+        element=document.createElement('img'); element.alt='Publisher image for '+item.title;
+        element.referrerPolicy='no-referrer'; element.decoding='async';element.src=media.url;
+      } else if(media.kind==='video' || media.kind==='audio') {
+        element=document.createElement(media.kind);element.controls=true;element.preload='none';element.src=media.url;
+      } else return;
+      element.addEventListener('error',()=>element.remove(),{once:true});
+      shell.replaceChildren(element,fallback);
+      fallback.focus();
+    });
+    filter();
+  }
   function newsPage() {
     const catalog = data.news;
     const briefing = (catalog.briefing || []).map(item => {
@@ -1193,12 +1262,14 @@
     }).join('');
     return heading('Technician intelligence', 'Technician News', 'Find official alerts first, then compare vendor updates, reporting, and community perspectives.', false)
       + `<div class="news-banner"><div><strong>Start with the source</strong><p>Look up the affected version in a vendor bulletin before changing a customer system. Treat social and reporting links as leads.</p></div><span>Catalog reviewed <time datetime="${esc(catalog.reviewedAt)}">${esc(dateLabel(catalog.reviewedAt,true))}</time></span></div>`
+      + newsDigestPage(catalog)
       + (briefing ? `<section aria-labelledby="news-brief-title"><h2 id="news-brief-title">Selected briefing</h2><p class="news-muted">Dated editorial snapshot, not a live feed. Open the publisher for the latest changes.</p><div class="news-grid">${briefing}</div></section>` : '')
       + `<section aria-labelledby="news-sources-title"><h2 id="news-sources-title">Source directory</h2><p class="news-muted">The directory works offline. Open publisher pages for current updates; saved sources are local to this browser.</p><div class="news-controls"><label>Search sources<input id="news-search" type="search" placeholder="CISA, Microsoft, NIST…"></label><label>Category<select id="news-category"><option value="">All categories</option>${Object.entries(newsGroups).map(([id,[label]])=>`<option value="${id}">${esc(label)}</option>`).join('')}</select></label><label class="news-saved"><input id="news-saved" type="checkbox"> Saved only</label></div><p id="news-count" aria-live="polite"></p><div id="news-directory"></div></section>`;
   }
   function bindNews() {
     const search = $('#news-search');
     if (!search) return;
+    bindNewsDigest();
     const directory = $('#news-directory');
     const category = $('#news-category');
     const onlySaved = $('#news-saved');
