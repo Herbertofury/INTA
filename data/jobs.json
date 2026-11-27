@@ -117,7 +117,13 @@
       {
         "title": "Run the primary cleanup",
         "detail": "Update the installed endpoint protection through a controlled connection or approved update channel, run its full scan, and preserve the results. Quarantine identified threats rather than manually deleting unfamiliar files. Reboot when the product requests it and record its post-reboot status.",
-        "anchor": "step-03"
+        "anchor": "step-03",
+        "command": "Start-MpScan -ScanType FullScan",
+        "commandShell": "PowerShell (Run as Administrator)",
+        "commandPurpose": "Start a Microsoft Defender full scan after confirming Defender Antivirus is the active primary protection product and signatures are current.",
+        "commandSafety": "Starts a potentially lengthy scan; it does not replace containment or an incident response. Do not assume Defender cmdlets are usable when a third-party product owns primary antivirus. Record scan completion, scope and detections.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/defender/start-mpscan",
+        "commandName": "Microsoft Start-MpScan documentation"
       },
       {
         "title": "Use an offline or focused second check",
@@ -509,7 +515,13 @@
       {
         "title": "Run the supported troubleshooter",
         "detail": "Open Get Help and run the Windows Update troubleshooter. Capture its findings and restart when appropriate, then retry the specific update once. If the same failure persists, use the new evidence rather than looping identical retries.",
-        "anchor": "step-03"
+        "anchor": "step-03",
+        "command": "Start-Process 'ms-settings:troubleshoot'",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Open Windows Settings troubleshooting so the technician can select the supported Windows Update troubleshooter for the installed Windows version.",
+        "commandSafety": "Opens Settings only; review the suggested changes before accepting them. Troubleshooter availability and behavior vary by Windows release and managed policy.",
+        "commandUrl": "https://support.microsoft.com/en-us/windows/experience/windows-update/windows-update-troubleshooter",
+        "commandName": "Microsoft Windows Update troubleshooter"
       },
       {
         "title": "Follow the exact error path",
@@ -591,12 +603,12 @@
         "title": "Enter Windows Recovery Environment",
         "detail": "Use the built-in recovery environment or official Windows installation media and select Repair my PC. Check the actual volume layout and encryption status before working on an offline installation; drive letters can differ from the normal Windows session.",
         "anchor": "step-03",
-        "commandShell": "CMD (Run as Administrator)",
-        "commandPurpose": "Check Windows Recovery Environment registration and enumerate the current boot entry before choosing a repair.",
-        "commandSafety": "Read-only inspection. Do not run BCDEdit /set, /delete or bootrec write operations until boot mode, target installation and recovery plan are confirmed.",
-        "commandUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/reagentc-command-line-options",
-        "commandName": "Microsoft REAgentC and recovery documentation",
-        "command": "reagentc /info\nbcdedit /enum {current}"
+        "commandShell": "CMD or PowerShell",
+        "commandPurpose": "Restart into the Windows advanced startup options when the machine still boots and the owner has approved the restart.",
+        "commandSafety": "Immediately restarts the PC. Save work, confirm the correct device, make BitLocker recovery material available and obtain authorization first. Do not use during active encryption, evidence collection or an unprotected data-recovery operation.",
+        "commandUrl": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/windows-recovery-environment",
+        "commandName": "Microsoft Windows Recovery Environment documentation",
+        "command": "shutdown /r /o /t 0"
       },
       {
         "title": "Try the narrow recovery option",
@@ -964,7 +976,13 @@
       {
         "title": "Repair only the identified layer",
         "detail": "Correct the proven DNS, DHCP, routing, adapter, or application configuration. Back up current settings before changes. Reserve network reset for cases that justify rebuilding adapters and settings; it may disrupt VPNs, virtual switches, and a remote-support session.",
-        "anchor": "step-05"
+        "anchor": "step-05",
+        "command": "ipconfig /flushdns",
+        "commandShell": "CMD or PowerShell",
+        "commandPurpose": "Clear the local DNS resolver cache when evidence indicates a stale or incorrect cached response on this Windows client.",
+        "commandSafety": "Changes only the local resolver cache. It does not repair authoritative DNS, internal DNS records, routing or server-side problems; record the original failure and immediately repeat the exact lookup.",
+        "commandUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig",
+        "commandName": "Microsoft ipconfig documentation"
       },
       {
         "title": "Retest the business workflow",
@@ -1246,7 +1264,13 @@
       {
         "title": "Repair the confirmed secure-channel fault",
         "detail": "If the network is healthy and the correct computer object is established, the directory administrator can use the documented Test-ComputerSecureChannel repair flow with credentials that have the required rights. Keep credentials in the interactive prompt and plan the restart with the user.",
-        "anchor": "step-05"
+        "anchor": "step-05",
+        "command": "Test-ComputerSecureChannel -Repair -Credential (Get-Credential) -Verbose",
+        "commandShell": "PowerShell (Run as Administrator)",
+        "commandPurpose": "Repair a confirmed broken workstation secure channel after the read-only test fails and the correct domain controller path is available.",
+        "commandSafety": "State-changing domain operation. Use only with authorized domain credentials after verifying DNS, connectivity, time synchronization, domain controller reachability and the correct computer identity. Do not run on a domain controller or as a generic sign-in fix; verify the channel again afterward.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel",
+        "commandName": "Microsoft Test-ComputerSecureChannel documentation"
       },
       {
         "title": "Validate from a fresh sign-in",
@@ -1416,7 +1440,13 @@
       {
         "title": "Clear the specific obstruction",
         "detail": "Cancel only the affected user’s stuck job when possible. Coordinate before restarting the Print Spooler because that affects other queues. On a shared print server, identify all affected users and obtain a service window before clearing queues or replacing a shared driver.",
-        "anchor": "step-04"
+        "anchor": "step-04",
+        "command": "Restart-Service -Name Spooler",
+        "commandShell": "PowerShell (Run as Administrator)",
+        "commandPurpose": "Restart the local print spooler only after confirming the spooler is stuck and the affected queues and active jobs have been reviewed.",
+        "commandSafety": "Interrupts printing and may affect every queue hosted by this PC or print server. Obtain approval, record/cancel only the identified stuck job through the supported queue UI, and avoid running against a shared print server without its owner.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/restart-service",
+        "commandName": "Microsoft Restart-Service documentation"
       },
       {
         "title": "Use the supported driver path",
