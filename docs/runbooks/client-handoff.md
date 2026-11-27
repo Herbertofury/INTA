@@ -6,9 +6,11 @@
 
 Turn completed technical work into proof the customer can use, with clean access and an actionable service record.
 
-**Getting started** · Starter · 10–20 min · 6 steps
+**Getting started** · Starter · 10–20 min · 15 steps
 
 [Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/client-handoff)
+
+**[Open the dedicated nine-step Checklist tab](https://herbertofury.github.io/INTA/#checklist)**
 
 <a id="working-kit"></a>
 
@@ -131,39 +133,136 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 Work in order, record the result of each step, and change route when the evidence calls for it.
 
+<a id="step-closeout-protect"></a>
+
+### 01 · Protect data and establish the baseline
+
+- [ ] Record the original failure and acceptance test. Confirm a recent backup and open a sample restored file. If storage may be failing, stop writes, updates, and scans; stage recovery before maintenance.
+
+- [Backup and restore](backup-restore.md)
+- [Failing drive triage](failing-drive.md)
+
+<a id="step-closeout-threats"></a>
+
+### 02 · Contain and remove malware
+
+- [ ] If compromise is active or suspected, isolate first and follow the incident process. Review the active antivirus, run the appropriate scan, verify disposition, and escalate recurring detections. Fix browser notification spam at its exact origin, not by wiping the browser.
+
+- [Malware playbook](malware-removal.md)
+- [Ransomware response](ransomware-response.md)
+- [Windows Security](https://support.microsoft.com/en-us/defender/troubleshoot-problems-with-detecting-and-removing-malware)
+
+<a id="step-closeout-updates"></a>
+
+### 03 · Patch [Windows](https://www.microsoft.com/windows) and the apps in use
+
+- [ ] Once the machine is safe to use, apply supported [Windows](https://www.microsoft.com/windows) and approved app security updates. Save work and restart as needed. Recheck update history, pending restart, and the important apps. Avoid forcing an unsupported [Windows](https://www.microsoft.com/windows) upgrade.
+
+- [Windows Update playbook](windows-update.md)
+- [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)**
+
+<a id="step-closeout-drivers"></a>
+
+### 04 · Review drivers and BIOS / UEFI
+
+- [ ] Update drivers only when applicable, from [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/) or the exact device OEM. Flash firmware only for a relevant fix, security advisory, or component requirement. Match model and revision, use stable AC power, confirm recovery key availability and follow the OEM encryption procedure. Verify boot, target version, and encryption afterward.
+
+- [OEM driver support](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+- [Driver update guidance](https://support.microsoft.com/en-gb/windows/hardware/drivers/automatically-get-recommended-and-updated-hardware-drivers)
+- [BitLocker and firmware](https://learn.microsoft.com/en-us/troubleshoot/windows-client/windows-security/suspend-bitlocker-protection-non-Microsoft-updates)
+
+<a id="step-closeout-tune"></a>
+
+### 05 · Optimize and verify a measurable gain
+
+- [ ] Measure the original bottleneck. Make targeted, reversible changes; retest the same workload. Free only approved space and preserve user files, security controls, and rollback data. Make minimum space for updates earlier only when required.
+
+- [Performance playbook](slow-pc.md)
+- [MangoDisk official page](https://mangodisk.app/)
+- [Download Windows installer · EXE](https://github.com/harry0703/MangoDisk/releases/download/v2.1.1/MangoDisk-2.1.1-windows.exe)
+
+<a id="step-closeout-verify"></a>
+
+### 06 · Restart and prove the original fix
+
+- [ ] Retest the original task under the user’s normal account. Check boot, network, required peripherals and apps, backup access, and the active antivirus. Record the evidence, not just that a command ran.
+
+- [Network checks](network-dns.md)
+- [Printer checks](printer-repair.md)
+- [Recovery options](https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows)
+
+<a id="step-closeout-clean"></a>
+
+### 07 · Remove job tools and temporary access
+
+- [ ] Use INTA Clean Handoff. Disconnect remote sessions and retire job-owned access, tools and files only. Keep the approved active antivirus, earlier apps, verified settings and repairs, and client-owned outputs. Recheck protection afterward.
+
+- [Remote support playbook](remote-support.md)
+
+<a id="step-closeout-billing"></a>
+
+### 08 · Record hours and draft the invoice
+
+- [ ] Confirm billable time, agreed rate and any excluded waiting time. Use the timer from a separate device for BIOS or reboot work, save the editable draft privately, and review the invoice rather than sending automatically.
+
+- [Kimai official page](https://www.kimai.org/)
+- [Self-hosted setup](https://www.kimai.org/en/download.html)
+- [LibreOffice official page](https://www.libreoffice.org/download/)
+- [Download Windows x64 · MSI](https://download.documentfoundation.org/libreoffice/stable/26.8.3/win/x86_64/LibreOffice_26.8.3_Win_x86-64.msi)
+
+<a id="step-closeout-handoff"></a>
+
+### 09 · Hand back the computer and record what remains
+
+- [ ] Explain what changed, what passed, and anything deferred. Record versions, rollback, evidence, and who owns the next action in the private ticket. Do not record passwords or recovery keys here.
+
+- [Private handoff template](https://github.com/Herbertofury/INTA/wiki/Technician-Handoff)
+
 <a id="step-01"></a>
 
-### 01 · Retest the original job with the user
+<a id="01--retest-the-original-job-with-the-user"></a>
+
+### 10 · Retest the original job with the user
 
 - [ ] Have the user repeat the failing action with real, representative data. Compare the result with the intake baseline. Record unresolved symptoms honestly rather than hiding them behind a successful diagnostic command.
 
 <a id="step-02"></a>
 
-### 02 · Check adjacent essentials
+<a id="02--check-adjacent-essentials"></a>
+
+### 11 · Check adjacent essentials
 
 - [ ] Verify restart, network, email, printing, security health, backup state, and any feature touched by the repair. Confirm restored files open and that no temporary setting changed a normal workflow.
 
 <a id="step-03"></a>
 
-### 03 · Remove temporary access and artifacts
+<a id="03--remove-temporary-access-and-artifacts"></a>
+
+### 12 · Remove temporary access and artifacts
 
 - [ ] End support sessions, remove case-specific temporary agents if appropriate, and return diagnostic logging to the intended level. Keep required evidence in the private service record; remove credentials and sensitive captures from temporary work areas according to the agreed handling process.
 
 <a id="step-04"></a>
 
-### 04 · Explain the result in plain language
+<a id="04--explain-the-result-in-plain-language"></a>
+
+### 13 · Explain the result in plain language
 
 - [ ] Tell the user what caused the problem, what changed, and what they should notice. Distinguish confirmed causes from likely causes. Include any action they must take, such as signing in, storing a recovery key, or scheduling hardware replacement.
 
 <a id="step-05"></a>
 
-### 05 · Record rollback and follow-up
+<a id="05--record-rollback-and-follow-up"></a>
+
+### 14 · Record rollback and follow-up
 
 - [ ] Document changed versions/settings, recovery images or backups, tested tasks, remaining issues, and who owns them. Give the next technician the exact next action and the failed routes that should not be repeated.
 
 <a id="step-06"></a>
 
-### 06 · Complete the private handoff record
+<a id="06--complete-the-private-handoff-record"></a>
+
+### 15 · Complete the private handoff record
 
 - [ ] Use the intake/handoff template linked from this wiki. Keep customer names, serials, network details, credentials, and case evidence in the approved private system. The public wiki holds reusable methods only.
 

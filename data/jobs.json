@@ -1520,6 +1520,157 @@
     "startHere": "Return to the acceptance test written at intake. A completed checklist is useful only when the customer’s original task works.",
     "steps": [
       {
+        "anchor": "step-closeout-protect",
+        "title": "Protect data and establish the baseline",
+        "detail": "Record the original failure and acceptance test. Confirm a recent backup and open a sample restored file. If storage may be failing, stop writes, updates, and scans; stage recovery before maintenance.",
+        "shortcuts": [
+          {
+            "label": "Backup and restore",
+            "job": "backup-restore"
+          },
+          {
+            "label": "Failing drive triage",
+            "job": "failing-drive"
+          }
+        ]
+      },
+      {
+        "anchor": "step-closeout-threats",
+        "title": "Contain and remove malware",
+        "detail": "If compromise is active or suspected, isolate first and follow the incident process. Review the active antivirus, run the appropriate scan, verify disposition, and escalate recurring detections. Fix browser notification spam at its exact origin, not by wiping the browser.",
+        "shortcuts": [
+          {
+            "label": "Malware playbook",
+            "job": "malware-removal"
+          },
+          {
+            "label": "Ransomware response",
+            "job": "ransomware-response"
+          },
+          {
+            "label": "Windows Security",
+            "url": "https://support.microsoft.com/en-us/defender/troubleshoot-problems-with-detecting-and-removing-malware"
+          }
+        ]
+      },
+      {
+        "anchor": "step-closeout-updates",
+        "title": "Patch Windows and the apps in use",
+        "detail": "Once the machine is safe to use, apply supported Windows and approved app security updates. Save work and restart as needed. Recheck update history, pending restart, and the important apps. Avoid forcing an unsupported Windows upgrade.",
+        "shortcuts": [
+          {
+            "label": "Windows Update playbook",
+            "job": "windows-update"
+          },
+          {
+            "label": "WinGet",
+            "tool": "winget"
+          }
+        ]
+      },
+      {
+        "anchor": "step-closeout-drivers",
+        "title": "Review drivers and BIOS / UEFI",
+        "detail": "Update drivers only when applicable, from Windows Update or the exact device OEM. Flash firmware only for a relevant fix, security advisory, or component requirement. Match model and revision, use stable AC power, confirm recovery key availability and follow the OEM encryption procedure. Verify boot, target version, and encryption afterward.",
+        "shortcuts": [
+          {
+            "label": "OEM driver support",
+            "tool": "oem-drivers"
+          },
+          {
+            "label": "Driver update guidance",
+            "url": "https://support.microsoft.com/en-gb/windows/hardware/drivers/automatically-get-recommended-and-updated-hardware-drivers"
+          },
+          {
+            "label": "BitLocker and firmware",
+            "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/windows-security/suspend-bitlocker-protection-non-Microsoft-updates"
+          }
+        ]
+      },
+      {
+        "anchor": "step-closeout-tune",
+        "title": "Optimize and verify a measurable gain",
+        "detail": "Measure the original bottleneck. Make targeted, reversible changes; retest the same workload. Free only approved space and preserve user files, security controls, and rollback data. Make minimum space for updates earlier only when required.",
+        "shortcuts": [
+          {
+            "label": "Performance playbook",
+            "job": "slow-pc"
+          },
+          {
+            "label": "MangoDisk official page",
+            "url": "https://mangodisk.app/"
+          },
+          {
+            "label": "Download Windows installer · EXE",
+            "url": "https://github.com/harry0703/MangoDisk/releases/download/v2.1.1/MangoDisk-2.1.1-windows.exe"
+          }
+        ]
+      },
+      {
+        "anchor": "step-closeout-verify",
+        "title": "Restart and prove the original fix",
+        "detail": "Retest the original task under the user’s normal account. Check boot, network, required peripherals and apps, backup access, and the active antivirus. Record the evidence, not just that a command ran.",
+        "shortcuts": [
+          {
+            "label": "Network checks",
+            "job": "network-dns"
+          },
+          {
+            "label": "Printer checks",
+            "job": "printer-repair"
+          },
+          {
+            "label": "Recovery options",
+            "url": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+          }
+        ]
+      },
+      {
+        "anchor": "step-closeout-clean",
+        "title": "Remove job tools and temporary access",
+        "detail": "Use INTA Clean Handoff. Disconnect remote sessions and retire job-owned access, tools and files only. Keep the approved active antivirus, earlier apps, verified settings and repairs, and client-owned outputs. Recheck protection afterward.",
+        "shortcuts": [
+          {
+            "label": "Remote support playbook",
+            "job": "remote-support"
+          }
+        ]
+      },
+      {
+        "anchor": "step-closeout-billing",
+        "title": "Record hours and draft the invoice",
+        "detail": "Confirm billable time, agreed rate and any excluded waiting time. Use the timer from a separate device for BIOS or reboot work, save the editable draft privately, and review the invoice rather than sending automatically.",
+        "shortcuts": [
+          {
+            "label": "Kimai official page",
+            "url": "https://www.kimai.org/"
+          },
+          {
+            "label": "Self-hosted setup",
+            "url": "https://www.kimai.org/en/download.html"
+          },
+          {
+            "label": "LibreOffice official page",
+            "url": "https://www.libreoffice.org/download/"
+          },
+          {
+            "label": "Download Windows x64 · MSI",
+            "url": "https://download.documentfoundation.org/libreoffice/stable/26.8.3/win/x86_64/LibreOffice_26.8.3_Win_x86-64.msi"
+          }
+        ]
+      },
+      {
+        "anchor": "step-closeout-handoff",
+        "title": "Hand back the computer and record what remains",
+        "detail": "Explain what changed, what passed, and anything deferred. Record versions, rollback, evidence, and who owns the next action in the private ticket. Do not record passwords or recovery keys here.",
+        "shortcuts": [
+          {
+            "label": "Private handoff template",
+            "url": "https://github.com/Herbertofury/INTA/wiki/Technician-Handoff"
+          }
+        ]
+      },
+      {
         "title": "Retest the original job with the user",
         "detail": "Have the user repeat the failing action with real, representative data. Compare the result with the intake baseline. Record unresolved symptoms honestly rather than hiding them behind a successful diagnostic command.",
         "anchor": "step-01"
