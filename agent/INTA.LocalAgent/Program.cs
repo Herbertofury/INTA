@@ -57,12 +57,15 @@ app.MapGet("/api/v1/operations/{id}", (string id) => store.Get(id) is { } record
 app.MapPost("/api/v1/operations", async (OperationRequest request) =>
 {
     if (!request.Confirmed) return Results.BadRequest(new { error = "This action changes the computer. Confirm once in INTA before continuing." });
-    if (request.Action is not ("update" or "repair" or "uninstall")) return Results.BadRequest(new { error = "Unsupported operation." });
+    if (request.Action is not ("update" or "update-all" or "repair" or "uninstall")) return Results.BadRequest(new { error = "Unsupported operation." });
     if (!managers.Detect().Contains(request.Manager, StringComparer.OrdinalIgnoreCase)) return Results.BadRequest(new { error = "That package manager is not installed on this computer." });
     if (request.Manager == "snap" && request.Action == "repair") return Results.BadRequest(new { error = "Snap does not expose a generic package repair operation." });
     if (request.Manager == "uniget" && request.Action != "update") return Results.BadRequest(new { error = "UniGetUI repair/uninstall is not supported by this agent version." });
-    try { _ = new OperationRequest(request.Manager, request.Action, PackageManagers.ValidateId(request.PackageId), true); }
-    catch (ArgumentException ex) { return Results.BadRequest(new { error = ex.Message }); }
+    if (request.Action != "update-all")
+    {
+        try { _ = PackageManagers.ValidateId(request.PackageId); }
+        catch (ArgumentException ex) { return Results.BadRequest(new { error = ex.Message }); }
+    }
     var id = Guid.NewGuid().ToString("N");
     var record = new OperationRecord(id, request.Manager, request.Action, request.PackageId, "queued", DateTimeOffset.UtcNow, null, null, "", false, null);
     await store.SaveAsync(record);
@@ -94,7 +97,7 @@ app.Run();
 
 async Task ExecuteOperation(OperationRequest request, OperationRecord initial)
 {
-    var gate = store.LockFor(request.Manager + ":" + request.PackageId.ToLowerInvariant());
+    var gate = store.LockFor(request.Manager);
     await gate.WaitAsync();
     var current = initial with { State = "running" };
     await store.SaveAsync(current);
