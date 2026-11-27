@@ -1336,6 +1336,57 @@ def build_outputs() -> dict[str, str]:
 
 
 
+def validate_command_center(catalog: dict) -> None:
+    """Validate the searchable command library, workflows and toolkit links."""
+    if catalog.get("schemaVersion") != 1 or not isinstance(catalog.get("commands"), list) or not catalog["commands"]:
+        raise ValueError("Command Center requires a versioned non-empty command catalog")
+    shells = set(catalog.get("shells", []))
+    categories = {item.get("id") for item in catalog.get("categories", []) if isinstance(item, dict)}
+    commands = {}
+    for item in catalog["commands"]:
+        identity = item.get("id", "?")
+        if identity in commands or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+            raise ValueError(f"{identity}: invalid or duplicate Command Center command ID")
+        commands[identity] = item
+        for field in ("title", "category", "shell", "privilege", "risk", "summary", "code", "safety", "sourceUrl", "sourceTitle"):
+            if not isinstance(item.get(field), str) or not item[field].strip():
+                raise ValueError(f"{identity}: Command Center command requires {field}")
+        if item["shell"] not in shells or item["category"] not in categories:
+            raise ValueError(f"{identity}: unsupported shell or category")
+        if item["risk"] not in {"read-only", "long-running", "downloads-file", "installs-software", "changes-system"}:
+            raise ValueError(f"{identity}: unsupported risk level")
+        if len(item["code"]) > 16000:
+            raise ValueError(f"{identity}: command block exceeds size limit")
+        source = urlparse(item["sourceUrl"])
+        if source.scheme != "https" or not source.hostname or source.username or source.password:
+            raise ValueError(f"{identity}: source must be a public HTTPS URL")
+        if re.search(r"(?i)(?:irm|iwr|curl)\\b[^\\n|]*\\|\\s*(?:iex|invoke-expression)", item["code"]):
+            raise ValueError(f"{identity}: direct remote download-and-execute pipelines are prohibited")
+    workflow_ids = set()
+    for workflow in catalog.get("workflows", []):
+        identity = workflow.get("id", "?")
+        if identity in workflow_ids or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+            raise ValueError(f"{identity}: invalid or duplicate Command Center workflow ID")
+        workflow_ids.add(identity)
+        if not workflow.get("commandIds") or any(command_id not in commands for command_id in workflow["commandIds"]):
+            raise ValueError(f"{identity}: workflow references an unknown or missing command")
+    toolkit_ids = set()
+    for toolkit in catalog.get("toolkits", []):
+        identity = toolkit.get("id", "?")
+        if identity in toolkit_ids or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+            raise ValueError(f"{identity}: invalid or duplicate toolkit ID")
+        toolkit_ids.add(identity)
+        for field in ("name", "kind", "platform", "summary", "url", "trust"):
+            if not isinstance(toolkit.get(field), str) or not toolkit[field].strip():
+                raise ValueError(f"{identity}: toolkit requires {field}")
+        for field in ("url", "repository"):
+            if toolkit.get(field):
+                parsed = urlparse(toolkit[field])
+                if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
+                    raise ValueError(f"{identity}: toolkit {field} must be public HTTPS")
+        if toolkit.get("installCommandId") and toolkit["installCommandId"] not in commands:
+            raise ValueError(f"{identity}: unknown toolkit install command")
+
 def validate_field_note_commands(field_notes: dict) -> None:
     """Validate every copy-ready command embedded in a specific-fix article."""
     if not isinstance(field_notes, dict) or not isinstance(field_notes.get("notes"), list):
