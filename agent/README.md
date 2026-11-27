@@ -67,3 +67,12 @@ Windows OS update installation and Microsoft Store updates remain in their suppo
 Run `inta-agent --storage-preview "<local-folder>" [minimum-age-days] [entry-limit]` as an explicit one-shot diagnostic. Defaults: 7 days and 100,000 entries. The preview rejects drive roots, Windows UNC/device paths, and roots passing through a link. The scan skips link, device and offline entries marked by the filesystem and reports entry/depth caps or read errors as `partial`. It never starts the local server.
 
 The JSON reports counts and **logical file bytes**. Hard links can be counted multiple times; compression, sparse files and allocation overhead mean this is not the space a cleanup would free. The preview is not a filesystem snapshot, and file age is not authorization to remove anything. It does not open file contents, modify the folder, include paths in the JSON or send results elsewhere.
+
+### Read the current Windows power plan
+
+Run `inta-agent --power-plans` locally to print the active plan GUID and installed
+power-plan IDs and names as JSON. The command is read-only and on demand. It
+does not start the local server, expose a browser API, change the active plan,
+or promise that an installed plan can be activated under current policy.
+Non-Windows hosts return `unsupported`; incomplete or changing reads are marked
+rather than guessed.

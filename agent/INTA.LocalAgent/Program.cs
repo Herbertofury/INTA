@@ -9,6 +9,12 @@ if (args.Length > 0 && args[0] == "--storage-preview")
     return;
 }
 
+if (args.Length > 0 && args[0] == "--power-plans")
+{
+    Environment.ExitCode = PowerPlans.Run(args.AsSpan(1), Console.Out, Console.Error);
+    return;
+}
+
 const string Version = "0.1.0";
 const int Port = 47821;
 var allowedOrigins = new HashSet<string>(StringComparer.OrdinalIgnoreCase)

@@ -45,6 +45,9 @@ jobs:
       - name: Exercise read-only storage preview
         if: matrix.rid == 'win-x64' || matrix.rid == 'linux-x64'
         run: python agent/storage_preview_test.py agent/INTA.LocalAgent/bin/Release/net10.0/inta-agent.dll -v
+      - name: Exercise read-only power plan inventory
+        if: matrix.rid == 'win-x64' || matrix.rid == 'linux-x64'
+        run: python agent/power_plans_test.py agent/INTA.LocalAgent/bin/Release/net10.0/inta-agent.dll -v
       - name: Publish self-contained single-file agent
         run: dotnet publish agent/INTA.LocalAgent/INTA.LocalAgent.csproj -c Release -r ${{ matrix.rid }} --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
       - name: Package release archive
