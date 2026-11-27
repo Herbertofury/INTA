@@ -10,7 +10,7 @@
     "fieldNotes": 95,
     "researchItems": 58,
     "scenarioToolChoices": 72,
-    "reviewedRecords": 996,
+    "reviewedRecords": 1018,
     "dueReviews": 0
   },
   "coverage": [
@@ -560,6 +560,26 @@
       "url": "https://github.com/Ylianst/MeshCentral"
     },
     {
+      "kind": "acquisition",
+      "id": "meshcentral/2",
+      "title": "MeshCentral 1.3.2 release notes",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/Ylianst/MeshCentral/releases/tag/1.3.2"
+    },
+    {
+      "kind": "acquisition",
+      "id": "meshcentral/3",
+      "title": "Open MeshCentral server package on npm",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.npmjs.com/package/meshcentral"
+    },
+    {
       "kind": "tool",
       "id": "rustdesk",
       "title": "RustDesk",
@@ -573,15 +593,25 @@
       "kind": "acquisition",
       "id": "rustdesk/0",
       "title": "Download Windows x64 · EXE",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://api.github.com/repos/rustdesk/rustdesk/releases/latest"
+      "url": "https://api.github.com/repos/rustdesk/rustdesk/releases/tags/1.5.3"
     },
     {
       "kind": "acquisition",
       "id": "rustdesk/1",
+      "title": "Download Windows ARM64 · EXE",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://api.github.com/repos/rustdesk/rustdesk/releases/tags/1.5.3"
+    },
+    {
+      "kind": "acquisition",
+      "id": "rustdesk/2",
       "title": "All download options",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -1103,11 +1133,11 @@
       "kind": "acquisition",
       "id": "winget/0",
       "title": "Download App Installer · MSIXBUNDLE",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
+      "url": "https://api.github.com/repos/microsoft/winget-cli/releases/tags/v1.29.380"
     },
     {
       "kind": "acquisition",
@@ -1133,11 +1163,11 @@
       "kind": "acquisition",
       "id": "powershell/0",
       "title": "Download Windows x64 portable · ZIP",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://api.github.com/repos/PowerShell/PowerShell/releases/latest"
+      "url": "https://api.github.com/repos/PowerShell/PowerShell/releases/tags/v7.7.0"
     },
     {
       "kind": "acquisition",
@@ -1173,11 +1203,11 @@
       "kind": "acquisition",
       "id": "windows-terminal/0",
       "title": "Download Windows x64 portable · ZIP",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://api.github.com/repos/microsoft/terminal/releases/latest"
+      "url": "https://api.github.com/repos/microsoft/terminal/releases/tags/v1.25.3131.0"
     },
     {
       "kind": "acquisition",
@@ -1233,11 +1263,11 @@
       "kind": "acquisition",
       "id": "windirstat/0",
       "title": "Download Windows x64 · MSI",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://api.github.com/repos/windirstat/windirstat/releases/latest"
+      "url": "https://api.github.com/repos/windirstat/windirstat/releases/tags/release/v2.9.3"
     },
     {
       "kind": "acquisition",
@@ -1613,11 +1643,11 @@
       "kind": "acquisition",
       "id": "rescuezilla/0",
       "title": "Download x64 rescue image · ISO",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://rescuezilla.com/download"
+      "url": "https://api.github.com/repos/rescuezilla/rescuezilla/releases/tags/2.6.2"
     },
     {
       "kind": "acquisition",
@@ -1673,11 +1703,11 @@
       "kind": "acquisition",
       "id": "restic/0",
       "title": "Download Windows x64 · ZIP",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://api.github.com/repos/restic/restic/releases/latest"
+      "url": "https://api.github.com/repos/restic/restic/releases/tags/v0.20.0"
     },
     {
       "kind": "acquisition",
@@ -1703,11 +1733,11 @@
       "kind": "acquisition",
       "id": "kopia/0",
       "title": "Download Windows desktop · ZIP",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://api.github.com/repos/kopia/kopia/releases/latest"
+      "url": "https://api.github.com/repos/kopia/kopia/releases/tags/v0.23.1"
     },
     {
       "kind": "acquisition",
@@ -2380,6 +2410,16 @@
       "url": "https://rufus.ie/#download"
     },
     {
+      "kind": "acquisition",
+      "id": "rufus/win-arm64-exe",
+      "title": "Download Windows ARM64 · EXE",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/pbatard/rufus/releases/tag/v4.16"
+    },
+    {
       "kind": "tool",
       "id": "ventoy",
       "title": "Ventoy",
@@ -2408,6 +2448,26 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://www.ventoy.net/en/download.html"
+    },
+    {
+      "kind": "acquisition",
+      "id": "ventoy/linux-tar",
+      "title": "Download Linux package · TAR.GZ",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/ventoy/Ventoy/releases/tag/v1.1.18"
+    },
+    {
+      "kind": "acquisition",
+      "id": "ventoy/livecd-iso",
+      "title": "Download standalone LiveCD · ISO",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/ventoy/Ventoy/releases/tag/v1.1.18"
     },
     {
       "kind": "tool",
@@ -2600,6 +2660,16 @@
       "url": "https://www.7-zip.org/download.html"
     },
     {
+      "kind": "acquisition",
+      "id": "7zip/linux-x64-tar",
+      "title": "Download Linux x64 CLI · TAR.XZ",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/ip7z/7zip/releases/tag/26.06"
+    },
+    {
       "kind": "tool",
       "id": "notepadplusplus",
       "title": "Notepad++",
@@ -2630,6 +2700,16 @@
       "url": "https://notepad-plus-plus.org/downloads/"
     },
     {
+      "kind": "acquisition",
+      "id": "notepadplusplus/win-arm64-portable",
+      "title": "Download Windows ARM64 portable · ZIP",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/tag/v8.9.9.1"
+    },
+    {
       "kind": "tool",
       "id": "powertoys",
       "title": "Microsoft PowerToys",
@@ -2658,6 +2738,16 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://github.com/microsoft/PowerToys/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "powertoys/win-arm64-user-exe",
+      "title": "Download Windows ARM64 per-user setup · EXE",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/microsoft/PowerToys/releases/tag/v0.102.3101"
     },
     {
       "kind": "tool",
@@ -2820,6 +2910,16 @@
       "url": "https://localsend.org/download"
     },
     {
+      "kind": "acquisition",
+      "id": "localsend/win-arm64-zip",
+      "title": "Download Windows ARM64 · ZIP",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/localsend/localsend/releases/tag/v1.19.0"
+    },
+    {
       "kind": "tool",
       "id": "unigetui",
       "title": "UniGetUI",
@@ -2908,6 +3008,16 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://github.com/openai/codex/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "codex-cli/win-arm64-exe",
+      "title": "Download Windows ARM64 CLI · EXE",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/openai/codex/releases/tag/rust-v0.172.0"
     },
     {
       "kind": "tool",
@@ -3010,6 +3120,26 @@
       "url": "https://ollama.com/download"
     },
     {
+      "kind": "acquisition",
+      "id": "ollama/win-x64-cli-zip",
+      "title": "Download Windows x64 standalone package · ZIP",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/ollama/ollama/releases/tag/v0.40.18"
+    },
+    {
+      "kind": "acquisition",
+      "id": "ollama/win-arm64-cli-zip",
+      "title": "Download Windows ARM64 standalone package · ZIP",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/ollama/ollama/releases/tag/v0.40.18"
+    },
+    {
       "kind": "tool",
       "id": "yara-x",
       "title": "YARA-X",
@@ -3038,6 +3168,16 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://github.com/VirusTotal/yara-x/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "yara-x/win-arm64-zip",
+      "title": "Download Windows ARM64 CLI · ZIP",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/VirusTotal/yara-x/releases/tag/v1.25.0"
     },
     {
       "kind": "tool",
@@ -3263,11 +3403,11 @@
       "kind": "acquisition",
       "id": "hayabusa/0",
       "title": "Download Windows x64 · ZIP",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://api.github.com/repos/Yamato-Security/hayabusa/releases/latest"
+      "url": "https://github.com/Yamato-Security/hayabusa/releases/tag/v4.5.0"
     },
     {
       "kind": "acquisition",
@@ -3278,6 +3418,26 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://github.com/Yamato-Security/hayabusa/releases/latest"
+    },
+    {
+      "kind": "acquisition",
+      "id": "hayabusa/win-arm64-zip",
+      "title": "Download Windows ARM64 · ZIP",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/Yamato-Security/hayabusa/releases/tag/v4.5.0"
+    },
+    {
+      "kind": "acquisition",
+      "id": "hayabusa/win-x86-zip",
+      "title": "Download Windows x86 · ZIP",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/Yamato-Security/hayabusa/releases/tag/v4.5.0"
     },
     {
       "kind": "tool",
@@ -3368,6 +3528,26 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://osquery.io/downloads/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "osquery/win-arm64-zip",
+      "title": "Download Windows ARM64 · ZIP",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/osquery/osquery/releases/tag/5.24.1"
+    },
+    {
+      "kind": "acquisition",
+      "id": "osquery/windows-msi",
+      "title": "Download Windows installer · MSI",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/osquery/osquery/releases/tag/5.24.1"
     },
     {
       "kind": "tool",
@@ -3760,6 +3940,16 @@
       "url": "https://www.naps2.com/download"
     },
     {
+      "kind": "acquisition",
+      "id": "naps2/win-x64-msi",
+      "title": "Download Windows x64 installer · MSI",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/cyanfish/naps2/releases/tag/v8.6.1"
+    },
+    {
       "kind": "tool",
       "id": "advanced-ip-scanner",
       "title": "Advanced IP Scanner",
@@ -4083,21 +4273,21 @@
       "kind": "acquisition",
       "id": "syncthing/0",
       "title": "Download Windows x64 · ZIP",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7"
+      "url": "https://api.github.com/repos/syncthing/syncthing/releases/tags/v2.1.7"
     },
     {
       "kind": "acquisition",
       "id": "syncthing/1",
       "title": "Download Windows ARM64 · ZIP",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7"
+      "url": "https://api.github.com/repos/syncthing/syncthing/releases/tags/v2.1.7"
     },
     {
       "kind": "acquisition",
@@ -4173,31 +4363,31 @@
       "kind": "acquisition",
       "id": "winmerge/0",
       "title": "Download Windows x64 portable · ZIP",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60"
+      "url": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60.2"
     },
     {
       "kind": "acquisition",
       "id": "winmerge/1",
       "title": "Download Windows x64 installer · EXE",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60"
+      "url": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60.2"
     },
     {
       "kind": "acquisition",
       "id": "winmerge/2",
       "title": "Download Windows ARM64 portable · ZIP",
-      "reviewedAt": "2026-11-26",
-      "dueAt": "2026-12-26",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
       "status": "current",
       "daysOverdue": 0,
-      "url": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60"
+      "url": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60.2"
     },
     {
       "kind": "acquisition",
@@ -4208,6 +4398,16 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://winmerge.org/downloads/index.php"
+    },
+    {
+      "kind": "acquisition",
+      "id": "winmerge/win-x64-peruser",
+      "title": "Download Windows x64 per-user installer · EXE",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60.2"
     },
     {
       "kind": "tool",
@@ -4308,6 +4508,26 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://netboot.xyz/downloads/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "netbootxyz/pc-usb-img",
+      "title": "Download PC USB boot image · IMG",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/netbootxyz/netboot.xyz/releases/tag/3.0.3"
+    },
+    {
+      "kind": "acquisition",
+      "id": "netbootxyz/legacy-pc-iso",
+      "title": "Download legacy BIOS boot image · ISO",
+      "reviewedAt": "2026-11-27",
+      "dueAt": "2026-12-27",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/netbootxyz/netboot.xyz/releases/tag/3.0.3"
     },
     {
       "kind": "tool",

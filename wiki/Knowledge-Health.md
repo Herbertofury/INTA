@@ -16,9 +16,9 @@
 | [Remove malware and browser hijackers](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) | 6 | 8 | 4 |
 | [Contain ransomware or a wider compromise](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response) | 3 | 3 | 4 |
 | [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) | 4 | 3 | 5 |
-| <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) | 4 | 4 | 5 |
+| [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) | 4 | 4 | 5 |
 | <a href="https://learn.microsoft.com/en-us/windows/deployment/update/" title="Open Windows Update official download or service page" aria-label="Open Windows Update official download or service page" data-inta-brand="app-windows-update"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows Update official page" width="18" height="18" valign="middle" /></a> [Fix a failing Windows update](https://github.com/Herbertofury/INTA/wiki/Job-windows-update) | 4 | 5 | 5 |
-| <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Recover a Windows PC that will not boot](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery) | 3 | 5 | 5 |
+| [Recover a Windows PC that will not boot](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery) | 3 | 5 | 5 |
 | [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) | 3 | 4 | 4 |
 | [Clone a healthy system or migrate to a new SSD](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration) | 3 | 4 | 5 |
 | [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) | 5 | 6 | 6 |
@@ -52,7 +52,7 @@ Review intervals are editorial targets. Passing a link or build check never chan
 
 **72 scenario tool choices** are included in the review schedule. Their task fit, edition and access boundaries are reviewed alongside the tool itself.
 
-**Reviews due in this snapshot: 0 of 996 dated records.**
+**Reviews due in this snapshot: 0 of 1018 dated records.**
 
 The [scheduled organization check](https://github.com/Herbertofury/INTA/actions/workflows/knowledge-health.yml) recalculates age using the run date and preserves the complete report as an artifact. The weekday contribution task uses that evidence to prioritize work.
 
