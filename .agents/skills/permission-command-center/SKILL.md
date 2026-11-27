@@ -1,6 +1,6 @@
 ---
 name: permission-command-center
-description: Fast, task-scoped preflight for connected-app access. Trigger on /permissions, /access, "check or enable permissions", "full access", "allow for this conversation", "give GitHub/Drive access", or automatically before work that needs GitHub, Google Drive, or another external connector. Surface necessary approval prompts with the first legitimate task action, then resume without repeated checks.
+description: Automatically activate whenever a user message mentions GitHub, Drive, or Google Drive, including shorthand and casual task phrasing, and on /permissions, /access, "full access", or "allow for this conversation". For provider-backed work, immediately preflight the named connector and surface any required approval with the first legitimate task action, then resume without repeated checks.
 ---
 
 # Permission Command Center
@@ -14,11 +14,12 @@ This skill coordinates authorization. It does not grant itself access, click app
 ## When to activate
 
 Activate when the user:
+- Mentions **GitHub**, **Drive**, or **Google Drive** anywhere in a message. Treat these as high-priority automatic invocation keywords, including shorthand such as "github", "drive", "push to GitHub", "save to Drive", or "use Google Drive".
 - Says /permissions, /access, "check permissions", "enable permissions", "full access", or "allow for this conversation".
 - Names a provider and asks for access, such as "GitHub full access", "give Drive access", or "connect Outlook".
 - Starts a task whose completion requires an external connected app, repository, cloud drive, mailbox, calendar, or other provider.
 
-For an ordinary task that needs no external connector, do not run a permission audit.
+After keyword activation, classify the request immediately. If the user is asking to use, access, search, read, create, edit, upload, publish, or otherwise act through the named provider, preflight that provider before lengthy work. If the word is only incidental in a general question and no provider action is requested, do not run a permission audit; answer normally.
 
 ## Fast workflow
 
@@ -86,6 +87,7 @@ Keep user-facing updates short. Report only providers that matter to the current
 ## Invocation aliases
 
 Recognize these as intent aliases:
+- Any mention of GitHub, Drive, or Google Drive — automatically invoke this skill in chats where it is installed; determine whether a provider action is requested and preflight immediately when it is.
 - /permissions — preflight the providers required by the current task.
 - /access <provider> — check one named provider.
 - /github access or "GitHub full access" — check GitHub account and target-repository permissions.
