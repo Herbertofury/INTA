@@ -1,0 +1,1837 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-27",
+  "tools": {
+    "defender-offline": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "safety-scanner": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "adwcleaner": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "malwarebytes": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "hitmanpro": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "eset-online-scanner": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "clamav": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/Cisco-Talos/clamav",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://blog.clamav.net/2021/05/clamav-devel-github-repository-name.html",
+        "stars": 7752,
+        "forks": 994
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "bitdefender-gravityzone": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "defender-business": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "sophos-endpoint": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "bitdefender-free": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "emsisoft-emergency-kit": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "meshcentral": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/Ylianst/MeshCentral",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/Ylianst/MeshCentral",
+        "stars": 7764,
+        "forks": 1186
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "rustdesk": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/rustdesk/rustdesk",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/rustdesk/rustdesk",
+        "stars": 131684,
+        "forks": 21312
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "quick-assist": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "chrome-remote-desktop": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "anydesk": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "teamviewer": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "screenconnect": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "tailscale": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/tailscale/tailscale",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://tailscale.com/opensource",
+        "stars": 39678,
+        "forks": 3559
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "sysinternals": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "autoruns": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "process-explorer": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "procmon": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "tcpview": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "rammap": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "procdump": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "sigcheck": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "dism": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "sfc": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "windows-recovery": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "winget": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/microsoft/winget-cli",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/microsoft/winget-cli",
+        "stars": 26648,
+        "forks": 1822
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "powershell": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/PowerShell/PowerShell",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/PowerShell/PowerShell",
+        "stars": 56329,
+        "forks": 8562
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "windows-terminal": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/microsoft/terminal",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/microsoft/terminal",
+        "stars": 105525,
+        "forks": 9753
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "system-informer": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/winsiderss/systeminformer",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/winsiderss/systeminformer",
+        "stars": 16588,
+        "forks": 1827
+      },
+      "sourceforge": {
+        "status": "observed",
+        "url": "https://sourceforge.net/projects/systeminformer/",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://sourceforge.net/projects/systeminformer/",
+        "rating": {
+          "value": 5.0,
+          "scale": 5.0,
+          "reviews": 7
+        },
+        "weeklyDownloads": 16957
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "windirstat": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/windirstat/windirstat",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/windirstat/windirstat",
+        "stars": 4638,
+        "forks": 296
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "wiztree": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "bcuninstaller": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller",
+        "stars": 22755,
+        "forks": 995
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "windows-performance-toolkit": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "windbg": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "winsat": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "crystaldiskinfo": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "observed",
+        "url": "https://sourceforge.net/projects/crystaldiskinfo/",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://sourceforge.net/projects/crystaldiskinfo/",
+        "rating": {
+          "value": 4.8,
+          "scale": 5.0,
+          "reviews": 20
+        },
+        "weeklyDownloads": 700132
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "smartmontools": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/smartmontools/smartmontools",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/smartmontools/smartmontools",
+        "stars": 1503,
+        "forks": 311
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "ddrescue": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "testdisk": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "photorec": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "dmde": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "gparted": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "observed",
+        "url": "https://sourceforge.net/projects/gparted/",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://sourceforge.net/projects/gparted/",
+        "rating": {
+          "value": 4.7,
+          "scale": 5.0,
+          "reviews": 115
+        },
+        "weeklyDownloads": 39303
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "rescuezilla": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/rescuezilla/rescuezilla",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/rescuezilla/rescuezilla",
+        "stars": 2854,
+        "forks": 138
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "clonezilla": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "observed",
+        "url": "https://sourceforge.net/projects/clonezilla/",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://clonezilla.org/",
+        "rating": {
+          "value": 4.6,
+          "scale": 5.0,
+          "reviews": 130
+        },
+        "weeklyDownloads": 39999
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "restic": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/restic/restic",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/restic/restic",
+        "stars": 37492,
+        "forks": 2002
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "kopia": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/kopia/kopia",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/kopia/kopia",
+        "stars": 14833,
+        "forks": 821
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "rclone": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/rclone/rclone",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://rclone.org/",
+        "stars": 61310,
+        "forks": 5752
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "veeam-agent": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "freefilesync": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "robocopy": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "hwinfo": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "libre-hardware-monitor": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+        "stars": 9462,
+        "forks": 1069
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "memtest86plus": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/memtest86plus/memtest86plus",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/memtest86plus/memtest86plus",
+        "stars": 1874,
+        "forks": 148
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "memtest86": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "cpu-z": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "occt": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "oem-drivers": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "wireshark": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "iperf3": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/esnet/iperf",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://software.es.net/iperf/obtaining.html",
+        "stars": 8905,
+        "forks": 1478
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "nmap": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "angry-ip-scanner": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/angryip/ipscan",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/angryip/ipscan",
+        "stars": 5216,
+        "forks": 849
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "putty": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "winscp": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "observed",
+        "url": "https://sourceforge.net/projects/winscp/",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://winscp.net/",
+        "rating": {
+          "value": 4.8,
+          "scale": 5.0,
+          "reviews": 210
+        },
+        "weeklyDownloads": 596379
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "openssh": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "pktmon": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "rufus": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/pbatard/rufus",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/pbatard/rufus",
+        "stars": 38514,
+        "forks": 3217
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "ventoy": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/ventoy/Ventoy",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/ventoy/Ventoy",
+        "stars": 81230,
+        "forks": 5097
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "systemrescue": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "hirens-bootcd-pe": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "microsoft-windows11-media": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "debian-live": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "ubuntu-live": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "7zip": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/ip7z/7zip",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/ip7z/7zip",
+        "stars": 4620,
+        "forks": 521
+      },
+      "sourceforge": {
+        "status": "observed",
+        "url": "https://sourceforge.net/projects/sevenzip/",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://www.7-zip.org/",
+        "rating": {
+          "value": 4.8,
+          "scale": 5.0,
+          "reviews": 833
+        },
+        "weeklyDownloads": 32562
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "notepadplusplus": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/notepad-plus-plus/notepad-plus-plus",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/notepad-plus-plus/notepad-plus-plus",
+        "stars": 29989,
+        "forks": 5456
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "powertoys": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/microsoft/PowerToys",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/microsoft/PowerToys",
+        "stars": 141445,
+        "forks": 8740
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "everything": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "wizfile": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "sharex": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/ShareX/ShareX",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/ShareX/ShareX",
+        "stars": 41402,
+        "forks": 4110
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "keepassxc": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/keepassxreboot/keepassxc",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/keepassxreboot/keepassxc",
+        "stars": 30214,
+        "forks": 2079
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "localsend": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/localsend/localsend",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/localsend/localsend",
+        "stars": 101058,
+        "forks": 5836
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "unigetui": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/Devolutions/UniGetUI",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/Devolutions/UniGetUI",
+        "stars": 27277,
+        "forks": 997
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "chatgpt": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "observed",
+        "weeklyActiveUsers": 1200000000,
+        "approximate": true,
+        "url": "https://openai.com/index/devday-2026-recap/",
+        "reportedAt": "2026-09-29",
+        "checkedAt": "2026-11-27"
+      }
+    },
+    "codex-cli": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/openai/codex",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/openai/codex",
+        "stars": 136588,
+        "forks": 21650
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "claude-code": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "gemini-cli": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/google-gemini/gemini-cli",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/google-gemini/gemini-cli",
+        "stars": 109199,
+        "forks": 15008
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "ollama": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/ollama/ollama",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://ollama.com/",
+        "stars": 188246,
+        "forks": 19220
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "yara-x": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/VirusTotal/yara-x",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/VirusTotal/yara-x",
+        "stars": 1383,
+        "forks": 176
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "pe-sieve": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/hasherezade/pe-sieve",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/hasherezade/pe-sieve",
+        "stars": 3960,
+        "forks": 494
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "hollows-hunter": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/hasherezade/hollows_hunter",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/hasherezade/hollows_hunter",
+        "stars": 2443,
+        "forks": 299
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "fibratus": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/rabbitstack/fibratus",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/rabbitstack/fibratus",
+        "stars": 2572,
+        "forks": 223
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "rustinel": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/Karib0u/rustinel",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/Karib0u/rustinel",
+        "stars": 544,
+        "forks": 69
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "prx-sd": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/openprx/prx-sd",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/openprx/prx-sd",
+        "stars": 7,
+        "forks": 0
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "sentinella": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/LeewayOpenSoftware/Sentinella",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/LeewayOpenSoftware/Sentinella",
+        "stars": 1,
+        "forks": 0
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "velociraptor": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/Velocidex/velociraptor",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/Velocidex/velociraptor",
+        "stars": 4522,
+        "forks": 803
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "hayabusa": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/Yamato-Security/hayabusa",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/Yamato-Security/hayabusa",
+        "stars": 3517,
+        "forks": 310
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "chainsaw": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/WithSecureOpenSource/chainsaw",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/WithSecureOpenSource/chainsaw",
+        "stars": 3739,
+        "forks": 313
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "sigma": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/SigmaHQ/sigma",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/SigmaHQ/sigma",
+        "stars": 11580,
+        "forks": 2977
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "osquery": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/osquery/osquery",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/osquery/osquery",
+        "stars": 23805,
+        "forks": 2653
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "wazuh": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/wazuh/wazuh",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://wazuh.com/",
+        "stars": 17925,
+        "forks": 2639
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "volatility": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/volatilityfoundation/volatility3",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/volatilityfoundation/volatility3",
+        "stars": 4635,
+        "forks": 764
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "autopsy": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/sleuthkit/autopsy",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/sleuthkit/autopsy",
+        "stars": 3468,
+        "forks": 721
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "nvme-cli": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/linux-nvme/nvme-cli",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/linux-nvme/nvme-cli",
+        "stars": 1901,
+        "forks": 758
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "gsmartcontrol": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/ashaduri/gsmartcontrol",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/ashaduri/gsmartcontrol",
+        "stars": 796,
+        "forks": 49
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "tcpdump": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/the-tcpdump-group/tcpdump",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/the-tcpdump-group/tcpdump",
+        "stars": 3275,
+        "forks": 950
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "cryptsetup": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "dislocker": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/Aorimn/dislocker",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/Aorimn/dislocker",
+        "stars": 1963,
+        "forks": 236
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "rsync": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/RsyncProject/rsync",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://rsync.samba.org/ftp/rsync/rsync.html",
+        "stars": 5384,
+        "forks": 632
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "get-help": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "naps2": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/cyanfish/naps2",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/cyanfish/naps2",
+        "stars": 4831,
+        "forks": 502
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "advanced-ip-scanner": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "quick-machine-recovery": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "windows-point-in-time-restore": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "setupdiag": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "windows-sandbox": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "usb-device-tree-view": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "powercfg": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "curl": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/curl/curl",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://curl.se/docs/verify.html",
+        "stars": 43694,
+        "forks": 7519
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "mtr": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/traviscross/mtr",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/traviscross/mtr",
+        "stars": 3394,
+        "forks": 382
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "remmina": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "syncthing": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/syncthing/syncthing",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/syncthing/syncthing",
+        "stars": 90887,
+        "forks": 5610
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "diskspd": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/microsoft/diskspd",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/microsoft/diskspd",
+        "stars": 1423,
+        "forks": 238
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "winmerge": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/WinMerge/winmerge",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/WinMerge/winmerge",
+        "stars": 9405,
+        "forks": 1041
+      },
+      "sourceforge": {
+        "status": "observed",
+        "url": "https://sourceforge.net/projects/winmerge/",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://winmerge.org/",
+        "rating": {
+          "value": 4.8,
+          "scale": 5.0,
+          "reviews": 193
+        },
+        "weeklyDownloads": 31714
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "sumatrapdf": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/sumatrapdfreader/sumatrapdf",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/sumatrapdfreader/sumatrapdf",
+        "stars": 18074,
+        "forks": 2108
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "netbootxyz": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/netbootxyz/netboot.xyz",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://github.com/netbootxyz/netboot.xyz",
+        "stars": 12730,
+        "forks": 892
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "promptfoo": {
+      "github": {
+        "status": "observed",
+        "url": "https://github.com/promptfoo/promptfoo",
+        "checkedAt": "2026-11-27",
+        "identitySource": "https://www.promptfoo.dev/",
+        "stars": 27722,
+        "forks": 2860
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "windows-laps": {
+      "github": {
+        "status": "not-applicable"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "sysmon": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    }
+  }
+}
