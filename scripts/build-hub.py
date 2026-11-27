@@ -1172,6 +1172,22 @@ def validate_updates_center(catalog: dict) -> None:
         if not workflow.get("commandIds") or any(command_id not in commands for command_id in workflow["commandIds"]):
             raise ValueError(f"{identity}: workflow references an unknown command")
 
+
+    platform_ids = set()
+    for platform in catalog.get("platforms", []):
+        identity = platform.get("id", "?")
+        if identity in platform_ids or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+            raise ValueError(f"{identity}: invalid or duplicate fleet patch platform")
+        platform_ids.add(identity)
+        for field in ("name", "kind", "platform", "summary", "url", "docsUrl", "trust"):
+            if not isinstance(platform.get(field), str) or not platform[field].strip():
+                raise ValueError(f"{identity}: fleet patch platform requires {field}")
+        for field in ("url", "docsUrl"):
+            parsed = urlparse(platform[field])
+            if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
+                raise ValueError(f"{identity}: platform {field} must be public HTTPS")
+
+
 def validate_command_center(catalog: dict) -> None:
     """Validate the complete authored command library and its relationships."""
     def text_fields(item, fields, label):
