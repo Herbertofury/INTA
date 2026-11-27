@@ -30,7 +30,12 @@
         "title": "Capture the smallest useful baseline",
         "detail": "Record the exact error text and time, OS build, recent changes, uptime, free space, and Task Manager CPU/memory/disk usage during the symptom. On Windows, open Reliability Monitor from Run with the command below to correlate failures with changes; save evidence to the private service record.",
         "command": "perfmon /rel",
-        "anchor": "step-03"
+        "anchor": "step-03",
+        "commandShell": "CMD or PowerShell",
+        "commandPurpose": "Open Reliability Monitor and correlate the failure with recent changes.",
+        "commandSafety": "Read-only diagnostic; opens a Windows system utility.",
+        "commandUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+        "commandName": "Microsoft perfmon command"
       },
       {
         "title": "Reproduce and narrow the scope",
@@ -122,7 +127,13 @@
       {
         "title": "Reconcile findings with scan coverage",
         "detail": "Perform scan coverage reconciliation for every run: record product and engine or intelligence version where exposed, scan mode, scope, start/end time, completion or cancellation, inaccessible areas, detections and disposition. Retain the product report; Microsoft Safety Scanner writes detailed results to %SYSTEMROOT%\\debug\\msert.log. A timeout, blocked scan or unscanned location remains incomplete even when no threat is reported. Reconcile repeated detections with the specific path, item and action rather than declaring a clean result from the headline alone.",
-        "anchor": "step-reconcile-findings-with-scan-coverage"
+        "anchor": "step-reconcile-findings-with-scan-coverage",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Read the protection state and recent Defender detections before choosing the next scan.",
+        "commandSafety": "Read-only diagnostic; requires the Defender PowerShell module and appropriate permissions to see all results.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/defender/get-mpcomputerstatus",
+        "commandName": "Microsoft Defender PowerShell documentation",
+        "command": "Get-MpComputerStatus | Select-Object AMServiceEnabled,AntivirusEnabled,RealTimeProtectionEnabled,AntivirusSignatureVersion,AntivirusSignatureLastUpdated\nGet-MpThreatDetection | Select-Object InitialDetectionTime,ThreatID,Resources"
       },
       {
         "title": "Review persistence and accounts",
@@ -216,7 +227,13 @@
       {
         "title": "Preserve evidence without allowing spread",
         "detail": "Keep the device powered on after network isolation when feasible so trained responders can capture volatile evidence. If isolation is impossible and harm is continuing, containment may require shutdown. Record the decision, visible symptoms, time, and who acted.",
-        "anchor": "step-02"
+        "anchor": "step-02",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Record adapter state and endpoint protection status without changing connectivity or security settings.",
+        "commandSafety": "Read-only triage. Do not use this as a substitute for incident-lead-directed containment.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/netadapter/get-netadapter",
+        "commandName": "Microsoft NetAdapter PowerShell documentation",
+        "command": "Get-NetAdapter | Format-Table Name,Status,LinkSpeed -AutoSize\nGet-MpComputerStatus | Select-Object AMServiceEnabled,AntivirusEnabled,RealTimeProtectionEnabled"
       },
       {
         "title": "Map the impact",
@@ -296,7 +313,13 @@
       {
         "title": "Capture a repeatable baseline",
         "detail": "Time sign-in and the specific failing task separately. Note AC power, current applications, storage connections, network state, and background updates. Repeat the same short workload after each change so an apparent improvement is comparable.",
-        "anchor": "step-01"
+        "anchor": "step-01",
+        "commandShell": "CMD or PowerShell",
+        "commandPurpose": "Open Resource Monitor and inspect CPU, memory, disk and network activity while reproducing the slowdown.",
+        "commandSafety": "Read-only diagnostic.",
+        "commandUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/resmon",
+        "commandName": "Microsoft Resource Monitor command",
+        "command": "resmon"
       },
       {
         "title": "Inspect pressure while the lag happens",
@@ -394,8 +417,13 @@
       {
         "title": "Repair the component store",
         "detail": "Run DISM and wait for its final result. If the repair source cannot be found, retain the error code and use Microsoft’s matching-source guidance; do not download replacement DLLs from a third-party site.",
-        "command": "DISM.exe /Online /Cleanup-Image /RestoreHealth",
-        "anchor": "step-03"
+        "command": "DISM.exe /Online /Cleanup-Image /RestoreHealth\nsfc /scannow",
+        "anchor": "step-03",
+        "commandShell": "PowerShell or CMD (Run as Administrator)",
+        "commandPurpose": "Repair the component store first, then verify and repair protected system files.",
+        "commandSafety": "Changes Windows servicing state. Run on a stable power connection; use a matching repair source if DISM requests one. Review results and reboot only when appropriate.",
+        "commandUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+        "commandName": "Microsoft DISM repair documentation"
       },
       {
         "title": "Check protected system files",
@@ -476,7 +504,13 @@
       {
         "title": "Follow the exact error path",
         "detail": "Use Microsoft’s troubleshooting reference for the captured code. Inspect relevant logs and service state. A cache reset or security-product change should be tied to a specific diagnosis and have a recovery plan; avoid one-click scripts that reset unrelated settings.",
-        "anchor": "step-04"
+        "anchor": "step-04",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Read recent Windows Update client events to identify the failure time and error before retrying installation.",
+        "commandSafety": "Read-only diagnostic; event availability and detail vary by Windows build.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent",
+        "commandName": "Microsoft Get-WinEvent documentation",
+        "command": "Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-WindowsUpdateClient'} -MaxEvents 30 | Select-Object TimeCreated,Id,LevelDisplayName,Message | Format-List"
       },
       {
         "title": "Repair servicing if indicated",
@@ -546,7 +580,13 @@
       {
         "title": "Enter Windows Recovery Environment",
         "detail": "Use the built-in recovery environment or official Windows installation media and select Repair my PC. Check the actual volume layout and encryption status before working on an offline installation; drive letters can differ from the normal Windows session.",
-        "anchor": "step-03"
+        "anchor": "step-03",
+        "commandShell": "CMD (Run as Administrator)",
+        "commandPurpose": "Check Windows Recovery Environment registration and enumerate the current boot entry before choosing a repair.",
+        "commandSafety": "Read-only inspection. Do not run BCDEdit /set, /delete or bootrec write operations until boot mode, target installation and recovery plan are confirmed.",
+        "commandUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/reagentc-command-line-options",
+        "commandName": "Microsoft REAgentC and recovery documentation",
+        "command": "reagentc /info\nbcdedit /enum {current}"
       },
       {
         "title": "Try the narrow recovery option",
@@ -617,7 +657,12 @@
         "title": "Identify every device",
         "detail": "In the Linux rescue session, record source and destination model, serial, capacity, interface, and mount state. Use a known-good cable and stable power when appropriate. Disable automount and keep the source unmounted or read-only; do not initialize, format, or run filesystem repair on it.",
         "command": "lsblk -o NAME,SIZE,MODEL,SERIAL,TYPE,MOUNTPOINTS",
-        "anchor": "step-02"
+        "anchor": "step-02",
+        "commandShell": "Linux shell (INTA Rescue)",
+        "commandPurpose": "List block devices, model, serial, size and mount points so the source and destination can be identified before imaging.",
+        "commandSafety": "Read-only inventory. Do not run filesystem repair, SMART self-tests or write operations against a failing source before the recovery plan is approved.",
+        "commandUrl": "https://man7.org/linux/man-pages/man8/lsblk.8.html",
+        "commandName": "Linux lsblk manual"
       },
       {
         "title": "Prepare a separate healthy destination",
@@ -711,7 +756,13 @@
       {
         "title": "Inventory before the move",
         "detail": "Record source and destination model/serial/capacity, firmware mode, partition layout, encryption, and the applications that must survive. Confirm the chosen tool supports the filesystem and intended target size. Shrinking to a smaller drive needs a specifically supported procedure.",
-        "anchor": "step-01"
+        "anchor": "step-01",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Compare disk identity, partition style, media type and health before selecting a migration source and target.",
+        "commandSafety": "Read-only inventory. Confirm model, serial, capacity and direction before any clone or format operation.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/storage/get-disk",
+        "commandName": "Microsoft Storage PowerShell documentation",
+        "command": "Get-Disk | Format-Table Number,FriendlyName,SerialNumber,PartitionStyle,OperationalStatus,Size -AutoSize\nGet-PhysicalDisk | Format-Table FriendlyName,MediaType,HealthStatus,OperationalStatus,Size -AutoSize"
       },
       {
         "title": "Create an independent rollback",
@@ -788,7 +839,13 @@
       {
         "title": "Inventory the recovery set",
         "detail": "List protected devices, folders, application data, backup destination, retention, encryption keys, and the last successful job. Confirm the person covering an outage can obtain the credentials. Identify data that lives outside the usual Documents/Desktop folders.",
-        "anchor": "step-01"
+        "anchor": "step-01",
+        "commandShell": "CMD (Run as Administrator)",
+        "commandPurpose": "List discoverable Windows Server Backup versions before selecting a recovery point; verify the destination and scope separately.",
+        "commandSafety": "Read-only query. A listed version is not proof that the data can be restored; perform a test restore to an isolated destination.",
+        "commandUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wbadmin-get-versions",
+        "commandName": "Microsoft wbadmin get versions documentation",
+        "command": "wbadmin get versions"
       },
       {
         "title": "Inspect repository and job health",
@@ -870,8 +927,13 @@
       {
         "title": "Read the assigned configuration",
         "detail": "On Windows, run the command below in PowerShell. Check address, subnet, default route, DNS servers, and DHCP source. Compare with a working device on the same intended network. On a domain network, preserve the organization’s DNS design; replacing internal DNS with a public resolver can break domain services.",
-        "command": "Get-NetIPConfiguration",
-        "anchor": "step-02"
+        "command": "Get-NetIPConfiguration\nResolve-DnsName learn.microsoft.com\nTest-NetConnection learn.microsoft.com -Port 443",
+        "anchor": "step-02",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Check assigned addresses, gateways and DNS resolution before changing adapter or resolver settings.",
+        "commandSafety": "Read-only diagnostic. Do not flush, reset or replace DNS settings until the failing layer is identified.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/get-netipconfiguration",
+        "commandName": "Microsoft NetTCPIP PowerShell documentation"
       },
       {
         "title": "Test reachability and name resolution separately",
@@ -951,7 +1013,13 @@
       {
         "title": "Restore the network foundation",
         "detail": "Bring up the internet handoff, firewall/router, switches, and wireless infrastructure in the site’s documented dependency order. Wait for each to reach a healthy state, then verify local link, addressing, routing, and name resolution before starting application tests.",
-        "anchor": "step-02"
+        "anchor": "step-02",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Capture adapter link state and key network/service status after power is restored.",
+        "commandSafety": "Read-only diagnostic. Confirm upstream power, switch, router and ISP state before restarting shared services.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service",
+        "commandName": "Microsoft Get-Service documentation",
+        "command": "Get-NetAdapter | Format-Table Name,Status,LinkSpeed -AutoSize\nGet-Service -Name Dhcp,Dnscache,Netlogon,LanmanServer -ErrorAction SilentlyContinue | Format-Table Name,Status,StartType -AutoSize"
       },
       {
         "title": "Recover storage and core services",
@@ -1031,7 +1099,13 @@
       {
         "title": "Prove the needed capabilities before repair",
         "detail": "Start in the least-permissive mode that supports the task. Test pointer or view access, a harmless control action if needed, the approved transfer route, and the reconnect plan before changing the machine. Quick Assist is an attended Windows path for INTA; its macOS client and browser support path are restricted to Microsoft Support. For Chrome Remote Desktop, distinguish the one-use support code from persistent PIN-based access, and keep the user available for renewed sharing confirmation.",
-        "anchor": "step-prove-the-needed-capabilities-before-repair"
+        "anchor": "step-prove-the-needed-capabilities-before-repair",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Inspect Remote Desktop Services state without enabling remote access or opening firewall rules.",
+        "commandSafety": "Read-only diagnostic. Only enable remote access through approved organization policy and with device-owner authorization.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service",
+        "commandName": "Microsoft Get-Service documentation",
+        "command": "Get-Service -Name TermService -ErrorAction SilentlyContinue | Format-List Name,Status,StartType\nGet-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server' -Name fDenyTSConnections -ErrorAction SilentlyContinue"
       },
       {
         "title": "Connect with the user present",
@@ -1142,7 +1216,12 @@
         "title": "Test without repairing",
         "detail": "Open Windows PowerShell as administrator on the member computer and run the diagnostic command. Record the result and relevant NETLOGON events. Do not apply this cmdlet to a domain controller, where the result can be misleading.",
         "command": "Test-ComputerSecureChannel -Verbose",
-        "anchor": "step-03"
+        "anchor": "step-03",
+        "commandShell": "PowerShell (Run as Administrator)",
+        "commandPurpose": "Test the computer's secure channel to its domain before attempting a trust repair.",
+        "commandSafety": "Diagnostic only. Do not run the -Repair variant until domain connectivity, a suitable domain controller, time synchronization and authorized domain credentials are confirmed.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel",
+        "commandName": "Microsoft Test-ComputerSecureChannel documentation"
       },
       {
         "title": "Resolve conflicting computer identity",
@@ -1214,7 +1293,13 @@
       {
         "title": "Check the message and network path",
         "detail": "Inspect Outbox for a stuck or oversized message and verify whether attachment size, recipient address, or a provider rejection explains the failure. Compare a small test message through webmail. Check VPN/proxy and DNS only when the symptom points there.",
-        "anchor": "step-03"
+        "anchor": "step-03",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Check HTTPS reachability to Outlook and whether the desktop process is running before rebuilding profiles.",
+        "commandSafety": "Read-only diagnostic. A successful TCP test does not prove mailbox authentication, service health or profile correctness.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection",
+        "commandName": "Microsoft Test-NetConnection documentation",
+        "command": "Test-NetConnection outlook.office365.com -Port 443\nGet-Process OUTLOOK -ErrorAction SilentlyContinue | Select-Object ProcessName,Id,StartTime"
       },
       {
         "title": "Use the correct client-specific repair",
@@ -1289,10 +1374,13 @@
       {
         "title": "Read the installed queue, driver and port",
         "detail": "On the affected Windows PC, open Windows PowerShell 5.1. This read-only command does not require administrator rights. Find the intended queue and compare its exact driver and port with the physical printer; keep real device names and addresses in the private case record.",
-        "command": "Get-Printer | Format-Table Name,DriverName,PortName -AutoSize",
-        "commandName": "Get-Printer",
+        "command": "Get-Printer | Format-Table Name,DriverName,PortName -AutoSize\nGet-PrinterPort | Format-List Name,PrinterHostAddress,PortNumber\nGet-Service -Name Spooler | Format-List Name,Status,StartType",
+        "commandName": "Microsoft PrintManagement PowerShell documentation",
         "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printer",
-        "anchor": "step-read-printer-queue-driver-port"
+        "anchor": "step-read-printer-queue-driver-port",
+        "commandShell": "PowerShell",
+        "commandPurpose": "List configured printers, ports and spooler state before deciding whether a queue or service needs attention.",
+        "commandSafety": "Read-only diagnostics. Do not restart the spooler until active print jobs and shared-printer impact have been checked."
       },
       {
         "title": "Compare the port with the current printer address",
@@ -1372,7 +1460,13 @@
       {
         "title": "Capture evidence before repeated testing",
         "detail": "Save the stop code, Reliability Monitor history, relevant events, and available crash dump in the private case. Note the dump’s sensitivity because it may contain user data. A named module is a clue that still needs context.",
-        "anchor": "step-01"
+        "anchor": "step-01",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Read recent Kernel-Power, unexpected-shutdown and bugcheck events to correlate crashes with the reported time.",
+        "commandSafety": "Read-only diagnostic. Event IDs are clues, not proof of a failing component; correlate with dump analysis and hardware tests.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent",
+        "commandName": "Microsoft Get-WinEvent documentation",
+        "command": "Get-WinEvent -FilterHashtable @{LogName='System'; Id=41,6008,1001} -MaxEvents 30 | Select-Object TimeCreated,Id,ProviderName,Message | Format-List"
       },
       {
         "title": "Check basic stability",
@@ -1452,7 +1546,13 @@
       {
         "title": "Record the new device and baseline",
         "detail": "Capture model, serial, warranty, Windows edition/build, firmware, storage, and memory in the private asset record. Use the supported OS and vendor driver path. Confirm hardware compatibility before applying firmware or feature updates.",
-        "anchor": "step-01"
+        "anchor": "step-01",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Record Windows edition, build and architecture, then list package-manager-managed applications.",
+        "commandSafety": "Read-only inventory. Review output before attaching it to a ticket because installed software can reveal business context.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo",
+        "commandName": "Microsoft Get-ComputerInfo documentation",
+        "command": "Get-ComputerInfo | Select-Object CsName,WindowsProductName,WindowsVersion,OsBuildNumber,CsSystemType\nwinget list"
       },
       {
         "title": "Establish identity and recovery",
@@ -1623,7 +1723,13 @@
             "label": "Recovery options",
             "url": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
           }
-        ]
+        ],
+        "commandShell": "PowerShell",
+        "commandPurpose": "Collect OS/build and recent hotfix inventory to support a technician handoff and maintenance record.",
+        "commandSafety": "Read-only inventory. Keep customer names, serials, installed-software lists and raw logs in the approved private ticket.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo",
+        "commandName": "Microsoft Get-ComputerInfo documentation",
+        "command": "Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture,CsSystemType\nGet-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 10 HotFixID,InstalledOn,Description"
       },
       {
         "anchor": "step-closeout-clean",
@@ -1754,7 +1860,13 @@
       {
         "title": "Verify the bytes before writing",
         "detail": "Compare the local SHA-256 hash with the release’s published checksum using the exact file path. In PowerShell, select the downloaded ISO and run Get-FileHash for that file. The hash proves a match to the published value; also verify you obtained that value from the genuine release.",
-        "anchor": "step-03"
+        "anchor": "step-03",
+        "commandShell": "PowerShell",
+        "commandPurpose": "List disk number, model, serial, bus type and size so the correct removable target can be selected in the approved USB writer.",
+        "commandSafety": "Read-only inventory. Physically confirm the USB device before selecting it in a destructive writer; do not use clean, format or partition commands from this diagnostic block.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/storage/get-disk",
+        "commandName": "Microsoft Get-Disk documentation",
+        "command": "Get-Disk | Format-Table Number,FriendlyName,SerialNumber,BusType,OperationalStatus,Size -AutoSize"
       },
       {
         "title": "Write or update the chosen device",
@@ -1826,7 +1938,13 @@
       {
         "title": "Prepare a minimal case summary",
         "detail": "Include OS/build, hardware class, exact error, time, reproduction steps, recent changes, and diagnostics already tried. Replace customer names, usernames, tenant IDs, internal addresses, file content, credentials, and recovery keys with neutral labels. Keep the original evidence private.",
-        "anchor": "step-01"
+        "anchor": "step-01",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Capture OS version, build, architecture and system type for a troubleshooting prompt without dumping usernames, credentials or customer files.",
+        "commandSafety": "Read-only. Review and sanitize output before sharing it with any external AI service; never include secrets, recovery keys, personal files or raw customer evidence.",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-computerinfo",
+        "commandName": "Microsoft Get-ComputerInfo documentation",
+        "command": "Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture,CsSystemType"
       },
       {
         "title": "Ask for a ranked hypothesis list",
@@ -1916,8 +2034,13 @@
       {
         "title": "Review updates before applying them",
         "detail": "Check Windows and application updates, reboot requirements, vendor advisories, and line-of-business compatibility. WinGet with no target lists available upgrades; review that list and update the intended packages rather than blindly upgrading every application during production work.",
-        "command": "winget upgrade",
-        "anchor": "step-03"
+        "command": "Get-Volume | Select-Object DriveLetter,FileSystem,HealthStatus,SizeRemaining,Size\nwinget upgrade",
+        "anchor": "step-03",
+        "commandShell": "PowerShell",
+        "commandPurpose": "Review free volume space and discover package-manager updates before deciding what to apply.",
+        "commandSafety": "Read-only inventory and update discovery; winget upgrade without an ID lists available upgrades and does not install them.",
+        "commandUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+        "commandName": "Microsoft WinGet upgrade documentation"
       },
       {
         "title": "Check backups through a restore",
