@@ -36,6 +36,10 @@ jobs:
           git add -A
           if ! git diff --cached --quiet || test -f .git/MERGE_HEAD; then
             git commit -m "Reconcile toolbox with current main and regenerate complete outputs"
+            mkdir -p reports/recovery
+            git rev-parse HEAD
+            git rev-parse HEAD^{tree}
+            git archive --format=zip --output=reports/recovery/source-checkpoint.zip HEAD
             git push origin HEAD:refs/heads/online-toolbox-2026-11-26
           fi
           git rev-parse HEAD

@@ -37,7 +37,7 @@ def merge(base, left, right, label):
             if any(identity not in ids for identity in maps[0]):
                 raise ValueError(label + ": original record deletion requires review")
             return [merge(maps[0].get(identity, MISSING), maps[1].get(identity, MISSING), maps[2].get(identity, MISSING), label + "[" + str(identity) + "]") for identity in ids]
-        if all(isinstance(row, (str, int, float, bool)) for row in rows):
+        if label.rsplit(".", 1)[-1] in {"tools", "toolIds", "tags", "sources", "aliases", "platforms"} and all(isinstance(row, (str, int, float, bool)) for row in rows):
             if not all(row in left and row in right for row in base):
                 raise ValueError(label + ": non-additive list edit requires review")
             return list(dict.fromkeys(left + right))
@@ -82,6 +82,10 @@ def resolve_reviewed_conflict(path):
 
 if os.environ.get("GITHUB_REF") != "refs/heads/online-toolbox-2026-11-26":
     raise SystemExit("Recovery is restricted to the owned toolbox branch")
+if git("rev-parse", "HEAD").stdout.strip() != os.environ.get("GITHUB_SHA"):
+    raise SystemExit("Checkout does not match the triggering source commit")
+generated = set(json.loads(Path("site/build-manifest.json").read_text())["files"])
+generated.add("site/build-manifest.json")
 git("fetch", "origin", "main")
 main_sha = git("rev-parse", "origin/main").stdout.strip()
 result = git("merge", "--no-commit", "--no-ff", "origin/main", check=False)
@@ -91,7 +95,7 @@ conflicts = git("diff", "--name-only", "--diff-filter=U").stdout.splitlines()
 unresolved = []
 for path in conflicts:
     try:
-        if path.startswith(("site/", "wiki/", "docs/runbooks/")):
+        if path in generated:
             git("checkout", "--ours", "--", path)
             git("add", "--", path)
         elif path.startswith("data/") and path.endswith(".json"):
