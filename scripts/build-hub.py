@@ -1133,6 +1133,7 @@ def build_outputs() -> dict[str, str]:
     tool_access = json.loads((ROOT / "data/tool-access.json").read_text(encoding="utf-8"))
     job_workspaces = json.loads((ROOT / "data/job-workspaces.json").read_text(encoding="utf-8"))
     field_notes = json.loads((ROOT / "data/field-notes.json").read_text(encoding="utf-8"))
+    validate_field_note_commands(field_notes)
     knowledge_policy = json.loads((ROOT / "data/knowledge-policy.json").read_text(encoding="utf-8"))
     research_queue = json.loads((ROOT / "data/research-queue.json").read_text(encoding="utf-8"))
     online_data = json.loads((ROOT / "data/online-tools.json").read_text(encoding="utf-8"))
@@ -1324,6 +1325,37 @@ def build_outputs() -> dict[str, str]:
                 "files": {path: hashlib.sha256(content.encode()).hexdigest() for path, content in sorted(outputs.items())}}
     outputs["site/build-manifest.json"] = json.dumps(manifest, indent=2) + "\n"
     return outputs
+
+
+
+def validate_field_note_commands(field_notes: dict) -> None:
+    """Validate every copy-ready command embedded in a specific-fix article."""
+    if not isinstance(field_notes, dict) or not isinstance(field_notes.get("notes"), list):
+        raise ValueError("Field notes require a notes list")
+    shells = {"PowerShell", "PowerShell (Run as Administrator)", "CMD", "CMD or PowerShell",
+              "CMD (Run as Administrator)", "PowerShell or CMD (Run as Administrator)",
+              "Linux shell (INTA Rescue)"}
+    seen = set()
+    for note in field_notes["notes"]:
+        for command in note.get("commands", []):
+            identity = f"{note.get('id', '?')}/{command.get('id', '?')}"
+            if not isinstance(command, dict):
+                raise ValueError(f"{identity}: command must be an object")
+            for field in ("id", "label", "shell", "purpose", "safety", "code", "sourceUrl", "sourceTitle"):
+                if not isinstance(command.get(field), str) or not command[field].strip():
+                    raise ValueError(f"{identity}: command requires {field}")
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", command["id"]) or identity in seen:
+                raise ValueError(f"{identity}: invalid or duplicate command ID")
+            seen.add(identity)
+            if command["shell"] not in shells:
+                raise ValueError(f"{identity}: unsupported shell label")
+            if len(command["code"]) > 12000 or re.search(r"(?i)(?:password|recovery key|access token)\\s*=", command["code"]):
+                raise ValueError(f"{identity}: command is oversized or appears to embed a secret")
+            parsed = urlparse(command["sourceUrl"])
+            if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
+                raise ValueError(f"{identity}: official command reference must be public HTTPS")
+            if re.search(r"(?i)\\b(?:irm|iwr|curl)\\b[^\\n|]*\\|\\s*(?:iex|invoke-expression)", command["code"]):
+                raise ValueError(f"{identity}: remote script download-and-execute pipelines are prohibited")
 
 
 def main():
