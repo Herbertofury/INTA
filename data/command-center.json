@@ -574,6 +574,8 @@
         "win-get-updates",
         "win-choco-detect",
         "win-choco-preview",
+        "ninitepro-audit",
+        "ninitepro-update",
         "win-scoop-status",
         "win-winget-update-all",
         "win-choco-update-all",
