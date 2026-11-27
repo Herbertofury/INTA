@@ -28,6 +28,9 @@ jobs:
           def git(*args):
               return subprocess.run(["git", *args], check=True, text=True, stdout=subprocess.PIPE).stdout.strip()
           changed = git("diff", "--name-only").splitlines()
+          untracked = git("ls-files", "--others", "--exclude-standard").splitlines()
+          if untracked:
+              raise RuntimeError("Unexpected untracked files: " + ", ".join(untracked))
           allowed = {"AGENTS.md", "site/build-manifest.json"}
           unexpected = sorted(set(changed) - allowed)
           if unexpected:
