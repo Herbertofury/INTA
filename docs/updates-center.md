@@ -92,7 +92,7 @@ Ninite Pro Classic documents audit, update-only and repair switches. The CLI is 
 
 ## Local agent implementation and remaining scope
 
-The initial cross-platform .NET 10 Local Agent is implemented in `agent/INTA.LocalAgent` and packaged by `.github/workflows/local-agent.yml`. It binds only to loopback port 47821, checks the browser Origin and Host, pairs with one in-memory bearer token per tab session, and exposes typed operations rather than a shell.
+The initial cross-platform .NET 10 Local Agent is implemented in `agent/INTA.LocalAgent` and packaged by `.github/workflows/local-agent.yml`. It also includes a Windows Update adapter for installed-hotfix history, DISM/SFC servicing repair, and exact-KB removal/rollback through WUSA. Checking/installing new Windows updates still opens the supported Settings interface. It binds only to loopback port 47821, checks the browser Origin and Host, pairs with one in-memory bearer token per tab session, and exposes typed operations rather than a shell.
 
 Implemented now:
 - Connect/disconnect from the Updates page.
@@ -157,3 +157,5 @@ The Updates tab has a separate Windows driver inventory and optional-driver entr
 ### macOS Software Update
 
 Apple's `softwareupdate --list` and `sudo softwareupdate --install --all` manage macOS system updates. They do not cover every Homebrew formula, Mac App Store app or vendor updater. Review MDM policy, backup and restart requirements. [Apple macOS updates](https://support.apple.com/guide/mac-help/get-macos-updates-mchlpx1065/mac).
+
+Windows Update rollback in the agent requires an exact uninstallable KB number (for example `KB5035845`). WUSA may reject updates that Microsoft or the servicing stack does not permit to uninstall. A successful WUSA exit is followed by a hotfix-history check; a restart may still be required. This is not a general rollback for feature upgrades, drivers or firmware.
