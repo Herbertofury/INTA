@@ -225,6 +225,20 @@ Choose the case that matches the evidence. Each case gives a first action, a sho
 2. Check whether the backup account or repository was modified during the incident; preserve access logs and the incident timeline.
 3. Restore a selected pre-incident sample into an isolated clean environment and test the actual data before planning production recovery.
 
+#### ⚡ Quick commands
+
+**Inspect backup-related services** · PowerShell
+
+Capture backup service status without mounting or connecting backup media to a suspected compromised endpoint.
+
+```powershell
+Get-Service -Name wbengine,VSS,swprv -ErrorAction SilentlyContinue | Format-Table Name,Status,StartType -AutoSize
+```
+
+> **Before running:** Read-only diagnostic. Review output before sharing; redact device names, user names, IP addresses, serial numbers and other customer-identifying details.
+
+**Official reference:** [Microsoft Get-Service](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service)
+
 **Prove it worked:** A usable recovery point is demonstrated and remains outside the attacker’s current access path.
 
 **If this does not resolve it:** If the backup system or administrative identity is also compromised, involve the incident and backup owners before changing retention or deleting snapshots.
