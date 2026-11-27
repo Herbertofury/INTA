@@ -31,7 +31,7 @@ public sealed class PackageManagers(ProcessRunner runner)
     }
     public async Task<(int ExitCode, string Output)> ExecuteAsync(OperationRequest request, CancellationToken ct = default)
     {
-        var package = request.Action == "update-all" ? "*" : ValidateId(request.PackageId);
+        var package = request.Action == "update-all" || (request.Manager == "windows-update" && request.Action == "repair") ? "*" : ValidateId(request.PackageId);
         var output = new List<string>();
         if (request.Manager == "apt" && request.Action is "update" or "update-all")
         {
