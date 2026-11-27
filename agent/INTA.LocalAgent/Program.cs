@@ -34,6 +34,7 @@ app.Use(async (context, next) =>
     var host = context.Request.Host.Host;
     if (host is not ("127.0.0.1" or "localhost" or "::1")) { context.Response.StatusCode = 403; return; }
     var origin = context.Request.Headers.Origin.ToString();
+    context.Response.Headers.CacheControl = "no-store";
     if (!allowedOrigins.Contains(origin)) { context.Response.StatusCode = 403; return; }
     context.Response.Headers.AccessControlAllowOrigin = origin;
     context.Response.Headers.AccessControlAllowMethods = "GET, POST, OPTIONS";
