@@ -17,7 +17,7 @@ Build the native technician workspace and exercise its portable data behavior on
 
 Build the native phone companion and prove authenticated job sync on a real mobile device.
 
-Desktop maintenance has its own [native parity acceptance matrix](desktop-maintenance-parity.md), including coverage pinned to both reference releases and distinct runtime gates for Windows, mobile, and recovery. A catalog link, package manager action, or storage preview is not an entire maintenance workspace.
+Desktop maintenance has its own [native parity acceptance matrix](https://github.com/Herbertofury/INTA/blob/main/docs/desktop-maintenance-parity.md), including coverage pinned to both reference releases and distinct runtime gates for Windows, mobile, and recovery. A catalog link, package manager action, or storage preview is not an entire maintenance workspace.
 
 ## Tool Library across clients
 
