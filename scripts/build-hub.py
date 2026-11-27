@@ -27,6 +27,7 @@ WIKI_MIRRORS = {
     "Knowledge-Standards": "knowledge-standards.md", "Contribute": "contribute.md",
     "Quick-Commands": "quick-commands.md",
     "Command-Center": "command-center.md",
+    "Updates-and-Maintenance": "updates-center.md",
     "Templates": "contribution-template.md", "Continuous-Improvement": "continuous-improvement.md",
     "Methods": "methods.md", "Decision-Desk": "decision-desk.md",
     "Interface-Design": "interface-design.md", "Service-Evidence": "service-evidence.md",
@@ -975,7 +976,7 @@ def home_markdown(tools: list[dict], jobs: list[dict], categories: dict, layout:
     lines = [f"![INTA Computer Services — technical knowledge base]({REPO}/raw/main/docs/assets/wiki-hero.svg)", "",
              *heading(1, "INTA knowledge base", "🧭 Your next good fix starts here."),
              "Service procedures, tool references and troubleshooting methods for the INTA team.", "",
-             f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
+             f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [Updates & Maintenance](Updates-and-Maintenance) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
              f"**{len(tools)} tools · {len(jobs)} playbooks · {len(categories)} tool categories**", "",
              quick_start_block.rstrip(), "",
              *heading(2, "🧭 Start a job", "🚦 First, choose the right route"),
@@ -1125,6 +1126,55 @@ def validate_news(catalog: dict) -> None:
                 or item["date"] > catalog["reviewedAt"] or not item.get("title") or not item.get("description")):
             raise ValueError("Invalid News briefing item")
 
+
+def validate_updates_center(catalog: dict) -> None:
+    """Validate update channels, copy-ready commands and recovery workflows."""
+    if catalog.get("schemaVersion") != 1 or not isinstance(catalog.get("commands"), list) or not catalog["commands"]:
+        raise ValueError("Updates Center requires a versioned command catalog")
+    categories = {"Windows Update", "Microsoft Store", "Installer recovery", "Application inventory", "WinGet", "Chocolatey", "Scoop", "UniGetUI", "Ninite Pro", "Update inventory", "Linux"}
+    commands = {}
+    for item in catalog["commands"]:
+        identity = item.get("id", "?")
+        if identity in commands or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+            raise ValueError(f"{identity}: invalid or duplicate update command ID")
+        commands[identity] = item
+        for field in ("title", "category", "shell", "privilege", "risk", "summary", "code", "safety", "sourceUrl", "sourceTitle"):
+            if not isinstance(item.get(field), str) or not item[field].strip():
+                raise ValueError(f"{identity}: update command requires {field}")
+        if item["category"] not in categories or item["shell"] not in {"PowerShell", "CMD", "Bash"}:
+            raise ValueError(f"{identity}: unsupported update category or shell")
+        if item["risk"] not in {"read-only", "long-running", "downloads-file", "installs-software", "changes-system"}:
+            raise ValueError(f"{identity}: unsupported update risk")
+        source = urlparse(item["sourceUrl"])
+        if source.scheme != "https" or not source.hostname or source.username or source.password:
+            raise ValueError(f"{identity}: source must be public HTTPS")
+        if len(item["code"]) > 16000:
+            raise ValueError(f"{identity}: command exceeds size limit")
+        code = item["code"].replace(chr(96) + "\n", " ").replace("\\\n", " ")
+        fetch = r"(?:irm|iwr|invoke-restmethod|invoke-webrequest|curl(?:\.exe)?|wget(?:\.exe)?)"
+        interpreter = r"(?:iex|invoke-expression|bash|sh|zsh|pwsh(?:\.exe)?|powershell(?:\.exe)?)"
+        if (re.search(rf"(?i)\b{fetch}\b[^\n;]*\|\s*(?:sudo\s+)?{interpreter}\b", code)
+                or re.search(rf"(?i)\b(?:iex|invoke-expression)\s*\(\s*{fetch}\b", code)):
+            raise ValueError(f"{identity}: remote download-and-execute pipeline prohibited")
+    channel_ids = set()
+    for channel in catalog.get("channels", []):
+        identity = channel.get("id", "?")
+        if identity in channel_ids or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+            raise ValueError(f"{identity}: invalid or duplicate update channel")
+        channel_ids.add(identity)
+        for field in ("name", "scope", "manager", "auditCommand", "updateCommand", "note"):
+            if not channel.get(field):
+                raise ValueError(f"{identity}: update channel requires {field}")
+        if channel["auditCommand"] not in commands or channel["updateCommand"] not in commands:
+            raise ValueError(f"{identity}: update channel references an unknown command")
+    workflow_ids = set()
+    for workflow in catalog.get("workflows", []):
+        identity = workflow.get("id", "?")
+        if identity in workflow_ids or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity):
+            raise ValueError(f"{identity}: invalid or duplicate update workflow")
+        workflow_ids.add(identity)
+        if not workflow.get("commandIds") or any(command_id not in commands for command_id in workflow["commandIds"]):
+            raise ValueError(f"{identity}: workflow references an unknown command")
 
 def validate_command_center(catalog: dict) -> None:
     """Validate the complete authored command library and its relationships."""
@@ -1301,6 +1351,8 @@ def build_outputs() -> dict[str, str]:
     research_queue = json.loads((ROOT / "data/research-queue.json").read_text(encoding="utf-8"))
     online_data = json.loads((ROOT / "data/online-tools.json").read_text(encoding="utf-8"))
     command_center = json.loads((ROOT / "data/command-center.json").read_text(encoding="utf-8"))
+    updates_center = json.loads((ROOT / "data/updates-center.json").read_text(encoding="utf-8"))
+    validate_updates_center(updates_center)
     validate_command_center(command_center)
     online_module = brand_module("online_tools.py")
     online_module.validate_online(online_data, tools, jobs)
@@ -1333,7 +1385,7 @@ def build_outputs() -> dict[str, str]:
     brand_markdown = brand_module("brand_markdown.py")
     decorator = brand_markdown.BrandMarkdown(brands, linker)
     data = {"tools": [{**tool, "reputation": reputation["tools"][tool["id"]]} for tool in tools], "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
-            "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces, "commandCenter": command_center,
+            "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces, "commandCenter": command_center, "updatesCenter": updates_center,
             "layout": layout, "fieldNotes": field_notes, "onlineTools": online_data, "brands": brands_module.portal_icons(brands), "news": news}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
@@ -1361,8 +1413,47 @@ def build_outputs() -> dict[str, str]:
     categories = defaultdict(list)
     for tool in tools:
         categories[tool["category"]].append(tool)
+    pwa_manifest = {
+        "id": "./", "name": "INTA Computer Services", "short_name": "INTA",
+        "description": "INTA technician tools, diagnostics, updates and maintenance.",
+        "start_url": "./#updates", "scope": "./", "display": "standalone",
+        "background_color": "#111214", "theme_color": "#111214",
+        "categories": ["productivity", "utilities"],
+        "icons": [{"src": "./inta-app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}],
+    }
+    pwa_icon = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="104" fill="#111214"/>
+      <g fill="#e7e9ee"><path d="M104 104h128v128H104zM280 104h128v128H280zM104 280h128v128H104z"/></g>
+      <path d="M280 280h128v128H280z" fill="none" stroke="#8bb8ff" stroke-width="18"/>
+    </svg>"""
+    service_worker = """const CACHE = "inta-shell-v1";
+const SHELL = ["./", "./manifest.webmanifest", "./inta-app-icon.svg"];
+self.addEventListener("install", event => {
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
+});
+self.addEventListener("activate", event => {
+  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith("inta-shell-") && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim()));
+});
+self.addEventListener("fetch", event => {
+  const request = event.request;
+  if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
+  if (request.mode === "navigate") {
+    event.respondWith(fetch(request).then(response => {
+      if (response && response.ok) { const copy = response.clone(); caches.open(CACHE).then(cache => cache.put("./", copy)); }
+      return response;
+    }).catch(() => caches.match("./").then(cached => cached || Response.error())));
+    return;
+  }
+  event.respondWith(fetch(request).then(response => {
+    if (response && response.ok) { const copy = response.clone(); caches.open(CACHE).then(cache => cache.put(request, copy)); }
+    return response;
+  }).catch(() => caches.match(request)));
+});
+"""
     outputs = {"site/index.html": template, "site/.nojekyll": "", "site/catalog.json": data_json + "\n",
-               "site/knowledge-health.json": json.dumps(health_report, ensure_ascii=False, indent=2) + "\n"}
+               "site/knowledge-health.json": json.dumps(health_report, ensure_ascii=False, indent=2) + "\n",
+               "site/manifest.webmanifest": json.dumps(pwa_manifest, ensure_ascii=False, indent=2) + "\n",
+               "site/inta-app-icon.svg": pwa_icon + "\n", "site/sw.js": service_worker}
     outputs.update(managed_sources)
     outputs.update(online_module.wiki_outputs(online_data, tools, access))
     for job in jobs:
@@ -1426,6 +1517,7 @@ def build_outputs() -> dict[str, str]:
     sidebar += ["", "### Reference", "",
                 "- [Decision desk](Decision-Desk)", "- [⚡ Command Center](Command-Center)", "- [⚡ Quick commands](Quick-Commands)",
                 "- [All playbooks](Playbooks)", "- [Complete tool directory](Tool-Directory)",
+                "- [Updates & Maintenance](Updates-and-Maintenance)",
                 "- [Methods](Methods)", "- [Rescue media](Rescue-Media)", "- [Intake and handoff](Technician-Handoff)",
                 "- [Service evidence](Service-Evidence)", "- [Tool selection](Tool-Selection)",
                 "- [Free Tool Picks](Free-Tool-Picks)", "- [Current tool choices](Current-Tool-Choices)",
@@ -1468,6 +1560,9 @@ def build_outputs() -> dict[str, str]:
                 "quickStartSha256": hashlib.sha256(json.dumps(quick_start, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
                 "onlineTools": len(online_data["tools"]),
                 "commandCenterCommands": len(command_center["commands"]),
+                "updatesCenterCommands": len(updates_center["commands"]),
+                "updatesCenterChannels": len(updates_center["channels"]),
+                "updatesCenterWorkflows": len(updates_center["workflows"]),
                 "commandCenterWorkflows": len(command_center["workflows"]),
                 "commandCenterToolkits": len(command_center["toolkits"]),
                 "onlineGroups": len(online_data["groups"]),

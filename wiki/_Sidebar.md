@@ -84,6 +84,7 @@ Tool name = official page. File buttons name the platform; built-in tools open i
 - [⚡ Quick commands](Quick-Commands)
 - [All playbooks](Playbooks)
 - [Complete tool directory](Tool-Directory)
+- [Updates & Maintenance](Updates-and-Maintenance)
 - [Methods](Methods)
 - [Rescue media](Rescue-Media)
 - [Intake and handoff](Technician-Handoff)

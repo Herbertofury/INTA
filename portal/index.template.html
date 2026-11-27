@@ -6,6 +6,11 @@
   <meta name="color-scheme" content="dark light">
   <link rel="icon" type="image/svg+xml" href="{{FAVICON}}">
   <meta name="theme-color" content="#111214">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./inta-app-icon.svg">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="description" content="The INTA Computer Services technician workspace. Find the right tools, follow a clear playbook, and verify every fix.">
   <title>INTA | Technician workspace</title>
   <style id="inta-styles">{{STYLES}}</style>
@@ -23,6 +28,7 @@
         <a href="#home" data-nav="home"><span data-icon="home"></span>Technician home</a>
         <a href="#news" data-nav="news"><span data-icon="activity"></span>News</a>
         <a href="#checklist" data-nav="checklist"><span data-icon="checkCircle"></span>Checklist</a>
+        <a href="#updates" data-nav="updates"><span data-icon="refresh-cw"></span>Updates &amp; Maintenance</a>
         <a href="#command-center" data-nav="command-center"><span data-icon="terminal"></span>Command Center</a>
         <a href="#services" data-nav="services"><span data-icon="route"></span>Service map</a>
         <a href="#online" data-nav="online"><span data-icon="globe"></span>Online tools</a>
@@ -64,5 +70,6 @@
   <noscript><div class="noscript">This interactive workspace needs JavaScript. The complete guides are also available in the <a href="https://github.com/Herbertofury/INTA/wiki">INTA GitHub wiki</a>.</div></noscript>
   <script id="inta-data">{{DATA}}</script>
   <script id="inta-app">{{APP}}</script>
+  <script>if ("serviceWorker" in navigator && location.protocol !== "file:") { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(() => {})); }</script>
 </body>
 </html>

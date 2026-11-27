@@ -1,0 +1,23 @@
+{
+  "id": "./",
+  "name": "INTA Computer Services",
+  "short_name": "INTA",
+  "description": "INTA technician tools, diagnostics, updates and maintenance.",
+  "start_url": "./#updates",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#111214",
+  "theme_color": "#111214",
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "./inta-app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

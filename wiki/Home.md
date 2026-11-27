@@ -6,7 +6,7 @@
 
 Service procedures, tool references and troubleshooting methods for the <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) team.
 
-**[🧰 Open technician hub](https://herbertofury.github.io/INTA/)** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)
+**[🧰 Open technician hub](https://herbertofury.github.io/INTA/)** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [Updates & Maintenance](Updates-and-Maintenance) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)
 
 **258 tools · 22 playbooks · 11 tool categories**
 
