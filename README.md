@@ -151,6 +151,14 @@ The ongoing **Grow the INTA Wiki** maintenance task runs on weekday mornings, ar
 <a id="-contribute-to-the-bench"></a>
 
 
+## ⚡ Copy-ready technician commands
+
+Every one of the 22 service playbooks now has at least one shell-labeled, copy-ready CMD, PowerShell or Linux diagnostic/action block, with purpose, safety guidance and an official reference. The hub copies text only; it never executes a command. Repairs remain conditional on the observed fault and are paired with verification and stop conditions.
+
+- [Quick-command standards and safe workflows](docs/quick-commands.md)
+- [All job playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks)
+
+
 ## Reputation, recommendations & source intelligence
 
 Every catalog entry has a planned, auditable reputation profile: GitHub stars and maintenance signals where a verified repository exists; native ratings and review counts from professional review platforms; independent lab results; and recommendations from technical publications and practitioner communities. These remain separate evidence streams rather than an opaque blended score.
