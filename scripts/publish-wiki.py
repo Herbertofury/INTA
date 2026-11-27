@@ -11,6 +11,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import urllib.request
 
 class PublishError(Exception):
     pass
@@ -75,6 +76,18 @@ def publish(report):
         return value
 
     report.update(source_head=head(root, "read-source-head"), changed_pages=[], changes=[], push_status="not-needed")
+    def require_current_main():
+        report["phase"] = "check-current-main"
+        request = urllib.request.Request(
+            f"https://api.github.com/repos/{repository}/git/ref/heads/main",
+            headers={"Authorization": "Bearer " + token, "Accept": "application/vnd.github+json",
+                     "User-Agent": "INTA-Wiki-Publisher"})
+        with urllib.request.urlopen(request, timeout=30) as response:
+            current = json.load(response)["object"]["sha"]
+        report["current_main"] = current
+        if current != report["source_head"]:
+            raise PublishError("A newer main revision exists; stale Wiki publication was stopped")
+    require_current_main()
     with tempfile.TemporaryDirectory(prefix="inta-wiki-") as temporary:
         directory = Path(temporary)
         work, readback = directory / "publish", directory / "readback"
@@ -110,6 +123,7 @@ def publish(report):
                 "-c", "user.email=41898282+github-actions[bot]@users.noreply.github.com",
                 "commit", "--quiet", "-m", f"Sync canonical Wiki from {report['source_head'][:12]}")
             report["published_head"] = head(work, "read-publish-head")
+            require_current_main()
             report["push_status"] = "attempted"
             git("push-wiki", work, "push", "--porcelain", "origin", f"HEAD:{branch_ref}")
             report["push_status"] = "confirmed"
