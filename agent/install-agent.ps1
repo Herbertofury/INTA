@@ -1,31 +1,24 @@
 [CmdletBinding()]
-param([switch]$RunAsAdministrator)
+param(
+    [string]$PackagePath = (Join-Path $PSScriptRoot 'inta-agent-win-x64.zip'),
+    [switch]$RunAsAdministrator
+)
 
 $ErrorActionPreference = 'Stop'
-$repo = 'Herbertofury/INTA'
-$release = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/releases/latest" -Headers @{ 'User-Agent' = 'INTA-Local-Agent-Installer'; Accept = 'application/vnd.github+json' }
-$asset = $release.assets | Where-Object name -eq 'inta-agent-win-x64.zip' | Select-Object -First 1
-$checksums = $release.assets | Where-Object name -eq 'SHA256SUMS.txt' | Select-Object -First 1
-if (-not $asset -or -not $checksums) { throw 'The latest release does not contain the Windows agent and checksum manifest.' }
+$PackagePath = (Resolve-Path -LiteralPath $PackagePath).Path
+$checksumPath = $PackagePath + '.sha256'
+if (-not (Test-Path -LiteralPath $checksumPath)) { throw "Missing checksum sidecar: $checksumPath" }
+$line = Get-Content -LiteralPath $checksumPath | Select-Object -First 1
+$expected = ($line -split '\s+')[0].ToLowerInvariant()
+$actual = (Get-FileHash -LiteralPath $PackagePath -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($actual -ne $expected) { throw 'Checksum verification failed. INTA Agent was not installed.' }
 
 $temp = Join-Path $env:TEMP ('inta-agent-' + [guid]::NewGuid().ToString('N'))
 $install = Join-Path $env:LOCALAPPDATA 'Programs\INTA\Agent'
-New-Item -ItemType Directory -Path $temp -Force | Out-Null
 try {
-    $zip = Join-Path $temp $asset.name
-    $sumFile = Join-Path $temp 'SHA256SUMS.txt'
-    Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $zip
-    Invoke-WebRequest -Uri $checksums.browser_download_url -OutFile $sumFile
-    $line = Get-Content $sumFile | Where-Object { $_ -match '  inta-agent-win-x64\.zip$' } | Select-Object -First 1
-    if (-not $line) { throw 'Windows package checksum is missing.' }
-    $expected = ($line -split '\s+')[0].ToLowerInvariant()
-    $actual = (Get-FileHash -Path $zip -Algorithm SHA256).Hash.ToLowerInvariant()
-    if ($actual -ne $expected) { throw 'Checksum verification failed. The agent was not installed.' }
-
-    $stage = Join-Path $temp 'publish'
-    Expand-Archive -Path $zip -DestinationPath $stage -Force
+    Expand-Archive -LiteralPath $PackagePath -DestinationPath $temp -Force
     New-Item -ItemType Directory -Path $install -Force | Out-Null
-    Copy-Item -Path (Join-Path $stage '*') -Destination $install -Recurse -Force
+    Copy-Item -Path (Join-Path $temp '*') -Destination $install -Recurse -Force
 
     $launch = Join-Path $install 'Start-INTA-Agent.cmd'
     Set-Content -Path $launch -Encoding ASCII -Value '@echo off','cd /d "%~dp0"','inta-agent.exe'
@@ -50,6 +43,4 @@ try {
     if ($RunAsAdministrator) { Start-Process -FilePath $admin }
     else { Start-Process -FilePath $launch }
 }
-finally {
-    Remove-Item -Path $temp -Recurse -Force -ErrorAction SilentlyContinue
-}
+finally { Remove-Item -Path $temp -Recurse -Force -ErrorAction SilentlyContinue }
