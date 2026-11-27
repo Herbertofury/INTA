@@ -1,0 +1,2065 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "groups": [
+    {
+      "id": "file-analysis",
+      "label": "Files, sandboxes & ransomware",
+      "summary": "Compare file reputation, inspect behavior and identify ransomware before choosing a response."
+    },
+    {
+      "id": "url-phishing",
+      "label": "Suspicious links & phishing",
+      "summary": "Inspect a destination and its existing reputation before opening it in a normal browser."
+    },
+    {
+      "id": "threat-intelligence",
+      "label": "IP, domain & threat intelligence",
+      "summary": "Add dated infrastructure, abuse and exposure evidence to an investigation."
+    },
+    {
+      "id": "dns-email",
+      "label": "DNS & email delivery",
+      "summary": "Check records, authentication and mail routing from the relevant outside perspective."
+    },
+    {
+      "id": "web-security",
+      "label": "Website security",
+      "summary": "Examine TLS, certificates, headers and modern internet configuration."
+    },
+    {
+      "id": "connectivity",
+      "label": "Internet, routing & outages",
+      "summary": "Compare geographic reachability, loaded latency, IPv6 and provider service health."
+    },
+    {
+      "id": "web-quality",
+      "label": "Website speed & accessibility",
+      "summary": "Separate performance and accessibility findings into specific changes to verify."
+    },
+    {
+      "id": "vulnerability",
+      "label": "Vulnerabilities & patch priority",
+      "summary": "Match affected versions and combine observed exploitation, likelihood and severity."
+    },
+    {
+      "id": "browser-utilities",
+      "label": "Browser utilities & documentation",
+      "summary": "Decode evidence, test APIs, inspect browser behavior and document the repair."
+    }
+  ],
+  "featured": [
+    "virustotal",
+    "metadefender-cloud",
+    "urlscan",
+    "google-admin-toolbox",
+    "ssl-labs",
+    "cyberchef"
+  ],
+  "workflows": [
+    {
+      "id": "check-file",
+      "title": "Check a suspicious file",
+      "jobId": "malware-removal",
+      "summary": "Start with an existing hash report, then choose static or behavioral analysis for the question that remains.",
+      "toolIds": [
+        "virustotal",
+        "metadefender-cloud",
+        "anyrun",
+        "triage"
+      ],
+      "steps": [
+        "Calculate the file hash locally and search for an existing report before sending file bytes to a service.",
+        "Compare detection names, report age, signer and behavior; choose a sandbox when you need to understand execution.",
+        "Record the exact hash and findings, then use the malware guide to verify the affected endpoint and choose cleanup or rebuild."
+      ]
+    },
+    {
+      "id": "check-link",
+      "title": "Inspect a suspicious link",
+      "jobId": "malware-removal",
+      "summary": "Combine reputation with redirects and page behavior without opening the destination on the customer’s workstation.",
+      "toolIds": [
+        "urlscan",
+        "google-safe-browsing",
+        "checkphish"
+      ],
+      "steps": [
+        "Copy the destination as text and search existing reports; inspect the hostname before following a link.",
+        "For a new scan, choose a visibility mode suitable for the URL; use an existing report, hostname lookup or appropriate private workflow for a token-bearing link. Record any input redaction because it can change page behavior.",
+        "Compare redirects, page requests and reputation; follow the incident guide if someone entered credentials or downloaded a payload."
+      ]
+    },
+    {
+      "id": "check-ip",
+      "title": "Investigate an IP or domain",
+      "jobId": "network-dns",
+      "summary": "Use several dated sources to explain reputation, exposed services and ownership.",
+      "toolIds": [
+        "greynoise",
+        "abuseipdb",
+        "censys",
+        "shodan"
+      ],
+      "steps": [
+        "Look up the exact indicator and record when each source last observed it.",
+        "Compare scanner noise, abuse reports, service banners and network ownership with the actual firewall evidence.",
+        "Confirm the current connection and scope before changing a block rule; shared hosting and old reports can change the interpretation."
+      ]
+    },
+    {
+      "id": "fix-email",
+      "title": "Diagnose email and DNS",
+      "jobId": "outlook-email",
+      "summary": "Separate DNS, sender authentication and service availability before changing a mailbox.",
+      "toolIds": [
+        "google-admin-toolbox",
+        "mxtoolbox",
+        "learndmarc",
+        "microsoft-remote-connectivity"
+      ],
+      "steps": [
+        "Check the domain’s MX and TXT records, the full delivery error and the provider’s service status.",
+        "Inspect SPF, DKIM and DMARC alignment, and use message-header analysis or a non-sensitive test message when needed.",
+        "After one targeted correction, send and receive the same test and record the resulting authentication and delivery evidence."
+      ]
+    },
+    {
+      "id": "test-website",
+      "title": "Check website security",
+      "jobId": "preventive-maintenance",
+      "summary": "Combine complementary configuration tests for a public site.",
+      "toolIds": [
+        "ssl-labs",
+        "mdn-observatory",
+        "internet-nl",
+        "securityheaders"
+      ],
+      "steps": [
+        "Run a TLS and certificate check against the exact public hostname you maintain.",
+        "Inspect security headers and internet configuration separately; map each finding to its server or application owner.",
+        "Apply a targeted change, rerun the matching check, and verify sign-in, embeds and the normal user journey still work."
+      ]
+    },
+    {
+      "id": "test-connection",
+      "title": "Find latency or an outage",
+      "jobId": "network-dns",
+      "summary": "Separate bandwidth, latency under load, local faults and regional reachability.",
+      "toolIds": [
+        "cloudflare-speed",
+        "waveform-bufferbloat",
+        "globalping",
+        "cloudflare-radar"
+      ],
+      "steps": [
+        "Measure from one wired device and record idle latency, loaded latency, loss and the time of the symptom.",
+        "Compare a second device or path, then use external vantage points and provider status to locate the failing boundary.",
+        "Retest the original call, stream or business application after the change; a download-speed result alone is not the completion test."
+      ]
+    },
+    {
+      "id": "prioritize-patches",
+      "title": "Prioritize a vulnerability",
+      "jobId": "preventive-maintenance",
+      "summary": "Combine affected-version evidence, known exploitation and likely exploitation without treating them as the same metric.",
+      "toolIds": [
+        "cisa-kev",
+        "first-epss",
+        "nvd",
+        "osv"
+      ],
+      "steps": [
+        "Match the advisory to the installed product and exact version; check vendor remediation and prerequisites.",
+        "Check known exploitation and current probability alongside severity and actual exposure.",
+        "Apply the applicable vendor fix in a recovery-ready window, then verify the version and the service’s original workload."
+      ]
+    },
+    {
+      "id": "improve-site",
+      "title": "Improve a slow website",
+      "jobId": "preventive-maintenance",
+      "summary": "Turn performance and accessibility reports into changes with a visible user result.",
+      "toolIds": [
+        "pagespeed-insights",
+        "webpagetest",
+        "wave-accessibility",
+        "squoosh"
+      ],
+      "steps": [
+        "Test the exact affected page and device conditions; distinguish lab runs from available real-user measurements.",
+        "Trace the slow resource or failed interaction, make one targeted change and preserve readable content and keyboard access.",
+        "Repeat the same test conditions and the actual user task; supplement automated accessibility findings with manual checks."
+      ]
+    },
+    {
+      "id": "decode-and-document",
+      "title": "Decode and document evidence",
+      "jobId": "intake-triage",
+      "summary": "Use purpose-specific browser tools to understand a sample of evidence and leave a clear handoff.",
+      "toolIds": [
+        "cyberchef",
+        "regex101",
+        "drawio",
+        "hoppscotch"
+      ],
+      "steps": [
+        "Choose the operation for the question: decode a value, match a pattern, diagram a dependency or reproduce an API request.",
+        "Check whether that operation is local, synchronized, proxied or sent to a remote service before supplying case data.",
+        "Keep the original evidence and save the recipe, request or editable diagram plus the observed result."
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "toolId": "virustotal",
+      "group": "file-analysis",
+      "account": "Basic web lookup is available without a paid plan; community, API and premium capabilities have their own account requirements.",
+      "sharing": "Standard uploads and reports are shared with the community and partners. The paid Private Scanning form keeps analyses within the organization but excludes partner antivirus and URL-scanner verdicts.",
+      "firstAction": "Select Search and look up the file SHA-256 before deciding whether a new upload is needed.",
+      "expectedResult": "A matching hash report with analysis date, detection names, behavior and related indicators; a missing or clean report is not a guarantee.",
+      "sources": [
+        {
+          "url": "https://docs.virustotal.com/docs/how-it-works",
+          "title": "How VirusTotal works",
+          "evidence": "Documents multi-engine analysis, submissions and sharing of reports and submitted content."
+        },
+        {
+          "url": "https://gtidocs.virustotal.com/docs/private-scanning",
+          "title": "Google Threat Intelligence Private Scanning",
+          "evidence": "Paid entitlement; separate private submission route, retention and absence of partner antivirus verdicts."
+        },
+        {
+          "url": "https://docs.virustotal.com/reference/analyse-binary",
+          "title": "Analyze code blocks with Code Insights",
+          "evidence": "Documents AI-assisted explanation of disassembled or decompiled code as an existing platform capability, not a separate scanner."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "File and URL reputation"
+    },
+    {
+      "toolId": "metadefender-cloud",
+      "group": "file-analysis",
+      "account": "A free account increases community limits and provides history; advanced processing depends on plan.",
+      "sharing": "Community submissions can be retained and shared. Private scan can still leave results visible; private processing restricts results and deletes the file after analysis. Choose the intended setting explicitly.",
+      "firstAction": "Look up the existing file hash, then compare engine findings and the recorded scan time.",
+      "expectedResult": "A file report separating individual engine detections and any enabled content or sandbox findings.",
+      "sources": [
+        {
+          "url": "https://metadefender.com/product/community",
+          "title": "MetaDefender Cloud Community",
+          "evidence": "Describes free file, URL, IP and hash analysis and the account benefits."
+        },
+        {
+          "url": "https://www.opswat.com/docs/mdcloud/operation/homepage",
+          "title": "MetaDefender Cloud dashboard",
+          "evidence": "Documents available scanning features and paid private scanning."
+        },
+        {
+          "url": "https://www.opswat.com/docs/mdcloud/compliance/responsibility-matrix",
+          "title": "MetaDefender Cloud responsibility matrix",
+          "evidence": "Distinguishes private processing, result visibility and sample sharing."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Independent multiscanner evidence"
+    },
+    {
+      "toolId": "jotti",
+      "group": "file-analysis",
+      "account": "The public upload page does not require a sign-in step.",
+      "sharing": "All submitted files are shared with antivirus companies.",
+      "firstAction": "Choose the file and review each engine result instead of relying only on the combined count.",
+      "expectedResult": "A per-engine file report to compare with the local antivirus result and the file’s publisher/signature.",
+      "sources": [
+        {
+          "url": "https://virusscan.jotti.org/en-GB",
+          "title": "Jotti upload page",
+          "evidence": "Confirms free multi-engine scanning, file limits and sharing with antivirus companies."
+        },
+        {
+          "url": "https://virusscan.jotti.org/en-GB/doc/privacy",
+          "title": "Jotti privacy policy",
+          "evidence": "Describes service logging and preference cookies."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "A straightforward second opinion on a nonconfidential file when a full investigation platform is unnecessary."
+    },
+    {
+      "toolId": "hybrid-analysis",
+      "group": "file-analysis",
+      "account": "Use a service account for submission/API capabilities; exact access level is shown by the current portal.",
+      "sharing": "Use the community workflow for shareable samples. This review did not establish a private-upload entitlement for the free portal.",
+      "firstAction": "Search for an existing file-hash report, then review execution behavior, contacted hosts and extracted indicators.",
+      "expectedResult": "A behavior report and corroborating indicators, with the sandbox environment and run date recorded.",
+      "sources": [
+        {
+          "url": "https://www.crowdstrike.com/en-us/blog/crowdstrike-delivers-next-evolution-of-agentic-soc/",
+          "title": "CrowdStrike agentic SOC update, September 2, 2026",
+          "evidence": "Confirms the reengineered public Hybrid Analysis service and API-first/open-source MCP access."
+        },
+        {
+          "url": "https://www.crowdstrike.com/en-gb/resources/videos/falcon-sandbox-demo/",
+          "title": "Falcon Sandbox demonstration",
+          "evidence": "Identifies Hybrid Analysis as the free community route to Falcon Sandbox technology."
+        },
+        {
+          "url": "https://hybrid-analysis.com/faq",
+          "title": "Hybrid Analysis FAQ",
+          "evidence": "Official FAQ route; client-rendered content did not yield readable text during this review."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Behavioral triage of a suspicious file and comparison with existing community analyses."
+    },
+    {
+      "toolId": "anyrun",
+      "group": "file-analysis",
+      "account": "Registration is required for creating analysis tasks.",
+      "sharing": "Community analyses are public; private analysis is a paid-plan capability.",
+      "firstAction": "Search an existing public report or create a task with the correct guest environment, then observe the process and network timeline.",
+      "expectedResult": "A task report with observed processes, connections, detections and extracted indicators.",
+      "sources": [
+        {
+          "url": "https://any.run/",
+          "title": "ANY.RUN product and start workflow",
+          "evidence": "Describes interactive analysis, account creation and paid private analyses."
+        },
+        {
+          "url": "https://any.run/plans/",
+          "title": "ANY.RUN plans",
+          "evidence": "Current Community and paid-plan boundaries; avoids assuming paid environments are included free."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Interactive behavior analysis"
+    },
+    {
+      "toolId": "triage",
+      "group": "file-analysis",
+      "account": "A public account is needed to submit; researcher permissions provide additional API and rule capabilities.",
+      "sharing": "Every public Triage submission is visible to others and cannot be deleted through the free service. Enterprise submissions are private by default.",
+      "firstAction": "Search existing reports by hash, then choose the appropriate environment for a shareable sample if a new run is necessary.",
+      "expectedResult": "A report with signatures, process/network activity and any supported extracted malware configuration.",
+      "sources": [
+        {
+          "url": "https://tria.ge/",
+          "title": "Triage public portal",
+          "evidence": "Confirms active free sandbox, configuration extraction and current public reports."
+        },
+        {
+          "url": "https://tria.ge/signup",
+          "title": "Triage account types",
+          "evidence": "States noncommercial individual access and researcher features."
+        },
+        {
+          "url": "https://sandbox.recordedfuture.com/docs/faq/",
+          "title": "Recorded Future Sandbox FAQ",
+          "evidence": "Public submissions cannot be deleted; enterprise private-submission distinction."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Sandbox behavior and reports"
+    },
+    {
+      "toolId": "joe-sandbox",
+      "group": "file-analysis",
+      "account": "Sign in before submitting a sample; viewing the form alone does not grant submission access.",
+      "sharing": "Basic publishes the sample, screenshots and analysis. Cloud Pro is the separate private-account route.",
+      "firstAction": "Choose the analysis system that matches the target, then inspect behavior and IOCs; enable Joe Reverser when its code-analysis report is useful.",
+      "expectedResult": "A detailed behavior report and, when selected, a separate Joe Reverser report with supporting findings.",
+      "sources": [
+        {
+          "url": "https://www.joesandbox.com/",
+          "title": "Joe Sandbox Cloud Basic submission interface",
+          "evidence": "Shows public/noncommercial boundaries, account requirement and current analysis options; Android analysis is marked EOL 2026."
+        },
+        {
+          "url": "https://www.joesecurity.org/joe-reverser",
+          "title": "Joe Reverser",
+          "evidence": "Confirms agentic malware/phishing analysis and availability through Cloud Basic."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "A detailed specialist sandbox report when a simple reputation result leaves the behavior unresolved."
+    },
+    {
+      "toolId": "intezer-analyze",
+      "group": "file-analysis",
+      "account": "An Intezer account and the capabilities assigned to it are required.",
+      "sharing": "Verify the account’s submission mode and retention controls before uploading; historical community offers should not be treated as a private service.",
+      "firstAction": "Open the analysis account, confirm the available file-analysis entitlement and inspect an existing hash before submitting.",
+      "expectedResult": "File classification and evidence of shared code or related families where supported by the active plan.",
+      "sources": [
+        {
+          "url": "https://analyze.intezer.com/",
+          "title": "Intezer analysis portal",
+          "evidence": "Current official application route; client-rendered sign-in service."
+        },
+        {
+          "url": "https://intezer.com/product/pricing",
+          "title": "Intezer current pricing",
+          "evidence": "Current Starter and Complete enterprise plans; page does not state a community file-scan quota."
+        },
+        {
+          "url": "https://intezer.com/blog/what-is-genetic-malware-analysis",
+          "title": "Intezer genetic malware analysis",
+          "evidence": "Official explanation of code-level file classification; historical feature background, not current pricing."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Specialist file classification and code-family context, particularly for teams already using Intezer."
+    },
+    {
+      "toolId": "polyswarm",
+      "group": "file-analysis",
+      "account": "Limited anonymous functionality; a free account unlocks Community features.",
+      "sharing": "Public network and private-community contexts differ. Invitation-only private communities keep artifacts and results within their membership.",
+      "firstAction": "Search the known file hash, review individual engine findings and PolyScore, and confirm the active account/community context.",
+      "expectedResult": "An artifact report with constituent engine results, classification and available contextual metadata.",
+      "sources": [
+        {
+          "url": "https://polyswarm.io/scan",
+          "title": "PolySwarm scanning",
+          "evidence": "Documents file, URL, domain, IP and QR-code artifact analysis."
+        },
+        {
+          "url": "https://docs.polyswarm.io/customers/",
+          "title": "PolySwarm UI guide",
+          "evidence": "Confirms limited anonymous access, free Community accounts and account-context behavior."
+        },
+        {
+          "url": "https://polyswarm.io/private",
+          "title": "PolySwarm Private Communities",
+          "evidence": "Documents invitation-only artifact/result isolation and separate commercial access."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "A complementary engine set and malware-family context when investigating a file or URL."
+    },
+    {
+      "toolId": "filescan-io",
+      "group": "file-analysis",
+      "account": "Use the public web portal; account/API requirements depend on the operation.",
+      "sharing": "Community reports are public and have no private-report option; commercial Aether deployment is a different offering.",
+      "firstAction": "Submit a shareable file or URL and inspect extracted indicators, script/emulation findings and embedded artifacts.",
+      "expectedResult": "A public triage report with the available indicators and emulation evidence.",
+      "sources": [
+        {
+          "url": "https://www.filescan.io/",
+          "title": "Filescan.io community portal",
+          "evidence": "Current official web analysis route."
+        },
+        {
+          "url": "https://www.opswat.com/docs/filescan/3.3.0/faq/what-is-the-difference-between-filescan-io-and-opswat-filescan-c",
+          "title": "Filescan.io versus MetaDefender Aether",
+          "evidence": "Official edition matrix confirms free public triage, no private reports, and supported emulation/QR features."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Investigating scripts, embedded content or URLs when engine detections alone do not explain the sample."
+    },
+    {
+      "toolId": "unpacme",
+      "group": "file-analysis",
+      "account": "Sign in for account quotas, saved work and paid/private capabilities.",
+      "sharing": "Free-tier submissions are public; private submissions require an appropriate paid plan.",
+      "firstAction": "Search the outer file hash, then unpack a shareable sample and inspect the unique extracted payloads.",
+      "expectedResult": "An unpacking result with extracted payload hashes, detections and searchable artifacts; unsuccessful unpacking remains inconclusive.",
+      "sources": [
+        {
+          "url": "https://www.openanalysis.net/",
+          "title": "OpenAnalysis UnpacMe overview",
+          "evidence": "Explains custom unpacking and artifact extraction that returns a unique payload set."
+        },
+        {
+          "url": "https://www.unpac.me/pricing",
+          "title": "UnpacMe plans",
+          "evidence": "Official indexed pricing identifies Public as noncommercial/public-only and paid private-submission plans."
+        },
+        {
+          "url": "https://support.unpac.me/",
+          "title": "UnpacMe support",
+          "evidence": "Official operation and troubleshooting reference."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Recovering embedded payloads and comparing their indicators when an outer packed file conceals useful evidence."
+    },
+    {
+      "toolId": "kaspersky-opentip",
+      "group": "threat-intelligence",
+      "account": "Anonymous use returns basic information; a Kaspersky account adds history, private requests and more detail.",
+      "sharing": "Private requests hide the request from the public list, but file sandbox results can still be found by hash; prior public submission also makes results public.",
+      "firstAction": "Look up the existing hash, IP or domain and inspect its classification, evidence and observation context.",
+      "expectedResult": "A vendor assessment with the details available to the account; Not Categorized is unresolved rather than clean.",
+      "sources": [
+        {
+          "url": "https://opentip.kaspersky.com/howto/",
+          "title": "About Kaspersky Threat Intelligence Portal",
+          "evidence": "Confirms free indicator lookup and supported object types."
+        },
+        {
+          "url": "https://opentip.kaspersky.com/Help/Doc_data/en-US/all-in-one.htm?sectionUrl=FileReport.htm",
+          "title": "Kaspersky OpenTIP help",
+          "evidence": "Documents account levels, indicator reports and the limited meaning of Private requests."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "An additional vendor assessment and contextual evidence for an indicator already found during an investigation."
+    },
+    {
+      "toolId": "urlscan",
+      "group": "url-phishing",
+      "account": "Public search is available without sign-in; accounts provide API keys and personal/team capabilities.",
+      "sharing": "Public scans are searchable. Unlisted scans remain visible to vetted Pro subscribers. Private scans are accessible to the submitter or anyone given their unique scan ID.",
+      "firstAction": "Search existing scans for the exact domain or URL first; if a fresh scan is needed, select its visibility before submission.",
+      "expectedResult": "A timestamped page snapshot and request/redirect evidence. Downloaded executables still need a file-analysis tool.",
+      "sources": [
+        {
+          "url": "https://docs.urlscan.io/pages/faq",
+          "title": "urlscan FAQ",
+          "evidence": "Documents point-in-time snapshots, visibility, commercial-workflow access and lack of executable malware detection."
+        },
+        {
+          "url": "https://docs.urlscan.io/pages/visibility",
+          "title": "urlscan visibility levels",
+          "evidence": "Defines Public, Unlisted and Private visibility."
+        },
+        {
+          "url": "https://urlscan.io/about/",
+          "title": "urlscan history",
+          "evidence": "Documents March 2026 AI summaries/Malicious Lookup API and October 2026 Labs for Enterprise/Ultimate."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Redirects and page requests"
+    },
+    {
+      "toolId": "urlhaus",
+      "group": "url-phishing",
+      "account": "Public browsing and lookup; contribution and automation features use the provider’s account/authentication workflow.",
+      "sharing": "Reports are shared threat intelligence. Searching existing records does not upload the local file.",
+      "firstAction": "Search the exact URL or host and compare the record’s status, first/last observation and payload evidence.",
+      "expectedResult": "A malware-distribution record or no match; this is not a general phishing, spam or website-quality verdict.",
+      "sources": [
+        {
+          "url": "https://urlhaus.abuse.ch/",
+          "title": "URLhaus overview",
+          "evidence": "Defines the platform as malware-distribution URL intelligence."
+        },
+        {
+          "url": "https://urlhaus.abuse.ch/browse/",
+          "title": "URLhaus database",
+          "evidence": "Current searchable web route."
+        },
+        {
+          "url": "https://urlhaus.abuse.ch/faq/",
+          "title": "URLhaus FAQ",
+          "evidence": "Describes database/API/feed routes and intended report scope."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Checking whether a suspicious download URL or host has been observed distributing malware."
+    },
+    {
+      "toolId": "malwarebazaar",
+      "group": "threat-intelligence",
+      "account": "Public search; authentication and provider terms apply to contribution/download/API operations.",
+      "sharing": "Submitted malware is shared with the research community; the corpus accepts confirmed malware rather than arbitrary unknown files.",
+      "firstAction": "Search the SHA-256 and inspect family tags, first-seen context and linked analysis reports.",
+      "expectedResult": "A matching known-malware record and related evidence; no match does not determine whether the file is safe.",
+      "sources": [
+        {
+          "url": "https://bazaar.abuse.ch/browse/",
+          "title": "MalwareBazaar search",
+          "evidence": "Documents hash, tag, family and similarity search fields."
+        },
+        {
+          "url": "https://bazaar.abuse.ch/faq/",
+          "title": "MalwareBazaar FAQ",
+          "evidence": "Confirms it is not a multi-antivirus scanner, accepts confirmed malware, and separates commercial API access."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Correlating a known hash with malware-family evidence and research reports without uploading an unknown document."
+    },
+    {
+      "toolId": "threatfox",
+      "group": "threat-intelligence",
+      "account": "Public database browsing; contributions and API calls use the provider’s account/authentication workflow.",
+      "sharing": "Submitted IOCs are published to the community; preserve private incident context outside the public record.",
+      "firstAction": "Search the exact indicator and inspect confidence and observation dates before deciding whether it matches the incident.",
+      "expectedResult": "A contextual IOC record; older records remain searchable in the UI even when expired from current exports.",
+      "sources": [
+        {
+          "url": "https://threatfox.abuse.ch/",
+          "title": "ThreatFox overview",
+          "evidence": "Defines community malware IOC exchange."
+        },
+        {
+          "url": "https://threatfox.abuse.ch/faq/",
+          "title": "ThreatFox FAQ",
+          "evidence": "Documents malware-only scope, confidence, API/commercial terms and six-month expiry from API/exports while UI history remains available."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Checking whether a connection, domain or hash from endpoint/network logs matches reported malware infrastructure."
+    },
+    {
+      "toolId": "yaraify",
+      "group": "file-analysis",
+      "account": "Custom rules and live hunts require an abuse.ch account; nonpublic Malpedia matches require a linked Malpedia key.",
+      "sharing": "The scan workflow lets the user choose sample sharing. Disabling sample sharing should not be treated as proof that all report metadata is confidential.",
+      "firstAction": "Search the hash or scan a shareable artifact, then inspect the matched rules and their authors/context.",
+      "expectedResult": "A list of YARA matches and optional scan/unpacking results to correlate with other evidence.",
+      "sources": [
+        {
+          "url": "https://yaraify.abuse.ch/",
+          "title": "YARAify overview",
+          "evidence": "Confirms file/process-dump scanning and YARA hunting."
+        },
+        {
+          "url": "https://yaraify.abuse.ch/faq/",
+          "title": "YARAify FAQ",
+          "evidence": "Documents optional sharing, ClamAV/unpacking and account requirements for rules and Malpedia matches."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Finding family or technique signatures in a sample or memory artifact beyond a simple antivirus label."
+    },
+    {
+      "toolId": "no-more-ransom",
+      "group": "file-analysis",
+      "account": "The official identification route is public; no account requirement was stated in the reviewed instructions.",
+      "sharing": "The identification workflow sends selected encrypted samples and ransom-note details to the project; use copies rather than the only originals.",
+      "firstAction": "Open Crypto Sheriff with the ransom note and small encrypted-file copies, then compare any family match with the linked decryptor instructions.",
+      "expectedResult": "An identification or supported decryptor route; a family match does not mean every variant can be decrypted.",
+      "sources": [
+        {
+          "url": "https://www.nomoreransom.org/en/ransomware-qa.html",
+          "title": "No More Ransom Q&A",
+          "evidence": "Defines Crypto Sheriff as identification and availability checking for a decryption solution."
+        },
+        {
+          "url": "https://www.europol.europa.eu/operations-services-and-innovation/public-awareness-and-prevention-guides/no-more-ransom-do-you-need-help-unlocking-your-digital-life",
+          "title": "Europol No More Ransom workflow",
+          "evidence": "Project owner explains encrypted-sample/ransom-note matching and official tool links."
+        },
+        {
+          "url": "https://www.nomoreransom.org/en/index.html",
+          "title": "No More Ransom home",
+          "evidence": "Current official page links to Crypto Sheriff and available decryptors."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Finding the correct public recovery utility after isolating an encrypted system and preserving the original files."
+    },
+    {
+      "toolId": "id-ransomware",
+      "group": "file-analysis",
+      "account": "Public form; no account is required by the visible workflow.",
+      "sharing": "Matched uploads are deleted; unmatched files may be shared with trusted analysts. The service does not promise complete confidentiality.",
+      "firstAction": "Upload a ransom-note copy and a small encrypted-file copy, then compare the evidence when multiple families are suggested.",
+      "expectedResult": "Candidate family matches and known recovery guidance. The service identifies ransomware; it does not decrypt files.",
+      "sources": [
+        {
+          "url": "https://id-ransomware.malwarehunterteam.com/",
+          "title": "ID Ransomware form and FAQ",
+          "evidence": "Confirms free identification, accepted input, interpretation and sample handling; page reports an update on November 13, 2026."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "A quick ransomware-family identification and a pointer toward known recovery information."
+    },
+    {
+      "toolId": "checkphish",
+      "group": "url-phishing",
+      "account": "Initial public scan is offered; additional scans and automation require signup.",
+      "sharing": "URL and resulting page evidence are processed by a remote service; a free submission is not a verified private workspace.",
+      "firstAction": "Start with a public URL and inspect screenshot, certificate, DOM and hosting context in the report.",
+      "expectedResult": "Observed phishing signals and related infrastructure for an analyst to review.",
+      "sources": [
+        {
+          "url": "https://checkphish.bolster.ai/",
+          "title": "CheckPhish official scanner",
+          "evidence": "Current URL input, initial free scan, signup boundary and report evidence."
+        },
+        {
+          "url": "https://checkphish.bolster.ai/live-url-scan/",
+          "title": "CheckPhish live URL scanner",
+          "evidence": "Observed direct scanner route linked from the official product page."
+        },
+        {
+          "url": "https://bolster.ai/kbarticles/scan-apis-for-checkphish-users",
+          "title": "CheckPhish API guide",
+          "evidence": "Describes free account keys, request/result behavior and upgrade limits."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Investigate a possible brand-impersonation or phishing landing page."
+    },
+    {
+      "toolId": "sophos-intelix",
+      "group": "file-analysis",
+      "account": "Guest mode is available. Sophos explicitly says Sophos Home credentials do not work for this portal.",
+      "sharing": "Artifacts are processed by Sophos. Its Intelix data sheet says clean files are deleted under retention rules and malicious samples are retained for research; this is not a local-only check.",
+      "firstAction": "Choose Guest mode, look up or submit the appropriate artifact, and read the evidence supporting the verdict.",
+      "expectedResult": "A report explaining the available reputation, static or dynamic findings.",
+      "sources": [
+        {
+          "url": "https://www.sophos.com/en-us/blog/analyze-suspicious-files-and-urls-with-the-free-sophoslabs-intelix-portal",
+          "title": "Sophos Intelix portal announcement",
+          "evidence": "Confirms a free web interface and reputation/static/dynamic analysis."
+        },
+        {
+          "url": "https://support.home.sophos.com/hc/en-us/articles/360041664851-How-to-review-and-submit-samples-of-suspicious-files-or-false-positives-to-Sophos",
+          "title": "Sophos file and URL submission guide",
+          "evidence": "Current help directs users to Intelix Guest mode and distinguishes Sophos Home credentials."
+        },
+        {
+          "url": "https://www.sophos.com/en-us/legal/product-privacy-information/sophoslabs-intelix",
+          "title": "Sophos Intelix data handling",
+          "evidence": "Documents processing and retention of clean versus malicious samples."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "An explainable second-vendor file or URL assessment without installing another endpoint product."
+    },
+    {
+      "toolId": "drweb-online",
+      "group": "file-analysis",
+      "account": "Public upload form; no sign-in step is required by the displayed file-scan workflow.",
+      "sharing": "The file is uploaded to Dr.Web. The reviewed scan instructions do not establish private-report or retention guarantees.",
+      "firstAction": "Choose a file within the displayed size limit and compare the returned detection with its expected publisher and behavior.",
+      "expectedResult": "A scan report for the submitted file. It does not assess whether the entire computer is infected.",
+      "sources": [
+        {
+          "url": "https://vms.drweb.com/scan_file/?lng=en",
+          "title": "Dr.Web online file scanner",
+          "evidence": "Confirms free file scanning, the observed upload limit and the distinction between a file result and whole-device diagnosis."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "A lightweight additional vendor check for a small nonconfidential file."
+    },
+    {
+      "toolId": "ssl-labs",
+      "group": "web-security",
+      "account": "No account required for the public test",
+      "sharing": "The service receives and scans the hostname. A checkbox excludes results from the public boards; that is not a private-network test.",
+      "firstAction": "Enter the public hostname, then inspect certificate trust, protocol support and client compatibility.",
+      "expectedResult": "A per-host TLS report with specific configuration findings; a strong TLS grade does not assess application security.",
+      "sources": [
+        {
+          "url": "https://www.ssllabs.com/ssltest/",
+          "title": "SSL Server Test",
+          "evidence": "Official form explicitly describes the free public-server test and board-visibility checkbox."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "TLS and certificate configuration"
+    },
+    {
+      "toolId": "mdn-observatory",
+      "group": "web-security",
+      "account": "No account required for a domain scan",
+      "sharing": "Domain scan history is public. The old private/public toggle is no longer offered.",
+      "firstAction": "Enter the public domain and work through failed checks and their linked implementation guidance.",
+      "expectedResult": "A scored configuration report; even an A+ is not proof that the website is secure.",
+      "sources": [
+        {
+          "url": "https://developer.mozilla.org/en-US/observatory",
+          "title": "HTTP Observatory",
+          "evidence": "Current official browser tool."
+        },
+        {
+          "url": "https://developer.mozilla.org/en-US/observatory/docs/faq",
+          "title": "Observatory FAQ",
+          "evidence": "New MDN host launched July 2024; old Mozilla service sunset October 2024. Scan history is public and A+ does not prove complete security."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "HTTP security configuration"
+    },
+    {
+      "toolId": "securityheaders",
+      "group": "web-security",
+      "account": "No account shown for the public scan; API uses keys",
+      "sharing": "The service fetches the submitted URL; recent scans are displayed publicly.",
+      "firstAction": "Scan the public HTTPS address, follow any redirect result, and inspect each missing header.",
+      "expectedResult": "A list of observed headers and a grade for this configuration, not a full vulnerability assessment.",
+      "sources": [
+        {
+          "url": "https://securityheaders.com/",
+          "title": "Security Headers",
+          "evidence": "Live site offers scan results and public recent-scan lists."
+        },
+        {
+          "url": "https://securityheaders.com/faq/",
+          "title": "Security Headers FAQ",
+          "evidence": "Defines grade scope, redirect handling and scanner identity."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Spot missing response headers and inspect redirects during a web-server change."
+    },
+    {
+      "toolId": "internet-nl",
+      "group": "web-security",
+      "account": "No account required for individual tests",
+      "sharing": "Submitted domains are tested remotely; connection testing contacts external endpoints and returns a shareable report.",
+      "firstAction": "Choose website or email, enter the domain, and open every failed subtest rather than relying only on the percentage.",
+      "expectedResult": "Specific standards failures and remediation explanations; this is not a malware or application-code scan.",
+      "sources": [
+        {
+          "url": "https://en.internet.nl/",
+          "title": "Internet.nl",
+          "evidence": "Official live tool provides website, email and connection entry points."
+        },
+        {
+          "url": "https://internet.nl/faqs/",
+          "title": "Internet.nl knowledge base",
+          "evidence": "Documents tested standards."
+        },
+        {
+          "url": "https://internet.nl/article/release-1.11/",
+          "title": "Updated TLS test in 2026",
+          "evidence": "April 2026 release, updated July 2026, adopts newer TLS guidance; post-quantum detection is described as a roadmap item, not an available check."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Check a domain across web and mail standards in one report, including DNS and transport dependencies."
+    },
+    {
+      "toolId": "hardenize",
+      "group": "web-security",
+      "account": "Public report is available on the home page; monitoring requires an account",
+      "sharing": "The home-page test is explicitly a public report and contacts the supplied domain.",
+      "firstAction": "Run the public report for the domain and inspect the DNS, web and email configuration findings.",
+      "expectedResult": "Cross-service configuration findings; continuous asset discovery and monitoring belong to the separate managed plan.",
+      "sources": [
+        {
+          "url": "https://www.hardenize.com/",
+          "title": "Hardenize public report",
+          "evidence": "Home page exposes the public-report domain field."
+        },
+        {
+          "url": "https://www.hardenize.com/product",
+          "title": "Hardenize product",
+          "evidence": "Documents DNS/DNSSEC, TLS, certificates and SMTP configuration capabilities."
+        },
+        {
+          "url": "https://www.hardenize.com/pricing",
+          "title": "Hardenize plans",
+          "evidence": "Managed monitoring is offered through business/enterprise plans; public report is not the paid subscription."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Investigate DNS, web TLS, certificates and email transport together."
+    },
+    {
+      "toolId": "dmarcian-tools",
+      "group": "dns-email",
+      "account": "No registration required for the listed free tools",
+      "sharing": "The publisher says tool input is used to run the tool, is not shared and is not used for marketing.",
+      "firstAction": "Start with Domain Checker, then inspect the failing SPF, DKIM or DMARC record using its dedicated tool.",
+      "expectedResult": "Record-level explanations; validate legitimate senders and alignment before enforcing a stricter DMARC policy.",
+      "sources": [
+        {
+          "url": "https://dmarcian.com/dmarc-tools/",
+          "title": "Free DMARC Tools",
+          "evidence": "Official page lists all tools, no-registration use and input-handling statement."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Find authentication-record mistakes before changing a domain mail policy."
+    },
+    {
+      "toolId": "mxtoolbox",
+      "group": "dns-email",
+      "account": "Basic lookup form is public",
+      "sharing": "Queries are sent to the service; SMTP and connection tests contact the target.",
+      "firstAction": "Start with an MX or DMARC lookup for the domain, then follow the relevant SMTP, SPF, MTA-STS or TLSRPT result.",
+      "expectedResult": "Specific DNS or mail-server findings; blocklist presence alone does not explain every delivery failure.",
+      "sources": [
+        {
+          "url": "https://mxtoolbox.com/SuperTool.aspx",
+          "title": "SuperTool",
+          "evidence": "Official command table includes MX, DNS, SMTP, DMARC, SPF, MTA-STS and TLSRPT."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Mail routing and authentication"
+    },
+    {
+      "toolId": "google-admin-toolbox",
+      "group": "dns-email",
+      "account": "No sign-in shown for Dig, Check MX or Messageheader",
+      "sharing": "Input handling varies by tool. DNS lookups query external services; treat pasted headers or logs as diagnostic data supplied to the selected tool.",
+      "firstAction": "Choose Check MX for domain routing, Dig for exact records, or Messageheader for a sanitized full message header.",
+      "expectedResult": "DNS answers or a timed mail-hop breakdown; Workspace-specific checks require context for other mail providers.",
+      "sources": [
+        {
+          "url": "https://toolbox.googleapps.com/apps/main/",
+          "title": "Google Admin Toolbox",
+          "evidence": "Official directory and tool roles."
+        },
+        {
+          "url": "https://toolbox.googleapps.com/apps/checkmx/",
+          "title": "Check MX",
+          "evidence": "Observed direct launch route."
+        },
+        {
+          "url": "https://toolbox.googleapps.com/apps/dig/",
+          "title": "Dig",
+          "evidence": "Observed direct launch route."
+        },
+        {
+          "url": "https://toolbox.googleapps.com/apps/messageheader/",
+          "title": "Messageheader",
+          "evidence": "Header workflow and mail-delay purpose."
+        },
+        {
+          "url": "https://knowledge.workspace.google.com/admin/support/troubleshooting/google-workspace-diagnostic-tools",
+          "title": "Google Workspace diagnostic tools",
+          "evidence": "Current official documentation after help-center migration."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "DNS, mail and header checks"
+    },
+    {
+      "toolId": "dnsviz",
+      "group": "dns-email",
+      "account": "No account required for the public entry form",
+      "sharing": "The domain is sent for remote DNS analysis; use the public-DNS view rather than internal DNS names.",
+      "firstAction": "Enter the failing public domain and inspect the authentication-chain graph and listed configuration errors.",
+      "expectedResult": "A graph identifying the failing DNSSEC or delegation relationship; compare with local resolver behavior.",
+      "sources": [
+        {
+          "url": "https://dnsviz.net/",
+          "title": "DNSViz",
+          "evidence": "Official description documents DNSSEC authentication-chain visualization and detected configuration errors."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Explain SERVFAIL caused by broken delegations, signatures or trust-chain configuration."
+    },
+    {
+      "toolId": "zonemaster",
+      "group": "dns-email",
+      "account": "No account required for public domain testing",
+      "sharing": "Remote DNS queries test the submitted public domain.",
+      "firstAction": "Run the domain check and inspect the severity and explanation for each failing test.",
+      "expectedResult": "A DNS configuration report covering the delegation path; resolve concrete errors before treating warnings as faults.",
+      "sources": [
+        {
+          "url": "https://zonemaster.net/en/",
+          "title": "Zonemaster",
+          "evidence": "Official AFNIC/Swedish Internet Foundation page documents root-to-authoritative tests and links documentation."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Validate DNS delegation, name-server reachability and DNSSEC configuration."
+    },
+    {
+      "toolId": "verisign-dnssec-debugger",
+      "group": "dns-email",
+      "account": "No account required for the form",
+      "sharing": "Submitted domains and optional DNS material are sent to the remote diagnostic service.",
+      "firstAction": "Enter the public domain; use an alternate trust anchor only when deliberately testing a DS or DNSKEY change.",
+      "expectedResult": "Validation detail showing where the chain succeeds or fails; an unpublished test anchor does not change live DNS.",
+      "sources": [
+        {
+          "url": "https://dnssec-debugger.verisignlabs.com/",
+          "title": "DNSSEC Debugger",
+          "evidence": "Official live form documents optional DS/DNSKEY trust anchors and alternative name servers."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Investigate DS/DNSKEY rollover or trust-chain failures with explicit starting conditions."
+    },
+    {
+      "toolId": "dnschecker",
+      "group": "dns-email",
+      "account": "No account required for the lookup form",
+      "sharing": "The queried hostname and record type are sent to remote resolvers through the service.",
+      "firstAction": "Select the exact record type and compare returned values with the intended authoritative record.",
+      "expectedResult": "A resolver-by-resolver snapshot; it cannot prove every client cache has refreshed.",
+      "sources": [
+        {
+          "url": "https://dnschecker.org/",
+          "title": "DNS Checker",
+          "evidence": "Official page describes free multi-resolver checks, record selection and expected-value comparison."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Check whether a DNS change is visible from several regions and resolvers."
+    },
+    {
+      "toolId": "whatsmydns",
+      "group": "dns-email",
+      "account": "No account required for the public lookup",
+      "sharing": "Remote servers receive the DNS query; this is an external resolver view.",
+      "firstAction": "Enter the hostname and record type, then compare regional answers and the record TTL.",
+      "expectedResult": "A geographic answer comparison; DNS cache expiration varies and is not a universal fixed waiting period.",
+      "sources": [
+        {
+          "url": "https://www.whatsmydns.net/",
+          "title": "DNS Propagation Checker",
+          "evidence": "Official page explains free service, resolver comparison and TTL-driven caching."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Cross-check regional cached DNS results after nameserver, web-host or mail changes."
+    },
+    {
+      "toolId": "nslookup-io",
+      "group": "dns-email",
+      "account": "Lookup form is public; account features use sign-in",
+      "sharing": "The service sends queries to the selected resolver. It does not cache results itself, but recursive resolvers can.",
+      "firstAction": "Look up the domain, select the authoritative server, and compare the relevant record with a public resolver.",
+      "expectedResult": "Exact DNS record values and resolver context; querying one name does not enumerate every subdomain.",
+      "sources": [
+        {
+          "url": "https://www.nslookup.io/",
+          "title": "DNS Lookup Tool",
+          "evidence": "Official page documents resolver selection, supported records, caching distinction, monitoring and MCP/API routes."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Compare an authoritative answer with a recursive resolver without using a command line."
+    },
+    {
+      "toolId": "learndmarc",
+      "group": "dns-email",
+      "account": "Public interactive tester",
+      "sharing": "Sending a test message delivers it to the service; header analysis also receives the diagnostic input.",
+      "firstAction": "Send a non-sensitive test message to the displayed address, or use sanitized headers, and inspect identity alignment.",
+      "expectedResult": "A stepwise authentication explanation; a passing result covers the tested sender path only.",
+      "sources": [
+        {
+          "url": "https://www.learndmarc.com/",
+          "title": "Learn and Test DMARC",
+          "evidence": "Official tool documents test-mail and header-analysis workflows."
+        },
+        {
+          "url": "https://www.uriports.com/dmarc",
+          "title": "URIports DMARC",
+          "evidence": "Publisher identifies LearnDMARC as its free visual tool."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Explain why passing SPF or DKIM still fails DMARC alignment."
+    },
+    {
+      "toolId": "mail-tester",
+      "group": "dns-email",
+      "account": "Account not required for the basic test; paid integrations use accounts",
+      "sharing": "The service receives the test email. Anyone with its exact testing address can see free results for seven days.",
+      "firstAction": "Send a non-sensitive sample to the displayed address and inspect the detailed checks, not just the score.",
+      "expectedResult": "Actionable sender and content findings; a perfect score does not guarantee delivery to every inbox.",
+      "sources": [
+        {
+          "url": "https://mail-tester.com/",
+          "title": "mail-tester",
+          "evidence": "Observed message-test entry point."
+        },
+        {
+          "url": "https://mail-tester.com/faq",
+          "title": "mail-tester FAQ",
+          "evidence": "Documents rolling free quota, report sharing/retention and limits of a perfect score."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Validate a changed sending setup using an actual message instead of only DNS records."
+    },
+    {
+      "toolId": "globalping",
+      "group": "connectivity",
+      "account": "No registration for basic use; optional account for higher limits",
+      "sharing": "Remote probes receive the target and perform the chosen test; results can be shared by link.",
+      "firstAction": "Choose DNS, HTTP or MTR, enter the public target, and select a useful city, region, ASN or ISP.",
+      "expectedResult": "Comparable remote-path results; a probe result is not a measurement of the customer LAN.",
+      "sources": [
+        {
+          "url": "https://globalping.io/",
+          "title": "Globalping",
+          "evidence": "Official page exposes all five test types and geographic/network selection."
+        },
+        {
+          "url": "https://globalping.io/credits",
+          "title": "Globalping limits",
+          "evidence": "Published free limits distinguish unauthenticated and registered users."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Separate a local problem from regional routing, DNS or CDN behavior."
+    },
+    {
+      "toolId": "ripestat",
+      "group": "connectivity",
+      "account": "Public browser explorer",
+      "sharing": "Looks up existing Internet measurement and registry datasets; input is sent to RIPEstat.",
+      "firstAction": "Look up the affected public IP or ASN and inspect its routing history and prefix information.",
+      "expectedResult": "Routing context from external datasets; historical observations do not prove a current customer-path fault.",
+      "sources": [
+        {
+          "url": "https://stat.ripe.net/",
+          "title": "RIPEstat",
+          "evidence": "Current official UI documents resource lookup, routing widgets, datasets and API link."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Inspect prefix ownership, routing history and BGP context during an upstream reachability problem."
+    },
+    {
+      "toolId": "cloudflare-radar",
+      "group": "connectivity",
+      "account": "No account required for public views",
+      "sharing": "Displays aggregated observations; it does not inspect the customer device or local network.",
+      "firstAction": "Choose the affected region or network and time range, then compare outage and traffic views.",
+      "expectedResult": "External evidence to corroborate an outage; absence of a Radar signal does not exclude a local or provider-specific fault.",
+      "sources": [
+        {
+          "url": "https://radar.cloudflare.com/",
+          "title": "Cloudflare Radar",
+          "evidence": "Current official dashboard describes traffic and reachability observations and geographic comparison."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Check whether an apparent local outage coincides with a regional or network-wide event."
+    },
+    {
+      "toolId": "cloudflare-speed",
+      "group": "connectivity",
+      "account": "No account required",
+      "sharing": "Cloudflare receives connection/IP data and shares anonymized measurements with partners; the page documents truncation and data use.",
+      "firstAction": "Run from the affected connection and compare latency, jitter and loss with a wired baseline.",
+      "expectedResult": "Connection measurements and quality scores; a test can consume up to 200 MB and is not a guarantee of every application path.",
+      "sources": [
+        {
+          "url": "https://speed.cloudflare.com/",
+          "title": "Cloudflare Speed Test",
+          "evidence": "Official UI lists metrics, network-quality scores, privacy details and up-to-200-MB use."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Latency, loss and connection quality"
+    },
+    {
+      "toolId": "fast-com",
+      "group": "connectivity",
+      "account": "No account required",
+      "sharing": "The test downloads from and uploads to Netflix servers; it is a network measurement, not local-only processing.",
+      "firstAction": "Open the test and choose Show more info to expose upload and loaded versus unloaded latency.",
+      "expectedResult": "A consumer connection estimate; Netflix explicitly excludes enterprise bandwidth certification.",
+      "sources": [
+        {
+          "url": "https://fast.com/",
+          "title": "FAST.com FAQ",
+          "evidence": "Official page describes metrics, Netflix-server traffic and lack of enterprise-certification support."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Quickly compare streaming-path throughput with latency while the connection is busy."
+    },
+    {
+      "toolId": "waveform-bufferbloat",
+      "group": "connectivity",
+      "account": "Public test; no account requirement documented in the reviewed tool page",
+      "sharing": "The browser transfers test traffic to remote servers; shareable result links expose the test measurements.",
+      "firstAction": "Test over Ethernet with other activity noted, then compare idle latency with download- and upload-loaded latency.",
+      "expectedResult": "A loaded-latency result that can support an SQM investigation; one grade does not locate every source of lag.",
+      "sources": [
+        {
+          "url": "https://www.waveform.com/tools/bufferbloat",
+          "title": "Waveform Bufferbloat Test",
+          "evidence": "Official indexed tool explains its free test, unloaded/loaded latency comparison and bufferbloat guidance; text-only fetch lacks interactive results."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Latency while the connection is busy"
+    },
+    {
+      "toolId": "microsoft-remote-connectivity",
+      "group": "connectivity",
+      "account": "Many scenarios require an appropriately permitted Microsoft account",
+      "sharing": "Tests run from Microsoft infrastructure; authenticated scenarios use the supplied service identity.",
+      "firstAction": "Check service health first, select the exact failing scenario, authenticate if prompted, and expand the first failure.",
+      "expectedResult": "Step-by-step failure evidence and linked guidance; Microsoft 365 Government GCC/GCC High are not supported by this analyzer.",
+      "sources": [
+        {
+          "url": "https://testconnectivity.microsoft.com/",
+          "title": "Remote Connectivity Analyzer",
+          "evidence": "Observed official launch endpoint."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/connectivity-analyzer/exchange-remote-connectivity-analyzer-tool",
+          "title": "Microsoft Remote Connectivity Analyzer",
+          "evidence": "Official May 2026 documentation covers free access, authentication, supported workloads, government-cloud exclusion and result export."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Find the failed step in a Microsoft cloud or Exchange connectivity workflow."
+    },
+    {
+      "toolId": "microsoft365-connectivity",
+      "group": "connectivity",
+      "account": "Anonymous basics; Microsoft 365 sign-in for tenant reporting",
+      "sharing": "Signed-in reports are uploaded to the tenant and shared with its administrator. Public report sharing is controlled by tenant settings.",
+      "firstAction": "Use the current Microsoft-hosted URL and run the browser checks; treat advanced-client download as a separate explicit step.",
+      "expectedResult": "A location and connectivity report; most advanced tests are not browser-only and need the documented Windows runtime.",
+      "sources": [
+        {
+          "url": "https://connectivity.m365.cloud.microsoft/",
+          "title": "Microsoft 365 connectivity",
+          "evidence": "Current official launch endpoint."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/microsoft-365/enterprise/office-365-network-mac-perf-onboarding-tool?view=o365-worldwide",
+          "title": "Microsoft 365 network connectivity test tool",
+          "evidence": "Documents new canonical host, anonymous basics, advanced Windows client and tenant report-sharing behavior."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Investigate slow Microsoft 365 access, distant network egress or blocked Copilot WebSockets."
+    },
+    {
+      "toolId": "microsoft-service-health",
+      "group": "connectivity",
+      "account": "Public page needs no account; tenant details require an eligible admin role",
+      "sharing": "Public page is a read-only status reference. Tenant reports remain within authenticated administration.",
+      "firstAction": "Check the affected workload and timestamp; use the admin center for incidents specific to the tenant.",
+      "expectedResult": "Provider incident context; an unlisted issue can still be local, emerging or limited to a tenant.",
+      "sources": [
+        {
+          "url": "https://status.cloud.microsoft/",
+          "title": "Microsoft service health status",
+          "evidence": "Observed official public endpoint."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/microsoft-365/enterprise/view-service-health?view=o365-worldwide",
+          "title": "Check Microsoft 365 service health",
+          "evidence": "Official documentation links public status as a fallback and explains tenant health and permitted roles."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Check known provider incidents before rebuilding Outlook profiles or changing working DNS."
+    },
+    {
+      "toolId": "google-workspace-status",
+      "group": "connectivity",
+      "account": "No account required for the dashboard",
+      "sharing": "Read-only published incident data; no email content or credentials need to be submitted.",
+      "firstAction": "Open the relevant service and inspect incident details, update time and history.",
+      "expectedResult": "Official provider status in UTC; no posted incident does not guarantee that every user is unaffected.",
+      "sources": [
+        {
+          "url": "https://www.google.com/appsstatus/dashboard/",
+          "title": "Workspace Status Dashboard",
+          "evidence": "Official live dashboard lists services, history, UTC times, RSS and JSON sources."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Distinguish a Gmail, Drive, Meet or Workspace outage from a single-PC problem."
+    },
+    {
+      "toolId": "test-ipv6",
+      "group": "connectivity",
+      "account": "Public browser test; no sign-in in the entry page",
+      "sharing": "The browser contacts test endpoints. Shared result URLs can contain the current public IP addresses.",
+      "firstAction": "Run from the failing connection and inspect dual-stack and large-packet checks, then compare another connection.",
+      "expectedResult": "Per-test reachability evidence; a browser-blocked test or missing IPv6 is different from a broken dual-stack path.",
+      "sources": [
+        {
+          "url": "https://test-ipv6.com/",
+          "title": "Test your IPv6",
+          "evidence": "Official page describes test endpoints, result interpretation and public-IP disclosure in shared results."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Find broken IPv6 or path-MTU behavior when only some websites fail."
+    },
+    {
+      "toolId": "webpagetest",
+      "group": "web-quality",
+      "account": "Account needed for the advertised Starter plan",
+      "sharing": "Remote browsers visit the supplied URL. Private and bulk testing are advertised as professional features.",
+      "firstAction": "Select a representative location and connection, run a public-page test, then inspect waterfall and filmstrip evidence.",
+      "expectedResult": "Detailed load diagnostics; test runs count against quota. Verify current retention in-account because official copy conflicts.",
+      "sources": [
+        {
+          "url": "https://www.logicmonitor.com/webpagetest",
+          "title": "WebPageTest current product page",
+          "evidence": "Advertises free Starter, 150 monthly runs, 30 locations and paid private/bulk tests. Retention copy inconsistently says 60 and 6 days, so no retention value is asserted."
+        },
+        {
+          "url": "https://github.com/catchpoint/WebPageTest.docs/blob/main/src/webpagetest-faqs.md",
+          "title": "WebPageTest FAQ source",
+          "evidence": "Official project explains test-run counting and Starter versus paid features; some plan details lag the current product page."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Identify slow requests and rendering delays under repeatable browser and network conditions."
+    },
+    {
+      "toolId": "pagespeed-insights",
+      "group": "web-quality",
+      "account": "No account required for the public analyzer",
+      "sharing": "Google fetches the public URL for lab testing; field metrics are aggregated from the CrUX dataset.",
+      "firstAction": "Analyze the exact public page and inspect mobile and desktop, then separate lab findings from 28-day field data.",
+      "expectedResult": "Performance diagnostics and, when sufficient data exists, Core Web Vitals field results; a lab score is not a live-user guarantee.",
+      "sources": [
+        {
+          "url": "https://pagespeed.web.dev/",
+          "title": "PageSpeed Insights",
+          "evidence": "Observed public analyzer."
+        },
+        {
+          "url": "https://developers.google.com/speed/docs/insights/v5/about",
+          "title": "About PageSpeed Insights",
+          "evidence": "Official explanation of lab/field distinction, 28-day field period and missing-data fallback."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Prioritize website performance fixes while separating current lab results from historical visitor experience."
+    },
+    {
+      "toolId": "wave-accessibility",
+      "group": "web-quality",
+      "account": "No account required for public single-page evaluation",
+      "sharing": "Online checking fetches a public URL. The browser extension is the separate route for local or authenticated pages.",
+      "firstAction": "Enter the public page and inspect each error in context, then test keyboard use and reading order manually.",
+      "expectedResult": "Actionable automated findings; zero errors does not establish accessibility conformance.",
+      "sources": [
+        {
+          "url": "https://wave.webaim.org/",
+          "title": "WAVE",
+          "evidence": "Official page distinguishes public checker, browser extension and paid API/engine."
+        },
+        {
+          "url": "https://wave.webaim.org/help",
+          "title": "WAVE Help",
+          "evidence": "Documents visual findings and the limits of automated accessibility checks."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Find missing labels, contrast issues and structural problems in a public page."
+    },
+    {
+      "toolId": "shodan",
+      "group": "threat-intelligence",
+      "account": "Free registration available; advanced capabilities depend on plan.",
+      "sharing": "Remote database lookup; an on-demand scan is a separate action.",
+      "firstAction": "Look up the public IP, then compare ports, banners and observation timestamps with the intended services.",
+      "expectedResult": "A dated exposure record to confirm against the current firewall and asset configuration.",
+      "sources": [
+        {
+          "url": "https://help.shodan.io/the-basics/what-is-shodan",
+          "title": "What is Shodan?",
+          "evidence": "Official description of banners, internet-connected devices and network-security use."
+        },
+        {
+          "url": "https://help.shodan.io/?search=delete+account",
+          "title": "Shodan account and credit documentation",
+          "evidence": "Official help results distinguish free account API keys, paid lifetime membership and query credits."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Find unexpected public services on a known business IP."
+    },
+    {
+      "toolId": "censys",
+      "group": "threat-intelligence",
+      "account": "Limited anonymous access; verified account unlocks the Free allocation.",
+      "sharing": "Remote lookup of Censys datasets; queries and account activity reach the provider.",
+      "firstAction": "Search an IP or domain in the Platform, inspect its record date, and pivot to matching certificates or web properties.",
+      "expectedResult": "Related hosts, services and certificates with the evidence needed to validate an exposure.",
+      "sources": [
+        {
+          "url": "https://docs.censys.com/docs/platform-quickstart-guide",
+          "title": "Censys Platform quick start",
+          "evidence": "Official launch destination, datasets, limited anonymous access and account setup."
+        },
+        {
+          "url": "https://docs.censys.com/docs/platform-credits-free-starter",
+          "title": "Credits for Free and Starter",
+          "evidence": "Current 100 monthly free credits, five free daily actions and one-credit actions."
+        },
+        {
+          "url": "https://docs.censys.com/changelog",
+          "title": "Censys release notes",
+          "evidence": "November 2, 2026 changed action costs and introduced monthly Starter subscriptions; credit packs removed."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Trace a domain, certificate or exposed service across related infrastructure."
+    },
+    {
+      "toolId": "greynoise",
+      "group": "threat-intelligence",
+      "account": "Free account available; Community API-key access requires a business email.",
+      "sharing": "Remote IP lookup; results describe GreyNoise observations rather than an endpoint scan.",
+      "firstAction": "Look up the alert IP and review classification, observed scanning, last-seen time and associated context.",
+      "expectedResult": "Evidence to prioritize the alert; an unobserved IP remains unknown rather than proven safe.",
+      "sources": [
+        {
+          "url": "https://docs.greynoise.io/docs/getting-started",
+          "title": "Getting started with GreyNoise",
+          "evidence": "Official Visualizer role and free signup route."
+        },
+        {
+          "url": "https://docs.greynoise.io/docs/using-the-greynoise-community-api",
+          "title": "Community access and limits",
+          "evidence": "Current shared 50-search weekly limit and business-email API-key restriction."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Distinguish widespread scanning noise from an alert needing closer investigation."
+    },
+    {
+      "toolId": "abuseipdb",
+      "group": "threat-intelligence",
+      "account": "No sign-in for basic web lookup; registration for API keys and reporting.",
+      "sharing": "The queried indicator reaches the provider; submitted abuse reports are a separate community contribution.",
+      "firstAction": "Search the IP and compare report dates, categories and confidence with your own observed event.",
+      "expectedResult": "Corroborating report history; a community score alone does not establish compromise.",
+      "sources": [
+        {
+          "url": "https://www.abuseipdb.com/",
+          "title": "AbuseIPDB lookup",
+          "evidence": "Public input, report-history lookup and registration boundary."
+        },
+        {
+          "url": "https://www.abuseipdb.com/pricing",
+          "title": "API plans",
+          "evidence": "Current free Individual quota and paid plan distinction."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Add report history and recency to a suspicious connection or mail-server IP."
+    },
+    {
+      "toolId": "talos-intelligence",
+      "group": "threat-intelligence",
+      "account": "Public search page; Cisco sign-in for account-specific actions.",
+      "sharing": "Remote lookup; reputation correction requests use a separate support workflow.",
+      "firstAction": "Search the IP, URL, domain or SHA-256 and review the reputation and supporting context.",
+      "expectedResult": "A provider-specific assessment to compare with the actual alert and other evidence.",
+      "sources": [
+        {
+          "url": "https://talosintelligence.com/reputation_center",
+          "title": "IP and Domain Intelligence Center",
+          "evidence": "Live official search supports IP, URL, domain, network owner and file SHA-256; separate support route."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Investigate blocked email, domain categorization or a suspicious network indicator."
+    },
+    {
+      "toolId": "otx",
+      "group": "threat-intelligence",
+      "account": "Register for contribution, subscriptions and API workflows.",
+      "sharing": "Public pulses are shared intelligence; private groups are a distinct feature.",
+      "firstAction": "Search the indicator, inspect pulse dates and original references, then compare with the incident timeline.",
+      "expectedResult": "Referenced intelligence and related indicators whose provenance can be checked.",
+      "sources": [
+        {
+          "url": "https://otx.alienvault.com/",
+          "title": "LevelBlue Open Threat Exchange",
+          "evidence": "Current LevelBlue branding, free membership, intelligence sharing and private groups."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Find published context around a hash, IP or domain instead of relying on one score."
+    },
+    {
+      "toolId": "pulsedive",
+      "group": "threat-intelligence",
+      "account": "Visitors can search; free registration adds submissions, comments and exports.",
+      "sharing": "Remote lookups; active analysis can contact the target. Searching existing records and submitting indicators are different actions.",
+      "firstAction": "Search the indicator in Explore and inspect sources, timestamps and linked threats before requesting new analysis.",
+      "expectedResult": "A traceable enrichment record, with paid/history limits visible in the service.",
+      "sources": [
+        {
+          "url": "https://pulsedive.com/",
+          "title": "Pulsedive platform",
+          "evidence": "Current visitor/free/Pro/commercial roles and passive or active enrichment."
+        },
+        {
+          "url": "https://pulsedive.com/explore/",
+          "title": "Pulsedive Explore",
+          "evidence": "Observed official direct launch destination."
+        },
+        {
+          "url": "https://docs.pulsedive.com/",
+          "title": "Pulsedive documentation",
+          "evidence": "Official lookup, investigation, API and export overview."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Pivot from an indicator to related threat context and recent evidence."
+    },
+    {
+      "toolId": "ipinfo",
+      "group": "threat-intelligence",
+      "account": "Public lookup available; register for plan/API access.",
+      "sharing": "Remote IP lookup; geographic data describes network location and is not an exact person or device location.",
+      "firstAction": "Search the IP and record ASN, organization and available location data alongside the log timestamp.",
+      "expectedResult": "Network-owner context that can guide provider escalation or explain a shared/cloud address.",
+      "sources": [
+        {
+          "url": "https://ipinfo.io/",
+          "title": "IPinfo lookup",
+          "evidence": "Official IP/ASN search and network-data overview."
+        },
+        {
+          "url": "https://ipinfo.io/pricing",
+          "title": "IPinfo plans",
+          "evidence": "Lite is free with country-level data; richer tiers and web lookup limits are separate."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Identify which provider owns an IP and check whether a location assumption is plausible."
+    },
+    {
+      "toolId": "spamhaus",
+      "group": "threat-intelligence",
+      "account": "No account is presented for the initial lookup.",
+      "sharing": "Remote indicator lookup; correction or removal follows the entry-specific workflow.",
+      "firstAction": "Look up the sending IP or domain and open the exact listing explanation before changing mail settings.",
+      "expectedResult": "A named listing and its remediation route, or a no-listing result limited to Spamhaus data.",
+      "sources": [
+        {
+          "url": "https://check.spamhaus.org/",
+          "title": "Spamhaus IP and Domain Reputation Checker",
+          "evidence": "Official public lookup and email-delivery troubleshooting purpose."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Identify a specific blocklist entry behind rejected outbound mail."
+    },
+    {
+      "toolId": "google-safe-browsing",
+      "group": "url-phishing",
+      "account": "No account is needed for the public diagnostic page.",
+      "sharing": "The queried address is sent to Google; this is a provider reputation lookup.",
+      "firstAction": "Enter the site address in Site Status and compare the result with the exact browser warning.",
+      "expectedResult": "Google-specific status to corroborate the incident; no warning is not a complete safety assessment.",
+      "sources": [
+        {
+          "url": "https://safebrowsing.google.com/",
+          "title": "Google Safe Browsing",
+          "evidence": "Official page explicitly links the Transparency Report Site Status diagnostic."
+        },
+        {
+          "url": "https://transparencyreport.google.com/safe-browsing/search",
+          "title": "Google Site Status",
+          "evidence": "Official JavaScript application destination; no scan was submitted."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Confirm the Google classification behind a browser warning."
+    },
+    {
+      "toolId": "have-i-been-pwned",
+      "group": "threat-intelligence",
+      "account": "Basic search needs no account; sensitive breach details require mailbox verification.",
+      "sharing": "Email lookup reaches the service; sensitive records are restricted to the verified address owner.",
+      "firstAction": "Search the affected email, review the breach dates and exposed data, then secure the relevant accounts.",
+      "expectedResult": "Known exposure history; absence from the database does not rule out a breach.",
+      "sources": [
+        {
+          "url": "https://haveibeenpwned.com/FAQs",
+          "title": "HIBP frequently asked questions",
+          "evidence": "Free public search, sensitive-breach verification, privacy and coverage limitations."
+        },
+        {
+          "url": "https://haveibeenpwned.com/Subscription",
+          "title": "HIBP plans",
+          "evidence": "Distinguishes API search and domain monitoring plans from public lookup."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Assess account exposure after a suspicious sign-in or stolen-password concern."
+    },
+    {
+      "toolId": "icann-lookup",
+      "group": "threat-intelligence",
+      "account": "No account required for public lookup; some fallback requests may present CAPTCHA.",
+      "sharing": "RDAP requests run from the browser to authoritative services; redacted registration details remain unavailable.",
+      "firstAction": "Enter the domain or IP resource and inspect dates, registrar, status and authoritative server details.",
+      "expectedResult": "Registration evidence from the responsible registry or registrar rather than a guessed owner identity.",
+      "sources": [
+        {
+          "url": "https://lookup.icann.org/en/faq",
+          "title": "ICANN Lookup FAQ",
+          "evidence": "Free public service, authoritative RDAP results and visibility boundaries."
+        },
+        {
+          "url": "https://www.icann.org/en/contracted-parties/registry-operators/registration-data-access-protocol/information-for-rdap-users-31-08-2018-en",
+          "title": "Information for RDAP users",
+          "evidence": "Current browser-based direct queries and RDAP replacement of WHOIS."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Find the registrar, registration status, nameservers or abuse-contact path for a domain."
+    },
+    {
+      "toolId": "urlvoid",
+      "group": "url-phishing",
+      "account": "No account is presented for the public website check.",
+      "sharing": "Submitted data is shared with security companies, as stated beside the input.",
+      "firstAction": "Submit the public site address and inspect which individual sources flagged it and when.",
+      "expectedResult": "A source-by-source report, not an unconditional safe-site certificate.",
+      "sources": [
+        {
+          "url": "https://www.urlvoid.com/",
+          "title": "URLVoid website reputation checker",
+          "evidence": "Observed public input, report contents and explicit sharing notice."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Get a second reputation view of a suspicious public domain."
+    },
+    {
+      "toolId": "openphish",
+      "group": "url-phishing",
+      "account": "Community access is public; commercial feed access is arranged separately.",
+      "sharing": "Reading the feed does not submit an indicator; reporting a URL is a separate contribution.",
+      "firstAction": "Open the Community feed and compare the exact indicator without visiting the listed suspicious pages.",
+      "expectedResult": "A feed match with its coverage limits; a non-match does not clear the URL.",
+      "sources": [
+        {
+          "url": "https://openphish.com/phishing_feeds.html",
+          "title": "OpenPhish feed comparison",
+          "evidence": "Current Community versus Premium/Platinum update frequency and data boundary."
+        },
+        {
+          "url": "https://openphish.com/kb.html",
+          "title": "OpenPhish knowledge base",
+          "evidence": "Official explanation of phishing intelligence products."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Cross-check whether an indicator appears in a current phishing feed."
+    },
+    {
+      "toolId": "urlquery",
+      "group": "url-phishing",
+      "account": "Anonymous submission produces a public report; configurable visibility needs an account.",
+      "sharing": "Public and restricted submissions may reach security partners; private analysis is separate and permission-controlled.",
+      "firstAction": "Search existing reports first; for a new public URL, inspect its report visibility before submitting.",
+      "expectedResult": "A timestamped behavioral report; a completed scan with no alerts does not establish safety.",
+      "sources": [
+        {
+          "url": "https://urlquery.net/about",
+          "title": "About URLQuery",
+          "evidence": "Official instrumented-browser workflow and captured artifacts."
+        },
+        {
+          "url": "https://urlquery.net/faq",
+          "title": "URLQuery FAQ",
+          "evidence": "Current anonymous/public behavior, private permissions, usage and report limits."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Inspect redirects, scripts and downloads behind a suspicious link."
+    },
+    {
+      "toolId": "first-epss",
+      "group": "vulnerability",
+      "account": "No account required.",
+      "sharing": "Read public CVE score data; no endpoint inventory upload is required.",
+      "firstAction": "Use Get the Data to look up the CVE through the API or current CSV; record date, probability and percentile.",
+      "expectedResult": "A dated prioritization input to combine with known exploitation and asset exposure, rather than a severity score.",
+      "sources": [
+        {
+          "url": "https://www.first.org/epss/",
+          "title": "EPSS overview",
+          "evidence": "Daily 30-day exploitation probability and interpretation."
+        },
+        {
+          "url": "https://www.first.org/epss/data",
+          "title": "Get EPSS data",
+          "evidence": "Free/no-registration access and current model history, including v5 starting June 15, 2026."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Daily exploitation likelihood"
+    },
+    {
+      "toolId": "cisa-kev",
+      "group": "vulnerability",
+      "account": "No account required.",
+      "sharing": "Public database lookup; no asset scan or inventory upload.",
+      "firstAction": "Search the CVE or product, match the affected version, and follow the vendor mitigation linked in the entry.",
+      "expectedResult": "Confirmed exploitation context and a concrete remediation reference; use EPSS and exposure for additional prioritization.",
+      "sources": [
+        {
+          "url": "https://github.com/cisagov/kev-data",
+          "title": "Official CISA KEV data mirror",
+          "evidence": "Authoritative catalog URL, data formats, synchronized update behavior and interactive mirror."
+        },
+        {
+          "url": "https://content.govdelivery.com/accounts/USDHSCISA/bulletins/418405e",
+          "title": "CISA KEV nomination announcement",
+          "evidence": "Official May 2026 bulletin describes exploitation evidence and mitigation criteria."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Confirmed exploited vulnerabilities"
+    },
+    {
+      "toolId": "nvd",
+      "group": "vulnerability",
+      "account": "No account needed for web search.",
+      "sharing": "Remote public-record search; no application files or system inventory are required.",
+      "firstAction": "Search the CVE, inspect enrichment status and product applicability, then open the original vendor advisory.",
+      "expectedResult": "A traceable vulnerability record; incomplete enrichment or missing records require checking upstream disclosure.",
+      "sources": [
+        {
+          "url": "https://nvd.nist.gov/",
+          "title": "NVD overview",
+          "evidence": "Official database purpose and content types."
+        },
+        {
+          "url": "https://nvd.nist.gov/general/FAQ-Sections/CVE-FAQs",
+          "title": "NVD CVE FAQ",
+          "evidence": "CVE publication, enrichment and missing-record boundaries."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Check the exact CVE and affected product range before choosing a patch."
+    },
+    {
+      "toolId": "osv",
+      "group": "vulnerability",
+      "account": "No account needed for web search.",
+      "sharing": "Remote package/advisory lookup; browser search does not require uploading source code.",
+      "firstAction": "Search the package and ecosystem or advisory ID, then compare your exact version with the affected and fixed ranges.",
+      "expectedResult": "Package-specific vulnerability evidence and upstream references for an upgrade decision.",
+      "sources": [
+        {
+          "url": "https://osv.dev/",
+          "title": "OSV overview",
+          "evidence": "Official version/commit-aware vulnerability schema and data sources."
+        },
+        {
+          "url": "https://osv.dev/list",
+          "title": "OSV vulnerability browser",
+          "evidence": "Observed search and ecosystem filters with published records."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Determine whether a particular dependency version is affected and which fix applies."
+    },
+    {
+      "toolId": "github-advisories",
+      "group": "vulnerability",
+      "account": "No account needed to read public advisories.",
+      "sharing": "Remote public-record lookup; publishing or reporting an advisory is a separate workflow.",
+      "firstAction": "Search the package, CVE or GHSA ID and check whether the record is reviewed, unreviewed or a malware advisory.",
+      "expectedResult": "A specific advisory with package and severity context, ready to validate against the installed version.",
+      "sources": [
+        {
+          "url": "https://github.com/advisories",
+          "title": "GitHub Advisory Database",
+          "evidence": "Observed public search, ecosystem filters and reviewed/unreviewed/malware separation."
+        },
+        {
+          "url": "https://docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/github-advisory-database",
+          "title": "GitHub Advisory Database documentation",
+          "evidence": "Current canonical documentation location and package-range/fixed-version distinctions."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Find affected dependency ranges and package-level remediation guidance."
+    },
+    {
+      "toolId": "snyk-vulnerability-db",
+      "group": "vulnerability",
+      "account": "No account is presented for public database search.",
+      "sharing": "Remote public-record search; connecting a code repository is a different product action.",
+      "firstAction": "Search the package or CVE, select the correct ecosystem, and compare the listed affected range with your install.",
+      "expectedResult": "A package-specific advisory and remediation evidence to verify against upstream release notes.",
+      "sources": [
+        {
+          "url": "https://security.snyk.io/",
+          "title": "Snyk Security Database",
+          "evidence": "Official package/CVE search and supported application, OS and infrastructure categories."
+        },
+        {
+          "url": "https://security.snyk.io/vuln/",
+          "title": "Snyk vulnerability browser",
+          "evidence": "Current official vulnerability listing and ecosystem navigation."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Cross-check dependency risk and available version guidance across ecosystems."
+    },
+    {
+      "toolId": "cyberchef",
+      "group": "browser-utilities",
+      "account": "No account required.",
+      "sharing": "Normal input and recipes are processed in-browser; shared deep links can contain the input.",
+      "firstAction": "Load a copy of the input, add the required operations, and inspect intermediate output before exporting.",
+      "expectedResult": "A reproducible recipe and transformed output while preserving the original evidence.",
+      "sources": [
+        {
+          "url": "https://github.com/gchq/CyberChef",
+          "title": "CyberChef official repository",
+          "evidence": "Client-side processing, offline copy, saved recipes and input-bearing deep links."
+        },
+        {
+          "url": "https://gchq.github.io/CyberChef/",
+          "title": "CyberChef application",
+          "evidence": "Observed live operation workspace; build timestamp November 26, 2026."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Decode and transform evidence locally"
+    },
+    {
+      "toolId": "regex101",
+      "group": "browser-utilities",
+      "account": "No account needed for basic editing; saving and account features are separate.",
+      "sharing": "Matching runs locally; saving/publishing, API/MCP and AI requests send relevant content to a service.",
+      "firstAction": "Choose the same regex engine used by the target app, paste sample text, and add accepted and rejected cases.",
+      "expectedResult": "A verified extraction pattern with visible capture groups and edge cases.",
+      "sources": [
+        {
+          "url": "https://docs.regex101.com/application/privacy/",
+          "title": "regex101 privacy and local processing",
+          "evidence": "Local engine behavior and precisely which save/AI/service actions send content."
+        },
+        {
+          "url": "https://docs.regex101.com/application/regex101-pro/",
+          "title": "Free and Pro comparison",
+          "evidence": "Current free matching/tests and paid advanced-tool boundaries."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Develop a log or indicator extraction pattern with positive and negative cases."
+    },
+    {
+      "toolId": "jwt-debugger",
+      "group": "browser-utilities",
+      "account": "No account required for the debugger.",
+      "sharing": "Use a synthetic test token; the hosted debugger was not certified as a private production-secret workspace in this review.",
+      "firstAction": "Generate an example or paste a test token, inspect claims, and verify the signature only with the intended trusted key.",
+      "expectedResult": "Readable claims and separate verification status; decoding alone does not authenticate the token.",
+      "sources": [
+        {
+          "url": "https://www.jwt.io/",
+          "title": "JWT.io Debugger",
+          "evidence": "Official decode, verify and generate UI with optional signature verification."
+        },
+        {
+          "url": "https://www.jwt.io/introduction",
+          "title": "JWT introduction",
+          "evidence": "Explains token structure and the distinction between decoding and verification."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Understand a test token’s algorithm, issuer, audience and expiry while debugging sign-in."
+    },
+    {
+      "toolId": "browserleaks",
+      "group": "browser-utilities",
+      "account": "No account required for the listed tests.",
+      "sharing": "Tests expose browser/network properties to test servers; WebRTC testing uses STUN traffic.",
+      "firstAction": "Record the IP and WebRTC results, change one privacy or VPN setting, then repeat the same test.",
+      "expectedResult": "A before/after observation of specific leaks or fingerprints, not proof of anonymity.",
+      "sources": [
+        {
+          "url": "https://browserleaks.com/",
+          "title": "BrowserLeaks test directory",
+          "evidence": "Official test coverage and explanation of server-side IP and WebRTC/STUN observations."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Check whether a browser or VPN configuration exposes unexpected connection information."
+    },
+    {
+      "toolId": "cover-your-tracks",
+      "group": "browser-utilities",
+      "account": "No account required.",
+      "sharing": "Collects anonymized browser-configuration data; the real-tracking-company test is optional.",
+      "firstAction": "Choose the test options, run the browser check, and compare results before and after a single configuration change.",
+      "expectedResult": "Evidence about the tested blocking and fingerprint characteristics within the test population.",
+      "sources": [
+        {
+          "url": "https://coveryourtracks.eff.org/",
+          "title": "Cover Your Tracks",
+          "evidence": "Official test scope and optional real tracking-company test."
+        },
+        {
+          "url": "https://coveryourtracks.eff.org/privacy",
+          "title": "Cover Your Tracks privacy",
+          "evidence": "Describes anonymized configuration and fingerprint research collection."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Compare the effect of browser privacy settings with a consistent diagnostic."
+    },
+    {
+      "toolId": "deps-dev",
+      "group": "vulnerability",
+      "account": "No account required for the public package browser.",
+      "sharing": "Remote search of public packages; no private repository upload is needed.",
+      "firstAction": "Find the package and exact version, inspect its dependency graph, and follow relevant OSV advisories.",
+      "expectedResult": "A dependency path and version context that makes a remediation decision explainable.",
+      "sources": [
+        {
+          "url": "https://docs.deps.dev/",
+          "title": "Open Source Insights documentation",
+          "evidence": "Google-hosted package graph service, supported ecosystems and security-advisory views."
+        },
+        {
+          "url": "https://deps.dev/",
+          "title": "Open Source Insights application",
+          "evidence": "Official JavaScript application destination."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Find which dependency path introduces an affected transitive package."
+    },
+    {
+      "toolId": "first-cvss",
+      "group": "vulnerability",
+      "account": "No account required.",
+      "sharing": "Choose metric values rather than uploading a system report; copied vector links convey the chosen metrics.",
+      "firstAction": "Load the published vector or set documented metrics, then add environment-specific values with evidence.",
+      "expectedResult": "A reproducible score and vector; severity remains distinct from exploitation likelihood and business priority.",
+      "sources": [
+        {
+          "url": "https://www.first.org/cvss/calculator/4.0",
+          "title": "CVSS v4.0 calculator",
+          "evidence": "Official calculator with links to the specification, user guide and examples."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Explain why a vulnerability score changes with its exploit conditions or environment."
+    },
+    {
+      "toolId": "attack-navigator",
+      "group": "browser-utilities",
+      "account": "No account required for the hosted application.",
+      "sharing": "Exports contain the annotations you enter; remote-layer loading and self-hosting are separate documented workflows.",
+      "firstAction": "Create a layer for the relevant domain, annotate only evidenced techniques, and export the JSON layer with notes.",
+      "expectedResult": "A reusable coverage or incident map; colored cells alone do not prove detection efficacy.",
+      "sources": [
+        {
+          "url": "https://github.com/mitre-attack/attack-navigator",
+          "title": "ATT&CK Navigator official repository",
+          "evidence": "Hosted application, custom layers, annotations and documented usage."
+        },
+        {
+          "url": "https://github.com/mitre-attack/attack-navigator/blob/main/USAGE.md",
+          "title": "ATT&CK Navigator usage",
+          "evidence": "Official documentation for layers, loading, editing and exports."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Map an incident or detection coverage to clearly identified techniques."
+    },
+    {
+      "toolId": "squoosh",
+      "group": "browser-utilities",
+      "account": "No account required.",
+      "sharing": "Image processing happens locally. The project documents analytics for visitor data and before/after image sizes; local image processing does not mean the website makes no network requests.",
+      "firstAction": "Open a copy of the image, choose an output format and inspect the split comparison at readable zoom.",
+      "expectedResult": "A smaller exported image whose text and relevant detail remain readable; keep the original evidence separately.",
+      "sources": [
+        {
+          "url": "https://squoosh.app/",
+          "title": "Squoosh browser application",
+          "evidence": "Official application offers side-by-side compression and states that image processing remains on the device."
+        },
+        {
+          "url": "https://github.com/GoogleChromeLabs/squoosh",
+          "title": "Squoosh source and privacy",
+          "evidence": "Publisher repository distinguishes local image processing from analytics about use and image sizes."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Reduce screenshot and web-image size while checking text and visual detail."
+    },
+    {
+      "toolId": "drawio",
+      "group": "browser-utilities",
+      "account": "No draw.io account required for the web editor; connected storage can require its own sign-in.",
+      "sharing": "Choose where the drawing is stored. Local files and connected cloud-storage workflows have different data paths; check the selected storage before sharing a client diagram.",
+      "firstAction": "Choose Device or approved storage, start a network diagram, and label devices, links and the fault boundary.",
+      "expectedResult": "An editable diagram and an export that another technician can use to identify the same connections.",
+      "sources": [
+        {
+          "url": "https://www.drawio.com/",
+          "title": "draw.io official editor and storage overview",
+          "evidence": "Publisher links app.diagrams.net, documents a free editor without signup, and explains user-selected storage and integrations."
+        },
+        {
+          "url": "https://www.drawio.com/docs/",
+          "title": "draw.io documentation",
+          "evidence": "Official documentation describes editor, file, diagram and integration workflows."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Document an office network or hand off a clear map of dependencies and ports."
+    },
+    {
+      "toolId": "excalidraw",
+      "group": "browser-utilities",
+      "account": "No account needed for the free whiteboard.",
+      "sharing": "The free drawing is stored in browser local storage. Collaboration and share links use end-to-end encryption; anyone given the relevant share link can access the shared content.",
+      "firstAction": "Draw the affected components and connections, label the observed failure, then export a copy for the service record.",
+      "expectedResult": "A readable sketch that makes the dependency and next test clear; save an exported copy before clearing browser data.",
+      "sources": [
+        {
+          "url": "https://plus.excalidraw.com/how-to-start",
+          "title": "Excalidraw first steps and FAQ",
+          "evidence": "Official FAQ documents free use without an account, local browser storage and encrypted sharing."
+        },
+        {
+          "url": "https://plus.excalidraw.com/security-and-compliance",
+          "title": "Excalidraw security",
+          "evidence": "Official security page distinguishes free local scenes and encrypted shares from the managed cloud product."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Explain a fault and proposed change visually during a support session."
+    },
+    {
+      "toolId": "hoppscotch",
+      "group": "browser-utilities",
+      "account": "Basic client opens without login; sign-in enables cloud workspace features.",
+      "sharing": "Sending a request transmits it to the chosen endpoint. Proxy mode adds a proxy to that path, and signed-in synchronization can store workspace data in the cloud.",
+      "firstAction": "Set the intended test endpoint, method and minimal headers, send the request, and inspect the status and response body.",
+      "expectedResult": "A reproducible request and observed response for the service ticket; browser CORS and chosen interceptor can affect whether the request runs.",
+      "sources": [
+        {
+          "url": "https://hoppscotch.com/releases",
+          "title": "Hoppscotch release history",
+          "evidence": "November 23, 2026 release 2026.11.0 updates cloud plans, personal/shared workspaces and migration."
+        },
+        {
+          "url": "https://hoppscotch.com/pricing",
+          "title": "Hoppscotch current plans",
+          "evidence": "Free plan covers a personal workspace and API testing; Business covers team workspaces and shared collections."
+        },
+        {
+          "url": "https://github.com/hoppscotch/hoppscotch",
+          "title": "Hoppscotch official source and usage",
+          "evidence": "Publisher describes requests, response inspection, cloud synchronization and optional proxy mode."
+        }
+      ],
+      "reviewedAt": "2026-11-26",
+      "shortRole": "Reproduce an API failure and compare status, headers and response content with the documented contract."
+    }
+  ]
+}
