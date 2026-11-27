@@ -952,7 +952,7 @@
       const terms=[item?.title,item?.summary,item?.code,item?.safety,item?.category,item?.shell,item?.sourceTitle].join(' ').toLocaleLowerCase();
       const updateGroup=['Windows Update','Microsoft Store','WinGet','Chocolatey','Scoop','UniGetUI','Ninite Pro','Linux','Update inventory'].includes(item?.category);
       const recoveryGroup=['Installer recovery','Application inventory','Windows Update','Microsoft Store'].includes(item?.category)||/repair|reinstall|recover|cache|failed|stuck|logs/i.test(item?.title||'');
-      const uninstallGroup=/uninstall/i.test(item?.title);
+      const uninstallGroup=/uninstall|remove/i.test(item?.title||'');
       const groupOk=active==='all'||(active==='updates'&&updateGroup)||(active==='recovery'&&recoveryGroup)||(active==='uninstall'&&uninstallGroup)||item?.category===active;
       const show=(!query||query.split(/\s+/).filter(Boolean).every(term=>terms.includes(term)))&&(!shell||item?.shell===shell)&&(!risk||item?.risk===risk)&&groupOk;
       card.hidden=!show;if(show)count++;
