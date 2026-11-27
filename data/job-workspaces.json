@@ -2585,6 +2585,14 @@
           "toolId": "squoosh",
           "why": "Reduce screenshot and web-image size while checking text and visual detail.",
           "actionId": "open-service"
+        },
+        {
+          "toolId": "mangodisk",
+          "why": "Preview healthy-drive capacity and duplicate groups before approving any cleanup."
+        },
+        {
+          "toolId": "optimizerduck",
+          "why": "Review startup entries; compare and undo only a measured, individually approved change."
         }
       ],
       "resources": [
@@ -2694,6 +2702,11 @@
           "symptom": "Changes are complete",
           "action": "Restart as planned and repeat the user’s main app, network, printing and backup checks.",
           "expected": "Normal work succeeds and all deferred issues have owners."
+        },
+        {
+          "symptom": "Healthy disk is crowded or an optional startup item delays sign-in",
+          "action": "Preview the disk candidates in MangoDisk or compare startup entries in optimizerDuck. Confirm an exact target; leave security and updates enabled. Stop on an unsigned-binary security warning.",
+          "expected": "The original task and protection still work; a measured free-space or sign-in change is recorded, or the change is undone."
         }
       ],
       "doneWhen": [

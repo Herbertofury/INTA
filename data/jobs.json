@@ -2104,7 +2104,9 @@
       "pagespeed-insights",
       "webpagetest",
       "wave-accessibility",
-      "squoosh"
+      "squoosh",
+      "mangodisk",
+      "optimizerduck"
     ],
     "startHere": "Agree on the maintenance window and identify the user’s current pain points. Preserve a baseline of the system’s normal work.",
     "steps": [
@@ -2136,7 +2138,7 @@
       },
       {
         "title": "Handle storage and physical upkeep",
-        "detail": "Use the system’s supported storage cleanup controls after reviewing what will be removed. Preserve downloads, local mail, and application data that may be unique. Clean physical dust using the device’s service guidance; avoid registry cleaners and indiscriminate driver-updater bundles. Use WizTree to explain capacity use and WizFile to locate a specific retained file or log before cleanup. Compare the proposed deletion with the owner's retention needs and the available backup. Recheck free space and the original workload afterward; exit WizFile and remove any one-case startup setting so a temporary visit does not leave unplanned monitoring.",
+        "detail": "Use the system’s supported storage cleanup controls after reviewing what will be removed. Preserve downloads, local mail, and application data that may be unique. Clean physical dust using the device’s service guidance; avoid registry cleaners and indiscriminate driver-updater bundles. Use WizTree to explain capacity use and WizFile to locate a specific retained file or log before cleanup. Compare the proposed deletion with the owner's retention needs and the available backup. Recheck free space and the original workload afterward; exit WizFile and remove any one-case startup setting so a temporary visit does not leave unplanned monitoring. On a healthy drive, MangoDisk can preview duplicate groups and reclaimable space before any removal. Use optimizerDuck only to inspect startup items or evaluate one justified, reversible change; leave updates and protection on and retest the same workload.",
         "anchor": "step-05"
       },
       {
@@ -2175,6 +2177,14 @@
       {
         "title": "WizFile: search filters and shutdown",
         "url": "https://antibody-software.com/wizfile/quick-start"
+      },
+      {
+        "title": "MangoDisk official releases",
+        "url": "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2"
+      },
+      {
+        "title": "optimizerDuck publisher documentation",
+        "url": "https://github.com/itsfatduck/optimizerDuck"
       }
     ],
     "related": [
