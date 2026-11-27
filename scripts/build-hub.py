@@ -104,6 +104,18 @@ def validate(tools: list[dict], jobs: list[dict]) -> None:
         for number, step in enumerate(job["steps"], 1):
             required(step, ["title", "detail"])
             step_ids.append(step_anchor(step, number))
+            for shortcut in step.get("shortcuts", []):
+                required(shortcut, ["label"])
+                kind = set(shortcut) - {"label"}
+                if kind == {"tool"} and shortcut["tool"] in tool_ids:
+                    continue
+                if kind == {"job"} and shortcut["job"] in job_ids:
+                    continue
+                if kind == {"url"}:
+                    url = urlparse(shortcut["url"])
+                    if url.scheme == "https" and url.hostname and not (url.username or url.password):
+                        continue
+                raise ValueError(f"{job['id']}: invalid step shortcut: {shortcut}")
         if len(set(step_ids)) != len(step_ids):
             raise ValueError(f"{job['id']}: duplicate step anchors")
         for source in job["sources"]:
@@ -701,6 +713,8 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
              f"**{cell(job['category'])}** · {cell(job['difficulty'])} · {cell(job['estimatedTime'])} · {len(job['steps'])} steps", "",
              "[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · "
              f"[Verification](#acceptance) · [Sources](#sources) · [Interactive checklist]({HUB}#job/{job['id']})", ""]
+    if job["id"] == "client-handoff":
+        lines += [f"**[Open the dedicated nine-step Checklist tab]({HUB}#checklist)**", ""]
     if workspace:
         lines += workspace_resources_markdown(workspace, by_id, access, f"{HUB}#job/{job['id']}")
     if quick_items:
@@ -746,6 +760,15 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
         old_title = f"{int(old_number[1]):02d} · {step['title']}" if old_number else None
         lines += [anchor(identity), "", *heading(3, f"{number:02d} · {step['title']}", old_title),
                   f"- [ ] {step['detail']}", ""]
+        for shortcut in step.get("shortcuts", []):
+            if "tool" in shortcut:
+                lines += [f"- [{shortcut['label']}]({access[shortcut['tool']]['officialUrl']}) · "
+                          + tool_access_links(by_id[shortcut["tool"]], access)]
+            else:
+                target = destination(shortcut["job"]) if "job" in shortcut else shortcut["url"]
+                lines += [f"- [{shortcut['label']}]({target})"]
+        if step.get("shortcuts"):
+            lines += [""]
         if step.get("command"):
             lines += ["**Command for the environment described above:**", "", "```text", step["command"], "```", ""]
             lines += [f"**Command legend:** {command_reference(step, by_id)} · [Return to the step context](#{identity}).", ""]
