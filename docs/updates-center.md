@@ -132,7 +132,7 @@ Installation, platform support and the current user flow are documented in [the 
 
 The Updates tab also includes Flatpak, Snap and Homebrew. Their inventories and transactions are independent:
 - Flatpak: `flatpak remote-ls --updates`, `flatpak update`, `flatpak repair`, `flatpak uninstall <app-id>`. [Flatpak docs](https://docs.flatpak.org/en/latest/using-flatpak.html).
-- Snap: `snap refresh --list`, `snap refresh --time`, `sudo snap refresh`. Snap normally refreshes automatically; holds and schedules matter. [Snap update management](https://snapcraft.io/docs/how-to-guides/manage-snaps/manage-updates/).
+- Snap: `snap refresh --list`, `snap refresh --time`, `sudo snap refresh`. Snap normally refreshes automatically; holds and schedules matter. Snap also supports reverting a package to its previous revision with `sudo snap revert <package>`; INTA exposes this as a one-confirmation rollback action. [Snap update management](https://snapcraft.io/docs/how-to-guides/manage-snaps/manage-updates/).
 - Homebrew: `brew outdated --verbose`, then review before `brew upgrade`. Homebrew is not a complete Mac App Store or vendor updater. [Homebrew manual](https://docs.brew.sh/Manpage.html).
 
 For managed customer fleets, the page now links to:
