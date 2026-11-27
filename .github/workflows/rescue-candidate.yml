@@ -1,5 +1,8 @@
 name: Retest and publish INTA Rescue candidate
 on:
+  push:
+    branches: [main]
+    paths: ['.github/rescue-candidate.json']
   workflow_dispatch:
     inputs:
       candidate_run_id:
@@ -19,7 +22,7 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: inta-rescue-candidate-${{ inputs.candidate_artifact_id }}
+  group: inta-rescue-candidate
   cancel-in-progress: false
 
 jobs:
@@ -38,6 +41,25 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
+      - name: Load the reviewed candidate selected by this commit
+        if: github.event_name == 'push'
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import pathlib
+          import re
+          candidate = json.loads(pathlib.Path('.github/rescue-candidate.json').read_text())
+          run_id = str(candidate['run_id'])
+          artifact_id = str(candidate['artifact_id'])
+          source = candidate['source_sha']
+          if not (re.fullmatch(r'[0-9]+', run_id) and re.fullmatch(r'[0-9]+', artifact_id)
+                  and re.fullmatch(r'[0-9a-f]{40}', source)):
+              raise SystemExit('Invalid candidate identity; no artifact was downloaded')
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write(f'CANDIDATE_RUN_ID={run_id}\nCANDIDATE_ARTIFACT_ID={artifact_id}\n'
+                           f'CANDIDATE_SOURCE_SHA={source}\n')
+          PY
       - name: Verify original build and unchanged native source
         env:
           GH_TOKEN: ${{ github.token }}
@@ -62,12 +84,12 @@ jobs:
       - name: Retrieve the exact existing candidate
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
-          artifact-ids: ${{ inputs.candidate_artifact_id }}
+          artifact-ids: ${{ env.CANDIDATE_ARTIFACT_ID }}
           merge-multiple: true
           path: ${{ runner.temp }}/inta-dist
           github-token: ${{ github.token }}
           repository: ${{ github.repository }}
-          run-id: ${{ inputs.candidate_run_id }}
+          run-id: ${{ env.CANDIDATE_RUN_ID }}
       - name: Verify candidate checksums
         working-directory: ${{ runner.temp }}/inta-dist
         run: |
