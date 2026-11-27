@@ -9936,6 +9936,7 @@
     },
     {
       "id": "app-windows",
+      "inlineIcon": false,
       "name": "Windows",
       "names": [
         "Windows"
@@ -9952,6 +9953,7 @@
     },
     {
       "id": "app-windows11",
+      "inlineIcon": false,
       "name": "Windows 11",
       "names": [
         "Windows 11"
@@ -9968,6 +9970,7 @@
     },
     {
       "id": "app-windows10",
+      "inlineIcon": false,
       "name": "Windows 10",
       "names": [
         "Windows 10"
@@ -10486,6 +10489,7 @@
     },
     {
       "id": "app-windows-server",
+      "inlineIcon": false,
       "name": "Windows Server",
       "names": [
         "Windows Server"

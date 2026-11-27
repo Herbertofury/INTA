@@ -59,6 +59,16 @@ class BrandIconTests(unittest.TestCase):
             self.assertEqual(resolve_brand(self.registry, name=name, url='https://github.com/')['id'], identity)
         self.assertEqual(resolve_brand(self.registry, tool_id='codex-cli', name='GitHub')['id'], 'codex-cli')
 
+    def test_only_explicit_platform_identities_opt_out_of_inline_images(self):
+        labels = {'windows', 'windows10', 'windows11', 'windows-server'}
+        self.assertEqual({alias['id'] for alias in self.aliases if alias.get('inlineIcon') is False}, labels)
+        built = portal_icons(self.registry)
+        self.assertEqual({b['id'] for b in built['brands'] if b.get('inlineIcon') is False},
+                         {f'app-{id}' for id in labels})
+        self.assertTrue(all(b.get('inlineIcon') is not False for b in built['brands'] if b.get('toolId')))
+        for identity in ('app-windows-update', 'windows-terminal', 'app-winpe'):
+            self.assertFalse(next(b for b in built['brands'] if b['id'] == identity).get('inlineIcon') is False)
+
     def test_shared_release_hosts_keep_their_own_website_identity(self):
         github = resolve_brand(self.registry, url='https://github.com/an-unrelated-project/docs')
         self.assertEqual(github['kind'], 'website')

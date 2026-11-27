@@ -103,6 +103,8 @@ def validate_registry(registry: dict, root: Path = ROOT) -> list[str]:
     if len(ids) != len(set(ids)):
         errors.append('Duplicate brand identity')
     for b in brands:
+        if 'inlineIcon' in b and not isinstance(b['inlineIcon'], bool):
+            errors.append(f'{b.get("id")}: inlineIcon must be boolean')
         if b.get('assetId') not in registry.get('assets', {}):
             errors.append(f'{b.get("id")}: missing authentic cached icon')
         for u in [b.get('downloadPage', ''), *b.get('urls', [])]:

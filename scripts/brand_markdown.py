@@ -72,7 +72,7 @@ class BrandMarkdown:
         return brand
 
     def icon(self, brand) -> str:
-        if not brand or brand.get("assetId") not in self.assets:
+        if not brand or brand.get("inlineIcon") is False or brand.get("assetId") not in self.assets:
             return ""
         asset = self.assets[brand["assetId"]]
         source = RAW_ASSETS + asset["path"]
