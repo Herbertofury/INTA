@@ -52,6 +52,7 @@ public sealed class PackageManagers(ProcessRunner runner)
             if (refresh.ExitCode != 0) return (refresh.ExitCode, string.Join(Environment.NewLine, output));
         }
         var (file, args) = BuildCommand(request.Manager, request.Action, package);
+        (file, args) = ResolveCommand(request.Manager, file, args);
         var result = await runner.RunAsync(file, args, TimeSpan.FromMinutes(60), ct);
         output.Add(result.Output);
         return (result.ExitCode, string.Join(Environment.NewLine, output));
