@@ -246,11 +246,11 @@
     },
     "malware-removal": {
       "icon": "🛡️",
-      "diagram": "flowchart TD\n    A[\"Record symptoms and isolate\"]:::action --> B{\"Wider compromise?\"}:::decision\n    B -->|\"Yes\"| C[\"Switch to incident response\"]:::stop\n    B -->|\"No evidence of spread\"| D[\"Run updated primary cleanup\"]:::action\n    D --> E{\"Persistence suspected?\"}:::decision\n    E -->|\"Yes\"| F[\"Use an outside-session check\"]:::action\n    E -->|\"No\"| G[\"Review startup and browser changes\"]:::action\n    F --> G\n    G --> H{\"Integrity established?\"}:::decision\n    H -->|\"No\"| I[\"Rebuild through trusted recovery\"]:::stop\n    H -->|\"Yes\"| J[\"Close entry point and retest\"]:::done\n    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46\n    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445\n    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137\n    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449\n",
+      "diagram": "flowchart TD\n    A[\"Record symptoms and isolate\"]:::action --> B{\"Wider compromise?\"}:::decision\n    B -->|\"Yes\"| C[\"Switch to incident response\"]:::stop\n    B -->|\"No evidence of spread\"| D[\"Run updated primary cleanup\"]:::action\n    D --> E{\"Persistence suspected?\"}:::decision\n    E -->|\"Yes\"| F[\"Use an outside-session check\"]:::action\n    E -->|\"No\"| G[\"Review startup and browser changes\"]:::action\n    F --> G\n    G --> K[\"Clean browser profiles and install protection\"]:::action\n    K --> H{\"Integrity established?\"}:::decision\n    H -->|\"No\"| I[\"Rebuild through trusted recovery\"]:::stop\n    H -->|\"Yes\"| J[\"Close entry point and retest\"]:::done\n    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46\n    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445\n    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137\n    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449\n",
       "checkpoints": {
-        "Before changing anything": "Record symptoms; decide whether this is a single-endpoint cleanup.",
-        "Keep during the job": "Detection names, scan versions, quarantine, persistence, and account findings.",
-        "Before handing back": "Healthy protection, stable settings, and tested original work."
+        "Before changing anything": "Record symptoms and decide whether this is a single-endpoint cleanup. Capture browser profile names, notification Allow origins, extension publishers, search/home settings and any management policy before changing them.",
+        "Keep during the job": "Detection names, scan versions, quarantine, persistence, account findings, browser permissions, extension changes and selected protection layer.",
+        "Before handing back": "Healthy endpoint protection, no untrusted browser notification grants or extensions, one supported browser protection layer per browser, stable settings and tested original work."
       },
       "navigationLabel": "Remove viruses",
       "navigationIcon": "🦠"
