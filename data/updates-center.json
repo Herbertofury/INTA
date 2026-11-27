@@ -153,7 +153,7 @@
       "privilege": "Administrator",
       "risk": "changes-system",
       "summary": "Stop update services, rename SoftwareDistribution and catroot2 to timestamped backup folders, then restart services to allow Windows to rebuild caches.",
-      "code": "$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'\n$services = 'bits','wuauserv','cryptsvc'\n$services | ForEach-Object { Stop-Service -Name $_ -Force -ErrorAction Stop }\ntry {\n  Rename-Item \"$env:windir\\SoftwareDistribution\" \"SoftwareDistribution.INTA-$stamp\" -ErrorAction Stop\n  Rename-Item \"$env:windir\\System32\\catroot2\" \"catroot2.INTA-$stamp\" -ErrorAction Stop\n} finally {\n  $services | ForEach-Object { Start-Service -Name $_ -ErrorAction SilentlyContinue }\n}\nGet-Service -Name bits,wuauserv,cryptsvc | Format-Table Name,Status -AutoSize",
+      "code": "$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'\n$services = 'bits','wuauserv','cryptsvc'\ntry {\n  foreach ($service in $services) { Stop-Service -Name $service -Force -ErrorAction Stop }\n  Rename-Item \"$env:windir\\SoftwareDistribution\" \"SoftwareDistribution.INTA-$stamp\" -ErrorAction Stop\n  Rename-Item \"$env:windir\\System32\\catroot2\" \"catroot2.INTA-$stamp\" -ErrorAction Stop\n} finally {\n  foreach ($service in $services) { Start-Service -Name $service -ErrorAction SilentlyContinue }\n}\nGet-Service -Name bits,wuauserv,cryptsvc | Format-Table Name,Status -AutoSize",
       "safety": "State-changing recovery action. Use only after collecting the update error and trying the supported troubleshooter. Requires admin and a maintenance window; temporarily stops update services, causes update history/download cache to be rebuilt, and can require another download. If either rename fails, stop and inspect service state before proceeding. Do not delete the timestamped backups until Windows Update succeeds and retention is approved.",
       "sourceUrl": "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows",
       "sourceTitle": "Microsoft Troubleshoot Windows updates"
@@ -360,8 +360,8 @@
       "shell": "PowerShell",
       "privilege": "Administrator",
       "risk": "changes-system",
-      "summary": "Remove a specific package managed by Chocolatey.",
-      "code": "choco list --local-only\nchoco uninstall package-id --confirm",
+      "summary": "List locally managed Chocolatey packages, then uninstall one exact package.",
+      "code": "choco list\nchoco uninstall package-id --confirm",
       "safety": "Replace package-id with the exact installed package ID. Package uninstall scripts may remove data or dependencies; inspect package metadata and preserve user data first.",
       "sourceUrl": "https://docs.chocolatey.org/en-us/choco/commands/uninstall/",
       "sourceTitle": "Chocolatey uninstall"
@@ -373,11 +373,11 @@
       "shell": "PowerShell",
       "privilege": "Administrator",
       "risk": "changes-system",
-      "summary": "Clear Chocolatey's package cache when a corrupt cached artifact is the confirmed cause.",
-      "code": "choco clean --yes",
-      "safety": "Deletes cached package files and requires re-download. Verify command availability for the installed Chocolatey version/edition; do not use as a generic first-line fix.",
-      "sourceUrl": "https://docs.chocolatey.org/en-us/choco/commands/",
-      "sourceTitle": "Chocolatey command reference"
+      "summary": "Inspect Chocolatey cache statistics and remove expired HTTP cache entries when a stale cache is implicated.",
+      "code": "choco cache list\nchoco cache remove --expired",
+      "safety": "Chocolatey CLI 2.1.0 or later. The command removes expired cached HTTP items; it does not delete all cached packages. Cache behavior depends on elevated context and the user/system HTTP cache. Review cache stats first.",
+      "sourceUrl": "https://docs.chocolatey.org/en-us/choco/commands/cache/",
+      "sourceTitle": "Chocolatey cache command"
     },
     {
       "id": "scoop-preview",
@@ -578,7 +578,7 @@
       "id": "update-export-inventory",
       "title": "Export WinGet package inventory for a maintenance record",
       "category": "Update inventory",
-      "shell": "CMD",
+      "shell": "PowerShell",
       "privilege": "Standard user",
       "risk": "read-only",
       "summary": "Export a package inventory file for review and later comparison.",
@@ -677,6 +677,19 @@
       "safety": "Changes the entire installed system. Arch does not support partial upgrades; read Arch news first and avoid interrupting package transactions.",
       "sourceUrl": "https://wiki.archlinux.org/title/System_maintenance",
       "sourceTitle": "Arch Linux system maintenance"
+    },
+    {
+      "id": "ninite-uninstall",
+      "title": "Uninstall a supported application with Ninite Pro Classic",
+      "category": "Ninite Pro",
+      "shell": "CMD",
+      "privilege": "Ninite Pro license",
+      "risk": "changes-system",
+      "summary": "Uninstall one selected Ninite-supported application through the Pro Classic command-line interface.",
+      "code": "NinitePro.exe /select Firefox /uninstall /silent uninstall.txt",
+      "safety": "Requires a valid Ninite Pro Classic license. Replace Firefox with a supported exact app selection. This changes the endpoint and may remove app data; preserve browser profiles and user data first. Newer Pro web interface has different controls.",
+      "sourceUrl": "https://ninite.com/help/features/switches.html",
+      "sourceTitle": "Ninite Pro command-line switches"
     }
   ],
   "workflows": [
@@ -753,7 +766,8 @@
         "choco-uninstall",
         "scoop-uninstall",
         "unigetui-uninstall-app",
-        "windows-installer-health"
+        "windows-installer-health",
+        "ninite-uninstall"
       ],
       "sequence": "Confirm app identity, publisher, uninstall scope and data-retention preference. Use the manager that owns the package. If manager metadata is missing, use the vendor's official uninstaller or Windows Apps UI. Inspect MSI logs for MSI failures.",
       "warning": "Do not delete Program Files folders, registry uninstall keys or Windows Installer cache as a substitute for uninstall. Shared dependencies and user data may be affected."
