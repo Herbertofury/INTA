@@ -13240,13 +13240,24 @@
       "id": "app-mangodisk",
       "name": "MangoDisk",
       "names": [
-        "MangoDisk"
+        "MangoDisk",
+        "Mango Disk"
       ],
       "urls": [
         "https://mangodisk.app/",
         "https://mangodisk.app/download",
         "https://github.com/harry0703/MangoDisk",
-        "https://downloads.mangodisk.app/"
+        "https://downloads.mangodisk.app/",
+        "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2",
+        "https://github.com/harry0703/MangoDisk#readme",
+        "https://api.github.com/repos/harry0703/MangoDisk/releases/latest",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-windows-portable.exe",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-windows.exe",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-macos.dmg",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-x64.AppImage",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-x64.deb",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-arm64.AppImage",
+        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-arm64.deb"
       ],
       "hosts": [
         "mangodisk.app",
@@ -13254,8 +13265,9 @@
         "downloads.mangodisk.app"
       ],
       "downloadPage": "https://mangodisk.app/download",
-      "kind": "application",
-      "assetId": "idf5a75004d3539ea0c5f"
+      "kind": "tool",
+      "assetId": "i66c3073015a38e7aa1c",
+      "toolId": "mangodisk"
     },
     {
       "id": "site-mangodisk-app",
@@ -16031,33 +16043,6 @@
       "downloadPage": "https://www.vmware.com/",
       "kind": "website",
       "assetId": "ibf098c181bb6fbff11a3"
-    },
-    {
-      "id": "mangodisk",
-      "toolId": "mangodisk",
-      "name": "MangoDisk",
-      "names": [
-        "MangoDisk",
-        "Mango Disk"
-      ],
-      "urls": [
-        "https://mangodisk.app/",
-        "https://github.com/harry0703/MangoDisk",
-        "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2",
-        "https://github.com/harry0703/MangoDisk#readme",
-        "https://api.github.com/repos/harry0703/MangoDisk/releases/latest",
-        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-windows-portable.exe",
-        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-windows.exe",
-        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-macos.dmg",
-        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-x64.AppImage",
-        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-x64.deb",
-        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-arm64.AppImage",
-        "https://github.com/harry0703/MangoDisk/releases/download/v2.1.2/MangoDisk-2.1.2-linux-arm64.deb"
-      ],
-      "hosts": [],
-      "downloadPage": "https://github.com/harry0703/MangoDisk/releases/tag/v2.1.2",
-      "kind": "tool",
-      "assetId": "i66c3073015a38e7aa1c"
     },
     {
       "id": "optimizerduck",
