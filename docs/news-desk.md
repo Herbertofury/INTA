@@ -24,3 +24,7 @@ python3 scripts/build-hub.py
 python3 -m unittest discover -s tests
 python3 scripts/build-hub.py --check
 ```
+
+### Reading freshness across clients
+
+The snapshot timestamp dates generation, not a successful refresh of every publisher. Schema 1 readers can use optional source fields: `origin` is `feed` or `editorial`; `lastSuccessfulCheckAt` is a UTC timestamp for an observed successful feed check. During a partial outage, previously accepted stories remain available and labeled **Retained**, with the last recorded successful check unchanged. Older snapshots without that timestamp show **unknown**; do not infer it from the overall snapshot date. In older schema-1 snapshots the fixed `windows-health` seed is editorial, not a successful feed. Editorial selections have no feed check timestamp and are excluded from feed availability totals. If all network sources fail, the previous snapshot remains byte-for-byte unchanged. The snapshot date and an offline/stale indicator remain important in each client; an older unchanged snapshot cannot identify a new outage that happened after its generation.
