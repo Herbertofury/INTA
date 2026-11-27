@@ -927,6 +927,80 @@
       <footer class="update-command-footer">${external(item.sourceUrl, `Official reference: ${esc(item.sourceTitle)} ${icon('external')}`)}</footer>
     </article>`;
   }
+
+  const localAgentBase = 'http://127.0.0.1:47821';
+  const localAgentTokenKey = 'inta-local-agent-token';
+  function localAgentToken() { try { return sessionStorage.getItem(localAgentTokenKey) || ''; } catch (_) { return ''; } }
+  async function localAgentRequest(path, options = {}) {
+    const headers = new Headers(options.headers || {});
+    const token = localAgentToken();
+    if (token) headers.set('Authorization', 'Bearer ' + token);
+    if (options.body) headers.set('Content-Type', 'application/json');
+    const response = await fetch(localAgentBase + path, { ...options, headers, mode: 'cors', credentials: 'omit', cache: 'no-store' });
+    const body = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(body.error || ('Local agent returned HTTP ' + response.status));
+    return body;
+  }
+  function renderLocalAgentStatus(status) {
+    const label=$('#agent-connection-status'), connect=$('[data-agent-connect]'), disconnect=$('[data-agent-disconnect]'), refresh=$('[data-agent-refresh]');
+    if(label) label.textContent = status ? (status.hostname + ' · ' + (status.elevated ? 'Administrator' : 'Standard privileges') + ' · ' + status.platform) : 'Not connected';
+    if(connect) connect.hidden=!!status;
+    if(disconnect) disconnect.hidden=!status;
+    if(refresh) refresh.disabled=!status;
+    const manager=$('#agent-manager');
+    if(manager && status) {
+      const previous=manager.value;
+      manager.innerHTML=array(status.managers).map(name=>'<option value="'+esc(name)+'">'+esc(name)+'</option>').join('');
+      if(status.managers.includes(previous)) manager.value=previous;
+      manager.disabled=!status.managers.length;
+    }
+    const caps=$('#agent-capabilities');
+    if(caps) caps.textContent=status ? ('Available: '+status.managers.join(', ')) : 'Connect this computer to inspect installed package managers.';
+  }
+  async function connectLocalAgent() {
+    try {
+      const health=await fetch(localAgentBase+'/api/v1/health',{mode:'cors',credentials:'omit',cache:'no-store'});
+      if(!health.ok) throw new Error('The local agent is not responding.');
+      const paired=await fetch(localAgentBase+'/api/v1/pair',{method:'POST',mode:'cors',credentials:'omit',cache:'no-store'});
+      if(!paired.ok) throw new Error('Pairing was refused. Open the official INTA website and try again.');
+      const pair=await paired.json();
+      sessionStorage.setItem(localAgentTokenKey,pair.token);
+      renderLocalAgentStatus(await localAgentRequest('/api/v1/status'));
+      notify('Connected to this computer.');
+      await refreshLocalAgentData();
+    } catch(error) { notify(error.message+' Start INTA Local Agent on this computer, then connect again.'); }
+  }
+  function renderLocalAgentInventory(data) {
+    const root=$('#agent-inventory'); if(!root)return;
+    const previews=array(data.updatePreviews), apps=array(data.applications);
+    root.innerHTML='<div class="agent-inventory-summary"><strong>'+apps.length+'</strong> registered apps · <strong>'+array(data.managers).length+'</strong> package managers · checked '+esc(new Date(data.collectedAt).toLocaleTimeString())+'</div>'+
+      '<div class="agent-preview-grid">'+previews.map(item=>'<details class="agent-preview-card"><summary><strong>'+esc(item.manager)+'</strong><span>'+(item.exitCode===0?'Preview ready':'Check output · '+esc(item.exitCode))+'</span></summary><pre>'+esc(item.output||'No output')+'</pre></details>').join('')+'</div>'+
+      '<details class="agent-app-inventory"><summary>Installed Windows applications ('+apps.length+')</summary><div class="agent-app-list">'+apps.slice(0,250).map(app=>'<div><strong>'+esc(app.name)+'</strong><span>'+esc([app.version,app.publisher,app.scope].filter(Boolean).join(' · '))+'</span></div>').join('')+'</div></details>';
+  }
+  function renderLocalAgentOperations(records) {
+    const root=$('#agent-operations'); if(!root)return;
+    root.innerHTML=array(records).slice(0,40).map(item=>'<article class="agent-operation-row"><div><strong>'+esc(item.action)+' · '+esc(item.packageId)+'</strong><span>'+esc(item.manager)+' · '+esc(item.state)+' · '+esc(new Date(item.startedAt).toLocaleString())+'</span></div><details><summary>Output / details</summary><pre>'+esc(item.error||item.output||('Exit code: '+item.exitCode))+'</pre></details></article>').join('')||'<p class="muted">No maintenance operations have been run from this computer yet.</p>';
+  }
+  async function refreshLocalAgentData() {
+    try {
+      const [inventoryData, operations] = await Promise.all([localAgentRequest('/api/v1/inventory'),localAgentRequest('/api/v1/operations')]);
+      renderLocalAgentInventory(inventoryData); renderLocalAgentOperations(operations);
+      renderLocalAgentStatus(await localAgentRequest('/api/v1/status'));
+    } catch(error) { notify(error.message); }
+  }
+  async function runLocalAgentOperation(action) {
+    const manager=$('#agent-manager')?.value||'';
+    const packageId=action==='update-all'?'*':($('#agent-package-id')?.value||'').trim();
+    if(!manager){notify('Connect the local agent and select an installed package manager.');return;}
+    if(action!=='update-all'&&!packageId){notify('Enter the exact package ID from the selected manager preview.');return;}
+    const description=action==='update-all'?'Update all packages managed by '+manager:action+' '+packageId+' using '+manager;
+    if(!window.confirm(description+'? This changes software on this computer.'))return;
+    try {
+      await localAgentRequest('/api/v1/operations',{method:'POST',body:JSON.stringify({manager,action,packageId,confirmed:true})});
+      notify('Operation queued. Refresh progress to see its result.');
+      renderLocalAgentOperations(await localAgentRequest('/api/v1/operations'));
+    } catch(error) { notify(error.message); }
+  }
   function updatesCenterPage(params = new URLSearchParams()) {
     const commands=array(updatesCenter.commands), workflows=array(updatesCenter.workflows), channels=array(updatesCenter.channels);
     const platforms=array(updatesCenter.platforms);
@@ -934,7 +1008,7 @@
     const selected=params.get('category')||'all';
     return heading('INTA maintenance workspace','Updates & Maintenance','One place to audit software, preview updates, repair broken installations, recover failed updates and uninstall applications safely.')+
       `<section class="updates-hero"><div class="updates-hero-copy"><p class="page-label">AUDIT · UPDATE · REPAIR · RECOVER · VERIFY</p><h2>Keep every machine healthy.</h2><p>One technician workflow across Windows Update, WinGet, Chocolatey, Scoop, UniGetUI, Ninite Pro, Microsoft Store and Linux package managers.</p><div class="updates-hero-actions"><button class="button ghost" data-install-pwa${deferredPwaInstall ? '' : ' hidden'}>${icon('download')}Install INTA app</button><a class="button primary" href="#updates?category=updates">${icon('refresh-cw')}Review update commands</a><a class="button ghost" href="#updates?category=recovery">${icon('wrench')}Fix a failed update</a></div><p class="updates-install-note">On iPhone/iPad use Share → Add to Home Screen. On Android use the browser menu → Install app / Add to Home Screen.</p></div><div class="updates-hero-metrics"><div><strong>${channels.length}</strong><span>update channels</span></div><div><strong>${commands.length}</strong><span>maintenance actions</span></div><div><strong>${workflows.length}</strong><span>recovery workflows</span></div></div></section>
-      <div class="updates-live-notice">${icon('activity')}<div><strong>Local inventory is not connected in this web build.</strong><span>This page provides verified commands and guided procedures. It does not claim to know which updates are pending on a customer's computer. Live inventory, operation progress and automatic recovery require the local INTA agent or a supported package-manager integration.</span></div></div>
+      <section class="updates-agent-panel" aria-labelledby="agent-panel-title"><div class="updates-section-heading"><div><p class="page-label">THIS COMPUTER</p><h2 id="agent-panel-title">Local maintenance agent</h2><p>Connect once. Inventory and previews are read-only; each update, repair or uninstall gets one simple confirmation.</p></div><div class="agent-status-chip"><span class="agent-status-dot"></span><span id="agent-connection-status">Not connected</span></div></div><div class="agent-connect-actions"><button class="button primary" data-agent-connect>\${icon('plug')}Connect this computer</button><button class="button ghost" data-agent-disconnect hidden>\${icon('unlink')}Disconnect</button><button class="button ghost" data-agent-refresh disabled>\${icon('refresh-cw')}Refresh inventory & progress</button></div><p class="agent-capabilities" id="agent-capabilities">Start INTA Local Agent on this computer, then connect. The agent only listens on this computer and exposes fixed package-manager actions, not a remote shell.</p><div class="agent-operation-controls"><label>Package manager<select id="agent-manager" disabled><option value="">Connect to detect managers</option></select></label><label>Exact package ID<input id="agent-package-id" type="text" placeholder="Copy from the preview above"></label><label>Action<select id="agent-action"><option value="update">Update one</option><option value="repair">Repair / reinstall</option><option value="uninstall">Uninstall</option></select></label><div class="agent-action-buttons"><button class="button primary" data-agent-run>\${icon('play')}Run action</button><button class="button ghost" data-agent-update-all>\${icon('refresh-cw')}Update all in manager</button></div></div><div class="agent-live-data"><div class="agent-data-heading"><h3>Inventory & update previews</h3><span>On request only</span></div><div id="agent-inventory"><p class="muted">Connect to this computer to load local inventory and package-manager update previews.</p></div></div><div class="agent-live-data"><div class="agent-data-heading"><h3>Recent operations</h3><span>Saved on this computer</span></div><div id="agent-operations"><p class="muted">No local operation history loaded.</p></div></div></section>
       <section class="updates-channel-section"><div class="updates-section-heading"><div><p class="page-label">UPDATE CHANNELS</p><h2>Know what updates what</h2><p>Audit each manager separately. Never double-update an app or confuse application patches with Windows servicing.</p></div></div><div class="updates-channel-grid">${channels.map(channel=>{const audit=updateCommandMap.get(channel.auditCommand),update=updateCommandMap.get(channel.updateCommand);return `<article class="updates-channel-card"><div class="updates-channel-top"><span class="updates-channel-icon">${icon(channel.icon||'package')}</span><span class="updates-channel-manager">${esc(channel.manager)}</span></div><h3>${esc(channel.name)}</h3><p>${esc(channel.scope)}</p><p class="updates-channel-note">${formatted(channel.note)}</p><div class="updates-channel-actions">${audit?`<button class="copy-command" data-copy-update-command="${esc(audit.id)}">${icon('scan-search')}Copy audit</button>`:''}${update?`<button class="copy-command" data-copy-update-command="${esc(update.id)}">${icon('download')}Copy update</button>`:''}</div></article>`;}).join('')}</div></section>
       <section class="updates-platforms"><div class="updates-section-heading"><div><p class="page-label">FLEET PATCH MANAGEMENT</p><h2>Professional endpoint update platforms</h2><p>For managed customer fleets, these platforms add endpoint inventory, approval, deployment rings, compliance reporting and third-party patching.</p></div></div><div class="updates-platform-grid">${platforms.map(platform=>`<article class="updates-platform-card"><p class="update-command-kicker">${esc(platform.kind.replace(/-/g,' '))} · ${esc(platform.platform)}</p><h3>${external(platform.url,esc(platform.name))}</h3><p>${formatted(platform.summary)}</p><p class="command-safety">${icon('shield-alert')}<span>${formatted(platform.trust)}</span></p><a href="${esc(platform.docsUrl)}" target="_blank" rel="noopener noreferrer">Official documentation ${icon('external')}</a></article>`).join('')}</div></section>
       <section class="updates-workflows"><div class="updates-section-heading"><div><p class="page-label">GUIDED MAINTENANCE</p><h2>One-click workflow bundles</h2><p>Copy an ordered checklist of commands with the safety notes attached.</p></div></div><div class="updates-workflow-grid">${workflows.map(workflow=>`<article class="updates-workflow-card"><p class="update-command-kicker">${esc(workflow.id.replace(/-/g,' '))}</p><h3>${esc(workflow.title)}</h3><p>${formatted(workflow.description)}</p><ol>${workflow.commandIds.map(id=>{const item=updateCommandMap.get(id);return item?`<li>${esc(item.title)}</li>`:''}).join('')}</ol><p class="updates-workflow-sequence">${formatted(workflow.sequence)}</p><p class="command-safety">${icon('alert-triangle')}<span>${formatted(workflow.warning)}</span></p><button class="secondary-button" data-copy-update-workflow="${esc(workflow.id)}">${icon('copy')}Copy workflow bundle</button></article>`).join('')}</div></section>
@@ -1510,6 +1584,11 @@
       promptEvent.prompt();promptEvent.userChoice.then(choice=>notify(choice.outcome==='accepted'?'INTA install accepted.':'INTA install dismissed.')).catch(()=>notify('Use your browser menu to install INTA.'));
       return;
     }
+    if(target.closest('[data-agent-connect]')){connectLocalAgent();return;}
+    if(target.closest('[data-agent-disconnect]')){try{sessionStorage.removeItem(localAgentTokenKey);}catch(_){}renderLocalAgentStatus(null);$('#agent-inventory').innerHTML='<p class="muted">Disconnected.</p>';$('#agent-operations').innerHTML='';notify('Disconnected from this computer.');return;}
+    if(target.closest('[data-agent-refresh]')){refreshLocalAgentData();return;}
+    if(target.closest('[data-agent-run]')){runLocalAgentOperation($('#agent-action')?.value||'update');return;}
+    if(target.closest('[data-agent-update-all]')){runLocalAgentOperation('update-all');return;}
     const updateCommand=target.closest('[data-copy-update-command]');
     if(updateCommand){const item=updateCommandMap.get(updateCommand.dataset.copyUpdateCommand);if(item)copy(item.code,'Maintenance command copied. Review the impact and prerequisites before running.');return;}
     const updateWorkflow=target.closest('[data-copy-update-workflow]');
