@@ -178,6 +178,15 @@ def field_notes_markdown(notes: list[dict], by_id: dict, access: dict, workspace
             lines += [f"**[{tool['name']}]({access[tool_id]['officialUrl']})** · "
                       + tool_access_links(tool, access, action_id=selection.get("actionId")), ""]
         lines += [f"{number}. {step}" for number, step in enumerate(note["steps"], 1)]
+        if note.get("commands"):
+            lines += ["", "#### ⚡ Quick commands", ""]
+            for command in note["commands"]:
+                language = "powershell" if "PowerShell" in command["shell"] else "bash" if "Linux" in command["shell"] else "cmd"
+                lines += [f"**{command['label']}** · {command['shell']}", "", command["purpose"], "",
+                          f"```{language}", command["code"], "```", "",
+                          f"> **Before running:** {command['safety']}", ""]
+                if command.get("sourceUrl"):
+                    lines += [f"**Official reference:** [{command.get('sourceTitle', 'Documentation')}]({command['sourceUrl']})", ""]
         lines += ["", f"**Prove it worked:** {note['expected']}", "",
                   f"**If this does not resolve it:** {note['ifUnresolved']}", "",
                   "**Official evidence:** " + " · ".join(f"[Source {number}]({url})" for number, url in enumerate(note["sourceUrls"], 1))
