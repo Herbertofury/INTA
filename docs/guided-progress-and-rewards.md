@@ -169,3 +169,8 @@ Do not block core INTA service functionality on the game or rewards system. Ship
 ## Definition of done
 
 A technician can open a guided procedure, understand the next action and expected result, complete and verify steps, pause, work offline, resume on another signed-in device, and hand back a clear outcome. Meaningful milestones are credited once with transparent criteria. Feedback is professional, brief and configurable. The optional game remains isolated and cannot degrade or interfere with real work. Core INTA remains fully useful when every gamification feature is disabled.
+
+
+## Current implementation checkpoint
+
+The first browser-local progression prototype is tracked in [Progression prototype: implementation and acceptance](progression-implementation.md). The proposed secure cross-device design is separately documented in [Progression synchronization contract](progression-sync-contract.md). These documents distinguish shipped branch behavior from future account, mobile and game work. Do not claim cloud sync until the production acceptance gate passes.
