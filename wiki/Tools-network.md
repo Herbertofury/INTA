@@ -25,17 +25,17 @@ Separate link, addressing, name resolution, transport, and application evidence.
 
 ## Tool comparison
 
-| Tool | Choose it for | Platforms | Role |
+| Tool | Choose it for | Platforms / role | Official page + download |
 | --- | --- | --- | --- |
-| [Angry IP Scanner](#angry-ip-scanner) | Quickly finding devices on a known managed subnet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
-| [iperf3](#iperf3) | Separating local network bandwidth limits from internet or application problems. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), FreeBSD | Core |
-| [OpenSSH](#openssh) | Repeatable authenticated remote shell and transfer operations. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
-| [PuTTY](#putty) | Connecting to network equipment or [Linux](https://www.kernel.org/) systems from [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows) | Core |
-| [Windows Packet Monitor](#pktmon) | Collecting [Windows](https://www.microsoft.com/windows) network evidence without installing a separate capture application. | [Windows](https://www.microsoft.com/windows) | Core |
-| [WinSCP](#winscp) | Transferring support logs and configuration files to an approved host. | [Windows](https://www.microsoft.com/windows) | Core |
-| [Wireshark](#wireshark) | Explaining DNS, TCP and application-protocol failures from a bounded capture. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
-| [Nmap](#nmap) | Identifying expected hosts and exposed services on a managed network. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
-| [tcpdump](#tcpdump) | A small, bounded network capture from [INTA Rescue](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md) or a [Linux](https://www.kernel.org/) host. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), BSD | Specialist |
+| [Angry IP Scanner](#angry-ip-scanner) | Quickly finding devices on a known managed subnet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://angryip.org/) · **[Download Windows standalone · EXE](https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-win.exe)** |
+| [iperf3](#iperf3) | Separating local network bandwidth limits from internet or application problems. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), FreeBSD · Core | [Official page](https://software.es.net/iperf/) · **[Download source · TAR.GZ](https://downloads.es.net/pub/iperf/iperf-3.22.1.tar.gz)** |
+| [OpenSSH](#openssh) | Repeatable authenticated remote shell and transfer operations. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://www.openssh.com/) · **[Enable Windows OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse)** |
+| [PuTTY](#putty) | Connecting to network equipment or [Linux](https://www.kernel.org/) systems from [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://www.chiark.greenend.org.uk/~sgtatham/putty/) · **[Download Windows x64 MSI](https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.85-installer.msi)** |
+| [Windows Packet Monitor](#pktmon) | Collecting [Windows](https://www.microsoft.com/windows) network evidence without installing a separate capture application. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon) · **[Open built-in capture instructions](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon)** |
+| [WinSCP](#winscp) | Transferring support logs and configuration files to an approved host. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://winscp.net/) · **[Windows installer download page](https://winscp.net/download/WinSCP-6.7.1-Setup.exe/download)** |
+| [Wireshark](#wireshark) | Explaining DNS, TCP and application-protocol failures from a bounded capture. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://www.wireshark.org/) · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)** |
+| [Nmap](#nmap) | Identifying expected hosts and exposed services on a managed network. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://nmap.org/) · **[Download Windows setup · EXE](https://nmap.org/dist/nmap-7.993-setup.exe)** |
+| [tcpdump](#tcpdump) | A small, bounded network capture from [INTA Rescue](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md) or a [Linux](https://www.kernel.org/) host. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), BSD · Specialist | [Official page](https://www.tcpdump.org/) · **[Download source · TAR.XZ](https://www.tcpdump.org/release/tcpdump-4.99.7.tar.xz)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
@@ -45,7 +45,7 @@ Core means an everyday candidate; Specialist means a focused advanced use; Evalu
 
 Graphical IP-address and port discovery for local network inventory.
 
-[Official download](https://angryip.org/download/) · [Documentation](https://angryip.org/documentation/) · [Publisher](https://angryip.org/)
+[Official page](https://angryip.org/) · **[Download Windows standalone · EXE](https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-win.exe)** · [All download options](https://angryip.org/download/) · [Documentation](https://angryip.org/documentation/)
 
 | Decision | Detail |
 | --- | --- |
@@ -76,7 +76,7 @@ Graphical IP-address and port discovery for local network inventory.
 
 Measures throughput and loss between a controlled client and server.
 
-[Official download](https://downloads.es.net/pub/iperf/) · [Documentation](https://software.es.net/iperf/invoking.html) · [Publisher](https://software.es.net/iperf/)
+[Official page](https://software.es.net/iperf/) · **[Download source · TAR.GZ](https://downloads.es.net/pub/iperf/iperf-3.22.1.tar.gz)** · [All download options](https://downloads.es.net/pub/iperf/) · [Documentation](https://software.es.net/iperf/invoking.html)
 
 | Decision | Detail |
 | --- | --- |
@@ -107,7 +107,7 @@ Measures throughput and loss between a controlled client and server.
 
 Secure shell and file-transfer tools, including supported [Windows](https://www.microsoft.com/windows) client and server components.
 
-[Official download](https://www.openssh.com/portable.html) · [Documentation](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh-overview) · [Publisher](https://www.openssh.com/)
+[Official page](https://www.openssh.com/) · **[Enable Windows OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse)** · [All download options](https://www.openssh.com/portable.html) · [Documentation](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh-overview)
 
 | Decision | Detail |
 | --- | --- |
@@ -138,7 +138,7 @@ Secure shell and file-transfer tools, including supported [Windows](https://www.
 
 SSH and serial terminal client with companion transfer utilities.
 
-[Official download](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) · [Documentation](https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html) · [Publisher](https://www.chiark.greenend.org.uk/~sgtatham/putty/)
+[Official page](https://www.chiark.greenend.org.uk/~sgtatham/putty/) · **[Download Windows x64 MSI](https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.85-installer.msi)** · [Portable Windows x64 EXE](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe) · [Other platforms and packages](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) · [Documentation](https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html)
 
 | Decision | Detail |
 | --- | --- |
@@ -170,7 +170,7 @@ SSH and serial terminal client with companion transfer utilities.
 
 Built-in packet capture, filtering and network-stack diagnostics.
 
-[Official download](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon) · [Documentation](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon) · [Publisher](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon)
+[Official page](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon) · **[Open built-in capture instructions](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon)** · [Documentation](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon)
 
 | Decision | Detail |
 | --- | --- |
@@ -201,7 +201,7 @@ Built-in packet capture, filtering and network-stack diagnostics.
 
 SFTP, SCP and other file-transfer workflows with a [Windows](https://www.microsoft.com/windows) graphical interface.
 
-[Official download](https://winscp.net/eng/download.php) · [Documentation](https://winscp.net/eng/docs/start) · [Publisher](https://winscp.net/)
+[Official page](https://winscp.net/) · **[Windows installer download page](https://winscp.net/download/WinSCP-6.7.1-Setup.exe/download)** · [Portable and other packages](https://winscp.net/eng/downloads.php) · [All download options](https://winscp.net/eng/download.php) · [Documentation](https://winscp.net/eng/docs/start)
 
 | Decision | Detail |
 | --- | --- |
@@ -233,7 +233,7 @@ SFTP, SCP and other file-transfer workflows with a [Windows](https://www.microso
 
 Packet capture and protocol analysis with display filters and stream inspection.
 
-[Official download](https://www.wireshark.org/download.html) · [Documentation](https://www.wireshark.org/docs/) · [Publisher](https://www.wireshark.org/)
+[Official page](https://www.wireshark.org/) · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)** · [All download options](https://www.wireshark.org/download.html) · [Documentation](https://www.wireshark.org/docs/)
 
 | Decision | Detail |
 | --- | --- |
@@ -265,7 +265,7 @@ Packet capture and protocol analysis with display filters and stream inspection.
 
 Network inventory and service discovery for an approved address range.
 
-[Official download](https://nmap.org/download.html) · [Documentation](https://nmap.org/book/man.html) · [Publisher](https://nmap.org/)
+[Official page](https://nmap.org/) · **[Download Windows setup · EXE](https://nmap.org/dist/nmap-7.993-setup.exe)** · [All download options](https://nmap.org/download.html) · [Documentation](https://nmap.org/book/man.html)
 
 | Decision | Detail |
 | --- | --- |
@@ -296,7 +296,7 @@ Network inventory and service discovery for an approved address range.
 
 Command-line packet capture and filtering.
 
-[Official download](https://github.com/the-tcpdump-group/tcpdump/releases) · [Documentation](https://www.tcpdump.org/manpages/tcpdump.1.html) · [Publisher](https://www.tcpdump.org/)
+[Official page](https://www.tcpdump.org/) · **[Download source · TAR.XZ](https://www.tcpdump.org/release/tcpdump-4.99.7.tar.xz)** · [All download options](https://github.com/the-tcpdump-group/tcpdump/releases) · [Documentation](https://www.tcpdump.org/manpages/tcpdump.1.html)
 
 | Decision | Detail |
 | --- | --- |

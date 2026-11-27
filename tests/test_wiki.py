@@ -101,27 +101,45 @@ A["Windows"] --> B["PowerShell"]
 
     def test_complete_directory_exposes_official_tool_routes(self):
         directory = build.build_outputs()['wiki/Tool-Directory.md']
+        access = json.loads((ROOT / 'data/tool-access.json').read_text())['tools']
         for tool in self.tools:
             self.assertIn('](' + tool['downloadUrl'] + ')', directory, tool['id'])
+            self.assertIn('](' + access[tool['id']]['officialUrl'] + ')', directory, tool['id'])
+            self.assertIn('](' + access[tool['id']]['primary']['url'] + ')', directory, tool['id'])
 
     def test_front_pages_share_direct_free_tool_and_scenario_routes(self):
         quick_start = json.loads((ROOT / 'data/quick-start.json').read_text())
         tools = {tool['id']: tool for tool in self.tools}
+        access = json.loads((ROOT / 'data/tool-access.json').read_text())['tools']
         jobs = {job['id'] for job in self.jobs}
         output = build.build_outputs()
         rows = quick_start['items']
         self.assertTrue(rows)
         self.assertEqual(len({row['id'] for row in rows}), len(rows))
+        self.assertEqual({row['jobId'] for row in rows}, jobs)
+        self.assertIn('Remove viruses', {row['label'] for row in rows})
+        self.assertIn('Fix a printer', {row['label'] for row in rows})
         for row in rows:
             self.assertIn(row['jobId'], jobs)
-            self.assertIn(row['toolId'], tools)
+            if not row.get('guideOnly'):
+                self.assertIn(row['toolId'], tools)
             self.assertTrue(row['freeUse'])
             self.assertTrue(row['qualityBasis'])
             self.assertTrue(row['evidenceUrls'])
+            self.assertTrue(row['firstStep'])
+            self.assertEqual(len(row['quickSteps']), 3)
+            anchor = 'quick-' + row['id']
+            guide_page = output['wiki/Job-' + row['jobId'] + '.md']
+            self.assertIn('<a id="' + anchor + '"></a>', guide_page)
+            self.assertLess(guide_page.index('<a id="' + anchor + '"></a>'), guide_page.index('<a id="walkthrough"></a>'))
             for path in ['README.md', 'docs/start-here.md', 'wiki/Home.md', 'wiki/Start-Here.md']:
                 page = output[path]
-                self.assertIn('](' + tools[row['toolId']]['downloadUrl'] + ')', page, path + ': ' + row['id'])
-                self.assertIn('](' + build.WIKI + '/Job-' + row['jobId'] + ')', page, path + ': ' + row['id'])
+                if not row.get('guideOnly'):
+                    route = access[row['toolId']]
+                    action = build.selected_tool_action(route, row.get('toolAction'))
+                    for url in [route['officialUrl'], action['url']]:
+                        self.assertIn('](' + url + ')', page, path + ': ' + row['id'])
+                self.assertIn('](' + build.WIKI + '/Job-' + row['jobId'] + '#' + anchor + ')', page, path + ': ' + row['id'])
         for path in ['README.md', 'docs/start-here.md']:
             self.assertEqual(output[path].count('<!-- INTA:QUICK-START:START -->'), 1)
             self.assertEqual(output[path].count('<!-- INTA:QUICK-START:END -->'), 1)

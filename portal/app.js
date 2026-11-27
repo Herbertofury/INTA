@@ -7,6 +7,17 @@
   const meta = data.meta || {};
   const toolMap = new Map(tools.map(tool => [tool.id, tool]));
   const jobMap = new Map(jobs.map(job => [job.id, job]));
+  const accessRegistry = data.toolAccess && typeof data.toolAccess === 'object' ? data.toolAccess : {};
+  const quickItems = (Array.isArray(data.quickStart?.items) ? data.quickStart.items : []).filter(item => item && jobMap.has(item.jobId) && (toolMap.has(item.toolId) || (item.guideOnly === true && item.toolId === null)));
+  const quickByJob = new Map(), quickByTool = new Map();
+  quickItems.forEach(item => {
+    if (!quickByJob.has(item.jobId)) quickByJob.set(item.jobId, []);
+    quickByJob.get(item.jobId).push(item);
+    if (item.toolId) {
+      if (!quickByTool.has(item.toolId)) quickByTool.set(item.toolId, []);
+      quickByTool.get(item.toolId).push(item);
+    }
+  });
   const app = document.getElementById('app');
   const search = document.getElementById('global-search');
   const searchResults = document.getElementById('search-results');
@@ -197,6 +208,26 @@
   const categoryLabels = { ai: 'AI workspace', boot: 'Boot & rescue', hardware: 'Hardware diagnostics', malware: 'Malware removal', network: 'Networking', productivity: 'Technician essentials', remote: 'Remote support', security: 'Security & investigation', storage: 'Storage & recovery', windows: 'Windows repair' };
   function categoryLabel(value) { return categoryLabels[value] || value; }
   function modeLabel(value) { return ({ 'built-in': 'Built into the system', portable: 'Portable', installed: 'Installed application', web: 'Web application', boot: 'Bootable media' })[value] || value; }
+  function accessInfo(tool) {
+    const record = accessRegistry[tool.id] || {};
+    const fallbackKind = tool.mode === 'built-in' ? 'builtin' : tool.mode === 'web' ? 'web' : 'release-page';
+    const fallbackLabels = { builtin: 'Setup instructions', web: 'Open web tool', 'release-page': 'Download options' };
+    const primary = record.primary || { kind: fallbackKind, label: fallbackLabels[fallbackKind], url: tool.downloadUrl || tool.homepage };
+    return { officialUrl: record.officialUrl || tool.homepage, options: [primary, ...array(record.alternates)].filter(option => option && safeUrl(option.url)), note: record.note || '' };
+  }
+  function accessLabel(option) {
+    return option.label || ({ file: 'Download file', store: 'Install from store', builtin: 'Setup instructions', web: 'Open web tool', account: 'Account and setup', package: 'Package instructions', source: 'Source and build', 'release-page': 'Download options' })[option.kind] || 'Acquisition instructions';
+  }
+  function accessActions(tool, variant = '', actionId = '') {
+    const access = accessInfo(tool);
+    const options = actionId ? access.options.filter(option => option.id === actionId) : access.options;
+    return `<div class="tool-access ${esc(variant)}" data-tool-access="${esc(tool.id)}">${external(access.officialUrl, `Official page ${icon('external')}`, 'access-link official-page')}${options.map((option, index) => `<a class="access-link acquisition-link${index === 0 ? ' primary-acquisition' : ''}" data-access-tool="${esc(tool.id)}" data-acquisition-kind="${esc(option.kind)}"${option.id ? ` data-access-id="${esc(option.id)}"` : ''} data-access-role="${index === 0 ? 'primary' : 'alternate'}" href="${esc(safeUrl(option.url))}" target="_blank" rel="noopener noreferrer">${esc(accessLabel(option))} ${icon(option.kind === 'file' ? 'download' : 'external')}</a>`).join('')}</div>`;
+  }
+  function quickHref(item) { return `#job/${encodeURIComponent(item.jobId)}/quick/${encodeURIComponent(item.id)}`; }
+  function selectionNotes(items, title = 'Tool choice and use notes') {
+    if (!items.length) return '';
+    return `<section class="selection-notes"><h2 class="block-heading">${icon('info')}${esc(title)}</h2>${items.map(item => `<article class="selection-note" data-selection-note="${esc(item.id)}"><h3><a href="${quickHref(item)}">${esc(item.label)}</a></h3><dl><div><dt>Why this choice</dt><dd>${formatted(item.why)}</dd></div><div><dt>Use and cost</dt><dd>${formatted(item.freeUse)}</dd></div><div><dt>Before you act</dt><dd>${formatted(item.boundary)}</dd></div><div><dt>Selection basis</dt><dd>${formatted(item.qualityBasis)}</dd></div></dl>${array(item.evidenceUrls).length ? sourceList(array(item.evidenceUrls).map((url, index) => ({ url, title: `Selection source ${index + 1} · ${safeUrl(url) ? new URL(url).hostname : ''}` }))) : ''}</article>`).join('')}</section>`;
+  }
   function tierLabel(tier) { return ({ core: 'Everyday pick', specialist: 'Specialist', evaluate: 'Evaluate first' })[tier] || 'Reference'; }
   function tierPill(tier) { return `<span class="recommendation ${esc(tier)}">${esc(tierLabel(tier))}</span>`; }
   function reviewBadge() { return `<span class="review-badge">Source review <time datetime="${esc(reviewDate)}">${esc(dateLabel(reviewDate, true))}</time></span>`; }
@@ -215,7 +246,7 @@
   function toolRow(tool, directory = false) {
     const related = firstJobForTool.get(tool.id);
     const description = directory ? tool.bestFor || tool.summary : tool.summary;
-    return `<article class="tool-row${directory ? ' directory-tool-row' : ''}" role="listitem" data-tool-id="${esc(tool.id)}"${directory ? '' : ` data-tool-card="${esc(tool.id)}"`}><div class="tool-name-cell"><h3><a class="${directory ? 'directory-tool-name' : 'tool-name'}" href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a></h3><p>${formatted(description)}</p><span class="row-meta">${directory ? esc(modeLabel(tool.mode)) : esc(categoryLabel(tool.category)) + ' · ' + esc(modeLabel(tool.mode))}</span></div><div class="tool-platform-cell" data-label="Platforms"><span class="sr-only">Platforms: </span>${esc(array(tool.platforms).join(', '))}</div><div class="tool-tier-cell" data-label="Recommendation"><span class="sr-only">Recommendation: </span>${tierPill(tool.tier)}</div><div class="tool-links-cell" data-label="Resources">${external(tool.downloadUrl || tool.homepage, `Official source ${icon('external')}`)}<a href="#tool/${encodeURIComponent(tool.id)}">Details</a>${directory ? related ? `<a href="#job/${encodeURIComponent(related.id)}">Job guide ${icon('arrow')}</a>` : external(`${repo}/wiki/Tools-${encodeURIComponent(tool.category)}`, `Wiki ${icon('external')}`) : external(tool.docsUrl, `Documentation ${icon('external')}`)}</div><div class="tool-save-cell">${saveButton(tool)}</div></article>`;
+    return `<article class="tool-row${directory ? ' directory-tool-row' : ''}" role="listitem" data-tool-id="${esc(tool.id)}"${directory ? '' : ` data-tool-card="${esc(tool.id)}"`}><div class="tool-name-cell"><h3><a class="${directory ? 'directory-tool-name' : 'tool-name'}" href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a></h3><p>${formatted(description)}</p><span class="row-meta">${directory ? esc(modeLabel(tool.mode)) : esc(categoryLabel(tool.category)) + ' · ' + esc(modeLabel(tool.mode))}</span></div><div class="tool-platform-cell" data-label="Platforms"><span class="sr-only">Platforms: </span>${esc(array(tool.platforms).join(', '))}</div><div class="tool-tier-cell" data-label="Recommendation"><span class="sr-only">Recommendation: </span>${tierPill(tool.tier)}</div><div class="tool-links-cell" data-label="Resources">${accessActions(tool, 'catalog-access')}<a href="#tool/${encodeURIComponent(tool.id)}">Details</a>${directory ? related ? `<a href="#job/${encodeURIComponent(related.id)}">Job guide ${icon('arrow')}</a>` : external(`${repo}/wiki/Tools-${encodeURIComponent(tool.category)}`, `Wiki ${icon('external')}`) : external(tool.docsUrl, `Documentation ${icon('external')}`)}</div><div class="tool-save-cell">${saveButton(tool)}</div></article>`;
   }
   function toolCard(tool) { return toolRow(tool); }
   function jobCard(job) {
@@ -223,7 +254,7 @@
     return `<article class="job-row" role="listitem" data-job-route="${esc(href)}"><span class="job-row-icon">${icon(jobIcon(job))}</span><div class="job-row-main"><h3><a href="${href}">${esc(job.title)}</a></h3><p>${esc(job.summary)}</p></div><div class="job-row-meta"><span>${esc(job.estimatedTime || `${array(job.steps).length} steps`)}</span><span>${esc(job.difficulty || job.category)}</span></div><a class="job-row-open" href="${href}" aria-label="Open ${esc(job.title)}">Open guide ${icon('arrow')}</a></article>`;
   }
   function quickTool(tool) {
-    return `<a class="quick-tool" href="#tool/${encodeURIComponent(tool.id)}"><span>${esc(tool.name)}</span><span>${esc(categoryLabel(tool.category))}</span>${icon('arrow')}</a>`;
+    return `<div class="quick-tool"><a href="#tool/${encodeURIComponent(tool.id)}"><strong>${esc(tool.name)}</strong></a><span>${esc(categoryLabel(tool.category))}</span>${accessActions(tool)}</div>`;
   }
   function selectFeatured(items, patterns, count) {
     const chosen = [];
@@ -280,24 +311,35 @@
     'preventive-maintenance': '🧹'
   };
   function quickStartSection() {
-    const items = array(data.quickStart?.items).map((item, index) => ({
-      ...item, rowId: item.id || `${item.jobId}-${item.toolId}-${index}`,
-      job: jobMap.get(item.jobId), tool: toolMap.get(item.toolId)
-    })).filter(item => item.job && item.tool);
-    if (!items.length) return '';
-    return `<section class="quick-start-section" aria-labelledby="quick-start-heading"><div class="section-title quick-start-title"><div><h2 id="quick-start-heading">Fix a problem now</h2><p>Curated free starting tools, with a job guide and an official source for each task.</p></div>${external(`${repo}/wiki/Free-Tool-Picks`, `How these picks were chosen ${icon('external')}`)}</div><div class="quick-start-head" aria-hidden="true"><span>Problem &amp; guide</span><span>Start with this tool</span><span>Fit &amp; boundaries</span></div><div class="quick-start-list" role="list">${items.map(item => `<article class="quick-start-row" role="listitem" data-quick-start="${esc(item.rowId)}" data-quick-job="${esc(item.jobId)}" data-quick-tool="${esc(item.toolId)}"><div class="quick-start-scenario"><h3><a href="#job/${encodeURIComponent(item.jobId)}"><span class="scenario-emoji" aria-hidden="true">${esc(item.icon || scenarioEmoji[item.jobId] || '🧰')}</span><span>${esc(item.label || item.job.title)}</span></a></h3></div><div class="quick-start-tool">${external(item.tool.downloadUrl || item.tool.homepage, `<strong>${esc(item.tool.name)}</strong>${icon('external')}`, 'quick-primary-tool')}<p class="quick-free-use">${formatted(item.freeUse)}</p></div><div class="quick-start-fit"><p>${formatted(item.why)}</p>${item.boundary ? `<p class="quick-boundary"><strong>Before you start:</strong> ${formatted(item.boundary)}</p>` : ''}</div></article>`).join('')}</div></section>`;
+    if (!quickItems.length) return '';
+    return `<section class="quick-start-section" aria-labelledby="quick-start-heading"><div class="section-title quick-start-title"><div><h2 id="quick-start-heading">Fix a problem</h2><p>Start with the first action. Open the guide or get the tool here.</p></div>${external(`${repo}/wiki/Free-Tool-Picks`, `Selection notes ${icon('external')}`)}</div><div class="quick-start-list" role="list">${quickItems.map(item => {
+      const tool = toolMap.get(item.toolId);
+      return `<article class="quick-start-row" role="listitem" data-quick-start="${esc(item.id)}" data-quick-job="${esc(item.jobId)}"${tool ? ` data-quick-tool="${esc(tool.id)}"` : ' data-guide-only="true"'}><h3><a class="quick-scenario-link" href="${quickHref(item)}"><span class="scenario-emoji" aria-hidden="true">${esc(item.icon || scenarioEmoji[item.jobId] || '🧰')}</span><span>${esc(item.label || jobMap.get(item.jobId).title)}</span></a></h3><p class="quick-first-step">${formatted(item.firstStep || item.why)}</p>${tool ? `<div class="quick-tool-name"><a href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a></div>${accessActions(tool, 'quick-access', item.toolAction)}` : `<p class="no-extra-tool">No extra download needed</p><a class="access-link" href="${quickHref(item)}">Open job guide ${icon('arrow')}</a>`}</article>`;
+    }).join('')}</div></section>`;
+  }
+  function jobAnswerStrip(job, quickId = '') {
+    const picks = quickByJob.get(job.id) || [];
+    if (!picks.length) return '';
+    const selected = picks.find(item => item.id === quickId) || picks[0];
+    const ordered = [selected, ...picks.filter(item => item !== selected)];
+    return `<section class="job-answer-strip" aria-label="First actions"><h2>Do this first</h2>${ordered.map(item => {
+      const tool = toolMap.get(item.toolId);
+      const actions = array(item.quickSteps);
+      return `<article class="quick-answer" id="quick-${esc(item.id)}" data-quick-answer="${esc(item.id)}"${item === selected ? ' data-current-case="true"' : ''}><div class="quick-answer-steps"><h3 tabindex="-1">${esc(item.icon || scenarioEmoji[item.jobId] || '🧰')} ${esc(item.label)}${item === selected && picks.length > 1 ? '<span class="current-case">Selected case</span>' : ''}</h3><p class="answer-first-step">${formatted(item.firstStep || job.startHere)}</p>${actions.length ? `<ol>${actions.map(action => `<li>${formatted(action)}</li>`).join('')}</ol>` : ''}</div><div class="quick-answer-tool">${tool ? `<h3><a href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a></h3>${accessActions(tool, 'answer-access', item.toolAction)}` : '<p class="no-extra-tool">No extra download needed</p>'}</div></article>`;
+    }).join('')}</section>`;
   }
   function home() {
     const featuredJobs = selectFeatured(jobs, [/malware|virus/i, /slow|performance/i, /network|internet|dns/i, /backup|restore/i, /boot|bitlocker/i, /remote/i], 6);
     const kit = selectFeatured(tools, [/sysinternals/i, /rustdesk/i, /crystaldiskinfo/i, /ventoy/i], 4);
     const intake = jobs.find(job => /intake|triage/i.test(job.id + ' ' + job.title));
-    return heading('INTA Computer Services', 'Technician home', 'Tools and procedures for computer repair, maintenance, and support.') + `<div class="home-actions"><a class="button primary" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">${icon('file')}Start a service visit</a><a class="button ghost" href="#playbooks">${icon('book')}${jobs.length} job playbooks</a><a class="button ghost" href="#knowledge">${icon('layers')}Knowledge desk</a><a class="button ghost" href="#resources">${icon('download')}Offline copy &amp; resources</a></div>${quickStartSection()}${compactToolDirectory()}<div class="home-support"><section><div class="section-title"><h2>Common service jobs</h2><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-list" role="list">${featuredJobs.map(jobCard).join('')}</div></section><section><h2>Everyday shortcuts</h2><div class="quick-tools">${kit.map(quickTool).join('')}</div>${knowledgeDesk(true)}</section></div>`;
+    return heading('INTA Computer Services', 'Technician home', 'Tools and procedures for computer repair, maintenance, and support.') + quickStartSection() + `<div class="home-actions"><a class="button primary" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">${icon('file')}Start a service visit</a><a class="button ghost" href="#playbooks">${icon('book')}${jobs.length} job playbooks</a><a class="button ghost" href="#knowledge">${icon('layers')}Knowledge desk</a><a class="button ghost" href="#resources">${icon('download')}Offline copy &amp; resources</a></div>${compactToolDirectory()}<div class="home-support"><section><div class="section-title"><h2>Common service jobs</h2><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-list" role="list">${featuredJobs.map(jobCard).join('')}</div></section><section><h2>Everyday shortcuts</h2><div class="quick-tools">${kit.map(quickTool).join('')}</div>${knowledgeDesk(true)}</section></div>`;
   }
   function selectOptions(values, label, selected = '') {
     return `<option value="">${esc(label)}</option>${[...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b)).map(value => `<option value="${esc(value)}"${selected === value ? ' selected' : ''}>${esc(categoryLabel(value))}</option>`).join('')}`;
   }
-  const toolSearchText = new Map(tools.map(tool => [tool.id, text([tool.name, tool.category, categoryLabel(tool.category), tool.summary, tool.bestFor, ...array(tool.tags), ...array(tool.platforms)]).toLowerCase()]));
-  const jobSearchText = new Map(jobs.map(job => [job.id, text([job.title, job.category, job.summary, job.startHere, ...array(job.steps).map(step => step.title)]).toLowerCase()]));
+  const toolSearchText = new Map(tools.map(tool => [tool.id, text([tool.name, tool.category, categoryLabel(tool.category), tool.summary, tool.bestFor, ...array(tool.tags), ...array(tool.platforms), ...(quickByTool.get(tool.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
+  const jobSearchText = new Map(jobs.map(job => [job.id, text([job.title, job.category, job.summary, job.startHere, ...array(job.steps).map(step => step.title), ...(quickByJob.get(job.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
+  const quickSearchText = new Map(quickItems.map(item => [item.id, text([item.label, item.firstStep, ...array(item.aliases)]).toLowerCase()]));
   function matches(haystack, query) { return query.trim().toLowerCase().split(/\s+/).filter(Boolean).every(term => haystack.includes(term)); }
   function library(savedOnly = false, params = new URLSearchParams()) {
     const query = params.get('q') || '';
@@ -408,22 +450,23 @@
   function relatedTools(ids) {
     return array(ids).map(id => toolMap.get(typeof id === 'string' ? id : id.id)).filter(Boolean);
   }
-  function jobDetail(id) {
+  function jobDetail(id, quickId = '') {
     const job = jobMap.get(id);
     if (!job) return notFound('playbook');
+    if (quickId && !(quickByJob.get(id) || []).some(item => item.id === quickId)) return notFound('scenario');
     const suggested = relatedTools(job.tools);
     const related = array(job.related).map(id => jobMap.get(id)).filter(Boolean);
     const steps = array(job.steps);
     const verifies = array(job.verify);
-    return `<a class="back-link" href="#playbooks">${icon('back')}All job playbooks</a><header class="detail-header"><div class="page-eyebrow">${icon(jobIcon(job))}${esc(job.category)} / Playbook</div><h1>${esc(job.title)}</h1><p class="summary">${esc(job.summary)}</p><div class="detail-meta"><span class="pill">${icon('clock')}${esc(job.estimatedTime || 'Work at the pace the job requires')}</span><span class="pill">${icon('layers')}${esc(job.difficulty || 'Technician guide')}</span><span class="pill">${icon('checkCircle')}${steps.length} steps · ${verifies.length} verification checks</span></div><div class="detail-actions"><button class="button primary" data-export-job="${esc(job.id)}">${icon('download')}Export checklist</button><button class="button ghost" data-print>${icon('printer')}Print guide</button><button class="button ghost" data-copy-link>${icon('link')}Copy link</button></div></header><div class="detail-layout"><div class="detail-main"><div class="callout">${icon('compass')}<div><h3>Start here</h3><p>${formatted(job.startHere || job.summary)}</p></div></div><h2 class="block-heading">${icon('route')}Work through the job</h2><div class="checklist">${steps.map((step, index) => `<section class="step"><label class="step-label"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="step" data-check-index="${index}" data-check-title="${esc(step.title)}"${checked(job, 'step', index, step.title) ? ' checked' : ''}><span><h3><span class="step-number">${index + 1}.</span>${esc(step.title)}</h3></span></label><div class="step-detail">${formatted(step.detail)}</div>${step.command ? `<div class="command-block"><div class="command-bar"><span>Command · follow the step above</span><button class="copy-command" data-copy-command="${esc(job.id)}" data-command-index="${index}">${icon('copy')}Copy</button></div><pre><code>${esc(text(step.command))}</code></pre></div>${commandLegend(step.command)}` : ''}</section>`).join('')}</div><h2 class="block-heading">${icon('checkCircle')}Verify the result</h2><div class="verify-list">${verifies.map((item, index) => `<label class="verify-item"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="verify" data-check-index="${index}" data-check-title="${esc(text(item))}"${checked(job, 'verify', index, text(item)) ? ' checked' : ''}><span>${formatted(item)}</span></label>`).join('')}</div>${array(job.sources).length ? `<h2 class="block-heading">${icon('book')}Official references</h2>${sourceList(job.sources)}<p class="sources-note">Reviewed ${esc(dateLabel(job.reviewedAt || reviewDate, true))}. Follow the vendor's current instructions when the product or environment differs.</p>` : ''}${related.length ? `<h2 class="block-heading">${icon('route')}Keep going</h2><div class="detail-related">${related.map(jobCard).join('')}</div>` : ''}</div><aside class="detail-aside"><section class="aside-card" id="job-progress">${progressCard(job)}</section>${suggested.length ? `<section class="aside-card"><h3>Tools for this job</h3><div class="aside-tools">${suggested.map(tool => `<a href="#tool/${encodeURIComponent(tool.id)}"><span>${esc(tool.name)}</span>${icon('arrow')}</a>`).join('')}</div></section>` : ''}${array(job.stopIf).length ? `<section class="aside-card caution-card"><h3>${icon('warning')}Pause &amp; escalate when</h3><ul class="stop-list">${array(job.stopIf).map(item => `<li>${formatted(item)}</li>`).join('')}</ul></section>` : ''}<section class="aside-card"><h3>Leave a useful handoff</h3><p>Record the symptom, findings, changes, and verification in your team's private ticket. Keep passwords, customer files, and recovery keys out of the public wiki.</p></section></aside></div>`;
+    return `<a class="back-link" href="#playbooks">${icon('back')}All job playbooks</a><header class="detail-header"><div class="page-eyebrow">${icon(jobIcon(job))}${esc(job.category)} / Playbook</div><h1>${esc(job.title)}</h1><p class="summary">${esc(job.summary)}</p>${jobAnswerStrip(job, quickId)}<div class="detail-meta"><span class="pill">${icon('clock')}${esc(job.estimatedTime || 'Work at the pace the job requires')}</span><span class="pill">${icon('layers')}${esc(job.difficulty || 'Technician guide')}</span><span class="pill">${icon('checkCircle')}${steps.length} steps · ${verifies.length} verification checks</span></div><div class="detail-actions"><button class="button primary" data-export-job="${esc(job.id)}">${icon('download')}Export checklist</button><button class="button ghost" data-print>${icon('printer')}Print guide</button><button class="button ghost" data-copy-link>${icon('link')}Copy link</button></div></header><div class="detail-layout"><div class="detail-main"><div class="callout">${icon('compass')}<div><h3>Start here</h3><p>${formatted(job.startHere || job.summary)}</p></div></div><h2 class="block-heading">${icon('route')}Work through the job</h2><div class="checklist">${steps.map((step, index) => `<section class="step"><label class="step-label"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="step" data-check-index="${index}" data-check-title="${esc(step.title)}"${checked(job, 'step', index, step.title) ? ' checked' : ''}><span><h3><span class="step-number">${index + 1}.</span>${esc(step.title)}</h3></span></label><div class="step-detail">${formatted(step.detail)}</div>${step.command ? `<div class="command-block"><div class="command-bar"><span>Command · follow the step above</span><button class="copy-command" data-copy-command="${esc(job.id)}" data-command-index="${index}">${icon('copy')}Copy</button></div><pre><code>${esc(text(step.command))}</code></pre></div>${commandLegend(step.command)}` : ''}</section>`).join('')}</div><h2 class="block-heading">${icon('checkCircle')}Verify the result</h2><div class="verify-list">${verifies.map((item, index) => `<label class="verify-item"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="verify" data-check-index="${index}" data-check-title="${esc(text(item))}"${checked(job, 'verify', index, text(item)) ? ' checked' : ''}><span>${formatted(item)}</span></label>`).join('')}</div>${selectionNotes(quickByJob.get(job.id) || [])}${array(job.sources).length ? `<h2 class="block-heading">${icon('book')}Official references</h2>${sourceList(job.sources)}<p class="sources-note">Reviewed ${esc(dateLabel(job.reviewedAt || reviewDate, true))}. Follow the vendor's current instructions when the product or environment differs.</p>` : ''}${related.length ? `<h2 class="block-heading">${icon('route')}Keep going</h2><div class="detail-related">${related.map(jobCard).join('')}</div>` : ''}</div><aside class="detail-aside"><section class="aside-card" id="job-progress">${progressCard(job)}</section>${suggested.length ? `<section class="aside-card"><h3>Tools for this job</h3><div class="recommended-tools">${suggested.map(tool => `<div class="recommended-tool" data-recommended-tool="${esc(tool.id)}"><h4><a href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a></h4>${accessActions(tool, 'recommended-access')}</div>`).join('')}</div></section>` : ''}${array(job.stopIf).length ? `<section class="aside-card caution-card"><h3>${icon('warning')}Pause &amp; escalate when</h3><ul class="stop-list">${array(job.stopIf).map(item => `<li>${formatted(item)}</li>`).join('')}</ul></section>` : ''}<section class="aside-card"><h3>Leave a useful handoff</h3><p>Record the symptom, findings, changes, and verification in your team's private ticket. Keep passwords, customer files, and recovery keys out of the public wiki.</p></section></aside></div>`;
   }
   function toolDetail(id) {
     const tool = toolMap.get(id);
     if (!tool) return notFound('tool');
     const related = jobs.filter(job => array(job.tools).includes(tool.id));
-    const downloadLabel = tool.mode === 'built-in' ? 'Open usage guide' : tool.mode === 'web' ? 'Open official site' : 'Open official download';
+    const access = accessInfo(tool);
     const references = [{ title: `${tool.name} · official website`, url: tool.homepage }, { title: 'Documentation & usage', url: tool.docsUrl }, { title: 'Source or upstream reference', url: tool.sourceUrl }].filter((source, i, values) => source.url && values.findIndex(value => value.url === source.url) === i);
-    return `<a class="back-link" href="#tools">${icon('back')}All tools</a><header class="detail-header"><div class="detail-tool-title"><div><div class="page-eyebrow">${esc(categoryLabel(tool.category))}</div><h1>${esc(tool.name)}</h1></div></div><p class="summary">${esc(tool.summary)}</p><div class="detail-meta">${tierPill(tool.tier)}${array(tool.platforms).map(platform => `<span class="pill">${esc(platform)}</span>`).join('')}<span class="pill">${esc(modeLabel(tool.mode))}</span></div><div class="detail-actions">${external(tool.downloadUrl || tool.homepage, `${icon('external')}${downloadLabel}`, 'button primary')}${external(tool.docsUrl, `${icon('book')}Documentation`, 'button ghost')}<button class="button ghost" data-save="${esc(tool.id)}" aria-pressed="${favorites.has(tool.id)}">${icon('bookmark')}<span>${favorites.has(tool.id) ? 'Saved to your toolkit' : 'Save to your toolkit'}</span></button></div></header><div class="detail-layout"><div class="detail-main"><div class="callout">${icon('compass')}<div><h3>When to reach for it</h3><p>${formatted(tool.bestFor || tool.summary)}</p></div></div><div class="tool-info-grid"><section class="info-block"><span class="small-label">Platforms</span><p>${esc(array(tool.platforms).join(' · '))}</p></section><section class="info-block"><span class="small-label">How you use it</span><p>${esc(modeLabel(tool.mode) || 'See official documentation')}</p></section><section class="info-block"><span class="small-label">Availability &amp; pricing</span><p>${formatted(tool.pricing || 'See the official source for current terms.')}</p></section><section class="info-block"><span class="small-label">Recommendation</span><p>${esc(tierLabel(tool.tier))}${tool.tier === 'evaluate' ? ' · Validate it against your own workflow before relying on it.' : tool.tier === 'specialist' ? ' · Best for a specific diagnostic or recovery need.' : ' · A practical starting point for routine service work.'}</p></section></div>${tool.cautions ? `<div class="callout warning">${icon('info')}<div><h3>Before you use it</h3><p>${formatted(tool.cautions)}</p></div></div>` : ''}${array(tool.tags).length ? `<div class="detail-tags">${array(tool.tags).map(tag => `<span class="pill">${esc(tag)}</span>`).join('')}</div>` : ''}<h2 class="block-heading">${icon('book')}Go to the source</h2>${sourceList(references)}<p class="sources-note">Source review: ${esc(dateLabel(tool.reviewedAt || reviewDate, true))}. Download links point to official upstream pages; available versions can change after review.</p>${array(tool.provenance).length ? `<h2 class="block-heading">${icon('layers')}Why it is in the toolkit</h2><ul class="bullet-list">${array(tool.provenance).map(item => `<li>${safeUrl(item) ? external(item, `${esc(item)} ${icon('external')}`) : formatted(item)}</li>`).join('')}</ul>` : ''}</div><aside class="detail-aside"><section class="aside-card"><h3>${external(`${repo}/wiki/Tool-Selection`, 'Tool selection')}</h3><p>Compare diagnostic roles, supported systems, required access, and operating requirements before choosing a tool for the job.</p></section>${related.length ? `<section class="aside-card"><h3>Use it in a playbook</h3><div class="aside-tools">${related.map(job => `<a href="#job/${encodeURIComponent(job.id)}"><span class="aside-link-icon">${icon(jobIcon(job))}</span><span>${esc(job.title)}</span>${icon('arrow')}</a>`).join('')}</div></section>` : ''}<section class="aside-card"><h3>Contribute a correction</h3><p>Bring the official source and a short explanation of what it improves to the INTA repository.</p>${external(`${repo}/issues/new`, `Suggest an update ${icon('arrow')}`, 'button text')}</section></aside></div>`;
+    return `<a class="back-link" href="#tools">${icon('back')}All tools</a><header class="detail-header"><div class="detail-tool-title"><div><div class="page-eyebrow">${esc(categoryLabel(tool.category))}</div><h1>${esc(tool.name)}</h1></div></div><p class="summary">${esc(tool.summary)}</p><div class="detail-meta">${tierPill(tool.tier)}${array(tool.platforms).map(platform => `<span class="pill">${esc(platform)}</span>`).join('')}<span class="pill">${esc(modeLabel(tool.mode))}</span></div><div class="detail-actions">${accessActions(tool, 'detail-access')}${external(tool.docsUrl, `${icon('book')}Documentation`, 'button ghost')}<button class="button ghost" data-save="${esc(tool.id)}" aria-pressed="${favorites.has(tool.id)}">${icon('bookmark')}<span>${favorites.has(tool.id) ? 'Saved to your toolkit' : 'Save to your toolkit'}</span></button></div></header><div class="detail-layout"><div class="detail-main">${access.note ? `<p class="access-note">${formatted(access.note)}</p>` : ''}<div class="callout">${icon('compass')}<div><h3>When to reach for it</h3><p>${formatted(tool.bestFor || tool.summary)}</p></div></div><div class="tool-info-grid"><section class="info-block"><span class="small-label">Platforms</span><p>${esc(array(tool.platforms).join(' · '))}</p></section><section class="info-block"><span class="small-label">How you use it</span><p>${esc(modeLabel(tool.mode) || 'See official documentation')}</p></section><section class="info-block"><span class="small-label">Availability &amp; pricing</span><p>${formatted(tool.pricing || 'See the official source for current terms.')}</p></section><section class="info-block"><span class="small-label">Recommendation</span><p>${esc(tierLabel(tool.tier))}${tool.tier === 'evaluate' ? ' · Validate it against your own workflow before relying on it.' : tool.tier === 'specialist' ? ' · Best for a specific diagnostic or recovery need.' : ' · A practical starting point for routine service work.'}</p></section></div>${tool.cautions ? `<div class="callout warning">${icon('info')}<div><h3>Before you use it</h3><p>${formatted(tool.cautions)}</p></div></div>` : ''}${array(tool.tags).length ? `<div class="detail-tags">${array(tool.tags).map(tag => `<span class="pill">${esc(tag)}</span>`).join('')}</div>` : ''}${selectionNotes(quickByTool.get(tool.id) || [], 'Used in these jobs')}<h2 class="block-heading">${icon('book')}Go to the source</h2>${sourceList(references)}<p class="sources-note">Source review: ${esc(dateLabel(tool.reviewedAt || reviewDate, true))}. Official pages and acquisition links are checked separately. File versions and availability can change after review.</p>${array(tool.provenance).length ? `<h2 class="block-heading">${icon('layers')}Why it is in the toolkit</h2><ul class="bullet-list">${array(tool.provenance).map(item => `<li>${safeUrl(item) ? external(item, `${esc(item)} ${icon('external')}`) : formatted(item)}</li>`).join('')}</ul>` : ''}</div><aside class="detail-aside"><section class="aside-card"><h3>${external(`${repo}/wiki/Tool-Selection`, 'Tool selection')}</h3><p>Compare diagnostic roles, supported systems, required access, and operating requirements before choosing a tool for the job.</p></section>${related.length ? `<section class="aside-card"><h3>Use it in a playbook</h3><div class="aside-tools">${related.map(job => `<a href="#job/${encodeURIComponent(job.id)}"><span class="aside-link-icon">${icon(jobIcon(job))}</span><span>${esc(job.title)}</span>${icon('arrow')}</a>`).join('')}</div></section>` : ''}<section class="aside-card"><h3>Contribute a correction</h3><p>Bring the official source and a short explanation of what it improves to the INTA repository.</p>${external(`${repo}/issues/new`, `Suggest an update ${icon('arrow')}`, 'button text')}</section></aside></div>`;
   }
   const projectResources = [
     { icon: 'layers', title: 'The INTA wiki', body: 'Browse the complete technician field guide on GitHub. Read a procedure, follow its sources, or propose an improvement.', label: 'Open the wiki', url: `${repo}/wiki` },
@@ -457,9 +500,11 @@
     const query = separator >= 0 ? raw.slice(separator + 1) : '';
     const [name, ...parts] = path.split('/');
     let id = parts.join('/');
-    try { id = decodeURIComponent(id); } catch (_) { id = ''; }
+    let quickId = '';
+    if (name === 'job' && parts.length === 3 && parts[1] === 'quick') { id = parts[0]; quickId = parts[2]; }
+    try { id = decodeURIComponent(id); quickId = decodeURIComponent(quickId); } catch (_) { id = ''; quickId = ''; }
     const anchor = path.startsWith('discipline-') ? path : '';
-    return { name: anchor ? 'home' : name, id, params: new URLSearchParams(query), raw, anchor };
+    return { name: anchor ? 'home' : name, id, quickId, params: new URLSearchParams(query), raw, anchor };
   }
   function closeNavigation() {
     $('#sidebar').classList.remove('is-open');
@@ -476,7 +521,7 @@
     else if (route.name === 'tools') app.innerHTML = library(false, route.params);
     else if (route.name === 'saved') app.innerHTML = library(true, route.params);
     else if (route.name === 'playbooks') app.innerHTML = playbooks(route.params);
-    else if (route.name === 'job') app.innerHTML = jobDetail(route.id);
+    else if (route.name === 'job') app.innerHTML = jobDetail(route.id, route.quickId);
     else if (route.name === 'tool') app.innerHTML = toolDetail(route.id);
     else if (route.name === 'resources') app.innerHTML = resources();
     else if (route.name === 'knowledge') app.innerHTML = knowledgePage();
@@ -487,7 +532,11 @@
     closeNavigation(); closeSearch();
     if (route.anchor && document.getElementById(route.anchor)) document.getElementById(route.anchor).scrollIntoView({ block: 'start', behavior: 'instant' });
     else if (lastRoute !== route.raw) window.scrollTo({ top: 0, behavior: 'instant' });
-    if (lastRoute) $('#main').focus({ preventScroll: true });
+    const selectedAnswer = route.quickId && document.getElementById(`quick-${route.quickId}`);
+    if (selectedAnswer) {
+      selectedAnswer.scrollIntoView({ block: 'start', behavior: 'instant' });
+      selectedAnswer.querySelector('h3')?.focus({ preventScroll: true });
+    } else if (lastRoute) $('#main').focus({ preventScroll: true });
     lastRoute = route.raw;
   }
   function updateCounts() {
@@ -563,7 +612,23 @@
     const job = jobMap.get(id);
     if (!job) return;
     const state = progress(job);
-    const lines = [`# INTA · ${job.title}`, '', job.summary, '', `Source review: ${job.reviewedAt || reviewDate}`, `Exported: ${new Date().toISOString()}`, `Checklist: ${state.done}/${state.total} checks`, '', '## Start here', '', text(job.startHere), '', '## Work through the job', ''];
+    const lines = [`# INTA · ${job.title}`, '', job.summary, '', `Source review: ${job.reviewedAt || reviewDate}`, `Exported: ${new Date().toISOString()}`, `Checklist: ${state.done}/${state.total} checks`, ''];
+    const picks = quickByJob.get(job.id) || [];
+    const selected = picks.find(item => item.id === parseRoute().quickId);
+    const ordered = selected ? [selected, ...picks.filter(item => item !== selected)] : picks;
+    if (ordered.length) {
+      lines.push('## First actions', '');
+      ordered.forEach(item => {
+        lines.push(`### ${item.label}`, '', text(item.firstStep), '', ...array(item.quickSteps).map((step, i) => `${i + 1}. ${text(step)}`), '');
+        const tool = toolMap.get(item.toolId);
+        if (tool) {
+          const access = accessInfo(tool);
+          const options = item.toolAction ? access.options.filter(option => option.id === item.toolAction) : access.options;
+          lines.push(`[${tool.name} · official page](${safeUrl(access.officialUrl)})`, ...options.map(option => `- [${accessLabel(option)}](${safeUrl(option.url)})`), '');
+        } else lines.push('No extra download needed.', '');
+      });
+    }
+    lines.push('## Start here', '', text(job.startHere), '', '## Work through the job', '');
     array(job.steps).forEach((step, index) => {
       lines.push(`- [${checked(job, 'step', index, step.title) ? 'x' : ' '}] ${index + 1}. ${step.title}`, '', text(step.detail), '');
       if (step.command) {
@@ -575,7 +640,15 @@
     lines.push('## Verify the result', '');
     array(job.verify).forEach((item, index) => lines.push(`- [${checked(job, 'verify', index, text(item)) ? 'x' : ' '}] ${text(item)}`));
     lines.push('', '## Pause and escalate when', '', ...array(job.stopIf).map(item => `- ${text(item)}`), '', '## Tools', '');
-    relatedTools(job.tools).forEach(tool => lines.push(`- [${tool.name}](${safeUrl(tool.downloadUrl || tool.homepage)}) — ${tool.summary}`));
+    relatedTools(job.tools).forEach(tool => {
+      const access = accessInfo(tool);
+      lines.push(`- [${tool.name}](${safeUrl(access.officialUrl)}) — ${tool.summary}`);
+      access.options.forEach(option => lines.push(`  - [${accessLabel(option)}](${safeUrl(option.url)})`));
+    });
+    if (picks.length) {
+      lines.push('', '## Selection notes', '');
+      picks.forEach(item => lines.push(`### ${item.label}`, '', `Why: ${item.why}`, '', `Use and cost: ${item.freeUse}`, '', `Before you act: ${item.boundary}`, '', `Selection basis: ${item.qualityBasis}`, '', ...array(item.evidenceUrls).map(url => `- ${url}`), ''));
+    }
     lines.push('', '## Official references', '', ...array(job.sources).map(source => `- [${source.title || source.url}](${safeUrl(source.url)})`), '', 'Record customer-specific details in your private service ticket.', '');
     download(`INTA-${job.id}-checklist.md`, lines.join('\n'));
     notify('Checklist exported with your current progress.');
@@ -595,12 +668,14 @@
   function updateSearch() {
     const query = search.value.trim();
     if (!query) return closeSearch();
+    const foundScenarios = quickItems.filter(item => matches(quickSearchText.get(item.id), query));
     const foundJobs = jobs.filter(job => matches(jobSearchText.get(job.id), query));
     const foundTools = tools.filter(tool => matches(toolSearchText.get(tool.id), query));
-    let html = `<div class="search-summary">${foundJobs.length + foundTools.length} results for “${esc(query)}”</div>`;
+    let html = `<div class="search-summary">${foundScenarios.length + foundJobs.length + foundTools.length} results for “${esc(query)}”</div>`;
+    if (foundScenarios.length) html += `<div class="search-label">First actions · ${foundScenarios.length}</div>${foundScenarios.map(item => `<a class="search-result search-scenario" data-search-scenario="${esc(item.id)}" href="${quickHref(item)}"><span class="result-icon" aria-hidden="true">${esc(item.icon || scenarioEmoji[item.jobId] || '🧰')}</span><span><strong>${esc(item.label)}</strong><small>${esc(item.firstStep)}</small></span>${icon('arrow')}</a>`).join('')}`;
     if (foundJobs.length) html += `<div class="search-label">Job playbooks · ${foundJobs.length}</div>${foundJobs.map(job => `<a class="search-result" href="#job/${encodeURIComponent(job.id)}"><span class="result-icon">${icon(jobIcon(job))}</span><span><strong>${esc(job.title)}</strong><small>${esc(job.category)}</small></span>${icon('arrow')}</a>`).join('')}`;
     if (foundTools.length) html += `<div class="search-label">Tools · ${foundTools.length}</div>${foundTools.map(tool => `<a class="search-result" href="#tool/${encodeURIComponent(tool.id)}"><span class="result-icon">${icon('grid')}</span><span><strong>${esc(tool.name)}</strong><small>${esc(categoryLabel(tool.category))} · ${esc(array(tool.platforms).join(', '))}</small></span>${icon('arrow')}</a>`).join('')}`;
-    if (!foundJobs.length && !foundTools.length) html += '<div class="search-empty">No results yet. Try a tool name or a symptom such as “network” or “malware”.</div>';
+    if (!foundScenarios.length && !foundJobs.length && !foundTools.length) html += '<div class="search-empty">No results yet. Try a tool name or a symptom such as “network” or “malware”.</div>';
     searchResults.innerHTML = html;
     searchResults.hidden = false;
     search.setAttribute('aria-expanded', 'true');

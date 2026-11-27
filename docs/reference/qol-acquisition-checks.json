@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 1,
+  "reviewSnapshot": "2026-11-26",
+  "validatedAt": "2026-11-27",
+  "scope": "All catalog tools; official product pages are separate from acquisition actions. No software was executed or installed.",
+  "sourceFiles": {
+    "data/tools.json": "ed6da8c03b051bc50d0920eb915814db2d254de274d2642d141c7f1150890b61",
+    "data/tool-access.json": "0cebb762113b497877f9a7afd0f38304d6a4698e57710c5e0aefcfa4d1cb8031"
+  },
+  "coverage": {
+    "catalogCount": 114,
+    "originalToolsPreserved": 113,
+    "newToolIds": [
+      "get-help"
+    ],
+    "accessCount": 114,
+    "actions": 237,
+    "primaryKinds": {
+      "account": 6,
+      "builtin": 9,
+      "file": 82,
+      "package": 1,
+      "release-page": 6,
+      "source": 6,
+      "store": 1,
+      "web": 3
+    },
+    "actionKinds": {
+      "account": 7,
+      "builtin": 15,
+      "file": 93,
+      "package": 1,
+      "release-page": 110,
+      "source": 7,
+      "store": 1,
+      "web": 3
+    },
+    "quickStartItems": 27,
+    "quickStartActionReferences": 5
+  },
+  "schemaChecks": {
+    "passed": true,
+    "errors": [],
+    "checks": [
+      "Complete catalog coverage",
+      "Original 113 catalog records preserved",
+      "Official page matches catalog homepage",
+      "Action kind and nonempty fields",
+      "HTTPS acquisition and evidence URLs",
+      "Platform and format for file actions",
+      "No expiring signed URLs in canonical records",
+      "No non-file Direct download labels",
+      "Unique scenario action IDs and valid quick-start references"
+    ]
+  },
+  "responseChecks": {
+    "method": "Bounded GET with Range bytes=0-511; response body capped at512bytes; redirects followed without persisting signed URLs. Existing vendor evidence was retained.",
+    "uniqueCurrentFileOrSourceArchiveUrls": 98,
+    "boundedProbeRecords": 98,
+    "nonHtmlFileResponses": 91,
+    "blockedResponses": 7,
+    "formatMagicChecks": 84,
+    "formatMismatches": [],
+    "claimLimit": "A successful response establishes file delivery to this client, not a complete download, authentic signature, supported installation, scan result, or safety certification."
+  },
+  "blockedPublisherRoutes": [
+    {
+      "toolIds": [
+        "memtest86"
+      ],
+      "url": "https://www.memtest86.com/downloads/memtest86-usb.zip",
+      "status": 403,
+      "contentType": "text/html; charset=iso-8859-1",
+      "finding": "The official publisher file route is documented, but the bounded automated request was denied; binary delivery was not verified."
+    },
+    {
+      "toolIds": [
+        "anydesk"
+      ],
+      "url": "https://download.anydesk.com/AnyDesk.exe",
+      "status": 403,
+      "contentType": "text/html; charset=utf-8",
+      "finding": "The official publisher file route is documented, but the bounded automated request was denied; binary delivery was not verified."
+    },
+    {
+      "toolIds": [
+        "teamviewer"
+      ],
+      "url": "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe",
+      "status": 403,
+      "contentType": "text/html; charset=utf-8",
+      "finding": "The official publisher file route is documented, but the bounded automated request was denied; binary delivery was not verified."
+    },
+    {
+      "toolIds": [
+        "teamviewer"
+      ],
+      "url": "https://download.teamviewer.com/download/TeamViewerQS_x64.exe",
+      "status": 403,
+      "contentType": "text/html; charset=utf-8",
+      "finding": "The official publisher file route is documented, but the bounded automated request was denied; binary delivery was not verified."
+    },
+    {
+      "toolIds": [
+        "teamviewer"
+      ],
+      "url": "https://download.teamviewer.com/download/TeamViewer_Setup_ARM64.exe",
+      "status": 403,
+      "contentType": "text/html; charset=utf-8",
+      "finding": "The official publisher file route is documented, but the bounded automated request was denied; binary delivery was not verified."
+    },
+    {
+      "toolIds": [
+        "tailscale"
+      ],
+      "url": "https://dl.tailscale.com/stable/tailscale-setup-1.104.7-amd64.msi",
+      "status": 403,
+      "contentType": "text/html; charset=utf-8",
+      "finding": "The official publisher file route is documented, but the bounded automated request was denied; binary delivery was not verified."
+    },
+    {
+      "toolIds": [
+        "tailscale"
+      ],
+      "url": "https://dl.tailscale.com/stable/tailscale-setup-1.104.7-arm64.msi",
+      "status": 403,
+      "contentType": "text/html; charset=utf-8",
+      "finding": "The official publisher file route is documented, but the bounded automated request was denied; binary delivery was not verified."
+    }
+  ],
+  "exactArtifactDownloadPages": [
+    {
+      "toolId": "gparted",
+      "label": "Get x64 live ISO · download page",
+      "url": "https://sourceforge.net/projects/gparted/files/gparted-live-stable/1.8.1-6/gparted-live-1.8.1-6-amd64.iso/download",
+      "reason": "The publisher route selects the exact ISO through SourceForge. Mirror links are generated during download; no expiring mirror URL is stored."
+    },
+    {
+      "toolId": "hitmanpro",
+      "label": "Windows x64 download · publisher check",
+      "url": "https://download.sophos.com/endpoint/clients/HitmanPro_x64.exe",
+      "reason": "These are the exact publisher file routes. Sophos applies an export check before delivery; the automated request reached that check rather than a file. Use All downloads / setup if it does not continue."
+    },
+    {
+      "toolId": "crystaldiskinfo",
+      "label": "Get Windows ZIP · 9.9.5",
+      "url": "https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download",
+      "reason": "This opens the exact Standard Edition ZIP on the publisher’s file host and starts its download. The host generates expiring mirror URLs, so a temporary signed address is not saved here."
+    },
+    {
+      "toolId": "winscp",
+      "label": "Windows installer download page",
+      "url": "https://winscp.net/download/WinSCP-6.7.1-Setup.exe/download",
+      "reason": "The publisher generates expiring CDN URLs. The stable official download page obtains a fresh file link; no expiring URL is embedded."
+    },
+    {
+      "toolId": "system-informer",
+      "label": "Get Windows portable ZIP · download page",
+      "url": "https://sourceforge.net/projects/systeminformer/files/systeminformer-4.0.26241.138-bin.zip/download",
+      "reason": "The exact publisher-hosted ZIP page obtains the file through a mirror; temporary mirror URLs are not saved."
+    },
+    {
+      "toolId": "clonezilla",
+      "label": "Get x64 rescue image · ISO",
+      "url": "https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso",
+      "reason": "This is the publisher’s exact ISO route. The file host may show its download page before delivering the image; mirror delivery varies by client. No expiring mirror URL is stored."
+    }
+  ],
+  "clonezillaMirrorVariation": {
+    "url": "https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso",
+    "classification": "release-page",
+    "positiveEvidence": {
+      "headStatus": 200,
+      "getStatus": 206,
+      "contentType": "application/octet-stream",
+      "isoLength": 523239424,
+      "isoSignatureRange": "bytes32768-32774",
+      "isoSignatureHex": "01434430303101",
+      "client": "Python urllib default user agent; no explicit Accept or cookies"
+    },
+    "alternateObservation": {
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "client": "Mozilla/5.0 user agent, Accept */*, Range bytes=0-511"
+    },
+    "decision": "Keep the exact unsigned publisher ISO route, label it as a download route, and disclose that the host may show its download page before file delivery."
+  },
+  "requiredToolSpotChecks": [
+    {
+      "toolId": "sysinternals",
+      "url": "https://download.sysinternals.com/files/SysinternalsSuite.zip",
+      "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+      "format": "ZIP",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "504b03041400000008002886ab54a5fe52661eed0700a06716000d0000006163",
+      "fileResponseConfirmed": true
+    },
+    {
+      "toolId": "wiztree",
+      "url": "https://diskanalyzer.com/files/wiztree_4_34_portable.zip",
+      "evidenceUrl": "https://diskanalyzer.com/download",
+      "format": "ZIP",
+      "status": 206,
+      "contentType": "application/zip",
+      "bytesRead": 512,
+      "first32BytesHex": "504b03041400000008006773695da72747a26eba00000bbd0000170000005769",
+      "fileResponseConfirmed": true
+    },
+    {
+      "toolId": "wizfile",
+      "url": "https://antibody-software.com/files/wizfile_3_15_portable.zip",
+      "evidenceUrl": "https://antibody-software.com/wizfile/download",
+      "format": "ZIP",
+      "status": 206,
+      "contentType": "application/zip",
+      "bytesRead": 512,
+      "first32BytesHex": "504b03041400000008007d5c915c6f1995e56e9441007012b7000d0000005769",
+      "fileResponseConfirmed": true
+    },
+    {
+      "toolId": "safety-scanner",
+      "url": "https://go.microsoft.com/fwlink/?LinkId=212732",
+      "evidenceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+      "format": "EXE",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "4d5a90000300000004000000ffff0000b8000000000000004000000000000000",
+      "fileResponseConfirmed": true
+    },
+    {
+      "toolId": "adwcleaner",
+      "url": "https://adwcleaner.malwarebytes.com/adwcleaner?channel=release",
+      "evidenceUrl": "https://www.malwarebytes.com/adwcleaner",
+      "format": "EXE",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "4d5a90000300000004000000ffff0000b8000000000000004000000000000000",
+      "fileResponseConfirmed": true
+    },
+    {
+      "toolId": "rufus",
+      "url": "https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe",
+      "evidenceUrl": "https://api.github.com/repos/pbatard/rufus/releases/latest",
+      "format": "EXE",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "4d5a90000300000004000000ffff0000b8000000000000004000000000000000",
+      "fileResponseConfirmed": true
+    },
+    {
+      "toolId": "photorec",
+      "url": "https://www.cgsecurity.org/testdisk-7.2.win64.zip",
+      "evidenceUrl": "https://www.cgsecurity.org/Download_and_donate.php/testdisk-7.2.win64.zip",
+      "format": "ZIP",
+      "status": 206,
+      "contentType": "application/zip",
+      "bytesRead": 512,
+      "first32BytesHex": "504b03040a0000000000f79042580000000000000000000000000d001c007465",
+      "fileResponseConfirmed": true
+    },
+    {
+      "toolId": "rustdesk",
+      "url": "https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe",
+      "evidenceUrl": "https://api.github.com/repos/rustdesk/rustdesk/releases/latest",
+      "format": "EXE",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "4d5a90000300000004000000ffff0000b8000000000000004000000000000000",
+      "fileResponseConfirmed": true
+    },
+    {
+      "toolId": "systemrescue",
+      "url": "https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso",
+      "evidenceUrl": "https://www.system-rescue.org/Download/",
+      "format": "ISO",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "33ed909090909090909090909090909090909090909090909090909090909090",
+      "fileResponseConfirmed": true
+    }
+  ],
+  "scenarioActions": {
+    "get-help": [
+      "printer",
+      "network",
+      "update",
+      "outlook",
+      "outlook-connectivity"
+    ],
+    "powershell": [
+      "windows-powershell"
+    ]
+  },
+  "sourceDistinctions": {
+    "sourceArchives": [
+      "ddrescue",
+      "iperf3",
+      "tcpdump",
+      "rsync",
+      "cryptsetup",
+      "dislocker"
+    ],
+    "installationPackage": "meshcentral",
+    "installerScripts": "claude-code",
+    "detectionRuleArchive": "sigma",
+    "endpointAgentRequiresServer": "wazuh",
+    "windowsFeature": "openssh",
+    "classicOutlookBoundary": "Get Help action outlook opens a diagnostic chooser for classic Outlook; connectivity is a separate action. Network and update actions open their specific Microsoft instructions with Windows launch buttons."
+  },
+  "limits": [
+    "No full binary/ISO payloads were downloaded for these checks.",
+    "No files were executed, installed, or booted.",
+    "Four vendors returned403 to the automated binary probe; official published file addresses remain recorded with that verification limit.",
+    "Version-pinned URLs reflect the review snapshot and require periodic review.",
+    "Download success and current licensing or business-use suitability are separate questions."
+  ]
+}

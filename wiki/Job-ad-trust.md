@@ -8,7 +8,23 @@ Check connectivity, time, and computer identity before repairing a member comput
 
 **Identity & business systems** · Advanced · 20–60 min · 6 steps
 
-[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ad-trust)
+[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ad-trust)
+
+<a id="quick-answer"></a>
+
+## ⚡ Quick answer
+
+<a id="quick-repair-domain-trust"></a>
+
+### 🔐 Repair domain sign-in
+
+**On the affected domain-member PC, check the domain DNS, time and domain-controller reachability first.**
+
+1. Use existing [Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell) to run the guide’s diagnostic secure-channel check on the member PC.
+2. Repair only a confirmed trust fault using an authorized account and the scoped procedure.
+3. Verify domain sign-in, a required shared resource and the secure-channel result.
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)**
 
 > [!NOTE]
 > **Start here.** Use this guide for an [Active Directory](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview) member workstation or member server. Domain-controller trust repair needs its own procedure.
@@ -59,9 +75,9 @@ flowchart TD
 
 Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
-| Tool / official download | Use it for | Platform & access | Documentation |
+| Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| [Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite) | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
+| **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
 
 <a id="walkthrough"></a>
 

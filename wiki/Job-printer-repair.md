@@ -9,7 +9,23 @@ Isolate printer hardware, network reachability, queue state, driver, and applica
 
 **Devices & peripherals** · Starter · 15–45 min · 6 steps
 
-[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/printer-repair)
+[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/printer-repair)
+
+<a id="quick-answer"></a>
+
+## ⚡ Quick answer
+
+<a id="quick-fix-a-printer"></a>
+
+### 🖨️ Fix a printer
+
+**Check that the intended printer is powered on, ready and connected before changing its queue or driver.**
+
+1. Check paper, ink or toner, displayed errors and the selected printer; compare a device test page if available.
+2. Run the printer troubleshooter in [Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help) on the affected PC and review the exact queue or connection finding.
+3. Apply the indicated repair, then print a test page and the user’s original document.
+
+**[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Start the printer troubleshooter](https://aka.ms/PrinterConnection)**
 
 > [!NOTE]
 > **Start here.** Identify the exact printer and queue. Check whether another user or application can print to the same device.
@@ -59,9 +75,9 @@ flowchart TD
 
 Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
-| Tool / official download | Use it for | Platform & access | Documentation |
+| Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| [Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite) | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
+| **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
 
 <a id="walkthrough"></a>
 

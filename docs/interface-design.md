@@ -23,7 +23,7 @@ The [Compact and Sieve observations](https://github.com/Herbertofury/Athena/blob
 ## Layout
 
 - **Application shell:** a quiet sidebar, a compact utility bar, and a fluid working area. Navigation names the actual destination.
-- **Home:** lead with the problem, a suitable free starting tool, its official link, and the matching procedure. Use a compact, immediately visible selection table before the complete tool directory. Keep every catalog entry available below it.
+- **Home:** lead with everyday problems such as **Remove viruses**, **Fix a printer**, **Fix internet** and **Fix email**. Each flat row has a bold emoji scenario link, one concrete first-action sentence, the official tool page and the exact acquisition action. Cover every service scenario and keep the complete tool directory below the answers.
 - **Tool library:** a readable list with visible filters, result count, platform information, recommendation tier, details, official source, and save control.
 - **Playbooks:** a compact index. Individual procedures use a document column with a restrained context area for the toolkit and related information.
 - **Knowledge desk:** linked reference rows with short descriptions. Its purpose is finding guidance, so it does not need a gallery of equally sized cards.
@@ -47,7 +47,9 @@ The Wiki uses meaningful emoji on scenario, category and quick-tool navigation. 
 
 **Navigation stays expanded.** Do not place scenarios, tool categories, official-download shortcuts or reference destinations inside collapsed groups, accordions, tabs or a “more” menu. A longer visible list is preferable to extra navigation clicks. Optional explanatory diagrams may use disclosures when all action destinations also remain visible outside them.
 
-**Front pages start with useful tools.** The application Home, Wiki Home, repository README and Start Here page share the same curated quick-start data. Show the scenario, a strong free choice for that job, a direct official link, a concise reason and the guide. Favor tools available without a paid upgrade for the intended technician workflow. Explain a relevant limitation where it changes the next action. Put detailed selection evidence in the linked guide. Never invent ratings, apply one product's test score to a different edition or utility, or claim a universal winner when the evidence covers a narrower task.
+**Front pages start with an answer.** The application Home, Wiki Home, repository README and Start Here page share the same quick-start data. Favor tools available without a paid upgrade for the intended technician workflow. A scenario opens its own three-step answer before the complete procedure, even when several scenarios share one guide. Keep detailed selection evidence in visible guide and tool notes. Never invent ratings, apply one product's test score to a different edition or utility, or claim a universal winner when the evidence covers a narrower task.
+
+**Two destinations, clearly named.** Keep the official product page beside the exact download action in Home, tool lists, details and recommended tool sections. File labels identify the platform and format. Built-in features offer their specific troubleshooter or instructions; Store, web, package and account-generated routes say what opens. Do not add a Details click to reach a download. Full tool details preserve alternate platforms and the original setup route.
 
 Use [Mermaid](https://mermaid.js.org/) only where a branch, dependency, or sequence benefits from a diagram. Preserve plain labels and provide linked legends immediately afterward. A table is usually better for selecting a tool from a small set.
 

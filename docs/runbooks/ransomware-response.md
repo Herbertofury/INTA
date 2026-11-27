@@ -8,7 +8,23 @@ Stop spread, preserve useful evidence, and restore services through a clean reco
 
 **Security** · Advanced · Immediate triage; recovery varies · 6 steps
 
-[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ransomware-response)
+[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ransomware-response)
+
+<a id="quick-answer"></a>
+
+## ⚡ Quick answer
+
+<a id="quick-contain-ransomware"></a>
+
+### 🚨 Contain ransomware
+
+**Isolate affected connections and alert the incident owner immediately if files are being encrypted or compromise is spreading.**
+
+1. Disconnect affected systems from networks and protect reachable backups without destroying useful evidence.
+2. Preserve the timeline, ransom note and available logs privately; scope affected accounts and systems with the incident owner.
+3. Follow the incident plan for credential containment, clean rebuild and verified restoration before reconnecting.
+
+**No extra download needed.** Follow the checklist below.
 
 > [!NOTE]
 > **Start here.** Treat live encryption, ransom notes, or several compromised systems as an incident. Start a private incident timeline and contact the designated incident lead.
@@ -59,10 +75,10 @@ flowchart TD
 
 Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
-| Tool / official download | Use it for | Platform & access | Documentation |
+| Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| [Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite) | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
-| [Wireshark](https://www.wireshark.org/download.html) | Explaining DNS, TCP and application-protocol failures from a bounded capture. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://www.wireshark.org/docs/) |
+| **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
+| **[Wireshark](https://www.wireshark.org/)** · [Official page](https://www.wireshark.org/) · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)** | Explaining DNS, TCP and application-protocol failures from a bounded capture. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://www.wireshark.org/docs/) |
 
 <a id="walkthrough"></a>
 

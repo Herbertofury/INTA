@@ -25,17 +25,17 @@ Make everyday technician work clearer without leaving unnecessary software on cu
 
 ## Tool comparison
 
-| Tool | Choose it for | Platforms | Role |
+| Tool | Choose it for | Platforms / role | Official page + download |
 | --- | --- | --- | --- |
-| [7-Zip](#7zip) | Packaging logs or extracting a trusted portable tool. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/) | Core |
-| [Everything](#everything) | Locating files by name on a technician workstation. | [Windows](https://www.microsoft.com/windows) | Core |
-| [KeePassXC](#keepassxc) | Keeping a protected technician vault with a deliberate sharing and backup process. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
-| [LocalSend](#localsend) | Moving a selected log or tool between trusted devices on the same network. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), Android, iOS | Core |
-| [Microsoft PowerToys](#powertoys) | Making the technician workstation easier to navigate and operate. | [Windows](https://www.microsoft.com/windows) | Core |
-| [Notepad++](#notepadplusplus) | Reading logs and making deliberate configuration-file changes. | [Windows](https://www.microsoft.com/windows) | Core |
-| [ShareX](#sharex) | Capturing a problem and producing clear technician documentation. | [Windows](https://www.microsoft.com/windows) | Core |
-| [UniGetUI](#unigetui) | Reviewing available applications and updates in one technician interface. | [Windows](https://www.microsoft.com/windows) | Core |
-| [WizFile](#wizfile) | Locating a known file, log or recently changed group of files without guessing its folder. | [Windows](https://www.microsoft.com/windows) | Core |
+| [7-Zip](#7zip) | Packaging logs or extracting a trusted portable tool. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/) · Core | [Official page](https://www.7-zip.org/) · **[Download Windows x64 EXE](https://github.com/ip7z/7zip/releases/download/26.06/7z2606-x64.exe)** |
+| [Everything](#everything) | Locating files by name on a technician workstation. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://www.voidtools.com/) · **[Download Windows x64 EXE](https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe)** |
+| [KeePassXC](#keepassxc) | Keeping a protected technician vault with a deliberate sharing and backup process. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://keepassxc.org/) · **[Download Windows x64 portable · ZIP](https://github.com/keepassxreboot/keepassxc/releases/download/2.8.0/KeePassXC-2.8.0-x64.zip)** |
+| [LocalSend](#localsend) | Moving a selected log or tool between trusted devices on the same network. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), Android, iOS · Core | [Official page](https://localsend.org/) · **[Download Windows x64 portable · ZIP](https://github.com/localsend/localsend/releases/download/v1.19.0/LocalSend-1.19.0-windows-x86-64.zip)** |
+| [Microsoft PowerToys](#powertoys) | Making the technician workstation easier to navigate and operate. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/windows/powertoys/) · **[Download Windows x64 setup · EXE](https://github.com/microsoft/PowerToys/releases/download/v0.102.3101/PowerToysUserSetup-0.102.3101.0-x64.exe)** |
+| [Notepad++](#notepadplusplus) | Reading logs and making deliberate configuration-file changes. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://notepad-plus-plus.org/) · **[Download Windows x64 portable · ZIP](https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.9.1/npp.8.9.9.1.portable.x64.zip)** |
+| [ShareX](#sharex) | Capturing a problem and producing clear technician documentation. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://getsharex.com/) · **[Download Windows x64 portable · ZIP](https://github.com/ShareX/ShareX/releases/download/v22.4.0/ShareX-22.4.0-portable-x64.zip)** |
+| [UniGetUI](#unigetui) | Reviewing available applications and updates in one technician interface. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://github.com/Devolutions/UniGetUI) · **[Download Windows x64 portable · ZIP](https://github.com/Devolutions/UniGetUI/releases/download/v2026.3.4/UniGetUI.x64.zip)** |
+| [WizFile](#wizfile) | Locating a known file, log or recently changed group of files without guessing its folder. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://antibody-software.com/wizfile/) · **[Download Windows portable · ZIP](https://antibody-software.com/files/wizfile_3_15_portable.zip)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
@@ -45,7 +45,7 @@ Core means an everyday candidate; Specialist means a focused advanced use; Evalu
 
 Archive creation, extraction and integrity testing for common archive formats.
 
-[Official download](https://www.7-zip.org/download.html) · [Documentation](https://www.7-zip.org/faq.html) · [Publisher](https://www.7-zip.org/)
+[Official page](https://www.7-zip.org/) · **[Download Windows x64 EXE](https://github.com/ip7z/7zip/releases/download/26.06/7z2606-x64.exe)** · [Download Windows ARM64 EXE](https://github.com/ip7z/7zip/releases/download/26.06/7z2606-arm64.exe) · [Other platforms and packages](https://www.7-zip.org/download.html) · [Documentation](https://www.7-zip.org/faq.html)
 
 | Decision | Detail |
 | --- | --- |
@@ -77,7 +77,7 @@ Archive creation, extraction and integrity testing for common archive formats.
 
 Fast indexed filename search on supported [Windows](https://www.microsoft.com/windows) filesystems.
 
-[Official download](https://www.voidtools.com/downloads/) · [Documentation](https://www.voidtools.com/support/everything/) · [Publisher](https://www.voidtools.com/)
+[Official page](https://www.voidtools.com/) · **[Download Windows x64 EXE](https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe)** · [Portable Windows x64 ZIP](https://www.voidtools.com/Everything-1.4.1.1032.x64.zip) · [Other Windows packages](https://www.voidtools.com/downloads/) · [Documentation](https://www.voidtools.com/support/everything/)
 
 | Decision | Detail |
 | --- | --- |
@@ -109,7 +109,7 @@ Fast indexed filename search on supported [Windows](https://www.microsoft.com/wi
 
 Local encrypted password database with cross-platform clients.
 
-[Official download](https://keepassxc.org/download/) · [Documentation](https://keepassxc.org/docs/) · [Publisher](https://keepassxc.org/)
+[Official page](https://keepassxc.org/) · **[Download Windows x64 portable · ZIP](https://github.com/keepassxreboot/keepassxc/releases/download/2.8.0/KeePassXC-2.8.0-x64.zip)** · [All download options](https://keepassxc.org/download/) · [Documentation](https://keepassxc.org/docs/)
 
 | Decision | Detail |
 | --- | --- |
@@ -141,7 +141,7 @@ Local encrypted password database with cross-platform clients.
 
 Cross-platform local-network file transfer without a cloud account.
 
-[Official download](https://localsend.org/download) · [Documentation](https://github.com/localsend/localsend) · [Publisher](https://localsend.org/)
+[Official page](https://localsend.org/) · **[Download Windows x64 portable · ZIP](https://github.com/localsend/localsend/releases/download/v1.19.0/LocalSend-1.19.0-windows-x86-64.zip)** · [All download options](https://localsend.org/download) · [Documentation](https://github.com/localsend/localsend)
 
 | Decision | Detail |
 | --- | --- |
@@ -173,7 +173,7 @@ Cross-platform local-network file transfer without a cloud account.
 
 Modular [Windows](https://www.microsoft.com/windows) utilities including window layout, file naming and input helpers.
 
-[Official download](https://github.com/microsoft/PowerToys/releases/latest) · [Documentation](https://learn.microsoft.com/en-us/windows/powertoys/) · [Publisher](https://learn.microsoft.com/en-us/windows/powertoys/)
+[Official page](https://learn.microsoft.com/en-us/windows/powertoys/) · **[Download Windows x64 setup · EXE](https://github.com/microsoft/PowerToys/releases/download/v0.102.3101/PowerToysUserSetup-0.102.3101.0-x64.exe)** · [All download options](https://github.com/microsoft/PowerToys/releases/latest) · [Documentation](https://learn.microsoft.com/en-us/windows/powertoys/)
 
 | Decision | Detail |
 | --- | --- |
@@ -205,7 +205,7 @@ Modular [Windows](https://www.microsoft.com/windows) utilities including window 
 
 [Windows](https://www.microsoft.com/windows) text editor with searching, syntax support and large text-file workflows.
 
-[Official download](https://notepad-plus-plus.org/downloads/) · [Documentation](https://npp-user-manual.org/) · [Publisher](https://notepad-plus-plus.org/)
+[Official page](https://notepad-plus-plus.org/) · **[Download Windows x64 portable · ZIP](https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.9.1/npp.8.9.9.1.portable.x64.zip)** · [All download options](https://notepad-plus-plus.org/downloads/) · [Documentation](https://npp-user-manual.org/)
 
 | Decision | Detail |
 | --- | --- |
@@ -235,7 +235,7 @@ Modular [Windows](https://www.microsoft.com/windows) utilities including window 
 
 Screenshots, recordings and configurable local output workflows.
 
-[Official download](https://github.com/ShareX/ShareX/releases/latest) · [Documentation](https://github.com/ShareX/ShareX) · [Publisher](https://getsharex.com/)
+[Official page](https://getsharex.com/) · **[Download Windows x64 portable · ZIP](https://github.com/ShareX/ShareX/releases/download/v22.4.0/ShareX-22.4.0-portable-x64.zip)** · [All download options](https://github.com/ShareX/ShareX/releases/latest) · [Documentation](https://github.com/ShareX/ShareX)
 
 | Decision | Detail |
 | --- | --- |
@@ -267,7 +267,7 @@ Screenshots, recordings and configurable local output workflows.
 
 Graphical management interface for multiple software package managers.
 
-[Official download](https://github.com/Devolutions/UniGetUI/releases/latest) · [Documentation](https://github.com/Devolutions/UniGetUI) · [Publisher](https://github.com/Devolutions/UniGetUI)
+[Official page](https://github.com/Devolutions/UniGetUI) · **[Download Windows x64 portable · ZIP](https://github.com/Devolutions/UniGetUI/releases/download/v2026.3.4/UniGetUI.x64.zip)** · [All download options](https://github.com/Devolutions/UniGetUI/releases/latest) · [Documentation](https://github.com/Devolutions/UniGetUI)
 
 | Decision | Detail |
 | --- | --- |
@@ -299,7 +299,7 @@ Graphical management interface for multiple software package managers.
 
 Fast filename and path lookup with size, date and other filters on [Windows](https://www.microsoft.com/windows).
 
-[Official download](https://antibody-software.com/wizfile/download) · [Documentation](https://antibody-software.com/wizfile/quick-start) · [Publisher](https://antibody-software.com/wizfile/)
+[Official page](https://antibody-software.com/wizfile/) · **[Download Windows portable · ZIP](https://antibody-software.com/files/wizfile_3_15_portable.zip)** · [All download options](https://antibody-software.com/wizfile/download) · [Documentation](https://antibody-software.com/wizfile/quick-start)
 
 | Decision | Detail |
 | --- | --- |

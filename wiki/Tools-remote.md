@@ -25,16 +25,16 @@ Match an [attended support session](https://github.com/Herbertofury/INTA/wiki/Jo
 
 ## Tool comparison
 
-| Tool | Choose it for | Platforms | Role |
+| Tool | Choose it for | Platforms / role | Official page + download |
 | --- | --- | --- | --- |
-| [Chrome Remote Desktop](#chrome-remote-desktop) | Attended support or an explicitly configured personal remote-access endpoint. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
-| [MeshCentral](#meshcentral) | INTA-managed unattended support with its own server and device groups. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
-| [Microsoft Quick Assist](#quick-assist) | A quick one-time [Windows](https://www.microsoft.com/windows) support session without deploying an RMM agent. | [Windows](https://www.microsoft.com/windows) | Core |
-| [RustDesk](#rustdesk) | A flexible remote-control option across mixed client platforms. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
-| [Tailscale](#tailscale) | Remote administration of private services without exposing them directly to the internet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
-| [AnyDesk](#anydesk) | Client support when the customer already standardizes on [AnyDesk](https://anydesk.com/). | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
-| [ScreenConnect](#screenconnect) | A ticket-oriented remote-support workflow with technician administration. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
-| [TeamViewer Remote](#teamviewer) | Supporting customers whose approved remote-access stack uses [TeamViewer](https://www.teamviewer.com/). | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
+| [Chrome Remote Desktop](#chrome-remote-desktop) | Attended support or an explicitly configured personal remote-access endpoint. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://remotedesktop.google.com/) · **[Open remote support](https://remotedesktop.google.com/support)** |
+| [MeshCentral](#meshcentral) | INTA-managed unattended support with its own server and device groups. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://meshcentral.com/) · **[Open server installation instructions](https://github.com/Ylianst/MeshCentral#installation)** |
+| [Microsoft Quick Assist](#quick-assist) | A quick one-time [Windows](https://www.microsoft.com/windows) support session without deploying an RMM agent. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · **[Get Quick Assist in Microsoft Store](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** |
+| [RustDesk](#rustdesk) | A flexible remote-control option across mixed client platforms. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://rustdesk.com/) · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)** |
+| [Tailscale](#tailscale) | Remote administration of private services without exposing them directly to the internet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://tailscale.com/) · **[Download Windows x64 MSI](https://dl.tailscale.com/stable/tailscale-setup-1.104.7-amd64.msi)** |
+| [AnyDesk](#anydesk) | Client support when the customer already standardizes on [AnyDesk](https://anydesk.com/). | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://anydesk.com/) · **[Download Windows EXE](https://download.anydesk.com/AnyDesk.exe)** |
+| [ScreenConnect](#screenconnect) | A ticket-oriented remote-support workflow with technician administration. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://www.screenconnect.com/) · **[Client installer setup instructions](https://www.screenconnect.com/pricing/unattended-access)** |
+| [TeamViewer Remote](#teamviewer) | Supporting customers whose approved remote-access stack uses [TeamViewer](https://www.teamviewer.com/). | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://www.teamviewer.com/) · **[Download Windows x64 EXE](https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
@@ -44,7 +44,7 @@ Core means an everyday candidate; Specialist means a focused advanced use; Evalu
 
 Browser-led remote access with separate temporary support and persistent access flows.
 
-[Official download](https://remotedesktop.google.com/support) · [Documentation](https://support.google.com/chrome/answer/1649523) · [Publisher](https://remotedesktop.google.com/)
+[Official page](https://remotedesktop.google.com/) · **[Open remote support](https://remotedesktop.google.com/support)** · [Documentation](https://support.google.com/chrome/answer/1649523)
 
 | Decision | Detail |
 | --- | --- |
@@ -75,7 +75,7 @@ Browser-led remote access with separate temporary support and persistent access 
 
 Self-hosted remote management with browser-based desktop, terminal and file access.
 
-[Official download](https://github.com/Ylianst/MeshCentral) · [Documentation](https://docs.meshcentral.com/) · [Publisher](https://meshcentral.com/)
+[Official page](https://meshcentral.com/) · **[Open server installation instructions](https://github.com/Ylianst/MeshCentral#installation)** · [All download options](https://github.com/Ylianst/MeshCentral) · [Documentation](https://docs.meshcentral.com/)
 
 | Decision | Detail |
 | --- | --- |
@@ -106,7 +106,7 @@ Self-hosted remote management with browser-based desktop, terminal and file acce
 
 [Windows](https://www.microsoft.com/windows) attended screen sharing using a support code and user-approved control.
 
-[Official download](https://apps.microsoft.com/detail/9P7BP5VNWKX5) · [Documentation](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · [Publisher](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)
+[Official page](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · **[Get Quick Assist in Microsoft Store](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** · [Documentation](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)
 
 | Decision | Detail |
 | --- | --- |
@@ -137,7 +137,7 @@ Self-hosted remote management with browser-based desktop, terminal and file acce
 
 Cross-platform remote desktop with self-hosted server options.
 
-[Official download](https://github.com/rustdesk/rustdesk/releases/latest) · [Documentation](https://rustdesk.com/docs/en/) · [Publisher](https://rustdesk.com/)
+[Official page](https://rustdesk.com/) · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)** · [All download options](https://github.com/rustdesk/rustdesk/releases/latest) · [Documentation](https://rustdesk.com/docs/en/)
 
 | Decision | Detail |
 | --- | --- |
@@ -168,7 +168,7 @@ Cross-platform remote desktop with self-hosted server options.
 
 Identity-based private connectivity for reaching approved devices and services.
 
-[Official download](https://tailscale.com/download) · [Documentation](https://tailscale.com/docs) · [Publisher](https://tailscale.com/)
+[Official page](https://tailscale.com/) · **[Download Windows x64 MSI](https://dl.tailscale.com/stable/tailscale-setup-1.104.7-amd64.msi)** · [Download Windows ARM64 MSI](https://dl.tailscale.com/stable/tailscale-setup-1.104.7-arm64.msi) · [Other platforms and packages](https://tailscale.com/download) · [Documentation](https://tailscale.com/docs)
 
 | Decision | Detail |
 | --- | --- |
@@ -199,7 +199,7 @@ Identity-based private connectivity for reaching approved devices and services.
 
 Remote desktop and support software with business plans and portable client options.
 
-[Official download](https://anydesk.com/en/downloads) · [Documentation](https://support.anydesk.com/) · [Publisher](https://anydesk.com/)
+[Official page](https://anydesk.com/) · **[Download Windows EXE](https://download.anydesk.com/AnyDesk.exe)** · [Other platforms](https://anydesk.com/en/downloads) · [Documentation](https://support.anydesk.com/)
 
 | Decision | Detail |
 | --- | --- |
@@ -228,7 +228,7 @@ Remote desktop and support software with business plans and portable client opti
 
 [Remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) sessions and managed access for service teams.
 
-[Official download](https://www.screenconnect.com/Download) · [Documentation](https://www.screenconnect.com/Download) · [Publisher](https://www.screenconnect.com/)
+[Official page](https://www.screenconnect.com/) · **[Client installer setup instructions](https://www.screenconnect.com/pricing/unattended-access)** · [Server downloads · licence required](https://www.screenconnect.com/Download) · [Documentation](https://www.screenconnect.com/Download)
 
 | Decision | Detail |
 | --- | --- |
@@ -259,7 +259,7 @@ Remote desktop and support software with business plans and portable client opti
 
 Commercial [remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) and device-access platform.
 
-[Official download](https://www.teamviewer.com/en/download/) · [Documentation](https://www.teamviewer.com/en/global/support/knowledge-base/) · [Publisher](https://www.teamviewer.com/)
+[Official page](https://www.teamviewer.com/) · **[Download Windows x64 EXE](https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe)** · [QuickSupport x64 EXE](https://download.teamviewer.com/download/TeamViewerQS_x64.exe) · [Download Windows ARM64 EXE](https://download.teamviewer.com/download/TeamViewer_Setup_ARM64.exe) · [Other platforms and editions](https://www.teamviewer.com/en/download/) · [Documentation](https://www.teamviewer.com/en/global/support/knowledge-base/)
 
 | Decision | Detail |
 | --- | --- |

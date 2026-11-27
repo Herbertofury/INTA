@@ -54,6 +54,40 @@ class HubIntegrity(unittest.TestCase):
         self.assertIn('window.INTA_DATA = ', output['site/index.html'])
         self.assertNotIn('{{DATA}}', output['site/index.html'])
 
+    def test_publisher_page_and_exact_acquisition_are_separate(self):
+        access = json.loads((ROOT / 'data/tool-access.json').read_text())
+        build.validate_tool_access(access, self.tools)
+        self.assertEqual(set(access['tools']), {t['id'] for t in self.tools})
+        for identity, entry in access['tools'].items():
+            if entry['primary']['kind'] == 'file':
+                self.assertTrue(entry['primary']['platform'], identity)
+                self.assertTrue(entry['primary']['format'], identity)
+                self.assertNotEqual(entry['officialUrl'], entry['primary']['url'], identity)
+
+    def test_acquisition_rejects_missing_tools_and_misleading_direct_downloads(self):
+        action = {'kind': 'release-page', 'label': 'Direct download',
+                  'url': 'https://example.com/releases', 'evidenceUrl': 'https://example.com/',
+                  'checkedAt': '2026-11-26'}
+        access = {'schemaVersion': 1, 'tools': {'sample': {
+            'officialUrl': 'https://example.com/', 'primary': action, 'alternates': []}}}
+        with self.assertRaisesRegex(ValueError, 'non-file route'):
+            build.validate_tool_access(access, [{'id': 'sample'}])
+        action['label'] = 'Choose a release'
+        with self.assertRaisesRegex(ValueError, 'every catalog tool'):
+            build.validate_tool_access(access, [{'id': 'sample'}, {'id': 'missing'}])
+        action['url'] = 'javascript:alert(1)'
+        with self.assertRaisesRegex(ValueError, 'public HTTPS'):
+            build.validate_tool_access(access, [{'id': 'sample'}])
+
+    def test_scenario_acquisition_selects_the_matching_troubleshooter(self):
+        entry = {'primary': {'url': 'https://example.com/get-help'}, 'alternates': [
+            {'id': 'printer', 'url': 'https://example.com/printer'},
+            {'id': 'network', 'url': 'https://example.com/network'}]}
+        self.assertEqual(build.selected_tool_action(entry)['url'], 'https://example.com/get-help')
+        self.assertEqual(build.selected_tool_action(entry, 'network')['url'], 'https://example.com/network')
+        with self.assertRaisesRegex(ValueError, 'Unknown scenario acquisition'):
+            build.selected_tool_action(entry, 'missing')
+
 
 class FakeResponse:
     status = 200

@@ -8,7 +8,23 @@ Turn completed technical work into proof the customer can use, with clean access
 
 **Getting started** · Starter · 10–20 min · 6 steps
 
-[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/client-handoff)
+[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/client-handoff)
+
+<a id="quick-answer"></a>
+
+## ⚡ Quick answer
+
+<a id="quick-complete-a-handoff"></a>
+
+### ✅ Finish the job and hand over
+
+**Repeat the original user task and collect acceptance evidence before closing the case.**
+
+1. Verify the requested outcome and record any remaining issue or agreed limitation.
+2. Remove temporary access and case-only tools; record changes and private recovery references in the handoff template.
+3. Confirm user acceptance, the next owner and any follow-up date.
+
+**No extra download needed.** Follow the checklist below.
 
 > [!NOTE]
 > **Start here.** Return to the acceptance test written at intake. A completed checklist is useful only when the customer’s original task works.

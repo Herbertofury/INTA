@@ -24,23 +24,23 @@ Specialist investigation and research candidates belong to an explicit scope and
 
 ## Tool comparison
 
-| Tool | Choose it for | Platforms | Role |
+| Tool | Choose it for | Platforms / role | Official page + download |
 | --- | --- | --- | --- |
-| [Autopsy](#autopsy) | A structured specialist investigation of an acquired image. | [Windows](https://www.microsoft.com/windows) | Specialist |
-| [Chainsaw](#chainsaw) | Searching exported logs and generating investigation leads. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
-| [Fibratus](#fibratus) | A scoped lab or managed investigation requiring event correlation. | [Windows](https://www.microsoft.com/windows) | Specialist |
-| [Hayabusa](#hayabusa) | Analyzing exported EVTX logs during incident triage. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
-| [HollowsHunter](#hollows-hunter) | A broader on-demand scan for suspicious process-memory modifications. | [Windows](https://www.microsoft.com/windows) | Specialist |
-| [osquery](#osquery) | Repeatable endpoint inventory and documented state checks. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
-| [PE-sieve](#pe-sieve) | A specialist on-demand memory-integrity investigation. | [Windows](https://www.microsoft.com/windows) | Specialist |
-| [Sigma rules](#sigma) | A starting point for reviewed detections in an existing analysis platform. | Cross-platform | Specialist |
-| [Velociraptor](#velociraptor) | Scoped forensic collection across a managed endpoint fleet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
-| [Volatility 3](#volatility) | Specialist examination of memory evidence after collection. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
-| [Wazuh](#wazuh) | An ongoing client security-monitoring deployment with managed operations. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
-| [YARA-X](#yara-x) | Scanning selected evidence files with reviewed detection rules. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
-| [PRX-SD](#prx-sd) | Comparative lab evaluation of a Rust security engine and its documented platform coverage. | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) | Evaluate |
-| [Rustinel](#rustinel) | An isolated evaluation of collection, rules, health checks and replay. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Evaluate |
-| [Sentinella](#sentinella) | Studying and testing scheduling, cache correctness and cancellation behavior. | [Windows](https://www.microsoft.com/windows) | Evaluate |
+| [Autopsy](#autopsy) | A structured specialist investigation of an acquired image. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://www.autopsy.com/) · **[Download Windows x64 · MSI](https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.23.1/autopsy-4.23.1-64bit.msi)** |
+| [Chainsaw](#chainsaw) | Searching exported logs and generating investigation leads. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://github.com/WithSecureOpenSource/chainsaw) · **[Download Windows x64 · ZIP](https://github.com/WithSecureOpenSource/chainsaw/releases/download/v2.18.0/chainsaw_x86_64-pc-windows-msvc.zip)** |
+| [Fibratus](#fibratus) | A scoped lab or managed investigation requiring event correlation. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://github.com/rabbitstack/fibratus) · **[Download Windows x64 · MSI](https://github.com/rabbitstack/fibratus/releases/download/v3.1.1/fibratus-3.1.1-amd64.msi)** |
+| [Hayabusa](#hayabusa) | Analyzing exported EVTX logs during incident triage. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://github.com/Yamato-Security/hayabusa) · **[Download Windows x64 · ZIP](https://github.com/Yamato-Security/hayabusa/releases/download/v4.4.0/hayabusa-4.4.0-win-x64.zip)** |
+| [HollowsHunter](#hollows-hunter) | A broader on-demand scan for suspicious process-memory modifications. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://github.com/hasherezade/hollows_hunter) · **[Download Windows x64 · EXE](https://github.com/hasherezade/hollows_hunter/releases/download/v0.4.1.1/hollows_hunter64.exe)** |
+| [osquery](#osquery) | Repeatable endpoint inventory and documented state checks. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://osquery.io/) · **[Download Windows x64 · ZIP](https://github.com/osquery/osquery/releases/download/5.24.1/osquery-5.24.1.windows_x86_64.zip)** |
+| [PE-sieve](#pe-sieve) | A specialist on-demand memory-integrity investigation. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://github.com/hasherezade/pe-sieve) · **[Download Windows x64 · EXE](https://github.com/hasherezade/pe-sieve/releases/download/v0.4.1.1/pe-sieve64.exe)** |
+| [Sigma rules](#sigma) | A starting point for reviewed detections in an existing analysis platform. | Cross-platform · Specialist | [Official page](https://sigmahq.io/) · **[Download detection rules · ZIP](https://github.com/SigmaHQ/sigma/releases/download/r2026-07-01/sigma_all_rules.zip)** |
+| [Velociraptor](#velociraptor) | Scoped forensic collection across a managed endpoint fleet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://docs.velociraptor.app/) · **[Download Windows x64 · MSI](https://github.com/Velocidex/velociraptor/releases/download/v0.77.4/velociraptor-v0.77.4-windows-amd64.msi)** |
+| [Volatility 3](#volatility) | Specialist examination of memory evidence after collection. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://volatilityfoundation.org/) · **[Download Windows executables · ZIP](https://github.com/volatilityfoundation/volatility3/releases/download/v2.28.2/volatility3-win-exes-2.28.2.zip)** |
+| [Wazuh](#wazuh) | An ongoing client security-monitoring deployment with managed operations. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://wazuh.com/) · **[Download Windows endpoint agent · MSI](https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.11-1.msi)** |
+| [YARA-X](#yara-x) | Scanning selected evidence files with reviewed detection rules. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://github.com/VirusTotal/yara-x) · **[Download Windows x64 CLI · ZIP](https://github.com/VirusTotal/yara-x/releases/download/v1.25.0/yara-x-v1.25.0-x86_64-pc-windows-msvc.zip)** |
+| [PRX-SD](#prx-sd) | Comparative lab evaluation of a Rust security engine and its documented platform coverage. | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) · Evaluate | [Official page](https://github.com/openprx/prx-sd) · **[Download Windows x64 CLI · EXE](https://github.com/openprx/prx-sd/releases/download/v0.2.3/sd-windows-x86_64.exe)** |
+| [Rustinel](#rustinel) | An isolated evaluation of collection, rules, health checks and replay. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Evaluate | [Official page](https://github.com/Karib0u/rustinel) · **[Download Windows x64 · ZIP](https://github.com/Karib0u/rustinel/releases/download/v1.11.0/rustinel-1.11.0-x86_64-pc-windows-msvc.zip)** |
+| [Sentinella](#sentinella) | Studying and testing scheduling, cache correctness and cancellation behavior. | [Windows](https://www.microsoft.com/windows) · Evaluate | [Official page](https://github.com/LeewayOpenSoftware/Sentinella) · **[Download Windows x64 setup · EXE](https://github.com/LeewayOpenSoftware/Sentinella/releases/download/v0.1.13/Sentinella_0.1.13_x64-setup.exe)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
@@ -50,7 +50,7 @@ Core means an everyday candidate; Specialist means a focused advanced use; Evalu
 
 Graphical digital-forensics platform for examining disk and file evidence.
 
-[Official download](https://www.autopsy.com/download/) · [Documentation](https://www.sleuthkit.org/autopsy/docs/user-docs/) · [Publisher](https://www.autopsy.com/)
+[Official page](https://www.autopsy.com/) · **[Download Windows x64 · MSI](https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.23.1/autopsy-4.23.1-64bit.msi)** · [All download options](https://www.autopsy.com/download/) · [Documentation](https://www.sleuthkit.org/autopsy/docs/user-docs/)
 
 | Decision | Detail |
 | --- | --- |
@@ -81,7 +81,7 @@ Graphical digital-forensics platform for examining disk and file evidence.
 
 Fast [Windows](https://www.microsoft.com/windows) event-log search and detection tooling.
 
-[Official download](https://github.com/WithSecureOpenSource/chainsaw/releases/latest) · [Documentation](https://github.com/WithSecureOpenSource/chainsaw) · [Publisher](https://github.com/WithSecureOpenSource/chainsaw)
+[Official page](https://github.com/WithSecureOpenSource/chainsaw) · **[Download Windows x64 · ZIP](https://github.com/WithSecureOpenSource/chainsaw/releases/download/v2.18.0/chainsaw_x86_64-pc-windows-msvc.zip)** · [All download options](https://github.com/WithSecureOpenSource/chainsaw/releases/latest) · [Documentation](https://github.com/WithSecureOpenSource/chainsaw)
 
 | Decision | Detail |
 | --- | --- |
@@ -112,7 +112,7 @@ Fast [Windows](https://www.microsoft.com/windows) event-log search and detection
 
 [Windows](https://www.microsoft.com/windows) event telemetry and rule-driven threat investigation with capture capabilities.
 
-[Official download](https://github.com/rabbitstack/fibratus/releases/latest) · [Documentation](https://www.fibratus.io/) · [Publisher](https://github.com/rabbitstack/fibratus)
+[Official page](https://github.com/rabbitstack/fibratus) · **[Download Windows x64 · MSI](https://github.com/rabbitstack/fibratus/releases/download/v3.1.1/fibratus-3.1.1-amd64.msi)** · [All download options](https://github.com/rabbitstack/fibratus/releases/latest) · [Documentation](https://www.fibratus.io/)
 
 | Decision | Detail |
 | --- | --- |
@@ -144,7 +144,7 @@ Fast [Windows](https://www.microsoft.com/windows) event-log search and detection
 
 [Windows](https://www.microsoft.com/windows) event-log threat hunting and timeline generation with Sigma-based detections.
 
-[Official download](https://github.com/Yamato-Security/hayabusa/releases/latest) · [Documentation](https://github.com/Yamato-Security/hayabusa) · [Publisher](https://github.com/Yamato-Security/hayabusa)
+[Official page](https://github.com/Yamato-Security/hayabusa) · **[Download Windows x64 · ZIP](https://github.com/Yamato-Security/hayabusa/releases/download/v4.4.0/hayabusa-4.4.0-win-x64.zip)** · [All download options](https://github.com/Yamato-Security/hayabusa/releases/latest) · [Documentation](https://github.com/Yamato-Security/hayabusa)
 
 | Decision | Detail |
 | --- | --- |
@@ -175,7 +175,7 @@ Fast [Windows](https://www.microsoft.com/windows) event-log search and detection
 
 Uses [PE-sieve](https://github.com/hasherezade/pe-sieve) to inspect multiple [Windows](https://www.microsoft.com/windows) processes and collect findings.
 
-[Official download](https://github.com/hasherezade/hollows_hunter/releases/latest) · [Documentation](https://github.com/hasherezade/hollows_hunter) · [Publisher](https://github.com/hasherezade/hollows_hunter)
+[Official page](https://github.com/hasherezade/hollows_hunter) · **[Download Windows x64 · EXE](https://github.com/hasherezade/hollows_hunter/releases/download/v0.4.1.1/hollows_hunter64.exe)** · [All download options](https://github.com/hasherezade/hollows_hunter/releases/latest) · [Documentation](https://github.com/hasherezade/hollows_hunter)
 
 | Decision | Detail |
 | --- | --- |
@@ -207,7 +207,7 @@ Uses [PE-sieve](https://github.com/hasherezade/pe-sieve) to inspect multiple [Wi
 
 Exposes supported system state as SQL-queryable tables.
 
-[Official download](https://osquery.io/downloads/) · [Documentation](https://osquery.readthedocs.io/en/stable/) · [Publisher](https://osquery.io/)
+[Official page](https://osquery.io/) · **[Download Windows x64 · ZIP](https://github.com/osquery/osquery/releases/download/5.24.1/osquery-5.24.1.windows_x86_64.zip)** · [All download options](https://osquery.io/downloads/) · [Documentation](https://osquery.readthedocs.io/en/stable/)
 
 | Decision | Detail |
 | --- | --- |
@@ -238,7 +238,7 @@ Exposes supported system state as SQL-queryable tables.
 
 Inspects one [Windows](https://www.microsoft.com/windows) process for suspicious memory modifications and injected code.
 
-[Official download](https://github.com/hasherezade/pe-sieve/releases/latest) · [Documentation](https://github.com/hasherezade/pe-sieve) · [Publisher](https://github.com/hasherezade/pe-sieve)
+[Official page](https://github.com/hasherezade/pe-sieve) · **[Download Windows x64 · EXE](https://github.com/hasherezade/pe-sieve/releases/download/v0.4.1.1/pe-sieve64.exe)** · [All download options](https://github.com/hasherezade/pe-sieve/releases/latest) · [Documentation](https://github.com/hasherezade/pe-sieve)
 
 | Decision | Detail |
 | --- | --- |
@@ -270,7 +270,7 @@ Inspects one [Windows](https://www.microsoft.com/windows) process for suspicious
 
 Generic detection-rule format and community rules for security log analysis.
 
-[Official download](https://github.com/SigmaHQ/sigma) · [Documentation](https://sigmahq.io/docs/) · [Publisher](https://sigmahq.io/)
+[Official page](https://sigmahq.io/) · **[Download detection rules · ZIP](https://github.com/SigmaHQ/sigma/releases/download/r2026-07-01/sigma_all_rules.zip)** · [All download options](https://github.com/SigmaHQ/sigma) · [Documentation](https://sigmahq.io/docs/)
 
 | Decision | Detail |
 | --- | --- |
@@ -301,7 +301,7 @@ Generic detection-rule format and community rules for security log analysis.
 
 Endpoint collection and investigation platform using VQL artifacts.
 
-[Official download](https://github.com/Velocidex/velociraptor/releases/latest) · [Documentation](https://docs.velociraptor.app/) · [Publisher](https://docs.velociraptor.app/)
+[Official page](https://docs.velociraptor.app/) · **[Download Windows x64 · MSI](https://github.com/Velocidex/velociraptor/releases/download/v0.77.4/velociraptor-v0.77.4-windows-amd64.msi)** · [All download options](https://github.com/Velocidex/velociraptor/releases/latest) · [Documentation](https://docs.velociraptor.app/)
 
 | Decision | Detail |
 | --- | --- |
@@ -332,7 +332,7 @@ Endpoint collection and investigation platform using VQL artifacts.
 
 Framework for analyzing supported memory captures.
 
-[Official download](https://github.com/volatilityfoundation/volatility3/releases/latest) · [Documentation](https://volatility3.readthedocs.io/en/latest/) · [Publisher](https://volatilityfoundation.org/)
+[Official page](https://volatilityfoundation.org/) · **[Download Windows executables · ZIP](https://github.com/volatilityfoundation/volatility3/releases/download/v2.28.2/volatility3-win-exes-2.28.2.zip)** · [All download options](https://github.com/volatilityfoundation/volatility3/releases/latest) · [Documentation](https://volatility3.readthedocs.io/en/latest/)
 
 | Decision | Detail |
 | --- | --- |
@@ -363,7 +363,7 @@ Framework for analyzing supported memory captures.
 
 Endpoint agents and a central platform for security monitoring and analysis.
 
-[Official download](https://documentation.wazuh.com/current/installation-guide/index.html) · [Documentation](https://documentation.wazuh.com/current/) · [Publisher](https://wazuh.com/)
+[Official page](https://wazuh.com/) · **[Download Windows endpoint agent · MSI](https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.11-1.msi)** · [All download options](https://documentation.wazuh.com/current/installation-guide/index.html) · [Documentation](https://documentation.wazuh.com/current/)
 
 | Decision | Detail |
 | --- | --- |
@@ -394,7 +394,7 @@ Endpoint agents and a central platform for security monitoring and analysis.
 
 Rust-based pattern-matching engine for compiling and applying YARA rules.
 
-[Official download](https://github.com/VirusTotal/yara-x/releases/latest) · [Documentation](https://virustotal.github.io/yara-x/) · [Publisher](https://github.com/VirusTotal/yara-x)
+[Official page](https://github.com/VirusTotal/yara-x) · **[Download Windows x64 CLI · ZIP](https://github.com/VirusTotal/yara-x/releases/download/v1.25.0/yara-x-v1.25.0-x86_64-pc-windows-msvc.zip)** · [All download options](https://github.com/VirusTotal/yara-x/releases/latest) · [Documentation](https://virustotal.github.io/yara-x/)
 
 | Decision | Detail |
 | --- | --- |
@@ -426,7 +426,7 @@ Rust-based pattern-matching engine for compiling and applying YARA rules.
 
 Cross-platform file-scanning and detection project evaluated in [ATHENA](https://github.com/Herbertofury/Athena) research.
 
-[Official download](https://github.com/openprx/prx-sd/releases) · [Documentation](https://github.com/openprx/prx-sd) · [Publisher](https://github.com/openprx/prx-sd)
+[Official page](https://github.com/openprx/prx-sd) · **[Download Windows x64 CLI · EXE](https://github.com/openprx/prx-sd/releases/download/v0.2.3/sd-windows-x86_64.exe)** · [All download options](https://github.com/openprx/prx-sd/releases) · [Documentation](https://github.com/openprx/prx-sd)
 
 | Decision | Detail |
 | --- | --- |
@@ -458,7 +458,7 @@ Cross-platform file-scanning and detection project evaluated in [ATHENA](https:/
 
 Rust endpoint telemetry and detection project studied by [ATHENA](https://github.com/Herbertofury/Athena) for reusable components.
 
-[Official download](https://github.com/Karib0u/rustinel/releases) · [Documentation](https://github.com/Karib0u/rustinel) · [Publisher](https://github.com/Karib0u/rustinel)
+[Official page](https://github.com/Karib0u/rustinel) · **[Download Windows x64 · ZIP](https://github.com/Karib0u/rustinel/releases/download/v1.11.0/rustinel-1.11.0-x86_64-pc-windows-msvc.zip)** · [All download options](https://github.com/Karib0u/rustinel/releases) · [Documentation](https://github.com/Karib0u/rustinel)
 
 | Decision | Detail |
 | --- | --- |
@@ -490,7 +490,7 @@ Rust endpoint telemetry and detection project studied by [ATHENA](https://github
 
 Security-engine research candidate with resource-management and scan-cache lessons.
 
-[Official download](https://github.com/LeewayOpenSoftware/Sentinella/releases) · [Documentation](https://github.com/LeewayOpenSoftware/Sentinella) · [Publisher](https://github.com/LeewayOpenSoftware/Sentinella)
+[Official page](https://github.com/LeewayOpenSoftware/Sentinella) · **[Download Windows x64 setup · EXE](https://github.com/LeewayOpenSoftware/Sentinella/releases/download/v0.1.13/Sentinella_0.1.13_x64-setup.exe)** · [All download options](https://github.com/LeewayOpenSoftware/Sentinella/releases) · [Documentation](https://github.com/LeewayOpenSoftware/Sentinella)
 
 | Decision | Detail |
 | --- | --- |

@@ -1,0 +1,575 @@
+{
+  "startedAt": "2026-11-27T00:02:57.873Z",
+  "screenshots": [
+    "answer-home-desktop.png",
+    "answer-job-desktop.png",
+    "answer-tool-desktop.png",
+    "answer-home-light.png",
+    "answer-home-390.png",
+    "answer-job-390.png",
+    "answer-home-320.png",
+    "answer-job-320.png"
+  ],
+  "errors": [],
+  "checks": [
+    {
+      "name": "Home shows every scenario, all jobs, first actions, separate official/acquisition links, guide-only rows, and full catalog",
+      "tools": 114,
+      "jobs": 22,
+      "scenarios": 27,
+      "accessRecords": 114,
+      "acquisitionActions": 237,
+      "primaryFiles": 82
+    },
+    {
+      "name": "Every catalog row preserves official and all acquisition actions",
+      "count": 114
+    },
+    {
+      "name": "All shared-job cases have correct direct URLs, selected-first focus, reload and Back",
+      "cases": 10
+    },
+    {
+      "name": "All old job routes preserve procedures, commands, selection details and visible recommended-tool access",
+      "steps": 140,
+      "verificationChecks": 83,
+      "commands": 9,
+      "recommendedToolBlocks": 76
+    },
+    {
+      "name": "Every tool detail has truthful official and complete acquisition actions",
+      "count": 114
+    },
+    {
+      "name": "Global search opens exact deleted-files and printer answers while preserving generic job results"
+    },
+    {
+      "name": "Symptom aliases, keyboard search, favorite/checklist reload and filters still work",
+      "alias": "virus removal"
+    },
+    {
+      "name": "Checklist Markdown export preserves first answer, scenario-specific acquisition and full selection notes"
+    },
+    {
+      "name": "Dark/light desktop and 390/320px mobile retain visible touch actions without overflow"
+    },
+    {
+      "name": "Offline HTML retains complete scenario/access data, direct-case routes and all catalog tools"
+    },
+    {
+      "name": "No runtime errors or external runtime requests"
+    },
+    {
+      "name": "Final presentation binding: bold blue scenario links, plain-language search prompt, dark/light/mobile visibility and refreshed offline export"
+    }
+  ],
+  "counts": {
+    "tools": 114,
+    "jobs": 22,
+    "scenarios": 27,
+    "accessRecords": 114,
+    "acquisitionActions": 237,
+    "primaryFiles": 82
+  },
+  "homeAccess": [
+    {
+      "id": "suspected-malware",
+      "toolId": "safety-scanner",
+      "actions": [
+        {
+          "href": "https://go.microsoft.com/fwlink/?LinkId=212732",
+          "kind": "file",
+          "label": "Download Windows x64 scanner · EXE",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "fix-a-printer",
+      "toolId": "get-help",
+      "toolAction": "printer",
+      "actions": [
+        {
+          "href": "https://aka.ms/PrinterConnection",
+          "kind": "builtin",
+          "label": "Start the printer troubleshooter",
+          "id": "printer",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "fix-internet",
+      "toolId": "get-help",
+      "toolAction": "network",
+      "actions": [
+        {
+          "href": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+          "kind": "builtin",
+          "label": "Open network troubleshooting",
+          "id": "network",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "fix-email",
+      "toolId": "get-help",
+      "toolAction": "outlook",
+      "actions": [
+        {
+          "href": "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters",
+          "kind": "builtin",
+          "label": "Choose a classic Outlook diagnostic",
+          "id": "outlook",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "failing-drive",
+      "toolId": "systemrescue",
+      "actions": [
+        {
+          "href": "https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso",
+          "kind": "file",
+          "label": "Download x64 rescue image · ISO",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://www.system-rescue.org/Download/",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "deleted-files",
+      "toolId": "photorec",
+      "actions": [
+        {
+          "href": "https://www.cgsecurity.org/testdisk-7.2.win64.zip",
+          "kind": "file",
+          "label": "Download PhotoRec / TestDisk · ZIP",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "slow-pc",
+      "toolId": "sysinternals",
+      "actions": [
+        {
+          "href": "https://download.sysinternals.com/files/SysinternalsSuite.zip",
+          "kind": "file",
+          "label": "Download Windows portable · ZIP",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "remote-help",
+      "toolId": "quick-assist",
+      "actions": [
+        {
+          "href": "https://apps.microsoft.com/detail/9P7BP5VNWKX5",
+          "kind": "store",
+          "label": "Get Quick Assist in Microsoft Store",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "fix-windows-updates",
+      "toolId": "get-help",
+      "toolAction": "update",
+      "actions": [
+        {
+          "href": "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+          "kind": "builtin",
+          "label": "Open Windows Update troubleshooting",
+          "id": "update",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "windows-repair",
+      "toolId": "dism",
+      "actions": [
+        {
+          "href": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+          "kind": "builtin",
+          "label": "Open built-in repair instructions",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "fix-boot-failure",
+      "toolId": "windows-recovery",
+      "actions": [
+        {
+          "href": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+          "kind": "builtin",
+          "label": "Open recovery instructions",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "diagnose-crashes",
+      "toolId": "windbg",
+      "actions": [
+        {
+          "href": "https://aka.ms/windbg/download",
+          "kind": "file",
+          "label": "Download Windows debugger installer",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "disk-space",
+      "toolId": "windirstat",
+      "actions": [
+        {
+          "href": "https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi",
+          "kind": "file",
+          "label": "Download Windows x64 · MSI",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://github.com/windirstat/windirstat/releases/latest",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "clone-a-drive",
+      "toolId": "rescuezilla",
+      "actions": [
+        {
+          "href": "https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso",
+          "kind": "file",
+          "label": "Download x64 rescue image · ISO",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://rescuezilla.com/download",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "file-backup",
+      "toolId": "restic",
+      "actions": [
+        {
+          "href": "https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip",
+          "kind": "file",
+          "label": "Download Windows x64 · ZIP",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://github.com/restic/restic/releases/latest",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "boot-usb",
+      "toolId": "rufus",
+      "actions": [
+        {
+          "href": "https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe",
+          "kind": "file",
+          "label": "Download Windows x64 portable · EXE",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://rufus.ie/#download",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "set-up-a-new-pc",
+      "toolId": "winget",
+      "actions": [
+        {
+          "href": "https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
+          "kind": "file",
+          "label": "Download App Installer · MSIXBUNDLE",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://github.com/microsoft/winget-cli/releases/latest",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "maintain-a-pc",
+      "toolId": "winget",
+      "actions": [
+        {
+          "href": "https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
+          "kind": "file",
+          "label": "Download App Installer · MSIXBUNDLE",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://github.com/microsoft/winget-cli/releases/latest",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "repair-domain-trust",
+      "toolId": "powershell",
+      "toolAction": "windows-powershell",
+      "actions": [
+        {
+          "href": "https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell",
+          "kind": "builtin",
+          "label": "Use Windows PowerShell 5.1",
+          "id": "windows-powershell",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "troubleshoot-with-ai",
+      "toolId": "chatgpt",
+      "actions": [
+        {
+          "href": "https://chatgpt.com/",
+          "kind": "web",
+          "label": "Open ChatGPT",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://chatgpt.com/download/",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "find-a-file",
+      "toolId": "everything",
+      "actions": [
+        {
+          "href": "https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe",
+          "kind": "file",
+          "label": "Download Windows x64 EXE",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://www.voidtools.com/Everything-1.4.1.1032.x64.zip",
+          "kind": "file",
+          "label": "Portable Windows x64 ZIP",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://www.voidtools.com/downloads/",
+          "kind": "release-page",
+          "label": "Other Windows packages",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "inspect-network-traffic",
+      "toolId": "wireshark",
+      "actions": [
+        {
+          "href": "https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe",
+          "kind": "file",
+          "label": "Download Windows x64 · EXE",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://www.wireshark.org/download.html",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "id": "suspected-ram-fault",
+      "toolId": "memtest86plus",
+      "actions": [
+        {
+          "href": "https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip",
+          "kind": "file",
+          "label": "Download x64 memory-test ISO · ZIP",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://www.memtest.org/#download",
+          "kind": "release-page",
+          "label": "All download options",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    }
+  ],
+  "desktop": {
+    "bodyFont": "16px",
+    "grid": "556px 556px",
+    "noOverflow": true,
+    "nodes": 4645,
+    "minActionHeight": 44
+  },
+  "mobile": [
+    {
+      "width": 390,
+      "noOverflow": true,
+      "minHeight": 44,
+      "minFont": 14,
+      "hidden": 0
+    },
+    {
+      "width": 320,
+      "noOverflow": true,
+      "minHeight": 44,
+      "minFont": 14,
+      "hidden": 0
+    }
+  ],
+  "hashes": {
+    "portal/app.js": "7c8a9d465366ffd6c581a6a5b18855f75047ed810bdd279e5f2bdfa24b6d476e",
+    "portal/styles.css": "407d29e9a2ced0756160e58b7867ff6d2704090b6e37f74c9c0b295bdb50672c",
+    "portal/index.template.html": "1aa7143d9b8d8ca28cd239d2fb6d87af408d88ca5c3fca0a30fb1e2f026478ab",
+    "site/index.html": "e641f3a79d06c4ff9e18859ec70e9516e2a89a5572e05ce530db5f7c958aad41",
+    "data/quick-start.json": "04538e2ebe2296187a56b2e8b2b4949e092909fcc6c115432c18a89496bee1a4",
+    "data/tool-access.json": "0cebb762113b497877f9a7afd0f38304d6a4698e57710c5e0aefcfa4d1cb8031"
+  },
+  "passed": true,
+  "finishedAt": "2026-11-27T00:04:45.798Z",
+  "behavioralArtifactHash": "f3582750c602b687bc9b212c79c6c740823e41d4ddf5d1290a6aff3e4ef76605",
+  "presentationBinding": {
+    "checkedAt": "2026-11-27T00:04:45.798Z",
+    "unchangedBehaviorSources": [
+      "portal/app.js",
+      "data/quick-start.json",
+      "data/tool-access.json"
+    ],
+    "desktop": [
+      {
+        "theme": "dark",
+        "scenarioTitles": 27,
+        "blueBoldLinks": true,
+        "hoverUnderline": true,
+        "minTarget": 44
+      },
+      {
+        "theme": "light",
+        "scenarioTitles": 27,
+        "blueBoldLinks": true,
+        "hoverUnderline": true,
+        "minTarget": 44
+      }
+    ],
+    "mobile": [
+      {
+        "width": 390,
+        "scenarioRows": 27,
+        "fullCatalog": 114,
+        "hiddenActions": 0,
+        "noOverflow": true,
+        "firstAcquisitionBottom": 635
+      },
+      {
+        "width": 320,
+        "scenarioRows": 27,
+        "fullCatalog": 114,
+        "hiddenActions": 0,
+        "noOverflow": true,
+        "firstAcquisitionBottom": 659
+      }
+    ],
+    "offlineExportRefreshed": true,
+    "errors": []
+  }
+}

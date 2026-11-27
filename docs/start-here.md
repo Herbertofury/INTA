@@ -8,26 +8,41 @@
 
 <a id="free-tools"></a>
 
-## ⚡ Free tools for common jobs
+## ⚡ What do you need to fix?
 
-Open a tool below, or select the scenario for its step-by-step guide. [How these picks were chosen](https://github.com/Herbertofury/INTA/wiki/Free-Tool-Picks).
+**Choose your problem for the first three actions.** Tool names open the official page; download links identify the file and platform. Built-in features link to their instructions.
 
-| Scenario | Primary free tool |
+| Fix this | Official tool + download / next action |
 | --- | --- |
-| **[🛡️ Suspected malware](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal)** | **[Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download)** |
-| **[📁 Deleted files](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)** | **[PhotoRec](https://www.cgsecurity.org/wiki/TestDisk_Download)** |
-| **[💾 Failing drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)** | **[GNU ddrescue](https://ftp.gnu.org/gnu/ddrescue/)** |
-| **[🐢 Slow PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)** | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)** |
-| **[📊 Disk space](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)** | **[WinDirStat](https://github.com/windirstat/windirstat/releases/latest)** |
-| **[🔎 Find a file](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)** | **[Everything](https://www.voidtools.com/downloads/)** |
-| **[🖥️ Remote help](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)** | **[Microsoft Quick Assist](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** |
-| **[🔌 Boot USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb)** | **[Rufus](https://rufus.ie/#download)** |
-| **[🧰 Windows repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair)** | **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** |
-| **[🌐 Inspect network traffic](https://github.com/Herbertofury/INTA/wiki/Job-network-dns)** | **[Wireshark](https://www.wireshark.org/download.html)** |
-| **[🧪 Suspected RAM fault](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod)** | **[Memtest86+](https://www.memtest.org/#download)** |
-| **[🗄️ File backup](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)** | **[restic](https://github.com/restic/restic/releases/latest)** |
+| **[🛡️ Remove viruses](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal#quick-suspected-malware)** | **[Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download)** · **[Download Windows x64 scanner · EXE](https://go.microsoft.com/fwlink/?LinkId=212732)** |
+| **[🖨️ Fix a printer](https://github.com/Herbertofury/INTA/wiki/Job-printer-repair#quick-fix-a-printer)** | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · **[Start the printer troubleshooter](https://aka.ms/PrinterConnection)** |
+| **[🌐 Fix internet](https://github.com/Herbertofury/INTA/wiki/Job-network-dns#quick-fix-internet)** | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · **[Open network troubleshooting](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows)** |
+| **[✉️ Fix email](https://github.com/Herbertofury/INTA/wiki/Job-outlook-email#quick-fix-email)** | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)** |
+| **[💾 Recover a failing drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive#quick-failing-drive)** | **[SystemRescue](https://www.system-rescue.org/)** · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** |
+| **[📁 Recover deleted files](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive#quick-deleted-files)** | **[PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec)** · **[Download PhotoRec / TestDisk · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** |
+| **[🐢 Fix a slow PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc#quick-slow-pc)** | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** |
+| **[🖥️ Help remotely](https://github.com/Herbertofury/INTA/wiki/Job-remote-support#quick-remote-help)** | **[Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)** · **[Get Quick Assist in Microsoft Store](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** |
+| **[🔄 Fix Windows updates](https://github.com/Herbertofury/INTA/wiki/Job-windows-update#quick-fix-windows-updates)** | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · **[Open Windows Update troubleshooting](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter)** |
+| **[🧰 Repair Windows files](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair#quick-windows-repair)** | **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** · **[Open built-in repair instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** |
+| **[🚀 Fix a PC that will not boot](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery#quick-fix-boot-failure)** | **[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · **[Open recovery instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** |
+| **[🧩 Diagnose crashes](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod#quick-diagnose-crashes)** | **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · **[Download Windows debugger installer](https://aka.ms/windbg/download)** |
+| **[📊 Free disk space](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc#quick-disk-space)** | **[WinDirStat](https://windirstat.net/)** · **[Download Windows x64 · MSI](https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi)** |
+| **[🔁 Clone or move a drive](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration#quick-clone-a-drive)** | **[Rescuezilla](https://rescuezilla.com/)** · **[Download x64 rescue image · ISO](https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso)** |
+| **[🗄️ Restore a file backup](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore#quick-file-backup)** | **[restic](https://restic.net/)** · **[Download Windows x64 · ZIP](https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip)** |
+| **[🔌 Make a boot USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb#quick-boot-usb)** | **[Rufus](https://rufus.ie/)** · **[Download Windows x64 portable · EXE](https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe)** |
+| **[💻 Set up a new PC](https://github.com/Herbertofury/INTA/wiki/Job-new-pc#quick-set-up-a-new-pc)** | **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** |
+| **[🛠️ Maintain a PC](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance#quick-maintain-a-pc)** | **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** |
+| **[🧭 Start a repair](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage#quick-start-a-repair)** | No extra download needed · **[Open checklist](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage#quick-start-a-repair)** |
+| **[🚨 Contain ransomware](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response#quick-contain-ransomware)** | No extra download needed · **[Open checklist](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response#quick-contain-ransomware)** |
+| **[🏢 Recover an office outage](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery#quick-recover-an-outage)** | No extra download needed · **[Open checklist](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery#quick-recover-an-outage)** |
+| **[🔐 Repair domain sign-in](https://github.com/Herbertofury/INTA/wiki/Job-ad-trust#quick-repair-domain-trust)** | **[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** |
+| **[💡 Troubleshoot with AI](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage#quick-troubleshoot-with-ai)** | **[ChatGPT](https://chatgpt.com/)** · **[Open ChatGPT](https://chatgpt.com/)** |
+| **[✅ Finish the job and hand over](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff#quick-complete-a-handoff)** | No extra download needed · **[Open checklist](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff#quick-complete-a-handoff)** |
+| **[🔎 Find a file](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance#quick-find-a-file)** | **[Everything](https://www.voidtools.com/)** · **[Download Windows x64 EXE](https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe)** |
+| **[🌐 Inspect network traffic](https://github.com/Herbertofury/INTA/wiki/Job-network-dns#quick-inspect-network-traffic)** | **[Wireshark](https://www.wireshark.org/)** · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)** |
+| **[🧪 Test memory](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod#quick-suspected-ram-fault)** | **[Memtest86+](https://www.memtest.org/)** · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** |
 
-Selection review: **2026-11-26** · [Complete tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory)
+Selection review: **2026-11-26** · [Complete tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Why these tools](https://github.com/Herbertofury/INTA/wiki/Free-Tool-Picks)
 
 <!-- INTA:QUICK-START:END -->
 

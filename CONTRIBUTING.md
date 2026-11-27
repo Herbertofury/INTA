@@ -9,6 +9,8 @@ Contributions should help a technician choose a suitable tool, understand the ne
 | Change | Canonical input |
 | --- | --- |
 | Tool, official download, platform, pricing or review evidence | [Tool catalog](data/tools.json) |
+| Exact file downloads, built-in launches, Store routes or acquisition evidence | [Tool acquisition routes](data/tool-access.json) |
+| Plain-language problem links, first actions or a scenario-specific tool action | [Quick-start answers](data/quick-start.json) |
 | Procedure, tool selection, commands, success checks or escalation | [Job guides](data/jobs.json) |
 | Named troubleshooting method and its canonical destination | [Method registry](data/methods.json) |
 | Additional precise application names or repeated-mention linking | [Link aliases](data/link-aliases.json) and [linking helper](scripts/wiki_links.py) |
@@ -25,6 +27,8 @@ Generated `wiki/`, `site/` and `docs/runbooks/` are build outputs. Change the ap
 3. Apply the [Knowledge Standards](docs/knowledge-standards.md), including links on repeated tool and method mentions, meaningful section icons, a clear next action and honest evidence dates.
 4. Rebuild and run the checks that prove the changed behavior. For visual changes, inspect the rendered page on desktop and a narrow screen.
 5. Record the source revision, test result, remaining limits and publication evidence using the [Contribution Template](docs/contribution-template.md).
+
+Walk the changed route as a person who needs an answer now: recognize the problem, open the exact tool or built-in action, and follow the first three steps. Keep official-page and acquisition actions visible together. Check the response destination and file identity before labelling a link a direct download. Test scenario-specific launch links independently when several jobs use the same application.
 
 ## 🧰 Build and validate
 

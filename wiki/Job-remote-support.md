@@ -9,7 +9,23 @@ Choose the right attended or managed tool and leave a clear, auditable handoff.
 
 **[Remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)** · Starter · 5–15 min setup · 9 steps
 
-[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/remote-support)
+[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/remote-support)
+
+<a id="quick-answer"></a>
+
+## ⚡ Quick answer
+
+<a id="quick-remote-help"></a>
+
+### 🖥️ Help remotely
+
+**Confirm the user and support technician through the existing support channel before sharing a session code.**
+
+1. Open [Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) on both [Windows](https://www.microsoft.com/windows) PCs; the helper signs in and supplies the temporary code.
+2. Have the user approve screen sharing and any separately requested control before making the agreed change.
+3. Test the original task with the user, end the session and record the work in the service ticket.
+
+**[Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)** · [Official page](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · **[Get Quick Assist in Microsoft Store](https://apps.microsoft.com/detail/9P7BP5VNWKX5)**
 
 > [!NOTE]
 > **Start here.** Confirm the customer, intended device, and requested task through the established service channel before exchanging a session code.
@@ -61,12 +77,12 @@ flowchart TD
 
 Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
-| Tool / official download | Use it for | Platform & access | Documentation |
+| Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| [Microsoft Quick Assist](https://apps.microsoft.com/detail/9P7BP5VNWKX5) | A quick one-time [Windows](https://www.microsoft.com/windows) support session without deploying an RMM agent. | [Windows](https://www.microsoft.com/windows); Free Microsoft app | [Open guide](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) |
-| [RustDesk](https://github.com/rustdesk/rustdesk/releases/latest) | A flexible remote-control option across mixed client platforms. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Open-source components; paid Server Pro features | [Open guide](https://rustdesk.com/docs/en/) |
-| [MeshCentral](https://github.com/Ylianst/MeshCentral) | INTA-managed unattended support with its own server and device groups. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source; hosting has a cost | [Open guide](https://docs.meshcentral.com/) |
-| [Chrome Remote Desktop](https://remotedesktop.google.com/support) | Attended support or an explicitly configured personal remote-access endpoint. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free service | [Open guide](https://support.google.com/chrome/answer/1649523) |
+| **[Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)** · [Official page](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · **[Get Quick Assist in Microsoft Store](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** | A quick one-time [Windows](https://www.microsoft.com/windows) support session without deploying an RMM agent. | [Windows](https://www.microsoft.com/windows); Free Microsoft app | [Open guide](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) |
+| **[RustDesk](https://rustdesk.com/)** · [Official page](https://rustdesk.com/) · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)** | A flexible remote-control option across mixed client platforms. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Open-source components; paid Server Pro features | [Open guide](https://rustdesk.com/docs/en/) |
+| **[MeshCentral](https://meshcentral.com/)** · [Official page](https://meshcentral.com/) · **[Open server installation instructions](https://github.com/Ylianst/MeshCentral#installation)** | INTA-managed unattended support with its own server and device groups. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source; hosting has a cost | [Open guide](https://docs.meshcentral.com/) |
+| **[Chrome Remote Desktop](https://remotedesktop.google.com/)** · [Official page](https://remotedesktop.google.com/) · **[Open remote support](https://remotedesktop.google.com/support)** | Attended support or an explicitly configured personal remote-access endpoint. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free service | [Open guide](https://support.google.com/chrome/answer/1649523) |
 
 <a id="walkthrough"></a>
 

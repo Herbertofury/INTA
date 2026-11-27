@@ -8,7 +8,35 @@ Correlate crash evidence with memory, storage, temperature, power, and driver ch
 
 **Hardware** · Advanced · 30–120 min plus extended tests · 6 steps
 
-[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/hardware-bsod)
+[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/hardware-bsod)
+
+<a id="quick-answer"></a>
+
+## ⚡ Quick answer
+
+<a id="quick-diagnose-crashes"></a>
+
+### 🧩 Diagnose crashes
+
+**Record the stop code, failure time and recent hardware or driver changes before replacing components.**
+
+1. Check reliability and event history, available crash dumps and storage health to narrow the failure.
+2. For a dump, use [WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) to inspect the crash evidence; follow the indicated driver, memory or hardware branch.
+3. Change one supported cause at a time and repeat the failing workload while checking for new crashes.
+
+**[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger installer](https://aka.ms/windbg/download)**
+
+<a id="quick-suspected-ram-fault"></a>
+
+### 🧪 Test memory
+
+**Use this branch when crash evidence suggests memory instability, after recording firmware and overclock settings.**
+
+1. Create the supported [Memtest86+](https://www.memtest.org/) boot media and preserve recovery keys before any necessary firmware change.
+2. Boot the test, record passes and errors, and isolate modules or slots using the hardware guide.
+3. Retest the corrected configuration and restore the intended firmware settings.
+
+**[Memtest86+](https://www.memtest.org/)** · [Official page](https://www.memtest.org/) · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)**
 
 > [!NOTE]
 > **Start here.** Record the exact stop code, timestamp, workload, recent hardware/driver changes, and whether the machine restarted or lost power.
@@ -59,13 +87,13 @@ flowchart TD
 
 Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
 
-| Tool / official download | Use it for | Platform & access | Documentation |
+| Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| [HWiNFO](https://www.hwinfo.com/download/) | Investigating temperatures, clocks, power and component identity. | [Windows](https://www.microsoft.com/windows); Pro license for commercial use of 64/ARM64 editions | [Open guide](https://www.hwinfo.com/licenses/) |
-| [Memtest86+](https://www.memtest.org/#download) | Investigating memory instability and repeatable hardware errors. | Bootable PC; Free / open source | [Open guide](https://github.com/memtest86plus/memtest86plus) |
-| [CrystalDiskInfo](https://crystalmark.info/en/download/) | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
-| [Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite) | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
-| [WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) | Interpreting a crash dump when basic event logs do not establish the cause. | [Windows](https://www.microsoft.com/windows); Free Microsoft tool | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) |
+| **[HWiNFO](https://www.hwinfo.com/)** · [Official page](https://www.hwinfo.com/) · **[Download Windows x64 EXE](https://www.hwinfo.com/files/hwi64_860.exe)** | Investigating temperatures, clocks, power and component identity. | [Windows](https://www.microsoft.com/windows); Pro license for commercial use of 64/ARM64 editions | [Open guide](https://www.hwinfo.com/licenses/) |
+| **[Memtest86+](https://www.memtest.org/)** · [Official page](https://www.memtest.org/) · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** | Investigating memory instability and repeatable hardware errors. | Bootable PC; Free / open source | [Open guide](https://github.com/memtest86plus/memtest86plus) |
+| **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
+| **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
+| **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger installer](https://aka.ms/windbg/download)** | Interpreting a crash dump when basic event logs do not establish the cause. | [Windows](https://www.microsoft.com/windows); Free Microsoft tool | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) |
 
 <a id="walkthrough"></a>
 

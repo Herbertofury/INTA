@@ -7,7 +7,7 @@
       "icon": "🛡️",
       "jobId": "malware-removal",
       "toolId": "safety-scanner",
-      "label": "Suspected malware",
+      "label": "Remove viruses",
       "why": "Run a portable, on-demand malware scan without replacing the client’s existing protection.",
       "boundary": "Contain spreading compromise first; download a fresh copy for the job and treat a clean scan as limited evidence.",
       "freeUse": "Free Microsoft download",
@@ -15,6 +15,133 @@
       "evidenceUrls": [
         "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
         "https://www.microsoft.com/en-us/security/blog/2012/03/22/free-pc-safety-scan/"
+      ],
+      "firstStep": "Disconnect a suspected compromised PC from the network before scanning; use the incident guide if encryption is spreading.",
+      "quickSteps": [
+        "Record the symptoms and isolate affected connections; keep the existing real-time protection in place.",
+        "On a trusted PC, download a fresh Microsoft Safety Scanner; transfer it safely and run a Full scan.",
+        "Save the scan log, review remaining symptoms and persistence, then follow the guide’s cleanup or rebuild decision."
+      ],
+      "aliases": [
+        "virus removal",
+        "malware",
+        "infected PC",
+        "pop-ups"
+      ]
+    },
+    {
+      "id": "fix-a-printer",
+      "icon": "🖨️",
+      "jobId": "printer-repair",
+      "toolId": "get-help",
+      "label": "Fix a printer",
+      "why": "Use the supported Windows printer diagnostic to separate connection, queue and device problems.",
+      "boundary": "Scope changes to the affected printer; preserve unrelated queued jobs and use a driver suitable for the PC architecture.",
+      "freeUse": "Included with supported Windows",
+      "qualityBasis": "Microsoft routes Windows 11 printing problems through its printer troubleshooter and provides device, connection and test-page checks.",
+      "evidenceUrls": [
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+        "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters"
+      ],
+      "firstStep": "Check that the intended printer is powered on, ready and connected before changing its queue or driver.",
+      "quickSteps": [
+        "Check paper, ink or toner, displayed errors and the selected printer; compare a device test page if available.",
+        "Run the printer troubleshooter in Windows Get Help on the affected PC and review the exact queue or connection finding.",
+        "Apply the indicated repair, then print a test page and the user’s original document."
+      ],
+      "aliases": [
+        "printer offline",
+        "cannot print",
+        "stuck print queue"
+      ],
+      "toolAction": "printer"
+    },
+    {
+      "id": "fix-internet",
+      "icon": "🌐",
+      "jobId": "network-dns",
+      "toolId": "get-help",
+      "label": "Fix internet",
+      "why": "Start with supported connection diagnostics before escalating to packet capture or network resets.",
+      "boundary": "A shared outage needs the network owner; retain VPN and adapter settings before disruptive changes.",
+      "freeUse": "Included with supported Windows",
+      "qualityBasis": "Microsoft documents a Network and Internet diagnostic and an ordered set of Wi-Fi, router and device comparisons.",
+      "evidenceUrls": [
+        "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters",
+        "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows"
+      ],
+      "firstStep": "Check whether one device, one connection or the whole office has lost access.",
+      "quickSteps": [
+        "Check the cable or Wi-Fi connection and compare another device on the same network.",
+        "In Windows Get Help, search “connect to network and internet” and run network diagnostics.",
+        "Follow the relevant address, gateway or DNS branch, then retest the original site and business service."
+      ],
+      "aliases": [
+        "no internet",
+        "Wi-Fi not working",
+        "DNS problem",
+        "network connection"
+      ],
+      "toolAction": "network"
+    },
+    {
+      "id": "fix-email",
+      "icon": "✉️",
+      "jobId": "outlook-email",
+      "toolId": "get-help",
+      "label": "Fix email",
+      "why": "Use the mail client and service scope to choose the correct authentication, startup or connectivity repair.",
+      "boundary": "The classic Outlook diagnostics do not apply to new Outlook; do not delete a profile before protecting local-only data.",
+      "freeUse": "Diagnostics are included; email service licensing is separate",
+      "qualityBasis": "Microsoft identifies separate classic Outlook diagnostics and explicitly excludes new Outlook from those tests.",
+      "evidenceUrls": [
+        "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters",
+        "https://support.microsoft.com/en-us/outlook/classic-outlook-not-responding-stuck-at-processing-stopped-working-or-freezes",
+        "https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/administration/architecture-changes-new-outlook",
+        "https://support.microsoft.com/en-us/outlook/getstarted/outlook-for-windows-not-responding-hangs-freezes-or-stops-working"
+      ],
+      "firstStep": "Check webmail and identify whether the affected app is classic Outlook or new Outlook before changing a profile.",
+      "quickSteps": [
+        "Test sign-in and send/receive in webmail; record the exact error and whether other users are affected.",
+        "For classic Outlook, run the matching Windows Get Help diagnostic; for new Outlook, use its supported troubleshooting branch.",
+        "Retest send, receive and the affected shared mailbox or calendar; preserve local-only mail before any profile rebuild."
+      ],
+      "aliases": [
+        "Outlook not working",
+        "cannot send email",
+        "email not syncing",
+        "mailbox"
+      ],
+      "toolAction": "outlook"
+    },
+    {
+      "id": "failing-drive",
+      "icon": "💾",
+      "jobId": "failing-drive",
+      "toolId": "systemrescue",
+      "label": "Recover a failing drive",
+      "why": "Preserve readable data in an image with a resumable mapfile before attempting file-system repairs.",
+      "boundary": "Confirm source and destination; stop for physical damage, repeated disconnects or irreplaceable data that warrants a recovery specialist.",
+      "freeUse": "Free software; destination storage is separate",
+      "qualityBasis": "The GNU manual explains good-area-first recovery, resumable mapfiles and unreadable-range accounting; an image alone does not prove usable files. SystemRescue provides a ready-to-boot ISO containing GNU ddrescue; imaging remains an operator-led task.",
+      "evidenceUrls": [
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+        "https://www.gnu.org/software/ddrescue/",
+        "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose",
+        "https://www.system-rescue.org/Download/",
+        "https://www.system-rescue.org/System-tools/"
+      ],
+      "firstStep": "Stop using the source disk; clicking, physical damage or irreplaceable data needs a recovery-specialist decision first.",
+      "quickSteps": [
+        "Boot a separate SystemRescue USB and identify source and destination by model, serial and size.",
+        "Follow the GNU ddrescue imaging procedure with a persistent mapfile; do not run file-system repairs on the source.",
+        "Work on an image copy, record unreadable ranges and open the client’s priority files to verify recovery."
+      ],
+      "aliases": [
+        "failing disk",
+        "bad sectors",
+        "disk recovery",
+        "recover data"
       ]
     },
     {
@@ -22,7 +149,7 @@
       "icon": "📁",
       "jobId": "failing-drive",
       "toolId": "photorec",
-      "label": "Deleted files",
+      "label": "Recover deleted files",
       "why": "Recover recognizable file contents from healthy media or an image when an intact backup cannot restore them.",
       "boundary": "Stop source-disk writes and recover to another disk; original names and folders may be lost, and failing media needs imaging first.",
       "freeUse": "Free and open source for business use",
@@ -31,22 +158,17 @@
         "https://www.cgsecurity.org/wiki/PhotoRec",
         "https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step",
         "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose"
-      ]
-    },
-    {
-      "id": "failing-drive",
-      "icon": "💾",
-      "jobId": "failing-drive",
-      "toolId": "ddrescue",
-      "label": "Failing drive",
-      "why": "Preserve readable data in an image with a resumable mapfile before attempting file-system repairs.",
-      "boundary": "Confirm source and destination; stop for physical damage, repeated disconnects or irreplaceable data that warrants a recovery specialist.",
-      "freeUse": "Free software; destination storage is separate",
-      "qualityBasis": "The GNU manual explains good-area-first recovery, resumable mapfiles and unreadable-range accounting; an image alone does not prove usable files.",
-      "evidenceUrls": [
-        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
-        "https://www.gnu.org/software/ddrescue/",
-        "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose"
+      ],
+      "firstStep": "Stop writing to the affected disk and check the backup or recycle bin before attempting recovery.",
+      "quickSteps": [
+        "Use healthy media or a preserved image; route an unstable drive to image-first recovery.",
+        "Run PhotoRec against that source and send recovered output to a different disk.",
+        "Open representative recovered files and record missing items; retain the source until acceptance."
+      ],
+      "aliases": [
+        "undelete",
+        "lost files",
+        "deleted photos"
       ]
     },
     {
@@ -54,7 +176,7 @@
       "icon": "🐢",
       "jobId": "slow-pc",
       "toolId": "sysinternals",
-      "label": "Slow PC",
+      "label": "Fix a slow PC",
       "why": "Inspect process activity and startup entries to identify a concrete cause before changing settings.",
       "boundary": "Choose utilities supported on the client’s Windows release; observe before terminating processes or disabling startup entries.",
       "freeUse": "Free Microsoft utilities",
@@ -64,6 +186,153 @@
         "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
         "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
         "https://learn.microsoft.com/en-us/sysinternals/license-terms"
+      ],
+      "firstStep": "Reproduce one slow task and check storage health before applying cleanup or startup changes.",
+      "quickSteps": [
+        "Use Process Explorer to identify the CPU, memory or I/O bottleneck during that task.",
+        "Inspect the relevant process or startup entry with Microsoft Sysinternals Suite and make one justified change.",
+        "Repeat the same task and compare its duration, resource use and responsiveness."
+      ],
+      "aliases": [
+        "slow computer",
+        "lag",
+        "high CPU",
+        "slow startup"
+      ]
+    },
+    {
+      "id": "remote-help",
+      "icon": "🖥️",
+      "jobId": "remote-support",
+      "toolId": "quick-assist",
+      "label": "Help remotely",
+      "why": "Start a one-time attended Windows support session with separate screen-sharing and control approval.",
+      "boundary": "Requires internet and a present user; use the organization’s approved managed tool when unattended access or session audit logs are required.",
+      "freeUse": "Free Microsoft app; organization policy applies",
+      "qualityBasis": "Microsoft’s IT guidance documents the session-code flow, helper sign-in, user approval and the absence of local session logs.",
+      "evidenceUrls": [
+        "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+        "https://apps.microsoft.com/detail/9P7BP5VNWKX5"
+      ],
+      "firstStep": "Confirm the user and support technician through the existing support channel before sharing a session code.",
+      "quickSteps": [
+        "Open Microsoft Quick Assist on both Windows PCs; the helper signs in and supplies the temporary code.",
+        "Have the user approve screen sharing and any separately requested control before making the agreed change.",
+        "Test the original task with the user, end the session and record the work in the service ticket."
+      ],
+      "aliases": [
+        "remote assistance",
+        "remote desktop",
+        "attended support"
+      ]
+    },
+    {
+      "id": "fix-windows-updates",
+      "icon": "🔄",
+      "jobId": "windows-update",
+      "toolId": "get-help",
+      "label": "Fix Windows updates",
+      "why": "Use Microsoft’s supported update diagnostic before manual component resets.",
+      "boundary": "Follow organizational update policy; route storage or component-store damage to the relevant guide.",
+      "freeUse": "Included with supported Windows",
+      "qualityBasis": "Microsoft recommends the Windows Update troubleshooter, then a restart and a fresh update check.",
+      "evidenceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+        "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows"
+      ],
+      "firstStep": "Record the failing update or KB number, error code and pending restart before retrying it.",
+      "quickSteps": [
+        "Confirm free space, a stable connection and a planned restart window.",
+        "Run the Windows Update troubleshooter in Windows Get Help and review its findings.",
+        "Restart when required, check for updates again and verify the affected update and original task."
+      ],
+      "aliases": [
+        "Windows Update error",
+        "update stuck",
+        "failed KB",
+        "update loop"
+      ],
+      "toolAction": "update"
+    },
+    {
+      "id": "windows-repair",
+      "icon": "🧰",
+      "jobId": "windows-repair",
+      "toolId": "dism",
+      "label": "Repair Windows files",
+      "why": "Check and repair the Windows component store before the guide’s system-file verification step.",
+      "boundary": "Check storage health and recovery options first; use the correct online or offline target and a compatible repair source.",
+      "freeUse": "Included with Windows",
+      "qualityBasis": "Microsoft documents corruption checks, repairable/non-repairable image states and controlled repair sources.",
+      "evidenceUrls": [
+        "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/using-system-file-checker-in-windows"
+      ],
+      "firstStep": "Confirm storage health, a recovery route and the intended Windows installation before repair writes.",
+      "quickSteps": [
+        "Run the guide’s DISM checks and repair against the correct online or offline installation.",
+        "Follow with System File Checker and record whether corruption was repaired or remains unresolved.",
+        "Restart if required, repeat the original task and retain the relevant repair logs."
+      ],
+      "aliases": [
+        "corrupt Windows",
+        "SFC",
+        "component store"
+      ]
+    },
+    {
+      "id": "fix-boot-failure",
+      "icon": "🚀",
+      "jobId": "boot-recovery",
+      "toolId": "windows-recovery",
+      "label": "Fix a PC that will not boot",
+      "why": "Use the built-in recovery environment to distinguish startup repair from data-preserving recovery or reinstall.",
+      "boundary": "Encrypted recovery may require the correct key; do not reset or reinstall before protecting required data.",
+      "freeUse": "Included with licensed Windows",
+      "qualityBasis": "Microsoft documents the recovery environment, Startup Repair and separate causes of boot failure.",
+      "evidenceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/windows-recovery-environment",
+        "https://learn.microsoft.com/en-us/windows/client-management/advanced-troubleshooting-boot-problems",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      ],
+      "firstStep": "Record the startup error and confirm disk health and BitLocker recovery access before attempting repairs.",
+      "quickSteps": [
+        "Check power, attached devices and the selected boot disk; stop if storage is failing.",
+        "Open Windows Recovery Environment and run Startup Repair for the identified installation when appropriate.",
+        "Follow the matching recovery branch, verify a normal boot and open priority files before closing the job."
+      ],
+      "aliases": [
+        "boot failure",
+        "startup repair",
+        "black screen at boot",
+        "BitLocker recovery"
+      ]
+    },
+    {
+      "id": "diagnose-crashes",
+      "icon": "🧩",
+      "jobId": "hardware-bsod",
+      "toolId": "windbg",
+      "label": "Diagnose crashes",
+      "why": "Use crash evidence to select the appropriate hardware or driver test.",
+      "boundary": "Dump analysis is an operator task; a module named in one crash does not by itself prove the root cause.",
+      "freeUse": "Free Microsoft debugger",
+      "qualityBasis": "Microsoft documents bug-check investigation and WinDbg dump analysis rather than treating every stop error as faulty RAM.",
+      "evidenceUrls": [
+        "https://learn.microsoft.com/en-us/windows/client-management/troubleshoot-stop-errors",
+        "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/"
+      ],
+      "firstStep": "Record the stop code, failure time and recent hardware or driver changes before replacing components.",
+      "quickSteps": [
+        "Check reliability and event history, available crash dumps and storage health to narrow the failure.",
+        "For a dump, use WinDbg to inspect the crash evidence; follow the indicated driver, memory or hardware branch.",
+        "Change one supported cause at a time and repeat the failing workload while checking for new crashes."
+      ],
+      "aliases": [
+        "blue screen",
+        "BSOD",
+        "random restart",
+        "PC crash"
       ]
     },
     {
@@ -71,7 +340,7 @@
       "icon": "📊",
       "jobId": "slow-pc",
       "toolId": "windirstat",
-      "label": "Disk space",
+      "label": "Free disk space",
       "why": "See which folders and file types occupy a healthy disk before choosing a cleanup target.",
       "boundary": "Avoid scanning failing media; confirm file ownership and a recovery route before deleting anything.",
       "freeUse": "Free and open source for business use",
@@ -80,7 +349,317 @@
         "https://github.com/windirstat/windirstat",
         "https://github.com/windirstat/windirstat/blob/master/LICENSE.md",
         "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose"
+      ],
+      "firstStep": "Confirm the disk is healthy and choose the drive to inspect before deleting any files.",
+      "quickSteps": [
+        "Scan that drive with WinDirStat and identify the largest folders and file types.",
+        "Confirm ownership and recovery options, then remove only approved files or application-managed caches.",
+        "Recheck free space and open the affected application to confirm it still works."
+      ],
+      "aliases": [
+        "disk full",
+        "storage cleanup",
+        "low disk space"
       ]
+    },
+    {
+      "id": "clone-a-drive",
+      "icon": "🔁",
+      "jobId": "disk-migration",
+      "toolId": "rescuezilla",
+      "label": "Clone or move a drive",
+      "why": "Use a graphical bootable imaging tool for planned migration of healthy storage.",
+      "boundary": "Do not clone failing media as a routine migration; smaller destinations need separate planning and may require source resizing.",
+      "freeUse": "Free open-source software; destination storage is separate",
+      "qualityBasis": "Rescuezilla provides a bootable graphical backup/clone environment and documents its smaller-disk limitation.",
+      "evidenceUrls": [
+        "https://rescuezilla.com/",
+        "https://rescuezilla.com/download",
+        "https://rescuezilla.com/help",
+        "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose"
+      ],
+      "firstStep": "Confirm a healthy source, a verified backup and a destination large enough for the selected clone or restore.",
+      "quickSteps": [
+        "Boot Rescuezilla from a separate USB and identify every source and destination by model, serial and size.",
+        "Choose the intended clone or image operation; confirm the destination may be overwritten before starting.",
+        "Boot the destination alone and verify files, applications, encryption recovery and backup operation."
+      ],
+      "aliases": [
+        "SSD migration",
+        "disk clone",
+        "replace hard drive"
+      ]
+    },
+    {
+      "id": "file-backup",
+      "icon": "🗄️",
+      "jobId": "backup-restore",
+      "toolId": "restic",
+      "label": "Restore a file backup",
+      "why": "Create encrypted file snapshots and restore a representative sample to prove the backup is usable.",
+      "boundary": "This is a file-backup workflow, not a bare-metal image; retain the repository password and test a separate restore target.",
+      "freeUse": "Free software; storage is separate",
+      "qualityBasis": "The official documentation provides repository checks, snapshot selection and explicit restore commands.",
+      "evidenceUrls": [
+        "https://restic.net/",
+        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
+        "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ],
+      "firstStep": "Identify the backup format, snapshot date and recoverable credentials before choosing the restore tool.",
+      "quickSteps": [
+        "For a restic repository, inspect snapshots and run the documented repository checks.",
+        "Restore the required snapshot or files to a separate destination using the scoped procedure.",
+        "Open representative files, check permissions and record the restored date and any missing data."
+      ],
+      "aliases": [
+        "backup restore",
+        "verify backup",
+        "restore files"
+      ]
+    },
+    {
+      "id": "boot-usb",
+      "icon": "🔌",
+      "jobId": "boot-usb",
+      "toolId": "rufus",
+      "label": "Make a boot USB",
+      "why": "Write a trusted operating-system or rescue image to a USB drive with explicit target and boot-mode choices.",
+      "boundary": "Writing erases the selected USB; verify its identity and use a trusted image that matches the target firmware.",
+      "freeUse": "Free software; image licensing is separate",
+      "qualityBasis": "The official project documents BIOS/UEFI media creation, image checksums and portable operation.",
+      "evidenceUrls": [
+        "https://github.com/pbatard/rufus",
+        "https://rufus.ie/en/",
+        "https://github.com/pbatard/rufus/wiki/FAQ"
+      ],
+      "firstStep": "Choose the official ISO and identify a USB drive that may be erased.",
+      "quickSteps": [
+        "Download the correct image and check its published checksum or signature where supplied.",
+        "In Rufus, confirm the USB model and capacity, select the ISO and choose the target’s firmware-compatible options.",
+        "Write the USB, check the log and test that it boots before taking it to the client."
+      ],
+      "aliases": [
+        "rescue USB",
+        "installation USB",
+        "bootable media"
+      ]
+    },
+    {
+      "id": "set-up-a-new-pc",
+      "icon": "💻",
+      "jobId": "new-pc",
+      "toolId": "winget",
+      "label": "Set up a new PC",
+      "why": "Make approved application setup repeatable while checking the complete workstation handoff.",
+      "boundary": "WinGet does not replace deployment policy, application licensing or migration of user data and settings.",
+      "freeUse": "Free package manager; application licenses are separate",
+      "qualityBasis": "Microsoft documents package identification, installation and import through WinGet; each package retains its own licensing.",
+      "evidenceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/install",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/import"
+      ],
+      "firstStep": "Confirm the owner, approved applications, identity setup and recovery requirements before installing software.",
+      "quickSteps": [
+        "Complete the approved Windows and device-driver updates and check basic hardware operation.",
+        "Use WinGet for approved available packages, reviewing the package identity and each application’s license.",
+        "Verify sign-in, encryption recovery, backup and the user’s daily tasks before handoff."
+      ],
+      "aliases": [
+        "new computer",
+        "PC setup",
+        "workstation deployment"
+      ]
+    },
+    {
+      "id": "maintain-a-pc",
+      "icon": "🛠️",
+      "jobId": "preventive-maintenance",
+      "toolId": "winget",
+      "label": "Maintain a PC",
+      "why": "Review and apply justified updates as part of a measured maintenance visit.",
+      "boundary": "Review package changes individually; a bulk upgrade is not a substitute for compatibility and restart planning.",
+      "freeUse": "Free package manager; application licenses are separate",
+      "qualityBasis": "Microsoft documents listing and selecting upgrades with WinGet; INTA maintenance adds backup and acceptance checks.",
+      "evidenceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+        "https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance"
+      ],
+      "firstStep": "Agree a maintenance window and confirm the backup can restore files before changing software.",
+      "quickSteps": [
+        "Check storage health, free space, protection status and a representative backup restore.",
+        "Review available Windows and application updates; use WinGet only for approved package changes.",
+        "Reboot in the agreed window, retest essential tasks and record the versions and remaining issues."
+      ],
+      "aliases": [
+        "routine maintenance",
+        "PC health check",
+        "application updates"
+      ]
+    },
+    {
+      "id": "start-a-repair",
+      "icon": "🧭",
+      "jobId": "intake-triage",
+      "toolId": null,
+      "label": "Start a repair",
+      "why": "Choose the right service path and preserve recoverability before downloading utilities.",
+      "boundary": "Do not provoke repeated failures on damaged storage or continue routine repair during an active incident.",
+      "freeUse": "No extra download needed",
+      "qualityBasis": "The INTA intake procedure records scope, recovery constraints and acceptance evidence; Microsoft documents recovery choices and their consequences.",
+      "evidenceUrls": [
+        "https://github.com/Herbertofury/INTA/wiki/Job-intake-triage",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      ],
+      "firstStep": "Record the exact symptom, affected device and desired result before making changes.",
+      "quickSteps": [
+        "Confirm permission, the last working time and any recent change with the user.",
+        "Check for spreading compromise, failing storage and missing recovery access before normal troubleshooting.",
+        "Reproduce the problem, record a baseline and choose the matching guide with a clear success test."
+      ],
+      "aliases": [
+        "triage",
+        "diagnose a computer",
+        "new service job"
+      ],
+      "guideOnly": true
+    },
+    {
+      "id": "contain-ransomware",
+      "icon": "🚨",
+      "jobId": "ransomware-response",
+      "toolId": null,
+      "label": "Contain ransomware",
+      "why": "Contain the incident and protect recovery options before routine cleanup.",
+      "boundary": "Coordinate evidence and shutdown decisions with the incident lead; a clean antivirus result is not a release decision.",
+      "freeUse": "No extra download needed for the first response",
+      "qualityBasis": "CISA and Microsoft prioritize isolation, evidence, scope assessment and a coordinated recovery process.",
+      "evidenceUrls": [
+        "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf",
+        "https://learn.microsoft.com/en-us/security/compass/incident-response-playbook-dart-ransomware-approach"
+      ],
+      "firstStep": "Isolate affected connections and alert the incident owner immediately if files are being encrypted or compromise is spreading.",
+      "quickSteps": [
+        "Disconnect affected systems from networks and protect reachable backups without destroying useful evidence.",
+        "Preserve the timeline, ransom note and available logs privately; scope affected accounts and systems with the incident owner.",
+        "Follow the incident plan for credential containment, clean rebuild and verified restoration before reconnecting."
+      ],
+      "aliases": [
+        "ransomware",
+        "encrypted files",
+        "active compromise"
+      ],
+      "guideOnly": true
+    },
+    {
+      "id": "recover-an-outage",
+      "icon": "🏢",
+      "jobId": "outage-recovery",
+      "toolId": null,
+      "label": "Recover an office outage",
+      "why": "Restore dependencies in a controlled order instead of installing an unrelated repair utility.",
+      "boundary": "Use the organization’s infrastructure runbook and qualified electrical or hardware support where required.",
+      "freeUse": "No extra download needed for triage",
+      "qualityBasis": "The INTA outage guide supplies the service dependency sequence; Microsoft explains that an unexpected-restart event alone does not identify the cause.",
+      "evidenceUrls": [
+        "https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery",
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart"
+      ],
+      "firstStep": "Confirm safe power and the affected business services, then assign one recovery owner.",
+      "quickSteps": [
+        "Check power, UPS status and network reachability without repeatedly cycling unstable equipment.",
+        "Restore dependencies in the guide’s order: network, storage, identity and the affected application services.",
+        "Test a real user workflow and backup status, then record the outage timeline and remaining faults."
+      ],
+      "aliases": [
+        "power failure",
+        "server down",
+        "office offline",
+        "service outage"
+      ],
+      "guideOnly": true
+    },
+    {
+      "id": "repair-domain-trust",
+      "icon": "🔐",
+      "jobId": "ad-trust",
+      "toolId": "powershell",
+      "label": "Repair domain sign-in",
+      "why": "Test and repair the member computer’s secure channel after connectivity and time are correct.",
+      "boundary": "This member-computer test is not for domain controllers; installing PowerShell 7 or rejoining the domain is not the first step.",
+      "freeUse": "Windows PowerShell 5.1 is already included on the target PC",
+      "qualityBasis": "Microsoft documents secure-channel testing and repair on domain members and warns against using this cmdlet on domain controllers.",
+      "evidenceUrls": [
+        "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1",
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/broken-trust-relationship-domain-joined-device-its-domain-secure-channel-issues"
+      ],
+      "firstStep": "On the affected domain-member PC, check the domain DNS, time and domain-controller reachability first.",
+      "quickSteps": [
+        "Use existing Windows PowerShell 5.1 to run the guide’s diagnostic secure-channel check on the member PC.",
+        "Repair only a confirmed trust fault using an authorized account and the scoped procedure.",
+        "Verify domain sign-in, a required shared resource and the secure-channel result."
+      ],
+      "aliases": [
+        "trust relationship failed",
+        "domain login",
+        "secure channel"
+      ],
+      "toolAction": "windows-powershell"
+    },
+    {
+      "id": "troubleshoot-with-ai",
+      "icon": "💡",
+      "jobId": "ai-triage",
+      "toolId": "chatgpt",
+      "label": "Troubleshoot with AI",
+      "why": "Use AI to structure hypotheses and explain evidence while the technician owns execution and verification.",
+      "boundary": "Use an approved account and sanitized data; free-plan limits apply and generated instructions can be wrong.",
+      "freeUse": "Free plan available; organization approval and usage limits apply",
+      "qualityBasis": "OpenAI documents free-plan access and data controls; the NIST profile identifies generative-AI risks requiring human evaluation.",
+      "evidenceUrls": [
+        "https://help.openai.com/en/articles/9275245-using-chatgpt-s-free-tier-faq",
+        "https://help.openai.com/en/articles/7730893-data-controls-faq",
+        "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+      ],
+      "firstStep": "Prepare a redacted error, timeline and environment summary that your organization permits you to share.",
+      "quickSteps": [
+        "Give ChatGPT the observed symptoms and ask for competing causes with one reversible discriminating test.",
+        "Check the proposed action against the official documentation and the actual target before running it.",
+        "Record the observed result, reject unsupported guesses and confirm the fix with the original task."
+      ],
+      "aliases": [
+        "AI troubleshooting",
+        "explain an error",
+        "diagnostic hypotheses"
+      ]
+    },
+    {
+      "id": "complete-a-handoff",
+      "icon": "✅",
+      "jobId": "client-handoff",
+      "toolId": null,
+      "label": "Finish the job and hand over",
+      "why": "Close the service job with proof, clear ownership and recoverable records.",
+      "boundary": "Keep passwords, recovery keys and customer evidence in the approved private record, not this public wiki.",
+      "freeUse": "No extra download needed",
+      "qualityBasis": "The INTA handoff guide and template define outcome verification, access cleanup, private evidence references and ownership.",
+      "evidenceUrls": [
+        "https://github.com/Herbertofury/INTA/wiki/Job-client-handoff",
+        "https://github.com/Herbertofury/INTA/wiki/Technician-Handoff"
+      ],
+      "firstStep": "Repeat the original user task and collect acceptance evidence before closing the case.",
+      "quickSteps": [
+        "Verify the requested outcome and record any remaining issue or agreed limitation.",
+        "Remove temporary access and case-only tools; record changes and private recovery references in the handoff template.",
+        "Confirm user acceptance, the next owner and any follow-up date."
+      ],
+      "aliases": [
+        "client handoff",
+        "close ticket",
+        "service acceptance",
+        "offboarding"
+      ],
+      "guideOnly": true
     },
     {
       "id": "find-a-file",
@@ -97,52 +676,17 @@
         "https://www.voidtools.com/License.txt",
         "https://www.voidtools.com/forum/viewtopic.php?t=7508",
         "https://www.voidtools.com/everything/server/buy/"
-      ]
-    },
-    {
-      "id": "remote-help",
-      "icon": "🖥️",
-      "jobId": "remote-support",
-      "toolId": "quick-assist",
-      "label": "Remote help",
-      "why": "Start a one-time attended Windows support session with separate screen-sharing and control approval.",
-      "boundary": "Requires internet and a present user; use the organization’s approved managed tool when unattended access or session audit logs are required.",
-      "freeUse": "Free Microsoft app; organization policy applies",
-      "qualityBasis": "Microsoft’s IT guidance documents the session-code flow, helper sign-in, user approval and the absence of local session logs.",
-      "evidenceUrls": [
-        "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
-        "https://apps.microsoft.com/detail/9P7BP5VNWKX5"
-      ]
-    },
-    {
-      "id": "boot-usb",
-      "icon": "🔌",
-      "jobId": "boot-usb",
-      "toolId": "rufus",
-      "label": "Boot USB",
-      "why": "Write a trusted operating-system or rescue image to a USB drive with explicit target and boot-mode choices.",
-      "boundary": "Writing erases the selected USB; verify its identity and use a trusted image that matches the target firmware.",
-      "freeUse": "Free software; image licensing is separate",
-      "qualityBasis": "The official project documents BIOS/UEFI media creation, image checksums and portable operation.",
-      "evidenceUrls": [
-        "https://github.com/pbatard/rufus",
-        "https://rufus.ie/en/",
-        "https://github.com/pbatard/rufus/wiki/FAQ"
-      ]
-    },
-    {
-      "id": "windows-repair",
-      "icon": "🧰",
-      "jobId": "windows-repair",
-      "toolId": "dism",
-      "label": "Windows repair",
-      "why": "Check and repair the Windows component store before the guide’s system-file verification step.",
-      "boundary": "Check storage health and recovery options first; use the correct online or offline target and a compatible repair source.",
-      "freeUse": "Included with Windows",
-      "qualityBasis": "Microsoft documents corruption checks, repairable/non-repairable image states and controlled repair sources.",
-      "evidenceUrls": [
-        "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
-        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/using-system-file-checker-in-windows"
+      ],
+      "firstStep": "Search by the known filename or extension in approved local folders.",
+      "quickSteps": [
+        "Open the Everything desktop app and limit indexing to the locations needed for this case.",
+        "Search a distinctive part of the name, then check the result’s path and modification time.",
+        "Open the correct file and remove any temporary case-only indexing settings."
+      ],
+      "aliases": [
+        "file search",
+        "missing document",
+        "filename"
       ]
     },
     {
@@ -159,6 +703,17 @@
         "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIntroduction.html",
         "https://npcap.com/guide/index.html",
         "https://www.wireshark.org/docs/wsdg_html_chunked/ChLibsPcap"
+      ],
+      "firstStep": "Use packet capture only after basic link, address, gateway and DNS checks have narrowed the fault.",
+      "quickSteps": [
+        "Get authorization and choose the smallest interface, host and time window that can reproduce the issue.",
+        "Capture the failing request in Wireshark and inspect the relevant DNS or connection exchange.",
+        "Apply one evidenced fix, repeat the request and store the capture only in the private case record."
+      ],
+      "aliases": [
+        "packet capture",
+        "DNS packets",
+        "TCP troubleshooting"
       ]
     },
     {
@@ -166,7 +721,7 @@
       "icon": "🧪",
       "jobId": "hardware-bsod",
       "toolId": "memtest86plus",
-      "label": "Suspected RAM fault",
+      "label": "Test memory",
       "why": "Test memory outside the running operating system when crash evidence points to RAM or memory stability.",
       "boundary": "Record firmware settings and test duration; memory errors need isolation, and a passing run does not rule out other crash causes.",
       "freeUse": "Free and open source for business use",
@@ -175,22 +730,17 @@
         "https://www.memtest.org/",
         "https://github.com/memtest86plus/memtest86plus",
         "https://www.gnu.org/licenses/gpl-faq.html#DoesTheGPLAllowUseOfTheProgramForAnyPurpose"
-      ]
-    },
-    {
-      "id": "file-backup",
-      "icon": "🗄️",
-      "jobId": "backup-restore",
-      "toolId": "restic",
-      "label": "File backup",
-      "why": "Create encrypted file snapshots and restore a representative sample to prove the backup is usable.",
-      "boundary": "This is a file-backup workflow, not a bare-metal image; retain the repository password and test a separate restore target.",
-      "freeUse": "Free software; storage is separate",
-      "qualityBasis": "The official documentation provides repository checks, snapshot selection and explicit restore commands.",
-      "evidenceUrls": [
-        "https://restic.net/",
-        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
-        "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ],
+      "firstStep": "Use this branch when crash evidence suggests memory instability, after recording firmware and overclock settings.",
+      "quickSteps": [
+        "Create the supported Memtest86+ boot media and preserve recovery keys before any necessary firmware change.",
+        "Boot the test, record passes and errors, and isolate modules or slots using the hardware guide.",
+        "Retest the corrected configuration and restore the intended firmware settings."
+      ],
+      "aliases": [
+        "RAM test",
+        "memory errors",
+        "memory diagnostics"
       ]
     }
   ]

@@ -1,0 +1,387 @@
+{
+  "checkedAt": "2026-11-27",
+  "scope": "Changed Markdown front pages and three requested quick-answer fragments; local Chromium rendering with approximated GitHub styling.",
+  "limits": [
+    "This is not a live GitHub visual readback.",
+    "Existing diagrams are outside this targeted rendering pass; their source is unchanged and the local preview omits their rendering.",
+    "Tool links were inspected as rendered href values; this script does not execute tools or contact download destinations."
+  ],
+  "viewports": [
+    {
+      "width": 1280,
+      "height": 1000
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "quickStartSha256": "04538e2ebe2296187a56b2e8b2b4949e092909fcc6c115432c18a89496bee1a4",
+  "toolAccessSha256": "0cebb762113b497877f9a7afd0f38304d6a4698e57710c5e0aefcfa4d1cb8031",
+  "sourceHashes": {
+    "wiki/Home.md": "09aad7e692bff3e9576f05aedbaad50d7f3db7d9126875e771de752aba7a0f61",
+    "README.md": "1b336ae89c3e63b587324f7f5f22df95de54516ba6c2edcda53958cbe6003627",
+    "wiki/Start-Here.md": "9d1435dad12b87a30652dba49ad3316bf319141ed318a21acf4bfe504e868397",
+    "wiki/Job-printer-repair.md": "2f2affa3646b03b46eb071751562e791f89e794db4330419ceec11dba77b431e",
+    "wiki/Job-malware-removal.md": "9814dd0a8f668b09a1b8ac095b9be3cd106ade08ccf89a525c8969b507a6c098",
+    "wiki/Job-failing-drive.md": "7d3f770f9713e3c718c972cb72b42b39e952d7285dc1c9588303e7c07fc369a2"
+  },
+  "results": [
+    {
+      "name": "Home",
+      "source": "wiki/Home.md",
+      "kind": "front page",
+      "rowCount": 27,
+      "columnCount": 2,
+      "errors": [],
+      "allQuickRowsOutsideDisclosure": true,
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "tableTop": 526,
+          "firstRows": [
+            {
+              "label": "🛡️ Remove viruses",
+              "top": 563,
+              "height": 37,
+              "bottom": 600
+            },
+            {
+              "label": "🖨️ Fix a printer",
+              "top": 600,
+              "height": 37,
+              "bottom": 637
+            },
+            {
+              "label": "🌐 Fix internet",
+              "top": 637,
+              "height": 37,
+              "bottom": 674
+            },
+            {
+              "label": "✉️ Fix email",
+              "top": 674,
+              "height": 37,
+              "bottom": 711
+            }
+          ],
+          "brokenImages": 0
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "tableTop": 546,
+          "firstRows": [
+            {
+              "label": "🛡️ Remove viruses",
+              "top": 608,
+              "height": 109,
+              "bottom": 717
+            },
+            {
+              "label": "🖨️ Fix a printer",
+              "top": 717,
+              "height": 85,
+              "bottom": 802
+            },
+            {
+              "label": "🌐 Fix internet",
+              "top": 802,
+              "height": 85,
+              "bottom": 887
+            },
+            {
+              "label": "✉️ Fix email",
+              "top": 887,
+              "height": 85,
+              "bottom": 972
+            }
+          ],
+          "brokenImages": 0
+        }
+      ]
+    },
+    {
+      "name": "Start-Here",
+      "source": "wiki/Start-Here.md",
+      "kind": "front page",
+      "rowCount": 27,
+      "columnCount": 2,
+      "errors": [],
+      "allQuickRowsOutsideDisclosure": true,
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "tableTop": 420,
+          "firstRows": [
+            {
+              "label": "🛡️ Remove viruses",
+              "top": 458,
+              "height": 37,
+              "bottom": 495
+            },
+            {
+              "label": "🖨️ Fix a printer",
+              "top": 495,
+              "height": 37,
+              "bottom": 532
+            },
+            {
+              "label": "🌐 Fix internet",
+              "top": 532,
+              "height": 37,
+              "bottom": 569
+            },
+            {
+              "label": "✉️ Fix email",
+              "top": 569,
+              "height": 37,
+              "bottom": 606
+            }
+          ],
+          "brokenImages": 0
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "tableTop": 531,
+          "firstRows": [
+            {
+              "label": "🛡️ Remove viruses",
+              "top": 592,
+              "height": 109,
+              "bottom": 701
+            },
+            {
+              "label": "🖨️ Fix a printer",
+              "top": 701,
+              "height": 85,
+              "bottom": 786
+            },
+            {
+              "label": "🌐 Fix internet",
+              "top": 786,
+              "height": 85,
+              "bottom": 871
+            },
+            {
+              "label": "✉️ Fix email",
+              "top": 871,
+              "height": 85,
+              "bottom": 956
+            }
+          ],
+          "brokenImages": 0
+        }
+      ]
+    },
+    {
+      "name": "Printer",
+      "source": "wiki/Job-printer-repair.md",
+      "itemId": "fix-a-printer",
+      "kind": "quick-answer fragment",
+      "anchor": "quick-fix-a-printer",
+      "heading": "🖨️ Fix a printer",
+      "firstAction": "Check that the intended printer is powered on, ready and connected before changing its queue or driver.",
+      "steps": [
+        "Check paper, ink or toner, displayed errors and the selected printer; compare a device test page if available.",
+        "Run the printer troubleshooter in Windows Get Help on the affected PC and review the exact queue or connection finding.",
+        "Apply the indicated repair, then print a test page and the user’s original document."
+      ],
+      "actionPresent": true,
+      "officialPresent": true,
+      "outsideDisclosure": true,
+      "errors": [],
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "quickAnchorTop": 0,
+          "sourceLinkCount": 64
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "quickAnchorTop": 0,
+          "sourceLinkCount": 64
+        }
+      ]
+    },
+    {
+      "name": "Malware",
+      "source": "wiki/Job-malware-removal.md",
+      "itemId": "suspected-malware",
+      "kind": "quick-answer fragment",
+      "anchor": "quick-suspected-malware",
+      "heading": "🛡️ Remove viruses",
+      "firstAction": "Disconnect a suspected compromised PC from the network before scanning; use the incident guide if encryption is spreading.",
+      "steps": [
+        "Record the symptoms and isolate affected connections; keep the existing real-time protection in place.",
+        "On a trusted PC, download a fresh Microsoft Safety Scanner; transfer it safely and run a Full scan.",
+        "Save the scan log, review remaining symptoms and persistence, then follow the guide’s cleanup or rebuild decision."
+      ],
+      "actionPresent": true,
+      "officialPresent": true,
+      "outsideDisclosure": true,
+      "errors": [],
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "quickAnchorTop": 0,
+          "sourceLinkCount": 112
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "quickAnchorTop": 0,
+          "sourceLinkCount": 112
+        }
+      ]
+    },
+    {
+      "name": "Deleted-Files",
+      "source": "wiki/Job-failing-drive.md",
+      "itemId": "deleted-files",
+      "kind": "quick-answer fragment",
+      "anchor": "quick-deleted-files",
+      "heading": "📁 Recover deleted files",
+      "firstAction": "Stop writing to the affected disk and check the backup or recycle bin before attempting recovery.",
+      "steps": [
+        "Use healthy media or a preserved image; route an unstable drive to image-first recovery.",
+        "Run PhotoRec against that source and send recovered output to a different disk.",
+        "Open representative recovered files and record missing items; retain the source until acceptance."
+      ],
+      "actionPresent": true,
+      "officialPresent": true,
+      "outsideDisclosure": true,
+      "errors": [],
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "quickAnchorTop": 0,
+          "sourceLinkCount": 107
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "quickAnchorTop": 0,
+          "sourceLinkCount": 107
+        }
+      ]
+    },
+    {
+      "name": "README",
+      "source": "README.md",
+      "kind": "front page",
+      "rowCount": 27,
+      "columnCount": 2,
+      "errors": [],
+      "allQuickRowsOutsideDisclosure": true,
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "tableTop": 498,
+          "firstRows": [
+            {
+              "label": "🛡️ Remove viruses",
+              "top": 535,
+              "height": 37,
+              "bottom": 572
+            },
+            {
+              "label": "🖨️ Fix a printer",
+              "top": 572,
+              "height": 37,
+              "bottom": 609
+            },
+            {
+              "label": "🌐 Fix internet",
+              "top": 609,
+              "height": 37,
+              "bottom": 646
+            },
+            {
+              "label": "✉️ Fix email",
+              "top": 646,
+              "height": 37,
+              "bottom": 683
+            }
+          ],
+          "brokenImages": 0
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "tableTop": 535,
+          "firstRows": [
+            {
+              "label": "🛡️ Remove viruses",
+              "top": 596,
+              "height": 109,
+              "bottom": 705
+            },
+            {
+              "label": "🖨️ Fix a printer",
+              "top": 705,
+              "height": 85,
+              "bottom": 790
+            },
+            {
+              "label": "🌐 Fix internet",
+              "top": 790,
+              "height": 85,
+              "bottom": 875
+            },
+            {
+              "label": "✉️ Fix email",
+              "top": 875,
+              "height": 85,
+              "bottom": 960
+            }
+          ],
+          "brokenImages": 0
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "result": "passed",
+    "imagesInspected": [
+      "Home-mobile-top.png",
+      "README-mobile-quick-answers.png",
+      "Printer-mobile-answer.png",
+      "Home-desktop-top.png",
+      "Malware-mobile-answer.png",
+      "Deleted-Files-mobile-answer.png",
+      "README-mobile-top.png",
+      "README-desktop-top.png"
+    ],
+    "observations": [
+      "Desktop Home exposes priority scenarios and separate official/download actions in compact rows.",
+      "At390px, Remove viruses and Fix a printer are fully visible in the first screen; all27 rows remain in each front page without disclosure controls.",
+      "The focused mobile table keeps action labels and acquisition routes readable without page overflow.",
+      "Printer, malware and deleted-file fragments begin at the exact selected answer and show the first action, three steps and matching tool route together.",
+      "Printer/network/Outlook action separation and data-preservation ordering are visible in rendered content."
+    ],
+    "materialFindings": []
+  },
+  "renderedSourceHashesStillCurrent": true,
+  "finalRefresh": "README only rerendered after the final authored count correction to114; the other five Markdown sources remained byte-identical to their reviewed render."
+}

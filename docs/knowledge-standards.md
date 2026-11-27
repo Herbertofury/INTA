@@ -24,6 +24,8 @@ Use a stable page title, a short breadcrumb, a one-sentence purpose and an immed
 
 Use icons consistently and sparingly. Do not substitute icon-only instructions for readable labels. Tables suit comparisons; numbered steps suit actions; callouts suit a decision that materially changes the plan. Avoid dense walls of decorative badges or repeated banners.
 
+Every service scenario appears in the front-page answers. Name the problem in ordinary language, including **Remove viruses** and **Fix a printer**. Start the guide with exactly three practical actions, then retain its complete diagnosis, repair, verification and escalation procedure. Distinct cases that share a guide receive their own direct anchors. Do not repeat lengthy selection notes in each Home row.
+
 ## 🔗 2. Every named mention is a route
 
 Every rendered occurrence of a known tool, application or named method must be linked, including repeated occurrences in the same paragraph, table, list or later section. Link a tool to its exact official product/download/documentation page; link a method to the canonical guide recorded in the [method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json). Choose the destination that helps with that specific mention.
@@ -40,6 +42,8 @@ Keep these boundaries precise:
 - Use official downloads and canonical documents. Remove tracking parameters. Retain meaningful query parameters needed to identify the supported documentation version.
 
 The [tool catalog](https://github.com/Herbertofury/INTA/blob/main/data/tools.json) and [method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json) are the shared linking inputs. An automated linker helps enforce the rule, but author review still owns context, ambiguity and destination quality.
+
+The [acquisition registry](https://github.com/Herbertofury/INTA/blob/main/data/tool-access.json) keeps a separate official product page and exact acquisition action for every tool. Observe the publisher's current link and check its response before marking it as a file; a filename-looking URL can still return an HTML page. Record platform, file format, evidence URL and review date. Retain stable publisher redirects where a final CDN address expires. Use honest labels for built-in, Store, account, web, package, source and release-selection routes. Never invent a universal installer for an account-specific support session. When one application offers several troubleshooters, the scenario must select the matching action ID.
 
 ## 🛠 3. Procedures must be executable by a person
 

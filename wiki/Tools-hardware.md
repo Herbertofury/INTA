@@ -24,15 +24,15 @@ Use readings and repeatable tests to distinguish the component, driver, cooling,
 
 ## Tool comparison
 
-| Tool | Choose it for | Platforms | Role |
+| Tool | Choose it for | Platforms / role | Official page + download |
 | --- | --- | --- | --- |
-| [CPU-Z](#cpu-z) | Confirming the actual hardware and memory configuration. | [Windows](https://www.microsoft.com/windows) | Core |
-| [HWiNFO](#hwinfo) | Investigating temperatures, clocks, power and component identity. | [Windows](https://www.microsoft.com/windows) | Core |
-| [Libre Hardware Monitor](#libre-hardware-monitor) | A freely available option for temperature, fan and clock investigation. | [Windows](https://www.microsoft.com/windows) | Core |
-| [Memtest86+](#memtest86plus) | Investigating memory instability and repeatable hardware errors. | Bootable PC | Core |
-| [Official OEM driver and firmware portals](#oem-drivers) | Repairing a confirmed device issue or applying a required vendor update. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Core |
-| [PassMark MemTest86](#memtest86) | A documented bench memory test with the edition features the job requires. | UEFI PC | Core |
-| [OCCT](#occt) | Reproducing a suspected load-related CPU, GPU or memory problem. | [Windows](https://www.microsoft.com/windows) | Specialist |
+| [CPU-Z](#cpu-z) | Confirming the actual hardware and memory configuration. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://www.cpuid.com/softwares/cpu-z.html) · **[Download Windows portable ZIP](https://download.cpuid.com/cpu-z/cpu-z_3.02-en.zip)** |
+| [HWiNFO](#hwinfo) | Investigating temperatures, clocks, power and component identity. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://www.hwinfo.com/) · **[Download Windows x64 EXE](https://www.hwinfo.com/files/hwi64_860.exe)** |
+| [Libre Hardware Monitor](#libre-hardware-monitor) | A freely available option for temperature, fan and clock investigation. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) · **[Download Windows portable · ZIP](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/download/v0.9.6/LibreHardwareMonitor.zip)** |
+| [Memtest86+](#memtest86plus) | Investigating memory instability and repeatable hardware errors. | Bootable PC · Core | [Official page](https://www.memtest.org/) · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** |
+| [Official OEM driver and firmware portals](#oem-drivers) | Repairing a confirmed device issue or applying a required vendor update. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** |
+| [PassMark MemTest86](#memtest86) | A documented bench memory test with the edition features the job requires. | UEFI PC · Core | [Official page](https://www.memtest86.com/) · **[Download UEFI USB image · ZIP](https://www.memtest86.com/downloads/memtest86-usb.zip)** |
+| [OCCT](#occt) | Reproducing a suspected load-related CPU, GPU or memory problem. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://www.ocbase.com/) · **[Licensed Pro download](https://www.ocbase.com/download-pro)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
@@ -42,7 +42,7 @@ Core means an everyday candidate; Specialist means a focused advanced use; Evalu
 
 CPU, motherboard and memory identification with detailed operating parameters.
 
-[Official download](https://www.cpuid.com/softwares/cpu-z.html) · [Documentation](https://www.cpuid.com/softwares/cpu-z.html) · [Publisher](https://www.cpuid.com/softwares/cpu-z.html)
+[Official page](https://www.cpuid.com/softwares/cpu-z.html) · **[Download Windows portable ZIP](https://download.cpuid.com/cpu-z/cpu-z_3.02-en.zip)** · [Download Windows installer EXE](https://download.cpuid.com/cpu-z/cpu-z_3.02-en.exe) · [Documentation](https://www.cpuid.com/softwares/cpu-z.html)
 
 | Decision | Detail |
 | --- | --- |
@@ -73,7 +73,7 @@ CPU, motherboard and memory identification with detailed operating parameters.
 
 Detailed hardware inventory and supported sensor readings.
 
-[Official download](https://www.hwinfo.com/download/) · [Documentation](https://www.hwinfo.com/licenses/) · [Publisher](https://www.hwinfo.com/)
+[Official page](https://www.hwinfo.com/) · **[Download Windows x64 EXE](https://www.hwinfo.com/files/hwi64_860.exe)** · [Portable Windows ZIP](https://www.hwinfo.com/files/hwi_860.zip) · [Other versions and editions](https://www.hwinfo.com/download/) · [Documentation](https://www.hwinfo.com/licenses/)
 
 | Decision | Detail |
 | --- | --- |
@@ -104,7 +104,7 @@ Detailed hardware inventory and supported sensor readings.
 
 Open-source hardware sensor monitoring for supported components.
 
-[Official download](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/latest) · [Documentation](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) · [Publisher](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)
+[Official page](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) · **[Download Windows portable · ZIP](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/download/v0.9.6/LibreHardwareMonitor.zip)** · [All download options](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/latest) · [Documentation](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)
 
 | Decision | Detail |
 | --- | --- |
@@ -136,7 +136,7 @@ Open-source hardware sensor monitoring for supported components.
 
 Open-source bootable memory testing independent of the installed operating system.
 
-[Official download](https://www.memtest.org/#download) · [Documentation](https://github.com/memtest86plus/memtest86plus) · [Publisher](https://www.memtest.org/)
+[Official page](https://www.memtest.org/) · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** · [All download options](https://www.memtest.org/#download) · [Documentation](https://github.com/memtest86plus/memtest86plus)
 
 | Decision | Detail |
 | --- | --- |
@@ -167,7 +167,7 @@ Open-source bootable memory testing independent of the installed operating syste
 
 Manufacturer-supported driver and firmware sources matched to a specific device.
 
-[Official download](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · [Documentation](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · [Publisher](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)
+[Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Documentation](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)
 
 | Decision | Detail |
 | --- | --- |
@@ -198,7 +198,7 @@ Manufacturer-supported driver and firmware sources matched to a specific device.
 
 UEFI memory testing with free and professional editions.
 
-[Official download](https://www.memtest86.com/download.htm) · [Documentation](https://www.memtest86.com/tech.html) · [Publisher](https://www.memtest86.com/)
+[Official page](https://www.memtest86.com/) · **[Download UEFI USB image · ZIP](https://www.memtest86.com/downloads/memtest86-usb.zip)** · [All download options](https://www.memtest86.com/download.htm) · [Documentation](https://www.memtest86.com/tech.html)
 
 | Decision | Detail |
 | --- | --- |
@@ -229,7 +229,7 @@ UEFI memory testing with free and professional editions.
 
 Component stress tests and stability diagnostics.
 
-[Official download](https://www.ocbase.com/download) · [Documentation](https://www.ocbase.com/) · [Publisher](https://www.ocbase.com/)
+[Official page](https://www.ocbase.com/) · **[Licensed Pro download](https://www.ocbase.com/download-pro)** · [Personal edition options](https://www.ocbase.com/download-personal) · [All download options](https://www.ocbase.com/download) · [Documentation](https://www.ocbase.com/)
 
 | Decision | Detail |
 | --- | --- |

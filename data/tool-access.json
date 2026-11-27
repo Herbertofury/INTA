@@ -1,0 +1,2620 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "tools": {
+    "defender-offline": {
+      "officialUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+      "primary": {
+        "kind": "builtin",
+        "label": "Run the built-in offline scan",
+        "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": [],
+      "note": "Included with supported Windows; no separate installer."
+    },
+    "dism": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+      "primary": {
+        "kind": "builtin",
+        "label": "Open built-in repair instructions",
+        "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": [],
+      "note": "Included with supported Windows; no separate installer."
+    },
+    "sfc": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+      "primary": {
+        "kind": "builtin",
+        "label": "Open built-in system-file checks",
+        "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": [],
+      "note": "Included with supported Windows; no separate installer."
+    },
+    "windows-recovery": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+      "primary": {
+        "kind": "builtin",
+        "label": "Open recovery instructions",
+        "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": [],
+      "note": "Included with supported Windows; no separate installer."
+    },
+    "winsat": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal",
+      "primary": {
+        "kind": "builtin",
+        "label": "Read legacy command instructions",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": [],
+      "note": "Included with supported Windows; no separate installer."
+    },
+    "robocopy": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+      "primary": {
+        "kind": "builtin",
+        "label": "Open built-in copy instructions",
+        "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": [],
+      "note": "Included with supported Windows; no separate installer."
+    },
+    "pktmon": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon",
+      "primary": {
+        "kind": "builtin",
+        "label": "Open built-in capture instructions",
+        "url": "https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": [],
+      "note": "Included with supported Windows; no separate installer."
+    },
+    "quick-assist": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+      "primary": {
+        "kind": "store",
+        "label": "Get Quick Assist in Microsoft Store",
+        "url": "https://apps.microsoft.com/detail/9P7BP5VNWKX5",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": []
+    },
+    "chatgpt": {
+      "officialUrl": "https://chatgpt.com/",
+      "primary": {
+        "kind": "web",
+        "label": "Open ChatGPT",
+        "url": "https://chatgpt.com/",
+        "evidenceUrl": "https://chatgpt.com/download/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://chatgpt.com/download/",
+          "evidenceUrl": "https://chatgpt.com/download/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Sign in to use the service; desktop and mobile options are available separately."
+    },
+    "chrome-remote-desktop": {
+      "officialUrl": "https://remotedesktop.google.com/",
+      "primary": {
+        "kind": "web",
+        "label": "Open remote support",
+        "url": "https://remotedesktop.google.com/support",
+        "evidenceUrl": "https://support.google.com/chrome/answer/1649523",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "The support workflow supplies the host setup and session approval; Google sign-in may be required."
+    },
+    "oem-drivers": {
+      "officialUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+      "primary": {
+        "kind": "web",
+        "label": "Find the correct driver source",
+        "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+        "evidenceUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Choose the device manufacturer, exact model and operating system before downloading firmware or drivers."
+    },
+    "rustdesk": {
+      "officialUrl": "https://rustdesk.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · EXE",
+        "url": "https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe",
+        "evidenceUrl": "https://api.github.com/repos/rustdesk/rustdesk/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "1.5.3"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/rustdesk/rustdesk/releases/latest",
+          "evidenceUrl": "https://github.com/rustdesk/rustdesk/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "winget": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+      "primary": {
+        "kind": "file",
+        "label": "Download App Installer · MSIXBUNDLE",
+        "url": "https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
+        "evidenceUrl": "https://api.github.com/repos/microsoft/winget-cli/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "MSIXBUNDLE",
+        "version": "v1.29.380"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/microsoft/winget-cli/releases/latest",
+          "evidenceUrl": "https://github.com/microsoft/winget-cli/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "powershell": {
+      "officialUrl": "https://learn.microsoft.com/en-us/powershell/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://github.com/PowerShell/PowerShell/releases/download/v7.7.0/PowerShell-7.7.0-win-x64.zip",
+        "evidenceUrl": "https://api.github.com/repos/PowerShell/PowerShell/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "v7.7.0"
+      },
+      "alternates": [
+        {
+          "kind": "builtin",
+          "label": "Use Windows PowerShell 5.1",
+          "url": "https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "id": "windows-powershell"
+        },
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/PowerShell/PowerShell/releases/latest",
+          "evidenceUrl": "https://github.com/PowerShell/PowerShell/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The primary ZIP is modern PowerShell. Use the built-in Windows PowerShell action when a repair procedure specifically requires the Windows shell."
+    },
+    "windows-terminal": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows/terminal/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://github.com/microsoft/terminal/releases/download/v1.25.3131.0/Microsoft.WindowsTerminal_1.25.3131.0_x64.zip",
+        "evidenceUrl": "https://api.github.com/repos/microsoft/terminal/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "v1.25.3131.0"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/microsoft/terminal/releases/latest",
+          "evidenceUrl": "https://github.com/microsoft/terminal/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "windirstat": {
+      "officialUrl": "https://windirstat.net/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · MSI",
+        "url": "https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi",
+        "evidenceUrl": "https://api.github.com/repos/windirstat/windirstat/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "MSI",
+        "version": "release/v2.9.3"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/windirstat/windirstat/releases/latest",
+          "evidenceUrl": "https://github.com/windirstat/windirstat/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "bcuninstaller": {
+      "officialUrl": "https://www.bcuninstaller.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · 7Z",
+        "url": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller/releases/download/v6.3/BCUninstaller_6.3.0_portable.7z",
+        "evidenceUrl": "https://api.github.com/repos/BCUninstaller/Bulk-Crap-Uninstaller/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "7Z",
+        "version": "v6.3"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller/releases/latest",
+          "evidenceUrl": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "smartmontools": {
+      "officialUrl": "https://www.smartmontools.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows setup · EXE",
+        "url": "https://github.com/smartmontools/smartmontools/releases/download/RELEASE_7_5/smartmontools-7.5.win32-setup.exe",
+        "evidenceUrl": "https://api.github.com/repos/smartmontools/smartmontools/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE",
+        "version": "RELEASE_7_5"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/smartmontools/smartmontools/releases",
+          "evidenceUrl": "https://github.com/smartmontools/smartmontools/releases",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "restic": {
+      "officialUrl": "https://restic.net/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · ZIP",
+        "url": "https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip",
+        "evidenceUrl": "https://api.github.com/repos/restic/restic/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "v0.20.0"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/restic/restic/releases/latest",
+          "evidenceUrl": "https://github.com/restic/restic/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "libre-hardware-monitor": {
+      "officialUrl": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/download/v0.9.6/LibreHardwareMonitor.zip",
+        "evidenceUrl": "https://api.github.com/repos/LibreHardwareMonitor/LibreHardwareMonitor/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "version": "v0.9.6"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/latest",
+          "evidenceUrl": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "powertoys": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows/powertoys/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 setup · EXE",
+        "url": "https://github.com/microsoft/PowerToys/releases/download/v0.102.3101/PowerToysUserSetup-0.102.3101.0-x64.exe",
+        "evidenceUrl": "https://api.github.com/repos/microsoft/PowerToys/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "v0.102.3101"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/microsoft/PowerToys/releases/latest",
+          "evidenceUrl": "https://github.com/microsoft/PowerToys/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "sharex": {
+      "officialUrl": "https://getsharex.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://github.com/ShareX/ShareX/releases/download/v22.4.0/ShareX-22.4.0-portable-x64.zip",
+        "evidenceUrl": "https://api.github.com/repos/ShareX/ShareX/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "v22.4.0"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/ShareX/ShareX/releases/latest",
+          "evidenceUrl": "https://github.com/ShareX/ShareX/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "unigetui": {
+      "officialUrl": "https://github.com/Devolutions/UniGetUI",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://github.com/Devolutions/UniGetUI/releases/download/v2026.3.4/UniGetUI.x64.zip",
+        "evidenceUrl": "https://api.github.com/repos/Devolutions/UniGetUI/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "v2026.3.4"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/Devolutions/UniGetUI/releases/latest",
+          "evidenceUrl": "https://github.com/Devolutions/UniGetUI/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "codex-cli": {
+      "officialUrl": "https://github.com/openai/codex",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 CLI · EXE",
+        "url": "https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe",
+        "evidenceUrl": "https://api.github.com/repos/openai/codex/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "rust-v0.172.0"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/openai/codex/releases/latest",
+          "evidenceUrl": "https://github.com/openai/codex/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "gemini-cli": {
+      "officialUrl": "https://github.com/google-gemini/gemini-cli",
+      "primary": {
+        "kind": "file",
+        "label": "Download CLI bundle · ZIP",
+        "url": "https://github.com/google-gemini/gemini-cli/releases/download/v0.71.1/gemini-cli-bundle.zip",
+        "evidenceUrl": "https://api.github.com/repos/google-gemini/gemini-cli/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Cross-platform",
+        "format": "ZIP",
+        "version": "v0.71.1"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/google-gemini/gemini-cli/releases/latest",
+          "evidenceUrl": "https://github.com/google-gemini/gemini-cli/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "This is the published CLI bundle; follow the documented runtime, installation and authentication requirements."
+    },
+    "yara-x": {
+      "officialUrl": "https://github.com/VirusTotal/yara-x",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 CLI · ZIP",
+        "url": "https://github.com/VirusTotal/yara-x/releases/download/v1.25.0/yara-x-v1.25.0-x86_64-pc-windows-msvc.zip",
+        "evidenceUrl": "https://api.github.com/repos/VirusTotal/yara-x/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "v1.25.0"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/VirusTotal/yara-x/releases/latest",
+          "evidenceUrl": "https://github.com/VirusTotal/yara-x/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "pe-sieve": {
+      "officialUrl": "https://github.com/hasherezade/pe-sieve",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · EXE",
+        "url": "https://github.com/hasherezade/pe-sieve/releases/download/v0.4.1.1/pe-sieve64.exe",
+        "evidenceUrl": "https://api.github.com/repos/hasherezade/pe-sieve/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "v0.4.1.1"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/hasherezade/pe-sieve/releases/latest",
+          "evidenceUrl": "https://github.com/hasherezade/pe-sieve/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "hollows-hunter": {
+      "officialUrl": "https://github.com/hasherezade/hollows_hunter",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · EXE",
+        "url": "https://github.com/hasherezade/hollows_hunter/releases/download/v0.4.1.1/hollows_hunter64.exe",
+        "evidenceUrl": "https://api.github.com/repos/hasherezade/hollows_hunter/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "v0.4.1.1"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/hasherezade/hollows_hunter/releases/latest",
+          "evidenceUrl": "https://github.com/hasherezade/hollows_hunter/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "fibratus": {
+      "officialUrl": "https://github.com/rabbitstack/fibratus",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · MSI",
+        "url": "https://github.com/rabbitstack/fibratus/releases/download/v3.1.1/fibratus-3.1.1-amd64.msi",
+        "evidenceUrl": "https://api.github.com/repos/rabbitstack/fibratus/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "MSI",
+        "version": "v3.1.1"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/rabbitstack/fibratus/releases/latest",
+          "evidenceUrl": "https://github.com/rabbitstack/fibratus/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "rustinel": {
+      "officialUrl": "https://github.com/Karib0u/rustinel",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · ZIP",
+        "url": "https://github.com/Karib0u/rustinel/releases/download/v1.11.0/rustinel-1.11.0-x86_64-pc-windows-msvc.zip",
+        "evidenceUrl": "https://api.github.com/repos/Karib0u/rustinel/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "v1.11.0"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/Karib0u/rustinel/releases",
+          "evidenceUrl": "https://github.com/Karib0u/rustinel/releases",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "prx-sd": {
+      "officialUrl": "https://github.com/openprx/prx-sd",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 CLI · EXE",
+        "url": "https://github.com/openprx/prx-sd/releases/download/v0.2.3/sd-windows-x86_64.exe",
+        "evidenceUrl": "https://api.github.com/repos/openprx/prx-sd/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "v0.2.3"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/openprx/prx-sd/releases",
+          "evidenceUrl": "https://github.com/openprx/prx-sd/releases",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "sentinella": {
+      "officialUrl": "https://github.com/LeewayOpenSoftware/Sentinella",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 setup · EXE",
+        "url": "https://github.com/LeewayOpenSoftware/Sentinella/releases/download/v0.1.13/Sentinella_0.1.13_x64-setup.exe",
+        "evidenceUrl": "https://api.github.com/repos/LeewayOpenSoftware/Sentinella/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "v0.1.13"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/LeewayOpenSoftware/Sentinella/releases",
+          "evidenceUrl": "https://github.com/LeewayOpenSoftware/Sentinella/releases",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "velociraptor": {
+      "officialUrl": "https://docs.velociraptor.app/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · MSI",
+        "url": "https://github.com/Velocidex/velociraptor/releases/download/v0.77.4/velociraptor-v0.77.4-windows-amd64.msi",
+        "evidenceUrl": "https://api.github.com/repos/Velocidex/velociraptor/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "MSI",
+        "version": "v0.77.4"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/Velocidex/velociraptor/releases/latest",
+          "evidenceUrl": "https://github.com/Velocidex/velociraptor/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "hayabusa": {
+      "officialUrl": "https://github.com/Yamato-Security/hayabusa",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · ZIP",
+        "url": "https://github.com/Yamato-Security/hayabusa/releases/download/v4.4.0/hayabusa-4.4.0-win-x64.zip",
+        "evidenceUrl": "https://api.github.com/repos/Yamato-Security/hayabusa/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "v4.4.0"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/Yamato-Security/hayabusa/releases/latest",
+          "evidenceUrl": "https://github.com/Yamato-Security/hayabusa/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "chainsaw": {
+      "officialUrl": "https://github.com/WithSecureOpenSource/chainsaw",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · ZIP",
+        "url": "https://github.com/WithSecureOpenSource/chainsaw/releases/download/v2.18.0/chainsaw_x86_64-pc-windows-msvc.zip",
+        "evidenceUrl": "https://api.github.com/repos/WithSecureOpenSource/chainsaw/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "v2.18.0"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/WithSecureOpenSource/chainsaw/releases/latest",
+          "evidenceUrl": "https://github.com/WithSecureOpenSource/chainsaw/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "volatility": {
+      "officialUrl": "https://volatilityfoundation.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows executables · ZIP",
+        "url": "https://github.com/volatilityfoundation/volatility3/releases/download/v2.28.2/volatility3-win-exes-2.28.2.zip",
+        "evidenceUrl": "https://api.github.com/repos/volatilityfoundation/volatility3/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "version": "v2.28.2"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/volatilityfoundation/volatility3/releases/latest",
+          "evidenceUrl": "https://github.com/volatilityfoundation/volatility3/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "nvme-cli": {
+      "officialUrl": "https://github.com/linux-nvme/nvme-cli",
+      "primary": {
+        "kind": "file",
+        "label": "Download Linux x64 binary",
+        "url": "https://github.com/linux-nvme/nvme-cli/releases/download/v3.3/nvme-cli-v3.3-x86_64",
+        "evidenceUrl": "https://api.github.com/repos/linux-nvme/nvme-cli/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Linux",
+        "architecture": "x64",
+        "format": "ELF",
+        "version": "v3.3"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/linux-nvme/nvme-cli/releases/latest",
+          "evidenceUrl": "https://github.com/linux-nvme/nvme-cli/releases/latest",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "sysinternals": {
+      "officialUrl": "https://learn.microsoft.com/en-us/sysinternals/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://download.sysinternals.com/files/SysinternalsSuite.zip",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "autoruns": {
+      "officialUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://download.sysinternals.com/files/Autoruns.zip",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "process-explorer": {
+      "officialUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://download.sysinternals.com/files/ProcessExplorer.zip",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "procmon": {
+      "officialUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://download.sysinternals.com/files/ProcessMonitor.zip",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "tcpview": {
+      "officialUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://download.sysinternals.com/files/TCPView.zip",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "rammap": {
+      "officialUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://download.sysinternals.com/files/RAMMap.zip",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "procdump": {
+      "officialUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://download.sysinternals.com/files/Procdump.zip",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "sigcheck": {
+      "officialUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://download.sysinternals.com/files/Sigcheck.zip",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "safety-scanner": {
+      "officialUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 scanner · EXE",
+        "url": "https://go.microsoft.com/fwlink/?LinkId=212732",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Download a fresh copy for each job; the scanner expires after ten days."
+    },
+    "adwcleaner": {
+      "officialUrl": "https://www.malwarebytes.com/adwcleaner",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows cleaner · EXE",
+        "url": "https://adwcleaner.malwarebytes.com/adwcleaner?channel=release",
+        "evidenceUrl": "https://www.malwarebytes.com/adwcleaner",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.malwarebytes.com/adwcleaner",
+          "evidenceUrl": "https://www.malwarebytes.com/adwcleaner",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "eset-online-scanner": {
+      "officialUrl": "https://www.eset.com/us/home/online-scanner/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 scanner · EXE",
+        "url": "https://download.eset.com/com/eset/tools/online_scanner/latest/esetonlinescanner_nt64.exe",
+        "evidenceUrl": "https://www.eset.com/us/home/online-scanner/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.eset.com/us/home/online-scanner/",
+          "evidenceUrl": "https://www.eset.com/us/home/online-scanner/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "wiztree": {
+      "officialUrl": "https://diskanalyzer.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://diskanalyzer.com/files/wiztree_4_34_portable.zip",
+        "evidenceUrl": "https://diskanalyzer.com/download",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://diskanalyzer.com/download",
+          "evidenceUrl": "https://diskanalyzer.com/download",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Free personal use; business service work requires the appropriate commercial license."
+    },
+    "wizfile": {
+      "officialUrl": "https://antibody-software.com/wizfile/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable · ZIP",
+        "url": "https://antibody-software.com/files/wizfile_3_15_portable.zip",
+        "evidenceUrl": "https://antibody-software.com/wizfile/download",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://antibody-software.com/wizfile/download",
+          "evidenceUrl": "https://antibody-software.com/wizfile/download",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Free personal use; business service work requires the appropriate commercial license."
+    },
+    "windbg": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows debugger installer",
+        "url": "https://aka.ms/windbg/download",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "APPINSTALLER"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "gsmartcontrol": {
+      "officialUrl": "https://gsmartcontrol.shaduri.dev/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://github.com/ashaduri/gsmartcontrol/releases/download/v2.0.2/gsmartcontrol-2.0.2-win64.zip",
+        "evidenceUrl": "https://gsmartcontrol.shaduri.dev/downloads",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://gsmartcontrol.shaduri.dev/downloads",
+          "evidenceUrl": "https://gsmartcontrol.shaduri.dev/downloads",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "rclone": {
+      "officialUrl": "https://rclone.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · ZIP",
+        "url": "https://downloads.rclone.org/v1.76.0/rclone-v1.76.0-windows-amd64.zip",
+        "evidenceUrl": "https://rclone.org/downloads/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://rclone.org/downloads/",
+          "evidenceUrl": "https://rclone.org/downloads/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "rescuezilla": {
+      "officialUrl": "https://rescuezilla.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download x64 rescue image · ISO",
+        "url": "https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso",
+        "evidenceUrl": "https://rescuezilla.com/download",
+        "checkedAt": "2026-11-26",
+        "platform": "Boot media",
+        "architecture": "x64",
+        "format": "ISO"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://rescuezilla.com/download",
+          "evidenceUrl": "https://rescuezilla.com/download",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "systemrescue": {
+      "officialUrl": "https://www.system-rescue.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download x64 rescue image · ISO",
+        "url": "https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso",
+        "evidenceUrl": "https://www.system-rescue.org/Download/",
+        "checkedAt": "2026-11-26",
+        "platform": "Boot media",
+        "architecture": "x64",
+        "format": "ISO"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.system-rescue.org/Download/",
+          "evidenceUrl": "https://www.system-rescue.org/Download/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "gparted": {
+      "officialUrl": "https://gparted.org/",
+      "primary": {
+        "kind": "release-page",
+        "label": "Get x64 live ISO · download page",
+        "url": "https://sourceforge.net/projects/gparted/files/gparted-live-stable/1.8.1-6/gparted-live-1.8.1-6-amd64.iso/download",
+        "evidenceUrl": "https://gparted.org/download.php",
+        "checkedAt": "2026-11-26",
+        "platform": "Boot media",
+        "architecture": "x64",
+        "format": "ISO",
+        "version": "1.8.1-6"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://gparted.org/download.php",
+          "evidenceUrl": "https://gparted.org/download.php",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The publisher route selects the exact ISO through SourceForge. Mirror links are generated during download; no expiring mirror URL is stored."
+    },
+    "memtest86": {
+      "officialUrl": "https://www.memtest86.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download UEFI USB image · ZIP",
+        "url": "https://www.memtest86.com/downloads/memtest86-usb.zip",
+        "evidenceUrl": "https://www.memtest86.com/download.htm",
+        "checkedAt": "2026-11-26",
+        "platform": "Boot media",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.memtest86.com/download.htm",
+          "evidenceUrl": "https://www.memtest86.com/download.htm",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "memtest86plus": {
+      "officialUrl": "https://www.memtest.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download x64 memory-test ISO · ZIP",
+        "url": "https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip",
+        "evidenceUrl": "https://www.memtest.org/#download",
+        "checkedAt": "2026-11-26",
+        "platform": "Boot media",
+        "architecture": "x64",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.memtest.org/#download",
+          "evidenceUrl": "https://www.memtest.org/#download",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "ollama": {
+      "officialUrl": "https://ollama.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows setup · EXE",
+        "url": "https://ollama.com/download/OllamaSetup.exe",
+        "evidenceUrl": "https://ollama.com/download",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://ollama.com/download",
+          "evidenceUrl": "https://ollama.com/download",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "angry-ip-scanner": {
+      "officialUrl": "https://angryip.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows standalone · EXE",
+        "url": "https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-win.exe",
+        "evidenceUrl": "https://angryip.org/download/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://angryip.org/download/",
+          "evidenceUrl": "https://angryip.org/download/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Requires the Java runtime version documented by the project."
+    },
+    "autopsy": {
+      "officialUrl": "https://www.autopsy.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · MSI",
+        "url": "https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.23.1/autopsy-4.23.1-64bit.msi",
+        "evidenceUrl": "https://www.autopsy.com/download/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "MSI"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.autopsy.com/download/",
+          "evidenceUrl": "https://www.autopsy.com/download/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "get-help": {
+      "officialUrl": "https://support.microsoft.com/en-us/support/get-help/about-get-help",
+      "primary": {
+        "kind": "builtin",
+        "label": "Open Windows troubleshooters",
+        "url": "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters",
+        "evidenceUrl": "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": [
+        {
+          "kind": "builtin",
+          "label": "Start the printer troubleshooter",
+          "url": "https://aka.ms/PrinterConnection",
+          "evidenceUrl": "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "id": "printer"
+        },
+        {
+          "kind": "builtin",
+          "label": "Open network troubleshooting",
+          "url": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+          "evidenceUrl": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "id": "network"
+        },
+        {
+          "kind": "builtin",
+          "label": "Open Windows Update troubleshooting",
+          "url": "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+          "evidenceUrl": "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "id": "update"
+        },
+        {
+          "kind": "builtin",
+          "label": "Choose a classic Outlook diagnostic",
+          "url": "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters",
+          "evidenceUrl": "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "id": "outlook"
+        },
+        {
+          "kind": "builtin",
+          "label": "Start classic Outlook connectivity diagnostic",
+          "url": "https://aka.ms/SaRA-OutlookDisconnect-sarahome",
+          "evidenceUrl": "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "id": "outlook-connectivity"
+        }
+      ],
+      "note": "The instructions provide Windows app launch buttons. Choose the matching problem; classic Outlook diagnostics are separate from new Outlook."
+    },
+    "rufus": {
+      "officialUrl": "https://rufus.ie/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · EXE",
+        "url": "https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe",
+        "evidenceUrl": "https://api.github.com/repos/pbatard/rufus/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "v4.16"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://rufus.ie/#download",
+          "evidenceUrl": "https://rufus.ie/#download",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "ventoy": {
+      "officialUrl": "https://www.ventoy.net/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows package · ZIP",
+        "url": "https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip",
+        "evidenceUrl": "https://api.github.com/repos/ventoy/Ventoy/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "version": "v1.1.18"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.ventoy.net/en/download.html",
+          "evidenceUrl": "https://www.ventoy.net/en/download.html",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "localsend": {
+      "officialUrl": "https://localsend.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://github.com/localsend/localsend/releases/download/v1.19.0/LocalSend-1.19.0-windows-x86-64.zip",
+        "evidenceUrl": "https://api.github.com/repos/localsend/localsend/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "v1.19.0"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://localsend.org/download",
+          "evidenceUrl": "https://localsend.org/download",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "kopia": {
+      "officialUrl": "https://kopia.io/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows desktop · ZIP",
+        "url": "https://github.com/kopia/kopia/releases/download/v0.23.1/KopiaUI-0.23.1-win.zip",
+        "evidenceUrl": "https://api.github.com/repos/kopia/kopia/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "version": "v0.23.1"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://kopia.io/docs/installation/",
+          "evidenceUrl": "https://kopia.io/docs/installation/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "osquery": {
+      "officialUrl": "https://osquery.io/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · ZIP",
+        "url": "https://github.com/osquery/osquery/releases/download/5.24.1/osquery-5.24.1.windows_x86_64.zip",
+        "evidenceUrl": "https://api.github.com/repos/osquery/osquery/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "5.24.1"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://osquery.io/downloads/",
+          "evidenceUrl": "https://osquery.io/downloads/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "notepadplusplus": {
+      "officialUrl": "https://notepad-plus-plus.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.9.1/npp.8.9.9.1.portable.x64.zip",
+        "evidenceUrl": "https://notepad-plus-plus.org/downloads/v8.9.9.1/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://notepad-plus-plus.org/downloads/",
+          "evidenceUrl": "https://notepad-plus-plus.org/downloads/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "testdisk": {
+      "officialUrl": "https://www.cgsecurity.org/wiki/TestDisk",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 tools · ZIP",
+        "url": "https://www.cgsecurity.org/testdisk-7.2.win64.zip",
+        "evidenceUrl": "https://www.cgsecurity.org/Download_and_donate.php/testdisk-7.2.win64.zip",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+          "evidenceUrl": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "clamav": {
+      "officialUrl": "https://www.clamav.net/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · ZIP",
+        "url": "https://www.clamav.net/downloads/production/clamav-1.5.5.win.x64.zip",
+        "evidenceUrl": "https://www.clamav.net/downloads",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.clamav.net/downloads",
+          "evidenceUrl": "https://www.clamav.net/downloads",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "dmde": {
+      "officialUrl": "https://dmde.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 GUI · ZIP",
+        "url": "https://dmde.com/download/dmde-4-4-4-842-win64-gui.zip",
+        "evidenceUrl": "https://dmde.com/download.html",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://dmde.com/download.html",
+          "evidenceUrl": "https://dmde.com/download.html",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "hirens-bootcd-pe": {
+      "officialUrl": "https://www.hirensbootcd.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download x64 rescue image · ISO",
+        "url": "https://www.hirensbootcd.org/files/HBCD_PE_x64.iso",
+        "evidenceUrl": "https://www.hirensbootcd.org/download/",
+        "checkedAt": "2026-11-26",
+        "platform": "Boot media",
+        "architecture": "x64",
+        "format": "ISO"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.hirensbootcd.org/download/",
+          "evidenceUrl": "https://www.hirensbootcd.org/download/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "wireshark": {
+      "officialUrl": "https://www.wireshark.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · EXE",
+        "url": "https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe",
+        "evidenceUrl": "https://www.wireshark.org/download.html",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.wireshark.org/download.html",
+          "evidenceUrl": "https://www.wireshark.org/download.html",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "nmap": {
+      "officialUrl": "https://nmap.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows setup · EXE",
+        "url": "https://nmap.org/dist/nmap-7.993-setup.exe",
+        "evidenceUrl": "https://nmap.org/download.html",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://nmap.org/download.html",
+          "evidenceUrl": "https://nmap.org/download.html",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "debian-live": {
+      "officialUrl": "https://www.debian.org/CD/live/",
+      "primary": {
+        "kind": "file",
+        "label": "Download x64 Xfce live image · ISO",
+        "url": "https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.8.0-amd64-xfce.iso",
+        "evidenceUrl": "https://www.debian.org/CD/live/",
+        "checkedAt": "2026-11-26",
+        "platform": "Boot media",
+        "architecture": "x64",
+        "format": "ISO"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.debian.org/CD/live/",
+          "evidenceUrl": "https://www.debian.org/CD/live/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "ubuntu-live": {
+      "officialUrl": "https://ubuntu.com/desktop",
+      "primary": {
+        "kind": "file",
+        "label": "Download x64 desktop image · ISO",
+        "url": "https://releases.ubuntu.com/26.04.1/ubuntu-26.04.1-desktop-amd64.iso",
+        "evidenceUrl": "https://ubuntu.com/download/desktop/thank-you?version=26.04.1&architecture=amd64&lts=true",
+        "checkedAt": "2026-11-26",
+        "platform": "Boot media",
+        "architecture": "x64",
+        "format": "ISO"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://ubuntu.com/download/desktop",
+          "evidenceUrl": "https://ubuntu.com/download/desktop",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "keepassxc": {
+      "officialUrl": "https://keepassxc.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://github.com/keepassxreboot/keepassxc/releases/download/2.8.0/KeePassXC-2.8.0-x64.zip",
+        "evidenceUrl": "https://keepassxc.org/download/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://keepassxc.org/download/",
+          "evidenceUrl": "https://keepassxc.org/download/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "microsoft-windows11-media": {
+      "officialUrl": "https://www.microsoft.com/software-download/windows11",
+      "primary": {
+        "kind": "file",
+        "label": "Download media creation tool · EXE",
+        "url": "https://go.microsoft.com/fwlink/?linkid=2156295",
+        "evidenceUrl": "https://www.microsoft.com/software-download/windows11",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.microsoft.com/software-download/windows11",
+          "evidenceUrl": "https://www.microsoft.com/software-download/windows11",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The media tool creates installation media. Use the official options page for language-specific ISO selection; those ISO links can expire."
+    },
+    "windows-performance-toolkit": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows ADK setup · EXE",
+        "url": "https://go.microsoft.com/fwlink/?linkid=2289980",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The ADK setup installs selected components; choose Windows Performance Toolkit. Check the supported Windows version before installation."
+    },
+    "tcpdump": {
+      "officialUrl": "https://www.tcpdump.org/",
+      "primary": {
+        "kind": "source",
+        "label": "Download source · TAR.XZ",
+        "url": "https://www.tcpdump.org/release/tcpdump-4.99.7.tar.xz",
+        "evidenceUrl": "https://www.tcpdump.org/",
+        "checkedAt": "2026-11-26",
+        "platform": "Linux / Unix",
+        "format": "TAR.XZ"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/the-tcpdump-group/tcpdump/releases",
+          "evidenceUrl": "https://github.com/the-tcpdump-group/tcpdump/releases",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Upstream publishes source here. Use a supported operating-system package for a ready-to-run installation, or follow the upstream build instructions."
+    },
+    "rsync": {
+      "officialUrl": "https://rsync.samba.org/",
+      "primary": {
+        "kind": "source",
+        "label": "Download source · TAR.GZ",
+        "url": "https://download.samba.org/pub/rsync/rsync-3.5.2.tar.gz",
+        "evidenceUrl": "https://download.samba.org/pub/rsync/",
+        "checkedAt": "2026-11-26",
+        "platform": "Linux / Unix",
+        "format": "TAR.GZ"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://rsync.samba.org/download.html",
+          "evidenceUrl": "https://rsync.samba.org/download.html",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Upstream publishes source here. Use a supported operating-system package for a ready-to-run installation, or follow the upstream build instructions."
+    },
+    "photorec": {
+      "officialUrl": "https://www.cgsecurity.org/wiki/PhotoRec",
+      "primary": {
+        "kind": "file",
+        "label": "Download PhotoRec / TestDisk · ZIP",
+        "url": "https://www.cgsecurity.org/testdisk-7.2.win64.zip",
+        "evidenceUrl": "https://www.cgsecurity.org/Download_and_donate.php/testdisk-7.2.win64.zip",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+          "evidenceUrl": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "PhotoRec and QPhotoRec are included in the official TestDisk archive; save recovered files to another drive."
+    },
+    "openssh": {
+      "officialUrl": "https://www.openssh.com/",
+      "primary": {
+        "kind": "builtin",
+        "label": "Enable Windows OpenSSH",
+        "url": "https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.openssh.com/portable.html",
+          "evidenceUrl": "https://www.openssh.com/portable.html",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Windows offers OpenSSH as an optional feature; enable only the client or server role required for the job."
+    },
+    "malwarebytes": {
+      "officialUrl": "https://www.malwarebytes.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows EXE",
+        "url": "https://downloads.malwarebytes.com/file/mb-windows",
+        "evidenceUrl": "https://www.malwarebytes.com/mwb-download/thankyou",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.malwarebytes.com/mwb-download",
+          "evidenceUrl": "https://www.malwarebytes.com/mwb-download",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The Windows bootstrapper downloads the selected edition. Other platforms remain available from All downloads / setup."
+    },
+    "hitmanpro": {
+      "officialUrl": "https://www.sophos.com/en-us/products/hitmanpro",
+      "primary": {
+        "kind": "release-page",
+        "label": "Windows x64 download · publisher check",
+        "url": "https://download.sophos.com/endpoint/clients/HitmanPro_x64.exe",
+        "evidenceUrl": "https://www.sophos.com/en-us/products/hitmanpro/downloads",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "Windows x86 download · publisher check",
+          "url": "https://download.sophos.com/endpoint/clients/HitmanPro.exe",
+          "evidenceUrl": "https://www.sophos.com/en-us/products/hitmanpro/downloads",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "x86",
+          "format": "EXE"
+        },
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.sophos.com/en-us/products/hitmanpro",
+          "evidenceUrl": "https://www.sophos.com/en-us/products/hitmanpro",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "These are the exact publisher file routes. Sophos applies an export check before delivery; the automated request reached that check rather than a file. Use All downloads / setup if it does not continue."
+    },
+    "emsisoft-emergency-kit": {
+      "officialUrl": "https://www.emsisoft.com/en/emergency-kit/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows EXE",
+        "url": "https://dl.emsisoft.com/EmsisoftEmergencyKit.exe",
+        "evidenceUrl": "https://www.emsisoft.com/en/emergency-kit/download/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.emsisoft.com/en/emergency-kit/",
+          "evidenceUrl": "https://www.emsisoft.com/en/emergency-kit/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "bitdefender-free": {
+      "officialUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows EXE",
+        "url": "https://download.bitdefender.com/windows/installer/en-us/bitdefender_avfree.exe",
+        "evidenceUrl": "https://www.bitdefender.com/en-us/consumer/thank-you",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+          "evidenceUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "freefilesync": {
+      "officialUrl": "https://freefilesync.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows EXE · 14.13",
+        "url": "https://freefilesync.org/download/FreeFileSync_14.13_Windows_Setup.exe",
+        "evidenceUrl": "https://freefilesync.org/download.php",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE",
+        "version": "14.13"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download macOS ZIP · 14.13",
+          "url": "https://freefilesync.org/download/FreeFileSync_14.13_macOS.zip",
+          "evidenceUrl": "https://freefilesync.org/download.php",
+          "checkedAt": "2026-11-26",
+          "platform": "macOS",
+          "format": "ZIP",
+          "version": "14.13"
+        },
+        {
+          "kind": "file",
+          "label": "Download Linux x64 TAR.GZ · 14.13",
+          "url": "https://freefilesync.org/download/FreeFileSync_14.13_Linux_x86_64.tar.gz",
+          "evidenceUrl": "https://freefilesync.org/download.php",
+          "checkedAt": "2026-11-26",
+          "platform": "Linux",
+          "architecture": "x86_64",
+          "format": "TAR.GZ",
+          "version": "14.13"
+        },
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://freefilesync.org/download.php",
+          "evidenceUrl": "https://freefilesync.org/download.php",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "screenconnect": {
+      "officialUrl": "https://www.screenconnect.com/",
+      "primary": {
+        "kind": "account",
+        "label": "Client installer setup instructions",
+        "url": "https://www.screenconnect.com/pricing/unattended-access",
+        "evidenceUrl": "https://www.screenconnect.com/pricing/unattended-access",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [
+        {
+          "kind": "account",
+          "label": "Server downloads · licence required",
+          "url": "https://www.screenconnect.com/Download",
+          "evidenceUrl": "https://www.screenconnect.com/Download",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "For remote help, open the session link supplied by your technician. A managed access installer is generated inside your organisation’s ScreenConnect site; there is no universal client file. The public server installer is a different product role."
+    },
+    "crystaldiskinfo": {
+      "officialUrl": "https://crystalmark.info/en/software/crystaldiskinfo/",
+      "primary": {
+        "kind": "release-page",
+        "label": "Get Windows ZIP · 9.9.5",
+        "url": "https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download",
+        "evidenceUrl": "https://crystalmark.info/en/download/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "version": "9.9.5"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://crystalmark.info/en/download/",
+          "evidenceUrl": "https://crystalmark.info/en/download/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "This opens the exact Standard Edition ZIP on the publisher’s file host and starts its download. The host generates expiring mirror URLs, so a temporary signed address is not saved here."
+    },
+    "anydesk": {
+      "officialUrl": "https://anydesk.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows EXE",
+        "url": "https://download.anydesk.com/AnyDesk.exe",
+        "evidenceUrl": "https://anydesk.com/en/downloads/windows",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "Other platforms",
+          "url": "https://anydesk.com/en/downloads",
+          "evidenceUrl": "https://anydesk.com/en/downloads",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "A commercial license is required for professional use; the download alone does not provide that license."
+    },
+    "teamviewer": {
+      "officialUrl": "https://www.teamviewer.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 EXE",
+        "url": "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe",
+        "evidenceUrl": "https://www.teamviewer.com/en-us/download/portal/windows/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "QuickSupport x64 EXE",
+          "url": "https://download.teamviewer.com/download/TeamViewerQS_x64.exe",
+          "evidenceUrl": "https://www.teamviewer.com/en-us/download/portal/windows/",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "x64",
+          "format": "EXE"
+        },
+        {
+          "kind": "file",
+          "label": "Download Windows ARM64 EXE",
+          "url": "https://download.teamviewer.com/download/TeamViewer_Setup_ARM64.exe",
+          "evidenceUrl": "https://www.teamviewer.com/en-us/download/portal/windows/",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "EXE"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other platforms and editions",
+          "url": "https://www.teamviewer.com/en/download/",
+          "evidenceUrl": "https://www.teamviewer.com/en/download/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The full client provides support; QuickSupport is for receiving attended support. Professional use requires the appropriate TeamViewer license."
+    },
+    "tailscale": {
+      "officialUrl": "https://tailscale.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 MSI",
+        "url": "https://dl.tailscale.com/stable/tailscale-setup-1.104.7-amd64.msi",
+        "evidenceUrl": "https://dl.tailscale.com/stable/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "MSI",
+        "version": "1.104.7"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows ARM64 MSI",
+          "url": "https://dl.tailscale.com/stable/tailscale-setup-1.104.7-arm64.msi",
+          "evidenceUrl": "https://dl.tailscale.com/stable/",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "MSI",
+          "version": "1.104.7"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other platforms and packages",
+          "url": "https://tailscale.com/download",
+          "evidenceUrl": "https://tailscale.com/download",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Choose the installer for the machine architecture, then sign in to the approved tailnet. Check the organization plan and access policy before use."
+    },
+    "hwinfo": {
+      "officialUrl": "https://www.hwinfo.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 EXE",
+        "url": "https://www.hwinfo.com/files/hwi64_860.exe",
+        "evidenceUrl": "https://www.hwinfo.com/download/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "8.60"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Portable Windows ZIP",
+          "url": "https://www.hwinfo.com/files/hwi_860.zip",
+          "evidenceUrl": "https://www.hwinfo.com/download/",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "format": "ZIP",
+          "version": "8.60"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other versions and editions",
+          "url": "https://www.hwinfo.com/download/",
+          "evidenceUrl": "https://www.hwinfo.com/download/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Check the HWiNFO commercial-use terms for customer work; free personal availability does not establish a technician-use license."
+    },
+    "cpu-z": {
+      "officialUrl": "https://www.cpuid.com/softwares/cpu-z.html",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows portable ZIP",
+        "url": "https://download.cpuid.com/cpu-z/cpu-z_3.02-en.zip",
+        "evidenceUrl": "https://www.cpuid.com/downloads/cpu-z/cpu-z_3.02-en.zip",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x86/x64",
+        "format": "ZIP",
+        "version": "3.02"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows installer EXE",
+          "url": "https://download.cpuid.com/cpu-z/cpu-z_3.02-en.exe",
+          "evidenceUrl": "https://www.cpuid.com/downloads/cpu-z/cpu-z_3.02-en.exe",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "x86/x64",
+          "format": "EXE",
+          "version": "3.02"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other platforms and editions",
+          "url": "https://www.cpuid.com/softwares/cpu-z.html",
+          "evidenceUrl": "https://www.cpuid.com/softwares/cpu-z.html",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "putty": {
+      "officialUrl": "https://www.chiark.greenend.org.uk/~sgtatham/putty/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 MSI",
+        "url": "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.85-installer.msi",
+        "evidenceUrl": "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "MSI",
+        "version": "0.85"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Portable Windows x64 EXE",
+          "url": "https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe",
+          "evidenceUrl": "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "x64",
+          "format": "EXE",
+          "version": "0.85"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other platforms and packages",
+          "url": "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html",
+          "evidenceUrl": "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "7zip": {
+      "officialUrl": "https://www.7-zip.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 EXE",
+        "url": "https://github.com/ip7z/7zip/releases/download/26.06/7z2606-x64.exe",
+        "evidenceUrl": "https://www.7-zip.org/download.html",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "26.06"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows ARM64 EXE",
+          "url": "https://github.com/ip7z/7zip/releases/download/26.06/7z2606-arm64.exe",
+          "evidenceUrl": "https://www.7-zip.org/download.html",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "EXE",
+          "version": "26.06"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other platforms and packages",
+          "url": "https://www.7-zip.org/download.html",
+          "evidenceUrl": "https://www.7-zip.org/download.html",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "everything": {
+      "officialUrl": "https://www.voidtools.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 EXE",
+        "url": "https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe",
+        "evidenceUrl": "https://www.voidtools.com/downloads/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "1.4.1.1032"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Portable Windows x64 ZIP",
+          "url": "https://www.voidtools.com/Everything-1.4.1.1032.x64.zip",
+          "evidenceUrl": "https://www.voidtools.com/downloads/",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "x64",
+          "format": "ZIP",
+          "version": "1.4.1.1032"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other Windows packages",
+          "url": "https://www.voidtools.com/downloads/",
+          "evidenceUrl": "https://www.voidtools.com/downloads/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "These links are for the stable Everything desktop application, not the separately licensed Everything Server product."
+    },
+    "occt": {
+      "officialUrl": "https://www.ocbase.com/",
+      "primary": {
+        "kind": "account",
+        "label": "Licensed Pro download",
+        "url": "https://www.ocbase.com/download-pro",
+        "evidenceUrl": "https://www.ocbase.com/download-pro",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows / Linux"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "Personal edition options",
+          "url": "https://www.ocbase.com/download-personal",
+          "evidenceUrl": "https://www.ocbase.com/download-personal",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.ocbase.com/download",
+          "evidenceUrl": "https://www.ocbase.com/download",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Commercial technician work requires the appropriate Pro or Enterprise license. The Personal edition is not the free business-use route; Pro downloads require sign-in."
+    },
+    "winscp": {
+      "officialUrl": "https://winscp.net/",
+      "primary": {
+        "kind": "release-page",
+        "label": "Windows installer download page",
+        "url": "https://winscp.net/download/WinSCP-6.7.1-Setup.exe/download",
+        "evidenceUrl": "https://winscp.net/eng/downloads.php",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "Portable and other packages",
+          "url": "https://winscp.net/eng/downloads.php",
+          "evidenceUrl": "https://winscp.net/eng/downloads.php",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://winscp.net/eng/download.php",
+          "evidenceUrl": "https://winscp.net/eng/download.php",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The publisher generates expiring CDN URLs. The stable official download page obtains a fresh file link; no expiring URL is embedded."
+    },
+    "bitdefender-gravityzone": {
+      "officialUrl": "https://www.bitdefender.com/en-us/business/smb-products/business-security",
+      "primary": {
+        "kind": "account",
+        "label": "Open business deployment instructions",
+        "url": "https://www.bitdefender.com/business/support/en/77209-77397-installation.html",
+        "evidenceUrl": "https://www.bitdefender.com/business/support/en/77209-77397-installation.html",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.bitdefender.com/en-us/business/smb-products/business-security",
+          "evidenceUrl": "https://www.bitdefender.com/en-us/business/smb-products/business-security",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "A licensed business administrator creates and deploys the endpoint package through GravityZone Control Center; consumer Bitdefender Central is a separate service."
+    },
+    "defender-business": {
+      "officialUrl": "https://learn.microsoft.com/en-us/defender-business/mdb-overview",
+      "primary": {
+        "kind": "account",
+        "label": "Open licensed device onboarding",
+        "url": "https://learn.microsoft.com/en-us/defender-business/mdb-onboard-devices",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/defender-business/mdb-onboard-devices",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://learn.microsoft.com/en-us/defender-business/mdb-overview",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/defender-business/mdb-overview",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Follow the licensed organization’s onboarding method. Windows protection is integrated; organizational onboarding packages and other-platform clients depend on the deployment."
+    },
+    "sophos-endpoint": {
+      "officialUrl": "https://www.sophos.com/en-us/products/endpoint-security",
+      "primary": {
+        "kind": "account",
+        "label": "Open endpoint deployment console",
+        "url": "https://central.sophos.com/manage/login",
+        "evidenceUrl": "https://www.sophos.com/en-us/products/endpoint-security",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.sophos.com/en-us/products/endpoint-security",
+          "evidenceUrl": "https://www.sophos.com/en-us/products/endpoint-security",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Sign in to the licensed organization to generate the endpoint installer. Linux server protection has separate deployment and subscription requirements."
+    },
+    "veeam-agent": {
+      "officialUrl": "https://www.veeam.com/products/free/microsoft-windows",
+      "primary": {
+        "kind": "account",
+        "label": "Sign in for the Windows download",
+        "url": "https://www.veeam.com/products/physical/windows-backup-recovery-download.html",
+        "evidenceUrl": "https://www.veeam.com/products/physical/windows-backup-recovery-download.html",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://www.veeam.com/products/free/microsoft-windows",
+          "evidenceUrl": "https://www.veeam.com/products/free/microsoft-windows",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The publisher download route requires a Veeam account; no temporary authenticated file URL is stored."
+    },
+    "meshcentral": {
+      "officialUrl": "https://meshcentral.com/",
+      "primary": {
+        "kind": "package",
+        "label": "Open server installation instructions",
+        "url": "https://github.com/Ylianst/MeshCentral#installation",
+        "evidenceUrl": "https://github.com/Ylianst/MeshCentral",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/Ylianst/MeshCentral",
+          "evidenceUrl": "https://github.com/Ylianst/MeshCentral",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Install and configure the server with the documented Node.js package. Generate endpoint agents from your own server so they connect to the correct organization."
+    },
+    "dislocker": {
+      "officialUrl": "https://github.com/Aorimn/dislocker",
+      "primary": {
+        "kind": "source",
+        "label": "Download source · ZIP",
+        "url": "https://api.github.com/repos/Aorimn/dislocker/zipball/refs/tags/v0.7.4",
+        "evidenceUrl": "https://api.github.com/repos/Aorimn/dislocker/tags",
+        "checkedAt": "2026-11-26",
+        "platform": "Linux / Unix",
+        "format": "ZIP",
+        "version": "v0.7.4"
+      },
+      "alternates": [
+        {
+          "kind": "source",
+          "label": "Open source and build instructions",
+          "url": "https://github.com/Aorimn/dislocker",
+          "evidenceUrl": "https://github.com/Aorimn/dislocker",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The upstream project documents a source build for supported Unix-like systems; this is not a ready Windows application."
+    },
+    "system-informer": {
+      "officialUrl": "https://systeminformer.sourceforge.io/",
+      "primary": {
+        "kind": "release-page",
+        "label": "Get Windows portable ZIP · download page",
+        "url": "https://sourceforge.net/projects/systeminformer/files/systeminformer-4.0.26241.138-bin.zip/download",
+        "evidenceUrl": "https://systeminformer.sourceforge.io/downloads",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://systeminformer.sourceforge.io/downloads",
+          "evidenceUrl": "https://systeminformer.sourceforge.io/downloads",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The exact publisher-hosted ZIP page obtains the file through a mirror; temporary mirror URLs are not saved."
+    },
+    "ddrescue": {
+      "officialUrl": "https://www.gnu.org/software/ddrescue/",
+      "primary": {
+        "kind": "source",
+        "label": "Download source · TAR.LZ",
+        "url": "https://ftp.gnu.org/gnu/ddrescue/ddrescue-1.30.tar.lz",
+        "evidenceUrl": "https://ftp.gnu.org/gnu/ddrescue/",
+        "checkedAt": "2026-11-26",
+        "platform": "Linux / Unix",
+        "format": "TAR.LZ"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://ftp.gnu.org/gnu/ddrescue/",
+          "evidenceUrl": "https://ftp.gnu.org/gnu/ddrescue/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "This is source code. For an immediately bootable recovery environment, use the SystemRescue ISO in the failing-drive guide; keep the mapfile and image on healthy storage."
+    },
+    "iperf3": {
+      "officialUrl": "https://software.es.net/iperf/",
+      "primary": {
+        "kind": "source",
+        "label": "Download source · TAR.GZ",
+        "url": "https://downloads.es.net/pub/iperf/iperf-3.22.1.tar.gz",
+        "evidenceUrl": "https://downloads.es.net/pub/iperf/",
+        "checkedAt": "2026-11-26",
+        "platform": "Linux / Unix",
+        "format": "TAR.GZ"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://downloads.es.net/pub/iperf/",
+          "evidenceUrl": "https://downloads.es.net/pub/iperf/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Upstream publishes source. Install a supported operating-system package or follow its build instructions; this link is not an official Windows executable."
+    },
+    "cryptsetup": {
+      "officialUrl": "https://gitlab.com/cryptsetup/cryptsetup",
+      "primary": {
+        "kind": "source",
+        "label": "Download source · TAR.XZ",
+        "url": "https://www.kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.9.tar.xz",
+        "evidenceUrl": "https://www.kernel.org/pub/linux/utils/cryptsetup/v2.8/",
+        "checkedAt": "2026-11-26",
+        "platform": "Linux",
+        "format": "TAR.XZ"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://gitlab.com/cryptsetup/cryptsetup/-/releases",
+          "evidenceUrl": "https://gitlab.com/cryptsetup/cryptsetup/-/releases",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Install your distribution’s maintained package for normal use; this upstream source archive requires a build."
+    },
+    "sigma": {
+      "officialUrl": "https://sigmahq.io/",
+      "primary": {
+        "kind": "file",
+        "label": "Download detection rules · ZIP",
+        "url": "https://github.com/SigmaHQ/sigma/releases/download/r2026-07-01/sigma_all_rules.zip",
+        "evidenceUrl": "https://api.github.com/repos/SigmaHQ/sigma/releases/latest",
+        "checkedAt": "2026-11-26",
+        "platform": "Cross-platform",
+        "format": "ZIP",
+        "version": "r2026-07-01"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://github.com/SigmaHQ/sigma",
+          "evidenceUrl": "https://github.com/SigmaHQ/sigma",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "This archive contains detection rules, not an antivirus executable. Convert and tune rules for the target telemetry platform."
+    },
+    "claude-code": {
+      "officialUrl": "https://code.claude.com/docs/en/overview",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows install script · CMD",
+        "url": "https://claude.ai/install.cmd",
+        "evidenceUrl": "https://code.claude.com/docs/en/setup",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "CMD"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Unix install script · SH",
+          "url": "https://claude.ai/install.sh",
+          "evidenceUrl": "https://code.claude.com/docs/en/setup",
+          "checkedAt": "2026-11-26",
+          "platform": "macOS / Linux",
+          "format": "SH"
+        },
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://code.claude.com/docs/en/setup",
+          "evidenceUrl": "https://code.claude.com/docs/en/setup",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "These are installer scripts. Review the documented prerequisites and authentication options before running a downloaded script."
+    },
+    "wazuh": {
+      "officialUrl": "https://wazuh.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows endpoint agent · MSI",
+        "url": "https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.11-1.msi",
+        "evidenceUrl": "https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "MSI",
+        "version": "4.14.11-1"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://documentation.wazuh.com/current/installation-guide/index.html",
+          "evidenceUrl": "https://documentation.wazuh.com/current/installation-guide/index.html",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "This installs the endpoint agent, not the complete monitoring platform. Configure it for your deployed server and follow the documented enrollment steps."
+    },
+    "clonezilla": {
+      "officialUrl": "https://clonezilla.org/",
+      "primary": {
+        "kind": "release-page",
+        "label": "Get x64 rescue image · ISO",
+        "url": "https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso",
+        "evidenceUrl": "https://clonezilla.org/downloads/download.php?branch=stable",
+        "checkedAt": "2026-11-26",
+        "platform": "Boot media",
+        "architecture": "x64",
+        "format": "ISO",
+        "version": "3.3.5-3"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "All download options",
+          "url": "https://clonezilla.org/downloads.php",
+          "evidenceUrl": "https://clonezilla.org/downloads.php",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "This is the publisher’s exact ISO route. The file host may show its download page before delivering the image; mirror delivery varies by client. No expiring mirror URL is stored."
+    }
+  }
+}

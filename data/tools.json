@@ -3399,5 +3399,37 @@
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
     "cautions": "Check trailing-slash semantics and avoid delete options unless deletion is part of the reviewed plan."
+  },
+  {
+    "id": "get-help",
+    "name": "Windows Get Help",
+    "category": "windows",
+    "summary": "Microsoft’s Windows support application with guided troubleshooters for common printer, network, audio and update problems.",
+    "bestFor": "Starting Microsoft’s guided Windows troubleshooters before manual printer, network or update repairs.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows; assisted support availability depends on the account and support agreement.",
+    "homepage": "https://support.microsoft.com/en-us/support/get-help/about-get-help",
+    "downloadUrl": "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters",
+    "docsUrl": "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters",
+    "sourceUrl": "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "printer",
+      "troubleshooting",
+      "network",
+      "windows-update",
+      "built-in"
+    ],
+    "cautions": "Troubleshooter launch buttons require the Get Help application on supported Windows. Classic Outlook diagnostics do not apply to new Outlook. Record the findings and test the affected task after repair.",
+    "provenance": [
+      "Microsoft Windows printer troubleshooting instructions",
+      "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+      "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters"
+    ],
+    "evidenceStatus": "Official documentation and launch route reviewed; not an INTA Windows runtime certification."
   }
 ]

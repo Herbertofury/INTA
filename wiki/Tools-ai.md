@@ -24,13 +24,13 @@ Use sanitized evidence, verified sources, and reviewed commands throughout an as
 
 ## Tool comparison
 
-| Tool | Choose it for | Platforms | Role |
+| Tool | Choose it for | Platforms / role | Official page + download |
 | --- | --- | --- | --- |
-| [ChatGPT](#chatgpt) | Explaining redacted errors, drafting job notes and reviewing a proposed troubleshooting plan. | Web, [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) | Core |
-| [Claude Code](#claude-code) | Explaining logs and developing a reviewed automation script. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) | Core |
-| [OpenAI Codex CLI](#codex-cli) | Reviewing or building technician scripts in a controlled working folder. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) | Core |
-| [Gemini CLI](#gemini-cli) | An additional AI-assisted terminal workflow for reviewed scripts and documentation. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) | Specialist |
-| [Ollama](#ollama) | A local AI assistant when the machine has the capacity and model files are available. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) | Specialist |
+| [ChatGPT](#chatgpt) | Explaining redacted errors, drafting job notes and reviewing a proposed troubleshooting plan. | Web, [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) · Core | [Official page](https://chatgpt.com/) · **[Open ChatGPT](https://chatgpt.com/)** |
+| [Claude Code](#claude-code) | Explaining logs and developing a reviewed automation script. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://code.claude.com/docs/en/overview) · **[Download Windows install script · CMD](https://claude.ai/install.cmd)** |
+| [OpenAI Codex CLI](#codex-cli) | Reviewing or building technician scripts in a controlled working folder. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://github.com/openai/codex) · **[Download Windows x64 CLI · EXE](https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe)** |
+| [Gemini CLI](#gemini-cli) | An additional AI-assisted terminal workflow for reviewed scripts and documentation. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://github.com/google-gemini/gemini-cli) · **[Download CLI bundle · ZIP](https://github.com/google-gemini/gemini-cli/releases/download/v0.71.1/gemini-cli-bundle.zip)** |
+| [Ollama](#ollama) | A local AI assistant when the machine has the capacity and model files are available. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://ollama.com/) · **[Download Windows setup · EXE](https://ollama.com/download/OllamaSetup.exe)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
@@ -40,7 +40,7 @@ Core means an everyday candidate; Specialist means a focused advanced use; Evalu
 
 AI assistant available through the official web service and supported desktop apps.
 
-[Official download](https://chatgpt.com/download/) · [Documentation](https://help.openai.com/) · [Publisher](https://chatgpt.com/)
+[Official page](https://chatgpt.com/) · **[Open ChatGPT](https://chatgpt.com/)** · [All download options](https://chatgpt.com/download/) · [Documentation](https://help.openai.com/)
 
 | Decision | Detail |
 | --- | --- |
@@ -71,7 +71,7 @@ AI assistant available through the official web service and supported desktop ap
 
 Terminal-based coding assistant for navigating and changing a project.
 
-[Official download](https://code.claude.com/docs/en/setup) · [Documentation](https://code.claude.com/docs/en/overview) · [Publisher](https://code.claude.com/docs/en/overview)
+[Official page](https://code.claude.com/docs/en/overview) · **[Download Windows install script · CMD](https://claude.ai/install.cmd)** · [Download Unix install script · SH](https://claude.ai/install.sh) · [All download options](https://code.claude.com/docs/en/setup) · [Documentation](https://code.claude.com/docs/en/overview)
 
 | Decision | Detail |
 | --- | --- |
@@ -102,7 +102,7 @@ Terminal-based coding assistant for navigating and changing a project.
 
 Coding agent that works with local project files and tools through a terminal interface.
 
-[Official download](https://github.com/openai/codex/releases/latest) · [Documentation](https://developers.openai.com/codex/cli/) · [Publisher](https://github.com/openai/codex)
+[Official page](https://github.com/openai/codex) · **[Download Windows x64 CLI · EXE](https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe)** · [All download options](https://github.com/openai/codex/releases/latest) · [Documentation](https://developers.openai.com/codex/cli/)
 
 | Decision | Detail |
 | --- | --- |
@@ -133,7 +133,7 @@ Coding agent that works with local project files and tools through a terminal in
 
 Open-source command-line agent with Google Gemini integration.
 
-[Official download](https://github.com/google-gemini/gemini-cli/releases/latest) · [Documentation](https://geminicli.com/docs/) · [Publisher](https://github.com/google-gemini/gemini-cli)
+[Official page](https://github.com/google-gemini/gemini-cli) · **[Download CLI bundle · ZIP](https://github.com/google-gemini/gemini-cli/releases/download/v0.71.1/gemini-cli-bundle.zip)** · [All download options](https://github.com/google-gemini/gemini-cli/releases/latest) · [Documentation](https://geminicli.com/docs/)
 
 | Decision | Detail |
 | --- | --- |
@@ -164,7 +164,7 @@ Open-source command-line agent with Google Gemini integration.
 
 Local model runtime with downloadable models and a local API.
 
-[Official download](https://ollama.com/download) · [Documentation](https://docs.ollama.com/) · [Publisher](https://ollama.com/)
+[Official page](https://ollama.com/) · **[Download Windows setup · EXE](https://ollama.com/download/OllamaSetup.exe)** · [All download options](https://ollama.com/download) · [Documentation](https://docs.ollama.com/)
 
 | Decision | Detail |
 | --- | --- |

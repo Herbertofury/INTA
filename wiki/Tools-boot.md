@@ -25,15 +25,15 @@ Keep independent rescue environments ready and test the exact hardware boot path
 
 ## Tool comparison
 
-| Tool | Choose it for | Platforms | Role |
+| Tool | Choose it for | Platforms / role | Official page + download |
 | --- | --- | --- | --- |
-| [Debian Live](#debian-live) | A general [Linux](https://www.kernel.org/) session independent of the installed operating system. | Bootable PC | Core |
-| [Hiren's BootCD PE](#hirens-bootcd-pe) | A familiar [Windows](https://www.microsoft.com/windows)-oriented offline bench toolkit. | Bootable PC | Core |
-| [Rufus](#rufus) | Preparing one ISO on a dedicated USB drive. | [Windows](https://www.microsoft.com/windows) | Core |
-| [SystemRescue](#systemrescue) | A ready-made [Linux](https://www.kernel.org/) recovery environment for an unbootable or damaged machine. | Bootable PC | Core |
-| [Ubuntu Desktop live media](#ubuntu-live) | Hardware checks and file access from a familiar [Linux](https://www.kernel.org/) desktop. | Bootable PC | Core |
-| [Ventoy](#ventoy) | Maintaining a technician USB with several independently updated rescue images. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/) | Core |
-| [Windows 11 installation media](#microsoft-windows11-media) | A clean installation or supported repair using the correct [Windows](https://www.microsoft.com/windows) edition and architecture. | [Windows](https://www.microsoft.com/windows), Bootable PC | Core |
+| [Debian Live](#debian-live) | A general [Linux](https://www.kernel.org/) session independent of the installed operating system. | Bootable PC · Core | [Official page](https://www.debian.org/CD/live/) · **[Download x64 Xfce live image · ISO](https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.8.0-amd64-xfce.iso)** |
+| [Hiren's BootCD PE](#hirens-bootcd-pe) | A familiar [Windows](https://www.microsoft.com/windows)-oriented offline bench toolkit. | Bootable PC · Core | [Official page](https://www.hirensbootcd.org/) · **[Download x64 rescue image · ISO](https://www.hirensbootcd.org/files/HBCD_PE_x64.iso)** |
+| [Rufus](#rufus) | Preparing one ISO on a dedicated USB drive. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://rufus.ie/) · **[Download Windows x64 portable · EXE](https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe)** |
+| [SystemRescue](#systemrescue) | A ready-made [Linux](https://www.kernel.org/) recovery environment for an unbootable or damaged machine. | Bootable PC · Core | [Official page](https://www.system-rescue.org/) · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** |
+| [Ubuntu Desktop live media](#ubuntu-live) | Hardware checks and file access from a familiar [Linux](https://www.kernel.org/) desktop. | Bootable PC · Core | [Official page](https://ubuntu.com/desktop) · **[Download x64 desktop image · ISO](https://releases.ubuntu.com/26.04.1/ubuntu-26.04.1-desktop-amd64.iso)** |
+| [Ventoy](#ventoy) | Maintaining a technician USB with several independently updated rescue images. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/) · Core | [Official page](https://www.ventoy.net/) · **[Download Windows package · ZIP](https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip)** |
+| [Windows 11 installation media](#microsoft-windows11-media) | A clean installation or supported repair using the correct [Windows](https://www.microsoft.com/windows) edition and architecture. | [Windows](https://www.microsoft.com/windows), Bootable PC · Core | [Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
@@ -43,7 +43,7 @@ Core means an everyday candidate; Specialist means a focused advanced use; Evalu
 
 Official live images for a standard [Debian](https://www.debian.org/) desktop and recovery starting point.
 
-[Official download](https://www.debian.org/CD/live/) · [Documentation](https://live-team.pages.debian.net/live-manual/html/live-manual/index.en.html) · [Publisher](https://www.debian.org/CD/live/)
+[Official page](https://www.debian.org/CD/live/) · **[Download x64 Xfce live image · ISO](https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.8.0-amd64-xfce.iso)** · [Documentation](https://live-team.pages.debian.net/live-manual/html/live-manual/index.en.html)
 
 | Decision | Detail |
 | --- | --- |
@@ -72,7 +72,7 @@ Official live images for a standard [Debian](https://www.debian.org/) desktop an
 
 [Windows PE](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro) recovery environment containing a broad collection of technician utilities.
 
-[Official download](https://www.hirensbootcd.org/download/) · [Documentation](https://www.hirensbootcd.org/howtos/) · [Publisher](https://www.hirensbootcd.org/)
+[Official page](https://www.hirensbootcd.org/) · **[Download x64 rescue image · ISO](https://www.hirensbootcd.org/files/HBCD_PE_x64.iso)** · [All download options](https://www.hirensbootcd.org/download/) · [Documentation](https://www.hirensbootcd.org/howtos/)
 
 | Decision | Detail |
 | --- | --- |
@@ -103,7 +103,7 @@ Official live images for a standard [Debian](https://www.debian.org/) desktop an
 
 Writes bootable USB media from operating-system and recovery images.
 
-[Official download](https://rufus.ie/#download) · [Documentation](https://github.com/pbatard/rufus/wiki/FAQ) · [Publisher](https://rufus.ie/)
+[Official page](https://rufus.ie/) · **[Download Windows x64 portable · EXE](https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe)** · [All download options](https://rufus.ie/#download) · [Documentation](https://github.com/pbatard/rufus/wiki/FAQ)
 
 | Decision | Detail |
 | --- | --- |
@@ -134,7 +134,7 @@ Writes bootable USB media from operating-system and recovery images.
 
 [Linux](https://www.kernel.org/) rescue environment for storage, filesystem and administrative recovery work.
 
-[Official download](https://www.system-rescue.org/Download/) · [Documentation](https://www.system-rescue.org/manual/) · [Publisher](https://www.system-rescue.org/)
+[Official page](https://www.system-rescue.org/) · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** · [All download options](https://www.system-rescue.org/Download/) · [Documentation](https://www.system-rescue.org/manual/)
 
 | Decision | Detail |
 | --- | --- |
@@ -165,7 +165,7 @@ Writes bootable USB media from operating-system and recovery images.
 
 Official [Ubuntu](https://ubuntu.com/) desktop installer with a live try-before-install workflow.
 
-[Official download](https://ubuntu.com/download/desktop) · [Documentation](https://ubuntu.com/tutorials/try-ubuntu-before-you-install) · [Publisher](https://ubuntu.com/desktop)
+[Official page](https://ubuntu.com/desktop) · **[Download x64 desktop image · ISO](https://releases.ubuntu.com/26.04.1/ubuntu-26.04.1-desktop-amd64.iso)** · [All download options](https://ubuntu.com/download/desktop) · [Documentation](https://ubuntu.com/tutorials/try-ubuntu-before-you-install)
 
 | Decision | Detail |
 | --- | --- |
@@ -196,7 +196,7 @@ Official [Ubuntu](https://ubuntu.com/) desktop installer with a live try-before-
 
 Boot menu for multiple ISO and other image files copied onto prepared media.
 
-[Official download](https://www.ventoy.net/en/download.html) · [Documentation](https://www.ventoy.net/en/doc_start.html) · [Publisher](https://www.ventoy.net/)
+[Official page](https://www.ventoy.net/) · **[Download Windows package · ZIP](https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip)** · [All download options](https://www.ventoy.net/en/download.html) · [Documentation](https://www.ventoy.net/en/doc_start.html)
 
 | Decision | Detail |
 | --- | --- |
@@ -227,7 +227,7 @@ Boot menu for multiple ISO and other image files copied onto prepared media.
 
 Official Microsoft installation assistant, media creation and ISO download source.
 
-[Official download](https://www.microsoft.com/software-download/windows11) · [Documentation](https://www.microsoft.com/software-download/windows11) · [Publisher](https://www.microsoft.com/software-download/windows11)
+[Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)** · [Documentation](https://www.microsoft.com/software-download/windows11)
 
 | Decision | Detail |
 | --- | --- |

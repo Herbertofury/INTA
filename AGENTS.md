@@ -8,9 +8,14 @@ Wiki navigation must make every service scenario and tool category directly visi
 
 Lead the application Home, Wiki Home, README and Start Here with shared, source-checked free tool picks for common urgent scenarios, direct official links and the matching guide. Preserve the complete catalog below this fast starting point. Record the evidence and current free-use boundary for each pick; do not invent ratings or present a limited test result as a universal ranking.
 
+Every service scenario needs a visible plain-language answer route. Use labels such as **Remove viruses** and **Fix a printer**. Put exactly three concrete first actions above the full procedure. Shared guides must retain distinct case links so a recovery or network shortcut opens the intended answer. Home rows need one useful first-action sentence, not repeated selection essays.
+
+Show separate **Official page** and exact acquisition links wherever tools are offered. A file action must identify its platform and file type and come from an observed publisher link. Do not call an HTML landing page a direct download, guess filenames, substitute source code for an installer, or send every built-in troubleshooter to the same problem. Label Store, built-in, package, web and account-specific routes honestly. Preserve alternate platforms and existing routes in details.
+
 ## Canonical inputs
 
 - [Tool catalog](data/tools.json): stable IDs, official routes, platform and pricing boundaries, editorial review evidence.
+- [Tool acquisition routes](data/tool-access.json): official product pages, exact observed files, platform alternatives, scenario action IDs and source evidence.
 - [Quick-start selections](data/quick-start.json): scenario-specific free starting tools, practical fit, current sources and evidence for their selection.
 - [Job guides](data/jobs.json): procedure, recommended tool IDs, verification, escalation and sources.
 - [Method registry](data/methods.json): precise names/aliases and canonical method destinations.

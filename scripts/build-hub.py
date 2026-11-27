@@ -107,7 +107,80 @@ def link_module():
     return module
 
 
-def validate_quick_start(quick_start: dict, tools: list[dict], jobs: list[dict]) -> None:
+def validate_tool_access(access: dict, tools: list[dict]) -> None:
+    """Keep a publisher page distinct from an observed acquisition route."""
+    if not isinstance(access, dict) or access.get("schemaVersion") != 1:
+        raise ValueError("Tool access requires schemaVersion 1")
+    entries = access.get("tools", {})
+    if not isinstance(entries, dict) or set(entries) != {tool["id"] for tool in tools}:
+        raise ValueError("Tool access must cover every catalog tool exactly")
+    kinds = {"file", "store", "builtin", "web", "account", "package", "source", "release-page"}
+
+    def public_url(value, identity):
+        parsed = urlparse(value) if isinstance(value, str) else None
+        if (parsed is None or parsed.scheme != "https" or not parsed.hostname
+                or parsed.username or parsed.password
+                or any(key in parsed.query.lower() for key in ("utm_", "fbclid=", "gclid="))):
+            raise ValueError(f"{identity}: a public HTTPS URL without tracking is required")
+
+    for identity, entry in entries.items():
+        public_url(entry.get("officialUrl"), identity)
+        primary = entry.get("primary")
+        alternates = entry.get("alternates", [])
+        if not isinstance(primary, dict) or not isinstance(alternates, list):
+            raise ValueError(f"{identity}: primary acquisition and alternate list are required")
+        action_ids = set()
+        for action in [primary, *alternates]:
+            if not isinstance(action, dict) or action.get("kind") not in kinds:
+                raise ValueError(f"{identity}: unknown acquisition kind")
+            label = action.get("label")
+            if not isinstance(label, str) or not label.strip() or re.search(r"[\n\r<>\[\]|`*]", label):
+                raise ValueError(f"{identity}: acquisition labels must be plain, useful text")
+            public_url(action.get("url"), identity)
+            public_url(action.get("evidenceUrl"), identity)
+            try:
+                date.fromisoformat(action.get("checkedAt", ""))
+            except (TypeError, ValueError):
+                raise ValueError(f"{identity}: acquisition review date is required") from None
+            if action["kind"] == "file" and not all(action.get(k) for k in ("platform", "format")):
+                raise ValueError(f"{identity}: direct files must identify platform and format")
+            if action["kind"] != "file" and re.search(r"\bdirect download\b", label, re.I):
+                raise ValueError(f"{identity}: a non-file route cannot claim a direct download")
+            if "id" in action:
+                action_id = action["id"]
+                if (not isinstance(action_id, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", action_id)
+                        or action_id in action_ids):
+                    raise ValueError(f"{identity}: acquisition action IDs must be distinct and stable")
+                action_ids.add(action_id)
+
+
+def selected_tool_action(entry: dict, action_id: str | None = None) -> dict:
+    if action_id is None:
+        return entry["primary"]
+    for action in [entry["primary"], *entry.get("alternates", [])]:
+        if action.get("id") == action_id:
+            return action
+    raise ValueError(f"Unknown scenario acquisition action: {action_id}")
+
+
+def tool_access_links(tool: dict, access: dict, *, all_routes: bool = False,
+                      action_id: str | None = None) -> str:
+    entry = access[tool["id"]]
+    primary = selected_tool_action(entry, action_id)
+    links = [f"[Official page]({entry['officialUrl']})", f"**[{cell(primary['label'])}]({primary['url']})**"]
+    seen = {entry["officialUrl"], primary["url"]}
+    if all_routes:
+        for action in [entry["primary"], *entry.get("alternates", [])]:
+            if action["url"] not in seen:
+                links += [f"[{cell(action['label'])}]({action['url']})"]
+                seen.add(action["url"])
+        if tool["downloadUrl"] not in seen:
+            links += [f"[All downloads / setup]({tool['downloadUrl']})"]
+    return " · ".join(links)
+
+
+def validate_quick_start(quick_start: dict, tools: list[dict], jobs: list[dict],
+                         access: dict | None = None) -> None:
     if not isinstance(quick_start, dict) or quick_start.get("schemaVersion") != 1:
         raise ValueError("Quick start requires schemaVersion 1")
     try:
@@ -119,7 +192,7 @@ def validate_quick_start(quick_start: dict, tools: list[dict], jobs: list[dict])
         raise ValueError("Quick start requires reviewed tool selections")
     tool_ids, job_ids = {tool["id"] for tool in tools}, {job["id"] for job in jobs}
     seen_ids = set()
-    required = ("id", "jobId", "toolId", "label", "why", "boundary", "freeUse", "qualityBasis")
+    required = ("id", "jobId", "label", "firstStep", "why", "boundary", "freeUse", "qualityBasis")
     for item in items:
         if not isinstance(item, dict):
             raise ValueError("Quick-start entries must be objects")
@@ -130,8 +203,17 @@ def validate_quick_start(quick_start: dict, tools: list[dict], jobs: list[dict])
         if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", identity) or identity in seen_ids:
             raise ValueError(f"Invalid or duplicate quick-start id: {identity}")
         seen_ids.add(identity)
-        if item["toolId"] not in tool_ids or item["jobId"] not in job_ids:
+        if item["jobId"] not in job_ids or (item.get("toolId") not in tool_ids and not
+                (item.get("guideOnly") is True and item.get("toolId") is None)):
             raise ValueError(f"{identity}: quick start references an unknown tool or playbook")
+        steps = item.get("quickSteps")
+        if not isinstance(steps, list) or len(steps) != 3 or any(not isinstance(s, str) or not s.strip() for s in steps):
+            raise ValueError(f"{identity}: exactly three concrete first actions are required")
+        if item.get("toolAction") is not None:
+            if item.get("guideOnly") or not isinstance(item["toolAction"], str):
+                raise ValueError(f"{identity}: scenario actions require a tool and a stable action ID")
+            if access is not None:
+                selected_tool_action(access[item["toolId"]], item["toolAction"])
         if re.search(r"[\n\r<>\[\]|`*]", item["label"]):
             raise ValueError(f"{identity}: quick-start labels must be plain single-line text")
         icon = item.get("icon")
@@ -147,20 +229,29 @@ def validate_quick_start(quick_start: dict, tools: list[dict], jobs: list[dict])
             if (parsed is None or parsed.scheme != "https" or not parsed.hostname or parsed.username
                     or any(key in parsed.query.lower() for key in ("utm_", "fbclid=", "gclid="))):
                 raise ValueError(f"{identity}: evidence must use public HTTPS URLs without tracking")
+    if {item["jobId"] for item in items} != job_ids:
+        raise ValueError("Quick start must cover every service scenario")
 
 
-def quick_start_markdown(quick_start: dict, tools_by_id: dict, layout: dict) -> str:
-    lines = [anchor("free-tools"), "", "## ⚡ Free tools for common jobs", "",
-             "Open a tool below, or select the scenario for its step-by-step guide. "
-             f"[How these picks were chosen]({WIKI}/Free-Tool-Picks).", "",
-             "| Scenario | Primary free tool |", "| --- | --- |"]
+def quick_start_markdown(quick_start: dict, tools_by_id: dict, layout: dict, access: dict) -> str:
+    lines = [anchor("free-tools"), "", "## ⚡ What do you need to fix?", "",
+             "**Choose your problem for the first three actions.** Tool names open the official page; "
+             "download links identify the file and platform. Built-in features link to their instructions.", "",
+             "| Fix this | Official tool + download / next action |", "| --- | --- |"]
     for item in quick_start["items"]:
-        job_id, tool = item["jobId"], tools_by_id[item["toolId"]]
+        job_id = item["jobId"]
         icon = item.get("icon") or layout["jobs"][job_id]["navigationIcon"]
-        guide = f"{WIKI}/Job-{job_id}"
-        lines += [f"| **[{icon} {cell(item['label'])}]({guide})** | **[{tool['name']}]({tool['downloadUrl']})** |"]
+        guide = f"{WIKI}/Job-{job_id}#quick-{item['id']}"
+        if item.get("guideOnly"):
+            action = f"No extra download needed · **[Open checklist]({guide})**"
+        else:
+            tool = tools_by_id[item["toolId"]]
+            entry = access[tool["id"]]
+            primary = selected_tool_action(entry, item.get("toolAction"))
+            action = f"**[{tool['name']}]({entry['officialUrl']})** · **[{cell(primary['label'])}]({primary['url']})**"
+        lines += [f"| **[{icon} {cell(item['label'])}]({guide})** | {action} |"]
     lines += ["", f"Selection review: **{quick_start['reviewedAt']}** · "
-              f"[Complete tool directory]({WIKI}/Tool-Directory)", ""]
+              f"[Complete tool directory]({WIKI}/Tool-Directory) · [Why these tools]({WIKI}/Free-Tool-Picks)", ""]
     return "\n".join(lines)
 
 
@@ -311,16 +402,35 @@ def command_reference(step: dict, by_id: dict) -> str:
 
 
 def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
-                 jobs_by_id: dict | None = None, reviewed: str = "2026-11-26") -> str:
+                 jobs_by_id: dict | None = None, reviewed: str = "2026-11-26",
+                 quick_items: list[dict] | None = None, access: dict | None = None) -> str:
     layout = layout or json.loads((ROOT / "data/wiki-layout.json").read_text(encoding="utf-8"))
     config = layout["jobs"][job["id"]]
     jobs_by_id = jobs_by_id or {j["id"]: j for j in records(ROOT / "data/jobs.json", "jobs")}
+    if access is None:
+        access = json.loads((ROOT / "data/tool-access.json").read_text(encoding="utf-8"))["tools"]
+    if quick_items is None:
+        quick_items = [item for item in json.loads((ROOT / "data/quick-start.json").read_text(encoding="utf-8"))["items"]
+                       if item["jobId"] == job["id"]]
     destination = lambda identity: f"{WIKI}/Job-{identity}" if wiki else f"{identity}.md"
     lines = [page_nav(), "", *heading(1, job["title"], f"{config['icon']} {job['title']}"), job["summary"], "",
              f"**{cell(job['category'])}** · {cell(job['difficulty'])} · {cell(job['estimatedTime'])} · {len(job['steps'])} steps", "",
-             "[Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · "
-             f"[Verification](#acceptance) · [Sources](#sources) · [Interactive checklist]({HUB}#job/{job['id']})", "",
-             "> [!NOTE]", f"> **Start here.** {job['startHere']}", "",
+             "[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · "
+             f"[Verification](#acceptance) · [Sources](#sources) · [Interactive checklist]({HUB}#job/{job['id']})", ""]
+    if quick_items:
+        lines += [anchor("quick-answer"), "", "## ⚡ Quick answer", ""]
+        for item in quick_items:
+            lines += [anchor(f"quick-{item['id']}"), "", f"### {item.get('icon', '🛠️')} {item['label']}", "",
+                      f"**{item['firstStep']}**", ""]
+            lines += [f"{n}. {step}" for n, step in enumerate(item["quickSteps"], 1)]
+            lines += [""]
+            if item.get("guideOnly"):
+                lines += ["**No extra download needed.** Follow the checklist below.", ""]
+            else:
+                tool = by_id[item["toolId"]]
+                lines += [f"**[{tool['name']}]({access[tool['id']]['officialUrl']})** · "
+                          + tool_access_links(tool, access, action_id=item.get("toolAction")), ""]
+    lines += ["> [!NOTE]", f"> **Start here.** {job['startHere']}", "",
              anchor("decision-route"), "", *heading(2, "🧭 Choose a route", "🧭 Choose the right branch"),
              "<details>", "<summary>View the decision map and escalation routes</summary>", ""]
     lines += diagram_block(config["diagram"])
@@ -332,10 +442,10 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
     lines += ["", anchor("toolkit"), "", *heading(2, "Recommended tools", "🧰 Build the right toolkit")]
     if job["tools"]:
         lines += ["Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.", "",
-                  "| Tool / official download | Use it for | Platform & access | Documentation |", "| --- | --- | --- | --- |"]
+                  "| Tool / official page + download | Use it for | Platform & access | Documentation |", "| --- | --- | --- | --- |"]
         for tool_id in job["tools"]:
             tool = by_id[tool_id]
-            lines += [f"| [{tool['name']}]({tool['downloadUrl']}) | {cell(tool['bestFor'])} | "
+            lines += [f"| **[{tool['name']}]({access[tool_id]['officialUrl']})** · {tool_access_links(tool, access)} | {cell(tool['bestFor'])} | "
                       f"{cell(tool['platforms'])}; {cell(tool['pricing'])} | [Open guide]({tool['docsUrl']}) |"]
     else:
         lines += [f"Use the approved private service record and the [intake and handoff template]({WIKI}/Technician-Handoff). No specialist application is required."]
@@ -373,7 +483,7 @@ def tier_label(value: str) -> str:
     return {"core": "Core", "specialist": "Specialist", "evaluate": "Evaluate"}[value]
 
 
-def category_markdown(category: str, tools: list[dict], layout: dict, jobs: dict, reviewed: str) -> str:
+def category_markdown(category: str, tools: list[dict], layout: dict, jobs: dict, reviewed: str, access: dict) -> str:
     info = layout["categories"].get(category, {"icon": "🧰", "intro": "Choose a tool for the observed job.", "jobs": [], "question": "What result do you need?"})
     label = CATEGORY_NAMES.get(category, category)
     ordered = sorted(tools, key=lambda t: ({"core": 0, "specialist": 1, "evaluate": 2}[t["tier"]], t["name"].casefold()))
@@ -382,13 +492,13 @@ def category_markdown(category: str, tools: list[dict], layout: dict, jobs: dict
              f"**Selection question:** {info['question']}", "", *heading(2, "Related playbooks", "🧭 Start with a workflow")]
     lines += [f"- [{jobs[identity]['title']}]({WIKI}/Job-{identity})" for identity in info["jobs"]]
     lines += ["", anchor("compare-options"), "", *heading(2, "Tool comparison", "⚖️ Compare the options"),
-              "| Tool | Choose it for | Platforms | Role |", "| --- | --- | --- | --- |"]
+              "| Tool | Choose it for | Platforms / role | Official page + download |", "| --- | --- | --- | --- |"]
     for tool in ordered:
-        lines += [f"| [{tool['name']}](#{tool['id']}) | {cell(tool['bestFor'])} | {cell(tool['platforms'])} | {tier_label(tool['tier'])} |"]
+        lines += [f"| [{tool['name']}](#{tool['id']}) | {cell(tool['bestFor'])} | {cell(tool['platforms'])} · {tier_label(tool['tier'])} | {tool_access_links(tool, access)} |"]
     lines += ["", "Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.", ""]
     for tool in ordered:
         lines += [anchor(tool["id"]), "", f"## {tool['name']}", "", tool["summary"], "",
-                  f"[Official download]({tool['downloadUrl']}) · [Documentation]({tool['docsUrl']}) · [Publisher]({tool['homepage']})", "",
+                  tool_access_links(tool, access, all_routes=True) + f" · [Documentation]({tool['docsUrl']})", "",
                   "| Decision | Detail |", "| --- | --- |",
                   f"| **Choose it for** | {cell(tool['bestFor'])} |",
                   f"| **Where it runs** | {cell(tool['platforms'])} |",
@@ -495,15 +605,17 @@ def build_outputs() -> dict[str, str]:
     meta = json.loads((ROOT / "data/meta.json").read_text(encoding="utf-8"))
     layout = json.loads((ROOT / "data/wiki-layout.json").read_text(encoding="utf-8"))
     quick_start = json.loads((ROOT / "data/quick-start.json").read_text(encoding="utf-8"))
+    tool_access = json.loads((ROOT / "data/tool-access.json").read_text(encoding="utf-8"))
     validate(tools, jobs)
     validate_layout(layout, jobs, tools)
-    validate_quick_start(quick_start, tools, jobs)
+    validate_tool_access(tool_access, tools)
+    validate_quick_start(quick_start, tools, jobs, tool_access["tools"])
     if not (ROOT / "docs/free-tool-picks.md").is_file():
         raise ValueError("Quick-start selections require docs/free-tool-picks.md for their evidence and limits")
     linker = link_module()
     registry = linker.build_registry(tools, jobs)
     data = {"tools": tools, "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
-            "quickStart": quick_start}
+            "quickStart": quick_start, "toolAccess": tool_access["tools"]}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     template = (ROOT / "portal/index.template.html").read_text(encoding="utf-8")
@@ -519,7 +631,8 @@ def build_outputs() -> dict[str, str]:
     if re.search(r"\{\{(?:STYLES|DATA|APP)\}\}", template):
         raise ValueError("Unresolved template marker")
     by_id, jobs_by_id = {x["id"]: x for x in tools}, {x["id"]: x for x in jobs}
-    quick_start_block = linker.link_markdown(quick_start_markdown(quick_start, by_id, layout), registry)
+    access = tool_access["tools"]
+    quick_start_block = linker.link_markdown(quick_start_markdown(quick_start, by_id, layout, access), registry)
     managed_sources = {
         name: replace_quick_start_block((ROOT / name).read_bytes().decode("utf-8"), quick_start_block, name)
         for name in ("README.md", "docs/start-here.md")
@@ -530,8 +643,9 @@ def build_outputs() -> dict[str, str]:
     outputs = {"site/index.html": template, "site/.nojekyll": "", "site/catalog.json": data_json + "\n"}
     outputs.update(managed_sources)
     for job in jobs:
-        outputs[f"wiki/Job-{job['id']}.md"] = job_markdown(job, by_id, True, layout, jobs_by_id, meta["reviewedAt"])
-        outputs[f"docs/runbooks/{job['id']}.md"] = job_markdown(job, by_id, False, layout, jobs_by_id, meta["reviewedAt"])
+        quick_items = [item for item in quick_start["items"] if item["jobId"] == job["id"]]
+        outputs[f"wiki/Job-{job['id']}.md"] = job_markdown(job, by_id, True, layout, jobs_by_id, meta["reviewedAt"], quick_items, access)
+        outputs[f"docs/runbooks/{job['id']}.md"] = job_markdown(job, by_id, False, layout, jobs_by_id, meta["reviewedAt"], quick_items, access)
     outputs["wiki/Playbooks.md"] = playbook_index(jobs, layout, True, meta["reviewedAt"])
     outputs["docs/runbooks/README.md"] = playbook_index(jobs, layout, False, meta["reviewedAt"])
     tool_index = [page_nav(), "", *heading(1, "Tool directory", "🧰 The tool directory"),
@@ -547,13 +661,13 @@ def build_outputs() -> dict[str, str]:
         items = categories[category]
         info = layout["categories"].get(category, {"icon": "🧰", "question": "What result do you need?"})
         tool_index += [f"| **[{info['navigationIcon']} {info['navigationLabel']}]({WIKI}/Tools-{slug(category)})** | {cell(info['question'])} | {len(items)} |"]
-        outputs[f"wiki/Tools-{slug(category)}.md"] = category_markdown(category, items, layout, jobs_by_id, meta["reviewedAt"])
+        outputs[f"wiki/Tools-{slug(category)}.md"] = category_markdown(category, items, layout, jobs_by_id, meta["reviewedAt"], access)
     tool_index += ["", anchor("complete-catalog"), "", *heading(2, "Complete catalog", "📇 Every tool, one place"),
-                  "| Tool | Discipline | Choose it for | Official download / access |", "| --- | --- | --- | --- |"]
+                  "| Tool | Discipline | Choose it for | Official page + download / access |", "| --- | --- | --- | --- |"]
     for tool in sorted(tools, key=lambda item: item["name"].casefold()):
         tool_index += [f"| [{tool['name']}]({WIKI}/Tools-{slug(tool['category'])}#{tool['id']}) | "
                        f"{cell(CATEGORY_NAMES.get(tool['category'], tool['category']))} | {cell(tool['bestFor'])} | "
-                       f"**[↗ Open official page]({tool['downloadUrl']})** |"]
+                       f"{tool_access_links(tool, access, all_routes=True)} |"]
     tool_index += page_footer(meta["reviewedAt"])
     outputs["wiki/Tool-Directory.md"] = "\n".join(tool_index)
     outputs["wiki/Home.md"] = home_markdown(tools, jobs, categories, layout, meta, quick_start_block)
@@ -565,10 +679,12 @@ def build_outputs() -> dict[str, str]:
     for identity in layout["scenarioOrder"]:
         sidebar += [f"- {group_anchors.get(identity, '')}{scenario_link(identity, layout)}"]
     sidebar += ["", "### Quick tool downloads", "",
-                "Official download pages; built-in tools link to setup instructions.", ""]
+                "Tool name = official page. File buttons name the platform; built-in tools open instructions.", ""]
     for shortcut in layout["quickDownloads"]:
         tool = by_id[shortcut["toolId"]]
-        sidebar += [f"- **[{shortcut['icon']} {shortcut['label']}]({tool['downloadUrl']})**"]
+        primary = access[tool["id"]]["primary"]
+        sidebar += [f"- **[{shortcut['icon']} {shortcut['label']}]({access[tool['id']]['officialUrl']})** · "
+                    f"**[{cell(primary['label'])}]({primary['url']})**"]
     sidebar += ["", *heading(3, "Tool categories", "🧰 Tool disciplines")]
     for category in layout["categoryOrder"]:
         info = layout["categories"][category]
@@ -604,6 +720,9 @@ def build_outputs() -> dict[str, str]:
                 "methods": len(records(ROOT / "data/methods.json", "methods")),
                 "quickStartItems": len(quick_start["items"]),
                 "quickStartSha256": hashlib.sha256(json.dumps(quick_start, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
+                "toolAccessEntries": len(access),
+                "directFileDownloads": sum(entry["primary"]["kind"] == "file" for entry in access.values()),
+                "toolAccessSha256": hashlib.sha256(json.dumps(tool_access, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
                 "categories": dict(sorted(Counter(t["category"] for t in tools).items())),
                 "contentSha256": hashlib.sha256(data_json.encode()).hexdigest(),
                 "wikiLayoutSha256": hashlib.sha256(json.dumps(layout, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),

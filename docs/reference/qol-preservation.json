@@ -1,0 +1,20 @@
+{
+  "baseline": "f62d074d7083fc8d9010762725c06f9b04ee9755",
+  "originalToolRecords": 113,
+  "originalToolRecordsUnchanged": true,
+  "addedToolIds": [
+    "get-help"
+  ],
+  "jobsByteIdentical": true,
+  "methodsByteIdentical": true,
+  "decisionDiagramsUnchanged": true,
+  "originalQuickIdsRetained": true,
+  "counts": {
+    "tools": 114,
+    "jobs": 22,
+    "quickAnswers": 27,
+    "steps": 140,
+    "checks": 83,
+    "commands": 9
+  }
+}

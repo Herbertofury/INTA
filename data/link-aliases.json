@@ -605,6 +605,13 @@
       "url": "https://npcap.com/",
       "kind": "application",
       "aliases": []
+    },
+    {
+      "id": "windows-powershell-51",
+      "name": "Windows PowerShell 5.1",
+      "url": "https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell",
+      "aliases": [],
+      "kind": "application"
     }
   ]
 }
