@@ -395,16 +395,24 @@ def read_bounded_json(path):
         raise Unsafe("local snapshot exceeds read budget")
     return json.loads(blob)
 
-def previous_items(path, source):
+def previous_snapshot(path):
     try:
-        if not path.is_file():
-            return []
         snapshot = read_bounded_json(path)
-        if not isinstance(snapshot, dict) or snapshot.get("schemaVersion") != 1 or not isinstance(snapshot.get("items"), list):
-            return []
-        return normalize_saved_items(snapshot["items"], source)
+        if isinstance(snapshot, dict) and snapshot.get("schemaVersion") == 1:
+            return snapshot
     except (OSError, ValueError):
-        return []
+        pass
+    return {}
+
+
+def snapshot_time(value):
+    if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z", value):
+        return None
+    try:
+        return dt.datetime.fromisoformat(value)
+    except ValueError:
+        return None
+
 
 def load_seed(path):
     try:
@@ -428,13 +436,49 @@ def refresh(output, *, sources=SOURCES, page_media=False, seed=None, fetcher=fet
     if not any(status == "ok" for _, status, _ in gathered):
         raise Unsafe("all public sources unavailable; previous output left unchanged")
     indexed = {s.id: s for s in sources}
-    gathered.extend(curated)
-    items = [item for ident, status, entries in gathered
-             for item in (entries if status == "ok" else previous_items(output, indexed[ident]))]
-    items.sort(key=lambda item: (item["date"], item["id"]), reverse=True)
+    previous = previous_snapshot(output)
+    prior_items = previous.get("items")
+    prior_items = prior_items if isinstance(prior_items, list) else []
+    prior_sources = previous.get("sources")
+    prior_sources = prior_sources if isinstance(prior_sources, list) else []
     now = now or dt.datetime.now(dt.timezone.utc)
-    obj = {"schemaVersion": 1, "generatedAt": now.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-           "items": items, "sources": [{"id": ident, "status": status} for ident, status, _ in gathered]}
+    generated = now.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    previous_generated = snapshot_time(previous.get("generatedAt"))
+    current_generated = snapshot_time(generated)
+    previous_checks = {}
+    seen_prior = set()
+    if previous_generated is not None and previous_generated <= current_generated:
+        for row in prior_sources:
+            if not isinstance(row, dict):
+                continue
+            ident = row.get("id")
+            if not isinstance(ident, str) or ident not in indexed:
+                continue
+            if ident in seen_prior:
+                previous_checks.pop(ident, None)
+                continue
+            seen_prior.add(ident)
+            instant = snapshot_time(row.get("lastSuccessfulCheckAt"))
+            if (row.get("origin", "feed") == "feed" and row.get("status") in ("ok", "unavailable")
+                    and instant is not None and instant <= previous_generated):
+                previous_checks[ident] = row["lastSuccessfulCheckAt"]
+    states = []
+    items = []
+    for ident, status, entries in gathered:
+        row = {"id": ident, "status": status, "origin": "feed"}
+        if status == "ok":
+            row["lastSuccessfulCheckAt"] = generated
+        else:
+            entries = normalize_saved_items(prior_items, indexed[ident])
+            if ident in previous_checks:
+                row["lastSuccessfulCheckAt"] = previous_checks[ident]
+        states.append(row)
+        items.extend(entries)
+    for ident, status, entries in curated:
+        states.append({"id": ident, "status": status, "origin": "editorial"})
+        items.extend(entries)
+    items.sort(key=lambda item: (item["date"], item["id"]), reverse=True)
+    obj = {"schemaVersion": 1, "generatedAt": generated, "items": items, "sources": states}
     payload = (json.dumps(obj, ensure_ascii=False, separators=(",", ":")) + "\n").encode()
     if len(payload) > OUTPUT_BYTES:
         raise Unsafe("digest exceeds output budget")
@@ -462,7 +506,7 @@ def main(argv=None):
     except (Unsafe, OSError) as exc:
         print(f"INTA News: {exc}", file=sys.stderr)
         return 1
-    counts = {state: sum(s["status"] == state for s in obj["sources"]) for state in ("ok", "unavailable")}
+    counts = {state: sum(s["origin"] == "feed" and s["status"] == state for s in obj["sources"]) for state in ("ok", "unavailable")}
     print(f"INTA News: {len(obj['items'])} items; {counts['ok']} sources ok, {counts['unavailable']} unavailable.")
     return 0
 

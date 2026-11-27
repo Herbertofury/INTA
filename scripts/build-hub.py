@@ -1373,14 +1373,23 @@ def validate_news_digest(digest: dict, news: dict) -> None:
     policies = {s.id: s for s in collector.SOURCES} | collector.SEED_SOURCES
     require(isinstance(digest, dict) and digest.get("schemaVersion") == 1)
     generated = digest.get("generatedAt")
-    require(isinstance(generated, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z", generated))
-    datetime.fromisoformat(generated)
+    generated_instant = collector.snapshot_time(generated)
+    require(generated_instant is not None)
     require(isinstance(digest.get("items"), list) and len(digest["items"]) <= 100)
     require(isinstance(digest.get("sources"), list) and len(digest["sources"]) <= len(known_ids))
     statuses, ids = set(), set()
     for source in digest["sources"]:
         require(isinstance(source, dict) and source.get("id") in known_ids and source.get("id") in policies and
                 source["id"] not in statuses and source.get("status") in {"ok","unavailable"})
+        origin = "editorial" if source["id"] in collector.SEED_SOURCES else "feed"
+        require(source.get("origin", origin) == origin)
+        if origin == "editorial":
+            require(source["status"] == "ok" and "lastSuccessfulCheckAt" not in source)
+        if "lastSuccessfulCheckAt" in source:
+            check = collector.snapshot_time(source["lastSuccessfulCheckAt"])
+            require(check is not None and check <= generated_instant)
+            if source["status"] == "ok":
+                require(check == generated_instant)
         statuses.add(source["id"])
     links = set()
     for item in digest["items"]:
