@@ -19,6 +19,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Validate complete content and generated outputs
         run: |
+          python3 -m py_compile scripts/publish-wiki.py scripts/package-inta-release.py
           python3 -m unittest discover -s tests
           node --check portal/app.js
           python3 scripts/build-hub.py
