@@ -5,6 +5,8 @@
   const tools = Array.isArray(data.tools) ? data.tools : [];
   const jobs = Array.isArray(data.jobs) ? data.jobs : [];
   const commandCenter = data.commandCenter || { commands: [], workflows: [], toolkits: [], categories: [] };
+  const updatesCenter = data.updatesCenter || { commands: [], workflows: [], channels: [], principles: [] };
+  const updateCommandMap = new Map(array(updatesCenter.commands).map(item => [item.id, item]));
   const commandCenterCommands = new Map(array(commandCenter.commands).map(item => [item.id, item]));
   const meta = data.meta || {};
   const toolMap = new Map(tools.map(tool => [tool.id, tool]));
@@ -908,6 +910,51 @@
     const count=$('#command-center-count');
     if(count) count.textContent = `${visible} of ${commandCenter.commands.length} commands`;
   }
+
+  function updateRiskLabel(risk) {
+    return ({ 'read-only': 'Read only', 'long-running': 'Long-running', 'downloads-file': 'Downloads file', 'installs-software': 'Installs software', 'changes-system': 'Changes system' })[risk] || 'Review first';
+  }
+  function updateCommandCard(item) {
+    const risk = item.risk || 'changes-system';
+    return `<article class="update-command-card" data-update-command-card="${esc(item.id)}" data-update-category-value="${esc(item.category)}" data-update-shell-value="${esc(item.shell)}" data-update-risk-value="${esc(risk)}">
+      <header class="update-command-heading"><div><p class="update-command-kicker">${esc(item.category)} · ${esc(item.shell)} · ${esc(item.privilege)}</p><h3>${esc(item.title)}</h3></div><span class="update-risk update-risk-${esc(risk)}">${esc(updateRiskLabel(risk))}</span></header>
+      <p class="update-command-summary">${formatted(item.summary)}</p>
+      <div class="update-code-toolbar"><span>${esc(item.shell)}</span><button class="copy-command" data-copy-update-command="${esc(item.id)}">${icon('copy')}Copy command</button></div>
+      <pre class="update-code"><code>${esc(item.code)}</code></pre>
+      <p class="command-safety">${icon('info')}<span>${formatted(item.safety)}</span></p>
+      <footer class="update-command-footer">${external(item.sourceUrl, `Official reference: ${esc(item.sourceTitle)} ${icon('external')}`)}</footer>
+    </article>`;
+  }
+  function updatesCenterPage(params = new URLSearchParams()) {
+    const commands=array(updatesCenter.commands), workflows=array(updatesCenter.workflows), channels=array(updatesCenter.channels);
+    const query=params.get('q')||'';
+    const selected=params.get('category')||'all';
+    return heading('INTA maintenance workspace','Updates & Maintenance','One place to audit software, preview updates, repair broken installations, recover failed updates and uninstall applications safely.')+
+      `<section class="updates-hero"><div class="updates-hero-copy"><p class="page-label">AUDIT · UPDATE · REPAIR · RECOVER · VERIFY</p><h2>Keep every machine healthy.</h2><p>One technician workflow across Windows Update, WinGet, Chocolatey, Scoop, UniGetUI, Ninite Pro, Microsoft Store and Linux package managers.</p><div class="updates-hero-actions"><a class="button primary" href="#updates?category=updates">${icon('refresh-cw')}Review update commands</a><a class="button ghost" href="#updates?category=recovery">${icon('wrench')}Fix a failed update</a></div></div><div class="updates-hero-metrics"><div><strong>${channels.length}</strong><span>update channels</span></div><div><strong>${commands.length}</strong><span>maintenance actions</span></div><div><strong>${workflows.length}</strong><span>recovery workflows</span></div></div></section>
+      <div class="updates-live-notice">${icon('activity')}<div><strong>Local inventory is not connected in this web build.</strong><span>This page provides verified commands and guided procedures. It does not claim to know which updates are pending on a customer's computer. Live inventory, operation progress and automatic recovery require the local INTA agent or a supported package-manager integration.</span></div></div>
+      <section class="updates-channel-section"><div class="updates-section-heading"><div><p class="page-label">UPDATE CHANNELS</p><h2>Know what updates what</h2><p>Audit each manager separately. Never double-update an app or confuse application patches with Windows servicing.</p></div></div><div class="updates-channel-grid">${channels.map(channel=>{const audit=updateCommandMap.get(channel.auditCommand),update=updateCommandMap.get(channel.updateCommand);return `<article class="updates-channel-card"><div class="updates-channel-top"><span class="updates-channel-icon">${icon(channel.icon||'package')}</span><span class="updates-channel-manager">${esc(channel.manager)}</span></div><h3>${esc(channel.name)}</h3><p>${esc(channel.scope)}</p><p class="updates-channel-note">${formatted(channel.note)}</p><div class="updates-channel-actions">${audit?`<button class="copy-command" data-copy-update-command="${esc(audit.id)}">${icon('scan-search')}Copy audit</button>`:''}${update?`<button class="copy-command" data-copy-update-command="${esc(update.id)}">${icon('download')}Copy update</button>`:''}</div></article>`;}).join('')}</div></section>
+      <section class="updates-workflows"><div class="updates-section-heading"><div><p class="page-label">GUIDED MAINTENANCE</p><h2>One-click workflow bundles</h2><p>Copy an ordered checklist of commands with the safety notes attached.</p></div></div><div class="updates-workflow-grid">${workflows.map(workflow=>`<article class="updates-workflow-card"><p class="update-command-kicker">${esc(workflow.id.replace(/-/g,' '))}</p><h3>${esc(workflow.title)}</h3><p>${formatted(workflow.description)}</p><ol>${workflow.commandIds.map(id=>{const item=updateCommandMap.get(id);return item?`<li>${esc(item.title)}</li>`:''}).join('')}</ol><p class="updates-workflow-sequence">${formatted(workflow.sequence)}</p><p class="command-safety">${icon('alert-triangle')}<span>${formatted(workflow.warning)}</span></p><button class="secondary-button" data-copy-update-workflow="${esc(workflow.id)}">${icon('copy')}Copy workflow bundle</button></article>`).join('')}</div></section>
+      <section class="updates-library"><div class="updates-section-heading"><div><p class="page-label">REPAIR & UPDATE LIBRARY</p><h2>Find the exact action</h2><p>Search by app, error, manager, repair, uninstall, cache, rollback or update status.</p></div></div><div class="updates-filters"><label class="input-wrap">${icon('search')}<span class="sr-only">Search update commands</span><input id="updates-search" type="search" placeholder="Search failed update, uninstall, Chocolatey, WinGet repair…" value="${esc(query)}"></label><label class="sr-only" for="updates-shell">Shell</label><select class="filter-select" id="updates-shell"><option value="">All shells</option><option>PowerShell</option><option>CMD</option><option>Bash</option></select><label class="sr-only" for="updates-risk">Impact</label><select class="filter-select" id="updates-risk"><option value="">All impacts</option><option value="read-only">Read only</option><option value="changes-system">Changes system</option><option value="long-running">Long-running</option><option value="downloads-file">Downloads file</option></select></div><nav class="updates-category-tabs" aria-label="Filter update commands"><button class="${selected==='all'?'active':''}" data-update-category="all">All</button><button class="${selected==='updates'?'active':''}" data-update-category="updates">Software updates</button><button class="${selected==='recovery'?'active':''}" data-update-category="recovery">Repairs & recovery</button><button class="${selected==='uninstall'?'active':''}" data-update-category="uninstall">Uninstallers</button><button class="${selected==='Windows Update'?'active':''}" data-update-category="Windows Update">Windows Update</button><button class="${selected==='WinGet'?'active':''}" data-update-category="WinGet">WinGet</button><button class="${selected==='Chocolatey'?'active':''}" data-update-category="Chocolatey">Chocolatey</button><button class="${selected==='Scoop'?'active':''}" data-update-category="Scoop">Scoop</button><button class="${selected==='UniGetUI'?'active':''}" data-update-category="UniGetUI">UniGetUI</button><button class="${selected==='Ninite Pro'?'active':''}" data-update-category="Ninite Pro">Ninite Pro</button><button class="${selected==='Linux'?'active':''}" data-update-category="Linux">Linux</button></nav><p class="updates-result-count" id="updates-count" aria-live="polite"></p><div class="updates-command-grid" id="updates-command-grid">${commands.map(updateCommandCard).join('')}</div></section>
+      <section class="updates-recovery-principles"><p class="page-label">RECOVERY SAFETY</p><h2>When an update goes wrong</h2><div class="updates-principle-grid">${array(updatesCenter.principles).map((principle,index)=>`<div><span>${String(index+1).padStart(2,'0')}</span><p>${formatted(principle)}</p></div>`).join('')}</div></section>`;
+  }
+  function filterUpdatesCenter() {
+    const root=$('#updates-command-grid'); if(!root)return;
+    const query=($('#updates-search')?.value||'').trim().toLocaleLowerCase();
+    const shell=$('#updates-shell')?.value||'',risk=$('#updates-risk')?.value||'';
+    const active=$('.updates-category-tabs [data-update-category].active')?.dataset.updateCategory||'all';
+    let count=0;
+    root.querySelectorAll('[data-update-command-card]').forEach(card=>{
+      const item=updateCommandMap.get(card.dataset.updateCommandCard);
+      const terms=[item?.title,item?.summary,item?.code,item?.safety,item?.category,item?.shell,item?.sourceTitle].join(' ').toLocaleLowerCase();
+      const updateGroup=['WinGet','Chocolatey','Scoop','UniGetUI','Ninite Pro','Linux','Update inventory'].includes(item?.category);
+      const recoveryGroup=['Installer recovery','Application inventory','Windows Update','Microsoft Store'].includes(item?.category);
+      const uninstallGroup=/uninstall/i.test(item?.title);
+      const groupOk=active==='all'||(active==='updates'&&updateGroup)||(active==='recovery'&&recoveryGroup)||(active==='uninstall'&&uninstallGroup)||item?.category===active;
+      const show=(!query||query.split(/\s+/).filter(Boolean).every(term=>terms.includes(term)))&&(!shell||item?.shell===shell)&&(!risk||item?.risk===risk)&&groupOk;
+      card.hidden=!show;if(show)count++;
+    });
+    const label=$('#updates-count');if(label)label.textContent=`${count} of ${updatesCenter.commands.length} maintenance actions`;
+  }
   function resources() {
     return heading('INTA references', 'Resources', 'Official references, project releases, research, and an offline copy of the workspace.') + `<div class="resource-list" role="list">${projectResources.map(resource => `<article class="resource-row" role="listitem"><span class="reference-icon">${icon(resource.icon)}</span><div><h2>${esc(resource.title)}</h2><p>${esc(resource.body)}</p></div>${resource.action ? `<button class="button ghost" data-download-offline>${esc(resource.label)} ${icon('download')}</button>` : external(resource.url, `${esc(resource.label)} ${icon('external')}`, 'button ghost')}</article>`).join('')}</div><section class="resource-note"><h2>Current sources, honest expectations.</h2><p>The source review date tells you when this collection was checked. It does not mean every program was installed or tested on every system. Official download pages are used so you can check the current release and compatibility before a job.</p><p><strong>Everyday picks</strong> are practical first choices. <strong>Specialist</strong> tools serve a more focused need. <strong>Evaluate first</strong> entries are candidates to test before they become part of a routine workflow.</p><p>Favorites and checklist progress stay in this browser. Use your team's private ticketing system for client records. ${storageAvailable ? 'Export a checklist when you need a portable handoff.' : 'Browser storage is unavailable in this session; export a checklist to preserve it.'}</p></section><section class="section-space"><div class="section-title"><div><h2>Official reference desk</h2><p>The primary references used by the job playbooks.</p></div></div><label class="input-wrap">${icon('search')}<span class="sr-only">Filter official references</span><input type="search" id="source-search" placeholder="Find a vendor, document, or reference…"></label><div class="filter-result"><span id="source-count" aria-live="polite"></span></div><div class="source-directory" id="source-directory"></div></section>`;
   }
@@ -1069,7 +1116,7 @@
   }
   function render() {
     const route = parseRoute();
-    const names = { home: 'Technician home', online: 'Online tools', checklist: 'Technician checklist', news: 'Technician News', 'command-center': 'Command Center', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
+    const names = { home: 'Technician home', online: 'Online tools', checklist: 'Technician checklist', news: 'Technician News', 'command-center': 'Command Center', updates: 'Updates & Maintenance', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
     $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
     $('#breadcrumb').innerHTML = `Workspace <span>/</span> <strong>${esc(names[route.name] || 'Technician home')}</strong>`;
@@ -1078,6 +1125,7 @@
     else if (route.name === 'checklist') app.innerHTML = checklistPage();
     else if (route.name === 'news') app.innerHTML = newsPage();
     else if (route.name === 'command-center') app.innerHTML = commandCenterPage(route.params);
+    else if (route.name === 'updates') app.innerHTML = updatesCenterPage(route.params);
     else if (route.name === 'services') app.innerHTML = serviceMap();
     else if (route.name === 'tools') app.innerHTML = library(false, route.params);
     else if (route.name === 'saved') app.innerHTML = library(true, route.params);
@@ -1089,7 +1137,7 @@
     else app.innerHTML = notFound('page');
     const title = route.name === 'job' ? jobMap.get(route.id)?.title : route.name === 'tool' ? toolMap.get(route.id)?.name : names[route.name];
     document.title = `${title || 'Technician workspace'} | INTA Computer Services`;
-    filterTools(false); filterJobs(false); filterSources(false); filterOnline(false); filterCommandCenter(); bindNews(); linkifyProse(app); updateCounts();
+    filterTools(false); filterJobs(false); filterSources(false); filterOnline(false); filterCommandCenter(); filterUpdatesCenter(); bindNews(); linkifyProse(app); updateCounts();
     closeNavigation(); closeSearch();
     if (route.anchor && document.getElementById(route.anchor)) document.getElementById(route.anchor).scrollIntoView({ block: 'start', behavior: 'instant' });
     else if (lastRoute !== route.raw) window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1449,6 +1497,15 @@
       if (commandItem) copy(text(commandItem.code), 'Command copied. Review its safety note before running it.');
       return;
     }
+    const updateCommand=target.closest('[data-copy-update-command]');
+    if(updateCommand){const item=updateCommandMap.get(updateCommand.dataset.copyUpdateCommand);if(item)copy(item.code,'Maintenance command copied. Review the impact and prerequisites before running.');return;}
+    const updateWorkflow=target.closest('[data-copy-update-workflow]');
+    if(updateWorkflow){const workflow=array(updatesCenter.workflows).find(item=>item.id===updateWorkflow.dataset.copyUpdateWorkflow);if(workflow)copy(workflow.commandIds.map(id=>{const item=updateCommandMap.get(id);return item?`# ${item.title} [${item.shell} · ${item.privilege} · ${item.risk}]
+${item.code}
+# Safety: ${item.safety}
+# Official reference: ${item.sourceUrl}`:''}).filter(Boolean).join('\n\n'),'Workflow bundle copied. Follow its sequence and review each safety note.');return;}
+    const updateCategory=target.closest('[data-update-category]');
+    if(updateCategory){$('.updates-category-tabs [data-update-category]').forEach(button=>{const active=button===updateCategory;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});filterUpdatesCenter();return;}
     const centerCommand = target.closest('[data-copy-center-command]');
     if (centerCommand) {
       const item = commandCenterCommands.get(centerCommand.dataset.copyCenterCommand);
@@ -1497,6 +1554,7 @@ ${item.code}
   });
   document.addEventListener('input', event => {
     if (event.target.id === 'command-center-search') filterCommandCenter();
+    else if (event.target.id === 'updates-search') filterUpdatesCenter();
     if (event.target.id === 'online-search') filterOnline();
     else if (event.target.id === 'library-search') filterTools();
     else if (event.target.id === 'jobs-search') filterJobs();
@@ -1504,6 +1562,7 @@ ${item.code}
   });
   document.addEventListener('change', event => {
     if (['command-center-shell', 'command-center-risk'].includes(event.target.id)) filterCommandCenter();
+    else if (['updates-shell','updates-risk'].includes(event.target.id)) filterUpdatesCenter();
     if (event.target.id === 'online-group') filterOnline();
     else if (['category-filter', 'platform-filter', 'tier-filter', 'tool-sort'].includes(event.target.id)) filterTools();
     else if (event.target.id === 'jobs-category') filterJobs();
