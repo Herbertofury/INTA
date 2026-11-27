@@ -82,3 +82,8 @@ Every playbook needs at least one command placed in the step where it belongs. A
 ## ⚡ Commands inside specific fixes
 
 When a shell action helps a specific symptom, add a `commands` array to that exact record in `data/field-notes.json`. Keep each block focused and include shell, purpose, safety, code and official source. The interactive article and generated Wiki render the same copyable block. Use the [Quick Commands Wiki](https://github.com/Herbertofury/INTA/wiki/Quick-Commands) for standards and trusted tool installation patterns.
+
+
+## ⚡ Command Center contributions
+
+Add reusable cross-platform commands and workflows to `data/command-center.json`. Each command needs a stable ID, shell, privilege, category, risk, purpose, exact code, safety boundary and official source. Workflows reference command IDs instead of duplicating code. Toolkits must link to maintained upstream projects and explain their trust, licensing and execution risks. Do not add remote download-and-execute pipelines, blind bulk updates or package-pin bypasses. See [Command Center](command-center.md).
