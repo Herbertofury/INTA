@@ -458,7 +458,7 @@
     if (groupedToolDirectory) return groupedToolDirectory;
     const grouped = new Map();
     tools.forEach(tool => { if (!grouped.has(tool.category)) grouped.set(tool.category, []); grouped.get(tool.category).push(tool); });
-    const preferred = ['malware', 'security', 'remote', 'windows', 'storage', 'hardware', 'network', 'boot', 'productivity', 'ai', 'online'];
+    const preferred = ['malware', 'online', 'security', 'remote', 'windows', 'storage', 'hardware', 'network', 'boot', 'productivity', 'ai'];
     const categories = [...grouped.keys()].sort((a, b) => {
       const ai = preferred.indexOf(a), bi = preferred.indexOf(b);
       return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi) || categoryLabel(a).localeCompare(categoryLabel(b));
@@ -517,7 +517,7 @@
     const featuredJobs = selectFeatured(jobs, [/malware|virus/i, /slow|performance/i, /network|internet|dns/i, /backup|restore/i, /boot|bitlocker/i, /remote/i], 6);
     const kit = selectFeatured(tools, [/sysinternals/i, /rustdesk/i, /crystaldiskinfo/i, /ventoy/i], 4);
     const intake = jobs.find(job => /intake|triage/i.test(job.id + ' ' + job.title));
-    return heading('INTA Computer Services', 'Technician home', 'Tools and procedures for computer repair, maintenance, and support.') + `<nav class="home-actions" aria-label="Common technician actions"><a class="button primary" href="#tools">${icon('grid')}Browse all tools</a><a class="button ghost" href="#command-center">${icon('terminal')}Command Center</a><a class="button ghost" href="#updates">${icon('refresh-cw')}Updates &amp; Maintenance</a><a class="button ghost" href="#checklist">${icon('checkCircle')}Checklist</a><a class="button ghost" href="#services">${icon('route')}Service map</a></nav>` + quickStartSection() + compactToolDirectory() + onlineStartSection() + `<div class="home-actions home-secondary-actions"><a class="button primary" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">${icon('file')}Start a service visit</a><a class="button ghost" href="#checklist">${icon('checkCircle')}Open checklist</a><a class="button primary" href="#command-center">${icon('terminal')}Open Command Center</a><a class="button ghost" href="#updates">${icon('refresh-cw')}Updates &amp; Maintenance</a><a class="button ghost" href="#services">${icon('route')}Service map</a><a class="button ghost" href="#playbooks">${icon('book')}${jobs.length} job playbooks</a><a class="button ghost" href="#knowledge">${icon('layers')}Knowledge desk</a><a class="button ghost" href="#resources">${icon('download')}Offline copy &amp; resources</a></div><div class="home-support"><section><div class="section-title"><h2>Common service jobs</h2><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-list" role="list">${featuredJobs.map(jobCard).join('')}</div></section><section><h2>Everyday shortcuts</h2><div class="quick-tools">${kit.map(quickTool).join('')}</div>${knowledgeDesk(true)}</section></div>`;
+    return heading('INTA Computer Services', 'Technician home', 'Tools and procedures for computer repair, maintenance, and support.') + quickStartSection() + compactToolDirectory() + onlineStartSection() + `<div class="home-actions"><a class="button primary" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">${icon('file')}Start a service visit</a><a class="button ghost" href="#checklist">${icon('checkCircle')}Open checklist</a><a class="button primary" href="#command-center">${icon('terminal')}Open Command Center</a><a class="button ghost" href="#updates">${icon('refresh-cw')}Updates &amp; Maintenance</a><a class="button ghost" href="#services">${icon('route')}Service map</a><a class="button ghost" href="#playbooks">${icon('book')}${jobs.length} job playbooks</a><a class="button ghost" href="#knowledge">${icon('layers')}Knowledge desk</a><a class="button ghost" href="#resources">${icon('download')}Offline copy &amp; resources</a></div><div class="home-support"><section><div class="section-title"><h2>Common service jobs</h2><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-list" role="list">${featuredJobs.map(jobCard).join('')}</div></section><section><h2>Everyday shortcuts</h2><div class="quick-tools">${kit.map(quickTool).join('')}</div>${knowledgeDesk(true)}</section></div>`;
   }
   function selectOptions(values, label, selected = '') {
     return `<option value="">${esc(label)}</option>${[...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b)).map(value => `<option value="${esc(value)}"${selected === value ? ' selected' : ''}>${esc(categoryLabel(value))}</option>`).join('')}`;
@@ -1190,19 +1190,36 @@
     if (!digest) return '';
     const known = new Map(catalog.sources.map(s => [s.id,s]));
     const items = [...digest.items].sort((a,b)=>b.date.localeCompare(a.date));
-    const active = digest.sources.filter(s=>s.status==='ok').length;
-    const unavailable = digest.sources.filter(s=>s.status==='unavailable').map(s=>known.get(s.id)?.name).filter(Boolean);
+    const states = new Map(digest.sources.map(row => [row.id, row]));
+    // Older schema-1 snapshots omit origin. The fixed editorial-only source
+    // was already part of the original seed contract.
+    const editorial = row => row?.origin === 'editorial' || (row?.origin == null && row?.id === 'windows-health');
+    const feeds = digest.sources.filter(row => !editorial(row));
+    const active = feeds.filter(row => row.status === 'ok').length;
+    const unavailable = feeds.filter(row => row.status === 'unavailable').map(row => known.get(row.id)?.name).filter(Boolean);
+    const provenance = row => editorial(row) ? 'editorial' : row?.status === 'unavailable' ? 'retained' : 'feed';
+    const counts = {feed: 0, retained: 0, editorial: 0};
+    for (const item of items) counts[provenance(states.get(item.sourceId))]++;
+    const timeLabel = value => `<time datetime="${esc(value)}">${esc(value.slice(0,16).replace('T',' '))} UTC</time>`;
+    const sourceLabel = (row, origin) => {
+      if (origin === 'editorial') return 'Editorial selection';
+      const checked = row?.lastSuccessfulCheckAt;
+      const label = origin === 'retained' ? 'Retained · feed unavailable' : 'Publisher feed';
+      return label + ' · ' + (checked ? 'Last successful check ' + timeLabel(checked) : 'Last successful check unknown');
+    };
     const age = Date.now()-Date.parse(digest.generatedAt);
     const stale = Number.isFinite(age) && age>72*60*60*1000;
     const categories = [...new Set(items.map(item => known.get(item.sourceId)?.category))].filter(Boolean);
     return `<section id="news-digest" aria-labelledby="news-digest-title"><h2 id="news-digest-title">Publisher digest</h2>
-      <p class="news-muted">Snapshot <time datetime="${esc(digest.generatedAt)}">${esc(digest.generatedAt.slice(0,16).replace('T',' '))} UTC</time> · ${active} of ${digest.sources.length} sources available.${stale?' Snapshot may be stale.':''}${unavailable.length?` Unavailable at refresh: ${esc(unavailable.join(', '))}.`:''} Media loads only when you ask. ${external('https://herbertofury.github.io/INTA/news-digest.json','Shared feed JSON')}</p>
+      <p class="news-muted">Snapshot ${timeLabel(digest.generatedAt)} · ${active} of ${feeds.length} publisher feeds available · ${counts.retained} retained · ${counts.editorial} editorial.${stale?' Snapshot may be stale.':''}${unavailable.length?` Unavailable at refresh: ${esc(unavailable.join(', '))}.`:''} Media loads only when you ask. ${external('https://herbertofury.github.io/INTA/news-digest.json','Shared feed JSON')}</p>
       <div class="news-controls"><label>Digest category<select id="news-digest-category"><option value="">All categories</option>${categories.map(id=>`<option value="${esc(id)}">${esc(newsGroups[id][0])}</option>`).join('')}</select></label><label class="news-saved"><input id="news-media-only" type="checkbox"> With media only</label></div>
       <p id="news-digest-count" aria-live="polite"></p><div class="news-grid">${items.map(item=>{
         const source=known.get(item.sourceId);
-        return `<article class="news-brief news-story" data-digest-id="${esc(item.id)}" data-digest-category="${esc(source.category)}" data-has-media="${item.media.length>0}">
+        const row=states.get(item.sourceId), origin=provenance(row);
+        return `<article class="news-brief news-story" data-freshness="${origin}" data-digest-id="${esc(item.id)}" data-digest-category="${esc(source.category)}" data-has-media="${item.media.length>0}">
           <span>${external(source.url,esc(source.name))} · ${esc(newsGroups[source.category][0])} · <time datetime="${esc(item.date)}">${esc(dateLabel(item.date,true))}</time></span>
           <h3>${external(item.url,esc(item.title))}</h3>
+          <p class="news-source-freshness">${sourceLabel(row,origin)}</p>
           ${item.media.map((m,i)=>`<div class="news-media"><button type="button" class="button" data-media-index="${i}" aria-label="${m.kind==='image'?'Show image':m.kind==='audio'?'Load audio':'Load video'} for ${esc(item.title)}">${m.kind==='image'?'Show image':m.kind==='audio'?'Load audio':'Load video'}</button></div>`).join('')}
         </article>`;
       }).join('')}</div></section>`;
