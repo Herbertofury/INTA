@@ -11,7 +11,7 @@ import json
 import re
 import unicodedata
 from collections import Counter, defaultdict
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -1125,6 +1125,57 @@ def validate_news(catalog: dict) -> None:
             raise ValueError("Invalid News briefing item")
 
 
+def validate_news_digest(digest: dict, news: dict) -> None:
+    def require(ok):
+        if not ok:
+            raise ValueError("Invalid News digest contract")
+    def url(value):
+        require(isinstance(value, str) and len(value) <= 2048 and
+                not any(c.isspace() or ord(c) < 32 for c in value))
+        parsed = urlparse(value)
+        require(parsed.scheme == "https" and parsed.hostname and not parsed.username and not parsed.password)
+        return parsed
+    def valid_date(value):
+        try:
+            return date.fromisoformat(value).isoformat() == value
+        except (TypeError, ValueError):
+            return False
+    known_ids = {s["id"] for s in news["sources"]}
+    collector = brand_module("refresh-news.py")
+    policies = {s.id: s for s in collector.SOURCES} | collector.SEED_SOURCES
+    require(isinstance(digest, dict) and digest.get("schemaVersion") == 1)
+    generated = digest.get("generatedAt")
+    require(isinstance(generated, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z", generated))
+    datetime.fromisoformat(generated)
+    require(isinstance(digest.get("items"), list) and len(digest["items"]) <= 100)
+    require(isinstance(digest.get("sources"), list) and len(digest["sources"]) <= len(known_ids))
+    statuses, ids = set(), set()
+    for source in digest["sources"]:
+        require(isinstance(source, dict) and source.get("id") in known_ids and source.get("id") in policies and
+                source["id"] not in statuses and source.get("status") in {"ok","unavailable"})
+        statuses.add(source["id"])
+    links = set()
+    for item in digest["items"]:
+        require(isinstance(item, dict) and item.get("sourceId") in statuses and
+                isinstance(item.get("id"), str) and bool(re.fullmatch(r"[a-zA-Z0-9_-]{1,96}", item["id"])) and
+                item["id"] not in ids and isinstance(item.get("title"), str) and 0 < len(item["title"].strip()) <= 300 and
+                valid_date(item.get("date")) and item["date"] <= generated[:10])
+        url(item.get("url"))
+        require(item["url"] not in links)
+        ids.add(item["id"])
+        links.add(item["url"])
+        require(isinstance(item.get("media"), list) and len(item["media"]) <= 4)
+        for media in item["media"]:
+            require(isinstance(media, dict) and media.get("kind") in {"image","video","audio","embed"})
+            parsed = url(media.get("url"))
+            if media["kind"] == "embed":
+                require(parsed.netloc in {"www.youtube-nocookie.com","www.youtube.com","youtube.com","youtu.be"})
+        # A checked-in digest crosses the same trust boundary as source data.
+        # Re-run the collector's publisher/media allowlist and canonicalization,
+        # so a malformed/imported snapshot cannot widen the web client's policy.
+        require(collector.normalize_saved_items([item], policies[item["sourceId"]]) == [item])
+
+
 def build_outputs() -> dict[str, str]:
     tools = records(ROOT / "data/tools.json", "tools")
     jobs = records(ROOT / "data/jobs.json", "jobs")
@@ -1145,6 +1196,8 @@ def build_outputs() -> dict[str, str]:
     validate_reputation(reputation, tools)
     news = json.loads((ROOT / "data/news-sources.json").read_text(encoding="utf-8"))
     validate_news(news)
+    news_digest = json.loads((ROOT / "data/news-digest.json").read_text(encoding="utf-8"))
+    validate_news_digest(news_digest, news)
     validate_layout(layout, jobs, tools)
     validate_tool_access(tool_access, tools)
     validate_quick_start(quick_start, tools, jobs, tool_access["tools"])
@@ -1166,7 +1219,7 @@ def build_outputs() -> dict[str, str]:
     decorator = brand_markdown.BrandMarkdown(brands, linker)
     data = {"tools": [{**tool, "reputation": reputation["tools"][tool["id"]]} for tool in tools], "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
             "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces,
-            "layout": layout, "fieldNotes": field_notes, "onlineTools": online_data, "brands": brands_module.portal_icons(brands), "news": news}
+            "layout": layout, "fieldNotes": field_notes, "onlineTools": online_data, "brands": brands_module.portal_icons(brands), "news": news, "newsDigest": news_digest}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     template = (ROOT / "portal/index.template.html").read_text(encoding="utf-8")
@@ -1193,7 +1246,7 @@ def build_outputs() -> dict[str, str]:
     categories = defaultdict(list)
     for tool in tools:
         categories[tool["category"]].append(tool)
-    outputs = {"site/index.html": template, "site/.nojekyll": "", "site/catalog.json": data_json + "\n",
+    outputs = {"site/news-digest.json": json.dumps(news_digest, ensure_ascii=False, indent=2) + "\n", "site/index.html": template, "site/.nojekyll": "", "site/catalog.json": data_json + "\n",
                "site/knowledge-health.json": json.dumps(health_report, ensure_ascii=False, indent=2) + "\n"}
     outputs.update(managed_sources)
     outputs.update(online_module.wiki_outputs(online_data, tools, access))
