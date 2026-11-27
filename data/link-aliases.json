@@ -644,6 +644,29 @@
       "aliases": [],
       "url": "https://github.com/Herbertofury/INTA/wiki/Contain-ransomware",
       "kind": "method"
+    },
+    {
+      "name": "uBlock Origin",
+      "aliases": [
+        "uBO"
+      ],
+      "toolId": "ublock-origin"
+    },
+    {
+      "name": "AdGuard Browser Extension",
+      "aliases": [
+        "AdGuard AdBlocker",
+        "AdGuard extension"
+      ],
+      "toolId": "adguard-browser-extension"
+    },
+    {
+      "name": "AdGuard Mini for Mac",
+      "aliases": [
+        "AdGuard Mini",
+        "AdGuard for Safari"
+      ],
+      "toolId": "adguard-mini-mac"
     }
   ]
 }
