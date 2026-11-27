@@ -112,7 +112,7 @@ public sealed class PackageManagers(ProcessRunner runner)
     private static (string? File, string[] Args) PreviewCommand(string manager) => manager switch
     {
         "winget" => ("winget", ["upgrade", "--accept-source-agreements", "--disable-interactivity"]),
-        "choco" => ("choco", ["outdated"]),
+        "choco" => ("choco", ["outdated", "--limit-output"]),
         "scoop" => ("scoop", ["status"]),
         "uniget" => ("uniget.exe", ["package", "updates", "--manager", "winget"]),
         "apt" => ("apt", ["list", "--upgradable"]),
