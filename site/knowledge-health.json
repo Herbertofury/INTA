@@ -5,24 +5,25 @@
   "counts": {
     "serviceAreas": 8,
     "jobs": 22,
-    "tools": 133,
-    "toolCategories": 10,
-    "fieldNotes": 74,
-    "researchItems": 54,
-    "reviewedRecords": 615,
+    "tools": 218,
+    "toolCategories": 11,
+    "fieldNotes": 94,
+    "researchItems": 58,
+    "scenarioToolChoices": 72,
+    "reviewedRecords": 904,
     "dueReviews": 0
   },
   "coverage": [
     {
       "jobId": "intake-triage",
       "fieldNotes": 3,
-      "resources": 3,
+      "resources": 4,
       "decisions": 4
     },
     {
       "jobId": "malware-removal",
-      "fieldNotes": 3,
-      "resources": 5,
+      "fieldNotes": 6,
+      "resources": 8,
       "decisions": 4
     },
     {
@@ -39,13 +40,13 @@
     },
     {
       "jobId": "windows-repair",
-      "fieldNotes": 3,
+      "fieldNotes": 4,
       "resources": 4,
       "decisions": 5
     },
     {
       "jobId": "windows-update",
-      "fieldNotes": 3,
+      "fieldNotes": 4,
       "resources": 5,
       "decisions": 5
     },
@@ -69,20 +70,20 @@
     },
     {
       "jobId": "backup-restore",
-      "fieldNotes": 4,
-      "resources": 5,
+      "fieldNotes": 5,
+      "resources": 6,
       "decisions": 6
     },
     {
       "jobId": "network-dns",
-      "fieldNotes": 5,
-      "resources": 4,
+      "fieldNotes": 8,
+      "resources": 8,
       "decisions": 5
     },
     {
       "jobId": "outage-recovery",
-      "fieldNotes": 3,
-      "resources": 4,
+      "fieldNotes": 4,
+      "resources": 5,
       "decisions": 5
     },
     {
@@ -99,14 +100,14 @@
     },
     {
       "jobId": "outlook-email",
-      "fieldNotes": 4,
-      "resources": 3,
+      "fieldNotes": 8,
+      "resources": 7,
       "decisions": 5
     },
     {
       "jobId": "printer-repair",
-      "fieldNotes": 5,
-      "resources": 16,
+      "fieldNotes": 7,
+      "resources": 18,
       "decisions": 7
     },
     {
@@ -117,8 +118,8 @@
     },
     {
       "jobId": "new-pc",
-      "fieldNotes": 3,
-      "resources": 4,
+      "fieldNotes": 4,
+      "resources": 5,
       "decisions": 4
     },
     {
@@ -141,8 +142,8 @@
     },
     {
       "jobId": "preventive-maintenance",
-      "fieldNotes": 4,
-      "resources": 4,
+      "fieldNotes": 7,
+      "resources": 8,
       "decisions": 5
     }
   ],
@@ -160,7 +161,7 @@
     },
     {
       "kind": "acquisition",
-      "id": "defender-offline/0",
+      "id": "defender-offline/builtin-scan",
       "title": "Run the built-in offline scan",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -180,7 +181,7 @@
     },
     {
       "kind": "acquisition",
-      "id": "safety-scanner/0",
+      "id": "safety-scanner/windows-x64",
       "title": "Download Windows x64 scanner · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -199,6 +200,16 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download"
     },
     {
+      "kind": "acquisition",
+      "id": "safety-scanner/windows-x86",
+      "title": "Download Windows x86 scanner · EXE",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download"
+    },
+    {
       "kind": "tool",
       "id": "adwcleaner",
       "title": "Malwarebytes AdwCleaner",
@@ -210,8 +221,8 @@
     },
     {
       "kind": "acquisition",
-      "id": "adwcleaner/0",
-      "title": "Download Windows cleaner · EXE",
+      "id": "adwcleaner/windows-portable",
+      "title": "Download Windows portable cleaner · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
       "status": "current",
@@ -240,8 +251,8 @@
     },
     {
       "kind": "acquisition",
-      "id": "malwarebytes/0",
-      "title": "Download Windows EXE",
+      "id": "malwarebytes/windows-installer",
+      "title": "Download Windows installer · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
       "status": "current",
@@ -270,7 +281,7 @@
     },
     {
       "kind": "acquisition",
-      "id": "hitmanpro/0",
+      "id": "hitmanpro/windows-x64",
       "title": "Windows x64 download · publisher check",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -280,7 +291,7 @@
     },
     {
       "kind": "acquisition",
-      "id": "hitmanpro/1",
+      "id": "hitmanpro/windows-x86",
       "title": "Windows x86 download · publisher check",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -310,7 +321,7 @@
     },
     {
       "kind": "acquisition",
-      "id": "eset-online-scanner/0",
+      "id": "eset-online-scanner/windows-x64",
       "title": "Download Windows x64 scanner · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
@@ -322,6 +333,16 @@
       "kind": "acquisition",
       "id": "eset-online-scanner/1",
       "title": "All download options",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.eset.com/us/home/online-scanner/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "eset-online-scanner/windows-x86",
+      "title": "Download Windows x86 scanner · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
       "status": "current",
@@ -460,8 +481,8 @@
     },
     {
       "kind": "acquisition",
-      "id": "bitdefender-free/0",
-      "title": "Download Windows EXE",
+      "id": "bitdefender-free/windows-installer",
+      "title": "Download Windows antivirus · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
       "status": "current",
@@ -490,8 +511,8 @@
     },
     {
       "kind": "acquisition",
-      "id": "emsisoft-emergency-kit/0",
-      "title": "Download Windows EXE",
+      "id": "emsisoft-emergency-kit/windows-x64",
+      "title": "Download Windows x64 kit · EXE",
       "reviewedAt": "2026-11-26",
       "dueAt": "2026-12-26",
       "status": "current",
@@ -2057,6 +2078,16 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows"
+    },
+    {
+      "kind": "acquisition",
+      "id": "oem-drivers/printer-drivers",
+      "title": "Find the correct printer driver",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers"
     },
     {
       "kind": "tool",
@@ -4379,6 +4410,1736 @@
       "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon"
     },
     {
+      "kind": "tool",
+      "id": "virustotal",
+      "title": "VirusTotal",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.virustotal.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "virustotal/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.virustotal.com/docs/how-it-works"
+    },
+    {
+      "kind": "tool",
+      "id": "metadefender-cloud",
+      "title": "OPSWAT MetaDefender Cloud",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://metadefender.com/product/community"
+    },
+    {
+      "kind": "acquisition",
+      "id": "metadefender-cloud/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://metadefender.com/product/community"
+    },
+    {
+      "kind": "tool",
+      "id": "jotti",
+      "title": "Jotti’s Malware Scan",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://virusscan.jotti.org/en-GB"
+    },
+    {
+      "kind": "acquisition",
+      "id": "jotti/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://virusscan.jotti.org/en-GB"
+    },
+    {
+      "kind": "tool",
+      "id": "hybrid-analysis",
+      "title": "Hybrid Analysis",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://hybrid-analysis.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "hybrid-analysis/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.crowdstrike.com/en-us/blog/crowdstrike-delivers-next-evolution-of-agentic-soc/"
+    },
+    {
+      "kind": "tool",
+      "id": "anyrun",
+      "title": "ANY.RUN",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://any.run/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "anyrun/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://any.run/"
+    },
+    {
+      "kind": "tool",
+      "id": "triage",
+      "title": "Recorded Future Triage",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://hatching.io/triage/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "triage/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://tria.ge/"
+    },
+    {
+      "kind": "tool",
+      "id": "joe-sandbox",
+      "title": "Joe Sandbox Cloud",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.joesecurity.org/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "joe-sandbox/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.joesandbox.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "intezer-analyze",
+      "title": "Intezer Analyze",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://intezer.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "intezer-analyze/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://analyze.intezer.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "polyswarm",
+      "title": "PolySwarm",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://polyswarm.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "polyswarm/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://polyswarm.io/scan"
+    },
+    {
+      "kind": "tool",
+      "id": "filescan-io",
+      "title": "OPSWAT Filescan.io",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.filescan.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "filescan-io/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.filescan.io/"
+    },
+    {
+      "kind": "tool",
+      "id": "unpacme",
+      "title": "UnpacMe",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.unpac.me/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "unpacme/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.openanalysis.net/"
+    },
+    {
+      "kind": "tool",
+      "id": "kaspersky-opentip",
+      "title": "Kaspersky OpenTIP",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://opentip.kaspersky.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "kaspersky-opentip/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://opentip.kaspersky.com/howto/"
+    },
+    {
+      "kind": "tool",
+      "id": "urlscan",
+      "title": "urlscan.io",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://urlscan.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "urlscan/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.urlscan.io/pages/faq"
+    },
+    {
+      "kind": "tool",
+      "id": "urlhaus",
+      "title": "URLhaus",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://urlhaus.abuse.ch/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "urlhaus/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://urlhaus.abuse.ch/"
+    },
+    {
+      "kind": "tool",
+      "id": "malwarebazaar",
+      "title": "MalwareBazaar",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://bazaar.abuse.ch/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "malwarebazaar/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://bazaar.abuse.ch/browse/"
+    },
+    {
+      "kind": "tool",
+      "id": "threatfox",
+      "title": "ThreatFox",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://threatfox.abuse.ch/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "threatfox/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://threatfox.abuse.ch/"
+    },
+    {
+      "kind": "tool",
+      "id": "yaraify",
+      "title": "YARAify",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://yaraify.abuse.ch/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "yaraify/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://yaraify.abuse.ch/"
+    },
+    {
+      "kind": "tool",
+      "id": "no-more-ransom",
+      "title": "No More Ransom Crypto Sheriff",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.nomoreransom.org/en/index.html"
+    },
+    {
+      "kind": "acquisition",
+      "id": "no-more-ransom/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.nomoreransom.org/en/ransomware-qa.html"
+    },
+    {
+      "kind": "tool",
+      "id": "id-ransomware",
+      "title": "ID Ransomware",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://id-ransomware.malwarehunterteam.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "id-ransomware/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://id-ransomware.malwarehunterteam.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "checkphish",
+      "title": "CheckPhish",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://checkphish.bolster.ai/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "checkphish/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://checkphish.bolster.ai/"
+    },
+    {
+      "kind": "tool",
+      "id": "sophos-intelix",
+      "title": "Sophos Intelix",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://intelix.sophos.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "sophos-intelix/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.sophos.com/en-us/blog/analyze-suspicious-files-and-urls-with-the-free-sophoslabs-intelix-portal"
+    },
+    {
+      "kind": "tool",
+      "id": "drweb-online",
+      "title": "Dr.Web Online Scanner",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://vms.drweb.com/scan_file/?lng=en"
+    },
+    {
+      "kind": "acquisition",
+      "id": "drweb-online/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://vms.drweb.com/scan_file/?lng=en"
+    },
+    {
+      "kind": "tool",
+      "id": "ssl-labs",
+      "title": "Qualys SSL Labs",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.ssllabs.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "ssl-labs/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.ssllabs.com/ssltest/"
+    },
+    {
+      "kind": "tool",
+      "id": "mdn-observatory",
+      "title": "MDN HTTP Observatory",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://developer.mozilla.org/en-US/observatory"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mdn-observatory/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://developer.mozilla.org/en-US/observatory"
+    },
+    {
+      "kind": "tool",
+      "id": "securityheaders",
+      "title": "Security Headers",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://securityheaders.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "securityheaders/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://securityheaders.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "internet-nl",
+      "title": "Internet.nl",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://en.internet.nl/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "internet-nl/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://en.internet.nl/"
+    },
+    {
+      "kind": "tool",
+      "id": "hardenize",
+      "title": "Hardenize",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.hardenize.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "hardenize/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.hardenize.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "dmarcian-tools",
+      "title": "dmarcian Tools",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dmarcian.com/dmarc-tools/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "dmarcian-tools/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dmarcian.com/dmarc-tools/"
+    },
+    {
+      "kind": "tool",
+      "id": "mxtoolbox",
+      "title": "MXToolbox SuperTool",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://mxtoolbox.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mxtoolbox/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://mxtoolbox.com/SuperTool.aspx"
+    },
+    {
+      "kind": "tool",
+      "id": "google-admin-toolbox",
+      "title": "Google Admin Toolbox",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://toolbox.googleapps.com/apps/main/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "google-admin-toolbox/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://toolbox.googleapps.com/apps/main/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "google-admin-toolbox/dig",
+      "title": "DNS lookup",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://knowledge.workspace.google.com/admin/support/troubleshooting/google-workspace-diagnostic-tools"
+    },
+    {
+      "kind": "acquisition",
+      "id": "google-admin-toolbox/check-mx",
+      "title": "Check MX",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://knowledge.workspace.google.com/admin/support/troubleshooting/google-workspace-diagnostic-tools"
+    },
+    {
+      "kind": "acquisition",
+      "id": "google-admin-toolbox/messageheader",
+      "title": "Analyze message headers",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://knowledge.workspace.google.com/admin/support/troubleshooting/google-workspace-diagnostic-tools"
+    },
+    {
+      "kind": "tool",
+      "id": "dnsviz",
+      "title": "DNSViz",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dnsviz.net/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "dnsviz/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dnsviz.net/"
+    },
+    {
+      "kind": "tool",
+      "id": "zonemaster",
+      "title": "Zonemaster",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://zonemaster.net/en/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "zonemaster/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://zonemaster.net/en/"
+    },
+    {
+      "kind": "tool",
+      "id": "verisign-dnssec-debugger",
+      "title": "Verisign DNSSEC Debugger",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dnssec-debugger.verisignlabs.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "verisign-dnssec-debugger/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dnssec-debugger.verisignlabs.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "dnschecker",
+      "title": "DNSChecker",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dnschecker.org/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "dnschecker/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dnschecker.org/"
+    },
+    {
+      "kind": "tool",
+      "id": "whatsmydns",
+      "title": "whatsmydns.net",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.whatsmydns.net/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "whatsmydns/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.whatsmydns.net/"
+    },
+    {
+      "kind": "tool",
+      "id": "nslookup-io",
+      "title": "NsLookup.io",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.nslookup.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "nslookup-io/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.nslookup.io/"
+    },
+    {
+      "kind": "tool",
+      "id": "learndmarc",
+      "title": "LearnDMARC",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.learndmarc.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "learndmarc/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.learndmarc.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "mail-tester",
+      "title": "mail-tester",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://mail-tester.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "mail-tester/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://mail-tester.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "globalping",
+      "title": "Globalping",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://globalping.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "globalping/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://globalping.io/"
+    },
+    {
+      "kind": "tool",
+      "id": "ripestat",
+      "title": "RIPEstat",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://stat.ripe.net/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "ripestat/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://stat.ripe.net/"
+    },
+    {
+      "kind": "tool",
+      "id": "cloudflare-radar",
+      "title": "Cloudflare Radar",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://radar.cloudflare.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "cloudflare-radar/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://radar.cloudflare.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "cloudflare-speed",
+      "title": "Cloudflare Speed Test",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://speed.cloudflare.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "cloudflare-speed/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://speed.cloudflare.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "fast-com",
+      "title": "FAST.com",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://fast.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "fast-com/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://fast.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "waveform-bufferbloat",
+      "title": "Waveform Bufferbloat Test",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.waveform.com/tools/bufferbloat"
+    },
+    {
+      "kind": "acquisition",
+      "id": "waveform-bufferbloat/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.waveform.com/tools/bufferbloat"
+    },
+    {
+      "kind": "tool",
+      "id": "microsoft-remote-connectivity",
+      "title": "Microsoft Remote Connectivity Analyzer",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://testconnectivity.microsoft.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "microsoft-remote-connectivity/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://testconnectivity.microsoft.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "microsoft365-connectivity",
+      "title": "Microsoft 365 Network Connectivity Test",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://connectivity.m365.cloud.microsoft/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "microsoft365-connectivity/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://connectivity.m365.cloud.microsoft/"
+    },
+    {
+      "kind": "tool",
+      "id": "microsoft-service-health",
+      "title": "Microsoft Service Health",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://status.cloud.microsoft/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "microsoft-service-health/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://status.cloud.microsoft/"
+    },
+    {
+      "kind": "tool",
+      "id": "google-workspace-status",
+      "title": "Google Workspace Status Dashboard",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.google.com/appsstatus/dashboard/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "google-workspace-status/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.google.com/appsstatus/dashboard/"
+    },
+    {
+      "kind": "tool",
+      "id": "test-ipv6",
+      "title": "Test-IPv6",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://test-ipv6.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "test-ipv6/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://test-ipv6.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "webpagetest",
+      "title": "WebPageTest",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.webpagetest.org/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "webpagetest/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.logicmonitor.com/webpagetest"
+    },
+    {
+      "kind": "tool",
+      "id": "pagespeed-insights",
+      "title": "Google PageSpeed Insights",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://pagespeed.web.dev/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "pagespeed-insights/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://pagespeed.web.dev/"
+    },
+    {
+      "kind": "tool",
+      "id": "wave-accessibility",
+      "title": "WAVE Web Accessibility Evaluation",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://wave.webaim.org/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "wave-accessibility/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://wave.webaim.org/"
+    },
+    {
+      "kind": "tool",
+      "id": "shodan",
+      "title": "Shodan",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.shodan.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "shodan/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://help.shodan.io/the-basics/what-is-shodan"
+    },
+    {
+      "kind": "tool",
+      "id": "censys",
+      "title": "Censys Platform",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://censys.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "censys/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.censys.com/docs/platform-quickstart-guide"
+    },
+    {
+      "kind": "tool",
+      "id": "greynoise",
+      "title": "GreyNoise Visualizer",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.greynoise.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "greynoise/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.greynoise.io/docs/getting-started"
+    },
+    {
+      "kind": "tool",
+      "id": "abuseipdb",
+      "title": "AbuseIPDB",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.abuseipdb.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "abuseipdb/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.abuseipdb.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "talos-intelligence",
+      "title": "Cisco Talos Intelligence",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://talosintelligence.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "talos-intelligence/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://talosintelligence.com/reputation_center"
+    },
+    {
+      "kind": "tool",
+      "id": "otx",
+      "title": "LevelBlue Open Threat Exchange",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://otx.alienvault.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "otx/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://otx.alienvault.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "pulsedive",
+      "title": "Pulsedive",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://pulsedive.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "pulsedive/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://pulsedive.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "ipinfo",
+      "title": "IPinfo",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://ipinfo.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "ipinfo/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://ipinfo.io/"
+    },
+    {
+      "kind": "tool",
+      "id": "spamhaus",
+      "title": "Spamhaus Reputation Checker",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.spamhaus.org/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "spamhaus/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://check.spamhaus.org/"
+    },
+    {
+      "kind": "tool",
+      "id": "google-safe-browsing",
+      "title": "Google Safe Browsing Site Status",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://safebrowsing.google.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "google-safe-browsing/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://safebrowsing.google.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "have-i-been-pwned",
+      "title": "Have I Been Pwned",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://haveibeenpwned.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "have-i-been-pwned/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://haveibeenpwned.com/FAQs"
+    },
+    {
+      "kind": "tool",
+      "id": "icann-lookup",
+      "title": "ICANN Lookup",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://lookup.icann.org/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "icann-lookup/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://lookup.icann.org/en/faq"
+    },
+    {
+      "kind": "tool",
+      "id": "urlvoid",
+      "title": "URLVoid",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.urlvoid.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "urlvoid/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.urlvoid.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "openphish",
+      "title": "OpenPhish",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://openphish.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "openphish/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://openphish.com/phishing_feeds.html"
+    },
+    {
+      "kind": "tool",
+      "id": "urlquery",
+      "title": "URLQuery",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://urlquery.net/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "urlquery/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://urlquery.net/about"
+    },
+    {
+      "kind": "tool",
+      "id": "first-epss",
+      "title": "FIRST EPSS",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.first.org/epss/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "first-epss/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.first.org/epss/"
+    },
+    {
+      "kind": "tool",
+      "id": "cisa-kev",
+      "title": "CISA Known Exploited Vulnerabilities",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+    },
+    {
+      "kind": "acquisition",
+      "id": "cisa-kev/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/cisagov/kev-data"
+    },
+    {
+      "kind": "tool",
+      "id": "nvd",
+      "title": "NIST National Vulnerability Database",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://nvd.nist.gov/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "nvd/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://nvd.nist.gov/"
+    },
+    {
+      "kind": "tool",
+      "id": "osv",
+      "title": "OSV.dev",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://osv.dev/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "osv/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://osv.dev/"
+    },
+    {
+      "kind": "tool",
+      "id": "github-advisories",
+      "title": "GitHub Advisory Database",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/advisories"
+    },
+    {
+      "kind": "acquisition",
+      "id": "github-advisories/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/advisories"
+    },
+    {
+      "kind": "tool",
+      "id": "snyk-vulnerability-db",
+      "title": "Snyk Security Database",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://security.snyk.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "snyk-vulnerability-db/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://security.snyk.io/"
+    },
+    {
+      "kind": "tool",
+      "id": "cyberchef",
+      "title": "CyberChef",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/gchq/CyberChef"
+    },
+    {
+      "kind": "acquisition",
+      "id": "cyberchef/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/gchq/CyberChef"
+    },
+    {
+      "kind": "tool",
+      "id": "regex101",
+      "title": "regex101",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://regex101.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "regex101/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.regex101.com/application/privacy/"
+    },
+    {
+      "kind": "tool",
+      "id": "jwt-debugger",
+      "title": "JWT.io Debugger",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.jwt.io/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "jwt-debugger/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.jwt.io/"
+    },
+    {
+      "kind": "tool",
+      "id": "browserleaks",
+      "title": "BrowserLeaks",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://browserleaks.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "browserleaks/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://browserleaks.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "cover-your-tracks",
+      "title": "EFF Cover Your Tracks",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://coveryourtracks.eff.org/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "cover-your-tracks/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://coveryourtracks.eff.org/"
+    },
+    {
+      "kind": "tool",
+      "id": "deps-dev",
+      "title": "Google Open Source Insights",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://deps.dev/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "deps-dev/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.deps.dev/"
+    },
+    {
+      "kind": "tool",
+      "id": "first-cvss",
+      "title": "FIRST CVSS v4.0 Calculator",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.first.org/cvss/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "first-cvss/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.first.org/cvss/calculator/4.0"
+    },
+    {
+      "kind": "tool",
+      "id": "attack-navigator",
+      "title": "MITRE ATT&CK Navigator",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/mitre-attack/attack-navigator"
+    },
+    {
+      "kind": "acquisition",
+      "id": "attack-navigator/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/mitre-attack/attack-navigator"
+    },
+    {
+      "kind": "tool",
+      "id": "squoosh",
+      "title": "Squoosh",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://squoosh.app/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "squoosh/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://squoosh.app/"
+    },
+    {
+      "kind": "tool",
+      "id": "drawio",
+      "title": "draw.io",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.drawio.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "drawio/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.drawio.com/"
+    },
+    {
+      "kind": "tool",
+      "id": "excalidraw",
+      "title": "Excalidraw",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://excalidraw.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "excalidraw/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://plus.excalidraw.com/how-to-start"
+    },
+    {
+      "kind": "tool",
+      "id": "hoppscotch",
+      "title": "Hoppscotch",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://hoppscotch.com/"
+    },
+    {
+      "kind": "acquisition",
+      "id": "hoppscotch/open-service",
+      "title": "Open online service",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://hoppscotch.com/releases"
+    },
+    {
       "kind": "guide",
       "id": "intake-triage",
       "title": "Start here: triage any computer problem",
@@ -5339,6 +7100,206 @@
       "url": "https://learn.microsoft.com/en-us/windows/release-health/"
     },
     {
+      "kind": "field-note",
+      "id": "printer-stuck-job-blocks-the-queue",
+      "title": "Clear a print job that blocks later documents",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows"
+    },
+    {
+      "kind": "field-note",
+      "id": "printer-guest-wifi-isolates-the-device",
+      "title": "Find a printer hidden by guest Wi-Fi isolation",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.hp.com/us-en/document/ish_8085688-8063994-16"
+    },
+    {
+      "kind": "field-note",
+      "id": "email-search-client-specific-diagnosis",
+      "title": "Fix missing search results in the right mail client",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/outlook/troubleshooting-outlook-search-issues"
+    },
+    {
+      "kind": "field-note",
+      "id": "email-gmail-rejects-old-password-signin",
+      "title": "Reconnect Gmail with the supported sign-in flow",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.google.com/mail/answer/7126229?hl=en"
+    },
+    {
+      "kind": "field-note",
+      "id": "email-cloud-quota-blocks-outlook-com",
+      "title": "Restore mail stopped by a cloud-storage quota",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/outlook/storage-limits-in-outlook-com"
+    },
+    {
+      "kind": "field-note",
+      "id": "network-web-works-service-proxy-fails",
+      "title": "Explain why a service fails while the browser works",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-winhttp"
+    },
+    {
+      "kind": "field-note",
+      "id": "network-reset-breaks-vpn-or-virtual-switch",
+      "title": "Prepare a network reset without losing the return path",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-ethernet-connection-problems-in-windows"
+    },
+    {
+      "kind": "field-note",
+      "id": "repair-preserve-apps-with-same-version-reinstall",
+      "title": "Repair a bootable system while retaining applications",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+    },
+    {
+      "kind": "field-note",
+      "id": "update-generic-rollback-needs-exact-code",
+      "title": "Turn an update rollback into a specific repair",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/get-help-with-windows-upgrade-and-installation-errors"
+    },
+    {
+      "kind": "field-note",
+      "id": "backup-vss-writer-failed",
+      "title": "Identify the writer stopping an application-aware backup",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.veeam.com/kb2041"
+    },
+    {
+      "kind": "field-note",
+      "id": "maintenance-firmware-bitlocker-resume",
+      "title": "Keep firmware maintenance recoverable on an encrypted PC",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/windows-security/bitlocker-recovery-known-issues"
+    },
+    {
+      "kind": "field-note",
+      "id": "outage-desktop-stays-off-after-ac-return",
+      "title": "Explain a desktop that stays off when power returns",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dl.dell.com/manuals/common/dell-emc-remote-wake-up-config-dell-client-cmd-suite.pdf"
+    },
+    {
+      "kind": "field-note",
+      "id": "newpc-nas-share-signing-compatibility",
+      "title": "Connect a new PC to a compatible authenticated share",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing"
+    },
+    {
+      "kind": "field-note",
+      "id": "malware-managed-protection-change-reverts",
+      "title": "Route a reverting antivirus setting to its policy owner",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/tamper-protection-troubleshoot"
+    },
+    {
+      "kind": "field-note",
+      "id": "online-file-verdicts-disagree",
+      "title": "Online scanners disagree about a file",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.virustotal.com/docs/how-it-works"
+    },
+    {
+      "kind": "field-note",
+      "id": "online-phishing-account-exposure",
+      "title": "A suspicious link was opened or credentials were entered",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.urlscan.io/pages/faq"
+    },
+    {
+      "kind": "field-note",
+      "id": "online-loaded-latency",
+      "title": "Calls lag even though a speed test looks fast",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://speed.cloudflare.com/"
+    },
+    {
+      "kind": "field-note",
+      "id": "online-email-authentication",
+      "title": "Mail reaches spam or fails authentication",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://toolbox.googleapps.com/apps/main/"
+    },
+    {
+      "kind": "field-note",
+      "id": "online-cve-priority",
+      "title": "A new CVE needs a practical patch decision",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/cisagov/kev-data"
+    },
+    {
+      "kind": "field-note",
+      "id": "online-website-configuration",
+      "title": "A website has a certificate or security-header problem",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.ssllabs.com/ssltest/"
+    },
+    {
       "kind": "resource",
       "id": "intake-triage/intake-sheet",
       "title": "Intake and handoff sheet",
@@ -5367,6 +7328,16 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+    },
+    {
+      "kind": "resource",
+      "id": "intake-triage/online-decode-and-document",
+      "title": "Decode and document evidence",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/gchq/CyberChef"
     },
     {
       "kind": "resource",
@@ -5417,6 +7388,36 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/reinstall-windows-with-the-installation-media"
+    },
+    {
+      "kind": "resource",
+      "id": "malware-removal/managed-tamper-policy",
+      "title": "Managed protection troubleshooting",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/tamper-protection-troubleshoot"
+    },
+    {
+      "kind": "resource",
+      "id": "malware-removal/online-check-file",
+      "title": "Check a suspicious file",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.virustotal.com/docs/how-it-works"
+    },
+    {
+      "kind": "resource",
+      "id": "malware-removal/online-check-link",
+      "title": "Inspect a suspicious link",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.urlscan.io/pages/faq"
     },
     {
       "kind": "resource",
@@ -5750,6 +7751,16 @@
     },
     {
       "kind": "resource",
+      "id": "backup-restore/vss-writer-owner",
+      "title": "VSS writer and service map",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.veeam.com/kb2041"
+    },
+    {
+      "kind": "resource",
       "id": "network-dns/wifi-route",
       "title": "Windows network troubleshooting",
       "reviewedAt": "2026-11-26",
@@ -5790,6 +7801,46 @@
     },
     {
       "kind": "resource",
+      "id": "network-dns/winhttp-proxy-state",
+      "title": "Inspect a service proxy",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-winhttp"
+    },
+    {
+      "kind": "resource",
+      "id": "network-dns/network-reset-recovery",
+      "title": "Network reset and adapter recovery",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-ethernet-connection-problems-in-windows"
+    },
+    {
+      "kind": "resource",
+      "id": "network-dns/online-check-ip",
+      "title": "Investigate an IP or domain",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.greynoise.io/docs/getting-started"
+    },
+    {
+      "kind": "resource",
+      "id": "network-dns/online-test-connection",
+      "title": "Find latency or an outage",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://speed.cloudflare.com/"
+    },
+    {
+      "kind": "resource",
       "id": "outage-recovery/unexpected-restart",
       "title": "Interpret unexpected-restart evidence",
       "reviewedAt": "2026-11-26",
@@ -5827,6 +7878,16 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://github.com/Herbertofury/INTA/wiki/Technician-Handoff"
+    },
+    {
+      "kind": "resource",
+      "id": "outage-recovery/power-recovery-setting",
+      "title": "Dell power-restoration behavior",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://dl.dell.com/manuals/common/dell-emc-remote-wake-up-config-dell-client-cmd-suite.pdf"
     },
     {
       "kind": "resource",
@@ -5917,6 +7978,46 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/administration/architecture-changes-new-outlook"
+    },
+    {
+      "kind": "resource",
+      "id": "outlook-email/mail-search-branches",
+      "title": "New and classic Outlook search",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/outlook/troubleshooting-outlook-search-issues"
+    },
+    {
+      "kind": "resource",
+      "id": "outlook-email/gmail-client-signin",
+      "title": "Gmail supported client sign-in",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.google.com/mail/answer/7126229?hl=en"
+    },
+    {
+      "kind": "resource",
+      "id": "outlook-email/outlook-com-storage",
+      "title": "Outlook.com mailbox and cloud quotas",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/outlook/storage-limits-in-outlook-com"
+    },
+    {
+      "kind": "resource",
+      "id": "outlook-email/online-fix-email",
+      "title": "Diagnose email and DNS",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://toolbox.googleapps.com/apps/main/"
     },
     {
       "kind": "resource",
@@ -6080,6 +8181,26 @@
     },
     {
       "kind": "resource",
+      "id": "printer-repair/stuck-print-queue",
+      "title": "Clear a blocked print queue",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows"
+    },
+    {
+      "kind": "resource",
+      "id": "printer-repair/printer-ap-isolation",
+      "title": "Printer discovery and Wi-Fi isolation",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.hp.com/us-en/document/ish_8085688-8063994-16"
+    },
+    {
+      "kind": "resource",
       "id": "hardware-bsod/stop-error-process",
       "title": "Microsoft stop-code troubleshooting",
       "reviewedAt": "2026-11-26",
@@ -6157,6 +8278,16 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://github.com/Herbertofury/INTA/wiki/Technician-Handoff"
+    },
+    {
+      "kind": "resource",
+      "id": "new-pc/smb-signing-compatibility",
+      "title": "Current SMB signing requirements",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing"
     },
     {
       "kind": "resource",
@@ -6297,6 +8428,766 @@
       "status": "current",
       "daysOverdue": 0,
       "url": "https://github.com/Herbertofury/INTA/wiki/Technician-Handoff"
+    },
+    {
+      "kind": "resource",
+      "id": "preventive-maintenance/firmware-encryption-recovery",
+      "title": "BitLocker and firmware maintenance",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/windows-security/bitlocker-recovery-known-issues"
+    },
+    {
+      "kind": "resource",
+      "id": "preventive-maintenance/online-test-website",
+      "title": "Check website security",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.ssllabs.com/ssltest/"
+    },
+    {
+      "kind": "resource",
+      "id": "preventive-maintenance/online-prioritize-patches",
+      "title": "Prioritize a vulnerability",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/cisagov/kev-data"
+    },
+    {
+      "kind": "resource",
+      "id": "preventive-maintenance/online-improve-site",
+      "title": "Improve a slow website",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2027-01-25",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://pagespeed.web.dev/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-malware/malwarebytes/windows-installer",
+      "title": "Remove viruses: Malwarebytes (On-demand cleanup)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://help.malwarebytes.com/hc/en-us/articles/49849786059035-Free-vs-Paid-Malwarebytes-Security-features"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-malware/adwcleaner/windows-portable",
+      "title": "Remove viruses: Malwarebytes AdwCleaner (Adware and hijackers)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-malware/bitdefender-free/windows-installer",
+      "title": "Remove viruses: Bitdefender Antivirus Free (Personal PC protection)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.bitdefender.com/en-us/consumer/free-antivirus"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-malware/safety-scanner/windows-x64",
+      "title": "Remove viruses: Microsoft Safety Scanner (Portable second opinion)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-malware/defender-offline/primary",
+      "title": "Remove viruses: Microsoft Defender Offline (Scan outside Windows)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "check-file/virustotal/open-service",
+      "title": "Check a suspicious file: VirusTotal (File and URL reputation)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.virustotal.com/docs/how-it-works"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "check-file/metadefender-cloud/open-service",
+      "title": "Check a suspicious file: OPSWAT MetaDefender Cloud (Independent multiscanner evidence)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://metadefender.com/product/community"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "check-link/urlscan/open-service",
+      "title": "Inspect a suspicious link: urlscan.io (Redirects and page requests)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://docs.urlscan.io/pages/faq"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "check-link/google-safe-browsing/open-service",
+      "title": "Inspect a suspicious link: Google Safe Browsing Site Status (Confirm the Google classification behind a browser warning.)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://safebrowsing.google.com/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "check-link/checkphish/open-service",
+      "title": "Inspect a suspicious link: CheckPhish (Investigate a possible brand-impersonation or phishing landing page.)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://checkphish.bolster.ai/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-a-printer/get-help/printer",
+      "title": "Fix a printer: Windows Get Help (Printer diagnostic)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-a-printer/oem-drivers/printer-drivers",
+      "title": "Fix a printer: Official OEM driver and firmware portals (Exact-model driver)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-a-printer/advanced-ip-scanner/primary",
+      "title": "Fix a printer: Advanced IP Scanner (Find the printer IP)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.advanced-ip-scanner.com/help/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-a-printer/naps2/primary",
+      "title": "Fix a printer: NAPS2 (Scanner and ADF test)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.naps2.com/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-internet/get-help/network",
+      "title": "Fix internet: Windows Get Help (Connection diagnostic)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-internet/powershell/windows-powershell",
+      "title": "Fix internet: PowerShell (DNS and port checks)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-internet/curl/windows-inbox",
+      "title": "Fix internet: curl (HTTP and TLS check)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://curl.se/docs/manpage.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-email/get-help/outlook",
+      "title": "Fix email: Windows Get Help (Classic Outlook diagnostic)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "failing-drive/systemrescue/primary",
+      "title": "Recover a failing drive: SystemRescue (Image the failing source)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.system-rescue.org/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "failing-drive/testdisk/primary",
+      "title": "Recover a failing drive: TestDisk (Inspect the working copy)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cgsecurity.org/wiki/TestDisk"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "failing-drive/photorec/primary",
+      "title": "Recover a failing drive: PhotoRec (Recover file contents)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "deleted-files/photorec/primary",
+      "title": "Recover deleted files: PhotoRec (Recover by file signature)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "deleted-files/testdisk/primary",
+      "title": "Recover deleted files: TestDisk (Undelete supported files)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.cgsecurity.org/wiki/TestDisk:_undelete_file_for_NTFS"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "slow-pc/process-explorer/primary",
+      "title": "Fix a slow PC: Process Explorer (Find the busy process)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "slow-pc/procmon/primary",
+      "title": "Fix a slow PC: Process Monitor (Explain an I/O stall)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "slow-pc/crystaldiskinfo/primary",
+      "title": "Fix a slow PC: CrystalDiskInfo (Check storage warnings)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://crystalmark.info/en/software/crystaldiskinfo/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "slow-pc/sysinternals/primary",
+      "title": "Fix a slow PC: Microsoft Sysinternals Suite (Complete diagnostic kit)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "remote-help/quick-assist/primary",
+      "title": "Help remotely: Microsoft Quick Assist (Attended Windows help)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "remote-help/rustdesk/primary",
+      "title": "Help remotely: RustDesk (Cross-platform support)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://rustdesk.com/docs/en/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "remote-help/meshcentral/primary",
+      "title": "Help remotely: MeshCentral (Existing managed fleet)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/Ylianst/MeshCentral"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "remote-help/remmina/primary",
+      "title": "Help remotely: Remmina (Linux remote client)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.remmina.org/how-to-install-remmina/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-windows-updates/get-help/update",
+      "title": "Fix Windows updates: Windows Get Help (Update diagnostic)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-windows-updates/setupdiag/primary",
+      "title": "Fix Windows updates: SetupDiag (Explain an upgrade rollback)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-windows-updates/dism/primary",
+      "title": "Fix Windows updates: DISM (Component-store repair)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-windows-updates/windows-recovery/repair-reinstall",
+      "title": "Fix Windows updates: Windows Recovery Environment (Same-version reinstall)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "windows-repair/dism/primary",
+      "title": "Repair Windows files: DISM (Repair component store)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "windows-repair/sfc/primary",
+      "title": "Repair Windows files: System File Checker (Verify protected files)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "windows-repair/windows-recovery/repair-reinstall",
+      "title": "Repair Windows files: Windows Recovery Environment (Same-version reinstall)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-boot-failure/windows-recovery/primary",
+      "title": "Fix a PC that will not boot: Windows Recovery Environment (Startup recovery)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-boot-failure/microsoft-windows11-media/primary",
+      "title": "Fix a PC that will not boot: Windows 11 installation media (Trusted repair media)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.microsoft.com/software-download/windows11"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-boot-failure/systemrescue/primary",
+      "title": "Fix a PC that will not boot: SystemRescue (Preserve unstable storage)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.system-rescue.org/manual/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "fix-boot-failure/quick-machine-recovery/primary",
+      "title": "Fix a PC that will not boot: Quick machine recovery (Eligible widespread failure)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "diagnose-crashes/windbg/primary",
+      "title": "Diagnose crashes: WinDbg (Analyze a crash dump)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "diagnose-crashes/memtest86plus/primary",
+      "title": "Diagnose crashes: Memtest86+ (Test memory stability)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/memtest86plus/memtest86plus"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "diagnose-crashes/libre-hardware-monitor/primary",
+      "title": "Diagnose crashes: Libre Hardware Monitor (Observe temperatures)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "disk-space/windirstat/primary",
+      "title": "Free disk space: WinDirStat (Free capacity map)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/windirstat/windirstat"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "disk-space/wiztree/primary",
+      "title": "Free disk space: WizTree (Licensed capacity analysis)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://diskanalyzer.com/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "clone-a-drive/rescuezilla/primary",
+      "title": "Clone or move a drive: Rescuezilla (Graphical image or clone)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://rescuezilla.com/help"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "clone-a-drive/clonezilla/primary",
+      "title": "Clone or move a drive: Clonezilla (Advanced image workflow)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://clonezilla.org/clonezilla-live-doc.php"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "clone-a-drive/robocopy/primary",
+      "title": "Clone or move a drive: Robocopy (Files-only migration)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "file-backup/restic/primary",
+      "title": "Restore a file backup: restic (Restore a restic repository)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://restic.readthedocs.io/en/stable/050_restore.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "file-backup/kopia/primary",
+      "title": "Restore a file backup: Kopia (Restore a Kopia snapshot)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://kopia.io/docs/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "file-backup/veeam-agent/primary",
+      "title": "Restore a file backup: Veeam Agent for Microsoft Windows (Restore an agent backup)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/files_restore.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "boot-usb/rufus/primary",
+      "title": "Make a boot USB: Rufus (Write one official ISO)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/pbatard/rufus/wiki/FAQ"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "boot-usb/ventoy/primary",
+      "title": "Make a boot USB: Ventoy (Maintain multiple ISOs)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.ventoy.net/en/doc_start.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "boot-usb/microsoft-windows11-media/primary",
+      "title": "Make a boot USB: Windows 11 installation media (Official Windows media)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.microsoft.com/software-download/windows11"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "boot-usb/systemrescue/primary",
+      "title": "Make a boot USB: SystemRescue (Ready recovery ISO)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.system-rescue.org/manual/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "set-up-a-new-pc/winget/primary",
+      "title": "Set up a new PC: WinGet (Approved application setup)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "set-up-a-new-pc/oem-drivers/primary",
+      "title": "Set up a new PC: Official OEM driver and firmware portals (Model-specific drivers)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "set-up-a-new-pc/robocopy/primary",
+      "title": "Set up a new PC: Robocopy (Move agreed user files)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "maintain-a-pc/winget/primary",
+      "title": "Maintain a PC: WinGet (Review app updates)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "maintain-a-pc/crystaldiskinfo/primary",
+      "title": "Maintain a PC: CrystalDiskInfo (Review storage health)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://crystalmark.info/en/software/crystaldiskinfo/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "maintain-a-pc/windirstat/primary",
+      "title": "Maintain a PC: WinDirStat (Explain capacity use)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/windirstat/windirstat"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "repair-domain-trust/powershell/windows-powershell",
+      "title": "Repair domain sign-in: PowerShell (Member secure-channel test)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "troubleshoot-with-ai/chatgpt/primary",
+      "title": "Troubleshoot with AI: ChatGPT (Compare hypotheses)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://help.openai.com/en/articles/9275245-using-chatgpt-s-free-tier-faq"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "troubleshoot-with-ai/codex-cli/primary",
+      "title": "Troubleshoot with AI: OpenAI Codex CLI (Review a scoped script)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/openai/codex"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "find-a-file/everything/primary",
+      "title": "Find a file: Everything (Find a local filename)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.voidtools.com/faq/"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "find-a-file/wizfile/primary",
+      "title": "Find a file: WizFile (Licensed file search)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://antibody-software.com/wizfile/quick-start"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "inspect-network-traffic/wireshark/primary",
+      "title": "Inspect network traffic: Wireshark (Protocol evidence)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIntroduction.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "inspect-network-traffic/curl/windows-inbox",
+      "title": "Inspect network traffic: curl (HTTP/TLS comparison)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://curl.se/docs/manpage.html"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "inspect-network-traffic/mtr/primary",
+      "title": "Inspect network traffic: mtr (Path-loss comparison)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://github.com/traviscross/mtr"
+    },
+    {
+      "kind": "tool-choice",
+      "id": "suspected-ram-fault/memtest86plus/primary",
+      "title": "Test memory: Memtest86+ (Bootable memory test)",
+      "reviewedAt": "2026-11-26",
+      "dueAt": "2026-12-26",
+      "status": "current",
+      "daysOverdue": 0,
+      "url": "https://www.memtest.org/"
     }
   ],
   "researchQueue": [
@@ -6326,6 +9217,19 @@
       "sourceUrls": [
         "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
         "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ]
+    },
+    {
+      "id": "backup-vss-recovery-proof",
+      "kind": "job",
+      "targetId": "backup-restore",
+      "priority": 1,
+      "status": "queued",
+      "question": "Prove recovery of a failed VSS writer through a real restore",
+      "deliverable": "Use a disposable workload to record the failed writer, targeted recovery, completed backup and restored application data.",
+      "acceptance": "The writer owner and service interruption are explicit; a successful backup status is followed by a usable restored workload.",
+      "sourceUrls": [
+        "https://www.veeam.com/kb2041"
       ]
     },
     {
@@ -6818,6 +9722,22 @@
       ]
     },
     {
+      "id": "online-manual-review",
+      "kind": "category",
+      "targetId": "online",
+      "priority": 2,
+      "status": "queued",
+      "question": "Recheck service ownership, free/account boundaries, submission visibility and actual launch destinations after provider changes.",
+      "deliverable": "A dated review of changed official plans, moved applications and useful new online services without duplicate product entries.",
+      "acceptance": "Every accepted change has primary evidence and consistent app, Wiki and first-action routes; inaccessible or retired candidates remain explicitly recorded.",
+      "sourceUrls": [
+        "https://docs.virustotal.com/docs/how-it-works",
+        "https://urlscan.io/about/",
+        "https://docs.censys.com/changelog",
+        "https://hoppscotch.com/releases"
+      ]
+    },
+    {
       "id": "outage-recovery-research-1",
       "kind": "job",
       "targetId": "outage-recovery",
@@ -6843,6 +9763,22 @@
       "sourceUrls": [
         "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart",
         "https://restic.readthedocs.io/en/stable/045_working_with_repos.html"
+      ]
+    },
+    {
+      "id": "outlook-auth-search-quota-proof",
+      "kind": "job",
+      "targetId": "outlook-email",
+      "priority": 2,
+      "status": "queued",
+      "question": "Exercise the client-specific auth, search and storage branches",
+      "deliverable": "Run disposable-account tests for Google authorization, a known search result and an Outlook.com quota error.",
+      "acceptance": "Record account type, client build, two-way delivery and content preservation; documentation review is not labeled a live test.",
+      "sourceUrls": [
+        "https://support.google.com/mail/answer/7126229?hl=en",
+        "https://knowledge.workspace.google.com/admin/sync/set-up-gmail-with-a-third-party-email-client",
+        "https://support.microsoft.com/en-us/outlook/troubleshooting-outlook-search-issues",
+        "https://support.microsoft.com/en-us/outlook/storage-limits-in-outlook-com"
       ]
     },
     {
@@ -6905,6 +9841,20 @@
         "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
         "https://diskanalyzer.com/about",
         "https://antibody-software.com/wizfile/quick-start"
+      ]
+    },
+    {
+      "id": "printer-isolation-runtime-proof",
+      "kind": "job",
+      "targetId": "printer-repair",
+      "priority": 2,
+      "status": "queued",
+      "question": "Validate printer discovery across trusted and isolated Wi-Fi",
+      "deliverable": "Exercise the new isolation and blocked-queue branches on a representative printer with a sanitized topology and actual output.",
+      "acceptance": "Discovery, printing and scanning results are recorded independently; guest isolation remains intentional and the affected queue is identified.",
+      "sourceUrls": [
+        "https://support.hp.com/us-en/document/ish_8085688-8063994-16",
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows"
       ]
     },
     {

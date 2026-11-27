@@ -6,5 +6,23 @@ for exe in xfce4-session lightdm firefox-esr gparted gsmartcontrol smartctl nvme
 done
 test -x /usr/local/bin/inta-rescue
 python3 -c 'import tkinter'
+python3 - <<'PY_BRAND_CHECK'
+import hashlib
+from pathlib import Path
+import sys
+sys.path.insert(0, "/usr/share/inta")
+from inta_brand_ui import BrandResources
+resources = BrandResources(resource_root="/usr/share/inta")
+for name in ("INTA", "INTA Rescue", "GSmartControl", "GParted", "TestDisk", "PhotoRec", "Clonezilla", "ClamAV", "ddrescue", "YARA", "Sleuth Kit", "dislocker", "tcpdump", "ChatGPT", "Firefox", "Codex CLI", "Claude Code", "Ventoy", "Rufus"):
+    if resources.resolve(name) is None:
+        raise SystemExit("Missing native brand identity: " + name)
+for asset in resources.assets.values():
+    data = resources.read(asset["path"])
+    if not data.startswith(b"\x89PNG\r\n\x1a\n") or hashlib.sha256(data).hexdigest() != asset["sha256"]:
+        raise SystemExit("Invalid native brand asset: " + asset["path"])
+if not Path("/usr/share/icons/hicolor/scalable/apps/inta-rescue.svg").is_file():
+    raise SystemExit("Missing INTA desktop icon")
+print(f"Verified {len(resources.assets)} bundled native icon files")
+PY_BRAND_CHECK
 /opt/inta-ai/node_modules/.bin/codex --version
 /opt/inta-ai/node_modules/.bin/claude --version

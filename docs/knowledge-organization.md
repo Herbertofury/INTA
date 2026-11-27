@@ -1,4 +1,4 @@
-# 🗂️ Keep INTA organized as it grows
+# 🗂️ Keep <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) organized as it grows
 
 [Home](https://github.com/Herbertofury/INTA/wiki) › **Knowledge organization**
 
@@ -21,6 +21,8 @@
 
 The existing [layout groups](https://github.com/Herbertofury/INTA/blob/main/data/wiki-layout.json) are the only service taxonomy. Related cases can link across several fields without copying the procedure. Editions and platform installers stay in one acquisition record unless they are genuinely distinct products.
 
+The `choices` list in each [quick-start selection](https://github.com/Herbertofury/INTA/blob/main/data/quick-start.json) controls which tools appear immediately for that case. It references canonical tool and acquisition IDs and adds only the task role, reason, access boundary and source evidence. That same list feeds the front pages and initial job toolkit. A tool being present in the complete catalog is not enough to make it discoverable during the relevant job. See [current choices by scenario](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices).
+
 ## Add useful depth in the right place
 
 1. **Find the existing job.** Search the service map, case titles, tool IDs and official product pages.
@@ -28,7 +30,7 @@ The existing [layout groups](https://github.com/Herbertofury/INTA/blob/main/data
 3. **Prove the useful difference.** State the starting condition, exact first action, result interpretation and fallback. Keep official evidence and its limits.
 4. **Publish the same change everywhere.** Rebuild and check the app, Wiki and offline copy; publish the source and actual Wiki, then verify the user path.
 
-This uses the distinction in [Diátaxis practical guides](https://diataxis.fr/how-to-guides/): task instructions help complete a job, while reference material supplies broader options. INTA keeps its existing architecture and stable routes.
+This uses the distinction in <a href="https://diataxis.fr/" title="Open diataxis.fr official download or service page" aria-label="Open diataxis.fr official download or service page" data-inta-brand="site-diataxis-fr"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/b8b16a3e1b0b02253b30.png" alt="diataxis.fr official page" width="18" height="18" valign="middle" /></a> [Diátaxis practical guides](https://diataxis.fr/how-to-guides/): task instructions help complete a job, while reference material supplies broader options. <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) keeps its existing architecture and stable routes.
 
 ## Automatic checks prevent drift
 
@@ -40,9 +42,9 @@ Every fix needs a symptom, first action, concrete steps, observable result, fall
 
 ## Keep research balanced and reviews honest
 
-The [knowledge health page](https://github.com/Herbertofury/INTA/wiki/Knowledge-Health) is a dated coverage snapshot. The [scheduled repository check](https://github.com/Herbertofury/INTA/actions/workflows/knowledge-health.yml) recalculates age using its run date and stores the complete report. Scheduled execution follows [GitHub's documented scheduling behavior](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule); configuration does not prove a future run finished.
+The [knowledge health page](https://github.com/Herbertofury/INTA/wiki/Knowledge-Health) is a dated coverage snapshot. The [scheduled repository check](https://github.com/Herbertofury/INTA/actions/workflows/knowledge-health.yml) recalculates age using its run date and stores the complete report. Scheduled execution follows <a href="https://github.com/" title="Open GitHub official download or service page" aria-label="Open GitHub official download or service page" data-inta-brand="app-github"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/99f4edb33272b70febb8.png" alt="GitHub official page" width="18" height="18" valign="middle" /></a> [GitHub's documented scheduling behavior](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule); configuration does not prove a future run finished.
 
-The existing **Grow the INTA Wiki** task continues on weekdays around **8:00 AM, America/Denver**. Choose harmful guidance, broken routes and overdue high-impact reviews first. Then rotate through the least recently reviewed fields, resolving the concrete questions in the research queue and recording adopt, retain, specialist, evaluate or unresolved decisions.
+The existing **Grow the <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) Wiki** task continues on weekdays around **8:00 AM, America/Denver**. Choose harmful guidance, broken routes and overdue high-impact reviews first. Then rotate through the least recently reviewed fields, resolving the concrete questions in the research queue and recording adopt, retain, specialist, evaluate or unresolved decisions.
 
 A loaded page, successful link check or rebuild never advances a review date. Read the relevant source, assess what changed and record the decision. New, free, popular and suitable for this client are separate claims. Keep preview status and business-use limits visible.
 

@@ -10,10 +10,11 @@
         "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
         "evidenceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
         "checkedAt": "2026-11-26",
-        "platform": "Windows"
+        "platform": "Windows",
+        "id": "builtin-scan"
       },
       "alternates": [],
-      "note": "Included with supported Windows; no separate installer."
+      "note": "Included on supported Windows x64/x86; requires enabled recovery environment. Windows on ARM and Windows Server are excluded."
     },
     "dism": {
       "officialUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
@@ -156,7 +157,17 @@
         "evidenceUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
         "checkedAt": "2026-11-26"
       },
-      "alternates": [],
+      "alternates": [
+        {
+          "id": "printer-drivers",
+          "kind": "web",
+          "label": "Find the correct printer driver",
+          "url": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+          "evidenceUrl": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows"
+        }
+      ],
       "note": "Choose the device manufacturer, exact model and operating system before downloading firmware or drivers."
     },
     "rustdesk": {
@@ -940,7 +951,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "architecture": "x64",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-x64"
       },
       "alternates": [
         {
@@ -949,6 +961,17 @@
           "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
           "evidenceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "windows-x86",
+          "kind": "file",
+          "label": "Download Windows x86 scanner · EXE",
+          "url": "https://go.microsoft.com/fwlink/?LinkId=212733",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "x86",
+          "format": "EXE"
         }
       ],
       "note": "Download a fresh copy for each job; the scanner expires after ten days."
@@ -957,12 +980,13 @@
       "officialUrl": "https://www.malwarebytes.com/adwcleaner",
       "primary": {
         "kind": "file",
-        "label": "Download Windows cleaner · EXE",
+        "label": "Download Windows portable cleaner · EXE",
         "url": "https://adwcleaner.malwarebytes.com/adwcleaner?channel=release",
         "evidenceUrl": "https://www.malwarebytes.com/adwcleaner",
         "checkedAt": "2026-11-26",
         "platform": "Windows",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-portable"
       },
       "alternates": [
         {
@@ -972,7 +996,8 @@
           "evidenceUrl": "https://www.malwarebytes.com/adwcleaner",
           "checkedAt": "2026-11-26"
         }
-      ]
+      ],
+      "note": "Portable targeted cleanup; inspect unwanted-software selections before quarantine and restart when requested."
     },
     "eset-online-scanner": {
       "officialUrl": "https://www.eset.com/us/home/online-scanner/",
@@ -984,7 +1009,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "architecture": "x64",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-x64"
       },
       "alternates": [
         {
@@ -993,8 +1019,20 @@
           "url": "https://www.eset.com/us/home/online-scanner/",
           "evidenceUrl": "https://www.eset.com/us/home/online-scanner/",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "windows-x86",
+          "kind": "file",
+          "label": "Download Windows x86 scanner · EXE",
+          "url": "https://download.eset.com/com/eset/tools/online_scanner/latest/esetonlinescanner.exe",
+          "evidenceUrl": "https://www.eset.com/us/home/online-scanner/",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "x86",
+          "format": "EXE"
         }
-      ]
+      ],
+      "note": "Initial detection-module update requires internet; this is an on-demand scanner, not continuous protection."
     },
     "wiztree": {
       "officialUrl": "https://diskanalyzer.com/",
@@ -1823,12 +1861,13 @@
       "officialUrl": "https://www.malwarebytes.com/",
       "primary": {
         "kind": "file",
-        "label": "Download Windows EXE",
+        "label": "Download Windows installer · EXE",
         "url": "https://downloads.malwarebytes.com/file/mb-windows",
         "evidenceUrl": "https://www.malwarebytes.com/mwb-download/thankyou",
         "checkedAt": "2026-11-26",
         "platform": "Windows",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-installer"
       },
       "alternates": [
         {
@@ -1839,7 +1878,7 @@
           "checkedAt": "2026-11-26"
         }
       ],
-      "note": "The Windows bootstrapper downloads the selected edition. Other platforms remain available from All downloads / setup."
+      "note": "The Windows installer supports free scans and offers paid protection. Free/paid scan features and business servicing rights differ."
     },
     "hitmanpro": {
       "officialUrl": "https://www.sophos.com/en-us/products/hitmanpro",
@@ -1851,7 +1890,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "architecture": "x64",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-x64"
       },
       "alternates": [
         {
@@ -1862,7 +1902,8 @@
           "checkedAt": "2026-11-26",
           "platform": "Windows",
           "architecture": "x86",
-          "format": "EXE"
+          "format": "EXE",
+          "id": "windows-x86"
         },
         {
           "kind": "release-page",
@@ -1878,13 +1919,14 @@
       "officialUrl": "https://www.emsisoft.com/en/emergency-kit/",
       "primary": {
         "kind": "file",
-        "label": "Download Windows EXE",
+        "label": "Download Windows x64 kit · EXE",
         "url": "https://dl.emsisoft.com/EmsisoftEmergencyKit.exe",
         "evidenceUrl": "https://www.emsisoft.com/en/emergency-kit/download/",
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "architecture": "x64",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-x64"
       },
       "alternates": [
         {
@@ -1894,18 +1936,20 @@
           "evidenceUrl": "https://www.emsisoft.com/en/emergency-kit/",
           "checkedAt": "2026-11-26"
         }
-      ]
+      ],
+      "note": "The package extracts a portable toolkit. Free private use and licensed business remediation have different rights."
     },
     "bitdefender-free": {
       "officialUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
       "primary": {
         "kind": "file",
-        "label": "Download Windows EXE",
+        "label": "Download Windows antivirus · EXE",
         "url": "https://download.bitdefender.com/windows/installer/en-us/bitdefender_avfree.exe",
         "evidenceUrl": "https://www.bitdefender.com/en-us/consumer/thank-you",
         "checkedAt": "2026-11-26",
         "platform": "Windows",
-        "format": "EXE"
+        "format": "EXE",
+        "id": "windows-installer"
       },
       "alternates": [
         {
@@ -1915,7 +1959,8 @@
           "evidenceUrl": "https://www.bitdefender.com/en-us/consumer/free-antivirus",
           "checkedAt": "2026-11-26"
         }
-      ]
+      ],
+      "note": "Installed ongoing protection for personal/non-commercial use; a Bitdefender account is required."
     },
     "freefilesync": {
       "officialUrl": "https://freefilesync.org/",
@@ -3217,6 +3262,1224 @@
         }
       ],
       "note": "This is a focused entry for the persistent telemetry component also distributed in Sysinternals Suite. The catalog links to the publisher; it does not redistribute the utility."
+    },
+    "virustotal": {
+      "officialUrl": "https://www.virustotal.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.virustotal.com/gui/home/upload",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.virustotal.com/docs/how-it-works",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public web analysis; paid Google Threat Intelligence and separately entitled Private Scanning. Public API access has separate usage limits. Basic web lookup is available without a paid plan; community, API and premium capabilities have their own account requirements."
+    },
+    "metadefender-cloud": {
+      "officialUrl": "https://metadefender.com/product/community",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://metadefender.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://metadefender.com/product/community",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free community access with quotas; paid plans add private scan and private processing options. A free account increases community limits and provides history; advanced processing depends on plan."
+    },
+    "jotti": {
+      "officialUrl": "https://virusscan.jotti.org/en-GB",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://virusscan.jotti.org/en-GB",
+        "platform": "Web browser",
+        "evidenceUrl": "https://virusscan.jotti.org/en-GB",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free web scanning; the current page lists five simultaneous files and a 250 MB per-file limit. The public upload page does not require a sign-in step."
+    },
+    "hybrid-analysis": {
+      "officialUrl": "https://hybrid-analysis.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://hybrid-analysis.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.crowdstrike.com/en-us/blog/crowdstrike-delivers-next-evolution-of-agentic-soc/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free community service; commercial Falcon Sandbox is a separate offering. Use a service account for submission/API capabilities; exact access level is shown by the current portal."
+    },
+    "anyrun": {
+      "officialUrl": "https://any.run/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://app.any.run/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://any.run/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free Community personal plan with restricted environments and runtime; paid Hunter and Enterprise plans add capabilities and private analyses. Registration is required for creating analysis tasks."
+    },
+    "triage": {
+      "officialUrl": "https://hatching.io/triage/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://tria.ge/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://tria.ge/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public individual/researcher accounts for noncommercial use; private enterprise service is commercial. A public account is needed to submit; researcher permissions provide additional API and rule capabilities."
+    },
+    "joe-sandbox": {
+      "officialUrl": "https://www.joesecurity.org/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.joesandbox.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.joesandbox.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Cloud Basic is free for noncommercial research with limited analyses/output; Cloud Pro supports private and commercial analysis. Sign in before submitting a sample; viewing the form alone does not grant submission access."
+    },
+    "intezer-analyze": {
+      "officialUrl": "https://intezer.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://analyze.intezer.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://analyze.intezer.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Current enterprise plans are quoted by endpoint coverage. A current free community scan allowance was not established in this review. An Intezer account and the capabilities assigned to it are required."
+    },
+    "polyswarm": {
+      "officialUrl": "https://polyswarm.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://polyswarm.network/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://polyswarm.io/scan",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free Community account with limited functionality and quotas; paid plans and private communities are separate. Limited anonymous functionality; a free account unlocks Community features."
+    },
+    "filescan-io": {
+      "officialUrl": "https://www.filescan.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.filescan.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.filescan.io/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free community service with limited report/configuration and API quotas; commercial Aether products provide additional controls. Use the public web portal; account/API requirements depend on the operation."
+    },
+    "unpacme": {
+      "officialUrl": "https://www.unpac.me/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.unpac.me/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.openanalysis.net/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free Public tier is noncommercial and public-only; paid researcher/professional plans include additional quotas and private submissions. Sign in for account quotas, saved work and paid/private capabilities."
+    },
+    "kaspersky-opentip": {
+      "officialUrl": "https://opentip.kaspersky.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://opentip.kaspersky.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://opentip.kaspersky.com/howto/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free basic/community access; premium intelligence and full reports require a subscription. Anonymous use returns basic information; a Kaspersky account adds history, private requests and more detail."
+    },
+    "urlscan": {
+      "officialUrl": "https://urlscan.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://urlscan.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.urlscan.io/pages/faq",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free community service with quotas; paid plans add hunting, feeds and advanced capabilities. Public search is available without sign-in; accounts provide API keys and personal/team capabilities."
+    },
+    "urlhaus": {
+      "officialUrl": "https://urlhaus.abuse.ch/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://urlhaus.abuse.ch/browse/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://urlhaus.abuse.ch/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public web database; automated feeds and API access have separate fair-use/commercial terms. Public browsing and lookup; contribution and automation features use the provider’s account/authentication workflow."
+    },
+    "malwarebazaar": {
+      "officialUrl": "https://bazaar.abuse.ch/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://bazaar.abuse.ch/browse/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://bazaar.abuse.ch/browse/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public database; commercial automation may require an enhanced API subscription. Public search; authentication and provider terms apply to contribution/download/API operations."
+    },
+    "threatfox": {
+      "officialUrl": "https://threatfox.abuse.ch/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://threatfox.abuse.ch/browse/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://threatfox.abuse.ch/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free community web access; commercial API usage may need the enhanced subscription. Public database browsing; contributions and API calls use the provider’s account/authentication workflow."
+    },
+    "yaraify": {
+      "officialUrl": "https://yaraify.abuse.ch/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://yaraify.abuse.ch/scan/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://yaraify.abuse.ch/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Community web service; provider account and API terms govern advanced use. Custom rules and live hunts require an abuse.ch account; nonpublic Malpedia matches require a linked Malpedia key."
+    },
+    "no-more-ransom": {
+      "officialUrl": "https://www.nomoreransom.org/en/index.html",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.nomoreransom.org/crypto-sheriff.php?lang=en",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.nomoreransom.org/en/ransomware-qa.html",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free identification resources and supported decryptor links. The official identification route is public; no account requirement was stated in the reviewed instructions."
+    },
+    "id-ransomware": {
+      "officialUrl": "https://id-ransomware.malwarehunterteam.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://id-ransomware.malwarehunterteam.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://id-ransomware.malwarehunterteam.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public service. Public form; no account is required by the visible workflow."
+    },
+    "checkphish": {
+      "officialUrl": "https://checkphish.bolster.ai/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://checkphish.bolster.ai/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://checkphish.bolster.ai/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free initial URL scan; signup expands scans and API options; Bolster commercial plans are separate. Initial public scan is offered; additional scans and automation require signup."
+    },
+    "sophos-intelix": {
+      "officialUrl": "https://intelix.sophos.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://intelix.sophos.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.sophos.com/en-us/blog/analyze-suspicious-files-and-urls-with-the-free-sophoslabs-intelix-portal",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free portal; registered Sophos customers receive additional features. Product/API subscriptions are separate. Guest mode is available. Sophos explicitly says Sophos Home credentials do not work for this portal."
+    },
+    "drweb-online": {
+      "officialUrl": "https://vms.drweb.com/scan_file/?lng=en",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://vms.drweb.com/scan_file/?lng=en",
+        "platform": "Web browser",
+        "evidenceUrl": "https://vms.drweb.com/scan_file/?lng=en",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free web scanner; the current upload instructions limit files to 10 MB. Public upload form; no sign-in step is required by the displayed file-scan workflow."
+    },
+    "ssl-labs": {
+      "officialUrl": "https://www.ssllabs.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.ssllabs.com/ssltest/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.ssllabs.com/ssltest/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public server test No account required for the public test"
+    },
+    "mdn-observatory": {
+      "officialUrl": "https://developer.mozilla.org/en-US/observatory",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://developer.mozilla.org/en-US/observatory",
+        "platform": "Web browser",
+        "evidenceUrl": "https://developer.mozilla.org/en-US/observatory",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public checker No account required for a domain scan"
+    },
+    "securityheaders": {
+      "officialUrl": "https://securityheaders.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://securityheaders.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://securityheaders.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public browser checker; API access is separate No account shown for the public scan; API uses keys"
+    },
+    "internet-nl": {
+      "officialUrl": "https://en.internet.nl/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://en.internet.nl/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://en.internet.nl/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public individual-domain tests; separate batch service No account required for individual tests"
+    },
+    "hardenize": {
+      "officialUrl": "https://www.hardenize.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.hardenize.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.hardenize.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public one-off report; paid managed monitoring with business and enterprise plans Public report is available on the home page; monitoring requires an account"
+    },
+    "dmarcian-tools": {
+      "officialUrl": "https://dmarcian.com/dmarc-tools/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://dmarcian.com/dmarc-tools/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://dmarcian.com/dmarc-tools/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free tools; hosted DMARC management is separate No registration required for the listed free tools"
+    },
+    "mxtoolbox": {
+      "officialUrl": "https://mxtoolbox.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://mxtoolbox.com/SuperTool.aspx",
+        "platform": "Web browser",
+        "evidenceUrl": "https://mxtoolbox.com/SuperTool.aspx",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public lookups; monitoring and API plans are separate Basic lookup form is public"
+    },
+    "google-admin-toolbox": {
+      "officialUrl": "https://toolbox.googleapps.com/apps/main/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://toolbox.googleapps.com/apps/main/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://toolbox.googleapps.com/apps/main/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [
+        {
+          "id": "dig",
+          "kind": "web",
+          "label": "DNS lookup",
+          "url": "https://toolbox.googleapps.com/apps/dig/",
+          "platform": "Web browser",
+          "evidenceUrl": "https://knowledge.workspace.google.com/admin/support/troubleshooting/google-workspace-diagnostic-tools",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "check-mx",
+          "kind": "web",
+          "label": "Check MX",
+          "url": "https://toolbox.googleapps.com/apps/checkmx/",
+          "platform": "Web browser",
+          "evidenceUrl": "https://knowledge.workspace.google.com/admin/support/troubleshooting/google-workspace-diagnostic-tools",
+          "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "messageheader",
+          "kind": "web",
+          "label": "Analyze message headers",
+          "url": "https://toolbox.googleapps.com/apps/messageheader/",
+          "platform": "Web browser",
+          "evidenceUrl": "https://knowledge.workspace.google.com/admin/support/troubleshooting/google-workspace-diagnostic-tools",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Public diagnostic tools No sign-in shown for Dig, Check MX or Messageheader"
+    },
+    "dnsviz": {
+      "officialUrl": "https://dnsviz.net/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://dnsviz.net/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://dnsviz.net/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public browser analyzer No account required for the public entry form"
+    },
+    "zonemaster": {
+      "officialUrl": "https://zonemaster.net/en/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://zonemaster.net/en/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://zonemaster.net/en/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public browser test; open-source project No account required for public domain testing"
+    },
+    "verisign-dnssec-debugger": {
+      "officialUrl": "https://dnssec-debugger.verisignlabs.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://dnssec-debugger.verisignlabs.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://dnssec-debugger.verisignlabs.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public web tool No account required for the form"
+    },
+    "dnschecker": {
+      "officialUrl": "https://dnschecker.org/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://dnschecker.org/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://dnschecker.org/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public propagation lookup No account required for the lookup form"
+    },
+    "whatsmydns": {
+      "officialUrl": "https://www.whatsmydns.net/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.whatsmydns.net/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.whatsmydns.net/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free online lookup No account required for the public lookup"
+    },
+    "nslookup-io": {
+      "officialUrl": "https://www.nslookup.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.nslookup.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.nslookup.io/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public DNS lookups; monitoring and API offerings are separate Lookup form is public; account features use sign-in"
+    },
+    "learndmarc": {
+      "officialUrl": "https://www.learndmarc.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.learndmarc.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.learndmarc.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free visual tool from URIports Public interactive tester"
+    },
+    "mail-tester": {
+      "officialUrl": "https://mail-tester.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://mail-tester.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://mail-tester.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Three free tests in a rolling 24 hours; paid extra tests and API Account not required for the basic test; paid integrations use accounts"
+    },
+    "globalping": {
+      "officialUrl": "https://globalping.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://globalping.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://globalping.io/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free quota; registration increases limits and credits fund extra tests No registration for basic use; optional account for higher limits"
+    },
+    "ripestat": {
+      "officialUrl": "https://stat.ripe.net/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://stat.ripe.net/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://stat.ripe.net/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public information service; API use has its own terms Public browser explorer"
+    },
+    "cloudflare-radar": {
+      "officialUrl": "https://radar.cloudflare.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://radar.cloudflare.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://radar.cloudflare.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public dashboard No account required for public views"
+    },
+    "cloudflare-speed": {
+      "officialUrl": "https://speed.cloudflare.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://speed.cloudflare.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://speed.cloudflare.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free browser test No account required"
+    },
+    "fast-com": {
+      "officialUrl": "https://fast.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://fast.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://fast.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free consumer test No account required"
+    },
+    "waveform-bufferbloat": {
+      "officialUrl": "https://www.waveform.com/tools/bufferbloat",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.waveform.com/tools/bufferbloat",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.waveform.com/tools/bufferbloat",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free browser test Public test; no account requirement documented in the reviewed tool page"
+    },
+    "microsoft-remote-connectivity": {
+      "officialUrl": "https://testconnectivity.microsoft.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://testconnectivity.microsoft.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://testconnectivity.microsoft.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free diagnostic service; tested service subscriptions remain separate Many scenarios require an appropriately permitted Microsoft account"
+    },
+    "microsoft365-connectivity": {
+      "officialUrl": "https://connectivity.m365.cloud.microsoft/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://connectivity.m365.cloud.microsoft/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://connectivity.m365.cloud.microsoft/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Browser tests available anonymously; tenant reporting requires sign-in Anonymous basics; Microsoft 365 sign-in for tenant reporting"
+    },
+    "microsoft-service-health": {
+      "officialUrl": "https://status.cloud.microsoft/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://status.cloud.microsoft/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://status.cloud.microsoft/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public status view; tenant details require existing administrative access Public page needs no account; tenant details require an eligible admin role"
+    },
+    "google-workspace-status": {
+      "officialUrl": "https://www.google.com/appsstatus/dashboard/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.google.com/appsstatus/dashboard/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.google.com/appsstatus/dashboard/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public dashboard No account required for the dashboard"
+    },
+    "test-ipv6": {
+      "officialUrl": "https://test-ipv6.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://test-ipv6.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://test-ipv6.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public browser test Public browser test; no sign-in in the entry page"
+    },
+    "webpagetest": {
+      "officialUrl": "https://www.webpagetest.org/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.webpagetest.org/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.logicmonitor.com/webpagetest",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free Starter account advertises 150 monthly test runs; paid professional features Account needed for the advertised Starter plan"
+    },
+    "pagespeed-insights": {
+      "officialUrl": "https://pagespeed.web.dev/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://pagespeed.web.dev/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://pagespeed.web.dev/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public browser analyzer; API has separate quotas No account required for the public analyzer"
+    },
+    "wave-accessibility": {
+      "officialUrl": "https://wave.webaim.org/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://wave.webaim.org/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://wave.webaim.org/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public single-page checker; subscription API and standalone engine are separate No account required for public single-page evaluation"
+    },
+    "shodan": {
+      "officialUrl": "https://www.shodan.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.shodan.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://help.shodan.io/the-basics/what-is-shodan",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Limited account access; membership and API subscriptions expand features. Free registration available; advanced capabilities depend on plan."
+    },
+    "censys": {
+      "officialUrl": "https://censys.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://platform.censys.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.censys.com/docs/platform-quickstart-guide",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free: 100 credits/month plus five free daily actions; Starter subscriptions expand access. Limited anonymous access; verified account unlocks the Free allocation."
+    },
+    "greynoise": {
+      "officialUrl": "https://www.greynoise.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://viz.greynoise.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.greynoise.io/docs/getting-started",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free tier: 50 searches/week shared between the Visualizer and Community API; paid tiers expand access. Free account available; Community API-key access requires a business email."
+    },
+    "abuseipdb": {
+      "officialUrl": "https://www.abuseipdb.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.abuseipdb.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.abuseipdb.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free web lookup; Individual API plan provides 1,000 checks/reports per day; larger plans are paid. No sign-in for basic web lookup; registration for API keys and reporting."
+    },
+    "talos-intelligence": {
+      "officialUrl": "https://talosintelligence.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://talosintelligence.com/reputation_center",
+        "platform": "Web browser",
+        "evidenceUrl": "https://talosintelligence.com/reputation_center",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public intelligence search; Cisco commercial security products are separate. Public search page; Cisco sign-in for account-specific actions."
+    },
+    "otx": {
+      "officialUrl": "https://otx.alienvault.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://otx.alienvault.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://otx.alienvault.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free community membership and threat intelligence. Register for contribution, subscriptions and API workflows."
+    },
+    "pulsedive": {
+      "officialUrl": "https://pulsedive.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://pulsedive.com/explore/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://pulsedive.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Visitor lookup and free account available; Pro and commercial API/feed plans have different boundaries. Visitors can search; free registration adds submissions, comments and exports."
+    },
+    "ipinfo": {
+      "officialUrl": "https://ipinfo.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://ipinfo.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://ipinfo.io/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free Lite plan: country-level data and limited web lookups; detailed location and privacy data are paid. Public lookup available; register for plan/API access."
+    },
+    "spamhaus": {
+      "officialUrl": "https://www.spamhaus.org/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://check.spamhaus.org/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://check.spamhaus.org/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public checker; automated data-feed products have separate access terms. No account is presented for the initial lookup."
+    },
+    "google-safe-browsing": {
+      "officialUrl": "https://safebrowsing.google.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://transparencyreport.google.com/safe-browsing/search",
+        "platform": "Web browser",
+        "evidenceUrl": "https://safebrowsing.google.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public Site Status lookup; API products have separate terms. No account is needed for the public diagnostic page."
+    },
+    "have-i-been-pwned": {
+      "officialUrl": "https://haveibeenpwned.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://haveibeenpwned.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://haveibeenpwned.com/FAQs",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public single-email search is free; API and larger domain monitoring plans are separate. Basic search needs no account; sensitive breach details require mailbox verification."
+    },
+    "icann-lookup": {
+      "officialUrl": "https://lookup.icann.org/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://lookup.icann.org/en",
+        "platform": "Web browser",
+        "evidenceUrl": "https://lookup.icann.org/en/faq",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public service. No account required for public lookup; some fallback requests may present CAPTCHA."
+    },
+    "urlvoid": {
+      "officialUrl": "https://www.urlvoid.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.urlvoid.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.urlvoid.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public web checker; APIVoid automation is a separate product. No account is presented for the public website check."
+    },
+    "openphish": {
+      "officialUrl": "https://openphish.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://openphish.com/phishing_feeds.html",
+        "platform": "Web browser",
+        "evidenceUrl": "https://openphish.com/phishing_feeds.html",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Community feed is free and refreshed every 12 hours; richer five-minute feeds are paid. Community access is public; commercial feed access is arranged separately."
+    },
+    "urlquery": {
+      "officialUrl": "https://urlquery.net/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://urlquery.net/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://urlquery.net/about",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public report browsing and search are available without sign-in; extra capabilities depend on account permissions. Anonymous submission produces a public report; configurable visibility needs an account."
+    },
+    "first-epss": {
+      "officialUrl": "https://www.first.org/epss/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.first.org/epss/data",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.first.org/epss/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free daily data and API; no registration. No account required."
+    },
+    "cisa-kev": {
+      "officialUrl": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "platform": "Web browser",
+        "evidenceUrl": "https://github.com/cisagov/kev-data",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public catalog, CSV and JSON; official GitHub mirror available. No account required."
+    },
+    "nvd": {
+      "officialUrl": "https://nvd.nist.gov/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://nvd.nist.gov/vuln/search",
+        "platform": "Web browser",
+        "evidenceUrl": "https://nvd.nist.gov/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public search; API access has separate rate-limit guidance. No account needed for web search."
+    },
+    "osv": {
+      "officialUrl": "https://osv.dev/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://osv.dev/list",
+        "platform": "Web browser",
+        "evidenceUrl": "https://osv.dev/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public database and API; optional scanner is a separate local tool. No account needed for web search."
+    },
+    "github-advisories": {
+      "officialUrl": "https://github.com/advisories",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://github.com/advisories",
+        "platform": "Web browser",
+        "evidenceUrl": "https://github.com/advisories",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public advisory browser; repository security products are separate. No account needed to read public advisories."
+    },
+    "snyk-vulnerability-db": {
+      "officialUrl": "https://security.snyk.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://security.snyk.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://security.snyk.io/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public database lookup; Snyk scanning and monitoring products have separate plans. No account is presented for public database search."
+    },
+    "cyberchef": {
+      "officialUrl": "https://github.com/gchq/CyberChef",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://gchq.github.io/CyberChef/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://github.com/gchq/CyberChef",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free and open source; downloadable offline application. No account required."
+    },
+    "regex101": {
+      "officialUrl": "https://regex101.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://regex101.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.regex101.com/application/privacy/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free matching and unit tests; advanced Pro features and Enterprise hosting are separate. No account needed for basic editing; saving and account features are separate."
+    },
+    "jwt-debugger": {
+      "officialUrl": "https://www.jwt.io/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.jwt.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.jwt.io/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public free debugger; Auth0 service plans are separate. No account required for the debugger."
+    },
+    "browserleaks": {
+      "officialUrl": "https://browserleaks.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://browserleaks.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://browserleaks.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public browser diagnostics. No account required for the listed tests."
+    },
+    "cover-your-tracks": {
+      "officialUrl": "https://coveryourtracks.eff.org/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://coveryourtracks.eff.org/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://coveryourtracks.eff.org/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public research tool. No account required."
+    },
+    "deps-dev": {
+      "officialUrl": "https://deps.dev/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://deps.dev/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://docs.deps.dev/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Public service and API; BigQuery usage is a separate access path. No account required for the public package browser."
+    },
+    "first-cvss": {
+      "officialUrl": "https://www.first.org/cvss/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://www.first.org/cvss/calculator/4.0",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.first.org/cvss/calculator/4.0",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free public calculator. No account required."
+    },
+    "attack-navigator": {
+      "officialUrl": "https://github.com/mitre-attack/attack-navigator",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://mitre-attack.github.io/attack-navigator/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://github.com/mitre-attack/attack-navigator",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free open-source web application; self-hosting is available. No account required for the hosted application."
+    },
+    "squoosh": {
+      "officialUrl": "https://squoosh.app/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://squoosh.app/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://squoosh.app/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free open-source browser application. No account required."
+    },
+    "drawio": {
+      "officialUrl": "https://www.drawio.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://app.diagrams.net/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://www.drawio.com/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free browser editor; some third-party integrations have separate offerings. No draw.io account required for the web editor; connected storage can require its own sign-in."
+    },
+    "excalidraw": {
+      "officialUrl": "https://excalidraw.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://excalidraw.com/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://plus.excalidraw.com/how-to-start",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free whiteboard; paid Excalidraw+ adds a cloud workspace. No account needed for the free whiteboard."
+    },
+    "hoppscotch": {
+      "officialUrl": "https://hoppscotch.com/",
+      "primary": {
+        "id": "open-service",
+        "kind": "web",
+        "label": "Open online service",
+        "url": "https://hoppscotch.io/",
+        "platform": "Web browser",
+        "evidenceUrl": "https://hoppscotch.com/releases",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "Free personal workspace; paid cloud plans add shared workspaces and organizational features. Basic client opens without login; sign-in enables cloud workspace features."
     }
   }
 }

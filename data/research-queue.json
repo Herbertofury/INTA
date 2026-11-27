@@ -901,6 +901,65 @@
         "https://geminicli.com/docs/",
         "https://docs.ollama.com/"
       ]
+    },
+    {
+      "id": "printer-isolation-runtime-proof",
+      "kind": "job",
+      "targetId": "printer-repair",
+      "priority": 2,
+      "status": "queued",
+      "question": "Validate printer discovery across trusted and isolated Wi-Fi",
+      "deliverable": "Exercise the new isolation and blocked-queue branches on a representative printer with a sanitized topology and actual output.",
+      "acceptance": "Discovery, printing and scanning results are recorded independently; guest isolation remains intentional and the affected queue is identified.",
+      "sourceUrls": [
+        "https://support.hp.com/us-en/document/ish_8085688-8063994-16",
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows"
+      ]
+    },
+    {
+      "id": "outlook-auth-search-quota-proof",
+      "kind": "job",
+      "targetId": "outlook-email",
+      "priority": 2,
+      "status": "queued",
+      "question": "Exercise the client-specific auth, search and storage branches",
+      "deliverable": "Run disposable-account tests for Google authorization, a known search result and an Outlook.com quota error.",
+      "acceptance": "Record account type, client build, two-way delivery and content preservation; documentation review is not labeled a live test.",
+      "sourceUrls": [
+        "https://support.google.com/mail/answer/7126229?hl=en",
+        "https://knowledge.workspace.google.com/admin/sync/set-up-gmail-with-a-third-party-email-client",
+        "https://support.microsoft.com/en-us/outlook/troubleshooting-outlook-search-issues",
+        "https://support.microsoft.com/en-us/outlook/storage-limits-in-outlook-com"
+      ]
+    },
+    {
+      "id": "backup-vss-recovery-proof",
+      "kind": "job",
+      "targetId": "backup-restore",
+      "priority": 1,
+      "status": "queued",
+      "question": "Prove recovery of a failed VSS writer through a real restore",
+      "deliverable": "Use a disposable workload to record the failed writer, targeted recovery, completed backup and restored application data.",
+      "acceptance": "The writer owner and service interruption are explicit; a successful backup status is followed by a usable restored workload.",
+      "sourceUrls": [
+        "https://www.veeam.com/kb2041"
+      ]
+    },
+    {
+      "id": "online-manual-review",
+      "kind": "category",
+      "targetId": "online",
+      "priority": 2,
+      "status": "queued",
+      "question": "Recheck service ownership, free/account boundaries, submission visibility and actual launch destinations after provider changes.",
+      "deliverable": "A dated review of changed official plans, moved applications and useful new online services without duplicate product entries.",
+      "acceptance": "Every accepted change has primary evidence and consistent app, Wiki and first-action routes; inaccessible or retired candidates remain explicitly recorded.",
+      "sourceUrls": [
+        "https://docs.virustotal.com/docs/how-it-works",
+        "https://urlscan.io/about/",
+        "https://docs.censys.com/changelog",
+        "https://hoppscotch.com/releases"
+      ]
     }
   ]
 }

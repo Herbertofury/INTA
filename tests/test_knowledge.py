@@ -47,6 +47,20 @@ class OrganizedKnowledge(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Duplicate normalized tool name'):
             self.validate()
 
+    def test_scenario_choices_get_due_dates_without_rewriting_evidence(self):
+        quick = {'items': [{'id': 'example-case', 'label': 'Fix the observed fault', 'choices': [{
+            'toolId': 'example-tool', 'role': 'Confirm the cause', 'reviewedAt': '2026-11-26',
+            'evidenceUrls': ['https://example.org/current-guide']}]}]}
+        before = copy.deepcopy(quick)
+        report = health.knowledge_report(self.policy, self.queue, self.tools, self.jobs, self.layout,
+                                         self.notes, self.workspaces, self.access, '2026-12-27', quick)
+        choices = [row for row in report['dueReviews'] if row['kind'] == 'tool-choice']
+        self.assertEqual(report['counts']['scenarioToolChoices'], 1)
+        self.assertEqual(len(choices), 1)
+        self.assertEqual(choices[0]['dueAt'], '2026-12-26')
+        self.assertEqual(choices[0]['daysOverdue'], 1)
+        self.assertEqual(quick, before)
+
     def test_same_product_page_needs_an_explained_exception(self):
         self.tools.append(dict(self.tools[0], id='other-product', name='Other product', homepage='https://EXAMPLE.org/tool/'))
         with self.assertRaisesRegex(ValueError, 'Duplicate official tool page'):

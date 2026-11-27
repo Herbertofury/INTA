@@ -132,7 +132,7 @@ def validate_organization(policy, queue, tools, jobs, layout, field_notes):
     validate_field_notes(field_notes, jobs, tools)
 
 
-def knowledge_report(policy, queue, tools, jobs, layout, field_notes, workspaces, access, as_of):
+def knowledge_report(policy, queue, tools, jobs, layout, field_notes, workspaces, access, as_of, quick_start=None):
     validate_organization(policy, queue, tools, jobs, layout, field_notes)
     as_of = date.fromisoformat(as_of) if isinstance(as_of, str) else as_of
     intervals, reviews = policy["reviewIntervalsDays"], []
@@ -162,13 +162,21 @@ def knowledge_report(policy, queue, tools, jobs, layout, field_notes, workspaces
         for resource in workspace["resources"]:
             review("resource", job_id + "/" + resource["id"], resource["label"], resource["checkedAt"],
                    intervals["resource"], resource["sourceUrl"])
+    choice_count = 0
+    tool_names = {tool["id"]: tool["name"] for tool in tools}
+    for item in (quick_start or {}).get("items", []):
+        for choice in item.get("choices", []):
+            choice_count += 1
+            review("tool-choice", item["id"] + "/" + choice["toolId"] + "/" + choice.get("actionId", "primary"),
+                   item["label"] + ": " + tool_names[choice["toolId"]] + " (" + choice["role"] + ")",
+                   choice["reviewedAt"], intervals["coreTool"], choice["evidenceUrls"][0])
     note_counts = Counter(note["jobId"] for note in field_notes["notes"])
     due = sorted((r for r in reviews if r["status"] != "current"),
                  key=lambda item: (-item["daysOverdue"], item["kind"], item["id"]))
     return {"schemaVersion": 1, "asOf": as_of.isoformat(), "structuralStatus": "passed",
             "counts": {"serviceAreas": len(layout["groups"]), "jobs": len(jobs), "tools": len(tools),
                        "toolCategories": len(layout["categories"]), "fieldNotes": len(field_notes["notes"]),
-                       "researchItems": len(queue["items"]), "reviewedRecords": len(reviews),
+                       "researchItems": len(queue["items"]), "scenarioToolChoices": choice_count, "reviewedRecords": len(reviews),
                        "dueReviews": len(due)},
             "coverage": [{"jobId": j["id"], "fieldNotes": note_counts[j["id"]],
                           "resources": len(workspaces["jobs"][j["id"]]["resources"]),

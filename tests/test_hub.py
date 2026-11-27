@@ -95,6 +95,7 @@ class HubIntegrity(unittest.TestCase):
         output = build.build_outputs()
         self.assertEqual(json.loads(output['site/catalog.json'])['jobWorkspaces'], workspaces)
         quick = json.loads((ROOT / 'data/quick-start.json').read_text())['items']
+        jobs_by_id = {job['id']: job for job in self.jobs}
         for identity, workspace in workspaces['jobs'].items():
             full = output[f'wiki/Job-{identity}.md']
             self.assertLess(full.index('## 🧰 Tools and links for this job'), full.index('## ⚡ Quick answer'))
@@ -102,11 +103,18 @@ class HubIntegrity(unittest.TestCase):
             self.assertNotIn('<details>', full)
             for resource in workspace['resources']:
                 self.assertIn(f"]({resource['url']})", full)
+            working_kit = full.split('<a id="working-kit"></a>', 1)[1].split('<a id="quick-answer"></a>', 1)[0]
             recommended = full.split('<a id="toolkit"></a>', 1)[1].split('<a id="walkthrough"></a>', 1)[0]
             for selection in workspace['tools']:
-                if selection.get('actionId'):
-                    action = build.selected_tool_action(access[selection['toolId']], selection['actionId'])
-                    self.assertIn(f"]({action['url']})", recommended)
+                route = access[selection['toolId']]
+                action = build.selected_tool_action(route, selection.get('actionId'))
+                for url in [route['officialUrl'], action['url']]:
+                    self.assertIn(f"]({url})", working_kit, identity + ': ' + selection['toolId'])
+                # The working kit may add useful actions beyond the job's
+                # catalog list. Its scenario action must also survive when
+                # that tool appears in the later recommended-tools section.
+                if selection['toolId'] in jobs_by_id[identity]['tools']:
+                    self.assertIn(f"]({action['url']})", recommended, identity + ': ' + selection['toolId'])
             for item in [item for item in quick if item['jobId'] == identity]:
                 answer = output[f"wiki/{item['wikiPage']}.md"]
                 self.assertIn(f"#job/{identity}/quick/{item['id']}", answer)

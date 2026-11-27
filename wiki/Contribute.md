@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+<a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 # 🛠 Make a useful contribution
 
@@ -13,7 +13,7 @@
 | A moved or misleading official link | Correct its canonical catalog or method entry and all affected routes. | The destination is the intended publisher page and rendered mentions point there. |
 | A confusing step | Rewrite the starting condition, action, expected observation and fallback. | A technician can select the next action without guessing the environment. |
 | A better tool candidate | Add its job fit, platform, operating mode, pricing context, sources and limits. | The documented capability is accurate; any claimed runtime advantage has a real comparison. |
-| A missing decision | Add a small decision table or [Mermaid](https://mermaid.js.org/intro/) diagram. | Every branch has a useful next guide and no branch implies an unverified repair. |
+| A missing decision | Add a small decision table or <a href="https://mermaid.js.org/" title="Open Mermaid official download or service page" aria-label="Open Mermaid official download or service page" data-inta-brand="app-mermaid"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/c733be15cbccdcb88240.png" alt="Mermaid official page" width="18" height="18" valign="middle" /></a> [Mermaid](https://mermaid.js.org/intro/) diagram. | Every branch has a useful next guide and no branch implies an unverified repair. |
 | A new release | Perform a [manual freshness review](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance). | The applicable release and compatibility decision are recorded separately from URL reachability. |
 | A repeated field lesson | Generalize it into a guide or named method. | The public example is sanitized, the original evidence stays private, and the method has an acceptance test. |
 
@@ -56,7 +56,7 @@ python3 scripts/check-wiki.py
 python3 scripts/check-knowledge.py --output reports/knowledge-health.json
 ```
 
-Command legend: [Python](https://www.python.org/) runs the [hub builder](https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py), [test suite](https://github.com/Herbertofury/INTA/tree/main/tests) and [wiki checker](https://github.com/Herbertofury/INTA/blob/main/scripts/check-wiki.py). The checks verify generated outputs, known named links, routes and linked diagram or command legends.
+Command legend: <a href="https://www.python.org/" title="Open Python official download or service page" aria-label="Open Python official download or service page" data-inta-brand="app-python"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/e3ea97f62e4259df2d67.png" alt="Python official page" width="18" height="18" valign="middle" /></a> [Python](https://www.python.org/) runs the [hub builder](https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py), [test suite](https://github.com/Herbertofury/INTA/tree/main/tests) and [wiki checker](https://github.com/Herbertofury/INTA/blob/main/scripts/check-wiki.py). The checks verify generated outputs, known named links, routes and linked diagram or command legends.
 
 For a content change, inspect the relevant rendered page and follow its actual links. For a visual or interaction change, check desktop and narrow layouts, keyboard navigation, both themes, complete search results, checklists, saved items and exports where affected. Check the offline build as well as the hosted surface when the change touches offline behavior. For working kits, verify every manufacturer/resource link is present, the exact case survives navigation, sticky controls remain usable during real scrolling, and narrow layouts do not obscure the instructions.
 
@@ -69,12 +69,16 @@ For a content change, inspect the relevant rendered page and follow its actual l
 - [ ] Significant challenge findings were resolved.
 - [ ] The exact source checkpoint is on the canonical remote.
 - [ ] The matching site and actual live wiki were published and read back.
-- [ ] The complete deliverable was saved to the project's connected [Google Drive](https://drive.google.com/) destination and its identity verified.
+- [ ] The complete deliverable was saved to the project's connected <a href="https://drive.google.com/" title="Open Google Drive official download or service page" aria-label="Open Google Drive official download or service page" data-inta-brand="app-google-drive"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4a3cfc17be3f4e8ad2c8.png" alt="Google Drive official page" width="18" height="18" valign="middle" /></a> [Google Drive](https://drive.google.com/) destination and its identity verified.
 - [ ] The contribution record includes proof, limits, published locations and any remaining next action.
 
 Use [Maintaining the Hub](https://github.com/Herbertofury/INTA/wiki/Maintaining-the-Hub) for publication commands and [Continuous Improvement](https://github.com/Herbertofury/INTA/wiki/Continuous-Improvement) for recurring work. If an external gate fails, retain the last verified checkpoint and continue on a materially different supported route. Do not label an unpublished or unverified required surface complete.
 
 **➜ Continue:** [Copy the contribution template](https://github.com/Herbertofury/INTA/wiki/Templates) · [Choose a method](https://github.com/Herbertofury/INTA/wiki/Methods) · [Report a correction](https://github.com/Herbertofury/INTA/issues/new/choose)
+
+## ⚡ Add a useful quick command
+
+Every playbook needs at least one command placed in the step where it belongs. Add shell, purpose, safety, official reference URL and reference title beside the command in `data/jobs.json`. Prefer read-only discovery before state changes; include the condition that justifies a repair, its prerequisites, rollback and a verification step. The interactive hub surfaces the first relevant command at the top of the guide and keeps the full command at its procedure step. Follow [Quick Command Standards](https://github.com/Herbertofury/INTA/blob/main/docs/quick-commands.md).
 
 ---
 

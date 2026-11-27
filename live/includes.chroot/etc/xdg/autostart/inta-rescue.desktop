@@ -1,5 +1,6 @@
 [Desktop Entry]
 Type=Application
 Name=INTA Rescue
+Icon=inta-rescue
 Exec=/usr/local/bin/inta-rescue
 OnlyShowIn=XFCE;

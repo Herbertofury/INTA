@@ -29,8 +29,10 @@ def main():
         builder.validate_layout(layout, jobs, tools)
         builder.validate_tool_access(access, tools)
         builder.validate_job_workspaces(workspaces, jobs, tools, access["tools"])
+        quick_start = read("quick-start")
+        builder.validate_quick_start(quick_start, tools, jobs, access["tools"])
         report = knowledge_report(read("knowledge-policy"), read("research-queue"), tools, jobs, layout,
-                                  read("field-notes"), workspaces, access["tools"], args.as_of)
+                                  read("field-notes"), workspaces, access["tools"], args.as_of, quick_start)
     except (ValueError, KeyError, TypeError, OSError) as error:
         print(f"Knowledge check failed: {error}", file=sys.stderr)
         return 1

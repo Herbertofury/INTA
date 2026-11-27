@@ -19,6 +19,7 @@ def module(filename):
 links = module('wiki_links.py')
 audit = module('check-wiki.py')
 build = module('build-hub.py')
+brand_markup = module('brand_markdown.py')
 
 
 class LinkedKnowledge(unittest.TestCase):
@@ -92,7 +93,7 @@ A["Windows"] --> B["PowerShell"]
 
     def test_sidebar_exposes_every_scenario_and_tool_category_without_expansion(self):
         output = build.build_outputs()
-        sidebar = output['wiki/_Sidebar.md']
+        sidebar = brand_markup.strip_icons(output['wiki/_Sidebar.md'])
         defaults = {}
         for row in json.loads((ROOT / 'data/quick-start.json').read_text())['items']:
             defaults.setdefault(row['jobId'], row['wikiPage'])
@@ -159,6 +160,7 @@ A["Windows"] --> B["PowerShell"]
         self.assertEqual(manifest['quickAnswerPages'], len(rows))
 
         def plain(value):
+            value = brand_markup.strip_icons(value)
             return re.sub(r'\[([^\]]+)\]\([^)]*\)', r'\1', value).replace('**', '')
 
         for row in rows:

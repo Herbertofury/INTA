@@ -214,6 +214,21 @@
       "question": "Collect evidence, analyze a capture, or evaluate a candidate?",
       "navigationLabel": "Security investigation",
       "navigationIcon": "🔎"
+    },
+    "online": {
+      "icon": "🌐",
+      "intro": "Open the service that answers the current question; compare its account and submission behavior before sending an input.",
+      "jobs": [
+        "malware-removal",
+        "ransomware-response",
+        "network-dns",
+        "outlook-email",
+        "preventive-maintenance",
+        "intake-triage"
+      ],
+      "question": "What do you need to check in your browser?",
+      "navigationLabel": "Online tools",
+      "navigationIcon": "🌐"
     }
   },
   "homeDiagram": "flowchart TD\n    A[\"Start with the observed problem\"]:::action --> B{\"Immediate risk?\"}:::decision\n    B -->|\"Active compromise\"| C[\"Contain and coordinate response\"]:::stop\n    B -->|\"Failing storage or damage\"| D[\"Protect data and choose recovery\"]:::stop\n    B -->|\"No immediate risk\"| E{\"What is the scope?\"}:::decision\n    E -->|\"Office or shared service\"| F[\"Restore dependencies in order\"]:::action\n    E -->|\"One device or application\"| G[\"Choose a focused playbook\"]:::action\n    F --> H[\"Test the real business task\"]:::done\n    G --> H\n    H --> I{\"Evidence worth reusing?\"}:::decision\n    I -->|\"New method or correction\"| J[\"Improve the shared guide\"]:::done\n    I -->|\"Case-specific details\"| K[\"Complete the private handoff\"]:::done\n    classDef decision fill:#eaf0f8,stroke:#607fa7,color:#172b46\n    classDef action fill:#f1f3f6,stroke:#8792a2,color:#263445\n    classDef stop fill:#faf0f0,stroke:#a46b70,color:#5e3137\n    classDef done fill:#e9edf3,stroke:#6c7d94,color:#253449\n",
@@ -487,6 +502,7 @@
   ],
   "categoryOrder": [
     "malware",
+    "online",
     "storage",
     "windows",
     "remote",

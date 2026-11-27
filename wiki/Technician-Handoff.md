@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+<a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 # 🤝 A service record the next technician can use
 
@@ -50,7 +50,7 @@ This record keeps the problem, protected data, exact change and evidence of repa
 - [ ] A usable recovery or rollback route exists for the planned change.
 - [ ] Required service-owner coordination is recorded.
 
-Useful methods: [Source and destination verification](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration), [restore verification](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore), [BitLocker recovery readiness](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery), and [rollback rehearsal](https://github.com/Herbertofury/INTA/wiki/Job-new-pc).
+Useful methods: [Source and destination verification](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration), [restore verification](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore), <a href="https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/" title="Open BitLocker official download or service page" aria-label="Open BitLocker official download or service page" data-inta-brand="app-bitlocker"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="BitLocker official page" width="18" height="18" valign="middle" /></a> [BitLocker recovery readiness](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery), and [rollback rehearsal](https://github.com/Herbertofury/INTA/wiki/Job-new-pc).
 
 ## 🔎 3 · Keep facts separate from the hypothesis
 
@@ -118,7 +118,7 @@ Use [post-change acceptance](https://github.com/Herbertofury/INTA/wiki/Job-clien
 
 **What you need to do next:**
 
-**How to contact INTA if the symptom returns:**
+**How to contact <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) if the symptom returns:**
 
 Keep the explanation short enough to use and specific enough to distinguish the fix from a guess. Link any reusable instructions to the relevant [field guide](https://github.com/Herbertofury/INTA/wiki/Playbooks); retain customer-specific details in the private case.
 

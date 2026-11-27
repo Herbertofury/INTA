@@ -1832,6 +1832,941 @@
       "usage": {
         "status": "unverified"
       }
+    },
+    "virustotal": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "metadefender-cloud": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "jotti": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "hybrid-analysis": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "anyrun": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "triage": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "joe-sandbox": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "intezer-analyze": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "polyswarm": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "filescan-io": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "unpacme": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "kaspersky-opentip": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "urlscan": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "urlhaus": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "malwarebazaar": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "threatfox": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "yaraify": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "no-more-ransom": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "id-ransomware": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "checkphish": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "sophos-intelix": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "drweb-online": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "ssl-labs": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "mdn-observatory": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "securityheaders": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "internet-nl": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "hardenize": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "dmarcian-tools": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "mxtoolbox": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "google-admin-toolbox": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "dnsviz": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "zonemaster": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "verisign-dnssec-debugger": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "dnschecker": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "whatsmydns": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "nslookup-io": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "learndmarc": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "mail-tester": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "globalping": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "ripestat": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "cloudflare-radar": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "cloudflare-speed": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "fast-com": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "waveform-bufferbloat": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "microsoft-remote-connectivity": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "microsoft365-connectivity": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "microsoft-service-health": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "google-workspace-status": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "test-ipv6": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "webpagetest": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "pagespeed-insights": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "wave-accessibility": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "shodan": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "censys": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "greynoise": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "abuseipdb": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "talos-intelligence": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "otx": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "pulsedive": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "ipinfo": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "spamhaus": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "google-safe-browsing": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "have-i-been-pwned": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "icann-lookup": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "urlvoid": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "openphish": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "urlquery": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "first-epss": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "cisa-kev": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "nvd": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "osv": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "github-advisories": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "snyk-vulnerability-db": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "cyberchef": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "regex101": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "jwt-debugger": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "browserleaks": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "cover-your-tracks": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "deps-dev": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "first-cvss": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "attack-navigator": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "squoosh": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "drawio": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "excalidraw": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
+    },
+    "hoppscotch": {
+      "github": {
+        "status": "unverified"
+      },
+      "sourceforge": {
+        "status": "unverified"
+      },
+      "usage": {
+        "status": "unverified"
+      }
     }
   }
 }

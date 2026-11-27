@@ -5,6 +5,10 @@ on:
     paths:
       - 'live/**'
       - 'media/**'
+      - 'data/brand-icons.json'
+      - 'assets/brand-icons/**'
+      - 'docs/assets/inta-mark.svg'
+      - 'scripts/package-media.py'
       - 'scripts/build-iso'
       - 'scripts/smoke-iso'
       - 'tests/test_media.py'
@@ -35,6 +39,11 @@ jobs:
             /src/scripts/build-iso /out/inta-dist
           '
           cat "${RUNNER_TEMP}/inta-dist/SHA256SUMS"
+      - name: Package complete portable Media Creator
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" "${RUNNER_TEMP}/inta-dist"
+          python3 scripts/package-media.py --output "${RUNNER_TEMP}/inta-dist/INTA-Media-Creator.pyz"
+          (cd "${RUNNER_TEMP}/inta-dist" && sha256sum INTA-Media-Creator.pyz >> SHA256SUMS)
       - name: Store candidate image
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

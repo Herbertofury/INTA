@@ -28,6 +28,13 @@ lb config --mode debian --distribution trixie --architectures amd64 \
     --iso-application 'INTA Rescue' --iso-volume 'INTA_RESCUE' \
     --bootappend-live 'boot=live components username=inta hostname=inta quiet'
 cp -a "$root/live/." config/
+# Keep native UI assets on the same canonical registry as the portal.
+install -d config/includes.chroot/usr/share/inta/data config/includes.chroot/usr/share/inta/assets/brand-icons
+install -m 644 "$root/media/inta_brand_ui.py" config/includes.chroot/usr/share/inta/inta_brand_ui.py
+install -m 644 "$root/data/brand-icons.json" config/includes.chroot/usr/share/inta/data/brand-icons.json
+cp -a "$root/assets/brand-icons/." config/includes.chroot/usr/share/inta/assets/brand-icons/
+install -d config/includes.chroot/usr/share/icons/hicolor/scalable/apps
+install -m 644 "$root/docs/assets/inta-mark.svg" config/includes.chroot/usr/share/icons/hicolor/scalable/apps/inta-rescue.svg
 chmod 755 config/includes.chroot/usr/local/bin/*
 lb build
 shopt -s nullglob

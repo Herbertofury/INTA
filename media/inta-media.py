@@ -86,19 +86,30 @@ def copy_to_ventoy(source, volume):
         stream_verified(image, volume / ISO, expected, source.stat().st_size)
 
 
-def main():
+def build_app():
     import tkinter as tk
-    from tkinter import filedialog, messagebox, ttk
+    from tkinter import filedialog, ttk
+    import sys
+    # Resolve alongside the source/portable script, independent of current cwd.
+    source_folder = Path(__file__).resolve().parent
+    if str(source_folder) not in sys.path:
+        sys.path.insert(0, str(source_folder))
+    from inta_brand_ui import BrandUI, ScrollableFrame
 
     root = tk.Tk()
     root.title("INTA Media Creator")
+    root.geometry(f"{min(870, max(630, root.winfo_screenwidth() - 40))}x{min(650, max(420, root.winfo_screenheight() - 50))}")
     root.minsize(630, 420)
-    root.configure(background="#102734")
+    brand_ui = BrandUI(root, script_path=__file__)
+    root.inta_brands = brand_ui
+    messagebox = brand_ui
     status = tk.StringVar(value="Ready")
-    panel = ttk.Frame(root, padding=24)
-    panel.pack(fill="both", expand=True, padx=16, pady=16)
-    ttk.Label(panel, text="INTA Media Creator", font=("TkDefaultFont", 22, "bold")).pack(anchor="w")
-    ttk.Label(panel, text="Download a refreshed rescue ISO and prepare your boot USB.").pack(anchor="w", pady=(3, 16))
+    viewport = ScrollableFrame(root, padding=24)
+    viewport.pack(fill="both", expand=True, padx=16, pady=16)
+    panel = viewport.content
+    brand_ui.text(panel, "INTA Media Creator", font=("TkDefaultFont", 22, "bold"), foreground="#e7e9ee", icon_size=36, fill="x")
+    brand_ui.text(panel, "Download a refreshed INTA Rescue ISO and prepare your boot USB.", fill="x", pady=(3, 12))
+    brand_ui.text(panel, "Open a tool name or icon for its official download page. The action buttons keep installation and launch separate.", fill="x", pady=(0, 16))
     responses = queue.Queue()
     buttons = []
     busy = False
@@ -194,18 +205,35 @@ def main():
             root.destroy()
 
     actions = [
-        ("Download or update INTA ISO", download),
-        ("Install or update ISO on Ventoy USB", ventoy),
-        ("Open or download Ventoy", lambda: official_tool("Ventoy")),
-        ("Open or download Rufus", lambda: official_tool("Rufus")),
+        ("INTA Rescue", "Download or update the verified ISO.", "Download / update ISO", download),
+        ("Ventoy", "Install or update the ISO on an existing Ventoy USB volume.", "Copy verified ISO", ventoy),
+        ("Ventoy", "Open a downloaded executable, or get the official Ventoy download.", "Open / download", lambda: official_tool("Ventoy")),
+        ("Rufus", "Open a downloaded executable, or get the official Rufus download.", "Open / download", lambda: official_tool("Rufus")),
     ]
-    for label, callback in actions:
-        button = ttk.Button(panel, text=label, command=callback)
-        button.pack(fill="x", pady=5, ipady=4)
+    for name, description, label, callback in actions:
+        row = ttk.Frame(panel, padding=(0, 11))
+        row.pack(fill="x")
+        row.columnconfigure(0, weight=1)
+        brand_ui.text(row, name, font=("TkDefaultFont", 12, "bold"), foreground="#e7e9ee", icon_size=26).grid(row=0, column=0, sticky="ew", padx=(0, 18))
+        brand_ui.text(row, description).grid(row=1, column=0, sticky="ew", padx=(0, 18))
+        button = ttk.Button(row, text=label, command=callback, width=22)
+        button.grid(row=0, column=1, rowspan=2, sticky="e")
         buttons.append(button)
-    ttk.Label(panel, textvariable=status, wraplength=540).pack(anchor="w", pady=(12, 0))
+        ttk.Separator(panel).pack(fill="x")
+    status_view = brand_ui.text(panel, status.get(), foreground="#e7e9ee", fill="x", pady=(15, 0))
+
+    def update_status(*_args):
+        nonlocal status_view
+        status_view.destroy()
+        status_view = brand_ui.text(panel, status.get(), foreground="#e7e9ee", fill="x", pady=(15, 0))
+
+    status.trace_add("write", update_status)
     root.protocol("WM_DELETE_WINDOW", close)
-    root.mainloop()
+    return root
+
+
+def main():
+    build_app().mainloop()
 
 
 if __name__ == "__main__":

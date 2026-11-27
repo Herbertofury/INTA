@@ -1,101 +1,110 @@
 #!/usr/bin/python3
-import os
 import subprocess
-import tkinter as tk
+import sys
 from pathlib import Path
-from tkinter import filedialog, messagebox, ttk
 
-BACKGROUND = "#102734"
-ACCENT = "#057f74"
 WORKSPACE = Path.home() / "INTA-AI"
 BIN = Path("/opt/inta-ai/node_modules/.bin")
 
-root = tk.Tk()
-root.title("INTA Rescue")
-root.geometry("880x595")
-root.minsize(710, 535)
-root.configure(background=BACKGROUND)
 
-style = ttk.Style()
-style.theme_use("clam")
-style.configure("TButton", padding=8)
-style.configure("TNotebook.Tab", padding=(14, 10))
+def build_app():
+    import tkinter as tk
+    from tkinter import filedialog, ttk
+    # Installed rescue media and a source checkout use the same shared renderer.
+    for parent in Path(__file__).resolve().parents:
+        if (parent / "media/inta_brand_ui.py").is_file():
+            sys.path.insert(0, str(parent / "media"))
+            break
+    sys.path.insert(0, "/usr/share/inta")
+    from inta_brand_ui import BrandUI, ScrollableFrame
 
-tk.Label(root, text="INTA Rescue", font=("Sans", 27, "bold"),
-         bg=BACKGROUND, fg="white").pack(anchor="w", padx=30, pady=(22, 0))
-tk.Label(root, text="Disk recovery  /  hardware diagnostics  /  security triage",
-         font=("Sans", 11), bg=BACKGROUND, fg="#9de4d7").pack(anchor="w", padx=32, pady=(1, 17))
+    root = tk.Tk()
+    root.title("INTA Rescue")
+    root.geometry(f"{min(1090, max(710, root.winfo_screenwidth() - 40))}x{min(760, max(535, root.winfo_screenheight() - 50))}")
+    root.minsize(710, 535)
+    brands = BrandUI(root, script_path=__file__)
+    root.inta_brands = brands
+    messagebox = brands
+    header = ttk.Frame(root, padding=(28, 20, 28, 14))
+    header.pack(fill="x")
+    brands.text(header, "INTA Rescue", font=("TkDefaultFont", 25, "bold"), foreground="#e7e9ee", icon_size=38, fill="x")
+    brands.text(header, "Disk recovery  /  hardware diagnostics  /  security triage", fill="x", pady=(3, 10))
+    brands.text(header, "Tool names and icons open official download pages. Use the action on the right to run the installed tool.", fill="x")
+    tabs = ttk.Notebook(root)
+    tabs.pack(fill="both", expand=True, padx=28, pady=(0, 24))
 
-tabs = ttk.Notebook(root)
-tabs.pack(fill="both", expand=True, padx=30, pady=(0, 24))
+    def launch(*command, terminal=False, cwd=None):
+        args = ["xfce4-terminal", "--hold", "--execute", *command] if terminal else list(command)
+        try:
+            subprocess.Popen(args, cwd=cwd, start_new_session=True)
+        except OSError as error:
+            messagebox.showerror("Could not open tool", str(error))
+
+    def ai(client, *args):
+        if not messagebox.askokcancel(
+            "Online AI session",
+            "The provider receives what you share. Review content for client data or secrets. "
+            "This tool opens in a dedicated working directory within your live account.",
+        ):
+            return
+        workspace = WORKSPACE / client
+        workspace.mkdir(parents=True, exist_ok=True, mode=0o700)
+        launch(str(BIN / client), *args, terminal=True, cwd=workspace)
+
+    def scan():
+        path = filedialog.askdirectory(parent=root, title="Choose a directory to scan with ClamAV")
+        if path:
+            launch("clamscan", "--recursive", "--infected", "--", path, terminal=True)
+
+    def tool_tab(title, actions):
+        viewport = ScrollableFrame(tabs, padding=18)
+        tabs.add(viewport, text=title)
+        panel = viewport.content
+        panel.columnconfigure(1, weight=1)
+        for index, (name, description, label, action) in enumerate(actions):
+            brands.text(panel, name, font=("TkDefaultFont", 11, "bold"), foreground="#e7e9ee", icon_size=26).grid(
+                row=index * 2, column=0, sticky="ew", padx=(0, 18), pady=10
+            )
+            panel.columnconfigure(0, minsize=165)
+            brands.text(panel, description).grid(row=index * 2, column=1, sticky="ew", padx=(0, 18), pady=10)
+            ttk.Button(panel, text=label, command=action, width=17).grid(row=index * 2, column=2, sticky="e", pady=10)
+            ttk.Separator(panel).grid(row=index * 2 + 1, column=0, columnspan=3, sticky="ew")
+
+    tool_tab("Disks & Recovery", [
+        ("Disk inventory", "List devices with size, model, filesystem and mount points.", "List devices",
+         lambda: launch("lsblk", "-e7", "-o", "NAME,SIZE,MODEL,FSTYPE,RO,MOUNTPOINTS", terminal=True)),
+        ("GSmartControl", "Inspect drive health and SMART attributes.", "Inspect health", lambda: launch("gsmartcontrol")),
+        ("GParted", "Open GParted for manual inspection or partition changes.", "Open editor", lambda: launch("gparted")),
+        ("TestDisk", "Inspect and recover disk partitions.", "Open recovery", lambda: launch("sudo", "testdisk", terminal=True)),
+        ("PhotoRec", "Recover files to a separate destination.", "Recover files", lambda: launch("sudo", "photorec", terminal=True)),
+        ("Clonezilla", "Save or restore disk images. Confirm source and destination in Clonezilla.", "Open imaging",
+         lambda: launch("sudo", "clonezilla", terminal=True)),
+    ])
+    tool_tab("System & Security", [
+        ("Hardware inventory", "Display CPU, graphics, storage and network details.", "Inspect hardware",
+         lambda: launch("inxi", "-F", "-z", terminal=True)),
+        ("Network inventory", "Show local interfaces and assigned addresses.", "Inspect network",
+         lambda: launch("ip", "-brief", "address", terminal=True)),
+        ("ClamAV signatures", "Download current ClamAV signatures for this session.", "Update signatures",
+         lambda: launch("sudo", "freshclam", terminal=True)),
+        ("ClamAV scan", "Run ClamAV against a selected directory without automatic removal.", "Scan folder", scan),
+        ("Terminal tools", "Use ddrescue, YARA, Sleuth Kit, dislocker, tcpdump and other CLI tools.", "Open terminal",
+         lambda: launch("xfce4-terminal")),
+    ])
+    tool_tab("AI Workspace", [
+        ("ChatGPT", "Open ChatGPT in Firefox. Internet access and sign-in may be required.", "Open browser",
+         lambda: launch("firefox-esr", "--new-window", "https://chatgpt.com/")),
+        ("Codex CLI", "Start in a dedicated work folder with Codex CLI's read-only shell sandbox mode.", "Start client",
+         lambda: ai("codex", "--sandbox", "read-only")),
+        ("Claude Code", "Start in a dedicated work folder with Claude Code's default permission prompts.", "Start client",
+         lambda: ai("claude")),
+    ])
+    return root
 
 
-def launch(*command, terminal=False, cwd=None):
-    args = ["xfce4-terminal", "--hold", "--execute", *command] if terminal else list(command)
-    try:
-        subprocess.Popen(args, cwd=cwd, start_new_session=True)
-    except OSError as error:
-        messagebox.showerror("Could not open tool", str(error))
+def main():
+    build_app().mainloop()
 
 
-def ai(client, *args):
-    if not messagebox.askokcancel(
-        "Online AI session",
-        "The provider receives what you share. Review content for client data or secrets. "
-        "This tool opens in a dedicated working directory within your live account.",
-    ):
-        return
-    workspace = WORKSPACE / client
-    workspace.mkdir(parents=True, exist_ok=True, mode=0o700)
-    launch(str(BIN / client), *args, terminal=True, cwd=workspace)
-
-
-def scan():
-    path = filedialog.askdirectory(title="Choose a directory to scan with ClamAV")
-    if path:
-        launch("clamscan", "--recursive", "--infected", "--", path, terminal=True)
-
-
-def tool_tab(title, actions):
-    panel = ttk.Frame(tabs, padding=18)
-    tabs.add(panel, text=title)
-    panel.columnconfigure(1, weight=1)
-    for index, (label, description, action) in enumerate(actions):
-        ttk.Button(panel, text=label, command=action, width=23).grid(
-            row=index, column=0, sticky="ew", padx=(0, 13), pady=6
-        )
-        ttk.Label(panel, text=description, wraplength=440, justify="left").grid(
-            row=index, column=1, sticky="w", pady=6
-        )
-
-
-tool_tab("Disks & Recovery", [
-    ("Disk inventory", "List devices with size, model, filesystem and mount points.",
-     lambda: launch("lsblk", "-e7", "-o", "NAME,SIZE,MODEL,FSTYPE,RO,MOUNTPOINTS", terminal=True)),
-    ("Drive health", "Inspect drive health and SMART attributes.", lambda: launch("gsmartcontrol")),
-    ("Partition editor", "Open GParted for manual inspection or partition changes.", lambda: launch("gparted")),
-    ("TestDisk", "Inspect and recover disk partitions.", lambda: launch("sudo", "testdisk", terminal=True)),
-    ("PhotoRec", "Recover files to a separate destination.", lambda: launch("sudo", "photorec", terminal=True)),
-    ("Clonezilla", "Save or restore disk images. Confirm source and destination in Clonezilla.",
-     lambda: launch("sudo", "clonezilla", terminal=True)),
-])
-tool_tab("System & Security", [
-    ("Hardware inventory", "Display CPU, graphics, storage and network details.",
-     lambda: launch("inxi", "-F", "-z", terminal=True)),
-    ("Network inventory", "Show local interfaces and assigned addresses.",
-     lambda: launch("ip", "-brief", "address", terminal=True)),
-    ("Update AV signatures", "Download current ClamAV signatures for this session.",
-     lambda: launch("sudo", "freshclam", terminal=True)),
-    ("Scan folder", "Run ClamAV against a selected directory without automatic removal.", scan),
-    ("Open terminal", "Use ddrescue, YARA, Sleuth Kit, dislocker, tcpdump and other CLI tools.",
-     lambda: launch("xfce4-terminal")),
-])
-tool_tab("AI Workspace", [
-    ("ChatGPT", "Open ChatGPT in Firefox. Internet access and sign-in may be required.",
-     lambda: launch("firefox-esr", "--new-window", "https://chatgpt.com/")),
-    ("Codex CLI", "Start in a dedicated work folder with Codex read-only shell sandbox mode.",
-     lambda: ai("codex", "--sandbox", "read-only")),
-    ("Claude Code", "Start in a dedicated work folder with Claude Code's default permission prompts.",
-     lambda: ai("claude")),
-])
-root.mainloop()
+if __name__ == "__main__":
+    main()

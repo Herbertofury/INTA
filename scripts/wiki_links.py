@@ -64,6 +64,17 @@ def build_registry(tools: list[dict], jobs: list[dict]) -> list[dict]:
             url, kind, identity = item["url"], item.get("kind", "application"), item["id"]
         for name in [item["name"], *item.get("aliases", [])]:
             add(name, url, kind, identity, item.get("caseSensitive", False))
+    # Publisher/site identities share the same repeated-mention linker as tools.
+    # Existing explicit aliases and precise method destinations keep precedence.
+    brand_path = ROOT / "data/brand-icons.json"
+    if brand_path.is_file():
+        brands = json.loads(brand_path.read_text(encoding="utf-8")).get("brands", [])
+        ordinary = {"home", "support", "download", "downloads", "documentation", "source", "help", "free", "tools", "media"}
+        for brand in brands:
+            for name in [brand.get("name", ""), *brand.get("names", [])]:
+                if not name or name.casefold() in entries or name.casefold() in ordinary or len(name) < 2:
+                    continue
+                add(name, brand["downloadPage"], brand.get("kind", "website"), brand["id"], True)
     return sorted(entries.values(), key=lambda x: (-len(x["name"]), x["name"].casefold()))
 
 

@@ -1613,6 +1613,476 @@
         "https://learn.microsoft.com/en-us/windows/whats-new/extended-security-updates"
       ],
       "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "printer-stuck-job-blocks-the-queue",
+      "jobId": "printer-repair",
+      "title": "Clear a print job that blocks later documents",
+      "symptom": "New documents remain behind one stuck job even though the printer is reachable.",
+      "firstAction": "Open Settings > Bluetooth & devices > Printers & scanners, select the affected printer, and open its print queue.",
+      "steps": [
+        "Record the failed document and cancel that job; check whether the next small test document prints.",
+        "If jobs remain stuck, arrange the brief interruption with anyone using this computer as a print host, then restart Print Spooler in services.msc.",
+        "If cancellation still fails, stop Print Spooler and clear files inside C:\\Windows\\System32\\spool\\PRINTERS only after confirming all affected pending jobs can be discarded; start the service again. The spool directory belongs to the host, not just the selected printer.",
+        "Resubmit one known-good document before the original large or complex job."
+      ],
+      "expected": "The queue empties and a new document physically prints once.",
+      "ifUnresolved": "If the service stops again or one document repeatedly stalls it, retain the error and investigate the exact driver/document; do not keep clearing every queue.",
+      "toolIds": [
+        "get-help"
+      ],
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "printer-guest-wifi-isolates-the-device",
+      "jobId": "printer-repair",
+      "title": "Find a printer hidden by guest Wi-Fi isolation",
+      "symptom": "The printer and laptop both have internet, but discovery and local printing fail.",
+      "firstAction": "Read the printer network report and compare its network with the computer, including guest versus trusted Wi-Fi.",
+      "steps": [
+        "Confirm the devices are on the intended local network; internet access alone does not prove they can communicate.",
+        "Check the router documentation for AP, client or wireless isolation. Keep guest separation intact and move the printer and authorized client to the supported trusted network when appropriate.",
+        "If the network must stay isolated, use the model-supported direct or wired printing route, or ask the network owner for a scoped printing path.",
+        "Add the verified printer again and test the actual print and scan tasks."
+      ],
+      "expected": "The correct printer is discovered or reachable through the approved path, and a document prints.",
+      "ifUnresolved": "If discovery still fails, compare the device address, VPN path and model-specific setup requirements before reinstalling drivers.",
+      "toolIds": [
+        "advanced-ip-scanner",
+        "oem-drivers"
+      ],
+      "sourceUrls": [
+        "https://support.hp.com/us-en/document/ish_8085688-8063994-16"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "email-search-client-specific-diagnosis",
+      "jobId": "outlook-email",
+      "title": "Fix missing search results in the right mail client",
+      "symptom": "A known message exists in its folder but search cannot find it.",
+      "firstAction": "Identify new or classic Outlook and repeat the search in the correct account and folder.",
+      "steps": [
+        "For new Outlook, inspect Settings > General > Search and narrow the query by sender or date; search each account separately instead of assuming a combined search.",
+        "For classic Outlook, select the search box and open Search Tools > Indexing Status. Record remaining items, wait briefly and see whether that count decreases.",
+        "If classic indexing is stalled, check the selected search locations and Windows Search service using the matching official branch. Rebuild the index only after those checks.",
+        "Test the same known message again and compare with webmail to separate mailbox content from a local search problem."
+      ],
+      "expected": "The known message is found in the intended account and scope; classic indexing completes or demonstrably progresses.",
+      "ifUnresolved": "If webmail also lacks the message, investigate delivery or retention; another local index rebuild cannot restore absent server content.",
+      "toolIds": [
+        "get-help"
+      ],
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/outlook/troubleshooting-outlook-search-issues"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "email-gmail-rejects-old-password-signin",
+      "jobId": "outlook-email",
+      "title": "Reconnect Gmail with the supported sign-in flow",
+      "symptom": "The password works on the website but an email client repeatedly reports incorrect credentials.",
+      "firstAction": "Confirm whether the account is personal Gmail or managed Google Workspace, and update the email client before changing account settings.",
+      "steps": [
+        "Choose the Google account type and use Sign in with Google in the supported client. Complete the consent and verification flow for the intended account.",
+        "For personal Gmail, do not hunt for an Enable IMAP switch: Google documents that IMAP is always enabled for these accounts.",
+        "For Google Workspace, have the administrator verify IMAP and application access policy. An allowed account and OAuth-capable client are separate requirements.",
+        "Preserve local-only messages and folders before removing a broken profile. Test incoming mail, outgoing mail and a folder change after reconnecting."
+      ],
+      "expected": "The client stays connected through the supported authorization flow and a fresh send/receive test succeeds.",
+      "ifUnresolved": "If the organization blocks the application or consent fails, resolve that policy with its administrator; repeated password resets do not correct an application-policy denial.",
+      "toolIds": [],
+      "sourceUrls": [
+        "https://support.google.com/mail/answer/7126229?hl=en",
+        "https://knowledge.workspace.google.com/admin/sync/set-up-gmail-with-a-third-party-email-client"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "email-cloud-quota-blocks-outlook-com",
+      "jobId": "outlook-email",
+      "title": "Restore mail stopped by a cloud-storage quota",
+      "symptom": "Outlook.com cannot send or receive, despite an apparently small mailbox or free space on the PC.",
+      "firstAction": "Open Outlook.com Settings > Account > Storage and read both the mailbox and Microsoft cloud-storage state.",
+      "steps": [
+        "Distinguish email storage from the account cloud allowance. Exceeding either can block Outlook.com mail.",
+        "With the owner, preserve needed content and remove unwanted items from the account that is actually full, or choose the appropriate storage plan. Empty Deleted Items only after its contents have been reviewed.",
+        "Refresh the account storage display and send a new message in both directions after the account is under quota.",
+        "Ask senders to resend messages rejected during the full-storage period; those messages do not automatically arrive after space is freed."
+      ],
+      "expected": "The account is below the relevant limit and a new two-way mail test succeeds.",
+      "ifUnresolved": "If storage is healthy but webmail still fails, check the account/service error before repairing the desktop client.",
+      "toolIds": [],
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/outlook/storage-limits-in-outlook-com"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "network-web-works-service-proxy-fails",
+      "jobId": "network-dns",
+      "title": "Explain why a service fails while the browser works",
+      "symptom": "Websites open, but an updater or Windows service reports a proxy or connection error.",
+      "firstAction": "Record the failing application and destination, then compare its error with the same destination in the browser.",
+      "steps": [
+        "Run netsh winhttp show proxy to inspect the proxy configured for applications that use WinHTTP.",
+        "Compare that configuration with the required organizational proxy and the user browser configuration; these are not interchangeable proof of connectivity.",
+        "Capture netsh winhttp dump before an approved change. Apply the documented configuration for that specific application and network instead of blindly importing or resetting every proxy.",
+        "Repeat the original service operation and preserve its result, rather than accepting a successful browser page as proof."
+      ],
+      "expected": "The failing service reaches its intended endpoint through the correct supported network configuration.",
+      "ifUnresolved": "If its configuration is correct, use the exact service log to investigate authentication, certificates or the destination path with the service owner.",
+      "toolIds": [
+        "powershell"
+      ],
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-winhttp"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "network-reset-breaks-vpn-or-virtual-switch",
+      "jobId": "network-dns",
+      "title": "Prepare a network reset without losing the return path",
+      "symptom": "A network reset is being considered, or VPN and virtual-machine networking disappeared after one.",
+      "firstAction": "Save the current adapter/IP/DNS details and identify the VPN client and virtual switches before resetting anything.",
+      "steps": [
+        "Try the scoped cable, adapter and connection checks first. Microsoft positions Network reset as a later troubleshooting step.",
+        "Keep the correct network driver and required VPN installer/configuration available; arrange local assistance if resetting would end the only support session.",
+        "If a reset is still needed, use Settings > Network & internet > Advanced network settings > Network reset and complete the restart.",
+        "Restore required VPN or virtualization components, check the resulting network profile, and test local networking plus the original remote/business task."
+      ],
+      "expected": "The computer reconnects and required VPN, share and virtual-machine paths work after restart.",
+      "ifUnresolved": "If a specific adapter remains missing, use its supported driver or product repair route; repeating the same reset can erase useful configuration again.",
+      "toolIds": [
+        "get-help",
+        "oem-drivers"
+      ],
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-ethernet-connection-problems-in-windows"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "repair-preserve-apps-with-same-version-reinstall",
+      "jobId": "windows-repair",
+      "title": "Repair a bootable system while retaining applications",
+      "symptom": "Component repairs have not resolved the fault, but Windows still starts and the files are recoverable.",
+      "firstAction": "Open Settings > System > Recovery and check whether Fix problems using Windows Update offers Reinstall now.",
+      "steps": [
+        "Confirm the recovery copy and account/recovery access before beginning, then keep stable power and internet connected.",
+        "Use Reinstall now for this documented repair route: it reinstalls the current Windows version while preserving applications, files and settings.",
+        "Review the offered restart choice, allow the repair download and installation to finish, then restart.",
+        "Repeat the original failed task and check updates plus the user's required applications."
+      ],
+      "expected": "The machine starts normally, retained applications still work, and the original fault has an observed result.",
+      "ifUnresolved": "If the option is absent, inspect the documented build and device-management restrictions; use the supported installation-media repair branch instead of assuming Reset this PC preserves applications.",
+      "toolIds": [
+        "windows-recovery",
+        "microsoft-windows11-media"
+      ],
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "update-generic-rollback-needs-exact-code",
+      "jobId": "windows-update",
+      "title": "Turn an update rollback into a specific repair",
+      "symptom": "The PC repeatedly says it could not complete updates or is undoing changes.",
+      "firstAction": "Open Windows Update > Update history and record the failed update identifier and exact error code.",
+      "steps": [
+        "Capture the Windows build and whether this is a cumulative update, driver update or feature upgrade.",
+        "Use the matching error branch in the official installation-error reference. A generic rollback message does not identify one cause.",
+        "Compare the documented prerequisite with evidence on this device, such as available space, the connection path or supported drivers; make one relevant change.",
+        "Retry that update and check its history after the required restart, then repeat the original user task."
+      ],
+      "expected": "The exact update is recorded as installed and the device completes a normal restart.",
+      "ifUnresolved": "If the same code returns, retain the error and applicable setup/servicing logs for the next diagnostic branch rather than cycling through unrelated reset commands.",
+      "toolIds": [
+        "get-help",
+        "setupdiag"
+      ],
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/get-help-with-windows-upgrade-and-installation-errors"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "backup-vss-writer-failed",
+      "jobId": "backup-restore",
+      "title": "Identify the writer stopping an application-aware backup",
+      "symptom": "A backup fails during snapshot creation or reports a VSS writer error.",
+      "firstAction": "On the computer being backed up, run vssadmin list writers from an elevated command prompt and record failed writers.",
+      "steps": [
+        "Retain the backup error and its timestamp; match the failing writer to its owning service using the vendor reference.",
+        "Plan any service restart with the application owner because it can interrupt the live workload.",
+        "After the agreed recovery action, run vssadmin list writers again and retry the backup only when the relevant writer is stable.",
+        "Perform a representative restore and application check after a successful backup. A recovered writer state alone is not restore proof."
+      ],
+      "expected": "The relevant writer remains stable, the job completes, and restored content passes the intended check.",
+      "ifUnresolved": "If the writer fails again, collect the machine's System and Application events around the failure for the backup/application owner instead of repeatedly restarting all services.",
+      "toolIds": [
+        "veeam-agent"
+      ],
+      "sourceUrls": [
+        "https://www.veeam.com/kb2041"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "maintenance-firmware-bitlocker-resume",
+      "jobId": "preventive-maintenance",
+      "title": "Keep firmware maintenance recoverable on an encrypted PC",
+      "symptom": "A planned firmware or TPM update may change the measured startup environment.",
+      "firstAction": "Verify the matching BitLocker recovery information is retrievable from another device before starting the vendor update.",
+      "steps": [
+        "Follow the actual device manufacturer's prerequisites and identify whether its update handles BitLocker suspension automatically.",
+        "When manual suspension is required, use the documented BitLocker workflow and an appropriate reboot count for the update. Multiple firmware restarts may outlast a one-reboot suspension.",
+        "Keep physical control of the device through the maintenance window and finish the firmware process on stable power.",
+        "Resume BitLocker when the supported procedure requires it, verify protection is active, and test a normal restart plus the original workload."
+      ],
+      "expected": "The intended firmware is installed, normal startup succeeds, and BitLocker protection is active again.",
+      "ifUnresolved": "If recovery appears, use the matching recorded key and inspect the actual boot/firmware change; do not clear the TPM as a generic fix.",
+      "toolIds": [
+        "oem-drivers",
+        "powershell"
+      ],
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/windows-security/bitlocker-recovery-known-issues"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "outage-desktop-stays-off-after-ac-return",
+      "jobId": "outage-recovery",
+      "title": "Explain a desktop that stays off when power returns",
+      "symptom": "Power and networking have returned, but an otherwise working desktop did not start automatically.",
+      "firstAction": "Check that the device can start normally with its power button before treating automatic restart as a Windows fault.",
+      "steps": [
+        "Look up the exact model's firmware power-recovery setting and record its current value.",
+        "Dell documents AC Recovery choices such as Power Off, Power On and Last Power State; names and availability on other models must come from their manuals.",
+        "Choose the required behavior with the site owner and coordinate it with UPS shutdown and service startup order.",
+        "Verify the selected behavior during a controlled maintenance test after a clean shutdown and saved work, then test the dependent business service."
+      ],
+      "expected": "The actual machine behaves as agreed after restored power and its required service returns in the correct order.",
+      "ifUnresolved": "If the device does not start from its button or shows hardware error indicators, move to the model-specific power/POST diagnosis before changing recovery policy.",
+      "toolIds": [
+        "oem-drivers"
+      ],
+      "sourceUrls": [
+        "https://dl.dell.com/manuals/common/dell-emc-remote-wake-up-config-dell-client-cmd-suite.pdf"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "newpc-nas-share-signing-compatibility",
+      "jobId": "new-pc",
+      "title": "Connect a new PC to a compatible authenticated share",
+      "symptom": "A replacement or upgraded PC rejects a NAS share that an older PC can still access.",
+      "firstAction": "Record the exact share error, Windows edition/build and whether the NAS is using a named account or guest access.",
+      "steps": [
+        "Compare the device with current SMB signing requirements; Windows 11 24H2 Pro, Enterprise and Education require signing by default.",
+        "Inspect the NAS's supported SMB configuration and firmware. Enable supported signing and use an authorized named account for the share.",
+        "Reconnect through the intended server name and verify both share and filesystem permissions for the real user.",
+        "Open, save and reopen a test file in the intended work location, then test the actual application."
+      ],
+      "expected": "The authorized user can complete the required file workflow over a supported authenticated connection.",
+      "ifUnresolved": "If the appliance cannot support the required protocol/signing, plan its supported update or replacement with the owner; a generic client-security downgrade is not a compatibility repair.",
+      "toolIds": [
+        "powershell"
+      ],
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "malware-managed-protection-change-reverts",
+      "jobId": "malware-removal",
+      "title": "Route a reverting antivirus setting to its policy owner",
+      "symptom": "A local antivirus setting appears to change but immediately reverts or has no effect on a managed endpoint.",
+      "firstAction": "Check the endpoint's management and tamper-protection state before retrying a local script or registry change.",
+      "steps": [
+        "Record the exact intended diagnostic change, observed result and policy owner.",
+        "Microsoft documents that tamper-protected settings can ignore Group Policy changes even when they appear successful.",
+        "Have the authorized endpoint administrator use the supported troubleshooting mode for a necessary temporary diagnostic change; the device must be online.",
+        "Complete the diagnostic test and verify the policy-managed protection state afterward. Troubleshooting-mode changes are discarded when the mode expires."
+      ],
+      "expected": "The administrator can explain the effective policy and the diagnostic result without leaving protection in an unintended state.",
+      "ifUnresolved": "If policy ownership or management access is unavailable, retain the evidence and escalate to that owner; repeated local toggles will not resolve the management boundary.",
+      "toolIds": [
+        "defender-business"
+      ],
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/defender-endpoint/tamper-protection-troubleshoot"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "online-file-verdicts-disagree",
+      "jobId": "malware-removal",
+      "title": "Online scanners disagree about a file",
+      "symptom": "One service flags a file while another calls it clean.",
+      "firstAction": "Calculate the file hash locally and search for an existing report before sending file bytes to a service.",
+      "steps": [
+        "Calculate the file hash locally and search for an existing report before sending file bytes to a service.",
+        "Compare detection names, report age, signer and behavior; choose a sandbox when you need to understand execution.",
+        "Record the exact hash and findings, then use the malware guide to verify the affected endpoint and choose cleanup or rebuild."
+      ],
+      "expected": "The case records the exact hash, report dates and the specific suspicious behavior or reason for the false-positive hypothesis.",
+      "ifUnresolved": "If provenance or behavior remains unresolved, preserve the evidence and continue endpoint incident triage before allowing execution.",
+      "toolIds": [
+        "virustotal",
+        "metadefender-cloud",
+        "anyrun",
+        "triage"
+      ],
+      "sourceUrls": [
+        "https://docs.virustotal.com/docs/how-it-works",
+        "https://metadefender.com/product/community",
+        "https://any.run/",
+        "https://tria.ge/"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "online-phishing-account-exposure",
+      "jobId": "malware-removal",
+      "title": "A suspicious link was opened or credentials were entered",
+      "symptom": "A user opened a questionable link, downloaded a file or entered a password.",
+      "firstAction": "Copy the destination as text and search existing reports; inspect the hostname before following a link.",
+      "steps": [
+        "Copy the destination as text and search existing reports; inspect the hostname before following a link.",
+        "For a new scan, choose a visibility mode suitable for the URL; use an existing report, hostname lookup or appropriate private workflow for a token-bearing link. Record any input redaction because it can change page behavior.",
+        "Compare redirects, page requests and reputation; follow the incident guide if someone entered credentials or downloaded a payload."
+      ],
+      "expected": "The destination and user action are established, with a separate account/endpoint response based on what actually happened.",
+      "ifUnresolved": "An absent scan report does not close the case; follow the account owner’s recovery process and the broader incident guide when exposure is credible.",
+      "toolIds": [
+        "urlscan",
+        "google-safe-browsing",
+        "checkphish"
+      ],
+      "sourceUrls": [
+        "https://docs.urlscan.io/pages/faq",
+        "https://safebrowsing.google.com/",
+        "https://checkphish.bolster.ai/"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "online-loaded-latency",
+      "jobId": "network-dns",
+      "title": "Calls lag even though a speed test looks fast",
+      "symptom": "Video calls or games stall when other devices upload or download.",
+      "firstAction": "Measure from one wired device and record idle latency, loaded latency, loss and the time of the symptom.",
+      "steps": [
+        "Measure from one wired device and record idle latency, loaded latency, loss and the time of the symptom.",
+        "Compare a second device or path, then use external vantage points and provider status to locate the failing boundary.",
+        "Retest the original call, stream or business application after the change; a download-speed result alone is not the completion test."
+      ],
+      "expected": "The same workload shows usable latency while the connection is busy, with before/after conditions recorded.",
+      "ifUnresolved": "If one wired device still fails, compare the router and upstream path; if only Wi-Fi fails, continue radio and local congestion diagnosis.",
+      "toolIds": [
+        "cloudflare-speed",
+        "waveform-bufferbloat",
+        "globalping",
+        "cloudflare-radar"
+      ],
+      "sourceUrls": [
+        "https://speed.cloudflare.com/",
+        "https://www.waveform.com/tools/bufferbloat",
+        "https://globalping.io/",
+        "https://radar.cloudflare.com/"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "online-email-authentication",
+      "jobId": "outlook-email",
+      "title": "Mail reaches spam or fails authentication",
+      "symptom": "A message is rejected or delivered to spam while basic mailbox access works.",
+      "firstAction": "Check the domain’s MX and TXT records, the full delivery error and the provider’s service status.",
+      "steps": [
+        "Check the domain’s MX and TXT records, the full delivery error and the provider’s service status.",
+        "Inspect SPF, DKIM and DMARC alignment, and use message-header analysis or a non-sensitive test message when needed.",
+        "After one targeted correction, send and receive the same test and record the resulting authentication and delivery evidence."
+      ],
+      "expected": "A repeat sample reaches the intended mailbox and its headers show the expected authenticated sending path.",
+      "ifUnresolved": "If public DNS and alignment are correct, retain the exact SMTP response and escalate to the sending or receiving provider.",
+      "toolIds": [
+        "google-admin-toolbox",
+        "mxtoolbox",
+        "learndmarc",
+        "microsoft-remote-connectivity"
+      ],
+      "sourceUrls": [
+        "https://toolbox.googleapps.com/apps/main/",
+        "https://mxtoolbox.com/SuperTool.aspx",
+        "https://www.learndmarc.com/",
+        "https://testconnectivity.microsoft.com/"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "online-cve-priority",
+      "jobId": "preventive-maintenance",
+      "title": "A new CVE needs a practical patch decision",
+      "symptom": "A vulnerability alert arrives without confirming the affected version or actual exposure.",
+      "firstAction": "Match the advisory to the installed product and exact version; check vendor remediation and prerequisites.",
+      "steps": [
+        "Match the advisory to the installed product and exact version; check vendor remediation and prerequisites.",
+        "Check known exploitation and current probability alongside severity and actual exposure.",
+        "Apply the applicable vendor fix in a recovery-ready window, then verify the version and the service’s original workload."
+      ],
+      "expected": "The advisory matches the asset, the decision records exploitation and exposure context, and remediation is verified on the actual workload.",
+      "ifUnresolved": "If no fixed supported build is available, use the vendor’s documented mitigation and track the exact affected version until a verified fix exists.",
+      "toolIds": [
+        "cisa-kev",
+        "first-epss",
+        "nvd",
+        "osv"
+      ],
+      "sourceUrls": [
+        "https://github.com/cisagov/kev-data",
+        "https://www.first.org/epss/",
+        "https://nvd.nist.gov/",
+        "https://osv.dev/"
+      ],
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "id": "online-website-configuration",
+      "jobId": "preventive-maintenance",
+      "title": "A website has a certificate or security-header problem",
+      "symptom": "A browser warns about a site or an external configuration test identifies a weakness.",
+      "firstAction": "Run a TLS and certificate check against the exact public hostname you maintain.",
+      "steps": [
+        "Run a TLS and certificate check against the exact public hostname you maintain.",
+        "Inspect security headers and internet configuration separately; map each finding to its server or application owner.",
+        "Apply a targeted change, rerun the matching check, and verify sign-in, embeds and the normal user journey still work."
+      ],
+      "expected": "The failing certificate or header check improves and normal sign-in, content loading and integrations still work.",
+      "ifUnresolved": "If the result differs by hostname or region, compare the CDN and origin configurations before applying another change.",
+      "toolIds": [
+        "ssl-labs",
+        "mdn-observatory",
+        "internet-nl",
+        "securityheaders"
+      ],
+      "sourceUrls": [
+        "https://www.ssllabs.com/ssltest/",
+        "https://developer.mozilla.org/en-US/observatory",
+        "https://en.internet.nl/",
+        "https://securityheaders.com/"
+      ],
+      "reviewedAt": "2026-11-26"
     }
   ]
 }

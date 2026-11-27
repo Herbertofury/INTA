@@ -12,7 +12,11 @@
       "sysinternals",
       "hwinfo",
       "usb-device-tree-view",
-      "powercfg"
+      "powercfg",
+      "cyberchef",
+      "regex101",
+      "drawio",
+      "hoppscotch"
     ],
     "startHere": "Ask the user to show the exact failing task once. Record what they expected, what happened, and when it last worked.",
     "steps": [
@@ -95,7 +99,14 @@
       "defender-offline",
       "sysinternals",
       "malwarebytes",
-      "sysmon"
+      "sysmon",
+      "virustotal",
+      "metadefender-cloud",
+      "anyrun",
+      "triage",
+      "urlscan",
+      "google-safe-browsing",
+      "checkphish"
     ],
     "startHere": "Check for active encryption, credential theft, unusual administrator accounts, or more affected machines before treating this as a routine cleanup.",
     "steps": [
@@ -221,7 +232,11 @@
     "tools": [
       "sysinternals",
       "wireshark",
-      "sysmon"
+      "sysmon",
+      "id-ransomware",
+      "no-more-ransom",
+      "malwarebazaar",
+      "threatfox"
     ],
     "startHere": "Treat live encryption, ransom notes, or several compromised systems as an incident. Start a private incident timeline and contact the designated incident lead.",
     "steps": [
@@ -937,7 +952,15 @@
       "iperf3",
       "sysinternals",
       "curl",
-      "mtr"
+      "mtr",
+      "greynoise",
+      "abuseipdb",
+      "censys",
+      "shodan",
+      "cloudflare-speed",
+      "waveform-bufferbloat",
+      "globalping",
+      "cloudflare-radar"
     ],
     "startHere": "Determine whether the problem affects one app, one device, one network segment, or every device. Capture the working and failing cases.",
     "steps": [
@@ -1315,7 +1338,11 @@
     "tools": [
       "get-help",
       "sysinternals",
-      "curl"
+      "curl",
+      "google-admin-toolbox",
+      "mxtoolbox",
+      "learndmarc",
+      "microsoft-remote-connectivity"
     ],
     "startHere": "Identify the mail provider and whether the user is in classic Outlook, new Outlook, or a browser. Their repair paths differ.",
     "steps": [
@@ -2065,7 +2092,19 @@
       "wizfile",
       "powercfg",
       "windows-laps",
-      "sysmon"
+      "sysmon",
+      "ssl-labs",
+      "mdn-observatory",
+      "internet-nl",
+      "securityheaders",
+      "cisa-kev",
+      "first-epss",
+      "nvd",
+      "osv",
+      "pagespeed-insights",
+      "webpagetest",
+      "wave-accessibility",
+      "squoosh"
     ],
     "startHere": "Agree on the maintenance window and identify the user’s current pain points. Preserve a baseline of the system’s normal work.",
     "steps": [
