@@ -147,3 +147,11 @@ The site is generated as an installable Progressive Web App (PWA): mobile browse
 The PWA does not grant the website access to installed applications. Live update inventory and repair still require the local INTA agent or an approved management integration.
 
 The Windows Update cache recovery workflow also includes a matching rollback command. It requires the exact timestamp and both backup folders created by the INTA reset command; it preserves any newly generated cache folders under rollback names and restores the original folders. This is specific to the INTA reversible cache-reset procedure, not a general-purpose Windows Update fix.
+
+### Windows drivers and firmware
+
+The Updates tab has a separate Windows driver inventory and optional-driver entry point. Compare the current signed driver and hardware model against the OEM's supported release. An optional Windows Update driver is not automatically newer or better. BIOS/UEFI and device firmware must use the exact manufacturer's supported process; never apply generic firmware-flash commands.
+
+### macOS Software Update
+
+Apple's `softwareupdate --list` and `sudo softwareupdate --install --all` manage macOS system updates. They do not cover every Homebrew formula, Mac App Store app or vendor updater. Review MDM policy, backup and restart requirements. [Apple macOS updates](https://support.apple.com/guide/mac-help/get-macos-updates-mchlpx1065/mac).
