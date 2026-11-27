@@ -34,6 +34,8 @@
   const savedKey = 'inta:favorite-tools:v1';
   const checksKey = 'inta:job-checklists:v1';
   const themeKey = 'inta:theme:v1';
+  const xpKey = 'inta:progression-ledger:v1';
+  const feedbackKey = 'inta:feedback-preferences:v1';
   let storageAvailable = true;
   let lastRoute = '';
   let toastTimer;
@@ -53,6 +55,13 @@
   let favorites = new Set(Array.isArray(rawFavorites) ? rawFavorites.filter(id => toolMap.has(id)) : []);
   let checklists = load(checksKey, {});
   if (!checklists || typeof checklists !== 'object' || Array.isArray(checklists)) checklists = {};
+  let xpLedger = load(xpKey, []);
+  if (!Array.isArray(xpLedger)) xpLedger = [];
+  xpLedger = xpLedger.filter(event => event && typeof event.id === 'string' && typeof event.jobId === 'string' && Number.isFinite(event.xp));
+  const storedFeedbackPreferences = load(feedbackKey, { sound: false });
+  const feedbackPreferences = storedFeedbackPreferences && typeof storedFeedbackPreferences === 'object' && !Array.isArray(storedFeedbackPreferences)
+    ? { sound: storedFeedbackPreferences.sound === true }
+    : { sound: false };
   const theme = load(themeKey, 'dark');
   document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
 
@@ -550,6 +559,61 @@
     const state = progress(job);
     return `<h3>Your checklist</h3><div class="progress-top"><strong id="progress-percentage">${state.percentage}%</strong><span id="progress-count">${state.done} of ${state.total} checks</span></div><div class="progress-track" role="progressbar" aria-label="Playbook completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${state.percentage}"><span style="width:${state.percentage}%"></span></div><p class="progress-note" id="progress-note">${storageAvailable ? 'Progress stays in this browser. Start a fresh checklist for each new job.' : 'Progress lasts for this visit because browser storage is unavailable. Export your checklist to keep it.'}</p><button class="checklist-reset" data-reset-checklist="${esc(job.id)}">Start a fresh checklist</button>`;
   }
+  function fullWorkflowProgress(job) {
+    const items = [...array(job.steps).map((step, index) => checked(job, 'step', index, step.title)), ...array(job.verify).map((item, index) => checked(job, 'verify', index, text(item)))];
+    const done = items.filter(Boolean).length;
+    return { total: items.length, done, complete: items.length > 0 && done === items.length };
+  }
+  function earnedBadges() {
+    const completed = new Set(xpLedger.map(event => event.jobId));
+    const badges = [];
+    if (completed.size >= 1) badges.push({ id: 'first-playbook', title: 'First playbook', detail: 'Completed every step and verification item in a playbook.', earned: true });
+    if (completed.size >= 3) badges.push({ id: 'field-ready', title: 'Field-ready', detail: 'Completed three distinct playbooks.', earned: true });
+    if (completed.size >= 5) badges.push({ id: 'trusted-routine', title: 'Reliable routine', detail: 'Completed five distinct playbooks.', earned: true });
+    return badges;
+  }
+  function rewardTone() {
+    if (!feedbackPreferences.sound || !window.AudioContext) return;
+    try {
+      const context = new AudioContext();
+      const now = context.currentTime;
+      [659.25, 783.99].forEach((frequency, index) => {
+        const oscillator = context.createOscillator(), gain = context.createGain();
+        oscillator.type = 'sine'; oscillator.frequency.value = frequency;
+        gain.gain.setValueAtTime(0.0001, now + index * 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.055, now + index * 0.12 + 0.018);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + index * 0.12 + 0.16);
+        oscillator.connect(gain); gain.connect(context.destination);
+        oscillator.start(now + index * 0.12); oscillator.stop(now + index * 0.12 + 0.17);
+      });
+      setTimeout(() => context.close().catch(() => {}), 600);
+    } catch (_) { /* Audio is optional; visual confirmation remains available. */ }
+  }
+  function awardWorkflowCompletion(job) {
+    if (!fullWorkflowProgress(job).complete) return null;
+    const id = `workflow-complete:${job.id}:v1`;
+    if (xpLedger.some(event => event.id === id)) return null;
+    const before = earnedBadges().map(badge => badge.id);
+    const event = { id, type: 'workflow-complete', jobId: job.id, title: job.title, xp: 50, createdAt: new Date().toISOString(), ruleVersion: 1 };
+    xpLedger = [...xpLedger, event];
+    store(xpKey, xpLedger);
+    const unlocked = earnedBadges().filter(badge => !before.includes(badge.id));
+    rewardTone();
+    return { event, unlocked };
+  }
+  function progressionPage() {
+    const xp = xpLedger.reduce((sum, event) => sum + event.xp, 0);
+    const completed = new Set(xpLedger.map(event => event.jobId));
+    const badges = earnedBadges();
+    const next = completed.size < 1 ? 'Complete your first playbook' : completed.size < 3 ? `Complete ${3 - completed.size} more distinct playbook${3 - completed.size === 1 ? '' : 's'} to earn Field-ready` : completed.size < 5 ? `Complete ${5 - completed.size} more distinct playbook${5 - completed.size === 1 ? '' : 's'} to earn Reliable routine` : 'You have reached the current fieldwork milestones';
+    return heading('INTA learning & fieldwork', 'Progress & awards', 'A record of completed playbooks and learning milestones. Rewards are earned for completing the actual work, not for idle time.') +
+      `<section class="progress-overview" aria-label="Your progression summary"><div class="progress-metric"><span>Total experience</span><strong>${xp.toLocaleString('en-US')} XP</strong></div><div class="progress-metric"><span>Completed playbooks</span><strong>${completed.size}</strong></div><div class="progress-metric"><span>Awards earned</span><strong>${badges.length}</strong></div></section>
+      <section class="progress-next"><div><span class="small-label">Next milestone</span><p>${esc(next)}</p></div><a class="button ghost" href="#playbooks">Browse playbooks ${icon('arrow')}</a></section>
+      <section class="progress-section"><header><h2>Achievements</h2><p>Milestones are based on your completed checklist and verification acknowledgements.</p></header>${badges.length ? `<div class="achievement-list">${badges.map(badge => `<article class="achievement-item"><span class="achievement-mark" aria-hidden="true">${icon('checkCircle')}</span><div><h3>${esc(badge.title)}</h3><p>${esc(badge.detail)}</p></div><span class="achievement-earned">Earned</span></article>`).join('')}</div>` : '<p class="progress-empty">No awards yet. Finish a playbook and its verification checks to earn your first milestone.</p>'}</section>
+      <section class="progress-section"><header><h2>Recent completions</h2><p>Only a fully checked playbook is recorded. These are personal acknowledgements, not independently audited certifications.</p></header>${xpLedger.length ? `<div class="progress-history">${xpLedger.slice().reverse().map(event => `<article><div><strong>${esc(event.title)}</strong><time datetime="${esc(event.createdAt)}">${esc(new Date(event.createdAt).toLocaleDateString())}</time></div><span>+${event.xp} XP</span></article>`).join('')}</div>` : '<p class="progress-empty">Your completed playbooks will appear here.</p>'}</section>
+      <section class="progress-section progress-preferences"><header><h2>Feedback preferences</h2><p>Short confirmation tones are optional and off by default. Visual confirmations remain available either way.</p></header><label class="feedback-toggle"><input type="checkbox" data-feedback-sound${feedbackPreferences.sound ? ' checked' : ''}><span><strong>Play a brief sound for newly earned awards</strong><small>Only plays after a real completion action. Respects browser and device audio controls.</small></span></label></section>
+      <p class="progress-storage-note">This first release stores progression in this browser only. It does not yet sync across accounts or devices. Do not use this local profile as an employee performance record or store customer details here.</p>`;
+  }
   function sourceList(sources) {
     return `<ul class="source-list">${array(sources).filter(source => safeUrl(source.url || source)).map(source => `<li>${external(source.url || source, `${esc(source.title || source.url || source)}${icon('external')}`)}</li>`).join('')}</ul>`;
   }
@@ -785,12 +849,13 @@
   }
   function render() {
     const route = parseRoute();
-    const names = { home: 'Technician home', checklist: 'Technician checklist', news: 'Technician News', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
+    const names = { home: 'Technician home', checklist: 'Technician checklist', progress: 'Progress & awards', news: 'Technician News', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
     $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
     $('#breadcrumb').innerHTML = `Workspace <span>/</span> <strong>${esc(names[route.name] || 'Technician home')}</strong>`;
     if (route.name === 'home') app.innerHTML = home();
     else if (route.name === 'checklist') app.innerHTML = checklistPage();
+    else if (route.name === 'progress') app.innerHTML = progressionPage();
     else if (route.name === 'news') app.innerHTML = newsPage();
     else if (route.name === 'services') app.innerHTML = serviceMap();
     else if (route.name === 'tools') app.innerHTML = library(false, route.params);
@@ -870,7 +935,11 @@
     track.setAttribute('aria-valuenow', state.percentage);
     track.firstElementChild.style.width = `${state.percentage}%`;
     if (!storageAvailable) $('#progress-note').textContent = 'Progress lasts for this visit because browser storage is unavailable. Export your checklist to keep it.';
-    if (state.total && state.done === state.total && input.checked) notify('Checklist complete. Record the verified result in your service ticket.');
+    const reward = input.checked ? awardWorkflowCompletion(job) : null;
+    if (reward) {
+      const badgeText = reward.unlocked.length ? ` New award: ${reward.unlocked.map(badge => badge.title).join(', ')}.` : '';
+      notify(`Playbook completed · +${reward.event.xp} XP.${badgeText} Record the verified result in your service ticket.`);
+    } else if (state.total && state.done === state.total && input.checked) notify('Checklist complete. Record the verified result in your service ticket.');
   }
   async function copy(value, success) {
     try {
@@ -1080,6 +1149,7 @@
   document.addEventListener('change', event => {
     if (['category-filter', 'platform-filter', 'tier-filter', 'tool-sort'].includes(event.target.id)) filterTools();
     else if (event.target.id === 'jobs-category') filterJobs();
+    else if (event.target.matches('[data-feedback-sound]')) { feedbackPreferences.sound = event.target.checked; store(feedbackKey, feedbackPreferences); notify(`Award sounds ${event.target.checked ? 'enabled' : 'disabled'}.`); if (event.target.checked) rewardTone(); }
     else if (event.target.matches('[data-check-job]')) changeCheck(event.target);
   });
   search.addEventListener('input', updateSearch);
@@ -1116,6 +1186,8 @@
   window.addEventListener('storage', event => {
     if (event.key === savedKey) { const next = load(savedKey, []); favorites = new Set(Array.isArray(next) ? next.filter(id => toolMap.has(id)) : []); updateCounts(); if (parseRoute().name === 'saved') render(); }
     if (event.key === checksKey) { const next = load(checksKey, {}); if (next && typeof next === 'object' && !Array.isArray(next)) checklists = next; migrateChecklistState(); if (['job','checklist'].includes(parseRoute().name)) render(); }
+    if (event.key === xpKey) { const next = load(xpKey, []); if (Array.isArray(next)) xpLedger = next.filter(item => item && typeof item.id === 'string' && Number.isFinite(item.xp)); if (parseRoute().name === 'progress') render(); }
+    if (event.key === feedbackKey) { const next = load(feedbackKey, { sound: false }); if (next && typeof next === 'object') Object.assign(feedbackPreferences, next); }
   });
   $$('[data-icon]').forEach(element => { element.innerHTML = icon(element.dataset.icon); });
   migrateChecklistState(); setTheme(); render();
