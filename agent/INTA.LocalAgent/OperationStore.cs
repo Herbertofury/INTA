@@ -5,6 +5,7 @@ public sealed class OperationStore
 {
     private readonly ConcurrentDictionary<string, OperationRecord> records = new();
     private readonly ConcurrentDictionary<string, SemaphoreSlim> packageLocks = new();
+    private readonly SemaphoreSlim fileWriteLock = new(1, 1);
     private readonly string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "INTA", "agent", "operations.jsonl");
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
     public OperationStore()
@@ -25,6 +26,8 @@ public sealed class OperationStore
     public async Task SaveAsync(OperationRecord record)
     {
         records[record.Id] = record;
-        await File.AppendAllTextAsync(filePath, JsonSerializer.Serialize(record, Json) + Environment.NewLine);
+        await fileWriteLock.WaitAsync();
+        try { await File.AppendAllTextAsync(filePath, JsonSerializer.Serialize(record, Json) + Environment.NewLine); }
+        finally { fileWriteLock.Release(); }
     }
 }
