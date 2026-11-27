@@ -1209,4 +1209,85 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 .news-media a { font-size:.85rem; }
 #news-digest { margin-bottom:1.5rem; }
 
+
+/* Technician home: task-first navigation, dense reference rows, calm hierarchy. */
+.home-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -5px 0 24px;
+  padding: 0 0 15px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.home-actions .button { min-height: 37px; padding: 7px 11px; }
+.home-actions .button.primary { background: var(--selected); border-color: var(--line); color: var(--accent); }
+.home-actions .button.primary:hover { border-color: var(--focus); background: var(--hover); }
+.home-secondary-actions { margin: 34px 0 22px; padding: 15px 0 0; border-top: 1px solid var(--line-soft); border-bottom: 0; }
+.quick-start-section { margin: 0 0 30px; padding-top: 2px; }
+.quick-start-title { display: flex; justify-content: space-between; gap: 18px; align-items: flex-end; margin-bottom: 13px; }
+.quick-start-title h2 { font-size: 22px; letter-spacing: -.35px; }
+.quick-start-title p:not(.page-label) { margin-top: 4px; color: var(--muted); font-size: 14px; }
+.quick-start-title > a { display: inline-flex; align-items: center; min-height: 36px; white-space: nowrap; font-size: 13px; }
+.quick-start-list { column-gap: 30px; border-top-color: var(--line); }
+.quick-start-row { padding: 11px 0 12px; }
+.quick-start-row h3 { font-size: 15px; }
+.quick-scenario-link { min-height: 36px; gap: 8px; font-size: 15px; }
+.scenario-emoji { display: inline-grid; place-items: center; width: 25px; height: 25px; flex: 0 0 25px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); font-size: 14px; }
+.quick-first-step { margin: 1px 0 6px; font-size: 13px; line-height: 1.5; }
+.quick-choice-list { border-top: 1px solid var(--line-soft); }
+.quick-choice { grid-template-columns: minmax(0, 1fr) minmax(0, .92fr); column-gap: 12px; padding: 7px 0; }
+.quick-choice h4 { font-size: 13px; }
+.quick-choice .choice-role, .quick-choice .choice-use { font-size: 12px; line-height: 1.45; }
+.quick-choice .access-link { min-height: 31px; padding: 3px 0; font-size: 12px; }
+.all-tools-section { margin: 0 0 28px; padding-top: 18px; border-top: 1px solid var(--line); }
+.directory-title { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; margin-bottom: 12px; }
+.directory-title h2 { font-size: 22px; letter-spacing: -.35px; }
+.directory-title p:not(.page-label) { margin-top: 4px; color: var(--muted); font-size: 14px; }
+.directory-title > a { display: inline-flex; align-items: center; min-height: 36px; white-space: nowrap; font-size: 13px; }
+.discipline-jump { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 16px; padding: 8px 0 12px; border-block: 1px solid var(--line-soft); }
+.discipline-jump a { display: inline-flex; align-items: center; gap: 7px; min-height: 31px; padding: 4px 8px; border: 1px solid var(--line-soft); border-radius: 4px; color: var(--muted); font-size: 12px; }
+.discipline-jump a:hover { border-color: var(--focus); background: var(--selected); color: var(--accent); text-decoration: none; }
+.discipline-jump a span { color: var(--dim); font-variant-numeric: tabular-nums; }
+.directory-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 30px; align-items: start; }
+.directory-section { min-width: 0; margin: 0; scroll-margin-top: calc(var(--topbar-height) + 12px); }
+.directory-section-header { min-height: 39px; margin-bottom: 5px; }
+.directory-section-header h2 { font-size: 16px; }
+.directory-section-header > a { font-size: 12px; }
+.directory-section .tool-table-head { display: none; }
+.directory-section .directory-tool-row { grid-template-columns: minmax(0, 1fr) 80px 90px 34px; column-gap: 10px; padding: 9px 0; }
+.directory-section .directory-tool-row .tool-name-cell { grid-column: 1; grid-row: 1 / span 2; }
+.directory-section .directory-tool-row .tool-name-cell h3 { font-size: 13px; line-height: 1.4; }
+.directory-section .directory-tool-row .tool-name-cell p { margin: 2px 0; font-size: 12px; line-height: 1.4; }
+.directory-section .directory-tool-row .row-meta { font-size: 11px; }
+.directory-section .directory-tool-row .tool-platform-cell { grid-column: 2; grid-row: 1; font-size: 11px; line-height: 1.35; }
+.directory-section .directory-tool-row .tool-tier-cell { grid-column: 3; grid-row: 1; font-size: 11px; }
+.directory-section .directory-tool-row .tool-save-cell { grid-column: 4; grid-row: 1; margin: -5px 0 0; }
+.directory-section .directory-tool-row .save-tool { width: 30px; height: 30px; }
+.directory-section .directory-tool-row .tool-links-cell { grid-column: 2 / 5; grid-row: 2; display: flex; flex-wrap: wrap; gap: 0 10px; margin-top: 2px; font-size: 11px; }
+.directory-section .directory-tool-row .tool-links-cell a { min-height: 27px; }
+.directory-section .directory-tool-row .tool-links-cell .access-link { min-height: 27px; padding: 1px 0; font-size: 11px; }
+.directory-section .directory-tool-row .tool-links-cell .catalog-access { display: contents; }
+.directory-footnote { margin-top: 18px; font-size: 12px; }
+.online-start { margin-top: 8px; padding: 18px 0; border-top: 1px solid var(--line); }
+.online-start .section-title h2 { font-size: 20px; }
+.online-start .section-title p:not(.page-label) { margin-top: 4px; font-size: 13px; }
+.online-shortcuts { gap: 10px 24px; }
+.online-shortcuts > div > a { font-size: 13px; font-weight: 600; }
+.online-shortcuts > div > span { font-size: 12px; }
+
+@media (max-width: 1100px) {
+  .directory-grid { grid-template-columns: 1fr; gap: 18px; }
+}
+@media (max-width: 640px) {
+  .home-actions { gap: 6px; padding-bottom: 12px; }
+  .home-actions .button { flex: 1 1 calc(50% - 4px); justify-content: flex-start; }
+  .quick-start-title, .directory-title { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .quick-start-list { grid-template-columns: 1fr; }
+  .quick-choice { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); }
+  .directory-section .directory-tool-row { grid-template-columns: minmax(0, 1fr) 70px 84px 30px; column-gap: 7px; }
+  .directory-section .directory-tool-row .tool-platform-cell { font-size: 10px; }
+  .directory-section .directory-tool-row .tool-links-cell { gap: 0 8px; }
+}
+
 .news-story .news-source-freshness { margin:0; font-size:.8rem; color:var(--muted); overflow-wrap:anywhere; }
