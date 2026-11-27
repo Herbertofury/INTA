@@ -183,7 +183,7 @@
       "privilege": "Administrator",
       "risk": "changes-system",
       "summary": "Stop update services, rename SoftwareDistribution and catroot2 to timestamped backup folders, then restart services to allow Windows to rebuild caches.",
-      "code": "$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'\n$services = 'bits','wuauserv','cryptsvc'\ntry {\n  foreach ($service in $services) { Stop-Service -Name $service -Force -ErrorAction Stop }\n  Rename-Item \"$env:windir\\SoftwareDistribution\" \"SoftwareDistribution.INTA-$stamp\" -ErrorAction Stop\n  Rename-Item \"$env:windir\\System32\\catroot2\" \"catroot2.INTA-$stamp\" -ErrorAction Stop\n} finally {\n  foreach ($service in $services) { Start-Service -Name $service -ErrorAction SilentlyContinue }\n}\nGet-Service -Name bits,wuauserv,cryptsvc | Format-Table Name,Status -AutoSize",
+      "code": "$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'\n$services = 'bits','wuauserv','cryptsvc'\n$wasRunning = @(Get-Service -Name $services -ErrorAction Stop | Where-Object Status -eq 'Running' | Select-Object -ExpandProperty Name)\ntry {\n  foreach ($service in $services) { Stop-Service -Name $service -Force -ErrorAction Stop }\n  Rename-Item \"$env:windir\\SoftwareDistribution\" \"SoftwareDistribution.INTA-$stamp\" -ErrorAction Stop\n  Rename-Item \"$env:windir\\System32\\catroot2\" \"catroot2.INTA-$stamp\" -ErrorAction Stop\n} finally {\n  foreach ($service in $wasRunning) { Start-Service -Name $service -ErrorAction SilentlyContinue }\n}\nGet-Service -Name $services | Format-Table Name,Status -AutoSize",
       "safety": "State-changing recovery action. Use only after collecting the update error and trying the supported troubleshooter. Requires admin and a maintenance window; temporarily stops update services, causes update history/download cache to be rebuilt, and can require another download. If either rename fails, stop and inspect service state before proceeding. Do not delete the timestamped backups until Windows Update succeeds and retention is approved.",
       "sourceUrl": "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows",
       "sourceTitle": "Microsoft Troubleshoot Windows updates"
@@ -878,7 +878,9 @@
         "scoop-preview",
         "unigetui-update-audit",
         "windows-update-audit",
-        "update-reboot-check"
+        "update-reboot-check",
+        "windows-update-open",
+        "store-open-updates"
       ],
       "sequence": "Identify package managers first. Run only the matching manager's preview. Compare duplicate package ownership before updating. Record exclusions and pins. Schedule installation and reboot separately.",
       "warning": "The commands do not provide one universal all-app inventory. A package can appear in more than one manager; avoid double updates. OS, Store, firmware and drivers are separate channels."
@@ -909,7 +911,10 @@
         "unigetui-repair-app",
         "ninite-repair",
         "windows-msi-repair",
-        "winget-uninstall-app"
+        "winget-uninstall-app",
+        "flatpak-repair",
+        "appx-store-repair",
+        "windows-store-cache"
       ],
       "sequence": "Find exact app, manager, source, version and scope. Preserve app data/config. Use native repair if supported. If repair unavailable, back up app data then use manager-specific reinstall. Uninstall only after user approval and data-retention check. Verify launch and version.",
       "warning": "Repair may reinstall or uninstall/reinstall. Never assume user data survives. Do not use generic registry cleaners or guessed MSI product codes."
