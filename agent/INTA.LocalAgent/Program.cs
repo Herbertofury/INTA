@@ -60,7 +60,8 @@ app.MapGet("/api/v1/operations/{id}", (string id) => store.Get(id) is { } record
 app.MapPost("/api/v1/operations", async (OperationRequest request) =>
 {
     if (!request.Confirmed) return Results.BadRequest(new { error = "This action changes the computer. Confirm once in INTA before continuing." });
-    if (request.Action is not ("update" or "update-all" or "repair" or "uninstall")) return Results.BadRequest(new { error = "Unsupported operation." });
+    if (request.Action is not ("update" or "update-all" or "repair" or "uninstall" or "rollback")) return Results.BadRequest(new { error = "Unsupported operation." });
+    if (request.Action == "rollback" && request.Manager != "snap") return Results.BadRequest(new { error = "This agent version supports native rollback only for Snap packages. Other managers require an explicitly selected previous version or vendor rollback route." });
     if (!managers.Detect().Contains(request.Manager, StringComparer.OrdinalIgnoreCase)) return Results.BadRequest(new { error = "That package manager is not installed on this computer." });
     if (request.Manager == "snap" && request.Action == "repair") return Results.BadRequest(new { error = "Snap does not expose a generic package repair operation." });
     if (request.Manager == "uniget" && request.Action != "update-all") return Results.BadRequest(new { error = "UniGetUI currently supports manager-wide update only in this agent version." });
