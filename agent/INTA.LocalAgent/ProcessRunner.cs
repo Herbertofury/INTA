@@ -23,6 +23,7 @@ public sealed class ProcessRunner
             // Keep observing the original process. Never terminate an installer because the UI stopped waiting.
             await process.WaitForExitAsync(CancellationToken.None);
         }
+        process.WaitForExit(); // Flush asynchronous stdout/stderr event handlers.
         return (process.ExitCode, output.ToString());
     }
     private static void Append(StringBuilder output, string? line)
