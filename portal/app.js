@@ -982,7 +982,7 @@
     const root=$('#agent-inventory'); if(!root)return;
     const previews=array(data.updatePreviews), apps=array(data.applications);
     root.innerHTML='<div class="agent-inventory-summary"><strong>'+apps.length+'</strong> registered apps · <strong>'+array(data.managers).length+'</strong> package managers · checked '+esc(new Date(data.collectedAt).toLocaleTimeString())+'</div>'+
-      '<div class="agent-preview-grid">'+previews.map(item=>'<details class="agent-preview-card"><summary><strong>'+esc(item.manager)+'</strong><span>'+(item.exitCode===0?'Preview ready':'Check output · '+esc(item.exitCode))+'</span></summary><pre>'+esc(item.output||'No output')+'</pre></details>').join('')+'</div>'+
+      '<div class="agent-preview-grid">'+previews.map(item=>'<details class="agent-preview-card"><summary><strong>'+esc(item.manager)+'</strong><span>'+((item.exitCode===0||(item.manager==='dnf'&&item.exitCode===100)||(item.manager==='pacman'&&item.exitCode===2))?'Preview ready':'Check output · '+esc(item.exitCode))+'</span></summary><pre>'+esc(item.output||'No output')+'</pre></details>').join('')+'</div>'+
       '<details class="agent-app-inventory"><summary>Installed Windows applications ('+apps.length+')</summary><div class="agent-app-list">'+apps.slice(0,250).map(app=>'<div><strong>'+esc(app.name)+'</strong><span>'+esc([app.version,app.publisher,app.scope].filter(Boolean).join(' · '))+'</span></div>').join('')+'</div></details>';
   }
   function renderLocalAgentOperations(records) {
