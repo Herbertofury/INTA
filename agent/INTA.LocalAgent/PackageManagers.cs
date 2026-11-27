@@ -36,6 +36,43 @@ public sealed class PackageManagers(ProcessRunner runner)
             throw new ArgumentException("Enter the exact package ID shown by the selected package manager. Shell syntax and command-line switches are not accepted.");
         return value;
     }
+    public async Task<(bool Verified, string Output, bool NeedsReview)> VerifyAsync(OperationRequest request, CancellationToken ct = default)
+    {
+        if (request.Action == "update-all")
+        {
+            var previews = await PreviewAsync([request.Manager], ct);
+            var preview = previews.FirstOrDefault();
+            return (false, preview?.Output ?? "No post-update preview was available.", true);
+        }
+        var package = ValidateId(request.PackageId);
+        var (file, args) = VerificationCommand(request.Manager, package);
+        if (file is null) return (false, "This package manager does not expose a reliable post-operation verification query.", true);
+        var result = await runner.RunAsync(file, args, TimeSpan.FromMinutes(3), ct);
+        var present = result.ExitCode == 0 && result.Output.Contains(package, StringComparison.OrdinalIgnoreCase);
+        var verified = request.Action switch
+        {
+            "update" => result.ExitCode == 0 && !present,
+            "repair" => result.ExitCode == 0 && present,
+            "uninstall" => result.ExitCode != 0 || !present,
+            _ => false
+        };
+        return (verified, result.Output, false);
+    }
+
+    private static (string? File, string[] Args) VerificationCommand(string manager, string package) => manager switch
+    {
+        "winget" => ("winget", ["list", "--id", package, "--exact", "--disable-interactivity"]),
+        "choco" => ("choco", ["list", "--limit-output", "--exact", package]),
+        "scoop" => ("scoop", ["list", package]),
+        "apt" => ("dpkg-query", ["-W", "-f=$" + "{Version}", package]),
+        "dnf" => ("rpm", ["-q", package]),
+        "pacman" => ("pacman", ["-Q", package]),
+        "brew" => ("brew", ["list", "--versions", package]),
+        "flatpak" => ("flatpak", ["info", package]),
+        "snap" => ("snap", ["list", package]),
+        _ => (null, [])
+    };
+
     private static (string? File, string[] Args) PreviewCommand(string manager) => manager switch
     {
         "winget" => ("winget", ["upgrade", "--accept-source-agreements", "--disable-interactivity"]),
