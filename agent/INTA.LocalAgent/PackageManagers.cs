@@ -70,6 +70,13 @@ public sealed class PackageManagers(ProcessRunner runner)
             var preview = previews.FirstOrDefault();
             return (false, preview?.Output ?? "No post-update preview was available.", true);
         }
+        if (request.Action == "rollback")
+        {
+            var (verifyFile, verifyArgs) = VerificationCommand(request.Manager, ValidateId(request.PackageId));
+            if (verifyFile is null) return (false, "No rollback verification is available.", true);
+            var rollbackCheck = await runner.RunAsync(verifyFile, verifyArgs, TimeSpan.FromMinutes(3), ct);
+            return (false, rollbackCheck.Output, true);
+        }
         var package = ValidateId(request.PackageId);
         if (request.Action == "update")
         {
@@ -182,6 +189,7 @@ public sealed class PackageManagers(ProcessRunner runner)
         ("flatpak", "uninstall") => ("flatpak", ["uninstall", package]),
         ("snap", "update-all") => ("snap", ["refresh"]),
         ("snap", "update") => ("snap", ["refresh", package]),
+        ("snap", "rollback") => ("snap", ["revert", package]),
         ("snap", "uninstall") => ("snap", ["remove", package]),
         ("uniget", "update-all") => ("uniget.exe", ["package", "update-all", "--wait", "true", "--timeout", "3600"]),
         _ => throw new ArgumentException($"The {manager} manager does not support the {action} operation.")
