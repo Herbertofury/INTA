@@ -61,11 +61,12 @@ app.MapPost("/api/v1/operations", async (OperationRequest request) =>
 {
     if (!request.Confirmed) return Results.BadRequest(new { error = "This action changes the computer. Confirm once in INTA before continuing." });
     if (request.Action is not ("update" or "update-all" or "repair" or "uninstall" or "rollback")) return Results.BadRequest(new { error = "Unsupported operation." });
-    if (request.Action == "rollback" && request.Manager != "snap") return Results.BadRequest(new { error = "This agent version supports native rollback only for Snap packages. Other managers require an explicitly selected previous version or vendor rollback route." });
+    if (request.Action == "rollback" && request.Manager is not ("snap" or "windows-update")) return Results.BadRequest(new { error = "This agent version supports native rollback for Snap and exact Windows KB updates only." });
+    if (request.Manager == "windows-update" && request.Action is "update" or "update-all") return Results.BadRequest(new { error = "Use the supported Windows Update Settings interface to check and install operating-system updates." });
     if (!managers.Detect().Contains(request.Manager, StringComparer.OrdinalIgnoreCase)) return Results.BadRequest(new { error = "That package manager is not installed on this computer." });
     if (request.Manager == "snap" && request.Action == "repair") return Results.BadRequest(new { error = "Snap does not expose a generic package repair operation." });
     if (request.Manager == "uniget" && request.Action != "update-all") return Results.BadRequest(new { error = "UniGetUI currently supports manager-wide update only in this agent version." });
-    if (request.Action != "update-all")
+    if (request.Action != "update-all" && !(request.Manager == "windows-update" && request.Action == "repair"))
     {
         try { _ = PackageManagers.ValidateId(request.PackageId); }
         catch (ArgumentException ex) { return Results.BadRequest(new { error = ex.Message }); }
