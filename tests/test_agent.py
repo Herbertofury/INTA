@@ -44,6 +44,7 @@ class LocalAgentContract(unittest.TestCase):
             self.assertIn(f'"{manager}"', source)
         self.assertIn("public static string ValidateId", source)
         self.assertIn("VerifyAsync", source)
+        self.assertIn('("snap", "rollback")', source)
 
     def test_agent_artifact_packaging_creates_sha256_sidecar(self):
         with tempfile.TemporaryDirectory() as temp:
