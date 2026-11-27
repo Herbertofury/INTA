@@ -19,3 +19,9 @@ remain separate from cross-target compilation.
 
 [Windows Forms .NET 10 desktop SDK](https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props-desktop)
 and [Microsoft's Startup Apps Settings URL](https://learn.microsoft.com/en-us/windows/apps/develop/launch/launch-settings).
+
+Open **Power plans** from the Startup window to inspect the installed Windows
+power schemes and active plan. The preview reads Windows power APIs directly
+on demand; it does not activate, edit, import, or remove a plan. Incomplete
+and unstable snapshots do not label a plan active. Close the Power plans
+window to return to Startup.

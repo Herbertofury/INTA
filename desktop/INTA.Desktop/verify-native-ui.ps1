@@ -56,6 +56,56 @@ try {
     # Do not print live registry/folder names. The manual follow-up verifies
     # the OS Settings handoff in an interactive Windows desktop.
     'Real Windows preview opened and populated. Native search, clear, refresh and accessible Settings action passed.'
+    function Active-Plan {
+        $cfg = Join-Path $env:SystemRoot 'System32\powercfg.exe'
+        $output = & $cfg /getactivescheme | Out-String
+        if ($LASTEXITCODE -ne 0) { throw 'Windows could not read its active power scheme.' }
+        $pattern = '[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}'
+        $guid = [Regex]::Match($output, $pattern, [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        if (-not $guid.Success) { throw 'The active scheme could not be identified.' }
+        $guid.Value
+    }
+
+    $before = Active-Plan
+    $power = Wait-Until { Find-Name 'Open power plans' } 'Missing accessible Power plans action.'
+    $power.GetCurrentPattern([Windows.Automation.InvokePattern]::Pattern).Invoke()
+    $powerWindow = Wait-Until {
+        $condition = [Windows.Automation.PropertyCondition]::new(
+            [Windows.Automation.AutomationElement]::ProcessIdProperty, [int]$process.Id)
+        $matches = [Windows.Automation.AutomationElement]::RootElement.FindAll(
+            [Windows.Automation.TreeScope]::Children, $condition)
+        foreach ($item in $matches) {
+            if ($item.Current.Name -like 'INTA Desktop * Power plans') { return $item }
+        }
+        $matches = $window.FindAll([Windows.Automation.TreeScope]::Descendants, $condition)
+        foreach ($item in $matches) {
+            if ($item.Current.Name -like 'INTA Desktop * Power plans') { return $item }
+        }
+    } 'The real native Power plans window did not launch.'
+    try {
+        $gridName = [Windows.Automation.PropertyCondition]::new(
+            [Windows.Automation.AutomationElement]::NameProperty, 'Installed Windows power plans')
+        $powerGrid = Wait-Until {
+            $powerWindow.FindFirst([Windows.Automation.TreeScope]::Descendants, $gridName)
+        } 'Missing native Power plans grid.'
+        $powerGridPattern = $powerGrid.GetCurrentPattern([Windows.Automation.GridPattern]::Pattern)
+        $null = Wait-Until {
+            $labelType = [Windows.Automation.PropertyCondition]::new(
+                [Windows.Automation.AutomationElement]::ControlTypeProperty, [Windows.Automation.ControlType]::Text)
+            $labels = $powerWindow.FindAll([Windows.Automation.TreeScope]::Descendants, $labelType)
+            foreach ($label in $labels) {
+                if ($label.Current.Name -like ('Active plan: '+$before+'*') -and $powerGridPattern.Current.RowCount -gt 0) {
+                    return $true
+                }
+            }
+        } 'Native Power plans did not show the same active scheme as Windows.'
+        if ((Active-Plan) -ne $before) { throw 'The Windows active scheme changed during observation.' }
+    } finally {
+        $powerWindow.GetCurrentPattern([Windows.Automation.WindowPattern]::Pattern).Close()
+    }
+    $null = Wait-Until { $refresh.Current.IsEnabled } 'Could not return to the Startup inventory window.'
+    'The real Power plans window showed the current Windows plan without changing the active scheme.'
+
 }
 finally {
     $process.Refresh()

@@ -91,6 +91,7 @@ internal sealed class StartupWindow : Form
         ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText,
     };
     private StartupRow[] _all = [], _visible = [];
+    private PowerWindow? _powerWindow;
     private int _completedScans;
     private int _sortColumn = -1;
     private bool _sortDescending;
@@ -115,13 +116,26 @@ internal sealed class StartupWindow : Form
         layout.Controls.Add(new Label { AutoSize = true, Text = "Startup inventory", Font = new Font(Font.FontFamily, 26F, FontStyle.Bold) }, 0, 0);
         layout.Controls.Add(new Label { AutoSize = true, Text = "LOCAL ONLY  /  READ-ONLY  /  REGISTRY + STARTUP FOLDERS", Margin = new Padding(3, 4, 3, 14) }, 0, 1);
         var actions = new FlowLayoutPanel { AutoSize = true, Dock = DockStyle.Fill, WrapContents = true, Padding = new Padding(0, 0, 0, 8) };
-        actions.Controls.AddRange([_filter, _refresh, _settings]);
+        var powerPlans = new Button { Text = "&Power plans", AccessibleName = "Open power plans", AutoSize = true, TabIndex = 3 };
+        powerPlans.Click += (_, _) =>
+        {
+            if (_powerWindow is { IsDisposed: false } existing)
+            {
+                existing.Activate();
+                return;
+            }
+            var window = new PowerWindow();
+            _powerWindow = window;
+            window.FormClosed += (_, _) => _powerWindow = null;
+            window.Show(this);
+        };
+        actions.Controls.AddRange([_filter, _refresh, _settings, powerPlans]);
         layout.Controls.Add(actions, 0, 2);
         layout.Controls.Add(_grid, 0, 3);
         _status.Margin = new Padding(3, 12, 3, 0);
         layout.Controls.Add(_status, 0, 4);
         Controls.Add(layout);
-        StyleControls();
+        StyleControls(powerPlans);
         AddColumn("Registration", 39);
         AddColumn("Scope", 14);
         AddColumn("Source", 24);
@@ -153,7 +167,7 @@ internal sealed class StartupWindow : Form
         Name = name, HeaderText = name, FillWeight = share, SortMode = DataGridViewColumnSortMode.Programmatic
     });
 
-    private void StyleControls()
+    private void StyleControls(Button powerPlans)
     {
         _grid.RowTemplate.Height = 30;
         if (_contrast) return;
@@ -170,7 +184,7 @@ internal sealed class StartupWindow : Form
         _grid.ColumnHeadersDefaultCellStyle.ForeColor = foreground;
         _filter.BackColor = surface;
         _filter.ForeColor = foreground;
-        foreach (var button in new[] { _refresh, _settings })
+        foreach (var button in new[] { _refresh, _settings, powerPlans })
         {
             button.FlatStyle = FlatStyle.Flat;
             button.UseVisualStyleBackColor = false;

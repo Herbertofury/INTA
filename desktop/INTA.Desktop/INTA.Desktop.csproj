@@ -12,5 +12,6 @@
   <ItemGroup>
     <Compile Include="../../agent/INTA.LocalAgent/StartupInventory.cs" Link="Windows/StartupInventory.cs" />
     <Compile Include="../../agent/INTA.LocalAgent/StartupFolders.cs" Link="Windows/StartupFolders.cs" />
+    <Compile Include="../../agent/INTA.LocalAgent/PowerPlans.cs" Link="Windows/PowerPlans.cs" />
   </ItemGroup>
 </Project>
