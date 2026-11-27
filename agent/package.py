@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Package a self-contained INTA Local Agent publish directory."""
 from pathlib import Path
+import hashlib
 import sys
 import zipfile
 
@@ -15,4 +16,6 @@ with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED, compressleve
     for path in sorted(source.rglob("*")):
         if path.is_file():
             archive.write(path, path.relative_to(source))
-print(f"Packaged {sum(1 for p in source.rglob('*') if p.is_file())} files into {output}")
+digest = hashlib.sha256(output.read_bytes()).hexdigest()
+output.with_suffix(output.suffix + ".sha256").write_text(digest + "  " + output.name + chr(10), encoding="ascii")
+print(f"Packaged {sum(1 for p in source.rglob('*') if p.is_file())} files into {output} (SHA-256 {digest})")
