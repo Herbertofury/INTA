@@ -2,7 +2,7 @@ name: Validate and publish technician hub
 on:
   push:
     branches: [main]
-    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/check-online-runtime.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
+    # Publication must match the current main commit, including source-only changes.
   pull_request:
     paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/check-online-runtime.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
   workflow_dispatch:
