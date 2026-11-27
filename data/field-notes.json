@@ -57,11 +57,11 @@
         },
         {
           "id": "install-sysinternals",
-          "label": "Install Microsoft Sysinternals Suite from WinGet",
+          "label": "Download, verify and launch the portable Sysinternals Suite",
           "shell": "PowerShell",
-          "purpose": "Check the exact package and publisher, then install the Microsoft Sysinternals Suite interactively.",
-          "safety": "Requires WinGet and user approval. Confirm the exact Microsoft package ID and source in the search/show results before running install; do not silently install. Sysinternals tools can expose sensitive process, network and account data.",
-          "code": "winget search --id Microsoft.SysinternalsSuite --exact\nwinget show --id Microsoft.SysinternalsSuite --exact --source winget\nwinget install --id Microsoft.SysinternalsSuite --exact --source winget --interactive",
+          "purpose": "Download Microsoft's portable Sysinternals Suite into the local INTA Toolbox, verify the Process Explorer Authenticode signature, then launch Process Explorer.",
+          "safety": "Downloads and extracts a large Microsoft utility suite into the current user's local INTA Toolbox. The command launches Process Explorer only after Windows reports a valid Authenticode signature. Review the publisher and use only the utility needed for the case; do not store traces or sensitive output in a shared toolbox folder.",
+          "code": "$toolbox = Join-Path $env:LOCALAPPDATA 'INTA Toolbox\\SysinternalsSuite'\n$zip = Join-Path $env:TEMP 'SysinternalsSuite.zip'\nNew-Item -ItemType Directory -Path $toolbox -Force | Out-Null\nInvoke-WebRequest -Uri 'https://download.sysinternals.com/files/SysinternalsSuite.zip' -OutFile $zip\nExpand-Archive -LiteralPath $zip -DestinationPath $toolbox -Force\n$proc = Join-Path $toolbox 'procexp64.exe'\n$signature = Get-AuthenticodeSignature -FilePath $proc\nif ($signature.Status -ne 'Valid') { throw \"Process Explorer signature is not valid: $($signature.Status)\" }\n$signature | Select-Object Status,@{N='Signer';E={$_.SignerCertificate.Subject}}\nStart-Process -FilePath $proc",
           "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
           "sourceTitle": "Microsoft Sysinternals Suite"
         },
