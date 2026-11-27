@@ -1,5 +1,6 @@
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 namespace INTA.LocalAgent;
 public sealed class Inventory(PackageManagers managers)
 {
@@ -10,6 +11,7 @@ public sealed class Inventory(PackageManagers managers)
         var previews = await managers.PreviewAsync(detected, ct);
         return new(DateTimeOffset.UtcNow, RuntimeInformation.OSDescription, apps, detected, previews);
     }
+    [SupportedOSPlatform("windows")]
     private static IReadOnlyList<InstalledApp> WindowsApps()
     {
         var rows = new List<InstalledApp>();
