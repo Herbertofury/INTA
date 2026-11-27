@@ -978,11 +978,32 @@
       await refreshLocalAgentData();
     } catch(error) { notify(error.message+' Start INTA Local Agent on this computer, then connect again.'); }
   }
+  function parseUpdateCandidateIds(manager, output) {
+    const lines=String(output||'').split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
+    let ids=[];
+    if(manager==='choco') ids=lines.filter(line=>line.includes('|')).map(line=>line.split('|')[0].trim());
+    else if(manager==='apt') ids=lines.map(line=>(line.match(/^([A-Za-z0-9+:.@_-]+)\//)||[])[1]).filter(Boolean);
+    else if(manager==='dnf') ids=lines.filter(line=>/\s/.test(line)&&!/^Last metadata|^Obsoleting|^Available|^Installed/i.test(line)).map(line=>line.split(/\s+/)[0]).filter(id=>/[.]/.test(id));
+    else if(manager==='pacman') ids=lines.filter(line=>line.includes(' -> ')).map(line=>line.split(/\s+/)[0]);
+    else if(manager==='flatpak') ids=lines.map(line=>line.split(/\s+/)[0]).filter(id=>id.includes('/'));
+    else if(manager==='snap') ids=lines.filter(line=>!/^Name\s|^Name$|^Refresh/i.test(line)).map(line=>line.split(/\s+/)[0]).filter(id=>/^[A-Za-z0-9][A-Za-z0-9._+-]*$/.test(id));
+    else if(manager==='brew') ids=lines.map(line=>line.split(/\s+/)[0].replace(/\(.*/, '')).filter(id=>/^[A-Za-z0-9][A-Za-z0-9._+-]*$/.test(id));
+    else if(manager==='scoop') ids=lines.filter(line=>!/^Name\s|^Name$|^Installed/i.test(line)).map(line=>line.split(/\s{2,}/)[0]).filter(id=>/^[A-Za-z0-9][A-Za-z0-9._+-]*$/.test(id));
+    else if(manager==='winget') {
+      const header=lines.findIndex(line=>/\bId\b/.test(line)&&/\bVersion\b/.test(line));
+      if(header>=0) {
+        const columns=lines[header].split(/\s{2,}/);
+        const idIndex=columns.findIndex(column=>column.toLowerCase()==='id');
+        if(idIndex>=0) ids=lines.slice(header+1).map(line=>line.split(/\s{2,}/)[idIndex]).filter(Boolean);
+      }
+    }
+    return [...new Set(ids.filter(id=>id&&id.length<=180&&!id.startsWith('-')))].slice(0,100);
+  }
   function renderLocalAgentInventory(data) {
     const root=$('#agent-inventory'); if(!root)return;
     const previews=array(data.updatePreviews), apps=array(data.applications);
     root.innerHTML='<div class="agent-inventory-summary"><strong>'+apps.length+'</strong> registered apps · <strong>'+array(data.managers).length+'</strong> package managers · checked '+esc(new Date(data.collectedAt).toLocaleTimeString())+'</div>'+
-      '<div class="agent-preview-grid">'+previews.map(item=>'<details class="agent-preview-card"><summary><strong>'+esc(item.manager)+'</strong><span>'+((item.exitCode===0||(item.manager==='dnf'&&item.exitCode===100)||(item.manager==='pacman'&&item.exitCode===2))?'Preview ready':'Check output · '+esc(item.exitCode))+'</span></summary><pre>'+esc(item.output||'No output')+'</pre></details>').join('')+'</div>'+
+      '<div class="agent-preview-grid">'+previews.map(item=>{const candidates=parseUpdateCandidateIds(item.manager,item.output);return '<details class="agent-preview-card"><summary><strong>'+esc(item.manager)+'</strong><span>'+((item.exitCode===0||(item.manager==='dnf'&&item.exitCode===100)||(item.manager==='pacman'&&item.exitCode===2))?'Preview ready':'Check output · '+esc(item.exitCode))+' · '+candidates.length+' candidates</span></summary>'+(candidates.length?'<div class="agent-candidate-list">'+candidates.map(id=>'<div><code>'+esc(id)+'</code><button data-agent-update-package="'+esc(id)+'" data-agent-package-manager="'+esc(item.manager)+'">Update</button></div>').join('')+'</div>':'')+'<pre>'+esc(item.output||'No output')+'</pre></details>';}).join('')+'</div>'+
       '<details class="agent-app-inventory"><summary>Installed Windows applications ('+apps.length+')</summary><div class="agent-app-list">'+apps.slice(0,250).map(app=>'<div><strong>'+esc(app.name)+'</strong><span>'+esc([app.version,app.publisher,app.scope].filter(Boolean).join(' · '))+'</span></div>').join('')+'</div></details>';
   }
   function renderLocalAgentOperations(records) {
@@ -1593,6 +1614,9 @@
       return;
     }
     if(target.closest('[data-agent-connect]')){connectLocalAgent();return;}
+    const updateCandidate=target.closest('[data-agent-update-package]');
+    if(updateCandidate){$('#agent-manager').value=updateCandidate.dataset.agentPackageManager;$('#agent-package-id').value=updateCandidate.dataset.agentUpdatePackage;$('#agent-action').value='update';runLocalAgentOperation('update');return;}
+
     if(target.closest('[data-agent-disconnect]')){try{sessionStorage.removeItem(localAgentTokenKey);}catch(_){}renderLocalAgentStatus(null);$('#agent-inventory').innerHTML='<p class="muted">Disconnected.</p>';$('#agent-operations').innerHTML='';notify('Disconnected from this computer.');return;}
     if(target.closest('[data-agent-refresh]')){refreshLocalAgentData();return;}
     if(target.closest('[data-agent-run]')){runLocalAgentOperation($('#agent-action')?.value||'update');return;}
