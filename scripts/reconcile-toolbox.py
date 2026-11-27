@@ -2,6 +2,7 @@
 """Merge current main into the online toolbox branch without dropping content."""
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
 
@@ -54,6 +55,31 @@ def stage_json(path):
     Path(path).write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     git("add", "--", path)
 
+
+def resolve_reviewed_conflict(path):
+    patterns = {
+        "docs/updates-center.md": ("They do not have access", "INTA Local Maintenance Agent", "right"),
+        "scripts/build-hub.py": ("interpreter = r", "if re.search", "left"),
+        "tests/test_hub.py": ("const updatesCenter = input.updatesCatalog;", "const updatesCenter = {commands: []};", "left"),
+    }
+    if path not in patterns:
+        return False
+    expected_left, expected_right, choice = patterns[path]
+    pattern = re.compile(r"^<<<<<<< HEAD\n(.*?)^=======\n(.*?)^>>>>>>> origin/main\n", re.M | re.S)
+    text = Path(path).read_text()
+    matches = list(pattern.finditer(text))
+    if len(matches) != 1:
+        return False
+    left, right = matches[0].groups()
+    if expected_left not in left or expected_right not in right:
+        return False
+    resolved = pattern.sub(lambda match: match.group(1 if choice == "left" else 2), text)
+    if any(marker in resolved for marker in ("<<<<<<<", ">>>>>>>")):
+        return False
+    Path(path).write_text(resolved)
+    git("add", "--", path)
+    return True
+
 if os.environ.get("GITHUB_REF") != "refs/heads/online-toolbox-2026-11-26":
     raise SystemExit("Recovery is restricted to the owned toolbox branch")
 git("fetch", "origin", "main")
@@ -70,7 +96,7 @@ for path in conflicts:
             git("add", "--", path)
         elif path.startswith("data/") and path.endswith(".json"):
             stage_json(path)
-        else:
+        elif not resolve_reviewed_conflict(path):
             unresolved.append(path)
     except (ValueError, json.JSONDecodeError, subprocess.CalledProcessError) as error:
         print("REVIEW REQUIRED:", path, str(error))
