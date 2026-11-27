@@ -1,0 +1,49 @@
+name: Reconcile and checkpoint online toolbox
+on:
+  push:
+    branches: [online-toolbox-2026-11-26]
+    paths:
+      - .github/workflows/toolbox-recovery.yml
+      - scripts/reconcile-toolbox.py
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: inta-toolbox-recovery
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.ref == 'refs/heads/online-toolbox-2026-11-26'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - name: Reconcile canonical sources and retain every tool
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 scripts/reconcile-toolbox.py
+          node --check portal/app.js
+          python3 scripts/build-hub.py
+          python3 scripts/check-wiki.py
+          git diff --check
+      - name: Preserve complete generated checkpoint
+        run: |
+          git add -A
+          if ! git diff --cached --quiet || test -f .git/MERGE_HEAD; then
+            git commit -m "Reconcile toolbox with current main and regenerate complete outputs"
+            git push origin HEAD:refs/heads/online-toolbox-2026-11-26
+          fi
+          git rev-parse HEAD
+          sha256sum site/index.html
+      - name: Preserve conflict evidence when needed
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: toolbox-recovery-evidence
+          path: reports/recovery
+          if-no-files-found: ignore
