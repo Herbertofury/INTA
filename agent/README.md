@@ -76,3 +76,20 @@ does not start the local server, expose a browser API, change the active plan,
 or promise that an installed plan can be activated under current policy.
 Non-Windows hosts return `unsupported`; incomplete or changing reads are marked
 rather than guessed.
+## Windows logon registrations (preview)
+
+Run `inta-agent --startup-inventory` for a one-shot local JSON inventory of the
+documented current-user and machine `Run` and `RunOnce` keys. On 64-bit Windows,
+inspect the independent machine views separately. Current-user names are counted
+once because this part of HKCU is shared. The command does not start the local
+web agent or install anything.
+
+Each source reports **read**, **not present**, or **unavailable** and whether
+the output names were truncated. A registration does not prove the app is
+enabled, safe, or runnable. Startup folders, scheduled tasks, services, disabled
+states, packaged startup actions, repair and edits are not included. Only names
+are collected: targets, command lines, content and arguments are never read.
+Treat names as local user data and do not share output unless intended.
+
+Sources: [Microsoft Run and RunOnce](https://learn.microsoft.com/windows/win32/setupapi/run-and-runonce-registry-keys)
+and [registry view scope](https://learn.microsoft.com/windows/win32/winprog64/shared-registry-keys).
