@@ -1360,7 +1360,7 @@ def validate_command_center(catalog: dict) -> None:
         source = urlparse(item["sourceUrl"])
         if source.scheme != "https" or not source.hostname or source.username or source.password:
             raise ValueError(f"{identity}: source must be a public HTTPS URL")
-        if re.search(r"(?i)(?:irm|iwr|curl)\\b[^\\n|]*\\|\\s*(?:iex|invoke-expression)", item["code"]):
+        if re.search(r"(?i)(?:irm|iwr|curl)\b[^\n|]*\|\s*(?:iex|invoke-expression)", item["code"]):
             raise ValueError(f"{identity}: direct remote download-and-execute pipelines are prohibited")
     workflow_ids = set()
     for workflow in catalog.get("workflows", []):
@@ -1408,12 +1408,12 @@ def validate_field_note_commands(field_notes: dict) -> None:
             seen.add(identity)
             if command["shell"] not in shells:
                 raise ValueError(f"{identity}: unsupported shell label")
-            if len(command["code"]) > 12000 or re.search(r"(?i)(?:password|recovery key|access token)\\s*=", command["code"]):
+            if len(command["code"]) > 12000 or re.search(r"(?i)(?:password|recovery key|access token)\s*=", command["code"]):
                 raise ValueError(f"{identity}: command is oversized or appears to embed a secret")
             parsed = urlparse(command["sourceUrl"])
             if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
                 raise ValueError(f"{identity}: official command reference must be public HTTPS")
-            if re.search(r"(?i)\\b(?:irm|iwr|curl)\\b[^\\n|]*\\|\\s*(?:iex|invoke-expression)", command["code"]):
+            if re.search(r"(?i)\b(?:irm|iwr|curl)\b[^\n|]*\|\s*(?:iex|invoke-expression)", command["code"]):
                 raise ValueError(f"{identity}: remote script download-and-execute pipelines are prohibited")
 
 
