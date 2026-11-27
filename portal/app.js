@@ -363,7 +363,7 @@
     const featuredJobs = selectFeatured(jobs, [/malware|virus/i, /slow|performance/i, /network|internet|dns/i, /backup|restore/i, /boot|bitlocker/i, /remote/i], 6);
     const kit = selectFeatured(tools, [/sysinternals/i, /rustdesk/i, /crystaldiskinfo/i, /ventoy/i], 4);
     const intake = jobs.find(job => /intake|triage/i.test(job.id + ' ' + job.title));
-    return heading('INTA Computer Services', 'Technician home', 'Tools and procedures for computer repair, maintenance, and support.') + quickStartSection() + `<div class="home-actions"><a class="button primary" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">${icon('file')}Start a service visit</a><a class="button ghost" href="#services">${icon('route')}Service map</a><a class="button ghost" href="#playbooks">${icon('book')}${jobs.length} job playbooks</a><a class="button ghost" href="#knowledge">${icon('layers')}Knowledge desk</a><a class="button ghost" href="#resources">${icon('download')}Offline copy &amp; resources</a></div>${compactToolDirectory()}<div class="home-support"><section><div class="section-title"><h2>Common service jobs</h2><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-list" role="list">${featuredJobs.map(jobCard).join('')}</div></section><section><h2>Everyday shortcuts</h2><div class="quick-tools">${kit.map(quickTool).join('')}</div>${knowledgeDesk(true)}</section></div>`;
+    return heading('INTA Computer Services', 'Technician home', 'Tools and procedures for computer repair, maintenance, and support.') + quickStartSection() + `<div class="home-actions"><a class="button primary" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">${icon('file')}Start a service visit</a><a class="button ghost" href="#checklist">${icon('checkCircle')}Open checklist</a><a class="button ghost" href="#services">${icon('route')}Service map</a><a class="button ghost" href="#playbooks">${icon('book')}${jobs.length} job playbooks</a><a class="button ghost" href="#knowledge">${icon('layers')}Knowledge desk</a><a class="button ghost" href="#resources">${icon('download')}Offline copy &amp; resources</a></div>${compactToolDirectory()}<div class="home-support"><section><div class="section-title"><h2>Common service jobs</h2><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-list" role="list">${featuredJobs.map(jobCard).join('')}</div></section><section><h2>Everyday shortcuts</h2><div class="quick-tools">${kit.map(quickTool).join('')}</div>${knowledgeDesk(true)}</section></div>`;
   }
   function selectOptions(values, label, selected = '') {
     return `<option value="">${esc(label)}</option>${[...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b)).map(value => `<option value="${esc(value)}"${selected === value ? ' selected' : ''}>${esc(categoryLabel(value))}</option>`).join('')}`;
@@ -469,7 +469,8 @@
   }
   function checked(job, type, index, title) { return !!(checklists[job.id] && checklists[job.id][checklistKey(job, type, index, title)]); }
   function progress(job) {
-    const all = [...array(job.steps).map((step, i) => checked(job, 'step', i, step.title)), ...array(job.verify).map((item, i) => checked(job, 'verify', i, text(item)))];
+    const focus = parseRoute().name === 'checklist';
+    const all = focus ? closeoutRows(job).map(({step,index})=>checked(job,'step',index,step.title)) : [...array(job.steps).map((step, i) => checked(job, 'step', i, step.title)), ...array(job.verify).map((item, i) => checked(job, 'verify', i, text(item)))];
     const done = all.filter(Boolean).length;
     return { total: all.length, done, percentage: all.length ? Math.round(done / all.length * 100) : 0 };
   }
@@ -558,6 +559,28 @@
     if (!workspace) return '';
     return `<section class="workspace-start" aria-labelledby="workspace-start-heading"><h2 class="block-heading" id="workspace-start-heading">${icon('compass')}Plan the job</h2>${workspace.goal ? `<p class="workspace-goal">${formatted(workspace.goal)}</p>` : ''}${workspace.startHere ? `<p>${formatted(workspace.startHere)}</p>` : ''}</section>${array(workspace.decisions).length ? `<section class="workspace-decisions" id="job-decisions" aria-labelledby="job-decisions-heading"><h2 class="block-heading" id="job-decisions-heading" tabindex="-1">${icon('route')}Choose the next action</h2><div class="decision-table-wrap"><table class="decision-table"><thead><tr><th scope="col">What you find</th><th scope="col">What to do</th><th scope="col">What to expect</th></tr></thead><tbody>${array(workspace.decisions).map(decision => `<tr><th scope="row" data-label="What you find">${formatted(decision.symptom)}</th><td data-label="What to do">${formatted(decision.action)}</td><td data-label="What to expect">${formatted(decision.expected)}</td></tr>`).join('')}</tbody></table></div></section>` : ''}`;
   }
+  function closeoutRows(job) {
+    return array(job.steps).map((step,index)=>({step,index})).filter(({step})=>String(step.anchor || '').startsWith('step-closeout-'));
+  }
+  function closeoutShortcuts(step) {
+    return array(step.shortcuts).map(item=>{
+      const tool = toolMap.get(item.tool);
+      if (tool) {
+        const access = accessInfo(tool), primary = access.options[0];
+        return `<a class="button ghost" href="#tool/${encodeURIComponent(tool.id)}">${esc(item.label)}</a>${primary ? external(primary.url,esc(accessLabel(primary)), 'button ghost') : ''}`;
+      }
+      if (jobMap.has(item.job)) return `<a class="button ghost" href="#job/${encodeURIComponent(item.job)}">${esc(item.label)}</a>`;
+      return external(item.url,esc(item.label),'button ghost');
+    }).join('');
+  }
+  function checklistPage() {
+    const job = jobMap.get('client-handoff'), rows = closeoutRows(job);
+    return heading('INTA fieldwork', 'Technician checklist', 'One pass from protecting the data to handing the computer back.') +
+      `<div class="detail-actions"><button class="button primary" data-export-job="${job.id}">${icon('download')}Export checklist</button><button class="button ghost" data-print>${icon('printer')}Print</button><a class="button ghost" href="#job/client-handoff">Full handoff guide</a></div>
+      <div class="detail-layout"><div><div class="callout">${icon('warning')}<div><h3>Protect data before routine maintenance</h3><p>If a drive may be failing, recover first. Isolate a suspected active compromise before routine patching or optimization.</p></div></div><div class="checklist closeout-rows">
+      ${rows.map(({step,index},n)=>`<section class="step"><label class="step-label"><input type="checkbox" data-check-job="${job.id}" data-check-type="step" data-check-index="${index}" data-check-title="${esc(step.title)}"${checked(job,'step',index,step.title)?' checked':''}><span><h3><span class="step-number">${n+1}.</span> ${esc(step.title)}</h3></span></label><div class="step-detail">${formatted(step.detail)}</div><div class="closeout-shortcuts" aria-label="Step shortcuts">${closeoutShortcuts(step)}</div></section>`).join('')}</div></div>
+      <aside class="detail-aside"><section class="aside-card" id="job-progress">${progressCard(job)}</section><section class="aside-card"><h3>Before closing</h3><p>Mark steps after you verify them. Record deferred work in the private ticket. Never mark an unresolved critical issue as passed.</p>${external(repo+'/wiki/Job-client-handoff','Open the Wiki guide','access-link')}</section></aside></div>`;
+  }
   function jobDetail(id, quickId = '') {
     const job = jobMap.get(id);
     if (!job) return notFound('playbook');
@@ -626,11 +649,12 @@
   }
   function render() {
     const route = parseRoute();
-    const names = { home: 'Technician home', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
+    const names = { home: 'Technician home', checklist: 'Technician checklist', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
     $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
     $('#breadcrumb').innerHTML = `Workspace <span>/</span> <strong>${esc(names[route.name] || 'Technician home')}</strong>`;
     if (route.name === 'home') app.innerHTML = home();
+    else if (route.name === 'checklist') app.innerHTML = checklistPage();
     else if (route.name === 'services') app.innerHTML = serviceMap();
     else if (route.name === 'tools') app.innerHTML = library(false, route.params);
     else if (route.name === 'saved') app.innerHTML = library(true, route.params);
@@ -772,6 +796,19 @@
     lines.push('## Start here', '', text(job.startHere), '', '## Work through the job', '');
     array(job.steps).forEach((step, index) => {
       lines.push(`- [${checked(job, 'step', index, step.title) ? 'x' : ' '}] ${index + 1}. ${step.title}`, '', text(step.detail), '');
+      array(step.shortcuts).forEach(item=>{
+        const tool = toolMap.get(item.tool);
+        if (tool) {
+          const access = accessInfo(tool);
+          lines.push(`- [${item.label}](${safeUrl(access.officialUrl)})`);
+          access.options.forEach(option=>lines.push(`  - [${accessLabel(option)}](${safeUrl(option.url)})`));
+        } else {
+          const target = item.job ? `${repo}/wiki/Job-${item.job}` : safeUrl(item.url);
+          lines.push(`- [${item.label}](${target})`);
+        }
+      });
+      if (array(step.shortcuts).length) lines.push('');
+
       if (step.command) {
         lines.push('```text', text(step.command), '```', '');
         const references = commandReferences(step.command);
@@ -940,7 +977,7 @@
   window.addEventListener('hashchange', render);
   window.addEventListener('storage', event => {
     if (event.key === savedKey) { const next = load(savedKey, []); favorites = new Set(Array.isArray(next) ? next.filter(id => toolMap.has(id)) : []); updateCounts(); if (parseRoute().name === 'saved') render(); }
-    if (event.key === checksKey) { const next = load(checksKey, {}); if (next && typeof next === 'object' && !Array.isArray(next)) checklists = next; migrateChecklistState(); if (parseRoute().name === 'job') render(); }
+    if (event.key === checksKey) { const next = load(checksKey, {}); if (next && typeof next === 'object' && !Array.isArray(next)) checklists = next; migrateChecklistState(); if (['job','checklist'].includes(parseRoute().name)) render(); }
   });
   $$('[data-icon]').forEach(element => { element.innerHTML = icon(element.dataset.icon); });
   migrateChecklistState(); setTheme(); render();

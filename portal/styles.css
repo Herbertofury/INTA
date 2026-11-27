@@ -768,3 +768,7 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
   .prose-link { text-decoration: underline; }
   .progress-track { print-color-adjust: exact; }
 }
+
+.closeout-rows .step { margin-block: .6rem; }
+.closeout-shortcuts { display:flex; flex-wrap:wrap; gap:.4rem; margin:.45rem 0 .12rem; }
+.closeout-shortcuts .button { white-space:normal; min-width:0; font-size:.88rem; padding:.34rem .58rem; }
