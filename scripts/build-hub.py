@@ -770,7 +770,11 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
         if step.get("shortcuts"):
             lines += [""]
         if step.get("command"):
-            lines += ["**Command for the environment described above:**", "", "```text", step["command"], "```", ""]
+            lines += [f"**{cell(step.get('commandShell', 'Command'))} · {cell(step.get('commandPurpose', 'Follow the step above'))}:**", "", "```text", step["command"], "```", ""]
+            if step.get("commandSafety"):
+                lines += [f"> **Before running:** {cell(step['commandSafety'])}", ""]
+            if step.get("commandUrl"):
+                lines += [f"**Official command reference:** [{cell(step.get('commandName', 'Documentation'))}]({step['commandUrl']})", ""]
             lines += [f"**Command legend:** {command_reference(step, by_id)} · [Return to the step context](#{identity}).", ""]
     lines += [anchor("acceptance"), "", *heading(2, "Verification", "✅ Prove the result")]
     lines += [f"- [ ] {item}" for item in job["verify"]]
