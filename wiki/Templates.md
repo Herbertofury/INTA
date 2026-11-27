@@ -11,7 +11,8 @@ Copy the relevant template into a contribution description or review record. Kee
 | Field | Your entry |
 | --- | --- |
 | Technician problem | What was difficult, misleading, missing or broken? |
-| Affected route | Canonical guide, tool ID, method ID or interface location |
+| Affected clients | <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) Desktop, <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) Mobile, <a href="https://github.com/Herbertofury/INTA/releases" title="Open INTA Rescue official download or service page" aria-label="Open INTA Rescue official download or service page" data-inta-brand="app-inta-rescue"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA Rescue official page" width="18" height="18" valign="middle" /></a> [INTA Rescue](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md), <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) Site, or a named combination. See [Ecosystem Development](https://github.com/Herbertofury/INTA/wiki/Ecosystem-Development). |
+| Affected route or contract | Canonical source, client interface, guide, tool ID or shared API/event contract |
 | Expected outcome | What will a technician be able to do after this change? |
 | Baseline revision | Exact source commit or existing artifact identity |
 | Canonical files changed | Inputs changed; identify generated outputs separately |
@@ -19,16 +20,16 @@ Copy the relevant template into a contribution description or review record. Kee
 | Source evidence | Official URLs, applicable dates and material findings |
 | Inference or uncertainty | What follows from reasoning rather than direct observation? |
 | Tested environment | OS/build, architecture, relevant versions and workload |
-| Proof | Test names, actual results and sanitized evidence references |
+| Proof by client | Exact build/package/image or live Site URL, actual platform/runtime, test results and sanitized evidence. Mark planned or untested rather than borrowing another client's pass. |
 | Challenge finding | Most material edge case checked and its outcome |
 | Compatibility and recovery | Applicable boundary, rollback and residual limitation |
-| Publication | Source commit, site, live wiki and complete artifact location |
+| Delivery by client | Source commit and relevant native package, release, Site deploy, wiki page or private review location. Note what was not released. |
 | Readback | Which published output was opened or retrieved, and what matched? |
 | Remaining work | Owner, blocker and literal next action, if any |
 
 ### Acceptance checklist
 
-- [ ] The complete affected workflow is usable.
+- [ ] The complete affected workflow is usable on each claimed client; shared changes identify the actual clients exercised.
 - [ ] Sources support the claims actually made.
 - [ ] Every rendered named tool, application and method mention is linked, including repeats.
 - [ ] Code and diagram syntax stayed intact; linked legends immediately follow them.
