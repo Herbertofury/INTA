@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-prove-a-backup-can-actually-restore"></a>
 
@@ -8,7 +8,7 @@ Validate recovery credentials, data integrity, application usability, and recove
 
 **Backup & continuity** · Intermediate · 30–90 min; full restore varies · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/backup-restore)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/backup-restore)
 
 <a id="working-kit"></a>
 
@@ -75,6 +75,13 @@ Validate recovery credentials, data integrity, application usability, and recove
 - [ ] Measured restore time and missing data are documented.
 
 **Change route when:** The only backup would be overwritten or exposed to an active compromise. · Required credentials or a valid recovery point cannot be established.
+
+### 🎯 Go straight to a specific fix
+
+- **[Include cloud-only files in the recovery plan](#fix-backup-cloud-placeholders-are-not-local-files)** — A local backup or migrated folder contains [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage) placeholders instead of usable offline files.
+- **[Check repository data as well as metadata](#fix-backup-restic-check-is-not-full-data-proof)** — A [restic](https://restic.net/) repository check passes but no restored file has been tested.
+- **[Recover an older version without overwriting current work](#fix-backup-restore-beside-current-files)** — The owner needs an earlier file version but current edits must be retained.
+- **[Prove the backup can be opened after the PC is lost](#fix-backup-test-credentials-away-from-source)** — Backups run automatically, but only the original machine appears to know the repository password.
 
 > [!NOTE]
 > **Start here.** Identify what must be recovered, the acceptable data-loss window, and the target recovery time. A green backup status is only the starting point.
@@ -185,6 +192,109 @@ Work in order, record the result of each step, and change route when the evidenc
 > **Pause this route and escalate when:**
 > - A repository check reports corruption or essential credentials are missing.
 > - The restore plan would overwrite the only good copy or live production data.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-backup-cloud-placeholders-are-not-local-files"></a>
+
+### Include cloud-only files in the recovery plan
+
+**Use when:** A local backup or migrated folder contains [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage) placeholders instead of usable offline files.
+
+**Start here:** Inspect the affected files’ [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage) status icons and confirm the intended account.
+
+**[restic](https://restic.net/)** · [Official page](https://restic.net/) · **[Download Windows x64 · ZIP](https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip)**
+
+**[Kopia](https://kopia.io/)** · [Official page](https://kopia.io/) · **[Download Windows desktop · ZIP](https://github.com/kopia/kopia/releases/download/v0.23.1/KopiaUI-0.23.1-win.zip)**
+
+1. For files that must be available locally, choose Always keep on this device and wait for the download to finish with enough disk space.
+2. Open representative files while disconnected from the network to prove local availability before relying on a filesystem copy.
+3. Run the approved backup, restore those samples to a separate destination and test them there.
+
+**Prove it worked:** The restore contains real usable content, not only cloud references that still depend on the original account.
+
+**If this does not resolve it:** If the cloud account, retention or download is blocked, record that recovery gap rather than marking the local backup complete.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-gb/onedrive/save-disk-space-with-onedrive-files-on-demand-for-windows) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-backup-restic-check-is-not-full-data-proof"></a>
+
+### Check repository data as well as metadata
+
+**Use when:** A [restic](https://restic.net/) repository check passes but no restored file has been tested.
+
+**Start here:** Record the snapshot ID and the scope of the check that actually ran.
+
+**[restic](https://restic.net/)** · [Official page](https://restic.net/) · **[Download Windows x64 · ZIP](https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip)**
+
+1. Distinguish [restic](https://restic.net/) check’s structural checks from the documented read-data options that read stored data packs.
+2. Choose an authorized data-verification scope appropriate to repository size, connection cost and the service window.
+3. Restore representative priority files from the selected snapshot to a separate target and open them with their real applications.
+
+**Prove it worked:** The record states which data was read and which restored files were usable, with sample limits explicit.
+
+**If this does not resolve it:** A metadata-only pass cannot establish every file’s recoverability; investigate reported pack errors without pruning the only repository copy.
+
+**Official evidence:** [Source 1](https://restic.readthedocs.io/en/stable/045_working_with_repos.html) · [Source 2](https://restic.readthedocs.io/en/stable/050_restore.html) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-backup-restore-beside-current-files"></a>
+
+### Recover an older version without overwriting current work
+
+**Use when:** The owner needs an earlier file version but current edits must be retained.
+
+**Start here:** Confirm the required recovery date and create a separate restore destination.
+
+**[Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows)** · [Official page](https://www.veeam.com/products/free/microsoft-windows) · **[Sign in for the Windows download](https://www.veeam.com/products/physical/windows-backup-recovery-download.html)**
+
+**[Kopia](https://kopia.io/)** · [Official page](https://kopia.io/) · **[Download Windows desktop · ZIP](https://github.com/kopia/kopia/releases/download/v0.23.1/KopiaUI-0.23.1-win.zip)**
+
+1. Select the correct source device and recovery point in the matching backup product.
+2. Use its copy-to-new-location or alternate-destination restore choice instead of restoring over the live file.
+3. Open both versions with the owner, verify permissions and decide which approved version should become active.
+
+**Prove it worked:** The requested earlier content is recovered while the current working copy remains available.
+
+**If this does not resolve it:** If an application database requires its own restore process, use that workflow on a safe copy rather than copying open database files blindly.
+
+**Official evidence:** [Source 1](https://helpcenter.veeam.com/docs/agentforwindows/userguide/files_restore.html) · [Source 2](https://kopia.io/docs/getting-started/) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-backup-test-credentials-away-from-source"></a>
+
+### Prove the backup can be opened after the PC is lost
+
+**Use when:** Backups run automatically, but only the original machine appears to know the repository password.
+
+**Start here:** Identify the approved credential/recovery store without copying secrets into the public record.
+
+**[Kopia](https://kopia.io/)** · [Official page](https://kopia.io/) · **[Download Windows desktop · ZIP](https://github.com/kopia/kopia/releases/download/v0.23.1/KopiaUI-0.23.1-win.zip)**
+
+**[restic](https://restic.net/)** · [Official page](https://restic.net/) · **[Download Windows x64 · ZIP](https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip)**
+
+**[KeePassXC](https://keepassxc.org/)** · [Official page](https://keepassxc.org/) · **[Download Windows x64 portable · ZIP](https://github.com/keepassxreboot/keepassxc/releases/download/2.8.0/KeePassXC-2.8.0-x64.zip)**
+
+1. From a separate trusted restore environment, follow the product’s existing-repository connection procedure with the authorized credentials.
+2. List the expected snapshots and restore a harmless representative file to a separate location.
+3. Record the private credential reference, required software and tested restore route so another authorized technician can repeat it.
+
+**Prove it worked:** Recovery succeeds without relying on the original workstation’s saved session or local configuration.
+
+**If this does not resolve it:** If the encryption password or recovery material is unavailable, preserve the repository and escalate; do not create a new repository over it.
+
+**Official evidence:** [Source 1](https://kopia.io/docs/getting-started/) · [Source 2](https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

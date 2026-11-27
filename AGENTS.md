@@ -48,3 +48,9 @@ python3 scripts/check-wiki.py
 Command legend: [Python](https://www.python.org/) runs the [hub builder](scripts/build-hub.py), the [test suite](tests/) and the [wiki checker](scripts/check-wiki.py). Follow [the contribution checklist](docs/contribute.md) for actual browser review, complete artifact publication, live-wiki readback and the final source checkpoint. Use [the maintenance guide](docs/maintaining-the-hub.md) for the exact publishing commands.
 
 Recurring contribution work follows [Continuous Improvement](docs/continuous-improvement.md). It improves the knowledge base with evidence; it does not silently install software on client computers.
+
+## Organized growth
+
+Use the existing service groups in [the canonical layout](data/wiki-layout.json); every job has exactly one primary home. Follow [Knowledge Organization](docs/knowledge-organization.md) and the machine-readable [knowledge policy](data/knowledge-policy.json). Add a specific fault to [field notes](data/field-notes.json) inside its existing job before creating an overlapping page. Keep one tool record per product, with editions/platform downloads in its acquisition alternatives. Preserve existing IDs, anchors, procedures, commands and saved-state behavior.
+
+Maintain an actionable [research queue](data/research-queue.json) for every service job and tool category. Prioritize harmful guidance, broken routes and overdue reviews, then rotate through the least recently reviewed areas. Research current primary sources and add substantial helpful coverage without filler, unsupported rankings or cosmetic date bumps. Every specific fix needs a first action, useful steps, observable result, fallback and official evidence. Run `python3 scripts/check-knowledge.py` alongside the existing checks; review the complete report before choosing the next contribution.

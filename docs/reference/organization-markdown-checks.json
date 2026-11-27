@@ -1,0 +1,399 @@
+{
+  "startedAt": "2026-11-27T01:39:17.664Z",
+  "scope": "Rendered Markdown review of Service-Map, Knowledge-Health, Research-Queue and Job-printer-repair at 1280px and 390px.",
+  "limits": [
+    "Local Chromium uses the previously reviewed approximate GitHub Markdown stylesheet; this is not live GitHub Wiki click proof.",
+    "The unchanged printer Mermaid source is marked as omitted in this targeted text/table/anchor preview; it is not newly rerendered."
+  ],
+  "sourceHashes": {
+    "wiki/Service-Map.md": "1fcec7f3b5f4e9cef36819f3409df5072cd56eb3887a5bcf9bb8ed6ba00d051b",
+    "wiki/Knowledge-Health.md": "5c6ed81a3d74ad6aa0e4b96824a30fd52b5e73c4226d5baa187fc46893590eff",
+    "wiki/Research-Queue.md": "a62d6bde8742b3f202c55f99f7eadc35dafd2165f5b8155c0dbe659eb379f4cb",
+    "wiki/Job-printer-repair.md": "a4d638b5af5960348c0469394ff35b24b151b874ca8cc0186ee44288269197d1"
+  },
+  "pages": [
+    {
+      "name": "Service-Map",
+      "headingCount": 32,
+      "explicitAnchors": 8,
+      "linkCount": 196,
+      "tables": 0,
+      "listItems": 74,
+      "checks": {
+        "allExplicitAnchorsResolve": true,
+        "allInternalLinksResolve": true,
+        "areas": 8,
+        "fullWikiGuides": 22,
+        "exactHubCaseLinks": 74,
+        "retainedWikiCaseAnchors": 74,
+        "localAnchorClick": "#area-workplace"
+      },
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "documentWidth": 1280,
+          "bodyFont": 16,
+          "tables": [],
+          "brokenImages": 0,
+          "overflowTables": []
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "documentWidth": 390,
+          "bodyFont": 16,
+          "tables": [],
+          "brokenImages": 0,
+          "overflowTables": []
+        }
+      ]
+    },
+    {
+      "name": "Knowledge-Health",
+      "headingCount": 4,
+      "explicitAnchors": 0,
+      "linkCount": 35,
+      "tables": 2,
+      "listItems": 7,
+      "checks": {
+        "allExplicitAnchorsResolve": true,
+        "allInternalLinksResolve": true,
+        "coverageRows": 22
+      },
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "documentWidth": 1280,
+          "bodyFont": 16,
+          "tables": [
+            {
+              "index": 0,
+              "clientWidth": 879,
+              "scrollWidth": 879,
+              "overflow": "auto",
+              "columns": 4
+            },
+            {
+              "index": 1,
+              "clientWidth": 382,
+              "scrollWidth": 382,
+              "overflow": "auto",
+              "columns": 2
+            }
+          ],
+          "brokenImages": 0,
+          "overflowTables": []
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "documentWidth": 390,
+          "bodyFont": 16,
+          "tables": [
+            {
+              "index": 0,
+              "clientWidth": 358,
+              "scrollWidth": 438,
+              "overflow": "auto",
+              "columns": 4
+            },
+            {
+              "index": 1,
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto",
+              "columns": 2
+            }
+          ],
+          "brokenImages": 0,
+          "overflowTables": [
+            {
+              "scrollLeft": 80,
+              "clientWidth": 358,
+              "scrollWidth": 438,
+              "lastColumnReached": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Research-Queue",
+      "headingCount": 87,
+      "explicitAnchors": 54,
+      "linkCount": 299,
+      "tables": 0,
+      "listItems": 0,
+      "checks": {
+        "allExplicitAnchorsResolve": true,
+        "allInternalLinksResolve": true,
+        "researchTasks": 54
+      },
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "documentWidth": 1280,
+          "bodyFont": 16,
+          "tables": [],
+          "brokenImages": 0,
+          "overflowTables": []
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "documentWidth": 390,
+          "bodyFont": 16,
+          "tables": [],
+          "brokenImages": 0,
+          "overflowTables": []
+        }
+      ]
+    },
+    {
+      "name": "Job-printer-repair",
+      "headingCount": 31,
+      "explicitAnchors": 35,
+      "linkCount": 207,
+      "tables": 9,
+      "listItems": 41,
+      "checks": {
+        "allExplicitAnchorsResolve": true,
+        "allInternalLinksResolve": true,
+        "specificFixes": 5,
+        "procedureAnchors": 8,
+        "driverLinks": 11,
+        "localAnchorClick": "#fix-printer-offline-after-router-change"
+      },
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "documentWidth": 1280,
+          "bodyFont": 16,
+          "tables": [
+            {
+              "index": 0,
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 1,
+              "clientWidth": 840,
+              "scrollWidth": 840,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 2,
+              "clientWidth": 812,
+              "scrollWidth": 812,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 3,
+              "clientWidth": 717,
+              "scrollWidth": 717,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 4,
+              "clientWidth": 913,
+              "scrollWidth": 913,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 5,
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto",
+              "columns": 3
+            },
+            {
+              "index": 6,
+              "clientWidth": 719,
+              "scrollWidth": 719,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 7,
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto",
+              "columns": 4
+            },
+            {
+              "index": 8,
+              "clientWidth": 948,
+              "scrollWidth": 948,
+              "overflow": "auto",
+              "columns": 2
+            }
+          ],
+          "brokenImages": 0,
+          "overflowTables": []
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "documentWidth": 390,
+          "bodyFont": 16,
+          "tables": [
+            {
+              "index": 0,
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 1,
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 2,
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 3,
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 4,
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 5,
+              "clientWidth": 358,
+              "scrollWidth": 511,
+              "overflow": "auto",
+              "columns": 3
+            },
+            {
+              "index": 6,
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto",
+              "columns": 2
+            },
+            {
+              "index": 7,
+              "clientWidth": 358,
+              "scrollWidth": 544,
+              "overflow": "auto",
+              "columns": 4
+            },
+            {
+              "index": 8,
+              "clientWidth": 358,
+              "scrollWidth": 358,
+              "overflow": "auto",
+              "columns": 2
+            }
+          ],
+          "brokenImages": 0,
+          "overflowTables": [
+            {
+              "scrollLeft": 153,
+              "clientWidth": 358,
+              "scrollWidth": 511,
+              "lastColumnReached": true
+            },
+            {
+              "scrollLeft": 186,
+              "clientWidth": 358,
+              "scrollWidth": 544,
+              "lastColumnReached": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    "markdown/Service-Map-desktop.png",
+    "markdown/Service-Map-desktop-focus.png",
+    "markdown/Service-Map-mobile.png",
+    "markdown/Service-Map-mobile-focus.png",
+    "markdown/Knowledge-Health-desktop.png",
+    "markdown/Knowledge-Health-desktop-focus.png",
+    "markdown/Knowledge-Health-mobile.png",
+    "markdown/Knowledge-Health-mobile-focus.png",
+    "markdown/Research-Queue-desktop.png",
+    "markdown/Research-Queue-desktop-focus.png",
+    "markdown/Research-Queue-mobile.png",
+    "markdown/Research-Queue-mobile-focus.png",
+    "markdown/Job-printer-repair-desktop.png",
+    "markdown/Job-printer-repair-desktop-focus.png",
+    "markdown/Job-printer-repair-desktop-last-case.png",
+    "markdown/Job-printer-repair-mobile.png",
+    "markdown/Job-printer-repair-mobile-focus.png",
+    "markdown/Job-printer-repair-mobile-last-case.png"
+  ],
+  "errors": [],
+  "passed": true,
+  "finishedAt": "2026-11-27T01:39:22.268Z",
+  "artifactHashes": {
+    "markdown/Service-Map-desktop.png": "c40372a95064f99abba670a780e65b0bbb0db88ed79126628eb4245bb790f3d1",
+    "markdown/Service-Map-desktop-focus.png": "49404df25f59ecb725dcb8f0ede19ed60ac68c7240dfac90737bf4b2e8aa149e",
+    "markdown/Service-Map-mobile.png": "11efd5a9b1161dce001d48a74154bd0314a3cad6d0e573fd9c357a78f2d545b2",
+    "markdown/Service-Map-mobile-focus.png": "ad00a8bc367ad8abe1c45838c056604b096d823e6f05e9da11607c5e482c949e",
+    "markdown/Knowledge-Health-desktop.png": "59daa996f755c80685710367b23f9f358c4f24977c13a3bfdf73afa0878340ce",
+    "markdown/Knowledge-Health-desktop-focus.png": "620b7fcb9b36bb35e215d092bbe1457e57ab3d67859e87ee299dd10b9f0f72cb",
+    "markdown/Knowledge-Health-mobile.png": "9abc9f0f54d77f33979cbc54e4f6d5cdee43c709598c0cc296e021e87c2f0cac",
+    "markdown/Knowledge-Health-mobile-focus.png": "1c7b7b90c72acaf2302f001189a15e3b8b239594ef9e3f632952dff05a3fa19a",
+    "markdown/Research-Queue-desktop.png": "c65446adf6fe58419535764c5f07d4106178aef9068827397f30f0a79e81139b",
+    "markdown/Research-Queue-desktop-focus.png": "951df03958bad02e415264a126121b6e3caf2b6641f67463d40d05026e069d93",
+    "markdown/Research-Queue-mobile.png": "5e60901a7e34412a3c6eb844eca4808142e54991da0daf3f12aaf500589694fe",
+    "markdown/Research-Queue-mobile-focus.png": "c7433abc22ab2242a1e5576a4764dd12f9b83e88388373b2dff7fe8645d05838",
+    "markdown/Job-printer-repair-desktop.png": "0296199cb78f39c08b99b3bb45d0a59b8fa72f3f2103da2d53a15be3f3c2de27",
+    "markdown/Job-printer-repair-desktop-focus.png": "ab256a448657548ca937c066ccf5c9d5d55b5e3879936ffa6d9448ac2a19c5c2",
+    "markdown/Job-printer-repair-desktop-last-case.png": "73f2b50e1c6eb1189f35d7db651b45d1b38408373864a1f7c01636d4d8915cd1",
+    "markdown/Job-printer-repair-mobile.png": "bbcb03fbcefa532810912cb647c06182f1f4b4a6f4e2500157c0c78188adb5c4",
+    "markdown/Job-printer-repair-mobile-focus.png": "40746204036c926cd942e05caad15f54c7ec73a83825d84ecddf74d6af098967",
+    "markdown/Job-printer-repair-mobile-last-case.png": "4edde856ee982a05a12cb537fed0780e57e9a498351181c24366d0e4227f5a97"
+  },
+  "visualReview": {
+    "reviewedAt": "2026-11-27T01:44:01.535054+00:00",
+    "screenshotsInspected": [
+      "markdown/Service-Map-desktop-focus.png",
+      "markdown/Service-Map-mobile-focus.png",
+      "markdown/Knowledge-Health-desktop-focus.png",
+      "markdown/Knowledge-Health-mobile.png",
+      "markdown/Research-Queue-desktop-focus.png",
+      "markdown/Research-Queue-mobile-focus.png",
+      "markdown/Job-printer-repair-desktop-focus.png",
+      "markdown/Job-printer-repair-mobile-last-case.png"
+    ],
+    "passed": true,
+    "findings": [],
+    "observations": [
+      "All four requested pages are readable at desktop and mobile widths.",
+      "Service-map first moves, full-guide links and individual specific-fix links remain visible in ordinary document flow.",
+      "Knowledge-health table is complete on desktop; narrow view scrolls the table without document overflow.",
+      "Research tasks keep delivery, acceptance and source text together with clear headings.",
+      "Printer cases keep tools, acquisition actions, numbered steps, outcomes and evidence readable without collapsed content."
+    ],
+    "scope": "Local Markdown render with approximate GitHub styling; not a hosted GitHub Wiki click proof. Existing unchanged printer Mermaid is explicitly omitted from this text/table/anchor preview."
+  }
+}

@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-run-a-useful-workstation-maintenance-visit"></a>
 
@@ -8,7 +8,7 @@ Check security, updates, hardware, backups, and usability without unnecessary cl
 
 **Maintenance** · Intermediate · 30–60 min · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/preventive-maintenance)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/preventive-maintenance)
 
 <a id="working-kit"></a>
 
@@ -24,6 +24,9 @@ Check security, updates, hardware, backups, and usability without unnecessary cl
 | Review storage warnings before cleanup. | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** |
 | Find capacity use on a healthy drive. | **[WinDirStat](https://windirstat.net/)** · [Official page](https://windirstat.net/) · **[Download Windows x64 · MSI](https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi)** |
 | Locate a named local file or log without unnecessary cleanup. | **[Everything](https://www.voidtools.com/)** · [Official page](https://www.voidtools.com/) · **[Download Windows x64 EXE](https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe)** |
+| Collecting battery and sleep evidence before changing hardware or power policy. | **[powercfg](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) · **[Open built-in battery and sleep diagnostics](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** |
+| Establishing recoverable, per-device administrator access during managed workstation setup and support planning. | **[Windows LAPS](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** · [Official page](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) · **[Configure built-in administrator password management](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** |
+| Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved. | **[Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) · **[Download Windows monitoring tools · ZIP](https://download.sysinternals.com/files/Sysmon.zip)** |
 
 ### Updates
 
@@ -97,6 +100,13 @@ Check security, updates, hardware, backups, and usability without unnecessary cl
 
 **Change route when:** Storage failure or active compromise changes the service route. · An unplanned critical workload would be interrupted.
 
+### 🎯 Go straight to a specific fix
+
+- **[Use the supported optimization for the drive type](#fix-maintenance-optimize-the-right-media)** — A maintenance request proposes repeatedly defragmenting or cleaning every drive.
+- **[Update an app missing from the package-manager list](#fix-maintenance-package-not-in-upgrade-list)** — An installed program is outdated but does not appear as a normal [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) upgrade.
+- **[Resume a stalled cloud-sync workflow](#fix-maintenance-onedrive-sync-is-paused)** — New files remain on one PC and the [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage) icon shows paused or an error state.
+- **[Find an operating system outside its support plan](#fix-maintenance-check-os-support-state)** — The device is usable but its installed [Windows](https://www.microsoft.com/windows) release may no longer receive the required updates.
+
 > [!NOTE]
 > **Start here.** Agree on the maintenance window and identify the user’s current pain points. Preserve a baseline of the system’s normal work.
 
@@ -152,6 +162,9 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows)** · [Official page](https://www.veeam.com/products/free/microsoft-windows) · **[Sign in for the Windows download](https://www.veeam.com/products/physical/windows-backup-recovery-download.html)** | Image backup and recovery media for a supported [Windows](https://www.microsoft.com/windows) endpoint. | [Windows](https://www.microsoft.com/windows); Free and paid editions; service-provider terms differ | [Open guide](https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html) |
 | **[WizTree](https://diskanalyzer.com/)** · [Official page](https://diskanalyzer.com/) · **[Download Windows portable · ZIP](https://diskanalyzer.com/files/wiztree_4_34_portable.zip)** | Finding the folders and files responsible for a capacity problem before selecting an approved cleanup. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/); Free for personal use; commercial supporter or enterprise license required by business site and staff size. | [Open guide](https://diskanalyzer.com/about) |
 | **[WizFile](https://antibody-software.com/wizfile/)** · [Official page](https://antibody-software.com/wizfile/) · **[Download Windows portable · ZIP](https://antibody-software.com/files/wizfile_3_15_portable.zip)** | Locating a known file, log or recently changed group of files without guessing its folder. | [Windows](https://www.microsoft.com/windows); Free for personal use; commercial supporter or enterprise license required by business site and staff size. | [Open guide](https://antibody-software.com/wizfile/quick-start) |
+| **[powercfg](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) · **[Open built-in battery and sleep diagnostics](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** | Collecting battery and sleep evidence before changing hardware or power policy. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) |
+| **[Windows LAPS](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** · [Official page](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) · **[Configure built-in administrator password management](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** | Establishing recoverable, per-device administrator access during managed workstation setup and support planning. | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/); Included with supported [Windows](https://www.microsoft.com/windows); directory prerequisites, licensing and retrieval permissions still apply | [Open guide](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) |
+| **[Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) · **[Download Windows monitoring tools · ZIP](https://download.sysinternals.com/files/Sysmon.zip)** | Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved. | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/); Free proprietary Microsoft utility under [Sysinternals](https://learn.microsoft.com/en-us/sysinternals/) terms; redistribution and commercial software hosting are restricted | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) |
 
 <a id="walkthrough"></a>
 
@@ -220,6 +233,101 @@ winget upgrade
 > **Pause this route and escalate when:**
 > - The maintenance would interrupt an unplanned critical workload.
 > - Storage failure or active compromise changes the job into recovery or [incident response](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response).
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-maintenance-optimize-the-right-media"></a>
+
+### Use the supported optimization for the drive type
+
+**Use when:** A maintenance request proposes repeatedly defragmenting or cleaning every drive.
+
+**Start here:** Check drive health and open Defragment and Optimize Drives to identify the media type and current status.
+
+**[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)**
+
+1. Use [Windows](https://www.microsoft.com/windows)’ supported optimization for that media and review the scheduled state rather than applying an HDD-style routine to every device.
+2. Investigate low free space or real I/O faults separately; optimization is not a repair for a failing drive.
+3. Retest the user’s workload and retain the observed health/performance result.
+
+**Prove it worked:** The appropriate maintenance completes without disguising an unresolved storage fault.
+
+**If this does not resolve it:** Stop write-heavy maintenance if the disk disconnects, reports I/O errors or contains the only unprotected data copy.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/defragment-optimize-your-data-drives-in-windows) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-maintenance-package-not-in-upgrade-list"></a>
+
+### Update an app missing from the package-manager list
+
+**Use when:** An installed program is outdated but does not appear as a normal [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) upgrade.
+
+**Start here:** Identify the publisher, installed version and how the application was originally deployed.
+
+**[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)**
+
+1. Inspect the package match and configured source; distinguish an unknown version, pinned package or unmanaged installer from a fully current app.
+2. Use the approved exact package or publisher update mechanism and respect organization deployment policy.
+3. Launch the app, check the resulting version and test its important file/workflow before considering the update complete.
+
+**Prove it worked:** The identified application is updated through its intended source and still works for the user.
+
+**If this does not resolve it:** Do not force every unknown package or bypass a pin without understanding the compatibility or management reason.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade) · [Source 2](https://learn.microsoft.com/en-us/windows/package-manager/winget/pinning) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-maintenance-onedrive-sync-is-paused"></a>
+
+### Resume a stalled cloud-sync workflow
+
+**Use when:** New files remain on one PC and the [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage) icon shows paused or an error state.
+
+**Start here:** Open the sync client’s activity/status view and identify the actual pause or error.
+
+1. Resume synchronization through the supported control when it is simply paused; for errors, resolve the named account, storage, filename or connectivity issue.
+2. Wait for the relevant file’s completed state and verify the expected version through the intended cloud account or another authorized device.
+3. Keep backup/retention checks separate because synchronization can propagate deletion or unwanted changes.
+
+**Prove it worked:** The expected file version reaches the intended account and the client no longer reports an unresolved sync state.
+
+**If this does not resolve it:** Do not unlink, reset or delete the local folder before accounting for unsynced local-only files.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/onedrive/how-to-pause-and-resume-onedrive-sync) · [Source 2](https://support.microsoft.com/en-us/onedrive/fix-onedrive-sync-problems) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-maintenance-check-os-support-state"></a>
+
+### Find an operating system outside its support plan
+
+**Use when:** The device is usable but its installed [Windows](https://www.microsoft.com/windows) release may no longer receive the required updates.
+
+**Start here:** Record the exact edition, version and build from Settings > System > About.
+
+**[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Open Windows troubleshooters](https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters)**
+
+**[Windows 11 installation media](https://www.microsoft.com/software-download/windows11)** · [Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)**
+
+1. Check the current official lifecycle/release-health information for that release and the organization’s recorded servicing or ESU entitlement.
+2. Separate missing monthly updates from an unsupported feature release or an absent extended-security plan.
+3. Document the approved upgrade/replacement route, application compatibility checks and backup/rollback requirements.
+
+**Prove it worked:** The maintenance record states the real support position and a concrete owner/date for any needed transition.
+
+**If this does not resolve it:** Do not label every older installation safe merely because [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/) says no updates are available.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows/release-health/) · [Source 2](https://learn.microsoft.com/en-us/windows/whats-new/extended-security-updates) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

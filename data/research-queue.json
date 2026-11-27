@@ -1,0 +1,906 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Concrete next research questions; queued items are not completed work or product recommendations.",
+  "items": [
+    {
+      "id": "intake-triage-research-1",
+      "kind": "job",
+      "targetId": "intake-triage",
+      "priority": 2,
+      "status": "queued",
+      "question": "Distinguish one-user, one-device and site-wide faults with a repeatable intake exercise",
+      "deliverable": "Create three sanitized intake examples that arrive at different correct guides.",
+      "acceptance": "Each example includes the actual discriminator, private-evidence boundary and measurable acceptance.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/"
+      ]
+    },
+    {
+      "id": "intake-triage-research-2",
+      "kind": "job",
+      "targetId": "intake-triage",
+      "priority": 2,
+      "status": "queued",
+      "question": "Reduce repeat visits caused by missing baseline evidence",
+      "deliverable": "Compare a minimal intake record against recurring repair handoff gaps.",
+      "acceptance": "A second technician can resume each example without asking for the original symptom again.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/"
+      ]
+    },
+    {
+      "id": "malware-removal-research-1",
+      "kind": "job",
+      "targetId": "malware-removal",
+      "priority": 2,
+      "status": "queued",
+      "question": "Validate the cleanup route on supported ARM and managed endpoints",
+      "deliverable": "Document the supported alternative when offline scanning is unavailable.",
+      "acceptance": "Primary platform support, management constraints and post-cleanup acceptance are explicit.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+        "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/reinstall-windows-with-the-installation-media",
+        "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf",
+        "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md",
+        "https://github.com/Herbertofury/INTA/wiki/Service-Evidence"
+      ]
+    },
+    {
+      "id": "malware-removal-research-2",
+      "kind": "job",
+      "targetId": "malware-removal",
+      "priority": 2,
+      "status": "queued",
+      "question": "Distinguish browser notification abuse from endpoint compromise",
+      "deliverable": "Add a reproducible browser-permission and extension investigation using clean examples.",
+      "acceptance": "The guide separates site permissions, account compromise and host persistence without overclaiming a clean scan.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+        "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/reinstall-windows-with-the-installation-media",
+        "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf",
+        "https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/engineering/docs/windows-endpoint-security.md",
+        "https://github.com/Herbertofury/INTA/wiki/Service-Evidence"
+      ]
+    },
+    {
+      "id": "ransomware-response-research-1",
+      "kind": "job",
+      "targetId": "ransomware-response",
+      "priority": 1,
+      "status": "queued",
+      "question": "Rehearse identity containment after endpoint isolation",
+      "deliverable": "Write a tabletop sequence for token/session revocation and recovery-account access.",
+      "acceptance": "The sequence preserves evidence and defines who can authorize tenant-wide actions.",
+      "sourceUrls": [
+        "https://www.cisa.gov/sites/default/files/publications/CISA_MS-ISAC_Ransomware%20Guide_S508C_.pdf",
+        "https://learn.microsoft.com/en-us/security/compass/incident-response-playbook-dart-ransomware-approach",
+        "https://learn.microsoft.com/en-us/defender-xdr/playbook-responding-ransomware-m365-defender"
+      ]
+    },
+    {
+      "id": "ransomware-response-research-2",
+      "kind": "job",
+      "targetId": "ransomware-response",
+      "priority": 1,
+      "status": "queued",
+      "question": "Prove a clean recovery boundary before reconnecting restored machines",
+      "deliverable": "Create a restore-and-rejoin tabletop with separated backup and identity checks.",
+      "acceptance": "Recovery evidence includes backup provenance, identity control and a monitored acceptance task.",
+      "sourceUrls": [
+        "https://www.cisa.gov/sites/default/files/publications/CISA_MS-ISAC_Ransomware%20Guide_S508C_.pdf",
+        "https://learn.microsoft.com/en-us/security/compass/incident-response-playbook-dart-ransomware-approach",
+        "https://learn.microsoft.com/en-us/defender-xdr/playbook-responding-ransomware-m365-defender"
+      ]
+    },
+    {
+      "id": "slow-pc-research-1",
+      "kind": "job",
+      "targetId": "slow-pc",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare bottlenecks using equivalent workloads",
+      "deliverable": "Capture CPU, memory, storage and thermal observations for the same reproducible task.",
+      "acceptance": "Recommendations follow the observed limiting resource; before/after conditions are equivalent.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+        "https://diskanalyzer.com/about",
+        "https://antibody-software.com/wizfile/quick-start"
+      ]
+    },
+    {
+      "id": "slow-pc-research-2",
+      "kind": "job",
+      "targetId": "slow-pc",
+      "priority": 2,
+      "status": "queued",
+      "question": "Evaluate startup and background-service changes reversibly",
+      "deliverable": "Document one narrowly scoped startup change with rollback and a measured original task.",
+      "acceptance": "No blanket service disabling; the evidence shows benefit or an explicit revert.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+        "https://diskanalyzer.com/about",
+        "https://antibody-software.com/wizfile/quick-start"
+      ]
+    },
+    {
+      "id": "windows-repair-research-1",
+      "kind": "job",
+      "targetId": "windows-repair",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare repair paths when Windows still boots",
+      "deliverable": "Compare component repair, same-version repair reinstall and applicable restore options.",
+      "acceptance": "A decision table covers preserved data, prerequisites, policy restrictions and post-repair tests.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/using-system-file-checker-in-windows",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      ]
+    },
+    {
+      "id": "windows-repair-research-2",
+      "kind": "job",
+      "targetId": "windows-repair",
+      "priority": 2,
+      "status": "queued",
+      "question": "Handle an unavailable repair source without random image substitution",
+      "deliverable": "Document supported source matching and servicing evidence collection.",
+      "acceptance": "Version, language and architecture constraints are sourced and errors route to a concrete next step.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/using-system-file-checker-in-windows",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      ]
+    },
+    {
+      "id": "windows-update-research-1",
+      "kind": "job",
+      "targetId": "windows-update",
+      "priority": 2,
+      "status": "queued",
+      "question": "Diagnose feature-update rollback from preserved setup logs",
+      "deliverable": "Work through a sanitized setup failure and the exact log evidence needed.",
+      "acceptance": "The diagnosis identifies an actionable compatibility or setup finding and a supported remedy.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+        "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows"
+      ]
+    },
+    {
+      "id": "windows-update-research-2",
+      "kind": "job",
+      "targetId": "windows-update",
+      "priority": 2,
+      "status": "queued",
+      "question": "Separate managed update policy from a damaged update client",
+      "deliverable": "Add an organization-managed endpoint decision branch.",
+      "acceptance": "The guide identifies the policy owner and avoids undoing deliberate deferral or deployment controls.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter",
+        "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows"
+      ]
+    },
+    {
+      "id": "boot-recovery-research-1",
+      "kind": "job",
+      "targetId": "boot-recovery",
+      "priority": 2,
+      "status": "queued",
+      "question": "Exercise recovery options on UEFI and encrypted systems",
+      "deliverable": "Run a documented lab recovery with recovery-key access and unambiguous target volumes.",
+      "acceptance": "Both boot identity and file access are verified; commands never assume recovery drive letters.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/windows-recovery-environment",
+        "https://learn.microsoft.com/en-us/windows/client-management/advanced-troubleshooting-boot-problems"
+      ]
+    },
+    {
+      "id": "boot-recovery-research-2",
+      "kind": "job",
+      "targetId": "boot-recovery",
+      "priority": 2,
+      "status": "queued",
+      "question": "Evaluate connected recovery on a supported outage scenario",
+      "deliverable": "Compare the current connected recovery capability with ordinary local recovery.",
+      "acceptance": "Supported builds, network prerequisites and an exit route are documented without universal claims.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/windows-recovery-environment",
+        "https://learn.microsoft.com/en-us/windows/client-management/advanced-troubleshooting-boot-problems"
+      ]
+    },
+    {
+      "id": "failing-drive-research-1",
+      "kind": "job",
+      "targetId": "failing-drive",
+      "priority": 1,
+      "status": "queued",
+      "question": "Validate imaging stop conditions with readable error evidence",
+      "deliverable": "Prepare a disposable-media lab for mapfile continuation and destination verification.",
+      "acceptance": "Source/destination identities, retry policy and evidence-preservation boundaries are recorded.",
+      "sourceUrls": [
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+        "https://www.cgsecurity.org/wiki/PhotoRec",
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html#Mapfile-structure",
+        "https://github.com/Herbertofury/INTA/wiki/Service-Evidence"
+      ]
+    },
+    {
+      "id": "failing-drive-research-2",
+      "kind": "job",
+      "targetId": "failing-drive",
+      "priority": 1,
+      "status": "queued",
+      "question": "Distinguish deleted data from lost encryption access",
+      "deliverable": "Build a decision branch for deleted files, missing volumes and unavailable recovery keys.",
+      "acceptance": "The guide explains what recovery tooling can and cannot restore in each branch.",
+      "sourceUrls": [
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+        "https://www.cgsecurity.org/wiki/PhotoRec",
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html#Mapfile-structure",
+        "https://github.com/Herbertofury/INTA/wiki/Service-Evidence"
+      ]
+    },
+    {
+      "id": "disk-migration-research-1",
+      "kind": "job",
+      "targetId": "disk-migration",
+      "priority": 2,
+      "status": "queued",
+      "question": "Test cloning across different logical sector sizes",
+      "deliverable": "Research supported migration constraints and prove a compatible disposable-disk workflow.",
+      "acceptance": "The guide states capacity, sector and boot constraints with an actual boot and file acceptance.",
+      "sourceUrls": [
+        "https://clonezilla.org/clonezilla-live-doc.php",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/export"
+      ]
+    },
+    {
+      "id": "disk-migration-research-2",
+      "kind": "job",
+      "targetId": "disk-migration",
+      "priority": 2,
+      "status": "queued",
+      "question": "Verify encryption and recovery after SSD migration",
+      "deliverable": "Document the post-migration encryption, recovery and backup checks.",
+      "acceptance": "The original remains recoverable until the new disk passes boot, workload and recovery checks.",
+      "sourceUrls": [
+        "https://clonezilla.org/clonezilla-live-doc.php",
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/export"
+      ]
+    },
+    {
+      "id": "backup-restore-research-1",
+      "kind": "job",
+      "targetId": "backup-restore",
+      "priority": 1,
+      "status": "queued",
+      "question": "Restore a representative app data set on an isolated target",
+      "deliverable": "Define a realistic restore exercise for files plus application metadata.",
+      "acceptance": "Restore time, permissions and application-level acceptance are recorded separately from backup completion.",
+      "sourceUrls": [
+        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
+        "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ]
+    },
+    {
+      "id": "backup-restore-research-2",
+      "kind": "job",
+      "targetId": "backup-restore",
+      "priority": 1,
+      "status": "queued",
+      "question": "Test disconnected or immutable recovery copies",
+      "deliverable": "Compare available copy-protection approaches for a small office.",
+      "acceptance": "Threat model, restoration access and ongoing cost are explicit; marketing claims are not accepted as proof.",
+      "sourceUrls": [
+        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
+        "https://restic.readthedocs.io/en/stable/050_restore.html"
+      ]
+    },
+    {
+      "id": "network-dns-research-1",
+      "kind": "job",
+      "targetId": "network-dns",
+      "priority": 2,
+      "status": "queued",
+      "question": "Distinguish IPv6 path failures from DNS faults",
+      "deliverable": "Create a controlled dual-stack diagnosis with explicit IPv4 and IPv6 comparisons.",
+      "acceptance": "The evidence isolates the failing path without globally disabling a supported protocol.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+        "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters",
+        "https://software.es.net/iperf/"
+      ]
+    },
+    {
+      "id": "network-dns-research-2",
+      "kind": "job",
+      "targetId": "network-dns",
+      "priority": 2,
+      "status": "queued",
+      "question": "Diagnose Wi-Fi roaming and intermittent loss",
+      "deliverable": "Collect reproducible link, latency and signal observations while moving between access points.",
+      "acceptance": "The guide separates RF coverage, authentication, DHCP and upstream connectivity with privacy-safe evidence.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+        "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters",
+        "https://software.es.net/iperf/"
+      ]
+    },
+    {
+      "id": "outage-recovery-research-1",
+      "kind": "job",
+      "targetId": "outage-recovery",
+      "priority": 2,
+      "status": "queued",
+      "question": "Rehearse a staged small-office power restoration",
+      "deliverable": "Create a dependency-aware restoration exercise for power, network, identity and workloads.",
+      "acceptance": "Acceptance follows dependencies and records failed-device stop conditions.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart",
+        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html"
+      ]
+    },
+    {
+      "id": "outage-recovery-research-2",
+      "kind": "job",
+      "targetId": "outage-recovery",
+      "priority": 2,
+      "status": "queued",
+      "question": "Verify UPS event evidence and safe shutdown behavior",
+      "deliverable": "Review current supported monitoring routes for the actual deployed UPS family.",
+      "acceptance": "A controlled test validates alerting and shutdown without claiming a paper configuration works.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart",
+        "https://restic.readthedocs.io/en/stable/045_working_with_repos.html"
+      ]
+    },
+    {
+      "id": "remote-support-research-1",
+      "kind": "job",
+      "targetId": "remote-support",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare attended support routes under restrictive policies",
+      "deliverable": "Test supported consent, elevation, reconnect and session-end behavior.",
+      "acceptance": "Business licensing, network requirements and positive session termination are verified.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/apps/solve-pc-problems-remotely-using-quick-assist",
+        "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+        "https://support.google.com/chrome/answer/1649523",
+        "https://rustdesk.com/docs/en/self-host/client-configuration/advanced-settings/",
+        "https://docs.meshcentral.com/meshcentral/devicetabs/",
+        "https://github.com/Herbertofury/INTA/wiki/Tool-Selection",
+        "https://github.com/Herbertofury/INTA/wiki/Service-Evidence"
+      ]
+    },
+    {
+      "id": "remote-support-research-2",
+      "kind": "job",
+      "targetId": "remote-support",
+      "priority": 2,
+      "status": "queued",
+      "question": "Verify accessible remote-help instructions with a novice user",
+      "deliverable": "Walk through the exact join and end-session path using simple labels.",
+      "acceptance": "A user can reach support and revoke access without sharing a password or guessing the right button.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/apps/solve-pc-problems-remotely-using-quick-assist",
+        "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+        "https://support.google.com/chrome/answer/1649523",
+        "https://rustdesk.com/docs/en/self-host/client-configuration/advanced-settings/",
+        "https://docs.meshcentral.com/meshcentral/devicetabs/",
+        "https://github.com/Herbertofury/INTA/wiki/Tool-Selection",
+        "https://github.com/Herbertofury/INTA/wiki/Service-Evidence"
+      ]
+    },
+    {
+      "id": "ad-trust-research-1",
+      "kind": "job",
+      "targetId": "ad-trust",
+      "priority": 2,
+      "status": "queued",
+      "question": "Differentiate trust failure from clock and DNS problems",
+      "deliverable": "Build a domain-member lab case that fails for each separate cause.",
+      "acceptance": "Each branch tests the cause before repair and verifies the intended identity context.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1",
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/broken-trust-relationship-domain-joined-device-its-domain-secure-channel-issues"
+      ]
+    },
+    {
+      "id": "ad-trust-research-2",
+      "kind": "job",
+      "targetId": "ad-trust",
+      "priority": 2,
+      "status": "queued",
+      "question": "Document a managed local-admin recovery path",
+      "deliverable": "Review the approved password-recovery and rotation workflow for the managed environment.",
+      "acceptance": "Only authorized access is described, and the guide distinguishes identity recovery from domain trust repair.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1",
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/broken-trust-relationship-domain-joined-device-its-domain-secure-channel-issues"
+      ]
+    },
+    {
+      "id": "outlook-email-research-1",
+      "kind": "job",
+      "targetId": "outlook-email",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare current Outlook clients for repair prerequisites",
+      "deliverable": "Verify feature, profile, add-in and offline-data differences for supported clients.",
+      "acceptance": "Guidance names the client and account type instead of applying a classic-client procedure universally.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/outlook/classic-outlook-not-responding-stuck-at-processing-stopped-working-or-freezes",
+        "https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/administration/architecture-changes-new-outlook"
+      ]
+    },
+    {
+      "id": "outlook-email-research-2",
+      "kind": "job",
+      "targetId": "outlook-email",
+      "priority": 2,
+      "status": "queued",
+      "question": "Prove whether mail failure is delivery, sync or local display",
+      "deliverable": "Build a sender-to-mailbox-to-client diagnostic example.",
+      "acceptance": "Message timestamps and server evidence identify the failing layer without deleting the only local copy.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/outlook/classic-outlook-not-responding-stuck-at-processing-stopped-working-or-freezes",
+        "https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/administration/architecture-changes-new-outlook"
+      ]
+    },
+    {
+      "id": "printer-repair-research-1",
+      "kind": "job",
+      "targetId": "printer-repair",
+      "priority": 2,
+      "status": "queued",
+      "question": "Verify protected-print and vendor-driver workflows by capability",
+      "deliverable": "Test printing and scanning requirements on representative compatible devices.",
+      "acceptance": "Model, OS, policy, duplex, tray and scanning requirements determine the supported route.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows"
+      ]
+    },
+    {
+      "id": "printer-repair-research-2",
+      "kind": "job",
+      "targetId": "printer-repair",
+      "priority": 2,
+      "status": "queued",
+      "question": "Reproduce queue failures after DHCP address changes",
+      "deliverable": "Test reserved addressing and queue-port alignment in a small lab.",
+      "acceptance": "The printer identity is verified, the target queue is changed alone and a real document prints.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows"
+      ]
+    },
+    {
+      "id": "hardware-bsod-research-1",
+      "kind": "job",
+      "targetId": "hardware-bsod",
+      "priority": 2,
+      "status": "queued",
+      "question": "Separate driver crashes from unstable hardware in a repeatable lab",
+      "deliverable": "Compare dump evidence, temperature and one-variable hardware checks.",
+      "acceptance": "The guide distinguishes evidence from correlation and avoids unsupervised stress on failing equipment.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/client-management/troubleshoot-stop-errors",
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart"
+      ]
+    },
+    {
+      "id": "hardware-bsod-research-2",
+      "kind": "job",
+      "targetId": "hardware-bsod",
+      "priority": 2,
+      "status": "queued",
+      "question": "Interpret battery health and charging limits accurately",
+      "deliverable": "Review supported battery reports and manufacturer diagnostics.",
+      "acceptance": "Capacity, workload, charge limit and actual runtime are separated; no universal percentage threshold is invented.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/client-management/troubleshoot-stop-errors",
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart"
+      ]
+    },
+    {
+      "id": "new-pc-research-1",
+      "kind": "job",
+      "targetId": "new-pc",
+      "priority": 2,
+      "status": "queued",
+      "question": "Validate a repeatable workstation acceptance checklist",
+      "deliverable": "Rebuild a disposable workstation with current supported setup and package routes.",
+      "acceptance": "Identity, encryption recovery, updates, backup, printers and the real user workload all pass.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/export",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/import"
+      ]
+    },
+    {
+      "id": "new-pc-research-2",
+      "kind": "job",
+      "targetId": "new-pc",
+      "priority": 2,
+      "status": "queued",
+      "question": "Prove profile and cloud-file migration completeness",
+      "deliverable": "Compare local folders, cloud-only placeholders and app-specific data before cutover.",
+      "acceptance": "Counts alone do not establish completeness; representative files and app behavior are checked.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/export",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/import"
+      ]
+    },
+    {
+      "id": "client-handoff-research-1",
+      "kind": "job",
+      "targetId": "client-handoff",
+      "priority": 2,
+      "status": "queued",
+      "question": "Test whether a second technician can resume the case",
+      "deliverable": "Use sanitized interrupted cases to assess continuation records.",
+      "acceptance": "Each record includes the last change, result, rollback, remaining risk and exact next action.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      ]
+    },
+    {
+      "id": "client-handoff-research-2",
+      "kind": "job",
+      "targetId": "client-handoff",
+      "priority": 2,
+      "status": "queued",
+      "question": "Create a plain-language customer acceptance exercise",
+      "deliverable": "Test handoff wording for repairs, remaining limitations and follow-up dates.",
+      "acceptance": "The original task is demonstrated and the client can explain the agreed next step.",
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows"
+      ]
+    },
+    {
+      "id": "boot-usb-research-1",
+      "kind": "job",
+      "targetId": "boot-usb",
+      "priority": 2,
+      "status": "queued",
+      "question": "Validate rescue media with Secure Boot and current firmware",
+      "deliverable": "Test BIOS/UEFI and supported Secure Boot paths using verified images.",
+      "acceptance": "Media identity, boot evidence, hardware limits and reversion to the normal boot order are recorded.",
+      "sourceUrls": [
+        "https://www.ventoy.net/en/doc_start.html",
+        "https://www.ventoy.net/en/doc_checksum.html",
+        "https://www.ventoy.net/en/doc_secure.html",
+        "https://github.com/Herbertofury/INTA"
+      ]
+    },
+    {
+      "id": "boot-usb-research-2",
+      "kind": "job",
+      "targetId": "boot-usb",
+      "priority": 2,
+      "status": "queued",
+      "question": "Verify offline access to the complete technician kit",
+      "deliverable": "Build an offline drill for drivers, recovery keys, documentation and essential utilities.",
+      "acceptance": "Everything claimed to work offline is exercised; account and network dependencies are labeled.",
+      "sourceUrls": [
+        "https://www.ventoy.net/en/doc_start.html",
+        "https://www.ventoy.net/en/doc_checksum.html",
+        "https://www.ventoy.net/en/doc_secure.html",
+        "https://github.com/Herbertofury/INTA"
+      ]
+    },
+    {
+      "id": "ai-triage-research-1",
+      "kind": "job",
+      "targetId": "ai-triage",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare AI diagnosis quality on sanitized known-outcome cases",
+      "deliverable": "Create a fixed evaluation set and score diagnoses, unsupported claims and useful next tests.",
+      "acceptance": "No live customer data is used and improvement is measured against a baseline.",
+      "sourceUrls": [
+        "https://github.com/Herbertofury/INTA",
+        "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+      ]
+    },
+    {
+      "id": "ai-triage-research-2",
+      "kind": "job",
+      "targetId": "ai-triage",
+      "priority": 2,
+      "status": "queued",
+      "question": "Validate local model resource and data-handling boundaries",
+      "deliverable": "Measure a permitted local workflow on the actual target hardware.",
+      "acceptance": "Memory, latency, network behavior and cleanup are documented separately from answer quality.",
+      "sourceUrls": [
+        "https://github.com/Herbertofury/INTA",
+        "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+      ]
+    },
+    {
+      "id": "preventive-maintenance-research-1",
+      "kind": "job",
+      "targetId": "preventive-maintenance",
+      "priority": 2,
+      "status": "queued",
+      "question": "Use failure trends to prioritize maintenance tasks",
+      "deliverable": "Compare a quarter of sanitized recurring symptoms against planned work.",
+      "acceptance": "Tasks reduce observed risk and have acceptance evidence rather than ceremonial cleanup.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+        "https://restic.readthedocs.io/en/stable/050_restore.html",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+        "https://diskanalyzer.com/about",
+        "https://antibody-software.com/wizfile/quick-start"
+      ]
+    },
+    {
+      "id": "preventive-maintenance-research-2",
+      "kind": "job",
+      "targetId": "preventive-maintenance",
+      "priority": 2,
+      "status": "queued",
+      "question": "Validate the recovery plan after a scheduled maintenance change",
+      "deliverable": "Exercise backup restoration and selected workload checks after a reversible update.",
+      "acceptance": "The change is accepted only after the real task and rollback/recovery path are checked.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+        "https://restic.readthedocs.io/en/stable/050_restore.html",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite",
+        "https://diskanalyzer.com/about",
+        "https://antibody-software.com/wizfile/quick-start"
+      ]
+    },
+    {
+      "id": "malware-category-review",
+      "kind": "category",
+      "targetId": "malware",
+      "priority": 2,
+      "status": "queued",
+      "question": "Recheck supported-platform and business-use limits for the cleanup kit",
+      "deliverable": "A comparison of supported architectures, managed-endpoint constraints and scanner roles.",
+      "acceptance": "Compare against the current catalog, record adopt/retain/evaluate decisions and do not claim runtime proof from documentation.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+        "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+        "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner",
+        "https://www.malwarebytes.com/free-tools",
+        "https://www.sophos.com/en-us/free-tools",
+        "https://support.eset.com/en/kb405-online-scanner-faq",
+        "https://docs.clamav.net/",
+        "https://www.bitdefender.com/en-us/business/smb-products/business-security",
+        "https://learn.microsoft.com/en-us/defender-business/mdb-overview",
+        "https://www.sophos.com/en-us/products/endpoint-security",
+        "https://www.bitdefender.com/en-us/consumer/free-antivirus",
+        "https://www.emsisoft.com/en/help/1702/getting-started/"
+      ]
+    },
+    {
+      "id": "storage-category-review",
+      "kind": "category",
+      "targetId": "storage",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare current recovery, cloning, sync and backup roles",
+      "deliverable": "A decision table that prevents using sync as backup or repair as recovery.",
+      "acceptance": "Compare against the current catalog, record adopt/retain/evaluate decisions and do not claim runtime proof from documentation.",
+      "sourceUrls": [
+        "https://crystalmark.info/en/software/crystaldiskinfo/",
+        "https://github.com/smartmontools/smartmontools",
+        "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+        "https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step",
+        "https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step",
+        "https://dmde.com/manual.html",
+        "https://gparted.org/documentation.php",
+        "https://rescuezilla.com/help",
+        "https://clonezilla.org/clonezilla-live-doc.php",
+        "https://restic.readthedocs.io/en/stable/",
+        "https://kopia.io/docs/",
+        "https://rclone.org/docs/",
+        "https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html",
+        "https://freefilesync.org/faq.php",
+        "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+        "https://github.com/linux-nvme/nvme-cli",
+        "https://gsmartcontrol.shaduri.dev/",
+        "https://gitlab.com/cryptsetup/cryptsetup",
+        "https://github.com/Aorimn/dislocker",
+        "https://download.samba.org/pub/rsync/rsync.1"
+      ]
+    },
+    {
+      "id": "windows-category-review",
+      "kind": "category",
+      "targetId": "windows",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare current Windows repair and diagnostic capabilities",
+      "deliverable": "Supported-build and policy-aware choices with exact launch/acquisition paths.",
+      "acceptance": "Compare against the current catalog, record adopt/retain/evaluate decisions and do not claim runtime proof from documentation.",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/procdump",
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck",
+        "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+        "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc",
+        "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+        "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+        "https://learn.microsoft.com/en-us/powershell/",
+        "https://learn.microsoft.com/en-us/windows/terminal/",
+        "https://github.com/winsiderss/systeminformer",
+        "https://github.com/windirstat/windirstat",
+        "https://diskanalyzer.com/eula",
+        "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller",
+        "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/",
+        "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
+        "https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal",
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+        "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+        "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore"
+      ]
+    },
+    {
+      "id": "remote-category-review",
+      "kind": "category",
+      "targetId": "remote",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare attended support setup burden and session termination",
+      "deliverable": "A consent-to-disconnect comparison with licensing and elevation behavior.",
+      "acceptance": "Compare against the current catalog, record adopt/retain/evaluate decisions and do not claim runtime proof from documentation.",
+      "sourceUrls": [
+        "https://docs.meshcentral.com/",
+        "https://rustdesk.com/docs/en/",
+        "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+        "https://support.google.com/chrome/answer/1649523",
+        "https://support.anydesk.com/",
+        "https://www.teamviewer.com/en/global/support/knowledge-base/",
+        "https://www.screenconnect.com/Download",
+        "https://tailscale.com/docs"
+      ]
+    },
+    {
+      "id": "hardware-category-review",
+      "kind": "category",
+      "targetId": "hardware",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare manufacturer diagnostics with specialist observation tools",
+      "deliverable": "A model-aware selection guide covering logs, thermal readings and test limits.",
+      "acceptance": "Compare against the current catalog, record adopt/retain/evaluate decisions and do not claim runtime proof from documentation.",
+      "sourceUrls": [
+        "https://www.hwinfo.com/licenses/",
+        "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+        "https://github.com/memtest86plus/memtest86plus",
+        "https://www.memtest86.com/tech.html",
+        "https://www.cpuid.com/softwares/cpu-z.html",
+        "https://www.ocbase.com/",
+        "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows"
+      ]
+    },
+    {
+      "id": "network-category-review",
+      "kind": "category",
+      "targetId": "network",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare discovery, packet capture and path-diagnostic setup burden",
+      "deliverable": "Evidence-based quick choices with platform, permissions and output interpretation.",
+      "acceptance": "Compare against the current catalog, record adopt/retain/evaluate decisions and do not claim runtime proof from documentation.",
+      "sourceUrls": [
+        "https://www.wireshark.org/docs/",
+        "https://software.es.net/iperf/invoking.html",
+        "https://nmap.org/book/man.html",
+        "https://angryip.org/documentation/",
+        "https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html",
+        "https://winscp.net/eng/docs/start",
+        "https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh-overview",
+        "https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon",
+        "https://github.com/the-tcpdump-group/tcpdump",
+        "https://www.advanced-ip-scanner.com/"
+      ]
+    },
+    {
+      "id": "boot-category-review",
+      "kind": "category",
+      "targetId": "boot",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare maintained rescue-media and network-boot paths",
+      "deliverable": "Verified source identity and supported firmware/architecture/dependency notes.",
+      "acceptance": "Compare against the current catalog, record adopt/retain/evaluate decisions and do not claim runtime proof from documentation.",
+      "sourceUrls": [
+        "https://github.com/pbatard/rufus/wiki/FAQ",
+        "https://www.ventoy.net/en/doc_start.html",
+        "https://www.system-rescue.org/manual/",
+        "https://www.hirensbootcd.org/howtos/",
+        "https://www.microsoft.com/software-download/windows11",
+        "https://live-team.pages.debian.net/live-manual/html/live-manual/index.en.html",
+        "https://ubuntu.com/tutorials/try-ubuntu-before-you-install"
+      ]
+    },
+    {
+      "id": "productivity-category-review",
+      "kind": "category",
+      "targetId": "productivity",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare useful technician utilities against already-covered capabilities",
+      "deliverable": "Additions only for a named service gap, with official acquisition and business-use evidence.",
+      "acceptance": "Compare against the current catalog, record adopt/retain/evaluate decisions and do not claim runtime proof from documentation.",
+      "sourceUrls": [
+        "https://www.7-zip.org/faq.html",
+        "https://github.com/notepad-plus-plus/notepad-plus-plus",
+        "https://learn.microsoft.com/en-us/windows/powertoys/",
+        "https://www.voidtools.com/support/everything/",
+        "https://antibody-software.com/wizfile/eula",
+        "https://github.com/ShareX/ShareX",
+        "https://keepassxc.org/docs/",
+        "https://github.com/localsend/localsend",
+        "https://github.com/Devolutions/UniGetUI",
+        "https://www.naps2.com/"
+      ]
+    },
+    {
+      "id": "security-category-review",
+      "kind": "category",
+      "targetId": "security",
+      "priority": 2,
+      "status": "queued",
+      "question": "Compare current defensive telemetry and managed identity tools",
+      "deliverable": "Deployment prerequisites, scope, data retention and reversible investigation routes.",
+      "acceptance": "Compare against the current catalog, record adopt/retain/evaluate decisions and do not claim runtime proof from documentation.",
+      "sourceUrls": [
+        "https://virustotal.github.io/yara-x/",
+        "https://github.com/hasherezade/pe-sieve",
+        "https://github.com/hasherezade/hollows_hunter",
+        "https://www.fibratus.io/",
+        "https://github.com/Karib0u/rustinel",
+        "https://github.com/openprx/prx-sd",
+        "https://github.com/LeewayOpenSoftware/Sentinella",
+        "https://docs.velociraptor.app/",
+        "https://github.com/Yamato-Security/hayabusa",
+        "https://github.com/WithSecureOpenSource/chainsaw",
+        "https://sigmahq.io/docs/",
+        "https://osquery.readthedocs.io/en/stable/",
+        "https://documentation.wazuh.com/current/",
+        "https://volatility3.readthedocs.io/en/latest/",
+        "https://www.sleuthkit.org/autopsy/docs/user-docs/"
+      ]
+    },
+    {
+      "id": "ai-category-review",
+      "kind": "category",
+      "targetId": "ai",
+      "priority": 2,
+      "status": "queued",
+      "question": "Evaluate AI troubleshooting tools against a fixed sanitized case set",
+      "deliverable": "Measured answer usefulness, data handling, hardware requirements and failure cases.",
+      "acceptance": "Compare against the current catalog, record adopt/retain/evaluate decisions and do not claim runtime proof from documentation.",
+      "sourceUrls": [
+        "https://help.openai.com/",
+        "https://developers.openai.com/codex/cli/",
+        "https://code.claude.com/docs/en/overview",
+        "https://geminicli.com/docs/",
+        "https://docs.ollama.com/"
+      ]
+    }
+  ]
+}

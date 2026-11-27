@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 # 💡 Troubleshoot with AI
 
@@ -16,6 +16,8 @@
 | --- | --- |
 | Troubleshoot with AI | **[ChatGPT](https://chatgpt.com/)** · [Official page](https://chatgpt.com/) · **[Open ChatGPT](https://chatgpt.com/)** |
 | Review a scoped script or code change in an approved workspace. | **[OpenAI Codex CLI](https://github.com/openai/codex)** · [Official page](https://github.com/openai/codex) · **[Download Windows x64 CLI · EXE](https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe)** |
+| Evaluate an approved package in a disposable desktop with network and shared-folder exposure explicitly configured. | **[Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/)** · [Official page](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/) · **[Enable Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install)** |
+| Checking whether a revised diagnostic prompt handles a sanitized regression set correctly before relying on it in technician workflows. | **[promptfoo](https://www.promptfoo.dev/)** · [Official page](https://www.promptfoo.dev/) · **[Install CLI through npm · Node.js required](https://www.promptfoo.dev/docs/installation/)** |
 
 ### Prepare the case
 
@@ -43,7 +45,7 @@
 
 **[ChatGPT](https://chatgpt.com/)** · **[Open ChatGPT](https://chatgpt.com/)**
 
-**[Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage)** · **[Selection evidence](https://github.com/Herbertofury/INTA/wiki/Free-Tool-Picks)**
+**[Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage)** · **[Specific fixes for this job](https://herbertofury.github.io/INTA/#job/ai-triage/quick/troubleshoot-with-ai?section=fixes)** · **[Selection evidence](https://github.com/Herbertofury/INTA/wiki/Free-Tool-Picks)**
 
 <a id="next-action"></a>
 

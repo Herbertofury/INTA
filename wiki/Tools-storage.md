@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-storage-recovery--backup"></a>
 
@@ -6,7 +6,7 @@
 
 Keep the source safe, select the right copy or recovery operation, and test the restored result.
 
-**20 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**22 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** Healthy migration, missing files, or failing media?
 
@@ -40,12 +40,14 @@ Keep the source safe, select the right copy or recovery operation, and test the 
 | [smartmontools](#smartmontools) | Reading SMART and NVMe health from a rescue environment or supported host OS. | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) · Core | [Official page](https://www.smartmontools.org/) · **[Download Windows setup · EXE](https://github.com/smartmontools/smartmontools/releases/download/RELEASE_7_5/smartmontools-7.5.win32-setup.exe)** |
 | [Veeam Agent for Microsoft Windows](#veeam-agent) | Image backup and recovery media for a supported [Windows](https://www.microsoft.com/windows) endpoint. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://www.veeam.com/products/free/microsoft-windows) · **[Sign in for the Windows download](https://www.veeam.com/products/physical/windows-backup-recovery-download.html)** |
 | [cryptsetup](#cryptsetup) | Opening a supported encrypted volume using the correct recovery material. | [Linux](https://www.kernel.org/) · Specialist | [Official page](https://gitlab.com/cryptsetup/cryptsetup) · **[Download source · TAR.XZ](https://www.kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.9.tar.xz)** |
+| [DiskSpd](#diskspd) | Reproducing a storage-performance complaint on healthy media with a bounded test file and comparable before/after settings. | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/) · Specialist | [Official page](https://github.com/microsoft/diskspd) · **[Download Windows x64/ARM64 tools · ZIP](https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP)** |
 | [Dislocker](#dislocker) | Reading an encrypted client volume with its valid key or recovery material. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://github.com/Aorimn/dislocker) · **[Download source · ZIP](https://api.github.com/repos/Aorimn/dislocker/zipball/refs/tags/v0.7.4)** |
 | [DMDE](#dmde) | Complex partition and file recovery where a specialist needs detailed filesystem views. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://dmde.com/) · **[Download Windows x64 GUI · ZIP](https://dmde.com/download/dmde-4-4-4-842-win64-gui.zip)** |
 | [GNU ddrescue](#ddrescue) | Creating an image of a failing disk before recovery or repair attempts. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://www.gnu.org/software/ddrescue/) · **[Download source · TAR.LZ](https://ftp.gnu.org/gnu/ddrescue/ddrescue-1.30.tar.lz)** |
 | [GParted](#gparted) | A planned partition resize or layout change after backup and health checks. | [Linux](https://www.kernel.org/), Bootable PC · Specialist | [Official page](https://gparted.org/) · **[Get x64 live ISO · download page](https://sourceforge.net/projects/gparted/files/gparted-live-stable/1.8.1-6/gparted-live-1.8.1-6-amd64.iso/download)** |
 | [nvme-cli](#nvme-cli) | Reading NVMe identity and health information from [INTA Rescue](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md). | [Linux](https://www.kernel.org/) · Specialist | [Official page](https://github.com/linux-nvme/nvme-cli) · **[Download Linux x64 binary](https://github.com/linux-nvme/nvme-cli/releases/download/v3.3/nvme-cli-v3.3-x86_64)** |
 | [PhotoRec](#photorec) | Recovering files from an image when directory-based recovery is unsuccessful. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://www.cgsecurity.org/wiki/PhotoRec) · **[Download PhotoRec / TestDisk · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** |
+| [Syncthing](#syncthing) | Keeping a defined healthy-data folder synchronized between authorized machines during a controlled transition or ongoing collaboration. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/), BSD · Specialist | [Official page](https://syncthing.net/) · **[Download Windows x64 · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip)** |
 | [TestDisk](#testdisk) | Investigating missing partitions on an image or safely copied disk. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://www.cgsecurity.org/wiki/TestDisk) · **[Download Windows x64 tools · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
@@ -463,6 +465,40 @@ smartctl and smartd tools for drive health information and supported self-tests.
 
 [Back to comparison](#compare-options)
 
+<a id="diskspd"></a>
+
+## [DiskSpd](https://github.com/microsoft/diskspd)
+
+Configurable [Windows](https://www.microsoft.com/windows) storage workload generator measures latency and throughput under a documented I/O profile.
+
+[Official page](https://github.com/microsoft/diskspd) · **[Download Windows x64/ARM64 tools · ZIP](https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP)** · [Release notes and other versions](https://github.com/microsoft/diskspd/releases) · [Documentation](https://github.com/microsoft/diskspd/wiki)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Reproducing a storage-performance complaint on healthy media with a bounded test file and comparable before/after settings. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/) |
+| **How you use it** | portable |
+| **Access / pricing** | Free and open source under MIT license |
+| **Selection role** | Specialist |
+
+> **Before using it:** Use an approved test file on healthy storage and a bounded duration. Write workloads, raw devices and long runs can damage data or disrupt services; do not benchmark a failing source. Version 2.3 changes defaults, so compare equivalent profiles and record the version.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://github.com/microsoft/diskspd)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://github.com/microsoft/diskspd
+  - https://github.com/microsoft/diskspd/releases/tag/v2.3
+  - https://github.com/microsoft/diskspd/blob/master/LICENSE
+
+</details>
+
+[Back to comparison](#compare-options)
+
 <a id="dislocker"></a>
 
 ## [Dislocker](https://github.com/Aorimn/dislocker)
@@ -649,6 +685,40 @@ File carving that can recover supported file content when filesystem metadata is
 - **Selection provenance:**
   - Official project or vendor documentation
   - https://github.com/Herbertofury/INTA/blob/1ecba1129aac275a02f40b9c4f5bea438c9e2688/live/package-lists/inta.list.chroot
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="syncthing"></a>
+
+## [Syncthing](https://syncthing.net/)
+
+Peer-to-peer synchronization keeps selected folders in agreement across approved devices without a central file-storage service.
+
+[Official page](https://syncthing.net/) · **[Download Windows x64 · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip)** · [Download Windows ARM64 · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-arm64-v2.1.7.zip) · [Download macOS universal · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-macos-universal-v2.1.7.zip) · [Download Linux x64 · TAR.GZ](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-linux-amd64-v2.1.7.tar.gz) · [Other operating systems and architectures](https://syncthing.net/downloads/) · [Documentation](https://docs.syncthing.net/)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Keeping a defined healthy-data folder synchronized between authorized machines during a controlled transition or ongoing collaboration. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/), BSD |
+| **How you use it** | portable |
+| **Access / pricing** | Free and open source under MPL-2.0 |
+| **Selection role** | Specialist |
+
+> **Before using it:** Changes and deletions propagate. Sync and optional versioning do not replace an independent tested backup. Confirm device identities, folder paths and conflict/versioning policy; do not synchronize suspected compromise into a clean recovery copy.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://syncthing.net/downloads/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://syncthing.net/downloads/
+  - https://docs.syncthing.net/users/faq
+  - https://github.com/syncthing/syncthing/blob/main/LICENSE
 
 </details>
 

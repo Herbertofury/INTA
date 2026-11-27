@@ -4,6 +4,8 @@
 
 **Find a tool, choose a procedure, and record the result.** Open the [interactive technician hub](https://herbertofury.github.io/INTA/) for search and checklists, or stay in the wiki for the complete field guides.
 
+**[🗺️ Browse every service area](https://herbertofury.github.io/INTA/#services)** · **[🎯 Find a specific fix](https://github.com/Herbertofury/INTA/wiki/Service-Map)** · **[🗂️ How INTA stays organized](https://github.com/Herbertofury/INTA/wiki/Knowledge-Organization)**
+
 <!-- INTA:QUICK-START:START -->
 
 <a id="free-tools"></a>

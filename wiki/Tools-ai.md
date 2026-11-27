@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-ai-assistance"></a>
 
@@ -6,7 +6,7 @@
 
 Use sanitized evidence, verified sources, and reviewed commands throughout an assisted investigation.
 
-**5 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**6 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** Explain evidence, review a script, or compare hypotheses?
 
@@ -31,6 +31,7 @@ Use sanitized evidence, verified sources, and reviewed commands throughout an as
 | [OpenAI Codex CLI](#codex-cli) | Reviewing or building technician scripts in a controlled working folder. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://github.com/openai/codex) · **[Download Windows x64 CLI · EXE](https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe)** |
 | [Gemini CLI](#gemini-cli) | An additional AI-assisted terminal workflow for reviewed scripts and documentation. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://github.com/google-gemini/gemini-cli) · **[Download CLI bundle · ZIP](https://github.com/google-gemini/gemini-cli/releases/download/v0.71.1/gemini-cli-bundle.zip)** |
 | [Ollama](#ollama) | A local AI assistant when the machine has the capacity and model files are available. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://ollama.com/) · **[Download Windows setup · EXE](https://ollama.com/download/OllamaSetup.exe)** |
+| [promptfoo](#promptfoo) | Checking whether a revised diagnostic prompt handles a sanitized regression set correctly before relying on it in technician workflows. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/) · Specialist | [Official page](https://www.promptfoo.dev/) · **[Install CLI through npm · Node.js required](https://www.promptfoo.dev/docs/installation/)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
@@ -184,6 +185,41 @@ Local model runtime with downloadable models and a local API.
 - **Evidence status:** Documentation reviewed; not an INTA runtime certification
 - **Selection provenance:**
   - Official project or vendor documentation
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="promptfoo"></a>
+
+## [promptfoo](https://www.promptfoo.dev/)
+
+Local evaluation runner compares model or prompt outputs against explicit test cases and assertions.
+
+[Official page](https://www.promptfoo.dev/) · **[Install CLI through npm · Node.js required](https://www.promptfoo.dev/docs/installation/)** · [Download npm package archive · TGZ](https://registry.npmjs.org/promptfoo/-/promptfoo-0.126.0.tgz) · [Documentation](https://www.promptfoo.dev/docs/intro/)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Checking whether a revised diagnostic prompt handles a sanitized regression set correctly before relying on it in technician workflows. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/) |
+| **How you use it** | installed |
+| **Access / pricing** | Free and open source under MIT license; configured model/API providers can charge separately |
+| **Selection role** | Specialist |
+
+> **Before using it:** The current CLI requires Node.js 22.22.0 or newer. Local execution still sends data to configured model providers, and optional hosted features have separate handling. Use sanitized examples and explicit assertions; a passing small test set does not establish general diagnostic accuracy.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://www.promptfoo.dev/docs/installation/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://www.promptfoo.dev/docs/installation/
+  - https://www.promptfoo.dev/docs/intro/
+  - https://www.promptfoo.dev/docs/contributing/
+  - https://registry.npmjs.org/promptfoo/latest
 
 </details>
 

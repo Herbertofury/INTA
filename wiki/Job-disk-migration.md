@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="️-clone-a-healthy-system-or-migrate-to-a-new-ssd"></a>
 <a id="-clone-a-healthy-system-or-migrate-to-a-new-ssd"></a>
@@ -9,7 +9,7 @@ Move a working system with clear source/destination control and a rollback copy.
 
 **Storage & recovery** · Intermediate · 45–180 min · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/disk-migration)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/disk-migration)
 
 <a id="working-kit"></a>
 
@@ -24,6 +24,8 @@ Move a working system with clear source/destination control and a rollback copy.
 | Graphical image or clone workflow for healthy storage. | **[Rescuezilla](https://rescuezilla.com/)** · [Official page](https://rescuezilla.com/) · **[Download x64 rescue image · ISO](https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso)** |
 | Copy approved file trees with an inspectable log. | **[Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · **[Open built-in copy instructions](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** |
 | Inventory and reapply approved application packages. | **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** |
+| Synchronize an explicitly chosen healthy-data folder between approved machines; keep an independent backup. | **[Syncthing](https://syncthing.net/)** · [Official page](https://syncthing.net/) · **[Download Windows x64 · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip)** |
+| Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. | **[WinMerge](https://winmerge.org/)** · [Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** |
 
 ### Choose the move
 
@@ -79,6 +81,12 @@ Move a working system with clear source/destination control and a rollback copy.
 
 **Change route when:** Source/destination identity or erase permission is ambiguous. · Storage failure or incompatible target geometry makes the planned migration unsafe.
 
+### 🎯 Go straight to a specific fix
+
+- **[Use remaining space after a successful clone](#fix-migration-new-ssd-shows-old-capacity)** — A larger replacement disk boots correctly but the [Windows](https://www.microsoft.com/windows) volume is still the old size.
+- **[Read a copy result correctly](#fix-migration-interpret-robocopy-exit-code)** — A [Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) job reports a nonzero exit code and a wrapper labels the whole migration failed.
+- **[Finish what an app-list import cannot migrate](#fix-migration-package-list-is-not-app-data)** — Applications reinstall on the new PC but settings, licenses or data are missing.
+
 > [!NOTE]
 > **Start here.** Verify the source drive is healthy. A failing drive needs the recovery workflow instead of an ordinary clone.
 
@@ -130,6 +138,8 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** | Inventory and reapply approved application packages. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://learn.microsoft.com/en-us/windows/package-manager/winget/) |
 | **[Clonezilla](https://clonezilla.org/)** · [Official page](https://clonezilla.org/) · **[Get x64 rescue image · ISO](https://downloads.sourceforge.net/clonezilla/clonezilla-live-3.3.5-3-amd64.iso)** | Capturing or restoring a supported disk image with a repeatable procedure. | Bootable PC, [Linux](https://www.kernel.org/); Free / open source | [Open guide](https://clonezilla.org/clonezilla-live-doc.php) |
 | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
+| **[Syncthing](https://syncthing.net/)** · [Official page](https://syncthing.net/) · **[Download Windows x64 · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip)** | Synchronize an explicitly chosen healthy-data folder between approved machines; keep an independent backup. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/), BSD; Free and open source under MPL-2.0 | [Open guide](https://docs.syncthing.net/) |
+| **[WinMerge](https://winmerge.org/)** · [Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** | Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. | [Windows](https://www.microsoft.com/windows); Free and open source under GPL-2.0-or-later | [Open guide](https://manual.winmerge.org/en/) |
 
 <a id="walkthrough"></a>
 
@@ -189,6 +199,81 @@ Work in order, record the result of each step, and change route when the evidenc
 > **Pause this route and escalate when:**
 > - The source exhibits I/O errors or unhealthy behavior.
 > - The selected tool cannot support the target size or partition/encryption layout.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-migration-new-ssd-shows-old-capacity"></a>
+
+### Use remaining space after a successful clone
+
+**Use when:** A larger replacement disk boots correctly but the [Windows](https://www.microsoft.com/windows) volume is still the old size.
+
+**Start here:** Open Disk Management and inspect the partition order on the verified new disk.
+
+**[Rescuezilla](https://rescuezilla.com/)** · [Official page](https://rescuezilla.com/) · **[Download x64 rescue image · ISO](https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso)**
+
+1. Confirm unallocated space exists on that same disk and whether it is immediately after the volume to extend.
+2. Use Extend Volume only when the documented filesystem/layout requirements are met and a rollback copy exists.
+3. Reopen the volume and verify capacity, applications and recovery behavior before releasing the original disk.
+
+**Prove it worked:** The intended volume uses the approved additional space and the migrated system still boots independently.
+
+**If this does not resolve it:** If a recovery or other partition blocks extension, plan a supported layout change; do not delete partitions just to make the option clickable.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows-server/storage/disk-management/extend-a-basic-volume) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-migration-interpret-robocopy-exit-code"></a>
+
+### Read a copy result correctly
+
+**Use when:** A [Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) job reports a nonzero exit code and a wrapper labels the whole migration failed.
+
+**Start here:** Retain the copy log and the exact exit code before rerunning.
+
+**[Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · **[Open built-in copy instructions](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)**
+
+1. Compare the result with Microsoft’s return-code table: codes below 8 describe successful copies or differences; 8 or higher includes a failure.
+2. Review copied, skipped, extra, mismatch and failed totals against the intended scope rather than accepting only the headline code.
+3. Open representative destination files as the intended user and investigate any failed or mismatched items individually.
+
+**Prove it worked:** The case identifies actual copy failures or documented differences and verifies usable destination data.
+
+**If this does not resolve it:** Do not add mirror or purge flags to make the totals match; those can delete destination files.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-migration-package-list-is-not-app-data"></a>
+
+### Finish what an app-list import cannot migrate
+
+**Use when:** Applications reinstall on the new PC but settings, licenses or data are missing.
+
+**Start here:** Separate the application inventory from the user-data and license migration records.
+
+**[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)**
+
+**[Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · **[Open built-in copy instructions](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)**
+
+1. Review [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) export/import results for packages that were unmatched, unavailable or installed from a different source.
+2. Install missing approved products from their publisher and restore settings/data through each application’s supported method.
+3. Activate the correct licenses and test a real user document or workflow for each critical application.
+
+**Prove it worked:** The migration proves working applications and user data rather than merely reproducing a package list.
+
+**If this does not resolve it:** Keep the old device or rollback copy until unique local data and licensed application access are accounted for.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows/package-manager/winget/export) · [Source 2](https://learn.microsoft.com/en-us/windows/package-manager/winget/import) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

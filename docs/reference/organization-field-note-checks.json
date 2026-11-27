@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "scope": "Final field-note data and research-index checks only; no target-machine repair was executed.",
+  "result": "passed",
+  "notes": 74,
+  "jobs": 22,
+  "steps": 222,
+  "uniquePrimaryUrls": 99,
+  "coverage": {
+    "intake-triage": 3,
+    "malware-removal": 3,
+    "ransomware-response": 3,
+    "slow-pc": 4,
+    "windows-repair": 3,
+    "windows-update": 3,
+    "boot-recovery": 3,
+    "failing-drive": 3,
+    "disk-migration": 3,
+    "backup-restore": 4,
+    "network-dns": 5,
+    "outage-recovery": 3,
+    "remote-support": 3,
+    "ad-trust": 3,
+    "outlook-email": 4,
+    "printer-repair": 5,
+    "hardware-bsod": 3,
+    "new-pc": 3,
+    "client-handoff": 3,
+    "boot-usb": 3,
+    "ai-triage": 3,
+    "preventive-maintenance": 4
+  },
+  "directWorkingViewCaseLinks": 74,
+  "parentWikiGuideRoutes": 22,
+  "knownToolIdsResolved": true,
+  "distinctFirstActionsAndStepSets": true,
+  "markdownLinkingIdempotent": true,
+  "httpStatusCounts": {
+    "200": 98,
+    "403": 1
+  },
+  "httpLimit": "The current official CISA PDF route was found in indexed publisher content, but direct HTTP retrieval and a subsequent web open both returned 403. Its presence in the official search index is not proof of complete live retrieval or universal reachability.",
+  "files": [
+    {
+      "path": "data/field-notes.json",
+      "sha256": "6d1c5c1ed5e0e1856517fab191df13730fbe787ad2fc4dc9b5447de27b703ad5"
+    },
+    {
+      "path": "docs/reference/field-notes-research-2026-11-26.md",
+      "sha256": "006a96ad25c3a302635153019a6e16e2a6f58956986fbb572353c183dd0acd2a"
+    }
+  ],
+  "sourceReview": "Operational claims were checked against primary documentation; HTTP results are a separate route check. No target-machine repair, decryptor, recovery operation or physical printer was runtime-tested in this authoring pass."
+}

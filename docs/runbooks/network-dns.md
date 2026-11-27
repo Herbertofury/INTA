@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-fix-internet-dns-or-local-network-problems"></a>
 
@@ -8,7 +8,7 @@ Locate the failing layer before resetting adapters or changing the whole network
 
 **Networking** · Intermediate · 15–60 min · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/network-dns)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/network-dns)
 
 <a id="working-kit"></a>
 
@@ -23,6 +23,8 @@ Locate the failing layer before resetting adapters or changing the whole network
 | Run supported local connection diagnostics. | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Open network troubleshooting](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows)** |
 | Read IP, DNS and connection results on the affected PC. | **[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** |
 | Capture only a scoped unresolved protocol failure. | **[Wireshark](https://www.wireshark.org/)** · [Official page](https://www.wireshark.org/) · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)** |
+| Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable. | **[curl](https://curl.se/)** · [Official page](https://curl.se/) · **[Use the Windows-included curl.exe](https://curl.se/windows/microsoft.html)** |
+| Comparing a reproducible path problem from a [Linux](https://www.kernel.org/) or [macOS](https://support.apple.com/macos) bench, or [Windows](https://www.microsoft.com/windows) through WSL. | **[mtr](https://www.bitwizard.nl/mtr/)** · [Official page](https://www.bitwizard.nl/mtr/) · **[Install a Linux/WSL distribution package](https://github.com/traviscross/mtr#using-mtr-on-windows)** |
 
 ### First checks
 
@@ -85,6 +87,14 @@ Locate the failing layer before resetting adapters or changing the whole network
 
 **Change route when:** The fault is a shared outage or managed-policy issue outside local authority. · The next action would reset production networking without a recovery path.
 
+### 🎯 Go straight to a specific fix
+
+- **[Fix a PC stuck on a self-assigned address](#fix-network-dhcp-self-assigned-address)** — A DHCP-configured adapter has a 169.254 address and cannot reach the normal gateway.
+- **[Restore internal name resolution on VPN](#fix-network-internal-names-fail-on-vpn)** — Public websites work, but a company share or application name fails after VPN connection.
+- **[Complete a captive Wi-Fi sign-in](#fix-network-captive-portal-signin)** — The PC associates with guest Wi-Fi but internet access is limited until the network’s sign-in step.
+- **[Separate a blocked port from a DNS problem](#fix-network-name-resolves-but-port-fails)** — The expected hostname resolves, but one application cannot connect.
+- **[Locate a throughput bottleneck](#fix-network-measure-lan-before-blaming-isp)** — Large transfers are slow, but browsing and connectivity checks pass.
+
 > [!NOTE]
 > **Start here.** Determine whether the problem affects one app, one device, one network segment, or every device. Capture the working and failing cases.
 
@@ -137,6 +147,8 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[Wireshark](https://www.wireshark.org/)** · [Official page](https://www.wireshark.org/) · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)** | Capture only a scoped unresolved protocol failure. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://www.wireshark.org/docs/) |
 | **[iperf3](https://software.es.net/iperf/)** · [Official page](https://software.es.net/iperf/) · **[Download source · TAR.GZ](https://downloads.es.net/pub/iperf/iperf-3.22.1.tar.gz)** | Separating local network bandwidth limits from internet or application problems. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), FreeBSD; Free / open source | [Open guide](https://software.es.net/iperf/invoking.html) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
+| **[curl](https://curl.se/)** · [Official page](https://curl.se/) · **[Use the Windows-included curl.exe](https://curl.se/windows/microsoft.html)** | Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/); Free and open source; the [curl](https://curl.se/) license permits commercial projects | [Open guide](https://curl.se/docs/manpage.html) |
+| **[mtr](https://www.bitwizard.nl/mtr/)** · [Official page](https://www.bitwizard.nl/mtr/) · **[Install a Linux/WSL distribution package](https://github.com/traviscross/mtr#using-mtr-on-windows)** | Comparing a reproducible path problem from a [Linux](https://www.kernel.org/) or [macOS](https://support.apple.com/macos) bench, or [Windows](https://www.microsoft.com/windows) through WSL. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) (WSL); Free and open source under GPL-2.0 | [Open guide](https://github.com/traviscross/mtr) |
 
 <a id="walkthrough"></a>
 
@@ -212,6 +224,129 @@ Resolve-DnsName learn.microsoft.com
 > **Pause this route and escalate when:**
 > - A remote-only network change would cut off the only recovery path.
 > - The problem is a widespread outage or an active security incident.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-network-dhcp-self-assigned-address"></a>
+
+### Fix a PC stuck on a self-assigned address
+
+**Use when:** A DHCP-configured adapter has a 169.254 address and cannot reach the normal gateway.
+
+**Start here:** Run ipconfig /all and identify the affected adapter, DHCP state and lease information.
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)**
+
+**[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Open network troubleshooting](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows)**
+
+1. Check the actual cable/Wi-Fi association and compare one working device on the same intended network.
+2. Inspect the DHCP Client service and its Admin/Operational event logs; distinguish one-PC failure from a VLAN, scope or server problem.
+3. Restore the proven DHCP path, then renew only the affected adapter when a local or alternate access path is available.
+
+**Prove it worked:** The adapter receives the intended lease, gateway and DNS settings and reaches the required service.
+
+**If this does not resolve it:** Do not invent a static address or release the adapter carrying the only remote session. Escalate shared lease failures to the network owner.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/troubleshoot-problems-dhcp-client) · [Source 2](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-network-internal-names-fail-on-vpn"></a>
+
+### Restore internal name resolution on VPN
+
+**Use when:** Public websites work, but a company share or application name fails after VPN connection.
+
+**Start here:** Compare the failing full hostname and DNS settings with a working approved client.
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)**
+
+**[Wireshark](https://www.wireshark.org/)** · [Official page](https://www.wireshark.org/) · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)**
+
+1. Run Resolve-DnsName for the actual service name and note the answer or error and the configured resolver.
+2. Check whether the approved VPN installed the intended DNS server, suffix and route to that server; distinguish a short-name problem from a full-name problem.
+3. Correct the managed DNS/VPN setting through its owner and retest the original application, not only a DNS query.
+
+**Prove it worked:** The intended internal name resolves through the correct path and the user can access the service.
+
+**If this does not resolve it:** Do not replace domain DNS with a public resolver or weaken the firewall to hide a missing route.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/troubleshoot-dns-client-resolution-issues) · [Source 2](https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/firewall-profile-not-switch-to-domain) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-network-captive-portal-signin"></a>
+
+### Complete a captive Wi-Fi sign-in
+
+**Use when:** The PC associates with guest Wi-Fi but internet access is limited until the network’s sign-in step.
+
+**Start here:** Confirm the exact network name with the venue or network owner.
+
+**[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Open network troubleshooting](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows)**
+
+1. Use the operating system’s network sign-in notification or the owner’s documented portal page and inspect the destination before entering information.
+2. Complete the approved access terms or account step; do not dismiss a certificate warning or enter organization credentials into an unexpected page.
+3. Recheck ordinary browsing and the required VPN/application after the portal releases access.
+
+**Prove it worked:** The portal state completes and an ordinary secure site plus the intended service works.
+
+**If this does not resolve it:** If the portal loops or the network identity is uncertain, involve the network owner; avoid broad proxy/VPN/security changes just to expose a page.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows-server/networking/ncsi/ncsi-overview) · [Source 2](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-network-name-resolves-but-port-fails"></a>
+
+### Separate a blocked port from a DNS problem
+
+**Use when:** The expected hostname resolves, but one application cannot connect.
+
+**Start here:** Identify the application’s documented destination and TCP port.
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)**
+
+**[TCPView](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/TCPView.zip)**
+
+1. Run Test-NetConnection with the actual ComputerName and Port values; record the chosen interface and TcpTestSucceeded result.
+2. Compare the same test from an approved working client and the intended VPN/proxy state.
+3. If TCP succeeds, test authentication, certificates and the application itself; if it fails, have the network/service owner inspect that specific path.
+
+**Prove it worked:** The evidence isolates transport reachability from application behavior without changing unrelated network settings.
+
+**If this does not resolve it:** A successful ping does not prove the service port works, and a successful TCP handshake does not prove the application is healthy.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-network-measure-lan-before-blaming-isp"></a>
+
+### Locate a throughput bottleneck
+
+**Use when:** Large transfers are slow, but browsing and connectivity checks pass.
+
+**Start here:** Choose approved test endpoints and compare the same transfer over wired and wireless paths.
+
+**[iperf3](https://software.es.net/iperf/)** · [Official page](https://software.es.net/iperf/) · **[Download source · TAR.GZ](https://downloads.es.net/pub/iperf/iperf-3.22.1.tar.gz)**
+
+1. Check the negotiated link and use a known-good cable/port when the observed link is below the device’s expected capability.
+2. For a controlled LAN test, use [iperf3](https://software.es.net/iperf/) on an upstream-supported [Linux](https://www.kernel.org/)/[macOS](https://support.apple.com/macos)/FreeBSD endpoint pair with the server restricted to the approved test network.
+3. Compare LAN results with the real file/application transfer before blaming the internet connection, storage or Wi-Fi.
+
+**Prove it worked:** Like-for-like measurements show which path or endpoint introduces the bottleneck.
+
+**If this does not resolve it:** Do not advertise an unverified third-party [Windows](https://www.microsoft.com/windows) build as upstream [iperf3](https://software.es.net/iperf/) or run an unrestricted public test server.
+
+**Official evidence:** [Source 1](https://software.es.net/iperf/) · [Source 2](https://software.es.net/iperf/invoking.html) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

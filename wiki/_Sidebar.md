@@ -2,7 +2,7 @@
 
 ## INTA knowledge base
 
-**[🏠 Home](Home)** · **[🧰 Open hub](https://herbertofury.github.io/INTA/)**
+**[🏠 Home](Home)** · **[🧰 Open hub](https://herbertofury.github.io/INTA/)** · **[🗺️ Service map](Service-Map)**
 
 <a id="playbook-groups"></a>
 
@@ -85,5 +85,9 @@ Tool name = official page. File buttons name the platform; built-in tools open i
 - [Interface design](Interface-Design)
 - [Contribute](Contribute)
 - [Contribution templates](Templates)
+- [Organization rules](Knowledge-Organization)
+- [Coverage and review health](Knowledge-Health)
+- [Research queue](Research-Queue)
+- [Research updates](Research-Updates)
 - [Continuous improvement](Continuous-Improvement)
 - [Maintain and publish](Maintaining-the-Hub)

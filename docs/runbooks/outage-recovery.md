@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-bring-an-office-back-after-a-power-outage"></a>
 
@@ -8,7 +8,7 @@ Restore dependencies in order and verify services before releasing the office ba
 
 **Backup & continuity** · Advanced · 30–120 min; infrastructure varies · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/outage-recovery)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/outage-recovery)
 
 <a id="working-kit"></a>
 
@@ -22,6 +22,8 @@ Restore dependencies in order and verify services before releasing the office ba
 | --- | --- |
 | Inspect recovered [Windows](https://www.microsoft.com/windows) services and connection state. | **[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** |
 | Check for a matching cloud remedy on eligible, configured devices with a widespread startup failure. | **[Quick machine recovery](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)** · [Official page](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp) · **[Check supported recovery setup](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)** |
+| Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable. | **[curl](https://curl.se/)** · [Official page](https://curl.se/) · **[Use the Windows-included curl.exe](https://curl.se/windows/microsoft.html)** |
+| Comparing a reproducible path problem from a [Linux](https://www.kernel.org/) or [macOS](https://support.apple.com/macos) bench, or [Windows](https://www.microsoft.com/windows) through WSL. | **[mtr](https://www.bitwizard.nl/mtr/)** · [Official page](https://www.bitwizard.nl/mtr/) · **[Install a Linux/WSL distribution package](https://github.com/traviscross/mtr#using-mtr-on-windows)** |
 
 ### Find the failure
 
@@ -83,6 +85,12 @@ Restore dependencies in order and verify services before releasing the office ba
 
 **Change route when:** Storage/RAID damage, unsafe power or active compromise changes the recovery route. · The required restore would overwrite the only recovery copy.
 
+### 🎯 Go straight to a specific fix
+
+- **[Read an unexpected-restart event correctly](#fix-outage-event-41-is-not-the-cause)** — Event 41 appears after a power outage or unexplained restart.
+- **[Recover a dependent service in the right order](#fix-outage-one-service-did-not-recover)** — The server is running after power restoration but one business service remains unavailable.
+- **[Restore a share after the server returns](#fix-outage-share-unavailable-after-restart)** — The server responds, but a previously working file share or mapped drive does not.
+
 > [!NOTE]
 > **Start here.** Confirm power is stable and establish which devices and services are down. Use the site’s private dependency diagram and recovery plan.
 
@@ -132,6 +140,8 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[Quick machine recovery](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)** · [Official page](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp) · **[Check supported recovery setup](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)** | Check for a matching cloud remedy on eligible, configured devices with a widespread startup failure. | [Windows 11](https://www.microsoft.com/windows/windows-11), [Windows Server](https://learn.microsoft.com/en-us/windows-server/) 2025; Included with supported [Windows](https://www.microsoft.com/windows); availability depends on release, edition and management policy | [Open guide](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp) |
 | **[smartmontools](https://www.smartmontools.org/)** · [Official page](https://www.smartmontools.org/) · **[Download Windows setup · EXE](https://github.com/smartmontools/smartmontools/releases/download/RELEASE_7_5/smartmontools-7.5.win32-setup.exe)** | Reading SMART and NVMe health from a rescue environment or supported host OS. | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://github.com/smartmontools/smartmontools) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
+| **[curl](https://curl.se/)** · [Official page](https://curl.se/) · **[Use the Windows-included curl.exe](https://curl.se/windows/microsoft.html)** | Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/); Free and open source; the [curl](https://curl.se/) license permits commercial projects | [Open guide](https://curl.se/docs/manpage.html) |
+| **[mtr](https://www.bitwizard.nl/mtr/)** · [Official page](https://www.bitwizard.nl/mtr/) · **[Install a Linux/WSL distribution package](https://github.com/traviscross/mtr#using-mtr-on-windows)** | Comparing a reproducible path problem from a [Linux](https://www.kernel.org/) or [macOS](https://support.apple.com/macos) bench, or [Windows](https://www.microsoft.com/windows) through WSL. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) (WSL); Free and open source under GPL-2.0 | [Open guide](https://github.com/traviscross/mtr) |
 
 <a id="walkthrough"></a>
 
@@ -192,6 +202,79 @@ Work in order, record the result of each step, and change route when the evidenc
 > **Pause this route and escalate when:**
 > - Power is unstable or equipment shows physical/electrical damage.
 > - Storage is degraded, rebuilding, or producing new errors without an approved recovery plan.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-outage-event-41-is-not-the-cause"></a>
+
+### Read an unexpected-restart event correctly
+
+**Use when:** Event 41 appears after a power outage or unexplained restart.
+
+**Start here:** Match the event time with the actual outage and user report.
+
+**[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger · APPINSTALLER](https://aka.ms/windbg/download)**
+
+1. Inspect the event’s bug-check information and nearby system events; Event 41 records an unclean shutdown, not a single proven cause.
+2. Check power/UPS and hardware evidence when there is no useful bug check; follow the crash-dump route when a stop code and dump exist.
+3. After the scoped correction, observe a normal shutdown/startup and the affected business service.
+
+**Prove it worked:** The case distinguishes a recorded unclean shutdown from evidence for power, hardware or software cause.
+
+**If this does not resolve it:** Stop repeated power cycling when storage, electrical safety or thermal symptoms appear.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-outage-one-service-did-not-recover"></a>
+
+### Recover a dependent service in the right order
+
+**Use when:** The server is running after power restoration but one business service remains unavailable.
+
+**Start here:** Identify the exact service name and its required dependencies before restarting anything.
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)**
+
+1. Open Services or use the read-only Get-Service view to inspect state and required/dependent services.
+2. Review service-start events and verify storage, DNS, identity and any database dependency before the approved start/restart.
+3. Test the real user operation from a client and retain the service error if it stops again.
+
+**Prove it worked:** The service stays running because its dependencies work, and the business transaction succeeds.
+
+**If this does not resolve it:** Do not mass-start or repeatedly restart every service. Recurring termination needs the application or infrastructure owner.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service?view=powershell-5.1) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-outage-share-unavailable-after-restart"></a>
+
+### Restore a share after the server returns
+
+**Use when:** The server responds, but a previously working file share or mapped drive does not.
+
+**Start here:** Test the approved share by its normal hostname from an affected user session.
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)**
+
+1. Separate name resolution, the required SMB connection and authentication; compare with a working client and the server’s service state.
+2. Check whether the backing volume and intended share are available and whether the original permissions remain intact.
+3. Repair the proven dependency, then open and save an agreed test file as the actual user.
+
+**Prove it worked:** The normal share path works with the intended permissions and data, not only with an administrator account.
+
+**If this does not resolve it:** Do not expose the share broadly or enable obsolete SMB versions as a generic outage workaround.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/troubleshooting-smb) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

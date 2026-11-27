@@ -1,0 +1,31 @@
+{
+  "reviewedAt": "2026-11-26",
+  "scope": "Keep the existing INTA architecture organized while expanding every current service area.",
+  "decisions": [
+    {
+      "candidate": "Existing canonical wiki-layout groups",
+      "decision": "Reuse",
+      "reason": "The eight existing service groups already cover all22 jobs; one source can generate app and Wiki navigation without new competing categories.",
+      "source": "https://github.com/Herbertofury/INTA/blob/main/data/wiki-layout.json"
+    },
+    {
+      "candidate": "Diataxis task-focused practical guides",
+      "decision": "Adapt",
+      "reason": "Use short problem-specific cases inside existing jobs, with reference/tool details linked separately; preserve the complete existing guides.",
+      "source": "https://diataxis.fr/how-to-guides/"
+    },
+    {
+      "candidate": "Replace the current static builder with another documentation platform",
+      "decision": "Retain current architecture",
+      "reason": "No unmet organization requirement needs a framework migration. The current single-file offline app, exact acquisitions, saved state and stable Wiki routes are valuable working behavior.",
+      "source": "https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py"
+    },
+    {
+      "candidate": "GitHub Actions schedule for editorial-age reporting",
+      "decision": "Adopt",
+      "reason": "Run read-only structure and due-date reporting on weekdays; preserve full results without changing content or review dates. Scheduled execution is best effort, separate from the maintenance task.",
+      "source": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule"
+    }
+  ],
+  "limits": "Editorial architecture choices, not a comparative runtime benchmark or proof of tool operation on client hardware."
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "owner": "INTA maintainers",
+  "taxonomySource": "data/wiki-layout.json",
+  "reviewIntervalsDays": {
+    "coreTool": 30,
+    "specialistTool": 60,
+    "evaluateTool": 14,
+    "guide": 60,
+    "fieldNote": 60,
+    "resource": 60,
+    "acquisition": 30
+  },
+  "duplicateOfficialPageAllowlist": [],
+  "priorities": [
+    "Correct a harmful or misleading instruction",
+    "Repair an official route or broken relationship",
+    "Review overdue high-impact guidance and acquisitions",
+    "Resolve a concrete missing case in an existing service area",
+    "Compare a useful new capability against the current choice",
+    "Improve presentation without removing useful content"
+  ],
+  "rules": [
+    {
+      "id": "one-service-home",
+      "rule": "Every service guide belongs to exactly one existing layout group; cross-links provide other routes."
+    },
+    {
+      "id": "one-tool-record",
+      "rule": "A tool has one stable catalog ID, one acquisition record and one primary category. Editions and platform files are acquisition alternatives."
+    },
+    {
+      "id": "extend-before-splitting",
+      "rule": "Add a specific fix to the existing service guide before creating another overlapping guide. Split only for a genuinely different job and preserve old routes."
+    },
+    {
+      "id": "evidence-before-promotion",
+      "rule": "New candidates carry source evidence, platform and business-use limits. Source review is not runtime certification; preview candidates remain labeled."
+    },
+    {
+      "id": "real-review-dates",
+      "rule": "Only a substantive source review advances a review date. A successful link check or rebuild does not refresh guidance."
+    },
+    {
+      "id": "balanced-research",
+      "rule": "Keep an actionable research queue for every job and tool category; use severity first and oldest reviewed area next to avoid neglect."
+    },
+    {
+      "id": "preserve-and-publish",
+      "rule": "Preserve existing IDs, commands, sources, cases and saved state; rebuild and verify the source, live hub, actual Wiki and offline copy together."
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 # 🛠 Make a useful contribution
 
@@ -25,6 +25,8 @@
 | [Quick-start selections](https://github.com/Herbertofury/INTA/blob/main/data/quick-start.json) | Free starting tools for urgent scenarios, task fit, source evidence and practical limits; shared by the front pages |
 | [Job guides](https://github.com/Herbertofury/INTA/blob/main/data/jobs.json) | Procedures, selected tool IDs, verification, escalation and sources |
 | [Job workspaces](https://github.com/Herbertofury/INTA/blob/main/data/job-workspaces.json) | Purpose-specific toolkits, official action resources, symptom decisions and completion evidence |
+| [Specific fixes](https://github.com/Herbertofury/INTA/blob/main/data/field-notes.json) | Distinct fault cases inside existing jobs, concrete actions, proof, fallback and official evidence |
+| [Knowledge policy](https://github.com/Herbertofury/INTA/blob/main/data/knowledge-policy.json) and [research queue](https://github.com/Herbertofury/INTA/blob/main/data/research-queue.json) | Shared organization rules, real review intervals and concrete next investigations for every field |
 | [Method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json) | Precise method names, aliases, canonical destinations and proof |
 | [Link aliases](https://github.com/Herbertofury/INTA/blob/main/data/link-aliases.json) and [linking helper](https://github.com/Herbertofury/INTA/blob/main/scripts/wiki_links.py) | Additional precise application names and linking of every repeated mention |
 | [Wiki layout](https://github.com/Herbertofury/INTA/blob/main/data/wiki-layout.json) | Page presentation and job decision diagrams |
@@ -51,6 +53,7 @@ python3 scripts/build-hub.py
 python3 -m unittest discover -s tests
 python3 scripts/build-hub.py --check
 python3 scripts/check-wiki.py
+python3 scripts/check-knowledge.py --output reports/knowledge-health.json
 ```
 
 Command legend: [Python](https://www.python.org/) runs the [hub builder](https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py), [test suite](https://github.com/Herbertofury/INTA/tree/main/tests) and [wiki checker](https://github.com/Herbertofury/INTA/blob/main/scripts/check-wiki.py). The checks verify generated outputs, known named links, routes and linked diagram or command legends.

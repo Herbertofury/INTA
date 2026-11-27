@@ -1,0 +1,898 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "scope": "HTTP route checks only; technical content review is recorded separately.",
+  "fieldNotesSha256": "6d1c5c1ed5e0e1856517fab191df13730fbe787ad2fc4dc9b5447de27b703ad5",
+  "newlyCheckedUrls": 14,
+  "reusedUnchangedChecks": 85,
+  "results": [
+    {
+      "url": "https://developers.openai.com/codex/security/",
+      "status": 200,
+      "finalUrl": "https://learn.chatgpt.com/docs/security",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Codex Security | ChatGPT Learn",
+      "sampledBytes": 403900,
+      "sampleSha256": "0a2b5b36c825ea1dc740559c92a1a46d02c45408448e50f352126f241daf7a13"
+    },
+    {
+      "url": "https://github.com/Ylianst/MeshCentral",
+      "status": 200,
+      "finalUrl": "https://github.com/Ylianst/MeshCentral",
+      "contentType": "text/html; charset=utf-8",
+      "title": "GitHub - Ylianst/MeshCentral: A complete web-based remote monitoring and management web site. Once setup you can install agents and perform remote desktop session to devices on the local network or over the Internet. · GitHub",
+      "sampledBytes": 434802,
+      "sampleSha256": "0457ab287d752e50acf8f84a45099d188b06031f2b76b648ce1728747a2b7a18"
+    },
+    {
+      "url": "https://github.com/memtest86plus/memtest86plus",
+      "status": 200,
+      "finalUrl": "https://github.com/memtest86plus/memtest86plus",
+      "contentType": "text/html; charset=utf-8",
+      "title": "GitHub - memtest86plus/memtest86plus: Official repo for Memtest86+ · GitHub",
+      "sampledBytes": 419081,
+      "sampleSha256": "8fab66cdad1358d919b185708a6c72d770423c27a598df49994b4590a08833d8"
+    },
+    {
+      "url": "https://github.com/pbatard/rufus/wiki/FAQ",
+      "status": 200,
+      "finalUrl": "https://github.com/pbatard/rufus/wiki/FAQ",
+      "contentType": "text/html; charset=utf-8",
+      "title": "FAQ · pbatard/rufus Wiki · GitHub",
+      "sampledBytes": 526857,
+      "sampleSha256": "40a4732b607fdc6308331305f8c37d11a1d68fee59b8dc7b5ec1ccb6da817ecd"
+    },
+    {
+      "url": "https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt",
+      "status": 200,
+      "finalUrl": "https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Data controls in ChatGPT | OpenAI Help Center",
+      "sampledBytes": 81275,
+      "sampleSha256": "c94b85bad2ce7e967b35d61ea5308fe4b3c3a2214a39516f06f4aeb340871ef3"
+    },
+    {
+      "url": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/files_restore.html",
+      "status": 200,
+      "finalUrl": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/files_restore.html",
+      "contentType": "text/html",
+      "title": "Restoring Files and Folders - Veeam Agent for Microsoft Windows User Guide",
+      "sampledBytes": 81068,
+      "sampleSha256": "7ad822cff7d98d9bafd92774f3b567eee663886e4af7bb56117b2692576ee514"
+    },
+    {
+      "url": "https://kopia.io/docs/getting-started/",
+      "status": 200,
+      "finalUrl": "https://kopia.io/docs/getting-started/",
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Getting Started Guide | Kopia",
+      "sampledBytes": 82593,
+      "sampleSha256": "556b430eb983954c02c806c4462de29212fa330b833a315696c85ddb4122889b"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+      "contentType": "text/html",
+      "title": "Microsoft Defender Offline scan in Windows - Microsoft Defender for Endpoint | Microsoft Learn",
+      "sampledBytes": 65814,
+      "sampleSha256": "493d2bf730909db2211dfb0d1423527f9586f423948cdbc34628a7129d820bbe"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/defender-office-365/responding-to-a-compromised-email-account",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/defender-office-365/responding-to-a-compromised-email-account",
+      "contentType": "text/html",
+      "title": "Respond to a compromised email account in Microsoft 365 - Microsoft Defender for Office 365 | Microsoft Learn",
+      "sampledBytes": 67281,
+      "sampleSha256": "235b2eeea416ca204461a8414249c242527b87da084c2841141951df7f9e7b70"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/entra/identity/devices/concept-device-registration",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/entra/identity/devices/concept-device-registration",
+      "contentType": "text/html",
+      "title": "What are Microsoft Entra registered devices? - Microsoft Entra ID | Microsoft Learn",
+      "sampledBytes": 50916,
+      "sampleSha256": "fe32c28a2e15cf56b76c6c42f204cba6070169746af528f72e0d1e8c3b852bc1"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/entra/identity/devices/concept-directory-join",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/entra/identity/devices/concept-directory-join",
+      "contentType": "text/html",
+      "title": "What is a Microsoft Entra joined device? - Microsoft Entra ID | Microsoft Learn",
+      "sampledBytes": 54890,
+      "sampleSha256": "a3fdce6ec2f4923183fb75fa865ab4ff69c6a067dedc064ec8d10055461c9b48"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access",
+      "contentType": "text/html",
+      "title": "Revoke user access in an emergency in Microsoft Entra ID - Microsoft Entra ID | Microsoft Learn",
+      "sampledBytes": 61778,
+      "sampleSha256": "bffe39416f7b877a135783d0f9ea777c1fa06b23e5c3d326d8a5f1406afd9a99"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-command",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-command?view=powershell-7.6",
+      "contentType": "text/html",
+      "title": "Get-Command (Microsoft.PowerShell.Core) - PowerShell | Microsoft Learn",
+      "sampledBytes": 116860,
+      "sampleSha256": "84fb73f7d9a7aaeb3ef4460cdbe02697680f105293642d01b6a6e863b4123dfc"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-help",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-help?view=powershell-7.6",
+      "contentType": "text/html",
+      "title": "Get-Help (Microsoft.PowerShell.Core) - PowerShell | Microsoft Learn",
+      "sampledBytes": 109430,
+      "sampleSha256": "75291e2a996b7d52e6a456fadb6af6811a3d6f4826baafb7c731e8fb8fcc02dc"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service?view=powershell-5.1",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-service?view=powershell-5.1",
+      "contentType": "text/html",
+      "title": "Get-Service (Microsoft.PowerShell.Management) - PowerShell | Microsoft Learn",
+      "sampledBytes": 83788,
+      "sampleSha256": "3b4fdb05a8fa964967fb394b2a35ef495449ef4d16a63d03967130331efb0f48"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1",
+      "contentType": "text/html",
+      "title": "Test-ComputerSecureChannel (Microsoft.PowerShell.Management) - PowerShell | Microsoft Learn",
+      "sampledBytes": 68829,
+      "sampleSha256": "84b2e212057a4a6400a4a642787aef657fede7b20cc664fdea136cd9e4285c4a"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection?view=windowsserver2025-ps",
+      "contentType": "text/html",
+      "title": "Test-NetConnection (NetTCPIP) | Microsoft Learn",
+      "sampledBytes": 70863,
+      "sampleSha256": "603f3eefc666ba669214bd9fa29f0e699861e2be68b0c2a50be4819df7af6916"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport?view=windowsserver2025-ps",
+      "contentType": "text/html",
+      "title": "Get-PrinterPort (PrintManagement) | Microsoft Learn",
+      "sampledBytes": 56463,
+      "sampleSha256": "e337d50538b6c24f40f2eb1b7a8df1708c17b85171a3b5dd454c50d08fbc1db2"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+      "contentType": "text/html",
+      "title": "Process Monitor - Sysinternals | Microsoft Learn",
+      "sampledBytes": 40428,
+      "sampleSha256": "85396930fa16677e89dd90596ec889d6faaaa445d0dd5ca234b290e0ea96164e"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+      "contentType": "text/html",
+      "title": "RAMMap - Sysinternals | Microsoft Learn",
+      "sampledBytes": 39543,
+      "sampleSha256": "1e710f265304e0c9c3cae5392f49a9e0b028863b902e02bf92d57b76407bab20"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/firewall-profile-not-switch-to-domain",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/firewall-profile-not-switch-to-domain",
+      "contentType": "text/html",
+      "title": "Firewall profile doesn&#39;t switch to Domain when you use a third-party VPN - Windows Client | Microsoft Learn",
+      "sampledBytes": 52017,
+      "sampleSha256": "7660999a0b8b97c114ebb0cf8b1f483c972890a65492e16697c1c741c9bc06e6"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/troubleshoot-dns-client-resolution-issues",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/troubleshoot-dns-client-resolution-issues",
+      "contentType": "text/html",
+      "title": "Troubleshoot DNS Client Name Resolution Issues - Windows Client | Microsoft Learn",
+      "sampledBytes": 57191,
+      "sampleSha256": "31bd4271287e57b21ad0a7e9eba739b494a470e8ac6d8eaf8716ae9a946ba32f"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options",
+      "contentType": "text/html",
+      "title": "Configure system failure and recovery options - Windows Client | Microsoft Learn",
+      "sampledBytes": 63118,
+      "sampleSha256": "e4406367a4f81826f978a5665dfc7170128f13947d039b86b3382cd79ea364a5"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart",
+      "contentType": "text/html",
+      "title": "Event ID 41 The system has rebooted without cleanly shutting down first - Windows Client | Microsoft Learn",
+      "sampledBytes": 67455,
+      "sampleSha256": "de082160eebbf663fea11c24bc4edbc51ae6d8c7b9f89d52dad9d786442e1169"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/how-to-determine-the-appropriate-page-file-size-for-64-bit-versions-of-windows",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/how-to-determine-the-appropriate-page-file-size-for-64-bit-versions-of-windows",
+      "contentType": "text/html",
+      "title": "How to determine the appropriate page file size for 64-bit versions of Windows - Windows Client | Microsoft Learn",
+      "sampledBytes": 59175,
+      "sampleSha256": "9fe74f605cfec330fa470191db420a30953063a43c79a5c46ddda893cda80ce7"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/troubleshoot-problems-dhcp-client",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/troubleshoot-problems-dhcp-client",
+      "contentType": "text/html",
+      "title": "Troubleshoot problems on the DHCP client - Windows Server | Microsoft Learn",
+      "sampledBytes": 49717,
+      "sampleSha256": "a5d3c25e32322c44a35513cfff459ba671e4d2a89223b3cd977df3d24b1e28b0"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/broken-trust-relationship-domain-joined-device-its-domain-secure-channel-issues",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/broken-trust-relationship-domain-joined-device-its-domain-secure-channel-issues",
+      "contentType": "text/html",
+      "title": "Broken trust relationship between domain-joined device and its domain - Windows Server | Microsoft Learn",
+      "sampledBytes": 54885,
+      "sampleSha256": "217c891b29341e8525c1c4dd21481b5d62f9391290d385cdcffb85ae1f4920c1"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/add-device-drivers-to-windows-during-windows-setup",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/add-device-drivers-to-windows-during-windows-setup?view=windows-11",
+      "contentType": "text/html",
+      "title": "Add Device Drivers to Windows During Windows Setup | Microsoft Learn",
+      "sampledBytes": 43195,
+      "sampleSha256": "017035f13fbd1e2a3b2565069214a144f47f9084829d21e927e9b1c0fb5ecee3"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-a-windows-repair-source",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-a-windows-repair-source?view=windows-11",
+      "contentType": "text/html",
+      "title": "Configure a Windows Repair Source | Microsoft Learn",
+      "sampledBytes": 43920,
+      "sampleSha256": "be2e92b0a0467d8136c081f4ca6d7d15fc65ebac0ee084a2e3b0b7b43d69465b"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/reagentc-command-line-options",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/reagentc-command-line-options?view=windows-11",
+      "contentType": "text/html",
+      "title": "REAgentC command-line options | Microsoft Learn",
+      "sampledBytes": 43078,
+      "sampleSha256": "a64496503f7ad5a2cbbb466c68e0f263839f3620e42f65bbed9d8bafe839ffe4"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image?view=windows-11",
+      "contentType": "text/html",
+      "title": "Repair a Windows Image | Microsoft Learn",
+      "sampledBytes": 40079,
+      "sampleSha256": "17642b480b3661e6b25788c9f81ecbc863ee26a009a9ad9e0eed99aee2db2e6e"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/icacls",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/icacls",
+      "contentType": "text/html",
+      "title": "icacls | Microsoft Learn",
+      "sampledBytes": 56721,
+      "sampleSha256": "8abc60552627a4444ec4d923442e84f3ac54ef043e7e61eb75f253916adb38b0"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig",
+      "contentType": "text/html",
+      "title": "ipconfig | Microsoft Learn",
+      "sampledBytes": 54635,
+      "sampleSha256": "aa8be50d2e6f1aaf6a868f7577b34fc5058849176212afb7bd9226bfc916e53d"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/list-volume",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/list-volume",
+      "contentType": "text/html",
+      "title": "list volume | Microsoft Learn",
+      "sampledBytes": 48045,
+      "sampleSha256": "db0c426ad49a9e03ea4d625acad2e0327b1bdf38fc72f9f9a3277b796511860b"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+      "contentType": "text/html",
+      "title": "Robocopy | Microsoft Learn",
+      "sampledBytes": 72649,
+      "sampleSha256": "087829ad74491a7087a88f3968587facb3269e33bad47ec8a8e60ea3d57e2797"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/networking/ncsi/ncsi-overview",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-server/networking/ncsi/ncsi-overview",
+      "contentType": "text/html",
+      "title": "Network Connectivity Status Indicator overview for Windows | Microsoft Learn",
+      "sampledBytes": 55370,
+      "sampleSha256": "92638db9b2cd0e4fd85b4868539f3b2e286be65c8d547b3d2e56db7a633b8118"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings",
+      "contentType": "text/html",
+      "title": "Windows Time Service Tools and Settings | Microsoft Learn",
+      "sampledBytes": 103461,
+      "sampleSha256": "b09234ad9410892469cc29e7cb1c680cd37cc84d886ff516a29716f02fe20dfe"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/disk-management/extend-a-basic-volume",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-server/storage/disk-management/extend-a-basic-volume",
+      "contentType": "text/html",
+      "title": "Extend a basic or dynamic volume in Windows and Windows Server | Microsoft Learn",
+      "sampledBytes": 57457,
+      "sampleSha256": "cf6fae19ba308976e0d6a64c1461e278bfd4bfc4607e64bf7dbe4a06cada5565"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/troubleshooting-smb",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/troubleshooting-smb",
+      "contentType": "text/html",
+      "title": "Advanced Troubleshooting Server Message Block (SMB) | Microsoft Learn",
+      "sampledBytes": 58842,
+      "sampleSha256": "a0c12aa68471889ce7f68eb4bcdee6100e41cc05fd060e067c1f78791cb0a1eb"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+      "contentType": "text/html",
+      "title": "Use Quick Assist to help users | Microsoft Learn",
+      "sampledBytes": 63453,
+      "sampleSha256": "3b12b060909b19e74211806022fa0255b71220a36649be445e9b1081eb943512"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/update/safeguard-holds",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/deployment/update/safeguard-holds",
+      "contentType": "text/html",
+      "title": "Safeguard holds for Windows | Microsoft Learn",
+      "sampledBytes": 55508,
+      "sampleSha256": "24ee1cdb1d92ad2fcd73913c1c8ec0adea8e206966745723cbdbc53a7f306ee3"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files",
+      "contentType": "text/html",
+      "title": "Log files and resolving upgrade errors | Microsoft Learn",
+      "sampledBytes": 65485,
+      "sampleSha256": "5b701f6537ef0f1e979ce7719bed3061ad5fff4bed0047cec79e580bff758c12"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+      "contentType": "text/html",
+      "title": "SetupDiag | Microsoft Learn",
+      "sampledBytes": 92425,
+      "sampleSha256": "dfeb944416f7c714038dde5a5cc75292a83baa2d5a6f1b17bdd56d18003f0529"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode",
+      "contentType": "text/html",
+      "title": "Windows Protected Print Mode | Microsoft Learn",
+      "sampledBytes": 44624,
+      "sampleSha256": "2a3bcbf4619484c917de577745dcc8bf9ec44aae1bca10cf473b5991c54e3f8f"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+      "contentType": "text/html",
+      "title": "Use WinGet to install and manage applications | Microsoft Learn",
+      "sampledBytes": 64099,
+      "sampleSha256": "e211749ee8126da9f2094d1e858873884f7b05891b0fc0fa73da0a1bea2664b8"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/export",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/export",
+      "contentType": "text/html",
+      "title": "`export` Command | Microsoft Learn",
+      "sampledBytes": 55319,
+      "sampleSha256": "b40fe3dc5cc8f70de6e209758d479f3deb953b821bfd53e583c8ff3ebf215c5e"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/import",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/import",
+      "contentType": "text/html",
+      "title": "`import` Command | Microsoft Learn",
+      "sampledBytes": 54492,
+      "sampleSha256": "138ccc3ba5e24d38ec90dafe12d7a44cfd31324a1b31c872c1bf7b7a4982a477"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/pinning",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/pinning",
+      "contentType": "text/html",
+      "title": "`pin` Command | Microsoft Learn",
+      "sampledBytes": 67600,
+      "sampleSha256": "3c8d4158210c070a282952314a78b0c6671c0a85bf753c1a218e1bd9f4a54a5b"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade",
+      "contentType": "text/html",
+      "title": "`upgrade` Command | Microsoft Learn",
+      "sampledBytes": 61074,
+      "sampleSha256": "f0669c1f7b00506c8dd0df948f54f65fd1aadd886b0a1311aa095aa415aa8847"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/release-health/",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/release-health/",
+      "contentType": "text/html",
+      "title": "Windows release health | Microsoft Learn",
+      "sampledBytes": 50023,
+      "sampleSha256": "0b0c241c82d9312da04b52b3e24f63824ede258f6ed92580a3ed6638bda2b054"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/whats-new/extended-security-updates",
+      "status": 200,
+      "finalUrl": "https://learn.microsoft.com/en-us/windows/whats-new/extended-security-updates",
+      "contentType": "text/html",
+      "title": "Extended Security Updates (ESU) program for Windows 10 | Microsoft Learn",
+      "sampledBytes": 55846,
+      "sampleSha256": "0849f9c573b4c068811aa5036b5e668b5166cb64990f7d28a9cdab9a9f94b6e2"
+    },
+    {
+      "url": "https://openai.com/enterprise-privacy/",
+      "status": 200,
+      "finalUrl": "https://openai.com/enterprise-privacy/",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Enterprise privacy at OpenAI | OpenAI",
+      "sampledBytes": 419379,
+      "sampleSha256": "88d7a0af932ba07cc0956d55176fa848c2baa8d82ded12b3b0d3e2e715aafa4b"
+    },
+    {
+      "url": "https://platform.openai.com/docs/guides/safety-best-practices",
+      "status": 200,
+      "finalUrl": "https://developers.openai.com/api/docs/guides/safety-best-practices",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Safety best practices | OpenAI API",
+      "sampledBytes": 454981,
+      "sampleSha256": "f78d702c28318b5c62e5b807878c904cc2689b003fdc409387552219e6a2ffe3"
+    },
+    {
+      "url": "https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html",
+      "status": 200,
+      "finalUrl": "https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Preparing a new repository &mdash; restic 0.20.0 documentation",
+      "sampledBytes": 73129,
+      "sampleSha256": "4eae086035512d74186a23d072e0e358052c9f79d4cc453a4f5256b6f28f38c2"
+    },
+    {
+      "url": "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
+      "status": 200,
+      "finalUrl": "https://restic.readthedocs.io/en/stable/045_working_with_repos.html",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Working with repositories &mdash; restic 0.20.0 documentation",
+      "sampledBytes": 63199,
+      "sampleSha256": "8bdc00816d5c50f5b833fd29bfb45307c8898b7048eeba3a1cdade24903d076c"
+    },
+    {
+      "url": "https://restic.readthedocs.io/en/stable/050_restore.html",
+      "status": 200,
+      "finalUrl": "https://restic.readthedocs.io/en/stable/050_restore.html",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Restoring from backup &mdash; restic 0.20.0 documentation",
+      "sampledBytes": 35645,
+      "sampleSha256": "139fa9bd1d1a2b45cc08732055d3f912c4a8a76764b1e63c87f73921431bbfbc"
+    },
+    {
+      "url": "https://rustdesk.com/docs/en/client/",
+      "status": 200,
+      "finalUrl": "https://rustdesk.com/docs/en/client/",
+      "contentType": "text/html",
+      "title": "RustDesk Client – RustDesk Documentation",
+      "sampledBytes": 184746,
+      "sampleSha256": "660a98c5ed3a804eed4c0748d259215a570037e43d916c2f389c1c9e7df32c27"
+    },
+    {
+      "url": "https://rustdesk.com/docs/en/client/mac/",
+      "status": 200,
+      "finalUrl": "https://rustdesk.com/docs/en/client/mac/",
+      "contentType": "text/html",
+      "title": "Mac – RustDesk Documentation",
+      "sampledBytes": 165338,
+      "sampleSha256": "860ae4ecb99018a9d70b6b215a996e50d5f070e8ad2e2b0840ff91fbbdfd86cd"
+    },
+    {
+      "url": "https://software.es.net/iperf/",
+      "status": 200,
+      "finalUrl": "https://software.es.net/iperf/",
+      "contentType": "text/html; charset=utf-8",
+      "title": "iperf3 &#8212; iperf3 3.22.1 documentation",
+      "sampledBytes": 12231,
+      "sampleSha256": "787daf42159a23b52977d4b37d5d60265e2d9bdb5cac13bb24d98282b71dce6f"
+    },
+    {
+      "url": "https://software.es.net/iperf/invoking.html",
+      "status": 200,
+      "finalUrl": "https://software.es.net/iperf/invoking.html",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Invoking iperf3 &#8212; iperf3 3.22.1 documentation",
+      "sampledBytes": 132267,
+      "sampleSha256": "424c5e2106dc73734ba670f1a7c8d5ac78bf447f48199643eb8df48d96e3505c"
+    },
+    {
+      "url": "https://support.hp.com/ee-en/document/c06432233",
+      "status": 200,
+      "finalUrl": "https://support.hp.com/ee-en/document/c06432233",
+      "contentType": "text/html",
+      "title": null,
+      "sampledBytes": 42495,
+      "sampleSha256": "30c6f2bef00250033c36826a90fede67ffb6bca087ae11ce17ce808bd2a83c84"
+    },
+    {
+      "url": "https://support.hp.com/us-en/document/c03231457",
+      "status": 200,
+      "finalUrl": "https://support.hp.com/us-en/document/c03231457",
+      "contentType": "text/html",
+      "title": null,
+      "sampledBytes": 42495,
+      "sampleSha256": "30c6f2bef00250033c36826a90fede67ffb6bca087ae11ce17ce808bd2a83c84"
+    },
+    {
+      "url": "https://support.microsoft.com/en-gb/onedrive/save-disk-space-with-onedrive-files-on-demand-for-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-gb/onedrive/save-disk-space-with-onedrive-files-on-demand-for-windows",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Save disk space with OneDrive Files On-Demand for Windows | Microsoft Support",
+      "sampledBytes": 117875,
+      "sampleSha256": "8051aa2f12b22c04d2903e3d0d83b4ec5191f943f54f70b47944bc4664f494fc"
+    },
+    {
+      "url": "https://support.microsoft.com/en-gb/windows/experience/backup-recovery/use-the-system-file-checker-tool-to-repair-missing-or-corrupted-system-files",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-gb/windows/experience/backup-recovery/use-the-system-file-checker-tool-to-repair-missing-or-corrupted-system-files",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Use the System File Checker tool to repair missing or corrupted system files | Microsoft Support",
+      "sampledBytes": 93688,
+      "sampleSha256": "78f63fd340ab09a46f592347b36f7ca4993d1835b00328c339f215d7739c9cdd"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Manage website notifications in Microsoft Edge | Microsoft Support",
+      "sampledBytes": 81966,
+      "sampleSha256": "c0a41a77f180b5703da3ef4997f6e596db74603f56cbc3f9fe88512c6843ecc7"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/onedrive/fix-onedrive-sync-problems",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/onedrive/fix-onedrive-sync-problems",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Fix OneDrive sync problems | Microsoft Support",
+      "sampledBytes": 111653,
+      "sampleSha256": "e44acab4f2c8746e36c0aaf6613165491a3e7ab3071a484c80ceea480d913c8e"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/onedrive/how-to-pause-and-resume-onedrive-sync",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/onedrive/how-to-pause-and-resume-onedrive-sync",
+      "contentType": "text/html; charset=utf-8",
+      "title": "How to Pause and Resume OneDrive Sync | Microsoft Support",
+      "sampledBytes": 111233,
+      "sampleSha256": "06ed9375b4d4d7aea4a661ae998cd09925831592a82dd8675d0a3b898e4724d1"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/onedrive/how-to-remove-an-outlook-pst-data-file-from-onedrive",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/onedrive/how-to-remove-an-outlook-pst-data-file-from-onedrive",
+      "contentType": "text/html; charset=utf-8",
+      "title": "How to remove an Outlook .pst data file from OneDrive | Microsoft Support",
+      "sampledBytes": 111674,
+      "sampleSha256": "d1077d5d5a38610ccd13331e01d2f51c1c13ff9c6e56568473ce63a1b797163f"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/onedrive/restrictions-and-limitations-in-onedrive-and-sharepoint",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/onedrive/restrictions-and-limitations-in-onedrive-and-sharepoint",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Restrictions and limitations in OneDrive and SharePoint | Microsoft Support",
+      "sampledBytes": 122213,
+      "sampleSha256": "ec282a3cd0a7e972360f14a8acaecb3b92dad095226ff5c4a7aecf8bfe0c571e"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/outlook/getstarted/how-to-work-offline-in-outlook-for-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/outlook/getstarted/how-to-work-offline-in-outlook-for-windows",
+      "contentType": "text/html; charset=utf-8",
+      "title": "How to work offline in Outlook for Windows | Microsoft Support",
+      "sampledBytes": 110280,
+      "sampleSha256": "14105c60bf817c047aa1734339c8ea26f777ddcbac036a7a436da6203e6bf7b3"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/outlook/outlook-email-stuck",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/outlook/outlook-email-stuck",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Outlook email stuck | Microsoft Support",
+      "sampledBytes": 92817,
+      "sampleSha256": "0c9e7b167ac362b0dc01e1643aa34ac4f14099077355359881289beec2cc8b60"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/apps/repair-apps-and-programs-in-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/apps/repair-apps-and-programs-in-windows",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Repair apps and programs in Windows | Microsoft Support",
+      "sampledBytes": 83351,
+      "sampleSha256": "c7c449fab4a539c6a030e089d447404a19c4d172b6b068a21050fd659b23024e"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/apps/uninstall-or-remove-apps-and-programs-in-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/apps/uninstall-or-remove-apps-and-programs-in-windows",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Uninstall or remove apps and programs in Windows | Microsoft Support",
+      "sampledBytes": 81423,
+      "sampleSha256": "f7fdae27ddc05bb40d2316071ea8190c35b57be3666f692b938418278657f800"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/free-up-space-for-windows-updates",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/free-up-space-for-windows-updates",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Free up space for Windows updates | Microsoft Support",
+      "sampledBytes": 110942,
+      "sampleSha256": "2124d5aeab35094c74afd82387606747be4c449c8f1cc74a5a34c86fd11bb192"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/change-the-power-mode-for-your-windows-pc",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/experience/change-the-power-mode-for-your-windows-pc",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Change the power mode for your Windows PC | Microsoft Support",
+      "sampledBytes": 81741,
+      "sampleSha256": "ba86ceca251e452115f34fb044cc057cc1a23a1539a9fdfcba49cf67d02aee08"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Fix Wi-Fi connection issues in Windows | Microsoft Support",
+      "sampledBytes": 118881,
+      "sampleSha256": "89660eab91f1fec44c5071ffee237280edc05cbee7668c686a100d2f7f6043a6"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/get-connected-when-setting-up-your-windows-device",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/get-connected-when-setting-up-your-windows-device",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Get connected when setting up your Windows device | Microsoft Support",
+      "sampledBytes": 92836,
+      "sampleSha256": "0b8fa1be50b7965f37d95576706f00143aba1589c4e923d912d0c923766e2db8"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/find-information-about-your-windows-device",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/experience/find-information-about-your-windows-device",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Find information about your Windows device | Microsoft Support",
+      "sampledBytes": 86054,
+      "sampleSha256": "e10fcbce5cf4956888dae2f733da23ceeaa4fd8ba836ddbeae3c2ccaa75d6884"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/platform-variants/windows-arm-based-pcs-faq",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/experience/platform-variants/windows-arm-based-pcs-faq",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Windows Arm-based PCs FAQ | Microsoft Support",
+      "sampledBytes": 121085,
+      "sampleSha256": "a5a08a1877ccc57ec5452232c262482f433d86f8cf1b064a10136f68b0626362"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/startup-boot/configure-startup-applications-in-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/experience/startup-boot/configure-startup-applications-in-windows",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Configure Startup applications in Windows | Microsoft Support",
+      "sampledBytes": 94585,
+      "sampleSha256": "c2482c334135904b4c186bf6675b8ea8f5115304c2d0b9390165803c0d5928d3"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/startup-boot/how-to-perform-a-clean-boot-in-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/experience/startup-boot/how-to-perform-a-clean-boot-in-windows",
+      "contentType": "text/html; charset=utf-8",
+      "title": "How to perform a clean boot in Windows | Microsoft Support",
+      "sampledBytes": 109448,
+      "sampleSha256": "d4e777034af15cc522c55d38019a3e9d6b23434a1f60a410cced59f0e0b7586e"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/defragment-optimize-your-data-drives-in-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/defragment-optimize-your-data-drives-in-windows",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Defragment / optimize your data drives in Windows | Microsoft Support",
+      "sampledBytes": 80890,
+      "sampleSha256": "6842cb413503eb38528f505c4db42ea50b6542e2404e31a7862936473eea7169"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Fix printer connection and printing problems in Windows | Microsoft Support",
+      "sampledBytes": 128545,
+      "sampleSha256": "735030d5af05575779158165b4463be8536f060432be0cc0d656589cff6dffbc"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/hardware/printer/troubleshooting-offline-printer-problems-in-windows",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/hardware/printer/troubleshooting-offline-printer-problems-in-windows",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Troubleshooting offline printer problems in Windows | Microsoft Support",
+      "sampledBytes": 115426,
+      "sampleSha256": "e5a990de1176ff66e4ab0ebe1b77ca2d7789ea5c607272a0f6e46778620ab71c"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/security/encryption/back-up-your-bitlocker-recovery-key",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/security/encryption/back-up-your-bitlocker-recovery-key",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Back Up Your BitLocker Recovery Key | Microsoft Support",
+      "sampledBytes": 94910,
+      "sampleSha256": "4cac8a0f50340bc3b28454f238cf10543661ae4183656477e5517e76f33eed37"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/security/encryption/find-your-bitlocker-recovery-key",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/security/encryption/find-your-bitlocker-recovery-key",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Find your BitLocker recovery key | Microsoft Support",
+      "sampledBytes": 95308,
+      "sampleSha256": "22f20677a9ffeae9264d5166c81e56e284f0de11b2e427187d3e5904e842c71e"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/security/windows-security/protection-history-in-the-windows-security-app",
+      "status": 200,
+      "finalUrl": "https://support.microsoft.com/en-us/windows/security/windows-security/protection-history-in-the-windows-security-app",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Protection History in the Windows Security App | Microsoft Support",
+      "sampledBytes": 90116,
+      "sampleSha256": "731f79e60786ec7bcf50547d3ab67c067b73abef070baf6f9aa6a1173c0767e3"
+    },
+    {
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec",
+      "status": 200,
+      "finalUrl": "https://www.cgsecurity.org/wiki/PhotoRec",
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Digital Picture and File Recovery",
+      "sampledBytes": 33414,
+      "sampleSha256": "befe59a37e318068a7b816e7051db95938a340c997e68a8b56941d41c202be2e"
+    },
+    {
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step",
+      "status": 200,
+      "finalUrl": "https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step",
+      "contentType": "text/html; charset=UTF-8",
+      "title": "PhotoRec Step By Step - CGSecurity",
+      "sampledBytes": 36735,
+      "sampleSha256": "be6fdf265cfcf309cbac3e09ea9e205e5920a27fd5d7cdd5348f5b2c7cacc544"
+    },
+    {
+      "url": "https://www.cgsecurity.org/wiki/TestDisk:_undelete_file_for_NTFS",
+      "status": 200,
+      "finalUrl": "https://www.cgsecurity.org/wiki/TestDisk:_undelete_file_for_NTFS",
+      "contentType": "text/html; charset=UTF-8",
+      "title": "Undelete files from NTFS with TestDisk - CGSecurity",
+      "sampledBytes": 25167,
+      "sampleSha256": "d75114460ea006ecfaaa2677f480328679c5f7dc0178f9e5a2f6dd8773d02064"
+    },
+    {
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf",
+      "status": 403,
+      "finalUrl": "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+      "status": 200,
+      "finalUrl": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+      "contentType": "text/html",
+      "title": "GNU ddrescue Manual",
+      "sampledBytes": 124343,
+      "sampleSha256": "1f5d00fae94becb007dc9de2cb719b68b5780a74d8adeb9cd110450aa6fdc4d3"
+    },
+    {
+      "url": "https://www.microsoft.com/en-us/software-download/windows11arm64",
+      "status": 200,
+      "finalUrl": "https://www.microsoft.com/en-us/software-download/windows11arm64",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Download Windows 11 Arm64",
+      "sampledBytes": 145128,
+      "sampleSha256": "cc5250778cff822ee911fe3f0e138659c1c5cb0a71f667161b36adb03110e596"
+    },
+    {
+      "url": "https://www.naps2.com/windows-scanning",
+      "status": 200,
+      "finalUrl": "https://www.naps2.com/windows-scanning",
+      "contentType": "text/html; charset=utf-8",
+      "title": "Windows Scanning - NAPS2",
+      "sampledBytes": 7825,
+      "sampleSha256": "d5ba59d187a8190fd64f1fc151c0af569e6c4e45bae569d16d1b3631faa22b7b"
+    },
+    {
+      "url": "https://www.nomoreransom.org/en/decryption-tools.html",
+      "status": 200,
+      "finalUrl": "https://www.nomoreransom.org/en/decryption-tools.html",
+      "contentType": "text/html",
+      "title": "Decryption Tools | The No More Ransom Project",
+      "sampledBytes": 282437,
+      "sampleSha256": "be987d3d6c547d3844f7d12f5e5459dd16ddf4d028b4537d6f30ab99076cf7ea"
+    },
+    {
+      "url": "https://www.sumatrapdfreader.org/docs/SumatraPDF-documentation",
+      "status": 200,
+      "finalUrl": "https://www.sumatrapdfreader.org/docs/SumatraPDF-documentation",
+      "contentType": "text/html; charset=utf-8",
+      "title": "SumatraPDF documentation",
+      "sampledBytes": 26529,
+      "sampleSha256": "e02a794a7abe2b8b98f4a6f60b6aa41e5572b394b6f940538afaa2b1cad8e6b2"
+    },
+    {
+      "url": "https://www.uwe-sieber.de/usbtreeview_e.html",
+      "status": 200,
+      "finalUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+      "contentType": "text/html",
+      "title": "USB Device Tree Viewer",
+      "sampledBytes": 28461,
+      "sampleSha256": "4f65a2e716e50e9443f4fbd85c42f9e8acf255e1a13ad29284787a8debf61ccd"
+    },
+    {
+      "url": "https://www.ventoy.net/en/doc_disk_layout.html",
+      "status": 200,
+      "finalUrl": "https://www.ventoy.net/en/doc_disk_layout.html",
+      "contentType": "text/html",
+      "title": "disk_layout . Ventoy",
+      "sampledBytes": 16108,
+      "sampleSha256": "0a668eb0d11b9cd05a65e5c5151a0a2d110fafb4bb0d1b95ba2b4a83bdc23f34"
+    },
+    {
+      "url": "https://www.ventoy.net/en/doc_secure.html",
+      "status": 200,
+      "finalUrl": "https://www.ventoy.net/en/doc_secure.html",
+      "contentType": "text/html",
+      "title": "secure . Ventoy",
+      "sampledBytes": 16070,
+      "sampleSha256": "41bd2f0ffe85169f42641372aa73c15c2d7bfdd0c85a8794e6d47807c7043c77"
+    }
+  ]
+}

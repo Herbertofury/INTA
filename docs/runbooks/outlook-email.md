@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="️-fix-outlook-or-email-sendreceive-problems"></a>
 <a id="-fix-outlook-or-email-sendreceive-problems"></a>
@@ -9,7 +9,7 @@ Separate service, authentication, mailbox, network, and local-client faults.
 
 **Identity & business systems** · Intermediate · 20–60 min · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/outlook-email)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/outlook-email)
 
 <a id="working-kit"></a>
 
@@ -22,6 +22,7 @@ Separate service, authentication, mailbox, network, and local-client faults.
 | Use this for | Official tool + exact action |
 | --- | --- |
 | Choose a diagnostic for classic [Outlook](https://support.microsoft.com/outlook) only. | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)** |
+| Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable. | **[curl](https://curl.se/)** · [Official page](https://curl.se/) · **[Use the Windows-included curl.exe](https://curl.se/windows/microsoft.html)** |
 
 ### Client repair
 
@@ -72,6 +73,13 @@ Separate service, authentication, mailbox, network, and local-client faults.
 
 **Change route when:** Local-only mail lacks a protected copy. · The fault involves tenant policy, identity compromise or a wider service outage.
 
+### 🎯 Go straight to a specific fix
+
+- **[Bring classic Outlook back online](#fix-email-classic-outlook-working-offline)** — Messages stay in Outbox and the classic client shows Working Offline.
+- **[Release a message stuck behind a large attachment](#fix-email-large-attachment-stuck-outbox)** — One classic [Outlook](https://support.microsoft.com/outlook) message remains in Outbox while sending is stalled.
+- **[Move an active PST out of the sync bottleneck](#fix-email-pst-stalls-onedrive-sync)** — [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage) stays on Processing changes or reports a file in use while [Outlook](https://support.microsoft.com/outlook) uses a PST in the sync folder.
+- **[Find mail missing only from the local cache](#fix-email-old-messages-missing-offline)** — Older mail appears in webmail but is absent or unavailable offline in classic [Outlook](https://support.microsoft.com/outlook).
+
 > [!NOTE]
 > **Start here.** Identify the mail provider and whether the user is in classic [Outlook](https://support.microsoft.com/outlook), new [Outlook](https://support.microsoft.com/outlook), or a browser. Their repair paths differ.
 
@@ -121,6 +129,7 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | --- | --- | --- | --- |
 | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)** | Choose a diagnostic for classic [Outlook](https://support.microsoft.com/outlook) only. | [Windows](https://www.microsoft.com/windows); Included with supported [Windows](https://www.microsoft.com/windows); assisted support availability depends on the account and support agreement. | [Open guide](https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
+| **[curl](https://curl.se/)** · [Official page](https://curl.se/) · **[Use the Windows-included curl.exe](https://curl.se/windows/microsoft.html)** | Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/); Free and open source; the [curl](https://curl.se/) license permits commercial projects | [Open guide](https://curl.se/docs/manpage.html) |
 
 <a id="walkthrough"></a>
 
@@ -180,6 +189,101 @@ Work in order, record the result of each step, and change route when the evidenc
 > **Pause this route and escalate when:**
 > - A proposed profile or account deletion would remove unbacked-up local mail.
 > - There are signs of account takeover, unexpected rules, or malicious forwarding.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-email-classic-outlook-working-offline"></a>
+
+### Bring classic [Outlook](https://support.microsoft.com/outlook) back online
+
+**Use when:** Messages stay in Outbox and the classic client shows Working Offline.
+
+**Start here:** Check the status bar and whether Send/Receive > Work Offline is highlighted.
+
+**[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)**
+
+1. Select Work Offline to return online, then confirm the status changes rather than repeatedly clicking without observing it.
+2. Send/receive again and compare the account in webmail if the client still shows Disconnected.
+3. Verify one agreed test message is sent and received and that queued mail is reconciled.
+
+**Prove it worked:** The client shows a connected state and messages leave the Outbox normally.
+
+**If this does not resolve it:** If webmail also fails or the client is new [Outlook](https://support.microsoft.com/outlook), use the appropriate account/service or new-client route instead of classic-only controls.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/outlook/getstarted/how-to-work-offline-in-outlook-for-windows) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-email-large-attachment-stuck-outbox"></a>
+
+### Release a message stuck behind a large attachment
+
+**Use when:** One classic [Outlook](https://support.microsoft.com/outlook) message remains in Outbox while sending is stalled.
+
+**Start here:** Confirm the recipient and preserve the message text before changing the stuck item.
+
+**[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)**
+
+1. Switch classic [Outlook](https://support.microsoft.com/outlook) to Work Offline and move the affected message to Drafts using Microsoft’s documented procedure.
+2. Remove the oversized attachment and use an approved sharing link or a smaller permitted file; preserve unrelated queued messages.
+3. Return online, send the corrected message and verify delivery through the normal account path.
+
+**Prove it worked:** The corrected message leaves Outbox and the remaining queue resumes without duplicate or unintended sends.
+
+**If this does not resolve it:** If the message remains locked, close/reopen the client as documented; do not delete the whole profile or mailbox to clear one item.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/outlook/outlook-email-stuck) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-email-pst-stalls-onedrive-sync"></a>
+
+### Move an active PST out of the sync bottleneck
+
+**Use when:** [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage) stays on Processing changes or reports a file in use while [Outlook](https://support.microsoft.com/outlook) uses a PST in the sync folder.
+
+**Start here:** Identify the exact PST and protect a closed, usable backup before moving it.
+
+**[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)**
+
+1. Close [Outlook](https://support.microsoft.com/outlook) and follow Microsoft’s PST relocation procedure to a suitable local location outside the active [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage) sync path.
+2. Reconnect the data file through [Outlook](https://support.microsoft.com/outlook)’s supported data-file controls and verify its folders and representative mail.
+3. Resume normal [OneDrive](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage) activity and configure a separate approved backup for the local mail file.
+
+**Prove it worked:** [Outlook](https://support.microsoft.com/outlook) opens the intended mail data and the sync queue clears without treating synchronization as the only PST backup.
+
+**If this does not resolve it:** If the PST contains unique mail or is damaged, preserve the original and use the data-file recovery path before further movement.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/onedrive/how-to-remove-an-outlook-pst-data-file-from-onedrive) · [Source 2](https://support.microsoft.com/en-us/onedrive/restrictions-and-limitations-in-onedrive-and-sharepoint) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-email-old-messages-missing-offline"></a>
+
+### Find mail missing only from the local cache
+
+**Use when:** Older mail appears in webmail but is absent or unavailable offline in classic [Outlook](https://support.microsoft.com/outlook).
+
+**Start here:** Confirm the same mailbox and folder in webmail before treating the messages as deleted.
+
+**[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)**
+
+1. In classic [Outlook](https://support.microsoft.com/outlook) inspect File > Account Settings > Account Settings, select the Exchange/[Microsoft 365](https://www.microsoft.com/microsoft-365) account and check the offline-mail synchronization range.
+2. Choose the approved range for the device and available storage, then allow synchronization to complete.
+3. Search the same known older message and test offline access if that is required for the user’s work.
+
+**Prove it worked:** The case distinguishes server-held mail from locally cached mail and proves the intended access mode.
+
+**If this does not resolve it:** If messages are missing from the server too, investigate retention, archive, deletion or permissions rather than rebuilding the cache.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/outlook/getstarted/how-to-work-offline-in-outlook-for-windows) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

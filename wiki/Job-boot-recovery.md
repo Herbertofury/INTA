@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-recover-a-windows-pc-that-will-not-boot"></a>
 
@@ -8,7 +8,7 @@ Separate firmware, storage, encryption, and [Windows](https://www.microsoft.com/
 
 **Recovery & boot** · Advanced · 30–120 min · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/boot-recovery)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/boot-recovery)
 
 <a id="working-kit"></a>
 
@@ -84,6 +84,12 @@ Separate firmware, storage, encryption, and [Windows](https://www.microsoft.com/
 - [ ] The intended boot disk and encryption recovery remain available.
 
 **Change route when:** The disk fails, disconnects or contains the only unprotected data copy. · Recovery keys or the identity of the target installation are uncertain.
+
+### 🎯 Go straight to a specific fix
+
+- **[Find a disk missing from recovery media](#fix-boot-installer-cannot-see-storage)** — Firmware sees the disk but [Windows](https://www.microsoft.com/windows) installation or recovery media does not.
+- **[Identify the Windows volume inside recovery](#fix-boot-check-recovery-drive-letters)** — An offline repair cannot find [Windows](https://www.microsoft.com/windows) or appears to target the wrong drive.
+- **[Find the matching BitLocker key](#fix-boot-recovery-key-does-not-match)** — A stored recovery key is rejected or several similarly named device records exist.
 
 > [!NOTE]
 > **Start here.** Record the exact screen and failure stage. Obtain the device’s recovery-key access path before any firmware, TPM, or boot changes.
@@ -198,6 +204,83 @@ Work in order, record the result of each step, and change route when the evidenc
 > **Pause this route and escalate when:**
 > - The recovery key or correct target disk cannot be established.
 > - The drive shows physical failure or the proposed action would overwrite the only copy.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-boot-installer-cannot-see-storage"></a>
+
+### Find a disk missing from recovery media
+
+**Use when:** Firmware sees the disk but [Windows](https://www.microsoft.com/windows) installation or recovery media does not.
+
+**Start here:** Confirm the disk is consistently detected in firmware and identify the exact storage controller/model.
+
+**[Windows 11 installation media](https://www.microsoft.com/software-download/windows11)** · [Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)**
+
+**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+
+1. Obtain the model-specific storage-controller driver for the recovery environment’s architecture from the OEM.
+2. Use the supported Load driver option in [Windows](https://www.microsoft.com/windows) Setup where applicable, then inspect the disk list again.
+3. Keep the original storage-controller mode documented; do not change RAID/VMD/AHCI settings as an unexplained workaround.
+
+**Prove it worked:** The correct disk and existing partitions appear without initializing, formatting or altering the storage mode.
+
+**If this does not resolve it:** If firmware detection is unstable or the OEM driver does not expose the disk, move to hardware/[data recovery](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) before write operations.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/add-device-drivers-to-windows-during-windows-setup) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-boot-check-recovery-drive-letters"></a>
+
+### Identify the [Windows](https://www.microsoft.com/windows) volume inside recovery
+
+**Use when:** An offline repair cannot find [Windows](https://www.microsoft.com/windows) or appears to target the wrong drive.
+
+**Start here:** Treat drive letters in the recovery environment as unverified until the actual volumes are identified.
+
+**[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) · **[Open recovery instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)**
+
+**[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · **[Open built-in repair instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)**
+
+1. In the recovery [Command Prompt](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd), run [diskpart](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart), then list volume, then exit; compare volume sizes and labels without formatting or modifying partitions, and verify the candidate volume’s encryption state.
+2. Inspect the candidate volume for the expected [Windows](https://www.microsoft.com/windows) and user folders; unlock the intended encrypted volume through its approved recovery key if required.
+3. Use that verified volume only in the product’s documented offline repair syntax and retain the target identity in the private ticket.
+
+**Prove it worked:** The offline operation addresses the intended installation, not the USB, recovery partition or another attached disk.
+
+**If this does not resolve it:** Stop if the target cannot be distinguished or the source is failing; never assume that C: identifies the installed OS in recovery.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/list-volume) · [Source 2](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-boot-recovery-key-does-not-match"></a>
+
+### Find the matching [BitLocker](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/) key
+
+**Use when:** A stored recovery key is rejected or several similarly named device records exist.
+
+**Start here:** Read the recovery-key ID displayed by the affected device.
+
+**[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) · **[Open recovery instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)**
+
+1. Use a separate trusted device to open the approved personal or organization recovery store and match the key ID, not just the computer name.
+2. Check the account that originally enabled encryption or the organization’s administrator-held record when the expected account has no match.
+3. Enter the matching recovery key locally and verify the intended volume unlocks; record only the approved private reference in the service ticket.
+
+**Prove it worked:** The encrypted installation unlocks with the record matching its displayed key ID.
+
+**If this does not resolve it:** If no valid key is available, stop data-destructive reset/reinstall decisions until the owner understands the recovery limit.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/windows/security/encryption/find-your-bitlocker-recovery-key) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

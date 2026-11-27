@@ -1,0 +1,828 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "reviewTimezone": "America/Denver",
+  "validatedAtUtc": "2026-11-27T01:35:29.145360+00:00",
+  "baselineSourceCommit": "0e70d341169fc5975fd98fc3e072b44e0285cd26",
+  "result": "pass",
+  "counts": {
+    "categoriesReviewed": 10,
+    "originalTools": 118,
+    "newTools": 15,
+    "tools": 133,
+    "originalActions": 247,
+    "newActions": 43,
+    "actions": 290,
+    "newFileActions": 22,
+    "sourceArchiveChecks": 1
+  },
+  "preservation": {
+    "all118OriginalRecordsUnchanged": true,
+    "originalRecordAndFieldOrderPreserved": true,
+    "all247OriginalActionsUnchanged": true,
+    "originalReviewDatesUnchanged": true
+  },
+  "checks": {
+    "catalogSchema": true,
+    "acquisitionSchema": true,
+    "uniqueNormalizedNames": true,
+    "uniqueOfficialHomepages": true,
+    "allNewToolsMappedToExistingJobs": true,
+    "everyNewFileActionHasObservedPublisherUrlAndMatchingPayloadSample": true,
+    "noFileActionUsesOfficialHomepageAsItsFileUrl": true,
+    "all43NewAcquisitionUrlsHaveSuccessfulResponseEvidence": true
+  },
+  "categoryDispositions": [
+    {
+      "category": "malware",
+      "name": "Malware removal",
+      "before": 12,
+      "after": 12,
+      "disposition": "Retain the existing on-demand scanners and managed endpoint options. Another general scanner would duplicate the present coverage; planned event evidence is expanded in the security category.",
+      "jobIds": [
+        "malware-removal",
+        "ransomware-response"
+      ]
+    },
+    {
+      "category": "remote",
+      "name": "Remote support",
+      "before": 8,
+      "after": 9,
+      "disposition": "Add [Remmina](https://remmina.org/) for a Linux technician client connecting through established protocols. Existing attended and managed-support products retain their roles.",
+      "jobIds": [
+        "remote-support"
+      ]
+    },
+    {
+      "category": "windows",
+      "name": "Windows repair",
+      "before": 24,
+      "after": 26,
+      "disposition": "Add [SetupDiag](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag) for failed-upgrade log analysis and [Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/) for a disposable application test. Existing repair, recovery and cleanup routes are retained.",
+      "jobIds": [
+        "windows-update",
+        "windows-repair",
+        "new-pc"
+      ]
+    },
+    {
+      "category": "storage",
+      "name": "Storage, backup and migration",
+      "before": 20,
+      "after": 22,
+      "disposition": "Add [Syncthing](https://syncthing.net/) for defined peer synchronization and [DiskSpd](https://github.com/microsoft/diskspd) for a controlled performance workload. Neither replaces source-preserving recovery or an independent restore test.",
+      "jobIds": [
+        "disk-migration",
+        "slow-pc"
+      ]
+    },
+    {
+      "category": "hardware",
+      "name": "Hardware diagnostics",
+      "before": 7,
+      "after": 9,
+      "disposition": "Add [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) for connection topology and [powercfg](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) for battery/sleep evidence, complementing the existing sensors, memory tests and OEM guidance.",
+      "jobIds": [
+        "printer-repair",
+        "hardware-bsod"
+      ]
+    },
+    {
+      "category": "network",
+      "name": "Network diagnostics",
+      "before": 10,
+      "after": 12,
+      "disposition": "Add [curl](https://curl.se/) for application-protocol/TLS observations and [mtr](https://www.bitwizard.nl/mtr/) for repeated path measurements. Existing discovery, capture and throughput tools remain available.",
+      "jobIds": [
+        "network-dns",
+        "outage-recovery"
+      ]
+    },
+    {
+      "category": "boot",
+      "name": "Boot and rescue media",
+      "before": 7,
+      "after": 8,
+      "disposition": "Add [netboot.xyz](https://netboot.xyz/) for network boot and remote virtual media. Existing complete rescue images and local USB workflows remain the first choices when offline operation is required.",
+      "jobIds": [
+        "boot-usb",
+        "new-pc"
+      ]
+    },
+    {
+      "category": "productivity",
+      "name": "Technician productivity",
+      "before": 10,
+      "after": 12,
+      "disposition": "Add [WinMerge](https://winmerge.org/) for explicit file/folder differences and [SumatraPDF](https://www.sumatrapdfreader.org/) for an independent PDF print comparison.",
+      "jobIds": [
+        "windows-repair",
+        "disk-migration",
+        "printer-repair"
+      ]
+    },
+    {
+      "category": "ai",
+      "name": "AI assistance",
+      "before": 5,
+      "after": 6,
+      "disposition": "Add [promptfoo](https://www.promptfoo.dev/) for repeatable, sanitized diagnostic-prompt checks. Another general chat or coding client would duplicate existing choices.",
+      "jobIds": [
+        "ai-triage"
+      ]
+    },
+    {
+      "category": "security",
+      "name": "Defensive security",
+      "before": 15,
+      "after": 17,
+      "disposition": "Add [Windows LAPS](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) for managed local-admin recovery access and [Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) for planned endpoint telemetry. Existing triage, detection-rule and forensic tools are retained.",
+      "jobIds": [
+        "new-pc",
+        "ad-trust",
+        "ransomware-response"
+      ]
+    }
+  ],
+  "jobMappings": {
+    "setupdiag": {
+      "jobIds": [
+        "windows-update",
+        "windows-repair"
+      ],
+      "capability": "Finding the failure rule and related log evidence before retrying an unsuccessful Windows upgrade.",
+      "defaultTier": "core",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag"
+      ]
+    },
+    "windows-sandbox": {
+      "jobIds": [
+        "new-pc",
+        "ai-triage"
+      ],
+      "capability": "Checking an approved package in a clean desktop before changing a workstation.",
+      "defaultTier": "specialist",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/",
+        "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install",
+        "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file"
+      ]
+    },
+    "usb-device-tree-view": {
+      "jobIds": [
+        "printer-repair",
+        "hardware-bsod",
+        "intake-triage"
+      ],
+      "capability": "Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly.",
+      "defaultTier": "core",
+      "sourceUrls": [
+        "https://www.uwe-sieber.de/usbtreeview_e.html"
+      ]
+    },
+    "powercfg": {
+      "jobIds": [
+        "hardware-bsod",
+        "slow-pc",
+        "intake-triage",
+        "preventive-maintenance"
+      ],
+      "capability": "Collecting battery and sleep evidence before changing hardware or power policy.",
+      "defaultTier": "core",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options"
+      ]
+    },
+    "curl": {
+      "jobIds": [
+        "network-dns",
+        "outlook-email",
+        "outage-recovery"
+      ],
+      "capability": "Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable.",
+      "defaultTier": "core",
+      "sourceUrls": [
+        "https://curl.se/windows/",
+        "https://curl.se/docs/copyright.html",
+        "https://curl.se/windows/microsoft.html"
+      ]
+    },
+    "mtr": {
+      "jobIds": [
+        "network-dns",
+        "outage-recovery"
+      ],
+      "capability": "Comparing a reproducible path problem from a Linux or macOS bench, or Windows through WSL.",
+      "defaultTier": "specialist",
+      "sourceUrls": [
+        "https://github.com/traviscross/mtr",
+        "https://www.bitwizard.nl/mtr/files/",
+        "https://github.com/traviscross/mtr/blob/master/COPYING"
+      ]
+    },
+    "remmina": {
+      "jobIds": [
+        "remote-support"
+      ],
+      "capability": "Connecting a Linux technician workstation to an already configured remote desktop or server.",
+      "defaultTier": "specialist",
+      "sourceUrls": [
+        "https://remmina.org/",
+        "https://www.remmina.org/how-to-install-remmina/",
+        "https://gitlab.com/Remmina/Remmina/blob/master/COPYING"
+      ]
+    },
+    "syncthing": {
+      "jobIds": [
+        "disk-migration",
+        "new-pc"
+      ],
+      "capability": "Keeping a defined healthy-data folder synchronized between authorized machines during a controlled transition or ongoing collaboration.",
+      "defaultTier": "specialist",
+      "sourceUrls": [
+        "https://syncthing.net/downloads/",
+        "https://docs.syncthing.net/users/faq",
+        "https://github.com/syncthing/syncthing/blob/main/LICENSE"
+      ]
+    },
+    "diskspd": {
+      "jobIds": [
+        "slow-pc",
+        "hardware-bsod"
+      ],
+      "capability": "Reproducing a storage-performance complaint on healthy media with a bounded test file and comparable before/after settings.",
+      "defaultTier": "specialist",
+      "sourceUrls": [
+        "https://github.com/microsoft/diskspd",
+        "https://github.com/microsoft/diskspd/releases/tag/v2.3",
+        "https://github.com/microsoft/diskspd/blob/master/LICENSE"
+      ]
+    },
+    "winmerge": {
+      "jobIds": [
+        "windows-repair",
+        "disk-migration",
+        "client-handoff"
+      ],
+      "capability": "Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration.",
+      "defaultTier": "core",
+      "sourceUrls": [
+        "https://winmerge.org/downloads/index.php",
+        "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
+        "https://winmerge.org/source-code/?lang=en"
+      ]
+    },
+    "sumatrapdf": {
+      "jobIds": [
+        "printer-repair"
+      ],
+      "capability": "Testing the same known-good PDF through an independent renderer to separate an application-specific print fault from the queue or printer.",
+      "defaultTier": "core",
+      "sourceUrls": [
+        "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+        "https://www.sumatrapdfreader.org/docs/Installation",
+        "https://github.com/sumatrapdfreader/sumatrapdf/blob/master/COPYING"
+      ]
+    },
+    "netbootxyz": {
+      "jobIds": [
+        "boot-usb",
+        "new-pc"
+      ],
+      "capability": "Starting an approved installer or rescue environment through network boot or remote virtual media when local media delivery is inconvenient.",
+      "defaultTier": "specialist",
+      "sourceUrls": [
+        "https://netboot.xyz/downloads/",
+        "https://netboot.xyz/docs/booting/iso/",
+        "https://netboot.xyz/docs/faq/",
+        "https://github.com/netbootxyz/netboot.xyz/blob/development/LICENSE"
+      ]
+    },
+    "promptfoo": {
+      "jobIds": [
+        "ai-triage"
+      ],
+      "capability": "Checking whether a revised diagnostic prompt handles a sanitized regression set correctly before relying on it in technician workflows.",
+      "defaultTier": "specialist",
+      "sourceUrls": [
+        "https://www.promptfoo.dev/docs/installation/",
+        "https://www.promptfoo.dev/docs/intro/",
+        "https://www.promptfoo.dev/docs/contributing/",
+        "https://registry.npmjs.org/promptfoo/latest"
+      ]
+    },
+    "windows-laps": {
+      "jobIds": [
+        "new-pc",
+        "ad-trust",
+        "preventive-maintenance"
+      ],
+      "capability": "Establishing recoverable, per-device administrator access during managed workstation setup and support planning.",
+      "defaultTier": "specialist",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview",
+        "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory",
+        "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-azure-active-directory"
+      ]
+    },
+    "sysmon": {
+      "jobIds": [
+        "malware-removal",
+        "ransomware-response",
+        "preventive-maintenance"
+      ],
+      "capability": "Collecting planned endpoint telemetry that can later support a scoped persistence or incident investigation.",
+      "defaultTier": "specialist",
+      "sourceUrls": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+        "https://learn.microsoft.com/en-us/sysinternals/license-terms"
+      ]
+    }
+  },
+  "newFileChecks": [
+    {
+      "id": "curl-arm64",
+      "url": "https://curl.se/windows/dl-8.23.0_10/curl-8.23.0_10-win64a-mingw.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://curl.se/windows/",
+      "checkedAtUtc": "2026-11-27T01:29:10.435558+00:00",
+      "status": 206,
+      "contentType": "application/zip",
+      "contentRange": "bytes 0-511/8464105",
+      "bytesRead": 512,
+      "prefixHex": "504b03040a0000000000c32e4e5d0000",
+      "sampleSha256": "6df46550b36333f85d02ca99ffefee01d2a8e8f84f06a55d8c9b3db48d821c14",
+      "finalHost": "curl.se",
+      "finalPath": "/windows/dl-8.23.0_10/curl-8.23.0_10-win64a-mingw.zip",
+      "magicMatches": true
+    },
+    {
+      "id": "curl-x64",
+      "url": "https://curl.se/windows/dl-8.23.0_10/curl-8.23.0_10-win64-mingw.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://curl.se/windows/",
+      "checkedAtUtc": "2026-11-27T01:29:07.082939+00:00",
+      "status": 206,
+      "contentType": "application/zip",
+      "contentRange": "bytes 0-511/8675867",
+      "bytesRead": 512,
+      "prefixHex": "504b03040a0000000000c32e4e5d0000",
+      "sampleSha256": "a9937f7fe0d65af66c436608b5579f9499518effbaa57b4fb834e237229b8a1d",
+      "finalHost": "curl.se",
+      "finalPath": "/windows/dl-8.23.0_10/curl-8.23.0_10-win64-mingw.zip",
+      "magicMatches": true
+    },
+    {
+      "id": "diskspd-DiskSpd.ZIP",
+      "url": "https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP",
+      "format": "ZIP",
+      "evidenceUrl": "https://github.com/microsoft/diskspd/releases/tag/v2.3",
+      "checkedAtUtc": "2026-11-27T01:29:16.141290+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/3606329",
+      "bytesRead": 512,
+      "prefixHex": "504b0304140000000800826ed85c93ca",
+      "sampleSha256": "250645ee7ff24987450a98ba3aa4cde8542f1d02b6f4b28691f1ce86abbc69bf",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/23956428/90c87533-059c-4331-9c88-9704c7709e82",
+      "magicMatches": true
+    },
+    {
+      "id": "netboot-netboot.xyz-arm64.iso",
+      "url": "https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz-arm64.iso",
+      "format": "ISO",
+      "evidenceUrl": "https://github.com/netbootxyz/netboot.xyz/releases/tag/3.0.3",
+      "checkedAtUtc": "2026-11-27T01:29:26.907662+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 32768-32774/2007040",
+      "bytesRead": 7,
+      "prefixHex": "01434430303101",
+      "sampleSha256": "c6571d35d65530d14d9b2be4e7014735da045b3c4d2fb973a99bd14f7b6ca3f9",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/41636424/b0d50047-49f4-47d9-a322-8023f8d8f20d",
+      "magicMatches": true
+    },
+    {
+      "id": "netboot-netboot.xyz-multiarch.iso",
+      "url": "https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz-multiarch.iso",
+      "format": "ISO",
+      "evidenceUrl": "https://github.com/netbootxyz/netboot.xyz/releases/tag/3.0.3",
+      "checkedAtUtc": "2026-11-27T01:29:32.971167+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 32768-32774/4100096",
+      "bytesRead": 7,
+      "prefixHex": "01434430303101",
+      "sampleSha256": "c6571d35d65530d14d9b2be4e7014735da045b3c4d2fb973a99bd14f7b6ca3f9",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/41636424/e9f5d0c0-0dff-43f9-89eb-a9a99a905b1b",
+      "magicMatches": true
+    },
+    {
+      "id": "netboot-netboot.xyz.iso",
+      "url": "https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.iso",
+      "format": "ISO",
+      "evidenceUrl": "https://github.com/netbootxyz/netboot.xyz/releases/tag/3.0.3",
+      "checkedAtUtc": "2026-11-27T01:29:26.856108+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 32768-32774/2428928",
+      "bytesRead": 7,
+      "prefixHex": "01434430303101",
+      "sampleSha256": "c6571d35d65530d14d9b2be4e7014735da045b3c4d2fb973a99bd14f7b6ca3f9",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/41636424/b469f853-8915-431f-bd2d-8386f7f5eacf",
+      "magicMatches": true
+    },
+    {
+      "id": "promptfoo-package",
+      "url": "https://registry.npmjs.org/promptfoo/-/promptfoo-0.126.0.tgz",
+      "format": "TGZ",
+      "evidenceUrl": "https://registry.npmjs.org/promptfoo/latest",
+      "checkedAtUtc": "2026-11-27T01:29:33.007360+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/7055539",
+      "bytesRead": 512,
+      "prefixHex": "1f8b08000000000002ffecbd7b77db38",
+      "sampleSha256": "e18d0a36cdee384517c986605e8ea9c291976c275f1e6f8048bb5f29d8c307e6",
+      "finalHost": "registry.npmjs.org",
+      "finalPath": "/promptfoo/-/promptfoo-0.126.0.tgz",
+      "magicMatches": true
+    },
+    {
+      "id": "setupdiag",
+      "url": "https://go.microsoft.com/fwlink/?linkid=870142",
+      "format": "EXE",
+      "evidenceUrl": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+      "checkedAtUtc": "2026-11-27T01:29:07.080270+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/804792",
+      "bytesRead": 512,
+      "prefixHex": "4d5a90000300000004000000ffff0000",
+      "sampleSha256": "eef9b486670b7616bb492cad115dc72505461bc05083264fb75ec11e30d790ec",
+      "finalHost": "download.microsoft.com",
+      "finalPath": "/download/1/1/1/111c347e-b7de-4510-8e62-a2f046efcc48/SetupDiag.exe",
+      "magicMatches": true
+    },
+    {
+      "id": "sumatra-arm64",
+      "url": "https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-arm64.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+      "checkedAtUtc": "2026-11-27T01:29:11.386780+00:00",
+      "status": 206,
+      "contentType": "application/zip",
+      "contentRange": "bytes 0-511/9321707",
+      "bytesRead": 512,
+      "prefixHex": "504b03041400000008009974865c9aab",
+      "sampleSha256": "b735526f9d918dce71218bb23b474d3758006cc97d9e1ab27032fc3fdb4c90ec",
+      "finalHost": "files.sumatrapdfreader.org",
+      "finalPath": "/software/sumatrapdf/rel/3.6.1/SumatraPDF-3.6.1-arm64.zip",
+      "magicMatches": true
+    },
+    {
+      "id": "sumatra-x64",
+      "url": "https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+      "checkedAtUtc": "2026-11-27T01:29:11.216759+00:00",
+      "status": 206,
+      "contentType": "application/zip",
+      "contentRange": "bytes 0-511/10031830",
+      "bytesRead": 512,
+      "prefixHex": "504b0304140000000800aa75865c6594",
+      "sampleSha256": "c59f95ead6d932e507f617c7ed2de76dfe258aec8d7ea22d2db56a3edc694b11",
+      "finalHost": "files.sumatrapdfreader.org",
+      "finalPath": "/software/sumatrapdf/rel/3.6.1/SumatraPDF-3.6.1-64.zip",
+      "magicMatches": true
+    },
+    {
+      "id": "sumatra-x64-setup",
+      "url": "https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64-install.exe",
+      "format": "EXE",
+      "evidenceUrl": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+      "checkedAtUtc": "2026-11-27T01:29:11.367268+00:00",
+      "status": 206,
+      "contentType": "application/x-msdownload",
+      "contentRange": "bytes 0-511/11075960",
+      "bytesRead": 512,
+      "prefixHex": "4d5a90000300000004000000ffff0000",
+      "sampleSha256": "805d369b10cd79a0b66f1fbaf74df3b44f24909487ab67c021fec7f24828886b",
+      "finalHost": "files.sumatrapdfreader.org",
+      "finalPath": "/software/sumatrapdf/rel/3.6.1/SumatraPDF-3.6.1-64-install.exe",
+      "magicMatches": true
+    },
+    {
+      "id": "syncthing-syncthing-linux-amd64-v2.1.7.tar.gz",
+      "url": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-linux-amd64-v2.1.7.tar.gz",
+      "format": "TGZ",
+      "evidenceUrl": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7",
+      "checkedAtUtc": "2026-11-27T01:29:19.760851+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/14046697",
+      "bytesRead": 512,
+      "prefixHex": "1f8b0800000000000003ec3d6b77dbb6",
+      "sampleSha256": "855933f87f93e6009aceac215bbd7a5eb986ebbe26ce6034a9ad45b7bea803a1",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/14712850/1ecd0ccd-62ec-4ce7-b7cd-c3a3e62a79c4",
+      "magicMatches": true
+    },
+    {
+      "id": "syncthing-syncthing-macos-universal-v2.1.7.zip",
+      "url": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-macos-universal-v2.1.7.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7",
+      "checkedAtUtc": "2026-11-27T01:29:19.739079+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/28225573",
+      "bytesRead": 512,
+      "prefixHex": "504b03040a00000000009930555d0000",
+      "sampleSha256": "27210ac6f987c5bfea649b42e9807ef7752fd5c1204ff58b5f1248a4fa290a9a",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/14712850/9610fc0d-d4ca-495d-9398-369482117138",
+      "magicMatches": true
+    },
+    {
+      "id": "syncthing-syncthing-windows-amd64-v2.1.7.zip",
+      "url": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7",
+      "checkedAtUtc": "2026-11-27T01:29:17.477845+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/14281765",
+      "bytesRead": 512,
+      "prefixHex": "504b03040a00000000009c30555d0000",
+      "sampleSha256": "aa91a722383a7a0f1791ab15087ed68958f57b06c9a2690ea19a6b9e4cc52ed0",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/14712850/54671e04-713b-475f-bd14-381474489fc6",
+      "magicMatches": true
+    },
+    {
+      "id": "syncthing-syncthing-windows-arm64-v2.1.7.zip",
+      "url": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-arm64-v2.1.7.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7",
+      "checkedAtUtc": "2026-11-27T01:29:19.728935+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/12924843",
+      "bytesRead": 512,
+      "prefixHex": "504b03040a00000000009d30555d0000",
+      "sampleSha256": "1789e0030a99b28c91eef6496f00edf90fbe3bb4c4ae93e307ece835da6ce656",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/14712850/f7e52c23-cce8-45be-9fb3-849ae30a35c3",
+      "magicMatches": true
+    },
+    {
+      "id": "sysmon",
+      "url": "https://download.sysinternals.com/files/Sysmon.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+      "checkedAtUtc": "2026-11-27T01:29:13.906226+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/2938038",
+      "bytesRead": 512,
+      "prefixHex": "504b0304140000000800c4802a5da1f0",
+      "sampleSha256": "2d88deeaee87f6742b17bb0ccda11db51dba7dc041273c9fd816561b7ebb178e",
+      "finalHost": "download.sysinternals.com",
+      "finalPath": "/files/Sysmon.zip",
+      "magicMatches": true
+    },
+    {
+      "id": "usb-tree-arm64",
+      "url": "https://www.uwe-sieber.de/files/UsbTreeView_arm64.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+      "checkedAtUtc": "2026-11-27T01:29:07.081503+00:00",
+      "status": 206,
+      "contentType": "application/zip",
+      "contentRange": "bytes 0-511/557264",
+      "bytesRead": 512,
+      "prefixHex": "504b0304140000000800e396565deed2",
+      "sampleSha256": "717b3240d3821c3da7df1279726dc1a0e2a22da2acd4d9cdd2ec138de0b64280",
+      "finalHost": "www.uwe-sieber.de",
+      "finalPath": "/files/UsbTreeView_arm64.zip",
+      "magicMatches": true
+    },
+    {
+      "id": "usb-tree-x64",
+      "url": "https://www.uwe-sieber.de/files/UsbTreeView_x64.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+      "checkedAtUtc": "2026-11-27T01:29:07.081025+00:00",
+      "status": 206,
+      "contentType": "application/zip",
+      "contentRange": "bytes 0-511/545942",
+      "bytesRead": 512,
+      "prefixHex": "504b03041400000008001997565d0e4d",
+      "sampleSha256": "461df503ed61231eef8a393f46e843f6eaeaa9c67c6ad4c598ea3fdc5c3ec038",
+      "finalHost": "www.uwe-sieber.de",
+      "finalPath": "/files/UsbTreeView_x64.zip",
+      "magicMatches": true
+    },
+    {
+      "id": "usb-tree-x86",
+      "url": "https://www.uwe-sieber.de/files/UsbTreeView_Win32.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+      "checkedAtUtc": "2026-11-27T01:29:07.082079+00:00",
+      "status": 206,
+      "contentType": "application/zip",
+      "contentRange": "bytes 0-511/507073",
+      "bytesRead": 512,
+      "prefixHex": "504b03041400000008002897565d22cb",
+      "sampleSha256": "64b2ef8f878f61ab77896ca831fa15da58844b97b169cacd7cd9f19f8b1c26c1",
+      "finalHost": "www.uwe-sieber.de",
+      "finalPath": "/files/UsbTreeView_Win32.zip",
+      "magicMatches": true
+    },
+    {
+      "id": "winmerge-WinMerge-2.16.60-x64-Setup.exe",
+      "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/WinMerge-2.16.60-x64-Setup.exe",
+      "format": "EXE",
+      "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
+      "checkedAtUtc": "2026-11-27T01:29:26.828116+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/18697696",
+      "bytesRead": 512,
+      "prefixHex": "4d5a50000200000004000f00ffff0000",
+      "sampleSha256": "1db5b5a7d3db0acd27cf3c27edd89596a96926da6660e2a3d84808c49cd22374",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/26494018/5808af73-ffb6-46c8-af30-05da9bd1be63",
+      "magicMatches": true
+    },
+    {
+      "id": "winmerge-winmerge-2.16.60-ARM64-exe.zip",
+      "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-ARM64-exe.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
+      "checkedAtUtc": "2026-11-27T01:29:26.855489+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/24365226",
+      "bytesRead": 512,
+      "prefixHex": "504b030414000000000069a95b5d0000",
+      "sampleSha256": "1728b3fa21080354167978bb3e020959f60ee6f2a63b75f093a7667281c28987",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/26494018/fb6c85d7-36b5-4e5d-b052-e92617a88775",
+      "magicMatches": true
+    },
+    {
+      "id": "winmerge-winmerge-2.16.60-x64-exe.zip",
+      "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip",
+      "format": "ZIP",
+      "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
+      "checkedAtUtc": "2026-11-27T01:29:26.819353+00:00",
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "contentRange": "bytes 0-511/25327174",
+      "bytesRead": 512,
+      "prefixHex": "504b03041400000000004aa95b5d0000",
+      "sampleSha256": "313b793e3e36cc4a560c31d3aa685c5221a676ef8b6d19aa45e272a4106d2b8b",
+      "finalHost": "release-assets.githubusercontent.com",
+      "finalPath": "/github-production-release-asset/26494018/9beb983e-f3df-4506-8028-9c812870e69e",
+      "magicMatches": true
+    }
+  ],
+  "sourceArchiveCheck": {
+    "id": "mtr-source",
+    "url": "https://www.bitwizard.nl/mtr/files/mtr-0.96.tar.gz",
+    "format": "TGZ",
+    "evidenceUrl": "https://www.bitwizard.nl/mtr/files/",
+    "checkedAtUtc": "2026-11-27T01:30:54.210405+00:00",
+    "status": 206,
+    "contentType": "application/x-gzip",
+    "contentRange": "bytes 0-511/301374",
+    "bytesRead": 512,
+    "prefixHex": "1f8b0800000000000203ec3b6b73db38",
+    "sampleSha256": "55b4778ba723442cdb560152c36cad5095d4563cc40e30e6298ee6c91e8ac335",
+    "magicMatches": true,
+    "classification": "Source archive; requires compilation, not a Windows installer"
+  },
+  "sourceRetrieval": {
+    "requested": 35,
+    "successful": 32,
+    "limitations": [
+      {
+        "id": "mtr-packages",
+        "url": "https://packages.debian.org/trixie/mtr-tiny",
+        "error": "HTTP Error 503: Service Unavailable"
+      },
+      {
+        "id": "mtr-release",
+        "url": "https://api.github.com/repos/traviscross/mtr/releases/latest",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "id": "remmina-packages",
+        "url": "https://packages.debian.org/trixie/remmina",
+        "error": "HTTP Error 503: Service Unavailable"
+      }
+    ]
+  },
+  "versionDecisions": [
+    "WinMerge 2.16.60 came from the current publisher page and stable release API; a search snippet still named 2.16.58.2.",
+    "SumatraPDF stable 3.6.1 is distinct from 3.7 preview features described in rolling documentation.",
+    "promptfoo CLI 0.126.0 and Node.js >=22.22.0 came from npm metadata and official installation docs; the newest GitHub tag was a separate code-scan action.",
+    "netboot.xyz versioned 3.0.3 release ISOs are distinct from the publisher rolling download routes.",
+    "mtr source 0.96 was observed in the upstream archive index; a missing GitHub latest-release endpoint was not treated as a broken project or an installer."
+  ],
+  "limits": [
+    "Only bounded response samples were retrieved: up to512 bytes per non-ISO file, seven bytes at offset32768 for each ISO.",
+    "These are not whole-file hashes, signature verification, installation tests, physical recovery tests, boot tests or efficacy benchmarks.",
+    "Primary documentation and release metadata support the stated capabilities; tool-to-job fit remains an editorial judgment.",
+    "Full rendered catalog, guide and mobile behavior is verified separately in the parent integration workflow."
+  ],
+  "sourceHashes": {
+    "data/tools.json": "56c3ea378440a63ad56622b6055ad89c8563d0724c9d2397a8c28616d938547d",
+    "data/tool-access.json": "fffc5d25ab8259c402d53fee715b694f690cb8e50915cb31717d14e5ca73f1b2",
+    "docs/reference/catalog-expansion-2026-11-26.md": "a75893ace854d5951faad140a7becdf1324fbfe674b0854527d18d556eb75b4a"
+  },
+  "newRouteLinkChecks": {
+    "distinctAcquisitionUrls": 43,
+    "reusedSuccessfulEvidence": 36,
+    "newChecks": [
+      {
+        "url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install",
+        "checkedAtUtc": "2026-11-27T01:35:49.797314+00:00",
+        "status": 206,
+        "bytesRead": 512,
+        "contentType": "text/html",
+        "finalUrl": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install"
+      },
+      {
+        "url": "https://curl.se/windows/microsoft.html",
+        "checkedAtUtc": "2026-11-27T01:35:49.798236+00:00",
+        "status": 206,
+        "bytesRead": 512,
+        "contentType": "text/html",
+        "finalUrl": "https://curl.se/windows/microsoft.html"
+      },
+      {
+        "url": "https://curl.se/download.html",
+        "checkedAtUtc": "2026-11-27T01:35:49.798902+00:00",
+        "status": 206,
+        "bytesRead": 512,
+        "contentType": "text/html",
+        "finalUrl": "https://curl.se/download.html"
+      },
+      {
+        "url": "https://gitlab.com/Remmina/Remmina",
+        "checkedAtUtc": "2026-11-27T01:35:49.799531+00:00",
+        "status": 206,
+        "bytesRead": 512,
+        "contentType": "text/html; charset=utf-8",
+        "finalUrl": "https://gitlab.com/Remmina/Remmina"
+      },
+      {
+        "url": "https://github.com/microsoft/diskspd/releases",
+        "checkedAtUtc": "2026-11-27T01:35:49.800161+00:00",
+        "status": 206,
+        "bytesRead": 512,
+        "contentType": "text/html; charset=utf-8",
+        "finalUrl": "https://github.com/microsoft/diskspd/releases"
+      },
+      {
+        "url": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory",
+        "checkedAtUtc": "2026-11-27T01:35:53.772534+00:00",
+        "status": 206,
+        "bytesRead": 512,
+        "contentType": "text/html",
+        "finalUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory"
+      },
+      {
+        "url": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-azure-active-directory",
+        "checkedAtUtc": "2026-11-27T01:35:53.963536+00:00",
+        "status": 206,
+        "bytesRead": 512,
+        "contentType": "text/html",
+        "finalUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-azure-active-directory"
+      }
+    ],
+    "unknownUrls": []
+  },
+  "materialChallenge": {
+    "result": "pass",
+    "unresolvedBlockingFindings": [],
+    "reviewedBoundaries": [
+      "Stable SumatraPDF3.6.1 is not credited with3.7 preview CLI features.",
+      "Sysmon remains proprietary under its license, is planned telemetry rather than a malware scanner, and defaults to no network-connection events.",
+      "Syncthing deletion propagation is explicit and independent backups remain necessary.",
+      "DiskSpd2.3 workload defaults and healthy-media-only scope are explicit.",
+      "Windows Sandbox edition, network, clipboard and writable-mapping boundaries are explicit.",
+      "mtr source and Linux/WSL package routes are not presented as Windows installers."
+    ],
+    "peerReview": "Runbook author found no catalog-fit mismatch; notes use SetupDiag upgrade-log analysis, USB Device Tree Viewer topology and an ordinary SumatraPDF one-page print test."
+  }
+}

@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-repair-windows-component-or-system-file-corruption"></a>
 
@@ -8,7 +8,7 @@ Use [Windows](https://www.microsoft.com/windows) servicing tools in a sensible o
 
 **[Windows](https://www.microsoft.com/windows) & performance** · Intermediate · 30–90 min · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/windows-repair)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/windows-repair)
 
 <a id="working-kit"></a>
 
@@ -23,6 +23,8 @@ Use [Windows](https://www.microsoft.com/windows) servicing tools in a sensible o
 | Repair the running [Windows](https://www.microsoft.com/windows) component store. | **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · **[Open built-in repair instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** |
 | Verify protected files after [component-store repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair). | **[System File Checker](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) · **[Open built-in system-file checks](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)** |
 | Reinstall the current [Windows](https://www.microsoft.com/windows) version while keeping apps, files and settings, when available. | **[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) · **[Reinstall current Windows via Windows Update](https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows)** |
+| Finding the failure rule and related log evidence before retrying an unsuccessful [Windows](https://www.microsoft.com/windows) upgrade. | **[SetupDiag](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag)** · [Official page](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag) · **[Download Windows upgrade analyzer · EXE](https://go.microsoft.com/fwlink/?linkid=870142)** |
+| Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. | **[WinMerge](https://winmerge.org/)** · [Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** |
 
 ### Repair
 
@@ -73,6 +75,12 @@ Use [Windows](https://www.microsoft.com/windows) servicing tools in a sensible o
 
 **Change route when:** Corruption returns with I/O errors or other storage symptoms. · The installation is nonrepairable or the correct target/source is uncertain.
 
+### 🎯 Go straight to a specific fix
+
+- **[Resolve a missing DISM repair source](#fix-repair-dism-source-not-found)** — [DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) reports that source files could not be found, including a source-related servicing error.
+- **[Identify what SFC could not repair](#fix-repair-read-the-current-sfc-result)** — [System File Checker](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) reports unresolved corruption after the documented component-store sequence.
+- **[Repair one broken app without resetting the PC](#fix-repair-one-app-without-resetting-windows)** — [Windows](https://www.microsoft.com/windows) works normally but one installed application will not open or behaves incorrectly.
+
 > [!NOTE]
 > **Start here.** Confirm the drive is stable and the affected data is backed up. Repeated corruption or I/O errors need a hardware investigation first.
 
@@ -121,6 +129,8 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · **[Open built-in repair instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** | Repair the running [Windows](https://www.microsoft.com/windows) component store. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) |
 | **[System File Checker](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) · **[Open built-in system-file checks](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)** | Verify protected files after [component-store repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair). | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) |
 | **[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) · **[Reinstall current Windows via Windows Update](https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows)** | Reinstall the current [Windows](https://www.microsoft.com/windows) version while keeping apps, files and settings, when available. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) |
+| **[SetupDiag](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag)** · [Official page](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag) · **[Download Windows upgrade analyzer · EXE](https://go.microsoft.com/fwlink/?linkid=870142)** | Finding the failure rule and related log evidence before retrying an unsuccessful [Windows](https://www.microsoft.com/windows) upgrade. | [Windows](https://www.microsoft.com/windows); Free Microsoft diagnostic download | [Open guide](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag) |
+| **[WinMerge](https://winmerge.org/)** · [Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** | Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. | [Windows](https://www.microsoft.com/windows); Free and open source under GPL-2.0-or-later | [Open guide](https://manual.winmerge.org/en/) |
 
 <a id="walkthrough"></a>
 
@@ -196,6 +206,81 @@ sfc /scannow
 > **Pause this route and escalate when:**
 > - Drive failure, unstable RAM, or overheating is suspected.
 > - The proposed reinstall does not clearly preserve the required data and applications.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-repair-dism-source-not-found"></a>
+
+### Resolve a missing [DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) repair source
+
+**Use when:** [DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) reports that source files could not be found, including a source-related servicing error.
+
+**Start here:** Record the exact servicing error, installed [Windows](https://www.microsoft.com/windows) build, architecture and language.
+
+**[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · **[Open built-in repair instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)**
+
+1. Check whether [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/) can supply repair content under the device’s policy before selecting a local source.
+2. Use Microsoft’s repair-source guidance to match the installed image and required language/servicing level; identify the correct image index when the source contains several editions.
+3. Retry only the documented repair against the confirmed running installation or explicitly identified offline image, then retain its final result.
+
+**Prove it worked:** [DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) accepts the compatible source and finishes, or returns a narrower actionable error.
+
+**If this does not resolve it:** Do not substitute random DLLs or use an unrelated ISO. Recurring corruption with I/O faults belongs to storage recovery.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-a-windows-repair-source) · [Source 2](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-repair-read-the-current-sfc-result"></a>
+
+### Identify what [SFC](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) could not repair
+
+**Use when:** [System File Checker](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) reports unresolved corruption after the documented component-store sequence.
+
+**Start here:** Note the start/end time of the latest scan rather than interpreting every old log entry.
+
+**[System File Checker](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) · **[Open built-in system-file checks](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)**
+
+**[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · **[Open built-in repair instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)**
+
+**[Notepad++](https://notepad-plus-plus.org/)** · [Official page](https://notepad-plus-plus.org/) · **[Download Windows x64 portable · ZIP](https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.9.1/npp.8.9.9.1.portable.x64.zip)**
+
+1. Open the current CBS log through Microsoft’s documented [SFC](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) detail workflow and inspect entries marked [SR] for that run.
+2. Record the unresolved component names and servicing errors privately; distinguish old repaired entries from current failures.
+3. Use the matching supported servicing or repair-install route, then rerun the relevant verification and the original failing feature.
+
+**Prove it worked:** The case identifies the current unresolved component or records a clean final scan and working feature.
+
+**If this does not resolve it:** Do not take ownership of protected files or copy binaries from another random PC as a generic repair.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-gb/windows/experience/backup-recovery/use-the-system-file-checker-tool-to-repair-missing-or-corrupted-system-files) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-repair-one-app-without-resetting-windows"></a>
+
+### Repair one broken app without resetting the PC
+
+**Use when:** [Windows](https://www.microsoft.com/windows) works normally but one installed application will not open or behaves incorrectly.
+
+**Start here:** Confirm that the same failure is limited to that application and protect its local-only data.
+
+1. Open Settings > Apps > Installed apps, choose the affected app’s menu and open Advanced options if available.
+2. Use Repair first when offered, then retest. Review the displayed data effects before considering Reset; reset can remove local app state.
+3. For desktop programs without that option, use the publisher-supported Modify/Repair path in Programs and Features or its installer.
+
+**Prove it worked:** The original application task works with the required data, settings and account access verified.
+
+**If this does not resolve it:** If the fault affects several [Windows](https://www.microsoft.com/windows) components or data cannot be protected, use the system or application-owner route before resetting.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/windows/apps/repair-apps-and-programs-in-windows) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

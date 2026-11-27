@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-windows-diagnosis--repair"></a>
 
@@ -6,7 +6,7 @@
 
 Inspect first, change a confirmed cause, and repeat the original workload.
 
-**24 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**26 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** Performance, servicing, startup, or application failure?
 
@@ -36,6 +36,7 @@ Inspect first, change a confirmed cause, and repeat the original workload.
 | [Process Explorer](#process-explorer) | Finding which process owns a locked file or consumes resources. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/ProcessExplorer.zip)** |
 | [Process Monitor](#procmon) | Reproducing an application failure and locating denied or missing resources. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/ProcessMonitor.zip)** |
 | [RAMMap](#rammap) | Explaining high memory use when [Task Manager](https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows) does not show a clear owner. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/rammap) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/RAMMap.zip)** |
+| [SetupDiag](#setupdiag) | Finding the failure rule and related log evidence before retrying an unsuccessful [Windows](https://www.microsoft.com/windows) upgrade. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag) · **[Download Windows upgrade analyzer · EXE](https://go.microsoft.com/fwlink/?linkid=870142)** |
 | [Sigcheck](#sigcheck) | Checking publisher and file identity before running or escalating a suspicious binary. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/Sigcheck.zip)** |
 | [System File Checker](#sfc) | System-file corruption after establishing disk health and servicing status. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) · **[Open built-in system-file checks](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)** |
 | [TCPView](#tcpview) | Identifying which local application is opening a network connection. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/TCPView.zip)** |
@@ -50,6 +51,7 @@ Inspect first, change a confirmed cause, and repeat the original workload.
 | [System Informer](#system-informer) | Advanced process investigation beyond the standard [task manager](https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows). | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://systeminformer.sourceforge.io/) · **[Get Windows portable ZIP · download page](https://sourceforge.net/projects/systeminformer/files/systeminformer-4.0.26241.138-bin.zip/download)** |
 | [WinDbg](#windbg) | Interpreting a crash dump when basic event logs do not establish the cause. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger · APPINSTALLER](https://aka.ms/windbg/download)** |
 | [Windows Performance Toolkit](#windows-performance-toolkit) | Investigating intermittent CPU, storage or application responsiveness problems with evidence. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/) · **[Download Windows ADK setup · EXE](https://go.microsoft.com/fwlink/?linkid=2289980)** |
+| [Windows Sandbox](#windows-sandbox) | Checking an approved package in a clean desktop before changing a workstation. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/) · **[Enable Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install)** |
 | [Windows point-in-time restore (preview)](#windows-point-in-time-restore) | A controlled evaluation of whole-system rollback on an eligible machine with an existing restore point and independently preserved current files. | [Windows 11](https://www.microsoft.com/windows/windows-11) · Evaluate | [Official page](https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore) · **[Review preview requirements and restore scope](https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore)** |
 | [WinSAT (legacy)](#winsat) | Understanding a legacy assessment when the target system still provides it; prefer WPR/WPA for current investigations. | [Windows](https://www.microsoft.com/windows) · Evaluate | [Official page](https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal) · **[Read legacy command instructions](https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal)** |
 
@@ -302,6 +304,38 @@ Breaks down how [Windows](https://www.microsoft.com/windows) uses physical memor
 - **Evidence status:** Documentation reviewed; not an INTA runtime certification
 - **Selection provenance:**
   - Official project or vendor documentation
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="setupdiag"></a>
+
+## [SetupDiag](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag)
+
+Analyzes [Windows](https://www.microsoft.com/windows) Setup logs to explain a failed feature update or operating-system upgrade.
+
+[Official page](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag) · **[Download Windows upgrade analyzer · EXE](https://go.microsoft.com/fwlink/?linkid=870142)** · [Documentation](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Finding the failure rule and related log evidence before retrying an unsuccessful [Windows](https://www.microsoft.com/windows) upgrade. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows) |
+| **How you use it** | portable |
+| **Access / pricing** | Free Microsoft diagnostic download |
+| **Selection role** | Core |
+
+> **Before using it:** This diagnoses upgrade logs; it does not repair the computer. Preserve the relevant setup logs before cleanup and match the reported failure to the actual upgrade attempt.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag
 
 </details>
 
@@ -745,6 +779,40 @@ Microsoft debugger for user-mode and kernel debugging and crash-dump analysis.
 - **Evidence status:** Documentation reviewed; not an INTA runtime certification
 - **Selection provenance:**
   - Official project or vendor documentation
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="windows-sandbox"></a>
+
+## [Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/)
+
+Disposable isolated [Windows](https://www.microsoft.com/windows) desktop for testing an application or reproducing a clean-environment behavior.
+
+[Official page](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/) · **[Enable Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install)** · [Configure network and shared-folder isolation](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file) · [Documentation](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Checking an approved package in a clean desktop before changing a workstation. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows) |
+| **How you use it** | built-in |
+| **Access / pricing** | Included with supported [Windows](https://www.microsoft.com/windows) Pro, Enterprise and Education licensing; unavailable on Home |
+| **Selection role** | Specialist |
+
+> **Before using it:** Requires a supported edition and enabled virtualization. Networking and clipboard sharing are on by default; configure them and read-only mapped folders for the test. Closing the sandbox discards its contents, but writes to a writable host mapping persist.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/
+  - https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install
+  - https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file
 
 </details>
 

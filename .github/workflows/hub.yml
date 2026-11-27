@@ -2,9 +2,9 @@ name: Validate and publish technician hub
 on:
   push:
     branches: [main]
-    paths: ['data/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'tests/test_hub.py', 'tests/test_wiki.py', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml']
+    paths: ['data/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/*knowledge*', 'tests/test_hub.py', 'tests/test_wiki.py', 'tests/test_knowledge.py', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
   pull_request:
-    paths: ['data/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'tests/test_hub.py', 'tests/test_wiki.py', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml']
+    paths: ['data/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/*knowledge*', 'tests/test_hub.py', 'tests/test_wiki.py', 'tests/test_knowledge.py', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -22,6 +22,7 @@ jobs:
           python3 -m unittest discover -s tests
           python3 scripts/build-hub.py --check
           python3 scripts/check-wiki.py
+          python3 scripts/check-knowledge.py --output reports/knowledge-health.json
       - uses: actions/upload-pages-artifact@v4
         with:
           path: site

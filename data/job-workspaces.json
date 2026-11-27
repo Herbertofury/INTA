@@ -13,6 +13,14 @@
         {
           "toolId": "crystaldiskinfo",
           "why": "Check drive warnings before repair writes."
+        },
+        {
+          "toolId": "usb-device-tree-view",
+          "why": "Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly."
+        },
+        {
+          "toolId": "powercfg",
+          "why": "Collecting battery and sleep evidence before changing hardware or power policy."
         }
       ],
       "resources": [
@@ -97,6 +105,10 @@
         {
           "toolId": "defender-offline",
           "why": "Offline scan when the documented platform and recovery requirements are met."
+        },
+        {
+          "toolId": "sysmon",
+          "why": "Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved."
         }
       ],
       "resources": [
@@ -186,7 +198,12 @@
     "ransomware-response": {
       "goal": "Contain spread, preserve useful evidence and recover through a controlled clean environment.",
       "startHere": "Disconnect affected network access and contact the incident lead through a clean channel. Do not attach backups to the affected environment.",
-      "tools": [],
+      "tools": [
+        {
+          "toolId": "sysmon",
+          "why": "Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved."
+        }
+      ],
       "resources": [
         {
           "id": "response-checklist",
@@ -270,6 +287,14 @@
         {
           "toolId": "crystaldiskinfo",
           "why": "Separate storage warnings from ordinary software lag."
+        },
+        {
+          "toolId": "powercfg",
+          "why": "Collecting battery and sleep evidence before changing hardware or power policy."
+        },
+        {
+          "toolId": "diskspd",
+          "why": "Measure a reproducible storage-performance problem on healthy media with a bounded test file."
         }
       ],
       "resources": [
@@ -356,6 +381,14 @@
           "toolId": "windows-recovery",
           "why": "Reinstall the current Windows version while keeping apps, files and settings, when available.",
           "actionId": "repair-reinstall"
+        },
+        {
+          "toolId": "setupdiag",
+          "why": "Finding the failure rule and related log evidence before retrying an unsuccessful Windows upgrade."
+        },
+        {
+          "toolId": "winmerge",
+          "why": "Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration."
         }
       ],
       "resources": [
@@ -457,6 +490,10 @@
           "toolId": "windows-recovery",
           "actionId": "repair-reinstall",
           "why": "Reinstall the current Windows version while keeping apps, files and settings, when available."
+        },
+        {
+          "toolId": "setupdiag",
+          "why": "Finding the failure rule and related log evidence before retrying an unsuccessful Windows upgrade."
         }
       ],
       "resources": [
@@ -762,6 +799,14 @@
         {
           "toolId": "winget",
           "why": "Inventory and reapply approved application packages."
+        },
+        {
+          "toolId": "syncthing",
+          "why": "Synchronize an explicitly chosen healthy-data folder between approved machines; keep an independent backup."
+        },
+        {
+          "toolId": "winmerge",
+          "why": "Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration."
         }
       ],
       "resources": [
@@ -970,6 +1015,15 @@
         {
           "toolId": "wireshark",
           "why": "Capture only a scoped unresolved protocol failure."
+        },
+        {
+          "toolId": "curl",
+          "why": "Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable.",
+          "actionId": "windows-inbox"
+        },
+        {
+          "toolId": "mtr",
+          "why": "Comparing a reproducible path problem from a Linux or macOS bench, or Windows through WSL."
         }
       ],
       "resources": [
@@ -1062,6 +1116,15 @@
         {
           "toolId": "quick-machine-recovery",
           "why": "Check for a matching cloud remedy on eligible, configured devices with a widespread startup failure."
+        },
+        {
+          "toolId": "curl",
+          "why": "Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable.",
+          "actionId": "windows-inbox"
+        },
+        {
+          "toolId": "mtr",
+          "why": "Comparing a reproducible path problem from a Linux or macOS bench, or Windows through WSL."
         }
       ],
       "resources": [
@@ -1158,6 +1221,10 @@
         {
           "toolId": "meshcentral",
           "why": "Existing managed-device access and service oversight."
+        },
+        {
+          "toolId": "remmina",
+          "why": "Connecting a Linux technician workstation to an already configured remote desktop or server."
         }
       ],
       "resources": [
@@ -1231,6 +1298,11 @@
           "toolId": "powershell",
           "why": "Use existing Windows PowerShell 5.1 on the member PC.",
           "actionId": "windows-powershell"
+        },
+        {
+          "toolId": "windows-laps",
+          "why": "Establishing recoverable, per-device administrator access during managed workstation setup and support planning.",
+          "actionId": "active-directory"
         }
       ],
       "resources": [
@@ -1304,6 +1376,11 @@
           "toolId": "get-help",
           "why": "Choose a diagnostic for classic Outlook only.",
           "actionId": "outlook"
+        },
+        {
+          "toolId": "curl",
+          "why": "Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable.",
+          "actionId": "windows-inbox"
         }
       ],
       "resources": [
@@ -1396,6 +1473,14 @@
         {
           "toolId": "naps2",
           "why": "Test scanner, feeder and multipage PDF output."
+        },
+        {
+          "toolId": "usb-device-tree-view",
+          "why": "Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly."
+        },
+        {
+          "toolId": "sumatrapdf",
+          "why": "Testing the same known-good PDF through an independent renderer to separate an application-specific print fault from the queue or printer."
         }
       ],
       "resources": [
@@ -1626,6 +1711,18 @@
         {
           "toolId": "crystaldiskinfo",
           "why": "Check storage warnings before further stress."
+        },
+        {
+          "toolId": "usb-device-tree-view",
+          "why": "Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly."
+        },
+        {
+          "toolId": "powercfg",
+          "why": "Collecting battery and sleep evidence before changing hardware or power policy."
+        },
+        {
+          "toolId": "diskspd",
+          "why": "Measure a reproducible storage-performance problem on healthy media with a bounded test file."
         }
       ],
       "resources": [
@@ -1716,6 +1813,22 @@
         {
           "toolId": "robocopy",
           "why": "Move only the agreed files with a reviewed copy plan."
+        },
+        {
+          "toolId": "windows-sandbox",
+          "why": "Evaluate an approved package in a disposable desktop with network and shared-folder exposure explicitly configured."
+        },
+        {
+          "toolId": "syncthing",
+          "why": "Synchronize an explicitly chosen healthy-data folder between approved machines; keep an independent backup."
+        },
+        {
+          "toolId": "netbootxyz",
+          "why": "Starting an approved installer or rescue environment through network boot or remote virtual media when local media delivery is inconvenient."
+        },
+        {
+          "toolId": "windows-laps",
+          "why": "Establishing recoverable, per-device administrator access during managed workstation setup and support planning."
         }
       ],
       "resources": [
@@ -1794,7 +1907,12 @@
     "client-handoff": {
       "goal": "Close the case with user-visible proof, clean access and a clear next owner.",
       "startHere": "Repeat the original requested task with the user before declaring the repair complete.",
-      "tools": [],
+      "tools": [
+        {
+          "toolId": "winmerge",
+          "why": "Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration."
+        }
+      ],
       "resources": [
         {
           "id": "handoff-form",
@@ -1877,6 +1995,10 @@
         {
           "toolId": "systemrescue",
           "why": "Provide an independent imaging and recovery environment."
+        },
+        {
+          "toolId": "netbootxyz",
+          "why": "Starting an approved installer or rescue environment through network boot or remote virtual media when local media delivery is inconvenient."
         }
       ],
       "resources": [
@@ -1963,6 +2085,14 @@
         {
           "toolId": "codex-cli",
           "why": "Review a scoped script or code change in an approved workspace."
+        },
+        {
+          "toolId": "windows-sandbox",
+          "why": "Evaluate an approved package in a disposable desktop with network and shared-folder exposure explicitly configured."
+        },
+        {
+          "toolId": "promptfoo",
+          "why": "Checking whether a revised diagnostic prompt handles a sanitized regression set correctly before relying on it in technician workflows."
         }
       ],
       "resources": [
@@ -2047,6 +2177,18 @@
         {
           "toolId": "everything",
           "why": "Locate a named local file or log without unnecessary cleanup."
+        },
+        {
+          "toolId": "powercfg",
+          "why": "Collecting battery and sleep evidence before changing hardware or power policy."
+        },
+        {
+          "toolId": "windows-laps",
+          "why": "Establishing recoverable, per-device administrator access during managed workstation setup and support planning."
+        },
+        {
+          "toolId": "sysmon",
+          "why": "Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved."
         }
       ],
       "resources": [

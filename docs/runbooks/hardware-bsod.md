@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-diagnose-crashes-blue-screens-and-overheating"></a>
 
@@ -8,7 +8,7 @@ Correlate crash evidence with memory, storage, temperature, power, and driver ch
 
 **Hardware** · Advanced · 30–120 min plus extended tests · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/hardware-bsod)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/hardware-bsod)
 
 <a id="working-kit"></a>
 
@@ -24,6 +24,9 @@ Correlate crash evidence with memory, storage, temperature, power, and driver ch
 | Test memory outside the running OS when evidence points there. | **[Memtest86+](https://www.memtest.org/)** · [Official page](https://www.memtest.org/) · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** |
 | Observe sensor behavior without claiming a sensor alone proves the cause. | **[Libre Hardware Monitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)** · [Official page](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) · **[Download Windows portable · ZIP](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/download/v0.9.6/LibreHardwareMonitor.zip)** |
 | Check storage warnings before further stress. | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** |
+| Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly. | **[USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html)** · [Official page](https://www.uwe-sieber.de/usbtreeview_e.html) · **[Download Windows x64 portable · ZIP](https://www.uwe-sieber.de/files/UsbTreeView_x64.zip)** |
+| Collecting battery and sleep evidence before changing hardware or power policy. | **[powercfg](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) · **[Open built-in battery and sleep diagnostics](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** |
+| Measure a reproducible storage-performance problem on healthy media with a bounded test file. | **[DiskSpd](https://github.com/microsoft/diskspd)** · [Official page](https://github.com/microsoft/diskspd) · **[Download Windows x64/ARM64 tools · ZIP](https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP)** |
 
 ### Find the cause
 
@@ -90,6 +93,12 @@ Correlate crash evidence with memory, storage, temperature, power, and driver ch
 
 **Change route when:** There is unsafe temperature, electrical damage or unstable storage. · The fault requires disassembly or specialist testing beyond the available service capability.
 
+### 🎯 Go straight to a specific fix
+
+- **[Capture usable evidence for the next crash](#fix-hardware-crash-without-a-dump)** — A real stop error occurs but no usable memory dump is available.
+- **[Isolate a memory fault after an upgrade](#fix-hardware-memory-errors-after-upgrade)** — Crashes or memory-test errors began after changing RAM or firmware memory settings.
+- **[Find a device failing through a USB hub](#fix-hardware-usb-dock-device-drops)** — A scanner, printer or storage device disconnects through a dock but works intermittently elsewhere.
+
 > [!NOTE]
 > **Start here.** Record the exact stop code, timestamp, workload, recent hardware/driver changes, and whether the machine restarted or lost power.
 
@@ -142,6 +151,9 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | Check storage warnings before further stress. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
 | **[HWiNFO](https://www.hwinfo.com/)** · [Official page](https://www.hwinfo.com/) · **[Download Windows x64 EXE](https://www.hwinfo.com/files/hwi64_860.exe)** | Investigating temperatures, clocks, power and component identity. | [Windows](https://www.microsoft.com/windows); Pro license for commercial use of 64/ARM64 editions | [Open guide](https://www.hwinfo.com/licenses/) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
+| **[USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html)** · [Official page](https://www.uwe-sieber.de/usbtreeview_e.html) · **[Download Windows x64 portable · ZIP](https://www.uwe-sieber.de/files/UsbTreeView_x64.zip)** | Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly. | [Windows](https://www.microsoft.com/windows); Freeware; publisher explicitly permits use in commercial environments | [Open guide](https://www.uwe-sieber.de/usbtreeview_e.html) |
+| **[powercfg](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) · **[Open built-in battery and sleep diagnostics](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** | Collecting battery and sleep evidence before changing hardware or power policy. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) |
+| **[DiskSpd](https://github.com/microsoft/diskspd)** · [Official page](https://github.com/microsoft/diskspd) · **[Download Windows x64/ARM64 tools · ZIP](https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP)** | Measure a reproducible storage-performance problem on healthy media with a bounded test file. | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/); Free and open source under MIT license | [Open guide](https://github.com/microsoft/diskspd/wiki) |
 
 <a id="walkthrough"></a>
 
@@ -201,6 +213,83 @@ Work in order, record the result of each step, and change route when the evidenc
 > **Pause this route and escalate when:**
 > - Cooling failure, electrical damage, or storage deterioration appears.
 > - A proposed test risks unbacked-up data or production availability.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-hardware-crash-without-a-dump"></a>
+
+### Capture usable evidence for the next crash
+
+**Use when:** A real stop error occurs but no usable memory dump is available.
+
+**Start here:** Check the configured dump type, target path, free space and page-file state.
+
+**[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger · APPINSTALLER](https://aka.ms/windbg/download)**
+
+1. Open System Properties > Advanced > Startup and Recovery and select the organization’s appropriate supported dump setting.
+2. Confirm that the page file or dedicated dump file meets the selected dump’s requirements; a disabled or undersized page file can prevent capture.
+3. After the next naturally occurring crash, preserve the resulting dump privately and analyze it with the crash time and recent changes.
+
+**Prove it worked:** A usable dump and matching event evidence are available for the specific crash.
+
+**If this does not resolve it:** Do not force a production crash just to test logging without a separate authorized plan; dumps can contain customer data.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options) · [Source 2](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/how-to-determine-the-appropriate-page-file-size-for-64-bit-versions-of-windows) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-hardware-memory-errors-after-upgrade"></a>
+
+### Isolate a memory fault after an upgrade
+
+**Use when:** Crashes or memory-test errors began after changing RAM or firmware memory settings.
+
+**Start here:** Record the installed modules, slots and current firmware settings before opening the device.
+
+**[Memtest86+](https://www.memtest.org/)** · [Official page](https://www.memtest.org/) · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)**
+
+**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+
+1. Check the exact motherboard/device memory requirements and restore an approved supported configuration before comparing results.
+2. Boot [Memtest86+](https://www.memtest.org/) through a supported, approved firmware path and record which test/configuration produces errors.
+3. Following the hardware service procedure, compare modules and slots individually to distinguish a module, slot or configuration problem.
+
+**Prove it worked:** Errors are reproducible in a documented configuration or the corrected supported configuration completes the planned test.
+
+**If this does not resolve it:** A passing sample does not exclude every intermittent fault; stop if disassembly, firmware security or unsupported hardware exceeds the service scope.
+
+**Official evidence:** [Source 1](https://github.com/memtest86plus/memtest86plus) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-hardware-usb-dock-device-drops"></a>
+
+### Find a device failing through a USB hub
+
+**Use when:** A scanner, printer or storage device disconnects through a dock but works intermittently elsewhere.
+
+**Start here:** Record the device, hub/dock, cable and physical port used for the failure.
+
+**[USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html)** · [Official page](https://www.uwe-sieber.de/usbtreeview_e.html) · **[Download Windows x64 portable · ZIP](https://www.uwe-sieber.de/files/UsbTreeView_x64.zip)**
+
+**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+
+1. Compare the same device on a known-good direct port and cable without moving unrelated production devices.
+2. Use [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) to identify the actual hub chain and negotiated connection, then check the dock/device’s power and firmware requirements.
+3. Apply the evidenced cable, port, power or supported firmware correction and repeat a sustained real transfer or scan.
+
+**Prove it worked:** The original workload remains connected on the documented path, with the failed component or topology isolated.
+
+**If this does not resolve it:** Do not use a failing storage device for repeated transfer stress; preserve its data first.
+
+**Official evidence:** [Source 1](https://www.uwe-sieber.de/usbtreeview_e.html) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

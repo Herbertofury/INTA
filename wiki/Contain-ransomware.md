@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 # 🚨 Contain ransomware
 
@@ -11,6 +11,10 @@
 **[Open working view](https://herbertofury.github.io/INTA/#job/ransomware-response/quick/contain-ransomware)** · Keep the tool panel beside the instructions.
 
 **First move:** Isolate affected connections and alert the incident owner immediately if files are being encrypted or compromise is spreading.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved. | **[Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) · **[Download Windows monitoring tools · ZIP](https://download.sysinternals.com/files/Sysmon.zip)** |
 
 ### [Incident response](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response)
 
@@ -33,7 +37,7 @@
 
 **No extra download needed.**
 
-**[Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response)** · **[Selection evidence](https://github.com/Herbertofury/INTA/wiki/Free-Tool-Picks)**
+**[Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response)** · **[Specific fixes for this job](https://herbertofury.github.io/INTA/#job/ransomware-response/quick/contain-ransomware?section=fixes)** · **[Selection evidence](https://github.com/Herbertofury/INTA/wiki/Free-Tool-Picks)**
 
 <a id="next-action"></a>
 

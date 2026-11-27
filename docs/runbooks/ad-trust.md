@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-repair-a-workstations-domain-trust-relationship"></a>
 
@@ -8,7 +8,7 @@ Check connectivity, time, and computer identity before repairing a member comput
 
 **Identity & business systems** · Advanced · 20–60 min · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ad-trust)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ad-trust)
 
 <a id="working-kit"></a>
 
@@ -21,6 +21,7 @@ Check connectivity, time, and computer identity before repairing a member comput
 | Use this for | Official tool + exact action |
 | --- | --- |
 | Use existing [Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell) on the member PC. | **[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** |
+| Establishing recoverable, per-device administrator access during managed workstation setup and support planning. | **[Windows LAPS](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** · [Official page](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) · **[Configure Active Directory backup](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory)** |
 
 ### Diagnostic and repair
 
@@ -68,6 +69,12 @@ Check connectivity, time, and computer identity before repairing a member comput
 - [ ] A normal domain sign-in and required shared resource work.
 
 **Change route when:** The target is a domain controller or the issue affects the wider domain. · Repair authority, local recovery access or the device identity is uncertain.
+
+### 🎯 Go straight to a specific fix
+
+- **[Fix domain discovery before changing trust](#fix-trust-domain-dns-before-account-repair)** — The member PC reports a trust/sign-in fault while internal domain names also fail.
+- **[Restore the domain time path](#fix-trust-clock-skew-blocks-authentication)** — Domain authentication fails and the member clock differs materially from the domain’s reference.
+- **[Check computer identity after restoring an old image](#fix-trust-error-after-old-image-restore)** — Trust broke after cloning, renaming or restoring a domain-joined workstation.
 
 > [!NOTE]
 > **Start here.** Use this guide for an [Active Directory](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview) member workstation or member server. Domain-controller trust repair needs its own procedure.
@@ -117,6 +124,7 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | --- | --- | --- | --- |
 | **[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** | Use existing [Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell) on the member PC. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://learn.microsoft.com/en-us/powershell/) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
+| **[Windows LAPS](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** · [Official page](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) · **[Configure Active Directory backup](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory)** | Establishing recoverable, per-device administrator access during managed workstation setup and support planning. | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/); Included with supported [Windows](https://www.microsoft.com/windows); directory prerequisites, licensing and retrieval permissions still apply | [Open guide](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) |
 
 <a id="walkthrough"></a>
 
@@ -185,6 +193,79 @@ Test-ComputerSecureChannel -Verbose
 > - The target is a domain controller.
 > - DNS/time/connectivity is still broken or the computer account is ambiguous.
 > - Local recovery access is not available before a membership change.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-trust-domain-dns-before-account-repair"></a>
+
+### Fix domain discovery before changing trust
+
+**Use when:** The member PC reports a trust/sign-in fault while internal domain names also fail.
+
+**Start here:** Read the member’s active IP and DNS configuration on the intended network or VPN.
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)**
+
+1. Compare the DNS servers and suffix with a working domain client, then resolve the actual domain/service names through the approved resolver.
+2. Restore the managed DNS/VPN route before running a secure-channel diagnostic.
+3. Use [Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell) to repeat the member-only Test-ComputerSecureChannel check and test a normal sign-in.
+
+**Prove it worked:** Domain discovery works and the trust test now gives a meaningful result over a working network path.
+
+**If this does not resolve it:** Do not rejoin the domain or point the member at public DNS to work around missing domain connectivity.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/broken-trust-relationship-domain-joined-device-its-domain-secure-channel-issues) · [Source 2](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-trust-clock-skew-blocks-authentication"></a>
+
+### Restore the domain time path
+
+**Use when:** Domain authentication fails and the member clock differs materially from the domain’s reference.
+
+**Start here:** Read the current clock and w32tm /query /status without changing time providers.
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)**
+
+1. Check the reported time source and whether the member can reach the intended domain synchronization path.
+2. Have the domain owner correct the configuration or connectivity under the organization’s policy, preserving evidence of the old state.
+3. After synchronization, retry domain authentication and the required share/application.
+
+**Prove it worked:** The member follows the approved time hierarchy and authentication succeeds without bypassing policy.
+
+**If this does not resolve it:** Do not apply a generic public-NTP recipe to domain controllers or all members; wider clock failure belongs to the directory owner.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-trust-error-after-old-image-restore"></a>
+
+### Check computer identity after restoring an old image
+
+**Use when:** Trust broke after cloning, renaming or restoring a domain-joined workstation.
+
+**Start here:** Record the restoration time and whether another active PC uses the same computer identity.
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)**
+
+1. Have the directory administrator compare the intended computer object, recent resets and duplicate-machine evidence.
+2. Keep a working local recovery account and correct the identity conflict before a scoped member secure-channel repair.
+3. Restart as planned, test a fresh domain sign-in and verify group policy, shares and business apps.
+
+**Prove it worked:** One intended machine owns the correct computer identity and its secure channel remains healthy.
+
+**If this does not resolve it:** Do not repeatedly reset or delete the computer object while two active machines compete for it; do not use this member procedure on a domain controller.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/broken-trust-relationship-domain-joined-device-its-domain-secure-channel-issues) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

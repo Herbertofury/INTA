@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-networking"></a>
 
@@ -6,7 +6,7 @@
 
 Separate link, addressing, name resolution, transport, and application evidence.
 
-**10 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**12 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** One device, one service, or the whole office?
 
@@ -29,12 +29,14 @@ Separate link, addressing, name resolution, transport, and application evidence.
 | --- | --- | --- | --- |
 | [Advanced IP Scanner](#advanced-ip-scanner) | Quickly finding candidate printer or network-device addresses from a [Windows](https://www.microsoft.com/windows) technician PC, then confirming the physical device and its web interface. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://www.advanced-ip-scanner.com/) · **[Download Windows scanner · EXE](https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe)** |
 | [Angry IP Scanner](#angry-ip-scanner) | Quickly finding devices on a known managed subnet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://angryip.org/) · **[Download Windows x64 EXE · Java bundled](https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-setup.exe)** |
+| [curl](#curl) | Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/) · Core | [Official page](https://curl.se/) · **[Download Windows x64 tools · ZIP](https://curl.se/windows/dl-8.23.0_10/curl-8.23.0_10-win64-mingw.zip)** |
 | [iperf3](#iperf3) | Separating local network bandwidth limits from internet or application problems. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), FreeBSD · Core | [Official page](https://software.es.net/iperf/) · **[Download source · TAR.GZ](https://downloads.es.net/pub/iperf/iperf-3.22.1.tar.gz)** |
 | [OpenSSH](#openssh) | Repeatable authenticated remote shell and transfer operations. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://www.openssh.com/) · **[Enable Windows OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse)** |
 | [PuTTY](#putty) | Connecting to network equipment or [Linux](https://www.kernel.org/) systems from [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://www.chiark.greenend.org.uk/~sgtatham/putty/) · **[Download Windows x64 MSI](https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.85-installer.msi)** |
 | [Windows Packet Monitor](#pktmon) | Collecting [Windows](https://www.microsoft.com/windows) network evidence without installing a separate capture application. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon) · **[Open built-in capture instructions](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon)** |
 | [WinSCP](#winscp) | Transferring support logs and configuration files to an approved host. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://winscp.net/) · **[Windows installer download page](https://winscp.net/download/WinSCP-6.7.1-Setup.exe/download)** |
 | [Wireshark](#wireshark) | Explaining DNS, TCP and application-protocol failures from a bounded capture. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://www.wireshark.org/) · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)** |
+| [mtr](#mtr) | Comparing a reproducible path problem from a [Linux](https://www.kernel.org/) or [macOS](https://support.apple.com/macos) bench, or [Windows](https://www.microsoft.com/windows) through WSL. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) (WSL) · Specialist | [Official page](https://www.bitwizard.nl/mtr/) · **[Install a Linux/WSL distribution package](https://github.com/traviscross/mtr#using-mtr-on-windows)** |
 | [Nmap](#nmap) | Identifying expected hosts and exposed services on a managed network. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://nmap.org/) · **[Download Windows setup · EXE](https://nmap.org/dist/nmap-7.993-setup.exe)** |
 | [tcpdump](#tcpdump) | A small, bounded network capture from [INTA Rescue](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md) or a [Linux](https://www.kernel.org/) host. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), BSD · Specialist | [Official page](https://www.tcpdump.org/) · **[Download source · TAR.XZ](https://www.tcpdump.org/release/tcpdump-4.99.7.tar.xz)** |
 
@@ -100,6 +102,40 @@ Graphical IP-address and port discovery for local network inventory.
 - **Evidence status:** Documentation reviewed; not an INTA runtime certification
 - **Selection provenance:**
   - Official project or vendor documentation
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="curl"></a>
+
+## [curl](https://curl.se/)
+
+Command-line client for inspecting HTTP responses, TLS connections, redirects and many other transfer protocols.
+
+[Official page](https://curl.se/) · **[Download Windows x64 tools · ZIP](https://curl.se/windows/dl-8.23.0_10/curl-8.23.0_10-win64-mingw.zip)** · [Download Windows ARM64 tools · ZIP](https://curl.se/windows/dl-8.23.0_10/curl-8.23.0_10-win64a-mingw.zip) · [Use the Windows-included curl.exe](https://curl.se/windows/microsoft.html) · [Choose other operating-system packages](https://curl.se/download.html) · [All downloads / setup](https://curl.se/windows/) · [Documentation](https://curl.se/docs/manpage.html)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/) |
+| **How you use it** | portable |
+| **Access / pricing** | Free and open source; the [curl](https://curl.se/) license permits commercial projects |
+| **Selection role** | Core |
+
+> **Before using it:** Use [curl](https://curl.se/).exe explicitly in [Windows](https://www.microsoft.com/windows) [PowerShell](https://learn.microsoft.com/en-us/powershell/) when its [curl](https://curl.se/) alias refers to a different command. Compare the installed version and TLS backend. Keep credentials and headers out of public logs; disabling certificate verification is not a repair.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://curl.se/windows/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://curl.se/windows/
+  - https://curl.se/docs/copyright.html
+  - https://curl.se/windows/microsoft.html
 
 </details>
 
@@ -289,6 +325,40 @@ Packet capture and protocol analysis with display filters and stream inspection.
 - **Selection provenance:**
   - Official project or vendor documentation
   - https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="mtr"></a>
+
+## [mtr](https://www.bitwizard.nl/mtr/)
+
+Repeated traceroute and ping-style measurements show latency and response loss along a network path.
+
+[Official page](https://www.bitwizard.nl/mtr/) · **[Install a Linux/WSL distribution package](https://github.com/traviscross/mtr#using-mtr-on-windows)** · [Download source archive · TAR.GZ](https://www.bitwizard.nl/mtr/files/mtr-0.96.tar.gz) · [All downloads / setup](https://github.com/traviscross/mtr) · [Documentation](https://github.com/traviscross/mtr)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Comparing a reproducible path problem from a [Linux](https://www.kernel.org/) or [macOS](https://support.apple.com/macos) bench, or [Windows](https://www.microsoft.com/windows) through WSL. |
+| **Where it runs** | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows) (WSL) |
+| **How you use it** | installed |
+| **Access / pricing** | Free and open source under GPL-2.0 |
+| **Selection role** | Specialist |
+
+> **Before using it:** Intermediate routers can suppress or rate-limit diagnostic replies without dropping forwarded traffic. Correlate destination behavior and the application test. [Windows](https://www.microsoft.com/windows) use requires WSL or a separately built compatibility environment; the source archive is not a [Windows](https://www.microsoft.com/windows) installer.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://github.com/traviscross/mtr)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://github.com/traviscross/mtr
+  - https://www.bitwizard.nl/mtr/files/
+  - https://github.com/traviscross/mtr/blob/master/COPYING
 
 </details>
 

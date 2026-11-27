@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-set-up-a-dependable-new-workstation"></a>
 
@@ -8,7 +8,7 @@ Build a usable, recoverable workstation around the employee’s actual job.
 
 **Deployment** · Intermediate · 60–180 min · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/new-pc)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/new-pc)
 
 <a id="working-kit"></a>
 
@@ -23,6 +23,10 @@ Build a usable, recoverable workstation around the employee’s actual job.
 | Identify and install approved application packages. | **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** |
 | Use the exact device vendor’s supported drivers and firmware. | **[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** |
 | Move only the agreed files with a reviewed copy plan. | **[Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · **[Open built-in copy instructions](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** |
+| Evaluate an approved package in a disposable desktop with network and shared-folder exposure explicitly configured. | **[Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/)** · [Official page](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/) · **[Enable Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install)** |
+| Synchronize an explicitly chosen healthy-data folder between approved machines; keep an independent backup. | **[Syncthing](https://syncthing.net/)** · [Official page](https://syncthing.net/) · **[Download Windows x64 · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip)** |
+| Starting an approved installer or rescue environment through network boot or remote virtual media when local media delivery is inconvenient. | **[netboot.xyz](https://netboot.xyz/)** · [Official page](https://netboot.xyz/) · **[Download PC network-boot image · ISO](https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.iso)** |
+| Establishing recoverable, per-device administrator access during managed workstation setup and support planning. | **[Windows LAPS](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** · [Official page](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) · **[Configure built-in administrator password management](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** |
 
 ### Applications
 
@@ -77,6 +81,12 @@ Build a usable, recoverable workstation around the employee’s actual job.
 
 **Change route when:** Enrollment, licensing or recovery ownership is unclear. · Migration would endanger the only copy of user data.
 
+### 🎯 Go straight to a specific fix
+
+- **[Restore network access during device setup](#fix-newpc-network-missing-during-setup)** — A newly installed PC has no working network adapter during [Windows](https://www.microsoft.com/windows) setup.
+- **[Make the package manager available to the user](#fix-newpc-winget-not-found)** — The [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) command is not recognized on a newly prepared supported [Windows](https://www.microsoft.com/windows) PC.
+- **[Confirm the intended organization device state](#fix-newpc-registered-is-not-joined)** — A work account is present, but the device does not receive expected management or sign-in behavior.
+
 > [!NOTE]
 > **Start here.** Collect the job role, approved applications, identity/join requirements, data sources, printers, and acceptance tests before provisioning.
 
@@ -128,6 +138,10 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows)** · [Official page](https://www.veeam.com/products/free/microsoft-windows) · **[Sign in for the Windows download](https://www.veeam.com/products/physical/windows-backup-recovery-download.html)** | Image backup and recovery media for a supported [Windows](https://www.microsoft.com/windows) endpoint. | [Windows](https://www.microsoft.com/windows); Free and paid editions; service-provider terms differ | [Open guide](https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html) |
 | **[RustDesk](https://rustdesk.com/)** · [Official page](https://rustdesk.com/) · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)** | A flexible remote-control option across mixed client platforms. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Open-source components; paid Server Pro features | [Open guide](https://rustdesk.com/docs/en/) |
 | **[MeshCentral](https://meshcentral.com/)** · [Official page](https://meshcentral.com/) · **[Open server installation instructions](https://github.com/Ylianst/MeshCentral#installation)** | INTA-managed unattended support with its own server and device groups. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source; hosting has a cost | [Open guide](https://docs.meshcentral.com/) |
+| **[Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/)** · [Official page](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/) · **[Enable Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install)** | Evaluate an approved package in a disposable desktop with network and shared-folder exposure explicitly configured. | [Windows](https://www.microsoft.com/windows); Included with supported [Windows](https://www.microsoft.com/windows) Pro, Enterprise and Education licensing; unavailable on Home | [Open guide](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file) |
+| **[Syncthing](https://syncthing.net/)** · [Official page](https://syncthing.net/) · **[Download Windows x64 · ZIP](https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip)** | Synchronize an explicitly chosen healthy-data folder between approved machines; keep an independent backup. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/), BSD; Free and open source under MPL-2.0 | [Open guide](https://docs.syncthing.net/) |
+| **[netboot.xyz](https://netboot.xyz/)** · [Official page](https://netboot.xyz/) · **[Download PC network-boot image · ISO](https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.iso)** | Starting an approved installer or rescue environment through network boot or remote virtual media when local media delivery is inconvenient. | Bootable PC, ARM64; Free and open source; project code uses Apache-2.0, and boot components and selected operating systems retain their own licenses | [Open guide](https://netboot.xyz/docs/) |
+| **[Windows LAPS](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** · [Official page](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) · **[Configure built-in administrator password management](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** | Establishing recoverable, per-device administrator access during managed workstation setup and support planning. | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/); Included with supported [Windows](https://www.microsoft.com/windows); directory prerequisites, licensing and retrieval permissions still apply | [Open guide](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) |
 
 <a id="walkthrough"></a>
 
@@ -187,6 +201,79 @@ Work in order, record the result of each step, and change route when the evidenc
 > **Pause this route and escalate when:**
 > - Required licensing, access, recovery keys, or data sources are unresolved.
 > - A migration action would destroy the only good source.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-newpc-network-missing-during-setup"></a>
+
+### Restore network access during device setup
+
+**Use when:** A newly installed PC has no working network adapter during [Windows](https://www.microsoft.com/windows) setup.
+
+**Start here:** Identify the exact device model and architecture from the hardware record.
+
+**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+
+**[Windows 11 installation media](https://www.microsoft.com/software-download/windows11)** · [Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)**
+
+1. Check the physical connection and try an approved supported Ethernet path if available.
+2. From a trusted working PC, obtain the exact OEM network driver and follow Microsoft’s documented setup-time driver installation route.
+3. Complete the intended organization enrollment after connectivity returns and verify the adapter in [Device Manager](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows).
+
+**Prove it worked:** The PC reaches the intended setup/enrollment service through a supported network adapter.
+
+**If this does not resolve it:** Do not use account-bypass scripts or random driver bundles to conceal an unresolved network or enrollment problem.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/windows/experience/connectivity-networking/get-connected-when-setting-up-your-windows-device) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-newpc-winget-not-found"></a>
+
+### Make the package manager available to the user
+
+**Use when:** The [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) command is not recognized on a newly prepared supported [Windows](https://www.microsoft.com/windows) PC.
+
+**Start here:** Check the supported [Windows](https://www.microsoft.com/windows) version, current user sign-in and App Installer availability.
+
+**[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)**
+
+1. Use Microsoft’s documented [Windows](https://www.microsoft.com/windows) Package Manager installation/registration path; on supported desktop [Windows](https://www.microsoft.com/windows) it is supplied through App Installer.
+2. Update or repair the approved App Installer deployment through its supported source and open a fresh user terminal.
+3. Run [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) --info, then inspect one approved package before starting the workstation’s application install list.
+
+**Prove it worked:** The actual user can invoke [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) and its configured sources are the intended ones.
+
+**If this does not resolve it:** If store access is managed or the platform is unsupported, use the organization’s deployment route instead of downloading a random replacement executable.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-newpc-registered-is-not-joined"></a>
+
+### Confirm the intended organization device state
+
+**Use when:** A work account is present, but the device does not receive expected management or sign-in behavior.
+
+**Start here:** Compare the intended enrollment/join design with Settings > Accounts > Access work or school.
+
+1. Distinguish adding an account to an app, registering a device and joining it to the organization’s directory.
+2. Have the device-management owner verify the device record and required enrollment path before disconnecting or rejoining anything.
+3. After the supported correction, test the intended user sign-in, policy delivery and required managed application.
+
+**Prove it worked:** The device has the expected identity and management state, with a real policy/application result.
+
+**If this does not resolve it:** Do not remove the only working account or destroy the user profile to force a different enrollment state.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/entra/identity/devices/concept-device-registration) · [Source 2](https://learn.microsoft.com/en-us/entra/identity/devices/concept-directory-join) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

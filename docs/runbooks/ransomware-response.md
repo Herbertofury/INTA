@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-contain-ransomware-or-a-wider-compromise"></a>
 
@@ -8,7 +8,7 @@ Stop spread, preserve useful evidence, and restore services through a clean reco
 
 **Security** · Advanced · Immediate triage; recovery varies · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ransomware-response)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ransomware-response)
 
 <a id="working-kit"></a>
 
@@ -17,6 +17,10 @@ Stop spread, preserve useful evidence, and restore services through a clean reco
 **[Open working view](https://herbertofury.github.io/INTA/#job/ransomware-response)** · Keep the tool panel beside the instructions.
 
 **First move:** Disconnect affected network access and contact the incident lead through a clean channel. Do not attach backups to the affected environment.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved. | **[Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) · **[Download Windows monitoring tools · ZIP](https://download.sysinternals.com/files/Sysmon.zip)** |
 
 ### [Incident response](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response)
 
@@ -66,6 +70,12 @@ Stop spread, preserve useful evidence, and restore services through a clean reco
 
 **Change route when:** An action would overwrite evidence or the only recovery copy. · Identity compromise or infrastructure recovery exceeds the responder’s authority or capability.
 
+### 🎯 Go straight to a specific fix
+
+- **[Protect backups before testing a restore](#fix-ransomware-protect-recovery-copies)** — Compromised machines can still reach the backup destination or its administration account.
+- **[Contain stolen account access as well as the PC](#fix-ransomware-compromised-admin-account)** — The incident involves privileged credentials, suspicious sessions or activity on more than one device.
+- **[Evaluate a decryptor without risking the evidence](#fix-ransomware-test-decryptor-on-copies)** — A supposed decryptor is offered for the observed ransomware family.
+
 > [!NOTE]
 > **Start here.** Treat live encryption, ransom notes, or several compromised systems as an incident. Start a private incident timeline and contact the designated incident lead.
 
@@ -114,6 +124,7 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | --- | --- | --- | --- |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
 | **[Wireshark](https://www.wireshark.org/)** · [Official page](https://www.wireshark.org/) · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)** | Explaining DNS, TCP and application-protocol failures from a bounded capture. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://www.wireshark.org/docs/) |
+| **[Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) · **[Download Windows monitoring tools · ZIP](https://download.sysinternals.com/files/Sysmon.zip)** | Use existing endpoint telemetry for investigation; plan new deployment after active evidence-preservation needs are resolved. | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/); Free proprietary Microsoft utility under [Sysinternals](https://learn.microsoft.com/en-us/sysinternals/) terms; redistribution and commercial software hosting are restricted | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) |
 
 <a id="walkthrough"></a>
 
@@ -174,6 +185,73 @@ Work in order, record the result of each step, and change route when the evidenc
 > **Pause this route and escalate when:**
 > - You are about to destroy evidence or overwrite the only recovery copy.
 > - The scope or identity compromise is beyond the current technician’s response capability.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-ransomware-protect-recovery-copies"></a>
+
+### Protect backups before testing a restore
+
+**Use when:** Compromised machines can still reach the backup destination or its administration account.
+
+**Start here:** Have the incident lead separate backup access from the affected systems using a known-clean administration path.
+
+1. Identify offline, immutable or otherwise isolated recovery copies and record their dates without attaching them to an affected endpoint.
+2. Check whether the backup account or repository was modified during the incident; preserve access logs and the incident timeline.
+3. Restore a selected pre-incident sample into an isolated clean environment and test the actual data before planning production recovery.
+
+**Prove it worked:** A usable recovery point is demonstrated and remains outside the attacker’s current access path.
+
+**If this does not resolve it:** If the backup system or administrative identity is also compromised, involve the incident and backup owners before changing retention or deleting snapshots.
+
+**Official evidence:** [Source 1](https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-ransomware-compromised-admin-account"></a>
+
+### Contain stolen account access as well as the PC
+
+**Use when:** The incident involves privileged credentials, suspicious sessions or activity on more than one device.
+
+**Start here:** Use a known-clean device and have the identity administrator identify the affected account and scope.
+
+1. Preserve relevant sign-in and audit evidence before applying the organization’s account containment procedure.
+2. Use the supported identity response to block or secure the account, reset credentials and revoke applicable sessions; review unauthorized authentication methods and app access.
+3. Recheck access and sign-in activity from a clean session while endpoint containment continues.
+
+**Prove it worked:** The account has an evidenced containment state and unauthorized access paths are addressed separately from endpoint rebuilding.
+
+**If this does not resolve it:** A password change alone is not a complete incident release. Escalate if administrators, federation or multiple identities are affected.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access) · [Source 2](https://learn.microsoft.com/en-us/defender-office-365/responding-to-a-compromised-email-account) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-ransomware-test-decryptor-on-copies"></a>
+
+### Evaluate a decryptor without risking the evidence
+
+**Use when:** A supposed decryptor is offered for the observed ransomware family.
+
+**Start here:** Preserve the ransom note and encrypted originals, and check the family against the official No More Ransom resources.
+
+1. Use only the matched vendor/project instructions; a similar ransom-note name is not proof that a decryptor supports the exact variant.
+2. In a known-clean, isolated recovery environment, prepare separate copies of representative encrypted files and any required original/encrypted pairs.
+3. Test the supported decryptor on those copies and open recovered files in their real applications before considering wider use.
+
+**Prove it worked:** The test demonstrates usable files for the exact supported variant while original evidence remains intact.
+
+**If this does not resolve it:** If the variant is unsupported, files remain corrupt or a website asks for unapproved payment/credentials, stop and continue the incident-led restore plan.
+
+**Official evidence:** [Source 1](https://www.nomoreransom.org/en/decryption-tools.html) · [Source 2](https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

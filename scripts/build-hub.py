@@ -29,6 +29,8 @@ WIKI_MIRRORS = {
     "Interface-Design": "interface-design.md", "Service-Evidence": "service-evidence.md",
     "Tool-Selection": "tool-selection.md", "Free-Tool-Picks": "free-tool-picks.md",
     "Current-Tool-Choices": "reference/job-tool-review-2026-11-26.md",
+    "Knowledge-Organization": "knowledge-organization.md",
+    "Research-Updates": "reference/catalog-expansion-2026-11-26.md",
 }
 CATEGORY_NAMES = {
     "malware": "Malware removal & endpoint protection", "remote": "Remote support",
@@ -115,6 +117,121 @@ def link_module():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def knowledge_module():
+    spec = importlib.util.spec_from_file_location("inta_knowledge_health", ROOT / "scripts/knowledge_health.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def field_note_index(notes: list[dict]) -> list[str]:
+    if not notes:
+        return []
+    return ["### 🎯 Go straight to a specific fix", "",
+            *[f"- **[{note['title']}](#fix-{note['id']})** — {note['symptom']}" for note in notes], ""]
+
+
+def field_notes_markdown(notes: list[dict], by_id: dict, access: dict, workspace: dict) -> list[str]:
+    lines = [anchor("specific-fixes"), "", "## 🎯 Specific fixes", "",
+             "Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.", ""]
+    for note in notes:
+        lines += [anchor("fix-" + note["id"]), "", f"### {note['title']}", "",
+                  f"**Use when:** {note['symptom']}", "", f"**Start here:** {note['firstAction']}", ""]
+        for tool_id in note["toolIds"]:
+            tool = by_id[tool_id]
+            selection = next((item for item in workspace.get("tools", []) if item["toolId"] == tool_id), {})
+            lines += [f"**[{tool['name']}]({access[tool_id]['officialUrl']})** · "
+                      + tool_access_links(tool, access, action_id=selection.get("actionId")), ""]
+        lines += [f"{number}. {step}" for number, step in enumerate(note["steps"], 1)]
+        lines += ["", f"**Prove it worked:** {note['expected']}", "",
+                  f"**If this does not resolve it:** {note['ifUnresolved']}", "",
+                  "**Official evidence:** " + " · ".join(f"[Source {number}]({url})" for number, url in enumerate(note["sourceUrls"], 1))
+                  + f" · Reviewed {note['reviewedAt']}", "",
+                  "[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)", ""]
+    return lines
+
+
+def service_map_markdown(jobs: list[dict], layout: dict, field_notes: dict, workspaces: dict) -> str:
+    jobs_by_id = {job["id"]: job for job in jobs}
+    grouped_notes = defaultdict(list)
+    for note in field_notes["notes"]:
+        grouped_notes[note["jobId"]].append(note)
+    lines = [page_nav(), "", "# 🗺️ Service map", "",
+             "**Choose the field, then the exact job or fix.** Case titles open that fix in the working view; full-guide links open the Wiki. Every guide has one primary home.", "",
+             f"**[Open the interactive service map]({HUB}#services)** · [Urgent answers](Home) · [All tools](Tool-Directory)", "",
+             " · ".join(f"**[{group['icon']} {group['navigationLabel']}](#area-{group['id']})**" for group in layout["groups"]), ""]
+    for group in layout["groups"]:
+        lines += [anchor("area-" + group["id"]), "", f"## {group['icon']} {group['title']}", "", group["summary"], ""]
+        for identity in group["jobs"]:
+            job, notes, workspace = jobs_by_id[identity], grouped_notes[identity], workspaces["jobs"][identity]
+            config = layout["jobs"][identity]
+            lines += [f"### [{config['navigationIcon']} {config['navigationLabel']}]({WIKI}/Job-{identity})", "",
+                      f"**First move:** {workspace['startHere']}", "",
+                      f"**[Working view]({HUB}#job/{identity})** · **[Full guide]({WIKI}/Job-{identity})** · "
+                      f"{len(notes)} specific fixes · {len(workspace['resources'])} official resources", ""]
+            lines += [f"- **[{note['title']}]({HUB}#job/{identity}?section=fix-{note['id']})** — {note['symptom']}" for note in notes]
+            lines += [""]
+    lines += ["## How this stays organized", "",
+              "The service groups come from one [canonical layout](https://github.com/Herbertofury/INTA/blob/main/data/wiki-layout.json). "
+              "New cases extend the existing guide. A new guide needs a distinct job, a complete procedure and a place in this map.", "",
+              "**[Organization rules](Knowledge-Organization)** · **[Coverage and review health](Knowledge-Health)** · **[Research queue](Research-Queue)**", ""]
+    return "\n".join(lines)
+
+
+def research_queue_markdown(queue: dict, jobs: list[dict], layout: dict) -> str:
+    lines = [page_nav(), "", "# 🔎 Research queue", "",
+             "**Concrete next investigations, organized by the job they improve.** A queued item is planned work; it is not a completed test or a recommendation.", "",
+             "Correct harmful guidance and broken routes first. Then use [review health](Knowledge-Health) and the oldest-reviewed service area to choose substantial work. "
+             "Complete and publish a coherent improvement before opening another equivalent investigation.", ""]
+    targets = [("job", job["id"], job["title"], f"{WIKI}/Job-{job['id']}") for job in jobs]
+    targets += [("category", key, layout["categories"][key]["navigationLabel"], f"{WIKI}/Tools-{key}") for key in layout["categoryOrder"]]
+    for kind, identity, title, url in targets:
+        lines += [f"## [{title}]({url})", ""]
+        for item in [x for x in queue["items"] if x["kind"] == kind and x["targetId"] == identity]:
+            lines += [anchor(item["id"]), "", f"### {item['question']}", "",
+                      f"**{item['status'].title()} · Priority {item['priority']}**", "",
+                      f"**Deliver:** {item['deliverable']}", "", f"**Accept when:** {item['acceptance']}", "",
+                      "**Start with official sources:** " + " · ".join(f"[Source {i}]({source})" for i, source in enumerate(item["sourceUrls"], 1)), ""]
+            if item.get("resultUrl"):
+                lines += [f"**[Published result]({item['resultUrl']})**", ""]
+    lines += ["**[Organization rules](Knowledge-Organization)** · **[Service map](Service-Map)** · **[Contribution workflow](Contribute)**", ""]
+    return "\n".join(lines)
+
+
+def knowledge_health_markdown(report: dict, policy: dict, jobs: list[dict]) -> str:
+    counts = report["counts"]
+    lines = [page_nav(), "", "# 🧭 Knowledge health", "",
+             f"**Published coverage snapshot: {report['asOf']}.** Structural checks passed for this build. "
+             "This is an editorial-age report, not live vendor monitoring or proof that a repair worked on client hardware.", "",
+             f"**{counts['serviceAreas']} service areas · {counts['jobs']} complete guides · {counts['fieldNotes']} specific fixes · "
+             f"{counts['tools']} tools · {counts['researchItems']} research tasks**", "",
+             "**[Find your job](Service-Map)** · **[Next research](Research-Queue)** · **[Organization rules](Knowledge-Organization)**", "",
+             "## Coverage by job", "", "| Job | Specific fixes | Official resources | Diagnostic branches |", "| --- | --- | --- | --- |"]
+    titles = {job["id"]: job["title"] for job in jobs}
+    lines += [f"| [{cell(titles[row['jobId']])}]({WIKI}/Job-{row['jobId']}) | {row['fieldNotes']} | {row['resources']} | {row['decisions']} |" for row in report["coverage"]]
+    lines += ["", "## Review schedule", "",
+              "Review intervals are editorial targets. Passing a link or build check never changes a review date.", "",
+              "| Record | Review interval |", "| --- | --- |"]
+    labels = {"coreTool": "Everyday tool", "specialistTool": "Specialist tool", "evaluateTool": "Evaluation candidate",
+              "guide": "Full guide", "fieldNote": "Specific fix", "resource": "Workspace resource", "acquisition": "Download or acquisition route"}
+    lines += [f"| {labels[key]} | {days} days |" for key, days in policy["reviewIntervalsDays"].items()]
+    lines += ["", f"**Reviews due in this snapshot: {counts['dueReviews']} of {counts['reviewedRecords']} dated records.**", ""]
+    if report["dueReviews"]:
+        lines += ["| Record | Due | Official source |", "| --- | --- | --- |"]
+        lines += [f"| {cell(item['title'])} | {item['dueAt']} | [Review]({item['url']}) |" for item in report["dueReviews"]]
+        lines += [""]
+    lines += ["The [scheduled organization check](https://github.com/Herbertofury/INTA/actions/workflows/knowledge-health.yml) "
+              "recalculates age using the run date and preserves the complete report as an artifact. The weekday contribution task uses that evidence to prioritize work.", "",
+              "## Checks that prevent clutter", ""]
+    lines += [f"- {rule['rule']}" for rule in policy["rules"]]
+    lines += ["", "The build rejects duplicate tool identities/names, unexplained duplicate official product pages, "
+              "unknown references, missing service homes, empty fixes, invalid sources and gaps in the research queue. "
+              "The normal build and Wiki checks also enforce exact acquisition actions and generated-page consistency.", "",
+              "**[Read the complete JSON snapshot](https://github.com/Herbertofury/INTA/blob/main/site/knowledge-health.json)** · "
+              "**[Contribute a useful improvement](Contribute)**", ""]
+    return "\n".join(lines)
 
 
 def validate_tool_access(access: dict, tools: list[dict]) -> None:
@@ -410,6 +527,7 @@ def quick_answer_markdown(item: dict, tools_by_id: dict, access: dict, reviewed:
         lines += [f"**[{tool['name']}]({entry['officialUrl']})** · "
                   f"**[{cell(action['label'])}]({action['url']})**", ""]
     lines += [f"**[Complete procedure]({WIKI}/Job-{item['jobId']})** · "
+              f"**[Specific fixes for this job]({HUB}#job/{item['jobId']}/quick/{item['id']}?section=fixes)** · "
               f"**[Selection evidence]({WIKI}/Free-Tool-Picks)**"]
     if workspace:
         lines += [""] + workspace_decisions_markdown(workspace)
@@ -488,7 +606,7 @@ def validate_layout(layout: dict, jobs: list[dict], tools: list[dict] | None = N
 
 def page_nav() -> str:
     return (f"[INTA]({WIKI}) / [Decision desk]({WIKI}/Decision-Desk) · "
-            f"[Playbooks]({WIKI}/Playbooks) · [Tools]({WIKI}/Tool-Directory) · "
+            f"[Service map]({WIKI}/Service-Map) · [Playbooks]({WIKI}/Playbooks) · [Tools]({WIKI}/Tool-Directory) · "
             f"[Methods]({WIKI}/Methods) · [Open hub]({HUB})")
 
 
@@ -569,7 +687,7 @@ def command_reference(step: dict, by_id: dict) -> str:
 def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
                  jobs_by_id: dict | None = None, reviewed: str = "2026-11-26",
                  quick_items: list[dict] | None = None, access: dict | None = None,
-                 workspace: dict | None = None) -> str:
+                 workspace: dict | None = None, field_notes: list[dict] | None = None) -> str:
     layout = layout or json.loads((ROOT / "data/wiki-layout.json").read_text(encoding="utf-8"))
     config = layout["jobs"][job["id"]]
     jobs_by_id = jobs_by_id or {j["id"]: j for j in records(ROOT / "data/jobs.json", "jobs")}
@@ -581,7 +699,7 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
     destination = lambda identity: f"{WIKI}/Job-{identity}" if wiki else f"{identity}.md"
     lines = [page_nav(), "", *heading(1, job["title"], f"{config['icon']} {job['title']}"), job["summary"], "",
              f"**{cell(job['category'])}** · {cell(job['difficulty'])} · {cell(job['estimatedTime'])} · {len(job['steps'])} steps", "",
-             "[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · "
+             "[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · "
              f"[Verification](#acceptance) · [Sources](#sources) · [Interactive checklist]({HUB}#job/{job['id']})", ""]
     if workspace:
         lines += workspace_resources_markdown(workspace, by_id, access, f"{HUB}#job/{job['id']}")
@@ -600,6 +718,7 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
                           + tool_access_links(tool, access, action_id=item.get("toolAction")), ""]
     if workspace:
         lines += workspace_decisions_markdown(workspace)
+    lines += field_note_index(field_notes or [])
     lines += ["> [!NOTE]", f"> **Start here.** {job['startHere']}", "",
              anchor("decision-route"), "", *heading(2, "🧭 Choose a route", "🧭 Choose the right branch")]
     lines += diagram_block(config["diagram"])
@@ -634,6 +753,8 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
     lines += [f"- [ ] {item}" for item in job["verify"]]
     lines += ["", "> [!WARNING]", "> **Pause this route and escalate when:**"]
     lines += [f"> - {item}" for item in job["stopIf"]]
+    if field_notes:
+        lines += [""] + field_notes_markdown(field_notes, by_id, access, workspace or {})
     lines += ["", *heading(2, "Related playbooks", "🔀 Continue with the evidence")]
     if job.get("related"):
         lines += ["| Next playbook | What it resolves |", "| --- | --- |"]
@@ -717,7 +838,7 @@ def home_markdown(tools: list[dict], jobs: list[dict], categories: dict, layout:
     lines = [f"![INTA Computer Services — technical knowledge base]({REPO}/raw/main/docs/assets/wiki-hero.svg)", "",
              *heading(1, "INTA knowledge base", "🧭 Your next good fix starts here."),
              "Service procedures, tool references and troubleshooting methods for the INTA team.", "",
-             f"[Open technician hub]({HUB}) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
+             f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
              f"**{len(tools)} tools · {len(jobs)} playbooks · {len(categories)} tool categories**", "",
              quick_start_block.rstrip(), "",
              *heading(2, "🧭 Start a job", "🚦 First, choose the right route"),
@@ -779,17 +900,23 @@ def build_outputs() -> dict[str, str]:
     quick_start = json.loads((ROOT / "data/quick-start.json").read_text(encoding="utf-8"))
     tool_access = json.loads((ROOT / "data/tool-access.json").read_text(encoding="utf-8"))
     job_workspaces = json.loads((ROOT / "data/job-workspaces.json").read_text(encoding="utf-8"))
+    field_notes = json.loads((ROOT / "data/field-notes.json").read_text(encoding="utf-8"))
+    knowledge_policy = json.loads((ROOT / "data/knowledge-policy.json").read_text(encoding="utf-8"))
+    research_queue = json.loads((ROOT / "data/research-queue.json").read_text(encoding="utf-8"))
     validate(tools, jobs)
     validate_layout(layout, jobs, tools)
     validate_tool_access(tool_access, tools)
     validate_quick_start(quick_start, tools, jobs, tool_access["tools"])
     validate_job_workspaces(job_workspaces, jobs, tools, tool_access["tools"])
+    health_report = knowledge_module().knowledge_report(knowledge_policy, research_queue, tools, jobs, layout,
+                                                       field_notes, job_workspaces, tool_access["tools"], meta["reviewedAt"])
     if not (ROOT / "docs/free-tool-picks.md").is_file():
         raise ValueError("Quick-start selections require docs/free-tool-picks.md for their evidence and limits")
     linker = link_module()
     registry = linker.build_registry(tools, jobs)
     data = {"tools": tools, "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
-            "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces}
+            "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces,
+            "layout": layout, "fieldNotes": field_notes}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     template = (ROOT / "portal/index.template.html").read_text(encoding="utf-8")
@@ -814,13 +941,18 @@ def build_outputs() -> dict[str, str]:
     categories = defaultdict(list)
     for tool in tools:
         categories[tool["category"]].append(tool)
-    outputs = {"site/index.html": template, "site/.nojekyll": "", "site/catalog.json": data_json + "\n"}
+    outputs = {"site/index.html": template, "site/.nojekyll": "", "site/catalog.json": data_json + "\n",
+               "site/knowledge-health.json": json.dumps(health_report, ensure_ascii=False, indent=2) + "\n"}
     outputs.update(managed_sources)
     for job in jobs:
         quick_items = [item for item in quick_start["items"] if item["jobId"] == job["id"]]
         workspace = job_workspaces["jobs"][job["id"]]
-        outputs[f"wiki/Job-{job['id']}.md"] = job_markdown(job, by_id, True, layout, jobs_by_id, meta["reviewedAt"], quick_items, access, workspace)
-        outputs[f"docs/runbooks/{job['id']}.md"] = job_markdown(job, by_id, False, layout, jobs_by_id, meta["reviewedAt"], quick_items, access, workspace)
+        notes = [note for note in field_notes["notes"] if note["jobId"] == job["id"]]
+        outputs[f"wiki/Job-{job['id']}.md"] = job_markdown(job, by_id, True, layout, jobs_by_id, meta["reviewedAt"], quick_items, access, workspace, notes)
+        outputs[f"docs/runbooks/{job['id']}.md"] = job_markdown(job, by_id, False, layout, jobs_by_id, meta["reviewedAt"], quick_items, access, workspace, notes)
+    outputs["wiki/Service-Map.md"] = service_map_markdown(jobs, layout, field_notes, job_workspaces)
+    outputs["wiki/Research-Queue.md"] = research_queue_markdown(research_queue, jobs, layout)
+    outputs["wiki/Knowledge-Health.md"] = knowledge_health_markdown(health_report, knowledge_policy, jobs)
     outputs["wiki/Playbooks.md"] = playbook_index(jobs, layout, True, meta["reviewedAt"])
     outputs["docs/runbooks/README.md"] = playbook_index(jobs, layout, False, meta["reviewedAt"])
     tool_index = [page_nav(), "", *heading(1, "Tool directory", "🧰 The tool directory"),
@@ -850,7 +982,7 @@ def build_outputs() -> dict[str, str]:
     for item in quick_start["items"]:
         default_answers.setdefault(item["jobId"], item)
     sidebar = [*heading(2, "INTA knowledge base", "🧭 INTA / Service Atlas"),
-               f"**[🏠 Home](Home)** · **[🧰 Open hub]({HUB})**", "",
+               f"**[🏠 Home](Home)** · **[🧰 Open hub]({HUB})** · **[🗺️ Service map](Service-Map)**", "",
                *heading(3, "Fix a problem", "Playbook groups")]
     group_anchors = {group["jobs"][0]: "".join(legacy_anchors(f"{group['icon']} {group['title']}"))
                      for group in layout["groups"]}
@@ -876,6 +1008,8 @@ def build_outputs() -> dict[str, str]:
                 *legacy_anchors("📏 The shared standard"), "", "### Standards and contributions", "",
                 "- [Start here](Start-Here)", "- [Knowledge standards](Knowledge-Standards)", "- [Interface design](Interface-Design)",
                 "- [Contribute](Contribute)", "- [Contribution templates](Templates)",
+                "- [Organization rules](Knowledge-Organization)", "- [Coverage and review health](Knowledge-Health)",
+                "- [Research queue](Research-Queue)", "- [Research updates](Research-Updates)",
                 "- [Continuous improvement](Continuous-Improvement)", "- [Maintain and publish](Maintaining-the-Hub)", ""]
     outputs["wiki/_Sidebar.md"] = "\n".join(sidebar).rstrip() + "\n"
     outputs["wiki/_Footer.md"] = (f"**INTA Computer Services**\n\n"
@@ -901,6 +1035,9 @@ def build_outputs() -> dict[str, str]:
                 "directFileDownloads": sum(entry["primary"]["kind"] == "file" for entry in access.values()),
                 "toolAccessSha256": hashlib.sha256(json.dumps(tool_access, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
                 "jobWorkspaces": len(job_workspaces["jobs"]),
+                "serviceAreas": len(layout["groups"]),
+                "fieldNotes": len(field_notes["notes"]),
+                "researchItems": len(research_queue["items"]),
                 "jobResources": sum(len(entry["resources"]) for entry in job_workspaces["jobs"].values()),
                 "jobDecisionBranches": sum(len(entry["decisions"]) for entry in job_workspaces["jobs"].values()),
                 "jobWorkspacesSha256": hashlib.sha256(json.dumps(job_workspaces, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),

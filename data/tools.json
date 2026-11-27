@@ -3567,5 +3567,515 @@
       "https://learn.microsoft.com/en-us/windows/configuration/windows-device-recovery-framework"
     ],
     "evidenceStatus": "Official requirements and scope reviewed; no INTA boot or restore test is claimed."
+  },
+  {
+    "id": "setupdiag",
+    "name": "SetupDiag",
+    "category": "windows",
+    "summary": "Analyzes Windows Setup logs to explain a failed feature update or operating-system upgrade.",
+    "bestFor": "Finding the failure rule and related log evidence before retrying an unsuccessful Windows upgrade.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free Microsoft diagnostic download",
+    "homepage": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "upgrade",
+      "setup logs",
+      "windows-update",
+      "diagnostics",
+      "offline logs"
+    ],
+    "cautions": "This diagnoses upgrade logs; it does not repair the computer. Preserve the relevant setup logs before cleanup and match the reported failure to the actual upgrade attempt.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "windows-sandbox",
+    "name": "Windows Sandbox",
+    "category": "windows",
+    "summary": "Disposable isolated Windows desktop for testing an application or reproducing a clean-environment behavior.",
+    "bestFor": "Checking an approved package in a clean desktop before changing a workstation.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows Pro, Enterprise and Education licensing; unavailable on Home",
+    "homepage": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "isolation",
+      "application testing",
+      "virtualization",
+      "built-in"
+    ],
+    "cautions": "Requires a supported edition and enabled virtualization. Networking and clipboard sharing are on by default; configure them and read-only mapped folders for the test. Closing the sandbox discards its contents, but writes to a writable host mapping persist.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/",
+      "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install",
+      "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "usb-device-tree-view",
+    "name": "USB Device Tree Viewer",
+    "category": "hardware",
+    "summary": "Displays USB controllers, hubs, device descriptors, negotiated speeds and connection details in a tree.",
+    "bestFor": "Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Freeware; publisher explicitly permits use in commercial environments",
+    "homepage": "https://www.uwe-sieber.de/usbtreeview_e.html",
+    "downloadUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+    "docsUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+    "sourceUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "usb",
+      "printer",
+      "scanner",
+      "hub",
+      "descriptors",
+      "portable"
+    ],
+    "cautions": "Current builds require Windows 8 or later. A descriptor or connection-speed report is evidence about enumeration, not proof of a good cable, adequate power or successful application I/O. The publisher restricts modification and downloader-wrapper distribution.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://www.uwe-sieber.de/usbtreeview_e.html"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "powercfg",
+    "name": "powercfg",
+    "category": "hardware",
+    "summary": "Built-in Windows power diagnostics for battery usage, supported sleep states, wake causes and application power requests.",
+    "bestFor": "Collecting battery and sleep evidence before changing hardware or power policy.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with Windows",
+    "homepage": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "battery",
+      "sleep",
+      "wake",
+      "energy",
+      "power",
+      "built-in"
+    ],
+    "cautions": "Start with reporting and query options. Other switches change power plans, hibernation or wake policy; review those changes separately. SleepStudy depends on supported power-state hardware, and reports can contain private device or usage information.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "curl",
+    "name": "curl",
+    "category": "network",
+    "summary": "Command-line client for inspecting HTTP responses, TLS connections, redirects and many other transfer protocols.",
+    "bestFor": "Separating DNS, TCP, TLS and HTTP failures when a web service or application endpoint is unreachable.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "mode": "portable",
+    "pricing": "Free and open source; the curl license permits commercial projects",
+    "homepage": "https://curl.se/",
+    "downloadUrl": "https://curl.se/windows/",
+    "docsUrl": "https://curl.se/docs/manpage.html",
+    "sourceUrl": "https://curl.se/windows/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "http",
+      "https",
+      "tls",
+      "proxy",
+      "api",
+      "network diagnostics"
+    ],
+    "cautions": "Use curl.exe explicitly in Windows PowerShell when its curl alias refers to a different command. Compare the installed version and TLS backend. Keep credentials and headers out of public logs; disabling certificate verification is not a repair.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://curl.se/windows/",
+      "https://curl.se/docs/copyright.html",
+      "https://curl.se/windows/microsoft.html"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "mtr",
+    "name": "mtr",
+    "category": "network",
+    "summary": "Repeated traceroute and ping-style measurements show latency and response loss along a network path.",
+    "bestFor": "Comparing a reproducible path problem from a Linux or macOS bench, or Windows through WSL.",
+    "platforms": [
+      "Linux",
+      "macOS",
+      "Windows (WSL)"
+    ],
+    "mode": "installed",
+    "pricing": "Free and open source under GPL-2.0",
+    "homepage": "https://www.bitwizard.nl/mtr/",
+    "downloadUrl": "https://github.com/traviscross/mtr",
+    "docsUrl": "https://github.com/traviscross/mtr",
+    "sourceUrl": "https://github.com/traviscross/mtr",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "latency",
+      "packet loss",
+      "traceroute",
+      "icmp",
+      "path",
+      "linux"
+    ],
+    "cautions": "Intermediate routers can suppress or rate-limit diagnostic replies without dropping forwarded traffic. Correlate destination behavior and the application test. Windows use requires WSL or a separately built compatibility environment; the source archive is not a Windows installer.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://github.com/traviscross/mtr",
+      "https://www.bitwizard.nl/mtr/files/",
+      "https://github.com/traviscross/mtr/blob/master/COPYING"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "remmina",
+    "name": "Remmina",
+    "category": "remote",
+    "summary": "Linux desktop client for RDP, VNC, SSH and other remote-access protocols through plugins.",
+    "bestFor": "Connecting a Linux technician workstation to an already configured remote desktop or server.",
+    "platforms": [
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "Free and open source under GPL-2.0-or-later",
+    "homepage": "https://remmina.org/",
+    "downloadUrl": "https://www.remmina.org/how-to-install-remmina/",
+    "docsUrl": "https://www.remmina.org/how-to-install-remmina/",
+    "sourceUrl": "https://remmina.org/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "linux",
+      "rdp",
+      "vnc",
+      "ssh",
+      "remote desktop",
+      "client"
+    ],
+    "cautions": "This is a client: the target protocol, network access and authorized account must already be available. Package plugins and keyring integration vary. Verify host identity and certificate warnings; stored profiles may contain sensitive connection details.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://remmina.org/",
+      "https://www.remmina.org/how-to-install-remmina/",
+      "https://gitlab.com/Remmina/Remmina/blob/master/COPYING"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "syncthing",
+    "name": "Syncthing",
+    "category": "storage",
+    "summary": "Peer-to-peer synchronization keeps selected folders in agreement across approved devices without a central file-storage service.",
+    "bestFor": "Keeping a defined healthy-data folder synchronized between authorized machines during a controlled transition or ongoing collaboration.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux",
+      "BSD"
+    ],
+    "mode": "portable",
+    "pricing": "Free and open source under MPL-2.0",
+    "homepage": "https://syncthing.net/",
+    "downloadUrl": "https://syncthing.net/downloads/",
+    "docsUrl": "https://docs.syncthing.net/",
+    "sourceUrl": "https://syncthing.net/downloads/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "synchronization",
+      "peer-to-peer",
+      "folders",
+      "migration",
+      "versioning"
+    ],
+    "cautions": "Changes and deletions propagate. Sync and optional versioning do not replace an independent tested backup. Confirm device identities, folder paths and conflict/versioning policy; do not synchronize suspected compromise into a clean recovery copy.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://syncthing.net/downloads/",
+      "https://docs.syncthing.net/users/faq",
+      "https://github.com/syncthing/syncthing/blob/main/LICENSE"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "diskspd",
+    "name": "DiskSpd",
+    "category": "storage",
+    "summary": "Configurable Windows storage workload generator measures latency and throughput under a documented I/O profile.",
+    "bestFor": "Reproducing a storage-performance complaint on healthy media with a bounded test file and comparable before/after settings.",
+    "platforms": [
+      "Windows",
+      "Windows Server"
+    ],
+    "mode": "portable",
+    "pricing": "Free and open source under MIT license",
+    "homepage": "https://github.com/microsoft/diskspd",
+    "downloadUrl": "https://github.com/microsoft/diskspd/releases",
+    "docsUrl": "https://github.com/microsoft/diskspd/wiki",
+    "sourceUrl": "https://github.com/microsoft/diskspd",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "storage performance",
+      "latency",
+      "benchmark",
+      "io",
+      "test file"
+    ],
+    "cautions": "Use an approved test file on healthy storage and a bounded duration. Write workloads, raw devices and long runs can damage data or disrupt services; do not benchmark a failing source. Version 2.3 changes defaults, so compare equivalent profiles and record the version.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://github.com/microsoft/diskspd",
+      "https://github.com/microsoft/diskspd/releases/tag/v2.3",
+      "https://github.com/microsoft/diskspd/blob/master/LICENSE"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "winmerge",
+    "name": "WinMerge",
+    "category": "productivity",
+    "summary": "Visual comparison and merging of text files and folders makes configuration or migration differences visible.",
+    "bestFor": "Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free and open source under GPL-2.0-or-later",
+    "homepage": "https://winmerge.org/",
+    "downloadUrl": "https://winmerge.org/downloads/index.php",
+    "docsUrl": "https://manual.winmerge.org/en/",
+    "sourceUrl": "https://winmerge.org/downloads/index.php",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "diff",
+      "compare",
+      "configuration",
+      "folders",
+      "migration",
+      "portable"
+    ],
+    "cautions": "Start in comparison mode and preserve originals before merging. Filters, ignored lines and timestamp-only comparisons can hide meaningful differences. A folder comparison is not an application-level restore test.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://winmerge.org/downloads/index.php",
+      "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
+      "https://winmerge.org/source-code/?lang=en"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "sumatrapdf",
+    "name": "SumatraPDF",
+    "category": "productivity",
+    "summary": "Lightweight Windows document reader with a portable build and standard PDF printing.",
+    "bestFor": "Testing the same known-good PDF through an independent renderer to separate an application-specific print fault from the queue or printer.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Free and open source under GPL-3.0",
+    "homepage": "https://www.sumatrapdfreader.org/",
+    "downloadUrl": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+    "docsUrl": "https://www.sumatrapdfreader.org/docs/SumatraPDF-documentation",
+    "sourceUrl": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "pdf",
+      "printer",
+      "print test",
+      "reader",
+      "portable"
+    ],
+    "cautions": "Use a small known-good document and the intended queue, paper size and scaling. The stable route is 3.6.1; rolling documentation also describes 3.7 preview features, which must not be assumed available in the stable build. Check physical output after submission.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+      "https://www.sumatrapdfreader.org/docs/Installation",
+      "https://github.com/sumatrapdfreader/sumatrapdf/blob/master/COPYING"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "netbootxyz",
+    "name": "netboot.xyz",
+    "category": "boot",
+    "summary": "Network-boot menu loads installation and recovery environments through iPXE and supported boot media.",
+    "bestFor": "Starting an approved installer or rescue environment through network boot or remote virtual media when local media delivery is inconvenient.",
+    "platforms": [
+      "Bootable PC",
+      "ARM64"
+    ],
+    "mode": "boot",
+    "pricing": "Free and open source; project code uses Apache-2.0, and boot components and selected operating systems retain their own licenses",
+    "homepage": "https://netboot.xyz/",
+    "downloadUrl": "https://netboot.xyz/downloads/",
+    "docsUrl": "https://netboot.xyz/docs/",
+    "sourceUrl": "https://netboot.xyz/downloads/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "network boot",
+      "pxe",
+      "ipxe",
+      "virtual media",
+      "uefi",
+      "rescue"
+    ],
+    "cautions": "The small boot image fetches additional content and is not a complete offline rescue system. Confirm network, architecture, firmware and Secure Boot requirements for the selected loader. Each installer can overwrite storage; preserve data and verify the selected target.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://netboot.xyz/downloads/",
+      "https://netboot.xyz/docs/booting/iso/",
+      "https://netboot.xyz/docs/faq/",
+      "https://github.com/netbootxyz/netboot.xyz/blob/development/LICENSE"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "promptfoo",
+    "name": "promptfoo",
+    "category": "ai",
+    "summary": "Local evaluation runner compares model or prompt outputs against explicit test cases and assertions.",
+    "bestFor": "Checking whether a revised diagnostic prompt handles a sanitized regression set correctly before relying on it in technician workflows.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "Free and open source under MIT license; configured model/API providers can charge separately",
+    "homepage": "https://www.promptfoo.dev/",
+    "downloadUrl": "https://www.promptfoo.dev/docs/installation/",
+    "docsUrl": "https://www.promptfoo.dev/docs/intro/",
+    "sourceUrl": "https://www.promptfoo.dev/docs/installation/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "ai evaluation",
+      "regression",
+      "prompts",
+      "assertions",
+      "local runner"
+    ],
+    "cautions": "The current CLI requires Node.js 22.22.0 or newer. Local execution still sends data to configured model providers, and optional hosted features have separate handling. Use sanitized examples and explicit assertions; a passing small test set does not establish general diagnostic accuracy.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://www.promptfoo.dev/docs/installation/",
+      "https://www.promptfoo.dev/docs/intro/",
+      "https://www.promptfoo.dev/docs/contributing/",
+      "https://registry.npmjs.org/promptfoo/latest"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "windows-laps",
+    "name": "Windows LAPS",
+    "category": "security",
+    "summary": "Built-in management rotates and backs up supported devices’ local administrator passwords to the selected organization directory.",
+    "bestFor": "Establishing recoverable, per-device administrator access during managed workstation setup and support planning.",
+    "platforms": [
+      "Windows",
+      "Windows Server"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows; directory prerequisites, licensing and retrieval permissions still apply",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "local administrator",
+      "password rotation",
+      "recovery access",
+      "entra",
+      "active directory",
+      "built-in"
+    ],
+    "cautions": "Deployment changes password management and needs the organization’s directory policy and delegated roles. Confirm the intended account, backup destination and authorized retrieval before relying on it. Supported builds vary; current Windows LAPS and legacy Microsoft LAPS are distinct.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview",
+      "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory",
+      "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-azure-active-directory"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
+  },
+  {
+    "id": "sysmon",
+    "name": "Sysmon",
+    "category": "security",
+    "summary": "Resident Windows service and driver records configured process, network and related activity in the event log.",
+    "bestFor": "Collecting planned endpoint telemetry that can later support a scoped persistence or incident investigation.",
+    "platforms": [
+      "Windows",
+      "Windows Server"
+    ],
+    "mode": "installed",
+    "pricing": "Free proprietary Microsoft utility under Sysinternals terms; redistribution and commercial software hosting are restricted",
+    "homepage": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+    "downloadUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+    "docsUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+    "sourceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "event logs",
+      "telemetry",
+      "process creation",
+      "incident evidence",
+      "sysinternals"
+    ],
+    "cautions": "Install with an approved configuration and retention plan; installation is a system change. It records events but does not analyze or remove malware, and cannot recreate earlier activity. Command lines and event data can contain secrets. Default installation does not enable network-connection monitoring.",
+    "provenance": [
+      "Current primary documentation and publisher acquisition sources",
+      "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+      "https://learn.microsoft.com/en-us/sysinternals/license-terms"
+    ],
+    "evidenceStatus": "Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed."
   }
 ]

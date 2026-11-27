@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-advanced-defensive-security"></a>
 
@@ -6,7 +6,7 @@
 
 Specialist investigation and research candidates belong to an explicit scope and a proven evidence workflow.
 
-**15 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**17 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** Collect evidence, analyze a capture, or evaluate a candidate?
 
@@ -34,9 +34,11 @@ Specialist investigation and research candidates belong to an explicit scope and
 | [osquery](#osquery) | Repeatable endpoint inventory and documented state checks. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://osquery.io/) · **[Download Windows x64 · ZIP](https://github.com/osquery/osquery/releases/download/5.24.1/osquery-5.24.1.windows_x86_64.zip)** |
 | [PE-sieve](#pe-sieve) | A specialist on-demand memory-integrity investigation. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://github.com/hasherezade/pe-sieve) · **[Download Windows x64 · EXE](https://github.com/hasherezade/pe-sieve/releases/download/v0.4.1.1/pe-sieve64.exe)** |
 | [Sigma rules](#sigma) | A starting point for reviewed detections in an existing analysis platform. | Cross-platform · Specialist | [Official page](https://sigmahq.io/) · **[Download detection rules · ZIP](https://github.com/SigmaHQ/sigma/releases/download/r2026-07-01/sigma_all_rules.zip)** |
+| [Sysmon](#sysmon) | Collecting planned endpoint telemetry that can later support a scoped persistence or incident investigation. | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/) · Specialist | [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) · **[Download Windows monitoring tools · ZIP](https://download.sysinternals.com/files/Sysmon.zip)** |
 | [Velociraptor](#velociraptor) | Scoped forensic collection across a managed endpoint fleet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://docs.velociraptor.app/) · **[Download Windows x64 · MSI](https://github.com/Velocidex/velociraptor/releases/download/v0.77.4/velociraptor-v0.77.4-windows-amd64.msi)** |
 | [Volatility 3](#volatility) | Specialist examination of memory evidence after collection. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://volatilityfoundation.org/) · **[Download Windows executables · ZIP](https://github.com/volatilityfoundation/volatility3/releases/download/v2.28.2/volatility3-win-exes-2.28.2.zip)** |
 | [Wazuh](#wazuh) | An ongoing client security-monitoring deployment with managed operations. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://wazuh.com/) · **[Download Windows endpoint agent · MSI](https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.11-1.msi)** |
+| [Windows LAPS](#windows-laps) | Establishing recoverable, per-device administrator access during managed workstation setup and support planning. | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/) · Specialist | [Official page](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) · **[Configure built-in administrator password management](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** |
 | [YARA-X](#yara-x) | Scanning selected evidence files with reviewed detection rules. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://github.com/VirusTotal/yara-x) · **[Download Windows x64 CLI · ZIP](https://github.com/VirusTotal/yara-x/releases/download/v1.25.0/yara-x-v1.25.0-x86_64-pc-windows-msvc.zip)** |
 | [PRX-SD](#prx-sd) | Comparative lab evaluation of a Rust security engine and its documented platform coverage. | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos) · Evaluate | [Official page](https://github.com/openprx/prx-sd) · **[Download Windows x64 CLI · EXE](https://github.com/openprx/prx-sd/releases/download/v0.2.3/sd-windows-x86_64.exe)** |
 | [Rustinel](#rustinel) | An isolated evaluation of collection, rules, health checks and replay. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Evaluate | [Official page](https://github.com/Karib0u/rustinel) · **[Download Windows x64 · ZIP](https://github.com/Karib0u/rustinel/releases/download/v1.11.0/rustinel-1.11.0-x86_64-pc-windows-msvc.zip)** |
@@ -295,6 +297,39 @@ Generic detection-rule format and community rules for security log analysis.
 
 [Back to comparison](#compare-options)
 
+<a id="sysmon"></a>
+
+## [Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+
+Resident [Windows](https://www.microsoft.com/windows) service and driver records configured process, network and related activity in the event log.
+
+[Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) · **[Download Windows monitoring tools · ZIP](https://download.sysinternals.com/files/Sysmon.zip)** · [Documentation](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Collecting planned endpoint telemetry that can later support a scoped persistence or incident investigation. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/) |
+| **How you use it** | installed |
+| **Access / pricing** | Free proprietary Microsoft utility under [Sysinternals](https://learn.microsoft.com/en-us/sysinternals/) terms; redistribution and commercial software hosting are restricted |
+| **Selection role** | Specialist |
+
+> **Before using it:** Install with an approved configuration and retention plan; installation is a system change. It records events but does not analyze or remove malware, and cannot recreate earlier activity. Command lines and event data can contain secrets. Default installation does not enable network-connection monitoring.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon
+  - https://learn.microsoft.com/en-us/sysinternals/license-terms
+
+</details>
+
+[Back to comparison](#compare-options)
+
 <a id="velociraptor"></a>
 
 ## [Velociraptor](https://docs.velociraptor.app/)
@@ -383,6 +418,40 @@ Endpoint agents and a central platform for security monitoring and analysis.
 - **Evidence status:** Documentation reviewed; not an INTA runtime certification
 - **Selection provenance:**
   - Official project or vendor documentation
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="windows-laps"></a>
+
+## [Windows LAPS](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)
+
+Built-in management rotates and backs up supported devices’ local administrator passwords to the selected organization directory.
+
+[Official page](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) · **[Configure built-in administrator password management](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)** · [Configure Active Directory backup](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory) · [Configure Microsoft Entra backup](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-azure-active-directory) · [Documentation](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Establishing recoverable, per-device administrator access during managed workstation setup and support planning. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/) |
+| **How you use it** | built-in |
+| **Access / pricing** | Included with supported [Windows](https://www.microsoft.com/windows); directory prerequisites, licensing and retrieval permissions still apply |
+| **Selection role** | Specialist |
+
+> **Before using it:** Deployment changes password management and needs the organization’s directory policy and delegated roles. Confirm the intended account, backup destination and authorized retrieval before relying on it. Supported builds vary; current [Windows LAPS](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview) and legacy Microsoft LAPS are distinct.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview
+  - https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory
+  - https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-azure-active-directory
 
 </details>
 

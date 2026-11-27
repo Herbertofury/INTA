@@ -19,6 +19,8 @@ The order is a decision aid, not a quantity limit. Finish the accepted scope. Wh
 
 ## 🔁 The contribution loop
 
+Use the [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) as the shared field index and the [research queue](https://github.com/Herbertofury/INTA/wiki/Research-Queue) as the explicit next-work list. Each existing job and tool category has concrete questions, deliverables and acceptance evidence. Review the complete [knowledge health report](https://github.com/Herbertofury/INTA/wiki/Knowledge-Health), fix higher-impact defects first, then rotate through the least recently reviewed areas. New findings extend an existing guide or tool record whenever possible; [organization rules](https://github.com/Herbertofury/INTA/wiki/Knowledge-Organization) keep this growth navigable.
+
 ```mermaid
 flowchart TD
     N[Known next action] --> E[Decisive evidence]
@@ -52,6 +54,7 @@ A recurring contribution run should:
 
 1. Resume the latest known checkpoint and inspect only genuinely changed or unresolved state.
 2. Choose meaningful work from current evidence, incoming corrections or the remaining queue.
+   Run the organization checker, use its complete review queue and reconcile every job/category against the canonical research queue. Choose a substantial coherent contribution and mark research complete only when a real published result and applicable proof exist. Finish the current investigation before duplicating it in another area.
 3. Implement the complete selected improvement in canonical source, following [Knowledge Standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards).
    Visual work also follows [Interface Design](https://github.com/Herbertofury/INTA/wiki/Interface-Design) and the linked [Athena design study](https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/ui-reference-comparison-2026-11-21/README.md). Preserve the compact neutral workspace and readable rows; maintain every tool and interaction as content grows. Keep Wiki scenarios, tool categories and official-tool shortcuts bold, emoji-labeled and always visible without opening collapsed groups. Keep the shared quick-start selections at the top of the Home, README and orientation pages; recheck their free-use boundary, task fit and source evidence before changing a recommendation.
 4. Verify content, links, generation and the affected user path; perform a material challenge pass.

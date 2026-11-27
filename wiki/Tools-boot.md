@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-bootable-media"></a>
 
@@ -6,7 +6,7 @@
 
 Keep independent rescue environments ready and test the exact hardware boot path.
 
-**7 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**8 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** Create media, recover startup, or rescue data?
 
@@ -34,6 +34,7 @@ Keep independent rescue environments ready and test the exact hardware boot path
 | [Ubuntu Desktop live media](#ubuntu-live) | Hardware checks and file access from a familiar [Linux](https://www.kernel.org/) desktop. | Bootable PC · Core | [Official page](https://ubuntu.com/desktop) · **[Download x64 desktop image · ISO](https://releases.ubuntu.com/26.04.1/ubuntu-26.04.1-desktop-amd64.iso)** |
 | [Ventoy](#ventoy) | Maintaining a technician USB with several independently updated rescue images. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/) · Core | [Official page](https://www.ventoy.net/) · **[Download Windows package · ZIP](https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip)** |
 | [Windows 11 installation media](#microsoft-windows11-media) | A clean installation or supported repair using the correct [Windows](https://www.microsoft.com/windows) edition and architecture. | [Windows](https://www.microsoft.com/windows), Bootable PC · Core | [Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)** |
+| [netboot.xyz](#netbootxyz) | Starting an approved installer or rescue environment through network boot or remote virtual media when local media delivery is inconvenient. | Bootable PC, ARM64 · Specialist | [Official page](https://netboot.xyz/) · **[Download PC network-boot image · ISO](https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.iso)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
@@ -247,6 +248,41 @@ Official Microsoft installation assistant, media creation and ISO download sourc
 - **Evidence status:** Documentation reviewed; not an INTA runtime certification
 - **Selection provenance:**
   - Official project or vendor documentation
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="netbootxyz"></a>
+
+## [netboot.xyz](https://netboot.xyz/)
+
+Network-boot menu loads installation and recovery environments through iPXE and supported boot media.
+
+[Official page](https://netboot.xyz/) · **[Download PC network-boot image · ISO](https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.iso)** · [Download ARM64 network-boot image · ISO](https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz-arm64.iso) · [Download multi-architecture boot image · ISO](https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz-multiarch.iso) · [Other loaders and rolling builds](https://netboot.xyz/downloads/) · [Documentation](https://netboot.xyz/docs/)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Starting an approved installer or rescue environment through network boot or remote virtual media when local media delivery is inconvenient. |
+| **Where it runs** | Bootable PC, ARM64 |
+| **How you use it** | boot |
+| **Access / pricing** | Free and open source; project code uses Apache-2.0, and boot components and selected operating systems retain their own licenses |
+| **Selection role** | Specialist |
+
+> **Before using it:** The small boot image fetches additional content and is not a complete offline rescue system. Confirm network, architecture, firmware and Secure Boot requirements for the selected loader. Each installer can overwrite storage; preserve data and verify the selected target.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://netboot.xyz/downloads/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://netboot.xyz/downloads/
+  - https://netboot.xyz/docs/booting/iso/
+  - https://netboot.xyz/docs/faq/
+  - https://github.com/netbootxyz/netboot.xyz/blob/development/LICENSE
 
 </details>
 

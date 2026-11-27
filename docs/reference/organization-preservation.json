@@ -1,0 +1,31 @@
+{
+  "baseCommit": "0e70d341169fc5975fd98fc3e072b44e0285cd26",
+  "status": "passed",
+  "preservedTools": 118,
+  "preservedAcquisitionActions": 247,
+  "preservedGuides": 22,
+  "preservedSteps": 142,
+  "preservedCommands": 11,
+  "preservedVerificationChecks": 83,
+  "preservedWorkspaceTools": 61,
+  "preservedResources": 96,
+  "preservedDecisions": 102,
+  "newTools": [
+    "curl",
+    "diskspd",
+    "mtr",
+    "netbootxyz",
+    "powercfg",
+    "promptfoo",
+    "remmina",
+    "setupdiag",
+    "sumatrapdf",
+    "syncthing",
+    "sysmon",
+    "usb-device-tree-view",
+    "windows-laps",
+    "windows-sandbox",
+    "winmerge"
+  ],
+  "originalRecords": "Every previous tool and acquisition record is structurally identical. Full guide text, steps, commands, checks, relationships and dates are unchanged; tool recommendations were appended. All original working-kit resources, decisions and checks are identical. Quick-start, layout/diagrams, methods, aliases and metadata are unchanged."
+}

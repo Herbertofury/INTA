@@ -1,0 +1,685 @@
+{
+  "startedAt": "2026-11-27T01:34:21.033Z",
+  "checks": [
+    {
+      "name": "Published baseline tool, guide and exact-case IDs retained",
+      "baseline": {
+        "tools": 118,
+        "jobs": 22,
+        "cases": 27
+      },
+      "current": {
+        "tools": 133,
+        "jobs": 22,
+        "quickCases": 27,
+        "serviceAreas": 8,
+        "fieldNotes": 74,
+        "noteSteps": 222,
+        "noteTools": 105,
+        "noteSources": 114
+      }
+    },
+    {
+      "name": "Service map uses every canonical area and job once, with direct first actions, full guides, fixes and stable area links",
+      "areas": 8,
+      "jobs": 22
+    },
+    {
+      "name": "Knowledge desk preserves existing references and exposes Service map, organization, health and research queue"
+    },
+    {
+      "name": "All fifteen added tools have complete official/acquisition routes on Home, Library and detail, with real job and kit placements",
+      "toolIds": [
+        "setupdiag",
+        "windows-sandbox",
+        "usb-device-tree-view",
+        "powercfg",
+        "curl",
+        "mtr",
+        "remmina",
+        "syncthing",
+        "diskspd",
+        "winmerge",
+        "sumatrapdf",
+        "netbootxyz",
+        "promptfoo",
+        "windows-laps",
+        "sysmon"
+      ]
+    },
+    {
+      "name": "Every authored note renders all fields, contextual tool actions and official sources without caps",
+      "notes": 74,
+      "steps": 222,
+      "toolMentions": 105,
+      "sources": 114
+    },
+    {
+      "name": "Every new-tool job recommendation has the correct visible working-kit acquisition",
+      "placements": 34,
+      "tools": 15
+    },
+    {
+      "name": "All exact-case routes retain selected answers, tool priority and selected-case note links",
+      "cases": 27
+    },
+    {
+      "name": "Every note title and selected full symptoms are searchable; all matching cases remain reachable and old exact-case priority is preserved",
+      "titles": 74,
+      "uncappedQuery": "Windows",
+      "matchingNotes": 29
+    },
+    {
+      "name": "Specific-fix anchors preserve selected case, reload and Back; sticky toolkit and checklist reset/Undo remain intact",
+      "toolkitBefore": {
+        "x": 1058,
+        "y": 80,
+        "width": 350,
+        "height": 904
+      },
+      "toolkitAfter": {
+        "x": 1058,
+        "y": 80,
+        "width": 350,
+        "height": 904
+      },
+      "nodes": 1214
+    },
+    {
+      "name": "Markdown exports include complete specific fixes, tools, sources and the original procedures",
+      "exports": [
+        {
+          "jobId": "printer-repair",
+          "file": "exports/printer-repair.md",
+          "sha256": "bb2a01bfd59f0c9649667a3784ebc384c5c822a24231fa82497f45db7aebc605"
+        },
+        {
+          "jobId": "client-handoff",
+          "file": "exports/client-handoff.md",
+          "sha256": "271b304960eec9dc66e9c773c5525e36cd4e07658720e3848ab792b837df7db1"
+        }
+      ]
+    },
+    {
+      "name": "Dark/light service map and 390/320px specific fixes preserve all rows, touch targets, sticky navigation and visible focus",
+      "layouts": [
+        {
+          "width": 390,
+          "overflow": false,
+          "bar": {
+            "x": 18,
+            "y": 62,
+            "width": 354,
+            "height": 57,
+            "top": 62,
+            "right": 372,
+            "bottom": 119,
+            "left": 18
+          },
+          "heading": {
+            "x": 18,
+            "y": 235.203125,
+            "width": 354,
+            "height": 26,
+            "top": 235.203125,
+            "right": 372,
+            "bottom": 261.203125,
+            "left": 18
+          },
+          "minHeight": 44,
+          "minFont": 14
+        },
+        {
+          "width": 320,
+          "overflow": false,
+          "bar": {
+            "x": 18,
+            "y": 62,
+            "width": 284,
+            "height": 57,
+            "top": 62,
+            "right": 302,
+            "bottom": 119,
+            "left": 18
+          },
+          "heading": {
+            "x": 18,
+            "y": 234.796875,
+            "width": 284,
+            "height": 26,
+            "top": 234.796875,
+            "right": 302,
+            "bottom": 260.796875,
+            "left": 18
+          },
+          "minHeight": 44,
+          "minFont": 14
+        }
+      ]
+    },
+    {
+      "name": "Actual offline export preserves canonical taxonomy, every field note and direct specific-fix navigation"
+    },
+    {
+      "name": "No runtime errors, external runtime requests or hidden case groups"
+    }
+  ],
+  "screenshots": [
+    "portal-services-desktop.png",
+    "portal-specific-fix-desktop.png",
+    "portal-services-light.png",
+    "portal-services-390.png",
+    "portal-specific-fixes-390.png",
+    "portal-specific-fix-390.png",
+    "portal-services-320.png",
+    "portal-specific-fixes-320.png",
+    "portal-specific-fix-320.png"
+  ],
+  "errors": [],
+  "counts": {
+    "tools": 133,
+    "jobs": 22,
+    "quickCases": 27,
+    "serviceAreas": 8,
+    "fieldNotes": 74,
+    "noteSteps": 222,
+    "noteTools": 105,
+    "noteSources": 114
+  },
+  "newToolIds": [
+    "setupdiag",
+    "windows-sandbox",
+    "usb-device-tree-view",
+    "powercfg",
+    "curl",
+    "mtr",
+    "remmina",
+    "syncthing",
+    "diskspd",
+    "winmerge",
+    "sumatrapdf",
+    "netbootxyz",
+    "promptfoo",
+    "windows-laps",
+    "sysmon"
+  ],
+  "newToolContexts": [
+    {
+      "jobId": "intake-triage",
+      "toolId": "usb-device-tree-view",
+      "actionUrl": "https://www.uwe-sieber.de/files/UsbTreeView_x64.zip"
+    },
+    {
+      "jobId": "intake-triage",
+      "toolId": "powercfg",
+      "actionUrl": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options"
+    },
+    {
+      "jobId": "malware-removal",
+      "toolId": "sysmon",
+      "actionUrl": "https://download.sysinternals.com/files/Sysmon.zip"
+    },
+    {
+      "jobId": "ransomware-response",
+      "toolId": "sysmon",
+      "actionUrl": "https://download.sysinternals.com/files/Sysmon.zip"
+    },
+    {
+      "jobId": "slow-pc",
+      "toolId": "powercfg",
+      "actionUrl": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options"
+    },
+    {
+      "jobId": "slow-pc",
+      "toolId": "diskspd",
+      "actionUrl": "https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP"
+    },
+    {
+      "jobId": "windows-repair",
+      "toolId": "setupdiag",
+      "actionUrl": "https://go.microsoft.com/fwlink/?linkid=870142"
+    },
+    {
+      "jobId": "windows-repair",
+      "toolId": "winmerge",
+      "actionUrl": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip"
+    },
+    {
+      "jobId": "windows-update",
+      "toolId": "setupdiag",
+      "actionUrl": "https://go.microsoft.com/fwlink/?linkid=870142"
+    },
+    {
+      "jobId": "disk-migration",
+      "toolId": "syncthing",
+      "actionUrl": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip"
+    },
+    {
+      "jobId": "disk-migration",
+      "toolId": "winmerge",
+      "actionUrl": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip"
+    },
+    {
+      "jobId": "network-dns",
+      "toolId": "curl",
+      "actionUrl": "https://curl.se/windows/microsoft.html"
+    },
+    {
+      "jobId": "network-dns",
+      "toolId": "mtr",
+      "actionUrl": "https://github.com/traviscross/mtr#using-mtr-on-windows"
+    },
+    {
+      "jobId": "outage-recovery",
+      "toolId": "curl",
+      "actionUrl": "https://curl.se/windows/microsoft.html"
+    },
+    {
+      "jobId": "outage-recovery",
+      "toolId": "mtr",
+      "actionUrl": "https://github.com/traviscross/mtr#using-mtr-on-windows"
+    },
+    {
+      "jobId": "remote-support",
+      "toolId": "remmina",
+      "actionUrl": "https://www.remmina.org/how-to-install-remmina/"
+    },
+    {
+      "jobId": "ad-trust",
+      "toolId": "windows-laps",
+      "actionUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory"
+    },
+    {
+      "jobId": "outlook-email",
+      "toolId": "curl",
+      "actionUrl": "https://curl.se/windows/microsoft.html"
+    },
+    {
+      "jobId": "printer-repair",
+      "toolId": "usb-device-tree-view",
+      "actionUrl": "https://www.uwe-sieber.de/files/UsbTreeView_x64.zip"
+    },
+    {
+      "jobId": "printer-repair",
+      "toolId": "sumatrapdf",
+      "actionUrl": "https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64.zip"
+    },
+    {
+      "jobId": "hardware-bsod",
+      "toolId": "usb-device-tree-view",
+      "actionUrl": "https://www.uwe-sieber.de/files/UsbTreeView_x64.zip"
+    },
+    {
+      "jobId": "hardware-bsod",
+      "toolId": "powercfg",
+      "actionUrl": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options"
+    },
+    {
+      "jobId": "hardware-bsod",
+      "toolId": "diskspd",
+      "actionUrl": "https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP"
+    },
+    {
+      "jobId": "new-pc",
+      "toolId": "windows-sandbox",
+      "actionUrl": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install"
+    },
+    {
+      "jobId": "new-pc",
+      "toolId": "syncthing",
+      "actionUrl": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip"
+    },
+    {
+      "jobId": "new-pc",
+      "toolId": "netbootxyz",
+      "actionUrl": "https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.iso"
+    },
+    {
+      "jobId": "new-pc",
+      "toolId": "windows-laps",
+      "actionUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview"
+    },
+    {
+      "jobId": "client-handoff",
+      "toolId": "winmerge",
+      "actionUrl": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip"
+    },
+    {
+      "jobId": "boot-usb",
+      "toolId": "netbootxyz",
+      "actionUrl": "https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.iso"
+    },
+    {
+      "jobId": "ai-triage",
+      "toolId": "windows-sandbox",
+      "actionUrl": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install"
+    },
+    {
+      "jobId": "ai-triage",
+      "toolId": "promptfoo",
+      "actionUrl": "https://www.promptfoo.dev/docs/installation/"
+    },
+    {
+      "jobId": "preventive-maintenance",
+      "toolId": "powercfg",
+      "actionUrl": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options"
+    },
+    {
+      "jobId": "preventive-maintenance",
+      "toolId": "windows-laps",
+      "actionUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview"
+    },
+    {
+      "jobId": "preventive-maintenance",
+      "toolId": "sysmon",
+      "actionUrl": "https://download.sysinternals.com/files/Sysmon.zip"
+    }
+  ],
+  "noteCoverage": [
+    {
+      "jobId": "intake-triage",
+      "notes": [
+        "triage-confirm-model-and-architecture",
+        "triage-isolate-background-conflict",
+        "triage-clock-breaks-signin"
+      ]
+    },
+    {
+      "jobId": "malware-removal",
+      "notes": [
+        "malware-browser-notification-popups",
+        "malware-allowed-threat-keeps-returning",
+        "malware-offline-scan-does-not-start"
+      ]
+    },
+    {
+      "jobId": "ransomware-response",
+      "notes": [
+        "ransomware-protect-recovery-copies",
+        "ransomware-compromised-admin-account",
+        "ransomware-test-decryptor-on-copies"
+      ]
+    },
+    {
+      "jobId": "slow-pc",
+      "notes": [
+        "slow-pc-standby-memory-is-not-a-leak",
+        "slow-pc-startup-app-delay",
+        "slow-pc-filter-a-short-io-trace",
+        "slow-pc-only-on-battery"
+      ]
+    },
+    {
+      "jobId": "windows-repair",
+      "notes": [
+        "repair-dism-source-not-found",
+        "repair-read-the-current-sfc-result",
+        "repair-one-app-without-resetting-windows"
+      ]
+    },
+    {
+      "jobId": "windows-update",
+      "notes": [
+        "update-free-the-space-the-installer-needs",
+        "update-explain-a-feature-upgrade-rollback",
+        "update-respect-a-safeguard-hold"
+      ]
+    },
+    {
+      "jobId": "boot-recovery",
+      "notes": [
+        "boot-installer-cannot-see-storage",
+        "boot-check-recovery-drive-letters",
+        "boot-recovery-key-does-not-match"
+      ]
+    },
+    {
+      "jobId": "failing-drive",
+      "notes": [
+        "recovery-preserve-names-on-ntfs",
+        "recovery-resume-the-correct-disk-image",
+        "recovery-carved-files-have-wrong-names"
+      ]
+    },
+    {
+      "jobId": "disk-migration",
+      "notes": [
+        "migration-new-ssd-shows-old-capacity",
+        "migration-interpret-robocopy-exit-code",
+        "migration-package-list-is-not-app-data"
+      ]
+    },
+    {
+      "jobId": "backup-restore",
+      "notes": [
+        "backup-cloud-placeholders-are-not-local-files",
+        "backup-restic-check-is-not-full-data-proof",
+        "backup-restore-beside-current-files",
+        "backup-test-credentials-away-from-source"
+      ]
+    },
+    {
+      "jobId": "network-dns",
+      "notes": [
+        "network-dhcp-self-assigned-address",
+        "network-internal-names-fail-on-vpn",
+        "network-captive-portal-signin",
+        "network-name-resolves-but-port-fails",
+        "network-measure-lan-before-blaming-isp"
+      ]
+    },
+    {
+      "jobId": "outage-recovery",
+      "notes": [
+        "outage-event-41-is-not-the-cause",
+        "outage-one-service-did-not-recover",
+        "outage-share-unavailable-after-restart"
+      ]
+    },
+    {
+      "jobId": "remote-support",
+      "notes": [
+        "remote-copy-route-not-proven",
+        "remote-mac-screen-or-control-permission",
+        "remote-reboot-needs-a-reconnect-plan"
+      ]
+    },
+    {
+      "jobId": "ad-trust",
+      "notes": [
+        "trust-domain-dns-before-account-repair",
+        "trust-clock-skew-blocks-authentication",
+        "trust-error-after-old-image-restore"
+      ]
+    },
+    {
+      "jobId": "outlook-email",
+      "notes": [
+        "email-classic-outlook-working-offline",
+        "email-large-attachment-stuck-outbox",
+        "email-pst-stalls-onedrive-sync",
+        "email-old-messages-missing-offline"
+      ]
+    },
+    {
+      "jobId": "printer-repair",
+      "notes": [
+        "printer-offline-after-router-change",
+        "printer-driver-rejected-on-arm-or-wpp",
+        "printer-adf-lines-flatbed-clean",
+        "printer-scanner-missing-from-app",
+        "printer-one-pdf-will-not-print"
+      ]
+    },
+    {
+      "jobId": "hardware-bsod",
+      "notes": [
+        "hardware-crash-without-a-dump",
+        "hardware-memory-errors-after-upgrade",
+        "hardware-usb-dock-device-drops"
+      ]
+    },
+    {
+      "jobId": "new-pc",
+      "notes": [
+        "newpc-network-missing-during-setup",
+        "newpc-winget-not-found",
+        "newpc-registered-is-not-joined"
+      ]
+    },
+    {
+      "jobId": "client-handoff",
+      "notes": [
+        "handoff-admin-works-user-denied",
+        "handoff-recovery-record-cannot-be-found",
+        "handoff-temporary-support-app-persists"
+      ]
+    },
+    {
+      "jobId": "boot-usb",
+      "notes": [
+        "bootusb-secure-boot-blocks-rescue-menu",
+        "bootusb-image-is-wrong-architecture",
+        "bootusb-large-iso-will-not-copy"
+      ]
+    },
+    {
+      "jobId": "ai-triage",
+      "notes": [
+        "ai-redact-logs-before-sharing",
+        "ai-command-does-not-match-the-machine",
+        "ai-untrusted-instructions-inside-evidence"
+      ]
+    },
+    {
+      "jobId": "preventive-maintenance",
+      "notes": [
+        "maintenance-optimize-the-right-media",
+        "maintenance-package-not-in-upgrade-list",
+        "maintenance-onedrive-sync-is-paused",
+        "maintenance-check-os-support-state"
+      ]
+    }
+  ],
+  "symptomSearch": [
+    {
+      "query": "A driver or repair package says it is incompatible, or the device model is uncertain.",
+      "noteId": "triage-confirm-model-and-architecture"
+    },
+    {
+      "query": "A network printer went offline after a router change, lease change or network move.",
+      "noteId": "printer-offline-after-router-change"
+    },
+    {
+      "query": "Files were deleted from a healthy NTFS volume and original names or folders matter.",
+      "noteId": "recovery-preserve-names-on-ntfs"
+    }
+  ],
+  "exports": [
+    {
+      "jobId": "printer-repair",
+      "file": "exports/printer-repair.md",
+      "sha256": "bb2a01bfd59f0c9649667a3784ebc384c5c822a24231fa82497f45db7aebc605"
+    },
+    {
+      "jobId": "client-handoff",
+      "file": "exports/client-handoff.md",
+      "sha256": "271b304960eec9dc66e9c773c5525e36cd4e07658720e3848ab792b837df7db1"
+    }
+  ],
+  "layouts": [
+    {
+      "width": 390,
+      "overflow": false,
+      "bar": {
+        "x": 18,
+        "y": 62,
+        "width": 354,
+        "height": 57,
+        "top": 62,
+        "right": 372,
+        "bottom": 119,
+        "left": 18
+      },
+      "heading": {
+        "x": 18,
+        "y": 235.203125,
+        "width": 354,
+        "height": 26,
+        "top": 235.203125,
+        "right": 372,
+        "bottom": 261.203125,
+        "left": 18
+      },
+      "minHeight": 44,
+      "minFont": 14
+    },
+    {
+      "width": 320,
+      "overflow": false,
+      "bar": {
+        "x": 18,
+        "y": 62,
+        "width": 284,
+        "height": 57,
+        "top": 62,
+        "right": 302,
+        "bottom": 119,
+        "left": 18
+      },
+      "heading": {
+        "x": 18,
+        "y": 234.796875,
+        "width": 284,
+        "height": 26,
+        "top": 234.796875,
+        "right": 302,
+        "bottom": 260.796875,
+        "left": 18
+      },
+      "minHeight": 44,
+      "minFont": 14
+    }
+  ],
+  "hashes": {
+    "portal/app.js": "eea22e2c558db2d41e302c5aba330b0d59d1f9b8a71bb92d2d6e0493550f477c",
+    "portal/styles.css": "d63405572d0e1f2338620b7f98e95d7efeaee6231b5a40847166d993805978a2",
+    "portal/index.template.html": "2a0fe317df3c822202c19dcec80f7c4c3dbaa4291dcf3d34c5c86e2a15e6e0b0",
+    "site/index.html": "fb1df2813d27cfc29209803a4a845a0381b6bbbc901c6e811e8c41a5d3df0ba3",
+    "data/field-notes.json": "06d0ef2b08224396781f90b719dd5ede767a213a105801c9d35e0e09a440cbf1",
+    "data/wiki-layout.json": "12f71dd8e427c26c4518e729fce36d21ad82a20ca1197d0056bcb4b3a434d0b5"
+  },
+  "bytes": 780175,
+  "passed": true,
+  "finishedAt": "2026-11-27T01:34:39.388Z",
+  "visualReview": {
+    "passed": true,
+    "reviewed": [
+      "portal-services-desktop.png",
+      "portal-specific-fix-desktop.png",
+      "portal-services-light.png",
+      "portal-services-320.png",
+      "portal-specific-fix-390.png"
+    ],
+    "findings": [
+      "Service map is a flat grouped directory with all specific cases linked inside the matching job row.",
+      "Desktop specific fixes remain readable beside the persistent tool panel; printer manufacturer shortcuts retain their priority.",
+      "The four mobile jump links fit at 320px and 390px without hiding the focused heading or producing horizontal overflow.",
+      "No significant UI defect was found."
+    ]
+  },
+  "publicationBinding": "Provisional until root confirms final content freeze and rebuild.",
+  "artifactHashes": {
+    "portal-services-desktop.png": "a189a7c800667f14c06a2dbd7d02f145dff63d7c9f10ce1f4905f182a07ba24d",
+    "portal-specific-fix-desktop.png": "e84a759f8b94a29ddc4d8991227bc4a74351408fe120842b7a3a6efa5a8b51d9",
+    "portal-services-light.png": "268c112fe992a9cb5dadc57e71fca3c1e26cd105f1c565bf3a95e92c6a108896",
+    "portal-services-390.png": "8806cb058dc61ebf1327e01bb945e0606c3b8a66407909c74353f87c949c0636",
+    "portal-specific-fixes-390.png": "d430659440aec519b151fe168421286a6fb2398b67fa1225c7edcced86a80753",
+    "portal-specific-fix-390.png": "22be103940e80b99c96509977b3898605ab164334caa2be8982637a1f316bb31",
+    "portal-services-320.png": "fcda9f1e94e9547cc2fa897fbb6c98887e9e96ecc5732e1553c4f7a6a1978a8c",
+    "portal-specific-fixes-320.png": "91d324fc4c1213b86473df214732e64557cfc0bc4e91f4492dd93b7bbc3c7d78",
+    "portal-specific-fix-320.png": "15fa356fed1af4d0cb4b934aecd8a644f05d34514be462c65f1866e9d190db03",
+    "portal-services-review.cjs": "c56427ad11a4052549b7cf462fb58dfc5e67fa04a16a02eeda1463c2115505e2",
+    "portal-services-offline.html": "e7cb13d0ba9b93b2375374c136b66027ffc0ab1e7108436f12d8f881a7a2d52a"
+  }
+}

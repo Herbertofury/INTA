@@ -4,7 +4,7 @@
 
 Choose a repair scenario below for a free starting tool and a step-by-step guide. Built for INTA Computer Services.
 
-**[🧰 Open the workspace](https://herbertofury.github.io/INTA/)** · **[📚 Open the Wiki](https://github.com/Herbertofury/INTA/wiki)** · **[💾 Rescue media](https://github.com/Herbertofury/INTA/wiki/Rescue-Media)**
+**[🧰 Open the workspace](https://herbertofury.github.io/INTA/)** · **[📚 Open the Wiki](https://github.com/Herbertofury/INTA/wiki)** · **[🗺️ Service map](https://herbertofury.github.io/INTA/#services)** · **[💾 Rescue media](https://github.com/Herbertofury/INTA/wiki/Rescue-Media)**
 
 <!-- INTA:QUICK-START:START -->
 

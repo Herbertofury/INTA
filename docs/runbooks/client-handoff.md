@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-close-a-repair-with-a-clear-client-handoff"></a>
 
@@ -8,7 +8,7 @@ Turn completed technical work into proof the customer can use, with clean access
 
 **Getting started** · Starter · 10–20 min · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/client-handoff)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/client-handoff)
 
 <a id="working-kit"></a>
 
@@ -17,6 +17,10 @@ Turn completed technical work into proof the customer can use, with clean access
 **[Open working view](https://herbertofury.github.io/INTA/#job/client-handoff)** · Keep the tool panel beside the instructions.
 
 **First move:** Repeat the original requested task with the user before declaring the repair complete.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. | **[WinMerge](https://winmerge.org/)** · [Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** |
 
 ### Close the case
 
@@ -65,6 +69,12 @@ Turn completed technical work into proof the customer can use, with clean access
 
 **Change route when:** The original task still fails or acceptance cannot be demonstrated. · Temporary access or required recovery ownership remains unresolved.
 
+### 🎯 Go straight to a specific fix
+
+- **[Prove the repair under the real user account](#fix-handoff-admin-works-user-denied)** — The technician can open a repaired or restored file, but the normal user gets Access denied.
+- **[Make recovery information retrievable](#fix-handoff-recovery-record-cannot-be-found)** — Encryption works, but the owner cannot locate the recovery record during handoff.
+- **[Remove access that was only for this repair](#fix-handoff-temporary-support-app-persists)** — A temporary support program or unattended setting still starts after the case ends.
+
 > [!NOTE]
 > **Start here.** Return to the acceptance test written at intake. A completed checklist is useful only when the customer’s original task works.
 
@@ -107,7 +117,11 @@ flowchart TD
 
 ## Recommended tools
 
-Use the approved private service record and the [intake and handoff template](https://github.com/Herbertofury/INTA/wiki/Technician-Handoff). No specialist application is required.
+Select a tool for the next diagnostic or repair step. Check its platform, access and licensing requirements before use.
+
+| Tool / official page + download | Use it for | Platform & access | Documentation |
+| --- | --- | --- | --- |
+| **[WinMerge](https://winmerge.org/)** · [Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** | Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. | [Windows](https://www.microsoft.com/windows); Free and open source under GPL-2.0-or-later | [Open guide](https://manual.winmerge.org/en/) |
 
 <a id="walkthrough"></a>
 
@@ -167,6 +181,79 @@ Work in order, record the result of each step, and change route when the evidenc
 > **Pause this route and escalate when:**
 > - The original symptom still reproduces without a clear next step.
 > - Temporary access or sensitive evidence is left in an uncontrolled location.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-handoff-admin-works-user-denied"></a>
+
+### Prove the repair under the real user account
+
+**Use when:** The technician can open a repaired or restored file, but the normal user gets Access denied.
+
+**Start here:** Reproduce the exact task under the intended standard-user account.
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Download Windows x64 portable · ZIP](https://github.com/PowerShell/PowerShell/releases/download/v7.7.0/PowerShell-7.7.0-win-x64.zip)**
+
+1. Compare the intended path and file ownership/permissions with a working equivalent; use a read-only permissions view before changing ACLs.
+2. Correct only the identified ownership or access issue through the approved application/share/file owner.
+3. Have the user reopen, edit and save an agreed test item without elevation.
+
+**Prove it worked:** The user’s actual workflow succeeds with the intended limited permissions.
+
+**If this does not resolve it:** Do not grant Everyone full control or make the user an administrator to hide a permission fault.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/icacls) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-handoff-recovery-record-cannot-be-found"></a>
+
+### Make recovery information retrievable
+
+**Use when:** Encryption works, but the owner cannot locate the recovery record during handoff.
+
+**Start here:** Identify the approved account or organization store that should hold the recovery key.
+
+1. Use a separate trusted device to verify that the authorized owner can reach the relevant recovery record and match the device/key identity.
+2. If the key is not backed up, follow the supported key-backup procedure using the approved destination.
+3. Record the private retrieval reference and responsible owner without copying the secret into the public wiki or ordinary handoff text.
+
+**Prove it worked:** The authorized owner can retrieve the correct recovery material independently of the repaired PC.
+
+**If this does not resolve it:** If retrieval cannot be demonstrated, leave that recovery gap explicitly open rather than claiming the machine is fully recoverable.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/windows/security/encryption/back-up-your-bitlocker-recovery-key) · [Source 2](https://support.microsoft.com/en-us/windows/security/encryption/find-your-bitlocker-recovery-key) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-handoff-temporary-support-app-persists"></a>
+
+### Remove access that was only for this repair
+
+**Use when:** A temporary support program or unattended setting still starts after the case ends.
+
+**Start here:** Compare the current installation/access state with the agreed end state for this device.
+
+**[RustDesk](https://rustdesk.com/)** · [Official page](https://rustdesk.com/) · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)**
+
+**[MeshCentral](https://meshcentral.com/)** · [Official page](https://meshcentral.com/) · **[Open server installation instructions](https://github.com/Ylianst/MeshCentral#installation)**
+
+1. End all case-only sessions and remove the temporary unattended credential or enrollment through that product’s supported controls.
+2. Uninstall a case-only client when appropriate; keep the organization’s approved persistent management agent intact.
+3. Restart if required and verify that the temporary access is gone while approved support and the repaired task still work.
+
+**Prove it worked:** Remaining access has an explicit owner and purpose; one-case access no longer functions.
+
+**If this does not resolve it:** If the temporary and managed deployments cannot be distinguished, involve the management owner before removing agents or services.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/windows/apps/uninstall-or-remove-apps-and-programs-in-windows) · [Source 2](https://rustdesk.com/docs/en/client/) · [Source 3](https://github.com/Ylianst/MeshCentral) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

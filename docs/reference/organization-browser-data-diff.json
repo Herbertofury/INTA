@@ -1,0 +1,920 @@
+{
+  "changedTopLevelKeys": [
+    "fieldNotes"
+  ],
+  "changedNotes": [
+    {
+      "id": "malware-browser-notification-popups",
+      "jobId": "malware-removal",
+      "fields": [
+        "sourceUrls",
+        "steps",
+        "toolIds"
+      ],
+      "old": {
+        "id": "malware-browser-notification-popups",
+        "jobId": "malware-removal",
+        "title": "Stop website notification popups",
+        "symptom": "Desktop alerts claim the PC is infected, but the alerts identify a browser or website sender.",
+        "firstAction": "Record the sender and close the alert without opening its link.",
+        "steps": [
+          "In Microsoft Edge open Settings > Privacy, search, and services > Site permissions > All permissions > Notifications, or use the current notification settings route in the linked guide.",
+          "Remove or block the unwanted site’s permission; inspect related extensions and recent downloads if the alerts began with an installation.",
+          "Retest with the browser restarted. Use the malware route if executable detections, persistence or other compromise evidence remains."
+        ],
+        "expected": "The unwanted site can no longer send notifications and normal browsing still works.",
+        "ifUnresolved": "If the sender is not the browser, or alerts persist after permission removal, identify the actual installed application before removing anything.",
+        "toolIds": [
+          "adwcleaner"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/microsoft-edge/manage-website-notifications-in-microsoft-edge"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "malware-browser-notification-popups",
+        "jobId": "malware-removal",
+        "title": "Stop website notification popups",
+        "symptom": "Desktop alerts claim the PC is infected, but the alerts identify a browser or website sender.",
+        "firstAction": "Record the sender and close the alert without opening its link.",
+        "steps": [
+          "In Microsoft Edge open Settings > Privacy, search, and services > Site permissions > All sites; choose the unwanted site and select See more.",
+          "Set that site’s Notifications permission to Block; inspect related extensions and recent downloads if the alerts began with an installation.",
+          "Retest with the browser restarted. Use the malware route if executable detections, persistence or other compromise evidence remains."
+        ],
+        "expected": "The unwanted site can no longer send notifications and normal browsing still works.",
+        "ifUnresolved": "If the sender is not the browser, or alerts persist after permission removal, identify the actual installed application before removing anything.",
+        "toolIds": [],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "malware-allowed-threat-keeps-returning",
+      "jobId": "malware-removal",
+      "fields": [
+        "sourceUrls",
+        "steps",
+        "toolIds"
+      ],
+      "old": {
+        "id": "malware-allowed-threat-keeps-returning",
+        "jobId": "malware-removal",
+        "title": "Undo an accidental allowed-threat decision",
+        "symptom": "A known detection was allowed earlier and the same item remains present.",
+        "firstAction": "Open Windows Security > Virus & threat protection and review the exact detection and its earlier disposition.",
+        "steps": [
+          "Check Protection history and Allowed threats for the matching item; distinguish an allowed action from quarantine or a failed remediation.",
+          "For a confirmed accidental allowance, choose the supported Don’t allow action, update the active protection and rescan the affected scope.",
+          "Record the new disposition and whether the file or startup entry returns after restart."
+        ],
+        "expected": "The unintended allowance is removed and the confirmed threat has a recorded remediation result.",
+        "ifUnresolved": "If policy controls the setting or the detection recurs, involve the managed protection owner and investigate the entry point rather than adding exclusions.",
+        "toolIds": [
+          "defender-business"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/security/windows-security/protection-history"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "malware-allowed-threat-keeps-returning",
+        "jobId": "malware-removal",
+        "title": "Undo an accidental allowed-threat decision",
+        "symptom": "A known detection was allowed earlier and the same item remains present.",
+        "firstAction": "Open Windows Security > Virus & threat protection and review the exact detection and its earlier disposition.",
+        "steps": [
+          "With the authorized administrator available, check Protection history and Allowed threats for the matching item; distinguish an allowed action from quarantine or a failed remediation.",
+          "For a confirmed accidental allowance, choose the supported Don’t allow action, update the active protection and rescan the affected scope.",
+          "Record the new disposition and whether the file or startup entry returns after restart."
+        ],
+        "expected": "The unintended allowance is removed and the confirmed threat has a recorded remediation result.",
+        "ifUnresolved": "If policy controls the setting or the detection recurs, involve the managed protection owner and investigate the entry point rather than adding exclusions.",
+        "toolIds": [],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/security/windows-security/protection-history-in-the-windows-security-app"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "ransomware-protect-recovery-copies",
+      "jobId": "ransomware-response",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "ransomware-protect-recovery-copies",
+        "jobId": "ransomware-response",
+        "title": "Protect backups before testing a restore",
+        "symptom": "Compromised machines can still reach the backup destination or its administration account.",
+        "firstAction": "Have the incident lead separate backup access from the affected systems using a known-clean administration path.",
+        "steps": [
+          "Identify offline, immutable or otherwise isolated recovery copies and record their dates without attaching them to an affected endpoint.",
+          "Check whether the backup account or repository was modified during the incident; preserve access logs and the incident timeline.",
+          "Restore a selected pre-incident sample into an isolated clean environment and test the actual data before planning production recovery."
+        ],
+        "expected": "A usable recovery point is demonstrated and remains outside the attacker’s current access path.",
+        "ifUnresolved": "If the backup system or administrative identity is also compromised, involve the incident and backup owners before changing retention or deleting snapshots.",
+        "toolIds": [],
+        "sourceUrls": [
+          "https://www.cisa.gov/sites/default/files/publications/CISA_MS-ISAC_Ransomware%20Guide_S508C_.pdf"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "ransomware-protect-recovery-copies",
+        "jobId": "ransomware-response",
+        "title": "Protect backups before testing a restore",
+        "symptom": "Compromised machines can still reach the backup destination or its administration account.",
+        "firstAction": "Have the incident lead separate backup access from the affected systems using a known-clean administration path.",
+        "steps": [
+          "Identify offline, immutable or otherwise isolated recovery copies and record their dates without attaching them to an affected endpoint.",
+          "Check whether the backup account or repository was modified during the incident; preserve access logs and the incident timeline.",
+          "Restore a selected pre-incident sample into an isolated clean environment and test the actual data before planning production recovery."
+        ],
+        "expected": "A usable recovery point is demonstrated and remains outside the attacker’s current access path.",
+        "ifUnresolved": "If the backup system or administrative identity is also compromised, involve the incident and backup owners before changing retention or deleting snapshots.",
+        "toolIds": [],
+        "sourceUrls": [
+          "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "ransomware-compromised-admin-account",
+      "jobId": "ransomware-response",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "ransomware-compromised-admin-account",
+        "jobId": "ransomware-response",
+        "title": "Contain stolen account access as well as the PC",
+        "symptom": "The incident involves privileged credentials, suspicious sessions or activity on more than one device.",
+        "firstAction": "Use a known-clean device and have the identity administrator identify the affected account and scope.",
+        "steps": [
+          "Preserve relevant sign-in and audit evidence before applying the organization’s account containment procedure.",
+          "Use the supported identity response to block or secure the account, reset credentials and revoke applicable sessions; review unauthorized authentication methods and app access.",
+          "Recheck access and sign-in activity from a clean session while endpoint containment continues."
+        ],
+        "expected": "The account has an evidenced containment state and unauthorized access paths are addressed separately from endpoint rebuilding.",
+        "ifUnresolved": "A password change alone is not a complete incident release. Escalate if administrators, federation or multiple identities are affected.",
+        "toolIds": [],
+        "sourceUrls": [
+          "https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access",
+          "https://learn.microsoft.com/en-us/security/operations/incident-response-playbook-compromised-account"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "ransomware-compromised-admin-account",
+        "jobId": "ransomware-response",
+        "title": "Contain stolen account access as well as the PC",
+        "symptom": "The incident involves privileged credentials, suspicious sessions or activity on more than one device.",
+        "firstAction": "Use a known-clean device and have the identity administrator identify the affected account and scope.",
+        "steps": [
+          "Preserve relevant sign-in and audit evidence before applying the organization’s account containment procedure.",
+          "Use the supported identity response to block or secure the account, reset credentials and revoke applicable sessions; review unauthorized authentication methods and app access.",
+          "Recheck access and sign-in activity from a clean session while endpoint containment continues."
+        ],
+        "expected": "The account has an evidenced containment state and unauthorized access paths are addressed separately from endpoint rebuilding.",
+        "ifUnresolved": "A password change alone is not a complete incident release. Escalate if administrators, federation or multiple identities are affected.",
+        "toolIds": [],
+        "sourceUrls": [
+          "https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access",
+          "https://learn.microsoft.com/en-us/defender-office-365/responding-to-a-compromised-email-account"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "ransomware-test-decryptor-on-copies",
+      "jobId": "ransomware-response",
+      "fields": [
+        "sourceUrls",
+        "steps"
+      ],
+      "old": {
+        "id": "ransomware-test-decryptor-on-copies",
+        "jobId": "ransomware-response",
+        "title": "Evaluate a decryptor without risking the evidence",
+        "symptom": "A supposed decryptor is offered for the observed ransomware family.",
+        "firstAction": "Preserve the ransom note and encrypted originals, and check the family against the official No More Ransom resources.",
+        "steps": [
+          "Use only the matched vendor/project instructions; a similar ransom-note name is not proof that a decryptor supports the exact variant.",
+          "Prepare separate copies of representative encrypted files and any required original/encrypted pairs.",
+          "Test the supported decryptor on those copies and open recovered files in their real applications before considering wider use."
+        ],
+        "expected": "The test demonstrates usable files for the exact supported variant while original evidence remains intact.",
+        "ifUnresolved": "If the variant is unsupported, files remain corrupt or a website asks for unapproved payment/credentials, stop and continue the incident-led restore plan.",
+        "toolIds": [],
+        "sourceUrls": [
+          "https://www.nomoreransom.org/en/decryption-tools.html",
+          "https://www.cisa.gov/sites/default/files/publications/CISA_MS-ISAC_Ransomware%20Guide_S508C_.pdf"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "ransomware-test-decryptor-on-copies",
+        "jobId": "ransomware-response",
+        "title": "Evaluate a decryptor without risking the evidence",
+        "symptom": "A supposed decryptor is offered for the observed ransomware family.",
+        "firstAction": "Preserve the ransom note and encrypted originals, and check the family against the official No More Ransom resources.",
+        "steps": [
+          "Use only the matched vendor/project instructions; a similar ransom-note name is not proof that a decryptor supports the exact variant.",
+          "In a known-clean, isolated recovery environment, prepare separate copies of representative encrypted files and any required original/encrypted pairs.",
+          "Test the supported decryptor on those copies and open recovered files in their real applications before considering wider use."
+        ],
+        "expected": "The test demonstrates usable files for the exact supported variant while original evidence remains intact.",
+        "ifUnresolved": "If the variant is unsupported, files remain corrupt or a website asks for unapproved payment/credentials, stop and continue the incident-led restore plan.",
+        "toolIds": [],
+        "sourceUrls": [
+          "https://www.nomoreransom.org/en/decryption-tools.html",
+          "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "slow-pc-startup-app-delay",
+      "jobId": "slow-pc",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "slow-pc-startup-app-delay",
+        "jobId": "slow-pc",
+        "title": "Find the optional app delaying sign-in",
+        "symptom": "The desktop appears quickly but the user must wait before starting normal work.",
+        "firstAction": "Time the same sign-in-to-ready task before making changes.",
+        "steps": [
+          "Open Task Manager > Startup apps and record enabled entries and their reported impact.",
+          "Disable one agreed optional item, keeping required security, accessibility and managed-support software in place, then repeat the same restart/sign-in test.",
+          "Keep only the evidenced change, and re-enable entries that did not improve the measured task."
+        ],
+        "expected": "The user’s real ready-to-work time improves and required background functions still run.",
+        "ifUnresolved": "If delays occur before sign-in or persist with the candidate disabled, investigate boot, domain, storage or profile dependencies.",
+        "toolIds": [
+          "autoruns"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/apps/configure-startup-applications-in-windows"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "slow-pc-startup-app-delay",
+        "jobId": "slow-pc",
+        "title": "Find the optional app delaying sign-in",
+        "symptom": "The desktop appears quickly but the user must wait before starting normal work.",
+        "firstAction": "Time the same sign-in-to-ready task before making changes.",
+        "steps": [
+          "Open Task Manager > Startup apps and record enabled entries and their reported impact.",
+          "Disable one agreed optional item, keeping required security, accessibility and managed-support software in place, then repeat the same restart/sign-in test.",
+          "Keep only the evidenced change, and re-enable entries that did not improve the measured task."
+        ],
+        "expected": "The user’s real ready-to-work time improves and required background functions still run.",
+        "ifUnresolved": "If delays occur before sign-in or persist with the candidate disabled, investigate boot, domain, storage or profile dependencies.",
+        "toolIds": [
+          "autoruns"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/experience/startup-boot/configure-startup-applications-in-windows"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "slow-pc-only-on-battery",
+      "jobId": "slow-pc",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "slow-pc-only-on-battery",
+        "jobId": "slow-pc",
+        "title": "Explain a laptop that slows down on battery",
+        "symptom": "The same application is responsive on AC power but slow when unplugged.",
+        "firstAction": "Repeat a short, identical workload on the approved charger and on battery.",
+        "steps": [
+          "Inspect Settings > System > Power & battery for the active power mode and energy-saving state.",
+          "Check whether the charger is recognized and suitable for the model; record any low-power or charging warning.",
+          "Choose an approved power mode for the workload and retest without disabling thermal or battery protections."
+        ],
+        "expected": "The performance difference is tied to an observed power state, charger issue or policy rather than an unexplained cleanup change.",
+        "ifUnresolved": "If performance drops while hot or on a correctly rated charger, investigate cooling, battery condition or firmware using the exact OEM guidance.",
+        "toolIds": [
+          "oem-drivers",
+          "libre-hardware-monitor"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/settings/change-the-power-mode-for-your-windows-pc"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "slow-pc-only-on-battery",
+        "jobId": "slow-pc",
+        "title": "Explain a laptop that slows down on battery",
+        "symptom": "The same application is responsive on AC power but slow when unplugged.",
+        "firstAction": "Repeat a short, identical workload on the approved charger and on battery.",
+        "steps": [
+          "Inspect Settings > System > Power & battery for the active power mode and energy-saving state.",
+          "Check whether the charger is recognized and suitable for the model; record any low-power or charging warning.",
+          "Choose an approved power mode for the workload and retest without disabling thermal or battery protections."
+        ],
+        "expected": "The performance difference is tied to an observed power state, charger issue or policy rather than an unexplained cleanup change.",
+        "ifUnresolved": "If performance drops while hot or on a correctly rated charger, investigate cooling, battery condition or firmware using the exact OEM guidance.",
+        "toolIds": [
+          "oem-drivers",
+          "libre-hardware-monitor"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/experience/change-the-power-mode-for-your-windows-pc"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "update-free-the-space-the-installer-needs",
+      "jobId": "windows-update",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "update-free-the-space-the-installer-needs",
+        "jobId": "windows-update",
+        "title": "Clear an update’s storage blocker safely",
+        "symptom": "Windows Update asks for more space or fails during a low-space installation.",
+        "firstAction": "Open Settings > System > Storage and record available space before deleting anything.",
+        "steps": [
+          "Review the supported temporary-file and cleanup choices; keep Downloads, customer files and rollback material unless their removal is explicitly intended.",
+          "If the update offers external storage, follow that specific workflow using a trusted device and keep it attached for the required phase.",
+          "Retry the same update, restart when requested and confirm its entry in Update history."
+        ],
+        "expected": "The identified update completes and the user’s data and rollback decision remain accounted for.",
+        "ifUnresolved": "If space rapidly disappears again, identify the owning files or service; do not repeatedly erase logs needed to diagnose the failure.",
+        "toolIds": [
+          "windirstat",
+          "get-help"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/deployment/windows-update/free-up-space-for-windows-updates"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "update-free-the-space-the-installer-needs",
+        "jobId": "windows-update",
+        "title": "Clear an update’s storage blocker safely",
+        "symptom": "Windows Update asks for more space or fails during a low-space installation.",
+        "firstAction": "Open Settings > System > Storage and record available space before deleting anything.",
+        "steps": [
+          "Review the supported temporary-file and cleanup choices; keep Downloads, customer files and rollback material unless their removal is explicitly intended.",
+          "If the update offers external storage, follow that specific workflow using a trusted device and keep it attached for the required phase.",
+          "Retry the same update, restart when requested and confirm its entry in Update history."
+        ],
+        "expected": "The identified update completes and the user’s data and rollback decision remain accounted for.",
+        "ifUnresolved": "If space rapidly disappears again, identify the owning files or service; do not repeatedly erase logs needed to diagnose the failure.",
+        "toolIds": [
+          "windirstat",
+          "get-help"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/free-up-space-for-windows-updates"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "boot-check-recovery-drive-letters",
+      "jobId": "boot-recovery",
+      "fields": [
+        "sourceUrls",
+        "steps"
+      ],
+      "old": {
+        "id": "boot-check-recovery-drive-letters",
+        "jobId": "boot-recovery",
+        "title": "Identify the Windows volume inside recovery",
+        "symptom": "An offline repair cannot find Windows or appears to target the wrong drive.",
+        "firstAction": "Treat drive letters in the recovery environment as unverified until the actual volumes are identified.",
+        "steps": [
+          "Use the recovery disk/volume listing to compare sizes, labels and encryption state without formatting or modifying partitions.",
+          "Inspect the candidate volume for the expected Windows and user folders; unlock the intended encrypted volume through its approved recovery key if required.",
+          "Use that verified volume only in the product’s documented offline repair syntax and retain the target identity in the private ticket."
+        ],
+        "expected": "The offline operation addresses the intended installation, not the USB, recovery partition or another attached disk.",
+        "ifUnresolved": "Stop if the target cannot be distinguished or the source is failing; never assume that C: identifies the installed OS in recovery.",
+        "toolIds": [
+          "windows-recovery",
+          "dism"
+        ],
+        "sourceUrls": [
+          "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-identify-drive-letters-with-a-script",
+          "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "boot-check-recovery-drive-letters",
+        "jobId": "boot-recovery",
+        "title": "Identify the Windows volume inside recovery",
+        "symptom": "An offline repair cannot find Windows or appears to target the wrong drive.",
+        "firstAction": "Treat drive letters in the recovery environment as unverified until the actual volumes are identified.",
+        "steps": [
+          "In the recovery Command Prompt, run diskpart, then list volume, then exit; compare volume sizes and labels without formatting or modifying partitions, and verify the candidate volume’s encryption state.",
+          "Inspect the candidate volume for the expected Windows and user folders; unlock the intended encrypted volume through its approved recovery key if required.",
+          "Use that verified volume only in the product’s documented offline repair syntax and retain the target identity in the private ticket."
+        ],
+        "expected": "The offline operation addresses the intended installation, not the USB, recovery partition or another attached disk.",
+        "ifUnresolved": "Stop if the target cannot be distinguished or the source is failing; never assume that C: identifies the installed OS in recovery.",
+        "toolIds": [
+          "windows-recovery",
+          "dism"
+        ],
+        "sourceUrls": [
+          "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/list-volume",
+          "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "network-dhcp-self-assigned-address",
+      "jobId": "network-dns",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "network-dhcp-self-assigned-address",
+        "jobId": "network-dns",
+        "title": "Fix a PC stuck on a self-assigned address",
+        "symptom": "A DHCP-configured adapter has a 169.254 address and cannot reach the normal gateway.",
+        "firstAction": "Run ipconfig /all and identify the affected adapter, DHCP state and lease information.",
+        "steps": [
+          "Check the actual cable/Wi-Fi association and compare one working device on the same intended network.",
+          "Inspect the DHCP Client service and its Admin/Operational event logs; distinguish one-PC failure from a VLAN, scope or server problem.",
+          "Restore the proven DHCP path, then renew only the affected adapter when a local or alternate access path is available."
+        ],
+        "expected": "The adapter receives the intended lease, gateway and DNS settings and reaches the required service.",
+        "ifUnresolved": "Do not invent a static address or release the adapter carrying the only remote session. Escalate shared lease failures to the network owner.",
+        "toolIds": [
+          "powershell",
+          "get-help"
+        ],
+        "sourceUrls": [
+          "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/troubleshoot-dhcp-client-issue",
+          "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "network-dhcp-self-assigned-address",
+        "jobId": "network-dns",
+        "title": "Fix a PC stuck on a self-assigned address",
+        "symptom": "A DHCP-configured adapter has a 169.254 address and cannot reach the normal gateway.",
+        "firstAction": "Run ipconfig /all and identify the affected adapter, DHCP state and lease information.",
+        "steps": [
+          "Check the actual cable/Wi-Fi association and compare one working device on the same intended network.",
+          "Inspect the DHCP Client service and its Admin/Operational event logs; distinguish one-PC failure from a VLAN, scope or server problem.",
+          "Restore the proven DHCP path, then renew only the affected adapter when a local or alternate access path is available."
+        ],
+        "expected": "The adapter receives the intended lease, gateway and DNS settings and reaches the required service.",
+        "ifUnresolved": "Do not invent a static address or release the adapter carrying the only remote session. Escalate shared lease failures to the network owner.",
+        "toolIds": [
+          "powershell",
+          "get-help"
+        ],
+        "sourceUrls": [
+          "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/troubleshoot-problems-dhcp-client",
+          "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "remote-copy-route-not-proven",
+      "jobId": "remote-support",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "remote-copy-route-not-proven",
+        "jobId": "remote-support",
+        "title": "Move a required file through an approved route",
+        "symptom": "Screen control works, but the required installer or diagnostic file cannot be transferred.",
+        "firstAction": "Confirm the exact file, transfer direction and approved destination with the user.",
+        "steps": [
+          "For an installer, open the verified publisher link on the target PC where possible instead of assuming clipboard copy is file transfer.",
+          "For private evidence, verify the chosen client’s file-transfer capability and permission or use the approved private transfer service.",
+          "Check the received file’s identity and readable content, then apply the agreed retention/removal decision."
+        ],
+        "expected": "The intended file reaches the correct private destination without copying unrelated customer data.",
+        "ifUnresolved": "If the selected session lacks the necessary capability, change to an approved route; do not deploy an unplanned unattended agent.",
+        "toolIds": [
+          "quick-assist",
+          "rustdesk",
+          "meshcentral"
+        ],
+        "sourceUrls": [
+          "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+          "https://rustdesk.com/docs/en/client/",
+          "https://docs.meshcentral.com/"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "remote-copy-route-not-proven",
+        "jobId": "remote-support",
+        "title": "Move a required file through an approved route",
+        "symptom": "Screen control works, but the required installer or diagnostic file cannot be transferred.",
+        "firstAction": "Confirm the exact file, transfer direction and approved destination with the user.",
+        "steps": [
+          "For an installer, open the verified publisher link on the target PC where possible instead of assuming clipboard copy is file transfer.",
+          "For private evidence, verify the chosen client’s file-transfer capability and permission or use the approved private transfer service.",
+          "Check the received file’s identity and readable content, then apply the agreed retention/removal decision."
+        ],
+        "expected": "The intended file reaches the correct private destination without copying unrelated customer data.",
+        "ifUnresolved": "If the selected session lacks the necessary capability, change to an approved route; do not deploy an unplanned unattended agent.",
+        "toolIds": [
+          "quick-assist",
+          "rustdesk",
+          "meshcentral"
+        ],
+        "sourceUrls": [
+          "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+          "https://rustdesk.com/docs/en/client/",
+          "https://github.com/Ylianst/MeshCentral"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "remote-reboot-needs-a-reconnect-plan",
+      "jobId": "remote-support",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "remote-reboot-needs-a-reconnect-plan",
+        "jobId": "remote-support",
+        "title": "Avoid losing the session during a restart",
+        "symptom": "The next repair requires rebooting, changing the network adapter or restarting security software.",
+        "firstAction": "Agree how the user and technician will reconnect before making the change.",
+        "steps": [
+          "For an attended code-based session, keep the user available to reopen the app and approve a new connection when needed.",
+          "For existing managed access, verify the assigned device, service startup and approved reconnect behavior before restarting.",
+          "After reconnecting, confirm the same machine and user context and retest the original repair outcome."
+        ],
+        "expected": "The session resumes through the agreed route without creating unplanned permanent access.",
+        "ifUnresolved": "If the only connection would be lost and no local person or recovery channel exists, defer the disruptive action.",
+        "toolIds": [
+          "quick-assist",
+          "meshcentral",
+          "rustdesk"
+        ],
+        "sourceUrls": [
+          "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+          "https://docs.meshcentral.com/"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "remote-reboot-needs-a-reconnect-plan",
+        "jobId": "remote-support",
+        "title": "Avoid losing the session during a restart",
+        "symptom": "The next repair requires rebooting, changing the network adapter or restarting security software.",
+        "firstAction": "Agree how the user and technician will reconnect before making the change.",
+        "steps": [
+          "For an attended code-based session, keep the user available to reopen the app and approve a new connection when needed.",
+          "For existing managed access, verify the assigned device, service startup and approved reconnect behavior before restarting.",
+          "After reconnecting, confirm the same machine and user context and retest the original repair outcome."
+        ],
+        "expected": "The session resumes through the agreed route without creating unplanned permanent access.",
+        "ifUnresolved": "If the only connection would be lost and no local person or recovery channel exists, defer the disruptive action.",
+        "toolIds": [
+          "quick-assist",
+          "meshcentral",
+          "rustdesk"
+        ],
+        "sourceUrls": [
+          "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+          "https://github.com/Ylianst/MeshCentral"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "printer-one-pdf-will-not-print",
+      "jobId": "printer-repair",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "printer-one-pdf-will-not-print",
+        "jobId": "printer-repair",
+        "title": "Separate a bad document from a broken printer",
+        "symptom": "A single PDF fails, but the printer’s internal page and other documents print.",
+        "firstAction": "Keep the original file and test a simple one-page document on the same queue.",
+        "steps": [
+          "Open the PDF in SumatraPDF and use Ctrl+P to try a single page with the same paper size and queue.",
+          "Compare page rendering and the exact print error; check whether only particular pages, fonts or embedded content trigger it.",
+          "Use the document/viewer’s supported correction or obtain a clean source copy, then print the required pages and confirm layout."
+        ],
+        "expected": "The test identifies a document/viewer-specific failure without changing every user’s driver or spooler.",
+        "ifUnresolved": "If all applications fail, return to the queue/device branch. Preserve confidential document contents when escalating to the author.",
+        "toolIds": [
+          "sumatrapdf"
+        ],
+        "sourceUrls": [
+          "https://www.sumatrapdfreader.org/docs/Printing",
+          "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "printer-one-pdf-will-not-print",
+        "jobId": "printer-repair",
+        "title": "Separate a bad document from a broken printer",
+        "symptom": "A single PDF fails, but the printer’s internal page and other documents print.",
+        "firstAction": "Keep the original file and test a simple one-page document on the same queue.",
+        "steps": [
+          "Open the PDF in SumatraPDF and use Ctrl+P to try a single page with the same paper size and queue.",
+          "Compare page rendering and the exact print error; check whether only particular pages, fonts or embedded content trigger it.",
+          "Use the document/viewer’s supported correction or obtain a clean source copy, then print the required pages and confirm layout."
+        ],
+        "expected": "The test identifies a document/viewer-specific failure without changing every user’s driver or spooler.",
+        "ifUnresolved": "If all applications fail, return to the queue/device branch. Preserve confidential document contents when escalating to the author.",
+        "toolIds": [
+          "sumatrapdf"
+        ],
+        "sourceUrls": [
+          "https://www.sumatrapdfreader.org/docs/SumatraPDF-documentation",
+          "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "hardware-memory-errors-after-upgrade",
+      "jobId": "hardware-bsod",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "hardware-memory-errors-after-upgrade",
+        "jobId": "hardware-bsod",
+        "title": "Isolate a memory fault after an upgrade",
+        "symptom": "Crashes or memory-test errors began after changing RAM or firmware memory settings.",
+        "firstAction": "Record the installed modules, slots and current firmware settings before opening the device.",
+        "steps": [
+          "Check the exact motherboard/device memory requirements and restore an approved supported configuration before comparing results.",
+          "Boot Memtest86+ through a supported, approved firmware path and record which test/configuration produces errors.",
+          "Following the hardware service procedure, compare modules and slots individually to distinguish a module, slot or configuration problem."
+        ],
+        "expected": "Errors are reproducible in a documented configuration or the corrected supported configuration completes the planned test.",
+        "ifUnresolved": "A passing sample does not exclude every intermittent fault; stop if disassembly, firmware security or unsupported hardware exceeds the service scope.",
+        "toolIds": [
+          "memtest86plus",
+          "oem-drivers"
+        ],
+        "sourceUrls": [
+          "https://www.memtest.org/readme.html"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "hardware-memory-errors-after-upgrade",
+        "jobId": "hardware-bsod",
+        "title": "Isolate a memory fault after an upgrade",
+        "symptom": "Crashes or memory-test errors began after changing RAM or firmware memory settings.",
+        "firstAction": "Record the installed modules, slots and current firmware settings before opening the device.",
+        "steps": [
+          "Check the exact motherboard/device memory requirements and restore an approved supported configuration before comparing results.",
+          "Boot Memtest86+ through a supported, approved firmware path and record which test/configuration produces errors.",
+          "Following the hardware service procedure, compare modules and slots individually to distinguish a module, slot or configuration problem."
+        ],
+        "expected": "Errors are reproducible in a documented configuration or the corrected supported configuration completes the planned test.",
+        "ifUnresolved": "A passing sample does not exclude every intermittent fault; stop if disassembly, firmware security or unsupported hardware exceeds the service scope.",
+        "toolIds": [
+          "memtest86plus",
+          "oem-drivers"
+        ],
+        "sourceUrls": [
+          "https://github.com/memtest86plus/memtest86plus"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "hardware-usb-dock-device-drops",
+      "jobId": "hardware-bsod",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "hardware-usb-dock-device-drops",
+        "jobId": "hardware-bsod",
+        "title": "Find a device failing through a USB hub",
+        "symptom": "A scanner, printer or storage device disconnects through a dock but works intermittently elsewhere.",
+        "firstAction": "Record the device, hub/dock, cable and physical port used for the failure.",
+        "steps": [
+          "Compare the same device on a known-good direct port and cable without moving unrelated production devices.",
+          "Use USB Device Tree Viewer to identify the actual hub chain and negotiated connection, then check the dock/device’s power and firmware requirements.",
+          "Apply the evidenced cable, port, power or supported firmware correction and repeat a sustained real transfer or scan."
+        ],
+        "expected": "The original workload remains connected on the documented path, with the failed component or topology isolated.",
+        "ifUnresolved": "Do not use a failing storage device for repeated transfer stress; preserve its data first.",
+        "toolIds": [
+          "usb-device-tree-view",
+          "oem-drivers"
+        ],
+        "sourceUrls": [
+          "https://www.uwe-sieber.de/usbtreeview_e.html",
+          "https://learn.microsoft.com/en-us/windows-hardware/drivers/usbcon/usbview"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "hardware-usb-dock-device-drops",
+        "jobId": "hardware-bsod",
+        "title": "Find a device failing through a USB hub",
+        "symptom": "A scanner, printer or storage device disconnects through a dock but works intermittently elsewhere.",
+        "firstAction": "Record the device, hub/dock, cable and physical port used for the failure.",
+        "steps": [
+          "Compare the same device on a known-good direct port and cable without moving unrelated production devices.",
+          "Use USB Device Tree Viewer to identify the actual hub chain and negotiated connection, then check the dock/device’s power and firmware requirements.",
+          "Apply the evidenced cable, port, power or supported firmware correction and repeat a sustained real transfer or scan."
+        ],
+        "expected": "The original workload remains connected on the documented path, with the failed component or topology isolated.",
+        "ifUnresolved": "Do not use a failing storage device for repeated transfer stress; preserve its data first.",
+        "toolIds": [
+          "usb-device-tree-view",
+          "oem-drivers"
+        ],
+        "sourceUrls": [
+          "https://www.uwe-sieber.de/usbtreeview_e.html"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "handoff-temporary-support-app-persists",
+      "jobId": "client-handoff",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "handoff-temporary-support-app-persists",
+        "jobId": "client-handoff",
+        "title": "Remove access that was only for this repair",
+        "symptom": "A temporary support program or unattended setting still starts after the case ends.",
+        "firstAction": "Compare the current installation/access state with the agreed end state for this device.",
+        "steps": [
+          "End all case-only sessions and remove the temporary unattended credential or enrollment through that product’s supported controls.",
+          "Uninstall a case-only client when appropriate; keep the organization’s approved persistent management agent intact.",
+          "Restart if required and verify that the temporary access is gone while approved support and the repaired task still work."
+        ],
+        "expected": "Remaining access has an explicit owner and purpose; one-case access no longer functions.",
+        "ifUnresolved": "If the temporary and managed deployments cannot be distinguished, involve the management owner before removing agents or services.",
+        "toolIds": [
+          "rustdesk",
+          "meshcentral"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/apps/uninstall-or-remove-apps-and-programs-in-windows",
+          "https://rustdesk.com/docs/en/client/",
+          "https://docs.meshcentral.com/"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "handoff-temporary-support-app-persists",
+        "jobId": "client-handoff",
+        "title": "Remove access that was only for this repair",
+        "symptom": "A temporary support program or unattended setting still starts after the case ends.",
+        "firstAction": "Compare the current installation/access state with the agreed end state for this device.",
+        "steps": [
+          "End all case-only sessions and remove the temporary unattended credential or enrollment through that product’s supported controls.",
+          "Uninstall a case-only client when appropriate; keep the organization’s approved persistent management agent intact.",
+          "Restart if required and verify that the temporary access is gone while approved support and the repaired task still work."
+        ],
+        "expected": "Remaining access has an explicit owner and purpose; one-case access no longer functions.",
+        "ifUnresolved": "If the temporary and managed deployments cannot be distinguished, involve the management owner before removing agents or services.",
+        "toolIds": [
+          "rustdesk",
+          "meshcentral"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/apps/uninstall-or-remove-apps-and-programs-in-windows",
+          "https://rustdesk.com/docs/en/client/",
+          "https://github.com/Ylianst/MeshCentral"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "maintenance-optimize-the-right-media",
+      "jobId": "preventive-maintenance",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "maintenance-optimize-the-right-media",
+        "jobId": "preventive-maintenance",
+        "title": "Use the supported optimization for the drive type",
+        "symptom": "A maintenance request proposes repeatedly defragmenting or cleaning every drive.",
+        "firstAction": "Check drive health and open Defragment and Optimize Drives to identify the media type and current status.",
+        "steps": [
+          "Use Windows’ supported optimization for that media and review the scheduled state rather than applying an HDD-style routine to every device.",
+          "Investigate low free space or real I/O faults separately; optimization is not a repair for a failing drive.",
+          "Retest the user’s workload and retain the observed health/performance result."
+        ],
+        "expected": "The appropriate maintenance completes without disguising an unresolved storage fault.",
+        "ifUnresolved": "Stop write-heavy maintenance if the disk disconnects, reports I/O errors or contains the only unprotected data copy.",
+        "toolIds": [
+          "crystaldiskinfo"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/experience/performance/defragment-optimize-your-data-drives-in-windows"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "maintenance-optimize-the-right-media",
+        "jobId": "preventive-maintenance",
+        "title": "Use the supported optimization for the drive type",
+        "symptom": "A maintenance request proposes repeatedly defragmenting or cleaning every drive.",
+        "firstAction": "Check drive health and open Defragment and Optimize Drives to identify the media type and current status.",
+        "steps": [
+          "Use Windows’ supported optimization for that media and review the scheduled state rather than applying an HDD-style routine to every device.",
+          "Investigate low free space or real I/O faults separately; optimization is not a repair for a failing drive.",
+          "Retest the user’s workload and retain the observed health/performance result."
+        ],
+        "expected": "The appropriate maintenance completes without disguising an unresolved storage fault.",
+        "ifUnresolved": "Stop write-heavy maintenance if the disk disconnects, reports I/O errors or contains the only unprotected data copy.",
+        "toolIds": [
+          "crystaldiskinfo"
+        ],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/defragment-optimize-your-data-drives-in-windows"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    },
+    {
+      "id": "maintenance-onedrive-sync-is-paused",
+      "jobId": "preventive-maintenance",
+      "fields": [
+        "sourceUrls"
+      ],
+      "old": {
+        "id": "maintenance-onedrive-sync-is-paused",
+        "jobId": "preventive-maintenance",
+        "title": "Resume a stalled cloud-sync workflow",
+        "symptom": "New files remain on one PC and the OneDrive icon shows paused or an error state.",
+        "firstAction": "Open the sync client’s activity/status view and identify the actual pause or error.",
+        "steps": [
+          "Resume synchronization through the supported control when it is simply paused; for errors, resolve the named account, storage, filename or connectivity issue.",
+          "Wait for the relevant file’s completed state and verify the expected version through the intended cloud account or another authorized device.",
+          "Keep backup/retention checks separate because synchronization can propagate deletion or unwanted changes."
+        ],
+        "expected": "The expected file version reaches the intended account and the client no longer reports an unresolved sync state.",
+        "ifUnresolved": "Do not unlink, reset or delete the local folder before accounting for unsynced local-only files.",
+        "toolIds": [],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/onedrive/how-to-pause-and-resume-sync-in-onedrive",
+          "https://support.microsoft.com/en-us/onedrive/fix-onedrive-sync-problems"
+        ],
+        "reviewedAt": "2026-11-26"
+      },
+      "new": {
+        "id": "maintenance-onedrive-sync-is-paused",
+        "jobId": "preventive-maintenance",
+        "title": "Resume a stalled cloud-sync workflow",
+        "symptom": "New files remain on one PC and the OneDrive icon shows paused or an error state.",
+        "firstAction": "Open the sync client’s activity/status view and identify the actual pause or error.",
+        "steps": [
+          "Resume synchronization through the supported control when it is simply paused; for errors, resolve the named account, storage, filename or connectivity issue.",
+          "Wait for the relevant file’s completed state and verify the expected version through the intended cloud account or another authorized device.",
+          "Keep backup/retention checks separate because synchronization can propagate deletion or unwanted changes."
+        ],
+        "expected": "The expected file version reaches the intended account and the client no longer reports an unresolved sync state.",
+        "ifUnresolved": "Do not unlink, reset or delete the local folder before accounting for unsynced local-only files.",
+        "toolIds": [],
+        "sourceUrls": [
+          "https://support.microsoft.com/en-us/onedrive/how-to-pause-and-resume-onedrive-sync",
+          "https://support.microsoft.com/en-us/onedrive/fix-onedrive-sync-problems"
+        ],
+        "reviewedAt": "2026-11-26"
+      }
+    }
+  ]
+}

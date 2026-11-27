@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-build-and-refresh-a-technician-rescue-usb"></a>
 
@@ -8,7 +8,7 @@ Keep verified recovery images, [Windows repair](https://github.com/Herbertofury/
 
 **Recovery & boot** · Intermediate · 20–60 min plus downloads · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/boot-usb)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/boot-usb)
 
 <a id="working-kit"></a>
 
@@ -24,6 +24,7 @@ Keep verified recovery images, [Windows repair](https://github.com/Herbertofury/
 | Maintain a verified multiboot collection. | **[Ventoy](https://www.ventoy.net/)** · [Official page](https://www.ventoy.net/) · **[Download Windows package · ZIP](https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip)** |
 | Obtain supported [Windows repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair)/install media. | **[Windows 11 installation media](https://www.microsoft.com/software-download/windows11)** · [Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)** |
 | Provide an independent imaging and recovery environment. | **[SystemRescue](https://www.system-rescue.org/)** · [Official page](https://www.system-rescue.org/) · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** |
+| Starting an approved installer or rescue environment through network boot or remote virtual media when local media delivery is inconvenient. | **[netboot.xyz](https://netboot.xyz/)** · [Official page](https://netboot.xyz/) · **[Download PC network-boot image · ISO](https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.iso)** |
 
 ### Create media
 
@@ -78,6 +79,12 @@ Keep verified recovery images, [Windows repair](https://github.com/Herbertofury/
 
 **Change route when:** The target USB or its erase permission is uncertain. · A firmware/security change lacks the necessary recovery material.
 
+### 🎯 Go straight to a specific fix
+
+- **[Resolve a Secure Boot rejection deliberately](#fix-bootusb-secure-boot-blocks-rescue-menu)** — A prepared [rescue USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) is detected but its bootloader is rejected by Secure Boot.
+- **[Choose media that can boot the target](#fix-bootusb-image-is-wrong-architecture)** — A rescue image works on an x64 PC but not on an ARM device.
+- **[Handle an image larger than the USB filesystem limit](#fix-bootusb-large-iso-will-not-copy)** — Copying a large ISO or installation file fails even though the USB has enough total free space.
+
 > [!NOTE]
 > **Start here.** Choose a known USB drive and copy off anything that must be kept. Confirm its model, capacity, and contents before a media-writing operation.
 
@@ -130,6 +137,7 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[SystemRescue](https://www.system-rescue.org/)** · [Official page](https://www.system-rescue.org/) · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** | Provide an independent imaging and recovery environment. | Bootable PC; Free / open source | [Open guide](https://www.system-rescue.org/manual/) |
 | **[Hiren's BootCD PE](https://www.hirensbootcd.org/)** · [Official page](https://www.hirensbootcd.org/) · **[Download x64 rescue image · ISO](https://www.hirensbootcd.org/files/HBCD_PE_x64.iso)** | A familiar [Windows](https://www.microsoft.com/windows)-oriented offline bench toolkit. | Bootable PC; Free distribution; bundled tools have individual terms | [Open guide](https://www.hirensbootcd.org/howtos/) |
 | **[Rescuezilla](https://rescuezilla.com/)** · [Official page](https://rescuezilla.com/) · **[Download x64 rescue image · ISO](https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso)** | A visual bare-metal backup or restore workflow at the bench. | Bootable PC; Free / open source | [Open guide](https://rescuezilla.com/help) |
+| **[netboot.xyz](https://netboot.xyz/)** · [Official page](https://netboot.xyz/) · **[Download PC network-boot image · ISO](https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.iso)** | Starting an approved installer or rescue environment through network boot or remote virtual media when local media delivery is inconvenient. | Bootable PC, ARM64; Free and open source; project code uses Apache-2.0, and boot components and selected operating systems retain their own licenses | [Open guide](https://netboot.xyz/docs/) |
 
 <a id="walkthrough"></a>
 
@@ -190,6 +198,85 @@ Work in order, record the result of each step, and change route when the evidenc
 > **Pause this route and escalate when:**
 > - The target USB is ambiguous or contains the only copy of important data.
 > - Secure Boot or encryption changes are proposed without a recovery plan.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-bootusb-secure-boot-blocks-rescue-menu"></a>
+
+### Resolve a Secure Boot rejection deliberately
+
+**Use when:** A prepared [rescue USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) is detected but its bootloader is rejected by Secure Boot.
+
+**Start here:** Record the exact firmware message and verify the USB image/publisher before changing firmware settings.
+
+**[Ventoy](https://www.ventoy.net/)** · [Official page](https://www.ventoy.net/) · **[Download Windows package · ZIP](https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip)**
+
+**[Rufus](https://rufus.ie/)** · [Official page](https://rufus.ie/) · **[Download Windows x64 portable · EXE](https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe)**
+
+1. Check the tool’s documented Secure Boot support and the device’s approved firmware policy.
+2. If using [Ventoy](https://www.ventoy.net/), follow its current supported enrollment or compatibility procedure only with the owner’s authorization and verified files.
+3. Boot-test the intended image and record the final security state along with storage/network access.
+
+**Prove it worked:** The approved recovery environment boots through the documented trust path and required security settings are accounted for.
+
+**If this does not resolve it:** Do not enroll an unverified key or disable Secure Boot as a universal troubleshooting step.
+
+**Official evidence:** [Source 1](https://www.ventoy.net/en/doc_secure.html) · [Source 2](https://github.com/pbatard/rufus/wiki/FAQ) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-bootusb-image-is-wrong-architecture"></a>
+
+### Choose media that can boot the target
+
+**Use when:** A rescue image works on an x64 PC but not on an ARM device.
+
+**Start here:** Check the target’s actual architecture before rewriting the same USB again.
+
+**[Windows 11 installation media](https://www.microsoft.com/software-download/windows11)** · [Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)**
+
+**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+
+1. Choose the official image and boot tool that explicitly support the target architecture and firmware mode.
+2. For [Windows](https://www.microsoft.com/windows) ARM recovery, follow Microsoft’s ARM64 media requirements and obtain required model-specific drivers.
+3. Boot-test on the intended class of device and verify its storage and input devices before putting the USB into service.
+
+**Prove it worked:** The recovery environment actually starts on the target architecture and can access the required hardware.
+
+**If this does not resolve it:** An amd64/x64 rescue ISO is not universal ARM recovery media; use the device’s supported recovery route when an image is unavailable.
+
+**Official evidence:** [Source 1](https://www.microsoft.com/en-us/software-download/windows11arm64) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-bootusb-large-iso-will-not-copy"></a>
+
+### Handle an image larger than the USB filesystem limit
+
+**Use when:** Copying a large ISO or installation file fails even though the USB has enough total free space.
+
+**Start here:** Check the USB filesystem and the exact file size before deleting files or changing partitions.
+
+**[Ventoy](https://www.ventoy.net/)** · [Official page](https://www.ventoy.net/) · **[Download Windows package · ZIP](https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip)**
+
+**[Rufus](https://rufus.ie/)** · [Official page](https://rufus.ie/) · **[Download Windows x64 portable · EXE](https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe)**
+
+1. Distinguish a filesystem’s single-file limit from total capacity; use the media tool’s documented layout rather than manually forcing a random format.
+2. For a supported multiboot workflow, use [Ventoy](https://www.ventoy.net/)’s documented data-partition filesystem support; for a single image, let [Rufus](https://rufus.ie/) prepare the supported boot layout.
+3. Verify the written/copied image and boot-test it in the intended UEFI/Secure Boot configuration.
+
+**Prove it worked:** The complete image fits and boots on the intended machine, not merely on the preparation PC.
+
+**If this does not resolve it:** Formatting or installing the boot manager can erase the USB; stop if the target device or retained files are uncertain.
+
+**Official evidence:** [Source 1](https://www.ventoy.net/en/doc_disk_layout.html) · [Source 2](https://github.com/pbatard/rufus/wiki/FAQ) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

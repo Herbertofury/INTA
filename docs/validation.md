@@ -1,8 +1,24 @@
 # Technician workspace validation
 
-**Review date: November 26, 2026 (America/Denver).** The current job-workspace update uses `b4e394eca61b1367cd744732439663fed65c47ce` as its preservation baseline. Earlier acquisition, redesign and navigation evidence remains below as history.
+**Review date: November 26, 2026 (America/Denver).** The organized-growth update uses `0e70d341169fc5975fd98fc3e072b44e0285cd26` as its preservation baseline. Earlier releases remain below as history.
 
-## Current practical job workspaces
+## Current organized growth and specific fixes
+
+The [Service map](https://herbertofury.github.io/INTA/#services) uses the existing **eight service areas** and shows every one of **22 guides** exactly once. **74 directly linked cases** add **222 concrete steps**, with symptoms, first actions, observable results, fallback routes, contextual tools and sources. Each case title is visible on the map and has an exact search destination. All 27 existing quick answers and the complete original procedures remain available.
+
+The catalog contains **133 tools and 290 acquisition actions**: **15 tools and 43 actions added**, integrated into **34 job recommendations and working-kit placements**. All 118 previous tool records, 247 acquisition actions, 142 procedure steps, 11 commands, 83 original acceptance checks, 96 resources, 102 diagnostic branches and 27 diagrams remain intact. The [preservation receipt](reference/organization-preservation.json) records exact comparisons.
+
+The [organization policy](../data/knowledge-policy.json), [54-item research queue](../data/research-queue.json), [health report](../site/knowledge-health.json) and [checker](../scripts/check-knowledge.py) keep service ownership, unique tool identities, source relationships and review dates explicit. The checker never rewrites dates or claims source rereview. The build rejects missing service homes, duplicate normalized tool names, unexplained duplicate official product pages, incomplete fixes and research coverage gaps. A separate weekday repository workflow recalculates due dates; the existing contribution task retains its weekday morning schedule.
+
+**45 tests passed; 114 generated outputs and all 84 Wiki files passed verification.** The Wiki audit includes 82 content pages, 361 registered names, 9,249 inline links and 27 preserved diagrams. [Build evidence](reference/organization-build-checks.json) includes the final HTML identity. The material navigation challenge replaced cross-page Wiki fragments with exact working-view case routes while keeping all original guides and same-page anchors.
+
+The browser review exercises all 74 case links and fields, the 15 added tool routes, 34 contextual placements, all 27 selected-case routes, exact search, Back/reload, repeated jumps, sticky controls, saved/checklist state, Markdown export and the actual offline download. Desktop dark/light and 320/390px layouts retain complete content without runtime errors or document overflow. The [full browser baseline](reference/organization-browser-baseline-checks.json), [final source-correction binding](reference/organization-browser-checks.json), [exact changed-record comparison](reference/organization-browser-data-diff.json) and [rendered Markdown proof](reference/organization-markdown-checks.json) preserve that evidence. Four Wiki pages were rendered at 1280/390 widths; their local styling is approximate. Actual live publication is verified separately.
+
+[Catalog research](reference/catalog-expansion-2026-11-26.md) covers all ten categories and records licensing, applicability and release decisions. All 43 new acquisition URLs have successful response evidence; 22 file actions and one explicitly labeled source archive have matching bounded response signatures. [Specific-fix research](reference/field-notes-research-2026-11-26.md) includes 99 unique primary URLs: 98 returned HTTP 200; direct retrieval of one official CISA PDF returned 403, with its indexed official route and retrieval limit explicitly recorded. These checks do not prove full-file identity, installation, effectiveness on client hardware or comparative superiority.
+
+## Earlier practical job workspaces
+
+
 
 All **22 jobs** now have a shared working kit, with **96 official or canonical resources**, **102 symptom/action/result branches**, **61 selected tool actions**, **52 completion checks** and **44 escalation checks**. The printer kit places **11 verified manufacturer driver portals** alongside discovery, exact queue/port inspection and separate scanning verification. The application uses a persistent desktop toolkit and mobile section navigation; the same kit appears at the top of each full and quick-answer Wiki page with its exact application working-view link. GitHub Wiki does not support this application's custom sticky styles.
 

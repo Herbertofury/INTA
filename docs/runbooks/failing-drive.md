@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-rescue-data-from-a-failing-or-unreadable-drive"></a>
 
@@ -8,7 +8,7 @@ Preserve the source, create a recoverable image, and perform recovery on a copy.
 
 **Storage & recovery** · Advanced · Triage 15–30 min; imaging varies · 8 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/failing-drive)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/failing-drive)
 
 <a id="working-kit"></a>
 
@@ -84,6 +84,12 @@ Preserve the source, create a recoverable image, and perform recovery on a copy.
 - [ ] Any unreadable ranges and missing files are documented before acceptance.
 
 **Change route when:** There is physical damage or an unstable connection that prevents controlled imaging. · A proposed repair would write to the only source or overwrite an unverified destination.
+
+### 🎯 Go straight to a specific fix
+
+- **[Try filesystem undelete before file carving](#fix-recovery-preserve-names-on-ntfs)** — Files were deleted from a healthy NTFS volume and original names or folders matter.
+- **[Resume imaging without swapping source and target](#fix-recovery-resume-the-correct-disk-image)** — A recovery session stopped and device names changed after reconnecting or rebooting.
+- **[Validate carved files without trusting their filenames](#fix-recovery-carved-files-have-wrong-names)** — [PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec) produces numbered folders and files rather than the original directory tree.
 
 > [!NOTE]
 > **Start here.** Stop ordinary use of the source drive. Ask whether the data is replaceable and whether a verified backup exists before applying power again.
@@ -226,6 +232,85 @@ lsblk -o NAME,SIZE,MODEL,SERIAL,TYPE,MOUNTPOINTS
 > - The source develops new noises, unstable detection, or worsening read failures.
 > - Source and destination cannot be distinguished with certainty.
 > - The data value calls for a specialist rather than further bench attempts.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-recovery-preserve-names-on-ntfs"></a>
+
+### Try filesystem undelete before file carving
+
+**Use when:** Files were deleted from a healthy NTFS volume and original names or folders matter.
+
+**Start here:** Stop writes to the affected filesystem and prepare a separate destination.
+
+**[TestDisk](https://www.cgsecurity.org/wiki/TestDisk)** · [Official page](https://www.cgsecurity.org/wiki/TestDisk) · **[Download Windows x64 tools · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)**
+
+**[PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec)** · [Official page](https://www.cgsecurity.org/wiki/PhotoRec) · **[Download PhotoRec / TestDisk · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)**
+
+1. On a healthy source or preserved working image, use [TestDisk](https://www.cgsecurity.org/wiki/TestDisk)’s documented Advanced > partition > Undelete path for NTFS.
+2. Select the recoverable files and copy them to the separate destination; do not write partition-table changes merely to undelete files.
+3. Open representative results. Use [PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec) as the fallback when filesystem metadata no longer supplies the needed files.
+
+**Prove it worked:** Recovered files are usable, with original metadata retained where the filesystem still provides it.
+
+**If this does not resolve it:** If media is unstable, return to imaging first. No undelete method can promise data already overwritten or discarded.
+
+**Official evidence:** [Source 1](https://www.cgsecurity.org/wiki/TestDisk:_undelete_file_for_NTFS) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-recovery-resume-the-correct-disk-image"></a>
+
+### Resume imaging without swapping source and target
+
+**Use when:** A recovery session stopped and device names changed after reconnecting or rebooting.
+
+**Start here:** Match the source and destination by model, serial and size before resuming anything.
+
+**[SystemRescue](https://www.system-rescue.org/)** · [Official page](https://www.system-rescue.org/) · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)**
+
+**[GNU ddrescue](https://www.gnu.org/software/ddrescue/)** · [Official page](https://www.gnu.org/software/ddrescue/) · **[Download source · TAR.LZ](https://ftp.gnu.org/gnu/ddrescue/ddrescue-1.30.tar.lz)**
+
+1. Locate the existing image and persistent mapfile on healthy storage and confirm they belong to this acquisition.
+2. Re-read the intended input/output paths and the [ddrescue](https://www.gnu.org/software/ddrescue/) command against the acquisition record; never rely on the old letter or device order alone.
+3. Resume with the matching mapfile under the documented recovery policy, retaining earlier checkpoints and stopping if the source deteriorates.
+
+**Prove it worked:** The operation continues the same acquisition and its mapfile records exactly which ranges remain incomplete.
+
+**If this does not resolve it:** Do not resume if device identity, mapfile pairing or destination overwrite scope cannot be proved.
+
+**Official evidence:** [Source 1](https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-recovery-carved-files-have-wrong-names"></a>
+
+### Validate carved files without trusting their filenames
+
+**Use when:** [PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec) produces numbered folders and files rather than the original directory tree.
+
+**Start here:** Treat recovered names and extensions as output labels, then test the contents.
+
+**[PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec)** · [Official page](https://www.cgsecurity.org/wiki/PhotoRec) · **[Download PhotoRec / TestDisk · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)**
+
+**[7-Zip](https://www.7-zip.org/)** · [Official page](https://www.7-zip.org/) · **[Download Windows x64 EXE](https://github.com/ip7z/7zip/releases/download/26.06/7z2606-x64.exe)**
+
+1. Use [PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec)’s documented file-type selection for the formats needed and send output to separate healthy storage.
+2. Open representative documents, images and archives with their real applications; check complete contents rather than only thumbnails or file size.
+3. Record missing filenames/folders, failed samples and any priority application validation; keep the source/image until acceptance.
+
+**Prove it worked:** The report distinguishes usable recovered content from the original metadata that carving did not restore.
+
+**If this does not resolve it:** If encrypted or fragmented priority files remain unusable, stop treating a large output count as successful recovery and escalate that specific format.
+
+**Official evidence:** [Source 1](https://www.cgsecurity.org/wiki/PhotoRec) · [Source 2](https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

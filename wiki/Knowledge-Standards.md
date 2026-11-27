@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 # ✨ Knowledge standards
 
@@ -100,6 +100,8 @@ Record the date of a real source review. Keep release publication date, retrieva
 Use the catalog's core, specialist and evaluate tiers as workflow guidance. Research candidates remain clearly labeled until [stable-release promotion](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) has adequate evidence. Preserve previous useful knowledge and provenance when an upstream moves or a product changes scope.
 
 ## 🗂 7. Canonical inputs produce every surface
+
+Follow [Knowledge Organization](https://github.com/Herbertofury/INTA/wiki/Knowledge-Organization): one primary home per service guide, one catalog identity per tool, specific fixes inside their existing job, and one shared layout taxonomy. Maintain the [research queue](https://github.com/Herbertofury/INTA/wiki/Research-Queue) across every job and category. The [coverage and review report](https://github.com/Herbertofury/INTA/wiki/Knowledge-Health) exposes gaps and due dates; organization checks reject duplicate identities, unexplained duplicate official pages and missing relationships. Extend the right source before adding another page.
 
 Edit the [tool catalog](https://github.com/Herbertofury/INTA/blob/main/data/tools.json), [job guides](https://github.com/Herbertofury/INTA/blob/main/data/jobs.json), [method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json), authored [documentation](https://github.com/Herbertofury/INTA/tree/main/docs) or [portal source](https://github.com/Herbertofury/INTA/tree/main/portal). The [hub builder](https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py) owns generated pages.
 

@@ -99,6 +99,8 @@ Use the catalog's core, specialist and evaluate tiers as workflow guidance. Rese
 
 ## 🗂 7. Canonical inputs produce every surface
 
+Follow [Knowledge Organization](https://github.com/Herbertofury/INTA/wiki/Knowledge-Organization): one primary home per service guide, one catalog identity per tool, specific fixes inside their existing job, and one shared layout taxonomy. Maintain the [research queue](https://github.com/Herbertofury/INTA/wiki/Research-Queue) across every job and category. The [coverage and review report](https://github.com/Herbertofury/INTA/wiki/Knowledge-Health) exposes gaps and due dates; organization checks reject duplicate identities, unexplained duplicate official pages and missing relationships. Extend the right source before adding another page.
+
 Edit the [tool catalog](https://github.com/Herbertofury/INTA/blob/main/data/tools.json), [job guides](https://github.com/Herbertofury/INTA/blob/main/data/jobs.json), [method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json), authored [documentation](https://github.com/Herbertofury/INTA/tree/main/docs) or [portal source](https://github.com/Herbertofury/INTA/tree/main/portal). The [hub builder](https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py) owns generated pages.
 
 Preserve stable IDs and existing links. Add aliases deliberately and check collisions. A visual or performance change must retain all entries, fields, guides, search results, saved-item behavior, exports, offline content and accessibility. Do not introduce quantity caps, viewport virtualization or content culling to manufacture a speed claim. Use native text, layout and code assets unless the current request explicitly authorizes image generation.

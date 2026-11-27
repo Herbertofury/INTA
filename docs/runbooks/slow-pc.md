@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-diagnose-a-slow-freezing-or-hitching-pc"></a>
 
@@ -8,7 +8,7 @@ Find the actual bottleneck and prove the improvement with the same workload.
 
 **[Windows](https://www.microsoft.com/windows) & performance** · Intermediate · 20–60 min · 6 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/slow-pc)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/slow-pc)
 
 <a id="working-kit"></a>
 
@@ -24,6 +24,8 @@ Find the actual bottleneck and prove the improvement with the same workload.
 | Capture a short, filtered file or registry stall. | **[Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/ProcessMonitor.zip)** |
 | Explain capacity use on healthy storage. | **[WinDirStat](https://windirstat.net/)** · [Official page](https://windirstat.net/) · **[Download Windows x64 · MSI](https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi)** |
 | Separate storage warnings from ordinary software lag. | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** |
+| Collecting battery and sleep evidence before changing hardware or power policy. | **[powercfg](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) · **[Open built-in battery and sleep diagnostics](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** |
+| Measure a reproducible storage-performance problem on healthy media with a bounded test file. | **[DiskSpd](https://github.com/microsoft/diskspd)** · [Official page](https://github.com/microsoft/diskspd) · **[Download Windows x64/ARM64 tools · ZIP](https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP)** |
 
 ### Find the cause
 
@@ -85,6 +87,13 @@ Find the actual bottleneck and prove the improvement with the same workload.
 
 **Change route when:** Drive disconnects, read errors or physical damage appear. · A proposed optimization disables required functionality without evidence.
 
+### 🎯 Go straight to a specific fix
+
+- **[Separate useful cache from memory pressure](#fix-slow-pc-standby-memory-is-not-a-leak)** — A PC shows high memory use and someone proposes a RAM-cleaning utility.
+- **[Find the optional app delaying sign-in](#fix-slow-pc-startup-app-delay)** — The desktop appears quickly but the user must wait before starting normal work.
+- **[Find what an app is waiting for](#fix-slow-pc-filter-a-short-io-trace)** — One application freezes while disk or network-file activity continues.
+- **[Explain a laptop that slows down on battery](#fix-slow-pc-only-on-battery)** — The same application is responsive on AC power but slow when unplugged.
+
 > [!NOTE]
 > **Start here.** Reproduce the exact slow action and measure it before changing anything. Ask whether the slowdown began after an update, new drive, app, or security product.
 
@@ -140,6 +149,8 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[Windows Performance Toolkit](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/) · **[Download Windows ADK setup · EXE](https://go.microsoft.com/fwlink/?linkid=2289980)** | Investigating intermittent CPU, storage or application responsiveness problems with evidence. | [Windows](https://www.microsoft.com/windows); Free Microsoft toolkit | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/) |
 | **[WizTree](https://diskanalyzer.com/)** · [Official page](https://diskanalyzer.com/) · **[Download Windows portable · ZIP](https://diskanalyzer.com/files/wiztree_4_34_portable.zip)** | Finding the folders and files responsible for a capacity problem before selecting an approved cleanup. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/); Free for personal use; commercial supporter or enterprise license required by business site and staff size. | [Open guide](https://diskanalyzer.com/about) |
 | **[WizFile](https://antibody-software.com/wizfile/)** · [Official page](https://antibody-software.com/wizfile/) · **[Download Windows portable · ZIP](https://antibody-software.com/files/wizfile_3_15_portable.zip)** | Locating a known file, log or recently changed group of files without guessing its folder. | [Windows](https://www.microsoft.com/windows); Free for personal use; commercial supporter or enterprise license required by business site and staff size. | [Open guide](https://antibody-software.com/wizfile/quick-start) |
+| **[powercfg](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) · **[Open built-in battery and sleep diagnostics](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options)** | Collecting battery and sleep evidence before changing hardware or power policy. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options) |
+| **[DiskSpd](https://github.com/microsoft/diskspd)** · [Official page](https://github.com/microsoft/diskspd) · **[Download Windows x64/ARM64 tools · ZIP](https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP)** | Measure a reproducible storage-performance problem on healthy media with a bounded test file. | [Windows](https://www.microsoft.com/windows), [Windows Server](https://learn.microsoft.com/en-us/windows-server/); Free and open source under MIT license | [Open guide](https://github.com/microsoft/diskspd/wiki) |
 
 <a id="walkthrough"></a>
 
@@ -208,6 +219,107 @@ resmon
 > **Pause this route and escalate when:**
 > - Storage-health symptoms appear during testing.
 > - A proposed optimization removes required functionality or only hides the symptom.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-slow-pc-standby-memory-is-not-a-leak"></a>
+
+### Separate useful cache from memory pressure
+
+**Use when:** A PC shows high memory use and someone proposes a RAM-cleaning utility.
+
+**Start here:** Reproduce the slowdown while watching [Task Manager](https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows) > Performance > Memory.
+
+**[RAMMap](https://learn.microsoft.com/en-us/sysinternals/downloads/rammap)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/rammap) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/RAMMap.zip)**
+
+**[Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/ProcessExplorer.zip)**
+
+1. Compare available memory and committed memory with the workload; use [RAMMap](https://learn.microsoft.com/en-us/sysinternals/downloads/rammap) to distinguish active usage from standby/file-cache pages.
+2. Close one agreed nonessential application and repeat the same task, keeping the before/after observations.
+3. If one process grows repeatedly without releasing memory, collect its identity and reproduction for the application owner rather than routinely emptying caches.
+
+**Prove it worked:** The evidence identifies actual workload pressure or a growing process, rather than treating every cached page as lost RAM.
+
+**If this does not resolve it:** If memory pressure does not correlate with the delay, return to CPU, storage and network evidence.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/sysinternals/downloads/rammap) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-slow-pc-startup-app-delay"></a>
+
+### Find the optional app delaying sign-in
+
+**Use when:** The desktop appears quickly but the user must wait before starting normal work.
+
+**Start here:** Time the same sign-in-to-ready task before making changes.
+
+**[Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/Autoruns.zip)**
+
+1. Open [Task Manager](https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows) > Startup apps and record enabled entries and their reported impact.
+2. Disable one agreed optional item, keeping required security, accessibility and managed-support software in place, then repeat the same restart/sign-in test.
+3. Keep only the evidenced change, and re-enable entries that did not improve the measured task.
+
+**Prove it worked:** The user’s real ready-to-work time improves and required background functions still run.
+
+**If this does not resolve it:** If delays occur before sign-in or persist with the candidate disabled, investigate boot, domain, storage or profile dependencies.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/windows/experience/startup-boot/configure-startup-applications-in-windows) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-slow-pc-filter-a-short-io-trace"></a>
+
+### Find what an app is waiting for
+
+**Use when:** One application freezes while disk or network-file activity continues.
+
+**Start here:** Check storage health before recording a short trace on healthy storage.
+
+**[Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/ProcessMonitor.zip)**
+
+**[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)**
+
+1. In [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon), filter to the affected process and reproduce the pause once; stop capture immediately afterward.
+2. Compare the pause time with repeated file, registry or network-path operations and their durations; a single ACCESS DENIED or NAME NOT FOUND is not automatically the cause.
+3. Test the specific blocked path or dependency, then repeat the same application action with the scoped correction.
+
+**Prove it worked:** A particular wait or repeated failing operation correlates with the freeze and the corrected task is measurably better.
+
+**If this does not resolve it:** Escalate an unresolved trace to the application owner with a private, bounded capture; stop tracing if the disk becomes unstable.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-slow-pc-only-on-battery"></a>
+
+### Explain a laptop that slows down on battery
+
+**Use when:** The same application is responsive on AC power but slow when unplugged.
+
+**Start here:** Repeat a short, identical workload on the approved charger and on battery.
+
+**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+
+**[Libre Hardware Monitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)** · [Official page](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) · **[Download Windows portable · ZIP](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/download/v0.9.6/LibreHardwareMonitor.zip)**
+
+1. Inspect Settings > System > Power & battery for the active power mode and energy-saving state.
+2. Check whether the charger is recognized and suitable for the model; record any low-power or charging warning.
+3. Choose an approved power mode for the workload and retest without disabling thermal or battery protections.
+
+**Prove it worked:** The performance difference is tied to an observed power state, charger issue or policy rather than an unexplained cleanup change.
+
+**If this does not resolve it:** If performance drops while hot or on a correctly rated charger, investigate cooling, battery condition or firmware using the exact OEM guidance.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/windows/experience/change-the-power-mode-for-your-windows-pc) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

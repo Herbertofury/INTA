@@ -18,6 +18,12 @@
       quickByTool.get(item.toolId).push(item);
     }
   });
+  const fieldNotes = (Array.isArray(data.fieldNotes?.notes) ? data.fieldNotes.notes : []).filter(note => note && typeof note.id === 'string' && jobMap.has(note.jobId));
+  const fieldNotesByJob = new Map();
+  fieldNotes.forEach(note => {
+    if (!fieldNotesByJob.has(note.jobId)) fieldNotesByJob.set(note.jobId, []);
+    fieldNotesByJob.get(note.jobId).push(note);
+  });
   const app = document.getElementById('app');
   const search = document.getElementById('global-search');
   const searchResults = document.getElementById('search-results');
@@ -267,9 +273,13 @@
     return chosen;
   }
   const knowledgeResources = [
+    { href: '#services', icon: 'route', title: 'Service map', body: 'Browse every service area, job guide, and specific fix in one place.', label: 'Browse service areas' },
     { slug: 'Decision-Desk', icon: 'compass', title: 'Decision desk', body: 'Start with the symptom. Follow the decision paths to the right playbook and tool.', label: 'Choose a path' },
     { slug: 'Methods', icon: 'book', title: 'Methods library', body: 'Learn the repeatable techniques behind a diagnosis, a repair, and a verified recovery.', label: 'Explore methods' },
     { slug: 'Knowledge-Standards', icon: 'layers', title: 'Knowledge standards', body: 'Use one clear structure for evidence, links, diagrams, review dates, and useful guidance.', label: 'Read the standards' },
+    { slug: 'Knowledge-Organization', icon: 'folder', title: 'Knowledge organization', body: 'See where guidance belongs and how its source records stay connected.', label: 'Organization guide' },
+    { slug: 'Knowledge-Health', icon: 'activity', title: 'Knowledge health', body: 'Inspect coverage, open gaps, and validation results for the knowledge base.', label: 'View knowledge health' },
+    { slug: 'Research-Queue', icon: 'search', title: 'Research queue', body: 'Find proposed improvements and the evidence needed before they are recommended.', label: 'Review research queue' },
     { slug: 'Templates', icon: 'file', title: 'Service templates', body: 'Turn a service visit, a tool evaluation, or a proven fix into a complete record.', label: 'Choose a template' },
     { slug: 'Contribute', icon: 'github', title: 'Contribute a fix', body: 'Bring a source, explain the improvement, and help the next technician reproduce the result.', label: 'Contribution guide' },
     { slug: 'Continuous-Improvement', icon: 'refresh', title: 'Continuous improvement', body: 'Review what changed, close gaps in a method, and use lessons from real jobs to improve the guidance.', label: 'Review the process' },
@@ -278,9 +288,12 @@
     { slug: 'Current-Tool-Choices', icon: 'activity', title: 'Current tool choices', body: 'Check the latest tool review, practical alternatives, and the reasons behind current recommendations.', label: 'Review current choices' },
     { slug: 'Service-Evidence', icon: 'checkCircle', title: 'Service evidence', body: 'Keep findings, changes, and verification connected in a useful service record.', label: 'Evidence guide' }
   ];
+  function knowledgeLink(resource, content, className = '') {
+    return resource.href === '#services' ? `<a href="#services"${className ? ` class="${esc(className)}"` : ''}>${content}</a>` : external(`${repo}/wiki/${resource.slug}`, content, className);
+  }
   function knowledgeDesk(compact = false) {
-    if (compact) return `<section class="home-knowledge"><h2>Knowledge desk</h2><nav aria-label="Knowledge desk references">${knowledgeResources.map(resource => external(`${repo}/wiki/${resource.slug}`, `${icon(resource.icon)}<span>${esc(resource.title)}</span>`)).join('')}</nav></section>`;
-    return `<div class="knowledge-list" role="list">${knowledgeResources.map(resource => `<article class="knowledge-row" role="listitem"><span class="reference-icon">${icon(resource.icon)}</span><div><h2>${external(`${repo}/wiki/${resource.slug}`, esc(resource.title))}</h2><p>${esc(resource.body)}</p></div>${external(`${repo}/wiki/${resource.slug}`, `${esc(resource.label)} ${icon('external')}`, 'row-action')}</article>`).join('')}</div>`;
+    if (compact) return `<section class="home-knowledge"><h2>Knowledge desk</h2><nav aria-label="Knowledge desk references">${knowledgeResources.map(resource => knowledgeLink(resource, `${icon(resource.icon)}<span>${esc(resource.title)}</span>`)).join('')}</nav></section>`;
+    return `<div class="knowledge-list" role="list">${knowledgeResources.map(resource => `<article class="knowledge-row" role="listitem"><span class="reference-icon">${icon(resource.icon)}</span><div><h2>${knowledgeLink(resource, esc(resource.title))}</h2><p>${esc(resource.body)}</p></div>${knowledgeLink(resource, `${esc(resource.label)} ${icon(resource.href ? 'arrow' : 'external')}`, 'row-action')}</article>`).join('')}</div>`;
   }
   function knowledgePage() {
     return heading('INTA field guide', 'Knowledge desk', 'Decision paths, methods, standards, and templates for repeatable service work.') + knowledgeDesk() + `<section class="document-section"><h2>From service work to shared guidance</h2><ol class="process-list"><li><strong>Choose the path.</strong> Start at the decision desk and name the problem you need to solve.</li><li><strong>Follow the method.</strong> Use the relevant playbook, primary references, and a measured next step.</li><li><strong>Verify the result.</strong> Reproduce the original task and record the outcome in a private service ticket.</li><li><strong>Improve the guide.</strong> Share the reusable lesson with a source and a clear verification.</li></ol></section>`;
@@ -330,18 +343,35 @@
       return `<article class="quick-answer" id="quick-${esc(item.id)}" data-quick-answer="${esc(item.id)}"${item === selected ? ' data-current-case="true"' : ''}><div class="quick-answer-steps"><h3 tabindex="-1">${esc(item.icon || scenarioEmoji[item.jobId] || '🧰')} ${esc(item.label)}${item === selected && picks.length > 1 ? '<span class="current-case">Selected case</span>' : ''}</h3><p class="answer-first-step">${formatted(item.firstStep || job.startHere)}</p>${actions.length ? `<ol>${actions.map(action => `<li>${formatted(action)}</li>`).join('')}</ol>` : ''}</div><div class="quick-answer-tool">${tool ? `<h3><a href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a></h3>${accessActions(tool, 'answer-access', item.toolAction)}` : '<p class="no-extra-tool">No extra download needed</p>'}</div></article>`;
     }).join('')}</section>`;
   }
+  function serviceMap() {
+    const groups = array(data.layout?.groups).filter(group => Array.isArray(group.jobs));
+    if (!groups.length) return empty('route', 'Service map unavailable in this edition', 'The complete job playbooks are still available.', 'Browse job playbooks', '#playbooks');
+    const coveredJobs = new Set(groups.flatMap(group => group.jobs).filter(id => jobMap.has(id)));
+    return heading('INTA service coverage', 'Service map', 'Choose the service area, then open a job guide or a specific fix.') + `<div class="service-map-overview"><p>${groups.length} service areas · ${coveredJobs.size} job guides · ${fieldNotes.length} specific fixes</p>${external(`${repo}/wiki/Service-Map`, `Wiki service map ${icon('external')}`)}</div><nav class="service-area-jump" aria-label="Jump to a service area">${groups.map(group => `<a href="#services?area=${encodeURIComponent(group.id)}"><span aria-hidden="true">${esc(group.icon || '')}</span>${esc(group.navigationLabel || group.title)}<span class="service-area-count">${group.jobs.filter(id => jobMap.has(id)).length}</span></a>`).join('')}</nav><div class="service-map">${groups.map(group => {
+      const entries = group.jobs.map(id => jobMap.get(id)).filter(Boolean);
+      const noteCount = entries.reduce((total, job) => total + (fieldNotesByJob.get(job.id)?.length || 0), 0);
+      return `<section class="service-area" id="service-${esc(group.id)}" data-service-area="${esc(group.id)}" aria-labelledby="service-heading-${esc(group.id)}"><header class="service-area-header"><div><h2 id="service-heading-${esc(group.id)}" tabindex="-1"><span aria-hidden="true">${esc(group.icon || '')}</span>${esc(group.title)}</h2><p>${formatted(group.summary)}</p></div><span>${entries.length} guides · ${noteCount} specific fixes</span></header><div class="service-job-list" role="list">${entries.map(job => {
+        const pick = quickByJob.get(job.id)?.[0];
+        const presentation = data.layout?.jobs?.[job.id] || {};
+        const notes = fieldNotesByJob.get(job.id) || [];
+        const resources = array(workspaceForJob(job)?.resources);
+        return `<article class="service-job-row" role="listitem" data-service-job="${esc(job.id)}"><div><h3><a href="#job/${encodeURIComponent(job.id)}"><span aria-hidden="true">${esc(presentation.navigationIcon || presentation.icon || scenarioEmoji[job.id] || '')}</span>${esc(presentation.navigationLabel || pick?.label || job.title)}</a></h3><p>${formatted(pick?.firstStep || job.startHere || job.summary)}</p><span class="service-job-coverage">${workspaceTools(job).length} tools · ${resources.length} resources${job.estimatedTime ? ` · ${esc(job.estimatedTime)}` : ''}</span>${notes.length ? `<nav class="service-note-links" aria-label="Specific fixes for ${esc(presentation.navigationLabel || job.title)}"><span>Specific fixes</span>${notes.map(note => `<a data-service-fix="${esc(note.id)}" href="${fieldNoteHref(note)}">${esc(note.title)}</a>`).join('')}</nav>` : ''}</div><nav class="service-job-actions" aria-label="Open ${esc(presentation.navigationLabel || job.title)}">${pick ? `<a href="${quickHref(pick)}">First three actions ${icon('arrow')}</a>` : ''}${notes.length ? `<a href="${jobSectionHref(job, '', 'fixes')}">${notes.length} specific fixes ${icon('arrow')}</a>` : ''}<a href="#job/${encodeURIComponent(job.id)}">Complete guide ${icon('book')}</a></nav></article>`;
+      }).join('')}</div></section>`;
+    }).join('')}</div>`;
+  }
   function home() {
     const featuredJobs = selectFeatured(jobs, [/malware|virus/i, /slow|performance/i, /network|internet|dns/i, /backup|restore/i, /boot|bitlocker/i, /remote/i], 6);
     const kit = selectFeatured(tools, [/sysinternals/i, /rustdesk/i, /crystaldiskinfo/i, /ventoy/i], 4);
     const intake = jobs.find(job => /intake|triage/i.test(job.id + ' ' + job.title));
-    return heading('INTA Computer Services', 'Technician home', 'Tools and procedures for computer repair, maintenance, and support.') + quickStartSection() + `<div class="home-actions"><a class="button primary" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">${icon('file')}Start a service visit</a><a class="button ghost" href="#playbooks">${icon('book')}${jobs.length} job playbooks</a><a class="button ghost" href="#knowledge">${icon('layers')}Knowledge desk</a><a class="button ghost" href="#resources">${icon('download')}Offline copy &amp; resources</a></div>${compactToolDirectory()}<div class="home-support"><section><div class="section-title"><h2>Common service jobs</h2><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-list" role="list">${featuredJobs.map(jobCard).join('')}</div></section><section><h2>Everyday shortcuts</h2><div class="quick-tools">${kit.map(quickTool).join('')}</div>${knowledgeDesk(true)}</section></div>`;
+    return heading('INTA Computer Services', 'Technician home', 'Tools and procedures for computer repair, maintenance, and support.') + quickStartSection() + `<div class="home-actions"><a class="button primary" href="${intake ? '#job/' + encodeURIComponent(intake.id) : '#playbooks'}">${icon('file')}Start a service visit</a><a class="button ghost" href="#services">${icon('route')}Service map</a><a class="button ghost" href="#playbooks">${icon('book')}${jobs.length} job playbooks</a><a class="button ghost" href="#knowledge">${icon('layers')}Knowledge desk</a><a class="button ghost" href="#resources">${icon('download')}Offline copy &amp; resources</a></div>${compactToolDirectory()}<div class="home-support"><section><div class="section-title"><h2>Common service jobs</h2><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-list" role="list">${featuredJobs.map(jobCard).join('')}</div></section><section><h2>Everyday shortcuts</h2><div class="quick-tools">${kit.map(quickTool).join('')}</div>${knowledgeDesk(true)}</section></div>`;
   }
   function selectOptions(values, label, selected = '') {
     return `<option value="">${esc(label)}</option>${[...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b)).map(value => `<option value="${esc(value)}"${selected === value ? ' selected' : ''}>${esc(categoryLabel(value))}</option>`).join('')}`;
   }
   const toolSearchText = new Map(tools.map(tool => [tool.id, text([tool.name, tool.category, categoryLabel(tool.category), tool.summary, tool.bestFor, ...array(tool.tags), ...array(tool.platforms), ...(quickByTool.get(tool.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
   const workspaceSearchText = new Map(jobs.map(job => [job.id, text(workspaceSearchTerms(job)).toLowerCase()]));
-  const jobSearchText = new Map(jobs.map(job => [job.id, text([job.title, job.category, job.summary, job.startHere, ...array(job.steps).map(step => step.title), workspaceSearchText.get(job.id), ...(quickByJob.get(job.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
+  const fieldNoteSearchText = new Map(fieldNotes.map(note => [note.id, text(fieldNoteTerms(note)).toLowerCase()]));
+  const jobSearchText = new Map(jobs.map(job => [job.id, text([job.title, job.category, job.summary, job.startHere, ...array(job.steps).map(step => step.title), workspaceSearchText.get(job.id), ...(fieldNotesByJob.get(job.id) || []).flatMap(fieldNoteTerms), ...(quickByJob.get(job.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
   const quickSearchText = new Map(quickItems.map(item => [item.id, text([item.label, item.firstStep, toolMap.get(item.toolId)?.name, ...array(item.aliases)]).toLowerCase()]));
   function matches(haystack, query) { return query.trim().toLowerCase().split(/\s+/).filter(Boolean).every(term => haystack.includes(term)); }
   function library(savedOnly = false, params = new URLSearchParams()) {
@@ -487,6 +517,25 @@
   function contextToolAccess(entry) {
     return `${accessActions(entry.tool, 'workspace-access', entry.actionId, true)}<a class="workspace-options-link" href="#tool/${encodeURIComponent(entry.toolId)}">All options ${icon('arrow')}</a>`;
   }
+  function fieldNoteTools(note, job) {
+    return array(note.toolIds).map(id => {
+      const tool = toolMap.get(id);
+      if (!tool) return null;
+      const authored = array(workspaceForJob(job)?.tools).find(entry => entry.toolId === id);
+      return { toolId: id, tool, actionId: authored?.actionId || '' };
+    }).filter(Boolean);
+  }
+  function fieldNoteTerms(note) {
+    return [note.title, note.symptom, note.firstAction, ...array(note.steps), note.expected, note.ifUnresolved, ...array(note.toolIds).map(id => toolMap.get(id)?.name)];
+  }
+  function fieldNoteHref(note, quickId = '') {
+    return jobSectionHref(jobMap.get(note.jobId), quickId, `fix-${note.id}`);
+  }
+  function fieldNotesSection(job, quickId = '') {
+    const notes = fieldNotesByJob.get(job.id) || [];
+    if (!notes.length) return '';
+    return `<section class="field-notes" id="job-fixes" aria-labelledby="job-fixes-heading"><header class="field-notes-header"><h2 class="block-heading" id="job-fixes-heading" tabindex="-1">${icon('wrench')}Specific fixes</h2><p>${notes.length} focused cases. Match the symptom, take the first action, and check the expected result.</p></header><nav class="field-note-jump" aria-label="Specific fixes in this guide">${notes.map(note => `<a href="${fieldNoteHref(note, quickId)}">${esc(note.title)} ${icon('arrow')}</a>`).join('')}</nav>${notes.map(note => `<article class="field-note" id="job-fix-${esc(note.id)}" data-field-note="${esc(note.id)}" aria-labelledby="fix-heading-${esc(note.id)}"><h3 id="fix-heading-${esc(note.id)}" tabindex="-1"><a href="${fieldNoteHref(note, quickId)}">${esc(note.title)} ${icon('link')}</a></h3><p class="field-note-symptom"><strong>Symptom</strong> ${formatted(note.symptom)}</p><p class="field-note-first"><strong>First action</strong> ${formatted(note.firstAction)}</p><ol class="field-note-steps">${array(note.steps).map(step => `<li>${formatted(step)}</li>`).join('')}</ol><dl class="field-note-outcomes"><div><dt>Expected result</dt><dd>${formatted(note.expected)}</dd></div><div><dt>If unresolved</dt><dd>${formatted(note.ifUnresolved)}</dd></div></dl>${array(note.toolIds).length ? `<section class="field-note-tools" aria-label="Tools for ${esc(note.title)}">${fieldNoteTools(note, job).map(entry => `<div class="field-note-tool" data-field-tool="${esc(entry.toolId)}"><h4><a href="#tool/${encodeURIComponent(entry.toolId)}">${esc(entry.tool.name)}</a></h4><div>${contextToolAccess(entry)}</div></div>`).join('')}</section>` : ''}<footer class="field-note-footer"><h4>Official sources</h4>${sourceList(array(note.sourceUrls).map((url, index) => ({ url, title: `Source ${index + 1} · ${safeUrl(url) ? new URL(url).hostname : ''}` })))}<p>Reviewed <time datetime="${esc(note.reviewedAt || data.fieldNotes.reviewedAt || reviewDate)}">${esc(dateLabel(note.reviewedAt || data.fieldNotes.reviewedAt || reviewDate, true))}</time></p></footer></article>`).join('')}</section>`;
+  }
   function jobToolPanel(job, workspace, quickId) {
     const entries = workspaceTools(job, workspace, quickId);
     const resources = array(workspace?.resources);
@@ -502,8 +551,8 @@
     return `<aside class="job-tool-panel" id="job-tools" aria-labelledby="job-tools-heading"><header class="job-tool-panel-heading"><div><h2 id="job-tools-heading" tabindex="-1">${icon('wrench')}Tools &amp; resources</h2><p>${entries.length} ${entries.length === 1 ? 'tool' : 'tools'} · ${resources.length} ${resources.length === 1 ? 'resource' : 'resources'}</p></div><a class="panel-procedure-link" href="${jobSectionHref(job, quickId, 'procedure')}" aria-label="Go to the procedure">${icon('route')}Steps</a></header><div class="job-panel-content" tabindex="0" role="region" aria-label="All tools and official resources for this job">${priority.length ? `<section class="job-priority-section" aria-labelledby="job-priority-heading"><h3 class="panel-group-heading" id="job-priority-heading">${quickId ? 'For this case' : 'Start with these'}</h3><div class="job-priority-tools${priority.length === 1 ? ' single-priority-tool' : ''}">${priority.map(entry => `<article class="job-priority-tool" data-priority-tool="${esc(entry.toolId)}" data-priority-action="${esc(entry.actionId || '')}"><h4><a href="#tool/${encodeURIComponent(entry.toolId)}">${esc(entry.tool.name)}</a></h4>${contextToolAccess(entry)}</article>`).join('')}</div></section>` : '<p class="no-extra-tool">No extra application is required for this job.</p>'}${drivers.length ? `<nav class="job-driver-shortcuts" aria-labelledby="job-driver-shortcuts-heading"><h3 class="panel-group-heading" id="job-driver-shortcuts-heading">Get the driver</h3><div>${drivers.map(resource => external(resource.url, `<span>${esc(resource.label)}</span>${icon('external')}`, 'driver-shortcut')).join('')}</div></nav>` : ''}${entries.length ? `<section class="job-panel-tools" aria-labelledby="job-tools-list-heading"><h3 class="panel-group-heading" id="job-tools-list-heading">Supporting tools &amp; usage</h3>${entries.map((entry, index) => `<article class="job-workspace-tool" data-workspace-tool="${esc(entry.toolId)}" data-workspace-action="${esc(entry.actionId || '')}"${entries.findIndex(other => other.toolId === entry.toolId) === index ? ` data-recommended-tool="${esc(entry.toolId)}"` : ''}><h4><a href="#tool/${encodeURIComponent(entry.toolId)}">${esc(entry.tool.name)}</a></h4>${entry.why ? `<p>${formatted(entry.why)}</p>` : ''}${contextToolAccess(entry)}</article>`).join('')}</section>` : ''}${[...groups.entries()].map(([group, items], index) => `<section class="job-resource-group" data-resource-group="${esc(group)}" aria-labelledby="job-resource-group-${index}"><h3 class="panel-group-heading" id="job-resource-group-${index}">${esc(resourceGroupLabel(group))}</h3><div class="job-resource-list${/driver|manufacturer|oem/i.test(group) ? ' driver-resource-list' : ''}">${items.map(resource => `<article class="job-resource" id="job-resource-${esc(resource.id)}" data-workspace-resource="${esc(resource.id)}">${external(resource.url, `<span>${esc(resource.label)}</span>${icon('external')}`, 'job-resource-link')}<p>${formatted(resource.description)}</p><div class="job-resource-meta">${resource.kind ? `<span>${esc(resourceGroupLabel(resource.kind))}</span>` : ''}${resource.sourceUrl && resource.sourceUrl !== resource.url ? external(resource.sourceUrl, 'Source', 'resource-source') : ''}${resource.checkedAt ? `<time datetime="${esc(resource.checkedAt)}">Checked ${esc(dateLabel(resource.checkedAt, true))}</time>` : ''}</div></article>`).join('')}</div></section>`).join('')}</div></aside>`;
   }
   function jobNavigation(job, workspace, quickId) {
-    const sections = [['tools', 'Tools & resources'], ...(array(workspace?.decisions).length ? [['decisions', 'Decisions']] : []), ['procedure', 'Procedure'], ['verify', 'Verify'], ...(array(job.sources).length ? [['references', 'Sources']] : [])];
-    return `<nav class="job-section-nav" aria-label="Sections in this job guide">${sections.map(([section, label]) => `<a href="${jobSectionHref(job, quickId, section)}">${esc(label)}</a>`).join('')}</nav><nav class="job-mobile-jump" aria-label="Quick navigation in this job guide"><a href="${jobSectionHref(job, quickId, 'tools')}">${icon('wrench')}Tools &amp; links</a><a href="${jobSectionHref(job, quickId, 'procedure')}">${icon('route')}Steps</a><a href="${jobSectionHref(job, quickId, 'verify')}">${icon('checkCircle')}Verify</a></nav>`;
+    const sections = [['tools', 'Tools & resources'], ...(array(workspace?.decisions).length ? [['decisions', 'Decisions']] : []), ['procedure', 'Procedure'], ['verify', 'Verify'], ...(fieldNotesByJob.get(job.id)?.length ? [['fixes', 'Specific fixes']] : []), ...(array(job.sources).length ? [['references', 'Sources']] : [])];
+    return `<nav class="job-section-nav" aria-label="Sections in this job guide">${sections.map(([section, label]) => `<a href="${jobSectionHref(job, quickId, section)}">${esc(label)}</a>`).join('')}</nav><nav class="job-mobile-jump" aria-label="Quick navigation in this job guide"><a href="${jobSectionHref(job, quickId, 'tools')}">${icon('wrench')}${fieldNotesByJob.get(job.id)?.length ? 'Tools' : 'Tools &amp; links'}</a><a href="${jobSectionHref(job, quickId, 'procedure')}">${icon('route')}Steps</a><a href="${jobSectionHref(job, quickId, 'verify')}">${icon('checkCircle')}Verify</a>${fieldNotesByJob.get(job.id)?.length ? `<a href="${jobSectionHref(job, quickId, 'fixes')}" aria-label="Specific fixes">${icon('life')}Fixes</a>` : ''}</nav>`;
   }
   function workspacePlan(workspace) {
     if (!workspace) return '';
@@ -521,7 +570,7 @@
     return `<div class="job-page" data-job-workspace="${esc(job.id)}"><a class="back-link" href="#playbooks">${icon('back')}All job playbooks</a><div class="job-work-layout"><header class="detail-header job-header"><div class="page-eyebrow">${icon(jobIcon(job))}${esc(job.category)} / Playbook</div><h1>${esc(job.title)}</h1><p class="summary">${esc(job.summary)}</p><div class="detail-meta"><span class="pill">${icon('clock')}${esc(job.estimatedTime || 'Work at the pace the job requires')}</span><span class="pill">${icon('layers')}${esc(job.difficulty || 'Technician guide')}</span><span class="pill">${icon('checkCircle')}${steps.length} steps · ${verifies.length} verification checks</span></div><div class="detail-actions"><button class="button primary" data-export-job="${esc(job.id)}">${icon('download')}Export checklist</button><button class="button ghost" data-print>${icon('printer')}Print guide</button><button class="button ghost" data-copy-link>${icon('link')}Copy link</button></div></header>${jobNavigation(job, workspace, quickId)}${jobToolPanel(job, workspace, quickId)}<div class="detail-main job-guide-main">${jobAnswerStrip(job, quickId)}${workspacePlan(workspace)}${stops.length ? `<section class="job-stop-conditions" id="job-escalate" aria-labelledby="job-escalate-heading"><h2 class="block-heading" id="job-escalate-heading" tabindex="-1">${icon('warning')}Pause &amp; escalate when</h2><ul class="stop-list">${stops.map(item => `<li>${formatted(item)}</li>`).join('')}</ul></section>` : ''}<div class="callout job-original-start">${icon('compass')}<div><h3>Start here</h3><p>${formatted(job.startHere || job.summary)}</p></div></div><section class="aside-card job-progress-inline" id="job-progress">${progressCard(job)}</section><section id="job-procedure" aria-labelledby="job-procedure-heading"><h2 class="block-heading" id="job-procedure-heading" tabindex="-1">${icon('route')}Work through the job</h2><div class="checklist">${steps.map((step, index) => {
       const anchor = step.anchor || `step-${String(index + 1).padStart(2, '0')}`;
       return `<section class="step" id="job-${esc(anchor)}" data-step-anchor="${esc(anchor)}"><div class="step-heading"><label class="step-label"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="step" data-check-index="${index}" data-check-title="${esc(step.title)}"${checked(job, 'step', index, step.title) ? ' checked' : ''}><span><h3 tabindex="-1"><span class="step-number">${index + 1}.</span>${esc(step.title)}</h3></span></label><a class="step-permalink" href="${jobSectionHref(job, quickId, anchor)}" aria-label="Link to step ${index + 1}: ${esc(step.title)}">${icon('link')}</a></div><div class="step-detail">${formatted(step.detail)}</div>${step.command ? `<div class="command-block"><div class="command-bar"><span>Command · follow the step above</span><button class="copy-command" data-copy-command="${esc(job.id)}" data-command-index="${index}">${icon('copy')}Copy</button></div><pre><code>${esc(text(step.command))}</code></pre></div>${commandLegend(step.command)}` : ''}</section>`;
-    }).join('')}</div></section><section id="job-verify" aria-labelledby="job-verify-heading"><h2 class="block-heading" id="job-verify-heading" tabindex="-1">${icon('checkCircle')}Verify the result</h2><div class="verify-list">${verifies.map((item, index) => `<label class="verify-item"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="verify" data-check-index="${index}" data-check-title="${esc(text(item))}"${checked(job, 'verify', index, text(item)) ? ' checked' : ''}><span>${formatted(item)}</span></label>`).join('')}</div>${array(workspace?.doneWhen).length ? `<div class="workspace-done"><h3>Ready to close when</h3><ul class="bullet-list">${array(workspace.doneWhen).map(item => `<li>${formatted(item)}</li>`).join('')}</ul></div>` : ''}</section>${selectionNotes(quickByJob.get(job.id) || [])}${array(job.sources).length ? `<section id="job-references" aria-labelledby="job-references-heading"><h2 class="block-heading" id="job-references-heading" tabindex="-1">${icon('book')}Official references</h2>${sourceList(job.sources)}<p class="sources-note">Reviewed ${esc(dateLabel(job.reviewedAt || reviewDate, true))}. Follow the vendor's current instructions when the product or environment differs.</p></section>` : ''}${related.length ? `<h2 class="block-heading">${icon('route')}Keep going</h2><div class="detail-related">${related.map(jobCard).join('')}</div>` : ''}<section class="job-handoff"><h3>Leave a useful handoff</h3><p>Record the symptom, findings, changes, and verification in your team's private ticket. Keep passwords, customer files, and recovery keys out of the public wiki.</p></section></div></div></div>`;
+    }).join('')}</div></section><section id="job-verify" aria-labelledby="job-verify-heading"><h2 class="block-heading" id="job-verify-heading" tabindex="-1">${icon('checkCircle')}Verify the result</h2><div class="verify-list">${verifies.map((item, index) => `<label class="verify-item"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="verify" data-check-index="${index}" data-check-title="${esc(text(item))}"${checked(job, 'verify', index, text(item)) ? ' checked' : ''}><span>${formatted(item)}</span></label>`).join('')}</div>${array(workspace?.doneWhen).length ? `<div class="workspace-done"><h3>Ready to close when</h3><ul class="bullet-list">${array(workspace.doneWhen).map(item => `<li>${formatted(item)}</li>`).join('')}</ul></div>` : ''}</section>${fieldNotesSection(job, quickId)}${selectionNotes(quickByJob.get(job.id) || [])}${array(job.sources).length ? `<section id="job-references" aria-labelledby="job-references-heading"><h2 class="block-heading" id="job-references-heading" tabindex="-1">${icon('book')}Official references</h2>${sourceList(job.sources)}<p class="sources-note">Reviewed ${esc(dateLabel(job.reviewedAt || reviewDate, true))}. Follow the vendor's current instructions when the product or environment differs.</p></section>` : ''}${related.length ? `<h2 class="block-heading">${icon('route')}Keep going</h2><div class="detail-related">${related.map(jobCard).join('')}</div>` : ''}<section class="job-handoff"><h3>Leave a useful handoff</h3><p>Record the symptom, findings, changes, and verification in your team's private ticket. Keep passwords, customer files, and recovery keys out of the public wiki.</p></section></div></div></div>`;
   }
 
   function toolDetail(id) {
@@ -577,11 +626,12 @@
   }
   function render() {
     const route = parseRoute();
-    const names = { home: 'Technician home', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
+    const names = { home: 'Technician home', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
     $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
     $('#breadcrumb').innerHTML = `Workspace <span>/</span> <strong>${esc(names[route.name] || 'Technician home')}</strong>`;
     if (route.name === 'home') app.innerHTML = home();
+    else if (route.name === 'services') app.innerHTML = serviceMap();
     else if (route.name === 'tools') app.innerHTML = library(false, route.params);
     else if (route.name === 'saved') app.innerHTML = library(true, route.params);
     else if (route.name === 'playbooks') app.innerHTML = playbooks(route.params);
@@ -596,10 +646,14 @@
     closeNavigation(); closeSearch();
     if (route.anchor && document.getElementById(route.anchor)) document.getElementById(route.anchor).scrollIntoView({ block: 'start', behavior: 'instant' });
     else if (lastRoute !== route.raw) window.scrollTo({ top: 0, behavior: 'instant' });
+    const serviceTarget = route.name === 'services' && document.getElementById(`service-${route.params.get('area')}`);
     const section = route.name === 'job' && route.params.get('section');
     const sectionTarget = section && document.getElementById(`job-${section}`);
     const selectedAnswer = route.quickId && document.getElementById(`quick-${route.quickId}`);
-    if (sectionTarget) {
+    if (serviceTarget) {
+      serviceTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
+      serviceTarget.querySelector('h2[tabindex]')?.focus({ preventScroll: true });
+    } else if (sectionTarget) {
       sectionTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
       sectionTarget.querySelector('h2[tabindex],h3[tabindex]')?.focus({ preventScroll: true });
     } else if (selectedAnswer) {
@@ -733,6 +787,20 @@
       lines.push(`- [${tool.name}](${safeUrl(access.officialUrl)}) — ${tool.summary}`);
       access.options.forEach(option => lines.push(`  - [${accessLabel(option)}](${safeUrl(option.url)})`));
     });
+    const notes = fieldNotesByJob.get(job.id) || [];
+    if (notes.length) {
+      lines.push('', '## Specific fixes', '');
+      notes.forEach(note => {
+        lines.push(`### ${note.title}`, '', `Symptom: ${text(note.symptom)}`, '', `First action: ${text(note.firstAction)}`, '', ...array(note.steps).map((step, index) => `${index + 1}. ${text(step)}`), '', `Expected result: ${text(note.expected)}`, '', `If unresolved: ${text(note.ifUnresolved)}`, '');
+        fieldNoteTools(note, job).forEach(entry => {
+          const access = accessInfo(entry.tool);
+          const chosen = entry.actionId ? access.options.filter(option => option.id === entry.actionId) : [];
+          const options = entry.actionId ? [...chosen, ...access.options.filter(option => option.id !== entry.actionId)] : access.options;
+          lines.push(`[${entry.tool.name} · official page](${safeUrl(access.officialUrl)})`, ...options.map(option => `- [${accessLabel(option)}](${safeUrl(option.url)})`), '');
+        });
+        lines.push('Official sources:', ...array(note.sourceUrls).map(url => `- ${safeUrl(url)}`), '', `Reviewed: ${note.reviewedAt || data.fieldNotes.reviewedAt || reviewDate}`, '');
+      });
+    }
     if (picks.length) {
       lines.push('', '## Selection notes', '');
       picks.forEach(item => lines.push(`### ${item.label}`, '', `Why: ${item.why}`, '', `Use and cost: ${item.freeUse}`, '', `Before you act: ${item.boundary}`, '', `Selection basis: ${item.qualityBasis}`, '', ...array(item.evidenceUrls).map(url => `- ${url}`), ''));
@@ -762,13 +830,15 @@
       const firstAnswer = quickByJob.get(job.id)?.[0];
       if (firstAnswer && !exactScenarioJobs.has(job.id) && matches(workspaceSearchText.get(job.id), query)) foundScenarios.push(firstAnswer);
     });
+    const foundNotes = fieldNotes.filter(note => matches(fieldNoteSearchText.get(note.id), query));
     const foundJobs = jobs.filter(job => matches(jobSearchText.get(job.id), query));
     const foundTools = tools.filter(tool => matches(toolSearchText.get(tool.id), query));
-    let html = `<div class="search-summary">${foundScenarios.length + foundJobs.length + foundTools.length} results for “${esc(query)}”</div>`;
+    let html = `<div class="search-summary">${foundScenarios.length + foundNotes.length + foundJobs.length + foundTools.length} results for “${esc(query)}”</div>`;
     if (foundScenarios.length) html += `<div class="search-label">First actions · ${foundScenarios.length}</div>${foundScenarios.map(item => `<a class="search-result search-scenario" data-search-scenario="${esc(item.id)}" href="${quickHref(item)}"><span class="result-icon" aria-hidden="true">${esc(item.icon || scenarioEmoji[item.jobId] || '🧰')}</span><span><strong>${esc(item.label)}</strong><small>${esc(item.firstStep)}</small></span>${icon('arrow')}</a>`).join('')}`;
+    if (foundNotes.length) html += `<div class="search-label">Specific fixes · ${foundNotes.length}</div>${foundNotes.map(note => `<a class="search-result" data-search-fix="${esc(note.id)}" href="${fieldNoteHref(note)}"><span class="result-icon">${icon('wrench')}</span><span><strong>${esc(note.title)}</strong><small>${esc(note.symptom)}</small></span>${icon('arrow')}</a>`).join('')}`;
     if (foundJobs.length) html += `<div class="search-label">Job playbooks · ${foundJobs.length}</div>${foundJobs.map(job => `<a class="search-result" href="#job/${encodeURIComponent(job.id)}"><span class="result-icon">${icon(jobIcon(job))}</span><span><strong>${esc(job.title)}</strong><small>${esc(job.category)}</small></span>${icon('arrow')}</a>`).join('')}`;
     if (foundTools.length) html += `<div class="search-label">Tools · ${foundTools.length}</div>${foundTools.map(tool => `<a class="search-result" href="#tool/${encodeURIComponent(tool.id)}"><span class="result-icon">${icon('grid')}</span><span><strong>${esc(tool.name)}</strong><small>${esc(categoryLabel(tool.category))} · ${esc(array(tool.platforms).join(', '))}</small></span>${icon('arrow')}</a>`).join('')}`;
-    if (!foundScenarios.length && !foundJobs.length && !foundTools.length) html += '<div class="search-empty">No results yet. Try a tool name or a symptom such as “network” or “malware”.</div>';
+    if (!foundScenarios.length && !foundNotes.length && !foundJobs.length && !foundTools.length) html += '<div class="search-empty">No results yet. Try a tool name or a symptom such as “network” or “malware”.</div>';
     searchResults.innerHTML = html;
     searchResults.hidden = false;
     search.setAttribute('aria-expanded', 'true');
@@ -815,7 +885,17 @@
     if (target.closest('[data-undo]')) { const action = undoAction; if (action) action(); return; }
     if (!target.closest('.global-search-wrap')) closeSearch();
     const hashLink = target.closest('a[href^="#"]');
-    if (hashLink && hashLink.getAttribute('href') === location.hash) { closeSearch(); closeNavigation(); }
+    if (hashLink && hashLink.getAttribute('href') === location.hash) {
+      closeSearch(); closeNavigation();
+      const route = parseRoute();
+      const targetId = route.name === 'services' && route.params.get('area') ? `service-${route.params.get('area')}` : route.name === 'job' && route.params.get('section') ? `job-${route.params.get('section')}` : route.anchor;
+      const destination = targetId && document.getElementById(targetId);
+      if (destination) {
+        event.preventDefault();
+        destination.scrollIntoView({ block: 'start', behavior: 'instant' });
+        destination.querySelector('h2[tabindex],h3[tabindex]')?.focus({ preventScroll: true });
+      }
+    }
   });
   document.addEventListener('input', event => {
     if (event.target.id === 'library-search') filterTools();

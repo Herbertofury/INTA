@@ -1,0 +1,26 @@
+name: Check knowledge organization and review dates
+on:
+  schedule:
+    - cron: '17 13 * * 1-5'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: inta-knowledge-health
+  cancel-in-progress: false
+jobs:
+  report:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Check every service, tool and editorial review date
+        run: python3 scripts/check-knowledge.py --output reports/knowledge-health.json
+      - name: Preserve complete coverage and review queue
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: inta-knowledge-health
+          path: reports/knowledge-health.json
+          if-no-files-found: warn
+          retention-days: 30

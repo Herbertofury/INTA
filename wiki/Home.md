@@ -6,9 +6,9 @@
 
 Service procedures, tool references and troubleshooting methods for the INTA team.
 
-[Open technician hub](https://herbertofury.github.io/INTA/) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)
+**[🧰 Open technician hub](https://herbertofury.github.io/INTA/)** · **[🗺️ Service map](Service-Map)** · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)
 
-**118 tools · 22 playbooks · 10 tool categories**
+**133 tools · 22 playbooks · 10 tool categories**
 
 <a id="free-tools"></a>
 

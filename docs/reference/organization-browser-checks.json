@@ -1,0 +1,417 @@
+{
+  "startedAt": "2026-11-27T01:41:24.805Z",
+  "priorCompleteProof": {
+    "path": "portal-services-results.json",
+    "sha256": "b51276459eb5c747645e2c94e741db669c5f2321780724011d6098c4a1592004",
+    "htmlSha256": "fb1df2813d27cfc29209803a4a845a0381b6bbbc901c6e811e8c41a5d3df0ba3",
+    "passed": true
+  },
+  "sourceUnchanged": true,
+  "changedTopLevelKeys": [
+    "fieldNotes"
+  ],
+  "changedNotes": [
+    {
+      "id": "malware-browser-notification-popups",
+      "jobId": "malware-removal",
+      "fields": [
+        "sourceUrls",
+        "steps",
+        "toolIds"
+      ],
+      "allFieldsMatch": true,
+      "tools": [],
+      "sources": [
+        "https://support.microsoft.com/en-us/edge/manage-website-notifications-in-microsoft-edge"
+      ]
+    },
+    {
+      "id": "malware-allowed-threat-keeps-returning",
+      "jobId": "malware-removal",
+      "fields": [
+        "sourceUrls",
+        "steps",
+        "toolIds"
+      ],
+      "allFieldsMatch": true,
+      "tools": [],
+      "sources": [
+        "https://support.microsoft.com/en-us/windows/security/windows-security/protection-history-in-the-windows-security-app"
+      ]
+    },
+    {
+      "id": "ransomware-protect-recovery-copies",
+      "jobId": "ransomware-response",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [],
+      "sources": [
+        "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf"
+      ]
+    },
+    {
+      "id": "ransomware-compromised-admin-account",
+      "jobId": "ransomware-response",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [],
+      "sources": [
+        "https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access",
+        "https://learn.microsoft.com/en-us/defender-office-365/responding-to-a-compromised-email-account"
+      ]
+    },
+    {
+      "id": "ransomware-test-decryptor-on-copies",
+      "jobId": "ransomware-response",
+      "fields": [
+        "sourceUrls",
+        "steps"
+      ],
+      "allFieldsMatch": true,
+      "tools": [],
+      "sources": [
+        "https://www.nomoreransom.org/en/decryption-tools.html",
+        "https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf"
+      ]
+    },
+    {
+      "id": "slow-pc-startup-app-delay",
+      "jobId": "slow-pc",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "autoruns"
+      ],
+      "sources": [
+        "https://support.microsoft.com/en-us/windows/experience/startup-boot/configure-startup-applications-in-windows"
+      ]
+    },
+    {
+      "id": "slow-pc-only-on-battery",
+      "jobId": "slow-pc",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "oem-drivers",
+        "libre-hardware-monitor"
+      ],
+      "sources": [
+        "https://support.microsoft.com/en-us/windows/experience/change-the-power-mode-for-your-windows-pc"
+      ]
+    },
+    {
+      "id": "update-free-the-space-the-installer-needs",
+      "jobId": "windows-update",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "windirstat",
+        "get-help"
+      ],
+      "sources": [
+        "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/free-up-space-for-windows-updates"
+      ]
+    },
+    {
+      "id": "boot-check-recovery-drive-letters",
+      "jobId": "boot-recovery",
+      "fields": [
+        "sourceUrls",
+        "steps"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "windows-recovery",
+        "dism"
+      ],
+      "sources": [
+        "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/list-volume",
+        "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image"
+      ]
+    },
+    {
+      "id": "network-dhcp-self-assigned-address",
+      "jobId": "network-dns",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "powershell",
+        "get-help"
+      ],
+      "sources": [
+        "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/troubleshoot-problems-dhcp-client",
+        "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig"
+      ]
+    },
+    {
+      "id": "remote-copy-route-not-proven",
+      "jobId": "remote-support",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "quick-assist",
+        "rustdesk",
+        "meshcentral"
+      ],
+      "sources": [
+        "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+        "https://rustdesk.com/docs/en/client/",
+        "https://github.com/Ylianst/MeshCentral"
+      ]
+    },
+    {
+      "id": "remote-reboot-needs-a-reconnect-plan",
+      "jobId": "remote-support",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "quick-assist",
+        "meshcentral",
+        "rustdesk"
+      ],
+      "sources": [
+        "https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist",
+        "https://github.com/Ylianst/MeshCentral"
+      ]
+    },
+    {
+      "id": "printer-one-pdf-will-not-print",
+      "jobId": "printer-repair",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "sumatrapdf"
+      ],
+      "sources": [
+        "https://www.sumatrapdfreader.org/docs/SumatraPDF-documentation",
+        "https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows"
+      ]
+    },
+    {
+      "id": "hardware-memory-errors-after-upgrade",
+      "jobId": "hardware-bsod",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "memtest86plus",
+        "oem-drivers"
+      ],
+      "sources": [
+        "https://github.com/memtest86plus/memtest86plus"
+      ]
+    },
+    {
+      "id": "hardware-usb-dock-device-drops",
+      "jobId": "hardware-bsod",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "usb-device-tree-view",
+        "oem-drivers"
+      ],
+      "sources": [
+        "https://www.uwe-sieber.de/usbtreeview_e.html"
+      ]
+    },
+    {
+      "id": "handoff-temporary-support-app-persists",
+      "jobId": "client-handoff",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "rustdesk",
+        "meshcentral"
+      ],
+      "sources": [
+        "https://support.microsoft.com/en-us/windows/apps/uninstall-or-remove-apps-and-programs-in-windows",
+        "https://rustdesk.com/docs/en/client/",
+        "https://github.com/Ylianst/MeshCentral"
+      ]
+    },
+    {
+      "id": "maintenance-optimize-the-right-media",
+      "jobId": "preventive-maintenance",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [
+        "crystaldiskinfo"
+      ],
+      "sources": [
+        "https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/defragment-optimize-your-data-drives-in-windows"
+      ]
+    },
+    {
+      "id": "maintenance-onedrive-sync-is-paused",
+      "jobId": "preventive-maintenance",
+      "fields": [
+        "sourceUrls"
+      ],
+      "allFieldsMatch": true,
+      "tools": [],
+      "sources": [
+        "https://support.microsoft.com/en-us/onedrive/how-to-pause-and-resume-onedrive-sync",
+        "https://support.microsoft.com/en-us/onedrive/fix-onedrive-sync-problems"
+      ]
+    }
+  ],
+  "exports": [
+    {
+      "jobId": "malware-removal",
+      "path": "final-exports/malware-removal.md",
+      "sha256": "d1ef5c21e81fd4c3cc312502b014edc68bb19df9a8da8dc62236bd2f2fe78182"
+    },
+    {
+      "jobId": "ransomware-response",
+      "path": "final-exports/ransomware-response.md",
+      "sha256": "9d4f90b8440c3341257e1733decf2ca4ea420fced60cea3432328e36cad7d2ec"
+    },
+    {
+      "jobId": "slow-pc",
+      "path": "final-exports/slow-pc.md",
+      "sha256": "3f0ad1657edfa199af05c05b8756f134fca9a98055d5395596385069f31570c4"
+    },
+    {
+      "jobId": "windows-update",
+      "path": "final-exports/windows-update.md",
+      "sha256": "444de85aa4cf575e98fcf3f35f449575227ceab7ba4a06c270abc21b36961e25"
+    },
+    {
+      "jobId": "boot-recovery",
+      "path": "final-exports/boot-recovery.md",
+      "sha256": "3f3c2581c720bda4cd2067b7afdcfce1a129735ec4cb3e9b042cb76fb2071f35"
+    },
+    {
+      "jobId": "network-dns",
+      "path": "final-exports/network-dns.md",
+      "sha256": "42e919afdf647e5508dbdb4eb1ab0d1bb3f59644bde562623b241771a72e8075"
+    },
+    {
+      "jobId": "remote-support",
+      "path": "final-exports/remote-support.md",
+      "sha256": "65eccf21a7b8580ab4a8a06f2a0140b05f50c8bd0831ccd8c16084c1a87fc0c9"
+    },
+    {
+      "jobId": "printer-repair",
+      "path": "final-exports/printer-repair.md",
+      "sha256": "c33f488351051dd0520576ada6365ec1f5b21328f3e5f8591f041bd66cbd8ac0"
+    },
+    {
+      "jobId": "hardware-bsod",
+      "path": "final-exports/hardware-bsod.md",
+      "sha256": "17e59706dee0084535f891240a67589e518ed17abdb33cc04b6c2df568d02d5c"
+    },
+    {
+      "jobId": "client-handoff",
+      "path": "final-exports/client-handoff.md",
+      "sha256": "be4099c2aeb4e039742e472f19593b09f747a3e0f0ed16037817931e3b83044d"
+    },
+    {
+      "jobId": "preventive-maintenance",
+      "path": "final-exports/preventive-maintenance.md",
+      "sha256": "f4196c5d7fb164997040376581ae30b40664f11c0f2d9d06e7cd4d8aa18b9936"
+    }
+  ],
+  "screenshots": [
+    "portal-final-services-desktop.png",
+    "portal-final-specific-fix-desktop.png",
+    "portal-final-specific-fix-390.png"
+  ],
+  "errors": [],
+  "counts": {
+    "tools": 133,
+    "jobs": 22,
+    "quickCases": 27,
+    "serviceAreas": 8,
+    "fieldNotes": 74,
+    "noteSteps": 222,
+    "noteTools": 103,
+    "noteSources": 113,
+    "changedNotes": 18,
+    "unchangedNotes": 56
+  },
+  "hashes": {
+    "portal/app.js": "eea22e2c558db2d41e302c5aba330b0d59d1f9b8a71bb92d2d6e0493550f477c",
+    "portal/styles.css": "d63405572d0e1f2338620b7f98e95d7efeaee6231b5a40847166d993805978a2",
+    "portal/index.template.html": "2a0fe317df3c822202c19dcec80f7c4c3dbaa4291dcf3d34c5c86e2a15e6e0b0",
+    "site/index.html": "90c05272156bb3db356e5f763d38fd7be0496a99d8dba34eb8ed054023b037f0",
+    "data/field-notes.json": "6d1c5c1ed5e0e1856517fab191df13730fbe787ad2fc4dc9b5447de27b703ad5",
+    "data/wiki-layout.json": "12f71dd8e427c26c4518e729fce36d21ad82a20ca1197d0056bcb4b3a434d0b5",
+    "data/tools.json": "56c3ea378440a63ad56622b6055ad89c8563d0724c9d2397a8c28616d938547d",
+    "data/tool-access.json": "fffc5d25ab8259c402d53fee715b694f690cb8e50915cb31717d14e5ca73f1b2",
+    "data/jobs.json": "7617f568161a5e01a774049dee153bf2255e34271be3c0a02d4701231e32a068",
+    "data/job-workspaces.json": "6af94328e0050f3c93c6b8e48c1020d7b2713f2776b0d08d8d28ba117960d8dd"
+  },
+  "bytes": 780246,
+  "artifactHashes": {
+    "portal-final-services-desktop.png": "a189a7c800667f14c06a2dbd7d02f145dff63d7c9f10ce1f4905f182a07ba24d",
+    "portal-final-specific-fix-desktop.png": "b7414f315f6066181dccd46665f39485f53b87527ae089137c106c8ad8ac25e6",
+    "portal-final-specific-fix-390.png": "bd2516732b4702b9c0b8e9b74018940b705d91cc698234ca68f60faefb949168",
+    "portal-services-final-offline.html": "5b1c3cb4b50cbb047a17589fb0e6da068ea0e9520899fe2560523a6ff005c26b",
+    "portal-final-rebind.cjs": "a3d53287a4909ad5b86663b53095a1170cb77e9dab230099545692e902ff2e69",
+    "portal-final-data-diff.json": "d42689815f708529258c29ab7b1c1071fd9bfb8ed5efa75bd7d001557963379b",
+    "portal-final-mobile-capture.cjs": "f33e71a98ada24877ae4b73e8f117f86211c6a386ecb9bfe023fdf00754b7b7f"
+  },
+  "passed": true,
+  "finishedAt": "2026-11-27T01:41:34.693Z",
+  "mobileCapture": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "directRoute": true,
+    "focusedHeading": "fix-heading-malware-browser-notification-popups",
+    "position": {
+      "x": 18,
+      "y": 222.40625,
+      "width": 354,
+      "height": 44
+    },
+    "reason": "Recaptured with the mobile viewport set before direct navigation, avoiding the desktop-to-mobile resize scroll position in the original capture."
+  },
+  "visualReview": {
+    "reviewedAt": "2026-11-27T01:44:01.535054+00:00",
+    "screenshotsInspected": [
+      "portal-final-services-desktop.png",
+      "portal-final-specific-fix-desktop.png",
+      "portal-final-specific-fix-390.png"
+    ],
+    "passed": true,
+    "findings": [],
+    "observations": [
+      "Service map preserves the compact flat row layout and all direct specific-fix links.",
+      "Changed-note desktop rendering retains the sticky tool panel alongside the instructions.",
+      "Direct mobile case entry focuses the intended note below the search and four-action strip; text and links fit the viewport."
+    ]
+  },
+  "markdownProof": {
+    "path": "wiki-markdown-results.json",
+    "sha256": "df3898def3d7c7ef02496eede8c3f7dc400643ac37ed1943193ed6dc7f13ac90",
+    "passed": true
+  }
+}

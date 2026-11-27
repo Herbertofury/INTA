@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "preservationBase": "0e70d341169fc5975fd98fc3e072b44e0285cd26",
+  "unitTests": 45,
+  "generatedOutputs": 114,
+  "wikiFiles": 84,
+  "wikiPages": 82,
+  "registeredNames": 361,
+  "inlineLinks": 9249,
+  "mermaidDiagrams": 27,
+  "wikiErrors": [],
+  "tools": 133,
+  "acquisitionActions": 290,
+  "serviceAreas": 8,
+  "jobs": 22,
+  "specificFixes": 74,
+  "caseSteps": 222,
+  "researchTasks": 54,
+  "htmlBytes": 780246,
+  "htmlSha256": "90c05272156bb3db356e5f763d38fd7be0496a99d8dba34eb8ed054023b037f0",
+  "challenge": {
+    "finding": "GitHub Wiki cross-page section fragments can be lost during ordinary navigation.",
+    "resolution": "Primary Service-Map case links and quick-answer fix links use exact working-view routes; same-page Wiki anchors and complete guides remain.",
+    "regressionTest": "test_cross_page_case_links_open_the_exact_working_route"
+  },
+  "limits": "Build, structure, source, response-format and browser evidence do not certify third-party repair utilities on customer hardware. Scheduled future runs have not been claimed as completed."
+}

@@ -1,10 +1,12 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 # 🧭 Start here
 
 [Home](https://github.com/Herbertofury/INTA/wiki) › **Start here**
 
 **Find a tool, choose a procedure, and record the result.** Open the [interactive technician hub](https://herbertofury.github.io/INTA/) for search and checklists, or stay in the wiki for the complete field guides.
+
+**[🗺️ Browse every service area](https://herbertofury.github.io/INTA/#services)** · **[🎯 Find a specific fix](https://github.com/Herbertofury/INTA/wiki/Service-Map)** · **[🗂️ How INTA stays organized](https://github.com/Herbertofury/INTA/wiki/Knowledge-Organization)**
 
 <!-- INTA:QUICK-START:START -->
 

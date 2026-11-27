@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="-technician-productivity"></a>
 
@@ -6,7 +6,7 @@
 
 Make everyday technician work clearer without leaving unnecessary software on customer machines.
 
-**10 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**12 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** Inspect, document, transfer, or improve your own workspace?
 
@@ -35,7 +35,9 @@ Make everyday technician work clearer without leaving unnecessary software on cu
 | [NAPS2](#naps2) | Testing scanner, flatbed, ADF and duplex workflows independently of the printer queue, then producing a readable sample PDF. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/) · Core | [Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)** |
 | [Notepad++](#notepadplusplus) | Reading logs and making deliberate configuration-file changes. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://notepad-plus-plus.org/) · **[Download Windows x64 portable · ZIP](https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.9.1/npp.8.9.9.1.portable.x64.zip)** |
 | [ShareX](#sharex) | Capturing a problem and producing clear technician documentation. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://getsharex.com/) · **[Download Windows x64 portable · ZIP](https://github.com/ShareX/ShareX/releases/download/v22.4.0/ShareX-22.4.0-portable-x64.zip)** |
+| [SumatraPDF](#sumatrapdf) | Testing the same known-good PDF through an independent renderer to separate an application-specific print fault from the queue or printer. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://www.sumatrapdfreader.org/) · **[Download Windows x64 portable · ZIP](https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64.zip)** |
 | [UniGetUI](#unigetui) | Reviewing available applications and updates in one technician interface. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://github.com/Devolutions/UniGetUI) · **[Download Windows x64 portable · ZIP](https://github.com/Devolutions/UniGetUI/releases/download/v2026.3.4/UniGetUI.x64.zip)** |
+| [WinMerge](#winmerge) | Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** |
 | [WizFile](#wizfile) | Locating a known file, log or recently changed group of files without guessing its folder. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://antibody-software.com/wizfile/) · **[Download Windows portable · ZIP](https://antibody-software.com/files/wizfile_3_15_portable.zip)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
@@ -296,6 +298,40 @@ Screenshots, recordings and configurable local output workflows.
 
 [Back to comparison](#compare-options)
 
+<a id="sumatrapdf"></a>
+
+## [SumatraPDF](https://www.sumatrapdfreader.org/)
+
+Lightweight [Windows](https://www.microsoft.com/windows) document reader with a portable build and standard PDF printing.
+
+[Official page](https://www.sumatrapdfreader.org/) · **[Download Windows x64 portable · ZIP](https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64.zip)** · [Download Windows x64 installer · EXE](https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64-install.exe) · [Download Windows ARM64 portable · ZIP](https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-arm64.zip) · [Other stable Windows builds](https://www.sumatrapdfreader.org/download-free-pdf-viewer) · [Documentation](https://www.sumatrapdfreader.org/docs/SumatraPDF-documentation)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Testing the same known-good PDF through an independent renderer to separate an application-specific print fault from the queue or printer. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows) |
+| **How you use it** | portable |
+| **Access / pricing** | Free and open source under GPL-3.0 |
+| **Selection role** | Core |
+
+> **Before using it:** Use a small known-good document and the intended queue, paper size and scaling. The stable route is 3.6.1; rolling documentation also describes 3.7 preview features, which must not be assumed available in the stable build. Check physical output after submission.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://www.sumatrapdfreader.org/download-free-pdf-viewer)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://www.sumatrapdfreader.org/download-free-pdf-viewer
+  - https://www.sumatrapdfreader.org/docs/Installation
+  - https://github.com/sumatrapdfreader/sumatrapdf/blob/master/COPYING
+
+</details>
+
+[Back to comparison](#compare-options)
+
 <a id="unigetui"></a>
 
 ## [UniGetUI](https://github.com/Devolutions/UniGetUI)
@@ -323,6 +359,40 @@ Graphical management interface for multiple software package managers.
 - **Selection provenance:**
   - Official project or vendor documentation
   - https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="winmerge"></a>
+
+## [WinMerge](https://winmerge.org/)
+
+Visual comparison and merging of text files and folders makes configuration or migration differences visible.
+
+[Official page](https://winmerge.org/) · **[Download Windows x64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip)** · [Download Windows x64 installer · EXE](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/WinMerge-2.16.60-x64-Setup.exe) · [Download Windows ARM64 portable · ZIP](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-ARM64-exe.zip) · [Other builds and published checksums](https://winmerge.org/downloads/index.php) · [Documentation](https://manual.winmerge.org/en/)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Comparing a saved configuration with the changed version or checking a copied folder before accepting a repair or migration. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows) |
+| **How you use it** | portable |
+| **Access / pricing** | Free and open source under GPL-2.0-or-later |
+| **Selection role** | Core |
+
+> **Before using it:** Start in comparison mode and preserve originals before merging. Filters, ignored lines and timestamp-only comparisons can hide meaningful differences. A folder comparison is not an application-level [restore test](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore).
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://winmerge.org/downloads/index.php)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://winmerge.org/downloads/index.php
+  - https://github.com/WinMerge/winmerge/releases/tag/v2.16.60
+  - https://winmerge.org/source-code/?lang=en
 
 </details>
 

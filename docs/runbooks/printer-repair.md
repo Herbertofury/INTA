@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="️-restore-printing-without-breaking-other-queues"></a>
 <a id="-restore-printing-without-breaking-other-queues"></a>
@@ -9,7 +9,7 @@ Isolate printer hardware, network reachability, queue state, driver, and applica
 
 **Devices & peripherals** · Starter · 15–45 min · 8 steps
 
-[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/printer-repair)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Specific fixes](#specific-fixes) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/printer-repair)
 
 <a id="working-kit"></a>
 
@@ -27,6 +27,8 @@ Isolate printer hardware, network reachability, queue state, driver, and applica
 | Find the printer’s current address within an approved local subnet. | **[Advanced IP Scanner](https://www.advanced-ip-scanner.com/)** · [Official page](https://www.advanced-ip-scanner.com/) · **[Download Windows scanner · EXE](https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe)** |
 | Read the exact installed queue, driver and port. | **[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** |
 | Test scanner, feeder and multipage PDF output. | **[NAPS2](https://www.naps2.com/)** · [Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)** |
+| Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly. | **[USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html)** · [Official page](https://www.uwe-sieber.de/usbtreeview_e.html) · **[Download Windows x64 portable · ZIP](https://www.uwe-sieber.de/files/UsbTreeView_x64.zip)** |
+| Testing the same known-good PDF through an independent renderer to separate an application-specific print fault from the queue or printer. | **[SumatraPDF](https://www.sumatrapdfreader.org/)** · [Official page](https://www.sumatrapdfreader.org/) · **[Download Windows x64 portable · ZIP](https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64.zip)** |
 
 ### Before driver changes
 
@@ -102,6 +104,14 @@ Isolate printer hardware, network reachability, queue state, driver, and applica
 
 **Change route when:** Changing a shared spooler/driver would interrupt other users without coordination. · Protected-print policy, ARM compatibility or unsupported hardware requires the managed print owner.
 
+### 🎯 Go straight to a specific fix
+
+- **[Match a stale printer port to the current device](#fix-printer-offline-after-router-change)** — A network printer went offline after a router change, lease change or network move.
+- **[Resolve an incompatible printer-driver package](#fix-printer-driver-rejected-on-arm-or-wpp)** — A vendor installer is rejected on an ARM PC or a protected-print device.
+- **[Fix streaks that occur only through the feeder](#fix-printer-adf-lines-flatbed-clean)** — Scans or copies show a vertical line from the ADF, while a flatbed copy is clean.
+- **[Make the scanner appear in the scan profile](#fix-printer-scanner-missing-from-app)** — Printing works, but the scan application cannot find the multifunction device.
+- **[Separate a bad document from a broken printer](#fix-printer-one-pdf-will-not-print)** — A single PDF fails, but the printer’s internal page and other documents print.
+
 > [!NOTE]
 > **Start here.** Identify the exact printer and queue. Check whether another user or application can print to the same device.
 
@@ -152,6 +162,8 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 | **[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** | Read the exact installed queue, driver and port. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://learn.microsoft.com/en-us/powershell/) |
 | **[NAPS2](https://www.naps2.com/)** · [Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)** | Test scanner, feeder and multipage PDF output. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/); Free and open source for individuals and businesses | [Open guide](https://www.naps2.com/windows-scanning) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
+| **[USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html)** · [Official page](https://www.uwe-sieber.de/usbtreeview_e.html) · **[Download Windows x64 portable · ZIP](https://www.uwe-sieber.de/files/UsbTreeView_x64.zip)** | Identifying the actual USB port, hub, device and negotiated connection when a printer, scanner or peripheral disconnects or runs slowly. | [Windows](https://www.microsoft.com/windows); Freeware; publisher explicitly permits use in commercial environments | [Open guide](https://www.uwe-sieber.de/usbtreeview_e.html) |
+| **[SumatraPDF](https://www.sumatrapdfreader.org/)** · [Official page](https://www.sumatrapdfreader.org/) · **[Download Windows x64 portable · ZIP](https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64.zip)** | Testing the same known-good PDF through an independent renderer to separate an application-specific print fault from the queue or printer. | [Windows](https://www.microsoft.com/windows); Free and open source under GPL-3.0 | [Open guide](https://www.sumatrapdfreader.org/docs/SumatraPDF-documentation) |
 
 <a id="walkthrough"></a>
 
@@ -247,6 +259,131 @@ Get-PrinterPort | Format-List *
 > **Pause this route and escalate when:**
 > - The device has a hardware fault or unsafe condition.
 > - A shared spooler/driver change would disrupt uncoordinated production jobs.
+
+<a id="specific-fixes"></a>
+
+## 🎯 Specific fixes
+
+Choose the case that matches the evidence. Each case gives a first action, a short procedure and a result to prove.
+
+<a id="fix-printer-offline-after-router-change"></a>
+
+### Match a stale printer port to the current device
+
+**Use when:** A network printer went offline after a router change, lease change or network move.
+
+**Start here:** Print the printer’s own network report and match its model/MAC to the intended device.
+
+**[Advanced IP Scanner](https://www.advanced-ip-scanner.com/)** · [Official page](https://www.advanced-ip-scanner.com/) · **[Download Windows scanner · EXE](https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe)**
+
+**[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)**
+
+**[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Start the printer troubleshooter](https://aka.ms/PrinterConnection)**
+
+1. Read the selected queue’s PortName with Get-Printer and inspect that port with Get-PrinterPort in [Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell).
+2. Compare the current device address with the configured TCP/IP port; use the supported queue/port settings to correct only the proven mismatch.
+3. Test the [Windows](https://www.microsoft.com/windows) page and original document, then coordinate any reservation or managed-address correction with the network owner.
+
+**Prove it worked:** The intended queue reaches the correct physical device and keeps its trays, duplex and other required options.
+
+**If this does not resolve it:** WSD, shared-server and USB queues use different bindings. Do not rewrite all ports or assign an arbitrary static address.
+
+**Official evidence:** [Source 1](https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport) · [Source 2](https://support.microsoft.com/en-us/windows/hardware/printer/troubleshooting-offline-printer-problems-in-windows) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-printer-driver-rejected-on-arm-or-wpp"></a>
+
+### Resolve an incompatible printer-driver package
+
+**Use when:** A vendor installer is rejected on an ARM PC or a protected-print device.
+
+**Start here:** Check Settings > System > About and the active [Windows protected print mode](https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode) policy.
+
+**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+
+**[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Start the printer troubleshooter](https://aka.ms/PrinterConnection)**
+
+1. If protected print mode applies, choose the supported IPP/Mopria path and the appropriate [Print Support App](https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-mode-faq) rather than forcing a legacy third-party driver.
+2. If a conventional package is appropriate, use the exact OEM model page and match [Windows](https://www.microsoft.com/windows) version plus native architecture.
+3. Verify a real document and required device options before removing the old working queue.
+
+**Prove it worked:** The selected print path is supported by the device architecture and active security mode.
+
+**If this does not resolve it:** If the printer depends on an unsupported driver, involve the managed print owner; do not casually disable protected print mode.
+
+**Official evidence:** [Source 1](https://support.microsoft.com/en-us/windows/experience/platform-variants/windows-arm-based-pcs-faq) · [Source 2](https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-printer-adf-lines-flatbed-clean"></a>
+
+### Fix streaks that occur only through the feeder
+
+**Use when:** Scans or copies show a vertical line from the ADF, while a flatbed copy is clean.
+
+**Start here:** Copy the same clean original once from the flatbed and once from the feeder, marking which is which.
+
+**[NAPS2](https://www.naps2.com/)** · [Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)**
+
+1. Use the exact model’s cleaning instructions to locate its narrow ADF glass strip and backing surface.
+2. Power down or disconnect as the manufacturer instructs and clean only the specified surfaces with the approved method; do not spray liquid into the unit.
+3. Repeat the paired flatbed/ADF test and save a sample of the corrected multipage output.
+
+**Prove it worked:** The feeder-specific line disappears while the flatbed and normal printing remain correct.
+
+**If this does not resolve it:** Persistent lines on both paths or damaged glass need the model’s service procedure, not another [Windows](https://www.microsoft.com/windows) driver installation.
+
+**Official evidence:** [Source 1](https://support.hp.com/us-en/document/c03231457) · [Source 2](https://support.hp.com/ee-en/document/c06432233) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-printer-scanner-missing-from-app"></a>
+
+### Make the scanner appear in the scan profile
+
+**Use when:** Printing works, but the scan application cannot find the multifunction device.
+
+**Start here:** Confirm the scanner’s connection and the actual OS architecture independently of the print queue.
+
+**[NAPS2](https://www.naps2.com/)** · [Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)**
+
+**[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)**
+
+1. In [NAPS2](https://www.naps2.com/) choose New Profile > Choose device and inspect the supported WIA, TWAIN and eSCL choices.
+2. Use the correct manufacturer scan driver for WIA/TWAIN, or eSCL for a compatible network scanner; do not assume a working print driver supplies scanning.
+3. Scan and save one page, then test the required ADF/duplex workflow and open the saved PDF.
+
+**Prove it worked:** The intended scanner is selectable and the saved file contains every requested page in order.
+
+**If this does not resolve it:** If the device is not supported through the chosen protocol or policy blocks discovery, use the exact OEM scan path or managed network owner.
+
+**Official evidence:** [Source 1](https://www.naps2.com/windows-scanning) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
+<a id="fix-printer-one-pdf-will-not-print"></a>
+
+### Separate a bad document from a broken printer
+
+**Use when:** A single PDF fails, but the printer’s internal page and other documents print.
+
+**Start here:** Keep the original file and test a simple one-page document on the same queue.
+
+**[SumatraPDF](https://www.sumatrapdfreader.org/)** · [Official page](https://www.sumatrapdfreader.org/) · **[Download Windows x64 portable · ZIP](https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64.zip)**
+
+1. Open the PDF in [SumatraPDF](https://www.sumatrapdfreader.org/) and use Ctrl+P to try a single page with the same paper size and queue.
+2. Compare page rendering and the exact print error; check whether only particular pages, fonts or embedded content trigger it.
+3. Use the document/viewer’s supported correction or obtain a clean source copy, then print the required pages and confirm layout.
+
+**Prove it worked:** The test identifies a document/viewer-specific failure without changing every user’s driver or spooler.
+
+**If this does not resolve it:** If all applications fail, return to the queue/device branch. Preserve confidential document contents when escalating to the author.
+
+**Official evidence:** [Source 1](https://www.sumatrapdfreader.org/docs/SumatraPDF-documentation) · [Source 2](https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows) · Reviewed 2026-11-26
+
+[Back to specific fixes](#specific-fixes) · [Full procedure](#walkthrough)
+
 
 <a id="-continue-with-the-evidence"></a>
 

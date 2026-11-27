@@ -2735,6 +2735,488 @@
       },
       "alternates": [],
       "note": "No separate installer. Preview evaluation only; preserve post-snapshot files before any rollback."
+    },
+    "setupdiag": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows upgrade analyzer · EXE",
+        "url": "https://go.microsoft.com/fwlink/?linkid=870142",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "EXE"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "Read online/offline log-analysis instructions",
+          "url": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/windows/deployment/upgrade/setupdiag",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "windows-sandbox": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/",
+      "primary": {
+        "kind": "builtin",
+        "label": "Enable Windows Sandbox",
+        "url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": [
+        {
+          "kind": "builtin",
+          "label": "Configure network and shared-folder isolation",
+          "url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows"
+        }
+      ]
+    },
+    "usb-device-tree-view": {
+      "officialUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://www.uwe-sieber.de/files/UsbTreeView_x64.zip",
+        "evidenceUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "architecture": "x64",
+        "version": "4.8.0"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows ARM64 portable · ZIP",
+          "url": "https://www.uwe-sieber.de/files/UsbTreeView_arm64.zip",
+          "evidenceUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "format": "ZIP",
+          "architecture": "ARM64",
+          "version": "4.8.0"
+        },
+        {
+          "kind": "file",
+          "label": "Download Windows x86 portable · ZIP",
+          "url": "https://www.uwe-sieber.de/files/UsbTreeView_Win32.zip",
+          "evidenceUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "format": "ZIP",
+          "architecture": "x86",
+          "version": "4.8.0"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other builds and usage terms",
+          "url": "https://www.uwe-sieber.de/usbtreeview_e.html",
+          "evidenceUrl": "https://www.uwe-sieber.de/usbtreeview_e.html",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "powercfg": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+      "primary": {
+        "kind": "builtin",
+        "label": "Open built-in battery and sleep diagnostics",
+        "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows"
+      },
+      "alternates": []
+    },
+    "curl": {
+      "officialUrl": "https://curl.se/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 tools · ZIP",
+        "url": "https://curl.se/windows/dl-8.23.0_10/curl-8.23.0_10-win64-mingw.zip",
+        "evidenceUrl": "https://curl.se/windows/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "architecture": "x64",
+        "version": "8.23.0_10"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows ARM64 tools · ZIP",
+          "url": "https://curl.se/windows/dl-8.23.0_10/curl-8.23.0_10-win64a-mingw.zip",
+          "evidenceUrl": "https://curl.se/windows/",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "format": "ZIP",
+          "architecture": "ARM64",
+          "version": "8.23.0_10"
+        },
+        {
+          "kind": "builtin",
+          "label": "Use the Windows-included curl.exe",
+          "url": "https://curl.se/windows/microsoft.html",
+          "evidenceUrl": "https://curl.se/windows/microsoft.html",
+          "checkedAt": "2026-11-26",
+          "id": "windows-inbox",
+          "platform": "Windows"
+        },
+        {
+          "kind": "release-page",
+          "label": "Choose other operating-system packages",
+          "url": "https://curl.se/download.html",
+          "evidenceUrl": "https://curl.se/download.html",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Windows includes a separately serviced curl build. The portable official package is an optional acquisition, not a prerequisite for every connection check."
+    },
+    "mtr": {
+      "officialUrl": "https://www.bitwizard.nl/mtr/",
+      "primary": {
+        "kind": "package",
+        "label": "Install a Linux/WSL distribution package",
+        "url": "https://github.com/traviscross/mtr#using-mtr-on-windows",
+        "evidenceUrl": "https://github.com/traviscross/mtr",
+        "checkedAt": "2026-11-26",
+        "platform": "Linux / Windows (WSL)"
+      },
+      "alternates": [
+        {
+          "kind": "source",
+          "label": "Download source archive · TAR.GZ",
+          "url": "https://www.bitwizard.nl/mtr/files/mtr-0.96.tar.gz",
+          "evidenceUrl": "https://www.bitwizard.nl/mtr/files/",
+          "checkedAt": "2026-11-26",
+          "platform": "Source build",
+          "format": "TAR.GZ",
+          "version": "0.96"
+        }
+      ]
+    },
+    "remmina": {
+      "officialUrl": "https://remmina.org/",
+      "primary": {
+        "kind": "package",
+        "label": "Install Linux package · Flatpak or distribution",
+        "url": "https://www.remmina.org/how-to-install-remmina/",
+        "evidenceUrl": "https://www.remmina.org/how-to-install-remmina/",
+        "checkedAt": "2026-11-26",
+        "platform": "Linux"
+      },
+      "alternates": [
+        {
+          "kind": "source",
+          "label": "Open upstream source and build guidance",
+          "url": "https://gitlab.com/Remmina/Remmina",
+          "evidenceUrl": "https://www.remmina.org/how-to-install-remmina/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "syncthing": {
+      "officialUrl": "https://syncthing.net/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 · ZIP",
+        "url": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip",
+        "evidenceUrl": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "architecture": "x64",
+        "version": "2.1.7"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows ARM64 · ZIP",
+          "url": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-arm64-v2.1.7.zip",
+          "evidenceUrl": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "format": "ZIP",
+          "architecture": "ARM64",
+          "version": "2.1.7"
+        },
+        {
+          "kind": "file",
+          "label": "Download macOS universal · ZIP",
+          "url": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-macos-universal-v2.1.7.zip",
+          "evidenceUrl": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7",
+          "checkedAt": "2026-11-26",
+          "platform": "macOS",
+          "format": "ZIP",
+          "architecture": "x64 / ARM64",
+          "version": "2.1.7"
+        },
+        {
+          "kind": "file",
+          "label": "Download Linux x64 · TAR.GZ",
+          "url": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-linux-amd64-v2.1.7.tar.gz",
+          "evidenceUrl": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7",
+          "checkedAt": "2026-11-26",
+          "platform": "Linux",
+          "format": "TGZ",
+          "architecture": "x64",
+          "version": "2.1.7"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other operating systems and architectures",
+          "url": "https://syncthing.net/downloads/",
+          "evidenceUrl": "https://syncthing.net/downloads/",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "diskspd": {
+      "officialUrl": "https://github.com/microsoft/diskspd",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64/ARM64 tools · ZIP",
+        "url": "https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP",
+        "evidenceUrl": "https://github.com/microsoft/diskspd/releases/tag/v2.3",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "architecture": "x64 / ARM64",
+        "version": "2.3"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "Release notes and other versions",
+          "url": "https://github.com/microsoft/diskspd/releases",
+          "evidenceUrl": "https://github.com/microsoft/diskspd/releases",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "winmerge": {
+      "officialUrl": "https://winmerge.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip",
+        "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "architecture": "x64",
+        "version": "2.16.60"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows x64 installer · EXE",
+          "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/WinMerge-2.16.60-x64-Setup.exe",
+          "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "format": "EXE",
+          "architecture": "x64",
+          "version": "2.16.60"
+        },
+        {
+          "kind": "file",
+          "label": "Download Windows ARM64 portable · ZIP",
+          "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-ARM64-exe.zip",
+          "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "format": "ZIP",
+          "architecture": "ARM64",
+          "version": "2.16.60"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other builds and published checksums",
+          "url": "https://winmerge.org/downloads/index.php",
+          "evidenceUrl": "https://winmerge.org/downloads/index.php",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "sumatrapdf": {
+      "officialUrl": "https://www.sumatrapdfreader.org/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64.zip",
+        "evidenceUrl": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "architecture": "x64",
+        "version": "3.6.1"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows x64 installer · EXE",
+          "url": "https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-64-install.exe",
+          "evidenceUrl": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "format": "EXE",
+          "architecture": "x64",
+          "version": "3.6.1"
+        },
+        {
+          "kind": "file",
+          "label": "Download Windows ARM64 portable · ZIP",
+          "url": "https://www.sumatrapdfreader.org/dl/rel/3.6.1/SumatraPDF-3.6.1-arm64.zip",
+          "evidenceUrl": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "format": "ZIP",
+          "architecture": "ARM64",
+          "version": "3.6.1"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other stable Windows builds",
+          "url": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+          "evidenceUrl": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+          "checkedAt": "2026-11-26"
+        }
+      ]
+    },
+    "netbootxyz": {
+      "officialUrl": "https://netboot.xyz/",
+      "primary": {
+        "kind": "file",
+        "label": "Download PC network-boot image · ISO",
+        "url": "https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.iso",
+        "evidenceUrl": "https://github.com/netbootxyz/netboot.xyz/releases/tag/3.0.3",
+        "checkedAt": "2026-11-26",
+        "platform": "BIOS / UEFI PC",
+        "format": "ISO",
+        "id": "pc-iso",
+        "version": "3.0.3"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download ARM64 network-boot image · ISO",
+          "url": "https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz-arm64.iso",
+          "evidenceUrl": "https://github.com/netbootxyz/netboot.xyz/releases/tag/3.0.3",
+          "checkedAt": "2026-11-26",
+          "platform": "UEFI ARM64",
+          "format": "ISO",
+          "id": "arm64-iso",
+          "architecture": "ARM64",
+          "version": "3.0.3"
+        },
+        {
+          "kind": "file",
+          "label": "Download multi-architecture boot image · ISO",
+          "url": "https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz-multiarch.iso",
+          "evidenceUrl": "https://github.com/netbootxyz/netboot.xyz/releases/tag/3.0.3",
+          "checkedAt": "2026-11-26",
+          "platform": "PC / ARM64",
+          "format": "ISO",
+          "id": "multiarch-iso",
+          "architecture": "x64 / ARM64",
+          "version": "3.0.3"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other loaders and rolling builds",
+          "url": "https://netboot.xyz/downloads/",
+          "evidenceUrl": "https://netboot.xyz/downloads/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Versioned 3.0.3 ISO assets are offered here. The publisher download page separately offers rolling bootloaders; the two release types are identified explicitly."
+    },
+    "promptfoo": {
+      "officialUrl": "https://www.promptfoo.dev/",
+      "primary": {
+        "kind": "package",
+        "label": "Install CLI through npm · Node.js required",
+        "url": "https://www.promptfoo.dev/docs/installation/",
+        "evidenceUrl": "https://www.promptfoo.dev/docs/installation/",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows / macOS / Linux",
+        "version": "0.126.0"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download npm package archive · TGZ",
+          "url": "https://registry.npmjs.org/promptfoo/-/promptfoo-0.126.0.tgz",
+          "evidenceUrl": "https://registry.npmjs.org/promptfoo/latest",
+          "checkedAt": "2026-11-26",
+          "platform": "Node.js runtime",
+          "format": "TGZ",
+          "version": "0.126.0"
+        }
+      ],
+      "note": "The TGZ is an npm package archive, not a standalone Windows installer. CLI version 0.126.0 was read from the official npm registry; unrelated GitHub action-release tags were not used as the CLI version."
+    },
+    "windows-laps": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview",
+      "primary": {
+        "kind": "builtin",
+        "label": "Configure built-in administrator password management",
+        "url": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows / Windows Server"
+      },
+      "alternates": [
+        {
+          "kind": "builtin",
+          "label": "Configure Active Directory backup",
+          "url": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-windows-server-active-directory",
+          "checkedAt": "2026-11-26",
+          "id": "active-directory",
+          "platform": "Windows / Windows Server"
+        },
+        {
+          "kind": "builtin",
+          "label": "Configure Microsoft Entra backup",
+          "url": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-azure-active-directory",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-azure-active-directory",
+          "checkedAt": "2026-11-26",
+          "id": "entra",
+          "platform": "Windows / Windows Server"
+        }
+      ]
+    },
+    "sysmon": {
+      "officialUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows monitoring tools · ZIP",
+        "url": "https://download.sysinternals.com/files/Sysmon.zip",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "format": "ZIP",
+        "version": "15.22"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "Read installation and event configuration",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+          "evidenceUrl": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "This is a focused entry for the persistent telemetry component also distributed in Sysinternals Suite. The catalog links to the publisher; it does not redistribute the utility."
     }
   }
 }

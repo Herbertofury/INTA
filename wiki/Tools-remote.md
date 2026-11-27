@@ -1,4 +1,4 @@
-[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
+[INTA](https://github.com/Herbertofury/INTA/wiki) / [Decision desk](https://github.com/Herbertofury/INTA/wiki/Decision-Desk) · [Service map](https://github.com/Herbertofury/INTA/wiki/Service-Map) · [Playbooks](https://github.com/Herbertofury/INTA/wiki/Playbooks) · [Tools](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Methods](https://github.com/Herbertofury/INTA/wiki/Methods) · [Open hub](https://herbertofury.github.io/INTA/)
 
 <a id="️-remote-support"></a>
 <a id="-remote-support"></a>
@@ -7,7 +7,7 @@
 
 Match an [attended support session](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) or a managed endpoint to the right access model.
 
-**8 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**9 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** One-time help or recurring managed access?
 
@@ -33,6 +33,7 @@ Match an [attended support session](https://github.com/Herbertofury/INTA/wiki/Jo
 | [RustDesk](#rustdesk) | A flexible remote-control option across mixed client platforms. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://rustdesk.com/) · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)** |
 | [Tailscale](#tailscale) | Remote administration of private services without exposing them directly to the internet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://tailscale.com/) · **[Download Windows x64 MSI](https://dl.tailscale.com/stable/tailscale-setup-1.104.7-amd64.msi)** |
 | [AnyDesk](#anydesk) | Client support when the customer already standardizes on [AnyDesk](https://anydesk.com/). | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://anydesk.com/) · **[Download Windows EXE](https://download.anydesk.com/AnyDesk.exe)** |
+| [Remmina](#remmina) | Connecting a [Linux](https://www.kernel.org/) technician workstation to an already configured remote desktop or server. | [Linux](https://www.kernel.org/) · Specialist | [Official page](https://remmina.org/) · **[Install Linux package · Flatpak or distribution](https://www.remmina.org/how-to-install-remmina/)** |
 | [ScreenConnect](#screenconnect) | A ticket-oriented remote-support workflow with technician administration. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://www.screenconnect.com/) · **[Client installer setup instructions](https://www.screenconnect.com/pricing/unattended-access)** |
 | [TeamViewer Remote](#teamviewer) | Supporting customers whose approved remote-access stack uses [TeamViewer](https://www.teamviewer.com/). | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Specialist | [Official page](https://www.teamviewer.com/) · **[Download Windows x64 EXE](https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe)** |
 
@@ -217,6 +218,40 @@ Remote desktop and support software with business plans and portable client opti
 - **Evidence status:** Documentation reviewed; not an INTA runtime certification
 - **Selection provenance:**
   - Official project or vendor documentation
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="remmina"></a>
+
+## [Remmina](https://remmina.org/)
+
+[Linux](https://www.kernel.org/) desktop client for RDP, VNC, SSH and other remote-access protocols through plugins.
+
+[Official page](https://remmina.org/) · **[Install Linux package · Flatpak or distribution](https://www.remmina.org/how-to-install-remmina/)** · [Open upstream source and build guidance](https://gitlab.com/Remmina/Remmina) · [Documentation](https://www.remmina.org/how-to-install-remmina/)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Connecting a [Linux](https://www.kernel.org/) technician workstation to an already configured remote desktop or server. |
+| **Where it runs** | [Linux](https://www.kernel.org/) |
+| **How you use it** | installed |
+| **Access / pricing** | Free and open source under GPL-2.0-or-later |
+| **Selection role** | Specialist |
+
+> **Before using it:** This is a client: the target protocol, network access and authorized account must already be available. Package plugins and keyring integration vary. Verify host identity and certificate warnings; stored profiles may contain sensitive connection details.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://remmina.org/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Primary documentation reviewed; published file routes were checked with bounded response samples where supplied. No INTA installation, hardware, recovery or efficacy test is claimed.
+- **Selection provenance:**
+  - Current primary documentation and publisher acquisition sources
+  - https://remmina.org/
+  - https://www.remmina.org/how-to-install-remmina/
+  - https://gitlab.com/Remmina/Remmina/blob/master/COPYING
 
 </details>
 

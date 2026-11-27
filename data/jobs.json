@@ -10,7 +10,9 @@
       "process-explorer",
       "crystaldiskinfo",
       "sysinternals",
-      "hwinfo"
+      "hwinfo",
+      "usb-device-tree-view",
+      "powercfg"
     ],
     "startHere": "Ask the user to show the exact failing task once. Record what they expected, what happened, and when it last worked.",
     "steps": [
@@ -87,7 +89,8 @@
       "autoruns",
       "defender-offline",
       "sysinternals",
-      "malwarebytes"
+      "malwarebytes",
+      "sysmon"
     ],
     "startHere": "Check for active encryption, credential theft, unusual administrator accounts, or more affected machines before treating this as a routine cleanup.",
     "steps": [
@@ -200,7 +203,8 @@
     "difficulty": "Advanced",
     "tools": [
       "sysinternals",
-      "wireshark"
+      "wireshark",
+      "sysmon"
     ],
     "startHere": "Treat live encryption, ransom notes, or several compromised systems as an incident. Start a private incident timeline and contact the designated incident lead.",
     "steps": [
@@ -283,7 +287,9 @@
       "hwinfo",
       "windows-performance-toolkit",
       "wiztree",
-      "wizfile"
+      "wizfile",
+      "powercfg",
+      "diskspd"
     ],
     "startHere": "Reproduce the exact slow action and measure it before changing anything. Ask whether the slowdown began after an update, new drive, app, or security product.",
     "steps": [
@@ -369,7 +375,9 @@
     "tools": [
       "dism",
       "sfc",
-      "windows-recovery"
+      "windows-recovery",
+      "setupdiag",
+      "winmerge"
     ],
     "startHere": "Confirm the drive is stable and the affected data is backed up. Repeated corruption or I/O errors need a hardware investigation first.",
     "steps": [
@@ -445,7 +453,8 @@
       "dism",
       "sfc",
       "windows-recovery",
-      "sysinternals"
+      "sysinternals",
+      "setupdiag"
     ],
     "startHere": "Write down the exact KB or feature update, error code, Windows edition/build, and whether the device is centrally managed.",
     "steps": [
@@ -693,7 +702,9 @@
       "robocopy",
       "winget",
       "clonezilla",
-      "crystaldiskinfo"
+      "crystaldiskinfo",
+      "syncthing",
+      "winmerge"
     ],
     "startHere": "Verify the source drive is healthy. A failing drive needs the recovery workflow instead of an ordinary clone.",
     "steps": [
@@ -845,7 +856,9 @@
       "powershell",
       "wireshark",
       "iperf3",
-      "sysinternals"
+      "sysinternals",
+      "curl",
+      "mtr"
     ],
     "startHere": "Determine whether the problem affects one app, one device, one network segment, or every device. Capture the working and failing cases.",
     "steps": [
@@ -924,7 +937,9 @@
       "powershell",
       "quick-machine-recovery",
       "smartmontools",
-      "sysinternals"
+      "sysinternals",
+      "curl",
+      "mtr"
     ],
     "startHere": "Confirm power is stable and establish which devices and services are down. Use the site’s private dependency diagram and recovery plan.",
     "steps": [
@@ -998,7 +1013,8 @@
       "quick-assist",
       "rustdesk",
       "meshcentral",
-      "chrome-remote-desktop"
+      "chrome-remote-desktop",
+      "remmina"
     ],
     "startHere": "Confirm the customer, intended device, and requested task through the established service channel before exchanging a session code.",
     "steps": [
@@ -1107,7 +1123,8 @@
     "difficulty": "Advanced",
     "tools": [
       "powershell",
-      "sysinternals"
+      "sysinternals",
+      "windows-laps"
     ],
     "startHere": "Use this guide for an Active Directory member workstation or member server. Domain-controller trust repair needs its own procedure.",
     "steps": [
@@ -1179,7 +1196,8 @@
     "difficulty": "Intermediate",
     "tools": [
       "get-help",
-      "sysinternals"
+      "sysinternals",
+      "curl"
     ],
     "startHere": "Identify the mail provider and whether the user is in classic Outlook, new Outlook, or a browser. Their repair paths differ.",
     "steps": [
@@ -1252,7 +1270,9 @@
       "advanced-ip-scanner",
       "powershell",
       "naps2",
-      "sysinternals"
+      "sysinternals",
+      "usb-device-tree-view",
+      "sumatrapdf"
     ],
     "startHere": "Identify the exact printer and queue. Check whether another user or application can print to the same device.",
     "steps": [
@@ -1342,7 +1362,10 @@
       "libre-hardware-monitor",
       "crystaldiskinfo",
       "hwinfo",
-      "sysinternals"
+      "sysinternals",
+      "usb-device-tree-view",
+      "powercfg",
+      "diskspd"
     ],
     "startHere": "Record the exact stop code, timestamp, workload, recent hardware/driver changes, and whether the machine restarted or lost power.",
     "steps": [
@@ -1418,7 +1441,11 @@
       "powertoys",
       "veeam-agent",
       "rustdesk",
-      "meshcentral"
+      "meshcentral",
+      "windows-sandbox",
+      "syncthing",
+      "netbootxyz",
+      "windows-laps"
     ],
     "startHere": "Collect the job role, approved applications, identity/join requirements, data sources, printers, and acceptance tests before provisioning.",
     "steps": [
@@ -1487,7 +1514,9 @@
     "summary": "Turn completed technical work into proof the customer can use, with clean access and an actionable service record.",
     "estimatedTime": "10–20 min",
     "difficulty": "Starter",
-    "tools": [],
+    "tools": [
+      "winmerge"
+    ],
     "startHere": "Return to the acceptance test written at intake. A completed checklist is useful only when the customer’s original task works.",
     "steps": [
       {
@@ -1556,7 +1585,8 @@
       "microsoft-windows11-media",
       "systemrescue",
       "hirens-bootcd-pe",
-      "rescuezilla"
+      "rescuezilla",
+      "netbootxyz"
     ],
     "startHere": "Choose a known USB drive and copy off anything that must be kept. Confirm its model, capacity, and contents before a media-writing operation.",
     "steps": [
@@ -1636,7 +1666,9 @@
     "tools": [
       "chatgpt",
       "codex-cli",
-      "claude-code"
+      "claude-code",
+      "windows-sandbox",
+      "promptfoo"
     ],
     "startHere": "Start with a concrete symptom and sanitized evidence. Decide whether the task is explanation, log analysis, script review, or a proposed diagnostic plan.",
     "steps": [
@@ -1713,7 +1745,10 @@
       "sysinternals",
       "veeam-agent",
       "wiztree",
-      "wizfile"
+      "wizfile",
+      "powercfg",
+      "windows-laps",
+      "sysmon"
     ],
     "startHere": "Agree on the maintenance window and identify the user’s current pain points. Preserve a baseline of the system’s normal work.",
     "steps": [
