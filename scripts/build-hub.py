@@ -1150,7 +1150,7 @@ def validate_updates_center(catalog: dict) -> None:
             raise ValueError(f"{identity}: source must be public HTTPS")
         if len(item["code"]) > 16000:
             raise ValueError(f"{identity}: command exceeds size limit")
-        if re.search(r"(?i)(?:irm|iwr|curl)\\b[^\\n|]*\\|\\s*(?:iex|invoke-expression)", item["code"]):
+        if re.search(r"(?i)(?:irm|iwr|curl)\b[^\n|]*\|\s*(?:iex|invoke-expression)", item["code"]):
             raise ValueError(f"{identity}: remote download-and-execute pipeline prohibited")
     channel_ids = set()
     for channel in catalog.get("channels", []):
