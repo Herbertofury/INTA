@@ -495,6 +495,32 @@
       "safety": "Changes the entire installed system. Arch does not support partial upgrades; read Arch news first and avoid interrupting package transactions.",
       "sourceUrl": "https://wiki.archlinux.org/title/System_maintenance",
       "sourceTitle": "Arch Linux system maintenance"
+    },
+    {
+      "id": "ninitepro-audit",
+      "title": "Audit applications managed by Ninite Pro",
+      "category": "updates",
+      "shell": "CMD",
+      "privilege": "Ninite Pro license",
+      "risk": "read-only",
+      "summary": "Create an application audit report with Ninite Pro Classic.",
+      "code": "NinitePro.exe /audit /silent audit-report.txt",
+      "safety": "Requires a valid Ninite Pro license and the NinitePro executable in the current directory or PATH. Audit output can reveal installed software and device details; store it privately. Ninite Pro Classic and the newer Pro web interface have different documentation and capabilities.",
+      "sourceUrl": "https://ninite.com/help/features/selection.html",
+      "sourceTitle": "Ninite Pro command-line selection and audit"
+    },
+    {
+      "id": "ninitepro-update",
+      "title": "Update outdated applications with Ninite Pro",
+      "category": "updates",
+      "shell": "CMD",
+      "privilege": "Ninite Pro license",
+      "risk": "changes-system",
+      "summary": "Update only applications Ninite Pro identifies as outdated.",
+      "code": "NinitePro.exe /updateonly /silent update-report.txt",
+      "safety": "Requires a valid Ninite Pro license and an approved maintenance window. This is a silent system-changing update. Confirm the device target, app selection, exclusions and report path first. Review the report and verify affected apps after completion. Do not confuse Ninite Pro commands with the free home installer.",
+      "sourceUrl": "https://ninite.com/help/features/selection.html",
+      "sourceTitle": "Ninite Pro command-line selection"
     }
   ],
   "workflows": [
@@ -663,6 +689,28 @@
       "repository": "https://github.com/Devolutions/UniGetUI",
       "installCommandId": null,
       "trust": "Use its official release page and verify the publisher; package coverage depends on configured managers."
+    },
+    {
+      "id": "ninite-pro",
+      "name": "Ninite Pro",
+      "kind": "commercial-app-patching",
+      "platform": "Windows",
+      "summary": "Commercial app deployment and patching with command-line selection, update-only, audit and remote-management workflows. Requires a paid license.",
+      "url": "https://ninite.com/pro",
+      "repository": "https://ninite.com/help/",
+      "installCommandId": "ninitepro-audit",
+      "trust": "Commercial licensed product. Command-line switches vary between Pro Classic and the newer Pro web interface; check the current account documentation before automation."
+    },
+    {
+      "id": "patch-my-pc-home-updater",
+      "name": "Patch My PC Home Updater",
+      "kind": "consumer-app-updater",
+      "platform": "Windows 64-bit",
+      "summary": "Consumer app updater with scheduled checks and a graphical update workflow. Not licensed for commercial/technician use.",
+      "url": "https://patchmypc.com/home-updater/",
+      "repository": "https://patchmypc.com/faq/category/home-updater/",
+      "installCommandId": null,
+      "trust": "Home Updater is restricted to non-commercial use; do not deploy on INTA customer or business endpoints. Review Patch My PC's commercial products instead."
     }
   ],
   "policies": {
