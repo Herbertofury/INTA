@@ -176,14 +176,27 @@
         "kind": "file",
         "label": "Download Windows x64 · EXE",
         "url": "https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe",
-        "evidenceUrl": "https://api.github.com/repos/rustdesk/rustdesk/releases/latest",
-        "checkedAt": "2026-11-26",
+        "evidenceUrl": "https://api.github.com/repos/rustdesk/rustdesk/releases/tags/1.5.3",
+        "checkedAt": "2026-11-27",
         "platform": "Windows",
         "architecture": "x64",
         "format": "EXE",
-        "version": "1.5.3"
+        "version": "1.5.3",
+        "sha256": "523ba0efbf62a21739961b62c7daaffb44d3da86139c546b364fd4e1333ed249"
       },
       "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows ARM64 · EXE",
+          "url": "https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-aarch64.exe",
+          "evidenceUrl": "https://api.github.com/repos/rustdesk/rustdesk/releases/tags/1.5.3",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "EXE",
+          "version": "1.5.3",
+          "sha256": "4152a661be3ddb0e4d241ba3f3a99051f22ce33d348e7a1ccfaca052c832410e"
+        },
         {
           "kind": "release-page",
           "label": "All download options",
@@ -191,7 +204,8 @@
           "evidenceUrl": "https://github.com/rustdesk/rustdesk/releases/latest",
           "checkedAt": "2026-11-26"
         }
-      ]
+      ],
+      "note": "These SHA-256 values are from the upstream release API for the exact assets; INTA has not installed or tested them. Choose your Windows architecture."
     },
     "winget": {
       "officialUrl": "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
@@ -199,11 +213,12 @@
         "kind": "file",
         "label": "Download App Installer · MSIXBUNDLE",
         "url": "https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
-        "evidenceUrl": "https://api.github.com/repos/microsoft/winget-cli/releases/latest",
-        "checkedAt": "2026-11-26",
+        "evidenceUrl": "https://api.github.com/repos/microsoft/winget-cli/releases/tags/v1.29.380",
+        "checkedAt": "2026-11-27",
         "platform": "Windows",
         "format": "MSIXBUNDLE",
-        "version": "v1.29.380"
+        "version": "v1.29.380",
+        "sha256": "65dea9c01ce08ee7b763366b27c0e651f97db857c11ca9b9c301826c10092f2e"
       },
       "alternates": [
         {
@@ -221,12 +236,13 @@
         "kind": "file",
         "label": "Download Windows x64 portable · ZIP",
         "url": "https://github.com/PowerShell/PowerShell/releases/download/v7.7.0/PowerShell-7.7.0-win-x64.zip",
-        "evidenceUrl": "https://api.github.com/repos/PowerShell/PowerShell/releases/latest",
-        "checkedAt": "2026-11-26",
+        "evidenceUrl": "https://api.github.com/repos/PowerShell/PowerShell/releases/tags/v7.7.0",
+        "checkedAt": "2026-11-27",
         "platform": "Windows",
         "architecture": "x64",
         "format": "ZIP",
-        "version": "v7.7.0"
+        "version": "v7.7.0",
+        "sha256": "7c74e03b20a75b59715847439d046a6214b1863ee79b187872980f139bb4a05f"
       },
       "alternates": [
         {
@@ -254,12 +270,13 @@
         "kind": "file",
         "label": "Download Windows x64 portable · ZIP",
         "url": "https://github.com/microsoft/terminal/releases/download/v1.25.3131.0/Microsoft.WindowsTerminal_1.25.3131.0_x64.zip",
-        "evidenceUrl": "https://api.github.com/repos/microsoft/terminal/releases/latest",
-        "checkedAt": "2026-11-26",
+        "evidenceUrl": "https://api.github.com/repos/microsoft/terminal/releases/tags/v1.25.3131.0",
+        "checkedAt": "2026-11-27",
         "platform": "Windows",
         "architecture": "x64",
         "format": "ZIP",
-        "version": "v1.25.3131.0"
+        "version": "v1.25.3131.0",
+        "sha256": "273d6f1502eca1b5bd95c43f5d4d7ec72cc503df340102f8659717e5bead3437"
       },
       "alternates": [
         {
@@ -277,12 +294,13 @@
         "kind": "file",
         "label": "Download Windows x64 · MSI",
         "url": "https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi",
-        "evidenceUrl": "https://api.github.com/repos/windirstat/windirstat/releases/latest",
-        "checkedAt": "2026-11-26",
+        "evidenceUrl": "https://api.github.com/repos/windirstat/windirstat/releases/tags/release/v2.9.3",
+        "checkedAt": "2026-11-27",
         "platform": "Windows",
         "architecture": "x64",
         "format": "MSI",
-        "version": "release/v2.9.3"
+        "version": "release/v2.9.3",
+        "sha256": "96c4c4beb63c7c5ad6b1a206f96560d7a9a2b6063f3cd175a82f392977a9af5d"
       },
       "alternates": [
         {
@@ -344,12 +362,13 @@
         "kind": "file",
         "label": "Download Windows x64 · ZIP",
         "url": "https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip",
-        "evidenceUrl": "https://api.github.com/repos/restic/restic/releases/latest",
-        "checkedAt": "2026-11-26",
+        "evidenceUrl": "https://api.github.com/repos/restic/restic/releases/tags/v0.20.0",
+        "checkedAt": "2026-11-27",
         "platform": "Windows",
         "architecture": "x64",
         "format": "ZIP",
-        "version": "v0.20.0"
+        "version": "v0.20.0",
+        "sha256": "bba9061c3dce081701ab353ec8cb73a78be73b71a538aad560f2d1067602b7fe"
       },
       "alternates": [
         {
@@ -394,7 +413,8 @@
         "platform": "Windows",
         "architecture": "x64",
         "format": "EXE",
-        "version": "v0.102.3101"
+        "version": "v0.102.3101",
+        "sha256": "4b4c49a31e8b7e6a36647ccd3033acb0ad56c306595a9409e59865c3c27d1cf2"
       },
       "alternates": [
         {
@@ -403,6 +423,19 @@
           "url": "https://github.com/microsoft/PowerToys/releases/latest",
           "evidenceUrl": "https://github.com/microsoft/PowerToys/releases/latest",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-arm64-user-exe",
+          "kind": "file",
+          "label": "Download Windows ARM64 per-user setup · EXE",
+          "url": "https://github.com/microsoft/PowerToys/releases/download/v0.102.3101/PowerToysUserSetup-0.102.3101.0-arm64.exe",
+          "evidenceUrl": "https://github.com/microsoft/PowerToys/releases/tag/v0.102.3101",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "EXE",
+          "version": "0.102.3101",
+          "sha256": "e80d5e784173101bbb4bd95ede66cf1974c230ca81ebeb16feba25fdd5ffce87"
         }
       ]
     },
@@ -463,7 +496,8 @@
         "platform": "Windows",
         "architecture": "x64",
         "format": "EXE",
-        "version": "rust-v0.172.0"
+        "version": "rust-v0.172.0",
+        "sha256": "3f42b12274b353ecb3ec555e6c8d0a43f6c6cb29c3a546179bc12dee4855deb6"
       },
       "alternates": [
         {
@@ -472,6 +506,19 @@
           "url": "https://github.com/openai/codex/releases/latest",
           "evidenceUrl": "https://github.com/openai/codex/releases/latest",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-arm64-exe",
+          "kind": "file",
+          "label": "Download Windows ARM64 CLI · EXE",
+          "url": "https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-aarch64-pc-windows-msvc.exe",
+          "evidenceUrl": "https://github.com/openai/codex/releases/tag/rust-v0.172.0",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "EXE",
+          "version": "rust-v0.172.0",
+          "sha256": "e84e514bc87bd84292d835bc03d037d4b97c40677e368e4c9cadf88113be9015"
         }
       ]
     },
@@ -485,7 +532,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Cross-platform",
         "format": "ZIP",
-        "version": "v0.71.1"
+        "version": "v0.71.1",
+        "sha256": "2761ebcdf6a0e5610e80a6541596ba9c71cdcf13ce837f3a7cba8c3763ff7f62"
       },
       "alternates": [
         {
@@ -509,7 +557,8 @@
         "platform": "Windows",
         "architecture": "x64",
         "format": "ZIP",
-        "version": "v1.25.0"
+        "version": "v1.25.0",
+        "sha256": "9798c3bcb81652df005f00b9b72e92732c998e925a2973dbd2558ad6f5ccc0ea"
       },
       "alternates": [
         {
@@ -518,6 +567,19 @@
           "url": "https://github.com/VirusTotal/yara-x/releases/latest",
           "evidenceUrl": "https://github.com/VirusTotal/yara-x/releases/latest",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-arm64-zip",
+          "kind": "file",
+          "label": "Download Windows ARM64 CLI · ZIP",
+          "url": "https://github.com/VirusTotal/yara-x/releases/download/v1.25.0/yara-x-v1.25.0-aarch64-pc-windows-msvc.zip",
+          "evidenceUrl": "https://github.com/VirusTotal/yara-x/releases/tag/v1.25.0",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "ZIP",
+          "version": "v1.25.0",
+          "sha256": "63f477a6e462ef96a32950adf1beb6ca428eb261e458318ac067fc61191e997c"
         }
       ]
     },
@@ -687,13 +749,14 @@
       "primary": {
         "kind": "file",
         "label": "Download Windows x64 · ZIP",
-        "url": "https://github.com/Yamato-Security/hayabusa/releases/download/v4.4.0/hayabusa-4.4.0-win-x64.zip",
-        "evidenceUrl": "https://api.github.com/repos/Yamato-Security/hayabusa/releases/latest",
-        "checkedAt": "2026-11-26",
+        "url": "https://github.com/Yamato-Security/hayabusa/releases/download/v4.5.0/hayabusa-4.5.0-win-x64.zip",
+        "evidenceUrl": "https://github.com/Yamato-Security/hayabusa/releases/tag/v4.5.0",
+        "checkedAt": "2026-11-27",
         "platform": "Windows",
         "architecture": "x64",
         "format": "ZIP",
-        "version": "v4.4.0"
+        "version": "v4.5.0",
+        "sha256": "b54f159427158bcc10c7695188a63db85a1c5181f15c20ea5baf4c05968ac6a9"
       },
       "alternates": [
         {
@@ -702,6 +765,32 @@
           "url": "https://github.com/Yamato-Security/hayabusa/releases/latest",
           "evidenceUrl": "https://github.com/Yamato-Security/hayabusa/releases/latest",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-arm64-zip",
+          "kind": "file",
+          "label": "Download Windows ARM64 · ZIP",
+          "url": "https://github.com/Yamato-Security/hayabusa/releases/download/v4.5.0/hayabusa-4.5.0-win-aarch64.zip",
+          "evidenceUrl": "https://github.com/Yamato-Security/hayabusa/releases/tag/v4.5.0",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "ZIP",
+          "version": "v4.5.0",
+          "sha256": "b1a21d7c7cc8acff647b217a70fe89ddc2e6d9348555cdaf0c24718b37fce965"
+        },
+        {
+          "id": "win-x86-zip",
+          "kind": "file",
+          "label": "Download Windows x86 · ZIP",
+          "url": "https://github.com/Yamato-Security/hayabusa/releases/download/v4.5.0/hayabusa-4.5.0-win-x86.zip",
+          "evidenceUrl": "https://github.com/Yamato-Security/hayabusa/releases/tag/v4.5.0",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "x86",
+          "format": "ZIP",
+          "version": "v4.5.0",
+          "sha256": "dd65f22e13054a7493392bf0f936aa29bab3349101c30e6efd5fcdc14b0d936d"
         }
       ]
     },
@@ -738,7 +827,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "format": "ZIP",
-        "version": "v2.28.2"
+        "version": "v2.28.2",
+        "sha256": "7ccd2394589bf15d88fb20b242157b93771bce26c0b3aafbba8f2c168a337fa5"
       },
       "alternates": [
         {
@@ -1149,11 +1239,12 @@
         "kind": "file",
         "label": "Download x64 rescue image · ISO",
         "url": "https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso",
-        "evidenceUrl": "https://rescuezilla.com/download",
-        "checkedAt": "2026-11-26",
+        "evidenceUrl": "https://api.github.com/repos/rescuezilla/rescuezilla/releases/tags/2.6.2",
+        "checkedAt": "2026-11-27",
         "platform": "Boot media",
         "architecture": "x64",
-        "format": "ISO"
+        "format": "ISO",
+        "sha256": "20dfdad31d3da56b8dd3978159721f19071916f65e123003a850fdecec85ae3f"
       },
       "alternates": [
         {
@@ -1272,6 +1363,32 @@
           "url": "https://ollama.com/download",
           "evidenceUrl": "https://ollama.com/download",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-x64-cli-zip",
+          "kind": "file",
+          "label": "Download Windows x64 standalone package · ZIP",
+          "url": "https://github.com/ollama/ollama/releases/download/v0.40.18/ollama-windows-amd64.zip",
+          "evidenceUrl": "https://github.com/ollama/ollama/releases/tag/v0.40.18",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "x64",
+          "format": "ZIP",
+          "version": "v0.40.18",
+          "sha256": "ca97292ac1e9acc77fcf473bb2741fa6acd12e3798f261b419680068b7cc4c16"
+        },
+        {
+          "id": "win-arm64-cli-zip",
+          "kind": "file",
+          "label": "Download Windows ARM64 standalone package · ZIP",
+          "url": "https://github.com/ollama/ollama/releases/download/v0.40.18/ollama-windows-arm64.zip",
+          "evidenceUrl": "https://github.com/ollama/ollama/releases/tag/v0.40.18",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "ZIP",
+          "version": "v0.40.18",
+          "sha256": "671d27e9f93e14662f3941d705e4b3626fc05bd120055f160489c80c9c552912"
         }
       ]
     },
@@ -1322,7 +1439,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "architecture": "x64",
-        "format": "MSI"
+        "format": "MSI",
+        "sha256": "f0f368e10cf615a805c85248356673a00c88a5e19c3b632859a1c98569ae03b6"
       },
       "alternates": [
         {
@@ -1404,7 +1522,8 @@
         "platform": "Windows",
         "architecture": "x64",
         "format": "EXE",
-        "version": "v4.16"
+        "version": "v4.16",
+        "sha256": "8351a56c134aa6dd26a930d702cc3fd57f11ef90b17e55a8de960d5a73d46cfc"
       },
       "alternates": [
         {
@@ -1413,6 +1532,19 @@
           "url": "https://rufus.ie/#download",
           "evidenceUrl": "https://rufus.ie/#download",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-arm64-exe",
+          "kind": "file",
+          "label": "Download Windows ARM64 · EXE",
+          "url": "https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16_arm64.exe",
+          "evidenceUrl": "https://github.com/pbatard/rufus/releases/tag/v4.16",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "EXE",
+          "version": "v4.16",
+          "sha256": "301e7bfe41d7fa15bf75da189302eb797986a77629ea4e41b172431beef2744c"
         }
       ]
     },
@@ -1426,7 +1558,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "format": "ZIP",
-        "version": "v1.1.18"
+        "version": "v1.1.18",
+        "sha256": "082c478e8c432e1ac653899fcf50e3a4077a2851bc6112b5ddd30545962164a9"
       },
       "alternates": [
         {
@@ -1435,6 +1568,30 @@
           "url": "https://www.ventoy.net/en/download.html",
           "evidenceUrl": "https://www.ventoy.net/en/download.html",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "linux-tar",
+          "kind": "file",
+          "label": "Download Linux package · TAR.GZ",
+          "url": "https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-linux.tar.gz",
+          "evidenceUrl": "https://github.com/ventoy/Ventoy/releases/tag/v1.1.18",
+          "checkedAt": "2026-11-27",
+          "platform": "Linux",
+          "format": "TAR.GZ",
+          "version": "v1.1.18",
+          "sha256": "d86ff9de63d94c8b8f1f6b14d23c55af4b88e8207bf2893890892a6a97b1ad54"
+        },
+        {
+          "id": "livecd-iso",
+          "kind": "file",
+          "label": "Download standalone LiveCD · ISO",
+          "url": "https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-livecd.iso",
+          "evidenceUrl": "https://github.com/ventoy/Ventoy/releases/tag/v1.1.18",
+          "checkedAt": "2026-11-27",
+          "platform": "Boot media",
+          "format": "ISO",
+          "version": "v1.1.18",
+          "sha256": "ee3917bd5a9973c0b2f8f3ef85048bf68ae089ec88f5561ad78b6ad308b51ab5"
         }
       ]
     },
@@ -1449,7 +1606,8 @@
         "platform": "Windows",
         "architecture": "x64",
         "format": "ZIP",
-        "version": "v1.19.0"
+        "version": "v1.19.0",
+        "sha256": "1b131a225e30bb46c7b4ffee23577716b2d0605108aded27899375033ff69abc"
       },
       "alternates": [
         {
@@ -1458,6 +1616,19 @@
           "url": "https://localsend.org/download",
           "evidenceUrl": "https://localsend.org/download",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-arm64-zip",
+          "kind": "file",
+          "label": "Download Windows ARM64 · ZIP",
+          "url": "https://github.com/localsend/localsend/releases/download/v1.19.0/LocalSend-1.19.0-windows-arm-64.zip",
+          "evidenceUrl": "https://github.com/localsend/localsend/releases/tag/v1.19.0",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "ZIP",
+          "version": "1.19.0",
+          "sha256": "581f4daa9bc2a8ae1015abd0090d0b3f434a805ce7bf578eae67265866678309"
         }
       ]
     },
@@ -1467,11 +1638,12 @@
         "kind": "file",
         "label": "Download Windows desktop · ZIP",
         "url": "https://github.com/kopia/kopia/releases/download/v0.23.1/KopiaUI-0.23.1-win.zip",
-        "evidenceUrl": "https://api.github.com/repos/kopia/kopia/releases/latest",
-        "checkedAt": "2026-11-26",
+        "evidenceUrl": "https://api.github.com/repos/kopia/kopia/releases/tags/v0.23.1",
+        "checkedAt": "2026-11-27",
         "platform": "Windows",
         "format": "ZIP",
-        "version": "v0.23.1"
+        "version": "v0.23.1",
+        "sha256": "66e1075a036e1b2446269c2a0d4d852e791a6ca0753d348cb85889f07ee04602"
       },
       "alternates": [
         {
@@ -1494,7 +1666,8 @@
         "platform": "Windows",
         "architecture": "x64",
         "format": "ZIP",
-        "version": "5.24.1"
+        "version": "5.24.1",
+        "sha256": "a71d6d3f57b9fb051988c341fd5186c548fcf83bc94f73cc2cc0a83d702391e9"
       },
       "alternates": [
         {
@@ -1503,6 +1676,31 @@
           "url": "https://osquery.io/downloads/",
           "evidenceUrl": "https://osquery.io/downloads/",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-arm64-zip",
+          "kind": "file",
+          "label": "Download Windows ARM64 · ZIP",
+          "url": "https://github.com/osquery/osquery/releases/download/5.24.1/osquery-5.24.1.windows_arm64.zip",
+          "evidenceUrl": "https://github.com/osquery/osquery/releases/tag/5.24.1",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "ZIP",
+          "version": "5.24.1",
+          "sha256": "a14a5d605298eb1eee90c9df59da341114d8b1b2014b3cfe557fa66940a83c6f"
+        },
+        {
+          "id": "windows-msi",
+          "kind": "file",
+          "label": "Download Windows installer · MSI",
+          "url": "https://github.com/osquery/osquery/releases/download/5.24.1/osquery-5.24.1.msi",
+          "evidenceUrl": "https://github.com/osquery/osquery/releases/tag/5.24.1",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "format": "MSI",
+          "version": "5.24.1",
+          "sha256": "36cc35dea559270c48040d894adde22785150bd2fcfe8f2489b86ead4688b004"
         }
       ]
     },
@@ -1516,7 +1714,8 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows",
         "architecture": "x64",
-        "format": "ZIP"
+        "format": "ZIP",
+        "sha256": "cbcefa34677e10fe6dd19802f7d6b3b9860cd6de62afeaae7680e09c51b47779"
       },
       "alternates": [
         {
@@ -1525,6 +1724,19 @@
           "url": "https://notepad-plus-plus.org/downloads/",
           "evidenceUrl": "https://notepad-plus-plus.org/downloads/",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-arm64-portable",
+          "kind": "file",
+          "label": "Download Windows ARM64 portable · ZIP",
+          "url": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.9.1/npp.8.9.9.1.portable.arm64.zip",
+          "evidenceUrl": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/tag/v8.9.9.1",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "ZIP",
+          "version": "8.9.9.1",
+          "sha256": "de0c5d1f15ccbdeac05421e1c282cb3d7e2da97bac674efa576d8ace04a5f20b"
         }
       ]
     },
@@ -2261,7 +2473,8 @@
         "platform": "Windows",
         "architecture": "x64",
         "format": "EXE",
-        "version": "26.06"
+        "version": "26.06",
+        "sha256": "9b697f65ecc2d9b0152f5ee96d72dde522a7827690349d9307935dacf40f42ec"
       },
       "alternates": [
         {
@@ -2273,7 +2486,8 @@
           "platform": "Windows",
           "architecture": "ARM64",
           "format": "EXE",
-          "version": "26.06"
+          "version": "26.06",
+          "sha256": "036a00d478ef81f4b4b85fb37b0f934d558341f3f51aa7d36d2a26454740e625"
         },
         {
           "kind": "release-page",
@@ -2281,6 +2495,19 @@
           "url": "https://www.7-zip.org/download.html",
           "evidenceUrl": "https://www.7-zip.org/download.html",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "linux-x64-tar",
+          "kind": "file",
+          "label": "Download Linux x64 CLI · TAR.XZ",
+          "url": "https://github.com/ip7z/7zip/releases/download/26.06/7z2606-linux-x64.tar.xz",
+          "evidenceUrl": "https://github.com/ip7z/7zip/releases/tag/26.06",
+          "checkedAt": "2026-11-27",
+          "platform": "Linux",
+          "architecture": "x64",
+          "format": "TAR.XZ",
+          "version": "26.06",
+          "sha256": "2b539cf067b2ad48e1baa5093dbaa8818b73542d1222a0ffde9dc5f2922ea62e"
         }
       ]
     },
@@ -2470,9 +2697,24 @@
           "url": "https://github.com/Ylianst/MeshCentral",
           "evidenceUrl": "https://github.com/Ylianst/MeshCentral",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "kind": "release-page",
+          "label": "MeshCentral 1.3.2 release notes",
+          "url": "https://github.com/Ylianst/MeshCentral/releases/tag/1.3.2",
+          "evidenceUrl": "https://github.com/Ylianst/MeshCentral/releases/tag/1.3.2",
+          "checkedAt": "2026-11-27"
+        },
+        {
+          "kind": "package",
+          "label": "Open MeshCentral server package on npm",
+          "url": "https://www.npmjs.com/package/meshcentral",
+          "evidenceUrl": "https://www.npmjs.com/package/meshcentral",
+          "checkedAt": "2026-11-27",
+          "version": "1.3.2"
         }
       ],
-      "note": "Install and configure the server with the documented Node.js package. Generate endpoint agents from your own server so they connect to the correct organization."
+      "note": "Install and configure the server with the documented Node.js package. Generate endpoint agents from your own server so they connect to the correct organization. GitHub and npm both list 1.3.2. Review the current release notes before exposing or upgrading a server; this release narrows the scope of device-share guest sessions."
     },
     "dislocker": {
       "officialUrl": "https://github.com/Aorimn/dislocker",
@@ -2697,7 +2939,8 @@
         "platform": "Windows",
         "architecture": "x64",
         "format": "ZIP",
-        "version": "8.6.1"
+        "version": "8.6.1",
+        "sha256": "62edd2b2a833dc097a0c8395de37757702ed19be2ade95921749a804a68927ae"
       },
       "alternates": [
         {
@@ -2709,7 +2952,8 @@
           "platform": "Windows",
           "architecture": "x64",
           "format": "EXE",
-          "version": "8.6.1"
+          "version": "8.6.1",
+          "sha256": "0aa5ab6797367a10e01063deff0e4e34c2163480038ec6570742e5cd213ee57d"
         },
         {
           "kind": "file",
@@ -2720,7 +2964,8 @@
           "platform": "Windows",
           "architecture": "ARM64",
           "format": "EXE",
-          "version": "8.6.1"
+          "version": "8.6.1",
+          "sha256": "39aff569dbd42d23a9833a023846f060edec0b1cad6639dc5b26e5b796c45a8a"
         },
         {
           "kind": "release-page",
@@ -2728,6 +2973,19 @@
           "url": "https://www.naps2.com/download",
           "evidenceUrl": "https://www.naps2.com/download",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-x64-msi",
+          "kind": "file",
+          "label": "Download Windows x64 installer · MSI",
+          "url": "https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.msi",
+          "evidenceUrl": "https://github.com/cyanfish/naps2/releases/tag/v8.6.1",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "x64",
+          "format": "MSI",
+          "version": "8.6.1",
+          "sha256": "db9768a748cc3de5b21a4fbab468deca900eec9acf7b2b52a8d257da996e9aa2"
         }
       ],
       "note": "The default is stable 8.6.1. The publisher also lists 9.0 beta; a beta is a separate evaluation choice. Use the operating-system and driver guidance for the target scanner."
@@ -2973,24 +3231,26 @@
         "kind": "file",
         "label": "Download Windows x64 · ZIP",
         "url": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-amd64-v2.1.7.zip",
-        "evidenceUrl": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7",
-        "checkedAt": "2026-11-26",
+        "evidenceUrl": "https://api.github.com/repos/syncthing/syncthing/releases/tags/v2.1.7",
+        "checkedAt": "2026-11-27",
         "platform": "Windows",
         "format": "ZIP",
         "architecture": "x64",
-        "version": "2.1.7"
+        "version": "2.1.7",
+        "sha256": "3ce7da770f546a8d02b65b2e7ee31f2a3b8b7c3f990ede045590cca4172ecfe1"
       },
       "alternates": [
         {
           "kind": "file",
           "label": "Download Windows ARM64 · ZIP",
           "url": "https://github.com/syncthing/syncthing/releases/download/v2.1.7/syncthing-windows-arm64-v2.1.7.zip",
-          "evidenceUrl": "https://github.com/syncthing/syncthing/releases/tag/v2.1.7",
-          "checkedAt": "2026-11-26",
+          "evidenceUrl": "https://api.github.com/repos/syncthing/syncthing/releases/tags/v2.1.7",
+          "checkedAt": "2026-11-27",
           "platform": "Windows",
           "format": "ZIP",
           "architecture": "ARM64",
-          "version": "2.1.7"
+          "version": "2.1.7",
+          "sha256": "d535ffd611b3af223de64bc5dfc60c378881eb13d5c8ecb1431b7407094c15ff"
         },
         {
           "kind": "file",
@@ -3051,36 +3311,39 @@
       "primary": {
         "kind": "file",
         "label": "Download Windows x64 portable · ZIP",
-        "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip",
-        "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
-        "checkedAt": "2026-11-26",
+        "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60.2/winmerge-2.16.60.2-x64-exe.zip",
+        "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60.2",
+        "checkedAt": "2026-11-27",
         "platform": "Windows",
         "format": "ZIP",
         "architecture": "x64",
-        "version": "2.16.60"
+        "version": "2.16.60.2",
+        "sha256": "efffb5e08fa0e4fa8035ea57dac811a2d23927063baa6e63998fa8b621b27934"
       },
       "alternates": [
         {
           "kind": "file",
           "label": "Download Windows x64 installer · EXE",
-          "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/WinMerge-2.16.60-x64-Setup.exe",
-          "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
-          "checkedAt": "2026-11-26",
+          "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60.2/WinMerge-2.16.60.2-x64-Setup.exe",
+          "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60.2",
+          "checkedAt": "2026-11-27",
           "platform": "Windows",
           "format": "EXE",
           "architecture": "x64",
-          "version": "2.16.60"
+          "version": "2.16.60.2",
+          "sha256": "7b31e9fe35c8be9537237ba30a6b67941855ff0a47721432cc7dde1743f20b34"
         },
         {
           "kind": "file",
           "label": "Download Windows ARM64 portable · ZIP",
-          "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-ARM64-exe.zip",
-          "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60",
-          "checkedAt": "2026-11-26",
+          "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60.2/winmerge-2.16.60.2-ARM64-exe.zip",
+          "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60.2",
+          "checkedAt": "2026-11-27",
           "platform": "Windows",
           "format": "ZIP",
           "architecture": "ARM64",
-          "version": "2.16.60"
+          "version": "2.16.60.2",
+          "sha256": "ae5b9b64d5cb32bc7cd4b092e94958e2f0d9e313f8ed3eb6dc4d34433099f8fe"
         },
         {
           "kind": "release-page",
@@ -3088,6 +3351,19 @@
           "url": "https://winmerge.org/downloads/index.php",
           "evidenceUrl": "https://winmerge.org/downloads/index.php",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "win-x64-peruser",
+          "kind": "file",
+          "label": "Download Windows x64 per-user installer · EXE",
+          "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60.2/WinMerge-2.16.60.2-x64-PerUser-Setup.exe",
+          "evidenceUrl": "https://github.com/WinMerge/winmerge/releases/tag/v2.16.60.2",
+          "checkedAt": "2026-11-27",
+          "platform": "Windows",
+          "architecture": "x64",
+          "format": "EXE",
+          "version": "2.16.60.2",
+          "sha256": "a1212fd437684dcada6303834277e3f4ea27de88bda4776448dc1833ae143380"
         }
       ]
     },
@@ -3147,7 +3423,8 @@
         "platform": "BIOS / UEFI PC",
         "format": "ISO",
         "id": "pc-iso",
-        "version": "3.0.3"
+        "version": "3.0.3",
+        "sha256": "2206b05c1c7a8ec7a7a4356dd5f811e19c8081d7d5e2bc856f1f3f4059c5fed1"
       },
       "alternates": [
         {
@@ -3160,7 +3437,8 @@
           "format": "ISO",
           "id": "arm64-iso",
           "architecture": "ARM64",
-          "version": "3.0.3"
+          "version": "3.0.3",
+          "sha256": "78bdf716c48a667ce6535082532347f4e2283cf5bcbf806f2bf12542b57b2496"
         },
         {
           "kind": "file",
@@ -3172,7 +3450,8 @@
           "format": "ISO",
           "id": "multiarch-iso",
           "architecture": "x64 / ARM64",
-          "version": "3.0.3"
+          "version": "3.0.3",
+          "sha256": "6b2420bc6a7811c1df0e021cbad1fc0889e45851d20be1205aa9706fce336209"
         },
         {
           "kind": "release-page",
@@ -3180,6 +3459,30 @@
           "url": "https://netboot.xyz/downloads/",
           "evidenceUrl": "https://netboot.xyz/downloads/",
           "checkedAt": "2026-11-26"
+        },
+        {
+          "id": "pc-usb-img",
+          "kind": "file",
+          "label": "Download PC USB boot image · IMG",
+          "url": "https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz.img",
+          "evidenceUrl": "https://github.com/netbootxyz/netboot.xyz/releases/tag/3.0.3",
+          "checkedAt": "2026-11-27",
+          "platform": "BIOS / UEFI PC",
+          "format": "IMG",
+          "version": "3.0.3",
+          "sha256": "bcb1f30942a2d5f2a81326fd6c585a0687578a49c33d3713dff951c777c27885"
+        },
+        {
+          "id": "legacy-pc-iso",
+          "kind": "file",
+          "label": "Download legacy BIOS boot image · ISO",
+          "url": "https://github.com/netbootxyz/netboot.xyz/releases/download/3.0.3/netboot.xyz-legacy.iso",
+          "evidenceUrl": "https://github.com/netbootxyz/netboot.xyz/releases/tag/3.0.3",
+          "checkedAt": "2026-11-27",
+          "platform": "Legacy BIOS PC",
+          "format": "ISO",
+          "version": "3.0.3",
+          "sha256": "92abb78d0bc6054fa5cb224f2d5148cbf0126291510d9e064c910ceb6eccd7ba"
         }
       ],
       "note": "Versioned 3.0.3 ISO assets are offered here. The publisher download page separately offers rolling bootloaders; the two release types are identified explicitly."
