@@ -80,6 +80,7 @@ Tool name = official page. File buttons name the platform; built-in tools open i
 ### Reference
 
 - [Decision desk](Decision-Desk)
+- [⚡ Quick commands](Quick-Commands)
 - [All playbooks](Playbooks)
 - [Complete tool directory](Tool-Directory)
 - [Methods](Methods)
