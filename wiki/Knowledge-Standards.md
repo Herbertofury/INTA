@@ -42,6 +42,7 @@ Every rendered occurrence of a known tool, application or named method must be l
 
 Keep these boundaries precise:
 
+- General [Windows](https://www.microsoft.com/windows) platform labels stay clickable without a repeated inline logo. Named tools and services such as <a href="https://github.com/microsoft/terminal/releases/latest" title="Open Windows Terminal official download or service page" aria-label="Open Windows Terminal official download or service page" data-inta-brand="windows-terminal"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows Terminal official page" width="18" height="18" valign="middle" /></a> [Windows Terminal](https://learn.microsoft.com/en-us/windows/terminal/) and <a href="https://learn.microsoft.com/en-us/windows/deployment/update/" title="Open Windows Update official download or service page" aria-label="Open Windows Update official download or service page" data-inta-brand="app-windows-update"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows Update official page" width="18" height="18" valign="middle" /></a> [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/) retain their own icons.
 - Preserve a link that is already correct. Never create nested links or rewrite the text of a URL.
 - Match the longest appropriate name first, with word boundaries. A product alias must be specific enough to identify that product. Ordinary words such as “everything,” “terminal,” “free,” “restore” or “windows” must not become accidental brand or method matches.
 - A brand with several products needs the exact product name. An operating system, server product and consumer application are not interchangeable.
@@ -127,7 +128,7 @@ Every playbook must include at least one practical command in the step where it 
 
 ## ⚡ Commands in specific-fix articles
 
-Specific fixes should carry a copy-ready shell block whenever a real command materially shortens diagnosis, repair or verification. Keep the command attached to the exact symptom, with shell, purpose, safety boundary and official source. The app and Wiki must expose an accessible copy button; copying never executes. Do not force a command into GUI-only, physical or non-<a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) cases where it adds no value. See [Quick Commands](https://github.com/Herbertofury/INTA/wiki/Quick-Commands).
+Specific fixes should carry a copy-ready shell block whenever a real command materially shortens diagnosis, repair or verification. Keep the command attached to the exact symptom, with shell, purpose, safety boundary and official source. The app and Wiki must expose an accessible copy button; copying never executes. Do not force a command into GUI-only, physical or non-[Windows](https://www.microsoft.com/windows) cases where it adds no value. See [Quick Commands](https://github.com/Herbertofury/INTA/wiki/Quick-Commands).
 
 
 ## ⚡ Command Center standards
@@ -136,7 +137,7 @@ Commands should be searchable, shell-specific, copyable and source-backed. Separ
 
 ## 🔄 Update and installer recovery standards
 
-Update guidance must identify the owning manager and exact package/source/scope. Preview before bulk changes, preserve pins and exclusions, distinguish OS servicing from application updates, and record exit codes and logs. A failed installer should lead to evidence collection and manager-native repair before uninstall. Never kill active <a href="https://www.microsoft.com/windows" title="Open Windows official download or service page" aria-label="Open Windows official download or service page" data-inta-brand="app-windows"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Windows official page" width="18" height="18" valign="middle" /></a> [Windows](https://www.microsoft.com/windows) Installer or servicing processes as a generic fix. Do not claim live machine status without an authorized local agent. See [Updates Center](https://github.com/Herbertofury/INTA/wiki/Updates-and-Maintenance).
+Update guidance must identify the owning manager and exact package/source/scope. Preview before bulk changes, preserve pins and exclusions, distinguish OS servicing from application updates, and record exit codes and logs. A failed installer should lead to evidence collection and manager-native repair before uninstall. Never kill active [Windows](https://www.microsoft.com/windows) Installer or servicing processes as a generic fix. Do not claim live machine status without an authorized local agent. See [Updates Center](https://github.com/Herbertofury/INTA/wiki/Updates-and-Maintenance).
 
 ---
 
