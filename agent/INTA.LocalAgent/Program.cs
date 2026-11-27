@@ -109,10 +109,11 @@ async Task ExecuteOperation(OperationRequest request, OperationRecord initial)
     try
     {
         var result = await managers.ExecuteAsync(request);
-        var reboot = OperatingSystem.IsWindows() && PendingReboot();
-        var state = result.ExitCode == 0 ? "completed-review" : "failed";
+        var succeeded = result.ExitCode == 0 || (request.Manager == "windows-update" && result.ExitCode == 3010);
+        var reboot = OperatingSystem.IsWindows() && (PendingReboot() || result.ExitCode == 3010);
+        var state = succeeded ? "completed-review" : "failed";
         var output = result.Output;
-        if (result.ExitCode == 0)
+        if (succeeded)
         {
             var verification = await managers.VerifyAsync(request);
             output += Environment.NewLine + Environment.NewLine + "===== INTA POST-CHECK =====" + Environment.NewLine + verification.Output;
@@ -120,7 +121,7 @@ async Task ExecuteOperation(OperationRequest request, OperationRecord initial)
         }
         current = current with { State = state, FinishedAt = DateTimeOffset.UtcNow,
             ExitCode = result.ExitCode, Output = output, RebootLikely = reboot,
-            Error = result.ExitCode == 0 && state == "completed-review" ? "Operation exited successfully. Review the post-check output; this manager does not expose a definitive verification for this operation." : null };
+            Error = succeeded && state == "completed-review" ? "Operation exited successfully. Review the post-check output; this manager does not expose a definitive verification for this operation." : null };
     }
     catch (Exception ex)
     {
