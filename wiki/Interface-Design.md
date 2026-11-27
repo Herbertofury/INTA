@@ -17,7 +17,7 @@ The source review starts with [Athena's interface library](https://github.com/He
 | Establish a product-specific direction before adding effects | Use the full technician directory, job procedures, evidence, and actual catalog counts as the interface | The first screen contains useful service content |
 | Use hierarchy and alignment to organize information | Group tools into compact rows, align actions, and separate sections with thin rules | Names, descriptions, platforms, and actions scan predictably |
 | Make color deliberate | Neutral charcoal surfaces, neutral text, and one restrained blue interaction accent | Green and teal are absent from the brand palette |
-| Remove unnecessary visual effects | Use flat surfaces, small control radii, and brief state transitions | No decorative gradients, glows, moving backgrounds, or floating panels |
+| Remove unnecessary visual effects | Use flat surfaces, small control radii, and brief state transitions | No decorative gradients, glows, moving backgrounds, or promotional floating panels |
 | Validate the real interaction | Exercise navigation, filters, keyboard focus, saved state, exports, and narrow layouts | Recorded browser evidence comes from the final generated artifact |
 
 The [Compact and Sieve observations](https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/docs/ui-design-library/visual-studies.md) support studying contextual rows and clearly separated evidence states. Those observations are design references, not proof that another product's behavior or performance transfers to INTA. The [Bencho and collection study](https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/docs/ui-design-library/bencho-and-saas.md) likewise informs consistent states and navigation; this project does not require its components.
@@ -27,11 +27,17 @@ The [Compact and Sieve observations](https://github.com/Herbertofury/Athena/blob
 - **Application shell:** a quiet sidebar, a compact utility bar, and a fluid working area. Navigation names the actual destination.
 - **Home:** lead with everyday problems such as **Remove viruses**, **Fix a printer**, **Fix internet** and **Fix email**. Each flat row has a bold emoji scenario link, one concrete first-action sentence, the official tool page and the exact acquisition action. Cover every service scenario and keep the complete tool directory below the answers.
 - **Tool library:** a readable list with visible filters, result count, platform information, recommendation tier, details, official source, and save control.
-- **Playbooks:** a compact index. Individual procedures use a document column with a restrained context area for the toolkit and related information.
+- **Playbooks:** a compact index. Individual procedures use a document column with a compact persistent toolkit, purpose-specific official links, diagnostic decisions and completion checks. On a wide screen the toolkit stays beside the reading position. Small screens show the complete toolkit first and a short sticky section strip; keep all links reachable and instructions unobscured.
 - **Knowledge desk:** linked reference rows with short descriptions. Its purpose is finding guidance, so it does not need a gallery of equally sized cards.
 - **Wiki:** use the host's document typography, bold task links, meaningful emoji, useful tables, and decision diagrams. Every service scenario and tool category must be visible immediately in the sidebar. Place common jobs and direct official tool links before administration links. The masthead establishes identity without dominating the page.
 
 Avoid giant welcome sections, equal-height promotional tiles, decorative statistic panels, fake avatars, decorative status dots, slogan-filled footers, and oversized empty containers. A box belongs around a real control group or distinct working context. Ordinary text does not need a card.
+
+## Working view
+
+Use native sticky positioning for the contextual tool group. Do not run continuous scroll handlers to keep it in place. Handle toolkits taller than the viewport without trapping links, adding content caps or hiding manufacturers. Place manufacturer driver links together in a compact visible group. Link **Open working view** from each corresponding Wiki answer and full guide, preserving the exact selected case.
+
+A fixed control must not cover the final line, focused item or completion check. Verify actual scrolling at desktop, narrow mobile and short landscape sizes, both themes, keyboard navigation and printed output. The [GitHub renderer](https://github.com/github/markup#github-markup) removes custom styles; publish the same visible toolkit there without promising a sticky effect the host cannot provide.
 
 ## Type, color, and spacing
 

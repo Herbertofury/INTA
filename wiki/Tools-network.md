@@ -6,7 +6,7 @@
 
 Separate link, addressing, name resolution, transport, and application evidence.
 
-**9 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**10 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** One device, one service, or the whole office?
 
@@ -14,9 +14,9 @@ Separate link, addressing, name resolution, transport, and application evidence.
 
 ## Related playbooks
 
-- [Fix internet, DNS, or local-network problems](https://github.com/Herbertofury/INTA/wiki/Job-network-dns)
-- [Bring an office back after a power outage](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery)
-- [Repair a workstation’s domain trust relationship](https://github.com/Herbertofury/INTA/wiki/Job-ad-trust)
+- **[🌐 Fix internet & DNS](https://github.com/Herbertofury/INTA/wiki/Job-network-dns)** · **[Open working view](https://herbertofury.github.io/INTA/#job/network-dns)**
+- **[⚡ Recover from an outage](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery)** · **[Open working view](https://herbertofury.github.io/INTA/#job/outage-recovery)**
+- **[🔑 Repair domain trust](https://github.com/Herbertofury/INTA/wiki/Job-ad-trust)** · **[Open working view](https://herbertofury.github.io/INTA/#job/ad-trust)**
 
 <a id="compare-options"></a>
 
@@ -27,7 +27,8 @@ Separate link, addressing, name resolution, transport, and application evidence.
 
 | Tool | Choose it for | Platforms / role | Official page + download |
 | --- | --- | --- | --- |
-| [Angry IP Scanner](#angry-ip-scanner) | Quickly finding devices on a known managed subnet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://angryip.org/) · **[Download Windows standalone · EXE](https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-win.exe)** |
+| [Advanced IP Scanner](#advanced-ip-scanner) | Quickly finding candidate printer or network-device addresses from a [Windows](https://www.microsoft.com/windows) technician PC, then confirming the physical device and its web interface. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://www.advanced-ip-scanner.com/) · **[Download Windows scanner · EXE](https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe)** |
+| [Angry IP Scanner](#angry-ip-scanner) | Quickly finding devices on a known managed subnet. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://angryip.org/) · **[Download Windows x64 EXE · Java bundled](https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-setup.exe)** |
 | [iperf3](#iperf3) | Separating local network bandwidth limits from internet or application problems. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), FreeBSD · Core | [Official page](https://software.es.net/iperf/) · **[Download source · TAR.GZ](https://downloads.es.net/pub/iperf/iperf-3.22.1.tar.gz)** |
 | [OpenSSH](#openssh) | Repeatable authenticated remote shell and transfer operations. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://www.openssh.com/) · **[Enable Windows OpenSSH](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse)** |
 | [PuTTY](#putty) | Connecting to network equipment or [Linux](https://www.kernel.org/) systems from [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://www.chiark.greenend.org.uk/~sgtatham/putty/) · **[Download Windows x64 MSI](https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.85-installer.msi)** |
@@ -39,13 +40,47 @@ Separate link, addressing, name resolution, transport, and application evidence.
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
 
+<a id="advanced-ip-scanner"></a>
+
+## [Advanced IP Scanner](https://www.advanced-ip-scanner.com/)
+
+[Windows](https://www.microsoft.com/windows) LAN discovery with IP addresses, host names, MAC addresses and exportable results.
+
+[Official page](https://www.advanced-ip-scanner.com/) · **[Download Windows scanner · EXE](https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe)** · [Official download and help options](https://www.advanced-ip-scanner.com/download/) · [Documentation](https://www.advanced-ip-scanner.com/help/)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Quickly finding candidate printer or network-device addresses from a [Windows](https://www.microsoft.com/windows) technician PC, then confirming the physical device and its web interface. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows) |
+| **How you use it** | portable |
+| **Access / pricing** | Publisher-advertised freeware for network scanning; Radmin remote control is a separate product |
+| **Selection role** | Core |
+
+> **Before using it:** Scan the actual authorized local range. A vendor or hostname match alone does not identify a printer: confirm its panel/configuration page, MAC address or web interface. Network segmentation and blocked probes can hide devices. Review the publisher terms for your deployment; the linked Radmin product has separate licensing.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://www.advanced-ip-scanner.com/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Official supported [Windows](https://www.microsoft.com/windows) route and portable capability reviewed; discovery behavior has not been measured on an INTA network.
+- **Selection provenance:**
+  - Current Famatech product, help and download pages
+  - https://www.advanced-ip-scanner.com/
+  - https://www.advanced-ip-scanner.com/help/
+  - https://www.advanced-ip-scanner.com/download/
+
+</details>
+
+[Back to comparison](#compare-options)
+
 <a id="angry-ip-scanner"></a>
 
 ## [Angry IP Scanner](https://angryip.org/)
 
 Graphical IP-address and port discovery for local network inventory.
 
-[Official page](https://angryip.org/) · **[Download Windows standalone · EXE](https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-win.exe)** · [All download options](https://angryip.org/download/) · [Documentation](https://angryip.org/documentation/)
+[Official page](https://angryip.org/) · **[Download Windows x64 EXE · Java bundled](https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-setup.exe)** · [Download Windows x64 EXE · Java 21+ required](https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-win.exe) · [All download options](https://angryip.org/download/) · [Documentation](https://angryip.org/documentation/)
 
 | Decision | Detail |
 | --- | --- |
@@ -55,7 +90,7 @@ Graphical IP-address and port discovery for local network inventory.
 | **Access / pricing** | Free / open source |
 | **Selection role** | Core |
 
-> **Before using it:** Use the intended subnet and reasonable scan settings; results can be incomplete when devices block probes.
+> **Before using it:** Use only the intended local range and reasonable scan settings; blocked probes and network segmentation can hide devices. The [Windows](https://www.microsoft.com/windows) installer bundles Java; the standalone EXE requires an existing 64-bit Java 21+ runtime.
 
 <details>
 <summary>Source, review date, and selection history</summary>

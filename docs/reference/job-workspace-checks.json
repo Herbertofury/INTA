@@ -1,0 +1,437 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "baselineSourceCommit": "b4e394eca61b1367cd744732439663fed65c47ce",
+  "result": "pass",
+  "scope": "Source data validation and primary-document review; no Windows repair runtime test or build performed by this agent.",
+  "counts": {
+    "workspaces": 22,
+    "resources": 96,
+    "decisions": 102,
+    "selectedToolActions": 61,
+    "doneChecks": 52,
+    "escalationChecks": 44,
+    "originalSteps": 140,
+    "currentSteps": 142,
+    "acceptanceChecks": 83,
+    "originalCommands": 9,
+    "currentCommands": 11,
+    "quickCases": 27,
+    "reprioritizedToolLists": 17,
+    "unchangedMermaidDiagrams": 27
+  },
+  "preservation": {
+    "allOriginalStepObjectsAndOrder": true,
+    "allOriginalAcceptanceChecks": true,
+    "allOriginalCommands": true,
+    "allOriginalToolReferences": true,
+    "allOtherExistingJobFields": true,
+    "quickStartBytesUnchanged": true,
+    "wikiLayoutBytesUnchanged": true,
+    "originalDiagramSourcesUnchanged": true,
+    "all27RenderedMermaidSourcesMatchBaseline": true
+  },
+  "newSteps": [
+    {
+      "jobId": "printer-repair",
+      "anchor": "step-read-printer-queue-driver-port",
+      "command": "Get-Printer | Format-Table Name,DriverName,PortName -AutoSize",
+      "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printer"
+    },
+    {
+      "jobId": "printer-repair",
+      "anchor": "step-read-printer-port-details",
+      "command": "Get-PrinterPort | Format-List *",
+      "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport"
+    }
+  ],
+  "changedToolLists": [
+    {
+      "jobId": "intake-triage",
+      "before": [
+        "sysinternals",
+        "crystaldiskinfo",
+        "hwinfo"
+      ],
+      "after": [
+        "process-explorer",
+        "crystaldiskinfo",
+        "sysinternals",
+        "hwinfo"
+      ]
+    },
+    {
+      "jobId": "malware-removal",
+      "before": [
+        "defender-offline",
+        "safety-scanner",
+        "adwcleaner",
+        "sysinternals",
+        "malwarebytes"
+      ],
+      "after": [
+        "safety-scanner",
+        "adwcleaner",
+        "autoruns",
+        "defender-offline",
+        "sysinternals",
+        "malwarebytes"
+      ]
+    },
+    {
+      "jobId": "slow-pc",
+      "before": [
+        "sysinternals",
+        "crystaldiskinfo",
+        "hwinfo",
+        "windows-performance-toolkit",
+        "wiztree",
+        "wizfile"
+      ],
+      "after": [
+        "process-explorer",
+        "procmon",
+        "windirstat",
+        "crystaldiskinfo",
+        "sysinternals",
+        "hwinfo",
+        "windows-performance-toolkit",
+        "wiztree",
+        "wizfile"
+      ]
+    },
+    {
+      "jobId": "windows-update",
+      "before": [
+        "sysinternals"
+      ],
+      "after": [
+        "get-help",
+        "dism",
+        "sfc",
+        "windows-recovery",
+        "sysinternals"
+      ]
+    },
+    {
+      "jobId": "boot-recovery",
+      "before": [
+        "windows-recovery",
+        "microsoft-windows11-media",
+        "ventoy",
+        "rufus",
+        "systemrescue",
+        "hirens-bootcd-pe"
+      ],
+      "after": [
+        "windows-recovery",
+        "microsoft-windows11-media",
+        "systemrescue",
+        "quick-machine-recovery",
+        "ventoy",
+        "rufus",
+        "hirens-bootcd-pe"
+      ]
+    },
+    {
+      "jobId": "failing-drive",
+      "before": [
+        "smartmontools",
+        "crystaldiskinfo",
+        "ddrescue",
+        "testdisk",
+        "photorec"
+      ],
+      "after": [
+        "systemrescue",
+        "photorec",
+        "testdisk",
+        "smartmontools",
+        "crystaldiskinfo",
+        "ddrescue"
+      ]
+    },
+    {
+      "jobId": "disk-migration",
+      "before": [
+        "rescuezilla",
+        "clonezilla",
+        "crystaldiskinfo",
+        "winget"
+      ],
+      "after": [
+        "rescuezilla",
+        "robocopy",
+        "winget",
+        "clonezilla",
+        "crystaldiskinfo"
+      ]
+    },
+    {
+      "jobId": "backup-restore",
+      "before": [
+        "restic",
+        "veeam-agent",
+        "rescuezilla"
+      ],
+      "after": [
+        "veeam-agent",
+        "restic",
+        "kopia",
+        "rescuezilla"
+      ]
+    },
+    {
+      "jobId": "network-dns",
+      "before": [
+        "wireshark",
+        "iperf3",
+        "sysinternals"
+      ],
+      "after": [
+        "get-help",
+        "powershell",
+        "wireshark",
+        "iperf3",
+        "sysinternals"
+      ]
+    },
+    {
+      "jobId": "outage-recovery",
+      "before": [
+        "smartmontools",
+        "sysinternals"
+      ],
+      "after": [
+        "powershell",
+        "quick-machine-recovery",
+        "smartmontools",
+        "sysinternals"
+      ]
+    },
+    {
+      "jobId": "ad-trust",
+      "before": [
+        "sysinternals"
+      ],
+      "after": [
+        "powershell",
+        "sysinternals"
+      ]
+    },
+    {
+      "jobId": "outlook-email",
+      "before": [
+        "sysinternals"
+      ],
+      "after": [
+        "get-help",
+        "sysinternals"
+      ]
+    },
+    {
+      "jobId": "printer-repair",
+      "before": [
+        "sysinternals"
+      ],
+      "after": [
+        "get-help",
+        "advanced-ip-scanner",
+        "powershell",
+        "naps2",
+        "sysinternals"
+      ]
+    },
+    {
+      "jobId": "hardware-bsod",
+      "before": [
+        "hwinfo",
+        "memtest86plus",
+        "crystaldiskinfo",
+        "sysinternals",
+        "windbg"
+      ],
+      "after": [
+        "windbg",
+        "memtest86plus",
+        "libre-hardware-monitor",
+        "crystaldiskinfo",
+        "hwinfo",
+        "sysinternals"
+      ]
+    },
+    {
+      "jobId": "new-pc",
+      "before": [
+        "winget",
+        "powertoys",
+        "veeam-agent",
+        "rustdesk",
+        "meshcentral"
+      ],
+      "after": [
+        "winget",
+        "oem-drivers",
+        "robocopy",
+        "powertoys",
+        "veeam-agent",
+        "rustdesk",
+        "meshcentral"
+      ]
+    },
+    {
+      "jobId": "boot-usb",
+      "before": [
+        "ventoy",
+        "rufus",
+        "microsoft-windows11-media",
+        "systemrescue",
+        "hirens-bootcd-pe",
+        "rescuezilla"
+      ],
+      "after": [
+        "rufus",
+        "ventoy",
+        "microsoft-windows11-media",
+        "systemrescue",
+        "hirens-bootcd-pe",
+        "rescuezilla"
+      ]
+    },
+    {
+      "jobId": "preventive-maintenance",
+      "before": [
+        "winget",
+        "crystaldiskinfo",
+        "hwinfo",
+        "sysinternals",
+        "veeam-agent",
+        "wiztree",
+        "wizfile"
+      ],
+      "after": [
+        "winget",
+        "crystaldiskinfo",
+        "windirstat",
+        "everything",
+        "hwinfo",
+        "sysinternals",
+        "veeam-agent",
+        "wiztree",
+        "wizfile"
+      ]
+    }
+  ],
+  "files": {
+    "data/job-workspaces.json": {
+      "sha256": "58f4fea8b995a958e36a5c447cb9d51ff00f02c69a7ea76a385079c369799975",
+      "bytes": 107302
+    },
+    "data/jobs.json": {
+      "sha256": "0d5631e68b8ad961829b6a8d42076c645980539404ab39be8a7918fab1cb6a8b",
+      "bytes": 99554
+    },
+    "data/quick-start.json": {
+      "sha256": "3cb71071c3bb338dd00fee02d55f99c0a2fb784cadc0c6d377cac80d8ed96367",
+      "bytes": 41105
+    }
+  },
+  "sourceEvidence": [
+    {
+      "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows",
+      "finding": "Official same-version repair preserves apps/files/settings; power, internet and supported update policy are prerequisites."
+    },
+    {
+      "url": "https://www.naps2.com/windows-scanning",
+      "finding": "Official Windows workflow uses New Profile and Choose device; WIA/TWAIN use vendor drivers, eSCL serves compatible network scanners."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printer",
+      "finding": "Read-only local queue/driver/port inspection; administrator rights not required."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport",
+      "finding": "Read-only local port inspection; administrator rights not required."
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/security/encryption/find-your-bitlocker-recovery-key",
+      "finding": "Match the recovery-key ID with the approved account or organization recovery record."
+    },
+    {
+      "url": "https://kopia.io/docs/getting-started/",
+      "finding": "GUI restore uses Snapshots, source Path and chosen snapshot; restore to a separate target."
+    },
+    {
+      "url": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/files_restore_launch.html",
+      "finding": "Official File Level Restore wizard launch route."
+    },
+    {
+      "url": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/files_restore.html",
+      "finding": "Existing compatible backups can expose files in the backup browser and copy them to another destination."
+    },
+    {
+      "url": "https://helpcenter.veeam.com/docs/agentforwindows/userguide/recovery_media.html",
+      "finding": "Existing Veeam Recovery Media provides the compatible bare-metal restore route."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/get-netipconfiguration",
+      "finding": "Read active IP configuration before diagnosing addressing, DNS and connectivity."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/dnsclient/resolve-dnsname",
+      "finding": "Query the actual failing hostname without replacing organization DNS."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/nettcpip/test-netconnection",
+      "finding": "Test a specific documented TCP port separately from ICMP and application behavior."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+      "finding": "perfmon /rel opens Reliability Monitor on supported Windows."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/security/ransomware/incident-response-playbook-dart-ransomware-approach",
+      "finding": "Incident-led containment and recovery; ordinary malware cleanup is insufficient for an enterprise compromise."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/release-health/",
+      "finding": "Official current known issues, safeguards and servicing notices."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/stop-code-error-troubleshooting",
+      "finding": "Compare actual stop-code/dump evidence and recent changes; a crash does not identify a single universal cause."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash",
+      "finding": "Compute the exact file hash and compare with the publisher release evidence."
+    },
+    {
+      "url": "https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt",
+      "finding": "Data controls vary with plan/workspace; sanitize customer material before approved AI use."
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/outlook/getstarted/outlook-for-windows-not-responding-hangs-freezes-or-stops-working",
+      "finding": "New and classic client branches differ; new-client restart via Task Manager, classic safe-mode comparison."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1",
+      "finding": "Member-computer test/repair only; True/False channel result; domain controllers require a different administrative procedure."
+    }
+  ],
+  "reusedEvidence": [
+    "Parent-verified 11 OEM portals and Windows protected print mode sources, dated 2026-11-26.",
+    "Catalog-agent verified Advanced IP Scanner, NAPS2 and conditional Quick machine recovery/tool-action routes, dated 2026-11-26.",
+    "Existing catalog/procedure official source records for unchanged technical workflows."
+  ],
+  "materialChallenge": "Reviewed every decision branch for concrete action/result, source-first recovery, protected-print compatibility, member-only trust scope, client-specific Outlook routing and backup-format matching.",
+  "acceptedChallengeCorrections": [
+    {
+      "finding": "Healthy-source deleted-file recovery inherited mandatory image/mapfile completion.",
+      "resolution": "Workspace completion now requires image/mapfile identities only when imaging was required; any unreadable ranges remain explicitly reported. Original full-guide acceptance unchanged."
+    },
+    {
+      "finding": "Malware answer lacked a direct wider-incident route.",
+      "resolution": "Added the existing Contain-ransomware answer page as a prominent Escalation resource with the complete incident guide as its source."
+    }
+  ]
+}

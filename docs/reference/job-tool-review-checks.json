@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "reviewTimezone": "America/Denver",
+  "validatedAtUtc": "2026-11-27T00:43:14.522441+00:00",
+  "baseCommit": "b4e394eca61b1367cd744732439663fed65c47ce",
+  "catalogCount": 118,
+  "accessCount": 118,
+  "actionCount": 247,
+  "originalToolIdsPreserved": 114,
+  "originalActionUrlsPreserved": 237,
+  "newToolIds": [
+    "advanced-ip-scanner",
+    "naps2",
+    "quick-machine-recovery",
+    "windows-point-in-time-restore"
+  ],
+  "changedExistingToolRecords": [
+    "angry-ip-scanner"
+  ],
+  "changedExistingAccessRecords": [
+    "windows-recovery",
+    "windbg",
+    "angry-ip-scanner"
+  ],
+  "jobMappings": 22,
+  "dataValidatorsPassed": true,
+  "newOrSelectedBinaryChecks": [
+    {
+      "url": "https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-setup.exe",
+      "toolIds": [
+        "angry-ip-scanner"
+      ],
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "4d5a90000300000004000000ffff0000b8000000000000004000000000000000",
+      "formatMatches": true
+    },
+    {
+      "url": "https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-win.exe",
+      "toolIds": [
+        "angry-ip-scanner"
+      ],
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "4d5a90000300000004000000ffff0000b8000000000000004000000000000000",
+      "formatMatches": true
+    },
+    {
+      "url": "https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip",
+      "toolIds": [
+        "naps2"
+      ],
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "504b0304140000000800d599725d49ad0bcaac950100882b04000d0000004170",
+      "formatMatches": true
+    },
+    {
+      "url": "https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.exe",
+      "toolIds": [
+        "naps2"
+      ],
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "4d5a50000200000004000f00ffff0000b80000000000000040001a0000000000",
+      "formatMatches": true
+    },
+    {
+      "url": "https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-arm64.exe",
+      "toolIds": [
+        "naps2"
+      ],
+      "status": 206,
+      "contentType": "application/octet-stream",
+      "bytesRead": 512,
+      "first32BytesHex": "4d5a50000200000004000f00ffff0000b80000000000000040001a0000000000",
+      "formatMatches": true
+    },
+    {
+      "url": "https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe",
+      "toolIds": [
+        "advanced-ip-scanner"
+      ],
+      "status": 206,
+      "contentType": "application/x-msdos-program",
+      "bytesRead": 512,
+      "first32BytesHex": "4d5a50000200000004000f00ffff0000b80000000000000040001a0000000000",
+      "formatMatches": true
+    }
+  ],
+  "stableReleaseChecks": [
+    {
+      "toolId": "winget",
+      "release": "v1.29.380",
+      "publishedAt": "2026-09-21T18:45:34Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/microsoft/winget-cli/releases/latest",
+      "sourceSha256": "1e4007d67ede07e67b92c832e80d6a31b9ae95d3e1ed2637d8e1df55061bb6e1"
+    },
+    {
+      "toolId": "unigetui",
+      "release": "v2026.3.4",
+      "publishedAt": "2026-11-13T13:29:16Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/Devolutions/UniGetUI/releases/latest",
+      "sourceSha256": "09b225d5f3baac4e172111c7f6c9648f11f97c61c5f193fc48598467c0344a70"
+    },
+    {
+      "toolId": "restic",
+      "release": "v0.20.0",
+      "publishedAt": "2026-11-19T12:11:52Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/restic/restic/releases/latest",
+      "sourceSha256": "30737913074187b0e30b19f1a1bdae064637e364285220ffc9250f8163ad2b63"
+    },
+    {
+      "toolId": "kopia",
+      "release": "v0.23.1",
+      "publishedAt": "2026-06-16T01:27:33Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/kopia/kopia/releases/latest",
+      "sourceSha256": "b950fe2dd35434e9d4ce3c5edc4e4ad1818b43637182f4a118cec276299e472b"
+    },
+    {
+      "toolId": "rustdesk",
+      "release": "1.5.3",
+      "publishedAt": "2026-11-09T09:43:52Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/rustdesk/rustdesk/releases/latest",
+      "sourceSha256": "b52ada0f515af8c68aaabcc4c06b68b3d094b7ce726fc7ee9c9c81e30a55a286"
+    },
+    {
+      "toolId": "windirstat",
+      "release": "release/v2.9.3",
+      "publishedAt": "2026-10-11T23:00:01Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/windirstat/windirstat/releases/latest",
+      "sourceSha256": "8b5c53978446a3df5939bf13c5a5241bb56e61dd1c89b9ad27f82899493199c6"
+    },
+    {
+      "toolId": "libre-hardware-monitor",
+      "release": "v0.9.6",
+      "publishedAt": "2026-02-14T11:44:20Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/LibreHardwareMonitor/LibreHardwareMonitor/releases/latest",
+      "sourceSha256": "992c32ad14312f884003e7e6152d9076df3c8146c20af59c4235e52247d6e038"
+    },
+    {
+      "toolId": "rufus",
+      "release": "v4.16",
+      "publishedAt": "2026-11-17T13:02:46Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/pbatard/rufus/releases/latest",
+      "sourceSha256": "2ad1a35d7cf541612a067181d43d2e734c793b5f541710c88a9ca066c7a236d0"
+    },
+    {
+      "toolId": "ventoy",
+      "release": "v1.1.18",
+      "publishedAt": "2026-10-09T05:20:45Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/ventoy/Ventoy/releases/latest",
+      "sourceSha256": "808892f213e8f941039a9408752e1be061c8112b44b4b355e4ae3c360e7f5704"
+    },
+    {
+      "toolId": "yara-x",
+      "release": "v1.25.0",
+      "publishedAt": "2026-11-26T09:25:36Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/VirusTotal/yara-x/releases/latest",
+      "sourceSha256": "7ddfa7b721e57c8c90eacfceea62a41e771cae6a635c98d8ad9c7c45a7a85469"
+    },
+    {
+      "toolId": "rustinel",
+      "release": "v1.11.0",
+      "publishedAt": "2026-11-08T09:49:21Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/Karib0u/rustinel/releases/latest",
+      "sourceSha256": "cf04eb8beedd479ccf1374f324d2c5de579d3d7ba068a3306f8238fe50015c1e"
+    },
+    {
+      "toolId": "prx-sd",
+      "release": "v0.2.3",
+      "publishedAt": "2026-03-23T03:44:38Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/openprx/prx-sd/releases/latest",
+      "sourceSha256": "34cf48621830cfdb149be24e18ff76259f147872e62d13a5d47cf5a447d46af6"
+    },
+    {
+      "toolId": "sentinella",
+      "release": "v0.1.13",
+      "publishedAt": "2026-08-03T02:51:50Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/LeewayOpenSoftware/Sentinella/releases/latest",
+      "sourceSha256": "fc9ee3624b46e414c45f7976c403d1067075bccfa2ce744bd45ceb452172e465"
+    },
+    {
+      "toolId": "angry-ip-scanner",
+      "release": "3.12.2",
+      "publishedAt": "2026-11-16T20:37:35Z",
+      "prerelease": false,
+      "exactExistingAssetStillPublished": true,
+      "sourceUrl": "https://api.github.com/repos/angryip/ipscan/releases/latest",
+      "sourceSha256": "163ed4e3642169b9f62e63f84252b85d4fbe06fd646dbc4b5193e760bad5ed6a"
+    },
+    {
+      "toolId": "naps2",
+      "release": "v8.6.1",
+      "publishedAt": "2026-11-19T02:45:45Z",
+      "prerelease": false,
+      "selectedAssetPublished": true,
+      "sourceUrl": "https://api.github.com/repos/cyanfish/naps2/releases/latest",
+      "sourceSha256": "093db83bd2fb7d682b459b50bdb96d67facf72d92d8e775c19538f3940b92c2f"
+    }
+  ],
+  "sourceHashes": {
+    "data/tools.json": "c3661122ce854c10256e853939177510045b557417016e976498c78688b9f4d5",
+    "data/tool-access.json": "45c38c7f0714f013402d8c83e82dc470b09f3e14b5e9e4fb6daf088fdf6f2fcd",
+    "docs/reference/job-tool-review-2026-11-26.md": "9526d56000e6d98cf9de59e6fb8e6a0b587a8d2c81d96bd2d1cc6344f1e19c3f"
+  },
+  "limits": [
+    "No utility was installed, executed or exercised against real hardware.",
+    "Binary checks read512bytes, not complete files or signatures.",
+    "Current Microsoft recovery guidance was read through the web retrieval tool; additional command-line retrievals of those four pages were denied403 by the network tunnel.",
+    "Advanced IP Scanner is publisher-advertised freeware for network administration; a separate business-specific EULA statement was not located.",
+    "The retrieved AV-Comparatives report concerns complete resident products; no ranking was reassigned to standalone cleanup or recovery tools."
+  ],
+  "currentMicrosoftRecoverySources": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+      "retrievedBy": "web open",
+      "webReference": "turn820286079view0"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+      "retrievedBy": "web open + find",
+      "webReference": "turn255042540view2"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/windows-device-recovery-framework",
+      "retrievedBy": "web open",
+      "webReference": "turn820286079view2"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows",
+      "retrievedBy": "official-domain web search",
+      "webReference": "turn820286079search0"
+    }
+  ]
+}

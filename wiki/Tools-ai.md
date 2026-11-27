@@ -14,8 +14,8 @@ Use sanitized evidence, verified sources, and reviewed commands throughout an as
 
 ## Related playbooks
 
-- [Use AI as a careful troubleshooting copilot](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage)
-- [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage)
+- **[🧠 Troubleshoot with AI](https://github.com/Herbertofury/INTA/wiki/Job-ai-triage)** · **[Open working view](https://herbertofury.github.io/INTA/#job/ai-triage)**
+- **[🧭 Triage a new issue](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage)** · **[Open working view](https://herbertofury.github.io/INTA/#job/intake-triage)**
 
 <a id="compare-options"></a>
 

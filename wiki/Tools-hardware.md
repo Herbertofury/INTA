@@ -14,8 +14,8 @@ Use readings and repeatable tests to distinguish the component, driver, cooling,
 
 ## Related playbooks
 
-- [Diagnose crashes, blue screens, and overheating](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod)
-- [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)
+- **[🌡️ Diagnose crashes / BSOD](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod)** · **[Open working view](https://herbertofury.github.io/INTA/#job/hardware-bsod)**
+- **[🐢 Fix a slow PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)** · **[Open working view](https://herbertofury.github.io/INTA/#job/slow-pc)**
 
 <a id="compare-options"></a>
 

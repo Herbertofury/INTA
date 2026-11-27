@@ -74,6 +74,7 @@ Tool name = official page. File buttons name the platform; built-in tools open i
 - [Service evidence](Service-Evidence)
 - [Tool selection](Tool-Selection)
 - [Free Tool Picks](Free-Tool-Picks)
+- [Current tool choices](Current-Tool-Choices)
 
 <a id="-the-shared-standard"></a>
 

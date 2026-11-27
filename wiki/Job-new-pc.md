@@ -8,7 +8,40 @@ Build a usable, recoverable workstation around the employee’s actual job.
 
 **Deployment** · Intermediate · 60–180 min · 6 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/new-pc)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/new-pc)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/new-pc)** · Keep the tool panel beside the instructions.
+
+**First move:** Confirm the owner, organization enrollment method, required apps and migrated data. Check Settings > System > About for the actual [Windows](https://www.microsoft.com/windows) version and architecture.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Identify and install approved application packages. | **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** |
+| Use the exact device vendor’s supported drivers and firmware. | **[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** |
+| Move only the agreed files with a reviewed copy plan. | **[Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · **[Open built-in copy instructions](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** |
+
+### Applications
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[WinGet package identification and install](https://learn.microsoft.com/en-us/windows/package-manager/winget/install)** | Review the exact package and source before installing. |
+| **[WinGet import review](https://learn.microsoft.com/en-us/windows/package-manager/winget/import)** | Reapply an approved inventory; licenses and user data remain separate. |
+
+### Device readiness
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Supported Windows driver updates](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** | Use [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/) and the correct device/manufacturer route. |
+
+### Handoff
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Workstation acceptance sheet](https://github.com/Herbertofury/INTA/wiki/Technician-Handoff)** | Record identity, encryption recovery, backup and daily-task proof. |
 
 <a id="quick-answer"></a>
 
@@ -26,6 +59,24 @@ Build a usable, recoverable workstation around the employee’s actual job.
 
 **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **The device is new or has a fresh installation** | Complete the approved enrollment and [Windows](https://www.microsoft.com/windows)/OEM updates, then check [Device Manager](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) for unresolved devices. | The intended identity and basic hardware work without unexplained device faults. |
+| **Approved applications must be installed** | Use [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) search/show to confirm package identity and review installation or the approved import list. | Each required app launches with the correct license and user context. |
+| **Data comes from the previous device** | Copy the agreed data using the migration plan and test representative files in their real applications. | The user can access the expected files without relying on the old device. |
+| **Setup is nearly complete** | Verify encryption recovery storage, a backup restore, printing and the user’s daily workflow before handoff. | The workstation is usable and recoverable, with acceptance evidence recorded. |
+
+### ✅ Finish the job
+
+- [ ] The owner can sign in and complete the agreed daily tasks.
+- [ ] Recovery material and a tested backup are accessible through the approved private process.
+
+**Change route when:** Enrollment, licensing or recovery ownership is unclear. · Migration would endanger the only copy of user data.
+
 > [!NOTE]
 > **Start here.** Collect the job role, approved applications, identity/join requirements, data sources, printers, and acceptance tests before provisioning.
 
@@ -34,9 +85,6 @@ Build a usable, recoverable workstation around the employee’s actual job.
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -57,8 +105,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Clone a healthy system or migrate to a new SSD](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration) · [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) · [Start and finish a clean remote-support session](https://github.com/Herbertofury/INTA/wiki/Job-remote-support) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Confirm the role, access, recovery keys, and retained migration source. |
@@ -75,7 +121,9 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** | Repeatable application setup and individually reviewed updates. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://learn.microsoft.com/en-us/windows/package-manager/winget/) |
+| **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** | Identify and install approved application packages. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://learn.microsoft.com/en-us/windows/package-manager/winget/) |
+| **[Official OEM driver and firmware portals](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** · [Official page](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) · **[Find the correct driver source](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows)** | Use the exact device vendor’s supported drivers and firmware. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Vendor downloads; support terms vary | [Open guide](https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows) |
+| **[Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) · **[Open built-in copy instructions](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)** | Move only the agreed files with a reviewed copy plan. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) |
 | **[Microsoft PowerToys](https://learn.microsoft.com/en-us/windows/powertoys/)** · [Official page](https://learn.microsoft.com/en-us/windows/powertoys/) · **[Download Windows x64 setup · EXE](https://github.com/microsoft/PowerToys/releases/download/v0.102.3101/PowerToysUserSetup-0.102.3101.0-x64.exe)** | Making the technician workstation easier to navigate and operate. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://learn.microsoft.com/en-us/windows/powertoys/) |
 | **[Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows)** · [Official page](https://www.veeam.com/products/free/microsoft-windows) · **[Sign in for the Windows download](https://www.veeam.com/products/physical/windows-backup-recovery-download.html)** | Image backup and recovery media for a supported [Windows](https://www.microsoft.com/windows) endpoint. | [Windows](https://www.microsoft.com/windows); Free and paid editions; service-provider terms differ | [Open guide](https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html) |
 | **[RustDesk](https://rustdesk.com/)** · [Official page](https://rustdesk.com/) · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)** | A flexible remote-control option across mixed client platforms. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Open-source components; paid Server Pro features | [Open guide](https://rustdesk.com/docs/en/) |
@@ -157,15 +205,11 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [Microsoft: WinGet export](https://learn.microsoft.com/en-us/windows/package-manager/winget/export)
 - [Microsoft: WinGet import](https://learn.microsoft.com/en-us/windows/package-manager/winget/import)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

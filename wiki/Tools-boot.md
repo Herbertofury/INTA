@@ -14,9 +14,9 @@ Keep independent rescue environments ready and test the exact hardware boot path
 
 ## Related playbooks
 
-- [Build and refresh a technician rescue USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb)
-- [Recover a Windows PC that will not boot](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery)
-- [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)
+- **[🔌 Build a rescue USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb)** · **[Open working view](https://herbertofury.github.io/INTA/#job/boot-usb)**
+- **[🚑 Fix boot failure](https://github.com/Herbertofury/INTA/wiki/Job-boot-recovery)** · **[Open working view](https://herbertofury.github.io/INTA/#job/boot-recovery)**
+- **[💾 Recover data](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)** · **[Open working view](https://herbertofury.github.io/INTA/#job/failing-drive)**
 
 <a id="compare-options"></a>
 

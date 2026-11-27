@@ -25,7 +25,7 @@
 | **[🔄 Fix Windows updates](https://github.com/Herbertofury/INTA/wiki/Fix-Windows-updates)** | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · **[Open Windows Update troubleshooting](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter)** |
 | **[🧰 Repair Windows files](https://github.com/Herbertofury/INTA/wiki/Repair-Windows-files)** | **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** · **[Open built-in repair instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** |
 | **[🚀 Fix a PC that will not boot](https://github.com/Herbertofury/INTA/wiki/Fix-a-PC-that-will-not-boot)** | **[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · **[Open recovery instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** |
-| **[🧩 Diagnose crashes](https://github.com/Herbertofury/INTA/wiki/Diagnose-crashes)** | **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · **[Download Windows debugger installer](https://aka.ms/windbg/download)** |
+| **[🧩 Diagnose crashes](https://github.com/Herbertofury/INTA/wiki/Diagnose-crashes)** | **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · **[Download Windows debugger · APPINSTALLER](https://aka.ms/windbg/download)** |
 | **[📊 Free disk space](https://github.com/Herbertofury/INTA/wiki/Free-disk-space)** | **[WinDirStat](https://windirstat.net/)** · **[Download Windows x64 · MSI](https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi)** |
 | **[🔁 Clone or move a drive](https://github.com/Herbertofury/INTA/wiki/Clone-or-move-a-drive)** | **[Rescuezilla](https://rescuezilla.com/)** · **[Download x64 rescue image · ISO](https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso)** |
 | **[🗄️ Restore a file backup](https://github.com/Herbertofury/INTA/wiki/Restore-a-file-backup)** | **[restic](https://restic.net/)** · **[Download Windows x64 · ZIP](https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip)** |
@@ -42,7 +42,7 @@
 | **[🌐 Inspect network traffic](https://github.com/Herbertofury/INTA/wiki/Inspect-network-traffic)** | **[Wireshark](https://www.wireshark.org/)** · **[Download Windows x64 · EXE](https://2.na.dl.wireshark.org/win64/Wireshark-4.6.10-x64.exe)** |
 | **[🧪 Test memory](https://github.com/Herbertofury/INTA/wiki/Test-memory)** | **[Memtest86+](https://www.memtest.org/)** · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** |
 
-Selection review: **2026-11-26** · [Complete tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Why these tools](https://github.com/Herbertofury/INTA/wiki/Free-Tool-Picks)
+Selection review: **2026-11-26** · [Complete tool directory](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Why these tools](https://github.com/Herbertofury/INTA/wiki/Free-Tool-Picks) · [Current tool choices](https://github.com/Herbertofury/INTA/wiki/Current-Tool-Choices)
 
 <!-- INTA:QUICK-START:END -->
 

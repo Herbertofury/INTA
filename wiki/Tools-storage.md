@@ -14,9 +14,9 @@ Keep the source safe, select the right copy or recovery operation, and test the 
 
 ## Related playbooks
 
-- [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)
-- [Clone a healthy system or migrate to a new SSD](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration)
-- [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)
+- **[💾 Recover data](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive)** · **[Open working view](https://herbertofury.github.io/INTA/#job/failing-drive)**
+- **[💽 Clone or migrate a disk](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration)** · **[Open working view](https://herbertofury.github.io/INTA/#job/disk-migration)**
+- **[🗄️ Test a backup restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)** · **[Open working view](https://herbertofury.github.io/INTA/#job/backup-restore)**
 
 <a id="compare-options"></a>
 

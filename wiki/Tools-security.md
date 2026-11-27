@@ -14,8 +14,8 @@ Specialist investigation and research candidates belong to an explicit scope and
 
 ## Related playbooks
 
-- [Contain ransomware or a wider compromise](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response)
-- [Remove malware and browser hijackers](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal)
+- **[🚨 Contain ransomware](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response)** · **[Open working view](https://herbertofury.github.io/INTA/#job/ransomware-response)**
+- **[🦠 Remove viruses](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal)** · **[Open working view](https://herbertofury.github.io/INTA/#job/malware-removal)**
 
 <a id="compare-options"></a>
 

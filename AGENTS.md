@@ -12,12 +12,15 @@ Every service scenario needs a visible plain-language answer route. Use labels s
 
 Show separate **Official page** and exact acquisition links wherever tools are offered. A file action must identify its platform and file type and come from an observed publisher link. Do not call an HTML landing page a direct download, guess filenames, substitute source code for an installer, or send every built-in troubleshooter to the same problem. Label Store, built-in, package, web and account-specific routes honestly. Preserve alternate platforms and existing routes in details.
 
+Every job has a source-backed working kit before the long procedure: exact tool actions, useful vendor or service links, symptom → action → expected-result decisions, and concrete completion tests. The app keeps the compact kit within reach while reading; the GitHub Wiki puts the same links first and links to the interactive working view. Test scrolling, keyboard access and small screens so persistent controls never cover instructions.
+
 ## Canonical inputs
 
 - [Tool catalog](data/tools.json): stable IDs, official routes, platform and pricing boundaries, editorial review evidence.
 - [Tool acquisition routes](data/tool-access.json): official product pages, exact observed files, platform alternatives, scenario action IDs and source evidence.
 - [Quick-start selections](data/quick-start.json): scenario-specific free starting tools, practical fit, current sources and evidence for their selection.
 - [Job guides](data/jobs.json): procedure, recommended tool IDs, verification, escalation and sources.
+- [Job workspaces](data/job-workspaces.json): per-job working kits, vendor resources, diagnostic branches and observable completion criteria.
 - [Method registry](data/methods.json): precise names/aliases and canonical method destinations.
 - [Link aliases](data/link-aliases.json) and [linking helper](scripts/wiki_links.py): exact names and repeated-mention linking.
 - [Wiki layout](data/wiki-layout.json): structured page presentation and the job decision diagrams.

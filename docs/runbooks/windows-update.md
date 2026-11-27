@@ -8,7 +8,42 @@ Diagnose the update code, servicing state, and available space before broad rese
 
 **[Windows](https://www.microsoft.com/windows) & performance** · Intermediate · 20–60 min plus installation · 6 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/windows-update)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/windows-update)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/windows-update)** · Keep the tool panel beside the instructions.
+
+**First move:** Open Settings > [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/) > Update history. Record the failing KB, error and restart state before retrying.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Run the supported update diagnostic. | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Open Windows Update troubleshooting](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter)** |
+| Investigate component-store damage when the error points there. | **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · **[Open built-in repair instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** |
+| Check protected files after successful servicing repair. | **[System File Checker](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) · **[Open built-in system-file checks](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)** |
+| Reinstall the current [Windows](https://www.microsoft.com/windows) version while keeping apps, files and settings, when available. | **[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) · **[Reinstall current Windows via Windows Update](https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows)** |
+
+### First repair
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Windows Update troubleshooter](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter)** | Run the diagnostic, restart when required and check updates again. |
+| **[Troubleshoot update failures](https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows)** | Use the exact error and installation stage. |
+
+### Current issues
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Windows release health](https://learn.microsoft.com/en-us/windows/release-health/)** | Check the affected [Windows](https://www.microsoft.com/windows) version for known issues or holds. |
+
+### Recovery
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Recovery and uninstall choices](https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows)** | Use the appropriate rollback route if the update prevents startup. |
+| **[Repair reinstall through Windows Update](https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows)** | Use the supported same-version repair; managed update policies can make it unavailable. |
 
 <a id="quick-answer"></a>
 
@@ -26,6 +61,25 @@ Diagnose the update code, servicing state, and available space before broad rese
 
 **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Open Windows Update troubleshooting](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **One update repeatedly fails** | Record its KB/error, check free space and connection, then run the [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/) troubleshooter in [Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help). | The diagnostic gives a finding or a reproducible update error. |
+| **A restart is pending** | Save work and restart in the agreed window, then return to [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/) and Update history. | The update completes or the same failing KB is identified after restart. |
+| **The device is managed or a compatibility hold is present** | Check the organization’s update owner and the applicable release-health notice; do not bypass the hold or policy. | The approved next update or remediation is recorded. |
+| **The update prevents [Windows](https://www.microsoft.com/windows) from starting** | With recovery access ready, use [WinRE](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) > Troubleshoot > Advanced options > Uninstall Updates when the affected update is the established cause. | The device returns to a bootable state for a scoped recovery plan. |
+| **[Windows](https://www.microsoft.com/windows) starts but system/update corruption persists** | With saved work, recovery access, stable power and internet, open Settings > System > Recovery > Fix problems using [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/) > Reinstall now if available. If managed policy hides it, use the organization’s repair route. | The same [Windows](https://www.microsoft.com/windows) version is repaired, apps/files/settings remain, and the original failed task or update succeeds after restart. |
+
+### ✅ Finish the job
+
+- [ ] Update history shows the intended result and no required restart remains.
+- [ ] The original application and a normal reboot succeed.
+
+**Change route when:** The next step would bypass a managed policy or documented safeguard without an approved plan. · Boot or storage failure changes the job into recovery.
+
 > [!NOTE]
 > **Start here.** Write down the exact KB or feature update, error code, [Windows](https://www.microsoft.com/windows) edition/build, and whether the device is centrally managed.
 
@@ -34,9 +88,6 @@ Diagnose the update code, servicing state, and available space before broad rese
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -59,8 +110,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Repair Windows component or system-file corruption](windows-repair.md) · [Diagnose crashes, blue screens, and overheating](hardware-bsod.md) · [Run a useful workstation maintenance visit](preventive-maintenance.md)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Respect the update policy and maintenance window. |
@@ -77,6 +126,10 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
+| **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Open Windows Update troubleshooting](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter)** | Run the supported update diagnostic. | [Windows](https://www.microsoft.com/windows); Included with supported [Windows](https://www.microsoft.com/windows); assisted support availability depends on the account and support agreement. | [Open guide](https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters) |
+| **[DISM](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) · **[Open built-in repair instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image)** | Investigate component-store damage when the error points there. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image) |
+| **[System File Checker](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)** · [Official page](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) · **[Open built-in system-file checks](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc)** | Check protected files after successful servicing repair. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sfc) |
+| **[Windows Recovery Environment](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) · **[Reinstall current Windows via Windows Update](https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows)** | Reinstall the current [Windows](https://www.microsoft.com/windows) version while keeping apps, files and settings, when available. | [Windows](https://www.microsoft.com/windows); Included with [Windows](https://www.microsoft.com/windows) | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
 
 <a id="walkthrough"></a>
@@ -154,15 +207,11 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [Microsoft: Windows Update troubleshooter](https://support.microsoft.com/en-us/windows/experience/windows-update-troubleshooter)
 - [Microsoft: troubleshooting Windows updates](https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

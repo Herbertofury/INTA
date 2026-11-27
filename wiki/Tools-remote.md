@@ -15,8 +15,8 @@ Match an [attended support session](https://github.com/Herbertofury/INTA/wiki/Jo
 
 ## Related playbooks
 
-- [Start and finish a clean remote-support session](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)
-- [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
+- **[🖥️ Help remotely](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)** · **[Open working view](https://herbertofury.github.io/INTA/#job/remote-support)**
+- **[📋 Complete the handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)** · **[Open working view](https://herbertofury.github.io/INTA/#job/client-handoff)**
 
 <a id="compare-options"></a>
 

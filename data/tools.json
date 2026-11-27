@@ -2001,7 +2001,7 @@
       "Official project or vendor documentation"
     ],
     "evidenceStatus": "Documentation reviewed; not an INTA runtime certification",
-    "cautions": "Use the intended subnet and reasonable scan settings; results can be incomplete when devices block probes."
+    "cautions": "Use only the intended local range and reasonable scan settings; blocked probes and network segmentation can hide devices. The Windows installer bundles Java; the standalone EXE requires an existing 64-bit Java 21+ runtime."
   },
   {
     "id": "putty",
@@ -3431,5 +3431,141 @@
       "https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters"
     ],
     "evidenceStatus": "Official documentation and launch route reviewed; not an INTA Windows runtime certification."
+  },
+  {
+    "id": "naps2",
+    "name": "NAPS2",
+    "category": "productivity",
+    "summary": "Scan documents to PDF or images, rearrange pages, and create searchable PDFs with OCR.",
+    "bestFor": "Testing scanner, flatbed, ADF and duplex workflows independently of the printer queue, then producing a readable sample PDF.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "mode": "portable",
+    "pricing": "Free and open source for individuals and businesses",
+    "homepage": "https://www.naps2.com/",
+    "downloadUrl": "https://www.naps2.com/download",
+    "docsUrl": "https://www.naps2.com/windows-scanning",
+    "sourceUrl": "https://www.naps2.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "scanner",
+      "printer",
+      "pdf",
+      "ocr",
+      "adf",
+      "duplex",
+      "portable"
+    ],
+    "cautions": "Select the driver and connection supported by the device. Confirm a flatbed/ADF sample and required duplex options; OCR can require additional language data. The current Windows release supports Windows 10 and 11.",
+    "provenance": [
+      "Official NAPS2 product, business-use and download documentation",
+      "https://www.naps2.com/",
+      "https://www.naps2.com/download",
+      "https://www.naps2.com/windows-scanning"
+    ],
+    "evidenceStatus": "Stable official release and documentation reviewed; scanner hardware and OCR output have not been tested by INTA."
+  },
+  {
+    "id": "advanced-ip-scanner",
+    "name": "Advanced IP Scanner",
+    "category": "network",
+    "summary": "Windows LAN discovery with IP addresses, host names, MAC addresses and exportable results.",
+    "bestFor": "Quickly finding candidate printer or network-device addresses from a Windows technician PC, then confirming the physical device and its web interface.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "portable",
+    "pricing": "Publisher-advertised freeware for network scanning; Radmin remote control is a separate product",
+    "homepage": "https://www.advanced-ip-scanner.com/",
+    "downloadUrl": "https://www.advanced-ip-scanner.com/download/",
+    "docsUrl": "https://www.advanced-ip-scanner.com/help/",
+    "sourceUrl": "https://www.advanced-ip-scanner.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "core",
+    "tags": [
+      "printer",
+      "ip-address",
+      "discovery",
+      "lan",
+      "mac-address",
+      "portable"
+    ],
+    "cautions": "Scan the actual authorized local range. A vendor or hostname match alone does not identify a printer: confirm its panel/configuration page, MAC address or web interface. Network segmentation and blocked probes can hide devices. Review the publisher terms for your deployment; the linked Radmin product has separate licensing.",
+    "provenance": [
+      "Current Famatech product, help and download pages",
+      "https://www.advanced-ip-scanner.com/",
+      "https://www.advanced-ip-scanner.com/help/",
+      "https://www.advanced-ip-scanner.com/download/"
+    ],
+    "evidenceStatus": "Official supported Windows route and portable capability reviewed; discovery behavior has not been measured on an INTA network."
+  },
+  {
+    "id": "quick-machine-recovery",
+    "name": "Quick machine recovery",
+    "category": "windows",
+    "summary": "Connected Windows recovery can look for Microsoft-provided fixes when a device repeatedly fails to boot.",
+    "bestFor": "An eligible device or fleet affected by a widespread boot failure for which Microsoft has published a remediation.",
+    "platforms": [
+      "Windows 11",
+      "Windows Server 2025"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows; availability depends on release, edition and management policy",
+    "homepage": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "recovery",
+      "fleet",
+      "windows-update",
+      "built-in"
+    ],
+    "cautions": "Best-effort recovery requires a working recovery environment and supported network. Enterprise-managed devices have cloud remediation disabled by default. Current guidance supports wired or WPA/WPA2 password-based Wi-Fi; confirm the managed policy and supported build before relying on it.",
+    "provenance": [
+      "Current Microsoft recovery guidance",
+      "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+      "https://learn.microsoft.com/en-us/windows/configuration/windows-device-recovery-framework"
+    ],
+    "evidenceStatus": "Official requirements and scope reviewed; no INTA boot or restore test is claimed."
+  },
+  {
+    "id": "windows-point-in-time-restore",
+    "name": "Windows point-in-time restore (preview)",
+    "category": "windows",
+    "summary": "Preview Windows recovery feature that rolls the system volume back to a recent locally captured state.",
+    "bestFor": "A controlled evaluation of whole-system rollback on an eligible machine with an existing restore point and independently preserved current files.",
+    "platforms": [
+      "Windows 11"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows; availability depends on release, edition and management policy",
+    "homepage": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+    "reviewedAt": "2026-11-26",
+    "tier": "evaluate",
+    "tags": [
+      "preview",
+      "rollback",
+      "recovery",
+      "vss",
+      "built-in"
+    ],
+    "cautions": "Preview: rollback includes local user files, apps, settings, passwords, certificates and keys; changes after the selected point can be lost. The documented local restore runs in the recovery environment and needs the BitLocker recovery key on encrypted volumes. Local snapshots depend on disk space and idle time; they are not an independent backup.",
+    "provenance": [
+      "Current Microsoft recovery guidance",
+      "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+      "https://learn.microsoft.com/en-us/windows/configuration/windows-device-recovery-framework"
+    ],
+    "evidenceStatus": "Official requirements and scope reviewed; no INTA boot or restore test is claimed."
   }
 ]

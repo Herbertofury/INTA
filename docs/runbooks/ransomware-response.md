@@ -8,7 +8,28 @@ Stop spread, preserve useful evidence, and restore services through a clean reco
 
 **Security** · Advanced · Immediate triage; recovery varies · 6 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ransomware-response)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ransomware-response)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/ransomware-response)** · Keep the tool panel beside the instructions.
+
+**First move:** Disconnect affected network access and contact the incident lead through a clean channel. Do not attach backups to the affected environment.
+
+### [Incident response](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response)
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[CISA ransomware response checklist](https://www.cisa.gov/sites/default/files/2025-03/StopRansomware-Guide%20508.pdf)** | Isolation, evidence preservation and recovery priorities. |
+| **[Microsoft incident-response approach](https://learn.microsoft.com/en-us/security/ransomware/incident-response-playbook-dart-ransomware-approach)** | Scope compromised systems, identities and recovery dependencies. |
+
+### Recovery
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Recovery acceptance evidence](https://github.com/Herbertofury/INTA/wiki/Service-Evidence)** | Record clean media, restored data and return-to-service proof. |
 
 <a id="quick-answer"></a>
 
@@ -26,6 +47,25 @@ Stop spread, preserve useful evidence, and restore services through a clean reco
 
 **No extra download needed.** Follow the checklist below.
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **Files are being encrypted or several endpoints are affected** | Isolate network links or the affected switch segment with the incident lead; keep isolated devices powered when feasible for evidence. | Spread is contained and the action time and affected scope are recorded. |
+| **Isolation is impossible and damage continues** | Have the incident lead decide whether shutdown is necessary, recording the loss of volatile evidence. | Continuing harm is stopped with an explicit evidence tradeoff. |
+| **Backups appear reachable from compromised systems** | Separate their access path and inspect recovery copies from a known-clean administration device. | At least one usable recovery copy is protected from the incident. |
+| **A team is ready to restore services** | Agree dependency order, rebuild affected systems from trusted media and test restored business tasks before reconnection. | The incident lead has evidence for release, including account/session containment. |
+
+### ✅ Finish the job
+
+- [ ] Affected systems and identities have a documented scope and owner.
+- [ ] Clean restoration passes the actual business workflow.
+- [ ] The incident lead authorizes reconnection and records remaining unknowns.
+
+**Change route when:** An action would overwrite evidence or the only recovery copy. · Identity compromise or infrastructure recovery exceeds the responder’s authority or capability.
+
 > [!NOTE]
 > **Start here.** Treat live encryption, ransom notes, or several compromised systems as an incident. Start a private incident timeline and contact the designated incident lead.
 
@@ -34,9 +74,6 @@ Stop spread, preserve useful evidence, and restore services through a clean reco
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -58,8 +95,6 @@ flowchart TD
 ```
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Remove malware and browser hijackers](malware-removal.md) · [Prove a backup can actually restore](backup-restore.md) · [Bring an office back after a power outage](outage-recovery.md) · [Close a repair with a clear client handoff](client-handoff.md)
-
-</details>
 
 | Checkpoint | What to carry forward |
 | --- | --- |
@@ -157,16 +192,12 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [CISA and MS-ISAC: ransomware response guide](https://www.cisa.gov/sites/default/files/publications/CISA_MS-ISAC_Ransomware%20Guide_S508C_.pdf)
 - [Microsoft: incident response ransomware approach](https://learn.microsoft.com/en-us/security/compass/incident-response-playbook-dart-ransomware-approach)
 - [Microsoft: ransomware investigation and recovery](https://learn.microsoft.com/en-us/defender-xdr/playbook-responding-ransomware-m365-defender)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

@@ -8,7 +8,46 @@ Check security, updates, hardware, backups, and usability without unnecessary cl
 
 **Maintenance** · Intermediate · 30–60 min · 6 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/preventive-maintenance)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/preventive-maintenance)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/preventive-maintenance)** · Keep the tool panel beside the instructions.
+
+**First move:** Agree the maintenance window and identify the user’s current problem. Verify a usable backup before changes.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| List and review application upgrades. | **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** |
+| Review storage warnings before cleanup. | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** |
+| Find capacity use on a healthy drive. | **[WinDirStat](https://windirstat.net/)** · [Official page](https://windirstat.net/) · **[Download Windows x64 · MSI](https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi)** |
+| Locate a named local file or log without unnecessary cleanup. | **[Everything](https://www.voidtools.com/)** · [Official page](https://www.voidtools.com/) · **[Download Windows x64 EXE](https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe)** |
+
+### Updates
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Review WinGet upgrades](https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade)** | List available changes and select approved packages. |
+
+### Recovery
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Test the existing backup](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)** | Restore a representative item to a separate folder. |
+
+### Find retained files
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Everything desktop search guidance](https://www.voidtools.com/support/everything/)** | Limit indexing/search to approved local locations. |
+
+### Handoff
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Record changes and deferred work](https://github.com/Herbertofury/INTA/wiki/Technician-Handoff)** | Capture the observed result and follow-up owner. |
 
 <a id="quick-answer"></a>
 
@@ -38,6 +77,26 @@ Check security, updates, hardware, backups, and usability without unnecessary cl
 
 **[Everything](https://www.voidtools.com/)** · [Official page](https://www.voidtools.com/) · **[Download Windows x64 EXE](https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **The device has recurring failures or storage warnings** | Check [Reliability Monitor](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon) and drive health; move actual faults to their repair or recovery guide before routine maintenance. | The maintenance plan is based on observed faults rather than cleanup rituals. |
+| **Application updates are available** | Run [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) upgrade to list them, review compatibility and update only the approved packages in the maintenance window. | The selected versions are installed and any planned restart is completed. |
+| **A full disk or missing local file is the concern** | Use [WinDirStat](https://windirstat.net/) for capacity or [Everything](https://www.voidtools.com/) for a filename; confirm ownership and retention before deleting or moving anything. | The relevant path is identified and any approved cleanup has a measured result. |
+| **Backup jobs report success** | Restore a representative item to a separate location and open it with the intended application. | The backup is demonstrably usable, with its recovery point recorded. |
+| **Changes are complete** | Restart as planned and repeat the user’s main app, network, printing and backup checks. | Normal work succeeds and all deferred issues have owners. |
+
+### ✅ Finish the job
+
+- [ ] Protection, hardware health and backup restoration have been checked.
+- [ ] The normal workload works after maintenance and restart.
+- [ ] Each unresolved item has an explicit next action and owner.
+
+**Change route when:** Storage failure or active compromise changes the service route. · An unplanned critical workload would be interrupted.
+
 > [!NOTE]
 > **Start here.** Agree on the maintenance window and identify the user’s current pain points. Preserve a baseline of the system’s normal work.
 
@@ -46,9 +105,6 @@ Check security, updates, hardware, backups, and usability without unnecessary cl
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -71,8 +127,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) · [Fix a failing Windows update](https://github.com/Herbertofury/INTA/wiki/Job-windows-update) · [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Agree the window and preserve normal-workload evidence. |
@@ -89,8 +143,10 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** | Repeatable application setup and individually reviewed updates. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://learn.microsoft.com/en-us/windows/package-manager/winget/) |
-| **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
+| **[WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)** · [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** | List and review application upgrades. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://learn.microsoft.com/en-us/windows/package-manager/winget/) |
+| **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | Review storage warnings before cleanup. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
+| **[WinDirStat](https://windirstat.net/)** · [Official page](https://windirstat.net/) · **[Download Windows x64 · MSI](https://github.com/windirstat/windirstat/releases/download/release/v2.9.3/WinDirStat-x64.msi)** | Find capacity use on a healthy drive. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://github.com/windirstat/windirstat) |
+| **[Everything](https://www.voidtools.com/)** · [Official page](https://www.voidtools.com/) · **[Download Windows x64 EXE](https://www.voidtools.com/Everything-1.4.1.1032.x64-Setup.exe)** | Locate a named local file or log without unnecessary cleanup. | [Windows](https://www.microsoft.com/windows); Freeware | [Open guide](https://www.voidtools.com/support/everything/) |
 | **[HWiNFO](https://www.hwinfo.com/)** · [Official page](https://www.hwinfo.com/) · **[Download Windows x64 EXE](https://www.hwinfo.com/files/hwi64_860.exe)** | Investigating temperatures, clocks, power and component identity. | [Windows](https://www.microsoft.com/windows); Pro license for commercial use of 64/ARM64 editions | [Open guide](https://www.hwinfo.com/licenses/) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
 | **[Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows)** · [Official page](https://www.veeam.com/products/free/microsoft-windows) · **[Sign in for the Windows download](https://www.veeam.com/products/physical/windows-backup-recovery-download.html)** | Image backup and recovery media for a supported [Windows](https://www.microsoft.com/windows) endpoint. | [Windows](https://www.microsoft.com/windows); Free and paid editions; service-provider terms differ | [Open guide](https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html) |
@@ -182,9 +238,6 @@ winget upgrade
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [Microsoft: WinGet upgrade](https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade)
 - [restic: restore a backup](https://restic.readthedocs.io/en/stable/050_restore.html)
 - [Microsoft: Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)
@@ -193,7 +246,6 @@ winget upgrade
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

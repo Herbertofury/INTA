@@ -1,0 +1,611 @@
+{
+  "startedAt": "2026-11-27T00:51:16.751Z",
+  "runtime": {
+    "executablePath": "/tmp/chromium",
+    "browser": "158.0.8127.0"
+  },
+  "checks": [
+    {
+      "name": "Bounded baseline confirms no tool, job or quick-case IDs lost",
+      "baselineTools": 114,
+      "currentTools": 118,
+      "baselineJobs": 22,
+      "currentJobs": 22
+    },
+    {
+      "name": "Every guide retains all steps, commands, checks, tools, resources, decisions, stop conditions and sources",
+      "tools": 118,
+      "jobs": 22,
+      "cases": 27,
+      "workspaces": 22,
+      "resources": 96,
+      "decisions": 102,
+      "steps": 142,
+      "commands": 11,
+      "verificationChecks": 83,
+      "contextTools": 104
+    },
+    {
+      "name": "All exact quick-case routes retain first action, three steps, selected tool/action and complete resources",
+      "cases": 27
+    },
+    {
+      "name": "Home and Library retain the complete catalog; All options restores every canonical acquisition action",
+      "tools": 118,
+      "actions": 247
+    },
+    {
+      "name": "Resource labels, descriptions and decision symptoms find the exact printer case while preserving case priority",
+      "queries": [
+        {
+          "query": "HP printer driver",
+          "exactRoute": "#job/printer-repair/quick/fix-a-printer"
+        },
+        {
+          "query": "Brother",
+          "exactRoute": "#job/printer-repair/quick/fix-a-printer"
+        },
+        {
+          "query": "Epson",
+          "exactRoute": "#job/printer-repair/quick/fix-a-printer"
+        },
+        {
+          "query": "stuck queue",
+          "exactRoute": "#job/printer-repair/quick/fix-a-printer"
+        },
+        {
+          "query": "scan to PDF",
+          "exactRoute": "#job/printer-repair/quick/fix-a-printer"
+        }
+      ]
+    },
+    {
+      "name": "Toolkit starts beside heading, keeps all eleven driver shortcuts visible, stays sticky and allows keyboard exit",
+      "top": {
+        "panel": {
+          "x": 1058,
+          "y": 137,
+          "width": 350,
+          "height": 904,
+          "top": 137,
+          "right": 1408,
+          "bottom": 1041,
+          "left": 1058
+        },
+        "header": {
+          "x": 264,
+          "y": 137,
+          "width": 762,
+          "height": 256.25,
+          "top": 137,
+          "right": 1026,
+          "bottom": 393.25,
+          "left": 264
+        },
+        "firstDriver": {
+          "x": 1075,
+          "y": 531.40625,
+          "width": 145,
+          "height": 52.59375,
+          "top": 531.40625,
+          "right": 1220,
+          "bottom": 584,
+          "left": 1075
+        },
+        "lastDriver": {
+          "x": 1075,
+          "y": 794.375,
+          "width": 145,
+          "height": 52.59375,
+          "top": 794.375,
+          "right": 1220,
+          "bottom": 846.96875,
+          "left": 1075
+        },
+        "priority": [
+          "get-help",
+          "advanced-ip-scanner"
+        ],
+        "driverCount": 11,
+        "panelClient": 827,
+        "panelScroll": 4228,
+        "nodes": 885
+      },
+      "scroll1": {
+        "x": 1058,
+        "y": 80,
+        "width": 350,
+        "height": 904
+      },
+      "scroll2": {
+        "x": 1058,
+        "y": 80,
+        "width": 350,
+        "height": 904
+      },
+      "keyboard": {
+        "href": "https://www.naps2.com/windows-scanning",
+        "top": 821.25,
+        "bottom": 865.25,
+        "regionTop": 156.140625,
+        "regionBottom": 983,
+        "scrollTop": 3401
+      },
+      "pageDownScroll": 38,
+      "scrollObservationMs": 97,
+      "noCulling": true
+    },
+    {
+      "name": "Selected-case section/per-step links, direct reload, Back, checklist reset/Undo and favorites persist"
+    },
+    {
+      "name": "Read-only command copies byte-for-byte and Markdown export keeps resources, decisions, commands and checklist state"
+    },
+    {
+      "name": "390/320px, short landscape and 200% layout-equivalent retain full panel, 44px actions and unoccluded section targets",
+      "layouts": [
+        {
+          "width": 390,
+          "height": 844,
+          "noOverflow": true,
+          "panelPosition": "static",
+          "panelMaxHeight": "none",
+          "contentOverflow": "visible",
+          "panelBeforeGuide": true,
+          "driverCount": 11,
+          "resourceCount": 16,
+          "bodyFont": 16,
+          "minActionHeight": 44,
+          "minActionFont": 14,
+          "sectionPositions": {
+            "bar": {
+              "x": 18,
+              "y": 62,
+              "width": 354,
+              "height": 57,
+              "top": 62,
+              "right": 372,
+              "bottom": 119,
+              "left": 18
+            },
+            "heading": {
+              "x": 18,
+              "y": 200.125,
+              "width": 354,
+              "height": 26,
+              "top": 200.125,
+              "right": 372,
+              "bottom": 226.125,
+              "left": 18
+            }
+          },
+          "view": "native CSS viewport"
+        },
+        {
+          "width": 320,
+          "height": 844,
+          "noOverflow": true,
+          "panelPosition": "static",
+          "panelMaxHeight": "none",
+          "contentOverflow": "visible",
+          "panelBeforeGuide": true,
+          "driverCount": 11,
+          "resourceCount": 16,
+          "bodyFont": 16,
+          "minActionHeight": 44,
+          "minActionFont": 14,
+          "sectionPositions": {
+            "bar": {
+              "x": 18,
+              "y": 62,
+              "width": 284,
+              "height": 57,
+              "top": 62,
+              "right": 302,
+              "bottom": 119,
+              "left": 18
+            },
+            "heading": {
+              "x": 18,
+              "y": 199.609375,
+              "width": 284,
+              "height": 26,
+              "top": 199.609375,
+              "right": 302,
+              "bottom": 225.609375,
+              "left": 18
+            }
+          },
+          "view": "native CSS viewport"
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "noOverflow": true,
+          "panelPosition": "static",
+          "panelMaxHeight": "none",
+          "contentOverflow": "visible",
+          "panelBeforeGuide": true,
+          "driverCount": 11,
+          "resourceCount": 16,
+          "bodyFont": 16,
+          "minActionHeight": 44,
+          "minActionFont": 14,
+          "sectionPositions": {
+            "bar": {
+              "x": 24,
+              "y": 64,
+              "width": 796,
+              "height": 57,
+              "top": 64,
+              "right": 820,
+              "bottom": 121,
+              "left": 24
+            },
+            "heading": {
+              "x": 24,
+              "y": 204.234375,
+              "width": 796,
+              "height": 26,
+              "top": 204.234375,
+              "right": 820,
+              "bottom": 230.234375,
+              "left": 24
+            }
+          },
+          "view": "native CSS viewport"
+        },
+        {
+          "width": 720,
+          "height": 500,
+          "noOverflow": true,
+          "panelPosition": "static",
+          "panelMaxHeight": "none",
+          "contentOverflow": "visible",
+          "panelBeforeGuide": true,
+          "driverCount": 11,
+          "resourceCount": 16,
+          "bodyFont": 16,
+          "minActionHeight": 44,
+          "minActionFont": 14,
+          "sectionPositions": {
+            "bar": {
+              "x": 24,
+              "y": 64,
+              "width": 672,
+              "height": 57,
+              "top": 64,
+              "right": 696,
+              "bottom": 121,
+              "left": 24
+            },
+            "heading": {
+              "x": 24,
+              "y": 203.765625,
+              "width": 672,
+              "height": 26,
+              "top": 203.765625,
+              "right": 696,
+              "bottom": 229.765625,
+              "left": 24
+            }
+          },
+          "view": "200% desktop layout-equivalent at 720 CSS px (1440 physical px target)"
+        }
+      ]
+    },
+    {
+      "name": "Offline export retains all job workspace metadata, exact selected route, driver links and full tool/answer catalogs"
+    },
+    {
+      "name": "No runtime errors, external runtime requests, scroll handlers or content culling"
+    }
+  ],
+  "screenshots": [
+    "portal-printer-desktop-top.png",
+    "portal-printer-desktop-scrolled.png",
+    "portal-printer-desktop-light.png",
+    "portal-printer-390-top.png",
+    "portal-printer-390-tools.png",
+    "portal-printer-390-procedure.png",
+    "portal-printer-320-top.png",
+    "portal-printer-320-tools.png",
+    "portal-printer-320-procedure.png",
+    "portal-printer-390-light.png"
+  ],
+  "errors": [],
+  "limitations": [
+    "The zoom check uses the equivalent 720-CSS-pixel layout width of a 1440px viewport at 200%; headless browser chrome zoom was not exercised. All content and navigation were also checked at 320px and short landscape."
+  ],
+  "currentRenderObservationMs": 655,
+  "counts": {
+    "tools": 118,
+    "jobs": 22,
+    "cases": 27,
+    "workspaces": 22,
+    "resources": 96,
+    "decisions": 102
+  },
+  "baseline": {
+    "tools": 114,
+    "jobs": 22,
+    "cases": 27,
+    "nodes": 390,
+    "stepCount": 6,
+    "commands": [],
+    "renderObservationMs": 180,
+    "hash": "5cd33ffb6003f9bdbd6a910690026aa6a18d1f6ce0953220dd801b43441bc124"
+  },
+  "currentPrinterNodes": 852,
+  "search": [
+    {
+      "query": "HP printer driver",
+      "exactRoute": "#job/printer-repair/quick/fix-a-printer"
+    },
+    {
+      "query": "Brother",
+      "exactRoute": "#job/printer-repair/quick/fix-a-printer"
+    },
+    {
+      "query": "Epson",
+      "exactRoute": "#job/printer-repair/quick/fix-a-printer"
+    },
+    {
+      "query": "stuck queue",
+      "exactRoute": "#job/printer-repair/quick/fix-a-printer"
+    },
+    {
+      "query": "scan to PDF",
+      "exactRoute": "#job/printer-repair/quick/fix-a-printer"
+    }
+  ],
+  "desktop": {
+    "top": {
+      "panel": {
+        "x": 1058,
+        "y": 137,
+        "width": 350,
+        "height": 904,
+        "top": 137,
+        "right": 1408,
+        "bottom": 1041,
+        "left": 1058
+      },
+      "header": {
+        "x": 264,
+        "y": 137,
+        "width": 762,
+        "height": 256.25,
+        "top": 137,
+        "right": 1026,
+        "bottom": 393.25,
+        "left": 264
+      },
+      "firstDriver": {
+        "x": 1075,
+        "y": 531.40625,
+        "width": 145,
+        "height": 52.59375,
+        "top": 531.40625,
+        "right": 1220,
+        "bottom": 584,
+        "left": 1075
+      },
+      "lastDriver": {
+        "x": 1075,
+        "y": 794.375,
+        "width": 145,
+        "height": 52.59375,
+        "top": 794.375,
+        "right": 1220,
+        "bottom": 846.96875,
+        "left": 1075
+      },
+      "priority": [
+        "get-help",
+        "advanced-ip-scanner"
+      ],
+      "driverCount": 11,
+      "panelClient": 827,
+      "panelScroll": 4228,
+      "nodes": 885
+    },
+    "scroll1": {
+      "x": 1058,
+      "y": 80,
+      "width": 350,
+      "height": 904
+    },
+    "scroll2": {
+      "x": 1058,
+      "y": 80,
+      "width": 350,
+      "height": 904
+    },
+    "keyboard": {
+      "href": "https://www.naps2.com/windows-scanning",
+      "top": 821.25,
+      "bottom": 865.25,
+      "regionTop": 156.140625,
+      "regionBottom": 983,
+      "scrollTop": 3401
+    },
+    "pageDownScroll": 38,
+    "scrollObservationMs": 97,
+    "noCulling": true
+  },
+  "commandCopy": {
+    "step": "Read the installed queue, driver and port",
+    "sha256": "a0b19d0f74239212d8e1e82f76c8b828eeac30403928a75a933385ab3e5e06ba",
+    "executed": false
+  },
+  "mobile": [
+    {
+      "width": 390,
+      "height": 844,
+      "noOverflow": true,
+      "panelPosition": "static",
+      "panelMaxHeight": "none",
+      "contentOverflow": "visible",
+      "panelBeforeGuide": true,
+      "driverCount": 11,
+      "resourceCount": 16,
+      "bodyFont": 16,
+      "minActionHeight": 44,
+      "minActionFont": 14,
+      "sectionPositions": {
+        "bar": {
+          "x": 18,
+          "y": 62,
+          "width": 354,
+          "height": 57,
+          "top": 62,
+          "right": 372,
+          "bottom": 119,
+          "left": 18
+        },
+        "heading": {
+          "x": 18,
+          "y": 200.125,
+          "width": 354,
+          "height": 26,
+          "top": 200.125,
+          "right": 372,
+          "bottom": 226.125,
+          "left": 18
+        }
+      },
+      "view": "native CSS viewport"
+    },
+    {
+      "width": 320,
+      "height": 844,
+      "noOverflow": true,
+      "panelPosition": "static",
+      "panelMaxHeight": "none",
+      "contentOverflow": "visible",
+      "panelBeforeGuide": true,
+      "driverCount": 11,
+      "resourceCount": 16,
+      "bodyFont": 16,
+      "minActionHeight": 44,
+      "minActionFont": 14,
+      "sectionPositions": {
+        "bar": {
+          "x": 18,
+          "y": 62,
+          "width": 284,
+          "height": 57,
+          "top": 62,
+          "right": 302,
+          "bottom": 119,
+          "left": 18
+        },
+        "heading": {
+          "x": 18,
+          "y": 199.609375,
+          "width": 284,
+          "height": 26,
+          "top": 199.609375,
+          "right": 302,
+          "bottom": 225.609375,
+          "left": 18
+        }
+      },
+      "view": "native CSS viewport"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "noOverflow": true,
+      "panelPosition": "static",
+      "panelMaxHeight": "none",
+      "contentOverflow": "visible",
+      "panelBeforeGuide": true,
+      "driverCount": 11,
+      "resourceCount": 16,
+      "bodyFont": 16,
+      "minActionHeight": 44,
+      "minActionFont": 14,
+      "sectionPositions": {
+        "bar": {
+          "x": 24,
+          "y": 64,
+          "width": 796,
+          "height": 57,
+          "top": 64,
+          "right": 820,
+          "bottom": 121,
+          "left": 24
+        },
+        "heading": {
+          "x": 24,
+          "y": 204.234375,
+          "width": 796,
+          "height": 26,
+          "top": 204.234375,
+          "right": 820,
+          "bottom": 230.234375,
+          "left": 24
+        }
+      },
+      "view": "native CSS viewport"
+    },
+    {
+      "width": 720,
+      "height": 500,
+      "noOverflow": true,
+      "panelPosition": "static",
+      "panelMaxHeight": "none",
+      "contentOverflow": "visible",
+      "panelBeforeGuide": true,
+      "driverCount": 11,
+      "resourceCount": 16,
+      "bodyFont": 16,
+      "minActionHeight": 44,
+      "minActionFont": 14,
+      "sectionPositions": {
+        "bar": {
+          "x": 24,
+          "y": 64,
+          "width": 672,
+          "height": 57,
+          "top": 64,
+          "right": 696,
+          "bottom": 121,
+          "left": 24
+        },
+        "heading": {
+          "x": 24,
+          "y": 203.765625,
+          "width": 672,
+          "height": 26,
+          "top": 203.765625,
+          "right": 696,
+          "bottom": 229.765625,
+          "left": 24
+        }
+      },
+      "view": "200% desktop layout-equivalent at 720 CSS px (1440 physical px target)"
+    }
+  ],
+  "passed": true,
+  "harnessRecovery": {
+    "reason": "Mobile theme control is inside the navigation menu; open the menu before clicking it.",
+    "resumedAt": "2026-11-27T00:52:30.922Z",
+    "retainedChecks": 8
+  },
+  "hashes": {
+    "portal/app.js": "bc9a54deecc12143415413fea2b9270e04fd66c0505495f1ae1361cb8bc2b358",
+    "portal/styles.css": "d04bd6870d3b12193779edafc7a25914611e9299ef2e77cf097a67ef3a214740",
+    "portal/index.template.html": "1aa7143d9b8d8ca28cd239d2fb6d87af408d88ca5c3fca0a30fb1e2f026478ab",
+    "site/index.html": "10e6cec4e3793684d23bc15b9f67c2630e7f6b1f4b97a1b057fa5a007ec38814",
+    "data/job-workspaces.json": "58f4fea8b995a958e36a5c447cb9d51ff00f02c69a7ea76a385079c369799975",
+    "data/quick-start.json": "3cb71071c3bb338dd00fee02d55f99c0a2fb784cadc0c6d377cac80d8ed96367",
+    "data/tool-access.json": "45c38c7f0714f013402d8c83e82dc470b09f3e14b5e9e4fb6daf088fdf6f2fcd",
+    "data/tools.json": "c3661122ce854c10256e853939177510045b557417016e976498c78688b9f4d5",
+    "data/jobs.json": "0d5631e68b8ad961829b6a8d42076c645980539404ab39be8a7918fab1cb6a8b"
+  },
+  "htmlBytes": 595284,
+  "finishedAt": "2026-11-27T00:52:34.915Z"
+}

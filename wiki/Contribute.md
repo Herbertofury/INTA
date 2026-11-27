@@ -24,6 +24,7 @@
 | [Tool catalog](https://github.com/Herbertofury/INTA/blob/main/data/tools.json) | Tool identity, official links, usage boundary, tier, tags and review evidence |
 | [Quick-start selections](https://github.com/Herbertofury/INTA/blob/main/data/quick-start.json) | Free starting tools for urgent scenarios, task fit, source evidence and practical limits; shared by the front pages |
 | [Job guides](https://github.com/Herbertofury/INTA/blob/main/data/jobs.json) | Procedures, selected tool IDs, verification, escalation and sources |
+| [Job workspaces](https://github.com/Herbertofury/INTA/blob/main/data/job-workspaces.json) | Purpose-specific toolkits, official action resources, symptom decisions and completion evidence |
 | [Method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json) | Precise method names, aliases, canonical destinations and proof |
 | [Link aliases](https://github.com/Herbertofury/INTA/blob/main/data/link-aliases.json) and [linking helper](https://github.com/Herbertofury/INTA/blob/main/scripts/wiki_links.py) | Additional precise application names and linking of every repeated mention |
 | [Wiki layout](https://github.com/Herbertofury/INTA/blob/main/data/wiki-layout.json) | Page presentation and job decision diagrams |
@@ -54,7 +55,7 @@ python3 scripts/check-wiki.py
 
 Command legend: [Python](https://www.python.org/) runs the [hub builder](https://github.com/Herbertofury/INTA/blob/main/scripts/build-hub.py), [test suite](https://github.com/Herbertofury/INTA/tree/main/tests) and [wiki checker](https://github.com/Herbertofury/INTA/blob/main/scripts/check-wiki.py). The checks verify generated outputs, known named links, routes and linked diagram or command legends.
 
-For a content change, inspect the relevant rendered page and follow its actual links. For a visual or interaction change, check desktop and narrow layouts, keyboard navigation, both themes, complete search results, checklists, saved items and exports where affected. Check the offline build as well as the hosted surface when the change touches offline behavior.
+For a content change, inspect the relevant rendered page and follow its actual links. For a visual or interaction change, check desktop and narrow layouts, keyboard navigation, both themes, complete search results, checklists, saved items and exports where affected. Check the offline build as well as the hosted surface when the change touches offline behavior. For working kits, verify every manufacturer/resource link is present, the exact case survives navigation, sticky controls remain usable during real scrolling, and narrow layouts do not obscure the instructions.
 
 ## 🚀 Definition of finished
 

@@ -28,6 +28,12 @@ Use icons consistently and sparingly. Do not substitute icon-only instructions f
 
 Every service scenario appears in the front-page answers. Name the problem in ordinary language, including **Remove viruses** and **Fix a printer**. Start the guide with exactly three practical actions, then retain its complete diagnosis, repair, verification and escalation procedure. Distinct cases receive stable dedicated Wiki answer pages, with links to their complete guides. Preserve existing guide anchors for compatibility, but do not depend on fragments to distinguish the answer reached from another page. Do not repeat lengthy selection notes in each Home row.
 
+### Keep the working tools within reach
+
+Every service job uses the shared [job workspace data](https://github.com/Herbertofury/INTA/blob/main/data/job-workspaces.json). Put its purpose-specific tools and useful official resources before the long procedure. Each tool offers its official page and exact acquisition action; each resource tells the user what to do after opening it. A printer job, for example, needs manufacturer driver finders, network discovery, queue inspection and output tests. A model-specific driver must be chosen for the actual device and operating system.
+
+Use a visible **symptom → next action → expected result** table and observable completion checks. Retain the complete guide, commands, diagrams and fallback routes. In the application, a compact tool panel follows the working document on wide screens, with small-screen jump controls that leave the instructions readable. [GitHub](https://github.com/) sanitizes custom styling, so the Wiki keeps the same kit at the top and offers an **Open working view** link. [GitHub rendering pipeline](https://github.com/github/markup#github-markup).
+
 ## 🔗 2. Every named mention is a route
 
 Every rendered occurrence of a known tool, application or named method must be linked, including repeated occurrences in the same paragraph, table, list or later section. Link a tool to its exact official product/download/documentation page; link a method to the canonical guide recorded in the [method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json). Choose the destination that helps with that specific mention.

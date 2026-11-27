@@ -8,7 +8,41 @@ Keep verified recovery images, [Windows repair](https://github.com/Herbertofury/
 
 **Recovery & boot** · Intermediate · 20–60 min plus downloads · 6 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/boot-usb)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/boot-usb)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/boot-usb)** · Keep the tool panel beside the instructions.
+
+**First move:** Identify the USB by model, capacity and contents; copy off anything that must be kept before a write operation.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Write one selected official ISO to the intended USB. | **[Rufus](https://rufus.ie/)** · [Official page](https://rufus.ie/) · **[Download Windows x64 portable · EXE](https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe)** |
+| Maintain a verified multiboot collection. | **[Ventoy](https://www.ventoy.net/)** · [Official page](https://www.ventoy.net/) · **[Download Windows package · ZIP](https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip)** |
+| Obtain supported [Windows repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair)/install media. | **[Windows 11 installation media](https://www.microsoft.com/software-download/windows11)** · [Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)** |
+| Provide an independent imaging and recovery environment. | **[SystemRescue](https://www.system-rescue.org/)** · [Official page](https://www.system-rescue.org/) · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** |
+
+### Create media
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Rufus operation and firmware choices](https://github.com/pbatard/rufus/wiki/FAQ)** | Confirm image, target USB and the intended boot mode. |
+| **[Ventoy install versus update](https://www.ventoy.net/en/doc_start.html)** | Distinguish a destructive install from updating existing media. |
+
+### Verify media
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Verify a selected file hash](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash)** | Compare the exact downloaded image with its publisher’s checksum. |
+
+### Boot compatibility
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Ventoy Secure Boot instructions](https://www.ventoy.net/en/doc_secure.html)** | Review image/firmware support and recovery before changing keys or settings. |
 
 <a id="quick-answer"></a>
 
@@ -26,6 +60,24 @@ Keep verified recovery images, [Windows repair](https://github.com/Herbertofury/
 
 **[Rufus](https://rufus.ie/)** · [Official page](https://rufus.ie/) · **[Download Windows x64 portable · EXE](https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **Only one rescue or installation image is needed** | Use the official ISO and [Rufus](https://rufus.ie/); confirm the selected USB can be erased and choose firmware-compatible options. | The intended image is written to the correct device. |
+| **Several verified images must stay on one USB** | Use the documented [Ventoy](https://www.ventoy.net/) install/update path and copy the checked images to its data partition. | The expected images appear in the boot menu. |
+| **The publisher supplies a checksum** | Run Get-FileHash for the exact downloaded file and compare it with the official value before writing. | The calculated hash matches the trusted release record. |
+| **Writing finished but the client may have unusual hardware** | Boot-test the intended firmware mode and verify keyboard, storage, network and the required recovery tool. | The actual service path works on representative hardware rather than only completing an image write. |
+
+### ✅ Finish the job
+
+- [ ] Image source, hash and release are recorded.
+- [ ] The USB boots and detects the hardware required for the planned job.
+
+**Change route when:** The target USB or its erase permission is uncertain. · A firmware/security change lacks the necessary recovery material.
+
 > [!NOTE]
 > **Start here.** Choose a known USB drive and copy off anything that must be kept. Confirm its model, capacity, and contents before a media-writing operation.
 
@@ -34,9 +86,6 @@ Keep verified recovery images, [Windows repair](https://github.com/Herbertofury/
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -59,8 +108,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Recover a Windows PC that will not boot](boot-recovery.md) · [Rescue data from a failing or unreadable drive](failing-drive.md) · [Prove a backup can actually restore](backup-restore.md)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Identify the USB and save anything that must be retained. |
@@ -77,10 +124,10 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| **[Ventoy](https://www.ventoy.net/)** · [Official page](https://www.ventoy.net/) · **[Download Windows package · ZIP](https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip)** | Maintaining a technician USB with several independently updated rescue images. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/); Free / open source | [Open guide](https://www.ventoy.net/en/doc_start.html) |
-| **[Rufus](https://rufus.ie/)** · [Official page](https://rufus.ie/) · **[Download Windows x64 portable · EXE](https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe)** | Preparing one ISO on a dedicated USB drive. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://github.com/pbatard/rufus/wiki/FAQ) |
-| **[Windows 11 installation media](https://www.microsoft.com/software-download/windows11)** · [Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)** | A clean installation or supported repair using the correct [Windows](https://www.microsoft.com/windows) edition and architecture. | [Windows](https://www.microsoft.com/windows), Bootable PC; Download available; [Windows](https://www.microsoft.com/windows) license required | [Open guide](https://www.microsoft.com/software-download/windows11) |
-| **[SystemRescue](https://www.system-rescue.org/)** · [Official page](https://www.system-rescue.org/) · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** | A ready-made [Linux](https://www.kernel.org/) recovery environment for an unbootable or damaged machine. | Bootable PC; Free / open source | [Open guide](https://www.system-rescue.org/manual/) |
+| **[Rufus](https://rufus.ie/)** · [Official page](https://rufus.ie/) · **[Download Windows x64 portable · EXE](https://github.com/pbatard/rufus/releases/download/v4.16/rufus-4.16p.exe)** | Write one selected official ISO to the intended USB. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://github.com/pbatard/rufus/wiki/FAQ) |
+| **[Ventoy](https://www.ventoy.net/)** · [Official page](https://www.ventoy.net/) · **[Download Windows package · ZIP](https://github.com/ventoy/Ventoy/releases/download/v1.1.18/ventoy-1.1.18-windows.zip)** | Maintain a verified multiboot collection. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/); Free / open source | [Open guide](https://www.ventoy.net/en/doc_start.html) |
+| **[Windows 11 installation media](https://www.microsoft.com/software-download/windows11)** · [Official page](https://www.microsoft.com/software-download/windows11) · **[Download media creation tool · EXE](https://go.microsoft.com/fwlink/?linkid=2156295)** | Obtain supported [Windows repair](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair)/install media. | [Windows](https://www.microsoft.com/windows), Bootable PC; Download available; [Windows](https://www.microsoft.com/windows) license required | [Open guide](https://www.microsoft.com/software-download/windows11) |
+| **[SystemRescue](https://www.system-rescue.org/)** · [Official page](https://www.system-rescue.org/) · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** | Provide an independent imaging and recovery environment. | Bootable PC; Free / open source | [Open guide](https://www.system-rescue.org/manual/) |
 | **[Hiren's BootCD PE](https://www.hirensbootcd.org/)** · [Official page](https://www.hirensbootcd.org/) · **[Download x64 rescue image · ISO](https://www.hirensbootcd.org/files/HBCD_PE_x64.iso)** | A familiar [Windows](https://www.microsoft.com/windows)-oriented offline bench toolkit. | Bootable PC; Free distribution; bundled tools have individual terms | [Open guide](https://www.hirensbootcd.org/howtos/) |
 | **[Rescuezilla](https://rescuezilla.com/)** · [Official page](https://rescuezilla.com/) · **[Download x64 rescue image · ISO](https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso)** | A visual bare-metal backup or restore workflow at the bench. | Bootable PC; Free / open source | [Open guide](https://rescuezilla.com/help) |
 
@@ -160,9 +207,6 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [Ventoy: install and update](https://www.ventoy.net/en/doc_start.html)
 - [Ventoy: verify image checksums](https://www.ventoy.net/en/doc_checksum.html)
 - [Ventoy: Secure Boot behavior](https://www.ventoy.net/en/doc_secure.html)
@@ -170,7 +214,6 @@ Work in order, record the result of each step, and change route when the evidenc
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

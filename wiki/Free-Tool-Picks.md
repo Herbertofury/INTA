@@ -59,7 +59,7 @@ Those are resident-antivirus protection results. They do not rate the standalone
 
 **🛡️ [Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download) · [Quick answer](https://github.com/Herbertofury/INTA/wiki/Remove-viruses) · [Complete procedure](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal)**
 
-**First action:** Disconnect a suspected compromised PC from the network before scanning; use the incident guide if encryption is spreading.
+**First action:** Disconnect a suspected compromised PC from the network before scanning; use the [incident guide](https://github.com/Herbertofury/INTA/wiki/Contain-ransomware) if encryption is spreading.
 
 1. Record the symptoms and isolate affected connections; keep the existing real-time protection in place.
 2. On a trusted PC, download a fresh [Microsoft Safety Scanner](https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download); transfer it safely and run a Full scan.

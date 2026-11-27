@@ -88,6 +88,59 @@ class HubIntegrity(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Unknown scenario acquisition'):
             build.selected_tool_action(entry, 'missing')
 
+    def test_every_job_has_a_complete_working_kit(self):
+        workspaces = json.loads((ROOT / 'data/job-workspaces.json').read_text())
+        access = json.loads((ROOT / 'data/tool-access.json').read_text())['tools']
+        build.validate_job_workspaces(workspaces, self.jobs, self.tools, access)
+        output = build.build_outputs()
+        self.assertEqual(json.loads(output['site/catalog.json'])['jobWorkspaces'], workspaces)
+        quick = json.loads((ROOT / 'data/quick-start.json').read_text())['items']
+        for identity, workspace in workspaces['jobs'].items():
+            full = output[f'wiki/Job-{identity}.md']
+            self.assertLess(full.index('## 🧰 Tools and links for this job'), full.index('## ⚡ Quick answer'))
+            self.assertIn('## 🧭 Match the symptom', full)
+            self.assertNotIn('<details>', full)
+            for resource in workspace['resources']:
+                self.assertIn(f"]({resource['url']})", full)
+            recommended = full.split('<a id="toolkit"></a>', 1)[1].split('<a id="walkthrough"></a>', 1)[0]
+            for selection in workspace['tools']:
+                if selection.get('actionId'):
+                    action = build.selected_tool_action(access[selection['toolId']], selection['actionId'])
+                    self.assertIn(f"]({action['url']})", recommended)
+            for item in [item for item in quick if item['jobId'] == identity]:
+                answer = output[f"wiki/{item['wikiPage']}.md"]
+                self.assertIn(f"#job/{identity}/quick/{item['id']}", answer)
+                self.assertLess(answer.index('## 🧰 Tools and links for this job'), answer.index('## ⚡ First three actions'))
+                for resource in workspace['resources']:
+                    self.assertIn(f"]({resource['url']})", answer)
+
+    def test_working_kits_reject_missing_jobs_and_unknown_tool_actions(self):
+        workspaces = json.loads((ROOT / 'data/job-workspaces.json').read_text())
+        access = json.loads((ROOT / 'data/tool-access.json').read_text())['tools']
+        missing = copy.deepcopy(workspaces)
+        missing['jobs'].pop(next(iter(missing['jobs'])))
+        with self.assertRaisesRegex(ValueError, 'every playbook exactly'):
+            build.validate_job_workspaces(missing, self.jobs, self.tools, access)
+        wrong_action = copy.deepcopy(workspaces)
+        toolkit = next(entry['tools'] for entry in wrong_action['jobs'].values() if entry['tools'])
+        toolkit[0]['actionId'] = 'unrelated-troubleshooter'
+        with self.assertRaisesRegex(ValueError, 'Unknown scenario acquisition'):
+            build.validate_job_workspaces(wrong_action, self.jobs, self.tools, access)
+
+    def test_working_kits_reject_unsafe_resources_and_empty_decisions(self):
+        workspaces = json.loads((ROOT / 'data/job-workspaces.json').read_text())
+        access = json.loads((ROOT / 'data/tool-access.json').read_text())['tools']
+        for url in ('javascript:alert(1)', 'https://user:password@example.com/', 'https://example.com/?utm_source=tracking'):
+            invalid = copy.deepcopy(workspaces)
+            resources = next(entry['resources'] for entry in invalid['jobs'].values() if entry['resources'])
+            resources[0]['url'] = url
+            with self.assertRaisesRegex(ValueError, 'public HTTPS resource'):
+                build.validate_job_workspaces(invalid, self.jobs, self.tools, access)
+        missing = copy.deepcopy(workspaces)
+        next(iter(missing['jobs'].values()))['decisions'] = []
+        with self.assertRaisesRegex(ValueError, 'decision, completion and escalation'):
+            build.validate_job_workspaces(missing, self.jobs, self.tools, access)
+
 
 class FakeResponse:
     status = 200

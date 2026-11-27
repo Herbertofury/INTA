@@ -28,6 +28,7 @@ WIKI_MIRRORS = {
     "Methods": "methods.md", "Decision-Desk": "decision-desk.md",
     "Interface-Design": "interface-design.md", "Service-Evidence": "service-evidence.md",
     "Tool-Selection": "tool-selection.md", "Free-Tool-Picks": "free-tool-picks.md",
+    "Current-Tool-Choices": "reference/job-tool-review-2026-11-26.md",
 }
 CATEGORY_NAMES = {
     "malware": "Malware removal & endpoint protection", "remote": "Remote support",
@@ -172,6 +173,111 @@ def selected_tool_action(entry: dict, action_id: str | None = None) -> dict:
     raise ValueError(f"Unknown scenario acquisition action: {action_id}")
 
 
+def validate_job_workspaces(workspaces: dict, jobs: list[dict], tools: list[dict], access: dict) -> None:
+    """Every service has a useful, source-backed working kit, not an empty panel."""
+    if not isinstance(workspaces, dict) or workspaces.get("schemaVersion") != 1:
+        raise ValueError("Job workspaces require schemaVersion 1")
+    try:
+        date.fromisoformat(workspaces.get("reviewedAt", ""))
+    except (TypeError, ValueError):
+        raise ValueError("Job workspaces require an editorial review date") from None
+    entries = workspaces.get("jobs", {})
+    if not isinstance(entries, dict) or set(entries) != {job["id"] for job in jobs}:
+        raise ValueError("Job workspaces must cover every playbook exactly")
+    tool_ids = {tool["id"] for tool in tools}
+
+    def text_field(value, identity):
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"{identity}: useful workspace text is required")
+
+    def public_url(value, identity):
+        parsed = urlparse(value) if isinstance(value, str) else None
+        if (parsed is None or parsed.scheme != "https" or not parsed.hostname
+                or parsed.username or parsed.password
+                or any(key in parsed.query.lower() for key in ("utm_", "fbclid=", "gclid="))):
+            raise ValueError(f"{identity}: public HTTPS resource without tracking is required")
+
+    for identity, entry in entries.items():
+        for field in ("goal", "startHere"):
+            text_field(entry.get(field), identity)
+        for field in ("tools", "resources", "decisions", "doneWhen", "escalateWhen"):
+            if not isinstance(entry.get(field), list):
+                raise ValueError(f"{identity}: workspace {field} must be a list")
+        if not entry["tools"] and not entry["resources"]:
+            raise ValueError(f"{identity}: workspace requires a working tool or resource")
+        seen_tools = set()
+        for selection in entry["tools"]:
+            tool_id = selection.get("toolId")
+            key = (tool_id, selection.get("actionId"))
+            if tool_id not in tool_ids or key in seen_tools:
+                raise ValueError(f"{identity}: unknown or duplicate workspace tool {tool_id}")
+            seen_tools.add(key)
+            text_field(selection.get("why"), identity)
+            selected_tool_action(access[tool_id], selection.get("actionId"))
+        seen_resources = set()
+        for resource in entry["resources"]:
+            resource_id = resource.get("id", "")
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", resource_id) or resource_id in seen_resources:
+                raise ValueError(f"{identity}: distinct stable resource IDs are required")
+            seen_resources.add(resource_id)
+            for field in ("label", "kind", "group", "description"):
+                text_field(resource.get(field), identity)
+            if re.search(r"[\n\r<>\[\]|`*]", resource["label"]):
+                raise ValueError(f"{identity}: resource labels must be plain text")
+            public_url(resource.get("url"), identity)
+            public_url(resource.get("sourceUrl"), identity)
+            try:
+                date.fromisoformat(resource.get("checkedAt", ""))
+            except (TypeError, ValueError):
+                raise ValueError(f"{identity}: resource review date is required") from None
+        if not entry["decisions"] or not entry["doneWhen"] or not entry["escalateWhen"]:
+            raise ValueError(f"{identity}: decision, completion and escalation evidence are required")
+        for decision in entry["decisions"]:
+            for field in ("symptom", "action", "expected"):
+                text_field(decision.get(field), identity)
+        for value in [*entry["doneWhen"], *entry["escalateWhen"]]:
+            text_field(value, identity)
+
+
+def workspace_resources_markdown(workspace: dict, tools_by_id: dict, access: dict,
+                                 working_url: str) -> list[str]:
+    """Share the same practical toolkit between the Wiki and the sticky app view."""
+    lines = [anchor("working-kit"), "", "## 🧰 Tools and links for this job", "",
+             f"**[Open working view]({working_url})** · Keep the tool panel beside the instructions.", "",
+             f"**First move:** {workspace['startHere']}", ""]
+    driver_resources = [resource for resource in workspace["resources"] if resource["kind"] == "driver"]
+    if driver_resources:
+        lines += ["**Driver shortcuts:** " + " · ".join(
+            f"**[{cell(resource['label'])}]({resource['url']})**" for resource in driver_resources), ""]
+    if workspace["tools"]:
+        lines += ["| Use this for | Official tool + exact action |", "| --- | --- |"]
+        for selection in workspace["tools"]:
+            tool = tools_by_id[selection["toolId"]]
+            lines += [f"| {cell(selection['why'])} | **[{tool['name']}]({access[tool['id']]['officialUrl']})** · "
+                      f"{tool_access_links(tool, access, action_id=selection.get('actionId'))} |"]
+        lines += [""]
+    groups = {}
+    for resource in workspace["resources"]:
+        groups.setdefault(resource["group"], []).append(resource)
+    for group, resources in groups.items():
+        lines += [f"### {group}", "", "| Open the exact resource | What to do there |", "| --- | --- |"]
+        lines += [f"| **[{cell(resource['label'])}]({resource['url']})** | {cell(resource['description'])} |"
+                  for resource in resources]
+        lines += [""]
+    return lines
+
+
+def workspace_decisions_markdown(workspace: dict) -> list[str]:
+    lines = [anchor("next-action"), "", "## 🧭 Match the symptom", "",
+             "| You see this | Do this next | You should get |", "| --- | --- | --- |"]
+    lines += [f"| **{cell(item['symptom'])}** | {cell(item['action'])} | {cell(item['expected'])} |"
+              for item in workspace["decisions"]]
+    lines += ["", "### ✅ Finish the job", ""]
+    lines += [f"- [ ] {item}" for item in workspace["doneWhen"]]
+    lines += ["", "**Change route when:** " + " · ".join(workspace["escalateWhen"]), ""]
+    return lines
+
+
 def tool_access_links(tool: dict, access: dict, *, all_routes: bool = False,
                       action_id: str | None = None) -> str:
     entry = access[tool["id"]]
@@ -270,14 +376,29 @@ def quick_start_markdown(quick_start: dict, tools_by_id: dict, layout: dict, acc
             action = f"**[{tool['name']}]({entry['officialUrl']})** · **[{cell(primary['label'])}]({primary['url']})**"
         lines += [f"| **[{icon} {cell(item['label'])}]({guide})** | {action} |"]
     lines += ["", f"Selection review: **{quick_start['reviewedAt']}** · "
-              f"[Complete tool directory]({WIKI}/Tool-Directory) · [Why these tools]({WIKI}/Free-Tool-Picks)", ""]
+              f"[Complete tool directory]({WIKI}/Tool-Directory) · [Why these tools]({WIKI}/Free-Tool-Picks) · "
+              f"[Current tool choices]({WIKI}/Current-Tool-Choices)", ""]
     return "\n".join(lines)
 
 
-def quick_answer_markdown(item: dict, tools_by_id: dict, access: dict, reviewed: str) -> str:
+def quick_answer_markdown(item: dict, tools_by_id: dict, access: dict, reviewed: str,
+                          workspace: dict | None = None) -> str:
     """Give a scenario its own reliable Wiki destination, independent of fragments."""
     lines = [page_nav(), "", f"# {item.get('icon', '🛠️')} {item['label']}", "",
              f"**{item['firstStep']}**", ""]
+    if workspace:
+        selected_workspace = dict(workspace, startHere=item["firstStep"])
+        if not item.get("guideOnly"):
+            selected = {"toolId": item["toolId"], "why": item["label"]}
+            if item.get("toolAction"):
+                selected["actionId"] = item["toolAction"]
+            selected_workspace["tools"] = [selected, *[
+                selection for selection in workspace["tools"]
+                if (selection["toolId"], selection.get("actionId")) !=
+                   (selected["toolId"], selected.get("actionId"))]]
+        lines += workspace_resources_markdown(selected_workspace, tools_by_id, access,
+                    f"{HUB}#job/{item['jobId']}/quick/{item['id']}")
+        lines += ["## ⚡ First three actions", ""]
     lines += [f"{number}. {step}" for number, step in enumerate(item["quickSteps"], 1)]
     lines += [""]
     if item.get("guideOnly"):
@@ -290,6 +411,8 @@ def quick_answer_markdown(item: dict, tools_by_id: dict, access: dict, reviewed:
                   f"**[{cell(action['label'])}]({action['url']})**", ""]
     lines += [f"**[Complete procedure]({WIKI}/Job-{item['jobId']})** · "
               f"**[Selection evidence]({WIKI}/Free-Tool-Picks)**"]
+    if workspace:
+        lines += [""] + workspace_decisions_markdown(workspace)
     lines += page_footer(reviewed)
     return "\n".join(lines)
 
@@ -445,7 +568,8 @@ def command_reference(step: dict, by_id: dict) -> str:
 
 def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
                  jobs_by_id: dict | None = None, reviewed: str = "2026-11-26",
-                 quick_items: list[dict] | None = None, access: dict | None = None) -> str:
+                 quick_items: list[dict] | None = None, access: dict | None = None,
+                 workspace: dict | None = None) -> str:
     layout = layout or json.loads((ROOT / "data/wiki-layout.json").read_text(encoding="utf-8"))
     config = layout["jobs"][job["id"]]
     jobs_by_id = jobs_by_id or {j["id"]: j for j in records(ROOT / "data/jobs.json", "jobs")}
@@ -457,8 +581,10 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
     destination = lambda identity: f"{WIKI}/Job-{identity}" if wiki else f"{identity}.md"
     lines = [page_nav(), "", *heading(1, job["title"], f"{config['icon']} {job['title']}"), job["summary"], "",
              f"**{cell(job['category'])}** · {cell(job['difficulty'])} · {cell(job['estimatedTime'])} · {len(job['steps'])} steps", "",
-             "[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · "
+             "[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · "
              f"[Verification](#acceptance) · [Sources](#sources) · [Interactive checklist]({HUB}#job/{job['id']})", ""]
+    if workspace:
+        lines += workspace_resources_markdown(workspace, by_id, access, f"{HUB}#job/{job['id']}")
     if quick_items:
         lines += [anchor("quick-answer"), "", "## ⚡ Quick answer", ""]
         for item in quick_items:
@@ -472,13 +598,14 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
                 tool = by_id[item["toolId"]]
                 lines += [f"**[{tool['name']}]({access[tool['id']]['officialUrl']})** · "
                           + tool_access_links(tool, access, action_id=item.get("toolAction")), ""]
+    if workspace:
+        lines += workspace_decisions_markdown(workspace)
     lines += ["> [!NOTE]", f"> **Start here.** {job['startHere']}", "",
-             anchor("decision-route"), "", *heading(2, "🧭 Choose a route", "🧭 Choose the right branch"),
-             "<details>", "<summary>View the decision map and escalation routes</summary>", ""]
+             anchor("decision-route"), "", *heading(2, "🧭 Choose a route", "🧭 Choose the right branch")]
     lines += diagram_block(config["diagram"])
     routes = ["[Continue this workflow](#walkthrough)", "[Acceptance checks](#acceptance)"]
     routes += [f"[{jobs_by_id[identity]['title']}]({destination(identity)})" for identity in job.get("related", [])]
-    lines += ["**Route links:** " + " · ".join(routes), "", "</details>", ""]
+    lines += ["**Route links:** " + " · ".join(routes), ""]
     lines += ["| Checkpoint | What to carry forward |", "| --- | --- |"]
     lines += [f"| **{cell(label)}** | {cell(detail)} |" for label, detail in config["checkpoints"].items()]
     lines += ["", anchor("toolkit"), "", *heading(2, "Recommended tools", "🧰 Build the right toolkit")]
@@ -487,7 +614,8 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
                   "| Tool / official page + download | Use it for | Platform & access | Documentation |", "| --- | --- | --- | --- |"]
         for tool_id in job["tools"]:
             tool = by_id[tool_id]
-            lines += [f"| **[{tool['name']}]({access[tool_id]['officialUrl']})** · {tool_access_links(tool, access)} | {cell(tool['bestFor'])} | "
+            selection = next((item for item in (workspace or {}).get("tools", []) if item["toolId"] == tool_id), {})
+            lines += [f"| **[{tool['name']}]({access[tool_id]['officialUrl']})** · {tool_access_links(tool, access, action_id=selection.get('actionId'))} | {cell(selection.get('why', tool['bestFor']))} | "
                       f"{cell(tool['platforms'])}; {cell(tool['pricing'])} | [Open guide]({tool['docsUrl']}) |"]
     else:
         lines += [f"Use the approved private service record and the [intake and handoff template]({WIKI}/Technician-Handoff). No specialist application is required."]
@@ -512,11 +640,10 @@ def job_markdown(job: dict, by_id: dict, wiki: bool, layout: dict | None = None,
         for identity in job["related"]:
             other = jobs_by_id[identity]
             lines += [f"| [{other['title']}]({destination(identity)}) | {cell(other['summary'])} |"]
-    lines += ["", anchor("sources"), "", *heading(2, "Official sources", "🔎 Source trail"),
-              "<details>", "<summary>References and review notes</summary>", ""]
+    lines += ["", anchor("sources"), "", *heading(2, "Official sources", "🔎 Source trail")]
     lines += [f"- [{source['title']}]({source['url']})" for source in job["sources"]]
     lines += ["", f"Reviewed **{job.get('reviewedAt', reviewed)}**. Timing is a planning range. "
-              "A successful command is evidence about that operation; acceptance belongs to the user’s original task.", "", "</details>"]
+              "A successful command is evidence about that operation; acceptance belongs to the user’s original task.", ""]
     lines += page_footer(job.get("reviewedAt", reviewed), wiki)
     return "\n".join(lines)
 
@@ -532,7 +659,8 @@ def category_markdown(category: str, tools: list[dict], layout: dict, jobs: dict
     lines = [page_nav(), "", *heading(1, label, f"{info['icon']} {label}"), info["intro"], "",
              f"**{len(tools)} tools** · [All categories]({WIKI}/Tool-Directory) · [Selection standards]({WIKI}/Knowledge-Standards)", "",
              f"**Selection question:** {info['question']}", "", *heading(2, "Related playbooks", "🧭 Start with a workflow")]
-    lines += [f"- [{jobs[identity]['title']}]({WIKI}/Job-{identity})" for identity in info["jobs"]]
+    lines += [f"- {scenario_link(identity, layout, absolute=True)} · **[Open working view]({HUB}#job/{identity})**"
+              for identity in info["jobs"]]
     lines += ["", anchor("compare-options"), "", *heading(2, "Tool comparison", "⚖️ Compare the options"),
               "| Tool | Choose it for | Platforms / role | Official page + download |", "| --- | --- | --- | --- |"]
     for tool in ordered:
@@ -573,7 +701,9 @@ def playbook_index(jobs: list[dict], layout: dict, wiki: bool, reviewed: str) ->
                   "| Playbook | Outcome | Experience | Plan your time |", "| --- | --- | --- | --- |"]
         for identity in group["jobs"]:
             job = by_id[identity]
-            lines += [f"| [{job['title']}]({destination(identity)}) | {cell(job['summary'])} | {job['difficulty']} | {cell(job['estimatedTime'])} |"]
+            navigation = layout["jobs"][identity]
+            lines += [f"| **[{navigation['navigationIcon']} {navigation['navigationLabel']}]({destination(identity)})** · "
+                      f"[Working view]({HUB}#job/{identity}) | {cell(job['summary'])} | {job['difficulty']} | {cell(job['estimatedTime'])} |"]
         lines += [""]
     lines += [*heading(2, "Corrections and additions", "🤝 Make the next case easier"), f"Use the [contribution template]({WIKI}/Templates) when a case reveals a better sequence, a changed tool, or a missing stop condition. "
               f"Keep customer evidence in the private service record and add only the reusable method to the [shared knowledge process]({WIKI}/Continuous-Improvement)."]
@@ -648,16 +778,18 @@ def build_outputs() -> dict[str, str]:
     layout = json.loads((ROOT / "data/wiki-layout.json").read_text(encoding="utf-8"))
     quick_start = json.loads((ROOT / "data/quick-start.json").read_text(encoding="utf-8"))
     tool_access = json.loads((ROOT / "data/tool-access.json").read_text(encoding="utf-8"))
+    job_workspaces = json.loads((ROOT / "data/job-workspaces.json").read_text(encoding="utf-8"))
     validate(tools, jobs)
     validate_layout(layout, jobs, tools)
     validate_tool_access(tool_access, tools)
     validate_quick_start(quick_start, tools, jobs, tool_access["tools"])
+    validate_job_workspaces(job_workspaces, jobs, tools, tool_access["tools"])
     if not (ROOT / "docs/free-tool-picks.md").is_file():
         raise ValueError("Quick-start selections require docs/free-tool-picks.md for their evidence and limits")
     linker = link_module()
     registry = linker.build_registry(tools, jobs)
     data = {"tools": tools, "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
-            "quickStart": quick_start, "toolAccess": tool_access["tools"]}
+            "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     template = (ROOT / "portal/index.template.html").read_text(encoding="utf-8")
@@ -686,8 +818,9 @@ def build_outputs() -> dict[str, str]:
     outputs.update(managed_sources)
     for job in jobs:
         quick_items = [item for item in quick_start["items"] if item["jobId"] == job["id"]]
-        outputs[f"wiki/Job-{job['id']}.md"] = job_markdown(job, by_id, True, layout, jobs_by_id, meta["reviewedAt"], quick_items, access)
-        outputs[f"docs/runbooks/{job['id']}.md"] = job_markdown(job, by_id, False, layout, jobs_by_id, meta["reviewedAt"], quick_items, access)
+        workspace = job_workspaces["jobs"][job["id"]]
+        outputs[f"wiki/Job-{job['id']}.md"] = job_markdown(job, by_id, True, layout, jobs_by_id, meta["reviewedAt"], quick_items, access, workspace)
+        outputs[f"docs/runbooks/{job['id']}.md"] = job_markdown(job, by_id, False, layout, jobs_by_id, meta["reviewedAt"], quick_items, access, workspace)
     outputs["wiki/Playbooks.md"] = playbook_index(jobs, layout, True, meta["reviewedAt"])
     outputs["docs/runbooks/README.md"] = playbook_index(jobs, layout, False, meta["reviewedAt"])
     tool_index = [page_nav(), "", *heading(1, "Tool directory", "🧰 The tool directory"),
@@ -739,7 +872,7 @@ def build_outputs() -> dict[str, str]:
                 "- [Decision desk](Decision-Desk)", "- [All playbooks](Playbooks)", "- [Complete tool directory](Tool-Directory)",
                 "- [Methods](Methods)", "- [Rescue media](Rescue-Media)", "- [Intake and handoff](Technician-Handoff)",
                 "- [Service evidence](Service-Evidence)", "- [Tool selection](Tool-Selection)",
-                "- [Free Tool Picks](Free-Tool-Picks)", "",
+                "- [Free Tool Picks](Free-Tool-Picks)", "- [Current tool choices](Current-Tool-Choices)", "",
                 *legacy_anchors("📏 The shared standard"), "", "### Standards and contributions", "",
                 "- [Start here](Start-Here)", "- [Knowledge standards](Knowledge-Standards)", "- [Interface design](Interface-Design)",
                 "- [Contribute](Contribute)", "- [Contribution templates](Templates)",
@@ -754,7 +887,8 @@ def build_outputs() -> dict[str, str]:
         source = managed_sources[source_name] if source_name in managed_sources else (ROOT / source_name).read_text(encoding="utf-8")
         outputs[f"wiki/{title}.md"] = mirror_markdown(source, mirrors, meta["reviewedAt"])
     for item in quick_start["items"]:
-        outputs[f"wiki/{item['wikiPage']}.md"] = quick_answer_markdown(item, by_id, access, quick_start["reviewedAt"])
+        outputs[f"wiki/{item['wikiPage']}.md"] = quick_answer_markdown(item, by_id, access, quick_start["reviewedAt"],
+                                                                    job_workspaces["jobs"][item["jobId"]])
     for path, content in list(outputs.items()):
         if path.endswith(".md") and path not in managed_sources:
             outputs[path] = linker.link_markdown(content, registry)
@@ -766,6 +900,10 @@ def build_outputs() -> dict[str, str]:
                 "toolAccessEntries": len(access),
                 "directFileDownloads": sum(entry["primary"]["kind"] == "file" for entry in access.values()),
                 "toolAccessSha256": hashlib.sha256(json.dumps(tool_access, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
+                "jobWorkspaces": len(job_workspaces["jobs"]),
+                "jobResources": sum(len(entry["resources"]) for entry in job_workspaces["jobs"].values()),
+                "jobDecisionBranches": sum(len(entry["decisions"]) for entry in job_workspaces["jobs"].values()),
+                "jobWorkspacesSha256": hashlib.sha256(json.dumps(job_workspaces, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
                 "categories": dict(sorted(Counter(t["category"] for t in tools).items())),
                 "contentSha256": hashlib.sha256(data_json.encode()).hexdigest(),
                 "wikiLayoutSha256": hashlib.sha256(json.dumps(layout, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),

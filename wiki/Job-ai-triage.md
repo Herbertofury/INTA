@@ -8,7 +8,38 @@ Use AI to organize evidence, compare hypotheses, and explain findings while the 
 
 **AI assistance** · Intermediate · 5–20 min per analysis · 6 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ai-triage)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/ai-triage)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/ai-triage)** · Keep the tool panel beside the instructions.
+
+**First move:** Prepare the exact error, timing and environment with customer identities, credentials, internal addresses and file contents removed.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Compare hypotheses and explain sanitized evidence. | **[ChatGPT](https://chatgpt.com/)** · [Official page](https://chatgpt.com/) · **[Open ChatGPT](https://chatgpt.com/)** |
+| Review a scoped script or code change in an approved workspace. | **[OpenAI Codex CLI](https://github.com/openai/codex)** · [Official page](https://github.com/openai/codex) · **[Download Windows x64 CLI · EXE](https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe)** |
+
+### Prepare the case
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[ChatGPT data controls](https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt)** | Check the approved account/workspace controls before sharing evidence. |
+
+### Script review
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Codex CLI documentation](https://developers.openai.com/codex/cli/)** | Use a defined workspace and review the proposed execution scope. |
+
+### Verification
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[NIST generative-AI profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)** | Check generated claims, sources and proposed actions against evidence. |
 
 <a id="quick-answer"></a>
 
@@ -26,6 +57,24 @@ Use AI to organize evidence, compare hypotheses, and explain findings while the 
 
 **[ChatGPT](https://chatgpt.com/)** · [Official page](https://chatgpt.com/) · **[Open ChatGPT](https://chatgpt.com/)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **The failure has several plausible causes** | Provide the sanitized reproduction and ask for ranked causes plus one small test that separates the leading possibilities. | The output distinguishes observations from assumptions and predicts a test result. |
+| **The assistant proposes a command** | Check the exact target, shell, privileges, writes and rollback against the official product documentation before execution. | The technician understands and approves the scoped action. |
+| **A test contradicts the proposed cause** | Return the exact sanitized result and require a revised hypothesis rather than repeating an unchanged failed action. | The next diagnostic follows the new evidence. |
+| **The repair is ready to document** | Draft the cause/change/test note from verified observations, then review it before saving. | The handoff contains demonstrated facts and explicit remaining uncertainty. |
+
+### ✅ Finish the job
+
+- [ ] The original task passes a real test independent of the AI answer.
+- [ ] Executed actions match the actual environment and no unnecessary private content was shared.
+
+**Change route when:** The proposed action is destructive, unsupported or lacks a verified target. · The organization has not approved the intended data/account boundary.
+
 > [!NOTE]
 > **Start here.** Start with a concrete symptom and sanitized evidence. Decide whether the task is explanation, log analysis, script review, or a proposed diagnostic plan.
 
@@ -34,9 +83,6 @@ Use AI to organize evidence, compare hypotheses, and explain findings while the 
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -60,8 +106,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) · [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Sanitize evidence and set the analysis or script-review scope. |
@@ -78,8 +122,8 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| **[ChatGPT](https://chatgpt.com/)** · [Official page](https://chatgpt.com/) · **[Open ChatGPT](https://chatgpt.com/)** | Explaining redacted errors, drafting job notes and reviewing a proposed troubleshooting plan. | Web, [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos); Free and paid plans | [Open guide](https://help.openai.com/) |
-| **[OpenAI Codex CLI](https://github.com/openai/codex)** · [Official page](https://github.com/openai/codex) · **[Download Windows x64 CLI · EXE](https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe)** | Reviewing or building technician scripts in a controlled working folder. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows); Open-source client; account or API usage terms apply | [Open guide](https://developers.openai.com/codex/cli/) |
+| **[ChatGPT](https://chatgpt.com/)** · [Official page](https://chatgpt.com/) · **[Open ChatGPT](https://chatgpt.com/)** | Compare hypotheses and explain sanitized evidence. | Web, [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos); Free and paid plans | [Open guide](https://help.openai.com/) |
+| **[OpenAI Codex CLI](https://github.com/openai/codex)** · [Official page](https://github.com/openai/codex) · **[Download Windows x64 CLI · EXE](https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe)** | Review a scoped script or code change in an approved workspace. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows); Open-source client; account or API usage terms apply | [Open guide](https://developers.openai.com/codex/cli/) |
 | **[Claude Code](https://code.claude.com/docs/en/overview)** · [Official page](https://code.claude.com/docs/en/overview) · **[Download Windows install script · CMD](https://claude.ai/install.cmd)** | Explaining logs and developing a reviewed automation script. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), [Windows](https://www.microsoft.com/windows); Account or API access according to current plan | [Open guide](https://code.claude.com/docs/en/overview) |
 
 <a id="walkthrough"></a>
@@ -157,15 +201,11 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [INTA Rescue source and build workflow](https://github.com/Herbertofury/INTA)
 - [NIST: Generative AI Profile, AI 600-1](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

@@ -612,6 +612,38 @@
       "url": "https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell",
       "aliases": [],
       "kind": "application"
+    },
+    {
+      "id": "windows-protected-print-mode",
+      "name": "Windows protected print mode",
+      "aliases": [
+        "WPP"
+      ],
+      "url": "https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode",
+      "kind": "platform"
+    },
+    {
+      "id": "print-support-apps",
+      "name": "Print Support Apps",
+      "aliases": [
+        "Print Support App"
+      ],
+      "url": "https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-mode-faq",
+      "kind": "platform"
+    },
+    {
+      "id": "microsoft-ipp-class-driver",
+      "name": "Microsoft IPP Class Driver",
+      "aliases": [],
+      "url": "https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-mode-faq",
+      "kind": "platform"
+    },
+    {
+      "id": "ransomware-incident-guide",
+      "name": "incident guide",
+      "aliases": [],
+      "url": "https://github.com/Herbertofury/INTA/wiki/Contain-ransomware",
+      "kind": "method"
     }
   ]
 }

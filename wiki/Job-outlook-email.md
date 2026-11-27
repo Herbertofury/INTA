@@ -9,7 +9,32 @@ Separate service, authentication, mailbox, network, and local-client faults.
 
 **Identity & business systems** · Intermediate · 20–60 min · 6 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/outlook-email)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/outlook-email)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/outlook-email)** · Keep the tool panel beside the instructions.
+
+**First move:** Test the same account in webmail and identify classic [Outlook](https://support.microsoft.com/outlook) versus new [Outlook](https://support.microsoft.com/outlook) before changing a local profile.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Choose a diagnostic for classic [Outlook](https://support.microsoft.com/outlook) only. | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)** |
+
+### Client repair
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Classic Outlook diagnostics](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)** | Choose startup, authentication or connectivity; not for new [Outlook](https://support.microsoft.com/outlook). |
+| **[New and classic Outlook repair branches](https://support.microsoft.com/en-us/outlook/getstarted/outlook-for-windows-not-responding-hangs-freezes-or-stops-working)** | Use the tab matching the installed client. |
+
+### Compatibility
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[New Outlook architecture and differences](https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/administration/architecture-changes-new-outlook)** | Check the client’s supported behavior before applying a classic-only fix. |
 
 <a id="quick-answer"></a>
 
@@ -27,6 +52,26 @@ Separate service, authentication, mailbox, network, and local-client faults.
 
 **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **Webmail also fails or several users are affected** | Capture the sign-in/send error and compare another affected account; involve the mail or identity service owner. | The fault is identified as service, account or policy scope rather than a local profile guess. |
+| **Classic [Outlook](https://support.microsoft.com/outlook) will not start or repeatedly asks for credentials** | Open the matching classic [Outlook](https://support.microsoft.com/outlook) diagnostic in [Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help) on the affected PC. | The test identifies a startup, authentication or connectivity finding. |
+| **Only classic [Outlook](https://support.microsoft.com/outlook) fails and an add-in is suspected** | Press Win+R, run [outlook](https://support.microsoft.com/outlook).exe /safe and compare the same task; record enabled add-ins before changing one. | The safe-mode comparison establishes whether the add-in branch is relevant. |
+| **New [Outlook](https://support.microsoft.com/outlook) is the affected client** | Preserve unsent work where possible; in [Task Manager](https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows) select Microsoft [Outlook](https://support.microsoft.com/outlook) > End task, then reopen new [Outlook](https://support.microsoft.com/outlook) and repeat the failing task. If it still fails, follow Microsoft’s new-client reinstall branch after protecting local-only mail. | The supported new-client path restores the failing task or identifies its service dependency. |
+| **A profile rebuild or data-file repair is proposed** | Identify PST/local-only mail and preserve it before changing the profile or file. | No unique mail is lost while the repaired client is tested. |
+
+### ✅ Finish the job
+
+- [ ] Send and receive succeed for the affected account.
+- [ ] The affected calendar, shared mailbox or attachment workflow works.
+- [ ] Local-only data is preserved and the actual client/version is recorded.
+
+**Change route when:** Local-only mail lacks a protected copy. · The fault involves tenant policy, identity compromise or a wider service outage.
+
 > [!NOTE]
 > **Start here.** Identify the mail provider and whether the user is in classic [Outlook](https://support.microsoft.com/outlook), new [Outlook](https://support.microsoft.com/outlook), or a browser. Their repair paths differ.
 
@@ -35,9 +80,6 @@ Separate service, authentication, mailbox, network, and local-client faults.
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -61,8 +103,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Fix internet, DNS, or local-network problems](https://github.com/Herbertofury/INTA/wiki/Job-network-dns) · [Remove malware and browser hijackers](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) · [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Identify the client and protect mail that exists only on this device. |
@@ -79,6 +119,7 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
+| **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Choose a classic Outlook diagnostic](https://support.microsoft.com/en-us/support/get-help/classic-outlook-troubleshooters)** | Choose a diagnostic for classic [Outlook](https://support.microsoft.com/outlook) only. | [Windows](https://www.microsoft.com/windows); Included with supported [Windows](https://www.microsoft.com/windows); assisted support availability depends on the account and support agreement. | [Open guide](https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
 
 <a id="walkthrough"></a>
@@ -156,15 +197,11 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [Microsoft: classic Outlook not responding](https://support.microsoft.com/en-us/outlook/classic-outlook-not-responding-stuck-at-processing-stopped-working-or-freezes)
 - [Microsoft: architecture changes in new Outlook](https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/administration/architecture-changes-new-outlook)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

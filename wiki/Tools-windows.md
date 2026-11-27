@@ -6,7 +6,7 @@
 
 Inspect first, change a confirmed cause, and repeat the original workload.
 
-**22 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**24 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** Performance, servicing, startup, or application failure?
 
@@ -14,10 +14,10 @@ Inspect first, change a confirmed cause, and repeat the original workload.
 
 ## Related playbooks
 
-- [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)
-- [Repair Windows component or system-file corruption](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair)
-- [Fix a failing Windows update](https://github.com/Herbertofury/INTA/wiki/Job-windows-update)
-- [Diagnose crashes, blue screens, and overheating](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod)
+- **[🐢 Fix a slow PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc)** · **[Open working view](https://herbertofury.github.io/INTA/#job/slow-pc)**
+- **[🛠️ Repair Windows](https://github.com/Herbertofury/INTA/wiki/Job-windows-repair)** · **[Open working view](https://herbertofury.github.io/INTA/#job/windows-repair)**
+- **[🔄 Fix Windows updates](https://github.com/Herbertofury/INTA/wiki/Job-windows-update)** · **[Open working view](https://herbertofury.github.io/INTA/#job/windows-update)**
+- **[🌡️ Diagnose crashes / BSOD](https://github.com/Herbertofury/INTA/wiki/Job-hardware-bsod)** · **[Open working view](https://herbertofury.github.io/INTA/#job/hardware-bsod)**
 
 <a id="compare-options"></a>
 
@@ -46,9 +46,11 @@ Inspect first, change a confirmed cause, and repeat the original workload.
 | [WinGet](#winget) | Repeatable application setup and individually reviewed updates. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/windows/package-manager/winget/) · **[Download App Installer · MSIXBUNDLE](https://github.com/microsoft/winget-cli/releases/download/v1.29.380/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)** |
 | [WizTree](#wiztree) | Finding the folders and files responsible for a capacity problem before selecting an approved cleanup. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/) · Core | [Official page](https://diskanalyzer.com/) · **[Download Windows portable · ZIP](https://diskanalyzer.com/files/wiztree_4_34_portable.zip)** |
 | [ProcDump](#procdump) | Collecting evidence for a repeatable crash or hung application. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/procdump) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/Procdump.zip)** |
+| [Quick machine recovery](#quick-machine-recovery) | An eligible device or fleet affected by a widespread boot failure for which Microsoft has published a remediation. | [Windows 11](https://www.microsoft.com/windows/windows-11), [Windows Server](https://learn.microsoft.com/en-us/windows-server/) 2025 · Specialist | [Official page](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp) · **[Check supported recovery setup](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)** |
 | [System Informer](#system-informer) | Advanced process investigation beyond the standard [task manager](https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows). | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://systeminformer.sourceforge.io/) · **[Get Windows portable ZIP · download page](https://sourceforge.net/projects/systeminformer/files/systeminformer-4.0.26241.138-bin.zip/download)** |
-| [WinDbg](#windbg) | Interpreting a crash dump when basic event logs do not establish the cause. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger installer](https://aka.ms/windbg/download)** |
+| [WinDbg](#windbg) | Interpreting a crash dump when basic event logs do not establish the cause. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger · APPINSTALLER](https://aka.ms/windbg/download)** |
 | [Windows Performance Toolkit](#windows-performance-toolkit) | Investigating intermittent CPU, storage or application responsiveness problems with evidence. | [Windows](https://www.microsoft.com/windows) · Specialist | [Official page](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/) · **[Download Windows ADK setup · EXE](https://go.microsoft.com/fwlink/?linkid=2289980)** |
+| [Windows point-in-time restore (preview)](#windows-point-in-time-restore) | A controlled evaluation of whole-system rollback on an eligible machine with an existing restore point and independently preserved current files. | [Windows 11](https://www.microsoft.com/windows/windows-11) · Evaluate | [Official page](https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore) · **[Review preview requirements and restore scope](https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore)** |
 | [WinSAT (legacy)](#winsat) | Understanding a legacy assessment when the target system still provides it; prefer WPR/WPA for current investigations. | [Windows](https://www.microsoft.com/windows) · Evaluate | [Official page](https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal) · **[Read legacy command instructions](https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal)** |
 
 Core means an everyday candidate; Specialist means a focused advanced use; Evaluate means prove it in a suitable test environment before promotion.
@@ -469,7 +471,7 @@ Microsoft’s [Windows](https://www.microsoft.com/windows) support application w
 
 [Windows](https://www.microsoft.com/windows) [startup repair](https://support.microsoft.com/en-us/windows/experience/startup-boot/startup-repair), recovery and troubleshooting environment.
 
-[Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) · **[Open recovery instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · [Documentation](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)
+[Official page](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference) · **[Open recovery instructions](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)** · [Reinstall current Windows via Windows Update](https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows) · [Documentation](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference)
 
 | Decision | Detail |
 | --- | --- |
@@ -621,6 +623,39 @@ Captures process dumps around exceptions, hangs and chosen performance condition
 
 [Back to comparison](#compare-options)
 
+<a id="quick-machine-recovery"></a>
+
+## [Quick machine recovery](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)
+
+Connected [Windows](https://www.microsoft.com/windows) recovery can look for Microsoft-provided fixes when a device repeatedly fails to boot.
+
+[Official page](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp) · **[Check supported recovery setup](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)** · [Documentation](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | An eligible device or fleet affected by a widespread boot failure for which Microsoft has published a remediation. |
+| **Where it runs** | [Windows 11](https://www.microsoft.com/windows/windows-11), [Windows Server](https://learn.microsoft.com/en-us/windows-server/) 2025 |
+| **How you use it** | built-in |
+| **Access / pricing** | Included with supported [Windows](https://www.microsoft.com/windows); availability depends on release, edition and management policy |
+| **Selection role** | Specialist |
+
+> **Before using it:** Best-effort recovery requires a working recovery environment and supported network. Enterprise-managed devices have cloud remediation disabled by default. Current guidance supports wired or WPA/WPA2 password-based Wi-Fi; confirm the managed policy and supported build before relying on it.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Official requirements and scope reviewed; no INTA boot or [restore test](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) is claimed.
+- **Selection provenance:**
+  - Current Microsoft recovery guidance
+  - https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp
+  - https://learn.microsoft.com/en-us/windows/configuration/windows-device-recovery-framework
+
+</details>
+
+[Back to comparison](#compare-options)
+
 <a id="system-informer"></a>
 
 ## [System Informer](https://systeminformer.sourceforge.io/)
@@ -659,7 +694,7 @@ Detailed process and resource inspection with debugging and system-information f
 
 Microsoft debugger for user-mode and kernel debugging and crash-dump analysis.
 
-[Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger installer](https://aka.ms/windbg/download)** · [Documentation](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)
+[Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger · APPINSTALLER](https://aka.ms/windbg/download)** · [Documentation](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)
 
 | Decision | Detail |
 | --- | --- |
@@ -710,6 +745,39 @@ Microsoft debugger for user-mode and kernel debugging and crash-dump analysis.
 - **Evidence status:** Documentation reviewed; not an INTA runtime certification
 - **Selection provenance:**
   - Official project or vendor documentation
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="windows-point-in-time-restore"></a>
+
+## [Windows point-in-time restore (preview)](https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore)
+
+Preview [Windows](https://www.microsoft.com/windows) recovery feature that rolls the system volume back to a recent locally captured state.
+
+[Official page](https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore) · **[Review preview requirements and restore scope](https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore)** · [Documentation](https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | A controlled evaluation of whole-system rollback on an eligible machine with an existing restore point and independently preserved current files. |
+| **Where it runs** | [Windows 11](https://www.microsoft.com/windows/windows-11) |
+| **How you use it** | built-in |
+| **Access / pricing** | Included with supported [Windows](https://www.microsoft.com/windows); availability depends on release, edition and management policy |
+| **Selection role** | Evaluate |
+
+> **Before using it:** Preview: rollback includes local user files, apps, settings, passwords, certificates and keys; changes after the selected point can be lost. The documented local restore runs in the recovery environment and needs the [BitLocker](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/) recovery key on encrypted volumes. Local snapshots depend on disk space and idle time; they are not an independent backup.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Official requirements and scope reviewed; no INTA boot or [restore test](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) is claimed.
+- **Selection provenance:**
+  - Current Microsoft recovery guidance
+  - https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore
+  - https://learn.microsoft.com/en-us/windows/configuration/windows-device-recovery-framework
 
 </details>
 

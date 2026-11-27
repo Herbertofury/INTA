@@ -6,7 +6,7 @@
 
 Make everyday technician work clearer without leaving unnecessary software on customer machines.
 
-**9 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
+**10 tools** · [All categories](https://github.com/Herbertofury/INTA/wiki/Tool-Directory) · [Selection standards](https://github.com/Herbertofury/INTA/wiki/Knowledge-Standards)
 
 **Selection question:** Inspect, document, transfer, or improve your own workspace?
 
@@ -14,9 +14,9 @@ Make everyday technician work clearer without leaving unnecessary software on cu
 
 ## Related playbooks
 
-- [Set up a dependable new workstation](https://github.com/Herbertofury/INTA/wiki/Job-new-pc)
-- [Run a useful workstation maintenance visit](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)
-- [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
+- **[🆕 Set up a new PC](https://github.com/Herbertofury/INTA/wiki/Job-new-pc)** · **[Open working view](https://herbertofury.github.io/INTA/#job/new-pc)**
+- **[🧹 Maintain a workstation](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)** · **[Open working view](https://herbertofury.github.io/INTA/#job/preventive-maintenance)**
+- **[📋 Complete the handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)** · **[Open working view](https://herbertofury.github.io/INTA/#job/client-handoff)**
 
 <a id="compare-options"></a>
 
@@ -32,6 +32,7 @@ Make everyday technician work clearer without leaving unnecessary software on cu
 | [KeePassXC](#keepassxc) | Keeping a protected technician vault with a deliberate sharing and backup process. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos) · Core | [Official page](https://keepassxc.org/) · **[Download Windows x64 portable · ZIP](https://github.com/keepassxreboot/keepassxc/releases/download/2.8.0/KeePassXC-2.8.0-x64.zip)** |
 | [LocalSend](#localsend) | Moving a selected log or tool between trusted devices on the same network. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos), Android, iOS · Core | [Official page](https://localsend.org/) · **[Download Windows x64 portable · ZIP](https://github.com/localsend/localsend/releases/download/v1.19.0/LocalSend-1.19.0-windows-x86-64.zip)** |
 | [Microsoft PowerToys](#powertoys) | Making the technician workstation easier to navigate and operate. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://learn.microsoft.com/en-us/windows/powertoys/) · **[Download Windows x64 setup · EXE](https://github.com/microsoft/PowerToys/releases/download/v0.102.3101/PowerToysUserSetup-0.102.3101.0-x64.exe)** |
+| [NAPS2](#naps2) | Testing scanner, flatbed, ADF and duplex workflows independently of the printer queue, then producing a readable sample PDF. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/) · Core | [Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)** |
 | [Notepad++](#notepadplusplus) | Reading logs and making deliberate configuration-file changes. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://notepad-plus-plus.org/) · **[Download Windows x64 portable · ZIP](https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.9.1/npp.8.9.9.1.portable.x64.zip)** |
 | [ShareX](#sharex) | Capturing a problem and producing clear technician documentation. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://getsharex.com/) · **[Download Windows x64 portable · ZIP](https://github.com/ShareX/ShareX/releases/download/v22.4.0/ShareX-22.4.0-portable-x64.zip)** |
 | [UniGetUI](#unigetui) | Reviewing available applications and updates in one technician interface. | [Windows](https://www.microsoft.com/windows) · Core | [Official page](https://github.com/Devolutions/UniGetUI) · **[Download Windows x64 portable · ZIP](https://github.com/Devolutions/UniGetUI/releases/download/v2026.3.4/UniGetUI.x64.zip)** |
@@ -194,6 +195,40 @@ Modular [Windows](https://www.microsoft.com/windows) utilities including window 
 - **Selection provenance:**
   - Official project or vendor documentation
   - https://github.com/Herbertofury/Athena/blob/7d529423b52d3cc6104ce7469eec358f5dc9b9ac/research/windows-utilities-2026-11-14/catalog.json
+
+</details>
+
+[Back to comparison](#compare-options)
+
+<a id="naps2"></a>
+
+## [NAPS2](https://www.naps2.com/)
+
+Scan documents to PDF or images, rearrange pages, and create searchable PDFs with OCR.
+
+[Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)** · [Download Windows x64 installer · EXE](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.exe) · [Download Windows ARM64 installer · EXE](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-arm64.exe) · [Other platforms and stable releases](https://www.naps2.com/download) · [Documentation](https://www.naps2.com/windows-scanning)
+
+| Decision | Detail |
+| --- | --- |
+| **Choose it for** | Testing scanner, flatbed, ADF and duplex workflows independently of the printer queue, then producing a readable sample PDF. |
+| **Where it runs** | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/) |
+| **How you use it** | portable |
+| **Access / pricing** | Free and open source for individuals and businesses |
+| **Selection role** | Core |
+
+> **Before using it:** Select the driver and connection supported by the device. Confirm a flatbed/ADF sample and required duplex options; OCR can require additional language data. The current [Windows](https://www.microsoft.com/windows) release supports [Windows 10](https://www.microsoft.com/windows/end-of-support) and 11.
+
+<details>
+<summary>Source, review date, and selection history</summary>
+
+- **Primary source:** [Open the source](https://www.naps2.com/)
+- **Editorial review:** 2026-11-26
+- **Evidence status:** Stable official release and documentation reviewed; scanner hardware and OCR output have not been tested by INTA.
+- **Selection provenance:**
+  - Official [NAPS2](https://www.naps2.com/) product, business-use and download documentation
+  - https://www.naps2.com/
+  - https://www.naps2.com/download
+  - https://www.naps2.com/windows-scanning
 
 </details>
 

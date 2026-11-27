@@ -8,7 +8,36 @@ Validate recovery credentials, data integrity, application usability, and recove
 
 **Backup & continuity** · Intermediate · 30–90 min; full restore varies · 6 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/backup-restore)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/backup-restore)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/backup-restore)** · Keep the tool panel beside the instructions.
+
+**First move:** Identify the existing backup product, repository, recovery point and credentials. Use the matching restore tool rather than converting formats during an incident.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Restore an existing supported [Windows](https://www.microsoft.com/windows)-agent backup. | **[Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows)** · [Official page](https://www.veeam.com/products/free/microsoft-windows) · **[Sign in for the Windows download](https://www.veeam.com/products/physical/windows-backup-recovery-download.html)** |
+| Inspect and restore an existing [restic](https://restic.net/) repository. | **[restic](https://restic.net/)** · [Official page](https://restic.net/) · **[Download Windows x64 · ZIP](https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip)** |
+| Restore files from an existing [Kopia](https://kopia.io/) snapshot. | **[Kopia](https://kopia.io/)** · [Official page](https://kopia.io/) · **[Download Windows desktop · ZIP](https://github.com/kopia/kopia/releases/download/v0.23.1/KopiaUI-0.23.1-win.zip)** |
+
+### File snapshots
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[restic repository checks](https://restic.readthedocs.io/en/stable/045_working_with_repos.html)** | Check repository integrity before declaring a backup usable. |
+| **[restic restore procedure](https://restic.readthedocs.io/en/stable/050_restore.html)** | Choose the snapshot and a separate restore destination. |
+| **[Kopia snapshot restoration](https://kopia.io/docs/getting-started/)** | Use the GUI snapshot browser or documented CLI restore to a separate folder. |
+
+### System backups
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Start Veeam file-level restore](https://helpcenter.veeam.com/docs/agentforwindows/userguide/files_restore_launch.html)** | Launch the restore wizard and choose the existing backup and recovery point. |
+| **[Veeam recovery media and bare-metal restore](https://helpcenter.veeam.com/docs/agentforwindows/userguide/recovery_media.html)** | Use compatible recovery media for an existing image backup; verify the target before overwrite. |
 
 <a id="quick-answer"></a>
 
@@ -26,6 +55,27 @@ Validate recovery credentials, data integrity, application usability, and recove
 
 **[restic](https://restic.net/)** · [Official page](https://restic.net/) · **[Download Windows x64 · ZIP](https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **A file or folder must be restored** | Select the correct device and snapshot date in the matching backup tool and restore to a separate location. | The expected version exists without overwriting the current working copy. |
+| **The existing backup is a [Veeam Agent](https://www.veeam.com/products/free/microsoft-windows) backup** | Open File Level Restore from the Veeam Start-menu entry, select the [backup and restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) point, then copy the required files to a separate destination in the backup browser. | The restored version opens correctly before any working file is replaced. |
+| **The existing backup is a [Kopia](https://kopia.io/) snapshot** | Connect KopiaUI to the existing repository, open Snapshots, select the source Path and dated snapshot, then restore the required item to a separate folder. | The selected files exist in the restore folder and open with the expected contents. |
+| **A [restic](https://restic.net/) backup reports success but has not been tested** | Inspect its snapshots, run the documented repository check and restore representative files to a separate target. | The recovery point and usable contents are demonstrated rather than inferred from a green job. |
+| **A whole computer must be recovered** | Use that backup product’s compatible recovery media and check storage/network drivers before selecting the erase target. | The restored system boots and its critical application opens the expected data. |
+| **A password, repository or required snapshot is missing** | Record the exact missing dependency and contact its owner before modifying the repository. | The recovery gap has an owner and the remaining copies stay intact. |
+
+### ✅ Finish the job
+
+- [ ] The requested recovery date and a real file/application test are recorded.
+- [ ] Permissions and ownership allow the intended user to work.
+- [ ] Measured restore time and missing data are documented.
+
+**Change route when:** The only backup would be overwritten or exposed to an active compromise. · Required credentials or a valid recovery point cannot be established.
+
 > [!NOTE]
 > **Start here.** Identify what must be recovered, the acceptable data-loss window, and the target recovery time. A green backup status is only the starting point.
 
@@ -34,9 +84,6 @@ Validate recovery credentials, data integrity, application usability, and recove
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -58,8 +105,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Clone a healthy system or migrate to a new SSD](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration) · [Bring an office back after a power outage](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery) · [Contain ransomware or a wider compromise](https://github.com/Herbertofury/INTA/wiki/Job-ransomware-response) · [Run a useful workstation maintenance visit](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Identify recovery credentials, unique data, and a separate test target. |
@@ -76,8 +121,9 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| **[restic](https://restic.net/)** · [Official page](https://restic.net/) · **[Download Windows x64 · ZIP](https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip)** | Repeatable file backups with explicit integrity and restore checks. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://restic.readthedocs.io/en/stable/) |
-| **[Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows)** · [Official page](https://www.veeam.com/products/free/microsoft-windows) · **[Sign in for the Windows download](https://www.veeam.com/products/physical/windows-backup-recovery-download.html)** | Image backup and recovery media for a supported [Windows](https://www.microsoft.com/windows) endpoint. | [Windows](https://www.microsoft.com/windows); Free and paid editions; service-provider terms differ | [Open guide](https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html) |
+| **[Veeam Agent for Microsoft Windows](https://www.veeam.com/products/free/microsoft-windows)** · [Official page](https://www.veeam.com/products/free/microsoft-windows) · **[Sign in for the Windows download](https://www.veeam.com/products/physical/windows-backup-recovery-download.html)** | Restore an existing supported [Windows](https://www.microsoft.com/windows)-agent backup. | [Windows](https://www.microsoft.com/windows); Free and paid editions; service-provider terms differ | [Open guide](https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html) |
+| **[restic](https://restic.net/)** · [Official page](https://restic.net/) · **[Download Windows x64 · ZIP](https://github.com/restic/restic/releases/download/v0.20.0/restic_0.20.0_windows_amd64.zip)** | Inspect and restore an existing [restic](https://restic.net/) repository. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://restic.readthedocs.io/en/stable/) |
+| **[Kopia](https://kopia.io/)** · [Official page](https://kopia.io/) · **[Download Windows desktop · ZIP](https://github.com/kopia/kopia/releases/download/v0.23.1/KopiaUI-0.23.1-win.zip)** | Restore files from an existing [Kopia](https://kopia.io/) snapshot. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://kopia.io/docs/) |
 | **[Rescuezilla](https://rescuezilla.com/)** · [Official page](https://rescuezilla.com/) · **[Download x64 rescue image · ISO](https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.resolute.iso)** | A visual bare-metal backup or restore workflow at the bench. | Bootable PC; Free / open source | [Open guide](https://rescuezilla.com/help) |
 
 <a id="walkthrough"></a>
@@ -157,15 +203,11 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [restic: repository consistency and integrity](https://restic.readthedocs.io/en/stable/045_working_with_repos.html)
 - [restic: restore a backup](https://restic.readthedocs.io/en/stable/050_restore.html)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

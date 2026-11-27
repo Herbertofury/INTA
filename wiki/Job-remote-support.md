@@ -9,7 +9,39 @@ Choose the right attended or managed tool and leave a clear, auditable handoff.
 
 **[Remote support](https://github.com/Herbertofury/INTA/wiki/Job-remote-support)** · Starter · 5–15 min setup · 9 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/remote-support)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/remote-support)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/remote-support)** · Keep the tool panel beside the instructions.
+
+**First move:** Confirm the user and helper through the existing support channel. Decide whether the session is attended or requires an approved managed agent.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| One-time attended [Windows](https://www.microsoft.com/windows) help. | **[Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)** · [Official page](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · **[Get Quick Assist in Microsoft Store](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** |
+| Approved cross-platform or self-hosted support. | **[RustDesk](https://rustdesk.com/)** · [Official page](https://rustdesk.com/) · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)** |
+| Existing managed-device access and service oversight. | **[MeshCentral](https://meshcentral.com/)** · [Official page](https://meshcentral.com/) · **[Open server installation instructions](https://github.com/Ylianst/MeshCentral#installation)** |
+
+### Attended session
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Quick Assist support-staff workflow](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)** | Code, helper sign-in, user approval and audit-log limits. |
+
+### Approved alternative
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[RustDesk platform instructions](https://rustdesk.com/docs/en/)** | Use the approved server and required platform permissions. |
+
+### Managed access
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[MeshCentral administration](https://docs.meshcentral.com/)** | Use the organization’s existing device group and access controls. |
 
 <a id="quick-answer"></a>
 
@@ -27,6 +59,24 @@ Choose the right attended or managed tool and leave a clear, auditable handoff.
 
 **[Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)** · [Official page](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · **[Get Quick Assist in Microsoft Store](https://apps.microsoft.com/detail/9P7BP5VNWKX5)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **A [Windows](https://www.microsoft.com/windows) user is present and can approve a session** | Open [Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) on both PCs, exchange the temporary code and have the user approve sharing and any separate control request. | The correct screen is visible and the user understands the control state. |
+| **The task requires unattended access or durable audit records** | Use the approved managed tool and existing device identity; verify the technician’s role before connecting. | The session is tied to the intended asset and required audit record. |
+| **Elevation or a secure-desktop prompt blocks work** | Have the authorized local user respond or use the approved managed elevation workflow; do not ask for credentials in chat. | The required action is approved without disclosing credentials or bypassing consent. |
+| **The repair appears complete** | Repeat the original task with the user, end the session and remove any case-only access setting. | The user confirms the outcome and temporary control has ended. |
+
+### ✅ Finish the job
+
+- [ ] The original task works in the user’s session.
+- [ ] The session is closed and authorized persistent access is documented.
+
+**Change route when:** The user/helper identity or device target cannot be verified. · Requested access exceeds the approved session or exposes an active compromise.
+
 > [!NOTE]
 > **Start here.** Confirm the customer, intended device, and requested task through the established service channel before exchanging a session code.
 
@@ -35,9 +85,6 @@ Choose the right attended or managed tool and leave a clear, auditable handoff.
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -61,8 +108,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Start here: triage any computer problem](https://github.com/Herbertofury/INTA/wiki/Job-intake-triage) · [Fix internet, DNS, or local-network problems](https://github.com/Herbertofury/INTA/wiki/Job-network-dns) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Confirm identity, device, scope, and a reconnection fallback. |
@@ -79,9 +124,9 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
-| **[Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)** · [Official page](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · **[Get Quick Assist in Microsoft Store](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** | A quick one-time [Windows](https://www.microsoft.com/windows) support session without deploying an RMM agent. | [Windows](https://www.microsoft.com/windows); Free Microsoft app | [Open guide](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) |
-| **[RustDesk](https://rustdesk.com/)** · [Official page](https://rustdesk.com/) · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)** | A flexible remote-control option across mixed client platforms. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Open-source components; paid Server Pro features | [Open guide](https://rustdesk.com/docs/en/) |
-| **[MeshCentral](https://meshcentral.com/)** · [Official page](https://meshcentral.com/) · **[Open server installation instructions](https://github.com/Ylianst/MeshCentral#installation)** | INTA-managed unattended support with its own server and device groups. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source; hosting has a cost | [Open guide](https://docs.meshcentral.com/) |
+| **[Microsoft Quick Assist](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)** · [Official page](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) · **[Get Quick Assist in Microsoft Store](https://apps.microsoft.com/detail/9P7BP5VNWKX5)** | One-time attended [Windows](https://www.microsoft.com/windows) help. | [Windows](https://www.microsoft.com/windows); Free Microsoft app | [Open guide](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist) |
+| **[RustDesk](https://rustdesk.com/)** · [Official page](https://rustdesk.com/) · **[Download Windows x64 · EXE](https://github.com/rustdesk/rustdesk/releases/download/1.5.3/rustdesk-1.5.3-x86_64.exe)** | Approved cross-platform or self-hosted support. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Open-source components; paid Server Pro features | [Open guide](https://rustdesk.com/docs/en/) |
+| **[MeshCentral](https://meshcentral.com/)** · [Official page](https://meshcentral.com/) · **[Open server installation instructions](https://github.com/Ylianst/MeshCentral#installation)** | Existing managed-device access and service oversight. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source; hosting has a cost | [Open guide](https://docs.meshcentral.com/) |
 | **[Chrome Remote Desktop](https://remotedesktop.google.com/)** · [Official page](https://remotedesktop.google.com/) · **[Open remote support](https://remotedesktop.google.com/support)** | Attended support or an explicitly configured personal remote-access endpoint. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free service | [Open guide](https://support.google.com/chrome/answer/1649523) |
 
 <a id="walkthrough"></a>
@@ -189,9 +234,6 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [Microsoft: Quick Assist](https://support.microsoft.com/en-us/windows/apps/solve-pc-problems-remotely-using-quick-assist)
 - [Microsoft: Quick Assist requirements and enterprise limitations](https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist)
 - [Google: support codes, confirmation and removal of remote access](https://support.google.com/chrome/answer/1649523)
@@ -202,7 +244,6 @@ Work in order, record the result of each step, and change route when the evidenc
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

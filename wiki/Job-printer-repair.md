@@ -7,9 +7,62 @@
 
 Isolate printer hardware, network reachability, queue state, driver, and application behavior.
 
-**Devices & peripherals** · Starter · 15–45 min · 6 steps
+**Devices & peripherals** · Starter · 15–45 min · 8 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/printer-repair)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/printer-repair)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/printer-repair)** · Keep the tool panel beside the instructions.
+
+**First move:** Read the make/model and IP from the printer’s own network/configuration report. On the PC open Settings > Bluetooth & devices > Printers & scanners and select the intended queue.
+
+**Driver shortcuts:** **[HP printer drivers](https://support.hp.com/us-en/drivers/printers)** · **[Brother printer drivers](https://www.brother-usa.com/support/drivers)** · **[Canon printer drivers](https://www.usa.canon.com/support/software-and-drivers)** · **[Epson printer support](https://support.epson.com/)** · **[Xerox printer drivers](https://www.support.xerox.com/en-us)** · **[Ricoh drivers and downloads](https://www.ricoh-usa.com/en/support-and-download)** · **[Lexmark printer drivers](https://support.lexmark.com/en_us/drivers-downloads.html)** · **[Kyocera download center](https://www.kyoceradocumentsolutions.us/en/support/downloads.html)** · **[Konica Minolta model search](https://onyxweb.mykonicaminolta.com/OneStopProductSupport?appMode=Public)** · **[Sharp product downloads](https://business.sharpusa.com/product-downloads)** · **[Zebra printer support](https://www.zebra.com/us/en/support-downloads/printers.html)**
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Run the supported printer diagnostic. | **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Start the printer troubleshooter](https://aka.ms/PrinterConnection)** |
+| Find the printer’s current address within an approved local subnet. | **[Advanced IP Scanner](https://www.advanced-ip-scanner.com/)** · [Official page](https://www.advanced-ip-scanner.com/) · **[Download Windows scanner · EXE](https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe)** |
+| Read the exact installed queue, driver and port. | **[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** |
+| Test scanner, feeder and multipage PDF output. | **[NAPS2](https://www.naps2.com/)** · [Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)** |
+
+### Before driver changes
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Windows printer-driver selection](https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers)** | Check [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/), exact model, operating system and architecture. |
+| **[Windows protected print mode](https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode)** | [WPP](https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode) uses the modern print stack and removes or blocks third-party drivers. |
+
+### Find the printer
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Read installed printer ports](https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport)** | Compare the configured port/address with the printer’s network report. |
+| **[Read installed queues and drivers](https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printer)** | Identify the exact queue, port and driver before changing it. |
+
+### Printer drivers by manufacturer
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[HP printer drivers](https://support.hp.com/us-en/drivers/printers)** | Identify the exact printer and supported package for this PC. |
+| **[Brother printer drivers](https://www.brother-usa.com/support/drivers)** | Search the model, then select its supported operating system. |
+| **[Canon printer drivers](https://www.usa.canon.com/support/software-and-drivers)** | Match the exact model and driver/software category. |
+| **[Epson printer support](https://support.epson.com/)** | Find the printer model in the current support search. |
+| **[Xerox printer drivers](https://www.support.xerox.com/en-us)** | Search the device and review its OS-specific downloads. |
+| **[Ricoh drivers and downloads](https://www.ricoh-usa.com/en/support-and-download)** | Choose the exact device before selecting a supported driver. |
+| **[Lexmark printer drivers](https://support.lexmark.com/en_us/drivers-downloads.html)** | Review the model and supported print/scan options. |
+| **[Kyocera download center](https://www.kyoceradocumentsolutions.us/en/support/downloads.html)** | Locate the model and match its supported [Windows](https://www.microsoft.com/windows) package. |
+| **[Konica Minolta model search](https://onyxweb.mykonicaminolta.com/OneStopProductSupport?appMode=Public)** | Search the device in the publisher-linked driver portal. |
+| **[Sharp product downloads](https://business.sharpusa.com/product-downloads)** | Choose the product and required driver or utility. |
+| **[Zebra printer support](https://www.zebra.com/us/en/support-downloads/printers.html)** | Select the printer model before downloading its setup tools. |
+
+### Scan verification
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[NAPS2 scanning instructions](https://www.naps2.com/windows-scanning)** | Create a profile; use supported WIA/TWAIN drivers or an eSCL-capable network scanner. |
 
 <a id="quick-answer"></a>
 
@@ -27,6 +80,28 @@ Isolate printer hardware, network reachability, queue state, driver, and applica
 
 **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Start the printer troubleshooter](https://aka.ms/PrinterConnection)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **The printer cannot print its own internal page** | Resolve paper, consumables, displayed errors and hardware state before changing the PC. | The device produces its own clean test/configuration page. |
+| **The printer IP is unknown** | Print the printer’s network report or check its approved DHCP record. If still needed, scan only the authorized local subnet with [Advanced IP Scanner](https://www.advanced-ip-scanner.com/) and match the device using its physical model and MAC address. | The address is tied to the intended printer, not merely an open port. |
+| **The queue is offline or targets an old address** | Run Get-Printer \| Format-Table Name,PortName,DriverName and Get-PrinterPort in [Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell); compare the target with the network report. | The selected queue uses the correct live device and connection. |
+| **A driver reinstall or vendor package is being considered** | Check Settings > Bluetooth & devices > Printers & scanners for [Windows protected print mode](https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode) and managed policy; use supported IPP/Mopria and a vendor [Print Support App](https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-mode-faq) when [WPP](https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode) applies. | The chosen print path is compatible with the active security mode; a legacy package is not forced onto [WPP](https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode). |
+| **A conventional driver is actually required** | Use [Windows Update](https://learn.microsoft.com/en-us/windows/deployment/update/) or the exact manufacturer link above; match model, [Windows](https://www.microsoft.com/windows) version and x64/ARM architecture before installation. | The supported driver installs for this device and retains required trays, duplex and color options. |
+| **One job or application fails** | Cancel only the affected stuck job when appropriate, test a [Windows](https://www.microsoft.com/windows) test page and print from another app before changing a shared queue. | The failing job/application is distinguished from a device-wide or queue-wide fault. |
+| **Printing works but scanning fails** | In [NAPS2](https://www.naps2.com/) choose New Profile > Choose device. Select a supported WIA/TWAIN device, or eSCL for a compatible network scanner; scan a page and save/open the PDF. Test the feeder and duplex if required. | The saved PDF contains every intended page in the correct order; scanning works independently of the print queue. |
+
+### ✅ Finish the job
+
+- [ ] The original document prints with correct page size, tray, duplex and color.
+- [ ] Another user can still print through any shared queue.
+- [ ] Required scan/ADF output opens correctly and the model, IP, port and driver are recorded.
+
+**Change route when:** Changing a shared spooler/driver would interrupt other users without coordination. · Protected-print policy, ARM compatibility or unsupported hardware requires the managed print owner.
+
 > [!NOTE]
 > **Start here.** Identify the exact printer and queue. Check whether another user or application can print to the same device.
 
@@ -35,9 +110,6 @@ Isolate printer hardware, network reachability, queue state, driver, and applica
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -59,8 +131,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Fix internet, DNS, or local-network problems](https://github.com/Herbertofury/INTA/wiki/Job-network-dns) · [Set up a dependable new workstation](https://github.com/Herbertofury/INTA/wiki/Job-new-pc) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Confirm the target queue and coordinate shared-service changes. |
@@ -77,6 +147,10 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
+| **[Windows Get Help](https://support.microsoft.com/en-us/support/get-help/about-get-help)** · [Official page](https://support.microsoft.com/en-us/support/get-help/about-get-help) · **[Start the printer troubleshooter](https://aka.ms/PrinterConnection)** | Run the supported printer diagnostic. | [Windows](https://www.microsoft.com/windows); Included with supported [Windows](https://www.microsoft.com/windows); assisted support availability depends on the account and support agreement. | [Open guide](https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters) |
+| **[Advanced IP Scanner](https://www.advanced-ip-scanner.com/)** · [Official page](https://www.advanced-ip-scanner.com/) · **[Download Windows scanner · EXE](https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe)** | Find the printer’s current address within an approved local subnet. | [Windows](https://www.microsoft.com/windows); Publisher-advertised freeware for network scanning; Radmin remote control is a separate product | [Open guide](https://www.advanced-ip-scanner.com/help/) |
+| **[PowerShell](https://learn.microsoft.com/en-us/powershell/)** · [Official page](https://learn.microsoft.com/en-us/powershell/) · **[Use Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell)** | Read the exact installed queue, driver and port. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://learn.microsoft.com/en-us/powershell/) |
+| **[NAPS2](https://www.naps2.com/)** · [Official page](https://www.naps2.com/) · **[Download Windows x64 portable · ZIP](https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip)** | Test scanner, feeder and multipage PDF output. | [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos), [Linux](https://www.kernel.org/); Free and open source for individuals and businesses | [Open guide](https://www.naps2.com/windows-scanning) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
 
 <a id="walkthrough"></a>
@@ -99,27 +173,63 @@ Work in order, record the result of each step, and change route when the evidenc
 
 - [ ] Confirm USB connection or the printer’s current network address against the queue’s configured port. Check that the intended queue is selected, not an old duplicate or offline copy. A changed DHCP address can leave a working printer behind an obsolete port.
 
+<a id="step-read-printer-queue-driver-port"></a>
+
+### 03 · Read the installed queue, driver and port
+
+- [ ] On the affected [Windows](https://www.microsoft.com/windows) PC, open [Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell). This read-only command does not require administrator rights. Find the intended queue and compare its exact driver and port with the physical printer; keep real device names and addresses in the private case record.
+
+**Command for the environment described above:**
+
+```text
+Get-Printer | Format-Table Name,DriverName,PortName -AutoSize
+```
+
+**Command legend:** [Get-Printer](https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printer) · [Return to the step context](#step-read-printer-queue-driver-port).
+
+<a id="step-read-printer-port-details"></a>
+
+### 04 · Compare the port with the current printer address
+
+- [ ] Run this read-only command in the same local [Windows PowerShell 5.1](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell) session. Match the PortName from the previous output. A TCP/IP port should point to the printer’s current address from its network report; WSD and USB use different bindings. Investigate a mismatch before changing only the affected queue. The output includes local network details and belongs in the private case record.
+
+**Command for the environment described above:**
+
+```text
+Get-PrinterPort | Format-List *
+```
+
+**Command legend:** [Get-PrinterPort](https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport) · [Return to the step context](#step-read-printer-port-details).
+
 <a id="step-03"></a>
 
-### 03 · Separate application and queue faults
+<a id="03--separate-application-and-queue-faults"></a>
+
+### 05 · Separate application and queue faults
 
 - [ ] Print a [Windows](https://www.microsoft.com/windows) test page and a simple document from another application. If only one application fails, troubleshoot its print settings or installation. If all jobs fail, inspect queue status and run the [Windows](https://www.microsoft.com/windows) printer troubleshooter.
 
 <a id="step-04"></a>
 
-### 04 · Clear the specific obstruction
+<a id="04--clear-the-specific-obstruction"></a>
+
+### 06 · Clear the specific obstruction
 
 - [ ] Cancel only the affected user’s stuck job when possible. Coordinate before restarting the Print Spooler because that affects other queues. On a shared print server, identify all affected users and obtain a service window before clearing queues or replacing a shared driver.
 
 <a id="step-05"></a>
 
-### 05 · Use the supported driver path
+<a id="05--use-the-supported-driver-path"></a>
+
+### 07 · Use the supported driver path
 
 - [ ] Install or repair the manufacturer-supported driver for the exact model and [Windows](https://www.microsoft.com/windows) architecture, or the supported [Windows](https://www.microsoft.com/windows) class driver where appropriate. Preserve existing ports and options; document any queue replacement so duplex, trays, and scanning are not lost.
 
 <a id="step-06"></a>
 
-### 06 · Verify real output
+<a id="06--verify-real-output"></a>
+
+### 08 · Verify real output
 
 - [ ] Print the original document and check page size, orientation, color, duplex, and selected tray. Test another user on shared printers, and verify scanning separately if the device is multifunction. Remove obsolete duplicate queues only after the working one is confirmed.
 
@@ -154,15 +264,11 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [Microsoft: printer connection and printing problems](https://support.microsoft.com/en-us/windows/hardware/printer/fix-printer-connection-and-printing-problems-in-windows)
 - [Microsoft: print jobs stuck in the queue](https://support.microsoft.com/en-us/windows/hardware/printer/fix-print-job-stuck-in-queue-errors-in-windows)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

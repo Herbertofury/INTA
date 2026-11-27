@@ -51,8 +51,18 @@
         "checkedAt": "2026-11-26",
         "platform": "Windows"
       },
-      "alternates": [],
-      "note": "Included with supported Windows; no separate installer."
+      "alternates": [
+        {
+          "id": "repair-reinstall",
+          "kind": "builtin",
+          "label": "Reinstall current Windows via Windows Update",
+          "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows",
+          "platform": "Windows 11",
+          "evidenceUrl": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/fix-issues-by-reinstalling-the-current-version-of-windows",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "Recovery options depend on the scenario. The Windows Update repair reinstall preserves apps, files and settings, but can be unavailable on devices with managed update policies; follow its separate instructions."
     },
     "winsat": {
       "officialUrl": "https://learn.microsoft.com/en-us/windows/win32/winsat/windows-system-assessment-tool-portal",
@@ -1034,7 +1044,7 @@
       "officialUrl": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
       "primary": {
         "kind": "file",
-        "label": "Download Windows debugger installer",
+        "label": "Download Windows debugger · APPINSTALLER",
         "url": "https://aka.ms/windbg/download",
         "evidenceUrl": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/",
         "checkedAt": "2026-11-26",
@@ -1231,14 +1241,29 @@
       "officialUrl": "https://angryip.org/",
       "primary": {
         "kind": "file",
-        "label": "Download Windows standalone · EXE",
-        "url": "https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-win.exe",
+        "label": "Download Windows x64 EXE · Java bundled",
+        "url": "https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-setup.exe",
         "evidenceUrl": "https://angryip.org/download/",
         "checkedAt": "2026-11-26",
         "platform": "Windows",
-        "format": "EXE"
+        "architecture": "x64",
+        "format": "EXE",
+        "version": "3.12.2",
+        "id": "bundled-java"
       },
       "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows x64 EXE · Java 21+ required",
+          "url": "https://github.com/angryip/ipscan/releases/download/3.12.2/ipscan-3.12.2-win.exe",
+          "evidenceUrl": "https://angryip.org/download/",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "format": "EXE",
+          "id": "standalone-java",
+          "architecture": "x64",
+          "version": "3.12.2"
+        },
         {
           "kind": "release-page",
           "label": "All download options",
@@ -1247,7 +1272,7 @@
           "checkedAt": "2026-11-26"
         }
       ],
-      "note": "Requires the Java runtime version documented by the project."
+      "note": "The Windows installer includes Java. The smaller standalone executable needs an existing 64-bit Java 21+ runtime; choose it only when that dependency is already satisfied."
     },
     "autopsy": {
       "officialUrl": "https://www.autopsy.com/",
@@ -2615,6 +2640,101 @@
         }
       ],
       "note": "This is the publisher’s exact ISO route. The file host may show its download page before delivering the image; mirror delivery varies by client. No expiring mirror URL is stored."
+    },
+    "naps2": {
+      "officialUrl": "https://www.naps2.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows x64 portable · ZIP",
+        "url": "https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip",
+        "evidenceUrl": "https://www.naps2.com/download",
+        "checkedAt": "2026-11-26",
+        "platform": "Windows",
+        "architecture": "x64",
+        "format": "ZIP",
+        "version": "8.6.1"
+      },
+      "alternates": [
+        {
+          "kind": "file",
+          "label": "Download Windows x64 installer · EXE",
+          "url": "https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.exe",
+          "evidenceUrl": "https://www.naps2.com/download",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "x64",
+          "format": "EXE",
+          "version": "8.6.1"
+        },
+        {
+          "kind": "file",
+          "label": "Download Windows ARM64 installer · EXE",
+          "url": "https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-arm64.exe",
+          "evidenceUrl": "https://www.naps2.com/download",
+          "checkedAt": "2026-11-26",
+          "platform": "Windows",
+          "architecture": "ARM64",
+          "format": "EXE",
+          "version": "8.6.1"
+        },
+        {
+          "kind": "release-page",
+          "label": "Other platforms and stable releases",
+          "url": "https://www.naps2.com/download",
+          "evidenceUrl": "https://www.naps2.com/download",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "The default is stable 8.6.1. The publisher also lists 9.0 beta; a beta is a separate evaluation choice. Use the operating-system and driver guidance for the target scanner."
+    },
+    "advanced-ip-scanner": {
+      "officialUrl": "https://www.advanced-ip-scanner.com/",
+      "primary": {
+        "kind": "file",
+        "label": "Download Windows scanner · EXE",
+        "url": "https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe",
+        "platform": "Windows",
+        "format": "EXE",
+        "version": "2.5.4594.1",
+        "evidenceUrl": "https://www.advanced-ip-scanner.com/download/",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [
+        {
+          "kind": "release-page",
+          "label": "Official download and help options",
+          "url": "https://www.advanced-ip-scanner.com/download/",
+          "evidenceUrl": "https://www.advanced-ip-scanner.com/download/",
+          "checkedAt": "2026-11-26"
+        }
+      ],
+      "note": "This is the exact EXE on the current publisher download page. The vendor documents portable operation; it is not a full service/port-analysis replacement for Nmap. No separate ARM64 package is asserted."
+    },
+    "quick-machine-recovery": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+      "primary": {
+        "kind": "builtin",
+        "label": "Check supported recovery setup",
+        "url": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+        "platform": "Windows",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows/configuration/quick-machine-recovery/?tabs=csp",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "No separate installer. Recovery depends on the device configuration and a matching Microsoft remediation."
+    },
+    "windows-point-in-time-restore": {
+      "officialUrl": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+      "primary": {
+        "kind": "builtin",
+        "label": "Review preview requirements and restore scope",
+        "url": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+        "platform": "Windows",
+        "evidenceUrl": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+        "checkedAt": "2026-11-26"
+      },
+      "alternates": [],
+      "note": "No separate installer. Preview evaluation only; preserve post-snapshot files before any rollback."
     }
   }
 }

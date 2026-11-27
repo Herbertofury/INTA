@@ -1,0 +1,1436 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-26",
+  "scope": "Targeted current Markdown rendering: full/quick printer, malware, deleted files, Home and README at desktop and 390px.",
+  "limits": [
+    "Local Chromium preview approximates GitHub styling; it is not a live Wiki readback.",
+    "The 27 unchanged diagram sources are not rerendered in this pass.",
+    "Tool hrefs are checked; no Windows repair operation or installer is executed."
+  ],
+  "viewports": [
+    {
+      "width": 1280,
+      "height": 1000
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "dataHashes": {
+    "data/job-workspaces.json": "58f4fea8b995a958e36a5c447cb9d51ff00f02c69a7ea76a385079c369799975",
+    "data/quick-start.json": "3cb71071c3bb338dd00fee02d55f99c0a2fb784cadc0c6d377cac80d8ed96367",
+    "data/jobs.json": "0d5631e68b8ad961829b6a8d42076c645980539404ab39be8a7918fab1cb6a8b",
+    "data/tool-access.json": "45c38c7f0714f013402d8c83e82dc470b09f3e14b5e9e4fb6daf088fdf6f2fcd"
+  },
+  "sourceHashes": {
+    "wiki/Fix-a-printer.md": "77fb80538d300ecf9cc2eaadb195c70a68e6b70da95ca14a7ba7f6d79d4085fe",
+    "wiki/Job-printer-repair.md": "74a84aec2efb55c26d2e66d28b5146d447540571b3808f4e9cef21dafc3f4ab7",
+    "wiki/Remove-viruses.md": "1451cb29b6e5e6f4499e99665ea6050c0bc61ddc9273e2542ef0a12427eb28b7",
+    "wiki/Recover-deleted-files.md": "5d3c52a15c50774db2337293d9b4abd8b45e5ba2976c941710f761d2a3da1ad3",
+    "wiki/Home.md": "de9555a8377e3b44c92a277b4cbd4d7824477e941828fced694b013ddf80b8b2",
+    "README.md": "2a1abc81c8e6e52ad458afb645d6bfa15c8315efb88cf0e999a05373e58e3ec9"
+  },
+  "result": [
+    {
+      "name": "Fix-a-printer",
+      "file": "wiki/Fix-a-printer.md",
+      "heading": "🖨️ Fix a printer",
+      "linkCount": 68,
+      "headings": [
+        "🖨️ Fix a printer",
+        "🧰 Tools and links for this job",
+        "Before driver changes",
+        "Find the printer",
+        "Printer drivers by manufacturer",
+        "Scan verification",
+        "⚡ First three actions",
+        "🧭 Match the symptom",
+        "✅ Finish the job"
+      ],
+      "kitBeforeAnswer": true,
+      "resources": [
+        {
+          "id": "windows-driver-path",
+          "url": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+          "visible": true
+        },
+        {
+          "id": "protected-print",
+          "url": "https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode",
+          "visible": true
+        },
+        {
+          "id": "printer-ports",
+          "url": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport",
+          "visible": true
+        },
+        {
+          "id": "printer-queues",
+          "url": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printer",
+          "visible": true
+        },
+        {
+          "id": "hp-drivers",
+          "url": "https://support.hp.com/us-en/drivers/printers",
+          "visible": true
+        },
+        {
+          "id": "brother-drivers",
+          "url": "https://www.brother-usa.com/support/drivers",
+          "visible": true
+        },
+        {
+          "id": "canon-drivers",
+          "url": "https://www.usa.canon.com/support/software-and-drivers",
+          "visible": true
+        },
+        {
+          "id": "epson-drivers",
+          "url": "https://support.epson.com/",
+          "visible": true
+        },
+        {
+          "id": "xerox-drivers",
+          "url": "https://www.support.xerox.com/en-us",
+          "visible": true
+        },
+        {
+          "id": "ricoh-drivers",
+          "url": "https://www.ricoh-usa.com/en/support-and-download",
+          "visible": true
+        },
+        {
+          "id": "lexmark-drivers",
+          "url": "https://support.lexmark.com/en_us/drivers-downloads.html",
+          "visible": true
+        },
+        {
+          "id": "kyocera-drivers",
+          "url": "https://www.kyoceradocumentsolutions.us/en/support/downloads.html",
+          "visible": true
+        },
+        {
+          "id": "konica-drivers",
+          "url": "https://onyxweb.mykonicaminolta.com/OneStopProductSupport?appMode=Public",
+          "visible": true
+        },
+        {
+          "id": "sharp-drivers",
+          "url": "https://business.sharpusa.com/product-downloads",
+          "visible": true
+        },
+        {
+          "id": "zebra-drivers",
+          "url": "https://www.zebra.com/us/en/support-downloads/printers.html",
+          "visible": true
+        },
+        {
+          "id": "scan-test",
+          "url": "https://www.naps2.com/windows-scanning",
+          "visible": true
+        }
+      ],
+      "toolActions": [
+        {
+          "toolId": "get-help",
+          "actionId": "printer",
+          "url": "https://aka.ms/PrinterConnection",
+          "visible": true
+        },
+        {
+          "toolId": "advanced-ip-scanner",
+          "actionId": null,
+          "url": "https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe",
+          "visible": true
+        },
+        {
+          "toolId": "powershell",
+          "actionId": "windows-powershell",
+          "url": "https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell",
+          "visible": true
+        },
+        {
+          "toolId": "naps2",
+          "actionId": null,
+          "url": "https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip",
+          "visible": true
+        }
+      ],
+      "finishChecks": [
+        {
+          "text": "The original document prints with correct page size, tray, duplex and color.",
+          "present": true
+        },
+        {
+          "text": "Another user can still print through any shared queue.",
+          "present": true
+        },
+        {
+          "text": "Required scan/ADF output opens correctly and the model, IP, port and driver are recorded.",
+          "present": true
+        }
+      ],
+      "escalationChecks": [
+        {
+          "text": "Changing a shared spooler/driver would interrupt other users without coordination.",
+          "present": true
+        },
+        {
+          "text": "Protected-print policy, ARM compatibility or unsupported hardware requires the managed print owner.",
+          "present": true
+        }
+      ],
+      "allResourcesOutsideDisclosure": true,
+      "quickSteps": [
+        "Check paper, ink or toner, displayed errors and the selected printer; compare a device test page if available.",
+        "Run the printer troubleshooter in Windows Get Help on the affected PC and review the exact queue or connection finding.",
+        "Apply the indicated repair, then print a test page and the user’s original document."
+      ],
+      "completeProcedurePresent": true,
+      "quickPrimaryAction": true,
+      "driverShortcutsBeforeTools": true,
+      "driverPortals": [
+        {
+          "id": "hp-drivers",
+          "visible": true
+        },
+        {
+          "id": "brother-drivers",
+          "visible": true
+        },
+        {
+          "id": "canon-drivers",
+          "visible": true
+        },
+        {
+          "id": "epson-drivers",
+          "visible": true
+        },
+        {
+          "id": "xerox-drivers",
+          "visible": true
+        },
+        {
+          "id": "ricoh-drivers",
+          "visible": true
+        },
+        {
+          "id": "lexmark-drivers",
+          "visible": true
+        },
+        {
+          "id": "kyocera-drivers",
+          "visible": true
+        },
+        {
+          "id": "konica-drivers",
+          "visible": true
+        },
+        {
+          "id": "sharp-drivers",
+          "visible": true
+        },
+        {
+          "id": "zebra-drivers",
+          "visible": true
+        }
+      ],
+      "protectedPrintDecision": true,
+      "windowsPowerShell51Action": true,
+      "noPowerShell7Acquisition": true,
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 460,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            },
+            {
+              "top": 759,
+              "width": 840,
+              "scrollWidth": 840,
+              "clientWidth": 840
+            },
+            {
+              "top": 936,
+              "width": 812,
+              "scrollWidth": 812,
+              "clientWidth": 812
+            },
+            {
+              "top": 1113,
+              "width": 717,
+              "scrollWidth": 717,
+              "clientWidth": 717
+            },
+            {
+              "top": 1623,
+              "width": 913,
+              "scrollWidth": 913,
+              "clientWidth": 913
+            },
+            {
+              "top": 2016,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            }
+          ]
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 691,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 1230,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 1527,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 1824,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 2862,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 3487,
+              "width": 358,
+              "scrollWidth": 511,
+              "clientWidth": 358
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Job-printer-repair",
+      "file": "wiki/Job-printer-repair.md",
+      "heading": "Restore printing without breaking other queues",
+      "linkCount": 159,
+      "headings": [
+        "Restore printing without breaking other queues",
+        "🧰 Tools and links for this job",
+        "Before driver changes",
+        "Find the printer",
+        "Printer drivers by manufacturer",
+        "Scan verification",
+        "⚡ Quick answer",
+        "🖨️ Fix a printer",
+        "🧭 Match the symptom",
+        "✅ Finish the job",
+        "🧭 Choose a route",
+        "Recommended tools",
+        "Procedure",
+        "01 · Check the printer itself",
+        "02 · Verify the connection and queue",
+        "03 · Read the installed queue, driver and port",
+        "04 · Compare the port with the current printer address",
+        "05 · Separate application and queue faults",
+        "06 · Clear the specific obstruction",
+        "07 · Use the supported driver path",
+        "08 · Verify real output",
+        "Verification",
+        "Related playbooks",
+        "Official sources"
+      ],
+      "kitBeforeAnswer": true,
+      "resources": [
+        {
+          "id": "windows-driver-path",
+          "url": "https://support.microsoft.com/en-us/windows/hardware/printer/download-and-install-the-latest-printer-drivers",
+          "visible": true
+        },
+        {
+          "id": "protected-print",
+          "url": "https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode",
+          "visible": true
+        },
+        {
+          "id": "printer-ports",
+          "url": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport",
+          "visible": true
+        },
+        {
+          "id": "printer-queues",
+          "url": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printer",
+          "visible": true
+        },
+        {
+          "id": "hp-drivers",
+          "url": "https://support.hp.com/us-en/drivers/printers",
+          "visible": true
+        },
+        {
+          "id": "brother-drivers",
+          "url": "https://www.brother-usa.com/support/drivers",
+          "visible": true
+        },
+        {
+          "id": "canon-drivers",
+          "url": "https://www.usa.canon.com/support/software-and-drivers",
+          "visible": true
+        },
+        {
+          "id": "epson-drivers",
+          "url": "https://support.epson.com/",
+          "visible": true
+        },
+        {
+          "id": "xerox-drivers",
+          "url": "https://www.support.xerox.com/en-us",
+          "visible": true
+        },
+        {
+          "id": "ricoh-drivers",
+          "url": "https://www.ricoh-usa.com/en/support-and-download",
+          "visible": true
+        },
+        {
+          "id": "lexmark-drivers",
+          "url": "https://support.lexmark.com/en_us/drivers-downloads.html",
+          "visible": true
+        },
+        {
+          "id": "kyocera-drivers",
+          "url": "https://www.kyoceradocumentsolutions.us/en/support/downloads.html",
+          "visible": true
+        },
+        {
+          "id": "konica-drivers",
+          "url": "https://onyxweb.mykonicaminolta.com/OneStopProductSupport?appMode=Public",
+          "visible": true
+        },
+        {
+          "id": "sharp-drivers",
+          "url": "https://business.sharpusa.com/product-downloads",
+          "visible": true
+        },
+        {
+          "id": "zebra-drivers",
+          "url": "https://www.zebra.com/us/en/support-downloads/printers.html",
+          "visible": true
+        },
+        {
+          "id": "scan-test",
+          "url": "https://www.naps2.com/windows-scanning",
+          "visible": true
+        }
+      ],
+      "toolActions": [
+        {
+          "toolId": "get-help",
+          "actionId": "printer",
+          "url": "https://aka.ms/PrinterConnection",
+          "visible": true
+        },
+        {
+          "toolId": "advanced-ip-scanner",
+          "actionId": null,
+          "url": "https://download.advanced-ip-scanner.com/download/files/Advanced_IP_Scanner_2.5.4594.1.exe",
+          "visible": true
+        },
+        {
+          "toolId": "powershell",
+          "actionId": "windows-powershell",
+          "url": "https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell",
+          "visible": true
+        },
+        {
+          "toolId": "naps2",
+          "actionId": null,
+          "url": "https://github.com/cyanfish/naps2/releases/download/v8.6.1/naps2-8.6.1-win-x64.zip",
+          "visible": true
+        }
+      ],
+      "finishChecks": [
+        {
+          "text": "The original document prints with correct page size, tray, duplex and color.",
+          "present": true
+        },
+        {
+          "text": "Another user can still print through any shared queue.",
+          "present": true
+        },
+        {
+          "text": "Required scan/ADF output opens correctly and the model, IP, port and driver are recorded.",
+          "present": true
+        }
+      ],
+      "escalationChecks": [
+        {
+          "text": "Changing a shared spooler/driver would interrupt other users without coordination.",
+          "present": true
+        },
+        {
+          "text": "Protected-print policy, ARM compatibility or unsupported hardware requires the managed print owner.",
+          "present": true
+        }
+      ],
+      "allResourcesOutsideDisclosure": true,
+      "driverShortcutsBeforeTools": true,
+      "driverPortals": [
+        {
+          "id": "hp-drivers",
+          "visible": true
+        },
+        {
+          "id": "brother-drivers",
+          "visible": true
+        },
+        {
+          "id": "canon-drivers",
+          "visible": true
+        },
+        {
+          "id": "epson-drivers",
+          "visible": true
+        },
+        {
+          "id": "xerox-drivers",
+          "visible": true
+        },
+        {
+          "id": "ricoh-drivers",
+          "visible": true
+        },
+        {
+          "id": "lexmark-drivers",
+          "visible": true
+        },
+        {
+          "id": "kyocera-drivers",
+          "visible": true
+        },
+        {
+          "id": "konica-drivers",
+          "visible": true
+        },
+        {
+          "id": "sharp-drivers",
+          "visible": true
+        },
+        {
+          "id": "zebra-drivers",
+          "visible": true
+        }
+      ],
+      "protectedPrintDecision": true,
+      "windowsPowerShell51Action": true,
+      "noPowerShell7Acquisition": true,
+      "queueCommand": true,
+      "portCommand": true,
+      "commandOrder": true,
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 564,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            },
+            {
+              "top": 863,
+              "width": 840,
+              "scrollWidth": 840,
+              "clientWidth": 840
+            },
+            {
+              "top": 1040,
+              "width": 812,
+              "scrollWidth": 812,
+              "clientWidth": 812
+            },
+            {
+              "top": 1217,
+              "width": 717,
+              "scrollWidth": 717,
+              "clientWidth": 717
+            },
+            {
+              "top": 1727,
+              "width": 913,
+              "scrollWidth": 913,
+              "clientWidth": 913
+            },
+            {
+              "top": 2169,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            },
+            {
+              "top": 3330,
+              "width": 719,
+              "scrollWidth": 719,
+              "clientWidth": 719
+            },
+            {
+              "top": 3598,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            },
+            {
+              "top": 5910,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            }
+          ]
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 899,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 1438,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 1735,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 2032,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 3070,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 3793,
+              "width": 358,
+              "scrollWidth": 511,
+              "clientWidth": 358
+            },
+            {
+              "top": 5814,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 6270,
+              "width": 358,
+              "scrollWidth": 529,
+              "clientWidth": 358
+            },
+            {
+              "top": 10494,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Remove-viruses",
+      "file": "wiki/Remove-viruses.md",
+      "heading": "🛡️ Remove viruses",
+      "linkCount": 40,
+      "headings": [
+        "🛡️ Remove viruses",
+        "🧰 Tools and links for this job",
+        "Run and verify",
+        "Escalation",
+        "⚡ First three actions",
+        "🧭 Match the symptom",
+        "✅ Finish the job"
+      ],
+      "kitBeforeAnswer": true,
+      "resources": [
+        {
+          "id": "scanner-log",
+          "url": "https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download",
+          "visible": true
+        },
+        {
+          "id": "adware-workflow",
+          "url": "https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner",
+          "visible": true
+        },
+        {
+          "id": "ransomware-containment",
+          "url": "https://github.com/Herbertofury/INTA/wiki/Contain-ransomware",
+          "visible": true
+        },
+        {
+          "id": "offline-requirements",
+          "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+          "visible": true
+        },
+        {
+          "id": "clean-rebuild",
+          "url": "https://support.microsoft.com/en-us/windows/deployment/install-upgrade/reinstall-windows-with-the-installation-media",
+          "visible": true
+        }
+      ],
+      "toolActions": [
+        {
+          "toolId": "safety-scanner",
+          "actionId": null,
+          "url": "https://go.microsoft.com/fwlink/?LinkId=212732",
+          "visible": true
+        },
+        {
+          "toolId": "adwcleaner",
+          "actionId": null,
+          "url": "https://adwcleaner.malwarebytes.com/adwcleaner?channel=release",
+          "visible": true
+        },
+        {
+          "toolId": "autoruns",
+          "actionId": null,
+          "url": "https://download.sysinternals.com/files/Autoruns.zip",
+          "visible": true
+        },
+        {
+          "toolId": "defender-offline",
+          "actionId": null,
+          "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-offline",
+          "visible": true
+        }
+      ],
+      "finishChecks": [
+        {
+          "text": "Protection is healthy after reboot and there are no unresolved detections.",
+          "present": true
+        },
+        {
+          "text": "The original task and browser behavior remain correct.",
+          "present": true
+        },
+        {
+          "text": "Compromised accounts and sessions have a separate documented resolution.",
+          "present": true
+        }
+      ],
+      "escalationChecks": [
+        {
+          "text": "Ransomware, lateral spread or privileged access is suspected.",
+          "present": true
+        },
+        {
+          "text": "Detections recur or scan coverage and system integrity cannot be established.",
+          "present": true
+        }
+      ],
+      "allResourcesOutsideDisclosure": true,
+      "quickSteps": [
+        "Record the symptoms and isolate affected connections; keep the existing real-time protection in place.",
+        "On a trusted PC, download a fresh Microsoft Safety Scanner; transfer it safely and run a Full scan.",
+        "Save the scan log, review remaining symptoms and persistence, then follow the guide’s cleanup or rebuild decision."
+      ],
+      "completeProcedurePresent": true,
+      "quickPrimaryAction": true,
+      "directIncidentRoute": true,
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 420,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            },
+            {
+              "top": 743,
+              "width": 802,
+              "scrollWidth": 802,
+              "clientWidth": 802
+            },
+            {
+              "top": 920,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            },
+            {
+              "top": 1411,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            }
+          ]
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 531,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 1190,
+              "width": 358,
+              "scrollWidth": 412,
+              "clientWidth": 358
+            },
+            {
+              "top": 1535,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 2426,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Recover-deleted-files",
+      "file": "wiki/Recover-deleted-files.md",
+      "heading": "📁 Recover deleted files",
+      "linkCount": 34,
+      "headings": [
+        "📁 Recover deleted files",
+        "🧰 Tools and links for this job",
+        "Preserve the source",
+        "Recover from a copy",
+        "⚡ First three actions",
+        "🧭 Match the symptom",
+        "✅ Finish the job"
+      ],
+      "kitBeforeAnswer": true,
+      "resources": [
+        {
+          "id": "image-first",
+          "url": "https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html",
+          "visible": true
+        },
+        {
+          "id": "rescue-environment",
+          "url": "https://www.system-rescue.org/System-tools/",
+          "visible": true
+        },
+        {
+          "id": "recover-files",
+          "url": "https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step",
+          "visible": true
+        },
+        {
+          "id": "partition-analysis",
+          "url": "https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step",
+          "visible": true
+        }
+      ],
+      "toolActions": [
+        {
+          "toolId": "systemrescue",
+          "actionId": null,
+          "url": "https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso",
+          "visible": true
+        },
+        {
+          "toolId": "photorec",
+          "actionId": null,
+          "url": "https://www.cgsecurity.org/testdisk-7.2.win64.zip",
+          "visible": true
+        },
+        {
+          "toolId": "testdisk",
+          "actionId": null,
+          "url": "https://www.cgsecurity.org/testdisk-7.2.win64.zip",
+          "visible": true
+        }
+      ],
+      "finishChecks": [
+        {
+          "text": "Source and destination identities are recorded; when imaging was required, the image and mapfile identities are recorded.",
+          "present": true
+        },
+        {
+          "text": "Priority recovered files open in their actual applications.",
+          "present": true
+        },
+        {
+          "text": "Any unreadable ranges and missing files are documented before acceptance.",
+          "present": true
+        }
+      ],
+      "escalationChecks": [
+        {
+          "text": "There is physical damage or an unstable connection that prevents controlled imaging.",
+          "present": true
+        },
+        {
+          "text": "A proposed repair would write to the only source or overwrite an unverified destination.",
+          "present": true
+        }
+      ],
+      "allResourcesOutsideDisclosure": true,
+      "quickSteps": [
+        "Use healthy media or a preserved image; route an unstable drive to image-first recovery.",
+        "Run PhotoRec against that source and send recovered output to a different disk.",
+        "Open representative recovered files and record missing items; retain the source until acceptance."
+      ],
+      "completeProcedurePresent": true,
+      "quickPrimaryAction": true,
+      "conditionalImagingEvidence": true,
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 372,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            },
+            {
+              "top": 658,
+              "width": 850,
+              "scrollWidth": 850,
+              "clientWidth": 850
+            },
+            {
+              "top": 835,
+              "width": 698,
+              "scrollWidth": 698,
+              "clientWidth": 698
+            },
+            {
+              "top": 1265,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            }
+          ]
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 507,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 985,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 1330,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 2016,
+              "width": 358,
+              "scrollWidth": 396,
+              "clientWidth": 358
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Home",
+      "file": "wiki/Home.md",
+      "heading": "INTA knowledge base",
+      "linkCount": 150,
+      "headings": [
+        "INTA knowledge base",
+        "⚡ What do you need to fix?",
+        "🧭 Start a job",
+        "Before you begin",
+        "Reference",
+        "Service checkpoints",
+        "Offline access",
+        "Contributing"
+      ],
+      "quickRows": 27,
+      "quickColumns": 2,
+      "allQuickRoutesVisible": true,
+      "allExactActionsPresent": true,
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 526,
+              "width": 798,
+              "scrollWidth": 798,
+              "clientWidth": 798
+            },
+            {
+              "top": 1682,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            },
+            {
+              "top": 2829,
+              "width": 829,
+              "scrollWidth": 829,
+              "clientWidth": 829
+            },
+            {
+              "top": 3134,
+              "width": 819,
+              "scrollWidth": 819,
+              "clientWidth": 819
+            },
+            {
+              "top": 3621,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            }
+          ]
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 546,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 2922,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 5602,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 6095,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 7130,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "README",
+      "file": "README.md",
+      "heading": "INTA Computer Services",
+      "linkCount": 208,
+      "headings": [
+        "INTA Computer Services",
+        "⚡ What do you need to fix?",
+        "🛠 Choose a job",
+        "Service reference",
+        "Knowledge desk",
+        "Workspace capabilities",
+        "Tool disciplines",
+        "💾 INTA Rescue & Media Creator",
+        "🌱 Stay current with a clear review trail",
+        "Reputation, recommendations & source intelligence",
+        "Contribute"
+      ],
+      "quickRows": 27,
+      "quickColumns": 2,
+      "allQuickRoutesVisible": true,
+      "allExactActionsPresent": true,
+      "views": [
+        {
+          "label": "desktop",
+          "viewport": 1280,
+          "document": 1280,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 498,
+              "width": 798,
+              "scrollWidth": 798,
+              "clientWidth": 798
+            },
+            {
+              "top": 1679,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            },
+            {
+              "top": 2759,
+              "width": 887,
+              "scrollWidth": 887,
+              "clientWidth": 887
+            },
+            {
+              "top": 3716,
+              "width": 948,
+              "scrollWidth": 948,
+              "clientWidth": 948
+            }
+          ]
+        },
+        {
+          "label": "mobile",
+          "viewport": 390,
+          "document": 390,
+          "brokenImages": 0,
+          "tables": [
+            {
+              "top": 535,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 2936,
+              "width": 358,
+              "scrollWidth": 359,
+              "clientWidth": 358
+            },
+            {
+              "top": 5568,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            },
+            {
+              "top": 7646,
+              "width": 358,
+              "scrollWidth": 358,
+              "clientWidth": 358
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "scriptErrors": [],
+  "visualReview": {
+    "result": "pass",
+    "inspected": "All 12 desktop/mobile top screenshots, desktop/mobile printer command sections, mobile printer decisions, and desktop deleted-file completion.",
+    "observations": [
+      "Compact native headings and links remain readable at both widths.",
+      "All eleven printer manufacturer shortcuts are visible before the toolkit and require no expansion.",
+      "Mobile wide decision tables scroll horizontally; the last result column was reached and checked for all four reviewed job pages.",
+      "Long read-only commands remain in their own horizontally scrollable code blocks without expanding the document.",
+      "The incident-guide link is visible at the top of the malware answer.",
+      "Deleted-file completion explicitly conditions image/mapfile evidence on imaging being required."
+    ],
+    "mobileHorizontalReachability": [
+      {
+        "name": "Fix-a-printer",
+        "overflowTables": [
+          {
+            "columns": 3,
+            "scrollLeft": 153,
+            "scrollWidth": 511,
+            "clientWidth": 358,
+            "lastColumnVisible": true
+          }
+        ]
+      },
+      {
+        "name": "Job-printer-repair",
+        "overflowTables": [
+          {
+            "columns": 3,
+            "scrollLeft": 153,
+            "scrollWidth": 511,
+            "clientWidth": 358,
+            "lastColumnVisible": true
+          },
+          {
+            "columns": 4,
+            "scrollLeft": 171,
+            "scrollWidth": 529,
+            "clientWidth": 358,
+            "lastColumnVisible": true
+          }
+        ]
+      },
+      {
+        "name": "Remove-viruses",
+        "overflowTables": [
+          {
+            "columns": 2,
+            "scrollLeft": 54,
+            "scrollWidth": 412,
+            "clientWidth": 358,
+            "lastColumnVisible": true
+          }
+        ]
+      },
+      {
+        "name": "Recover-deleted-files",
+        "overflowTables": [
+          {
+            "columns": 3,
+            "scrollLeft": 38,
+            "scrollWidth": 396,
+            "clientWidth": 358,
+            "lastColumnVisible": true
+          }
+        ]
+      }
+    ],
+    "sourceHashesStillMatch": true,
+    "unresolvedMaterialFindings": []
+  },
+  "artifacts": [
+    {
+      "path": "markdown/Fix-a-printer-desktop-decisions.png",
+      "bytes": 225520,
+      "sha256": "a2815ebaf87b1e956673303b187ad01f0d248f53ef240a2891d5ce57acb8eb62"
+    },
+    {
+      "path": "markdown/Fix-a-printer-desktop.png",
+      "bytes": 162494,
+      "sha256": "13ce426cdc26df2f658ad3353b02aa6e4d4480225a7e7de27dc0a21471411f8e"
+    },
+    {
+      "path": "markdown/Fix-a-printer-mobile-decisions-right.png",
+      "bytes": 88651,
+      "sha256": "8ebb7e90d988cdd94a60cac9338e8acb236b81574945784e6c12c5d7ebddb29f"
+    },
+    {
+      "path": "markdown/Fix-a-printer-mobile-decisions.png",
+      "bytes": 91940,
+      "sha256": "f3fa85cc45b3305d0102dedecb0c3f25296c1e888fc584310323207b6cd87e8a"
+    },
+    {
+      "path": "markdown/Fix-a-printer-mobile.png",
+      "bytes": 74002,
+      "sha256": "407f3ddb735f7643ffe3d9d2b994054bfa7e4acd8aabed6d584d8715482f8769"
+    },
+    {
+      "path": "markdown/Fix-a-printer.html",
+      "bytes": 15014,
+      "sha256": "c2217f6d88d8a33e68967e8dcff62ab4b50309a67a4a675dd1049f8f52656d20"
+    },
+    {
+      "path": "markdown/Home-desktop-scenarios.png",
+      "bytes": 201159,
+      "sha256": "96a50fa5e65504b07a045ec6541d140f5db8b795284132237e6aec2391ed5a48"
+    },
+    {
+      "path": "markdown/Home-desktop.png",
+      "bytes": 156830,
+      "sha256": "0e1da9e0fa7481eae12c3459bebde542e88acaba32a7dcce9538c7df1ae8147d"
+    },
+    {
+      "path": "markdown/Home-mobile-scenarios.png",
+      "bytes": 78140,
+      "sha256": "78b6f38663a8ad231f43a0547c941fa42c82f231ef5e3b087202d4484fd351d8"
+    },
+    {
+      "path": "markdown/Home-mobile.png",
+      "bytes": 74274,
+      "sha256": "94abe950b7abf7a78dddad4c63173249dc4017ad2342c48297510e306e2c95d0"
+    },
+    {
+      "path": "markdown/Home.html",
+      "bytes": 23696,
+      "sha256": "0065335669aaf4a689c1616ce8ea09ba306b7dc6bf5bfabb0b96f96d481d3d8e"
+    },
+    {
+      "path": "markdown/Job-printer-repair-desktop-commands.png",
+      "bytes": 171891,
+      "sha256": "eab702f8e872ec7b4bb3882a089e54a1896e6ba6e11c0e41ee3f6bc11462057e"
+    },
+    {
+      "path": "markdown/Job-printer-repair-desktop-decisions.png",
+      "bytes": 225574,
+      "sha256": "0e1a81e6782dee0070826c89582703674bf146eead88707f6d7f88ad53fa67d5"
+    },
+    {
+      "path": "markdown/Job-printer-repair-desktop.png",
+      "bytes": 174251,
+      "sha256": "b4d3869edb6710a86e0748accd002c5d8df7a214fbd9b9947fff40af3be78cd4"
+    },
+    {
+      "path": "markdown/Job-printer-repair-mobile-commands.png",
+      "bytes": 83475,
+      "sha256": "5852843a0ba5351a673cf299aac94255f25b20f8f4bf3068e62ea3a76aa442ee"
+    },
+    {
+      "path": "markdown/Job-printer-repair-mobile-decisions.png",
+      "bytes": 93055,
+      "sha256": "1a9f8baf4feefcbfff0905c0844bb449aad9a747c89342d8a9d8ab60ca0f6441"
+    },
+    {
+      "path": "markdown/Job-printer-repair-mobile.png",
+      "bytes": 81954,
+      "sha256": "ad581b6908c46cebb9ebd00975248a23c3333cf54e741fafe370f938fc7d28b9"
+    },
+    {
+      "path": "markdown/Job-printer-repair.html",
+      "bytes": 28329,
+      "sha256": "babc0fc13a26cdd8802400bb1378c8bc33b2bff797d4e73a6a537ea40d451a4d"
+    },
+    {
+      "path": "markdown/README-desktop-scenarios.png",
+      "bytes": 201159,
+      "sha256": "96a50fa5e65504b07a045ec6541d140f5db8b795284132237e6aec2391ed5a48"
+    },
+    {
+      "path": "markdown/README-desktop.png",
+      "bytes": 162359,
+      "sha256": "9287a29b2bee29e46d02dbb0df06612d77c045a87fa7a4d6723b25f9a16e7c2d"
+    },
+    {
+      "path": "markdown/README-mobile-scenarios.png",
+      "bytes": 78140,
+      "sha256": "78b6f38663a8ad231f43a0547c941fa42c82f231ef5e3b087202d4484fd351d8"
+    },
+    {
+      "path": "markdown/README-mobile.png",
+      "bytes": 73573,
+      "sha256": "399f51ae9187113aca2de1c4e879790655d513234a34eb0429069aa5d4138b00"
+    },
+    {
+      "path": "markdown/README.html",
+      "bytes": 33050,
+      "sha256": "130bf027986421ccc90ade789619becd9442f38ddefe050abd6cfe4221109cf3"
+    },
+    {
+      "path": "markdown/Recover-deleted-files-desktop-decisions.png",
+      "bytes": 179093,
+      "sha256": "c04d09d121e6f4be0ed46faafc67e535abc58d98353ec3f6e57f24ff26a245df"
+    },
+    {
+      "path": "markdown/Recover-deleted-files-desktop.png",
+      "bytes": 145104,
+      "sha256": "1496fb07e928cff759e01ca259c472419d70d68e8b3235ecbf6c04a8acfdb196"
+    },
+    {
+      "path": "markdown/Recover-deleted-files-mobile-decisions.png",
+      "bytes": 83674,
+      "sha256": "2df055754f8a1f4b5a51ceff10a6e2966ad6540d47670ffe32c5529f54c03985"
+    },
+    {
+      "path": "markdown/Recover-deleted-files-mobile.png",
+      "bytes": 76470,
+      "sha256": "7f3e21b00738d89917fe6a1af3c621015780cacda8e320833765906810e3e148"
+    },
+    {
+      "path": "markdown/Recover-deleted-files.html",
+      "bytes": 8365,
+      "sha256": "e81ccc20af856f9baace22ee710e174873387f5c656a402687d220be1bbf6564"
+    },
+    {
+      "path": "markdown/Remove-viruses-desktop-decisions.png",
+      "bytes": 180640,
+      "sha256": "80500628c161a545ab985475c4b0f4130e1d00dfcae20c5f29c9f70927a30f8f"
+    },
+    {
+      "path": "markdown/Remove-viruses-desktop.png",
+      "bytes": 154338,
+      "sha256": "77f437e50361191be521d4309cb1e43659ae84e143896a0f72be038bdc155313"
+    },
+    {
+      "path": "markdown/Remove-viruses-mobile-decisions.png",
+      "bytes": 74639,
+      "sha256": "16d9e08721463ea0dfa81eb234a9557393de76106d9d465156a7039495e1b7fd"
+    },
+    {
+      "path": "markdown/Remove-viruses-mobile.png",
+      "bytes": 78095,
+      "sha256": "70565926df08d5f30cfe87f3967f7ee04e96a194c449613491e0cadce3a3dca4"
+    },
+    {
+      "path": "markdown/Remove-viruses.html",
+      "bytes": 9868,
+      "sha256": "5f6d1ec6f108edb9894c1e9959ea7af89d3f1179523d3a205c2bbeaac3972038"
+    }
+  ],
+  "artifactCounts": {
+    "pages": 6,
+    "viewportReviews": 12,
+    "screenshots": 27,
+    "htmlPreviews": 6
+  }
+}

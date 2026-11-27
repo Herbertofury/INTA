@@ -8,7 +8,38 @@ Turn a vague symptom into a clear next action, a protected data set, and a usefu
 
 **Getting started** · Starter · 10–20 min · 6 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/intake-triage)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/intake-triage)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/intake-triage)** · Keep the tool panel beside the instructions.
+
+**First move:** Ask the user to show the failing task once. Record the exact error, last working time, affected users and whether important data has another copy.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Identify the process involved in the failure. | **[Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/ProcessExplorer.zip)** |
+| Check drive warnings before repair writes. | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** |
+
+### Case record
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Intake and handoff sheet](https://github.com/Herbertofury/INTA/wiki/Technician-Handoff)** | Capture the symptom, permission, recovery plan and acceptance test. |
+
+### First observations
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Reliability history command](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon)** | Open failure history with perfmon /rel. |
+
+### Protect data
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Windows recovery choices](https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows)** | Check which recovery action preserves files and applications. |
 
 <a id="quick-answer"></a>
 
@@ -26,6 +57,24 @@ Turn a vague symptom into a clear next action, a protected data set, and a usefu
 
 **No extra download needed.** Follow the checklist below.
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **The error appears in one app or account** | Repeat the same task in another approved account or app; record what changes. | The fault is scoped to an app, profile or wider device problem. |
+| **Several users or devices fail together** | Compare one known-working device and the same service; use the office-outage route when the dependency is shared. | The ticket identifies the shared service and its recovery owner. |
+| **The timing or cause is unclear** | Press Win+R, run perfmon /rel, select the failure time and open technical details. | A dated failure or recent change can be compared with the user’s timeline. |
+| **A drive clicks, disappears or reports repeated I/O errors** | Stop ordinary repair and route to failing-drive recovery before scans or file-system repairs. | The source is preserved and the imaging or specialist decision is recorded. |
+
+### ✅ Finish the job
+
+- [ ] One exact reproduction and expected outcome are recorded.
+- [ ] The next guide, responsible technician and recoverable data copy are identified.
+
+**Change route when:** Active encryption or spreading compromise requires the incident route. · The next action would risk the only usable data copy.
+
 > [!NOTE]
 > **Start here.** Ask the user to show the exact failing task once. Record what they expected, what happened, and when it last worked.
 
@@ -34,9 +83,6 @@ Turn a vague symptom into a clear next action, a protected data set, and a usefu
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -56,8 +102,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Remove malware and browser hijackers](https://github.com/Herbertofury/INTA/wiki/Job-malware-removal) · [Diagnose a slow, freezing, or hitching PC](https://github.com/Herbertofury/INTA/wiki/Job-slow-pc) · [Rescue data from a failing or unreadable drive](https://github.com/Herbertofury/INTA/wiki/Job-failing-drive) · [Bring an office back after a power outage](https://github.com/Herbertofury/INTA/wiki/Job-outage-recovery) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Identify unique data and the working boundary. |
@@ -74,8 +118,9 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
+| **[Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/ProcessExplorer.zip)** | Identify the process involved in the failure. | [Windows](https://www.microsoft.com/windows); Free Microsoft utility | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) |
+| **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | Check drive warnings before repair writes. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
-| **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
 | **[HWiNFO](https://www.hwinfo.com/)** · [Official page](https://www.hwinfo.com/) · **[Download Windows x64 EXE](https://www.hwinfo.com/files/hwi64_860.exe)** | Investigating temperatures, clocks, power and component identity. | [Windows](https://www.microsoft.com/windows); Pro license for commercial use of 64/ARM64 editions | [Open guide](https://www.hwinfo.com/licenses/) |
 
 <a id="walkthrough"></a>
@@ -163,15 +208,11 @@ perfmon /rel
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [Microsoft: recovery options in Windows](https://support.microsoft.com/en-us/windows/experience/backup-recovery/recovery-options-in-windows)
 - [Microsoft Sysinternals: Process Explorer](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer/)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

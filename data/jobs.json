@@ -7,8 +7,9 @@
     "estimatedTime": "10–20 min",
     "difficulty": "Starter",
     "tools": [
-      "sysinternals",
+      "process-explorer",
       "crystaldiskinfo",
+      "sysinternals",
       "hwinfo"
     ],
     "startHere": "Ask the user to show the exact failing task once. Record what they expected, what happened, and when it last worked.",
@@ -81,9 +82,10 @@
     "estimatedTime": "45–120 min plus scanning",
     "difficulty": "Intermediate",
     "tools": [
-      "defender-offline",
       "safety-scanner",
       "adwcleaner",
+      "autoruns",
+      "defender-offline",
       "sysinternals",
       "malwarebytes"
     ],
@@ -273,8 +275,11 @@
     "estimatedTime": "20–60 min",
     "difficulty": "Intermediate",
     "tools": [
-      "sysinternals",
+      "process-explorer",
+      "procmon",
+      "windirstat",
       "crystaldiskinfo",
+      "sysinternals",
       "hwinfo",
       "windows-performance-toolkit",
       "wiztree",
@@ -436,6 +441,10 @@
     "estimatedTime": "20–60 min plus installation",
     "difficulty": "Intermediate",
     "tools": [
+      "get-help",
+      "dism",
+      "sfc",
+      "windows-recovery",
       "sysinternals"
     ],
     "startHere": "Write down the exact KB or feature update, error code, Windows edition/build, and whether the device is centrally managed.",
@@ -507,9 +516,10 @@
     "tools": [
       "windows-recovery",
       "microsoft-windows11-media",
+      "systemrescue",
+      "quick-machine-recovery",
       "ventoy",
       "rufus",
-      "systemrescue",
       "hirens-bootcd-pe"
     ],
     "startHere": "Record the exact screen and failure stage. Obtain the device’s recovery-key access path before any firmware, TPM, or boot changes.",
@@ -580,11 +590,12 @@
     "estimatedTime": "Triage 15–30 min; imaging varies",
     "difficulty": "Advanced",
     "tools": [
+      "systemrescue",
+      "photorec",
+      "testdisk",
       "smartmontools",
       "crystaldiskinfo",
-      "ddrescue",
-      "testdisk",
-      "photorec"
+      "ddrescue"
     ],
     "startHere": "Stop ordinary use of the source drive. Ask whether the data is replaceable and whether a verified backup exists before applying power again.",
     "steps": [
@@ -679,9 +690,10 @@
     "difficulty": "Intermediate",
     "tools": [
       "rescuezilla",
+      "robocopy",
+      "winget",
       "clonezilla",
-      "crystaldiskinfo",
-      "winget"
+      "crystaldiskinfo"
     ],
     "startHere": "Verify the source drive is healthy. A failing drive needs the recovery workflow instead of an ordinary clone.",
     "steps": [
@@ -755,8 +767,9 @@
     "estimatedTime": "30–90 min; full restore varies",
     "difficulty": "Intermediate",
     "tools": [
-      "restic",
       "veeam-agent",
+      "restic",
+      "kopia",
       "rescuezilla"
     ],
     "startHere": "Identify what must be recovered, the acceptable data-loss window, and the target recovery time. A green backup status is only the starting point.",
@@ -828,6 +841,8 @@
     "estimatedTime": "15–60 min",
     "difficulty": "Intermediate",
     "tools": [
+      "get-help",
+      "powershell",
       "wireshark",
       "iperf3",
       "sysinternals"
@@ -906,6 +921,8 @@
     "estimatedTime": "30–120 min; infrastructure varies",
     "difficulty": "Advanced",
     "tools": [
+      "powershell",
+      "quick-machine-recovery",
       "smartmontools",
       "sysinternals"
     ],
@@ -1089,6 +1106,7 @@
     "estimatedTime": "20–60 min",
     "difficulty": "Advanced",
     "tools": [
+      "powershell",
       "sysinternals"
     ],
     "startHere": "Use this guide for an Active Directory member workstation or member server. Domain-controller trust repair needs its own procedure.",
@@ -1160,6 +1178,7 @@
     "estimatedTime": "20–60 min",
     "difficulty": "Intermediate",
     "tools": [
+      "get-help",
       "sysinternals"
     ],
     "startHere": "Identify the mail provider and whether the user is in classic Outlook, new Outlook, or a browser. Their repair paths differ.",
@@ -1229,6 +1248,10 @@
     "estimatedTime": "15–45 min",
     "difficulty": "Starter",
     "tools": [
+      "get-help",
+      "advanced-ip-scanner",
+      "powershell",
+      "naps2",
       "sysinternals"
     ],
     "startHere": "Identify the exact printer and queue. Check whether another user or application can print to the same device.",
@@ -1242,6 +1265,22 @@
         "title": "Verify the connection and queue",
         "detail": "Confirm USB connection or the printer’s current network address against the queue’s configured port. Check that the intended queue is selected, not an old duplicate or offline copy. A changed DHCP address can leave a working printer behind an obsolete port.",
         "anchor": "step-02"
+      },
+      {
+        "title": "Read the installed queue, driver and port",
+        "detail": "On the affected Windows PC, open Windows PowerShell 5.1. This read-only command does not require administrator rights. Find the intended queue and compare its exact driver and port with the physical printer; keep real device names and addresses in the private case record.",
+        "command": "Get-Printer | Format-Table Name,DriverName,PortName -AutoSize",
+        "commandName": "Get-Printer",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printer",
+        "anchor": "step-read-printer-queue-driver-port"
+      },
+      {
+        "title": "Compare the port with the current printer address",
+        "detail": "Run this read-only command in the same local Windows PowerShell 5.1 session. Match the PortName from the previous output. A TCP/IP port should point to the printer’s current address from its network report; WSD and USB use different bindings. Investigate a mismatch before changing only the affected queue. The output includes local network details and belongs in the private case record.",
+        "command": "Get-PrinterPort | Format-List *",
+        "commandName": "Get-PrinterPort",
+        "commandUrl": "https://learn.microsoft.com/en-us/powershell/module/printmanagement/get-printerport",
+        "anchor": "step-read-printer-port-details"
       },
       {
         "title": "Separate application and queue faults",
@@ -1298,11 +1337,12 @@
     "estimatedTime": "30–120 min plus extended tests",
     "difficulty": "Advanced",
     "tools": [
-      "hwinfo",
+      "windbg",
       "memtest86plus",
+      "libre-hardware-monitor",
       "crystaldiskinfo",
-      "sysinternals",
-      "windbg"
+      "hwinfo",
+      "sysinternals"
     ],
     "startHere": "Record the exact stop code, timestamp, workload, recent hardware/driver changes, and whether the machine restarted or lost power.",
     "steps": [
@@ -1373,6 +1413,8 @@
     "difficulty": "Intermediate",
     "tools": [
       "winget",
+      "oem-drivers",
+      "robocopy",
       "powertoys",
       "veeam-agent",
       "rustdesk",
@@ -1509,8 +1551,8 @@
     "estimatedTime": "20–60 min plus downloads",
     "difficulty": "Intermediate",
     "tools": [
-      "ventoy",
       "rufus",
+      "ventoy",
       "microsoft-windows11-media",
       "systemrescue",
       "hirens-bootcd-pe",
@@ -1665,6 +1707,8 @@
     "tools": [
       "winget",
       "crystaldiskinfo",
+      "windirstat",
+      "everything",
       "hwinfo",
       "sysinternals",
       "veeam-agent",

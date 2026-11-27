@@ -218,9 +218,10 @@
   function accessLabel(option) {
     return option.label || ({ file: 'Download file', store: 'Install from store', builtin: 'Setup instructions', web: 'Open web tool', account: 'Account and setup', package: 'Package instructions', source: 'Source and build', 'release-page': 'Download options' })[option.kind] || 'Acquisition instructions';
   }
-  function accessActions(tool, variant = '', actionId = '') {
+  function accessActions(tool, variant = '', actionId = '', primaryOnly = false) {
     const access = accessInfo(tool);
-    const options = actionId ? access.options.filter(option => option.id === actionId) : access.options;
+    const selected = actionId ? access.options.filter(option => option.id === actionId) : [];
+    const options = actionId ? selected : primaryOnly ? (access.options[0] ? [access.options[0]] : []) : access.options;
     return `<div class="tool-access ${esc(variant)}" data-tool-access="${esc(tool.id)}">${external(access.officialUrl, `Official page ${icon('external')}`, 'access-link official-page')}${options.map((option, index) => `<a class="access-link acquisition-link${index === 0 ? ' primary-acquisition' : ''}" data-access-tool="${esc(tool.id)}" data-acquisition-kind="${esc(option.kind)}"${option.id ? ` data-access-id="${esc(option.id)}"` : ''} data-access-role="${index === 0 ? 'primary' : 'alternate'}" href="${esc(safeUrl(option.url))}" target="_blank" rel="noopener noreferrer">${esc(accessLabel(option))} ${icon(option.kind === 'file' ? 'download' : 'external')}</a>`).join('')}</div>`;
   }
   function quickHref(item) { return `#job/${encodeURIComponent(item.jobId)}/quick/${encodeURIComponent(item.id)}`; }
@@ -274,6 +275,7 @@
     { slug: 'Continuous-Improvement', icon: 'refresh', title: 'Continuous improvement', body: 'Review what changed, close gaps in a method, and use lessons from real jobs to improve the guidance.', label: 'Review the process' },
     { slug: 'Interface-Design', icon: 'grid', title: 'Interface design', body: 'Read the layout, typography, interaction, and accessibility standards for this workspace.', label: 'Design standards' },
     { slug: 'Tool-Selection', icon: 'filter', title: 'Tool selection', body: 'Compare a tool’s fit, evidence, and operating requirements before using it for a job.', label: 'Selection guide' },
+    { slug: 'Current-Tool-Choices', icon: 'activity', title: 'Current tool choices', body: 'Check the latest tool review, practical alternatives, and the reasons behind current recommendations.', label: 'Review current choices' },
     { slug: 'Service-Evidence', icon: 'checkCircle', title: 'Service evidence', body: 'Keep findings, changes, and verification connected in a useful service record.', label: 'Evidence guide' }
   ];
   function knowledgeDesk(compact = false) {
@@ -338,8 +340,9 @@
     return `<option value="">${esc(label)}</option>${[...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b)).map(value => `<option value="${esc(value)}"${selected === value ? ' selected' : ''}>${esc(categoryLabel(value))}</option>`).join('')}`;
   }
   const toolSearchText = new Map(tools.map(tool => [tool.id, text([tool.name, tool.category, categoryLabel(tool.category), tool.summary, tool.bestFor, ...array(tool.tags), ...array(tool.platforms), ...(quickByTool.get(tool.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
-  const jobSearchText = new Map(jobs.map(job => [job.id, text([job.title, job.category, job.summary, job.startHere, ...array(job.steps).map(step => step.title), ...(quickByJob.get(job.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
-  const quickSearchText = new Map(quickItems.map(item => [item.id, text([item.label, item.firstStep, ...array(item.aliases)]).toLowerCase()]));
+  const workspaceSearchText = new Map(jobs.map(job => [job.id, text(workspaceSearchTerms(job)).toLowerCase()]));
+  const jobSearchText = new Map(jobs.map(job => [job.id, text([job.title, job.category, job.summary, job.startHere, ...array(job.steps).map(step => step.title), workspaceSearchText.get(job.id), ...(quickByJob.get(job.id) || []).flatMap(item => [item.label, item.firstStep, ...array(item.aliases)])]).toLowerCase()]));
+  const quickSearchText = new Map(quickItems.map(item => [item.id, text([item.label, item.firstStep, toolMap.get(item.toolId)?.name, ...array(item.aliases)]).toLowerCase()]));
   function matches(haystack, query) { return query.trim().toLowerCase().split(/\s+/).filter(Boolean).every(term => haystack.includes(term)); }
   function library(savedOnly = false, params = new URLSearchParams()) {
     const query = params.get('q') || '';
@@ -450,16 +453,77 @@
   function relatedTools(ids) {
     return array(ids).map(id => toolMap.get(typeof id === 'string' ? id : id.id)).filter(Boolean);
   }
+  function workspaceForJob(job) {
+    const workspace = data.jobWorkspaces?.jobs?.[job.id];
+    return workspace && typeof workspace === 'object' ? workspace : null;
+  }
+  function workspaceTools(job, workspace = workspaceForJob(job), quickId = '') {
+    const entries = array(workspace?.tools).filter(entry => entry && toolMap.has(entry.toolId)).map(entry => ({ ...entry, tool: toolMap.get(entry.toolId) }));
+    const present = new Set(entries.map(entry => entry.toolId));
+    relatedTools(job.tools).forEach(tool => {
+      if (!present.has(tool.id)) { entries.push({ toolId: tool.id, tool, why: tool.bestFor || tool.summary }); present.add(tool.id); }
+    });
+    const selected = (quickByJob.get(job.id) || []).find(item => item.id === quickId);
+    if (selected?.toolId && toolMap.has(selected.toolId)) {
+      let index = entries.findIndex(entry => entry.toolId === selected.toolId && (!selected.toolAction || entry.actionId === selected.toolAction));
+      if (index < 0) index = entries.findIndex(entry => entry.toolId === selected.toolId);
+      const entry = index >= 0 ? entries.splice(index, 1)[0] : { toolId: selected.toolId, tool: toolMap.get(selected.toolId), why: selected.why };
+      entries.unshift({ ...entry, actionId: selected.toolAction || '', selectedCase: selected.label });
+    }
+    return entries;
+  }
+  function workspaceSearchTerms(job) {
+    const workspace = workspaceForJob(job);
+    if (!workspace) return [];
+    return [workspace.goal, workspace.startHere, ...array(workspace.tools).map(entry => entry.why), ...array(workspace.resources).flatMap(resource => [resource.label, resource.description, resource.group, resource.url]), ...array(workspace.decisions).flatMap(decision => [decision.symptom, decision.action, decision.expected]), ...array(workspace.doneWhen), ...array(workspace.escalateWhen)];
+  }
+  function jobSectionHref(job, quickId, section) {
+    return `#job/${encodeURIComponent(job.id)}${quickId ? `/quick/${encodeURIComponent(quickId)}` : ''}?section=${encodeURIComponent(section)}`;
+  }
+  function resourceGroupLabel(value) {
+    const label = text(value || 'Official resources').replace(/[-_]/g, ' ');
+    return label.charAt(0).toUpperCase() + label.slice(1);
+  }
+  function contextToolAccess(entry) {
+    return `${accessActions(entry.tool, 'workspace-access', entry.actionId, true)}<a class="workspace-options-link" href="#tool/${encodeURIComponent(entry.toolId)}">All options ${icon('arrow')}</a>`;
+  }
+  function jobToolPanel(job, workspace, quickId) {
+    const entries = workspaceTools(job, workspace, quickId);
+    const resources = array(workspace?.resources);
+    const authoredTools = new Set(array(workspace?.tools).map(entry => entry.toolId));
+    const priority = entries.filter((entry, index) => index === 0 || (authoredTools.has(entry.toolId) && array(entry.tool.tags).includes('discovery')));
+    const drivers = resources.filter(resource => resource.kind === 'driver' || /manufacturer|oem/i.test(resource.group || ''));
+    const groups = new Map();
+    resources.forEach(resource => {
+      const group = resource.group || 'Official resources';
+      if (!groups.has(group)) groups.set(group, []);
+      groups.get(group).push(resource);
+    });
+    return `<aside class="job-tool-panel" id="job-tools" aria-labelledby="job-tools-heading"><header class="job-tool-panel-heading"><div><h2 id="job-tools-heading" tabindex="-1">${icon('wrench')}Tools &amp; resources</h2><p>${entries.length} ${entries.length === 1 ? 'tool' : 'tools'} · ${resources.length} ${resources.length === 1 ? 'resource' : 'resources'}</p></div><a class="panel-procedure-link" href="${jobSectionHref(job, quickId, 'procedure')}" aria-label="Go to the procedure">${icon('route')}Steps</a></header><div class="job-panel-content" tabindex="0" role="region" aria-label="All tools and official resources for this job">${priority.length ? `<section class="job-priority-section" aria-labelledby="job-priority-heading"><h3 class="panel-group-heading" id="job-priority-heading">${quickId ? 'For this case' : 'Start with these'}</h3><div class="job-priority-tools${priority.length === 1 ? ' single-priority-tool' : ''}">${priority.map(entry => `<article class="job-priority-tool" data-priority-tool="${esc(entry.toolId)}" data-priority-action="${esc(entry.actionId || '')}"><h4><a href="#tool/${encodeURIComponent(entry.toolId)}">${esc(entry.tool.name)}</a></h4>${contextToolAccess(entry)}</article>`).join('')}</div></section>` : '<p class="no-extra-tool">No extra application is required for this job.</p>'}${drivers.length ? `<nav class="job-driver-shortcuts" aria-labelledby="job-driver-shortcuts-heading"><h3 class="panel-group-heading" id="job-driver-shortcuts-heading">Get the driver</h3><div>${drivers.map(resource => external(resource.url, `<span>${esc(resource.label)}</span>${icon('external')}`, 'driver-shortcut')).join('')}</div></nav>` : ''}${entries.length ? `<section class="job-panel-tools" aria-labelledby="job-tools-list-heading"><h3 class="panel-group-heading" id="job-tools-list-heading">Supporting tools &amp; usage</h3>${entries.map((entry, index) => `<article class="job-workspace-tool" data-workspace-tool="${esc(entry.toolId)}" data-workspace-action="${esc(entry.actionId || '')}"${entries.findIndex(other => other.toolId === entry.toolId) === index ? ` data-recommended-tool="${esc(entry.toolId)}"` : ''}><h4><a href="#tool/${encodeURIComponent(entry.toolId)}">${esc(entry.tool.name)}</a></h4>${entry.why ? `<p>${formatted(entry.why)}</p>` : ''}${contextToolAccess(entry)}</article>`).join('')}</section>` : ''}${[...groups.entries()].map(([group, items], index) => `<section class="job-resource-group" data-resource-group="${esc(group)}" aria-labelledby="job-resource-group-${index}"><h3 class="panel-group-heading" id="job-resource-group-${index}">${esc(resourceGroupLabel(group))}</h3><div class="job-resource-list${/driver|manufacturer|oem/i.test(group) ? ' driver-resource-list' : ''}">${items.map(resource => `<article class="job-resource" id="job-resource-${esc(resource.id)}" data-workspace-resource="${esc(resource.id)}">${external(resource.url, `<span>${esc(resource.label)}</span>${icon('external')}`, 'job-resource-link')}<p>${formatted(resource.description)}</p><div class="job-resource-meta">${resource.kind ? `<span>${esc(resourceGroupLabel(resource.kind))}</span>` : ''}${resource.sourceUrl && resource.sourceUrl !== resource.url ? external(resource.sourceUrl, 'Source', 'resource-source') : ''}${resource.checkedAt ? `<time datetime="${esc(resource.checkedAt)}">Checked ${esc(dateLabel(resource.checkedAt, true))}</time>` : ''}</div></article>`).join('')}</div></section>`).join('')}</div></aside>`;
+  }
+  function jobNavigation(job, workspace, quickId) {
+    const sections = [['tools', 'Tools & resources'], ...(array(workspace?.decisions).length ? [['decisions', 'Decisions']] : []), ['procedure', 'Procedure'], ['verify', 'Verify'], ...(array(job.sources).length ? [['references', 'Sources']] : [])];
+    return `<nav class="job-section-nav" aria-label="Sections in this job guide">${sections.map(([section, label]) => `<a href="${jobSectionHref(job, quickId, section)}">${esc(label)}</a>`).join('')}</nav><nav class="job-mobile-jump" aria-label="Quick navigation in this job guide"><a href="${jobSectionHref(job, quickId, 'tools')}">${icon('wrench')}Tools &amp; links</a><a href="${jobSectionHref(job, quickId, 'procedure')}">${icon('route')}Steps</a><a href="${jobSectionHref(job, quickId, 'verify')}">${icon('checkCircle')}Verify</a></nav>`;
+  }
+  function workspacePlan(workspace) {
+    if (!workspace) return '';
+    return `<section class="workspace-start" aria-labelledby="workspace-start-heading"><h2 class="block-heading" id="workspace-start-heading">${icon('compass')}Plan the job</h2>${workspace.goal ? `<p class="workspace-goal">${formatted(workspace.goal)}</p>` : ''}${workspace.startHere ? `<p>${formatted(workspace.startHere)}</p>` : ''}</section>${array(workspace.decisions).length ? `<section class="workspace-decisions" id="job-decisions" aria-labelledby="job-decisions-heading"><h2 class="block-heading" id="job-decisions-heading" tabindex="-1">${icon('route')}Choose the next action</h2><div class="decision-table-wrap"><table class="decision-table"><thead><tr><th scope="col">What you find</th><th scope="col">What to do</th><th scope="col">What to expect</th></tr></thead><tbody>${array(workspace.decisions).map(decision => `<tr><th scope="row" data-label="What you find">${formatted(decision.symptom)}</th><td data-label="What to do">${formatted(decision.action)}</td><td data-label="What to expect">${formatted(decision.expected)}</td></tr>`).join('')}</tbody></table></div></section>` : ''}`;
+  }
   function jobDetail(id, quickId = '') {
     const job = jobMap.get(id);
     if (!job) return notFound('playbook');
     if (quickId && !(quickByJob.get(id) || []).some(item => item.id === quickId)) return notFound('scenario');
-    const suggested = relatedTools(job.tools);
+    const workspace = workspaceForJob(job);
     const related = array(job.related).map(id => jobMap.get(id)).filter(Boolean);
     const steps = array(job.steps);
     const verifies = array(job.verify);
-    return `<a class="back-link" href="#playbooks">${icon('back')}All job playbooks</a><header class="detail-header"><div class="page-eyebrow">${icon(jobIcon(job))}${esc(job.category)} / Playbook</div><h1>${esc(job.title)}</h1><p class="summary">${esc(job.summary)}</p>${jobAnswerStrip(job, quickId)}<div class="detail-meta"><span class="pill">${icon('clock')}${esc(job.estimatedTime || 'Work at the pace the job requires')}</span><span class="pill">${icon('layers')}${esc(job.difficulty || 'Technician guide')}</span><span class="pill">${icon('checkCircle')}${steps.length} steps · ${verifies.length} verification checks</span></div><div class="detail-actions"><button class="button primary" data-export-job="${esc(job.id)}">${icon('download')}Export checklist</button><button class="button ghost" data-print>${icon('printer')}Print guide</button><button class="button ghost" data-copy-link>${icon('link')}Copy link</button></div></header><div class="detail-layout"><div class="detail-main"><div class="callout">${icon('compass')}<div><h3>Start here</h3><p>${formatted(job.startHere || job.summary)}</p></div></div><h2 class="block-heading">${icon('route')}Work through the job</h2><div class="checklist">${steps.map((step, index) => `<section class="step"><label class="step-label"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="step" data-check-index="${index}" data-check-title="${esc(step.title)}"${checked(job, 'step', index, step.title) ? ' checked' : ''}><span><h3><span class="step-number">${index + 1}.</span>${esc(step.title)}</h3></span></label><div class="step-detail">${formatted(step.detail)}</div>${step.command ? `<div class="command-block"><div class="command-bar"><span>Command · follow the step above</span><button class="copy-command" data-copy-command="${esc(job.id)}" data-command-index="${index}">${icon('copy')}Copy</button></div><pre><code>${esc(text(step.command))}</code></pre></div>${commandLegend(step.command)}` : ''}</section>`).join('')}</div><h2 class="block-heading">${icon('checkCircle')}Verify the result</h2><div class="verify-list">${verifies.map((item, index) => `<label class="verify-item"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="verify" data-check-index="${index}" data-check-title="${esc(text(item))}"${checked(job, 'verify', index, text(item)) ? ' checked' : ''}><span>${formatted(item)}</span></label>`).join('')}</div>${selectionNotes(quickByJob.get(job.id) || [])}${array(job.sources).length ? `<h2 class="block-heading">${icon('book')}Official references</h2>${sourceList(job.sources)}<p class="sources-note">Reviewed ${esc(dateLabel(job.reviewedAt || reviewDate, true))}. Follow the vendor's current instructions when the product or environment differs.</p>` : ''}${related.length ? `<h2 class="block-heading">${icon('route')}Keep going</h2><div class="detail-related">${related.map(jobCard).join('')}</div>` : ''}</div><aside class="detail-aside"><section class="aside-card" id="job-progress">${progressCard(job)}</section>${suggested.length ? `<section class="aside-card"><h3>Tools for this job</h3><div class="recommended-tools">${suggested.map(tool => `<div class="recommended-tool" data-recommended-tool="${esc(tool.id)}"><h4><a href="#tool/${encodeURIComponent(tool.id)}">${esc(tool.name)}</a></h4>${accessActions(tool, 'recommended-access')}</div>`).join('')}</div></section>` : ''}${array(job.stopIf).length ? `<section class="aside-card caution-card"><h3>${icon('warning')}Pause &amp; escalate when</h3><ul class="stop-list">${array(job.stopIf).map(item => `<li>${formatted(item)}</li>`).join('')}</ul></section>` : ''}<section class="aside-card"><h3>Leave a useful handoff</h3><p>Record the symptom, findings, changes, and verification in your team's private ticket. Keep passwords, customer files, and recovery keys out of the public wiki.</p></section></aside></div>`;
+    const stops = [...new Set([...array(job.stopIf), ...array(workspace?.escalateWhen)].map(text))];
+    return `<div class="job-page" data-job-workspace="${esc(job.id)}"><a class="back-link" href="#playbooks">${icon('back')}All job playbooks</a><div class="job-work-layout"><header class="detail-header job-header"><div class="page-eyebrow">${icon(jobIcon(job))}${esc(job.category)} / Playbook</div><h1>${esc(job.title)}</h1><p class="summary">${esc(job.summary)}</p><div class="detail-meta"><span class="pill">${icon('clock')}${esc(job.estimatedTime || 'Work at the pace the job requires')}</span><span class="pill">${icon('layers')}${esc(job.difficulty || 'Technician guide')}</span><span class="pill">${icon('checkCircle')}${steps.length} steps · ${verifies.length} verification checks</span></div><div class="detail-actions"><button class="button primary" data-export-job="${esc(job.id)}">${icon('download')}Export checklist</button><button class="button ghost" data-print>${icon('printer')}Print guide</button><button class="button ghost" data-copy-link>${icon('link')}Copy link</button></div></header>${jobNavigation(job, workspace, quickId)}${jobToolPanel(job, workspace, quickId)}<div class="detail-main job-guide-main">${jobAnswerStrip(job, quickId)}${workspacePlan(workspace)}${stops.length ? `<section class="job-stop-conditions" id="job-escalate" aria-labelledby="job-escalate-heading"><h2 class="block-heading" id="job-escalate-heading" tabindex="-1">${icon('warning')}Pause &amp; escalate when</h2><ul class="stop-list">${stops.map(item => `<li>${formatted(item)}</li>`).join('')}</ul></section>` : ''}<div class="callout job-original-start">${icon('compass')}<div><h3>Start here</h3><p>${formatted(job.startHere || job.summary)}</p></div></div><section class="aside-card job-progress-inline" id="job-progress">${progressCard(job)}</section><section id="job-procedure" aria-labelledby="job-procedure-heading"><h2 class="block-heading" id="job-procedure-heading" tabindex="-1">${icon('route')}Work through the job</h2><div class="checklist">${steps.map((step, index) => {
+      const anchor = step.anchor || `step-${String(index + 1).padStart(2, '0')}`;
+      return `<section class="step" id="job-${esc(anchor)}" data-step-anchor="${esc(anchor)}"><div class="step-heading"><label class="step-label"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="step" data-check-index="${index}" data-check-title="${esc(step.title)}"${checked(job, 'step', index, step.title) ? ' checked' : ''}><span><h3 tabindex="-1"><span class="step-number">${index + 1}.</span>${esc(step.title)}</h3></span></label><a class="step-permalink" href="${jobSectionHref(job, quickId, anchor)}" aria-label="Link to step ${index + 1}: ${esc(step.title)}">${icon('link')}</a></div><div class="step-detail">${formatted(step.detail)}</div>${step.command ? `<div class="command-block"><div class="command-bar"><span>Command · follow the step above</span><button class="copy-command" data-copy-command="${esc(job.id)}" data-command-index="${index}">${icon('copy')}Copy</button></div><pre><code>${esc(text(step.command))}</code></pre></div>${commandLegend(step.command)}` : ''}</section>`;
+    }).join('')}</div></section><section id="job-verify" aria-labelledby="job-verify-heading"><h2 class="block-heading" id="job-verify-heading" tabindex="-1">${icon('checkCircle')}Verify the result</h2><div class="verify-list">${verifies.map((item, index) => `<label class="verify-item"><input type="checkbox" data-check-job="${esc(job.id)}" data-check-type="verify" data-check-index="${index}" data-check-title="${esc(text(item))}"${checked(job, 'verify', index, text(item)) ? ' checked' : ''}><span>${formatted(item)}</span></label>`).join('')}</div>${array(workspace?.doneWhen).length ? `<div class="workspace-done"><h3>Ready to close when</h3><ul class="bullet-list">${array(workspace.doneWhen).map(item => `<li>${formatted(item)}</li>`).join('')}</ul></div>` : ''}</section>${selectionNotes(quickByJob.get(job.id) || [])}${array(job.sources).length ? `<section id="job-references" aria-labelledby="job-references-heading"><h2 class="block-heading" id="job-references-heading" tabindex="-1">${icon('book')}Official references</h2>${sourceList(job.sources)}<p class="sources-note">Reviewed ${esc(dateLabel(job.reviewedAt || reviewDate, true))}. Follow the vendor's current instructions when the product or environment differs.</p></section>` : ''}${related.length ? `<h2 class="block-heading">${icon('route')}Keep going</h2><div class="detail-related">${related.map(jobCard).join('')}</div>` : ''}<section class="job-handoff"><h3>Leave a useful handoff</h3><p>Record the symptom, findings, changes, and verification in your team's private ticket. Keep passwords, customer files, and recovery keys out of the public wiki.</p></section></div></div></div>`;
   }
+
   function toolDetail(id) {
     const tool = toolMap.get(id);
     if (!tool) return notFound('tool');
@@ -532,8 +596,13 @@
     closeNavigation(); closeSearch();
     if (route.anchor && document.getElementById(route.anchor)) document.getElementById(route.anchor).scrollIntoView({ block: 'start', behavior: 'instant' });
     else if (lastRoute !== route.raw) window.scrollTo({ top: 0, behavior: 'instant' });
+    const section = route.name === 'job' && route.params.get('section');
+    const sectionTarget = section && document.getElementById(`job-${section}`);
     const selectedAnswer = route.quickId && document.getElementById(`quick-${route.quickId}`);
-    if (selectedAnswer) {
+    if (sectionTarget) {
+      sectionTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
+      sectionTarget.querySelector('h2[tabindex],h3[tabindex]')?.focus({ preventScroll: true });
+    } else if (selectedAnswer) {
       selectedAnswer.scrollIntoView({ block: 'start', behavior: 'instant' });
       selectedAnswer.querySelector('h3')?.focus({ preventScroll: true });
     } else if (lastRoute) $('#main').focus({ preventScroll: true });
@@ -613,6 +682,24 @@
     if (!job) return;
     const state = progress(job);
     const lines = [`# INTA · ${job.title}`, '', job.summary, '', `Source review: ${job.reviewedAt || reviewDate}`, `Exported: ${new Date().toISOString()}`, `Checklist: ${state.done}/${state.total} checks`, ''];
+    const workspace = workspaceForJob(job);
+    if (workspace) {
+      lines.push('## Working plan', '', text(workspace.goal), '', text(workspace.startHere), '', '## Tools and resources for this job', '');
+      workspaceTools(job, workspace, parseRoute().quickId).forEach(entry => {
+        const access = accessInfo(entry.tool);
+        const selectedOptions = entry.actionId ? access.options.filter(option => option.id === entry.actionId) : [];
+        const options = entry.actionId ? [...selectedOptions, ...access.options.filter(option => option.id !== entry.actionId)] : access.options;
+        lines.push(`### ${entry.tool.name}`, '', text(entry.why), '', `[Official page](${safeUrl(access.officialUrl)})`, ...options.map(option => `- [${accessLabel(option)}](${safeUrl(option.url)})`), '');
+      });
+      array(workspace.resources).forEach(resource => {
+        lines.push(`- [${resource.label}](${safeUrl(resource.url)}) — ${text(resource.description)}`, `  - ${resourceGroupLabel(resource.group)} · ${resourceGroupLabel(resource.kind)} · Checked ${resource.checkedAt || data.jobWorkspaces.reviewedAt || reviewDate}`);
+        if (resource.sourceUrl) lines.push(`  - [Source](${safeUrl(resource.sourceUrl)})`);
+      });
+      if (array(workspace.decisions).length) {
+        lines.push('', '## Choose the next action', '');
+        array(workspace.decisions).forEach(decision => lines.push(`### ${text(decision.symptom)}`, '', `Action: ${text(decision.action)}`, '', `Expected: ${text(decision.expected)}`, ''));
+      }
+    }
     const picks = quickByJob.get(job.id) || [];
     const selected = picks.find(item => item.id === parseRoute().quickId);
     const ordered = selected ? [selected, ...picks.filter(item => item !== selected)] : picks;
@@ -639,7 +726,8 @@
     });
     lines.push('## Verify the result', '');
     array(job.verify).forEach((item, index) => lines.push(`- [${checked(job, 'verify', index, text(item)) ? 'x' : ' '}] ${text(item)}`));
-    lines.push('', '## Pause and escalate when', '', ...array(job.stopIf).map(item => `- ${text(item)}`), '', '## Tools', '');
+    if (array(workspace?.doneWhen).length) lines.push('', '## Ready to close when', '', ...array(workspace.doneWhen).map(item => `- ${text(item)}`));
+    lines.push('', '## Pause and escalate when', '', ...[...new Set([...array(job.stopIf), ...array(workspace?.escalateWhen)].map(text))].map(item => `- ${item}`), '', '## Tools', '');
     relatedTools(job.tools).forEach(tool => {
       const access = accessInfo(tool);
       lines.push(`- [${tool.name}](${safeUrl(access.officialUrl)}) — ${tool.summary}`);
@@ -669,6 +757,11 @@
     const query = search.value.trim();
     if (!query) return closeSearch();
     const foundScenarios = quickItems.filter(item => matches(quickSearchText.get(item.id), query));
+    const exactScenarioJobs = new Set(foundScenarios.map(item => item.jobId));
+    jobs.forEach(job => {
+      const firstAnswer = quickByJob.get(job.id)?.[0];
+      if (firstAnswer && !exactScenarioJobs.has(job.id) && matches(workspaceSearchText.get(job.id), query)) foundScenarios.push(firstAnswer);
+    });
     const foundJobs = jobs.filter(job => matches(jobSearchText.get(job.id), query));
     const foundTools = tools.filter(tool => matches(toolSearchText.get(tool.id), query));
     let html = `<div class="search-summary">${foundScenarios.length + foundJobs.length + foundTools.length} results for “${esc(query)}”</div>`;

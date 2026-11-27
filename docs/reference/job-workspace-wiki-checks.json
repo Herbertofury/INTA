@@ -1,0 +1,13 @@
+{
+  "reviewedAt": "2026-11-26",
+  "scope": "Generated source validation; live publication verified separately",
+  "testsPassed": 34,
+  "buildOutputs": 108,
+  "wikiFiles": 79,
+  "wikiPages": 77,
+  "registeredNames": 346,
+  "inlineLinks": 6811,
+  "mermaidDiagrams": 27,
+  "playbooks": 22,
+  "errors": []
+}

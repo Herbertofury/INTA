@@ -8,7 +8,35 @@ Preserve the source, create a recoverable image, and perform recovery on a copy.
 
 **Storage & recovery** · Advanced · Triage 15–30 min; imaging varies · 8 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/failing-drive)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/failing-drive)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/failing-drive)** · Keep the tool panel beside the instructions.
+
+**First move:** Stop writing to the source. Clicking, impact damage or irreplaceable data warrants a recovery-specialist decision before more power-on time.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Boot a ready recovery environment containing [GNU ddrescue](https://www.gnu.org/software/ddrescue/). | **[SystemRescue](https://www.system-rescue.org/)** · [Official page](https://www.system-rescue.org/) · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** |
+| Recover file contents from healthy media or an image. | **[PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec)** · [Official page](https://www.cgsecurity.org/wiki/PhotoRec) · **[Download PhotoRec / TestDisk · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** |
+| Inspect partitions on a working copy when that branch is justified. | **[TestDisk](https://www.cgsecurity.org/wiki/TestDisk)** · [Official page](https://www.cgsecurity.org/wiki/TestDisk) · **[Download Windows x64 tools · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** |
+
+### Preserve the source
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[GNU ddrescue imaging manual](https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html)** | Use verified devices and a persistent mapfile before file-system repair. |
+| **[SystemRescue included recovery tools](https://www.system-rescue.org/System-tools/)** | Confirm the imaging and identification tools in the boot environment. |
+
+### Recover from a copy
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[PhotoRec recovery steps](https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step)** | Write recovered output to another disk and inspect actual files. |
+| **[TestDisk partition analysis](https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step)** | Distinguish inspection from partition-table writes. |
 
 <a id="quick-answer"></a>
 
@@ -38,6 +66,25 @@ Preserve the source, create a recoverable image, and perform recovery on a copy.
 
 **[PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec)** · [Official page](https://www.cgsecurity.org/wiki/PhotoRec) · **[Download PhotoRec / TestDisk · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **The drive clicks, was dropped or repeatedly disconnects** | Stop repeated boots and scans; record symptoms and have the owner choose specialist recovery. | The remaining recoverability is not consumed by routine repair attempts. |
+| **A damaged drive remains readable enough to image** | Boot [SystemRescue](https://www.system-rescue.org/), identify source and destination by model/serial/size and follow [GNU ddrescue](https://www.gnu.org/software/ddrescue/) with a mapfile on persistent healthy storage. | An image and resumable mapfile preserve readable ranges and identify unreadable gaps. |
+| **Files were deleted from healthy media** | Check backups first; otherwise run [PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec) against the healthy source or image and save to a separate disk. | Recovered files open successfully; lost names or folder structure are recorded. |
+| **The image is encrypted or recovery reports missing ranges** | Obtain the correct recovery material and assess the client’s priority files on a working copy. | Usable files and unrecoverable areas are explicitly distinguished. |
+
+### ✅ Finish the job
+
+- [ ] Source and destination identities are recorded; when imaging was required, the image and mapfile identities are recorded.
+- [ ] Priority recovered files open in their actual applications.
+- [ ] Any unreadable ranges and missing files are documented before acceptance.
+
+**Change route when:** There is physical damage or an unstable connection that prevents controlled imaging. · A proposed repair would write to the only source or overwrite an unverified destination.
+
 > [!NOTE]
 > **Start here.** Stop ordinary use of the source drive. Ask whether the data is replaceable and whether a verified backup exists before applying power again.
 
@@ -46,9 +93,6 @@ Preserve the source, create a recoverable image, and perform recovery on a copy.
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -72,8 +116,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Clone a healthy system or migrate to a new SSD](https://github.com/Herbertofury/INTA/wiki/Job-disk-migration) · [Prove a backup can actually restore](https://github.com/Herbertofury/INTA/wiki/Job-backup-restore) · [Build and refresh a technician rescue USB](https://github.com/Herbertofury/INTA/wiki/Job-boot-usb) · [Close a repair with a clear client handoff](https://github.com/Herbertofury/INTA/wiki/Job-client-handoff)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Stop writes; choose the recovery route based on data value and damage. |
@@ -90,11 +132,12 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
+| **[SystemRescue](https://www.system-rescue.org/)** · [Official page](https://www.system-rescue.org/) · **[Download x64 rescue image · ISO](https://fastly-cdn.system-rescue.org/releases/13.03/systemrescue-13.03-amd64.iso)** | Boot a ready recovery environment containing [GNU ddrescue](https://www.gnu.org/software/ddrescue/). | Bootable PC; Free / open source | [Open guide](https://www.system-rescue.org/manual/) |
+| **[PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec)** · [Official page](https://www.cgsecurity.org/wiki/PhotoRec) · **[Download PhotoRec / TestDisk · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** | Recover file contents from healthy media or an image. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step) |
+| **[TestDisk](https://www.cgsecurity.org/wiki/TestDisk)** · [Official page](https://www.cgsecurity.org/wiki/TestDisk) · **[Download Windows x64 tools · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** | Inspect partitions on a working copy when that branch is justified. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step) |
 | **[smartmontools](https://www.smartmontools.org/)** · [Official page](https://www.smartmontools.org/) · **[Download Windows setup · EXE](https://github.com/smartmontools/smartmontools/releases/download/RELEASE_7_5/smartmontools-7.5.win32-setup.exe)** | Reading SMART and NVMe health from a rescue environment or supported host OS. | [Linux](https://www.kernel.org/), [Windows](https://www.microsoft.com/windows), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://github.com/smartmontools/smartmontools) |
 | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
 | **[GNU ddrescue](https://www.gnu.org/software/ddrescue/)** · [Official page](https://www.gnu.org/software/ddrescue/) · **[Download source · TAR.LZ](https://ftp.gnu.org/gnu/ddrescue/ddrescue-1.30.tar.lz)** | Creating an image of a failing disk before recovery or repair attempts. | [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html) |
-| **[TestDisk](https://www.cgsecurity.org/wiki/TestDisk)** · [Official page](https://www.cgsecurity.org/wiki/TestDisk) · **[Download Windows x64 tools · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** | Investigating missing partitions on an image or safely copied disk. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://www.cgsecurity.org/wiki/TestDisk_Step_By_Step) |
-| **[PhotoRec](https://www.cgsecurity.org/wiki/PhotoRec)** · [Official page](https://www.cgsecurity.org/wiki/PhotoRec) · **[Download PhotoRec / TestDisk · ZIP](https://www.cgsecurity.org/testdisk-7.2.win64.zip)** | Recovering files from an image when directory-based recovery is unsuccessful. | [Windows](https://www.microsoft.com/windows), [Linux](https://www.kernel.org/), [macOS](https://support.apple.com/macos); Free / open source | [Open guide](https://www.cgsecurity.org/wiki/PhotoRec_Step_By_Step) |
 
 <a id="walkthrough"></a>
 
@@ -201,9 +244,6 @@ lsblk -o NAME,SIZE,MODEL,SERIAL,TYPE,MOUNTPOINTS
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [GNU ddrescue manual](https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html)
 - [CGSecurity: PhotoRec data recovery](https://www.cgsecurity.org/wiki/PhotoRec)
 - [GNU ddrescue: mapfile, algorithm and status semantics](https://www.gnu.org/software/ddrescue/manual/ddrescue_manual.html#Mapfile-structure)
@@ -211,7 +251,6 @@ lsblk -o NAME,SIZE,MODEL,SERIAL,TYPE,MOUNTPOINTS
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

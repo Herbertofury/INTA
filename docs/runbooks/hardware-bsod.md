@@ -8,7 +8,41 @@ Correlate crash evidence with memory, storage, temperature, power, and driver ch
 
 **Hardware** · Advanced · 30–120 min plus extended tests · 6 steps
 
-[Quick answer](#quick-answer) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/hardware-bsod)
+[Tools and useful links](#working-kit) · [Quick answer](#quick-answer) · [Next action](#next-action) · [Decision route](#decision-route) · [Tools](#toolkit) · [Procedure](#walkthrough) · [Verification](#acceptance) · [Sources](#sources) · [Interactive checklist](https://herbertofury.github.io/INTA/#job/hardware-bsod)
+
+<a id="working-kit"></a>
+
+## 🧰 Tools and links for this job
+
+**[Open working view](https://herbertofury.github.io/INTA/#job/hardware-bsod)** · Keep the tool panel beside the instructions.
+
+**First move:** Record the stop code, crash time and recent changes. Check storage health and safe temperatures before load testing.
+
+| Use this for | Official tool + exact action |
+| --- | --- |
+| Read the recorded crash dump and stack. | **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger · APPINSTALLER](https://aka.ms/windbg/download)** |
+| Test memory outside the running OS when evidence points there. | **[Memtest86+](https://www.memtest.org/)** · [Official page](https://www.memtest.org/) · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** |
+| Observe sensor behavior without claiming a sensor alone proves the cause. | **[Libre Hardware Monitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)** · [Official page](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) · **[Download Windows portable · ZIP](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/download/v0.9.6/LibreHardwareMonitor.zip)** |
+| Check storage warnings before further stress. | **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** |
+
+### Find the cause
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Microsoft stop-code troubleshooting](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/stop-code-error-troubleshooting)** | Correlate stop codes, changes and relevant hardware tests. |
+| **[Unexpected-restart evidence](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart)** | Event 41 is a symptom record, not proof of a failed PSU. |
+
+### Crash analysis
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[WinDbg documentation](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** | Open the dump and inspect analysis in the correct context. |
+
+### Hardware tests
+
+| Open the exact resource | What to do there |
+| --- | --- |
+| **[Memtest86+ boot and error guidance](https://www.memtest.org/)** | Match firmware support and record the tested configuration. |
 
 <a id="quick-answer"></a>
 
@@ -24,7 +58,7 @@ Correlate crash evidence with memory, storage, temperature, power, and driver ch
 2. For a dump, use [WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) to inspect the crash evidence; follow the indicated driver, memory or hardware branch.
 3. Change one supported cause at a time and repeat the failing workload while checking for new crashes.
 
-**[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger installer](https://aka.ms/windbg/download)**
+**[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger · APPINSTALLER](https://aka.ms/windbg/download)**
 
 <a id="quick-suspected-ram-fault"></a>
 
@@ -38,6 +72,24 @@ Correlate crash evidence with memory, storage, temperature, power, and driver ch
 
 **[Memtest86+](https://www.memtest.org/)** · [Official page](https://www.memtest.org/) · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)**
 
+<a id="next-action"></a>
+
+## 🧭 Match the symptom
+
+| You see this | Do this next | You should get |
+| --- | --- | --- |
+| **A crash dump is available** | Open it in [WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) and run !analyze -v; compare the stop code and stack with other failures and the change timeline. | Repeated evidence identifies a driver/component branch; one named module is not treated as proof by itself. |
+| **Crashes began after a specific driver or hardware change** | Use the exact vendor-supported rollback or correction for that identified change and repeat the failing workload. | The same reproduction no longer crashes, or the hypothesis is rejected. |
+| **Evidence points to RAM instability** | Record firmware/overclock settings, boot [Memtest86+](https://www.memtest.org/) and isolate modules or slots using the hardware procedure. | Errors are reproduced and narrowed to a configuration, or the test result is recorded without excluding other causes. |
+| **The system overheats, loses power or storage disappears** | Stop stress testing and inspect the indicated cooling, power or storage path with the appropriate service guidance. | The physical fault is addressed before further workload testing. |
+
+### ✅ Finish the job
+
+- [ ] The same workload runs without a new crash after the evidenced correction.
+- [ ] Crash/test results, firmware settings and any component change are recorded.
+
+**Change route when:** There is unsafe temperature, electrical damage or unstable storage. · The fault requires disassembly or specialist testing beyond the available service capability.
+
 > [!NOTE]
 > **Start here.** Record the exact stop code, timestamp, workload, recent hardware/driver changes, and whether the machine restarted or lost power.
 
@@ -46,9 +98,6 @@ Correlate crash evidence with memory, storage, temperature, power, and driver ch
 <a id="-choose-the-right-branch"></a>
 
 ## 🧭 Choose a route
-
-<details>
-<summary>View the decision map and escalation routes</summary>
 
 ```mermaid
 flowchart TD
@@ -71,8 +120,6 @@ flowchart TD
 
 **Route links:** [Continue this workflow](#walkthrough) · [Acceptance checks](#acceptance) · [Diagnose a slow, freezing, or hitching PC](slow-pc.md) · [Rescue data from a failing or unreadable drive](failing-drive.md) · [Recover a Windows PC that will not boot](boot-recovery.md) · [Prove a backup can actually restore](backup-restore.md)
 
-</details>
-
 | Checkpoint | What to carry forward |
 | --- | --- |
 | **Before changing anything** | Protect data before reproducing failure or stressing components. |
@@ -89,11 +136,12 @@ Select a tool for the next diagnostic or repair step. Check its platform, access
 
 | Tool / official page + download | Use it for | Platform & access | Documentation |
 | --- | --- | --- | --- |
+| **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger · APPINSTALLER](https://aka.ms/windbg/download)** | Read the recorded crash dump and stack. | [Windows](https://www.microsoft.com/windows); Free Microsoft tool | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) |
+| **[Memtest86+](https://www.memtest.org/)** · [Official page](https://www.memtest.org/) · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** | Test memory outside the running OS when evidence points there. | Bootable PC; Free / open source | [Open guide](https://github.com/memtest86plus/memtest86plus) |
+| **[Libre Hardware Monitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)** · [Official page](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) · **[Download Windows portable · ZIP](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases/download/v0.9.6/LibreHardwareMonitor.zip)** | Observe sensor behavior without claiming a sensor alone proves the cause. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) |
+| **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | Check storage warnings before further stress. | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
 | **[HWiNFO](https://www.hwinfo.com/)** · [Official page](https://www.hwinfo.com/) · **[Download Windows x64 EXE](https://www.hwinfo.com/files/hwi64_860.exe)** | Investigating temperatures, clocks, power and component identity. | [Windows](https://www.microsoft.com/windows); Pro license for commercial use of 64/ARM64 editions | [Open guide](https://www.hwinfo.com/licenses/) |
-| **[Memtest86+](https://www.memtest.org/)** · [Official page](https://www.memtest.org/) · **[Download x64 memory-test ISO · ZIP](https://www.memtest.org/download/v9.00/mt86plus_9.00_x86_64.iso.zip)** | Investigating memory instability and repeatable hardware errors. | Bootable PC; Free / open source | [Open guide](https://github.com/memtest86plus/memtest86plus) |
-| **[CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/)** · [Official page](https://crystalmark.info/en/software/crystaldiskinfo/) · **[Get Windows ZIP · 9.9.5](https://sourceforge.net/projects/crystaldiskinfo/files/9.9.5/CrystalDiskInfo9_9_5.zip/download)** | First-pass HDD and SSD health inspection in [Windows](https://www.microsoft.com/windows). | [Windows](https://www.microsoft.com/windows); Free / open source | [Open guide](https://crystalmark.info/en/software/crystaldiskinfo/) |
 | **[Microsoft Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/)** · [Official page](https://learn.microsoft.com/en-us/sysinternals/) · **[Download Windows portable · ZIP](https://download.sysinternals.com/files/SysinternalsSuite.zip)** | The core portable [Windows](https://www.microsoft.com/windows) troubleshooting kit. | [Windows](https://www.microsoft.com/windows); Free Microsoft utilities | [Open guide](https://learn.microsoft.com/en-us/sysinternals/downloads/) |
-| **[WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)** · [Official page](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) · **[Download Windows debugger installer](https://aka.ms/windbg/download)** | Interpreting a crash dump when basic event logs do not establish the cause. | [Windows](https://www.microsoft.com/windows); Free Microsoft tool | [Open guide](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/) |
 
 <a id="walkthrough"></a>
 
@@ -171,15 +219,11 @@ Work in order, record the result of each step, and change route when the evidenc
 
 ## Official sources
 
-<details>
-<summary>References and review notes</summary>
-
 - [Microsoft: stop code and bug check troubleshooting](https://learn.microsoft.com/en-us/windows/client-management/troubleshoot-stop-errors)
 - [Microsoft: interpreting Kernel-Power Event ID 41](https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart)
 
 Reviewed **2026-11-26**. Timing is a planning range. A successful command is evidence about that operation; acceptance belongs to the user’s original task.
 
-</details>
 
 ---
 

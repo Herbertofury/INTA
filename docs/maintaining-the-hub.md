@@ -10,6 +10,7 @@
 | --- | --- |
 | [Tool catalog](https://github.com/Herbertofury/INTA/blob/main/data/tools.json) | Names, official URLs, platforms, selection tier, source and review date |
 | [Job guides](https://github.com/Herbertofury/INTA/blob/main/data/jobs.json) | Workflows, recommended tools, actions, verification, escalation and sources |
+| [Job workspaces](https://github.com/Herbertofury/INTA/blob/main/data/job-workspaces.json) | Purpose-specific toolkits, official action resources, symptom decisions and completion evidence |
 | [Method registry](https://github.com/Herbertofury/INTA/blob/main/data/methods.json) | Precise named methods, aliases, canonical destinations and proof |
 | [Link aliases](https://github.com/Herbertofury/INTA/blob/main/data/link-aliases.json) | Additional explicit application and platform names used by the linker |
 | [Linking helper](https://github.com/Herbertofury/INTA/blob/main/scripts/wiki_links.py) | Protected [Markdown](https://github.github.com/gfm/) handling and links on every repeated known name |
