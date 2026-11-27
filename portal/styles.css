@@ -1188,3 +1188,9 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 .agent-operation-row pre { grid-column:1/-1; max-width:min(650px,70vw); }
 @media(max-width:1000px) { .agent-operation-controls { grid-template-columns:repeat(2,minmax(0,1fr)); } .agent-action-buttons { grid-column:1/-1; } }
 @media(max-width:650px) { .updates-agent-panel { padding:12px; } .agent-status-chip { max-width:100%; } .agent-operation-controls,.agent-preview-grid { grid-template-columns:1fr; } .agent-action-buttons { grid-column:auto; } .agent-action-buttons .button { flex:1; } .agent-app-list > div { display:grid; gap:2px; } .agent-app-list > div span { text-align:left; } .agent-operation-row { grid-template-columns:1fr; } .agent-operation-row pre { max-width:100%; } }
+
+
+.agent-candidate-list { max-height:190px; overflow:auto; border-top:1px solid var(--line-soft); }
+.agent-candidate-list > div { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:5px 8px; border-bottom:1px solid var(--line-soft); }
+.agent-candidate-list code { min-width:0; overflow-wrap:anywhere; color:var(--muted); font-size:10px; }
+.agent-candidate-list button { flex:0 0 auto; min-height:28px; padding:3px 8px; border:1px solid var(--line); border-radius:4px; background:var(--selected); color:var(--accent); font-size:10px; }
