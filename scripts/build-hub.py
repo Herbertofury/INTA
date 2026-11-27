@@ -28,6 +28,7 @@ WIKI_MIRRORS = {
     "Quick-Commands": "quick-commands.md",
     "Command-Center": "command-center.md",
     "Updates-and-Maintenance": "updates-center.md",
+    "Ecosystem-Development": "ecosystem-development.md",
     "Templates": "contribution-template.md", "Continuous-Improvement": "continuous-improvement.md",
     "Methods": "methods.md", "Decision-Desk": "decision-desk.md",
     "Interface-Design": "interface-design.md", "Service-Evidence": "service-evidence.md",
@@ -1603,7 +1604,7 @@ self.addEventListener("fetch", event => {
                 "- [Malware tool choices](Malware-Tool-Choices)", "",
                 *legacy_anchors("📏 The shared standard"), "", "### Standards and contributions", "",
                 "- [Start here](Start-Here)", "- [Knowledge standards](Knowledge-Standards)", "- [Interface design](Interface-Design)",
-                "- [Contribute](Contribute)", "- [Contribution templates](Templates)",
+                "- [Contribute](Contribute)", "- [Ecosystem development](Ecosystem-Development)", "- [Contribution templates](Templates)",
                 "- [Organization rules](Knowledge-Organization)", "- [Coverage and review health](Knowledge-Health)",
                 "- [Research queue](Research-Queue)", "- [Research updates](Research-Updates)", "- [Online tool review](Online-Tool-Review)",
                 "- [Continuous improvement](Continuous-Improvement)", "- [Maintain and publish](Maintaining-the-Hub)", ""]
