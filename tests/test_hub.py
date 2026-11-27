@@ -358,6 +358,17 @@ process.stdout.write(JSON.stringify(results));
         with self.assertRaisesRegex(ValueError, 'Unknown scenario acquisition'):
             build.selected_tool_action(entry, 'missing')
 
+    def test_repair_quick_starts_precede_online_tools_on_all_front_pages(self):
+        output = build.build_outputs()
+        self.assertIn("+ quickStartSection() + onlineStartSection() +", output["site/index.html"])
+        for path in ("README.md", "docs/start-here.md", "docs/free-tool-picks.md",
+                     "wiki/Home.md", "wiki/Start-Here.md", "wiki/Free-Tool-Picks.md"):
+            page = output[path]
+            if "<!-- INTA:QUICK-START:START -->" in page:
+                page = page.split("<!-- INTA:QUICK-START:START -->", 1)[1].split("<!-- INTA:QUICK-START:END -->", 1)[0]
+            self.assertLess(page.index("## ⚡ What do you need to fix?"),
+                            page.index("## 🌐 Online tools: open a service and get a result"), path)
+
     def test_every_job_has_a_complete_working_kit(self):
         workspaces = json.loads((ROOT / 'data/job-workspaces.json').read_text())
         access = json.loads((ROOT / 'data/tool-access.json').read_text())['tools']

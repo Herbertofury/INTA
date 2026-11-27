@@ -23,7 +23,7 @@ The <a href="https://github.com/Herbertofury/Athena" title="Open Athena official
 ## Layout
 
 - **Application shell:** a quiet sidebar, a compact utility bar, and a fluid working area. Navigation names the actual destination.
-- **Home:** lead with everyday problems such as **Remove viruses**, **Fix a printer**, **Fix internet** and **Fix email**. Each flat row has a bold emoji scenario link, one concrete first-action sentence, the official tool page and the exact acquisition action. Cover every service scenario and keep the complete tool directory below the answers.
+- **Home:** lead with everyday problems such as **Remove viruses**, **Fix a printer**, **Fix internet** and **Fix email**. Each flat row has a bold emoji scenario link, one concrete first-action sentence, the official tool page and the exact acquisition action. Cover every service scenario, place all **Fix a problem** choices before the secondary **Online tools** section, and keep the complete tool directory below both.
 - **Tool library:** a readable list with visible filters, result count, platform information, recommendation tier, details, official source, and save control.
 - **Playbooks:** a compact index. Individual procedures use a document column with a compact persistent toolkit, purpose-specific official links, diagnostic decisions and completion checks. On a wide screen the toolkit stays beside the reading position. Small screens show the complete toolkit first and a short sticky section strip; keep all links reachable and instructions unobscured.
 - **Knowledge desk:** linked reference rows with short descriptions. Its purpose is finding guidance, so it does not need a gallery of equally sized cards.

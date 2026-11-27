@@ -1474,7 +1474,8 @@ def build_outputs() -> dict[str, str]:
     by_id, jobs_by_id = {x["id"]: x for x in tools}, {x["id"]: x for x in jobs}
     access = tool_access["tools"]
     quick_start_block = linker.link_markdown(quick_start_markdown(quick_start, by_id, layout, access), registry)
-    quick_start_block = online_module.start_markdown(online_data, by_id, access) + "\n" + quick_start_block
+    # Keep repair choices first; online utilities follow as a supporting reference.
+    quick_start_block = quick_start_block + "\n" + online_module.start_markdown(online_data, by_id, access)
     managed_sources = {
         name: replace_quick_start_block((ROOT / name).read_bytes().decode("utf-8"), quick_start_block, name)
         for name in ("README.md", "docs/start-here.md", "docs/free-tool-picks.md")
