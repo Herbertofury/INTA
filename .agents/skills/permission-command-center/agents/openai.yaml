@@ -1,4 +1,4 @@
 interface:
   display_name: "Permission Command Center"
-  short_description: "Surface required app approvals early, then resume."
-  default_prompt: "Preflight the providers my task needs, surface any required approval prompts now, and continue the task."
+  short_description: "Auto-preflight GitHub and Drive access, then resume."
+  default_prompt: "Quickly preflight GitHub, Drive, or the providers this task needs; surface approvals early and continue."
