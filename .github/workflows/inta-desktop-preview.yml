@@ -1,0 +1,37 @@
+name: Verify INTA Desktop preview
+on:
+  pull_request:
+    paths:
+      - 'desktop/INTA.Desktop/**'
+      - 'agent/INTA.LocalAgent/StartupFolders.cs'
+      - 'agent/INTA.LocalAgent/StartupInventory.cs'
+      - '.github/workflows/inta-desktop-preview.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'desktop/INTA.Desktop/**'
+      - 'agent/INTA.LocalAgent/StartupFolders.cs'
+      - 'agent/INTA.LocalAgent/StartupInventory.cs'
+      - '.github/workflows/inta-desktop-preview.yml'
+permissions:
+  contents: read
+jobs:
+  native-startup:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build the native Windows preview
+        run: dotnet publish desktop/INTA.Desktop/INTA.Desktop.csproj -c Release -r win-x64 --self-contained -warnaserror -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o out
+      - name: Exercise the exact native window on the test runner
+        shell: powershell
+        run: desktop/INTA.Desktop/verify-native-ui.ps1 out/INTA.Desktop.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: inta-desktop-startup-preview-win-x64
+          path: out/INTA.Desktop.exe
+          if-no-files-found: error
+          retention-days: 30
