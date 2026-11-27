@@ -4,11 +4,11 @@ The Local Maintenance Agent is the small, user-installed bridge between the INTA
 
 ## Install on Windows
 
-Download the latest Windows agent from the official [INTA Releases](https://github.com/Herbertofury/INTA/releases/latest) page. Verify the published SHA-256 checksum. Or download and inspect the installer script from this repository, then run it:
+Download the latest successful Windows build artifact from [INTA Local Agent Actions](https://github.com/Herbertofury/INTA/actions/workflows/local-agent.yml). Extract the Actions artifact ZIP, then run the included installer script with the Windows package ZIP and its `.sha256` sidecar in the same folder:
 
-    powershell -NoProfile -ExecutionPolicy Bypass -File .\agent\install-agent.ps1
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\\install-agent.ps1 -PackagePath .\\inta-agent-win-x64.zip
 
-The script downloads the Windows release, verifies SHA-256, installs to the current user's LocalAppData, creates normal and administrator Start menu shortcuts, and starts the agent. The first release is not code-signed; Windows may show a SmartScreen warning. Only use the official repository release and verify its checksum.
+The installer verifies SHA-256, installs to the current user's LocalAppData, creates normal and administrator Start menu shortcuts, and starts the agent. The first build is not code-signed; Windows may show a SmartScreen warning. Only use artifacts from the official INTA workflow and verify the checksum.
 
 ## User experience
 
@@ -51,7 +51,7 @@ The agent currently collects Windows installed applications from the uninstall r
 
 ## Build locally
 
-Requires .NET 8 SDK.
+Requires .NET 10 SDK.
 
     dotnet publish agent/INTA.LocalAgent/INTA.LocalAgent.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o dist/inta-agent
 
