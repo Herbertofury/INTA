@@ -87,3 +87,8 @@ When a shell action helps a specific symptom, add a `commands` array to that exa
 ## ⚡ Command Center contributions
 
 Add reusable cross-platform commands and workflows to `data/command-center.json`. Each command needs a stable ID, shell, privilege, category, risk, purpose, exact code, safety boundary and official source. Workflows reference command IDs instead of duplicating code. Toolkits must link to maintained upstream projects and explain their trust, licensing and execution risks. Do not add remote download-and-execute pipelines, blind bulk updates or package-pin bypasses. See [Command Center](command-center.md).
+
+
+## 🔄 Updates & Maintenance contributions
+
+Add update channels, copy-ready commands and recovery workflows to `data/updates-center.json`. Keep Windows servicing, Store apps, WinGet, Chocolatey, Scoop, UniGetUI, Ninite Pro and Linux package managers distinct. Every command requires shell, privilege, risk, purpose, safety and an official source. Recovery commands must preserve evidence, avoid interrupting active installer transactions and prefer reversible repairs. See [Updates Center](updates-center.md).
