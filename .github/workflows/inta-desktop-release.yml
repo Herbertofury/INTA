@@ -13,6 +13,7 @@ on:
       - 'media/**'
       - 'assets/**'
       - 'scripts/release_artwork.py'
+      - 'scripts/brand_markdown.py'
       - '.github/workflows/inta-desktop-release.yml'
 permissions:
   contents: read
