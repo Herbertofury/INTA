@@ -54,6 +54,24 @@ class NativeHarness(unittest.TestCase):
             with self.assertRaises(ValueError):
                 harness.startup_inventory(self.binary, self.pin)
 
+    def test_program_display_metadata_only(self):
+        report = dict(schema=1, scope="windows-desktop-registrations", readOnly=True,
+                      commandsCollected=False, skipped=0, errors=0, capped=False,
+                      rows=[dict(name="Synthetic", version="1.0", publisher="Publisher", scope="Current user")])
+        def run():
+            return subprocess.CompletedProcess([], 0, json.dumps(report).encode(), b"")
+        with patch.object(harness.subprocess, "run", return_value=run()) as call:
+            self.assertEqual(harness.installed_programs(self.binary, self.pin)["status"], "ready")
+        call.assert_called_once_with([str(self.binary), "--installed-programs"], capture_output=True,
+                                    check=True, shell=False, timeout=12)
+        report["errors"] = 1
+        with patch.object(harness.subprocess, "run", return_value=run()):
+            self.assertEqual(harness.installed_programs(self.binary, self.pin)["status"], "incomplete")
+        report["rows"][0]["uninstallString"] = "not a display field"
+        with patch.object(harness.subprocess, "run", return_value=run()):
+            with self.assertRaises(ValueError):
+                harness.installed_programs(self.binary, self.pin)
+
     def test_bad_pin_never_launches(self):
         with patch.object(harness.subprocess, "run") as run:
             with self.assertRaises(ValueError):

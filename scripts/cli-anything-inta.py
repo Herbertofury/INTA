@@ -120,18 +120,45 @@ def startup_inventory(path, expected_sha):
             **report}
 
 
+def installed_programs(path, expected_sha):
+    binary = executable(path, expected_sha)
+    run = subprocess.run([str(binary), "--installed-programs"], capture_output=True,
+                         check=True, shell=False, timeout=12)
+    if len(run.stdout) > 16 * 1024 * 1024:
+        raise ValueError("native response is too large")
+    report = json.loads(run.stdout.decode("utf-8"), object_pairs_hook=unique)
+    required = {"schema", "scope", "readOnly", "commandsCollected", "rows", "skipped", "errors", "capped"}
+    if (not isinstance(report, dict) or set(report) != required
+            or type(report["schema"]) is not int or report["schema"] != 1
+            or report["scope"] != "windows-desktop-registrations"
+            or report["readOnly"] is not True or report["commandsCollected"] is not False
+            or not isinstance(report["rows"], list) or len(report["rows"]) > 3 * 4096
+            or type(report["capped"]) is not bool
+            or any(type(report[k]) is not int or not 0 <= report[k] <= 3 * 4097 for k in ("skipped", "errors"))):
+        raise ValueError("unexpected installed program report")
+    scopes = {"Current user", "Machine", "Machine · 32-bit", "Machine · 64-bit"}
+    for row in report["rows"]:
+        if (not isinstance(row, dict) or set(row) != {"name", "version", "publisher", "scope"}
+                or not all(isinstance(v, str) and len(v) <= 385 and "\0" not in v for v in row.values())
+                or not row["name"].strip() or row["scope"] not in scopes):
+            raise ValueError("invalid registered program display data")
+    return {"status": "incomplete" if report["capped"] or report["errors"] else "ready", **report}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help="output a machine-readable JSON result (also the default)")
     sub = parser.add_subparsers(dest="operation", required=True)
     power = sub.add_parser("power-plans", help="read only: list Windows power plans and their active selection")
     startup = sub.add_parser("startup-inventory", help="read only: Windows Run and RunOnce names, no commands or enable state")
-    for operation in (power, startup):
+    programs = sub.add_parser("installed-programs", help="read only: Windows desktop registration display metadata")
+    for operation in (power, startup, programs):
         operation.add_argument("--agent-binary", type=pathlib.Path, required=True)
         operation.add_argument("--agent-sha256", required=True)
     args = parser.parse_args(argv)
     try:
-        read = inventory if args.operation == "power-plans" else startup_inventory
+        read = {"power-plans": inventory, "startup-inventory": startup_inventory,
+                "installed-programs": installed_programs}[args.operation]
         result = read(args.agent_binary, args.agent_sha256)
     except (OSError, ValueError, TypeError, RecursionError, subprocess.SubprocessError):
         print(json.dumps({"operation": args.operation, "status": "refused"}))

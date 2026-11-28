@@ -98,6 +98,37 @@ jobs:
               if ($fixtureWritten) { $key.DeleteValue($tag, $false) }
               $key.Dispose()
           }
+      - name: Verify desktop program metadata without exposing uninstall commands
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:GITHUB_ACTIONS -ne 'true' -or $env:RUNNER_ENVIRONMENT -ne 'github-hosted') { throw 'Disposable hosted runner required' }
+          $agent = (Resolve-Path 'cli-native/inta-agent.exe').Path
+          $pin = (Get-FileHash -Algorithm SHA256 $agent).Hash.ToLowerInvariant()
+          $id = 'INTA_CLI_App_' + [Guid]::NewGuid().ToString('N')
+          $base = [Microsoft.Win32.Registry]::CurrentUser.CreateSubKey('Software\Microsoft\Windows\CurrentVersion\Uninstall')
+          $app = $null
+          try {
+              if ($id -in $base.GetSubKeyNames()) { throw 'Fixture name already exists' }
+              $app = $base.CreateSubKey($id)
+              $name = 'INTA synthetic program display'
+              $marker = 'SYNTHETIC_UNINSTALL_VALUE_DO_NOT_READ_OR_RUN'
+              $app.SetValue('DisplayName', $name)
+              $app.SetValue('DisplayVersion', '9.8.7')
+              $app.SetValue('Publisher', 'Synthetic publisher')
+              $app.SetValue('UninstallString', $marker)
+              $raw = python -B scripts/cli-anything-inta.py --json installed-programs --agent-binary $agent --agent-sha256 $pin
+              if ($LASTEXITCODE -ne 0 -or ($raw -join "`n").Contains($marker) -or ($raw -join "`n").Contains($id)) { throw 'Program harness failed or disclosed an internal registration field' }
+              $snapshot = $raw | ConvertFrom-Json
+              $matches = @($snapshot.rows | Where-Object { $_.scope -eq 'Current user' -and $_.name -eq $name -and $_.version -eq '9.8.7' -and $_.publisher -eq 'Synthetic publisher' })
+              if ($snapshot.operation -ne 'installed-programs' -or $snapshot.status -ne 'ready' -or $snapshot.commandsCollected -or
+                  $matches.Length -ne 1 -or $app.GetValue('UninstallString') -ne $marker) { throw 'Program metadata proof did not match the fixture' }
+              @{ operation = 'installed-programs'; platform = 'windows-x64'; passed = $true; version = '0.1.0'; agentSha256 = $pin; sourceCommit = $env:GITHUB_SHA } |
+                  ConvertTo-Json | Set-Content -Encoding utf8 cli-programs-proof.json
+          } finally {
+              if ($null -ne $app) { $app.Dispose(); $base.DeleteSubKeyTree($id, $false) }
+              $base.Dispose()
+          }
       - uses: actions/upload-artifact@v4
         with:
           name: inta-power-plans-cli-test-preview
@@ -105,5 +136,6 @@ jobs:
           path: |
             cli-harness-proof.json
             cli-startup-proof.json
+            cli-programs-proof.json
             cli-native/inta-agent.exe
           if-no-files-found: error
