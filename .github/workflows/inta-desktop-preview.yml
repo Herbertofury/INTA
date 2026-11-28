@@ -8,6 +8,7 @@ on:
       - 'agent/INTA.LocalAgent/StartupInventory.cs'
       - 'agent/INTA.LocalAgent/PowerPlans.cs'
       - 'agent/INTA.LocalAgent/StoragePreview.cs'
+      - 'agent/INTA.LocalAgent/WindowsAllocation.cs'
       - '.github/workflows/inta-desktop-preview.yml'
   push:
     branches: [main]
@@ -17,6 +18,7 @@ on:
       - 'agent/INTA.LocalAgent/StartupInventory.cs'
       - 'agent/INTA.LocalAgent/PowerPlans.cs'
       - 'agent/INTA.LocalAgent/StoragePreview.cs'
+      - 'agent/INTA.LocalAgent/WindowsAllocation.cs'
       - '.github/workflows/inta-desktop-preview.yml'
 permissions:
   contents: read

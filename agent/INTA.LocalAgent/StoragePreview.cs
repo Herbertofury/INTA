@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace INTA.LocalAgent;
 
@@ -8,7 +9,8 @@ internal static class StoragePreview
     private const int MaxDepth = 128;
     private static readonly JsonSerializerOptions OutputOptions = new(JsonSerializerDefaults.Web);
 
-    internal static int Run(ReadOnlySpan<string> args, TextWriter output, TextWriter error)
+    internal static int Run(ReadOnlySpan<string> args, TextWriter output, TextWriter error,
+        bool measureAllocation = false, CancellationToken cancellation = default)
     {
         if (args.Length is < 1 or > 3 || string.IsNullOrWhiteSpace(args[0]) || args[0].StartsWith("--", StringComparison.Ordinal))
             return Usage(error);
@@ -16,6 +18,11 @@ internal static class StoragePreview
             !ReadRange(args, 2, 100000, 1, 1000000, out var limit))
             return Usage(error);
 
+        if (measureAllocation && !OperatingSystem.IsWindows())
+        {
+            error.WriteLine("Allocation detail is only supported on Windows.");
+            return 3;
+        }
         try
         {
             var root = Path.GetFullPath(args[0]);
@@ -23,6 +30,13 @@ internal static class StoragePreview
             if (Directory.GetParent(root) is null ||
                 (OperatingSystem.IsWindows() && root.StartsWith(@"\\", StringComparison.Ordinal)))
                 throw new ArgumentException("Select a folder on a local drive, not a drive root or network path.");
+            if (measureAllocation)
+            {
+                var drive = Path.GetPathRoot(root);
+                if (drive is null || drive.Length != 3 || drive[1] != ':' ||
+                    new DriveInfo(drive).DriveType is not (DriveType.Fixed or DriveType.Removable or DriveType.Ram))
+                    throw new ArgumentException("Allocation detail needs an ordinary local Windows drive.");
+            }
             for (DirectoryInfo? directory = new(root); directory is not null; directory = directory.Parent)
             {
                 var attributes = File.GetAttributes(directory.FullName);
@@ -33,7 +47,9 @@ internal static class StoragePreview
             }
             var snapshotTime = DateTimeOffset.UtcNow;
             var totals = new Totals(snapshotTime, days, limit);
-            Visit(new DirectoryInfo(root), snapshotTime.UtcDateTime.AddDays(-days), 0, totals);
+            var allocation = measureAllocation ? new AllocationSummary() : null;
+            Visit(new DirectoryInfo(root), snapshotTime.UtcDateTime.AddDays(-days), 0, totals, allocation, cancellation);
+            totals.Allocation = allocation?.Finish(totals.Partial);
             output.WriteLine(JsonSerializer.Serialize(totals, OutputOptions));
             return 0;
         }
@@ -42,7 +58,7 @@ internal static class StoragePreview
             error.WriteLine(ex.Message);
             return 2;
         }
-        catch (Exception ex) when (ReadFailure(ex))
+        catch (Exception ex) when (ReadFailure(ex) || ex is OverflowException)
         {
             error.WriteLine("Cannot read the selected folder.");
             return 2;
@@ -65,7 +81,8 @@ internal static class StoragePreview
     private static bool ReadFailure(Exception ex) =>
         ex is IOException or UnauthorizedAccessException or System.Security.SecurityException;
 
-    private static void Visit(DirectoryInfo folder, DateTime cutoff, int depth, Totals totals)
+    private static void Visit(DirectoryInfo folder, DateTime cutoff, int depth, Totals totals,
+        AllocationSummary? allocation, CancellationToken cancellation)
     {
         try
         {
@@ -75,6 +92,7 @@ internal static class StoragePreview
                 IgnoreInaccessible = false, AttributesToSkip = 0
             }))
             {
+                cancellation.ThrowIfCancellationRequested();
                 if (totals.EntriesScanned == totals.EntryLimit)
                 {
                     totals.EntryLimitReached = true;
@@ -92,7 +110,7 @@ internal static class StoragePreview
                     if (entry is DirectoryInfo child)
                     {
                         if (depth == MaxDepth) totals.DepthLimitedDirectories++;
-                        else Visit(child, cutoff, depth + 1, totals);
+                        else Visit(child, cutoff, depth + 1, totals, allocation, cancellation);
                         if (totals.EntryLimitReached) return;
                     }
                     else if (entry is FileInfo file)
@@ -102,6 +120,8 @@ internal static class StoragePreview
                         var modifiedAt = file.LastWriteTimeUtc;
                         totals.FilesScanned++;
                         totals.LogicalBytes += length;
+                        if (allocation is not null && OperatingSystem.IsWindows())
+                            WindowsAllocation.Measure(file, length, allocation);
                         if (modifiedAt <= cutoff)
                         {
                             totals.OlderFiles++;
@@ -131,6 +151,8 @@ internal static class StoragePreview
         public int ReadErrors { get; set; }
         public int DepthLimitedDirectories { get; set; }
         public bool EntryLimitReached { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public AllocationReceipt? Allocation { get; set; }
         public bool Partial => EntryLimitReached || ReadErrors > 0 || DepthLimitedDirectories > 0;
     }
 }

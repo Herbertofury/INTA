@@ -56,6 +56,12 @@ jobs:
       - name: Verify packaged startup inventory rejects unsupported platform
         if: matrix.rid == 'linux-x64'
         run: python agent/startup_inventory_test.py publish/inta-agent
+      - name: Verify allocated bytes against an independent Windows hard-link and sparse fixture
+        if: matrix.rid == 'win-x64'
+        run: python -B agent/storage_allocation_test.py publish/inta-agent.exe
+      - name: Verify Linux refuses Windows allocation without changing the default
+        if: matrix.rid == 'linux-x64'
+        run: python -B agent/storage_allocation_test.py publish/inta-agent
       - name: Package release archive
         run: python agent/package.py publish dist/inta-agent-${{ matrix.rid }}.zip
       - name: Include Windows installer helper
