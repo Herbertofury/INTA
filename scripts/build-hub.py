@@ -1626,7 +1626,7 @@ self.addEventListener("fetch", event => {
     authored = [ROOT / name for name in ("README.md", "AGENTS.md", "CONTRIBUTING.md")]
     authored += sorted((ROOT / "docs").rglob("*.md"))
     for source in authored:
-        path = str(source.relative_to(ROOT))
+        path = source.relative_to(ROOT).as_posix()
         if path not in outputs and source.is_file():
             outputs[path] = source.read_text(encoding="utf-8")
     for path, content in list(outputs.items()):
