@@ -1478,10 +1478,25 @@ def validate_news_digest(digest: dict, news: dict) -> None:
         require(collector.normalize_saved_items([item], policies[item["sourceId"]]) == [item])
 
 
+def validate_business_profiles(profiles: list[dict]) -> None:
+    """Allow only the two reviewed public business destinations in the Hub."""
+    approved = {
+        "company": "https://intacomputerservices.com/",
+        "nextdoor": "https://nextdoor.com/pages/inta-computer-services-northglenn-co/",
+    }
+    if (not isinstance(profiles, list) or len(profiles) != len(approved)
+            or any(not isinstance(row, dict) or set(row) != {"id", "url"}
+                   or not isinstance(row["id"], str) or not isinstance(row["url"], str)
+                   for row in profiles)
+            or {row["id"]: row["url"] for row in profiles} != approved):
+        raise ValueError("Business profiles must contain only the approved public company and Nextdoor URLs")
+
+
 def build_outputs() -> dict[str, str]:
     tools = records(ROOT / "data/tools.json", "tools")
     jobs = records(ROOT / "data/jobs.json", "jobs")
     meta = json.loads((ROOT / "data/meta.json").read_text(encoding="utf-8"))
+    validate_business_profiles(meta.get("businessProfiles"))
     product_releases = product_release_links(json.loads((ROOT / "data/product-releases.json").read_text(encoding="utf-8")))
     layout = json.loads((ROOT / "data/wiki-layout.json").read_text(encoding="utf-8"))
     quick_start = json.loads((ROOT / "data/quick-start.json").read_text(encoding="utf-8"))
