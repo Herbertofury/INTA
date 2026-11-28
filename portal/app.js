@@ -141,6 +141,7 @@
   const brandData = data.brands && typeof data.brands === 'object' ? data.brands : {};
   const brandAssets = brandData.assets || {};
   const brandRecords = array(brandData.brands);
+  const intaApplicationAsset = brandRecords.find(brand => brand?.id === "app-inta")?.assetId;
   const brandsByTool = new Map(), brandsByName = new Map(), brandsByUrl = new Map(), brandsByHost = new Map();
   function brandUrlKey(value) {
     try { const url = new URL(value); return url.origin + url.pathname.replace(/\/$/, '') + url.search + url.hash; }
@@ -193,7 +194,7 @@
     const value = brand && brandAssets[brand.assetId];
     const src = typeof value === 'string' ? value : value?.dataUri;
     if (!src || !/^data:image\/(?:png|svg\+xml|x-icon|vnd\.microsoft\.icon|webp|jpeg|gif);/i.test(src)) return '';
-    return `<img class="brand-icon${className ? ` ${esc(className)}` : ''}" src="${esc(src)}" width="20" height="20" alt="" aria-hidden="true" decoding="async" data-brand-icon="${esc(brand.id)}">`;
+    return `<img class="brand-icon${className ? ` ${esc(className)}` : ''}" src="${esc(src)}" width="20" height="20" alt="" aria-hidden="true" decoding="async" data-brand-icon="${esc(brand.id)}"${brand.assetId === intaApplicationAsset ? " data-inta-brand-mark" : ""}>`;
   }
   function brandLink(brand, label, className = '') {
     if (!brand) return esc(label);
