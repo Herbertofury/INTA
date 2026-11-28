@@ -1474,13 +1474,14 @@ def build_outputs() -> dict[str, str]:
         "{{STYLES}}": (ROOT / "portal/styles.css").read_text(encoding="utf-8"),
         "{{DATA}}": "window.INTA_DATA = " + safe_json + ";",
         "{{APP}}": (ROOT / "portal/app.js").read_text(encoding="utf-8"),
-        "{{FAVICON}}": "data:image/svg+xml;base64," + base64.b64encode((ROOT / "docs/assets/inta-mark.svg").read_bytes()).decode("ascii"),
+        "{{FAVICON}}": "data:image/x-icon;base64," + base64.b64encode((ROOT / "native/workbench/desktop/inta.ico").read_bytes()).decode("ascii"),
+        "{{HERITAGE}}": "data:image/png;base64," + base64.b64encode((ROOT / "assets/inta-brand/heritage-192.png").read_bytes()).decode("ascii"),
     }
     for marker, value in replacements.items():
         if marker not in template:
             raise ValueError(f"Template missing {marker}")
         template = template.replace(marker, value)
-    if re.search(r"\{\{(?:STYLES|DATA|APP|FAVICON)\}\}", template):
+    if re.search(r"\{\{(?:STYLES|DATA|APP|FAVICON|HERITAGE)\}\}", template):
         raise ValueError("Unresolved template marker")
     by_id, jobs_by_id = {x["id"]: x for x in tools}, {x["id"]: x for x in jobs}
     access = tool_access["tools"]
@@ -1500,15 +1501,15 @@ def build_outputs() -> dict[str, str]:
         "start_url": "./#updates", "scope": "./", "display": "standalone",
         "background_color": "#111214", "theme_color": "#111214",
         "categories": ["productivity", "utilities"],
-        "icons": [{"src": "./inta-app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}],
+        "icons": [
+            {"src": "./inta-app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"},
+            {"src": "./inta-touch-icon.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+        ],
     }
-    pwa_icon = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-      <rect width="512" height="512" rx="104" fill="#111214"/>
-      <g fill="#e7e9ee"><path d="M104 104h128v128H104zM280 104h128v128H280zM104 280h128v128H104z"/></g>
-      <path d="M280 280h128v128H280z" fill="none" stroke="#8bb8ff" stroke-width="18"/>
-    </svg>"""
-    service_worker = """const CACHE = "inta-shell-v1";
-const SHELL = ["./", "./manifest.webmanifest", "./inta-app-icon.svg"];
+    brand_assets = brand_module("refresh-inta-brand.py")
+    pwa_icon = brand_assets.app_svg((ROOT / "assets/inta-brand/application-512.png").read_bytes(), 512).decode("ascii")
+    service_worker = """const CACHE = "inta-shell-BRAND_VERSION";
+const SHELL = ["./", "./manifest.webmanifest", "./inta-app-icon.svg", "./inta-touch-icon.png"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
 });
@@ -1531,10 +1532,12 @@ self.addEventListener("fetch", event => {
   }).catch(() => caches.match(request)));
 });
 """
+    service_worker = service_worker.replace("BRAND_VERSION", brand_assets.brand_cache_version(brand_assets.canonical_inputs(ROOT)))
     outputs = {"site/news-digest.json": json.dumps(news_digest, ensure_ascii=False, indent=2) + "\n", "site/index.html": template, "site/.nojekyll": "", "site/catalog.json": data_json + "\n",
                "site/knowledge-health.json": json.dumps(health_report, ensure_ascii=False, indent=2) + "\n",
                "site/manifest.webmanifest": json.dumps(pwa_manifest, ensure_ascii=False, indent=2) + "\n",
-               "site/inta-app-icon.svg": pwa_icon + "\n", "site/sw.js": service_worker}
+               "site/inta-app-icon.svg": pwa_icon, "site/sw.js": service_worker,
+               "site/inta-touch-icon.png": (ROOT / "assets/inta-brand/application-192.png").read_bytes()}
     outputs.update(managed_sources)
     outputs.update(online_module.wiki_outputs(online_data, tools, access))
     for job in jobs:
@@ -1671,7 +1674,7 @@ self.addEventListener("fetch", event => {
                 "wikiPages": len([x for x in outputs if x.startswith("wiki/") and not Path(x).name.startswith("_")]),
                 "wikiFiles": len([x for x in outputs if x.startswith("wiki/")]),
                 "wikiDiagrams": sum(content.count("```mermaid") for path, content in outputs.items() if path.startswith("wiki/")),
-                "files": {path: hashlib.sha256(content.encode()).hexdigest() for path, content in sorted(outputs.items())}}
+                "files": {path: hashlib.sha256(content if isinstance(content, bytes) else content.encode("utf-8")).hexdigest() for path, content in sorted(outputs.items())}}
     outputs["site/build-manifest.json"] = json.dumps(manifest, indent=2) + "\n"
     return outputs
 
@@ -1716,7 +1719,14 @@ def main():
     mismatches = []
     for relative, content in outputs.items():
         path = ROOT / relative
-        if args.check:
+        if isinstance(content, bytes):
+            if args.check:
+                if not path.exists() or path.read_bytes() != content:
+                    mismatches.append(relative)
+            else:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(content)
+        elif args.check:
             if not path.exists() or path.read_text(encoding="utf-8") != content:
                 mismatches.append(relative)
         else:

@@ -278,9 +278,12 @@ def main():
             if old and 'inlineIcon' in b:return {**old,'inlineIcon':b['inlineIcon']},None
             return old or b,None
         if b['id'] in ('app-inta','app-inta-rescue','app-media-creator','site-herbertofury-github-io'):
-            source=ROOT/'docs/assets/inta-mark.svg'
-            raw=source.read_bytes();png,w,h=normalize(raw,'image/svg+xml');digest=hashlib.sha256(png).hexdigest();aid='i'+digest[:20];path=OUT/(digest[:20]+'.png');path.write_bytes(png)
-            r={'assetId':aid,'asset':{'path':str(path.relative_to(ROOT)),'sourceUrl':'https://raw.githubusercontent.com/Herbertofury/INTA/main/docs/assets/inta-mark.svg','resolvedSourceUrl':'https://raw.githubusercontent.com/Herbertofury/INTA/main/docs/assets/inta-mark.svg','sourceKind':'Existing first-party INTA interface brand mark','publisherHost':'herbertofury.github.io','sha256':digest,'sourceSha256':hashlib.sha256(raw).hexdigest(),'mimeType':'image/png','width':w,'height':h,'checkedAt':DATE}}
+            aid = 'i70ad9f0981b05341142b'  # Stable published INTA asset ID.
+            asset = previous['assets'][aid]
+            source = ROOT / 'assets/inta-brand/application-64.png'
+            if not (ROOT / asset['path']).is_file() or (ROOT / asset['path']).read_bytes() != source.read_bytes():
+                raise ValueError('Run refresh-inta-brand.py --sync before refreshing third-party icons')
+            r = {'assetId': aid, 'asset': asset}
         elif b['id']=='app-yara':r=acquire('github.com','https://github.com/VirusTotal/yara')
         else:
             icon_page=b['urls'][0]

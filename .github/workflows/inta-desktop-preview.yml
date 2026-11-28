@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'desktop/INTA.Desktop/**'
+      - 'native/workbench/desktop/inta.ico'
       - 'agent/INTA.LocalAgent/StartupFolders.cs'
       - 'agent/INTA.LocalAgent/StartupInventory.cs'
       - 'agent/INTA.LocalAgent/PowerPlans.cs'
@@ -14,6 +15,7 @@ on:
     branches: [main]
     paths:
       - 'desktop/INTA.Desktop/**'
+      - 'native/workbench/desktop/inta.ico'
       - 'agent/INTA.LocalAgent/StartupFolders.cs'
       - 'agent/INTA.LocalAgent/StartupInventory.cs'
       - 'agent/INTA.LocalAgent/PowerPlans.cs'

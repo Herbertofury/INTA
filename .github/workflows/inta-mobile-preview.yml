@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - mobile/android/**
+      - assets/inta-brand/**
       - native/optics/**
       - .github/workflows/inta-mobile-preview.yml
   workflow_dispatch:

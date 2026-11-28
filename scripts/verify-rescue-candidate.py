@@ -14,7 +14,7 @@ from rescue_boot_log import passed
 # from the publication source and has its own tests and checksum.
 ISO_INPUTS = (
     "live", "media/inta_brand_ui.py", "data/brand-icons.json", "assets/brand-icons",
-    "docs/assets/inta-mark.svg", "scripts/build-iso", "scripts/build-rescue-wallpaper.py",
+    "docs/assets/inta-mark.svg", "assets/inta-brand/heritage-192.png", "scripts/build-iso", "scripts/build-rescue-wallpaper.py",
     "media/inta_optics_ui.py", "native/optics",
 )
 MEDIA_INPUTS = ("media", "data/rescue-download-channel.json", "scripts/package-media.py", "scripts/package-rescue-release.py")

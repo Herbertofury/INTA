@@ -122,20 +122,20 @@ expected hash differed; exit 2 means refused. A hash is not a signature.
 Keep hashes local unless the operator chooses to share them. This single
 operation is a preview, not Sync, cloud-account or tool-wide CLI admission.
 
-### Robocopy metadata preview
+### <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy" title="Open Robocopy official download or service page" aria-label="Open Robocopy official download or service page" data-inta-brand="robocopy"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Robocopy official page" width="18" height="18" valign="middle" /></a> [Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) metadata preview
 
-Use the built-in [Microsoft Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)
-on two distinct, existing folders on a fixed Windows drive:
+Use the built-in <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy" title="Open Robocopy official download or service page" aria-label="Open Robocopy official download or service page" data-inta-brand="robocopy"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Robocopy official page" width="18" height="18" valign="middle" /></a> [Microsoft Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)
+on two distinct, existing folders on a fixed [Windows](https://www.microsoft.com/windows) drive:
 
 ```text
 python3 scripts/cli-anything-inta.py --json robocopy-preview --source "C:\backup source" --destination "C:\backup target" --robocopy-sha256 REVIEWED_WINDOWS_BINARY_SHA256
 ```
 
-The harness obtains the Windows system directory from the OS, pins that
+The harness obtains the [Windows](https://www.microsoft.com/windows) system directory from the OS, pins that
 installed executable and uses a constant list-only invocation. No file is
 copied, mirrored or deleted; recursive comparisons, redirected roots and
 network shares are excluded. The result reports aggregate native flags, not
 paths, filenames, byte hashes, or proof of equal content. Each system build
 needs its own reviewed executable pin. This narrow preview is not full
-Robocopy coverage, an installation recommendation, or admission into a
+<a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy" title="Open Robocopy official download or service page" aria-label="Open Robocopy official download or service page" data-inta-brand="robocopy"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Robocopy official page" width="18" height="18" valign="middle" /></a> [Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) coverage, an installation recommendation, or admission into a
 remote repair plan.
