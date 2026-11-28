@@ -37,7 +37,7 @@ def main():
     build = json.loads((root / "site/build-manifest.json").read_text())
     html = (root / "site/index.html").read_bytes()
     deployment = {}
-    for name in ("index.html", "manifest.webmanifest", "sw.js", "inta-app-icon.svg"):
+    for name in ("index.html", "manifest.webmanifest", "sw.js", "inta-app-icon.svg", "inta-touch-icon.png"):
         expected_bytes = (root / "site" / name).read_bytes()
         url = "https://herbertofury.github.io/INTA/" + ("" if name == "index.html" else name) + "?verify=" + commit
         actual_hash = None
