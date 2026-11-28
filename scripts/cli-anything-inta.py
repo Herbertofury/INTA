@@ -76,16 +76,63 @@ def inventory(path, expected_sha):
     return report
 
 
+def startup_inventory(path, expected_sha):
+    """List only Windows Run/RunOnce registration names. Never read their values."""
+    binary = executable(path, expected_sha)
+    run = subprocess.run([str(binary), "--startup-inventory"], capture_output=True,
+                         check=True, shell=False, timeout=12)
+    if len(run.stdout) > 3 * 1024 * 1024:
+        raise ValueError("native response is too large")
+    report = json.loads(run.stdout.decode("utf-8"), object_pairs_hook=unique)
+    keys = {"schema", "scope", "readOnly", "enabledState", "argumentsCollected", "sources"}
+    if (not isinstance(report, dict) or set(report) != keys or type(report["schema"]) is not int
+            or report["schema"] != 1 or report["scope"] != "windows-logon-run-keys-only"
+            or report["readOnly"] is not True or report["argumentsCollected"] is not False
+            or report["enabledState"] != "not-evaluated" or not isinstance(report["sources"], list)):
+        raise ValueError("unexpected startup response")
+    rows = report["sources"]
+    expected_keys = {"scope", "view", "key", "status", "entryNames", "truncated"}
+    if len(rows) not in {4, 6}:
+        raise ValueError("unexpected number of native startup sources")
+    views = {"default"} if len(rows) == 4 else {"32-bit", "64-bit"}
+    expected_sources = {(scope, view, key)
+                        for scope, choices in (("current-user", {"shared"}), ("machine", views))
+                        for view in choices for key in ("Run", "RunOnce")}
+    seen = set()
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != expected_keys:
+            raise ValueError("unexpected startup row")
+        source = row["scope"], row["view"], row["key"]
+        status = row["status"]
+        names = row["entryNames"]
+        truncated = row["truncated"]
+        if (not all(isinstance(value, str) for value in source) or source not in expected_sources or source in seen
+                or not isinstance(status, str) or status not in {"read", "not-present", "unavailable"}
+                or not isinstance(names, list) or len(names) > 1024 or type(truncated) is not bool
+                or (truncated and len(names) != 1024)
+                or (status != "read" and (names or truncated))
+                or not all(isinstance(name, str) and len(name) <= 16383 and "\0" not in name for name in names)):
+            raise ValueError("invalid native startup row")
+        if len(set(names)) != len(names):
+            raise ValueError("duplicate startup value")
+        seen.add(source)
+    return {"status": "incomplete" if any(r["truncated"] or r["status"] == "unavailable" for r in rows) else "ready",
+            **report}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help="output a machine-readable JSON result (also the default)")
     sub = parser.add_subparsers(dest="operation", required=True)
     power = sub.add_parser("power-plans", help="read only: list Windows power plans and their active selection")
-    power.add_argument("--agent-binary", type=pathlib.Path, required=True)
-    power.add_argument("--agent-sha256", required=True)
+    startup = sub.add_parser("startup-inventory", help="read only: Windows Run and RunOnce names, no commands or enable state")
+    for operation in (power, startup):
+        operation.add_argument("--agent-binary", type=pathlib.Path, required=True)
+        operation.add_argument("--agent-sha256", required=True)
     args = parser.parse_args(argv)
     try:
-        result = inventory(args.agent_binary, args.agent_sha256)
+        read = inventory if args.operation == "power-plans" else startup_inventory
+        result = read(args.agent_binary, args.agent_sha256)
     except (OSError, ValueError, TypeError, RecursionError, subprocess.SubprocessError):
         print(json.dumps({"operation": args.operation, "status": "refused"}))
         return 2
