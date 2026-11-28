@@ -3,9 +3,11 @@ import argparse
 import datetime
 import hashlib
 import json
+import os
 import pathlib
 import re
 import subprocess
+import stat
 import sys
 import uuid
 
@@ -13,20 +15,20 @@ MAX_BACKEND = 180 * 1024 * 1024
 STATES = {"ready", "incomplete", "unsupported", "unavailable", "unstable"}
 
 
-def executable(path, expected_sha):
-    if (not path.is_absolute() or path.name not in {"inta-agent", "inta-agent.exe"}
+def executable(path, expected_sha, names=frozenset({"inta-agent", "inta-agent.exe"})):
+    if (not path.is_absolute() or path.name not in names
             or path.is_symlink() or not path.is_file() or not re.fullmatch(r"[a-f0-9]{64}", expected_sha)):
-        raise ValueError("select the absolute path to an already verified INTA agent")
+        raise ValueError("select the absolute path to an already verified executable")
     remaining = MAX_BACKEND
     digest = hashlib.sha256()
     with path.open("rb") as stream:
         while chunk := stream.read(min(1024 * 1024, remaining + 1)):
             remaining -= len(chunk)
             if remaining < 0:
-                raise ValueError("INTA binary exceeds configured size bound")
+                raise ValueError("executable exceeds configured size bound")
             digest.update(chunk)
     if digest.hexdigest() != expected_sha:
-        raise ValueError("INTA agent does not match the approved release pin")
+        raise ValueError("executable does not match the approved release pin")
     return path
 
 
@@ -212,6 +214,102 @@ def storage_preview(path, expected_sha, folder, days, entry_limit):
     return {"status": "incomplete" if report["partial"] else "ready", **report}
 
 
+MAX_LOCAL_HASH = 32 * 1024 * 1024
+
+
+def open_windows_readonly(path):
+    import ctypes
+    from ctypes import wintypes
+    import msvcrt
+    api = ctypes.WinDLL("kernel32", use_last_error=True)
+    open_file = api.CreateFileW
+    open_file.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD, wintypes.LPVOID,
+                          wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+    open_file.restype = wintypes.HANDLE
+    query = api.GetFileInformationByHandleEx
+    query.argtypes = [wintypes.HANDLE, ctypes.c_int, wintypes.LPVOID, wintypes.DWORD]
+    query.restype = wintypes.BOOL
+    api.CloseHandle.argtypes = [wintypes.HANDLE]
+    api.CloseHandle.restype = wintypes.BOOL
+    # GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, FILE_FLAG_OPEN_REPARSE_POINT.
+    # Refuse concurrent writers/deletion and do not traverse a final reparse point.
+    handle = open_file(str(path), 0x80000000, 1, None, 3, 0x00200000, None)
+    if handle == ctypes.c_void_p(-1).value:
+        raise ctypes.WinError(ctypes.get_last_error())
+    try:
+        attributes = (wintypes.DWORD * 2)()
+        if not query(handle, 9, ctypes.byref(attributes), ctypes.sizeof(attributes)):  # FileAttributeTagInfo
+            raise ctypes.WinError(ctypes.get_last_error())
+        if attributes[0] & (0x10 | 0x40 | 0x400):  # directory, device or reparse point
+            raise ValueError("selected Windows handle is not an ordinary file")
+        fd = msvcrt.open_osfhandle(handle, os.O_RDONLY | os.O_BINARY)
+    except BaseException:
+        api.CloseHandle(handle)
+        raise
+    return fd
+
+
+def regular_snapshot(path):
+    if not path.is_absolute() or path.parent == path or ".." in path.parts:
+        raise ValueError("choose an absolute file path on a local volume")
+    if os.name == "nt":
+        if re.fullmatch(r"[a-zA-Z]:", path.drive) is None or any(":" in p for p in path.parts[1:]):
+            raise ValueError("Windows network paths, device paths and streams are out of scope")
+        import ctypes
+        drive_type = ctypes.windll.kernel32.GetDriveTypeW
+        drive_type.argtypes, drive_type.restype = [ctypes.c_wchar_p], ctypes.c_uint
+        if drive_type(path.anchor) not in {2, 3, 5, 6}:
+            raise ValueError("choose a file on a known local Windows volume")
+    for directory in reversed(path.parents):
+        parent = directory.lstat()
+        if not stat.S_ISDIR(parent.st_mode) or getattr(parent, "st_file_attributes", 0) & 0x400:
+            raise ValueError("symlink or reparse folder is out of scope")
+    item = path.lstat()
+    if not stat.S_ISREG(item.st_mode) or getattr(item, "st_file_attributes", 0) & 0x400:
+        raise ValueError("choose a regular file, not a symlink or reparse point")
+    if item.st_size > MAX_LOCAL_HASH:
+        raise ValueError("file exceeds the local hash preview budget")
+    # O_NONBLOCK keeps a racing FIFO from blocking a POSIX opener; the opened
+    # handle must still be a regular file and match the original identity.
+    flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+    fd = open_windows_readonly(path) if os.name == "nt" else os.open(path, flags)
+    with os.fdopen(fd, "rb") as stream:
+        opened = os.fstat(stream.fileno())
+        snapshot_key = lambda st: (st.st_dev, st.st_ino, st.st_size, st.st_mtime_ns, st.st_ctime_ns)
+        # Windows path and descriptor metadata use different system APIs;
+        # compare only within each source, and bind the actual read to a
+        # no-follow handle that refuses concurrent writer/delete sharing.
+        path_matches = (snapshot_key(path.lstat()) == snapshot_key(item) and opened.st_size == item.st_size
+                        if os.name == "nt" else snapshot_key(opened) == snapshot_key(item))
+        if not stat.S_ISREG(opened.st_mode) or not path_matches:
+            raise ValueError("file changed before it was opened")
+        data = stream.read(MAX_LOCAL_HASH + 1)
+        if (len(data) != item.st_size or snapshot_key(os.fstat(stream.fileno())) != snapshot_key(opened)
+                or (os.name == "nt" and snapshot_key(path.lstat()) != snapshot_key(item))):
+            raise ValueError("file changed while it was read")
+    return data
+
+
+def rclone_local_sha256(binary_path, expected_pin, file_path, expected_digest=None):
+    if expected_digest is not None and not re.fullmatch(r"[a-f0-9]{64}", expected_digest):
+        raise ValueError("invalid expected digest")
+    binary = executable(binary_path, expected_pin, frozenset({"rclone", "rclone.exe"}))
+    data = regular_snapshot(file_path)
+    # No name/path/remote arguments and no inherited rclone/proxy settings.
+    # stdin is the only backend; the OS null config avoids loading user accounts.
+    env = {k: os.environ[k] for k in ("SystemRoot", "WINDIR") if k in os.environ}
+    cmd = [str(binary), "--config=", "hashsum", "sha256", "-"]
+    run = subprocess.run(cmd, input=data, capture_output=True, check=True, shell=False,
+                         timeout=30, cwd=binary.parent, env=env)
+    match = re.fullmatch(rb"([a-f0-9]{64})[ \t]+-?\r?\n", run.stdout)
+    if not match:
+        raise ValueError("unexpected rclone output")
+    digest = match[1].decode("ascii")
+    return {"status": "ready" if expected_digest in {None,digest} else "mismatch",
+            "scope": "rclone-local-stdin", "sha256": digest, "bytes": len(data), "readOnly": True,
+            "matchesExpected": None if expected_digest is None else expected_digest == digest}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help="output a machine-readable JSON result (also the default)")
@@ -228,9 +326,16 @@ def main(argv=None):
     for operation in (power, startup, programs, storage):
         operation.add_argument("--agent-binary", type=pathlib.Path, required=True)
         operation.add_argument("--agent-sha256", required=True)
+    rclone = sub.add_parser("rclone-sha256", help="read only: use pinned rclone to hash a single local file")
+    rclone.add_argument("--rclone-binary", type=pathlib.Path, required=True)
+    rclone.add_argument("--rclone-sha256", required=True)
+    rclone.add_argument("--file", type=pathlib.Path, required=True)
+    rclone.add_argument("--expect-sha256")
     args = parser.parse_args(argv)
     try:
-        if args.operation == "storage-preview":
+        if args.operation == "rclone-sha256":
+            result = rclone_local_sha256(args.rclone_binary, args.rclone_sha256, args.file, args.expect_sha256)
+        elif args.operation == "storage-preview":
             result = storage_preview(args.agent_binary, args.agent_sha256, args.folder,
                                      args.minimum_age_days, args.entry_limit)
         elif args.operation == "startup-inventory":
