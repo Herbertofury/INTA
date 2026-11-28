@@ -6,6 +6,7 @@ on:
       - agent/INTA.RepairQueue/**
       - agent/INTA.LocalAgent/PowerPlans.cs
       - tests/INTA.RepairQueue.Proof/**
+      - tests/INTA.SecurityCheckup.Proof/**
 permissions:
   contents: read
 jobs:
@@ -39,3 +40,5 @@ jobs:
           dotnet run --project tests/INTA.RepairQueue.Proof/INTA.RepairQueue.Proof.csproj
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           if ($IsWindows -and (ActivePowerGuid) -ne $before) { throw 'Read-only pilot changed the active plan' }
+      - name: Verify pure Security Checkup preview and approval binding
+        run: dotnet run --project tests/INTA.SecurityCheckup.Proof/INTA.SecurityCheckup.Proof.csproj
