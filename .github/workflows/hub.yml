@@ -36,6 +36,7 @@ jobs:
           node --check portal/app.js
           node --check portal/rogue-game.js
           node --check portal/card-game.js
+          node --check portal/training-audio.js
           node --test tests/rogue_game.test.cjs tests/test_packet_duel.cjs
           python3 scripts/build-hub.py
           python3 scripts/check-wiki.py
@@ -47,6 +48,7 @@ jobs:
           python3 scripts/check-online-runtime.py --html site/index.html --output reports/online-runtime
           python3 tests/browser_rogue_game.py --screenshot reports/online-runtime/defense-boss-report.png
           python3 tests/browser_packet_duel.py --html site/index.html
+          python3 tests/browser_training_feedback.py --html site/index.html
           mkdir -p site/validation
           cp -R reports/online-runtime site/validation/online-runtime
       - name: Preserve browser verification evidence
