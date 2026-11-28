@@ -26,7 +26,13 @@ class BrandContract(unittest.TestCase):
     def test_pwa_uses_application_art_and_verified_cache(self):
         site = ROOT / "site"
         manifest = json.loads((site / "manifest.webmanifest").read_text())
-        self.assertIn("inta-touch-icon.png", (site / "sw.js").read_text())
+        service_worker = (site / "sw.js").read_text()
+        self.assertIn("inta-touch-icon.png", service_worker)
+        sources = brand.canonical_inputs(ROOT)
+        self.assertIn("inta-shell-" + brand.brand_cache_version(sources), service_worker)
+        for name in sources:
+            self.assertNotEqual(brand.brand_cache_version(sources),
+                                brand.brand_cache_version({**sources, name: b"different"}))
         self.assertTrue(any(item["src"] == "./inta-touch-icon.png" and item["sizes"] == "192x192"
                             for item in manifest["icons"]))
         self.assertEqual((site / "inta-touch-icon.png").read_bytes(),

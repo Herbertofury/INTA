@@ -6,6 +6,8 @@ import hashlib
 import io
 import json
 import struct
+import subprocess
+import sys
 import zipfile
 from pathlib import Path
 
@@ -76,6 +78,13 @@ def canonical_inputs(root):
     return files
 
 
+def brand_cache_version(files):
+    seal = hashlib.sha256()
+    for name, data in sorted(files.items()):
+        seal.update(name.encode("ascii") + b"\0" + hashlib.sha256(data).digest())
+    return seal.hexdigest()[:16]
+
+
 def pack_inputs(path):
     paths = {f"{ASSETS}/application-{size}.png": f"Application/PNG/INTA-Application-{size}x{size}.png" for size in APP_SIZES}
     paths[f"{ASSETS}/heritage-{HERITAGE_SIZE}.png"] = f"Heritage/PNG/INTA-Heritage-{HERITAGE_SIZE}x{HERITAGE_SIZE}.png"
@@ -136,6 +145,33 @@ def msix_assets(files, root, check):
     return {**logos, MSIX_LOCK: (json.dumps(seal, indent=2, sort_keys=True) + "\n").encode("ascii")}
 
 
+def web_brand_errors(root, files):
+    site = root / "site"
+    app192 = files[f"{ASSETS}/application-192.png"]
+    app512 = files[f"{ASSETS}/application-512.png"]
+    heritage = files[f"{ASSETS}/heritage-{HERITAGE_SIZE}.png"]
+    ico = b"data:image/x-icon;base64," + base64.b64encode(files[ICO])
+    wanted = {
+        "inta-touch-icon.png": app192,
+        "inta-app-icon.svg": app_svg(app512, 512),
+    }
+    bad = [name for name, data in wanted.items() if not (site / name).is_file()
+           or (site / name).read_bytes() != data]
+    html = site / "index.html"
+    expected_html = (
+        b'<link rel="icon" type="image/x-icon" href="' + ico + b'">',
+        b'<img class="brand-mark" src="' + png_uri(heritage).encode("ascii") + b'"',
+    )
+    page = html.read_bytes() if html.is_file() else b""
+    if not all(token in page for token in expected_html):
+        bad.append(html.name)
+    worker = site / "sw.js"
+    cache = f'const CACHE = "inta-shell-{brand_cache_version(files)}";'.encode("ascii")
+    if not worker.is_file() or cache not in worker.read_bytes():
+        bad.append(worker.name)
+    return ["site/" + name for name in bad]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
@@ -147,6 +183,7 @@ def main():
     outputs = {**generated(ROOT, files), **msix_assets(files, ROOT, args.check)}
     if args.check:
         errors = [name for name, data in outputs.items() if not (ROOT / name).exists() or (ROOT / name).read_bytes() != data]
+        errors.extend(web_brand_errors(ROOT, files))
         if errors:
             parser.exit(1, "Stale INTA branding: " + ", ".join(errors) + "\n")
     else:
@@ -154,6 +191,10 @@ def main():
             path = ROOT / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(data)
+        # Native resources are built independently, but the committed site
+        # and offline icons must refresh in the same authoring operation.
+        subprocess.run([sys.executable, "-B", str(ROOT / "scripts/build-hub.py")],
+                       cwd=ROOT, check=True)
     print("INTA Application and Heritage branding verified.")
 
 

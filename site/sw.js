@@ -1,4 +1,4 @@
-const CACHE = "inta-shell-440f277fd0ab9323";
+const CACHE = "inta-shell-b55b28c3dadbb16c";
 const SHELL = ["./", "./manifest.webmanifest", "./inta-app-icon.svg", "./inta-touch-icon.png"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));

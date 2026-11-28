@@ -1532,7 +1532,7 @@ self.addEventListener("fetch", event => {
   }).catch(() => caches.match(request)));
 });
 """
-    service_worker = service_worker.replace("BRAND_VERSION", hashlib.sha256(pwa_icon.encode()).hexdigest()[:16])
+    service_worker = service_worker.replace("BRAND_VERSION", brand_assets.brand_cache_version(brand_assets.canonical_inputs(ROOT)))
     outputs = {"site/news-digest.json": json.dumps(news_digest, ensure_ascii=False, indent=2) + "\n", "site/index.html": template, "site/.nojekyll": "", "site/catalog.json": data_json + "\n",
                "site/knowledge-health.json": json.dumps(health_report, ensure_ascii=False, indent=2) + "\n",
                "site/manifest.webmanifest": json.dumps(pwa_manifest, ensure_ascii=False, indent=2) + "\n",
