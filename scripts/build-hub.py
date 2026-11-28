@@ -1464,8 +1464,10 @@ def build_outputs() -> dict[str, str]:
     registry = extend_web_brand_links(registry, web_brands["brands"])
     brand_markdown = brand_module("brand_markdown.py")
     decorator = brand_markdown.BrandMarkdown(brands, linker)
+    cli_audit = brand_module("check-tool-cli.py")
+    cli_coverage = cli_audit.public_portal_coverage(tools, cli_audit.load(ROOT / "data/tool-cli-coverage.json"))
     data = {"tools": [{**tool, "reputation": reputation["tools"][tool["id"]]} for tool in tools], "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
-            "quickStart": quick_start, "toolAccess": tool_access["tools"], "jobWorkspaces": job_workspaces, "commandCenter": command_center, "updatesCenter": updates_center,
+            "quickStart": quick_start, "toolAccess": tool_access["tools"], "toolCliCoverage": cli_coverage, "jobWorkspaces": job_workspaces, "commandCenter": command_center, "updatesCenter": updates_center,
             "layout": layout, "fieldNotes": field_notes, "onlineTools": online_data, "brands": brands_module.portal_icons(brands), "news": news, "newsDigest": news_digest}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
