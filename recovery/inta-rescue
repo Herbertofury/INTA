@@ -1,0 +1,77 @@
+#!/usr/bin/python3
+"""An offline, attended disk-recovery workspace."""
+import subprocess
+import sys
+from pathlib import Path
+
+TITLE = "INTA Rescue Recovery"
+SECTIONS = {
+    "Inspect": [
+        ("Disk inventory", "Show device sizes, filesystems, mount points and read-only flags.", "List devices",
+         ("lsblk", "-e7", "-o", "NAME,SIZE,MODEL,FSTYPE,RO,MOUNTPOINTS"), True),
+        ("GSmartControl", "Inspect drive health and SMART attributes.", "Inspect health", ("gsmartcontrol",), False),
+    ],
+    "Recover files": [
+        ("TestDisk", "Inspect partitions and locate recoverable files. Review changes before writing.", "Open TestDisk",
+         ("sudo", "testdisk"), True),
+        ("PhotoRec", "Recover files by signature. Choose a destination on a different disk.", "Open PhotoRec",
+         ("sudo", "photorec"), True),
+        ("File manager", "Browse existing mounted filesystems and recovered files.", "Open files", ("thunar",), False),
+    ],
+    "Copy and repair": [
+        ("Clonezilla", "Create or restore a device image. Check the selected source and destination in the wizard.", "Open Clonezilla",
+         ("sudo", "clonezilla"), True),
+        ("GParted", "Open the partition editor for manual inspection or approved changes.", "Open editor", ("gparted",), False),
+        ("GNU ddrescue", "Read the installed imaging options and mapfile usage.", "Show usage", ("ddrescue", "--help"), True),
+    ],
+}
+
+
+def build_app():
+    import tkinter as tk
+    from tkinter import ttk
+    sys.path.insert(0, "/usr/share/inta")
+    from inta_brand_ui import BrandUI, ScrollableFrame
+    from inta_optics_ui import OpticalHeader
+    root = tk.Tk()
+    root.title(TITLE)
+    root.geometry(f"{min(1060, max(700, root.winfo_screenwidth()-50))}x{min(735, max(525,root.winfo_screenheight()-50))}")
+    root.minsize(690, 500)
+    brands = BrandUI(root, script_path=__file__)
+    root.inta_brands = brands
+    header = ttk.Frame(root, padding=(24,18,24,10))
+    header.pack(fill="x")
+    header.columnconfigure(0, weight=3)
+    header.columnconfigure(1, weight=2)
+    headings = ttk.Frame(header)
+    headings.grid(row=0,column=0,sticky="ew")
+    brands.text(headings, TITLE, font=("TkDefaultFont",23,"bold"), icon_size=34, fill="x")
+    brands.text(headings,"Offline file recovery and disk imaging", fill="x",pady=(4,8))
+    root.inta_optics = OpticalHeader(header)
+    root.inta_optics.grid(row=0,column=1,sticky="nsew",padx=(16,0))
+    tabs = ttk.Notebook(root)
+    tabs.pack(fill="both", expand=True, padx=24, pady=(2,20))
+
+    def launch(command, terminal):
+        argv = ["xfce4-terminal", "--hold", "--execute", *command] if terminal else list(command)
+        try:
+            subprocess.Popen(argv, cwd=Path.home(), start_new_session=True)
+        except OSError as error:
+            brands.showerror("Could not open recovery tool", str(error))
+
+    for name, rows in SECTIONS.items():
+        view = ScrollableFrame(tabs, padding=16)
+        tabs.add(view,text=name)
+        panel = view.content
+        panel.columnconfigure(1, weight=1)
+        for index,(tool,detail,label,command,terminal) in enumerate(rows):
+            y = index*2
+            brands.text(panel,tool,font=("TkDefaultFont",11,"bold"),icon_size=24).grid(row=y,column=0,sticky="w",padx=(0,12),pady=9)
+            brands.text(panel,detail).grid(row=y,column=1,sticky="ew",padx=(0,12),pady=9)
+            ttk.Button(panel,text=label,command=lambda c=command,t=terminal:launch(c,t)).grid(row=y,column=2,sticky="e")
+            ttk.Separator(panel).grid(row=y+1,column=0,columnspan=3,sticky="ew")
+    return root
+
+
+if __name__ == "__main__":
+    build_app().mainloop()
