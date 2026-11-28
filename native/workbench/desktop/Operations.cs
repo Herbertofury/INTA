@@ -75,6 +75,7 @@ namespace Inta.Desktop
                 Action(pageActions, "System inventory", delegate { OpenFeature("inventory"); });
                 Action(pageActions, "Capability diagnostics", delegate { OpenFeature("diagnostics"); });
                 Action(pageActions, "Mobile handoff", ExportMobileSnapshot);
+                Action(pageActions, "Review phone repair draft...", ReviewPhoneRepairDraft);
                 Action(pageActions, "Review cache files\u2026", OpenCleanupReview);
                 Action(pageActions, "Manage sign-in entries\u2026", OpenStartupReview);
                 SetRows(Diagnostics); return;
