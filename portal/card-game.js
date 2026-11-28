@@ -571,13 +571,16 @@
       const position = nodes.find(el => el.dataset.focus === preferred && !el.disabled) || nodes.find(el => el.dataset.focus === "turn-notice");
       position?.focus({preventScroll:true});
     }
-    function commit(move, keep = "") {
+    function commit(move, keep = "", event = null) {
       const next = transition(current.match, pool, move);
       if (!next) return;
       current.match = next;
       current.picked = null;
       current.confirm = false;
       finish();
+      const cue = next.phase === "ended" ? (next.winner === 0 ? "win" : next.winner === -1 ? "report" : "loss")
+        : move.type === "play" ? "card" : null;
+      if (cue && event) globalThis.INTATrainingAudio?.play(cue,event);
       paint(next.phase === "ended" ? "result" : keep || "turn-notice");
     }
     pane.addEventListener("click", event => {
@@ -592,21 +595,21 @@
       if (move === "swap" && current.match?.phase === "opening") {
         const i = Number(key); current.swaps.has(i) ? current.swaps.delete(i) : current.swaps.add(i); paint(focus); return;
       }
-      if (move === "deal") { commit({type:"opening",indices:[...current.swaps]}); return; }
+      if (move === "deal") { commit({type:"opening",indices:[...current.swaps]}, "", event); return; }
       if (current.match?.phase !== "playing") return;
       if (move === "play") {
         const i = Number(key), card = pool[current.match.sides[0].hand[i]];
         if (card?.effect === "hit") { current.picked = {type:"play",i}; paint("t-core"); }
-        else commit({type:"play",i}, focus);
+        else commit({type:"play",i}, focus, event);
       } else if (move === "select-attack") {
         current.picked = {type:"attack",uid:key};
         const legal = targetable(current.match, pool, "core") ? "core" :
           current.match.sides[1].board.find(unit => targetable(current.match, pool, unit.uid))?.uid;
         paint(legal ? `t-${legal}` : focus);
-      } else if (move === "target" && current.picked) commit({...current.picked,target:key});
+      } else if (move === "target" && current.picked) commit({...current.picked,target:key}, "", event);
       else if (move === "cancel") { current.picked = null; paint("turn-notice"); }
       else if (move === "ask-concede" || move === "back-concede") { current.confirm = move === "ask-concede"; paint(current.confirm ? "concede" : "turn-notice"); }
-      else if (["pass","power","concede"].includes(move)) commit({type:move},focus);
+      else if (["pass","power","concede"].includes(move)) commit({type:move},focus,event);
     });
     paint();
   }
