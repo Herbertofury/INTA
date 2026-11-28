@@ -79,3 +79,57 @@ jobs:
           desktop/INTA.Desktop/verify-native-ui.ps1 (Join-Path $package 'INTA.Desktop.exe')
           $summary = "Verified Windows x64 Desktop preview at commit $env:GITHUB_SHA`n`nExecutable SHA-256: $env:BUILD_SHA256`n"
           [IO.File]::AppendAllText($env:GITHUB_STEP_SUMMARY, $summary, [Text.UTF8Encoding]::new($false))
+
+  installer:
+    needs: [build, native-startup]
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          artifact-ids: ${{ needs.build.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/verified-preview
+      - name: Build twice, verify the installer and reject an unsigned distribution candidate
+        shell: pwsh
+        env:
+          EXE_SHA256: ${{ needs.build.outputs.sha256 }}
+        run: |
+          $tool = 'desktop/INTA.Desktop/msix/package.py'
+          python -B -m unittest discover -s desktop/INTA.Desktop/msix -p test_package.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $version = "0.1.$env:GITHUB_RUN_NUMBER.0"
+          $preview = Join-Path $env:RUNNER_TEMP 'verified-preview'
+          $file = 'INTA-Desktop-Preview-x64-unsigned.msix'
+          $null = New-Item -ItemType Directory -Path installer
+          $first = Join-Path $pwd "installer/$file"
+          $second = Join-Path $env:RUNNER_TEMP 'second-build.msix'
+          foreach ($output in $first,$second) {
+            python -B $tool build $preview $output --version $version --exe-sha256 $env:EXE_SHA256
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          $sha = (Get-FileHash -Algorithm SHA256 -LiteralPath $first).Hash.ToLowerInvariant()
+          if ((Get-FileHash -Algorithm SHA256 -LiteralPath $second).Hash -ne $sha) { throw 'MSIX rebuild differed.' }
+          python -B $tool verify $first --version $version --exe-sha256 $env:EXE_SHA256 --publisher-sha256 ('0' * 64)
+          if ($LASTEXITCODE -eq 0) { throw 'Unsigned MSIX passed the publisher gate.' }
+          [IO.File]::WriteAllText("$pwd/installer/SHA256SUMS", "$sha  $file`n", [Text.Encoding]::ASCII)
+          "INTA_MSIX_VERSION=$version" >> $env:GITHUB_ENV
+          "INTA_MSIX_SHA256=$sha" >> $env:GITHUB_ENV
+          exit 0
+      - name: Install, exercise and remove an ephemeral signed copy on the disposable runner
+        shell: powershell
+        env:
+          EXE_SHA256: ${{ needs.build.outputs.sha256 }}
+        run: |
+          desktop/INTA.Desktop/msix/test-install.ps1 installer/INTA-Desktop-Preview-x64-unsigned.msix $env:EXE_SHA256 $env:INTA_MSIX_VERSION
+          $summary = "Unsigned Desktop installer $env:INTA_MSIX_VERSION tested with a disposable certificate.`n`nMSIX SHA-256: $env:INTA_MSIX_SHA256`n"
+          [IO.File]::AppendAllText($env:GITHUB_STEP_SUMMARY, $summary, [Text.UTF8Encoding]::new($false))
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: inta-desktop-msix-unsigned-win-x64
+          path: installer/
+          if-no-files-found: error
+          retention-days: 30
