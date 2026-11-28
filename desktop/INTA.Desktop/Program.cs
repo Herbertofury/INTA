@@ -92,6 +92,7 @@ internal sealed class StartupWindow : Form
     };
     private StartupRow[] _all = [], _visible = [];
     private PowerWindow? _powerWindow;
+    private StorageWindow? _storageWindow;
     private int _completedScans;
     private int _sortColumn = -1;
     private bool _sortDescending;
@@ -129,13 +130,26 @@ internal sealed class StartupWindow : Form
             window.FormClosed += (_, _) => _powerWindow = null;
             window.Show(this);
         };
-        actions.Controls.AddRange([_filter, _refresh, _settings, powerPlans]);
+        var storage = new Button { Text = "&Storage preview", AccessibleName = "Open storage preview", AutoSize = true, TabIndex = 4 };
+        storage.Click += (_, _) =>
+        {
+            if (_storageWindow is { IsDisposed: false } existing)
+            {
+                existing.Activate();
+                return;
+            }
+            var window = new StorageWindow();
+            _storageWindow = window;
+            window.FormClosed += (_, _) => _storageWindow = null;
+            window.Show(this);
+        };
+        actions.Controls.AddRange([_filter, _refresh, _settings, powerPlans, storage]);
         layout.Controls.Add(actions, 0, 2);
         layout.Controls.Add(_grid, 0, 3);
         _status.Margin = new Padding(3, 12, 3, 0);
         layout.Controls.Add(_status, 0, 4);
         Controls.Add(layout);
-        StyleControls(powerPlans);
+        StyleControls(powerPlans, storage);
         AddColumn("Registration", 39);
         AddColumn("Scope", 14);
         AddColumn("Source", 24);
@@ -167,7 +181,7 @@ internal sealed class StartupWindow : Form
         Name = name, HeaderText = name, FillWeight = share, SortMode = DataGridViewColumnSortMode.Programmatic
     });
 
-    private void StyleControls(Button powerPlans)
+    private void StyleControls(Button powerPlans, Button storage)
     {
         _grid.RowTemplate.Height = 30;
         if (_contrast) return;
@@ -184,7 +198,7 @@ internal sealed class StartupWindow : Form
         _grid.ColumnHeadersDefaultCellStyle.ForeColor = foreground;
         _filter.BackColor = surface;
         _filter.ForeColor = foreground;
-        foreach (var button in new[] { _refresh, _settings, powerPlans })
+        foreach (var button in new[] { _refresh, _settings, powerPlans, storage })
         {
             button.FlatStyle = FlatStyle.Flat;
             button.UseVisualStyleBackColor = false;
