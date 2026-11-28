@@ -1102,7 +1102,6 @@
   }
   const projectResources = [
     { icon: 'layers', title: 'The INTA wiki', body: 'Browse the complete technician field guide on GitHub. Read a procedure, follow its sources, or propose an improvement.', label: 'Open the wiki', url: `${repo}/wiki` },
-    { icon: 'usb', title: 'Rescue & boot media', body: 'Find INTA Rescue releases and the Media Creator. Keep a recovery workspace ready for systems that need attention.', label: 'View releases', url: `${repo}/releases` },
     { icon: 'book', title: 'Athena research', body: 'Explore the research collection behind specialist additions to the toolkit. Bring proven findings into a practical workflow.', label: 'Explore Athena', url: 'https://github.com/Herbertofury/Athena' },
     { icon: 'github', title: 'Source repository', body: 'The repository holds the hub, guides, source catalog, and rescue tooling. Share a reproducible fix or suggest a useful tool.', label: 'Open the repository', url: repo },
     { icon: 'activity', title: 'Build & publication checks', body: 'Follow the repository workflows and review the result of each build. Release and source history remain easy to inspect.', label: 'View workflow runs', url: `${repo}/actions` },
@@ -1316,8 +1315,27 @@
     });
     const label=$('#updates-count');if(label)label.textContent=`${count} of ${updatesCenter.commands.length} maintenance actions`;
   }
+  function productDownloads() {
+    const products = array(data.productReleases);
+    if (!products.length) return '';
+    return `<section class="product-downloads" aria-labelledby="product-downloads-title">
+      <div class="section-title"><div><h2 id="product-downloads-title">Download INTA</h2>
+      <p>Choose the matching product. These are separate releases; file downloads need a connection.</p></div></div>
+      <div class="product-release-list">${products.map(product => `<article class="product-release" data-product-release="${esc(product.id)}">
+        <header><h3>${external(product.releaseUrl, esc(product.name))}</h3><span class="pill">${product.channel === 'stable' ? 'Stable' : 'Preview'}</span></header>
+        <p class="product-release-platform">${esc(product.platform)} · ${esc(product.version)}</p>
+        <p>${esc(product.summary)}</p>${product.requirements ? `<p>${esc(product.requirements)}</p>` : ''}
+        <p class="product-release-proof">${esc(product.tested)}</p>
+        <div class="product-release-actions" data-no-link>${array(product.actions).map((item, index) =>
+          external(item.url, `${index === 0 ? icon('download') : ''}${esc(item.label)}`, index === 0 ? 'button primary' : 'button ghost')).join('')}</div>
+      </article>`).join('')}</div>
+      <div class="product-release-history">${external(`${repo}/releases`, 'All releases and previous versions')}
+        ${external(`${repo}/issues/76`, 'Connected release status')}
+        ${external(`${repo}/blob/main/docs/rescue-scanner-release-review.md`, 'Rescue scanner release review')}</div>
+    </section>`;
+  }
   function resources() {
-    return heading('INTA references', 'Resources', 'Official references, project releases, research, and an offline copy of the workspace.') + `<div class="resource-list" role="list">${projectResources.map(resource => `<article class="resource-row" role="listitem"><span class="reference-icon">${icon(resource.icon)}</span><div><h2>${esc(resource.title)}</h2><p>${esc(resource.body)}</p></div>${resource.action ? `<button class="button ghost" data-download-offline>${esc(resource.label)} ${icon('download')}</button>` : external(resource.url, `${esc(resource.label)} ${icon('external')}`, 'button ghost')}</article>`).join('')}</div><section class="resource-note"><h2>Current sources, honest expectations.</h2><p>The source review date tells you when this collection was checked. It does not mean every program was installed or tested on every system. Official download pages are used so you can check the current release and compatibility before a job.</p><p><strong>Everyday picks</strong> are practical first choices. <strong>Specialist</strong> tools serve a more focused need. <strong>Evaluate first</strong> entries are candidates to test before they become part of a routine workflow.</p><p>Favorites and checklist progress stay in this browser. Use your team's private ticketing system for client records. ${storageAvailable ? 'Export a checklist when you need a portable handoff.' : 'Browser storage is unavailable in this session; export a checklist to preserve it.'}</p></section><section class="section-space"><div class="section-title"><div><h2>Official reference desk</h2><p>The primary references used by the job playbooks.</p></div></div><label class="input-wrap">${icon('search')}<span class="sr-only">Filter official references</span><input type="search" id="source-search" placeholder="Find a vendor, document, or reference…"></label><div class="filter-result"><span id="source-count" aria-live="polite"></span></div><div class="source-directory" id="source-directory"></div></section>`;
+    return heading('INTA references', 'Resources', 'Official references, project releases, research, and an offline copy of the workspace.') + productDownloads() + `<div class="resource-list" role="list">${projectResources.map(resource => `<article class="resource-row" role="listitem"><span class="reference-icon">${icon(resource.icon)}</span><div><h2>${esc(resource.title)}</h2><p>${esc(resource.body)}</p></div>${resource.action ? `<button class="button ghost" data-download-offline>${esc(resource.label)} ${icon('download')}</button>` : external(resource.url, `${esc(resource.label)} ${icon('external')}`, 'button ghost')}</article>`).join('')}</div><section class="resource-note"><h2>Current sources, honest expectations.</h2><p>The source review date tells you when this collection was checked. It does not mean every program was installed or tested on every system. Official download pages are used so you can check the current release and compatibility before a job.</p><p><strong>Everyday picks</strong> are practical first choices. <strong>Specialist</strong> tools serve a more focused need. <strong>Evaluate first</strong> entries are candidates to test before they become part of a routine workflow.</p><p>Favorites and checklist progress stay in this browser. Use your team's private ticketing system for client records. ${storageAvailable ? 'Export a checklist when you need a portable handoff.' : 'Browser storage is unavailable in this session; export a checklist to preserve it.'}</p></section><section class="section-space"><div class="section-title"><div><h2>Official reference desk</h2><p>The primary references used by the job playbooks.</p></div></div><label class="input-wrap">${icon('search')}<span class="sr-only">Filter official references</span><input type="search" id="source-search" placeholder="Find a vendor, document, or reference…"></label><div class="filter-result"><span id="source-count" aria-live="polite"></span></div><div class="source-directory" id="source-directory"></div></section>`;
   }
   const allSources = (() => {
     const unique = new Map();
