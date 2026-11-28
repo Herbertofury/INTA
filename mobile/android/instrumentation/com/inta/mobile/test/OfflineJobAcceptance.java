@@ -51,8 +51,38 @@ public final class OfflineJobAcceptance extends Instrumentation {
                 find(activity, "1. Apply a repair · Review printer queue", false);
                 find(activity, "2. Run a malware scan · Scan the serviced PC", false);
                 find(activity, "Put steps in order before picking and approving a PC. Nothing runs from this draft.", false);
+            } else if ("invoice".equals(stage)) {
+                find(activity, "Completed. Review recorded time before billing.", false);
+                find(activity, "Save invoice draft", true);
+                long frozen=seconds(activity);
+                runOnMainSync(() -> {
+                    View root=activity.getWindow().getDecorView();
+                    EditText rate=(EditText)byDescription(root, "Hourly rate (USD)");
+                    EditText minutes=(EditText)byDescription(root, "Billable minutes (optional)");
+                    require(rate != null && minutes != null && rate.isShown(), "billing form missing");
+                    rate.setText("95.00");
+                    minutes.setText("5");
+                });
+                press(activity, "Business billing (unchecked: residential)");
+                find(activity, "Unsaved preview · Draft subtotal US$7.92", false);
+                press(activity, "Save invoice draft");
+                find(activity, "Saved on this phone · Draft subtotal US$7.92 · 5 billable min", false);
+                require(seconds(activity)==frozen, "billing cannot rewrite recorded time");
+            } else if ("invoice-verify".equals(stage)) {
+                find(activity, "Saved on this phone · Draft subtotal US$7.92 · 5 billable min", false);
+                runOnMainSync(() -> {
+                    View root=activity.getWindow().getDecorView();
+                    EditText rate=(EditText)byDescription(root, "Hourly rate (USD)");
+                    EditText minutes=(EditText)byDescription(root, "Billable minutes (optional)");
+                    CheckBox profile=(CheckBox)search(root, "Business billing (unchecked: residential)", false);
+                    require(rate != null && "95.00".contentEquals(rate.getText()), "rate did not survive cold launch");
+                    require(minutes != null && "5".contentEquals(minutes.getText()), "manual minutes did not survive");
+                    require(profile != null && profile.isChecked(), "business category did not survive");
+                });
             } else if ("start".equals(stage)) {
                 find(activity, "Paused on this phone.", false);
+                TextView billing=find(activity,"Invoice draft",false);
+                runOnMainSync(() -> require(!billing.isShown(),"unfinished jobs must not show billing"));
                 press(activity, "Start timer");
                 find(activity, "Pause timer", true);
                 press(activity, "Confirm scope and back up");

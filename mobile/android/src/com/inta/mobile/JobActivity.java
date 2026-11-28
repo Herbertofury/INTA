@@ -12,10 +12,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.View;
 import android.provider.Settings;
 import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -40,6 +46,12 @@ public final class JobActivity extends Activity {
     private final CheckBox[] checks = new CheckBox[STEPS.length];
     private TextView clock, detail, progress;
     private Button timer, complete;
+    private LinearLayout billing;
+    private EditText rate, billableMinutes;
+    private CheckBox business;
+    private TextView billingStatus;
+    private Button saveInvoice;
+    private boolean billingLoaded, billingPending, billingDamaged;
     private JobStore store;
     private JobTimer state;
     private int boot;
@@ -104,6 +116,26 @@ public final class JobActivity extends Activity {
                 .setMessage("The timer will stop. Unchecked steps remain recorded as incomplete.")
                 .setNegativeButton("Keep working", null).setPositiveButton("Finish job", (dialog, which) -> finishJob()).show();
         });
+        billing = card(body);
+        label(billing, "Invoice draft", 22, WHITE, true);
+        label(billing, "Uses recorded time unless you override it. Nothing is sent or charged.", 14, MUTED, false);
+        rate = billingField(billing, "Hourly rate (USD)", InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        billableMinutes = billingField(billing, "Billable minutes (optional)", InputType.TYPE_CLASS_NUMBER);
+        business = new CheckBox(this);
+        business.setText("Business billing (unchecked: residential)");
+        business.setTextColor(WHITE);
+        business.setMinimumHeight(dp(48));
+        billing.addView(business);
+        saveInvoice = button(billing, "Save invoice draft", this::saveBilling);
+        billingStatus = label(billing, "Enter your rate to calculate the subtotal.", 14, ACCENT, true);
+        TextWatcher preview = new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence text, int start, int count, int after) { }
+            @Override public void onTextChanged(CharSequence text, int start, int before, int count) { refreshBilling(); }
+            @Override public void afterTextChanged(Editable text) { }
+        };
+        rate.addTextChangedListener(preview);
+        billableMinutes.addTextChangedListener(preview);
+        business.setOnCheckedChangeListener((button, enabled) -> refreshBilling());
         button(body, "Draft a repair plan", () -> startActivity(new Intent(this, RepairDraftActivity.class)));
         label(body, "This job stays on this phone. No sync, remote access, or invoice is sent.", 13, MUTED, false);
         setContentView(scroll);
@@ -202,8 +234,108 @@ public final class JobActivity extends Activity {
                 : "Running, including while this screen is closed.")
             : state.interrupted ? "The clock changed. Unverified time was not counted."
             : boot < 0 ? "Cannot verify the phone clock. Checklist remains available." : "Paused on this phone.");
+        if (billing != null) {
+            billing.setVisibility(finished ? View.VISIBLE : View.GONE);
+            if (finished && !billingLoaded && !billingPending) loadBilling(state);
+        }
         ui.removeCallbacks(tick);
         if (visible && running) ui.postDelayed(tick, 1000);
+    }
+
+    private EditText billingField(LinearLayout card, String field, int inputType) {
+        label(card, field, 14, MUTED, true);
+        EditText value = new EditText(this);
+        value.setContentDescription(field);
+        value.setSingleLine();
+        value.setTextColor(WHITE);
+        value.setInputType(inputType);
+        value.setFilters(new InputFilter[] { new InputFilter.LengthFilter(10) });
+        card.addView(value, new LinearLayout.LayoutParams(-1, -2));
+        return value;
+    }
+
+    private java.nio.file.Path invoiceFile() {
+        return getNoBackupFilesDir().toPath().resolve("offline-invoice-draft.v1");
+    }
+
+    private void billingEnabled(boolean enabled) {
+        rate.setEnabled(enabled);
+        billableMinutes.setEnabled(enabled);
+        business.setEnabled(enabled);
+        saveInvoice.setEnabled(enabled);
+    }
+
+    private void loadBilling(JobTimer completed) {
+        billingPending = true;
+        billingEnabled(false);
+        DISK.execute(() -> {
+            InvoiceDraft found = null;
+            boolean malformed = false;
+            try { found = InvoiceDraft.read(invoiceFile(), completed); }
+            catch (IOException failure) { malformed = true; }
+            InvoiceDraft draft = found;
+            boolean damaged = malformed;
+            ui.post(() -> {
+                if (isDestroyed()) return;
+                billingLoaded = true;
+                billingDamaged = damaged;
+                if (damaged) billingStatus.setText("Previous invoice draft could not be read. It was not replaced.");
+                if (draft != null) {
+                    rate.setText(draft.hourlyDollars());
+                    if (draft.minutes >= 0) billableMinutes.setText(Long.toString(draft.minutes));
+                    business.setChecked(draft.profile == InvoiceDraft.Profile.BUSINESS);
+                    showSavedBilling(draft);
+                }
+                billingPending = false;
+                billingEnabled(!damaged);
+            });
+        });
+    }
+
+    private InvoiceDraft billingDraftFromFields() {
+        return InvoiceDraft.prepare(state, rate.getText().toString(), billableMinutes.getText().toString(),
+                business.isChecked() ? InvoiceDraft.Profile.BUSINESS : InvoiceDraft.Profile.RESIDENTIAL);
+    }
+
+    private void refreshBilling() {
+        if (billingPending || billingDamaged || !billingLoaded || state == null) return;
+        try {
+            billingStatus.setText("Unsaved preview · Draft subtotal US$" + billingDraftFromFields().subtotalDollars());
+        } catch (IllegalArgumentException invalid) {
+            billingStatus.setText(invalid.getMessage());
+        }
+    }
+
+    private void saveBilling() {
+        if (billingPending || billingDamaged || !billingLoaded || state == null) return;
+        final InvoiceDraft draft;
+        try {
+            draft = billingDraftFromFields();
+        } catch (IllegalArgumentException invalid) {
+            billingStatus.setText(invalid.getMessage());
+            return;
+        }
+        billingPending = true;
+        billingEnabled(false);
+        billingStatus.setText("Saving invoice draft locally…");
+        DISK.execute(() -> {
+            boolean saved = false;
+            try { draft.save(invoiceFile()); saved = true; }
+            catch (IOException failure) { /* Preserve UI values for another explicit save. */ }
+            boolean ok = saved;
+            ui.post(() -> {
+                if (isDestroyed()) return;
+                billingPending = false;
+                billingEnabled(true);
+                if (ok) showSavedBilling(draft);
+                else billingStatus.setText("Could not save. No new draft confirmed.");
+            });
+        });
+    }
+
+    private void showSavedBilling(InvoiceDraft draft) {
+        billingStatus.setText("Saved on this phone · Draft subtotal US$" + draft.subtotalDollars()
+                + (draft.minutes < 0 ? " · Recorded time" : " · " + draft.minutes + " billable min"));
     }
 
     private void showClock() {

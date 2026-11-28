@@ -45,3 +45,11 @@ them. The list is saved separately from the current timer, survives a cold
 launch, and stays on this phone. A draft is never a command, approved job,
 or remote executable. Pairing, exact tool selection, signing and dispatch
 must be completed separately before INTA can run it on a PC.
+
+A completed local job shows an offline USD **Invoice draft**. It uses the
+recorded duration, or explicitly entered whole billable minutes; original
+time stays untouched. The technician selects residential or business and
+enters a rate. The subtotal previews immediately, rounds once to cents,
+and saves only on **Save invoice draft**. It survives process restart.
+There is no guessed rate, tax, invoice numbering, payment, sending, or
+sync in this preview. This remains the app's existing single-job mode.
