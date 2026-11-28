@@ -1473,7 +1473,13 @@
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
     $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
     $('#breadcrumb').innerHTML = `Workspace <span>/</span> <strong>${esc(names[route.name] || 'Technician home')}</strong>`;
-    if (route.name === 'home') app.innerHTML = home();
+    if (route.name === 'home') {
+      app.innerHTML = home();
+      const art = document.getElementById('inta-home-brand');
+      const title = app.querySelector('.page-heading');
+      title.classList.add('home-page-heading');
+      title.prepend(art.content.cloneNode(true));
+    }
     else if (route.name === 'online') app.innerHTML = online(route.params);
     else if (route.name === 'checklist') app.innerHTML = checklistPage();
     else if (route.name === 'news') app.innerHTML = newsPage();

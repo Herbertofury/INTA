@@ -20,7 +20,7 @@
   <div class="app-shell">
     <aside class="sidebar" id="sidebar" aria-label="Main navigation">
       <a class="brand" href="#home" aria-label="INTA home">
-        <img class="brand-mark" src="{{HERITAGE}}" alt="" width="36" height="36">
+        <img class="brand-mark" src="{{APPLICATION_MARK}}" alt="" width="36" height="36">
         <span class="brand-wordmark">INTA<span>COMPUTER SERVICES</span></span>
       </a>
       <div class="workspace-label">Workspace</div>
@@ -70,6 +70,7 @@
   <button id="nav-backdrop" class="nav-backdrop" aria-label="Close navigation" hidden></button>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   <noscript><div class="noscript">This interactive workspace needs JavaScript. The complete guides are also available in the <a href="https://github.com/Herbertofury/INTA/wiki">INTA GitHub wiki</a>.</div></noscript>
+  <template id="inta-home-brand"><img class="home-heritage-mark" src="{{HERITAGE}}" alt="" width="64" height="64"></template>
   <script id="inta-data">{{DATA}}</script>
   <script id="inta-app">{{APP}}</script>
   <script>if ("serviceWorker" in navigator && location.protocol !== "file:") { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(() => {})); }</script>
