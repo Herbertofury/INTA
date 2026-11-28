@@ -7,13 +7,22 @@ import queue
 import re
 import shutil
 import subprocess
-import tempfile
+import sys
 import threading
 import urllib.request
 import webbrowser
 import zipimport
 from contextlib import closing
 from pathlib import Path
+
+if isinstance(__loader__, zipimport.zipimporter):
+    import rescue_products as products
+else:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    try:
+        from native.workbench.media import rescue_products as products
+    finally:
+        sys.path.pop(0)
 
 REPO = "Herbertofury/INTA"
 RELEASE_API = f"https://api.github.com/repos/{REPO}/releases/tags/"
@@ -25,37 +34,8 @@ MAX_PART_SIZE = 1024 * 1024 * 1024
 MAX_MANIFEST_SIZE = 1024 * 1024
 
 
-def expected_digest(data):
-    pattern = rf"([0-9a-f]{{64}}) [ *]{re.escape(ISO)}"
-    matches = [match.group(1) for line in data.splitlines()
-               if (match := re.fullmatch(pattern, line))]
-    if len(matches) != 1:
-        raise ValueError(f"Expected exactly one checksum for {ISO}.")
-    return matches[0]
-
-
-def stream_verified(source, target, expected, expected_size=None):
-    digest = hashlib.sha256()
-    total = 0
-    with tempfile.NamedTemporaryFile(dir=target.parent, prefix=".inta-", delete=False) as output:
-        partial = Path(output.name)
-        try:
-            while chunk := source.read(1024 * 1024):
-                total += len(chunk)
-                if expected_size is not None and total > expected_size:
-                    raise ValueError("The download exceeds the release asset size.")
-                digest.update(chunk)
-                output.write(chunk)
-            if digest.hexdigest() != expected or (expected_size is not None and total != expected_size):
-                raise ValueError("Verification failed. Any previous ISO is intact.")
-            output.flush()
-            os.fsync(output.fileno())
-            output.close()
-            partial.replace(target)
-        finally:
-            if partial.exists():
-                output.close()
-                partial.unlink()
+expected_digest = products.expected_digest
+stream_verified = products.stream_verified
 
 
 def release_asset(assets, name):
@@ -153,30 +133,25 @@ class _VerifiedPartsReader:
                 raise ValueError(f"Verification failed for {self.name}. Any previous ISO is intact.")
 
 
-def download_channel():
-    name = "data/rescue-download-channel.json"
+def download_channel(edition=products.FULL):
+    name = "data/" + products.CHANNELS[edition]
     if isinstance(__loader__, zipimport.zipimporter):
         data = __loader__.get_data("inta-resources/" + name)
     else:
-        data = (Path(__file__).resolve().parents[1] / name).read_bytes()
-    return validated_channel(json.loads(data, object_pairs_hook=_unique_manifest_object))
+        with (Path(__file__).resolve().parents[1] / name).open("rb") as stream:
+            data = stream.read(8193)
+    return products.decode(data, edition)
 
 
-def validated_channel(channel):
-    if (not isinstance(channel, dict) or type(channel.get("schemaVersion")) is not int or channel["schemaVersion"] != 1
-            or not re.fullmatch(r"rescue-[0-9]+\.[0-9]+", str(channel.get("tag", "")))
-            or not re.fullmatch(r"[0-9a-f]{64}", str(channel.get("sha256", "")))
-            or channel.get("qualification") not in ("historical-recovery", "qualified")):
-        raise ValueError("The bundled Rescue download channel is invalid.")
-    warning = channel.get("scannerWarning")
-    if channel["qualification"] == "historical-recovery" and (
-            not isinstance(warning, str) or not 1 <= len(warning.strip()) <= 1500):
-        raise ValueError("The historical Rescue channel requires a scanner warning.")
-    return channel
+validated_channel = products.validate
 
 
-def download_release(folder, channel=None):
-    channel = download_channel() if channel is None else validated_channel(channel)
+def download_release(folder, channel=None, edition=products.FULL):
+    channel = download_channel(edition) if channel is None else validated_channel(channel, edition)
+    if edition == products.RECOVERY:
+        if channel != download_channel(edition):
+            raise ValueError("The recovery-only selection differs from the bundled product pin.")
+        return products.fetch_product(folder, channel, edition)
     tag = channel["tag"]
     with urllib.request.urlopen(RELEASE_API + tag, timeout=30) as reply:
         release = json.load(reply)
@@ -220,19 +195,30 @@ def download_release(folder, channel=None):
 
 
 def copy_to_ventoy(source, volume):
-    expected = expected_digest((source.parent / SUMS).read_text(encoding="ascii"))
+    filename = products.RECOVERY_ISO if source.name == products.RECOVERY_ISO else ISO
+    with (source.parent / SUMS).open("rb") as manifest:
+        data = manifest.read(65537)
+    if len(data) > 65536:
+        raise ValueError("Checksum manifest exceeds 64 KiB.")
+    expected = expected_digest(data.decode("ascii"), filename)
+    check = None
+    if filename == products.RECOVERY_ISO:
+        channel = download_channel(products.RECOVERY)
+        if expected != channel["sha256"]:
+            raise ValueError("The checksum differs from the recovery-only product pin.")
+        def check(path):
+            products.readback(path, channel, products.RECOVERY)
     if not os.path.ismount(volume):
         raise ValueError("Select the root of the mounted Ventoy data volume.")
     if shutil.disk_usage(volume).free < source.stat().st_size:
         raise ValueError("The Ventoy volume has insufficient free space for a safe replacement.")
     with source.open("rb") as image:
-        stream_verified(image, volume / ISO, expected, source.stat().st_size)
+        stream_verified(image, volume / filename, expected, source.stat().st_size, check)
 
 
 def build_app():
     import tkinter as tk
     from tkinter import filedialog, ttk
-    import sys
     # Resolve alongside the source/portable script, independent of current cwd.
     source_folder = Path(__file__).resolve().parent
     if str(source_folder) not in sys.path:
@@ -290,18 +276,19 @@ def build_app():
 
         def worker():
             try:
-                function(*arguments)
+                result = function(*arguments)
             except Exception as error:
                 responses.put(("", str(error)))
             else:
-                responses.put(("ISO ready · SHA-256 checksum matched", None))
+                location = f"Verified ISO ready at {result}" if isinstance(result, Path) else "ISO ready · SHA-256 checksum matched"
+                responses.put((location, None))
 
         threading.Thread(target=worker, daemon=True).start()
         root.after(150, collect)
 
-    def download():
+    def download(edition=products.FULL):
         try:
-            channel = download_channel()
+            channel = download_channel(edition)
         except (OSError, ValueError, KeyError) as error:
             messagebox.showerror("Rescue download unavailable", str(error))
             return
@@ -310,7 +297,7 @@ def build_app():
             return
         folder = filedialog.askdirectory(title="Choose where to save the Rescue ISO")
         if folder:
-            run("Downloading and checking the release checksum", download_release, Path(folder), channel)
+            run("Downloading and checking the release checksum", download_release, Path(folder), channel, edition)
 
     def ventoy():
         source = filedialog.askopenfilename(
@@ -319,7 +306,8 @@ def build_app():
         if not source:
             return
         target = filedialog.askdirectory(title="Choose the mounted Ventoy data volume")
-        if target and messagebox.askokcancel("Copy to Ventoy", f"Install or replace {ISO} on {target}?"):
+        filename = products.RECOVERY_ISO if Path(source).name == products.RECOVERY_ISO else ISO
+        if target and messagebox.askokcancel("Copy to Ventoy", f"Install or replace {filename} on {target}?"):
             run("Verifying and copying ISO", copy_to_ventoy, Path(source), Path(target))
 
     def official_tool(tool):
@@ -366,6 +354,7 @@ def build_app():
             root.destroy()
 
     actions = [
+        ("INTA Rescue Recovery", "Recover files, clone disks and repair filesystems offline. This edition has no malware scanner.", "Download Recovery", lambda: download(products.RECOVERY)),
         ("INTA Rescue", "Download the image selected by the bundled Rescue channel and check its SHA-256.", "Download / update ISO", download),
         ("Ventoy", "Check the selected ISO against its adjacent SHA256SUMS and copy it to an existing Ventoy volume.", "Copy checked ISO", ventoy),
         ("Ventoy", "Open a downloaded executable, or get the official Ventoy download.", "Open / download", lambda: official_tool("Ventoy")),

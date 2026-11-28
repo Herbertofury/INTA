@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "tag": "rescue-recovery-20261128.1",
+  "qualification": "recovery-only",
+  "edition": "recovery-only-v1",
+  "filename": "inta-rescue-recovery-amd64.iso",
+  "volumeId": "INTA_RECOVERY",
+  "bytes": 635260928,
+  "sha256": "dd8b9273a7382b6b76516837ef682b79065500c8e2dbb0f1f1130ebc91eff65d",
+  "sourceRevision": "7c52d09b2e88b3f2e9c6981c271e2e6933abd200"
+}
