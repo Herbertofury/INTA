@@ -124,6 +124,16 @@ namespace Inta.Desktop
                             false, null);
                     });
                 }
+                var knowledge = Json.Get(result, "knowledge") as System.Collections.Generic.Dictionary<string, object>;
+                var citations = knowledge == null ? null : Json.Get(knowledge, "citations") as System.Collections.IList;
+                if (citations != null && citations.Count > 0) {
+                    Paragraph("Offline references", "Text", 16, true);
+                    foreach (var citation in citations.Cast<object>().Select(Json.Object)) {
+                        Paragraph(Json.Text(citation, "title"), "Text", 14, true);
+                        Note(Json.Text(citation, "passage"));
+                        Note(Json.Text(citation, "section") + " · " + Json.Text(citation, "source") + " · " + Json.Text(citation, "location"));
+                    }
+                }
                 Action(detailActions, "New question", RefreshPage);
                 Status("Plan review complete.");
             } catch (OperationCanceledException) { }

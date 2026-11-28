@@ -320,14 +320,16 @@ pub fn triage(c: &rusqlite::Connection, args: &[&str]) -> Result<Value> {
                 "Model returned an unknown scenario"
             );
             if suggestion.scenario == "unmatched" {
+                let references = crate::knowledge::search(request)?;
                 return Ok(
-                    json!({"schemaVersion":1,"state":"unmatched","model":model,"executed":false}),
+                    json!({"schemaVersion":1,"state":"unmatched","model":model,"knowledge":references,"executed":false}),
                 );
             }
             let (plan, hash) = reviewed(c, &suggestion.scenario)?;
+            let references = crate::knowledge::ranked(request, Some(&suggestion.scenario))?;
             Ok(
                 json!({"schemaVersion":1,"state":"awaiting-review","model":model,"modelDigest":digest,
-                "plan":plan,"planSha256":hash,"executed":false}),
+                "plan":plan,"planSha256":hash,"knowledge":references,"executed":false}),
             )
         }
         _ => bail!(

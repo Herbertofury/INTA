@@ -5,6 +5,7 @@ mod cleanup;
 mod db;
 mod health;
 mod inspect;
+mod knowledge;
 mod linux_tools;
 mod scenario;
 #[cfg(windows)]
@@ -23,6 +24,7 @@ use std::{env, path::Path};
 const HELP: &str = "INTA technician CLI. Results are JSON.
   capabilities | tools search QUERY | tools inspect ID | forge verify FILE
   ai ask MODEL MODEL_DIGEST QUESTION | ai run-plan SCENARIO PLAN_SHA256 --approve
+  knowledge search QUESTION
   ai forge MODEL MODEL_DIGEST REQUEST NEW_ABSOLUTE_RECIPE.json --approve
   catalog [query] | record tool|job|method ID
   tool actions [ID] | tool install|launch ID --approve | tool bind ID FILE.exe --approve
@@ -175,7 +177,12 @@ fn main() {
         println!("{HELP}");
         return;
     }
-    let value = if args == ["build-info"] {
+    let value = if let [k, op, words @ ..] = args.as_slice()
+        && k == "knowledge"
+        && op == "search"
+    {
+        knowledge::search(&words.join(" "))
+    } else if args == ["build-info"] {
         build_info()
     } else if args == ["version"] || args == ["--version"] {
         let mut capabilities = vec!["vm", "tool-actions"];

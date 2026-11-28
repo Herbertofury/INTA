@@ -1,3 +1,5 @@
+mod build_knowledge;
+
 use serde_json::Value;
 use std::{collections::BTreeSet, env, fs, path::PathBuf};
 
@@ -20,4 +22,6 @@ fn main() {
     }
     let out = PathBuf::from(env::var_os("OUT_DIR").expect("cargo output"));
     fs::write(out.join("tools.json"), serde_json::to_vec(&rows).unwrap()).unwrap();
+    build_knowledge::build(&root.join("../../../.."), &out.join("knowledge.sqlite3"))
+        .expect("build the offline INTA passage index");
 }
