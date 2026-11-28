@@ -2,6 +2,7 @@ package com.inta.mobile.test;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -143,7 +144,7 @@ public final class OfflineJobAcceptance extends Instrumentation {
         require(uri != null, "could not allocate an isolated export file");
         try {
             press(activity, "Review handoff export");
-            clickDialog("Cancel");
+            clickDialog("Cancel", "android:id/button2");
             find(activity, "Review handoff export", true);
             try (InputStream bytes = resolver.openInputStream(uri)) {
                 require(bytes != null && bytes.read() == -1, "cancel wrote export bytes");
@@ -154,7 +155,7 @@ public final class OfflineJobAcceptance extends Instrumentation {
                     new ActivityResult(Activity.RESULT_OK, new Intent().setData(uri)), true);
             try {
                 press(activity, "Review handoff export");
-                clickDialog("Choose save location");
+                clickDialog("Choose save location", "android:id/button1");
                 find(activity, "Reviewed handoff saved.", false);
                 require(monitor.getHits() == 1, "Android create-document action was not launched");
             } finally { removeMonitor(monitor); }
@@ -171,13 +172,18 @@ public final class OfflineJobAcceptance extends Instrumentation {
         }
     }
 
-    private void clickDialog(String name) {
+    private void clickDialog(String name, String buttonId) {
+        var automation = getUiAutomation();
+        var service = automation.getServiceInfo();
+        service.flags |= AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS;
+        automation.setServiceInfo(service);
         long deadline = SystemClock.uptimeMillis() + 8000;
         do {
-            AccessibilityNodeInfo root = getUiAutomation().getRootInActiveWindow();
+            AccessibilityNodeInfo root = automation.getRootInActiveWindow();
             if (root != null) {
-                for (AccessibilityNodeInfo node : root.findAccessibilityNodeInfosByText(name)) {
-                    if (node.getText() != null && name.contentEquals(node.getText())
+                for (AccessibilityNodeInfo node : root.findAccessibilityNodeInfosByViewId(buttonId)) {
+                    CharSequence text = node.getText();
+                    if (text != null && name.equalsIgnoreCase(text.toString())
                             && node.performAction(AccessibilityNodeInfo.ACTION_CLICK)) return;
                 }
             }
