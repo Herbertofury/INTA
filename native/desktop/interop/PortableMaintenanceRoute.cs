@@ -12,7 +12,12 @@ namespace INTA.Desktop
 
         internal static MaintenanceView? Read(string applicationDirectory)
         {
-            string state = Path.Combine(applicationDirectory, "state");
+            return ReadStateDirectory(Path.Combine(applicationDirectory, "state"));
+        }
+
+        internal static MaintenanceView? ReadStateDirectory(string state)
+        {
+            if (state == null) return null;
             string path = Path.Combine(state, FileName);
             try
             {
@@ -36,7 +41,12 @@ namespace INTA.Desktop
 
         internal static bool Save(string applicationDirectory, MaintenanceView? view)
         {
-            string state = Path.Combine(applicationDirectory, "state");
+            return SaveStateDirectory(Path.Combine(applicationDirectory, "state"), view);
+        }
+
+        internal static bool SaveStateDirectory(string state, MaintenanceView? view)
+        {
+            if (state == null) return false;
             string path = Path.Combine(state, FileName);
             string temporary = String.Empty;
             try
