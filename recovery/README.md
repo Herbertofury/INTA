@@ -8,7 +8,7 @@ The release includes **INTA-Media-Creator.pyz**. Open it with Python 3 and Tk, s
 * **Recover files** opens TestDisk, PhotoRec or the file manager. Choose a separate destination for recovered files.
 * **Copy and repair** opens the Clonezilla wizard, GParted, or the installed GNU ddrescue help. Select the source and destination explicitly. Keep the original media read-only while evaluating filesystem repair on a copy.
 
-The image boots in BIOS and UEFI modes. It includes freely packaged Debian kernel firmware. Physical hardware compatibility varies by storage controller and firmware. Release verification uses disposable virtual hardware and synthetic data. It does not certify a particular physical USB device, write blocker, storage controller or Secure Boot configuration.
+The image boots in BIOS and UEFI modes. It includes freely packaged Debian kernel firmware. Release verification uses disposable virtual hardware and synthetic data. In **verification.json**, **enrolledSecureBoot** records an optical boot with OVMF Secure Boot enabled and Microsoft key databases enrolled. **virtualVentoyUSB** records separate BIOS and UEFI boots from a prepared virtual USB device when that test was run. Hardware compatibility depends on the physical USB device, write blocker, storage controller and firmware settings.
 
 This edition provides no malware scanner, scanner definitions, cloud AI clients, or provider credentials. The full Rescue edition has a separate exact scanner-version qualification gate.
 

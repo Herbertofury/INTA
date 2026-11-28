@@ -25,6 +25,42 @@ def read(path):
     return json.loads(path.read_bytes())
 
 
+def additional_boot_receipts(secure, usb, iso_hash, size):
+    receipts = {}
+    for name, directory, serials in (
+        ("enrolledSecureBoot", secure, ["secure-serial.log"]),
+        ("virtualVentoyUSB", usb, ["bios-usb.log", "uefi-usb.log"]),
+    ):
+        if directory is None:
+            continue
+        receipt = read(directory / "evidence.json")
+        require(receipt["isoSHA256"] == iso_hash and receipt["networkDevices"] == 0,
+                f"{name} tested a different image or network configuration")
+        if name == "enrolledSecureBoot":
+            require(receipt["bytes"] == size and receipt["pflashSecure"] is True and
+                    receipt["SMM"] is True and receipt["writableDataDisks"] == 0 and
+                    "SecureBootEnable ON" in receipt["firmware"] and
+                    "verified before and after boot" in receipt["firmware"] and
+                    all(re.fullmatch(r"[0-9a-f]{64}", receipt[key])
+                        for key in ("firmwareCodeSHA256", "initialMSVarsSHA256")),
+                    "Missing active Secure Boot or enrolled firmware evidence")
+        else:
+            require(receipt["usbFirmware"] == ["bios", "uefi"] and receipt["passed"] is True
+                    and receipt["deviceIdentityMismatchRejected"] is True and receipt["sentinelPreserved"] is True
+                    and re.fullmatch(r"[0-9a-f]{64}", receipt["ventoyArchiveSHA256"])
+                    and digest(directory / "inta-rescue-virtual-usb.qcow2") == receipt["virtualUSBSHA256"],
+                    "Missing verified virtual USB evidence")
+        serial_digests = {}
+        for serial in serials:
+            path = directory / serial
+            lines = path.read_bytes().splitlines()
+            require(b"INTA_SMOKE_PASS" in lines and b"INTA_RECOVERY_ONLY_RUNTIME_OK" in lines,
+                    f"{name} guest did not confirm the recovery runtime")
+            serial_digests[serial] = digest(path)
+        receipts[name] = {**receipt, "serialSHA256": serial_digests}
+    return receipts
+
+
 def package(a):
     gate = read(a.qualification/"image-qualification.json")
     iso_hash = digest(a.iso)
@@ -38,7 +74,7 @@ def package(a):
     installed=[p for p in read(pkg) if p["status"].endswith(" installed")]
     boot=sources["bootAndBuildComponents"]
     require(boot["isoSha256"]==iso_hash and boot["imageSourceRevision"]==revision and boot["matchedExternalFileCount"]>0
-        and {"grub2","grub2-signed","shim","shim-signed","syslinux","live-build","rustc"}<={p["source"] for p in boot["packages"]}
+        and {"grub2","grub-efi-amd64-signed","shim","shim-signed","syslinux","live-build","rustc"}<={p["source"] for p in boot["packages"]}
         and "grub-efi-amd64-signed" in boot["matchedExternalFiles"]["ISO/EFI/boot/grubx64.efi"]
         and "shim-signed" in boot["matchedExternalFiles"]["ISO/EFI/boot/bootx64.efi"], "Missing external boot payload evidence")
     require({(p["source"],p["sourceVersion"]) for p in installed+boot["packages"]}==
@@ -90,7 +126,8 @@ def package(a):
             "actualDebianSourceFiles":volumes["sourceFiles"],"actualDebianSourceBytes":volumes["sourceBytes"],
             "verifiedSourceVolumes":[v["name"] for v in volumes["volumes"]],
             "mediaCreator":{"sourceRevision":a.media_source_revision,"sha256":a.media_sha256,"tag":channel["tag"]},
-            "runtimeScope":"Isolated QEMU virtual hardware, no guest network; physical USB and Secure Boot untested."}
+            "runtimeScope":"Tests use isolated virtual hardware. Physical USB devices and physical firmware require separate hardware qualification."}
+    result.update(additional_boot_receipts(a.secure_boot, a.virtual_usb, iso_hash, gate["bytes"]))
     inputs={a.iso.name:a.iso,"image-qualification.json":a.qualification/"image-qualification.json",
             "debian-package-inventory.json":pkg,"debian-source-index.json":a.source_index,"debian-notices.tar.gz":a.notices,
             "INTA-Recovery-build-source.tar.gz":a.build_source,"RECOVERY-GUIDE.md":Path(__file__).resolve().parents[1]/"recovery/README.md"}
@@ -122,6 +159,8 @@ if __name__=="__main__":
     p=argparse.ArgumentParser(description=__doc__)
     for name in ["iso","qualification","firmware","ui","repair","independent-absence","source-index","source-volumes","notices","build-source","media-creator"]:
         p.add_argument("--"+name,type=Path,required=True)
+    p.add_argument("--secure-boot", type=Path, help="Directory containing enrolled OVMF proof and guest serial log")
+    p.add_argument("--virtual-usb", type=Path, help="Directory containing verified virtual USB image, proof and both guest serial logs")
     p.add_argument("--media-sha256",required=True)
     p.add_argument("--media-source-revision",required=True)
     p.add_argument("new_output_directory",type=Path)
