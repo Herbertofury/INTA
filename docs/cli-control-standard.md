@@ -139,3 +139,18 @@ paths, filenames, byte hashes, or proof of equal content. Each system build
 needs its own reviewed executable pin. This narrow preview is not full
 <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy" title="Open Robocopy official download or service page" aria-label="Open Robocopy official download or service page" data-inta-brand="robocopy"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="Robocopy official page" width="18" height="18" valign="middle" /></a> [Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy) coverage, an installation recommendation, or admission into a
 remote repair plan.
+
+### Native sleep capability snapshot
+
+```sh
+python3 scripts/cli-anything-inta.py --json sleep-states \
+  --agent-binary ABSOLUTE_PATH_TO_REVIEWED_INTA_AGENT \
+  --agent-sha256 APPROVED_PACKAGE_EXECUTABLE_SHA256
+```
+
+The command reads the documented operating-system support flags for ACPI
+S1–S4 and whether a hibernation file is present. It does not infer why a state
+is unavailable, expose S0 Modern Standby or wake devices, or change any setting.
+An unavailable query returns no flags. Use the same reviewed local executable
+and version pin as for the Power Plans preview. The operation has no remote
+job or repair binding.
