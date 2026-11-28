@@ -3,15 +3,27 @@
   "tools": {
     "powercfg": {
       "scope": "partial",
-      "requiredOperations": ["power-plans", "battery-report", "sleep-states", "wake-source", "power-requests"],
+      "requiredOperations": [
+        "power-plans",
+        "battery-report",
+        "sleep-states",
+        "wake-source",
+        "power-requests"
+      ],
       "operations": {
         "power-plans": {
-          "state": "candidate",
+          "state": "tested-preview",
           "backend": "official-api",
           "effect": "read-only",
-          "platform": "windows",
+          "platform": "windows-x64",
           "source": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
-          "note": "INTA's native one-shot inventory is implemented. The new harness is not yet accepted inside Windows."
+          "note": "Hosted Windows x64 preview: matched independent powercfg inventory and did not change the active plan. Temporary unsigned evaluation only.",
+          "version": "0.1.0",
+          "artifactSha256": "0b9bcdc752ff95ed47f14b442a45d8891bad37edec5c9f0829139819111992a7",
+          "runtimeEvidence": "https://github.com/Herbertofury/INTA/actions/runs/46090342014/job/140809525371",
+          "artifactUrl": "https://github.com/Herbertofury/INTA/actions/runs/46090342014#artifacts",
+          "archiveSha256": "b37eba7cb06c3faec22c942a7c4d756f7316dbe05ab4e495cbd8b8fbddb68263",
+          "expiresAt": "2026-12-05T00:54:53Z"
         }
       }
     }
