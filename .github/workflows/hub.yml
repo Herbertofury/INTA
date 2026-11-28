@@ -4,7 +4,7 @@ on:
     branches: [main]
     # Publication must match the current main commit, including source-only changes.
   pull_request:
-    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/refresh-news.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/refresh-inta-brand.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/check-online-runtime.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
+    paths: ['data/**', 'assets/**', 'portal/**', 'site/**', 'wiki/**', 'docs/**', 'scripts/build-hub.py', 'scripts/refresh-news.py', 'scripts/brand*', 'scripts/online_tools.py', 'scripts/refresh-brand-icons.py', 'scripts/refresh-inta-brand.py', 'scripts/wiki*', 'scripts/check-wiki.py', 'scripts/check-online-runtime.py', 'scripts/check-tool-cli.py', 'scripts/*knowledge*', 'tests/**', 'AGENTS.md', 'CONTRIBUTING.md', '.github/workflows/hub.yml', '.github/workflows/knowledge-health.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,6 +17,17 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Require verified control before adding a new catalog tool
+        if: github.event_name == 'pull_request'
+        env:
+          INTA_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          [[ "$INTA_BASE" =~ ^[0-9a-f]{40}$ ]]
+          git show "${INTA_BASE}:data/tools.json" > "$RUNNER_TEMP/inta-base-tools.json"
+          python3 -B scripts/check-tool-cli.py --require-new-offers "$RUNNER_TEMP/inta-base-tools.json" --json
       - name: Validate complete content and generated outputs
         run: |
           python3 scripts/refresh-inta-brand.py --check

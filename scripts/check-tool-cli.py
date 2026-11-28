@@ -68,13 +68,18 @@ def as_operation(entry, now):
     return state
 
 
-def audit(catalog, ledger, now=None):
-    now = datetime.now(timezone.utc) if now is None else now
+def catalog_ids(catalog):
     if not isinstance(catalog, list) or not all(isinstance(t, dict) and slug(t.get("id")) for t in catalog):
         raise ValueError("invalid tool catalog")
     ids = {t["id"] for t in catalog}
     if len(ids) != len(catalog):
         raise ValueError("duplicate catalog tool")
+    return ids
+
+
+def audit(catalog, ledger, now=None):
+    now = datetime.now(timezone.utc) if now is None else now
+    ids = catalog_ids(catalog)
     if not isinstance(ledger, dict) or type(ledger.get("schemaVersion")) is not int or ledger["schemaVersion"] != 1 or not isinstance(ledger.get("tools"), dict):
         raise ValueError("invalid coverage ledger")
     entries = ledger["tools"]
@@ -110,6 +115,45 @@ def audit(catalog, ledger, now=None):
     return {"toolCount": len(ids), "summary": dict(collections.Counter(row["status"] for row in rows.values())), "tools": rows}
 
 
+OFFER_PLATFORM_LABELS = {
+    "windows-x64": {"Windows", "Windows 11"},
+    "windows-arm64": {"Windows", "Windows 11"},
+    "linux-x64": {"Linux"},
+    "linux-arm64": {"Linux"},
+    "macos-x64": {"macOS"},
+    "macos-arm64": {"macOS"},
+    "android-arm64": {"Android"},
+    "ios-arm64": {"iOS"},
+    "web": {"Web", "Web browser"},
+}
+
+
+def new_offer_gaps(report, base_catalog, catalog):
+    """Do not expand the legacy catalog beyond complete verified control."""
+    original = catalog_ids(base_catalog)
+    result = {}
+    current = {tool["id"]: tool for tool in catalog}
+    for tool_id, row in report["tools"].items():
+        if tool_id in original:
+            continue
+        # Production claims must not combine tests from different editions,
+        # platforms or artifact builds into a single tool-wide release claim.
+        fingerprints = {(entry["platform"], entry["version"], entry["artifactSha256"])
+                        for entry in row.get("bindings", {}).values()}
+        if row["status"] != "ready":
+            result[tool_id] = row["status"]
+        elif len(fingerprints) != 1:
+            result[tool_id] = "mixed-tested-builds"
+        else:
+            advertised = current[tool_id].get("platforms")
+            platform = next(iter(fingerprints))[0]
+            if (not isinstance(advertised, list) or not advertised
+                    or not all(isinstance(value, str) and value in OFFER_PLATFORM_LABELS.get(platform, ())
+                               for value in advertised)):
+                result[tool_id] = "unverified-advertised-platform"
+    return result
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--catalog", type=pathlib.Path, default=ROOT / "data/tools.json")
@@ -118,6 +162,7 @@ def main(argv=None):
     gate = parser.add_mutually_exclusive_group()
     gate.add_argument("--require-full", metavar="TOOL")
     gate.add_argument("--require-operation", nargs=2, metavar=("TOOL", "OPERATION"))
+    gate.add_argument("--require-new-offers", type=pathlib.Path, metavar="BASE_CATALOG")
     parser.add_argument("--platform")
     parser.add_argument("--version")
     parser.add_argument("--artifact-sha256")
@@ -130,10 +175,16 @@ def main(argv=None):
     if args.require_operation and (not args.version or not args.artifact_sha256 or not HASH.fullmatch(args.artifact_sha256)):
         parser.error("operation admission requires exact version and reviewed artifact SHA-256")
     try:
-        report = audit(load(args.catalog), load(args.coverage))
+        catalog = load(args.catalog)
+        report = audit(catalog, load(args.coverage))
+        new_gaps = new_offer_gaps(report, load(args.require_new_offers), catalog) if args.require_new_offers else None
     except (OSError, ValueError, TypeError, RecursionError) as exc:
         print(f"Invalid CLI coverage: {exc}", file=sys.stderr)
         return 2
+    if new_gaps is not None:
+        payload = {"accepted": not new_gaps, "blockedNewOffers": new_gaps}
+        print(json.dumps(payload, sort_keys=True))
+        return int(bool(new_gaps))
     tool = args.require_full or (args.require_operation[0] if args.require_operation else None)
     if tool:
         row = report["tools"].get(tool, {"status": "unknown-tool", "tested": []})

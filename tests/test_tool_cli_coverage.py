@@ -11,8 +11,8 @@ spec.loader.exec_module(control)
 
 class Coverage(unittest.TestCase):
     def setUp(self):
-        self.catalog = [{"id": "fake-tool"}, {"id": "unpinned"}]
-        self.operation = {"state": "tested", "backend": "official-cli", "effect": "read-only", "platform": "windows",
+        self.catalog = [{"id": "fake-tool", "platforms": ["Windows"]}, {"id": "unpinned"}]
+        self.operation = {"state": "tested", "backend": "official-cli", "effect": "read-only", "platform": "windows-x64",
                           "source": "https://example.com/official-docs", "version": "1.2.3",
                           "artifactSha256": "a" * 64, "runtimeEvidence": "https://example.com/window-test"}
         self.tool = {"scope": "complete", "requiredOperations": ["inventory"],
@@ -51,6 +51,35 @@ class Coverage(unittest.TestCase):
         self.operation["effect"] = "changes-device"
         with self.assertRaises(ValueError):
             control.audit(self.catalog, self.ledger, now=before)
+
+    def test_offer_gate_preserves_old_rows_without_granting_readiness(self):
+        report = control.audit(self.catalog, self.ledger)
+        self.assertEqual(control.new_offer_gaps(report, self.catalog, self.catalog), {})
+        self.assertEqual(control.new_offer_gaps(report, [], self.catalog), {"unpinned": "needs-tool-review"})
+        with self.assertRaisesRegex(ValueError, "duplicate catalog tool"):
+            control.new_offer_gaps(report, self.catalog * 2, self.catalog)
+
+    def test_offer_gate_refuses_preview_partial_and_incoherent_release(self):
+        self.tool["requiredOperations"].append("check")
+        self.tool["operations"]["check"] = dict(self.operation, artifactSha256="b" * 64)
+        before = [{"id": "unpinned"}]
+        def gap():
+            return control.new_offer_gaps(control.audit(self.catalog, self.ledger), before, self.catalog)["fake-tool"]
+        self.assertEqual(gap(), "mixed-tested-builds")
+        self.tool["operations"]["check"] = dict(self.operation, state="candidate")
+        self.assertEqual(gap(), "partial")
+        self.tool["operations"]["check"] = dict(self.operation)
+        self.assertEqual(control.new_offer_gaps(control.audit(self.catalog, self.ledger), before, self.catalog), {})
+
+    def test_offer_gate_does_not_infer_platform_coverage(self):
+        report = control.audit(self.catalog, self.ledger)
+        before = [{"id": "unpinned"}]
+        for platforms in (["Windows", "Linux"], ["Linux"], [], "Windows"):
+            self.catalog[0]["platforms"] = platforms
+            self.assertEqual(control.new_offer_gaps(report, before, self.catalog),
+                             {"fake-tool": "unverified-advertised-platform"})
+        self.catalog[0]["platforms"] = ["Windows", "Windows 11"]
+        self.assertEqual(control.new_offer_gaps(report, before, self.catalog), {})
 
     def test_claim_without_evidence_refused(self):
         del self.operation["runtimeEvidence"]

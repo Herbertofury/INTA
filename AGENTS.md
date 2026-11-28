@@ -75,3 +75,12 @@ website, silent installer, process launch or harness name. Preserve existing
 reference links, but label unqualified tools and hide their automated
 actions until their required operations pass. Desktop, Mobile and agents
 share the same capability list; no generated command text runs remotely.
+
+Treat this as an acceptance gate, not a writing preference. Do not add a new
+catalog recommendation before every promised operation is verified on the
+same reviewed platform, version and artifact. Keep existing tool links while
+backfilling missing coverage. Report the audited surface and do not imply
+that a successful check of one operation approves a complete tool or a mobile
+job. The catalog PR gate compares against the actual base, with no new legacy
+exceptions. Do not advertise an additional OS whose CLI coverage has not yet
+been assessed and tested.
