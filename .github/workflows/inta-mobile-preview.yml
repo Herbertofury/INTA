@@ -27,9 +27,18 @@ jobs:
           mkdir -p "$RUNNER_TEMP/inta-avd" "$RUNNER_TEMP/inta-android-user"
           export ANDROID_AVD_HOME="$RUNNER_TEMP/inta-avd"
           export ANDROID_USER_HOME="$RUNNER_TEMP/inta-android-user"
-          sdkmanager --install 'platforms;android-36' 'build-tools;36.0.0' 'system-images;android-36;default;x86_64' 'emulator'
-          "$ANDROID_HOME/emulator/emulator" -accel-check
-          printf 'no\n' | avdmanager create avd -n inta-test-ci -k 'system-images;android-36;default;x86_64'
+          sdk_manager="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          if [[ ! -x "$sdk_manager" ]]; then
+            sdk_manager=$(find "$ANDROID_HOME/cmdline-tools" -maxdepth 3 -type f -name sdkmanager | sort -V | tail -n 1)
+          fi
+          test -x "$sdk_manager"
+          avd_manager="$(dirname "$sdk_manager")/avdmanager"
+          test -x "$avd_manager"
+          "$sdk_manager" --install 'platforms;android-36' 'build-tools;36.0.0' 'system-images;android-36;default;x86_64' 'emulator'
+          mode=off
+          if [[ -r /dev/kvm && -w /dev/kvm ]] && "$ANDROID_HOME/emulator/emulator" -accel-check; then mode=on; fi
+          printf 'INTA_ANDROID_EMULATOR_ACCEL=%s\n' "$mode" >> "$GITHUB_ENV"
+          printf 'no\n' | "$avd_manager" create avd -n inta-test-ci -k 'system-images;android-36;default;x86_64'
           {
             printf 'JAVA_HOME=%s\n' "$JAVA_HOME"
             printf 'ANDROID_AVD_HOME=%s\n' "$ANDROID_AVD_HOME"
