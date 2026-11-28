@@ -37,3 +37,11 @@ Copying only a job record onto another installation never carries a running
 interval: even identical phone boot counters leave it paused at its last
 measured checkpoint. This was verified with an independent-store fixture,
 not a device-transfer service. No automatic or explicit job export exists yet.
+
+## Draft a reconnect plan offline
+
+Use **Draft a repair plan** to add typed steps, change their order or remove
+them. The list is saved separately from the current timer, survives a cold
+launch, and stays on this phone. A draft is never a command, approved job,
+or remote executable. Pairing, exact tool selection, signing and dispatch
+must be completed separately before INTA can run it on a PC.
