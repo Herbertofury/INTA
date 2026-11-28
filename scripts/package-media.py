@@ -33,6 +33,8 @@ def package(output: Path, root: Path = ROOT):
     with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for name, data in sorted(entries.items()):
             info = zipfile.ZipInfo(name, date_time=(2026, 11, 26, 0, 0, 0))
+            # Pin the central directory's creator OS for identical Windows and Linux builds.
+            info.create_system = 0
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o644 << 16
             archive.writestr(info, data)
