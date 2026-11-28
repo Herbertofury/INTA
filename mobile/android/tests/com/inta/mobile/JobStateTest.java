@@ -65,6 +65,11 @@ public final class JobStateTest {
         must(reopenedPlan.steps.get(0).kind == RepairDraft.Kind.FIX && plan.steps.get(0).kind == RepairDraft.Kind.SCAN,
             "durable reordering must not mutate the original draft");
         reopenedPlan.remove(0).save(planFile);
+        String handoffDraft = reopenedPlan.exportText();
+        must(handoffDraft.contains("Not approved.") && handoffDraft.indexOf("1. Apply a repair") < handoffDraft.indexOf("2. Run a malware scan"),
+            "reviewed export must be explicitly inactive and ordered");
+        try { new RepairDraft().exportText(); throw new AssertionError("empty draft export accepted"); }
+        catch (IllegalStateException expected) { /* No document is created. */ }
         must(RepairDraft.read(planFile).steps.size() == 1, "step removal survives reopening");
         try { new RepairDraft.Step(RepairDraft.Kind.FIX, "hidden\nextra"); throw new AssertionError("multiline draft label accepted"); }
         catch (IllegalArgumentException expected) { }
