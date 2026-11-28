@@ -121,3 +121,21 @@ file up to 32 MiB; nothing is uploaded, written or changed. Exit 1 means the
 expected hash differed; exit 2 means refused. A hash is not a signature.
 Keep hashes local unless the operator chooses to share them. This single
 operation is a preview, not Sync, cloud-account or tool-wide CLI admission.
+
+### Robocopy metadata preview
+
+Use the built-in [Microsoft Robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)
+on two distinct, existing folders on a fixed Windows drive:
+
+```text
+python3 scripts/cli-anything-inta.py --json robocopy-preview --source "C:\backup source" --destination "C:\backup target" --robocopy-sha256 REVIEWED_WINDOWS_BINARY_SHA256
+```
+
+The harness obtains the Windows system directory from the OS, pins that
+installed executable and uses a constant list-only invocation. No file is
+copied, mirrored or deleted; recursive comparisons, redirected roots and
+network shares are excluded. The result reports aggregate native flags, not
+paths, filenames, byte hashes, or proof of equal content. Each system build
+needs its own reviewed executable pin. This narrow preview is not full
+Robocopy coverage, an installation recommendation, or admission into a
+remote repair plan.

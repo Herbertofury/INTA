@@ -1,6 +1,7 @@
 import hashlib
 import importlib.util
 import json
+import os
 import pathlib
 import subprocess
 import tempfile
@@ -163,6 +164,54 @@ class NativeHarness(unittest.TestCase):
                 harness.rclone_local_sha256(binary, self.pin, selected, digest)
         call.assert_not_called()
         self.assertEqual(selected.read_bytes(), data)
+
+    def test_robocopy_binds_only_the_fixed_dry_run(self):
+        src, dst = pathlib.PureWindowsPath("C:/safe source"), pathlib.PureWindowsPath("C:/safe target")
+        binary = pathlib.PureWindowsPath("C:/Windows/System32/robocopy.exe")
+        with (patch.object(harness, "os", unittest.mock.Mock()) as platform,
+              patch.object(harness, "windows_compare_directory", side_effect=lambda p:p),
+              patch.object(harness, "windows_system_directory", return_value=binary.parent),
+              patch.object(harness, "executable", return_value=binary) as admit,
+              patch.object(harness.subprocess, "run", return_value=subprocess.CompletedProcess([], 3)) as run):
+            platform.name = "nt"
+            result = harness.robocopy_metadata_preview(src,dst,self.pin)
+            self.assertEqual(result, {"status":"ready","writesRequested":False,"recursive":False,"exitCode":3,
+                "copyWouldBeConsidered":True,"extrasReported":True,"mismatchReported":False,"contentCompared":False})
+            admit.assert_called_once_with(binary,self.pin,frozenset({"robocopy.exe"}))
+            run.assert_called_once_with([str(binary),str(src),str(dst),"*","/L","/XJ","/R:0","/W:0","/NP","/NJH","/NJS","/NFL","/NDL"],
+                stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,shell=False,timeout=15)
+            run.reset_mock()
+            with self.assertRaises(ValueError):
+                harness.robocopy_metadata_preview(src,src / "nested",self.pin)
+            run.assert_not_called()
+            run.return_value = subprocess.CompletedProcess([], 8)
+            self.assertEqual(harness.robocopy_metadata_preview(src,dst,self.pin)["status"],"unavailable")
+
+    @unittest.skipUnless(os.name == "nt" and os.environ.get("GITHUB_ACTIONS") == "true"
+                         and os.environ.get("RUNNER_ENVIRONMENT") == "github-hosted",
+                         "requires disposable Windows-only hosted fixture")
+    def test_installed_windows_robocopy_leaves_both_fixtures_unchanged(self):
+        binary=harness.windows_system_directory() / "robocopy.exe"
+        pin=hashlib.sha256(binary.read_bytes()).hexdigest()
+        with tempfile.TemporaryDirectory(prefix="INTA Robocopy ") as root:
+            src,dst=(pathlib.Path(root)/name for name in ("source folder","target folder"))
+            src.mkdir();dst.mkdir()
+            new_file=src/"new only.txt"; new_file.write_bytes(b"source fixture")
+            extra=dst/"extra only.txt"; extra.write_bytes(b"destination fixture")
+            def snapshot():
+                return [(p.name,p.read_bytes(),p.stat().st_mtime_ns) for base in (src,dst) for p in sorted(base.iterdir())]
+            before=snapshot()
+            native=subprocess.run([str(binary),str(src),str(dst),"*","/L","/R:0","/W:0","/XJ"],
+                                  capture_output=True, timeout=15, shell=False)
+            self.assertTrue(0 <= native.returncode <= 7)
+            actual=harness.robocopy_metadata_preview(src,dst,pin)
+            self.assertEqual(actual["exitCode"],native.returncode)
+            self.assertTrue(actual["copyWouldBeConsidered"])
+            self.assertTrue(actual["extrasReported"])
+            self.assertEqual(snapshot(),before)
+            with self.assertRaises(ValueError):
+                harness.robocopy_metadata_preview(src,dst,"0"*64)
+            self.assertEqual(snapshot(),before)
 
     def test_bad_pin_never_launches(self):
         with patch.object(harness.subprocess, "run") as run:

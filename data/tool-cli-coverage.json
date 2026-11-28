@@ -26,6 +26,27 @@
           "expiresAt": "2026-12-05T00:54:53Z"
         }
       }
+    },
+    "robocopy": {
+      "scope": "partial",
+      "requiredOperations": [
+        "robocopy-preview",
+        "copy-with-verification",
+        "restartable-copy",
+        "attribute-and-permission-handling",
+        "purge-or-mirror-review",
+        "backup-and-logging"
+      ],
+      "operations": {
+        "robocopy-preview": {
+          "state": "candidate",
+          "backend": "official-cli",
+          "effect": "read-only",
+          "platform": "windows-x64",
+          "source": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy",
+          "note": "Independent disposable Windows acceptance gates this version-specific immediate-entry comparison. No bytes, recursive scan, mutation, or remote dispatch."
+        }
+      }
     }
   }
 }
