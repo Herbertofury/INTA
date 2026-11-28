@@ -8,6 +8,7 @@ $output = [IO.Directory]::CreateDirectory($OutputDirectory).FullName
 $refs = @('System.dll', 'System.Core.dll', 'System.Xaml.dll', 'System.Web.Extensions.dll', 'System.Windows.Forms.dll', 'WPF\WindowsBase.dll', 'WPF\PresentationCore.dll', 'WPF\PresentationFramework.dll', 'WPF\UIAutomationTypes.dll', 'WPF\UIAutomationProvider.dll')
 $arguments = @('/nologo', '/codepage:65001', '/optimize+', '/warnaserror+', '/platform:x64', '/target:winexe', "/out:$output\inta-desktop.exe", "/win32manifest:$PSScriptRoot\app.manifest", "/resource:$PSScriptRoot\Workspace.xaml,Workspace.xaml")
 $arguments += "/win32icon:$PSScriptRoot\inta.ico"
+$arguments += "/resource:$(Join-Path $PSScriptRoot '..\..\..\assets\inta-brand\heritage-192.png'),INTA.Heritage.png"
 $registry = Join-Path $output 'tool-mentions.json'
 & python -I (Join-Path $PSScriptRoot 'mentions.py') $registry
 if ($LASTEXITCODE) { throw 'Failed to compile the catalog mention registry.' }

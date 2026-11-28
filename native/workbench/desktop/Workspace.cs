@@ -66,6 +66,19 @@ namespace Inta.Desktop
         internal Workspace(Window window, string directory, ToolActionRoute route)
         {
             this.window = window;
+            using (var art = typeof(Workspace).Assembly.GetManifestResourceStream("INTA.Heritage.png"))
+            {
+                if (art != null)
+                {
+                    var image = new System.Windows.Media.Imaging.BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
+                    image.StreamSource = art;
+                    image.EndInit();
+                    image.Freeze();
+                    Find<Image>("HeritageMark").Source = image;
+                }
+            }
             baseDirectory = directory;
             core = new CoreClient(directory);
             Find<Grid>("OpticalBackground").Children.Add(new PrismField { IsHitTestVisible = false });
