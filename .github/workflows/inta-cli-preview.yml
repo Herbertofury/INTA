@@ -10,6 +10,7 @@ on:
       - scripts/cli-anything-inta.py
       - scripts/stage-rclone-preview.py
       - tests/test_cli_anything_inta.py
+      - tests/verify_cli_sleep_states.ps1
       - tests/verify_cli_storage_preview.py
       - tests/verify_cli_rclone_local.py
       - tests/test_tool_cli_coverage.py
@@ -40,6 +41,9 @@ jobs:
         run: |
           dotnet publish agent/INTA.LocalAgent/INTA.LocalAgent.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o cli-native
           exit $LASTEXITCODE
+      - name: Verify read-only sleep capability flags against an independent Windows API
+        shell: pwsh
+        run: ./tests/verify_cli_sleep_states.ps1 -Agent 'cli-native/inta-agent.exe'
       - name: Independently verify the read-only Windows result
         shell: pwsh
         run: |
