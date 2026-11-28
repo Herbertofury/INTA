@@ -149,7 +149,7 @@ class NativeHarness(unittest.TestCase):
                 binary = binary.resolve()
                 self.assertEqual(harness.rclone_local_sha256(binary, self.pin, selected, digest)["status"], "ready")
             cmd = call.call_args.args[0]
-            self.assertEqual(cmd, [str(binary), "--config", harness.os.devnull, "hashsum", "sha256", "-"])
+            self.assertEqual(cmd, [str(binary), "--config=", "hashsum", "sha256", "-"])
             self.assertEqual(call.call_args.kwargs["input"], data)
             self.assertFalse(call.call_args.kwargs["shell"])
             self.assertFalse({"RCLONE_CONFIG", "HTTPS_PROXY"} & set(call.call_args.kwargs["env"]))
