@@ -75,6 +75,24 @@ foreach (var (id, reason) in new[]
     Must(Decision(all, id).Disposition == reason && Decision(one, id).Disposition == reason && one.Plan is null,
         $"Fix One cannot bypass the Fix All exclusion for {id}");
 }
+// Different device observations, duplicate aliases and excluded observations
+// must not affect the deterministic approval preview through arrival order.
+var shuffle = new Random(75077);
+for (var i = 0; i < 120; i++)
+{
+    var varied = findings.ToArray();
+    for (var index = varied.Length - 1; index > 0; index--)
+    {
+        int next = shuffle.Next(index + 1);
+        (varied[index], varied[next]) = (varied[next], varied[index]);
+    }
+    var candidate = planner.Preview(device, varied, now, Request);
+    Must(candidate.Plan!.Digest == plan.Digest && candidate.Decisions.SequenceEqual(all.Decisions),
+        "mixed evidence arrival order must not affect digest or review explanations");
+}
+var equivalentZone = findings.Select(f => f with { ObservedAt = f.ObservedAt?.ToOffset(TimeSpan.FromHours(-7)) });
+Must(planner.Preview(device, equivalentZone, now, Request).Plan!.Digest == plan.Digest,
+    "the same evidence instant has the same approval identity regardless of its display timezone");
 Must(Decision(all, "restart").Disruption == CheckupDisruption.Restart, "restart remains visible and separate");
 var aliasOne = planner.Preview(device, findings, now, Request, "beta");
 Must(aliasOne.Plan!.Steps.SequenceEqual(plan.Steps.Take(1))
