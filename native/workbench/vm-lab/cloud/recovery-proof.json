@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "vmm": "cloud-hypervisor v55.0",
-  "rescueISO": "dd8b9273a7382b6b76516837ef682b79065500c8e2dbb0f1f1130ebc91eff65d",
+  "rescueISO": "c6cdce492702fa57c96d40f8a5e519c4c1f5458dfc669c607460ea0382e2b2bb",
   "kernelSHA256": "f080f76ab2012d27d408635dab803f4cda43f706639c8f98515702762df60b2d",
-  "initrdSHA256": "415fb1e483780db819ec49fc1b58b9eb88383fd02a8a1b87186b317f5c4468d8",
-  "sourceSHA256BeforeAndAfter": "03a38adf11bcf6403c93bbf2307b0404d7f002d998e0d76c2bb601cc9812306c",
+  "initrdSHA256": "891c10dafe44671b57567fdf8cac898f86c3acdba37c3e835d063d4905db270e",
+  "sourceSHA256BeforeAndAfter": "f4bbf4a5462bd5d5e418b000058479674f401f038451b0948a70b4a534403026",
   "recoveredFileSHA256": "14516d423e8f53c66e0af6eec66cf942606e571efe2861058ac8e78911507881",
   "workload": "ddrescue clone, FAT repair on copy, clean check and recovered-file readback",
   "networkDevices": 0,
