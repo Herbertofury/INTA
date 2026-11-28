@@ -68,6 +68,26 @@ public final class JobStateTest {
         must(RepairDraft.read(planFile).steps.size() == 1, "step removal survives reopening");
         try { new RepairDraft.Step(RepairDraft.Kind.FIX, "hidden\nextra"); throw new AssertionError("multiline draft label accepted"); }
         catch (IllegalArgumentException expected) { }
-        System.out.println("Offline job, repair draft and atomic storage acceptance passed.");
+        Path draftFile = dir.resolve("invoice-draft");
+        JobTimer billable = new JobTimer(5400000L, 0, -1, 7, JobTimer.Phase.COMPLETE, false);
+        must(InvoiceDraft.read(draftFile, billable) == null, "no guessed rate or automatic charge");
+        InvoiceDraft invoice = InvoiceDraft.prepare(billable, "95.00", "", InvoiceDraft.Profile.BUSINESS);
+        must(invoice.subtotalDollars().equals("142.50"), "recorded 90 minutes at $95");
+        invoice.save(draftFile);
+        must(InvoiceDraft.read(draftFile, billable).profile == InvoiceDraft.Profile.BUSINESS, "reopen service profile");
+        InvoiceDraft adjusted = InvoiceDraft.prepare(billable, "95", "5", InvoiceDraft.Profile.RESIDENTIAL);
+        must(adjusted.subtotalDollars().equals("7.92") && adjusted.recordedMs == billable.recordedMs,
+            "manual override rounds only the subtotal and preserves original time");
+        adjusted.save(draftFile);
+        InvoiceDraft saved = InvoiceDraft.read(draftFile, billable);
+        must(saved.minutes == 5 && saved.hourlyDollars().equals("95.00") && saved.subtotalDollars().equals("7.92"), "durable override");
+        must(InvoiceDraft.prepare(billable, "95", "0", InvoiceDraft.Profile.RESIDENTIAL).subtotalDollars().equals("0.00"), "explicit zero is not blank");
+        try { InvoiceDraft.read(draftFile, done); throw new AssertionError("another job accepted"); }
+        catch (IOException expected) { must(InvoiceDraft.read(draftFile, billable).minutes == 5, "mismatched draft remains preserved"); }
+        try { InvoiceDraft.prepare(active, "95", "", InvoiceDraft.Profile.BUSINESS); throw new AssertionError("unfinished job billed"); }
+        catch (IllegalArgumentException expected) { }
+        try { InvoiceDraft.prepare(billable, "1e3", "", InvoiceDraft.Profile.BUSINESS); throw new AssertionError("exponent accepted"); }
+        catch (IllegalArgumentException expected) { }
+        System.out.println("Offline job, repair draft, invoice calculation and atomic storage acceptance passed.");
     }
 }
