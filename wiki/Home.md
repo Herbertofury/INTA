@@ -1,5 +1,7 @@
 ![INTA Computer Services — technical knowledge base](https://github.com/Herbertofury/INTA/raw/main/docs/assets/wiki-hero.svg)
 
+[Brand kit and replacement guide](https://github.com/Herbertofury/INTA/blob/main/assets/inta-brand/README.md)
+
 <a id="-your-next-good-fix-starts-here"></a>
 
 # <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) knowledge base
