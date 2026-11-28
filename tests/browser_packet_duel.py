@@ -12,7 +12,8 @@ def check(browser, html, width):
     failures, remote = [], []
     page.on("pageerror", lambda error: failures.append(str(error)))
     page.on("request", lambda req: remote.append(req.url) if req.url.startswith(("https://", "http://")) else None)
-    page.add_init_script("Object.defineProperty(Math, 'random', {value:()=>0.141}); Date.now=()=>1717171717;")
+    seed = 1 if width == 320 else 4
+    page.add_init_script(f"Object.defineProperty(Math, 'random', {{value:()=>0}}); Date.now=()=>{seed};")
     page.goto(html.as_uri() + "#packet-duel")
     duel = page.locator("[data-inta-card-game]")
     duel.get_by_role("heading", name="Packet Duel").wait_for()
@@ -61,6 +62,7 @@ def check(browser, html, width):
         duel.get_by_role("button", name="End turn", exact=False).click()
     assert end.count()
     result = end.get_by_role("heading").inner_text()
+    assert result == ("Victory!" if width == 320 else "Defeat"), result
     stored = page.evaluate("JSON.parse(localStorage.getItem('inta.packet-duel.record.v1'))")
     assert stored["wins"] + stored["losses"] + stored["draws"] == 1
     duel.get_by_role("button", name="Replay this deal").click()
