@@ -9,6 +9,7 @@ on:
       - scripts/check-tool-cli.py
       - scripts/cli-anything-inta.py
       - tests/test_cli_anything_inta.py
+      - tests/verify_cli_storage_preview.py
       - tests/test_tool_cli_coverage.py
 permissions:
   contents: read
@@ -129,6 +130,13 @@ jobs:
               if ($null -ne $app) { $app.Dispose(); $base.DeleteSubKeyTree($id, $false) }
               $base.Dispose()
           }
+      - name: Match native storage totals and preserve the disposable folder
+        shell: pwsh
+        run: |
+          $proof = python -B tests/verify_cli_storage_preview.py cli-native/inta-agent.exe
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $proof | Set-Content -Encoding utf8 cli-storage-proof.json
+          $proof
       - uses: actions/upload-artifact@v4
         with:
           name: inta-power-plans-cli-test-preview
@@ -137,5 +145,6 @@ jobs:
             cli-harness-proof.json
             cli-startup-proof.json
             cli-programs-proof.json
+            cli-storage-proof.json
             cli-native/inta-agent.exe
           if-no-files-found: error
