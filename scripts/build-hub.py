@@ -975,6 +975,7 @@ def home_markdown(tools: list[dict], jobs: list[dict], categories: dict, layout:
                   quick_start_block: str) -> str:
     by_id = {job["id"]: job for job in jobs}
     lines = [f"![INTA Computer Services — technical knowledge base]({REPO}/raw/main/docs/assets/wiki-hero.svg)", "",
+             f"[Brand kit and replacement guide]({REPO}/blob/main/assets/inta-brand/README.md)", "",
              *heading(1, "INTA knowledge base", "🧭 Your next good fix starts here."),
              "Service procedures, tool references and troubleshooting methods for the INTA team.", "",
              f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [Updates & Maintenance](Updates-and-Maintenance) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
