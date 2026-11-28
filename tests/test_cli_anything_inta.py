@@ -137,6 +137,33 @@ class NativeHarness(unittest.TestCase):
                     harness.storage_preview(self.binary, self.pin, folder, days, limit)
         call.assert_not_called()
 
+    def test_rclone_receives_only_bounded_stdin_and_pinned_command(self):
+        binary = self.binary.rename(self.binary.with_name("rclone.exe" if harness.os.name == "nt" else "rclone"))
+        data = b"local fixture"
+        selected = binary.parent.resolve() / "private client & file.bin"
+        selected.write_bytes(data)
+        digest = hashlib.sha256(data).hexdigest()
+        result = subprocess.CompletedProcess([], 0, (digest+"  -\n").encode(), b"unprojected")
+        with patch.dict(harness.os.environ, {"RCLONE_CONFIG": "secret", "HTTPS_PROXY": "private"}):
+            with patch.object(harness.subprocess, "run", return_value=result) as call:
+                binary = binary.resolve()
+                self.assertEqual(harness.rclone_local_sha256(binary, self.pin, selected, digest)["status"], "ready")
+            cmd = call.call_args.args[0]
+            self.assertEqual(cmd, [str(binary), "--config", harness.os.devnull, "hashsum", "sha256", "-"])
+            self.assertEqual(call.call_args.kwargs["input"], data)
+            self.assertFalse(call.call_args.kwargs["shell"])
+            self.assertFalse({"RCLONE_CONFIG", "HTTPS_PROXY"} & set(call.call_args.kwargs["env"]))
+        with patch.object(harness.subprocess, "run", return_value=result):
+            self.assertEqual(harness.rclone_local_sha256(binary, self.pin, selected, "0" * 64)["status"], "mismatch")
+        with patch.object(harness.subprocess, "run") as call:
+            for file in (selected.parent, pathlib.Path("relative.bin")):
+                with self.assertRaises(ValueError):
+                    harness.rclone_local_sha256(binary, self.pin, file, digest)
+            with patch.object(harness, "MAX_LOCAL_HASH", 2), self.assertRaises(ValueError):
+                harness.rclone_local_sha256(binary, self.pin, selected, digest)
+        call.assert_not_called()
+        self.assertEqual(selected.read_bytes(), data)
+
     def test_bad_pin_never_launches(self):
         with patch.object(harness.subprocess, "run") as run:
             with self.assertRaises(ValueError):
