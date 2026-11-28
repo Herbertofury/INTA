@@ -1,0 +1,46 @@
+{
+  "checkedUtc": "2026-11-28T03:28:10.567414+00:00",
+  "version": "1.0.0",
+  "executableSha256": "4cd404d051cd755903920935d62c2943a7bf44e75106c21feb94b4fdc8367d07",
+  "host": {
+    "platform": "win32",
+    "build": 22631,
+    "machine": "AMD64"
+  },
+  "catalog": {
+    "canonical": 260,
+    "additional": 59,
+    "unique": 319,
+    "exactReadbacks": 319
+  },
+  "schemaReadbacks": 7,
+  "operations": [
+    "tools.search",
+    "tools.inspect",
+    "system.memory",
+    "system.power",
+    "startup.counts",
+    "file.sha256",
+    "text.sha256"
+  ],
+  "nativeComparisons": {
+    "physicalMemoryMatches": true,
+    "allPowerPlanIdsAndActiveSchemeMatch": true,
+    "sixRegistryViewsMatch": true,
+    "powerPlanCount": 5
+  },
+  "localFile": {
+    "bytes": 396022,
+    "sha256": "15abacf5a55aa3340512c21f90fde09eaae24657417dd00c117fa0118b3ae869"
+  },
+  "sourcePreserved": true,
+  "forge": {
+    "recipeSha256": "a1637dc3c3e5a16a08a4ca74c046008272245b75cedd17ab922aa2fb44d53afb",
+    "verifiedVectors": 4,
+    "concurrentPublication": [
+      "already-imported",
+      "imported"
+    ],
+    "successfulRerun": true
+  }
+}

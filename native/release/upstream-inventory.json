@@ -1,0 +1,435 @@
+{
+  "scope": "Upstream license metadata, release tags and source tree inventory. No third-party UI source is embedded by this inventory.",
+  "repositories": [
+    {
+      "requested": "0DNANCY/agy-claude-style",
+      "repo": "0DNANCY/agy-claude-style",
+      "head": "f9ec98a6652c909d50dce436754d2f1170b17b0e",
+      "license": "MIT",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "v3.1.0",
+      "latestPrerelease": "v3.0.0",
+      "sourcePaths": [
+        "ripple-core.js",
+        "test/ripple-core.test.mjs"
+      ],
+      "truncated": false,
+      "language": "JavaScript"
+    },
+    {
+      "requested": "abundantbeing/aether",
+      "repo": "abundantbeing/aether",
+      "head": "e328dba5c41d00d8d87213ecbe91c61fbaeaea7c",
+      "license": "MIT",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "v0.1.0",
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "_palette.py",
+        "desktop-src/renderer.js",
+        "desktop-src/shader.js",
+        "docs/screenshots/hero-agent-theme.png",
+        "skills/theme-design/SKILL.md",
+        "tests/shaders.mjs"
+      ],
+      "truncated": false,
+      "language": "JavaScript"
+    },
+    {
+      "requested": "Adolanium/hermes-borealis",
+      "repo": "Adolanium/hermes-borealis",
+      "head": "8e89d82ff34084654f690d093e8c69809f754a86",
+      "license": "MIT",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "catalog-v0.3.0",
+      "latestPrerelease": null,
+      "sourcePaths": [],
+      "truncated": false,
+      "language": "JavaScript"
+    },
+    {
+      "requested": "NousResearch/hermes-agent",
+      "repo": "NousResearch/hermes-agent",
+      "head": "774a456f7a181c3c61ba3e5a3d93d66b1505fa8e",
+      "license": "MIT",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "v0.23.5",
+      "latestPrerelease": "canary.20261125T064800Z-v0.23.4",
+      "sourcePaths": [
+        "agent/reasoning_promotion.py",
+        "apps/bootstrap-installer/src/theme.ts",
+        "apps/desktop/electron/renderer-accessibility.test.ts",
+        "apps/desktop/electron/renderer-accessibility.ts",
+        "apps/desktop/electron/renderer-bundle.test.ts",
+        "apps/desktop/electron/renderer-bundle.ts",
+        "apps/desktop/electron/renderer-crash-metrics.test.ts",
+        "apps/desktop/electron/renderer-crash-metrics.ts",
+        "apps/desktop/electron/renderer-heap-flags.test.ts",
+        "apps/desktop/electron/renderer-heap-flags.ts",
+        "apps/desktop/electron/renderer-load-error-page.test.ts",
+        "apps/desktop/electron/renderer-load-error-page.ts"
+      ],
+      "truncated": false,
+      "language": "Python"
+    },
+    {
+      "requested": "joeynyc/hermes-hudui",
+      "repo": "joeynyc/hermes-hudui",
+      "head": "9f6270450e8e86649cb8beb6c59fc43172992483",
+      "license": "MIT",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "v0.12.2",
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "frontend/src/components/CommandPalette.tsx",
+        "frontend/src/hooks/useTheme.tsx",
+        "tests/test_frontend_themes.py"
+      ],
+      "truncated": false,
+      "language": "Python"
+    },
+    {
+      "requested": "Nwflower/dsh-claude-style",
+      "repo": "Nwflower/dsh-claude-style",
+      "head": "ae4547daf7ce135554fc8ba0bf3fed852d4719bd",
+      "license": "NOASSERTION",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "v0.22.4",
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "docs/adr/D93-canvas-per-block-motion.md",
+        "docs/adr/D97-palette-text-seeds.md",
+        "packages/client/src/features/chat-fold/fold-motion.css",
+        "packages/client/src/features/home-ripple/home-ripple.copy.json",
+        "packages/client/src/features/home-ripple/home-ripple.css",
+        "packages/client/src/features/home-ripple/home-ripple.manifest.ts",
+        "packages/client/src/features/home-ripple/home-ripple.ts",
+        "packages/client/src/features/home-ripple/ripple-field.ts",
+        "packages/client/src/features/home-ripple/ripple-noise.ts",
+        "packages/client/src/features/home-ripple/ripple-params.ts",
+        "packages/client/src/features/home-ripple/ripple-wave.ts",
+        "packages/client/src/features/settings/palette-cards.ts"
+      ],
+      "truncated": false,
+      "language": "TypeScript"
+    },
+    {
+      "requested": "Tht1guyfromtht1place/hermes-sigil-overlay-v2.5",
+      "repo": "Tht1guyfromtht1place/hermes-sigil-overlay-v2.5",
+      "head": "fd17ca90192bed79d384e14b91fa7a6dcc9a2bcd",
+      "license": "MIT",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "v2.5.0",
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "src/renderer.js"
+      ],
+      "truncated": false,
+      "language": "JavaScript"
+    },
+    {
+      "requested": "Tranquil-Flow/hermes-neurovision",
+      "repo": "Tranquil-Flow/hermes-neurovision",
+      "head": "5eb9656319e8c79352a7bc8ccb74552741b43615",
+      "license": "MIT",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "v0.2.1",
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "hermes_neurovision/import_theme.py",
+        "hermes_neurovision/renderer.py",
+        "hermes_neurovision/theme_editor.py",
+        "hermes_neurovision/theme_plugins/__init__.py",
+        "hermes_neurovision/theme_plugins/advanced_screens.py",
+        "hermes_neurovision/theme_plugins/ascii_fields.py",
+        "hermes_neurovision/theme_plugins/attractors.py",
+        "hermes_neurovision/theme_plugins/cosmic.py",
+        "hermes_neurovision/theme_plugins/cosmic_new.py",
+        "hermes_neurovision/theme_plugins/cosmic_v2.py",
+        "hermes_neurovision/theme_plugins/emergent_showcase.py",
+        "hermes_neurovision/theme_plugins/emergent_v2.py"
+      ],
+      "truncated": false,
+      "language": "Python"
+    },
+    {
+      "requested": "rullerzhou-afk/clawd-on-desk",
+      "repo": "rullerzhou-afk/clawd-on-desk",
+      "head": "5f5b36010ea1cd444ea4b080b3832f8da7d9173a",
+      "license": "AGPL-3.0",
+      "licensePaths": [
+        "LICENSE",
+        "NOTICE.md"
+      ],
+      "latestStable": "v1.7.0",
+      "latestPrerelease": "diag-752-native-drag-20260909",
+      "sourcePaths": [
+        ".github/ISSUE_TEMPLATE/theme-submission-zh.yml",
+        ".github/ISSUE_TEMPLATE/theme-submission.yml",
+        "docs/guides/contributing-themes.md",
+        "docs/guides/contributing-themes.zh-CN.md",
+        "docs/guides/guide-theme-creation.md",
+        "docs/project/theme-publishing.md",
+        "docs/project/theme-state-ui.md",
+        "scripts/create-theme.js",
+        "scripts/update-official-theme-catalog-snapshot.js",
+        "scripts/validate-theme.js",
+        "src/bubble-renderer.js",
+        "src/dashboard-renderer.js"
+      ],
+      "truncated": false,
+      "language": "JavaScript"
+    },
+    {
+      "requested": "stablyai/orca",
+      "repo": "stablyai/orca",
+      "head": "a8bb12b98a8a02d8c56d82948695513061d3d0db",
+      "license": "MIT",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "v1.4.280",
+      "latestPrerelease": "android-v0.0.71",
+      "sourcePaths": [
+        "config/ast-grep/rule-tests/renderer-intl-ui-locale-test.yml",
+        "config/ast-grep/rules/renderer-intl-ui-locale.yml",
+        "config/build-plugins/renderer-bundled-dev.ts",
+        "config/oxlint-plugins/renderer-scrollbar-style.mjs",
+        "config/renderer-layout-writer-baseline.txt",
+        "config/scripts/desktop-build/output-contracts/renderer-boot-graph.mjs",
+        "config/scripts/desktop-build/output-contracts/verify-renderer-boot-graph.mjs",
+        "config/scripts/development/web-client/project-renderer-web-client.mjs",
+        "config/scripts/diagnostics/wayland/linux-wayland-renderer-diagnostics.mjs",
+        "config/scripts/localization/source-extraction/localize-renderer-strings.mjs",
+        "config/scripts/performance/fleet-gate/fleet-gate-renderer-probe.mjs",
+        "config/scripts/performance/idle-cpu/idle-cpu-renderer-scale-fixture.mjs"
+      ],
+      "truncated": false,
+      "language": "TypeScript"
+    },
+    {
+      "requested": "EKKOLearnAI/ekko-studio",
+      "repo": "EKKOLearnAI/ekko-studio",
+      "head": "f57b784f7c529a406899d56586df1f8d8a313557",
+      "license": "NOASSERTION",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "v0.8.32",
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "docs/theme-customization.md",
+        "packages/client/src/api/studio/theme.ts",
+        "packages/client/src/components/hermes/chat/MarkdownRenderer.vue",
+        "packages/client/src/components/hermes/chat/mermaidRenderer.ts",
+        "packages/client/src/components/layout/ThemeAppearanceEditor.vue",
+        "packages/client/src/components/layout/ThemePresetManager.vue",
+        "packages/client/src/components/layout/ThemeSwitch.vue",
+        "packages/client/src/composables/useReducedMotion.ts",
+        "packages/client/src/composables/useTheme.ts",
+        "packages/client/src/i18n/theme-appearance-locales.ts",
+        "packages/client/src/i18n/theme-preset-locales.ts",
+        "packages/client/src/plugins/theme.ts"
+      ],
+      "truncated": false,
+      "language": "TypeScript"
+    },
+    {
+      "requested": "6shenhonghong9/dsh-startup-screen",
+      "repo": "6shenhonghong9/dsh-startup-screen",
+      "head": "872ae017ff2183d195495b26111b61f518f7b420",
+      "license": "MIT",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "1.3.1",
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "docs/screenshots/theme-dark.jpg",
+        "docs/screenshots/theme-light.jpg"
+      ],
+      "truncated": false,
+      "language": "JavaScript"
+    },
+    {
+      "requested": "system643/claude-code-themes",
+      "repo": "system643/claude-code-themes",
+      "head": "8f7b65cccbb878e0f25627f633dfa4850fff771d",
+      "license": "NOASSERTION",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": null,
+      "latestPrerelease": null,
+      "sourcePaths": [
+        ".github/ISSUE_TEMPLATE/theme.yml",
+        ".github/workflows/themes.yml",
+        "app/src-tauri/shaders/bubbles.glsl",
+        "app/src-tauri/shaders/bubbles.hlsl",
+        "app/src-tauri/shaders/crt.glsl",
+        "app/src-tauri/shaders/crt.hlsl",
+        "app/src-tauri/shaders/embers.glsl",
+        "app/src-tauri/shaders/embers.hlsl",
+        "app/src-tauri/shaders/fireflies.glsl",
+        "app/src-tauri/shaders/fireflies.hlsl",
+        "app/src-tauri/shaders/glow.glsl",
+        "app/src-tauri/shaders/glow.hlsl"
+      ],
+      "truncated": false,
+      "language": "Python"
+    },
+    {
+      "requested": "DavidHDev/react-bits",
+      "repo": "DavidHDev/react-bits",
+      "head": "a30a9da9b40a91c5672fc8cd77785719e8e5b1e6",
+      "license": "NOASSERTION",
+      "licensePaths": [
+        "LICENSE.md"
+      ],
+      "latestStable": null,
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "public/assets/pro/agent-kit/prompt-restaurant.webp",
+        "public/assets/pro/agent-kit/skill-playful-motion.webp",
+        "public/assets/pro/components/ascii-ripple-poster.webp",
+        "public/assets/pro/components/ascii-ripple.webp",
+        "public/assets/pro/components/aura-blob-poster.webp",
+        "public/assets/pro/components/aura-blob.webp",
+        "public/assets/pro/components/minimal-ripple-poster.webp",
+        "public/assets/pro/components/minimal-ripple.webp",
+        "public/assets/pro/components/prism-carousel-poster.webp",
+        "public/assets/pro/components/prism-carousel.webp",
+        "public/assets/pro/components/prismatic-slats-poster.webp",
+        "public/assets/pro/components/prismatic-slats.webp"
+      ],
+      "truncated": false,
+      "language": "JavaScript"
+    },
+    {
+      "requested": "paper-design/shaders",
+      "repo": "paper-design/shaders",
+      "head": "e7003a2d4e6e932e30b8fa11ec1239e6ea48e16a",
+      "license": "Apache-2.0",
+      "licensePaths": [
+        "LICENSE",
+        "NOTICE"
+      ],
+      "latestStable": null,
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "docs/public/shaders/color-panels.webp",
+        "docs/public/shaders/dithering.webp",
+        "docs/public/shaders/dot-grid.webp",
+        "docs/public/shaders/dot-orbit.webp",
+        "docs/public/shaders/fluted-glass.webp",
+        "docs/public/shaders/gem-smoke.webp",
+        "docs/public/shaders/god-rays.webp",
+        "docs/public/shaders/grain-gradient.webp",
+        "docs/public/shaders/halftone-cmyk.webp",
+        "docs/public/shaders/halftone-dots.webp",
+        "docs/public/shaders/heatmap.webp",
+        "docs/public/shaders/image-dithering.webp"
+      ],
+      "truncated": false,
+      "language": "TypeScript"
+    },
+    {
+      "requested": "AndreyBegma/glass-ui",
+      "repo": "AndreyBegma/glass-ui",
+      "head": "29cb772953e3f2090f23b6ab95d06a276b591cea",
+      "license": "MIT",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": null,
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "docs/palette/after-dark-navy.png",
+        "docs/palette/after-dark.png",
+        "docs/palette/after-light-navy.png",
+        "docs/palette/after-light.png",
+        "docs/palette/before-dark.png",
+        "docs/palette/before-light.png",
+        "docs/palette/button-navy-after-dark.png",
+        "docs/palette/button-navy-after-light.png",
+        "docs/palette/button-navy-before-dark.png",
+        "src/hooks/use-command-palette-shortcut.ts",
+        "src/palette.spec.ts",
+        "src/patterns/command-palette.spec.tsx"
+      ],
+      "truncated": false,
+      "language": "TypeScript"
+    },
+    {
+      "requested": "RMvdesi/obsidian-prism",
+      "repo": "RMvdesi/obsidian-prism",
+      "head": "d47c5d9ccb8886025d0f8b1bdf99bc1b5e4b1d07",
+      "license": "GPL-3.0",
+      "licensePaths": [
+        "LICENSE",
+        "NOTICE"
+      ],
+      "latestStable": "v1.0.7",
+      "latestPrerelease": "v1.0.8-beta.5",
+      "sourcePaths": [
+        "assets/screenshots/palettes.webp",
+        "conv-aura.js",
+        "crystal-prism-core.js",
+        "home-ripple-host.js",
+        "motion-engine.js",
+        "prism-rim-canvas.js",
+        "ripple-core.js",
+        "src/runtime/reduced-motion-guard.js",
+        "src/runtime/ripple-worker.js",
+        "test/crystal-prism-core.test.mjs",
+        "test/font-and-reduced-motion.test.mjs",
+        "test/home-ripple-165hz-smooth-sleep.test.mjs"
+      ],
+      "truncated": false,
+      "language": "JavaScript"
+    },
+    {
+      "requested": "HKUDS/CLI-Anything",
+      "repo": "HKUDS/CLI-Anything",
+      "head": "34f519533bc175d2fe287ab8316b0dd99bb9cc43",
+      "license": "Apache-2.0",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "latestStable": "v0.4.0",
+      "latestPrerelease": null,
+      "sourcePaths": [
+        "3MF/agent-harness/cli_anything/threemf/skills/SKILL.md",
+        "QGIS/agent-harness/cli_anything/qgis/skills/SKILL.md",
+        "adguardhome/agent-harness/cli_anything/adguardhome/skills/SKILL.md",
+        "anygen/agent-harness/cli_anything/anygen/skills/SKILL.md",
+        "audacity/agent-harness/cli_anything/audacity/skills/SKILL.md",
+        "blender/agent-harness/cli_anything/blender/skills/SKILL.md",
+        "browser/agent-harness/cli_anything/browser/skills/SKILL.md",
+        "calibre/agent-harness/cli_anything/calibre/skills/SKILL.md",
+        "cc-switch/agent-harness/cli_anything/ccswitch/skills/SKILL.md",
+        "chromadb/agent-harness/cli_anything/chromadb/skills/SKILL.md",
+        "cli-anything-plugin/templates/SKILL.md.template",
+        "cli-hub-matrix/3d-cad/SKILL.md"
+      ],
+      "truncated": false,
+      "language": "Python"
+    }
+  ]
+}

@@ -1,0 +1,1172 @@
+[
+  {
+    "id": "defender-offline",
+    "builtin": "windows-security"
+  },
+  {
+    "id": "safety-scanner",
+    "winget": "Microsoft.SafetyScanner",
+    "filenames": [
+      "msert.exe"
+    ]
+  },
+  {
+    "id": "adwcleaner",
+    "winget": "Malwarebytes.AdwCleaner",
+    "filenames": [
+      "adwcleaner.exe"
+    ]
+  },
+  {
+    "id": "malwarebytes",
+    "winget": "Malwarebytes.Malwarebytes",
+    "executables": [
+      "pf/Malwarebytes/Anti-Malware/mbam.exe"
+    ]
+  },
+  {
+    "id": "hitmanpro",
+    "executables": [
+      "pf/HitmanPro/HitmanPro.exe"
+    ],
+    "filenames": [
+      "HitmanPro_x64.exe",
+      "HitmanPro.exe"
+    ]
+  },
+  {
+    "id": "eset-online-scanner",
+    "filenames": [
+      "esetonlinescanner.exe"
+    ]
+  },
+  {
+    "id": "clamav",
+    "winget": "Cisco.ClamAV",
+    "executables": [
+      "pf/ClamAV/clamscan.exe"
+    ],
+    "linux": {
+      "package": "clamav",
+      "command": "clamscan"
+    }
+  },
+  {
+    "id": "bitdefender-gravityzone",
+    "web": "https://gravityzone.bitdefender.com/"
+  },
+  {
+    "id": "defender-business",
+    "web": "https://security.microsoft.com/"
+  },
+  {
+    "id": "sophos-endpoint",
+    "web": "https://central.sophos.com/"
+  },
+  {
+    "id": "bitdefender-free",
+    "executables": [
+      "pf/Bitdefender/Bitdefender Security/bdagent.exe"
+    ]
+  },
+  {
+    "id": "emsisoft-emergency-kit",
+    "winget": "Emsisoft.EmergencyKit",
+    "filenames": [
+      "Start Emergency Kit Scanner.exe",
+      "a2emergencykit.exe"
+    ]
+  },
+  {
+    "id": "meshcentral"
+  },
+  {
+    "id": "rustdesk",
+    "executables": [
+      "pf/RustDesk/rustdesk.exe"
+    ]
+  },
+  {
+    "id": "quick-assist",
+    "builtin": "quick-assist"
+  },
+  {
+    "id": "chrome-remote-desktop",
+    "web": "https://remotedesktop.google.com/support"
+  },
+  {
+    "id": "anydesk",
+    "winget": "AnyDesk.AnyDesk",
+    "executables": [
+      "pf86/AnyDesk/AnyDesk.exe",
+      "pf/AnyDesk/AnyDesk.exe"
+    ]
+  },
+  {
+    "id": "teamviewer",
+    "winget": "TeamViewer.TeamViewer",
+    "executables": [
+      "pf/TeamViewer/TeamViewer.exe",
+      "pf86/TeamViewer/TeamViewer.exe"
+    ]
+  },
+  {
+    "id": "screenconnect"
+  },
+  {
+    "id": "tailscale",
+    "winget": "Tailscale.Tailscale",
+    "executables": [
+      "pf/Tailscale/tailscale-ipn.exe"
+    ]
+  },
+  {
+    "id": "sysinternals",
+    "winget": "Microsoft.Sysinternals.Suite",
+    "filenames": [
+      "procexp64.exe",
+      "procexp.exe"
+    ]
+  },
+  {
+    "id": "autoruns",
+    "winget": "Microsoft.Sysinternals.Autoruns",
+    "filenames": [
+      "Autoruns64.exe",
+      "Autoruns.exe"
+    ]
+  },
+  {
+    "id": "process-explorer",
+    "winget": "Microsoft.Sysinternals.ProcessExplorer",
+    "filenames": [
+      "procexp64.exe",
+      "procexp.exe"
+    ]
+  },
+  {
+    "id": "procmon",
+    "winget": "Microsoft.Sysinternals.ProcessMonitor",
+    "filenames": [
+      "Procmon64.exe",
+      "Procmon.exe"
+    ]
+  },
+  {
+    "id": "tcpview",
+    "winget": "Microsoft.Sysinternals.TCPView",
+    "filenames": [
+      "tcpview64.exe",
+      "tcpview.exe"
+    ]
+  },
+  {
+    "id": "rammap",
+    "winget": "Microsoft.Sysinternals.RAMMap",
+    "filenames": [
+      "RAMMap64.exe",
+      "RAMMap.exe"
+    ]
+  },
+  {
+    "id": "procdump",
+    "filenames": [
+      "procdump64.exe",
+      "procdump.exe"
+    ]
+  },
+  {
+    "id": "sigcheck",
+    "winget": "Microsoft.Sysinternals.Sigcheck",
+    "filenames": [
+      "sigcheck64.exe",
+      "sigcheck.exe"
+    ]
+  },
+  {
+    "id": "dism",
+    "builtin": "dism"
+  },
+  {
+    "id": "sfc",
+    "builtin": "sfc"
+  },
+  {
+    "id": "windows-recovery",
+    "builtin": "recovery-settings"
+  },
+  {
+    "id": "winget",
+    "winget": "Microsoft.AppInstaller",
+    "builtin": "winget"
+  },
+  {
+    "id": "powershell",
+    "winget": "Microsoft.PowerShell",
+    "executables": [
+      "pf/PowerShell/7/pwsh.exe"
+    ],
+    "builtin": "powershell"
+  },
+  {
+    "id": "windows-terminal",
+    "winget": "Microsoft.WindowsTerminal",
+    "builtin": "windows-terminal"
+  },
+  {
+    "id": "system-informer",
+    "winget": "WinsiderSS.SystemInformer",
+    "executables": [
+      "pf/SystemInformer/SystemInformer.exe"
+    ]
+  },
+  {
+    "id": "windirstat",
+    "winget": "WinDirStat.WinDirStat",
+    "executables": [
+      "pf/WinDirStat/WinDirStat.exe",
+      "pf86/WinDirStat/windirstat.exe"
+    ]
+  },
+  {
+    "id": "wiztree",
+    "winget": "AntibodySoftware.WizTree",
+    "executables": [
+      "pf/WizTree/WizTree64.exe",
+      "pf86/WizTree/WizTree64.exe"
+    ]
+  },
+  {
+    "id": "bcuninstaller",
+    "winget": "Klocman.BulkCrapUninstaller",
+    "executables": [
+      "pf/BCUninstaller/BCUninstaller.exe"
+    ]
+  },
+  {
+    "id": "windows-performance-toolkit",
+    "executables": [
+      "pf86/Windows Kits/10/Windows Performance Toolkit/wpa.exe"
+    ]
+  },
+  {
+    "id": "windbg",
+    "winget": "Microsoft.WinDbg",
+    "filenames": [
+      "WinDbgX.exe",
+      "windbg.exe"
+    ]
+  },
+  {
+    "id": "winsat",
+    "builtin": "winsat"
+  },
+  {
+    "id": "crystaldiskinfo",
+    "winget": "CrystalDewWorld.CrystalDiskInfo",
+    "executables": [
+      "pf/CrystalDiskInfo/DiskInfo64.exe"
+    ]
+  },
+  {
+    "id": "smartmontools",
+    "winget": "smartmontools.smartmontools",
+    "executables": [
+      "pf/smartmontools/bin/smartctl.exe"
+    ],
+    "linux": {
+      "package": "smartmontools",
+      "command": "smartctl"
+    }
+  },
+  {
+    "id": "ddrescue",
+    "linux": {
+      "package": "gddrescue",
+      "command": "ddrescue"
+    }
+  },
+  {
+    "id": "testdisk",
+    "winget": "CGSecurity.TestDisk",
+    "filenames": [
+      "testdisk_win.exe"
+    ],
+    "linux": {
+      "package": "testdisk",
+      "command": "testdisk"
+    }
+  },
+  {
+    "id": "photorec",
+    "winget": "CGSecurity.TestDisk",
+    "filenames": [
+      "qphotorec_win.exe",
+      "photorec_win.exe"
+    ],
+    "linux": {
+      "package": "testdisk",
+      "command": "photorec"
+    }
+  },
+  {
+    "id": "dmde",
+    "winget": "DMDE.DataRecovery.GUI",
+    "filenames": [
+      "dmde.exe"
+    ]
+  },
+  {
+    "id": "gparted",
+    "boot": true,
+    "linux": {
+      "package": "gparted",
+      "command": "gparted",
+      "gui": true
+    }
+  },
+  {
+    "id": "rescuezilla",
+    "boot": true
+  },
+  {
+    "id": "clonezilla",
+    "boot": true,
+    "linux": {
+      "package": "clonezilla",
+      "command": "clonezilla"
+    }
+  },
+  {
+    "id": "restic",
+    "winget": "restic.restic",
+    "filenames": [
+      "restic.exe"
+    ],
+    "managed": "restic",
+    "linux": {
+      "package": "restic",
+      "command": "restic"
+    }
+  },
+  {
+    "id": "kopia",
+    "winget": "Kopia.KopiaUI",
+    "executables": [
+      "pf/KopiaUI/KopiaUI.exe",
+      "local/Programs/KopiaUI/KopiaUI.exe"
+    ]
+  },
+  {
+    "id": "rclone",
+    "winget": "Rclone.Rclone",
+    "filenames": [
+      "rclone.exe"
+    ],
+    "managed": "rclone",
+    "linux": {
+      "package": "rclone",
+      "command": "rclone"
+    }
+  },
+  {
+    "id": "veeam-agent",
+    "winget": "Veeam.VeeamAgent",
+    "executables": [
+      "pf/Veeam/Endpoint Backup/Veeam.EndPoint.Tray.exe"
+    ]
+  },
+  {
+    "id": "freefilesync",
+    "executables": [
+      "pf/FreeFileSync/FreeFileSync.exe"
+    ]
+  },
+  {
+    "id": "robocopy",
+    "builtin": "robocopy"
+  },
+  {
+    "id": "hwinfo",
+    "winget": "REALiX.HWiNFO",
+    "executables": [
+      "pf/HWiNFO64/HWiNFO64.exe"
+    ]
+  },
+  {
+    "id": "libre-hardware-monitor",
+    "winget": "LibreHardwareMonitor.LibreHardwareMonitor",
+    "filenames": [
+      "LibreHardwareMonitor.exe"
+    ]
+  },
+  {
+    "id": "memtest86plus",
+    "boot": true
+  },
+  {
+    "id": "memtest86",
+    "boot": true
+  },
+  {
+    "id": "cpu-z",
+    "winget": "CPUID.CPU-Z",
+    "executables": [
+      "pf/CPUID/CPU-Z/cpuz.exe",
+      "pf/CPUID/CPU-Z/cpuz_x64.exe"
+    ]
+  },
+  {
+    "id": "occt",
+    "filenames": [
+      "OCCT.exe"
+    ]
+  },
+  {
+    "id": "oem-drivers",
+    "builtin": "windows-update"
+  },
+  {
+    "id": "wireshark",
+    "winget": "WiresharkFoundation.Wireshark",
+    "executables": [
+      "pf/Wireshark/Wireshark.exe"
+    ],
+    "linux": {
+      "package": "wireshark",
+      "command": "wireshark",
+      "gui": true
+    }
+  },
+  {
+    "id": "iperf3",
+    "linux": {
+      "package": "iperf3",
+      "command": "iperf3"
+    }
+  },
+  {
+    "id": "nmap",
+    "winget": "Insecure.Nmap",
+    "executables": [
+      "pf86/Nmap/zenmap.exe",
+      "pf/Nmap/zenmap.exe"
+    ]
+  },
+  {
+    "id": "angry-ip-scanner",
+    "winget": "angryziber.AngryIPScanner",
+    "executables": [
+      "pf/Angry IP Scanner/ipscan.exe"
+    ],
+    "linux": {
+      "package": "ipscan",
+      "command": "ipscan",
+      "gui": true
+    }
+  },
+  {
+    "id": "putty",
+    "winget": "PuTTY.PuTTY",
+    "executables": [
+      "pf/PuTTY/putty.exe"
+    ],
+    "linux": {
+      "package": "putty",
+      "command": "putty",
+      "gui": true
+    }
+  },
+  {
+    "id": "winscp",
+    "winget": "WinSCP.WinSCP",
+    "executables": [
+      "pf86/WinSCP/WinSCP.exe",
+      "pf/WinSCP/WinSCP.exe"
+    ]
+  },
+  {
+    "id": "openssh",
+    "builtin": "openssh",
+    "linux": {
+      "package": "openssh-client",
+      "command": "ssh"
+    }
+  },
+  {
+    "id": "pktmon",
+    "builtin": "pktmon"
+  },
+  {
+    "id": "rufus",
+    "winget": "Rufus.Rufus",
+    "filenames": [
+      "rufus.exe"
+    ]
+  },
+  {
+    "id": "ventoy",
+    "winget": "Ventoy.Ventoy",
+    "filenames": [
+      "Ventoy2Disk.exe"
+    ]
+  },
+  {
+    "id": "systemrescue",
+    "boot": true
+  },
+  {
+    "id": "hirens-bootcd-pe",
+    "boot": true
+  },
+  {
+    "id": "microsoft-windows11-media",
+    "boot": true
+  },
+  {
+    "id": "debian-live",
+    "boot": true
+  },
+  {
+    "id": "ubuntu-live",
+    "boot": true
+  },
+  {
+    "id": "7zip",
+    "winget": "7zip.7zip",
+    "executables": [
+      "pf/7-Zip/7zFM.exe",
+      "pf86/7-Zip/7zFM.exe"
+    ],
+    "managed": "7zip",
+    "linux": {
+      "package": "7zip",
+      "command": "7zz"
+    }
+  },
+  {
+    "id": "notepadplusplus",
+    "winget": "Notepad++.Notepad++",
+    "executables": [
+      "pf/Notepad++/notepad++.exe",
+      "pf86/Notepad++/notepad++.exe"
+    ]
+  },
+  {
+    "id": "powertoys",
+    "winget": "Microsoft.PowerToys",
+    "executables": [
+      "pf/PowerToys/PowerToys.exe",
+      "local/PowerToys/PowerToys.exe"
+    ]
+  },
+  {
+    "id": "everything",
+    "winget": "voidtools.Everything",
+    "executables": [
+      "pf/Everything/Everything.exe",
+      "pf86/Everything/Everything.exe"
+    ]
+  },
+  {
+    "id": "wizfile",
+    "winget": "AntibodySoftware.WizFile",
+    "executables": [
+      "pf/WizFile/WizFile64.exe",
+      "pf86/WizFile/WizFile64.exe"
+    ]
+  },
+  {
+    "id": "sharex",
+    "winget": "ShareX.ShareX",
+    "executables": [
+      "pf/ShareX/ShareX.exe"
+    ]
+  },
+  {
+    "id": "keepassxc",
+    "winget": "KeePassXCTeam.KeePassXC",
+    "executables": [
+      "pf/KeePassXC/KeePassXC.exe"
+    ],
+    "linux": {
+      "package": "keepassxc",
+      "command": "keepassxc",
+      "gui": true
+    }
+  },
+  {
+    "id": "localsend",
+    "winget": "LocalSend.LocalSend",
+    "executables": [
+      "pf/LocalSend/localsend_app.exe",
+      "local/Programs/LocalSend/localsend_app.exe"
+    ]
+  },
+  {
+    "id": "unigetui",
+    "winget": "Devolutions.UniGetUI",
+    "executables": [
+      "pf/UniGetUI/UniGetUI.exe",
+      "local/Programs/UniGetUI/UniGetUI.exe"
+    ]
+  },
+  {
+    "id": "chatgpt",
+    "winget": "OpenAI.ChatGPT",
+    "web": "https://chatgpt.com/"
+  },
+  {
+    "id": "codex-cli",
+    "winget": "OpenAI.Codex",
+    "filenames": [
+      "codex.exe"
+    ],
+    "linux": {
+      "command": "codex"
+    }
+  },
+  {
+    "id": "claude-code",
+    "winget": "Anthropic.ClaudeCode",
+    "filenames": [
+      "claude.exe"
+    ],
+    "linux": {
+      "command": "claude"
+    }
+  },
+  {
+    "id": "gemini-cli",
+    "linux": {
+      "command": "gemini"
+    }
+  },
+  {
+    "id": "ollama",
+    "winget": "Ollama.Ollama",
+    "executables": [
+      "local/Programs/Ollama/ollama app.exe"
+    ],
+    "linux": {
+      "command": "ollama"
+    }
+  },
+  {
+    "id": "yara-x",
+    "winget": "VirusTotal.YARA-X",
+    "filenames": [
+      "yr.exe"
+    ],
+    "managed": "yara-x"
+  },
+  {
+    "id": "pe-sieve",
+    "filenames": [
+      "pe-sieve64.exe",
+      "pe-sieve32.exe"
+    ]
+  },
+  {
+    "id": "hollows-hunter",
+    "filenames": [
+      "hollows_hunter64.exe",
+      "hollows_hunter32.exe"
+    ]
+  },
+  {
+    "id": "fibratus",
+    "filenames": [
+      "fibratus.exe"
+    ]
+  },
+  {
+    "id": "rustinel",
+    "filenames": [
+      "rustinel.exe"
+    ]
+  },
+  {
+    "id": "prx-sd",
+    "filenames": [
+      "sd.exe"
+    ]
+  },
+  {
+    "id": "sentinella",
+    "filenames": [
+      "Sentinella.exe"
+    ]
+  },
+  {
+    "id": "velociraptor",
+    "winget": "Velocidex.Velociraptor",
+    "filenames": [
+      "velociraptor.exe"
+    ]
+  },
+  {
+    "id": "hayabusa",
+    "filenames": [
+      "hayabusa.exe"
+    ]
+  },
+  {
+    "id": "chainsaw",
+    "filenames": [
+      "chainsaw.exe"
+    ]
+  },
+  {
+    "id": "sigma",
+    "web": "https://sigmahq.io/"
+  },
+  {
+    "id": "osquery",
+    "winget": "osquery.osquery",
+    "executables": [
+      "pf/osquery/osqueryi.exe"
+    ],
+    "linux": {
+      "package": "osquery",
+      "command": "osqueryi"
+    }
+  },
+  {
+    "id": "wazuh"
+  },
+  {
+    "id": "volatility",
+    "linux": {
+      "package": "volatility3",
+      "command": "vol"
+    }
+  },
+  {
+    "id": "autopsy",
+    "winget": "SleuthKit.Autopsy",
+    "filenames": [
+      "autopsy64.exe",
+      "autopsy.exe"
+    ]
+  },
+  {
+    "id": "nvme-cli",
+    "linux": {
+      "package": "nvme-cli",
+      "command": "nvme"
+    }
+  },
+  {
+    "id": "gsmartcontrol",
+    "winget": "AlexanderShaduri.GSmartControl",
+    "executables": [
+      "pf/GSmartControl/gsmartcontrol.exe"
+    ],
+    "linux": {
+      "package": "gsmartcontrol",
+      "command": "gsmartcontrol",
+      "gui": true
+    }
+  },
+  {
+    "id": "tcpdump",
+    "linux": {
+      "package": "tcpdump",
+      "command": "tcpdump"
+    }
+  },
+  {
+    "id": "cryptsetup",
+    "linux": {
+      "package": "cryptsetup",
+      "command": "cryptsetup"
+    }
+  },
+  {
+    "id": "dislocker",
+    "linux": {
+      "package": "dislocker",
+      "command": "dislocker"
+    }
+  },
+  {
+    "id": "rsync",
+    "linux": {
+      "package": "rsync",
+      "command": "rsync"
+    }
+  },
+  {
+    "id": "bitlocker",
+    "builtin": "bitlocker"
+  },
+  {
+    "id": "windows-update",
+    "builtin": "windows-update"
+  },
+  {
+    "id": "defender-antivirus",
+    "builtin": "windows-security"
+  },
+  {
+    "id": "chkdsk",
+    "builtin": "chkdsk"
+  },
+  {
+    "id": "diskpart",
+    "builtin": "diskpart"
+  },
+  {
+    "id": "bcdboot",
+    "builtin": "bcdboot"
+  },
+  {
+    "id": "task-manager",
+    "builtin": "task-manager"
+  },
+  {
+    "id": "event-viewer",
+    "builtin": "event-viewer"
+  },
+  {
+    "id": "reliability-monitor",
+    "builtin": "reliability-monitor"
+  },
+  {
+    "id": "resource-monitor",
+    "builtin": "resource-monitor"
+  },
+  {
+    "id": "performance-monitor",
+    "builtin": "performance-monitor"
+  },
+  {
+    "id": "device-manager",
+    "builtin": "device-manager"
+  },
+  {
+    "id": "system-restore",
+    "builtin": "system-restore"
+  },
+  {
+    "id": "windows-security",
+    "builtin": "windows-security"
+  },
+  {
+    "id": "command-prompt",
+    "builtin": "command-prompt"
+  },
+  {
+    "id": "hyper-v",
+    "builtin": "hyper-v"
+  },
+  {
+    "id": "startup-repair",
+    "builtin": "recovery-settings"
+  },
+  {
+    "id": "safe-mode",
+    "builtin": "recovery-settings"
+  },
+  {
+    "id": "inta-rescue",
+    "builtin": "inta-rescue"
+  },
+  {
+    "id": "media-creator",
+    "builtin": "media-creator"
+  },
+  {
+    "id": "git",
+    "winget": "Git.Git",
+    "executables": [
+      "pf/Git/git-bash.exe"
+    ],
+    "filenames": [
+      "git-bash.exe"
+    ],
+    "linux": {
+      "package": "git",
+      "command": "git"
+    }
+  },
+  {
+    "id": "python",
+    "winget": "Python.Python.3.13",
+    "executables": [
+      "local/Programs/Python/Python313/python.exe"
+    ],
+    "filenames": [
+      "python.exe"
+    ],
+    "linux": {
+      "package": "python3",
+      "command": "python3",
+      "interactive": true
+    }
+  },
+  {
+    "id": "onedrive",
+    "winget": "Microsoft.OneDrive",
+    "executables": [
+      "local/Microsoft/OneDrive/OneDrive.exe",
+      "pf/Microsoft OneDrive/OneDrive.exe"
+    ],
+    "filenames": [
+      "OneDrive.exe"
+    ]
+  },
+  {
+    "id": "virtualbox",
+    "winget": "Oracle.VirtualBox",
+    "executables": [
+      "pf/Oracle/VirtualBox/VirtualBox.exe"
+    ],
+    "filenames": [
+      "VirtualBox.exe"
+    ]
+  },
+  {
+    "id": "google-chrome",
+    "winget": "Google.Chrome",
+    "executables": [
+      "pf/Google/Chrome/Application/chrome.exe",
+      "pf86/Google/Chrome/Application/chrome.exe"
+    ],
+    "filenames": [
+      "chrome.exe"
+    ]
+  },
+  {
+    "id": "firefox",
+    "winget": "Mozilla.Firefox",
+    "executables": [
+      "pf/Mozilla Firefox/firefox.exe"
+    ],
+    "filenames": [
+      "firefox.exe"
+    ],
+    "linux": {
+      "package": "firefox-esr",
+      "command": "firefox-esr",
+      "gui": true
+    }
+  },
+  {
+    "id": "microsoft-edge",
+    "winget": "Microsoft.Edge",
+    "executables": [
+      "pf86/Microsoft/Edge/Application/msedge.exe",
+      "pf/Microsoft/Edge/Application/msedge.exe"
+    ],
+    "filenames": [
+      "msedge.exe"
+    ]
+  },
+  {
+    "id": "mermaid",
+    "web": "https://mermaid.live/"
+  },
+  {
+    "id": "github",
+    "web": "https://github.com/"
+  },
+  {
+    "id": "github-wiki",
+    "web": "https://github.com/Herbertofury/INTA/wiki"
+  },
+  {
+    "id": "github-pages",
+    "web": "https://herbertofury.github.io/INTA/"
+  },
+  {
+    "id": "github-actions",
+    "web": "https://github.com/Herbertofury/INTA/actions"
+  },
+  {
+    "id": "outlook",
+    "web": "https://outlook.office.com/"
+  },
+  {
+    "id": "microsoft365",
+    "web": "https://www.microsoft365.com/"
+  },
+  {
+    "id": "google-drive",
+    "web": "https://drive.google.com/"
+  },
+  {
+    "id": "winpe",
+    "boot": true
+  },
+  {
+    "id": "proxmox",
+    "boot": true
+  },
+  {
+    "id": "qemu",
+    "builtin": "qemu"
+  },
+  {
+    "id": "cloud-hypervisor",
+    "builtin": "cloud-hypervisor"
+  },
+  {
+    "id": "xfce",
+    "linux": {
+      "package": "xfce4-settings",
+      "command": "xfce4-settings-manager",
+      "gui": true
+    }
+  },
+  {
+    "id": "active-directory",
+    "builtin": "active-directory"
+  },
+  {
+    "id": "athena",
+    "web": "https://github.com/Herbertofury/Athena"
+  },
+  {
+    "id": "unslop",
+    "web": "https://github.com/heydamir/unslop"
+  },
+  {
+    "id": "lm-studio",
+    "winget": "ElementLabs.LMStudio",
+    "filenames": [
+      "LM Studio.exe"
+    ],
+    "executables": [
+      "local/Programs/LM Studio/LM Studio.exe"
+    ]
+  },
+  {
+    "id": "comfyui",
+    "winget": "Comfy.ComfyUI-Desktop",
+    "filenames": [
+      "ComfyUI.exe"
+    ],
+    "executables": [
+      "local/Programs/ComfyUI/ComfyUI.exe"
+    ]
+  },
+  {
+    "id": "hugging-face",
+    "web": "https://huggingface.co/models"
+  },
+  {
+    "id": "mangodisk",
+    "winget": "MangoDisk.MangoDisk",
+    "filenames": [
+      "MangoDisk.exe",
+      "mangodisk-gui.exe"
+    ],
+    "executables": [
+      "local/MangoDisk/MangoDisk.exe",
+      "pf/MangoDisk/MangoDisk.exe"
+    ]
+  },
+  {
+    "id": "chatgpt-desktop",
+    "winget": "OpenAI.ChatGPT"
+  },
+  {
+    "id": "claude-desktop",
+    "winget": "Anthropic.Claude",
+    "executables": [
+      "local/AnthropicClaude/claude.exe",
+      "local/Programs/Claude/Claude.exe"
+    ],
+    "filenames": [
+      "claude.exe"
+    ]
+  },
+  {
+    "id": "winutil",
+    "web": "https://github.com/ChrisTitusTech/winutil"
+  },
+  {
+    "id": "sophia-script",
+    "winget": "TeamSophia.SophiaScript",
+    "web": "https://github.com/farag2/Sophia-Script-for-Windows"
+  },
+  {
+    "id": "win11debloat",
+    "web": "https://github.com/Raphire/Win11Debloat"
+  },
+  {
+    "id": "winhance",
+    "winget": "memstechtips.Winhance",
+    "executables": [
+      "pf/Winhance/Winhance.exe",
+      "local/Programs/Winhance/Winhance.exe"
+    ],
+    "filenames": [
+      "Winhance.exe"
+    ]
+  },
+  {
+    "id": "wintools",
+    "filenames": [
+      "wintools.exe"
+    ],
+    "web": "https://github.com/QexleOSS/wintools"
+  },
+  {
+    "id": "winaero-tweaker",
+    "winget": "winaero.tweaker",
+    "filenames": [
+      "WinaeroTweaker.exe"
+    ]
+  },
+  {
+    "id": "shutup10",
+    "winget": "OO-Software.ShutUp10",
+    "filenames": [
+      "OOSU10.exe",
+      "OOSU10x64.exe"
+    ]
+  },
+  {
+    "id": "appbuster",
+    "winget": "OO-Software.AppBuster",
+    "filenames": [
+      "OOAPB.exe",
+      "OOAPB64.exe",
+      "OOAppBuster.exe"
+    ]
+  },
+  {
+    "id": "bloatynosy",
+    "filenames": [
+      "Bloatynosy.exe",
+      "BloatynosyNue.exe",
+      "BloatynosyApp.exe"
+    ],
+    "web": "https://github.com/builtbybel/Bloatynosy"
+  },
+  {
+    "id": "windows-adk",
+    "winget": "Microsoft.WindowsADK",
+    "executables": [
+      "pf86/Windows Kits/10/Assessment and Deployment Kit/Windows System Image Manager/imgmgr.exe"
+    ],
+    "filenames": [
+      "imgmgr.exe"
+    ]
+  },
+  {
+    "id": "yara",
+    "winget": "VirusTotal.YARA",
+    "filenames": [
+      "yara64.exe",
+      "yara.exe"
+    ],
+    "linux": {
+      "package": "yara",
+      "command": "yara"
+    }
+  }
+]

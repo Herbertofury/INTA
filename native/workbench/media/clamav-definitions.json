@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "available": true,
+  "targetRescueSHA256": "e3b39605ec5be40c7c0ec52936e0178e2eac91b717698616c55ecce4b371e8a7",
+  "toolboxRelativeDirectory": "01 - Security & Malware/Antivirus & Malware Removal/ClamAV/definitions-3778c9ce2260",
+  "filename": "clamav-definitions.iso",
+  "bytes": 113201152,
+  "sha256": "3778c9ce2260837edda85c7ec912a19a6acab125de2298ea2cbbf01e47c08239",
+  "volumeLabel": "INTA_CLAMAV",
+  "collectedUtc": "2026-11-27T01:41:56+00:00",
+  "sources": [
+    "https://docs.clamav.net/manual/Usage/SignatureManagement.html",
+    "https://docs.clamav.net/appendix/CvdPrivateMirror.html",
+    "https://docs.clamav.net/manual/Signatures.html"
+  ],
+  "definitions": [
+    {
+      "file": "bytecode.cvd",
+      "bytes": 281702,
+      "sha256": "6d4aa01f219e988060fc419f495d07f27e0cdf1a2cccc065971da922c76f7ffb",
+      "version": 339,
+      "signatures": 80,
+      "functionalityLevel": 90,
+      "builtUtc": "2025-09-11T12:29:00+00:00",
+      "signatureVerified": true
+    },
+    {
+      "file": "daily.cvd",
+      "bytes": 23446329,
+      "sha256": "88beb774b475593ce7e785234ab9f7731c236a44103f05b1e42f12489f1de312",
+      "version": 28194,
+      "signatures": 355842,
+      "functionalityLevel": 90,
+      "builtUtc": "2026-11-25T06:26:00+00:00",
+      "signatureVerified": true
+    },
+    {
+      "file": "main.cvd",
+      "bytes": 89072577,
+      "sha256": "0b2182d229f46981ec8f535382222f7c9dfdd656b250ad47988b910a8d302365",
+      "version": 63,
+      "signatures": 3287027,
+      "functionalityLevel": 90,
+      "builtUtc": "2025-12-16T23:18:00+00:00",
+      "signatureVerified": true
+    }
+  ],
+  "sidecars": {
+    "README.txt": "67732020880de5c935bf93009d65b699e2e7e03b3be13b0ef7542a9a99faadad",
+    "COPYING.txt": "32b1062f7da84967e7019d01ab805935caa7ab7321a7ced0e30ebe75e5df1670",
+    "manifest.json": "2b87d09c45b88f07d5280c20255ea45d8ae60422fc156e50cb797711bbf4b0f3",
+    "SHA256SUMS": "11e4c3b3b9e1d37a271b0815c6ed7f3596feebcf0a2fd11d5e7de8b9574e2c19",
+    "evidence.json": "2468c28cb11a4e4a8fafbdfdd4f059b58a81e7d7b49bac06b31f2b74517c3112",
+    "guest-serial.log": "d46cabd6c1db45c6bfc4eb02249d12cec7d4588465f2e6b45e24d46a37a4b7fb",
+    "freshclam-result.json": "414c666c364f38ce2f2e5a5285ef2cfa7b92bb72d99ca9b788121ae0ae51ec32"
+  }
+}

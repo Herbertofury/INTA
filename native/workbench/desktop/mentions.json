@@ -1,0 +1,394 @@
+{
+  "links": [
+    {
+      "name": "Windows Assessment and Deployment Kit",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+      "kind": "tool",
+      "id": "windows-adk"
+    },
+    {
+      "name": "Microsoft Defender Antivirus",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-windows",
+      "kind": "tool",
+      "id": "defender-antivirus"
+    },
+    {
+      "name": "Sophia Script for Windows",
+      "url": "https://github.com/farag2/Sophia-Script-for-Windows",
+      "kind": "tool",
+      "id": "sophia-script"
+    },
+    {
+      "name": "Performance Monitor",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor",
+      "kind": "tool",
+      "id": "performance-monitor"
+    },
+    {
+      "name": "Reliability Monitor",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+      "kind": "tool",
+      "id": "reliability-monitor"
+    },
+    {
+      "name": "Defender Antivirus",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-windows",
+      "kind": "tool",
+      "id": "defender-antivirus"
+    },
+    {
+      "name": "Bloatynosy Origin",
+      "url": "https://github.com/builtbybel/Bloatynosy",
+      "kind": "tool",
+      "id": "bloatynosy"
+    },
+    {
+      "name": "Active Directory",
+      "url": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview",
+      "kind": "tool",
+      "id": "active-directory"
+    },
+    {
+      "name": "Cloud Hypervisor",
+      "url": "https://www.cloudhypervisor.org/",
+      "kind": "tool",
+      "id": "cloud-hypervisor"
+    },
+    {
+      "name": "Resource Monitor",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+      "kind": "tool",
+      "id": "resource-monitor"
+    },
+    {
+      "name": "Windows Security",
+      "url": "https://support.microsoft.com/en-us/windows/security/windows-security/windows-security-app-overview",
+      "kind": "tool",
+      "id": "windows-security"
+    },
+    {
+      "name": "ChatGPT desktop",
+      "url": "https://chatgpt.com/download/",
+      "kind": "tool",
+      "id": "chatgpt-desktop"
+    },
+    {
+      "name": "Winaero Tweaker",
+      "url": "https://winaerotweaker.com/",
+      "kind": "tool",
+      "id": "winaero-tweaker"
+    },
+    {
+      "name": "Claude desktop",
+      "url": "https://claude.com/download",
+      "kind": "tool",
+      "id": "claude-desktop"
+    },
+    {
+      "name": "Command Prompt",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd",
+      "kind": "tool",
+      "id": "command-prompt"
+    },
+    {
+      "name": "Device Manager",
+      "url": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+      "kind": "tool",
+      "id": "device-manager"
+    },
+    {
+      "name": "GitHub Actions",
+      "url": "https://docs.github.com/en/actions",
+      "kind": "tool",
+      "id": "github-actions"
+    },
+    {
+      "name": "Microsoft Edge",
+      "url": "https://www.microsoft.com/edge",
+      "kind": "tool",
+      "id": "microsoft-edge"
+    },
+    {
+      "name": "O&O ShutUp10++",
+      "url": "https://www.oo-software.com/en/shutup10",
+      "kind": "tool",
+      "id": "shutup10"
+    },
+    {
+      "name": "Startup Repair",
+      "url": "https://support.microsoft.com/en-us/windows/experience/startup-boot/startup-repair",
+      "kind": "tool",
+      "id": "startup-repair"
+    },
+    {
+      "name": "System Restore",
+      "url": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/system-restore",
+      "kind": "tool",
+      "id": "system-restore"
+    },
+    {
+      "name": "Windows Update",
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+      "kind": "tool",
+      "id": "windows-update"
+    },
+    {
+      "name": "Google Chrome",
+      "url": "https://www.google.com/chrome/",
+      "kind": "tool",
+      "id": "google-chrome"
+    },
+    {
+      "name": "Media Creator",
+      "url": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+      "kind": "tool",
+      "id": "media-creator"
+    },
+    {
+      "name": "Microsoft 365",
+      "url": "https://www.microsoft.com/microsoft-365",
+      "kind": "tool",
+      "id": "microsoft365"
+    },
+    {
+      "name": "O&O AppBuster",
+      "url": "https://www.oo-software.com/en/ooappbuster",
+      "kind": "tool",
+      "id": "appbuster"
+    },
+    {
+      "name": "Event Viewer",
+      "url": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+      "kind": "tool",
+      "id": "event-viewer"
+    },
+    {
+      "name": "GitHub Pages",
+      "url": "https://docs.github.com/en/pages",
+      "kind": "tool",
+      "id": "github-pages"
+    },
+    {
+      "name": "Google Drive",
+      "url": "https://drive.google.com/",
+      "kind": "tool",
+      "id": "google-drive"
+    },
+    {
+      "name": "Hugging Face",
+      "url": "https://huggingface.co/",
+      "kind": "tool",
+      "id": "hugging-face"
+    },
+    {
+      "name": "Task Manager",
+      "url": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+      "kind": "tool",
+      "id": "task-manager"
+    },
+    {
+      "name": "Win11Debloat",
+      "url": "https://github.com/Raphire/Win11Debloat",
+      "kind": "tool",
+      "id": "win11debloat"
+    },
+    {
+      "name": "GitHub Wiki",
+      "url": "https://docs.github.com/en/communities/documenting-your-project-with-wikis",
+      "kind": "tool",
+      "id": "github-wiki"
+    },
+    {
+      "name": "INTA Rescue",
+      "url": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+      "kind": "tool",
+      "id": "inta-rescue"
+    },
+    {
+      "name": "Windows ADK",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+      "kind": "tool",
+      "id": "windows-adk"
+    },
+    {
+      "name": "Bloatynosy",
+      "url": "https://github.com/builtbybel/Bloatynosy",
+      "kind": "tool",
+      "id": "bloatynosy"
+    },
+    {
+      "name": "Proxmox VE",
+      "url": "https://www.proxmox.com/en/products/proxmox-virtual-environment/overview",
+      "kind": "tool",
+      "id": "proxmox"
+    },
+    {
+      "name": "VirtualBox",
+      "url": "https://www.virtualbox.org/",
+      "kind": "tool",
+      "id": "virtualbox"
+    },
+    {
+      "name": "Windows PE",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro",
+      "kind": "tool",
+      "id": "winpe"
+    },
+    {
+      "name": "BitLocker",
+      "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/",
+      "kind": "tool",
+      "id": "bitlocker"
+    },
+    {
+      "name": "LM Studio",
+      "url": "https://lmstudio.ai/",
+      "kind": "tool",
+      "id": "lm-studio"
+    },
+    {
+      "name": "Safe Mode",
+      "url": "https://support.microsoft.com/en-us/windows/experience/startup-boot/windows-startup-settings",
+      "kind": "tool",
+      "id": "safe-mode"
+    },
+    {
+      "name": "DiskPart",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+      "kind": "tool",
+      "id": "diskpart"
+    },
+    {
+      "name": "OneDrive",
+      "url": "https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage",
+      "kind": "tool",
+      "id": "onedrive"
+    },
+    {
+      "name": "Winhance",
+      "url": "https://github.com/memstechtips/Winhance",
+      "kind": "tool",
+      "id": "winhance"
+    },
+    {
+      "name": "Wintools",
+      "url": "https://github.com/QexleOSS/wintools",
+      "kind": "tool",
+      "id": "wintools"
+    },
+    {
+      "name": "BCDBoot",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di",
+      "kind": "tool",
+      "id": "bcdboot"
+    },
+    {
+      "name": "ComfyUI",
+      "url": "https://www.comfy.org/",
+      "kind": "tool",
+      "id": "comfyui"
+    },
+    {
+      "name": "Firefox",
+      "url": "https://www.mozilla.org/firefox/",
+      "kind": "tool",
+      "id": "firefox"
+    },
+    {
+      "name": "Hyper-V",
+      "url": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/overview",
+      "kind": "tool",
+      "id": "hyper-v"
+    },
+    {
+      "name": "Mermaid",
+      "url": "https://mermaid.js.org/",
+      "kind": "tool",
+      "id": "mermaid"
+    },
+    {
+      "name": "Outlook",
+      "url": "https://support.microsoft.com/outlook",
+      "kind": "tool",
+      "id": "outlook"
+    },
+    {
+      "name": "Proxmox",
+      "url": "https://www.proxmox.com/en/products/proxmox-virtual-environment/overview",
+      "kind": "tool",
+      "id": "proxmox"
+    },
+    {
+      "name": "WinUtil",
+      "url": "https://github.com/ChrisTitusTech/winutil",
+      "kind": "tool",
+      "id": "winutil"
+    },
+    {
+      "name": "Athena",
+      "url": "https://github.com/Herbertofury/Athena",
+      "kind": "tool",
+      "id": "athena"
+    },
+    {
+      "name": "chkdsk",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk",
+      "kind": "tool",
+      "id": "chkdsk"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/",
+      "kind": "tool",
+      "id": "github"
+    },
+    {
+      "name": "Python",
+      "url": "https://www.python.org/",
+      "kind": "tool",
+      "id": "python"
+    },
+    {
+      "name": "Unslop",
+      "url": "https://github.com/heydamir/unslop",
+      "kind": "tool",
+      "id": "unslop"
+    },
+    {
+      "name": "WinPE",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro",
+      "kind": "tool",
+      "id": "winpe"
+    },
+    {
+      "name": "M365",
+      "url": "https://www.microsoft.com/microsoft-365",
+      "kind": "tool",
+      "id": "microsoft365"
+    },
+    {
+      "name": "QEMU",
+      "url": "https://www.qemu.org/",
+      "kind": "tool",
+      "id": "qemu"
+    },
+    {
+      "name": "XFCE",
+      "url": "https://www.xfce.org/",
+      "kind": "tool",
+      "id": "xfce"
+    },
+    {
+      "name": "YARA",
+      "url": "https://github.com/VirusTotal/yara",
+      "kind": "tool",
+      "id": "yara"
+    },
+    {
+      "name": "Git",
+      "url": "https://git-scm.com/",
+      "kind": "tool",
+      "id": "git"
+    }
+  ]
+}

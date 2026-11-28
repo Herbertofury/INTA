@@ -1,0 +1,857 @@
+{
+  "schemaVersion": 1,
+  "version": "11.1.3",
+  "build": "11.1.3-2",
+  "defaultLocation": "11 - Linux & Rescue/Virtual Machines/QEMU/11.1.3",
+  "source": "https://github.com/qemu/qemu",
+  "commit": "005c61c0ef6f6ae615283440b4bb7be51b2c6ddd",
+  "files": [
+    {
+      "path": "bin/libaom.dll",
+      "sha256": "9b2bf9122f924b9ad7f9c2be31133758331fd7a7fd33261a63a6d620b31f1883",
+      "bytes": 9682038,
+      "package": "mingw-w64-ucrt-x86_64-aom",
+      "member": "ucrt64/bin/libaom.dll"
+    },
+    {
+      "path": "bin/libatk-1.0-0.dll",
+      "sha256": "c6eabaa9b926a5cf0ff6ebba68546cff6689d2385ead86545bf0cf72704f8d56",
+      "bytes": 158876,
+      "package": "mingw-w64-ucrt-x86_64-atk",
+      "member": "ucrt64/bin/libatk-1.0-0.dll"
+    },
+    {
+      "path": "bin/libavif-16.dll",
+      "sha256": "73275b8df832b25a9fc8e12ff3b6a57e86f0f971d3090098a3762ec396d102cd",
+      "bytes": 322832,
+      "package": "mingw-w64-ucrt-x86_64-libavif",
+      "member": "ucrt64/bin/libavif-16.dll"
+    },
+    {
+      "path": "bin/libbrotlicommon.dll",
+      "sha256": "7b0047dc16dd92a7932124dfd5a6e698d342f533a15d37d61f710def66091436",
+      "bytes": 140697,
+      "package": "mingw-w64-ucrt-x86_64-brotli",
+      "member": "ucrt64/bin/libbrotlicommon.dll"
+    },
+    {
+      "path": "bin/libbrotlidec.dll",
+      "sha256": "c4c987a01597ddf969d93023f933f999a20f285588b0decb4deeb780c9e9cdf8",
+      "bytes": 60224,
+      "package": "mingw-w64-ucrt-x86_64-brotli",
+      "member": "ucrt64/bin/libbrotlidec.dll"
+    },
+    {
+      "path": "bin/libbrotlienc.dll",
+      "sha256": "03f9a82d293caf5b4065a9641dd5309e27aefc5c8111eeec25f906e47ec6c934",
+      "bytes": 786797,
+      "package": "mingw-w64-ucrt-x86_64-brotli",
+      "member": "ucrt64/bin/libbrotlienc.dll"
+    },
+    {
+      "path": "bin/libbz2-1.dll",
+      "sha256": "1790bf6473c9d48db14c1f0ee8124142327556d281299ea2a72ee361118ee01a",
+      "bytes": 107741,
+      "package": "mingw-w64-ucrt-x86_64-bzip2",
+      "member": "ucrt64/bin/libbz2-1.dll"
+    },
+    {
+      "path": "bin/libcacard-0.dll",
+      "sha256": "f5ecc0b5ed7f821817486c59b84b39069953e184c8b2fc0a3cfea4de338525c3",
+      "bytes": 108927,
+      "package": "mingw-w64-ucrt-x86_64-libcacard",
+      "member": "ucrt64/bin/libcacard-0.dll"
+    },
+    {
+      "path": "bin/libcairo-2.dll",
+      "sha256": "be391428fd305983f888becae10ebab9d8009637e7805383e822740043e95849",
+      "bytes": 1244446,
+      "package": "mingw-w64-ucrt-x86_64-cairo",
+      "member": "ucrt64/bin/libcairo-2.dll"
+    },
+    {
+      "path": "bin/libcairo-gobject-2.dll",
+      "sha256": "060e586a23bc07d81cf9c9c2a3927dc2d61168fcc89b13601e98afdffffbfeb6",
+      "bytes": 31536,
+      "package": "mingw-w64-ucrt-x86_64-cairo",
+      "member": "ucrt64/bin/libcairo-gobject-2.dll"
+    },
+    {
+      "path": "bin/libcapstone.dll",
+      "sha256": "0d99d83bc8e163f3c3e523529c5fc8e7b557d1fe96ee31ae93061b94b8c7acaf",
+      "bytes": 7998949,
+      "package": "mingw-w64-ucrt-x86_64-capstone",
+      "member": "ucrt64/bin/libcapstone.dll"
+    },
+    {
+      "path": "bin/libcrypto-4-x64.dll",
+      "sha256": "ff5bd426835acf70a03e6fd8bb51b60441806bf228de608caf4355b57f0c2340",
+      "bytes": 5590344,
+      "package": "mingw-w64-ucrt-x86_64-openssl",
+      "member": "ucrt64/bin/libcrypto-4-x64.dll"
+    },
+    {
+      "path": "bin/libcurl-4.dll",
+      "sha256": "07ffcc59d7c012b39956f4f21dc8875f3892d1570077606703e23ebb2b0dee0f",
+      "bytes": 1413589,
+      "package": "mingw-w64-ucrt-x86_64-curl",
+      "member": "ucrt64/bin/libcurl-4.dll"
+    },
+    {
+      "path": "bin/libdatrie-1.dll",
+      "sha256": "40aee3ae9a62a77454dfe8419fe21b54c54d969e0471c9e817b65d4502a9949f",
+      "bytes": 35223,
+      "package": "mingw-w64-ucrt-x86_64-libdatrie",
+      "member": "ucrt64/bin/libdatrie-1.dll"
+    },
+    {
+      "path": "bin/libdav1d-7.dll",
+      "sha256": "4f58c005ecc51dd689fca1670ed7fbcc090abc6c424babc30ca3a186e699b960",
+      "bytes": 1928165,
+      "package": "mingw-w64-ucrt-x86_64-dav1d",
+      "member": "ucrt64/bin/libdav1d-7.dll"
+    },
+    {
+      "path": "bin/libdb-6.2.dll",
+      "sha256": "1d718f2e454bf4b051bd4a3c378b13742f2b5a0e596b50d835ff13539e823c17",
+      "bytes": 1534317,
+      "package": "mingw-w64-ucrt-x86_64-db",
+      "member": "ucrt64/bin/libdb-6.2.dll"
+    },
+    {
+      "path": "bin/libdeflate.dll",
+      "sha256": "61a60665da9fd15a0e8668c47424f325e1d74479c3f896fa7ae48ffcee4ca300",
+      "bytes": 97053,
+      "package": "mingw-w64-ucrt-x86_64-libdeflate",
+      "member": "ucrt64/bin/libdeflate.dll"
+    },
+    {
+      "path": "bin/libEGL.dll",
+      "sha256": "625af4e343a115422c906ecee1cc1c7cb9d9f1a5b3827620f80f30e6577f8a4a",
+      "bytes": 252928,
+      "package": "mingw-w64-ucrt-x86_64-angleproject",
+      "member": "ucrt64/bin/libEGL.dll"
+    },
+    {
+      "path": "bin/libepoxy-0.dll",
+      "sha256": "dc4055b53d0d6507740e9f3be18c9f2b1318faa531b9b2913eef3c5332fffedc",
+      "bytes": 1770497,
+      "package": "mingw-w64-ucrt-x86_64-libepoxy",
+      "member": "ucrt64/bin/libepoxy-0.dll"
+    },
+    {
+      "path": "bin/libexpat-1.dll",
+      "sha256": "6b79d56a3e5735263ea3938cd9234db595d8d58e027114f69cbe1645e6220c64",
+      "bytes": 236179,
+      "package": "mingw-w64-ucrt-x86_64-expat",
+      "member": "ucrt64/bin/libexpat-1.dll"
+    },
+    {
+      "path": "bin/libfdt-1.dll",
+      "sha256": "eeba742c398648f4d4813126d0a1c46ec32c43e3872533671ea4eb9515aa6f1c",
+      "bytes": 212650,
+      "package": "mingw-w64-ucrt-x86_64-dtc",
+      "member": "ucrt64/bin/libfdt-1.dll"
+    },
+    {
+      "path": "bin/libffi-8.dll",
+      "sha256": "5f515b95604d71f7b26b84f52a33350332a52992300396c33c90563716325ab6",
+      "bytes": 33108,
+      "package": "mingw-w64-ucrt-x86_64-libffi",
+      "member": "ucrt64/bin/libffi-8.dll"
+    },
+    {
+      "path": "bin/libfontconfig-1.dll",
+      "sha256": "d3c21c68a989e738e23516c3460f73db7c21e03c9a3a022457a0c49db1b2ea7d",
+      "bytes": 505218,
+      "package": "mingw-w64-ucrt-x86_64-fontconfig",
+      "member": "ucrt64/bin/libfontconfig-1.dll"
+    },
+    {
+      "path": "bin/libfreetype-6.dll",
+      "sha256": "19604dde573cbb8a13053fc231eee99b91cd972e0e9a3e1465f44ad6985e83ee",
+      "bytes": 808305,
+      "package": "mingw-w64-ucrt-x86_64-freetype",
+      "member": "ucrt64/bin/libfreetype-6.dll"
+    },
+    {
+      "path": "bin/libfribidi-0.dll",
+      "sha256": "4c775e98b38991c93affaf71f088306b37fd2c0d94ff8a90c4906db4669746c9",
+      "bytes": 153053,
+      "package": "mingw-w64-ucrt-x86_64-fribidi",
+      "member": "ucrt64/bin/libfribidi-0.dll"
+    },
+    {
+      "path": "bin/libgcc_s_seh-1.dll",
+      "sha256": "44f6318f96eb2aaf6e90400bb1178ab6d55b01ae2cf24846d6b30d96e87e89dd",
+      "bytes": 150025,
+      "package": "mingw-w64-ucrt-x86_64-libgcc",
+      "member": "ucrt64/bin/libgcc_s_seh-1.dll"
+    },
+    {
+      "path": "bin/libgdk-3-0.dll",
+      "sha256": "867de3778673beed6aa5ecaed274c8dbb31eda2cc3f72c814d42e994ac655100",
+      "bytes": 1382980,
+      "package": "mingw-w64-ucrt-x86_64-gtk3",
+      "member": "ucrt64/bin/libgdk-3-0.dll"
+    },
+    {
+      "path": "bin/libgdk_pixbuf-2.0-0.dll",
+      "sha256": "0f51ba434b2080ab14ce5d6b0b890620be3716fa15460d519bf641ca8441dcd0",
+      "bytes": 355572,
+      "package": "mingw-w64-ucrt-x86_64-gdk-pixbuf2",
+      "member": "ucrt64/bin/libgdk_pixbuf-2.0-0.dll"
+    },
+    {
+      "path": "bin/libgio-2.0-0.dll",
+      "sha256": "1256cbd7cb48df5ecea1646343d617c8e41a434216fdbb88ccfd78fe498442c8",
+      "bytes": 1919044,
+      "package": "mingw-w64-ucrt-x86_64-glib2",
+      "member": "ucrt64/bin/libgio-2.0-0.dll"
+    },
+    {
+      "path": "bin/libGLESv2.dll",
+      "sha256": "710e246f405a6f63005c0d91f385a1b7e62fb1cfc566fd0fbde01b7319a0d6a4",
+      "bytes": 11592704,
+      "package": "mingw-w64-ucrt-x86_64-angleproject",
+      "member": "ucrt64/bin/libGLESv2.dll"
+    },
+    {
+      "path": "bin/libglib-2.0-0.dll",
+      "sha256": "3a1abec0184b238db54399cb9243393d9436d96b8fdb9bd9f2875da207c5b458",
+      "bytes": 1568604,
+      "package": "mingw-w64-ucrt-x86_64-glib2",
+      "member": "ucrt64/bin/libglib-2.0-0.dll"
+    },
+    {
+      "path": "bin/libgmodule-2.0-0.dll",
+      "sha256": "5833f90d3c7a627d4d1b541e873bf0b10bca2204be89666213b3c48f6a57422d",
+      "bytes": 23440,
+      "package": "mingw-w64-ucrt-x86_64-glib2",
+      "member": "ucrt64/bin/libgmodule-2.0-0.dll"
+    },
+    {
+      "path": "bin/libgmp-10.dll",
+      "sha256": "c2567ccf3f410c3411ba7cd4b7ba14f393a0e70a1d0c0593297df6706b5fba96",
+      "bytes": 681231,
+      "package": "mingw-w64-ucrt-x86_64-gmp",
+      "member": "ucrt64/bin/libgmp-10.dll"
+    },
+    {
+      "path": "bin/libgnutls-30.dll",
+      "sha256": "907512c0bca3870ad696a9c55524f7bb9aeee38046a922fd782d3ef5cd2fd243",
+      "bytes": 2321591,
+      "package": "mingw-w64-ucrt-x86_64-gnutls",
+      "member": "ucrt64/bin/libgnutls-30.dll"
+    },
+    {
+      "path": "bin/libgobject-2.0-0.dll",
+      "sha256": "d12b1c34335cf605809af3b9bbed80a05c3334a9dbd02c0d398c1618d47f1d21",
+      "bytes": 358171,
+      "package": "mingw-w64-ucrt-x86_64-glib2",
+      "member": "ucrt64/bin/libgobject-2.0-0.dll"
+    },
+    {
+      "path": "bin/libgraphite2.dll",
+      "sha256": "93953e4744bcfce9a7bc439b956544bc213095cb1349c3602a58370f32b25c18",
+      "bytes": 167857,
+      "package": "mingw-w64-ucrt-x86_64-graphite2",
+      "member": "ucrt64/bin/libgraphite2.dll"
+    },
+    {
+      "path": "bin/libgstapp-1.0-0.dll",
+      "sha256": "c401ec04fe88875f894ee54e487e0b93a84969e0cc4003a3ce35bde6213973a0",
+      "bytes": 100309,
+      "package": "mingw-w64-ucrt-x86_64-gst-plugins-base",
+      "member": "ucrt64/bin/libgstapp-1.0-0.dll"
+    },
+    {
+      "path": "bin/libgstbase-1.0-0.dll",
+      "sha256": "fe6581fd50a1e54f4e6ff7c2a704b8b0f1e7a7c68f5db2c96d9f7c9a3ba22e5c",
+      "bytes": 546120,
+      "package": "mingw-w64-ucrt-x86_64-gstreamer",
+      "member": "ucrt64/bin/libgstbase-1.0-0.dll"
+    },
+    {
+      "path": "bin/libgstreamer-1.0-0.dll",
+      "sha256": "19356a2fa3ac3804badb76719a9c918c86429f473be21e4af4ab10d3391c79d8",
+      "bytes": 1475888,
+      "package": "mingw-w64-ucrt-x86_64-gstreamer",
+      "member": "ucrt64/bin/libgstreamer-1.0-0.dll"
+    },
+    {
+      "path": "bin/libgtk-3-0.dll",
+      "sha256": "c5df1e6dcb722602938510a03a6a13af3be46c651ca4c52ff97c92c777593844",
+      "bytes": 7159259,
+      "package": "mingw-w64-ucrt-x86_64-gtk3",
+      "member": "ucrt64/bin/libgtk-3-0.dll"
+    },
+    {
+      "path": "bin/libharfbuzz-0.dll",
+      "sha256": "982bdd069c942203b89830d9c0e8805e1d0c784a7c5bc1ff9991216e16b997eb",
+      "bytes": 1949817,
+      "package": "mingw-w64-ucrt-x86_64-harfbuzz",
+      "member": "ucrt64/bin/libharfbuzz-0.dll"
+    },
+    {
+      "path": "bin/libhogweed-7.dll",
+      "sha256": "b48e33181b78d715ba310581f4c72376c959854638bf635e1703e5fc1b783498",
+      "bytes": 276571,
+      "package": "mingw-w64-ucrt-x86_64-nettle",
+      "member": "ucrt64/bin/libhogweed-7.dll"
+    },
+    {
+      "path": "bin/libhwy.dll",
+      "sha256": "9ba0ac7bad82c4c88e9bb8d6ca8c6a83877adc1f71cc48590c65b8d26108a41c",
+      "bytes": 87628,
+      "package": "mingw-w64-ucrt-x86_64-highway",
+      "member": "ucrt64/bin/libhwy.dll"
+    },
+    {
+      "path": "bin/libiconv-2.dll",
+      "sha256": "9824e9f78e76ad513e5ba0d697c60de2fb24a21c20922bc2f918c86998a08cab",
+      "bytes": 1139262,
+      "package": "mingw-w64-ucrt-x86_64-libiconv",
+      "member": "ucrt64/bin/libiconv-2.dll"
+    },
+    {
+      "path": "bin/libidn2-0.dll",
+      "sha256": "1103631c9f063083407d05d6baeacd564c774f6803ba54421ee53dfb3e25c1b9",
+      "bytes": 244380,
+      "package": "mingw-w64-ucrt-x86_64-libidn2",
+      "member": "ucrt64/bin/libidn2-0.dll"
+    },
+    {
+      "path": "bin/libintl-8.dll",
+      "sha256": "0e5a178731e6be6d115442a6ade3df7f03265cd1fc4338f8b6f86a8001cbf582",
+      "bytes": 298164,
+      "package": "mingw-w64-ucrt-x86_64-gettext-runtime",
+      "member": "ucrt64/bin/libintl-8.dll"
+    },
+    {
+      "path": "bin/libjack64.dll",
+      "sha256": "3dd3d4030cd1f7fb5fb075a4afe1a59db54eda1961bf5eefc5e08abbf99b73f0",
+      "bytes": 312580,
+      "package": "mingw-w64-ucrt-x86_64-jack2",
+      "member": "ucrt64/bin/libjack64.dll"
+    },
+    {
+      "path": "bin/libjbig-0.dll",
+      "sha256": "36b6155be36d24a19154a48177a09978ff6c26f48665d8c7bb5057aaace6b91c",
+      "bytes": 61598,
+      "package": "mingw-w64-ucrt-x86_64-jbigkit",
+      "member": "ucrt64/bin/libjbig-0.dll"
+    },
+    {
+      "path": "bin/libjpeg-8.dll",
+      "sha256": "22286acc18b907d03eec1177c99f54a802a6f8437888d1abb79e65a7ecd14605",
+      "bytes": 963471,
+      "package": "mingw-w64-ucrt-x86_64-libjpeg-turbo",
+      "member": "ucrt64/bin/libjpeg-8.dll"
+    },
+    {
+      "path": "bin/libjxl.dll",
+      "sha256": "660b185250366602e4fec1cdff06255f531024828ee9f803d54f5fac9398ff47",
+      "bytes": 6307766,
+      "package": "mingw-w64-ucrt-x86_64-libjxl",
+      "member": "ucrt64/bin/libjxl.dll"
+    },
+    {
+      "path": "bin/libjxl_cms.dll",
+      "sha256": "e9f89bef2a785ff168acb3ecc851fc177b08d8902a22bb5ce7eff293729e1e07",
+      "bytes": 141365,
+      "package": "mingw-w64-ucrt-x86_64-libjxl",
+      "member": "ucrt64/bin/libjxl_cms.dll"
+    },
+    {
+      "path": "bin/liblcms2-2.dll",
+      "sha256": "54ce5a43219a39a52eafd10f40180f75b659dda59c40204795d9be13350055a2",
+      "bytes": 451042,
+      "package": "mingw-w64-ucrt-x86_64-lcms2",
+      "member": "ucrt64/bin/liblcms2-2.dll"
+    },
+    {
+      "path": "bin/libLerc.dll",
+      "sha256": "1ffee78579c25b073267bcac8d0a6045d9bd446e010c7953b569b2629ca8a58a",
+      "bytes": 803103,
+      "package": "mingw-w64-ucrt-x86_64-lerc",
+      "member": "ucrt64/bin/libLerc.dll"
+    },
+    {
+      "path": "bin/liblz4.dll",
+      "sha256": "4ec83678100682f0be6ba31e1e642332caa53b2efcee2c201b7cab0788d1260f",
+      "bytes": 187849,
+      "package": "mingw-w64-ucrt-x86_64-lz4",
+      "member": "ucrt64/bin/liblz4.dll"
+    },
+    {
+      "path": "bin/liblzma-5.dll",
+      "sha256": "d97a260b8bb4f6affc34ec47249429240068b94bb6f7dc30c4d64daaafb3ac69",
+      "bytes": 190872,
+      "package": "mingw-w64-ucrt-x86_64-xz",
+      "member": "ucrt64/bin/liblzma-5.dll"
+    },
+    {
+      "path": "bin/liblzo2-2.dll",
+      "sha256": "9262476001bb015edb6eacaabfd84592ac5b1080a83acbb4c8e626445b37d136",
+      "bytes": 156218,
+      "package": "mingw-w64-ucrt-x86_64-lzo2",
+      "member": "ucrt64/bin/liblzo2-2.dll"
+    },
+    {
+      "path": "bin/libncursesw6.dll",
+      "sha256": "e7d6942ebb3f2ca60050ee6bcaf361b2ef2516de308589ee2c49d81df9b83a47",
+      "bytes": 542854,
+      "package": "mingw-w64-ucrt-x86_64-ncurses",
+      "member": "ucrt64/bin/libncursesw6.dll"
+    },
+    {
+      "path": "bin/libnettle-9.dll",
+      "sha256": "9b9f8bffca94d3cca7d1afb77d9deb0fa34427eaa05f1832037f46bc9e3dc134",
+      "bytes": 359138,
+      "package": "mingw-w64-ucrt-x86_64-nettle",
+      "member": "ucrt64/bin/libnettle-9.dll"
+    },
+    {
+      "path": "bin/libnfs-16.dll",
+      "sha256": "fbecc4edfe6ae9631022ddbd6794363c594f06e9774885111b9596f8de2b790a",
+      "bytes": 360964,
+      "package": "mingw-w64-ucrt-x86_64-libnfs",
+      "member": "ucrt64/bin/libnfs-16.dll"
+    },
+    {
+      "path": "bin/libnghttp2-14.dll",
+      "sha256": "5e5460b1f9dd489566a747f7fb72bcc7862608213e1cc401e02a9ee0f1866da1",
+      "bytes": 213153,
+      "package": "mingw-w64-ucrt-x86_64-nghttp2",
+      "member": "ucrt64/bin/libnghttp2-14.dll"
+    },
+    {
+      "path": "bin/libnghttp3-9.dll",
+      "sha256": "30ed479b0ae35b56bd79c816e2b9010f2d0a9f84c96b0a210d44e188e9222f1e",
+      "bytes": 203451,
+      "package": "mingw-w64-ucrt-x86_64-nghttp3",
+      "member": "ucrt64/bin/libnghttp3-9.dll"
+    },
+    {
+      "path": "bin/libngtcp2-16.dll",
+      "sha256": "099bdd982e4c6ec0fc04dd00ebaa9fb8bc090cc5521175cceb7c66ea5b5b4aea",
+      "bytes": 391446,
+      "package": "mingw-w64-ucrt-x86_64-ngtcp2",
+      "member": "ucrt64/bin/libngtcp2-16.dll"
+    },
+    {
+      "path": "bin/libngtcp2_crypto_ossl-0.dll",
+      "sha256": "9ce610fc3d42e4d82e8242a71feace273f5e305fb551d2f6d6b09861362ebec9",
+      "bytes": 51580,
+      "package": "mingw-w64-ucrt-x86_64-ngtcp2",
+      "member": "ucrt64/bin/libngtcp2_crypto_ossl-0.dll"
+    },
+    {
+      "path": "bin/libnspr4.dll",
+      "sha256": "6ed9004869b84ab0aa77fc59dba43dae9cde4ddcf343bec38e19f082e04d1ccb",
+      "bytes": 333636,
+      "package": "mingw-w64-ucrt-x86_64-nspr",
+      "member": "ucrt64/bin/libnspr4.dll"
+    },
+    {
+      "path": "bin/libopus-0.dll",
+      "sha256": "e747edad6bf02cf5cdcce417b95be3b7ba108f93df1b024778be5d73fa6dae39",
+      "bytes": 491630,
+      "package": "mingw-w64-ucrt-x86_64-opus",
+      "member": "ucrt64/bin/libopus-0.dll"
+    },
+    {
+      "path": "bin/liborc-0.4-0.dll",
+      "sha256": "c61ef2525f47cdddd0c4191cabe08287afaf3f32b1275587aed6c65783561a5d",
+      "bytes": 590497,
+      "package": "mingw-w64-ucrt-x86_64-orc",
+      "member": "ucrt64/bin/liborc-0.4-0.dll"
+    },
+    {
+      "path": "bin/libp11-kit-0.dll",
+      "sha256": "55b2acce88372d68d00e95bde8c6155ec7aac55b4e4a401de38100902666f5c6",
+      "bytes": 1629937,
+      "package": "mingw-w64-ucrt-x86_64-p11-kit",
+      "member": "ucrt64/bin/libp11-kit-0.dll"
+    },
+    {
+      "path": "bin/libpango-1.0-0.dll",
+      "sha256": "fd92503a3fcab12fcf555cf8a47610f23b203cf888b48b5628629987d68215b8",
+      "bytes": 435180,
+      "package": "mingw-w64-ucrt-x86_64-pango",
+      "member": "ucrt64/bin/libpango-1.0-0.dll"
+    },
+    {
+      "path": "bin/libpangocairo-1.0-0.dll",
+      "sha256": "0af768e57c0aaf8f1dbafdff21b95a21d9cff7ae5be2e3e5ffa366c9dbf4f5c8",
+      "bytes": 82317,
+      "package": "mingw-w64-ucrt-x86_64-pango",
+      "member": "ucrt64/bin/libpangocairo-1.0-0.dll"
+    },
+    {
+      "path": "bin/libpangoft2-1.0-0.dll",
+      "sha256": "27620f9c842109690616393b3616c29d5dfda8f8a0a980c0a5e869d4f75be925",
+      "bytes": 111100,
+      "package": "mingw-w64-ucrt-x86_64-pango",
+      "member": "ucrt64/bin/libpangoft2-1.0-0.dll"
+    },
+    {
+      "path": "bin/libpangowin32-1.0-0.dll",
+      "sha256": "152832e8add3031293fca8152ac8450db9122ee5b20561160e025a078954162d",
+      "bytes": 109864,
+      "package": "mingw-w64-ucrt-x86_64-pango",
+      "member": "ucrt64/bin/libpangowin32-1.0-0.dll"
+    },
+    {
+      "path": "bin/libpcre2-8-0.dll",
+      "sha256": "82bfffeb1f5cab5d1919b3bf4f744602ecbbdab7332d5e80eda469a9138dba80",
+      "bytes": 706022,
+      "package": "mingw-w64-ucrt-x86_64-pcre2",
+      "member": "ucrt64/bin/libpcre2-8-0.dll"
+    },
+    {
+      "path": "bin/libpixman-1-0.dll",
+      "sha256": "12e693d94829f013e0bd7c042b30998b20e91ece7b6f4d5f075ddbb58b373c92",
+      "bytes": 737775,
+      "package": "mingw-w64-ucrt-x86_64-pixman",
+      "member": "ucrt64/bin/libpixman-1-0.dll"
+    },
+    {
+      "path": "bin/libplc4.dll",
+      "sha256": "add28ee2a31d9496e1c675daf10215733e3328a199d53e11dce2ff34967001fe",
+      "bytes": 22565,
+      "package": "mingw-w64-ucrt-x86_64-nspr",
+      "member": "ucrt64/bin/libplc4.dll"
+    },
+    {
+      "path": "bin/libplds4.dll",
+      "sha256": "467ac5bca5ac5970b2fe647944dd94f5e7171bd888f1136d4f8811bc0046e895",
+      "bytes": 18167,
+      "package": "mingw-w64-ucrt-x86_64-nspr",
+      "member": "ucrt64/bin/libplds4.dll"
+    },
+    {
+      "path": "bin/libpng16-16.dll",
+      "sha256": "28db7a8c6fcc579ce621729d27f1952324cd3a2b4e24da121611bb586346e732",
+      "bytes": 254777,
+      "package": "mingw-w64-ucrt-x86_64-libpng",
+      "member": "ucrt64/bin/libpng16-16.dll"
+    },
+    {
+      "path": "bin/libpsl-5.dll",
+      "sha256": "a531e72de3c64d43fb83cbfb6fa63e5ee982a970292ec51314e29d0acabf1dd5",
+      "bytes": 105846,
+      "package": "mingw-w64-ucrt-x86_64-libpsl",
+      "member": "ucrt64/bin/libpsl-5.dll"
+    },
+    {
+      "path": "bin/librav1e.dll",
+      "sha256": "bc549e2178589f371469d1bd23544859ff118e48218eae2bfca7126654988779",
+      "bytes": 3522560,
+      "package": "mingw-w64-ucrt-x86_64-rav1e",
+      "member": "ucrt64/bin/librav1e.dll"
+    },
+    {
+      "path": "bin/libsasl2-3.dll",
+      "sha256": "08440e1cdc1c9837b0d545bce0e5ae4f0b4074b04b2561f1802708fe005cf777",
+      "bytes": 162916,
+      "package": "mingw-w64-ucrt-x86_64-cyrus-sasl",
+      "member": "ucrt64/bin/libsasl2-3.dll"
+    },
+    {
+      "path": "bin/libsharpyuv-0.dll",
+      "sha256": "d29380c7056383f3e7a80bf9e150f0b8c425c1cf2568d1336e88979ddc2307af",
+      "bytes": 48938,
+      "package": "mingw-w64-ucrt-x86_64-libwebp",
+      "member": "ucrt64/bin/libsharpyuv-0.dll"
+    },
+    {
+      "path": "bin/libslirp-0.dll",
+      "sha256": "8dd8f243308c694207fdb62054c1aa6ba87176cd72ecc37be0954c032bb80da4",
+      "bytes": 212508,
+      "package": "mingw-w64-ucrt-x86_64-libslirp",
+      "member": "ucrt64/bin/libslirp-0.dll"
+    },
+    {
+      "path": "bin/libsnappy.dll",
+      "sha256": "9de2700ed48900c9f7a26fd35d5be6162aaea28d29391972dd1bcc0dc8e0512c",
+      "bytes": 62061,
+      "package": "mingw-w64-ucrt-x86_64-snappy",
+      "member": "ucrt64/bin/libsnappy.dll"
+    },
+    {
+      "path": "bin/libspice-server-1.dll",
+      "sha256": "c45e20a417b6387098e36d189071ee8bcbb04653f782f9f3a9debf63e854d222",
+      "bytes": 1206844,
+      "package": "mingw-w64-ucrt-x86_64-spice",
+      "member": "ucrt64/bin/libspice-server-1.dll"
+    },
+    {
+      "path": "bin/libssh.dll",
+      "sha256": "d3c50d4779bdb4d9aafce8f72ee4d15797a9fcd43ab35523513ab87c2720966b",
+      "bytes": 620221,
+      "package": "mingw-w64-ucrt-x86_64-libssh",
+      "member": "ucrt64/bin/libssh.dll"
+    },
+    {
+      "path": "bin/libssh2-1.dll",
+      "sha256": "682fd57a3d16f00f26025d01672d7ec3bfc4b1694c35e90b7b1ffc321c0fa5aa",
+      "bytes": 336426,
+      "package": "mingw-w64-ucrt-x86_64-libssh2",
+      "member": "ucrt64/bin/libssh2-1.dll"
+    },
+    {
+      "path": "bin/libssl-4-x64.dll",
+      "sha256": "879b67699f587b4e1c5ce23c444f587f01a4fbe10f0cdf0374414e37bd606331",
+      "bytes": 1148375,
+      "package": "mingw-w64-ucrt-x86_64-openssl",
+      "member": "ucrt64/bin/libssl-4-x64.dll"
+    },
+    {
+      "path": "bin/libstdc++-6.dll",
+      "sha256": "098e4964e3c8179847f7a1c313d2e8020ca12df3f1d18878a417a8f54d41505a",
+      "bytes": 2659194,
+      "package": "mingw-w64-ucrt-x86_64-libstdc++",
+      "member": "ucrt64/bin/libstdc++-6.dll"
+    },
+    {
+      "path": "bin/libSvtAv1Enc-4.dll",
+      "sha256": "4f40f05a3d7ee53fdaefd2179cfeae0a75ca90e8f66d72e515b0893802426fe1",
+      "bytes": 7994078,
+      "package": "mingw-w64-ucrt-x86_64-svt-av1",
+      "member": "ucrt64/bin/libSvtAv1Enc-4.dll"
+    },
+    {
+      "path": "bin/libsystre-0.dll",
+      "sha256": "f933efd15c898dd2040e21f15801e3c7dc186f5b2cee353c9747afc9e5b54000",
+      "bytes": 11002,
+      "package": "mingw-w64-ucrt-x86_64-libsystre",
+      "member": "ucrt64/bin/libsystre-0.dll"
+    },
+    {
+      "path": "bin/libtasn1-6.dll",
+      "sha256": "d32d726c2a2068f5f9a9111da399163b288b1e50b5e3cf1a1b26bb02070d97b5",
+      "bytes": 110365,
+      "package": "mingw-w64-ucrt-x86_64-libtasn1",
+      "member": "ucrt64/bin/libtasn1-6.dll"
+    },
+    {
+      "path": "bin/libthai-0.dll",
+      "sha256": "d8d8b87e9089a811e088f6a01da57c19ed54d2b6613bb85697f1958473f63666",
+      "bytes": 71780,
+      "package": "mingw-w64-ucrt-x86_64-libthai",
+      "member": "ucrt64/bin/libthai-0.dll"
+    },
+    {
+      "path": "bin/libtiff-6.dll",
+      "sha256": "d047260c3d456f84a2f9cd801d3b57bee0357cade32724caf16006c64c5fe8ff",
+      "bytes": 614318,
+      "package": "mingw-w64-ucrt-x86_64-libtiff",
+      "member": "ucrt64/bin/libtiff-6.dll"
+    },
+    {
+      "path": "bin/libtre-5.dll",
+      "sha256": "1014afb8649e6eba839748cc0ad5dc542249df831ee483f7a93e465e223f7bae",
+      "bytes": 99997,
+      "package": "mingw-w64-ucrt-x86_64-libtre",
+      "member": "ucrt64/bin/libtre-5.dll"
+    },
+    {
+      "path": "bin/libunistring-5.dll",
+      "sha256": "dfa746de2174d9471be54dd64c8ac478f981abf434d3c95c0e6b500ef78e63e7",
+      "bytes": 2291262,
+      "package": "mingw-w64-ucrt-x86_64-libunistring",
+      "member": "ucrt64/bin/libunistring-5.dll"
+    },
+    {
+      "path": "bin/libusb-1.0.dll",
+      "sha256": "bc18f430b2639c2f63961a51724adb910ac8ed4a045ad2dcfd504e67ea52c460",
+      "bytes": 244884,
+      "package": "mingw-w64-ucrt-x86_64-libusb",
+      "member": "ucrt64/bin/libusb-1.0.dll"
+    },
+    {
+      "path": "bin/libusbredirparser-1.dll",
+      "sha256": "9f5239f5e32a735f1b3ba9cc3307cd827cb29534a27e8a54c6c3b958f6f7aca3",
+      "bytes": 65550,
+      "package": "mingw-w64-ucrt-x86_64-usbredir",
+      "member": "ucrt64/bin/libusbredirparser-1.dll"
+    },
+    {
+      "path": "bin/libvirglrenderer-1.dll",
+      "sha256": "92d4266b479b4eaf91b518d01533d49efe1bee8c00bc515d16b7e34e406c7322",
+      "bytes": 877220,
+      "package": "mingw-w64-ucrt-x86_64-virglrenderer",
+      "member": "ucrt64/bin/libvirglrenderer-1.dll"
+    },
+    {
+      "path": "bin/libwebp-7.dll",
+      "sha256": "8dfe40c4e0abc90ddf18f080898987e01253d099b2b2d6daf7db521e55c00446",
+      "bytes": 746378,
+      "package": "mingw-w64-ucrt-x86_64-libwebp",
+      "member": "ucrt64/bin/libwebp-7.dll"
+    },
+    {
+      "path": "bin/libwebpdemux-2.dll",
+      "sha256": "d9ac8b88387cea7ac943c38c7610314d7a41e7d6d86a8a22582ff8b8a6b99c72",
+      "bytes": 26908,
+      "package": "mingw-w64-ucrt-x86_64-libwebp",
+      "member": "ucrt64/bin/libwebpdemux-2.dll"
+    },
+    {
+      "path": "bin/libwinpthread-1.dll",
+      "sha256": "94a9a4e2fe27b4bc827a4b209e9deb4cc3dc34bc025df06b849144f9d4c588f8",
+      "bytes": 73308,
+      "package": "mingw-w64-ucrt-x86_64-libwinpthread",
+      "member": "ucrt64/bin/libwinpthread-1.dll"
+    },
+    {
+      "path": "bin/libyuv.dll",
+      "sha256": "ecba917cb08e6208bb9c28156f0f5106d5cb2aa91801c5bd868c242c41625ebd",
+      "bytes": 1007634,
+      "package": "mingw-w64-ucrt-x86_64-libyuv",
+      "member": "ucrt64/bin/libyuv.dll"
+    },
+    {
+      "path": "bin/libz-1.dll",
+      "sha256": "934103c50623302548a1cf66fbc22f0029e4eb4556343252a505e2fc005e835f",
+      "bytes": 148154,
+      "package": "mingw-w64-ucrt-x86_64-zlib",
+      "member": "ucrt64/bin/libz-1.dll"
+    },
+    {
+      "path": "bin/libzstd.dll",
+      "sha256": "48368ab0ca622d0ec12f41ce85d91f22866bf5da92c77a69a06483564c93816c",
+      "bytes": 1217412,
+      "package": "mingw-w64-ucrt-x86_64-zstd",
+      "member": "ucrt64/bin/libzstd.dll"
+    },
+    {
+      "path": "bin/nss3.dll",
+      "sha256": "091d4309861eb6b51aa71e266ac2548b882073ec36708b9dac642337c57cd05b",
+      "bytes": 1352541,
+      "package": "mingw-w64-ucrt-x86_64-nss",
+      "member": "ucrt64/bin/nss3.dll"
+    },
+    {
+      "path": "bin/nssutil3.dll",
+      "sha256": "13eaf61b167abe49b2745d6dd474513366f0479281e2521756a077f1f0361074",
+      "bytes": 171202,
+      "package": "mingw-w64-ucrt-x86_64-nss",
+      "member": "ucrt64/bin/nssutil3.dll"
+    },
+    {
+      "path": "bin/qemu-img.exe",
+      "sha256": "fcd97ab14862887d3a0718f8b8ef18f2c63107d7f1e290f5849356ede319b5b2",
+      "bytes": 1967026,
+      "package": "mingw-w64-ucrt-x86_64-qemu-image-util",
+      "member": "ucrt64/bin/qemu-img.exe"
+    },
+    {
+      "path": "bin/qemu-io.exe",
+      "sha256": "3d29b6801ed6b25d553142ea0dea2fec86b623b3d9523ed47781eb04ac5724f5",
+      "bytes": 1897363,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/bin/qemu-io.exe"
+    },
+    {
+      "path": "bin/qemu-system-x86_64.exe",
+      "sha256": "d0343ee35fc78d25c1207780acfc15fe12d893134347ddc36082cd1aaa605f9d",
+      "bytes": 25651948,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/bin/qemu-system-x86_64.exe"
+    },
+    {
+      "path": "bin/SDL2.dll",
+      "sha256": "4b8749d7244a8e5adbc1b73f2456d5a6c8a355fdfb5368c8c46f97545da47ce4",
+      "bytes": 380874,
+      "package": "mingw-w64-ucrt-x86_64-sdl2-compat",
+      "member": "ucrt64/bin/SDL2.dll"
+    },
+    {
+      "path": "bin/SDL2_image.dll",
+      "sha256": "8ac32fcc1115aa897ff8200c30bf5f9bbca518e498fa6b06af78b50008f71c51",
+      "bytes": 160521,
+      "package": "mingw-w64-ucrt-x86_64-sdl2-image",
+      "member": "ucrt64/bin/SDL2_image.dll"
+    },
+    {
+      "path": "bin/SDL3.dll",
+      "sha256": "fcf8a99a019c8d2ed947219e7e768aae1f9cef7219ad93c0ab0007b63db1a6f1",
+      "bytes": 4036010,
+      "package": "mingw-w64-ucrt-x86_64-sdl3",
+      "member": "ucrt64/bin/SDL3.dll"
+    },
+    {
+      "path": "bin/zlib1.dll",
+      "sha256": "aa658771fb152b095eda1614d8bde798efb92324b6f4a0c99c743cd96b67ac90",
+      "bytes": 190835,
+      "package": "mingw-w64-ucrt-x86_64-zlib",
+      "member": "ucrt64/bin/zlib1.dll"
+    },
+    {
+      "path": "share/qemu/bios-256k.bin",
+      "sha256": "ae6f6aa973aaccc143f57aa960fb035fd9de4daee4ad0cd713322f8c259e7650",
+      "bytes": 262144,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/share/qemu/bios-256k.bin"
+    },
+    {
+      "path": "share/qemu/edk2-i386-vars.fd",
+      "sha256": "5d2ac383371b408398accee7ec27c8c09ea5b74a0de0ceea6513388b15be5d1e",
+      "bytes": 540672,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/share/qemu/edk2-i386-vars.fd"
+    },
+    {
+      "path": "share/qemu/edk2-licenses.txt",
+      "sha256": "1ddeaed2e7d2e9ecb960bdfc1b8ee45387aff70d056d985d145949af3951657c",
+      "bytes": 42903,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/share/qemu/edk2-licenses.txt"
+    },
+    {
+      "path": "share/qemu/edk2-x86_64-code.fd",
+      "sha256": "33090cc07675baa5190d9f1e84bf5176b33bcbfa9bacac522961150cdb6dbb2a",
+      "bytes": 3653632,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/share/qemu/edk2-x86_64-code.fd"
+    },
+    {
+      "path": "share/qemu/efi-e1000.rom",
+      "sha256": "f37222fcdf0481bfbaf7a16d9aaf740aeb41d3d24c187801eb6e9a628cec0fc8",
+      "bytes": 159232,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/share/qemu/efi-e1000.rom"
+    },
+    {
+      "path": "share/qemu/efi-e1000e.rom",
+      "sha256": "102c20348be2d0ebe45a77b076b31848182c2f7b4364775b6bc2ece6e97b4024",
+      "bytes": 159232,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/share/qemu/efi-e1000e.rom"
+    },
+    {
+      "path": "share/qemu/kvmvapic.bin",
+      "sha256": "cdf057a71b07e3b52b19cbe210bdefa59250d01a9810b960f7fe1f98eed95a27",
+      "bytes": 9216,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/share/qemu/kvmvapic.bin"
+    },
+    {
+      "path": "share/qemu/linuxboot_dma.bin",
+      "sha256": "9c49e255340c78fc12e54ed043462bca02fb7fca29b7cfab62ff88a5344b6950",
+      "bytes": 1536,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/share/qemu/linuxboot_dma.bin"
+    },
+    {
+      "path": "share/qemu/vgabios-stdvga.bin",
+      "sha256": "e8fc9e55790dbe3cb31f019a3deb57206ba6c54f5e581adb2ab2677a9d391472",
+      "bytes": 39424,
+      "package": "mingw-w64-ucrt-x86_64-qemu",
+      "member": "ucrt64/share/qemu/vgabios-stdvga.bin"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+[
+  {
+    "id": "restic",
+    "name": "restic",
+    "homepage": "https://restic.net/",
+    "version": "0.20.0",
+    "repo": "restic/restic",
+    "tag": "v0.20.0",
+    "commit": "9c88ff768f10c192dc6a87619a65a16374080e33",
+    "asset": "restic_0.20.0_windows_amd64.zip",
+    "assetBytes": 13944434,
+    "assetSha256": "bba9061c3dce081701ab353ec8cb73a78be73b71a538aad560f2d1067602b7fe",
+    "member": "restic_0.20.0_windows_amd64.exe",
+    "exeSha256": "2683eb2b061f11568b9132ac0242f183ba4b3a0ed7630f1186a57e889c82a0e2",
+    "executable": "restic.exe",
+    "probe": [
+      "version"
+    ],
+    "folder": "04 - Storage & Data Recovery/Backup & Restore",
+    "license": "BSD-2-Clause",
+    "notice": "LICENSE",
+    "rationale": "Core backup selection for encrypted, versioned local repositories. Restore and check operate offline.",
+    "architecture": "x64"
+  },
+  {
+    "id": "rclone",
+    "name": "rclone",
+    "homepage": "https://rclone.org/",
+    "version": "1.76.0",
+    "repo": "rclone/rclone",
+    "tag": "v1.76.0",
+    "commit": "e982ff36668f5130d94b4f70409babb3d964df42",
+    "asset": "rclone-v1.76.0-windows-amd64.zip",
+    "assetBytes": 32193987,
+    "assetSha256": "8b4fd2737ade4e70c057ef4a49deb7cffe94b0fb9d7587c189d149823f21a1dc",
+    "member": "rclone-v1.76.0-windows-amd64/rclone.exe",
+    "exeSha256": "acd80683e23151e93bbe0d6ffa74d26e542ec510332f630beecb9944f8d1a623",
+    "executable": "rclone.exe",
+    "probe": [
+      "version"
+    ],
+    "folder": "07 - Remote Support & IT Management/File Transfer",
+    "license": "MIT",
+    "notice": "COPYING",
+    "rationale": "Core file transfer selection for verifiable local copies and checks. No cloud account is needed for the tested workflow.",
+    "architecture": "x64"
+  },
+  {
+    "id": "7zip",
+    "name": "7-Zip",
+    "homepage": "https://www.7-zip.org/",
+    "version": "26.06",
+    "repo": "ip7z/7zip",
+    "tag": "26.06",
+    "commit": "d3296e39e1f1f92c7b41c0c3848e65640428d42d",
+    "asset": "7zr.exe",
+    "assetBytes": 600064,
+    "assetSha256": "e80db2dad715a6c5adabe292d31ed54e11f4e9b99ca349827b50573b175891bc",
+    "member": null,
+    "exeSha256": "e80db2dad715a6c5adabe292d31ed54e11f4e9b99ca349827b50573b175891bc",
+    "executable": "7zr.exe",
+    "probe": [
+      "i"
+    ],
+    "folder": "08 - Software, Drivers & Deployment/Offline Install Sets",
+    "license": "LGPL-2.1-or-later and upstream file-specific notices",
+    "notice": "DOC/License.txt",
+    "rationale": "Core archive selection. The reduced official 7zr console supports local 7z packing, testing and extraction.",
+    "architecture": "x86"
+  },
+  {
+    "id": "yara-x",
+    "name": "YARA-X",
+    "homepage": "https://github.com/VirusTotal/yara-x",
+    "version": "1.25.0",
+    "repo": "VirusTotal/yara-x",
+    "tag": "v1.25.0",
+    "commit": "ae2d36586f36726d268d634437ec23c701d941f2",
+    "asset": "yara-x-v1.25.0-x86_64-pc-windows-msvc.zip",
+    "assetBytes": 9150304,
+    "assetSha256": "9798c3bcb81652df005f00b9b72e92732c998e925a2973dbd2558ad6f5ccc0ea",
+    "member": "yr.exe",
+    "exeSha256": "0bcbc58048bef61b7a6a37602d68fdf2d23780bc1cf35abc25aaa3e4678979ec",
+    "executable": "yr.exe",
+    "probe": [
+      "--version"
+    ],
+    "folder": "01 - Security & Malware/YARA & Detection Rules",
+    "license": "BSD-3-Clause",
+    "notice": "LICENSE",
+    "rationale": "Specialist static file identification. The fixture uses a harmless text rule with positive and negative controls.",
+    "architecture": "x64"
+  }
+]
