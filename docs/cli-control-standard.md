@@ -116,7 +116,7 @@ python3 scripts/cli-anything-inta.py --json rclone-sha256 --rclone-binary ABSOLU
 Use an already acquired [official rclone build](https://rclone.org/downloads/).
 The explicit [rclone stdin hash command](https://rclone.org/commands/rclone_hashsum/)
 receives file bytes only, never a filename, remote or arbitrary options.
-The OS null config disables the account configuration. One selected regular
+An explicit empty config disables account configuration. One selected regular
 file up to 32 MiB; nothing is uploaded, written or changed. Exit 1 means the
 expected hash differed; exit 2 means refused. A hash is not a signature.
 Keep hashes local unless the operator chooses to share them. This single
