@@ -106,3 +106,18 @@ bytes are not physical disk usage. Exit 1 means usable but incomplete evidence
 (an entry or depth limit or a read failure); exit 2 means refused. Choose a
 specific folder you are authorized to inspect. This is local-only; it does not
 grant mobile queue admission or probe, optimize, delete, clean or repair files.
+
+### <a href="https://rclone.org/downloads/" title="Open rclone official download or service page" aria-label="Open rclone official download or service page" data-inta-brand="rclone"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/94e3ecdd12ec4ec0b278.png" alt="rclone official page" width="18" height="18" valign="middle" /></a> [rclone](https://rclone.org/) local SHA-256 preview
+
+```text
+python3 scripts/cli-anything-inta.py --json rclone-sha256 --rclone-binary ABSOLUTE_EXECUTABLE --rclone-sha256 EXACT_BINARY_SHA256 --file ABSOLUTE_FILE --expect-sha256 EXPECTED_FILE_SHA256
+```
+
+Use an already acquired <a href="https://rclone.org/downloads/" title="Open rclone official download or service page" aria-label="Open rclone official download or service page" data-inta-brand="rclone"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/94e3ecdd12ec4ec0b278.png" alt="rclone official page" width="18" height="18" valign="middle" /></a> [official rclone build](https://rclone.org/downloads/).
+The explicit <a href="https://rclone.org/downloads/" title="Open rclone official download or service page" aria-label="Open rclone official download or service page" data-inta-brand="rclone"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/94e3ecdd12ec4ec0b278.png" alt="rclone official page" width="18" height="18" valign="middle" /></a> [rclone stdin hash command](https://rclone.org/commands/rclone_hashsum/)
+receives file bytes only, never a filename, remote or arbitrary options.
+An explicit empty config disables account configuration. One selected regular
+file up to 32 MiB; nothing is uploaded, written or changed. Exit 1 means the
+expected hash differed; exit 2 means refused. A hash is not a signature.
+Keep hashes local unless the operator chooses to share them. This single
+operation is a preview, not Sync, cloud-account or tool-wide CLI admission.
