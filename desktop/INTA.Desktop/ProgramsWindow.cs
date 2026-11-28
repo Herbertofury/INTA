@@ -1,66 +1,6 @@
-using Microsoft.Win32;
+using INTA.LocalAgent;
 
 namespace INTA.Desktop;
-
-internal sealed record ProgramRow(string Name, string Version, string Publisher, string Scope);
-internal sealed record ProgramSnapshot(ProgramRow[] Rows, int Skipped, int Errors, bool Capped);
-
-internal static class DesktopPrograms
-{
-    private const string Registration = @"Software\Microsoft\Windows\CurrentVersion\Uninstall";
-    private const int PerViewLimit = 4096;
-
-    internal static ProgramSnapshot Read()
-    {
-        var rows = new List<ProgramRow>();
-        int skipped = 0, errors = 0;
-        bool capped = false;
-        if (Environment.Is64BitOperatingSystem)
-            Read(RegistryHive.LocalMachine, RegistryView.Registry64, "Machine · 64-bit");
-        Read(RegistryHive.LocalMachine, Environment.Is64BitOperatingSystem ? RegistryView.Registry32 : RegistryView.Default,
-             Environment.Is64BitOperatingSystem ? "Machine · 32-bit" : "Machine");
-        Read(RegistryHive.CurrentUser, RegistryView.Default, "Current user");
-        return new(rows.OrderBy(x => x.Name, StringComparer.CurrentCultureIgnoreCase).ThenBy(x => x.Scope).ToArray(), skipped, errors, capped);
-
-        void Read(RegistryHive hive, RegistryView view, string scope)
-        {
-            try
-            {
-                using var root = RegistryKey.OpenBaseKey(hive, view);
-                using var directory = root.OpenSubKey(Registration, writable: false);
-                if (directory is null) return;
-                var keys = directory.GetSubKeyNames();
-                if (keys.Length > PerViewLimit) capped = true;
-                foreach (string key in keys.Take(PerViewLimit))
-                {
-                    try
-                    {
-                        using var app = directory.OpenSubKey(key, writable: false);
-                        if (app is null) { skipped++; continue; }
-                        string name = Metadata(app, "DisplayName");
-                        if (name.Length == 0 || app.GetValue("SystemComponent") is 1) { skipped++; continue; }
-                        // Scope and display metadata only. Do not read uninstall commands, paths, or key identities.
-                        rows.Add(new(name, Metadata(app, "DisplayVersion"), Metadata(app, "Publisher"), scope));
-                    }
-                    catch (Exception e) when (ReadFailure(e)) { errors++; }
-                }
-            }
-            catch (Exception e) when (ReadFailure(e)) { errors++; }
-        }
-    }
-
-    private static bool ReadFailure(Exception e) => e is IOException or UnauthorizedAccessException or System.Security.SecurityException;
-
-    private static string Metadata(RegistryKey app, string name)
-    {
-        var raw = app.GetValue(name, null, RegistryValueOptions.DoNotExpandEnvironmentNames) as string;
-        if (string.IsNullOrWhiteSpace(raw)) return "";
-        var value = raw.Trim();
-        if (value.Length <= 384) return value;
-        var length = char.IsHighSurrogate(value[383]) ? 383 : 384;
-        return value[..length] + "…";
-    }
-}
 
 internal sealed class ProgramsWindow : Form
 {
@@ -139,7 +79,7 @@ internal sealed class ProgramsWindow : Form
         _summary = "Reading desktop registrations…"; Filter();
         try
         {
-            var data = await Task.Run(DesktopPrograms.Read);
+            var data = await Task.Run(WindowsPrograms.Read);
             if (Disposing || IsDisposed) return;
             _all = data.Rows;
             _revision++;
