@@ -259,7 +259,7 @@ def rclone_local_sha256(binary_path, expected_pin, file_path, expected_digest=No
     # No name/path/remote arguments and no inherited rclone/proxy settings.
     # stdin is the only backend; the OS null config avoids loading user accounts.
     env = {k: os.environ[k] for k in ("SystemRoot", "WINDIR") if k in os.environ}
-    cmd = [str(binary), "--config", os.devnull, "hashsum", "sha256", "-"]
+    cmd = [str(binary), "--config=", "hashsum", "sha256", "-"]
     run = subprocess.run(cmd, input=data, capture_output=True, check=True, shell=False,
                          timeout=30, cwd=binary.parent, env=env)
     match = re.fullmatch(rb"([a-f0-9]{64})[ \t]+-?\r?\n", run.stdout)
