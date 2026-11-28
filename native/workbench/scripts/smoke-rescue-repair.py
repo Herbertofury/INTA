@@ -80,6 +80,21 @@ def extract_boot_files(image, work):
     return kernel, ram
 
 
+def verified_lab_iso(image):
+    if image.name == media.products.RECOVERY_ISO:
+        proof = json.loads((ROOT / "vm-lab/cloud/recovery-proof.json").read_bytes())
+        info = media.inspect_product(image)
+        if proof["passed"] is not True or proof["rescueISO"] != info["sha256"]:
+            raise ValueError("This recovery-only image has no matching Cloud Hypervisor qualification.")
+        return info
+    if image.name != media.ISO:
+        raise ValueError("Choose a supported INTA Debian amd64 lab ISO.")
+    info = media.inspect_product(image)
+    if info["volumeLabel"] != "INTA_RESCUE":
+        raise ValueError("The image does not identify itself as INTA Rescue.")
+    return info
+
+
 def run(args):
     image = args.iso.resolve(strict=True)
     if not image.is_file():
@@ -87,9 +102,7 @@ def run(args):
     paths = [image, args.output.resolve(), Path(tempfile.gettempdir())]
     if any(any(char in str(path) for char in ",\r\n") for path in paths):
         raise ValueError("VMM device paths must be representable as single option values.")
-    info = media.verify_iso(image, media.image_digest(image))
-    if image.name != media.ISO or info["volumeLabel"] != "INTA_RESCUE":
-        raise ValueError("This lab requires the INTA Debian amd64 rescue ISO.")
+    info = verified_lab_iso(image)
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     serial = output / "guest-serial.log"
