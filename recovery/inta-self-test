@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+test "$(cat /etc/inta-edition)" = recovery-only-v1
+for cmd in xfce4-session lightdm lsblk gsmartcontrol smartctl thunar gparted clonezilla testdisk photorec ddrescue e2fsck ntfs-3g; do
+    command -v "$cmd" > /dev/null
+done
+for cmd in clamscan clamd clamdscan clamconf freshclam sigtool yara; do
+    if command -v "$cmd" > /dev/null; then exit 1; fi
+done
+if dpkg-query -W -f='${binary:Package}\n' | grep -Ei '^(clamav|libclamav|libclamunrar|clamdscan|clamtk|libfreshclam|freshclam|yara(:|$)|libyara)'; then exit 1; fi
+PYTHONPATH=/usr/share/inta python3 - <<'PY'
+from pathlib import Path
+from inta_optics_ui import native_sampler
+import runpy
+app = runpy.run_path("/usr/local/bin/inta-rescue")
+assert app["TITLE"] == "INTA Rescue Recovery"
+assert list(app["SECTIONS"]) == ["Inspect", "Recover files", "Copy and repair"]
+sample = native_sampler()
+assert sample is not None and any(sample(x,1,40,8,0,0,0) for x in range(40))
+assert Path("/usr/share/backgrounds/inta/obsidian-field.svg").is_file()
+print("INTA_OPTICS_NATIVE_OK")
+print("INTA_RECOVERY_ONLY_RUNTIME_OK")
+PY

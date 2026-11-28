@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=INTA Rescue Recovery
+Comment=Inspect disks, image media and recover files
+Icon=inta-rescue
+Exec=/usr/local/bin/inta-rescue
+OnlyShowIn=XFCE;

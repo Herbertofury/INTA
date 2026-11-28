@@ -1,0 +1,66 @@
+#!/bin/bash
+# Separate Debian live-build configuration for the recovery-only product.
+set -euo pipefail
+[[ "$(id -u)" == 0 && "$(dpkg --print-architecture)" == amd64 ]]
+source_root=$(cd -- "$(dirname -- "$0")/.." && pwd)
+revision=${INTA_RECOVERY_SOURCE_REVISION:-$(git -C "$source_root" rev-parse HEAD)}
+[[ "$revision" =~ ^[0-9a-f]{40}$ ]]
+destination=$(realpath -m -- "${1:?Choose a new output directory}")
+mkdir -- "$destination"
+work=$(mktemp -d)
+cleanup() {
+    local result=$?
+    trap - EXIT
+    cd "$work"
+    if lb clean && ! mountpoint -q chroot/proc && ! mountpoint -q chroot/dev && ! mountpoint -q chroot/sys; then
+        rm -rf -- "$work"
+    else
+        printf 'Retained isolated build directory %s\n' "$work" >&2
+    fi
+    exit "$result"
+}
+trap cleanup EXIT
+cd "$work"
+lb config --mode debian --distribution trixie --architectures amd64 \
+    --archive-areas main --binary-images iso-hybrid --bootloaders 'grub-pc grub-efi' \
+    --debian-installer none --firmware-chroot false --apt-recommends false \
+    --security true --updates true --memtest none --iso-application 'INTA Rescue Recovery' \
+    --iso-volume INTA_RECOVERY --bootappend-live 'boot=live components username=inta hostname=inta quiet'
+common="$source_root/live/includes.chroot"
+product="$source_root/recovery"
+base=config/includes.chroot
+install -Dm644 "$product/packages.list" config/package-lists/inta-recovery.list.chroot
+for file in etc/lightdm/lightdm.conf.d/50-inta.conf etc/systemd/system/inta-boot-smoke.service \
+        etc/xdg/autostart/{inta-desktop-appearance,thunar-volman}.desktop \
+        etc/xdg/xfce4/xfconf/xfce-perchannel-xml/thunar-volman.xml; do
+    install -Dm644 "$common/$file" "$base/$file"
+done
+install -d "$base/etc/systemd/system/multi-user.target.wants"
+ln -s ../inta-boot-smoke.service "$base/etc/systemd/system/multi-user.target.wants/inta-boot-smoke.service"
+for file in inta-boot-smoke inta-desktop-appearance; do
+    install -Dm755 "$common/usr/local/bin/$file" "$base/usr/local/bin/$file"
+done
+for file in inta-rescue inta-self-test; do
+    install -Dm755 "$product/$file" "$base/usr/local/bin/$file"
+done
+for file in etc/xdg/autostart/inta-rescue.desktop usr/share/applications/inta-rescue.desktop; do
+    install -Dm644 "$product/desktop.entry" "$base/$file"
+done
+printf '%s\n' recovery-only-v1 > "$base/etc/inta-edition"
+printf '%s\n' "$revision" > "$base/etc/inta-source-revision"
+install -d "$base/usr/share/inta" "$base/usr/lib/inta" "$base/usr/share/backgrounds/inta"
+install -m644 "$source_root"/media/{inta_brand_ui,inta_optics_ui}.py "$base/usr/share/inta/"
+python3 "$product/select-brand-assets.py" "$source_root" "$base/usr/share/inta"
+install -Dm644 "$source_root/docs/assets/inta-mark.svg" "$base/usr/share/icons/hicolor/scalable/apps/inta-rescue.svg"
+rustc --edition=2021 --crate-name inta_optics --crate-type cdylib -C opt-level=s -C panic=abort -C strip=symbols \
+    "$source_root/native/optics/src/lib.rs" -o "$base/usr/lib/inta/libinta_optics.so"
+python3 "$source_root/scripts/build-rescue-wallpaper.py" "$base/usr/lib/inta/libinta_optics.so" \
+    "$base/usr/share/backgrounds/inta/obsidian-field.svg"
+lb build
+shopt -s nullglob
+images=(*.iso)
+[[ ${#images[@]} == 1 ]]
+out=inta-rescue-recovery-amd64.iso
+cp -- "${images[0]}" "$destination/$out"
+cd "$destination"
+sha256sum "$out" > SHA256SUMS
