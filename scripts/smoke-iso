@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
-iso=$(realpath "$1")
+iso=$(realpath -- "$1")
+if [[ ! -f "$iso" || ! -s "$iso" ]]; then
+    printf 'Expected a nonempty rescue ISO file: %s\n' "$iso" >&2
+    exit 2
+fi
 mode=$2
 diagnostics=$(realpath -m "${3:-dist/boot-diagnostics}")
 mkdir -p "$diagnostics"
@@ -25,18 +29,37 @@ if [[ -r /dev/kvm && -w /dev/kvm ]]; then
     acceleration=kvm
     cpu=host
 fi
+# The gate reads only this invocation's serial stream, even if an
+# output directory is reused. Export for diagnostics without following symlinks.
+guest_log="$work/serial.log"
+: > "$guest_log"
+publish_serial() {
+    local fresh_log
+    fresh_log=$(mktemp -- "$diagnostics/.$mode-serial.XXXXXXXX") || return 1
+    if ! cp -- "$guest_log" "$fresh_log" || ! mv -fT -- "$fresh_log" "$log"; then
+        rm -f -- "$fresh_log"
+        return 1
+    fi
+}
+publish_serial
 printf 'Booting INTA via %s (%s)\n' "$mode" "$acceleration"
 qemu-system-x86_64 -machine "q35,accel=$acceleration" -cpu "$cpu" -smp 2 -m 3072 \
     -nic none -display none -monitor "unix:$work/monitor,server=on,wait=off" \
-    -serial "file:$log" -boot order=d,strict=on \
+    -serial "file:$guest_log" -boot order=d,strict=on \
     -smbios type=1,serial=INTA_CI_SMOKE -cdrom "$iso" "${args[@]}" &
 guest=$!
 trap 'kill "$guest" 2>/dev/null || true; rm -rf "$work"' EXIT
 for ((second = 0; second < 340; second += 5)); do
     if ! kill -0 "$guest" 2>/dev/null; then
-        wait "$guest"
-        cat "$log"
-        python3 "$(dirname -- "$0")/rescue_boot_log.py" "$log"
+        rc=0
+        wait "$guest" || rc=$?
+        publish_serial
+        tail -c 262144 -- "$guest_log"
+        if ((rc != 0)); then
+            printf 'QEMU exited with status %s during %s boot.\n' "$rc" "$mode" >&2
+            exit "$rc"
+        fi
+        python3 "$(dirname -- "$0")/rescue_boot_log.py" "$guest_log"
         exit
     fi
     if ((second == 35)); then
@@ -88,6 +111,7 @@ PY
     fi
     sleep 5
 done
-cat "$log"
+publish_serial
+tail -c 262144 -- "$guest_log"
 printf 'Timed out waiting for %s guest to report desktop readiness.\n' "$mode" >&2
 exit 1
