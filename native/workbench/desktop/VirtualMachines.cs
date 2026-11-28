@@ -113,6 +113,7 @@ namespace Inta.Desktop
                     if (antivirus) command.Add("--clamav");
                     if (nat) command.Add("--nat");
                     if (baseImage != null) { command.Add("--base"); command.Add(baseImage); }
+                    else { command.Add("--disk-gib"); command.Add(Json.Text(plan, "diskGiB")); }
                     RunOperation("Virtual machine startup", Vm(command.ToArray()), true);
                 });
                 Action(detailActions, nat ? "Preview offline plan" : "Preview NAT plan", delegate { PreviewGuest(iso, !nat, baseImage, digest, antivirus); });
