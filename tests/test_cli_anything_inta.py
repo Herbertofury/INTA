@@ -72,6 +72,39 @@ class NativeHarness(unittest.TestCase):
             with self.assertRaises(ValueError):
                 harness.installed_programs(self.binary, self.pin)
 
+    def test_storage_reports_only_valid_aggregate_totals_and_exact_arguments(self):
+        target = self.binary.parent / "folder with spaces & symbols"
+        report = dict(schemaVersion=1, resultType="storage-preview", observedAt="2026-11-28T02:59:20.1234567+00:00",
+                      minimumAgeDays=7, entryLimit=5, entriesScanned=2, filesScanned=2, logicalBytes=9,
+                      olderFiles=1, olderLogicalBytes=5, specialEntriesSkipped=0, readErrors=0,
+                      depthLimitedDirectories=0, entryLimitReached=False, partial=False)
+        def output():
+            return subprocess.CompletedProcess([], 0, json.dumps(report).encode(), b"")
+        with patch.object(harness.subprocess, "run", return_value=output()) as call:
+            self.assertEqual(harness.storage_preview(self.binary, self.pin, target, 7, 5)["status"], "ready")
+        call.assert_called_once_with([str(self.binary), "--storage-preview", str(target), "7", "5"],
+                                    capture_output=True, check=True, shell=False, timeout=30)
+        report.update(entriesScanned=5, entryLimitReached=True, partial=True)
+        with patch.object(harness.subprocess, "run", return_value=output()):
+            self.assertEqual(harness.storage_preview(self.binary, self.pin, target, 7, 5)["status"], "incomplete")
+        for key, invalid in (("filesScanned", True), ("olderLogicalBytes", 10), ("partial", False),
+                             ("observedAt", "2026-02-30T02:59:20+00:00"), ("entryLimit", 6), ("rootPath", str(target))):
+            present, saved = key in report, report.get(key)
+            report[key] = invalid
+            with patch.object(harness.subprocess, "run", return_value=output()):
+                with self.assertRaises(ValueError):
+                    harness.storage_preview(self.binary, self.pin, target, 7, 5)
+            if present:
+                report[key] = saved
+            else:
+                del report[key]
+        with patch.object(harness.subprocess, "run") as call:
+            for folder, days, limit in ((pathlib.Path("relative"), 7, 5),
+                                        (pathlib.Path(self.binary.anchor), 7, 5), (target, 7, 0), (target, -1, 5)):
+                with self.assertRaises(ValueError):
+                    harness.storage_preview(self.binary, self.pin, folder, days, limit)
+        call.assert_not_called()
+
     def test_bad_pin_never_launches(self):
         with patch.object(harness.subprocess, "run") as run:
             with self.assertRaises(ValueError):

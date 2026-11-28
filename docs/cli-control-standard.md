@@ -86,3 +86,16 @@ installation paths or uninstall commands, inventory Store apps, or modify
 the system. Skipped display rows and capped or unreadable scopes are reported
 rather than guessed. Keep this inventory local by default. This command does
 not authorize an uninstall, package identity or tool-wide admission.
+
+### Selected folder storage preview
+
+```text
+python3 scripts/cli-anything-inta.py --json storage-preview --folder ABSOLUTE_CHILD_FOLDER --minimum-age-days 7 --entry-limit 100000 --agent-binary ABSOLUTE_PATH --agent-sha256 EXACT_SHA256
+```
+
+This calls the existing native metadata-only storage preview and reports totals,
+not names, paths, file contents, per-file actions or reclaimable space. Logical
+bytes are not physical disk usage. Exit 1 means usable but incomplete evidence
+(an entry or depth limit or a read failure); exit 2 means refused. Choose a
+specific folder you are authorized to inspect. This is local-only; it does not
+grant mobile queue admission or probe, optimize, delete, clean or repair files.
