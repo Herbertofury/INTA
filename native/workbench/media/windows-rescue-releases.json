@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "images": [
+    {
+      "architecture": "amd64",
+      "bytes": 570175488,
+      "sha256": "618c8b21afdb52d40306ce81b368d94de2146a72a7b10e4059b118d0dc264fca"
+    },
+    {
+      "architecture": "arm64",
+      "bytes": 583260160,
+      "sha256": "ef20063871ba4b81565be403b26fe52ae22213b3a427c401c6e375b09eb94625"
+    }
+  ]
+}

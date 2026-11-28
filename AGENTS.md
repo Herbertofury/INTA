@@ -66,10 +66,10 @@ Whenever a user message mentions **<a href="https://github.com/" title="Open Git
 
 ## CLI-first technician control
 
-Every tool INTA recommends, ships, installs, launches or queues requires a
+Every tool <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) recommends, ships, installs, launches or queues requires a
 [verified CLI-Anything-compatible control surface](docs/cli-control-standard.md).
 Use the tool's documented native CLI or API before building a reviewed harness
-against the real backend. Cover and test every operation INTA offers by
+against the real backend. Cover and test every operation <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) offers by
 platform and edition. Do not infer operation readiness from a download,
 website, silent installer, process launch or harness name. Preserve existing
 reference links, but label unqualified tools and hide their automated

@@ -16,7 +16,9 @@ def package(output: Path, root: Path = ROOT):
     entries = {
         "__main__.py": (root / "media/inta-media.py").read_bytes(),
         "inta_brand_ui.py": (root / "media/inta_brand_ui.py").read_bytes(),
+        "inta_optics_ui.py": (root / "media/inta_optics_ui.py").read_bytes(),
         "inta-resources/data/brand-icons.json": (root / "data/brand-icons.json").read_bytes(),
+        "inta-resources/data/rescue-download-channel.json": (root / "data/rescue-download-channel.json").read_bytes(),
     }
     for asset in registry["assets"].values():
         data = (root / asset["path"]).read_bytes()

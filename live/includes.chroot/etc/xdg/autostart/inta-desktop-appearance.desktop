@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=INTA desktop appearance
+Exec=/usr/local/bin/inta-desktop-appearance
+TryExec=xfconf-query
+OnlyShowIn=XFCE;
+NoDisplay=true

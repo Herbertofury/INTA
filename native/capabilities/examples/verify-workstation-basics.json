@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "verify-workstation-basics",
+  "title": "Verify the local tool catalog and UTF-8 checksum provider",
+  "version": 1,
+  "steps": [
+    {"operation":"tools.inspect","version":1,"input":{"id":"powercfg"}},
+    {"operation":"text.sha256","version":1,"input":{"text":"abc"}}
+  ],
+  "tests": [
+    {"step":0,"pointer":"/tool/id","equals":"powercfg"},
+    {"step":0,"pointer":"/origin","equals":"public-catalog"},
+    {"step":1,"pointer":"/bytes","equals":3},
+    {"step":1,"pointer":"/sha256","equals":"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"}
+  ]
+}

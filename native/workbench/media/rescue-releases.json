@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "images": [
+    {
+      "bytes": 1925369856,
+      "sha256": "e3b39605ec5be40c7c0ec52936e0178e2eac91b717698616c55ecce4b371e8a7"
+    },
+    {
+      "bytes": 1925236736,
+      "sha256": "81880fb3775772facc03d97ceb0c67afb315ca3355fddef8388317ba366581b9"
+    },
+    {
+      "bytes": 1925193728,
+      "sha256": "6e31c36b7d574cd7d694b1bf1aa780b833643bdb89d214d7d6762e12afe1fcf2"
+    }
+  ],
+  "files": {
+    "SHA256SUMS": "4174c10094ee0fb9d06cd589aa1abb48304f2b06a85e0b46947111b7147ea115",
+    "build.json": "9860571da24ab80481ce804759d857bd840958d9b5ab30b89290d9fc3d7a3bf8",
+    "inta-rescue-amd64.packages": "84ff05ebc7a0500049e880c1a646453c9f8e79d32456b22427b914db9cff71f2",
+    "verified-release.json": "1a75af85eecb1fd95e38cfcb3d59522e4d53fc720db294e216421d845c6a97d0"
+  },
+  "notices": {
+    "image-notices.zip": "36b7ac6ded697b23750311809428647135d14a75d77158a165a3092c2b06b3bd",
+    "inventory.json": "ea3971abad1d76602ac3fde44acc856df81d58ba2f5dd2523dba201e00fe733d",
+    "rescue.cdx.json": "a4b90fab076f6d509272289709c8379b93c4d5bd2dfe23afefce57f086e4eab3"
+  }
+}

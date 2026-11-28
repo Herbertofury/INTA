@@ -12,6 +12,13 @@ from pathlib import Path
 import sys
 sys.path.insert(0, "/usr/share/inta")
 from inta_brand_ui import BrandResources
+from inta_optics_ui import native_sampler
+sample = native_sampler()
+if sample is None or not any(sample(x, 1, 40, 8, 0, 0, 0) for x in range(40)):
+    raise SystemExit("Rust optical library did not return a glyph")
+print("INTA_OPTICS_NATIVE_OK")
+if not Path("/usr/share/backgrounds/inta/obsidian-field.svg").is_file():
+    raise SystemExit("Missing offline desktop optical backdrop")
 resources = BrandResources(resource_root="/usr/share/inta")
 for name in ("INTA", "INTA Rescue", "GSmartControl", "GParted", "TestDisk", "PhotoRec", "Clonezilla", "ClamAV", "ddrescue", "YARA", "Sleuth Kit", "dislocker", "tcpdump", "ChatGPT", "Firefox", "Codex CLI", "Claude Code", "Ventoy", "Rufus"):
     if resources.resolve(name) is None:

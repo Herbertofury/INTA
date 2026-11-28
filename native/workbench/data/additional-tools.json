@@ -1,0 +1,1635 @@
+[
+  {
+    "id": "bitlocker",
+    "name": "BitLocker",
+    "category": "security",
+    "summary": "Manages encryption and recovery options for Windows volumes.",
+    "bestFor": "Checking protection status before servicing a disk.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "security",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "windows-update",
+    "name": "Windows Update",
+    "category": "windows",
+    "summary": "Shows update availability, history and restart options.",
+    "bestFor": "Reviewing a failed OS update.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows/deployment/update/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "defender-antivirus",
+    "name": "Microsoft Defender Antivirus",
+    "category": "malware",
+    "summary": "Provides local malware protection controls in Windows Security.",
+    "bestFor": "Reviewing protection and scan options.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-windows",
+    "downloadUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-windows",
+    "docsUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-windows",
+    "sourceUrl": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-windows",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "malware",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "chkdsk",
+    "name": "chkdsk",
+    "category": "storage",
+    "summary": "Checks Windows file systems and supports explicit repairs.",
+    "bestFor": "Reviewing command usage before selecting a volume.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "storage",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "diskpart",
+    "name": "DiskPart",
+    "category": "storage",
+    "summary": "Manages disk, partition and volume configuration.",
+    "bestFor": "Reviewing the disk-management command before a supervised procedure.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "storage",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "bcdboot",
+    "name": "BCDBoot",
+    "category": "boot",
+    "summary": "Copies Windows boot files to an explicitly selected system partition.",
+    "bestFor": "Reviewing boot-file provisioning options during recovery.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "task-manager",
+    "name": "Task Manager",
+    "category": "windows",
+    "summary": "Displays processes, performance and startup applications.",
+    "bestFor": "Identifying the process responsible for a resource spike.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+    "downloadUrl": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+    "docsUrl": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+    "sourceUrl": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "event-viewer",
+    "name": "Event Viewer",
+    "category": "windows",
+    "summary": "Reads Windows event channels and saved event logs.",
+    "bestFor": "Correlating a failure with events at the same time.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+    "downloadUrl": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+    "docsUrl": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+    "sourceUrl": "https://support.microsoft.com/en-us/windows/experience/system-configuration-tools-in-windows",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "reliability-monitor",
+    "name": "Reliability Monitor",
+    "category": "windows",
+    "summary": "Displays a timeline of failures and configuration changes.",
+    "bestFor": "Comparing the onset of crashes with recent changes.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "resource-monitor",
+    "name": "Resource Monitor",
+    "category": "hardware",
+    "summary": "Breaks down CPU, memory, disk and network activity by process.",
+    "bestFor": "Tracing contention to a process or resource.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "hardware",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "performance-monitor",
+    "name": "Performance Monitor",
+    "category": "hardware",
+    "summary": "Displays performance counters and manages data collector sets.",
+    "bestFor": "Recording a reproducible performance problem.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor",
+    "downloadUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor",
+    "docsUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor",
+    "sourceUrl": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "hardware",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "device-manager",
+    "name": "Device Manager",
+    "category": "hardware",
+    "summary": "Presents hardware status, driver details and device properties.",
+    "bestFor": "Identifying a missing driver or a device error code.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+    "downloadUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+    "docsUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+    "sourceUrl": "https://support.microsoft.com/en-us/windows/hardware/drivers/update-drivers-through-device-manager-in-windows",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "hardware",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "system-restore",
+    "name": "System Restore",
+    "category": "windows",
+    "summary": "Starts the Windows restore-point wizard.",
+    "bestFor": "Reviewing available restore points before a supervised rollback.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/system-restore",
+    "downloadUrl": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/system-restore",
+    "docsUrl": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/system-restore",
+    "sourceUrl": "https://support.microsoft.com/en-us/windows/experience/backup-recovery/system-restore",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "windows-security",
+    "name": "Windows Security",
+    "category": "security",
+    "summary": "Shows local protection providers and security settings.",
+    "bestFor": "Checking the status reported by the installed protection provider.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://support.microsoft.com/en-us/windows/security/windows-security/windows-security-app-overview",
+    "downloadUrl": "https://support.microsoft.com/en-us/windows/security/windows-security/windows-security-app-overview",
+    "docsUrl": "https://support.microsoft.com/en-us/windows/security/windows-security/windows-security-app-overview",
+    "sourceUrl": "https://support.microsoft.com/en-us/windows/security/windows-security/windows-security-app-overview",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "security",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "command-prompt",
+    "name": "Command Prompt",
+    "category": "windows",
+    "summary": "Opens an interactive Windows command interpreter.",
+    "bestFor": "Running a technician-selected local command.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "hyper-v",
+    "name": "Hyper-V",
+    "category": "boot",
+    "summary": "Opens management tools for Microsoft's virtualization platform when installed.",
+    "bestFor": "Inspecting existing virtual machines on supported Windows editions.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/overview",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/overview",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/overview",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/overview",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "startup-repair",
+    "name": "Startup Repair",
+    "category": "boot",
+    "summary": "Windows Recovery Environment can diagnose and repair boot failures.",
+    "bestFor": "Opening recovery settings to plan a supervised restart.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://support.microsoft.com/en-us/windows/experience/startup-boot/startup-repair",
+    "downloadUrl": "https://support.microsoft.com/en-us/windows/experience/startup-boot/startup-repair",
+    "docsUrl": "https://support.microsoft.com/en-us/windows/experience/startup-boot/startup-repair",
+    "sourceUrl": "https://support.microsoft.com/en-us/windows/experience/startup-boot/startup-repair",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "safe-mode",
+    "name": "Safe Mode",
+    "category": "windows",
+    "summary": "Windows Startup Settings provides restricted diagnostic startup modes.",
+    "bestFor": "Opening recovery settings to prepare a supervised diagnostic boot.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included with supported Windows editions",
+    "homepage": "https://support.microsoft.com/en-us/windows/experience/startup-boot/windows-startup-settings",
+    "downloadUrl": "https://support.microsoft.com/en-us/windows/experience/startup-boot/windows-startup-settings",
+    "docsUrl": "https://support.microsoft.com/en-us/windows/experience/startup-boot/windows-startup-settings",
+    "sourceUrl": "https://support.microsoft.com/en-us/windows/experience/startup-boot/windows-startup-settings",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "inta-rescue",
+    "name": "INTA Rescue",
+    "category": "boot",
+    "summary": "Provides INTA rescue image and virtual boot controls.",
+    "bestFor": "Testing recovery media against a disposable virtual disk.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included in INTA Workstation",
+    "homepage": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+    "downloadUrl": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+    "docsUrl": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+    "sourceUrl": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "media-creator",
+    "name": "Media Creator",
+    "category": "boot",
+    "summary": "Prepares and verifies INTA installation or recovery media.",
+    "bestFor": "Opening the media preparation workflow and selecting its destination.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "built-in",
+    "pricing": "Included in INTA Workstation",
+    "homepage": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+    "downloadUrl": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+    "docsUrl": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+    "sourceUrl": "https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "built-in"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "category": "productivity",
+    "summary": "Tracks changes in local source repositories.",
+    "bestFor": "Inspecting recorded changes and release revisions.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Publisher terms apply. Check licensing for extensions and paid services.",
+    "homepage": "https://git-scm.com/",
+    "downloadUrl": "https://git-scm.com/",
+    "docsUrl": "https://git-scm.com/",
+    "sourceUrl": "https://git-scm.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "category": "productivity",
+    "summary": "Runs Python programs and provides an interactive interpreter.",
+    "bestFor": "Running reviewed local maintenance scripts.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Publisher terms apply. Check licensing for extensions and paid services.",
+    "homepage": "https://www.python.org/",
+    "downloadUrl": "https://www.python.org/",
+    "docsUrl": "https://www.python.org/",
+    "sourceUrl": "https://www.python.org/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "onedrive",
+    "name": "OneDrive",
+    "category": "productivity",
+    "summary": "Synchronizes files with a configured Microsoft cloud account.",
+    "bestFor": "Inspecting the user's sync status and resolving conflicts.",
+    "platforms": [
+      "Windows",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Publisher terms apply. Check licensing for extensions and paid services.",
+    "homepage": "https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage",
+    "downloadUrl": "https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage",
+    "docsUrl": "https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage",
+    "sourceUrl": "https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "virtualbox",
+    "name": "VirtualBox",
+    "category": "boot",
+    "summary": "Hosts local virtual machines with virtual disks and snapshots.",
+    "bestFor": "Testing changes against a disposable guest.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Publisher terms apply. Check licensing for extensions and paid services.",
+    "homepage": "https://www.virtualbox.org/",
+    "downloadUrl": "https://www.virtualbox.org/",
+    "docsUrl": "https://www.virtualbox.org/",
+    "sourceUrl": "https://www.virtualbox.org/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "google-chrome",
+    "name": "Google Chrome",
+    "category": "productivity",
+    "summary": "Opens websites and provides browser developer tools.",
+    "bestFor": "Reproducing a browser-specific support issue.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Publisher terms apply. Check licensing for extensions and paid services.",
+    "homepage": "https://www.google.com/chrome/",
+    "downloadUrl": "https://www.google.com/chrome/",
+    "docsUrl": "https://www.google.com/chrome/",
+    "sourceUrl": "https://www.google.com/chrome/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "firefox",
+    "name": "Firefox",
+    "category": "productivity",
+    "summary": "Opens websites and provides browser diagnostic tools.",
+    "bestFor": "Checking a web workflow in Firefox.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Publisher terms apply. Check licensing for extensions and paid services.",
+    "homepage": "https://www.mozilla.org/firefox/",
+    "downloadUrl": "https://www.mozilla.org/firefox/",
+    "docsUrl": "https://www.mozilla.org/firefox/",
+    "sourceUrl": "https://www.mozilla.org/firefox/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "microsoft-edge",
+    "name": "Microsoft Edge",
+    "category": "productivity",
+    "summary": "Opens websites and provides browser management and diagnostic tools.",
+    "bestFor": "Reproducing a browser issue in Microsoft Edge.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Publisher terms apply. Check licensing for extensions and paid services.",
+    "homepage": "https://www.microsoft.com/edge",
+    "downloadUrl": "https://www.microsoft.com/edge",
+    "docsUrl": "https://www.microsoft.com/edge",
+    "sourceUrl": "https://www.microsoft.com/edge",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "mermaid",
+    "name": "Mermaid",
+    "category": "productivity",
+    "summary": "Renders text-based diagrams in the Mermaid Live Editor.",
+    "bestFor": "Previewing a non-confidential workflow diagram.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Service terms apply. Some features require an account or subscription.",
+    "homepage": "https://mermaid.js.org/",
+    "downloadUrl": "https://mermaid.js.org/",
+    "docsUrl": "https://mermaid.js.org/",
+    "sourceUrl": "https://mermaid.js.org/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "web"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "category": "productivity",
+    "summary": "Hosts source repositories and project collaboration tools.",
+    "bestFor": "Finding the upstream project, source code and release notes.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Service terms apply. Some features require an account or subscription.",
+    "homepage": "https://github.com/",
+    "downloadUrl": "https://github.com/",
+    "docsUrl": "https://github.com/",
+    "sourceUrl": "https://github.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "web"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "github-wiki",
+    "name": "GitHub Wiki",
+    "category": "productivity",
+    "summary": "Hosts the published INTA knowledge base.",
+    "bestFor": "Opening the current project's online technician documentation.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Service terms apply. Some features require an account or subscription.",
+    "homepage": "https://docs.github.com/en/communities/documenting-your-project-with-wikis",
+    "downloadUrl": "https://docs.github.com/en/communities/documenting-your-project-with-wikis",
+    "docsUrl": "https://docs.github.com/en/communities/documenting-your-project-with-wikis",
+    "sourceUrl": "https://docs.github.com/en/communities/documenting-your-project-with-wikis",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "web"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "github-pages",
+    "name": "GitHub Pages",
+    "category": "productivity",
+    "summary": "Serves the published INTA technician hub.",
+    "bestFor": "Opening the project's online reference catalog.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Service terms apply. Some features require an account or subscription.",
+    "homepage": "https://docs.github.com/en/pages",
+    "downloadUrl": "https://docs.github.com/en/pages",
+    "docsUrl": "https://docs.github.com/en/pages",
+    "sourceUrl": "https://docs.github.com/en/pages",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "web"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "github-actions",
+    "name": "GitHub Actions",
+    "category": "productivity",
+    "summary": "Shows the project workflow runs in GitHub.",
+    "bestFor": "Reviewing a build run and its recorded status.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Service terms apply. Some features require an account or subscription.",
+    "homepage": "https://docs.github.com/en/actions",
+    "downloadUrl": "https://docs.github.com/en/actions",
+    "docsUrl": "https://docs.github.com/en/actions",
+    "sourceUrl": "https://docs.github.com/en/actions",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "web"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "outlook",
+    "name": "Outlook",
+    "category": "productivity",
+    "summary": "Provides access to an authorized mailbox through the browser.",
+    "bestFor": "Comparing web mail behavior with a desktop mail client.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Service terms apply. Some features require an account or subscription.",
+    "homepage": "https://support.microsoft.com/outlook",
+    "downloadUrl": "https://support.microsoft.com/outlook",
+    "docsUrl": "https://support.microsoft.com/outlook",
+    "sourceUrl": "https://support.microsoft.com/outlook",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "web"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "microsoft365",
+    "name": "Microsoft 365",
+    "category": "productivity",
+    "summary": "Opens the Microsoft 365 application portal.",
+    "bestFor": "Checking whether the user's licensed services are accessible.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Service terms apply. Some features require an account or subscription.",
+    "homepage": "https://www.microsoft.com/microsoft-365",
+    "downloadUrl": "https://www.microsoft.com/microsoft-365",
+    "docsUrl": "https://www.microsoft.com/microsoft-365",
+    "sourceUrl": "https://www.microsoft.com/microsoft-365",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "web"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "google-drive",
+    "name": "Google Drive",
+    "category": "productivity",
+    "summary": "Provides browser access to a user's cloud files.",
+    "bestFor": "Checking whether authorized cloud files are accessible.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "Service terms apply. Some features require an account or subscription.",
+    "homepage": "https://drive.google.com/",
+    "downloadUrl": "https://drive.google.com/",
+    "docsUrl": "https://drive.google.com/",
+    "sourceUrl": "https://drive.google.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "web"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "winpe",
+    "name": "Windows PE",
+    "category": "boot",
+    "summary": "Microsoft's preinstallation environment boots from prepared Windows media.",
+    "bestFor": "Starting a licensed, locally supplied WinPE ISO in the offline lab.",
+    "platforms": [
+      "Bootable media"
+    ],
+    "mode": "boot",
+    "pricing": "Consult the publisher's use and redistribution terms.",
+    "homepage": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "boot"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "proxmox",
+    "name": "Proxmox VE",
+    "category": "boot",
+    "summary": "A virtualization platform installed on a dedicated host or lab guest.",
+    "bestFor": "Inspecting a publisher-provided installer ISO inside a disposable VM.",
+    "platforms": [
+      "Bootable media"
+    ],
+    "mode": "boot",
+    "pricing": "Consult the publisher's use and redistribution terms.",
+    "homepage": "https://www.proxmox.com/en/products/proxmox-virtual-environment/overview",
+    "downloadUrl": "https://www.proxmox.com/en/products/proxmox-virtual-environment/overview",
+    "docsUrl": "https://www.proxmox.com/en/products/proxmox-virtual-environment/overview",
+    "sourceUrl": "https://www.proxmox.com/en/products/proxmox-virtual-environment/overview",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "boot"
+    ],
+    "provenance": [
+      "Publisher and project reference linked in the INTA catalog"
+    ],
+    "evidenceStatus": "Cataloged. Availability is checked separately on each machine.",
+    "cautions": ""
+  },
+  {
+    "id": "qemu",
+    "name": "QEMU",
+    "category": "boot",
+    "summary": "Runs virtual machines with isolated virtual storage and firmware.",
+    "bestFor": "Booting a selected rescue ISO in the local INTA lab.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "portable",
+    "pricing": "See project or vendor terms",
+    "homepage": "https://www.qemu.org/",
+    "downloadUrl": "https://www.qemu.org/",
+    "docsUrl": "https://www.qemu.org/",
+    "sourceUrl": "https://www.qemu.org/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "portable"
+    ],
+    "provenance": [
+      "Upstream project or publisher documentation"
+    ],
+    "evidenceStatus": "Cataloged. Check availability on the current machine.",
+    "cautions": ""
+  },
+  {
+    "id": "cloud-hypervisor",
+    "name": "Cloud Hypervisor",
+    "category": "boot",
+    "summary": "Runs hardware-accelerated virtual machines through a Rust virtual machine monitor.",
+    "bestFor": "Using the prepared Linux KVM lab for the INTA rescue console.",
+    "platforms": [
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "See project or vendor terms",
+    "homepage": "https://www.cloudhypervisor.org/",
+    "downloadUrl": "https://www.cloudhypervisor.org/",
+    "docsUrl": "https://www.cloudhypervisor.org/",
+    "sourceUrl": "https://www.cloudhypervisor.org/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "installed"
+    ],
+    "provenance": [
+      "Upstream project or publisher documentation"
+    ],
+    "evidenceStatus": "Cataloged. Check availability on the current machine.",
+    "cautions": ""
+  },
+  {
+    "id": "xfce",
+    "name": "XFCE",
+    "category": "productivity",
+    "summary": "Provides the graphical desktop and settings manager in INTA Rescue.",
+    "bestFor": "Opening the Linux desktop's appearance and device preferences.",
+    "platforms": [
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "See project or vendor terms",
+    "homepage": "https://www.xfce.org/",
+    "downloadUrl": "https://www.xfce.org/",
+    "docsUrl": "https://www.xfce.org/",
+    "sourceUrl": "https://www.xfce.org/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "installed"
+    ],
+    "provenance": [
+      "Upstream project or publisher documentation"
+    ],
+    "evidenceStatus": "Cataloged. Check availability on the current machine.",
+    "cautions": ""
+  },
+  {
+    "id": "active-directory",
+    "name": "Active Directory",
+    "category": "windows",
+    "summary": "Manages domain directory objects through the optional Users and Computers console.",
+    "bestFor": "Opening installed administrative tools for an authorized directory.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "See project or vendor terms",
+    "homepage": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "installed"
+    ],
+    "provenance": [
+      "Upstream project or publisher documentation"
+    ],
+    "evidenceStatus": "Cataloged. Check availability on the current machine.",
+    "cautions": ""
+  },
+  {
+    "id": "athena",
+    "name": "Athena",
+    "category": "productivity",
+    "summary": "Maintains community reference material used in INTA tool discovery.",
+    "bestFor": "Inspecting the upstream evidence behind a catalog candidate.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "source project",
+    "pricing": "See project or vendor terms",
+    "homepage": "https://github.com/Herbertofury/Athena",
+    "downloadUrl": "https://github.com/Herbertofury/Athena",
+    "docsUrl": "https://github.com/Herbertofury/Athena",
+    "sourceUrl": "https://github.com/Herbertofury/Athena",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "source project"
+    ],
+    "provenance": [
+      "Upstream project or publisher documentation"
+    ],
+    "evidenceStatus": "Cataloged. Check availability on the current machine.",
+    "cautions": ""
+  },
+  {
+    "id": "unslop",
+    "name": "Unslop",
+    "category": "productivity",
+    "summary": "Provides an upstream reference for design and interface review.",
+    "bestFor": "Inspecting the original project resources and documented usage.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "source project",
+    "pricing": "See project or vendor terms",
+    "homepage": "https://github.com/heydamir/unslop",
+    "downloadUrl": "https://github.com/heydamir/unslop",
+    "docsUrl": "https://github.com/heydamir/unslop",
+    "sourceUrl": "https://github.com/heydamir/unslop",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "productivity",
+      "source project"
+    ],
+    "provenance": [
+      "Upstream project or publisher documentation"
+    ],
+    "evidenceStatus": "Cataloged. Check availability on the current machine.",
+    "cautions": ""
+  },
+  {
+    "id": "lm-studio",
+    "name": "LM Studio",
+    "category": "ai",
+    "summary": "Runs local language models and maintains a local model library.",
+    "bestFor": "Inspecting locally available models and testing inference.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "See publisher and model-specific license terms",
+    "homepage": "https://lmstudio.ai/",
+    "downloadUrl": "https://lmstudio.ai/",
+    "docsUrl": "https://lmstudio.ai/docs",
+    "sourceUrl": "https://lmstudio.ai/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "ai",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher documentation and exact package identifier where available"
+    ],
+    "evidenceStatus": "Cataloged. Acquisition and local execution depend on this host.",
+    "cautions": "Review data and license terms before downloading models or using connected services."
+  },
+  {
+    "id": "comfyui",
+    "name": "ComfyUI",
+    "category": "ai",
+    "summary": "Runs node-based local inference workflows.",
+    "bestFor": "Checking a local workflow environment and its model files.",
+    "platforms": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "mode": "installed",
+    "pricing": "See publisher and model-specific license terms",
+    "homepage": "https://www.comfy.org/",
+    "downloadUrl": "https://www.comfy.org/",
+    "docsUrl": "https://docs.comfy.org/",
+    "sourceUrl": "https://www.comfy.org/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "ai",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher documentation and exact package identifier where available"
+    ],
+    "evidenceStatus": "Cataloged. Acquisition and local execution depend on this host.",
+    "cautions": "Review data and license terms before downloading models or using connected services."
+  },
+  {
+    "id": "hugging-face",
+    "name": "Hugging Face",
+    "category": "ai",
+    "summary": "Hosts model repositories with licenses, model cards and versioned files.",
+    "bestFor": "Reviewing a model's provenance and license before local use.",
+    "platforms": [
+      "Web browser"
+    ],
+    "mode": "web",
+    "pricing": "See publisher and model-specific license terms",
+    "homepage": "https://huggingface.co/",
+    "downloadUrl": "https://huggingface.co/",
+    "docsUrl": "https://huggingface.co/docs/hub",
+    "sourceUrl": "https://huggingface.co/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "ai",
+      "web"
+    ],
+    "provenance": [
+      "Publisher documentation and exact package identifier where available"
+    ],
+    "evidenceStatus": "Cataloged. Acquisition and local execution depend on this host.",
+    "cautions": "Review data and license terms before downloading models or using connected services."
+  },
+  {
+    "id": "chatgpt-desktop",
+    "name": "ChatGPT desktop",
+    "category": "ai",
+    "summary": "Official desktop client for ChatGPT.",
+    "bestFor": "Opening the installed Windows client or acquiring it from its publisher.",
+    "platforms": [
+      "Windows",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Publisher terms apply",
+    "homepage": "https://chatgpt.com/download/",
+    "downloadUrl": "https://chatgpt.com/download/",
+    "docsUrl": "https://chatgpt.com/download/",
+    "sourceUrl": "https://chatgpt.com/download/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "ai",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher source and application documentation"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Use a redacted case summary and review the account data settings.",
+    "aliases": []
+  },
+  {
+    "id": "claude-desktop",
+    "name": "Claude desktop",
+    "category": "ai",
+    "summary": "Official desktop application for Claude.",
+    "bestFor": "Opening a supported Claude client for an explicitly approved case discussion.",
+    "platforms": [
+      "Windows",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "Publisher terms apply",
+    "homepage": "https://claude.com/download",
+    "downloadUrl": "https://claude.com/download",
+    "docsUrl": "https://claude.com/download",
+    "sourceUrl": "https://claude.com/download",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "ai",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher source and application documentation"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Review the account and connected tools before sharing case information.",
+    "aliases": []
+  },
+  {
+    "id": "winutil",
+    "name": "WinUtil",
+    "category": "windows",
+    "summary": "Provides upstream Windows configuration and maintenance tools.",
+    "bestFor": "Inspecting the settings and presets offered by the upstream project.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "source project",
+    "pricing": "MIT",
+    "homepage": "https://github.com/ChrisTitusTech/winutil",
+    "downloadUrl": "https://github.com/ChrisTitusTech/winutil",
+    "docsUrl": "https://github.com/ChrisTitusTech/winutil",
+    "sourceUrl": "https://github.com/ChrisTitusTech/winutil",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "source project"
+    ],
+    "provenance": [
+      "Official checkout 26.11.13 at 74607a0613d817eeb5cb35d187b5d7b31e23f386"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Review each proposed change and its restore procedure before applying it.",
+    "aliases": []
+  },
+  {
+    "id": "sophia-script",
+    "name": "Sophia Script for Windows",
+    "category": "windows",
+    "summary": "Provides upstream Windows configuration and maintenance tools.",
+    "bestFor": "Reviewing a version-specific Windows configuration preset.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "source project",
+    "pricing": "MIT",
+    "homepage": "https://github.com/farag2/Sophia-Script-for-Windows",
+    "downloadUrl": "https://github.com/farag2/Sophia-Script-for-Windows",
+    "docsUrl": "https://github.com/farag2/Sophia-Script-for-Windows",
+    "sourceUrl": "https://github.com/farag2/Sophia-Script-for-Windows",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "source project"
+    ],
+    "provenance": [
+      "Official checkout 8.1.0 at a6a160816461e4ca257347e6ac58e49d2d3973fd"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Review each proposed change and its restore procedure before applying it.",
+    "aliases": []
+  },
+  {
+    "id": "win11debloat",
+    "name": "Win11Debloat",
+    "category": "windows",
+    "summary": "Provides upstream Windows configuration and maintenance tools.",
+    "bestFor": "Inspecting the published app-selection rules and registry restoration workflow.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "source project",
+    "pricing": "MIT",
+    "homepage": "https://github.com/Raphire/Win11Debloat",
+    "downloadUrl": "https://github.com/Raphire/Win11Debloat",
+    "docsUrl": "https://github.com/Raphire/Win11Debloat",
+    "sourceUrl": "https://github.com/Raphire/Win11Debloat",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "source project"
+    ],
+    "provenance": [
+      "Official checkout 2026.10.30 at 5d88bfe9ef2be5a8a643166a6400eb78a30c46ec"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Review each proposed change and its restore procedure before applying it.",
+    "aliases": []
+  },
+  {
+    "id": "winhance",
+    "name": "Winhance",
+    "category": "windows",
+    "summary": "Provides upstream Windows configuration and maintenance tools.",
+    "bestFor": "Reviewing Windows setup options with the upstream graphical tool.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "PolyForm-Shield-1.0.0",
+    "homepage": "https://github.com/memstechtips/Winhance",
+    "downloadUrl": "https://github.com/memstechtips/Winhance",
+    "docsUrl": "https://github.com/memstechtips/Winhance",
+    "sourceUrl": "https://github.com/memstechtips/Winhance",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "installed"
+    ],
+    "provenance": [
+      "Official checkout v26.06.12 at f23d554eb2d6400b1827bcc46b91294ffa53fbc9"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Review each proposed change and its restore procedure before applying it.",
+    "aliases": []
+  },
+  {
+    "id": "wintools",
+    "name": "Wintools",
+    "category": "windows",
+    "summary": "Provides upstream Windows configuration and maintenance tools.",
+    "bestFor": "Checking the source of its Windows operation catalog and snapshot logic.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "source project",
+    "pricing": "MIT with appended system-modification disclaimer",
+    "homepage": "https://github.com/QexleOSS/wintools",
+    "downloadUrl": "https://github.com/QexleOSS/wintools",
+    "docsUrl": "https://github.com/QexleOSS/wintools",
+    "sourceUrl": "https://github.com/QexleOSS/wintools",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "source project"
+    ],
+    "provenance": [
+      "Official checkout v0.1.0 at f7c703a51494dcd5d7b630c09ace8dc0687a8039"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Review each proposed change and its restore procedure before applying it.",
+    "aliases": []
+  },
+  {
+    "id": "winaero-tweaker",
+    "name": "Winaero Tweaker",
+    "category": "windows",
+    "summary": "Publisher-distributed Windows administration utility.",
+    "bestFor": "Reviewing desktop and shell customization settings.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Proprietary. Consult the publisher for use and redistribution terms.",
+    "homepage": "https://winaerotweaker.com/",
+    "downloadUrl": "https://winaerotweaker.com/",
+    "docsUrl": "https://winaerotweaker.com/",
+    "sourceUrl": "https://winaerotweaker.com/",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher source and application documentation"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Review each proposed change and its restore procedure before applying it.",
+    "aliases": []
+  },
+  {
+    "id": "shutup10",
+    "name": "O&O ShutUp10++",
+    "category": "windows",
+    "summary": "Publisher-distributed Windows administration utility.",
+    "bestFor": "Inspecting individual Windows privacy settings and their recommended scope.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Proprietary. Consult the publisher for use and redistribution terms.",
+    "homepage": "https://www.oo-software.com/en/shutup10",
+    "downloadUrl": "https://www.oo-software.com/en/shutup10",
+    "docsUrl": "https://www.oo-software.com/en/shutup10",
+    "sourceUrl": "https://www.oo-software.com/en/shutup10",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher source and application documentation"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Review each proposed change and its restore procedure before applying it.",
+    "aliases": []
+  },
+  {
+    "id": "appbuster",
+    "name": "O&O AppBuster",
+    "category": "windows",
+    "summary": "Publisher-distributed Windows administration utility.",
+    "bestFor": "Reviewing installed Windows applications and their removal eligibility.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Proprietary. Consult the publisher for use and redistribution terms.",
+    "homepage": "https://www.oo-software.com/en/ooappbuster",
+    "downloadUrl": "https://www.oo-software.com/en/ooappbuster",
+    "docsUrl": "https://www.oo-software.com/en/ooappbuster",
+    "sourceUrl": "https://www.oo-software.com/en/ooappbuster",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher source and application documentation"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Review each proposed change and its restore procedure before applying it.",
+    "aliases": []
+  },
+  {
+    "id": "bloatynosy",
+    "name": "Bloatynosy Origin",
+    "category": "windows",
+    "summary": "Windows customization utility in the Bloatynosy project lineage.",
+    "bestFor": "Finding the maintained release and reviewing the selected settings.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "source project",
+    "pricing": "Publisher terms apply",
+    "homepage": "https://github.com/builtbybel/Bloatynosy",
+    "downloadUrl": "https://github.com/builtbybel/Bloatynosy",
+    "docsUrl": "https://github.com/builtbybel/Bloatynosy",
+    "sourceUrl": "https://github.com/builtbybel/Bloatynosy",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "windows",
+      "source project"
+    ],
+    "provenance": [
+      "Publisher source and application documentation"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Review each proposed change and its restore procedure before applying it.",
+    "aliases": [
+      "Bloatynosy"
+    ]
+  },
+  {
+    "id": "windows-adk",
+    "name": "Windows Assessment and Deployment Kit",
+    "category": "boot",
+    "summary": "Microsoft deployment and imaging tools for Windows.",
+    "bestFor": "Preparing a licensed Windows installation or recovery image.",
+    "platforms": [
+      "Windows"
+    ],
+    "mode": "installed",
+    "pricing": "Microsoft ADK terms",
+    "homepage": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+    "downloadUrl": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+    "docsUrl": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+    "sourceUrl": "https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "boot",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher source and application documentation"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Windows PE has a separate add-on and specific installation and recovery use terms.",
+    "aliases": [
+      "Windows ADK"
+    ]
+  },
+  {
+    "id": "yara",
+    "name": "YARA",
+    "category": "security",
+    "summary": "Applies technician-selected pattern rules to local files.",
+    "bestFor": "Reviewing rule syntax or checking an authorized offline sample.",
+    "platforms": [
+      "Windows",
+      "Linux",
+      "macOS"
+    ],
+    "mode": "installed",
+    "pricing": "BSD-3-Clause",
+    "homepage": "https://github.com/VirusTotal/yara",
+    "downloadUrl": "https://github.com/VirusTotal/yara",
+    "docsUrl": "https://github.com/VirusTotal/yara",
+    "sourceUrl": "https://github.com/VirusTotal/yara",
+    "reviewedAt": "2026-11-26",
+    "tier": "specialist",
+    "tags": [
+      "security",
+      "installed"
+    ],
+    "provenance": [
+      "Publisher source and application documentation"
+    ],
+    "evidenceStatus": "Source reviewed. Local availability and runtime outcomes are recorded separately.",
+    "cautions": "Rule matches require interpretation. Keep customer samples and results in the approved case workspace.",
+    "aliases": []
+  }
+]

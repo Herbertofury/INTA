@@ -19,12 +19,12 @@ import webbrowser
 import weakref
 import zipfile
 
-BG = "#111214"
-SURFACE = "#17191d"
+BG = "#0d121a"
+SURFACE = "#18212d"
 TEXT = "#e7e9ee"
 MUTED = "#a8afb9"
 ACCENT = "#8bb8ff"
-LINE = "#30353d"
+LINE = "#344355"
 SENSITIVE_NAMES = {"everything", "autopsy", "chainsaw", "windows", "terminal"}
 
 
@@ -103,15 +103,26 @@ def configure_theme(root):
     root.configure(background=BG)
     style = ttk.Style(root)
     style.theme_use("clam")
+    style.configure(".", background=BG, foreground=TEXT, bordercolor=LINE, lightcolor=LINE,
+                    darkcolor=LINE, troughcolor=BG, focuscolor=ACCENT)
     style.configure("TFrame", background=BG)
     style.configure("Surface.TFrame", background=SURFACE)
     style.configure("TLabel", background=BG, foreground=TEXT, font=native_font(root, ("TkDefaultFont", 11)))
-    style.configure("TButton", background=SURFACE, foreground=TEXT, bordercolor=LINE, padding=(12, 9), font=native_font(root, ("TkDefaultFont", 10)))
-    style.map("TButton", background=[("active", "#242a33"), ("disabled", SURFACE)], foreground=[("disabled", "#78818d")])
+    style.configure("TButton", background=SURFACE, foreground=TEXT, bordercolor=LINE, lightcolor=SURFACE,
+                    darkcolor=SURFACE, relief="flat", padding=(12, 9), font=native_font(root, ("TkDefaultFont", 10)))
+    style.map("TButton", background=[("disabled", SURFACE), ("pressed", "#30435a"), ("active", "#243345")],
+              bordercolor=[("focus", ACCENT), ("active", "#6686a8")], foreground=[("disabled", "#929aa6")])
+    style.configure("TCombobox", fieldbackground=SURFACE, foreground=TEXT, arrowcolor=TEXT, bordercolor=LINE)
+    style.map("TCombobox", fieldbackground=[("readonly", SURFACE)], foreground=[("readonly", TEXT)],
+              bordercolor=[("focus", ACCENT)])
     style.configure("TNotebook", background=BG, borderwidth=0)
-    style.configure("TNotebook.Tab", background=SURFACE, foreground=MUTED, padding=(15, 11), font=native_font(root, ("TkDefaultFont", 11)))
-    style.map("TNotebook.Tab", background=[("selected", "#202e42")], foreground=[("selected", ACCENT)])
+    style.configure("TNotebook.Tab", background=SURFACE, foreground=MUTED, lightcolor=SURFACE,
+                    darkcolor=SURFACE, bordercolor=LINE, padding=(15, 11), font=native_font(root, ("TkDefaultFont", 11)))
+    style.map("TNotebook.Tab", background=[("selected", "#26384c"), ("active", "#223042")],
+              foreground=[("selected", "#c2e3ff")], bordercolor=[("focus", ACCENT)])
     style.configure("TSeparator", background=LINE)
+    style.configure("Vertical.TScrollbar", background="#263344", troughcolor=BG, arrowcolor=MUTED,
+                    lightcolor=SURFACE, darkcolor=SURFACE, bordercolor=BG)
     return style
 
 

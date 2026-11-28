@@ -1,0 +1,22 @@
+{
+  "checkedUtc": "2026-11-28T03:34:10.264631+00:00",
+  "executableSha256": "523647872c674205817785ab4c6f297d69d675ce7d040d7d3eaf30eaca6173d5",
+  "windowsBuild": 22631,
+  "mobileConsumer": "Production Android decoder executing in OpenJDK, separate process from the Rust executable",
+  "packetBytes": 87,
+  "checks": [
+    "approval-required",
+    "real-windows-capture-and-ciphertext",
+    "existing-file-preserved",
+    "version-expiry-session-nonce-data-and-tag-tamper-refused",
+    "actual-mobile-decoder-and-independent-memory-check",
+    "replay-refused",
+    "different-pairing-refused",
+    "revoked-pairing-refused",
+    "expired-pairing-refused",
+    "elapsed-pairing-refused",
+    "invalid-and-expired-export-refused"
+  ],
+  "newNetworkPermissions": 0,
+  "localKeysOrCustomerDataStored": false
+}

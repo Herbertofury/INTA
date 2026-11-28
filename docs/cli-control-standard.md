@@ -1,15 +1,15 @@
-# CLI control for INTA tools
+# CLI control for <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) tools
 
-Every tool INTA recommends, ships, installs, launches or puts in a repair
+Every tool <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) recommends, ships, installs, launches or puts in a repair
 plan needs a tested, machine-readable control surface. Use
-[CLI-Anything](https://github.com/HKUDS/CLI-Anything) conventions: prefer an
+<a href="https://github.com/" title="Open GitHub official download or service page" aria-label="Open GitHub official download or service page" data-inta-brand="app-github"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/99f4edb33272b70febb8.png" alt="GitHub official page" width="18" height="18" valign="middle" /></a> [CLI-Anything](https://github.com/HKUDS/CLI-Anything) conventions: prefer an
 official CLI or API, otherwise make a reviewed harness against the genuine
 backend. Pin product and wrapper versions and reviewed bytes; use one-shot
 operation IDs, structured output and an observable result. Never substitute
 a GUI macro, download link or installer for the actual task.
 
 Review the platform, edition, applicable install/discovery, launch, and
-every operation exposed by INTA. Provide primary sources, exact successful
+every operation exposed by <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/). Provide primary sources, exact successful
 runtime checks and predictable errors. Record whether the operation only
 reads or modifies the device, its required privileges, cancellation and
 rollback/review conditions. If something cannot be controlled, keep its
@@ -39,7 +39,7 @@ runtime evidence. The `complete` scope claim is set only after every relevant
 feature has been reviewed; one qualified operation does not imply parity.
 
 The first candidate harness is a read-only native Power Plans inventory through
-the pinned INTA agent and documented Windows power APIs:
+the pinned <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) agent and documented [Windows](https://www.microsoft.com/windows) power APIs:
 
 ```sh
 python3 scripts/cli-anything-inta.py --json power-plans \
@@ -54,14 +54,14 @@ agent service or background polling and never changes a power plan. Exit 0
 means ready data, 1 means a supported command returned a non-ready observation
 (e.g. unsupported OS), and 2 means the request or backend contract was refused.
 
-A Windows CI artifact is evidence for an exact short-lived preview, not
+A [Windows](https://www.microsoft.com/windows) CI artifact is evidence for an exact short-lived preview, not
 production approval. An unexpired read-only preview may be gated locally with
 `--require-operation ... --preview` on its exact platform, version and executable
 hash. It is never counted as full coverage or automatically accepted for a
 Desktop, Mobile or agent repair. Expired previews remain visible for history
 but are refused for use.
 
-### Windows startup registration preview
+### [Windows](https://www.microsoft.com/windows) startup registration preview
 
 ```text
 python3 scripts/cli-anything-inta.py --json startup-inventory --agent-binary ABSOLUTE_PATH --agent-sha256 EXACT_SHA256
@@ -75,7 +75,7 @@ keep output local and do not send or store it in shared logs by default.
 The command is not a production certification for a full startup manager.
 
 Optional `--include-folders` keeps that registry inventory and adds base names
-from the current-user and all-users Startup folders and a Windows Settings link
+from the current-user and all-users Startup folders and a [Windows](https://www.microsoft.com/windows) Settings link
 (unopened). It uses the same collector as Desktop and does not open files, resolve
 shortcut targets, disclose full paths, start items, or change startup settings.
 A redirected or unreadable folder is reported as incomplete, not empty.
@@ -87,7 +87,7 @@ The default remains the original registry-only scope.
 python3 scripts/cli-anything-inta.py --json installed-programs --agent-binary ABSOLUTE_PATH --agent-sha256 EXACT_SHA256
 ```
 
-This uses the same reader as the Windows Desktop view. It returns registered
+This uses the same reader as the [Windows](https://www.microsoft.com/windows) Desktop view. It returns registered
 display name, version, publisher and scope. It does not expose registry IDs,
 installation paths or uninstall commands, inventory Store apps, or modify
 the system. Skipped display rows and capped or unreadable scopes are reported
@@ -107,14 +107,14 @@ bytes are not physical disk usage. Exit 1 means usable but incomplete evidence
 specific folder you are authorized to inspect. This is local-only; it does not
 grant mobile queue admission or probe, optimize, delete, clean or repair files.
 
-### rclone local SHA-256 preview
+### <a href="https://rclone.org/downloads/" title="Open rclone official download or service page" aria-label="Open rclone official download or service page" data-inta-brand="rclone"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/94e3ecdd12ec4ec0b278.png" alt="rclone official page" width="18" height="18" valign="middle" /></a> [rclone](https://rclone.org/) local SHA-256 preview
 
 ```text
 python3 scripts/cli-anything-inta.py --json rclone-sha256 --rclone-binary ABSOLUTE_EXECUTABLE --rclone-sha256 EXACT_BINARY_SHA256 --file ABSOLUTE_FILE --expect-sha256 EXPECTED_FILE_SHA256
 ```
 
-Use an already acquired [official rclone build](https://rclone.org/downloads/).
-The explicit [rclone stdin hash command](https://rclone.org/commands/rclone_hashsum/)
+Use an already acquired <a href="https://rclone.org/downloads/" title="Open rclone official download or service page" aria-label="Open rclone official download or service page" data-inta-brand="rclone"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/94e3ecdd12ec4ec0b278.png" alt="rclone official page" width="18" height="18" valign="middle" /></a> [official rclone build](https://rclone.org/downloads/).
+The explicit <a href="https://rclone.org/downloads/" title="Open rclone official download or service page" aria-label="Open rclone official download or service page" data-inta-brand="rclone"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/94e3ecdd12ec4ec0b278.png" alt="rclone official page" width="18" height="18" valign="middle" /></a> [rclone stdin hash command](https://rclone.org/commands/rclone_hashsum/)
 receives file bytes only, never a filename, remote or arbitrary options.
 An explicit empty config disables account configuration. One selected regular
 file up to 32 MiB; nothing is uploaded, written or changed. Exit 1 means the

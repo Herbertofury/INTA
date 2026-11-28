@@ -93,7 +93,7 @@ fi
 "$adb" -s "$serial" install "$scratch/signed/INTA-Mobile-Android.apk"
 "$adb" -s "$serial" install "$scratch/test.apk"
 test_id=com.inta.mobile.test/.OfflineJobAcceptance
-for stage in start resume verify-completed draft draft-verify invoice invoice-verify handoff; do
+for stage in optics start resume verify-completed draft draft-verify invoice invoice-verify handoff diagnostic-import; do
   "$adb" -s "$serial" shell am force-stop com.inta.mobile
   if [[ "$stage" == resume ]]; then sleep 2; fi
   timeout 80 "$adb" -s "$serial" shell am instrument -w -e stage "$stage" "$test_id" | tee "$out/$stage.log"
@@ -105,3 +105,24 @@ sleep 1
 cp "$scratch/app/inta-mobile-unsigned.apk" "$out/"
 cp "$scratch/signed/verification.txt" "$out/disposable-signing-proof.txt"
 (cd "$out"; sha256sum inta-mobile-unsigned.apk > SHA256SUMS)
+if [[ -n "${INTA_OWNER_SIGNED_APK:-}" ]]; then
+  signed=$INTA_OWNER_SIGNED_APK
+  proof="$out/owner-install.txt"
+  "$tools/apksigner" verify --verbose --print-certs "$signed" > "$proof"
+  grep -Fxq 'Signer #1 certificate SHA-256 digest: eb1e89cf61e1c5e3c1ec8f2d8e46b91a6a5a66feaf3283189ddec5a224d02c0d' "$proof"
+  "$tools/zipalign" -c -P 16 4 "$signed"
+  "$tools/aapt2" dump badging "$signed" >> "$proof"
+  grep -Eq "^package: name='com[.]inta[.]mobile' versionCode='[0-9]+'" "$proof"
+  grep -Eq "^(minSdkVersion|sdkVersion):'26'$" "$proof"
+  grep -Fxq "targetSdkVersion:'36'" "$proof"
+  "$adb" -s "$serial" uninstall com.inta.mobile.test
+  "$adb" -s "$serial" uninstall com.inta.mobile
+  "$adb" -s "$serial" install "$signed"
+  "$adb" -s "$serial" shell am start -W -n com.inta.mobile/.JobActivity >> "$proof"
+  "$adb" -s "$serial" shell uiautomator dump /sdcard/inta-acceptance.xml
+  "$adb" -s "$serial" exec-out cat /sdcard/inta-acceptance.xml > "$scratch/owner-ui.xml"
+  grep -Fq 'text="Repair job"' "$scratch/owner-ui.xml"
+  "$adb" -s "$serial" install -r "$signed"
+  sha256sum "$signed" >> "$proof"
+  printf '%s\n' 'Owner-signed APK installed, opened Repair job, and reinstalled with the persistent identity.' >> "$proof"
+fi

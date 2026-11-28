@@ -1,0 +1,26 @@
+[package]
+name = "inta"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+inta-toolbox = {path = "../../toolbox"}
+inta-vm-lab = {path = "../../vm-lab"}
+anyhow = "1"
+serde_json = "1"
+serde = { version = "1", features = ["derive"] }
+tempfile = "3"
+rusqlite = { version = "0.43", features = ["bundled"] }
+sha2 = "0.10"
+uuid = {version = "1", features = ["v4"] }
+time = {version = "0.3", features = ["formatting"] }
+walkdir = "2.5"
+
+[target.'cfg(windows)'.dependencies]
+inta-capabilities = { path = "../../../capabilities" }
+winreg = "0.56"
+windows-sys = {version = "0.61", features = ["Win32_System_Registry","Win32_Networking_WinHttp","Win32_System_SystemInformation","Win32_Storage_FileSystem","Win32_UI_Shell","Win32_UI_WindowsAndMessaging","Win32_Security","Win32_Security_Authorization","Win32_System_Threading","Win32_System_Com","Win32_Storage_Packaging_Appx","Win32_Security_WinTrust","Win32_Security_Cryptography"]}
+
+[build-dependencies]
+serde_json = "1"

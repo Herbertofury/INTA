@@ -19,9 +19,12 @@ javac --release 11 -Xlint:all -Werror -d "$scratch/test" \
 java -cp "$scratch/test" com.inta.mobile.JobStateTest "$scratch/fixture"
 "$tools/aapt2" compile --dir "$root/res" -o "$scratch/resources.zip"
 "$tools/aapt2" link --manifest "$root/AndroidManifest.xml" -I "$jar" -o "$scratch/base.apk" "$scratch/resources.zip"
+bash "$root/build-optics.sh" "$scratch"
+(cd -- "$scratch"; export TZ=UTC; touch -t 198001010000 lib/*/libinta_optics.so; zip -q -0 -X base.apk lib/*/libinta_optics.so)
 mapfile -d '' -t classes < <(find "$scratch/classes" -name '*.class' -print0 | sort -z)
 "$tools/d8" --release --min-api 26 --lib "$jar" --output "$scratch/dex" "${classes[@]}"
 (cd -- "$scratch/dex"; export TZ=UTC; touch -t 198001010000 classes.dex; zip -q -X -j ../base.apk classes.dex)
-"$tools/zipalign" -f -p 4 "$scratch/base.apk" "$out/inta-mobile-unsigned.apk"
+"$tools/zipalign" -f -P 16 4 "$scratch/base.apk" "$out/inta-mobile-unsigned.apk"
+"$tools/zipalign" -c -P 16 4 "$out/inta-mobile-unsigned.apk"
 "$tools/aapt2" dump badging "$out/inta-mobile-unsigned.apk"
 sha256sum "$out/inta-mobile-unsigned.apk"

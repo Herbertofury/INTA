@@ -4,8 +4,18 @@ on:
   pull_request:
     paths:
       - mobile/android/**
+      - native/optics/**
       - .github/workflows/inta-mobile-preview.yml
   workflow_dispatch:
+    inputs:
+      owner_apk_tag:
+        description: Optional INTA Mobile release tag to install on the test emulator
+        required: false
+        type: string
+      owner_apk_sha256:
+        description: Expected SHA-256 of the owner-signed release APK
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -24,6 +34,7 @@ jobs:
           set -euo pipefail
           export JAVA_HOME="$JAVA_HOME_21_X64" PATH="$JAVA_HOME_21_X64/bin:$PATH"
           java -version
+          rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
           mkdir -p "$RUNNER_TEMP/inta-avd" "$RUNNER_TEMP/inta-android-user"
           export ANDROID_AVD_HOME="$RUNNER_TEMP/inta-avd"
           export ANDROID_USER_HOME="$RUNNER_TEMP/inta-android-user"
@@ -53,6 +64,19 @@ jobs:
             printf 'ANDROID_USER_HOME=%s\n' "$ANDROID_USER_HOME"
           } >> "$GITHUB_ENV"
           printf '%s\n' "$JAVA_HOME/bin" >> "$GITHUB_PATH"
+      - name: Fetch the selected owner-signed package
+        if: inputs.owner_apk_tag != '' || inputs.owner_apk_sha256 != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.owner_apk_tag }}
+          DIGEST: ${{ inputs.owner_apk_sha256 }}
+        run: |
+          set -euo pipefail
+          [[ "$TAG" =~ ^mobile-[0-9][a-zA-Z0-9.-]{0,48}$ && "$DIGEST" =~ ^[a-f0-9]{64}$ ]]
+          gh release download "$TAG" --pattern INTA-Mobile-Android.apk --dir "$RUNNER_TEMP"
+          cd "$RUNNER_TEMP"
+          printf '%s  INTA-Mobile-Android.apk\n' "$DIGEST" | sha256sum --check
+          printf 'INTA_OWNER_SIGNED_APK=%s/INTA-Mobile-Android.apk\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
       - name: Build and exercise native timer, restart and checklist
         run: |
           bash mobile/android/verify-emulator.sh "$ANDROID_HOME/platforms/android-36/android.jar" \
@@ -65,6 +89,7 @@ jobs:
             mobile-proof/inta-mobile-unsigned.apk
             mobile-proof/inta-job-completed.png
             mobile-proof/build.log
+            mobile-proof/optics.log
             mobile-proof/start.log
             mobile-proof/resume.log
             mobile-proof/verify-completed.log
@@ -73,6 +98,8 @@ jobs:
             mobile-proof/invoice.log
             mobile-proof/invoice-verify.log
             mobile-proof/handoff.log
+            mobile-proof/diagnostic-import.log
             mobile-proof/SHA256SUMS
             mobile-proof/disposable-signing-proof.txt
+            mobile-proof/owner-install.txt
           if-no-files-found: error

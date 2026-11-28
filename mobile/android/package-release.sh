@@ -27,7 +27,7 @@ grep -Eq "^(minSdkVersion|sdkVersion):'26'$" <<< "$badging" || {
 grep -Fxq "targetSdkVersion:'36'" <<< "$badging" || {
   echo 'Unexpected Android target SDK.' >&2; exit 1;
 }
-"$tools/zipalign" -c -p 4 "$apk"
+"$tools/zipalign" -c -P 16 4 "$apk"
 parent=$(realpath -- "$(dirname -- "$8")")
 out="$parent/$(basename -- "$8")"
 [[ ! -e "$out" && ! -L "$out" ]]
@@ -49,7 +49,7 @@ grep -Fxq 'Verified using v2 scheme (APK Signature Scheme v2): true' <<< "$info"
 grep -Fxq "Signer #1 certificate SHA-256 digest: $signer" <<< "$info" || {
   echo 'Android signer differs from the approved certificate fingerprint.' >&2; exit 1;
 }
-"$tools/zipalign" -c -p 4 "$candidate"
+"$tools/zipalign" -c -P 16 4 "$candidate"
 {
   printf 'Source revision: %s\nVerified input SHA-256: %s\n' "$revision" "$expected"
   printf '%s\n' "$info"
