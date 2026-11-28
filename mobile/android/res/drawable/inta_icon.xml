@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Same geometry and palette as the repository's site/inta-app-icon.svg. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="512" android:viewportHeight="512">
+    <path android:fillColor="#111214"
+        android:pathData="M104,0H408Q512,0 512,104V408Q512,512 408,512H104Q0,512 0,408V104Q0,0 104,0Z" />
+    <path android:fillColor="#E7E9EE"
+        android:pathData="M104,104H232V232H104Z M280,104H408V232H280Z M104,280H232V408H104Z" />
+    <path android:strokeColor="#8BB8FF" android:strokeWidth="18"
+        android:pathData="M280,280H408V408H280Z" />
+</vector>

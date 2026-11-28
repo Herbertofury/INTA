@@ -1,0 +1,63 @@
+name: Verify INTA Android preview
+
+on:
+  pull_request:
+    paths:
+      - mobile/android/**
+      - .github/workflows/inta-mobile-preview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Prepare isolated official Android tools and AVD
+        shell: bash
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$JAVA_HOME_21_X64" PATH="$JAVA_HOME_21_X64/bin:$PATH"
+          java -version
+          mkdir -p "$RUNNER_TEMP/inta-avd" "$RUNNER_TEMP/inta-android-user"
+          export ANDROID_AVD_HOME="$RUNNER_TEMP/inta-avd"
+          export ANDROID_USER_HOME="$RUNNER_TEMP/inta-android-user"
+          sdk_manager="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          if [[ ! -x "$sdk_manager" ]]; then
+            sdk_manager=$(find "$ANDROID_HOME/cmdline-tools" -maxdepth 3 -type f -name sdkmanager | sort -V | tail -n 1)
+          fi
+          test -x "$sdk_manager"
+          avd_manager="$(dirname "$sdk_manager")/avdmanager"
+          test -x "$avd_manager"
+          "$sdk_manager" --install 'platforms;android-36' 'build-tools;36.0.0' 'system-images;android-36;default;x86_64' 'emulator'
+          mode=off
+          if [[ -r /dev/kvm && -w /dev/kvm ]] && "$ANDROID_HOME/emulator/emulator" -accel-check; then mode=on; fi
+          printf 'INTA_ANDROID_EMULATOR_ACCEL=%s\n' "$mode" >> "$GITHUB_ENV"
+          printf 'no\n' | "$avd_manager" create avd -n inta-test-ci -k 'system-images;android-36;default;x86_64'
+          {
+            printf 'JAVA_HOME=%s\n' "$JAVA_HOME"
+            printf 'ANDROID_AVD_HOME=%s\n' "$ANDROID_AVD_HOME"
+            printf 'ANDROID_USER_HOME=%s\n' "$ANDROID_USER_HOME"
+          } >> "$GITHUB_ENV"
+          printf '%s\n' "$JAVA_HOME/bin" >> "$GITHUB_PATH"
+      - name: Build and exercise native timer, restart and checklist
+        run: |
+          bash mobile/android/verify-emulator.sh "$ANDROID_HOME/platforms/android-36/android.jar" \
+            "$ANDROID_HOME/build-tools/36.0.0" "$ANDROID_HOME/platform-tools/adb" inta-test-ci mobile-proof
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: inta-mobile-android-preview-unsigned
+          path: |
+            mobile-proof/inta-mobile-unsigned.apk
+            mobile-proof/inta-job-completed.png
+            mobile-proof/build.log
+            mobile-proof/start.log
+            mobile-proof/resume.log
+            mobile-proof/verify-completed.log
+          if-no-files-found: error
