@@ -77,6 +77,12 @@ jobs:
           cd "$RUNNER_TEMP"
           printf '%s  INTA-Mobile-Android.apk\n' "$DIGEST" | sha256sum --check
           printf 'INTA_OWNER_SIGNED_APK=%s/INTA-Mobile-Android.apk\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          if [[ "$TAG" != mobile-0.2-preview.1 ]]; then
+            mkdir "$RUNNER_TEMP/prior-mobile"
+            gh release download mobile-0.2-preview.1 --repo "$GITHUB_REPOSITORY" --pattern INTA-Mobile-Android.apk --dir "$RUNNER_TEMP/prior-mobile"
+            printf '%s  %s\n' 74cd9e5aa37dee61104f9a43a89c4815bb8647af64ab6c3e4eec9607ef112e63 "$RUNNER_TEMP/prior-mobile/INTA-Mobile-Android.apk" | sha256sum --check
+            printf 'INTA_PRIOR_SIGNED_APK=%s/prior-mobile/INTA-Mobile-Android.apk\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          fi
       - name: Build and exercise native timer, restart and checklist
         run: |
           bash mobile/android/verify-emulator.sh "$ANDROID_HOME/platforms/android-36/android.jar" \
