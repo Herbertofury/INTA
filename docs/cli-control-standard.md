@@ -60,3 +60,16 @@ production approval. An unexpired read-only preview may be gated locally with
 hash. It is never counted as full coverage or automatically accepted for a
 Desktop, Mobile or agent repair. Expired previews remain visible for history
 but are refused for use.
+
+### Windows startup registration preview
+
+```text
+python3 scripts/cli-anything-inta.py --json startup-inventory --agent-binary ABSOLUTE_PATH --agent-sha256 EXACT_SHA256
+```
+
+The command reads names only from documented Run and RunOnce registry scopes.
+It does not expose command targets, enable or disable entries, enumerate the
+Startup folders, or assess other autostart sources. Missing sources are
+distinguished from unreadable or truncated ones. Names can be sensitive, so
+keep output local and do not send or store it in shared logs by default.
+The command is not a production certification for a full startup manager.
