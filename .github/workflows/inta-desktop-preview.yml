@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'desktop/INTA.Desktop/**'
+      - 'native/desktop/interop/FavoriteTweaks.cs'
+      - 'tests/INTA.FavoriteTweaks.Proof/**'
+      - 'tests/INTA.MaintenanceNavigation.Proof/**'
       - 'native/workbench/desktop/inta.ico'
       - 'agent/INTA.LocalAgent/StartupFolders.cs'
       - 'agent/INTA.LocalAgent/StartupInventory.cs'
@@ -15,6 +18,9 @@ on:
     branches: [main]
     paths:
       - 'desktop/INTA.Desktop/**'
+      - 'native/desktop/interop/FavoriteTweaks.cs'
+      - 'tests/INTA.FavoriteTweaks.Proof/**'
+      - 'tests/INTA.MaintenanceNavigation.Proof/**'
       - 'native/workbench/desktop/inta.ico'
       - 'agent/INTA.LocalAgent/StartupFolders.cs'
       - 'agent/INTA.LocalAgent/StartupInventory.cs'
@@ -38,6 +44,13 @@ jobs:
       - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: '10.0.x'
+      - name: Verify category routing, filters and portable preferences
+        shell: pwsh
+        run: |
+          dotnet run --project tests/INTA.FavoriteTweaks.Proof/INTA.FavoriteTweaks.Proof.csproj
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/INTA.MaintenanceNavigation.Proof/INTA.MaintenanceNavigation.Proof.csproj
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Build the native Windows preview
         run: dotnet publish desktop/INTA.Desktop/INTA.Desktop.csproj -c Release -r win-x64 --self-contained -warnaserror -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o out
       - name: Package the single executable and record its independent build digest
