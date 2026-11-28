@@ -217,6 +217,38 @@ def storage_preview(path, expected_sha, folder, days, entry_limit):
 MAX_LOCAL_HASH = 32 * 1024 * 1024
 
 
+def open_windows_readonly(path):
+    import ctypes
+    from ctypes import wintypes
+    import msvcrt
+    api = ctypes.WinDLL("kernel32", use_last_error=True)
+    open_file = api.CreateFileW
+    open_file.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD, wintypes.LPVOID,
+                          wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+    open_file.restype = wintypes.HANDLE
+    query = api.GetFileInformationByHandleEx
+    query.argtypes = [wintypes.HANDLE, ctypes.c_int, wintypes.LPVOID, wintypes.DWORD]
+    query.restype = wintypes.BOOL
+    api.CloseHandle.argtypes = [wintypes.HANDLE]
+    api.CloseHandle.restype = wintypes.BOOL
+    # GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, FILE_FLAG_OPEN_REPARSE_POINT.
+    # Refuse concurrent writers/deletion and do not traverse a final reparse point.
+    handle = open_file(str(path), 0x80000000, 1, None, 3, 0x00200000, None)
+    if handle == ctypes.c_void_p(-1).value:
+        raise ctypes.WinError(ctypes.get_last_error())
+    try:
+        attributes = (wintypes.DWORD * 2)()
+        if not query(handle, 9, ctypes.byref(attributes), ctypes.sizeof(attributes)):  # FileAttributeTagInfo
+            raise ctypes.WinError(ctypes.get_last_error())
+        if attributes[0] & (0x10 | 0x40 | 0x400):  # directory, device or reparse point
+            raise ValueError("selected Windows handle is not an ordinary file")
+        fd = msvcrt.open_osfhandle(handle, os.O_RDONLY | os.O_BINARY)
+    except BaseException:
+        api.CloseHandle(handle)
+        raise
+    return fd
+
+
 def regular_snapshot(path):
     if not path.is_absolute() or path.parent == path or ".." in path.parts:
         raise ValueError("choose an absolute file path on a local volume")
@@ -240,13 +272,20 @@ def regular_snapshot(path):
     # O_NONBLOCK keeps a racing FIFO from blocking a POSIX opener; the opened
     # handle must still be a regular file and match the original identity.
     flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
-    with os.fdopen(os.open(path, flags), "rb") as stream:
+    fd = open_windows_readonly(path) if os.name == "nt" else os.open(path, flags)
+    with os.fdopen(fd, "rb") as stream:
         opened = os.fstat(stream.fileno())
         snapshot_key = lambda st: (st.st_dev, st.st_ino, st.st_size, st.st_mtime_ns, st.st_ctime_ns)
-        if not stat.S_ISREG(opened.st_mode) or snapshot_key(opened) != snapshot_key(item):
+        # Windows path and descriptor metadata use different system APIs;
+        # compare only within each source, and bind the actual read to a
+        # no-follow handle that refuses concurrent writer/delete sharing.
+        path_matches = (snapshot_key(path.lstat()) == snapshot_key(item) and opened.st_size == item.st_size
+                        if os.name == "nt" else snapshot_key(opened) == snapshot_key(item))
+        if not stat.S_ISREG(opened.st_mode) or not path_matches:
             raise ValueError("file changed before it was opened")
         data = stream.read(MAX_LOCAL_HASH + 1)
-        if len(data) != item.st_size or snapshot_key(os.fstat(stream.fileno())) != snapshot_key(opened):
+        if (len(data) != item.st_size or snapshot_key(os.fstat(stream.fileno())) != snapshot_key(opened)
+                or (os.name == "nt" and snapshot_key(path.lstat()) != snapshot_key(item))):
             raise ValueError("file changed while it was read")
     return data
 
