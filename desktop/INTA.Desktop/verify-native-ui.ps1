@@ -146,11 +146,21 @@ try {
         if ($rows.Current.RowCount -ne 0) { throw 'Storage must not scan on startup.' }
         $edit = $pathInput.GetCurrentPattern([Windows.Automation.ValuePattern]::Pattern)
         $scan = $preview.GetCurrentPattern([Windows.Automation.InvokePattern]::Pattern)
+        $allocation = Wait-Until { Find-StorageControl 'Include observed disk allocation' } 'Missing allocation opt-in.'
+        $allocationToggle = $allocation.GetCurrentPattern([Windows.Automation.TogglePattern]::Pattern)
+        if ($allocationToggle.Current.ToggleState -ne [Windows.Automation.ToggleState]::Off) {
+            throw 'Allocation must be off by default.'
+        }
         $edit.SetValue($fixture)
         $scan.Invoke()
-        $null = Wait-Until { (Storage-Status 'Preview complete: 2 files, 13 bytes.*') -and $rows.Current.RowCount -eq 8 -and $preview.Current.IsEnabled } 'Storage totals did not match the synthetic fixture.'
+        $null = Wait-Until { (Storage-Status 'Preview complete: 2 files, 13 logical bytes.*') -and $rows.Current.RowCount -eq 8 -and $preview.Current.IsEnabled } 'Storage totals did not match the synthetic fixture.'
         if ([IO.File]::GetLastWriteTimeUtc($old) -ne $oldTime -or
             (Compare-Object $bytes @(Get-FileHash -LiteralPath $old, $recent | ForEach-Object Hash))) { throw 'The read-only scan modified the fixture.' }
+        $allocationToggle.Toggle()
+        $scan.Invoke()
+        $null = Wait-Until { (Storage-Status 'Preview complete: 2 files, 13 logical bytes.*') -and $rows.Current.RowCount -eq 14 -and $preview.Current.IsEnabled } 'Opt-in allocation totals were not shown.'
+        if ([IO.File]::GetLastWriteTimeUtc($old) -ne $oldTime -or
+            (Compare-Object $bytes @(Get-FileHash -LiteralPath $old, $recent | ForEach-Object Hash))) { throw 'Allocation scan modified the fixture.' }
         $edit.SetValue([IO.Path]::GetPathRoot($fixture))
         $scan.Invoke()
         $null = Wait-Until { (Storage-Status '*not a drive root or link*') -and $rows.Current.RowCount -eq 0 -and $preview.Current.IsEnabled } 'The drive-root request was not rejected before scanning.'

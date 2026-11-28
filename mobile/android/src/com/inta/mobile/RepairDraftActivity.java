@@ -75,8 +75,8 @@ public final class RepairDraftActivity extends Activity {
         setContentView(optics);
         add.setEnabled(false);
         DISK.execute(() -> {
-            Path local = getNoBackupFilesDir().toPath().resolve("repair-plan-draft.v1");
             try {
+                Path local = JobBook.read(getNoBackupFilesDir().toPath()).directory().resolve("repair-plan-draft.v1");
                 RepairDraft loaded = RepairDraft.read(local);
                 runOnUiThread(() -> {
                     if (!isDestroyed()) {

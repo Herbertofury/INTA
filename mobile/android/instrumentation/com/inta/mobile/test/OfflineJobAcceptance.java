@@ -48,6 +48,8 @@ public final class OfflineJobAcceptance extends Instrumentation {
                 == PackageManager.PERMISSION_DENIED, "unexpected network access");
             if ("diagnostic-import".equals(stage)) {
                 verifyDiagnosticImport(activity);
+            } else if (stage.startsWith("jobs-")) {
+                verifyJobSwitch(activity);
             } else if ("optics".equals(stage)) {
                 var field = getTargetContext().getClassLoader().loadClass("com.inta.mobile.OpticalField");
                 var nativeLoaded = field.getDeclaredField("NATIVE");
@@ -211,8 +213,10 @@ public final class OfflineJobAcceptance extends Instrumentation {
         long deadline = SystemClock.uptimeMillis() + 5000;
         do {
             AtomicReference<Boolean> ready = new AtomicReference<>(false);
-            runOnMainSync(() -> ready.set(activity.hasWindowFocus() && prefs.getInt("profile", -1) == expected));
-            if (ready.get()) return;
+            runOnMainSync(() -> ready.set(!activity.isDestroyed() && prefs.getInt("profile", -1) == expected));
+            AccessibilityNodeInfo root = getUiAutomation().getRootInActiveWindow();
+            if (ready.get() && root != null && root.findAccessibilityNodeInfosByText("Repair job").stream()
+                    .anyMatch(item -> item.isVisibleToUser() && "Repair job".contentEquals(item.getText() == null ? "" : item.getText()))) return;
             SystemClock.sleep(60);
         } while (SystemClock.uptimeMillis() < deadline);
         throw new AssertionError("appearance did not settle at " + expected + ", stored " + prefs.getInt("profile", -1));
@@ -335,6 +339,39 @@ public final class OfflineJobAcceptance extends Instrumentation {
             }
         }
         return null;
+    }
+
+    private void verifyJobSwitch(Activity activity) {
+        if ("jobs-return".equals(stage)) {
+            find(activity, "6 of 6 complete", false);
+            find(activity, "Saved on this phone · Draft subtotal US$7.92 · 5 billable min", false);
+            return;
+        }
+        boolean create = "jobs-create".equals(stage);
+        if (create) {
+            find(activity, "Saved on this phone · Draft subtotal US$7.92 · 5 billable min", false);
+        } else {
+            require("jobs-switch".equals(stage), "unknown work order test");
+            find(activity, "Laptop 812", false);
+            find(activity, "0 of 6 complete", false);
+            press(activity, "Confirm scope and back up");
+            find(activity, "1 of 6 complete", false);
+        }
+        ActivityMonitor monitor = addMonitor("com.inta.mobile.JobsActivity", null, false);
+        Activity list;
+        try {
+            press(activity, "Switch or create job");
+            list = waitForMonitorWithTimeout(monitor, 10000);
+            require(list != null, "job selector did not open");
+        } finally { removeMonitor(monitor); }
+        if (create) {
+            find(list, "Create job", true);
+            runOnMainSync(() -> ((EditText) byDescription(list.getWindow().getDecorView(), "New job name")).setText("Laptop 812"));
+            press(list, "Create job");
+        } else press(list, "Repair job");
+        long deadline = SystemClock.elapsedRealtime() + 5000;
+        while (!list.isFinishing() && !list.isDestroyed() && SystemClock.elapsedRealtime() < deadline) SystemClock.sleep(50);
+        require(list.isFinishing() || list.isDestroyed(), "job selection did not finish");
     }
 
     private void press(Activity activity, String label) {
