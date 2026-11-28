@@ -60,4 +60,6 @@ jobs:
             mobile-proof/start.log
             mobile-proof/resume.log
             mobile-proof/verify-completed.log
+            mobile-proof/draft.log
+            mobile-proof/draft-verify.log
           if-no-files-found: error
