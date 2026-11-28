@@ -85,7 +85,7 @@ def capture(monitor, target):
         raise ValueError("Missing guest screenshot")
 
 
-def host(image, expected, dest):
+def host(image, expected, dest, *, guest_script=None, verified_tabs=None):
     image = image.resolve(strict=True)
     if not image.is_file() or not re.fullmatch(r"[0-9a-f]{64}", expected):
         raise ValueError("Select a regular ISO and provide its SHA-256")
@@ -100,7 +100,7 @@ def host(image, expected, dest):
         boot_files(image, work)
         seed = work/"seed"
         seed.mkdir()
-        shutil.copyfile(__file__, seed/"test.py")
+        shutil.copyfile(guest_script or __file__, seed/"test.py")
         (seed/"start.sh").write_text('''#!/bin/bash
 set -euo pipefail
 exec >/dev/ttyS0 2>&1
@@ -151,7 +151,9 @@ runuser -u inta -- env HOME=/home/inta DISPLAY=:0 XAUTHORITY=/home/inta/.Xauthor
         if process.returncode or len(seen) != 2 or "INTA_OPTICAL_GUEST_PASS" not in serial.read_text(errors="replace").splitlines():
             raise RuntimeError("Guest UI failed; inspect "+str(serial))
         result = {"sha256":expected, "acceleration":"kvm" if kvm else "tcg", "profiles":["Full Prism","Classic","Professional"],
-                  "nativeRenderer":True, "systemTab":True, "settled":True, "networkDevices":0, "writableGuestDisks":0}
+                  "nativeRenderer":True, "systemTab":guest_script is None, "settled":True, "networkDevices":0, "writableGuestDisks":0}
+        if verified_tabs is not None:
+            result["verifiedTabs"] = verified_tabs
         (dest/"evidence.json").write_text(json.dumps(result, indent=2)+"\n")
         print(json.dumps(result))
 
