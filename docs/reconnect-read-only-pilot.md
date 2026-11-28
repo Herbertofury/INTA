@@ -26,3 +26,13 @@ The pilot takes a trusted local adapter selected by its host. A production
 implementation still needs reviewed immutable catalog artifacts, pairing and
 revocation, authenticated delivery and receipts, and independent acceptance
 for each operation. The Mobile editor is not yet an authorized dispatch path.
+
+### Review an exported phone draft on Windows
+
+In the native INTA workbench, open **Diagnostics → Review phone repair
+draft...** and choose the unchanged text file from INTA Mobile's **Review
+draft export**. The workbench shows the original step order and labels. It
+opens only a selected file on an ordinary local fixed drive, with a 16 KiB
+limit. It does not keep a copy, choose a device, approve a plan, run commands
+or dispatch work. Deliberately edited, malformed or unsupported exports are
+refused. Keep the original file private and unchanged.
