@@ -100,3 +100,14 @@ identity and signing material for future updates. `-Action Identity` prints
 the public SHA-256 certificate fingerprint. `-Action Sign` takes the tested
 unsigned APK, expected SHA-256, source revision, apksigner Java classpath and
 a new output directory. The public release includes its signature receipt.
+
+
+### Review and export an ordered repair draft
+
+From **Draft a repair plan**, save and reorder your steps, then tap **Review
+draft export**. Review the exact text before choosing a document destination.
+The plain-text handoff preserves the saved order and marks the draft as not
+approved. It contains no runnable action, device token or approval; it cannot
+dispatch work or grant access. The app writes to the destination you select,
+which may be outside the phone if you choose a synced provider. Canceling
+before choosing a destination leaves the local draft and files unchanged.
