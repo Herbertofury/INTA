@@ -622,6 +622,11 @@ main { min-height: calc(100vh - 125px); padding: 30px 32px 48px; outline: none; 
 .row-action { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; font-size: 14px; }
 .row-action svg { width: 14px; height: 14px; }
 .resource-row .button { margin-left: 10px; }
+.public-business { margin: 24px 0; scroll-margin-top: calc(var(--topbar-height) + 12px); }
+.public-business .resource-list { list-style: none; margin: 0; padding: 0; }
+.public-business .resource-row { padding-block: 14px; }
+.public-business .resource-row h3 { margin: 0; font-size: 1rem; }
+.public-business .resource-row p { margin-top: 3px; }
 .document-section, .resource-note { max-width: 95ch; margin-top: 34px; }
 .document-section h2, .resource-note h2 { margin-bottom: 15px; }
 .resource-note p { margin-top: 12px; color: var(--muted); }

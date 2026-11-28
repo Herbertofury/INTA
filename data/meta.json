@@ -6,6 +6,10 @@
   "wikiUrl": "https://github.com/Herbertofury/INTA/wiki",
   "hubUrl": "https://herbertofury.github.io/INTA/",
   "releaseUrl": "https://github.com/Herbertofury/INTA/releases",
+  "businessProfiles": [
+    {"id": "company", "url": "https://intacomputerservices.com/"},
+    {"id": "nextdoor", "url": "https://nextdoor.com/pages/inta-computer-services-northglenn-co/"}
+  ],
   "freshnessNote": "Editorial review is separate from installed tool versions. Follow official downloads and release notes when preparing your kit.",
   "privacyNote": "Favorites and checklist progress stay in this browser. Keep customer records in your approved private system."
 }
