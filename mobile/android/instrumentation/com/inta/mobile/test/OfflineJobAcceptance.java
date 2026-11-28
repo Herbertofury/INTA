@@ -19,7 +19,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
 
 /** Instrument an isolated Android guest, never install into an owner's app profile. */
@@ -143,11 +145,16 @@ public final class OfflineJobAcceptance extends Instrumentation {
         Uri uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, file);
         require(uri != null, "could not allocate an isolated export file");
         try {
+            byte[] original = "Untouched acceptance-test destination".getBytes(StandardCharsets.UTF_8);
+            try (OutputStream bytes = resolver.openOutputStream(uri, "wt")) {
+                require(bytes != null, "document provider could not create the test file");
+                bytes.write(original);
+            }
             press(activity, "Review handoff export");
             clickDialog("Cancel", "android:id/button2");
             find(activity, "Review handoff export", true);
             try (InputStream bytes = resolver.openInputStream(uri)) {
-                require(bytes != null && bytes.read() == -1, "cancel wrote export bytes");
+                require(bytes != null && Arrays.equals(bytes.readAllBytes(), original), "cancel changed the test file");
             }
             IntentFilter create = new IntentFilter(Intent.ACTION_CREATE_DOCUMENT, "text/plain");
             create.addCategory(Intent.CATEGORY_OPENABLE);
