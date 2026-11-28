@@ -171,7 +171,7 @@ def build(out, thumbprint):
         TARGET / "cargo-release/release/inta_optics.dll", out / "inta_optics.dll"
     )
     dotnet = Path(shutil.which("dotnet") or "dotnet")
-    if not output(dotnet, "--version").decode().strip().startswith("10."):
+    if not output(dotnet, "--version", cwd=HERE).decode().strip().startswith("10."):
         raise RuntimeError(
             "Add the Microsoft .NET 10 SDK directory to PATH to build Windows system tools."
         )
@@ -225,6 +225,7 @@ def build(out, thumbprint):
         "-p:DebugType=None",
         "-o",
         system,
+        cwd=HERE,
     )
     shutil.copyfile(system / "INTA.Desktop.exe", out / "INTA System Tools.exe")
     run(
