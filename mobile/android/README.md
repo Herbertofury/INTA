@@ -1,14 +1,16 @@
 # INTA Mobile: native offline repair job preview
 
-One Android job with a repair checklist, a durable stopwatch, and an explicit
+Each Android repair job has a checklist, a durable stopwatch, and an explicit
 complete action that freezes recorded time without marking any unchecked steps
 as done. The timer needs no foreground service. Closing the app on the same
 phone boot retains the running interval. If the phone itself restarts, the
 app pauses and retains only the last saved duration rather than guessing time.
 A restart of the serviced PC does not modify this independent phone timer.
 
-Install the [signed Android APK](https://github.com/Herbertofury/INTA/releases/tag/mobile-0.2-preview.1)
-on Android 8.0 or later. It keeps one job in private device storage. Use **Review
+Install the [signed Android APK](https://github.com/Herbertofury/INTA/releases/tag/mobile-0.2-preview.2)
+on Android 8.0 or later. **Switch or create job** opens named local work orders. Each
+keeps its own stopwatch, checklist, invoice and repair draft. An existing
+installation's original record stays accessible under **Repair job**. Use **Review
 handoff export** to save a completed job before uninstalling. **Receive PC
 diagnostics** opens an encrypted Desktop handoff through the system file picker.
 Create the one-time pairing code on the phone, enter it on Desktop, then open the
@@ -60,7 +62,7 @@ time stays untouched. The technician selects residential or business and
 enters a rate. The subtotal previews immediately, rounds once to cents,
 and saves only on **Save invoice draft**. It survives process restart.
 There is no guessed rate, tax, invoice numbering, payment, sending, or
-sync in this preview. This remains the app's existing single-job mode.
+sync in this preview.
 
 ## Export a completed job
 

@@ -93,7 +93,7 @@ fi
 "$adb" -s "$serial" install "$scratch/signed/INTA-Mobile-Android.apk"
 "$adb" -s "$serial" install "$scratch/test.apk"
 test_id=com.inta.mobile.test/.OfflineJobAcceptance
-for stage in optics start resume verify-completed draft draft-verify invoice invoice-verify handoff diagnostic-import; do
+for stage in optics start resume verify-completed draft draft-verify invoice invoice-verify handoff diagnostic-import jobs-create jobs-switch jobs-return; do
   "$adb" -s "$serial" shell am force-stop com.inta.mobile
   if [[ "$stage" == resume ]]; then sleep 2; fi
   timeout 80 "$adb" -s "$serial" shell am instrument -w -e stage "$stage" "$test_id" | tee "$out/$stage.log"
@@ -117,7 +117,16 @@ if [[ -n "${INTA_OWNER_SIGNED_APK:-}" ]]; then
   grep -Fxq "targetSdkVersion:'36'" "$proof"
   "$adb" -s "$serial" uninstall com.inta.mobile.test
   "$adb" -s "$serial" uninstall com.inta.mobile
-  "$adb" -s "$serial" install "$signed"
+  if [[ -n "${INTA_PRIOR_SIGNED_APK:-}" ]]; then
+    "$adb" -s "$serial" install "$INTA_PRIOR_SIGNED_APK"
+    python3 "$root/verify-owner-upgrade.py" "$adb" "$serial" record
+    "$adb" -s "$serial" install -r "$signed"
+    python3 "$root/verify-owner-upgrade.py" "$adb" "$serial" check
+    printf '%s\n' 'Updated over the signed 0.2-preview.1 release and preserved its original checklist.' >> "$proof"
+  else
+    "$adb" -s "$serial" install "$signed"
+  fi
+  "$adb" -s "$serial" shell am force-stop com.inta.mobile
   "$adb" -s "$serial" shell am start -W -n com.inta.mobile/.JobActivity >> "$proof"
   "$adb" -s "$serial" shell uiautomator dump /sdcard/inta-acceptance.xml
   "$adb" -s "$serial" exec-out cat /sdcard/inta-acceptance.xml > "$scratch/owner-ui.xml"
