@@ -177,7 +177,8 @@ public final class OfflineJobAcceptance extends Instrumentation {
             AccessibilityNodeInfo root = getUiAutomation().getRootInActiveWindow();
             if (root != null) {
                 for (AccessibilityNodeInfo node : root.findAccessibilityNodeInfosByText(name)) {
-                    if (name.contentEquals(node.getText()) && node.performAction(AccessibilityNodeInfo.ACTION_CLICK)) return;
+                    if (node.getText() != null && name.contentEquals(node.getText())
+                            && node.performAction(AccessibilityNodeInfo.ACTION_CLICK)) return;
                 }
             }
             SystemClock.sleep(100);

@@ -62,3 +62,22 @@ picker. The export contains recorded time, the checklist, and the last saved
 invoice draft when one exists. Unsaved billing edits and the separate repair
 plan stay out of the file. The selected document provider controls where the
 export is stored. Select an on-device location for a local handoff.
+
+## Package an accepted Android build
+
+The native emulator workflow records the exact unsigned APK checksum. A
+release operator can sign that APK on the release host with the approved
+Android application key. Use the checksum from the accepted workflow, the
+expected SHA-256 of the app-signing certificate, and the tested Git commit.
+Set `INTA_ANDROID_STORE_PASS` and `INTA_ANDROID_KEY_PASS` from the release
+host's secret store before running:
+
+```sh
+bash mobile/android/package-release.sh \
+  "$ANDROID_HOME/build-tools/36.0.0" inta-mobile-unsigned.apk \
+  "$APK_SHA256" "$SIGNER_SHA256" "$KEYSTORE" "$KEY_ALIAS" "$TESTED_REVISION" new-release
+```
+
+The output contains the signed APK, its SHA-256 and the signature verification
+receipt. The emulator uses a disposable key to exercise packaging and install.
+Public updates require the approved persistent app signing key.
