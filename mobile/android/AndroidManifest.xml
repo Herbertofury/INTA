@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.inta.mobile" android:versionCode="3" android:versionName="0.2-preview.2">
     <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="36" />
-    <application android:label="INTA Mobile" android:icon="@drawable/inta_icon" android:allowBackup="false"
+    <application android:label="INTA Mobile" android:icon="@mipmap/inta_application" android:allowBackup="false"
         android:theme="@android:style/Theme.Material.NoActionBar">
         <activity android:name=".JobsActivity" android:exported="false" />
         <activity android:name=".RepairDraftActivity" android:exported="false" />

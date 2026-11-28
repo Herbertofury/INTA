@@ -13,13 +13,17 @@ out=$(cd -- "$3" && pwd)
 scratch=$(mktemp -d "$out/.build.XXXXXX")
 trap 'rm -rf -- "$scratch"' EXIT
 mkdir "$scratch"/{classes,dex,test,fixture}
-javac --release 11 -Xlint:all -Werror -classpath "$jar" -d "$scratch/classes" "$root"/src/com/inta/mobile/*.java
+brand="$root/../../assets/inta-brand"
+mkdir -p "$scratch"/{res/mipmap-xxxhdpi,res/drawable-nodpi,gen}
+install -m 644 "$brand/application-192.png" "$scratch/res/mipmap-xxxhdpi/inta_application.png"
+install -m 644 "$brand/heritage-192.png" "$scratch/res/drawable-nodpi/inta_heritage.png"
+"$tools/aapt2" compile --dir "$scratch/res" -o "$scratch/resources.zip"
+"$tools/aapt2" link --manifest "$root/AndroidManifest.xml" -I "$jar" --java "$scratch/gen" -o "$scratch/base.apk" "$scratch/resources.zip"
+javac --release 11 -Xlint:all -Werror -classpath "$jar" -d "$scratch/classes" "$scratch/gen/com/inta/mobile/R.java" "$root"/src/com/inta/mobile/*.java
 javac --release 11 -Xlint:all -Werror -d "$scratch/test" \
   "$root"/src/com/inta/mobile/{JobTimer,JobStore,JobBook,RepairDraft,InvoiceDraft,JobHandoff}.java "$root"/tests/com/inta/mobile/JobStateTest.java "$root"/tests/com/inta/mobile/JobBookTest.java
 java -cp "$scratch/test" com.inta.mobile.JobStateTest "$scratch/fixture"
 java -cp "$scratch/test" com.inta.mobile.JobBookTest "$scratch/fixture-book"
-"$tools/aapt2" compile --dir "$root/res" -o "$scratch/resources.zip"
-"$tools/aapt2" link --manifest "$root/AndroidManifest.xml" -I "$jar" -o "$scratch/base.apk" "$scratch/resources.zip"
 bash "$root/build-optics.sh" "$scratch"
 (cd -- "$scratch"; export TZ=UTC; touch -t 198001010000 lib/*/libinta_optics.so; zip -q -0 -X base.apk lib/*/libinta_optics.so)
 mapfile -d '' -t classes < <(find "$scratch/classes" -name '*.class' -print0 | sort -z)
