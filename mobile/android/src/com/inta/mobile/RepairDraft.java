@@ -57,6 +57,17 @@ final class RepairDraft {
         return new RepairDraft(copy);
     }
 
+    String exportText() {
+        if (steps.isEmpty()) throw new IllegalStateException("The draft has no steps.");
+        StringBuilder report = new StringBuilder(
+            "INTA repair plan draft\nNot approved. Nothing in this document runs or grants access.\n\n");
+        for (int i = 0; i < steps.size(); ++i) {
+            Step step = steps.get(i);
+            report.append(i + 1).append(". ").append(step.kind.label).append(" — ").append(step.label).append('\n');
+        }
+        return report.toString();
+    }
+
     static RepairDraft read(Path path) throws IOException {
         try (DataInputStream input = new DataInputStream(Files.newInputStream(path))) {
             if (input.readInt() != 0x44520100) throw new IOException("Unsupported draft data");

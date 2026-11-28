@@ -2,6 +2,9 @@ package com.inta.mobile;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -16,6 +19,8 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -26,7 +31,10 @@ public final class RepairDraftActivity extends Activity {
     private LinearLayout rows;
     private TextView status;
     private EditText label;
-    private Button add;
+    private Button add, export;
+    private static final int CREATE_DRAFT = 8;
+    private String pendingExport;
+    private boolean writingExport;
     private Spinner kind;
     private Path destination;
     private RepairDraft draft;
@@ -70,6 +78,8 @@ public final class RepairDraftActivity extends Activity {
         status = text(body, "Opening saved draft…", 14, DIM, false);
         rows = column();
         body.addView(rows);
+        export = button(body, "Review draft export", this::reviewExport);
+        export.setEnabled(false);
         setContentView(scroll);
         add.setEnabled(false);
         DISK.execute(() -> {
@@ -110,8 +120,70 @@ public final class RepairDraftActivity extends Activity {
         });
     }
 
+    private void reviewExport() {
+        if (draft == null || draft.steps.isEmpty() || pending || pendingExport != null || writingExport) return;
+        String report = draft.exportText();
+        new AlertDialog.Builder(this)
+            .setTitle("Review this draft before saving")
+            .setMessage(report + "\nSave only to a location appropriate for this job.")
+            .setNegativeButton("Cancel", null)
+            .setPositiveButton("Choose save location", (dialog, which) -> chooseDestination(report))
+            .show();
+    }
+
+    @SuppressWarnings("deprecation")
+    private void chooseDestination(String report) {
+        pendingExport = report;
+        updateExport();
+        Intent create = new Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE)
+            .setType("text/plain").putExtra(Intent.EXTRA_TITLE, "INTA-repair-draft.txt");
+        try { startActivityForResult(create, CREATE_DRAFT); }
+        catch (ActivityNotFoundException unavailable) {
+            pendingExport = null;
+            status.setText("This device has no document picker.");
+            updateExport();
+        }
+    }
+
+    @Override @SuppressWarnings("deprecation")
+    protected void onActivityResult(int request, int result, Intent data) {
+        super.onActivityResult(request, result, data);
+        if (request != CREATE_DRAFT) return;
+        String report = pendingExport;
+        pendingExport = null;
+        Uri chosen = data == null ? null : data.getData();
+        if (result != RESULT_OK || chosen == null || !"content".equals(chosen.getScheme()) || report == null) {
+            status.setText(result == RESULT_CANCELED ? "Draft export canceled." : "No reviewed export was confirmed.");
+            updateExport();
+            return;
+        }
+        writingExport = true;
+        updateExport();
+        status.setText("Saving the reviewed draft…");
+        DISK.execute(() -> {
+            boolean saved;
+            try (OutputStream out = getContentResolver().openOutputStream(chosen, "wt")) {
+                if (out == null) throw new IOException("No output stream");
+                out.write(report.getBytes(StandardCharsets.UTF_8));
+                saved = true;
+            } catch (IOException | RuntimeException failure) { saved = false; }
+            boolean confirmed = saved;
+            runOnUiThread(() -> {
+                if (isDestroyed()) return;
+                writingExport = false;
+                status.setText(confirmed ? "Reviewed draft saved." : "Draft export failed. Check the chosen destination.");
+                updateExport();
+            });
+        });
+    }
+
+    private void updateExport() {
+        export.setEnabled(draft != null && !draft.steps.isEmpty() && !pending && pendingExport == null && !writingExport);
+    }
+
     private void render(String message) {
         status.setText(message);
+        updateExport();
         rows.removeAllViews();
         add.setEnabled(!pending && draft.steps.size() < RepairDraft.LIMIT);
         for (int i = 0; i < draft.steps.size(); ++i) {
