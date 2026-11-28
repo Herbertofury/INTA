@@ -39,6 +39,35 @@ try {
     $diag.GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern).Select()
     $null = Wait-For { Named 'Capability diagnostics' } 'native diagnostics entry point'
     $null = Wait-For { Named 'Review phone repair draft...' } 'the native Mobile draft review entry point'
+    # Windows PowerShell wraps method arguments inside PSObject when invoking
+    # reflection directly. Use a typed C# boundary with ordinary string/row values.
+    Add-Type -TypeDefinition @'
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+public static class IntaPackagedMobileDraftCheck {
+    private static IEnumerable Open(MethodInfo reader, string path) {
+        return (IEnumerable)reader.Invoke(null, new object[] { path });
+    }
+    public static string[] Labels(MethodInfo reader, string path) {
+        var result = new List<string>();
+        foreach (object row in Open(reader, path)) {
+            var field = row.GetType().GetField("Label", BindingFlags.NonPublic | BindingFlags.Instance);
+            result.Add((string)field.GetValue(row));
+        }
+        return result.ToArray();
+    }
+    public static bool Refuses(MethodInfo reader, string path) {
+        try { Open(reader, path); return false; }
+        catch (TargetInvocationException error) {
+            if (error.InnerException is InvalidDataException) return true;
+            throw;
+        }
+    }
+}
+'@
     $binding = [Reflection.BindingFlags]'NonPublic,Static'
     $reader = [Reflection.Assembly]::LoadFile($app).GetType('Inta.Desktop.MobileDraftReader',$true)
     $read = $reader.GetMethod('ReadFile',$binding)
@@ -48,16 +77,11 @@ try {
     try {
         [IO.File]::WriteAllText($draftPath,$report,([Text.UTF8Encoding]::new($false)))
         $original = (Get-FileHash -LiteralPath $draftPath -Algorithm SHA256).Hash
-        $rows = @($read.Invoke($null,@($draftPath)))
-        if ($rows.Count -ne 2) { throw 'The packaged reader did not return both steps' }
-        $fields = [Reflection.BindingFlags]'NonPublic,Instance'
-        $label = $rows[0].GetType().GetField('Label',$fields)
-        if ($label.GetValue($rows[0]) -cne 'Review results' -or $label.GetValue($rows[1]) -cne 'Observe startup timing') { throw 'The packaged reader lost draft order' }
+        $labels = @([IntaPackagedMobileDraftCheck]::Labels($read,[string]$draftPath))
+        if ($labels.Count -ne 2 -or $labels[0] -cne 'Review results' -or $labels[1] -cne 'Observe startup timing') { throw 'The packaged reader lost draft order' }
         if ((Get-FileHash -LiteralPath $draftPath -Algorithm SHA256).Hash -cne $original) { throw 'Review changed the selected draft file' }
         [IO.File]::WriteAllText($draftPath,($report.Replace('2. Apply','3. Apply')),([Text.UTF8Encoding]::new($false)))
-        $refused = $false
-        try { $null = $read.Invoke($null,@($draftPath)) } catch { if ($_.Exception.GetBaseException() -isnot [IO.InvalidDataException]) { throw }; $refused = $true }
-        if (!$refused) { throw 'The packaged reader accepted a malformed order' }
+        if (![IntaPackagedMobileDraftCheck]::Refuses($read,[string]$draftPath)) { throw 'The packaged reader accepted a malformed order' }
     } finally {
         Remove-Item -LiteralPath $draftPath -ErrorAction SilentlyContinue
     }
