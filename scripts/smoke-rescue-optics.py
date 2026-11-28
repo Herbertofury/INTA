@@ -35,7 +35,7 @@ def guest_test():
             root.update()
             assert bool(header.cells) == (name == "Full Prism")
             assert header.settings.read_text().strip() == name
-            print("INTA_OPTICAL_VISIBLE_" + name.split()[0].upper(), flush=True)
+            print("\nINTA_OPTICAL_VISIBLE_" + name.split()[0].upper(), flush=True)
             root.after(2200, root.quit)
             root.mainloop()
         header.profile.set("Professional")
