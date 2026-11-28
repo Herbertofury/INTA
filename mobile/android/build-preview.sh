@@ -15,7 +15,7 @@ trap 'rm -rf -- "$scratch"' EXIT
 mkdir "$scratch"/{classes,dex,test,fixture}
 javac --release 11 -Xlint:all -Werror -classpath "$jar" -d "$scratch/classes" "$root"/src/com/inta/mobile/*.java
 javac --release 11 -Xlint:all -Werror -d "$scratch/test" \
-  "$root"/src/com/inta/mobile/{JobTimer,JobStore}.java "$root"/tests/com/inta/mobile/JobStateTest.java
+  "$root"/src/com/inta/mobile/{JobTimer,JobStore,RepairDraft}.java "$root"/tests/com/inta/mobile/JobStateTest.java
 java -cp "$scratch/test" com.inta.mobile.JobStateTest "$scratch/fixture"
 "$tools/aapt2" compile --dir "$root/res" -o "$scratch/resources.zip"
 "$tools/aapt2" link --manifest "$root/AndroidManifest.xml" -I "$jar" -o "$scratch/base.apk" "$scratch/resources.zip"

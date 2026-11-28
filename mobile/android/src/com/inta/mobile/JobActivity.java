@@ -2,6 +2,7 @@ package com.inta.mobile;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -103,6 +104,7 @@ public final class JobActivity extends Activity {
                 .setMessage("The timer will stop. Unchecked steps remain recorded as incomplete.")
                 .setNegativeButton("Keep working", null).setPositiveButton("Finish job", (dialog, which) -> finishJob()).show();
         });
+        button(body, "Draft a repair plan", () -> startActivity(new Intent(this, RepairDraftActivity.class)));
         label(body, "This job stays on this phone. No sync, remote access, or invoice is sent.", 13, MUTED, false);
         setContentView(scroll);
         render();

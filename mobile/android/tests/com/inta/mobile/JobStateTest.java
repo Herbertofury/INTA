@@ -56,6 +56,18 @@ public final class JobStateTest {
         }
         must(new JobTimer(Long.MAX_VALUE, 0, 12, 0, JobTimer.Phase.RUNNING, false)
             .elapsed(Long.MAX_VALUE, 12) == Long.MAX_VALUE, "long job duration must not overflow");
-        System.out.println("Offline job and atomic storage acceptance passed.");
+        Path planFile = dir.resolve("repair-draft");
+        RepairDraft plan = RepairDraft.read(planFile)
+            .append(new RepairDraft.Step(RepairDraft.Kind.SCAN, "Scan after reconnect"))
+            .append(new RepairDraft.Step(RepairDraft.Kind.FIX, "Review the printer queue"));
+        plan.move(1, -1).save(planFile);
+        RepairDraft reopenedPlan = RepairDraft.read(planFile);
+        must(reopenedPlan.steps.get(0).kind == RepairDraft.Kind.FIX && plan.steps.get(0).kind == RepairDraft.Kind.SCAN,
+            "durable reordering must not mutate the original draft");
+        reopenedPlan.remove(0).save(planFile);
+        must(RepairDraft.read(planFile).steps.size() == 1, "step removal survives reopening");
+        try { new RepairDraft.Step(RepairDraft.Kind.FIX, "hidden\nextra"); throw new AssertionError("multiline draft label accepted"); }
+        catch (IllegalArgumentException expected) { }
+        System.out.println("Offline job, repair draft and atomic storage acceptance passed.");
     }
 }
