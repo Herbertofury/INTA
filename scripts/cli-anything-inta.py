@@ -77,17 +77,24 @@ def inventory(path, expected_sha):
     return report
 
 
-def startup_inventory(path, expected_sha):
-    """List only Windows Run/RunOnce registration names. Never read their values."""
+def startup_inventory(path, expected_sha, include_folders=False):
+    """List documented logon registration names; startup folder names require explicit opt-in."""
     binary = executable(path, expected_sha)
-    run = subprocess.run([str(binary), "--startup-inventory"], capture_output=True,
+    command = [str(binary), "--startup-inventory"]
+    if include_folders:
+        command.append("--include-folders")
+    run = subprocess.run(command, capture_output=True,
                          check=True, shell=False, timeout=12)
     if len(run.stdout) > 3 * 1024 * 1024:
         raise ValueError("native response is too large")
     report = json.loads(run.stdout.decode("utf-8"), object_pairs_hook=unique)
     keys = {"schema", "scope", "readOnly", "enabledState", "argumentsCollected", "sources"}
+    schema = 2 if include_folders else 1
+    scope = "windows-logon-registrations-and-local-startup-folders" if include_folders else "windows-logon-run-keys-only"
+    if include_folders:
+        keys |= {"startupFolders", "startupSettingsUri"}
     if (not isinstance(report, dict) or set(report) != keys or type(report["schema"]) is not int
-            or report["schema"] != 1 or report["scope"] != "windows-logon-run-keys-only"
+            or report["schema"] != schema or report["scope"] != scope
             or report["readOnly"] is not True or report["argumentsCollected"] is not False
             or report["enabledState"] != "not-evaluated" or not isinstance(report["sources"], list)):
         raise ValueError("unexpected startup response")
@@ -117,8 +124,29 @@ def startup_inventory(path, expected_sha):
         if len(set(names)) != len(names):
             raise ValueError("duplicate startup value")
         seen.add(source)
-    return {"status": "incomplete" if any(r["truncated"] or r["status"] == "unavailable" for r in rows) else "ready",
-            **report}
+    incomplete = any(r["truncated"] or r["status"] == "unavailable" for r in rows)
+    if include_folders:
+        folders = report["startupFolders"]
+        if (report["startupSettingsUri"] != "ms-settings:startupapps"
+                or not isinstance(folders, list) or len(folders) != 2):
+            raise ValueError("unexpected startup folder coverage")
+        scopes = set()
+        for folder in folders:
+            if not isinstance(folder, dict) or set(folder) != {"scope", "status", "entryNames", "truncated"}:
+                raise ValueError("unexpected startup folder row")
+            key, status, names, truncated = (folder[k] for k in ("scope", "status", "entryNames", "truncated"))
+            if (not isinstance(key, str) or key not in {"current-user", "all-users"} or key in scopes
+                    or not isinstance(status, str) or status not in {"read", "not-present", "unavailable", "location-not-scanned"}
+                    or not isinstance(names, list) or len(names) > 1024 or type(truncated) is not bool
+                    or (truncated and len(names) != 1024) or (status != "read" and (names or truncated))
+                    or not all(isinstance(n, str) and 0 < len(n) <= 255 and n not in {".", ".."}
+                               and not any(separator in n for separator in "/\\:\0") for n in names)):
+                raise ValueError("invalid startup folder display data")
+            if len(set(names)) != len(names):
+                raise ValueError("duplicate startup folder name")
+            scopes.add(key)
+            incomplete |= truncated or status in {"unavailable", "location-not-scanned"}
+    return {"status": "incomplete" if incomplete else "ready", **report}
 
 
 def installed_programs(path, expected_sha):
@@ -191,6 +219,8 @@ def main(argv=None):
     power = sub.add_parser("power-plans", help="read only: list Windows power plans and their active selection")
     startup = sub.add_parser("startup-inventory", help="read only: Windows Run and RunOnce names, no commands or enable state")
     programs = sub.add_parser("installed-programs", help="read only: Windows desktop registration display metadata")
+    startup.add_argument("--include-folders", action="store_true",
+                         help="explicitly include base names in the current-user and all-users local startup folders")
     storage = sub.add_parser("storage-preview", help="read only: aggregate metadata for a selected local folder")
     storage.add_argument("--folder", type=pathlib.Path, required=True)
     storage.add_argument("--minimum-age-days", type=int, default=7)
@@ -203,9 +233,10 @@ def main(argv=None):
         if args.operation == "storage-preview":
             result = storage_preview(args.agent_binary, args.agent_sha256, args.folder,
                                      args.minimum_age_days, args.entry_limit)
+        elif args.operation == "startup-inventory":
+            result = startup_inventory(args.agent_binary, args.agent_sha256, args.include_folders)
         else:
-            read = {"power-plans": inventory, "startup-inventory": startup_inventory,
-                    "installed-programs": installed_programs}[args.operation]
+            read = {"power-plans": inventory, "installed-programs": installed_programs}[args.operation]
             result = read(args.agent_binary, args.agent_sha256)
     except (OSError, ValueError, TypeError, RecursionError, subprocess.SubprocessError):
         print(json.dumps({"operation": args.operation, "status": "refused"}))
