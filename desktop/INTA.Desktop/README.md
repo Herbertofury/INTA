@@ -32,3 +32,10 @@ coverage. It never opens file contents or deletes anything. Drive roots,
 network locations and link-backed roots are not scanned. Reported bytes are
 logical size, not a guarantee of disk space you can reclaim. The Windows UI
 test uses disposable files only.
+
+Open **Installed programs** to browse desktop program registrations by name,
+version, publisher and registry scope. Identical names in separate registrations
+stay separate. Searches do not change the computer or invoke a package manager.
+Hidden and unnamed records are omitted; unreadable sources and scan caps are
+reported. This is not the Windows Store app list and does not uninstall programs.
+See Microsoft's [Windows Installer registry properties](https://learn.microsoft.com/windows/win32/msi/uninstall-registry-key).

@@ -159,6 +159,68 @@ try {
         Remove-Item -LiteralPath $fixture -Recurse -Force
     }
     'The real Storage preview matched the scoped fixture, left its files unchanged, and refused a whole-drive scan.'
+    function Registered-Snapshot {
+        $sub = 'Software\Microsoft\Windows\CurrentVersion\Uninstall'
+        if ([Environment]::Is64BitOperatingSystem) {
+            $scopes = ,@('CurrentUser','Default') + ,@('LocalMachine','Registry64') + ,@('LocalMachine','Registry32')
+        } else { $scopes = ,@('CurrentUser','Default') + ,@('LocalMachine','Default') }
+        $evidence = [Collections.Generic.List[string]]::new()
+        foreach ($scope in $scopes) {
+            $base = [Microsoft.Win32.RegistryKey]::OpenBaseKey($scope[0], $scope[1])
+            try {
+                $parent = $base.OpenSubKey($sub, $false)
+                if ($null -eq $parent) { continue }
+                try {
+                    foreach ($name in ($parent.GetSubKeyNames() | Select-Object -First 4096)) {
+                        $app = $parent.OpenSubKey($name, $false)
+                        if ($null -eq $app) { continue }
+                        try {
+                            $title = $app.GetValue('DisplayName', $null, [Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames)
+                            $system = $app.GetValue('SystemComponent')
+                            if ($title -is [string] -and -not [string]::IsNullOrWhiteSpace($title) -and -not ($system -is [int] -and $system -eq 1)) {
+                                $version = $app.GetValue('DisplayVersion', $null, [Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames)
+                                $publisher = $app.GetValue('Publisher', $null, [Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames)
+                                $evidence.Add((@($scope[0],$scope[1],$name,$title,$version,$publisher) -join [char]0))
+                            }
+                        } finally { $app.Dispose() }
+                    }
+                } finally { $parent.Dispose() }
+            } finally { $base.Dispose() }
+        }
+        return $evidence.ToArray() | Sort-Object -CaseSensitive
+    }
+
+    $registrationsBefore = @(Registered-Snapshot)
+    $expectedPrograms = $registrationsBefore.Count
+    if ($expectedPrograms -lt 1) { throw 'Windows must supply at least one desktop-program registry fixture.' }
+    $programs = Wait-Until { Find-Name 'Open installed programs' } 'Missing Installed programs action.'
+    $programs.GetCurrentPattern([Windows.Automation.InvokePattern]::Pattern).Invoke()
+    $programWindow = Wait-Until {
+        $condition = [Windows.Automation.PropertyCondition]::new(
+            [Windows.Automation.AutomationElement]::ProcessIdProperty, [int]$process.Id)
+        $matches = [Windows.Automation.AutomationElement]::RootElement.FindAll([Windows.Automation.TreeScope]::Children, $condition)
+        foreach ($item in $matches) { if ($item.Current.Name -like 'INTA Desktop * Installed programs') { return $item } }
+        $matches = $window.FindAll([Windows.Automation.TreeScope]::Descendants, $condition)
+        foreach ($item in $matches) { if ($item.Current.Name -like 'INTA Desktop * Installed programs') { return $item } }
+    } 'The native Installed programs window did not launch.'
+    try {
+        function Find-ProgramsControl([string]$Name) {
+            $condition = [Windows.Automation.PropertyCondition]::new([Windows.Automation.AutomationElement]::NameProperty, $Name)
+            $programWindow.FindFirst([Windows.Automation.TreeScope]::Descendants, $condition)
+        }
+        $programGrid = Wait-Until { Find-ProgramsControl 'Desktop program registrations' } 'Missing native programs grid.'
+        $programFilter = Wait-Until { Find-ProgramsControl 'Search desktop programs' } 'Missing accessible program search.'
+        $programRows = $programGrid.GetCurrentPattern([Windows.Automation.GridPattern]::Pattern)
+        $null = Wait-Until { $programRows.Current.RowCount -eq $expectedPrograms } 'Desktop program list did not match the independent registry count.'
+        $searchPrograms = $programFilter.GetCurrentPattern([Windows.Automation.ValuePattern]::Pattern)
+        $searchPrograms.SetValue('inta-test-no-program-'+[Guid]::NewGuid().ToString('N'))
+        $null = Wait-Until { $programRows.Current.RowCount -eq 0 } 'Installed programs did not filter.'
+        $searchPrograms.SetValue('')
+        $null = Wait-Until { $programRows.Current.RowCount -eq $expectedPrograms } 'Clearing the program search did not restore entries.'
+        if (Compare-Object -ReferenceObject $registrationsBefore -DifferenceObject @(Registered-Snapshot) -CaseSensitive) { throw 'Desktop program registry observations changed after the read-only preview.' }
+    } finally { $programWindow.GetCurrentPattern([Windows.Automation.WindowPattern]::Pattern).Close() }
+    'Native Installed programs matched the independent registry count and passed search; entries were not changed.'
+
 
 
 }
