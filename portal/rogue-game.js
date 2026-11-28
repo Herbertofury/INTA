@@ -383,6 +383,7 @@
       const control = event.target.closest('button[data-dc-action]');
       if (!control || !shell.contains(control) || control.disabled) return;
       const { dcAction: type, dcId: id } = control.dataset;
+      const previousPhase = state.run?.phase;
       if (type === 'start' || type === 'daily') {
         if (!own(kits, id)) return;
         const seed = type === 'daily' ? 'daily-' + new Date().toISOString().slice(0, 10) :
@@ -392,6 +393,11 @@
         state.run = null;
       } else if (!transition(state, type, id)) return;
       save();
+      const phase = state.run?.phase;
+      if (phase !== previousPhase) {
+        const cue = phase === 'won' ? 'report' : phase === 'final' ? 'win' : phase === 'defeat' ? 'loss' : null;
+        if (cue) globalThis.INTATrainingAudio?.play(cue,event);
+      }
       render([type, id]);
     });
     render();

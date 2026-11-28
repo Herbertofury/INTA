@@ -1710,3 +1710,17 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 @media(max-width:900px){.command-workbench .command-center-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.command-workbench .command-center-filters .input-wrap{grid-column:1/-1}}
 @media(max-width:560px){.command-workbench .command-workbench-tabs button{padding:8px 6px;font-size:11px;gap:4px}.command-workbench .command-workbench-tabs button svg{display:none}.command-workbench .command-card{padding:9px}.command-workbench .command-card-header{flex-wrap:wrap}.command-workbench .command-card-footer{flex-direction:row}.command-workbench .command-center-code{padding:9px}.command-workbench .command-maintenance-grid{grid-template-columns:minmax(0,1fr)}}
 @media print{.command-workbench :is(.command-workbench-tabs,.command-center-filters,.command-code-actions,.command-category-tabs){display:none}.command-workbench .command-card{display:block;break-inside:avoid}.command-workbench .command-center-code code{color:#111}}
+.mission-filter-tools { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.mission-search { display:flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:7px; padding:0 8px; min-height:42px; background:var(--surface); color:var(--accent); }
+.mission-search:focus-within { border-color:var(--focus); }
+.mission-search input { background:transparent; color:var(--text); border:0; width:min(15.5rem,74vw); min-height:40px; padding:0 3px; font-size:.83rem; }
+@media print { .mission-search { display:none !important; } }
+.training-audio { color:var(--muted); border:1px solid var(--line); border-radius:8px; background:var(--surface); padding:0 11px; font-size:.82rem; }
+#app > div > .training-audio { margin:0 0 12px; }
+.training-audio summary { min-height:40px; padding:9px 0; cursor:pointer; color:var(--text); font-weight:650; }
+.training-audio summary small { margin-inline-start:6px; color:var(--dim); font-size:.77rem; }
+.training-audio > div { display:flex; flex-wrap:wrap; align-items:center; gap:8px 13px; padding:0 0 9px; }
+.training-audio label { display:inline-flex; align-items:center; gap:4px; }
+.training-audio input[type=range] { width:90px; accent-color:var(--accent); }
+.training-audio button { padding:5px 8px; border:1px solid var(--line); border-radius:5px; background:var(--selected); }
+@media print { .training-audio { display:none !important; } }

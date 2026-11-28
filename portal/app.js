@@ -994,7 +994,7 @@
       <header class="mission-stage-head"><span class="mission-stage-icon">${icon(symbol)}</span><div><p class="mission-kicker">STAGE ${String(n+1).padStart(2,'0')}</p><h2 id="mission-title-${id}">${title}</h2><p>${desc}</p></div><span class="mission-stage-score" data-stage-score></span></header>
       <div class="closeout-rows">${items.map(({step,index,n:order}) => {
         const done = checked(job,'step',index,step.title);
-        return `<div class="mission-task${done?' is-done':''}" data-mission-row>
+        return `<div class="mission-task${done?' is-done':''}" data-mission-row data-mission-text="${esc(text([step.title,step.detail,...array(step.shortcuts).map(item=>item.label)]).toLowerCase())}">
           <div class="mission-task-top"><span class="mission-task-index" aria-hidden="true">${String(order+1).padStart(2,'0')}</span><label class="mission-check">
             <input type="checkbox" data-check-job="${job.id}" data-check-type="step" data-check-index="${index}" data-check-title="${esc(step.title)}"${done?' checked':''}>
             <span class="mission-tick" aria-hidden="true">${icon('check')}</span><span class="mission-task-title">${esc(step.title)}</span></label></div>
@@ -1004,7 +1004,7 @@
     </section>`;
     return `<div class="mission-board" data-mission-board>
       <header class="mission-hero"><div><p class="mission-kicker">INTA FIELDWORK / SERVICE BOARD</p><h1>Technician checklist</h1><p>From the first backup to a verified handoff. Mark each step only after you’ve checked the result.</p></div><div class="mission-seal" aria-hidden="true">${icon('shield')}<span>SERVICE<br>CHECKPOINT</span></div></header>
-      <div class="mission-toolbar"><div class="mission-filters" role="group" aria-label="Filter checklist"><button data-mission-filter="all" aria-pressed="true">All steps</button><button data-mission-filter="open" aria-pressed="false">Remaining</button><button data-mission-filter="done" aria-pressed="false">Verified</button></div>
+      <div class="mission-toolbar"><div class="mission-filter-tools"><label class="mission-search">${icon('search')}<span class="sr-only">Find a checklist step</span><input type="search" data-mission-search placeholder="Find a step, instruction, or tool…" autocomplete="off"></label><div class="mission-filters" role="group" aria-label="Filter checklist"><button data-mission-filter="all" aria-pressed="true">All steps</button><button data-mission-filter="open" aria-pressed="false">Remaining</button><button data-mission-filter="done" aria-pressed="false">Verified</button></div></div>
         <div class="mission-actions"><button class="button ghost" data-export-job="${job.id}">${icon('download')}Export checklist</button><button class="button ghost" data-print>${icon('printer')}Print</button><a class="button ghost" href="#job/client-handoff">Full handoff guide</a></div></div>
       <div class="mission-layout"><aside class="mission-rail" aria-label="Checklist progress"><section class="mission-meter" id="job-progress">
           <p class="mission-kicker">JOB PROGRESS</p><h2>Verification log</h2><div class="progress-top"><strong id="progress-percentage">${total.percentage}%</strong><span id="progress-count">${total.done} of ${total.total} checks</span></div>
@@ -1020,6 +1020,7 @@
   }
   function refreshMission(board, announce = false, input = null) {
     const mode = board.dataset.missionView || 'all';
+    const terms = board.querySelector('[data-mission-search]').value.toLowerCase().trim().split(/\s+/).filter(Boolean);
     let visible = 0, cleared = 0, all = 0;
     const stages = [...board.querySelectorAll('[data-mission-stage]')];
     for (const stage of stages) {
@@ -1029,7 +1030,8 @@
         const marked = row.querySelector('input').checked;
         done += Number(marked);
         row.classList.toggle('is-done', marked);
-        row.hidden = mode === 'open' ? marked : mode === 'done' ? !marked : false;
+        const statusHidden = mode === 'open' ? marked : mode === 'done' ? !marked : false;
+        row.hidden = statusHidden || terms.some(term => !row.dataset.missionText.includes(term));
         shown += Number(!row.hidden);
       }
       const complete = tasks.length > 0 && done === tasks.length;
@@ -1594,6 +1596,7 @@
   }
   function render() {
     const route = parseRoute();
+    if (route.raw !== lastRoute) window.INTATrainingAudio?.stop();
     const names = { home: 'Technician home', online: 'Online tools', checklist: 'Technician checklist', 'defense-circuit': 'Defense Circuit', 'packet-duel': 'Packet Duel', news: 'Technician News', 'command-center': 'Command Center', updates: 'Updates & Maintenance', services: 'Service map', tools: 'Tool library', playbooks: 'Job playbooks', saved: 'Saved tools', resources: 'Resources & wiki', knowledge: 'Knowledge desk', job: 'Job playbooks', tool: 'Tool library' };
     const active = route.name === 'job' ? 'playbooks' : route.name === 'tool' ? 'tools' : route.name;
     $$('#primary-nav [data-nav]').forEach(link => { link.classList.toggle('active', link.dataset.nav === active); if (link.dataset.nav === active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
@@ -1607,12 +1610,13 @@
       }
     }
     else if (route.name === 'online') app.innerHTML = online(route.params);
-    else if (route.name === 'checklist') { app.innerHTML = checklistPage(); refreshMission(app.firstElementChild); }
+    else if (route.name === 'checklist') { app.innerHTML = checklistPage(); refreshMission(app.firstElementChild); window.INTATrainingAudio?.mount(app.firstElementChild.querySelector('.mission-rail')); }
     else if (route.name === 'defense-circuit' || route.name === 'packet-duel') {
       const stage = document.createElement('div');
       app.replaceChildren(stage);
       const game = route.name === 'defense-circuit' ? window.INTARogue : window.INTACardGame;
       game?.mount(stage, data);
+      window.INTATrainingAudio?.mount(stage);
     }
     else if (route.name === 'news') app.innerHTML = newsPage();
     else if (route.name === 'command-center') app.innerHTML = commandCenterPage(route.params);
@@ -1708,7 +1712,7 @@
     }
     notify(`${toolMap.get(id).name} ${wasSaved ? 'removed from' : 'saved to'} your toolkit.${!storageAvailable ? ' Browser storage is unavailable; this lasts for this visit.' : ''}`);
   }
-  function changeCheck(input) {
+  function changeCheck(input, event) {
     const job = jobMap.get(input.dataset.checkJob);
     if (!job) return;
     if (!checklists[job.id] || typeof checklists[job.id] !== 'object' || Array.isArray(checklists[job.id])) checklists[job.id] = {};
@@ -1723,7 +1727,14 @@
     track.firstElementChild.style.width = `${state.percentage}%`;
     if (!storageAvailable) $('#progress-note').textContent = 'Progress lasts for this visit because browser storage is unavailable. Export your checklist to keep it.';
     const board = input.closest('[data-mission-board]');
-    if (board) refreshMission(board, true, input);
+    if (board) {
+      refreshMission(board, true, input);
+      if (input.checked) {
+        const stage = input.closest('[data-mission-stage]');
+        const cue = state.total && state.done === state.total ? 'handoff' : stage?.classList.contains('is-cleared') ? 'stage' : 'check';
+        window.INTATrainingAudio?.play(cue,event);
+      }
+    }
     if (state.total && state.done === state.total && input.checked) notify('Checklist complete. Record the verified result in your service ticket.');
   }
   async function copy(value, success) {
@@ -2131,7 +2142,13 @@ ${item.code}
     if (missionNext) {
       const board = missionNext.closest('[data-mission-board]');
       if (board.dataset.missionView === 'done') selectMissionView(board, 'open');
-      board.querySelector('[data-mission-row] input:not(:checked)')?.focus();
+      let next = board.querySelector('[data-mission-row]:not([hidden]) input:not(:checked)');
+      if (!next) {
+        board.querySelector('[data-mission-search]').value = '';
+        selectMissionView(board, 'open');
+        next = board.querySelector('[data-mission-row]:not([hidden]) input:not(:checked)');
+      }
+      next?.focus();
       return;
     }
     const reset = target.closest('[data-reset-checklist]'); if (reset) {
@@ -2179,13 +2196,16 @@ ${item.code}
     else if (event.target.id === 'jobs-search') filterJobs();
     else if (event.target.id === 'source-search') filterSources();
   });
+  document.addEventListener('input', event => {
+    if (event.target.matches('[data-mission-search]')) refreshMission(event.target.closest('[data-mission-board]'),true);
+  });
   document.addEventListener('change', event => {
     if (['command-center-shell', 'command-center-risk'].includes(event.target.id)) filterCommandCenter();
     else if (['updates-shell','updates-risk'].includes(event.target.id)) filterUpdatesCenter();
     else if (['online-group', 'online-task-only', 'online-saved-only'].includes(event.target.id)) filterOnline();
     else if ((libraryFields.includes(event.target.id) || event.target.id === 'tool-sort')) filterTools();
     else if (event.target.id === 'jobs-category') filterJobs();
-    else if (event.target.matches('[data-check-job]')) changeCheck(event.target);
+    else if (event.target.matches('[data-check-job]')) changeCheck(event.target,event);
   });
   search.addEventListener('input', updateSearch);
   search.addEventListener('focus', () => { if (search.value.trim()) updateSearch(); });
