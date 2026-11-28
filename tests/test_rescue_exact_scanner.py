@@ -23,7 +23,7 @@ class ExactImageTests(unittest.TestCase):
         self.addCleanup(f.cleanup)
         self.folder = Path(f.name)
 
-    def pack(self, version):
+    def pack(self, version, extra_status=""):
         root = self.folder / "inert"
         (root / "var/lib/dpkg").mkdir(parents=True)
         (root / "usr/lib").mkdir(parents=True)
@@ -33,7 +33,10 @@ class ExactImageTests(unittest.TestCase):
             lines.append(f"Package: {package}\nStatus: install ok installed\nArchitecture: amd64\n"
                          f"Maintainer: Fixture <fixture@example.invalid>\nDescription: Inert fixture\n"
                          f"Version: {version}\nSource: clamav ({version})\n")
-        (root / "var/lib/dpkg/status").write_text("\n".join(lines))
+        # Real Debian status databases include library names that exist only
+        # through relationships in an installed package's stanza.
+        lines[-1] += "Conflicts: libclamav2, libclamav3\nReplaces: libclamav12t64\n"
+        (root / "var/lib/dpkg/status").write_text("\n".join(lines) + extra_status)
         image_folder = self.folder / "disc"
         (image_folder / "live").mkdir(parents=True)
         squash = image_folder / "live/filesystem.squashfs"
@@ -84,6 +87,14 @@ class ExactImageTests(unittest.TestCase):
         self.assertEqual(wrong.returncode, 2)
         self.assertFalse(wrong.stdout)
         self.assertIn("refused", wrong.stderr)
+
+    def test_unpacked_library_is_not_a_virtual_placeholder(self):
+        self.pack(SYNTHETIC, "\nPackage: libclamav3\nStatus: install ok unpacked\nArchitecture: amd64\n"
+                  f"Version: {SYNTHETIC}\nSource: clamav ({SYNTHETIC})\n"
+                  "Maintainer: Fixture <fixture@example.invalid>\nDescription: Partially installed fixture\n")
+        result = self.run_check(review=self.review(SYNTHETIC))
+        self.assertEqual(result.returncode, 2, result.stderr)
+        self.assertFalse(result.stdout)
 
     def test_digest_valid_non_iso_refused(self):
         self.iso = self.folder / "fake.iso"

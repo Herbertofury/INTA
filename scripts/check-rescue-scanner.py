@@ -43,6 +43,11 @@ def packages(root):
     rows = []
     for line in data.splitlines():
         package, arch, state, error, source, source_version, version = line.split("\t")
+        # dpkg-query -W includes virtual library names mentioned in dependency
+        # relationships. These references have no architecture or package version.
+        if (state == "not-installed" and error == "ok" and source == package
+                and not arch and not source_version and not version):
+            continue
         if (not re.fullmatch(r"clamav|libclamav[0-9]+", package) or arch != ARCH
                 or state != "installed" or error != "ok" or source != "clamav"
                 or not VERSION.fullmatch(source_version) or not VERSION.fullmatch(version)):
