@@ -109,6 +109,7 @@
     zap: '<path d="m13 2-9 12h7l-1 8 10-13h-7Z"/>',
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>',
     filter: '<path d="M3 4h18l-7 8v7l-4 2v-9Z"/>',
+    chevron: '<path d="m6 9 6 6 6-6"/>',
     close: '<path d="m6 6 12 12M18 6 6 18"/>'
   };
   function icon(name, className = '') {
@@ -407,22 +408,9 @@
     const saved = favorites.has(tool.id);
     return `<button class="save-tool" data-save="${esc(tool.id)}" aria-pressed="${saved}" aria-label="${saved ? 'Unsave' : 'Save'} ${esc(tool.name)}" title="${saved ? 'Remove from saved tools' : 'Save this tool'}">${icon('bookmark')}</button>`;
   }
-  function toolTableHeader() {
-    return '<div class="tool-table-head" aria-hidden="true"><span>Tool &amp; purpose</span><span>Platforms</span><span>Recommendation</span><span>Resources</span><span>Save</span></div>';
-  }
-  const firstJobForTool = new Map();
-  jobs.forEach(job => array(job.tools).forEach(id => { if (!firstJobForTool.has(id)) firstJobForTool.set(id, job); }));
-  function toolRow(tool, directory = false, sort = 'catalog') {
-    const related = firstJobForTool.get(tool.id);
-    const description = directory ? tool.bestFor || tool.summary : tool.summary;
-    return `<article class="tool-row${directory ? ' directory-tool-row' : ''}" role="listitem" data-tool-id="${esc(tool.id)}"${directory ? '' : ` data-tool-card="${esc(tool.id)}"`}><div class="tool-name-cell"><h3>${toolName(tool, directory ? 'directory-tool-name' : 'tool-name')}</h3><p>${formatted(description)}</p><span class="row-meta">${directory ? esc(modeLabel(tool.mode)) : esc(categoryLabel(tool.category)) + ' · ' + esc(modeLabel(tool.mode))}</span></div><div class="tool-platform-cell" data-label="Platforms"><span class="sr-only">Platforms: </span>${esc(array(tool.platforms).join(', '))}</div><div class="tool-tier-cell" data-label="Recommendation"><span class="sr-only">Recommendation: </span>${tierPill(tool.tier)}${!directory ? toolSortSignal(tool, sort) : ''}</div><div class="tool-links-cell" data-label="Resources">${accessActions(tool, 'catalog-access')}<a href="#tool/${encodeURIComponent(tool.id)}">Details</a>${directory ? related ? `<a href="#job/${encodeURIComponent(related.id)}">Job guide ${icon('arrow')}</a>` : external(`${repo}/wiki/Tools-${encodeURIComponent(tool.category)}`, `Wiki ${icon('external')}`) : external(tool.docsUrl, `Documentation ${icon('external')}`)}</div><div class="tool-save-cell">${saveButton(tool)}</div></article>`;
-  }
   function jobCard(job) {
     const href = `#job/${encodeURIComponent(job.id)}`;
     return `<article class="job-row" role="listitem" data-job-route="${esc(href)}"><span class="job-row-icon">${icon(jobIcon(job))}</span><div class="job-row-main"><h3><a href="${href}">${esc(job.title)}</a></h3><p>${esc(job.summary)}</p></div><div class="job-row-meta"><span>${esc(job.estimatedTime || `${array(job.steps).length} steps`)}</span><span>${esc(job.difficulty || job.category)}</span></div><a class="job-row-open" href="${href}" aria-label="Open ${esc(job.title)}">Open guide ${icon('arrow')}</a></article>`;
-  }
-  function quickTool(tool) {
-    return `<div class="quick-tool">${toolName(tool)}<span>${esc(categoryLabel(tool.category))}</span>${accessActions(tool)}</div>`;
   }
   function selectFeatured(items, patterns, count) {
     const chosen = [];
@@ -476,7 +464,13 @@
   }
   function compactToolDirectory() {
     const disciplines = toolDisciplines();
-    return `<section class="all-tools-section" aria-labelledby="directory-heading"><div class="section-title directory-title"><div><h2 id="directory-heading">Tool directory</h2><p>${tools.length} tools across ${disciplines.length} disciplines. Open a named tool to reach its official page. Details keeps the full reference and alternate downloads.</p></div><a href="#tools">Browse the tool library ${icon('arrow')}</a></div><nav class="discipline-jump" aria-label="Jump to a tool discipline">${disciplines.map(({category, items}) => `<a href="#discipline-${esc(category)}">${esc(categoryLabel(category))}<span>${items.length}</span></a>`).join('')}</nav><div class="directory-grid">${disciplines.map(({category, items}) => `<section class="directory-section" id="discipline-${esc(category)}" data-discipline="${esc(category)}"><header class="directory-section-header"><h2>${esc(categoryLabel(category))}<span>${items.length} ${items.length === 1 ? 'tool' : 'tools'}</span></h2>${external(`${repo}/wiki/Tools-${encodeURIComponent(category)}`, `Discipline guide ${icon('external')}`)}</header>${toolTableHeader()}<div class="directory-tool-list tool-list${preferredLibraryView === 'gallery' ? ' is-gallery' : ''}" role="list">${items.map(tool => toolRow(tool, true)).join('')}</div></section>`).join('')}</div><p class="directory-footnote"><strong>Everyday</strong> is a practical starting point. <strong>Specialist</strong> serves a focused need. <strong>Evaluate first</strong> identifies a research candidate that needs local validation. Check the official release, compatibility, and terms for the intended job.</p></section>`;
+    return `<section class="home-panel home-tool-panel" aria-labelledby="directory-heading">
+      ${homeSectionTitle('02 / TOOL LIBRARY', 'Find a tool', `${tools.length} source-reviewed tools across ${disciplines.length} categories.`, 'directory-heading', '#tools', 'Open library')}
+      <div class="home-tool-tiles">${disciplines.map(({category, items}) => `<a class="home-tool-tile" id="discipline-${esc(category)}" data-home-category="${esc(category)}" href="#tools?category=${encodeURIComponent(category)}">
+        <span class="home-tile-icon">${icon(libraryIcons[category] || 'wrench')}</span>
+        <strong>${esc(categoryLabel(category))}</strong><span class="home-tile-count">${items.length}</span>
+      </a>`).join('')}</div>
+    </section>`;
   }
   const scenarioEmoji = {
     'intake-triage': '🧭', 'malware-removal': '🦠', 'ransomware-response': '🚨',
@@ -488,12 +482,36 @@
     'client-handoff': '📋', 'boot-usb': '🔌', 'ai-triage': '🧠',
     'preventive-maintenance': '🧹'
   };
+  // Labels and order are editorial; new scenarios automatically remain discoverable.
+  const homeFixGroups = [
+    ['protect', 'Security & threats', 'shield', ['suspected-malware','check-file','check-link','contain-ransomware']],
+    ['connect', 'Connections & devices', 'network', ['fix-a-printer','fix-internet','fix-email','remote-help','recover-an-outage','repair-domain-trust','inspect-network-traffic']],
+    ['repair', 'Windows & hardware', 'activity', ['slow-pc','fix-windows-updates','windows-repair','fix-boot-failure','diagnose-crashes','suspected-ram-fault']],
+    ['recover', 'Data & storage', 'drive', ['failing-drive','deleted-files','disk-space','clone-a-drive','file-backup','boot-usb','find-a-file']],
+    ['service', 'Set up & maintain', 'wrench', []],
+  ];
+  function homeSectionTitle(code, title, body, id, href, link) {
+    return `<header class="home-panel-head"><div><p class="home-section-tag">${esc(code)}</p><h2 id="${id}">${esc(title)}</h2><p>${esc(body)}</p></div><a class="home-panel-link" href="${href}">${link} ${icon('arrow')}</a></header>`;
+  }
   function quickStartSection() {
-    if (!quickItems.length) return '';
-    return `<section class="quick-start-section" aria-labelledby="quick-start-heading"><div class="section-title quick-start-title"><div><h2 id="quick-start-heading">Fix a problem</h2><p>Start with the first action, then choose the tool for the job. Each choice has its own role.</p></div>${external(`${repo}/wiki/Free-Tool-Picks`, `Selection notes ${icon('external')}`)}</div><div class="quick-start-list" role="list">${quickItems.map(item => {
-      const tool = toolMap.get(item.toolId);
-      return `<article class="quick-start-row" role="listitem" data-quick-start="${esc(item.id)}" data-quick-job="${esc(item.jobId)}"${tool ? ` data-quick-tool="${esc(tool.id)}"` : ' data-guide-only="true"'}><h3><a class="quick-scenario-link" href="${quickHref(item)}"><span class="scenario-emoji" aria-hidden="true">${esc(item.icon || scenarioEmoji[item.jobId] || '🧰')}</span><span>${esc(item.label || jobMap.get(item.jobId).title)}</span></a></h3><p class="quick-first-step">${formatted(item.firstStep || item.why)}</p>${quickChoiceRows(item)}${!tool ? `<a class="access-link" href="${quickHref(item)}">Open job guide ${icon('arrow')}</a>` : ''}</article>`;
-    }).join('')}</div></section>`;
+    const assigned = new Set(homeFixGroups.flatMap(([, , , ids]) => ids));
+    const byId = new Map(quickItems.map(item => [item.id, item]));
+    return `<section class="home-panel home-fix-panel" aria-labelledby="quick-start-heading">
+      ${homeSectionTitle('01 / TROUBLESHOOT', 'Fix a problem', 'Open the guide or expand a row for the first step and official tools.', 'quick-start-heading', '#services', 'Service map')}
+      <div class="home-fix-groups">${homeFixGroups.map(([key, title, symbol, ids]) => {
+        const entries = key === 'service' ? quickItems.filter(item => !assigned.has(item.id)) : ids.map(id => byId.get(id)).filter(Boolean);
+        return entries.length ? `<section class="home-fix-group" data-home-field="${key}" aria-labelledby="home-field-${key}">
+          <h3 id="home-field-${key}">${icon(symbol)}${esc(title)} <span>${entries.length}</span></h3>
+          <ul>${entries.map(item => `<li class="home-fix-row" data-quick-start="${esc(item.id)}">
+            <a class="home-case-link" href="${quickHref(item)}">${esc(item.label)}${icon('arrow')}</a>
+            <details class="home-tool-reveal"><summary aria-label="First steps and tools: ${esc(item.label)}" title="Show first steps and tools">${icon('chevron')}</summary>
+              <p class="quick-first-step">${formatted(item.firstStep || item.why)}</p>
+              ${quickChoiceRows(item)}
+              <a class="home-case-guide" href="${quickHref(item)}">Open full guide ${icon('arrow')}</a>
+            </details></li>`).join('')}</ul>
+        </section>` : '';
+      }).join('')}</div>
+    </section>`;
   }
   function jobAnswerStrip(job, quickId = '') {
     const picks = quickByJob.get(job.id) || [];
@@ -521,11 +539,29 @@
       }).join('')}</div></section>`;
     }).join('')}</div>`;
   }
+  const homeRoutes = [
+    ['checkCircle', 'Technician checklist', 'Track the job from intake to handoff.', '#checklist'],
+    ['terminal', 'Command Center', 'Find commands and see what they change.', '#command-center'],
+    ['refresh-cw', 'Updates & maintenance', 'Audit, repair, and update a machine.', '#updates'],
+    ['globe', 'Online tools', 'Check URLs, files, DNS, and more.', '#online'],
+  ];
   function home() {
     const featuredJobs = selectFeatured(jobs, [/malware|virus/i, /slow|performance/i, /network|internet|dns/i, /backup|restore/i, /boot|bitlocker/i, /remote/i], 6);
-    const kit = selectFeatured(tools, [/sysinternals/i, /rustdesk/i, /crystaldiskinfo/i, /ventoy/i], 4);
-    const intake = jobs.find(job => /intake|triage/i.test(job.id + ' ' + job.title));
-    return heading('INTA Computer Services', 'Technician home', 'Tools and procedures for computer repair, maintenance, and support.') + `<nav class="home-actions" aria-label="Common technician actions"><a class="button primary" href="#tools">${icon('grid')}Browse all tools</a><a class="button ghost" href="#command-center">${icon('terminal')}Open Command Center</a><a class="button ghost" href="#updates">${icon('refresh-cw')}Updates &amp; Maintenance</a><a class="button ghost" href="#checklist">${icon('checkCircle')}Checklist</a><a class="button ghost" href="#services">${icon('route')}Service map</a></nav>` + quickStartSection() + compactToolDirectory() + onlineStartSection() + `<div class="home-support"><section><div class="section-title"><h2>Common service jobs</h2><a href="#playbooks">All playbooks ${icon('arrow')}</a></div><div class="job-list" role="list">${featuredJobs.map(jobCard).join('')}</div></section><section><h2>Everyday shortcuts</h2><div class="quick-tools">${kit.map(quickTool).join('')}</div>${knowledgeDesk(true)}</section></div>`;
+    return `<div class="home-deck">
+      <header class="home-intro page-heading">
+        <div class="home-intro-copy"><p class="home-section-tag" data-no-link>INTA COMPUTER SERVICES</p><h1>Technician home</h1><p>Find the next step, the right tool, and a way to verify the fix.</p></div>
+        <div class="home-intro-meta"><span><strong>${tools.length}</strong> tools</span><span><strong>${jobs.length}</strong> playbooks</span>${reviewBadge()}</div>
+      </header>
+      <nav class="home-launcher" aria-label="Common technician actions">${homeRoutes.map(([symbol,title,desc,href]) => `<a class="home-launch-link" href="${href}"><span class="home-tile-icon">${icon(symbol)}</span><span><strong>${title}</strong><small>${desc}</small></span>${icon('arrow')}</a>`).join('')}</nav>
+      <nav class="home-section-jump" aria-label="Jump to a Home section"><a href="#quick-start-heading">Fix a problem</a><a href="#directory-heading">Find a tool</a><a href="#home-playbooks-heading">Run a playbook</a></nav>
+      <div class="home-workbench">${quickStartSection()}${compactToolDirectory()}</div>
+      <section class="home-panel home-playbooks" aria-labelledby="home-playbooks-heading">
+        ${homeSectionTitle('03 / FIELD GUIDES', 'Run a playbook', 'Start with a documented process and prove the fix worked.', 'home-playbooks-heading', '#playbooks', 'All playbooks')}
+        <div class="job-list" role="list">${featuredJobs.map(jobCard).join('')}</div>
+      </section>
+      ${onlineStartSection()}
+      <div class="home-deck-footer"><a href="#knowledge">${icon('book')} Knowledge desk</a><a href="#saved">${icon('bookmark')} Saved tools</a><a href="#news">${icon('activity')} Technician news</a></div>
+    </div>`;
   }
   function selectOptions(values, label, selected = '') {
     return `<option value="">${esc(label)}</option>${[...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b)).map(value => `<option value="${esc(value)}"${selected === value ? ' selected' : ''}>${esc(categoryLabel(value))}</option>`).join('')}`;
@@ -1459,7 +1495,7 @@
     let quickId = '';
     if (name === 'job' && parts.length === 3 && parts[1] === 'quick') { id = parts[0]; quickId = parts[2]; }
     try { id = decodeURIComponent(id); quickId = decodeURIComponent(quickId); } catch (_) { id = ''; quickId = ''; }
-    const anchor = path.startsWith('discipline-') ? path : '';
+    const anchor = path.startsWith('discipline-') || ['quick-start-heading', 'directory-heading', 'home-playbooks-heading'].includes(path) ? path : '';
     return { name: anchor ? 'home' : name, id, quickId, params: new URLSearchParams(query), raw, anchor };
   }
   function closeNavigation() {
@@ -1476,8 +1512,7 @@
     if (route.name === 'home') {
       app.innerHTML = home();
       const art = document.getElementById('inta-home-brand');
-      const title = app.querySelector('.page-heading');
-      title.classList.add('home-page-heading');
+      const title = app.querySelector('.home-intro');
       title.prepend(art.content.cloneNode(true));
     }
     else if (route.name === 'online') app.innerHTML = online(route.params);
@@ -1498,7 +1533,12 @@
     document.title = `${title || 'Technician workspace'} | INTA Computer Services`;
     filterTools(false); filterJobs(false); filterSources(false); filterOnline(false); filterCommandCenter(); filterUpdatesCenter(); bindNews(); linkifyProse(app); updateCounts();
     closeNavigation(); closeSearch();
-    if (route.anchor && document.getElementById(route.anchor)) document.getElementById(route.anchor).scrollIntoView({ block: 'start', behavior: 'instant' });
+    const homeAnchor = route.anchor && document.getElementById(route.anchor);
+    if (homeAnchor) {
+      if (homeAnchor.tabIndex < 0) homeAnchor.tabIndex = -1;
+      homeAnchor.focus({ preventScroll: true });
+      homeAnchor.scrollIntoView({ block: 'start', behavior: 'instant' });
+    }
     else if (lastRoute !== route.raw) window.scrollTo({ top: 0, behavior: 'instant' });
     const serviceTarget = route.name === 'services' && document.getElementById(`service-${route.params.get('area')}`);
     const section = route.name === 'job' && route.params.get('section');
@@ -1524,7 +1564,7 @@
     } else if (selectedAnswer) {
       selectedAnswer.scrollIntoView({ block: 'start', behavior: 'instant' });
       selectedAnswer.querySelector('h3')?.focus({ preventScroll: true });
-    } else if (lastRoute) $('#main').focus({ preventScroll: true });
+    } else if (lastRoute && !homeAnchor) $('#main').focus({ preventScroll: true });
     lastRoute = route.raw;
   }
   function updateCounts() {
