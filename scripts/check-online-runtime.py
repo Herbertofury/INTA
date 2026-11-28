@@ -114,6 +114,34 @@ def main():
             check(page.evaluate('document.documentElement.scrollWidth <= innerWidth'),
                   'Brand layout overflows viewport')
         report['checks'].append('Application chrome, transparent inline marks and front-page-only Heritage')
+        expected_home = page.evaluate("window.INTA_DATA.quickStart.items.map(x => x.id).sort()")
+        actual_home = page.locator('#app [data-quick-start]').evaluate_all(
+            '(rows) => rows.map(row => row.dataset.quickStart).sort()')
+        check(actual_home == expected_home, 'Missing or repeated Home repair scenario')
+        categories = page.evaluate("[...new Set(window.INTA_DATA.tools.map(x => x.category))].sort()")
+        check(page.locator('[data-home-category]').evaluate_all(
+            '(tiles) => tiles.map(tile => tile.dataset.homeCategory).sort()') == categories,
+            'Home category cards do not match the complete source')
+        page.screenshot(path=args.output / 'technician-home-desktop.png')
+        panel = page.locator('[data-quick-start="suspected-malware"]')
+        check(panel.locator('details[open]').count() == 0, 'Home should stay compact at initial load')
+        panel.locator('summary').press('Enter')
+        check(panel.locator('.quick-first-step').is_visible(), 'First steps not visible after keyboard activation')
+        check(panel.locator('.acquisition-link').first.is_visible(), 'Official acquisition hidden after opening')
+        check(panel.locator('a.home-case-link').get_attribute('href') == '#job/malware-removal/quick/suspected-malware',
+              'Home scenario did not preserve direct job link')
+        panel.locator('summary').press('Enter')
+        page.set_viewport_size({'width': 390, 'height': 1000})
+        page.screenshot(path=args.output / 'technician-home-mobile.png')
+        page.get_by_role('navigation', name='Jump to a Home section').get_by_role('link', name='Find a tool').click()
+        page.wait_for_url('**#directory-heading')
+        page.wait_for_function("document.activeElement.id === 'directory-heading'")
+        page.locator('[data-home-category="storage"]').click()
+        page.locator('#category-filter').wait_for(state='attached')
+        check(page.locator('#category-filter').input_value() == 'storage', 'Home tile did not select its category')
+        page.set_viewport_size({'width': 1440, 'height': 1000})
+        report['checks'].append('All Home topics and tool categories, keyboard details and real filtered library route')
+
 
         page.goto(args.html.resolve().as_uri() + '#tools?cli=partial')
         check(home_mark.count() == 0, 'Heritage leaked into tool workspace')
