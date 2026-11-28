@@ -1,4 +1,4 @@
-use anyhow::{Result, ensure};
+use anyhow::{Context, Result, ensure};
 use rusqlite::Connection;
 use serde_json::{Value, json};
 use std::collections::HashSet;
@@ -42,6 +42,42 @@ pub fn search(question: &str) -> Result<Value> {
     ranked(question, None)
 }
 
+fn index() -> Result<Connection> {
+    let mut con = Connection::open_in_memory()?;
+    con.deserialize_bytes("main", INDEX)?;
+    Ok(con)
+}
+
+pub fn context(source: &str, location: &str) -> Result<Value> {
+    let con = index()?;
+    let (document, anchor, digest): (i64, i64, String) = con
+        .query_row(
+            "SELECT s.rowid,p.rowid,s.sha256 FROM sources s JOIN passages p ON p.source=s.rowid
+         WHERE s.kind IN ('runbook','wiki') AND s.path=?1 AND p.location=?2",
+            [source, location],
+            |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?)),
+        )
+        .context("This guide passage is absent from the installed index")?;
+    // The build inserts each document in reading order. Restrict both directions to
+    // this source so a passage at the edge cannot pull in unrelated instructions.
+    let mut query = con.prepare(
+        "SELECT section,passage,location FROM passages WHERE source=?1
+         AND rowid BETWEEN ?2-3 AND ?2+3 ORDER BY rowid",
+    )?;
+    let passages = query
+        .query_map([document, anchor], |r| {
+            Ok(
+                json!({"section": r.get::<_,String>(0)?, "passage": r.get::<_,String>(1)?,
+                  "location": r.get::<_,String>(2)?}),
+            )
+        })?
+        .collect::<rusqlite::Result<Vec<_>>>()?;
+    Ok(
+        json!({"schemaVersion":1,"source":source,"location":location,
+              "sourceTextSha256":digest,"passages":passages}),
+    )
+}
+
 pub fn ranked(question: &str, scenario: Option<&str>) -> Result<Value> {
     let mut expressions = vec![terms(question)?];
     if let Some(id) = scenario {
@@ -49,8 +85,7 @@ pub fn ranked(question: &str, scenario: Option<&str>) -> Result<Value> {
     }
     expressions.retain(|term| !term.is_empty());
     let query = expressions.join(" OR ");
-    let mut con = Connection::open_in_memory()?;
-    con.deserialize_bytes("main", INDEX)?;
+    let con = index()?;
     let mut hits = Vec::new();
     if !query.is_empty() {
         let mut statement = con.prepare(
@@ -149,6 +184,24 @@ mod tests {
             assert_eq!(search(query).unwrap()["citations"], json!([]));
         }
         assert!(search("DNS \" OR 1=1 --").is_ok());
+    }
+
+    #[test]
+    fn context_resolves_the_original_guide_and_location() {
+        let result = search("Why is the printer queue stuck?").unwrap();
+        let hit = &result["citations"][0];
+        let source = hit["source"].as_str().unwrap();
+        let mark = hit["location"].as_str().unwrap();
+        let result = context(source, mark).unwrap();
+        assert_eq!(result["sourceTextSha256"], hit["sourceTextSha256"]);
+        let rows = result["passages"].as_array().unwrap();
+        assert!((2..=7).contains(&rows.len()));
+        assert!(
+            rows.iter()
+                .any(|r| r["location"] == mark && r["passage"] == hit["passage"])
+        );
+        assert!(context("../local-file", mark).is_err());
+        assert!(context(source, "L0").is_err());
     }
 
     #[test]

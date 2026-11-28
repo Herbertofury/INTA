@@ -24,7 +24,7 @@ use std::{env, path::Path};
 const HELP: &str = "INTA technician CLI. Results are JSON.
   capabilities | tools search QUERY | tools inspect ID | forge verify FILE
   ai ask MODEL MODEL_DIGEST QUESTION | ai run-plan SCENARIO PLAN_SHA256 --approve
-  knowledge search QUESTION
+  knowledge search QUESTION | knowledge context SOURCE LOCATION
   ai forge MODEL MODEL_DIGEST REQUEST NEW_ABSOLUTE_RECIPE.json --approve
   catalog [query] | record tool|job|method ID
   tool actions [ID] | tool install|launch ID --approve | tool bind ID FILE.exe --approve
@@ -39,7 +39,9 @@ const HELP: &str = "INTA technician CLI. Results are JSON.
   toolbox archive FILE.7z [--root DIRECTORY]
   toolbox backup SOURCE NEW.7z --approve [--root DIRECTORY]
   vm repair-test | vm console --approve [--base FILE.img] [--root DIRECTORY]
-  vm status|sessions | vm plan ISO [--base FILE.img] | vm start ISO --approve [--base FILE.img] [--nat] | vm stop ID --approve
+  vm status|sessions | vm stop ID --approve
+  vm plan ISO | vm start ISO --approve
+     [--disk-gib 8|16|32|64 | --base FILE.img] [--sha256 ISO_DIGEST] [--nat] [--root DIRECTORY]
   tweak list | tweak status|preview [ID] | tweak apply|undo [ID] --approve
   tweak profiles | tweak profile preview ID | tweak profile apply|undo ID --approve
   history | version | build-info";
@@ -182,6 +184,11 @@ fn main() {
         && op == "search"
     {
         knowledge::search(&words.join(" "))
+    } else if let [k, op, source, location] = args.as_slice()
+        && k == "knowledge"
+        && op == "context"
+    {
+        knowledge::context(source, location)
     } else if args == ["build-info"] {
         build_info()
     } else if args == ["version"] || args == ["--version"] {

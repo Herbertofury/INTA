@@ -12,6 +12,68 @@ namespace Inta.Desktop
 {
     internal sealed partial class Workspace
     {
+        private async Task SearchReferences(CancellationToken token)
+        {
+            string query = search.Text.Trim();
+            if (query.Length == 0) {
+                Note("Enter symptoms or a tool name in Search to find passages in the installed guides, catalog and Wiki.");
+                Status("Offline references ready."); return;
+            }
+            var result = Json.Object(await core.Read(new[] { "knowledge", "search", query }, token));
+            token.ThrowIfCancellationRequested();
+            var hits = Json.Array(Json.Get(result, "citations")).Select(Json.Object).ToList();
+            count.Text = hits.Count + (hits.Count == 1 ? " reference" : " references");
+            if (hits.Count == 0) Note("No matching passages. Try a tool name or a shorter description of the symptom.");
+            foreach (var hit in hits) RenderCitation(hit, token);
+            Status("Offline reference search complete.");
+        }
+
+        private void RenderCitation(System.Collections.Generic.Dictionary<string, object> citation, CancellationToken token)
+        {
+            string location = Json.Text(citation, "location");
+            Paragraph(Json.Text(citation, "title"), "Text", 15, true);
+            Note(Json.Text(citation, "passage"));
+            Note(Json.Text(citation, "section") + " · " + Json.Text(citation, "source") + " · " + location);
+            string kind = Json.Text(citation, "kind");
+            if (kind == "wiki" || kind == "runbook") {
+                var content = new StackPanel { Margin = new Thickness(14, 7, 0, 9) };
+                var expand = new Expander { Header = "Read surrounding passages", Content = content, Margin = new Thickness(0, 0, 0, 12) };
+                expand.SetResourceReference(Expander.ForegroundProperty, "Text");
+                AutomationProperties.SetName(expand, "Read surrounding passages for " + Json.Text(citation, "title"));
+                bool loading = false, loaded = false;
+                expand.Expanded += async delegate {
+                    if (loading || loaded || token.IsCancellationRequested) return;
+                    loading = true;
+                    content.Children.Clear();
+                    try {
+                        var result = Json.Object(await core.Read(new[] { "knowledge", "context", Json.Text(citation, "source"), location }, token));
+                        token.ThrowIfCancellationRequested();
+                        if (Json.Text(result, "sourceTextSha256") != Json.Text(citation, "sourceTextSha256"))
+                            throw new InvalidDataException("The guide changed. Run the search again.");
+                        foreach (var row in Json.Array(Json.Get(result, "passages")).Select(Json.Object)) {
+                            var block = RowText(Json.Text(row, "passage"), Json.Text(row, "location") == location, true);
+                            block.Margin = new Thickness(0, 0, 0, 6);
+                            content.Children.Add(block);
+                        }
+                        loaded = true;
+                        Status("Surrounding passages loaded.");
+                    } catch (OperationCanceledException) { }
+                      catch (Exception e) {
+                        if (!token.IsCancellationRequested) content.Children.Add(RowText(e.GetBaseException().Message, false, false));
+                    } finally { loading = false; }
+                };
+                detail.Children.Add(expand);
+                return;
+            }
+            string[] parts = location.Split('/');
+            if (parts.Length < 3) return;
+            string destination = parts[0] == "tool" ? "Tools" : parts[0] == "job" ? "Playbooks" : parts[0] == "method" ? "Methods" : null;
+            if (destination == null) return;
+            var actions = new WrapPanel();
+            detail.Children.Add(actions);
+            Action(actions, "Open " + Label(parts[0]).ToLowerInvariant() + " record", delegate { OpenRecord(destination, parts[1]); });
+        }
+
         private void OpenFeature(string view)
         {
             bool inventory = view == "inventory";
@@ -128,11 +190,7 @@ namespace Inta.Desktop
                 var citations = knowledge == null ? null : Json.Get(knowledge, "citations") as System.Collections.IList;
                 if (citations != null && citations.Count > 0) {
                     Paragraph("Offline references", "Text", 16, true);
-                    foreach (var citation in citations.Cast<object>().Select(Json.Object)) {
-                        Paragraph(Json.Text(citation, "title"), "Text", 14, true);
-                        Note(Json.Text(citation, "passage"));
-                        Note(Json.Text(citation, "section") + " · " + Json.Text(citation, "source") + " · " + Json.Text(citation, "location"));
-                    }
+                    foreach (var citation in citations.Cast<object>().Select(Json.Object)) RenderCitation(citation, token);
                 }
                 Action(detailActions, "New question", RefreshPage);
                 Status("Plan review complete.");
