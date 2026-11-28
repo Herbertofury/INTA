@@ -18,9 +18,15 @@ revision=$7
 actual=$(sha256sum < "$apk")
 [[ "${actual%% *}" == "$expected" ]] || { echo 'Unsigned Android artifact differs from the accepted digest.' >&2; exit 1; }
 badging=$("$tools/aapt2" dump badging "$apk")
-grep -q "^package: name='com.inta.mobile' versionCode='[0-9]\+'" <<< "$badging"
-grep -q "^sdkVersion:'26'$" <<< "$badging"
-grep -q "^targetSdkVersion:'36'$" <<< "$badging"
+grep -Eq "^package: name='com[.]inta[.]mobile' versionCode='[0-9]+'" <<< "$badging" || {
+  echo 'Unexpected Android package identifier or version.' >&2; exit 1;
+}
+grep -Eq "^(minSdkVersion|sdkVersion):'26'$" <<< "$badging" || {
+  echo 'Unexpected Android minimum SDK.' >&2; exit 1;
+}
+grep -Fxq "targetSdkVersion:'36'" <<< "$badging" || {
+  echo 'Unexpected Android target SDK.' >&2; exit 1;
+}
 "$tools/zipalign" -c -p 4 "$apk"
 parent=$(realpath -- "$(dirname -- "$8")")
 out="$parent/$(basename -- "$8")"
@@ -36,9 +42,13 @@ candidate="$scratch/INTA-Mobile-Android.apk"
   --v3-signing-enabled true --v4-signing-enabled false --ks "$keystore" --ks-key-alias "$alias" \
   --ks-pass env:INTA_ANDROID_STORE_PASS --key-pass env:INTA_ANDROID_KEY_PASS --out "$candidate" "$apk"
 info=$("$tools/apksigner" verify --verbose --print-certs --min-sdk-version 26 "$candidate")
-grep -Fxq 'Number of signers: 1' <<< "$info"
-grep -Fxq 'Verified using v2 scheme (APK Signature Scheme v2): true' <<< "$info"
-grep -Fxq "Signer #1 certificate SHA-256 digest: $signer" <<< "$info"
+grep -Fxq 'Number of signers: 1' <<< "$info" || { echo 'Expected one Android signer.' >&2; exit 1; }
+grep -Fxq 'Verified using v2 scheme (APK Signature Scheme v2): true' <<< "$info" || {
+  echo 'The Android v2 signature did not verify.' >&2; exit 1;
+}
+grep -Fxq "Signer #1 certificate SHA-256 digest: $signer" <<< "$info" || {
+  echo 'Android signer differs from the approved certificate fingerprint.' >&2; exit 1;
+}
 "$tools/zipalign" -c -p 4 "$candidate"
 {
   printf 'Source revision: %s\nVerified input SHA-256: %s\n' "$revision" "$expected"
