@@ -1652,3 +1652,61 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 }
 .mission-meter .progress-note { margin-bottom:6px; color:var(--muted); font-size:.81rem; }
 .mission-stage .mission-shortcuts img { width:16px; height:16px; }
+
+/* Command Center: full, selectable command reference */
+.command-workbench .page-heading{margin-bottom:12px}
+.command-workbench .command-center-hero{margin:0 0 12px;padding:10px 0;gap:14px}
+.command-workbench .command-center-hero h2{font-size:16px;margin:0 0 3px}
+.command-workbench .command-center-hero p:not(.page-label){font-size:12px}
+.command-workbench .command-center-stats{gap:16px}
+.command-workbench .command-center-stats strong{font-size:18px}
+.command-workbench-tabs{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 14px;border-bottom:1px solid var(--line)}
+.command-workbench-tabs button{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:0;border-bottom:2px solid transparent;border-radius:4px 4px 0 0;background:transparent;color:var(--muted);font-size:13px;font-weight:600}
+.command-workbench-tabs button[aria-pressed=true]{background:var(--selected);border-bottom-color:var(--accent);color:var(--accent)}
+.command-workbench-tabs button:hover{background:var(--hover)}
+.command-workbench-tabs button svg{width:15px;height:15px}
+.command-workbench [data-command-panel][hidden],.command-workbench [data-command-empty][hidden],.command-workbench .command-card[hidden]{display:none!important}
+.command-workbench :is(.command-center-workflows,.command-center-toolkit,.command-center-library,.command-center-maintenance){margin:0 0 16px}
+.command-workbench .section-heading-row{margin-bottom:8px}
+.command-workbench .section-heading-row h2{font-size:17px;margin:0 0 2px}
+.command-workbench .command-center-filters{grid-template-columns:minmax(0,1fr) minmax(115px,.28fr) minmax(145px,.36fr) auto;gap:7px;margin:8px 0}
+.command-workbench .command-center-filters>*{min-width:0}
+.command-workbench .command-category-tabs{gap:5px;margin-bottom:8px}
+.command-workbench .command-category-tabs button{font-size:11px;padding:6px 9px}
+.command-workbench .command-center-list{grid-template-columns:minmax(0,1fr);gap:9px}
+.command-workbench .command-card{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;padding:12px;border-radius:7px;align-items:start}
+.command-workbench .command-card-header,.command-workbench .command-card-summary,.command-workbench .command-card-footer,.command-workbench .command-card>.command-safety{padding:0;border:0}
+.command-workbench .command-card-header h3{font-size:14px}
+.command-workbench .command-card-footer{flex-wrap:wrap;gap:5px 12px;font-size:11px;overflow-wrap:anywhere}
+.command-workbench .command-card-footer a{color:var(--accent)}
+.command-workbench .command-snippet{min-width:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--bg)}
+.command-workbench .command-code-toolbar{padding:4px 8px;border-top:0;flex-wrap:wrap;gap:5px;text-transform:none;letter-spacing:0}
+.command-workbench .command-code-toolbar>span{font-family:ui-monospace,Consolas,monospace;font-size:11px}
+.command-workbench .command-code-actions{display:flex;flex-wrap:wrap;gap:5px}
+.command-workbench :is(.command-select,.command-clear){display:inline-flex;align-items:center;justify-content:center;min-height:32px;padding:4px 8px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--text);font-size:11px;font-weight:600}
+.command-workbench :is(.copy-command,.command-select,.command-clear):hover{border-color:var(--accent);color:var(--accent)}
+.command-workbench .command-center-code{display:block;width:100%;max-height:none;height:auto;overflow:visible;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;padding:11px 12px;font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;cursor:text;user-select:text;-webkit-user-select:text}
+.command-workbench .command-center-code code{display:block;padding:0;border:0;background:none;color:var(--text);font:inherit;white-space:inherit;overflow-wrap:inherit;user-select:text;-webkit-user-select:text}
+.command-workbench .command-center-code code::selection{background:var(--primary);color:#fff}
+.command-workbench .command-workflow-grid,.command-workbench .command-toolkit-grid{grid-template-columns:minmax(0,1fr);gap:10px}
+.command-workbench :is(.command-workflow-card,.command-toolkit-card){padding:12px}
+.command-workbench :is(.command-workflow-card,.command-toolkit-card)>p{font-size:12px;margin-bottom:7px}
+.command-workbench .command-workflow-card ol{display:grid;gap:10px;padding-left:22px}
+.command-workbench .command-workflow-card li{min-width:0}
+.command-workbench .command-workflow-card li>a{display:inline-block;font-weight:600;margin-bottom:5px}
+.command-workbench .command-step-meta,.command-workbench .command-step-safety{display:block;font-size:11px;color:var(--muted);margin:4px 0}
+.command-workbench .command-toolkit-card .command-snippet{margin-top:9px}
+.command-workbench .command-center-maintenance{padding:12px}
+.command-workbench .command-empty{padding:18px;border:1px dashed var(--line);border-radius:6px;color:var(--muted);text-align:center;font-size:13px}
+@media(min-width:1250px){
+.command-workbench .command-card{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);column-gap:16px;grid-template-areas:"header code" "summary code" "safety code" "footer code";grid-template-rows:auto auto auto 1fr}
+.command-workbench .command-card-header{grid-area:header}
+.command-workbench .command-card-summary{grid-area:summary}
+.command-workbench .command-card>.command-snippet{grid-area:code}
+.command-workbench .command-card>.command-safety{grid-area:safety}
+.command-workbench .command-card-footer{grid-area:footer;align-self:end}
+.command-workbench .command-toolkit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){.command-workbench .command-center-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.command-workbench .command-center-filters .input-wrap{grid-column:1/-1}}
+@media(max-width:560px){.command-workbench .command-workbench-tabs button{padding:8px 6px;font-size:11px;gap:4px}.command-workbench .command-workbench-tabs button svg{display:none}.command-workbench .command-card{padding:9px}.command-workbench .command-card-header{flex-wrap:wrap}.command-workbench .command-card-footer{flex-direction:row}.command-workbench .command-center-code{padding:9px}.command-workbench .command-maintenance-grid{grid-template-columns:minmax(0,1fr)}}
+@media print{.command-workbench :is(.command-workbench-tabs,.command-center-filters,.command-code-actions,.command-category-tabs){display:none}.command-workbench .command-card{display:block;break-inside:avoid}.command-workbench .command-center-code code{color:#111}}
