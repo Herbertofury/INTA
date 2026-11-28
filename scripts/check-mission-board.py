@@ -17,6 +17,20 @@ def check_mission_board(page, html: Path, output: Path):
     checks = board.get_by_role('checkbox')
     assert checks.count() == 9
     assert board.locator('[data-mission-stage]').count() == 4
+    search = board.get_by_role('searchbox', name='Find a checklist step')
+    search.fill('sample restored')
+    assert checks.count() == 1
+    assert checks.first.get_attribute('data-check-title') == 'Protect data and establish the baseline'
+    search.fill('firmware relevant')
+    assert checks.count() == 1
+    assert checks.first.get_attribute('data-check-title') == 'Review drivers and BIOS / UEFI'
+    search.fill('billing-no-match')
+    assert board.locator('[data-mission-empty]').is_visible()
+    assert board.locator('#progress-count').inner_text() == '0 of 9 checks'
+    board.get_by_role('button', name='Next unchecked').click()
+    assert search.input_value() == ''
+    board.get_by_role('button', name='All steps', exact=True).click()
+
     page.screenshot(path=output / 'technician-checklist-desktop.png')
     board.get_by_role('button', name='Next unchecked').click()
     assert checks.first.evaluate('(c) => c === document.activeElement')

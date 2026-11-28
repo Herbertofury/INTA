@@ -1477,7 +1477,7 @@ def build_outputs() -> dict[str, str]:
         "{{STYLES}}": "\n".join((ROOT / "portal" / name).read_text(encoding="utf-8")
                                   for name in ("styles.css", "rogue-game.css", "card-game.css")),
         "{{ARCADE}}": "\n;\n".join((ROOT / "portal" / name).read_text(encoding="utf-8")
-                                 for name in ("rogue-game.js", "card-game.js")),
+                                 for name in ("training-audio.js", "rogue-game.js", "card-game.js")),
         "{{DATA}}": "window.INTA_DATA = " + safe_json + ";",
         "{{APP}}": (ROOT / "portal/app.js").read_text(encoding="utf-8"),
         "{{FAVICON}}": "data:image/x-icon;base64," + base64.b64encode((ROOT / "native/workbench/desktop/inta.ico").read_bytes()).decode("ascii"),
