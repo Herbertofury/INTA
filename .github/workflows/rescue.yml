@@ -9,6 +9,7 @@ on:
       - 'native/optics/**'
       - 'data/brand-icons.json'
       - 'assets/brand-icons/**'
+      - 'assets/inta-brand/**'
       - 'docs/assets/inta-mark.svg'
       - 'scripts/build-iso'
       - 'scripts/build-rescue-wallpaper.py'
