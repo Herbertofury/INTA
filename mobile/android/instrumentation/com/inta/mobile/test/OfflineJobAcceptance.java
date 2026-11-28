@@ -61,6 +61,12 @@ public final class OfflineJobAcceptance extends Instrumentation {
                 find(activity, "1. Apply a repair · Review printer queue", false);
                 find(activity, "2. Run a malware scan · Scan the serviced PC", false);
                 find(activity, "Put steps in order before picking and approving a PC. Nothing runs from this draft.", false);
+                verifyTextExport(activity, "Review draft export", "Reviewed draft saved.", report ->
+                    require(report.startsWith("INTA repair plan draft\nNot approved.")
+                        && report.indexOf("1. Apply a repair") >= 0
+                        && report.indexOf("1. Apply a repair") < report.indexOf("2. Run a malware scan"),
+                        "draft export preserves approval warning and saved order"));
+                find(activity, "1. Apply a repair · Review printer queue", false);
             } else if ("invoice".equals(stage)) {
                 find(activity, "Completed. Review recorded time before billing.", false);
                 find(activity, "Save invoice draft", true);
@@ -137,6 +143,15 @@ public final class OfflineJobAcceptance extends Instrumentation {
 
     private void verifyHandoff(Activity activity) throws Exception {
         long recorded = seconds(activity);
+        verifyTextExport(activity, "Review handoff export", "Reviewed handoff saved.", report ->
+            require(report.startsWith("INTA service handoff\n") && report.contains("[x] Confirm scope and back up")
+                && report.contains("Billing profile: Business") && report.contains("Billable minutes: 5")
+                && report.contains("Draft subtotal: 7.92"), "unexpected handoff contents"));
+        require(seconds(activity) == recorded, "export altered the source timer");
+    }
+
+    private void verifyTextExport(Activity activity, String button, String completed,
+            java.util.function.Consumer<String> checkReport) throws Exception {
         var resolver = getTargetContext().getContentResolver();
         ContentValues file = new ContentValues();
         file.put(MediaStore.Downloads.DISPLAY_NAME, "inta-ci-handoff-" + SystemClock.elapsedRealtime() + ".txt");
@@ -150,9 +165,9 @@ public final class OfflineJobAcceptance extends Instrumentation {
                 require(bytes != null, "document provider could not create the test file");
                 bytes.write(original);
             }
-            press(activity, "Review handoff export");
+            press(activity, button);
             clickDialog("Cancel", "android:id/button2");
-            find(activity, "Review handoff export", true);
+            find(activity, button, true);
             try (InputStream bytes = resolver.openInputStream(uri)) {
                 require(bytes != null && Arrays.equals(bytes.readAllBytes(), original), "cancel changed the test file");
             }
@@ -161,19 +176,16 @@ public final class OfflineJobAcceptance extends Instrumentation {
             var monitor = addMonitor(create,
                     new ActivityResult(Activity.RESULT_OK, new Intent().setData(uri)), true);
             try {
-                press(activity, "Review handoff export");
+                press(activity, button);
                 clickDialog("Choose save location", "android:id/button1");
-                find(activity, "Reviewed handoff saved.", false);
+                find(activity, completed, false);
                 require(monitor.getHits() == 1, "Android create-document action was not launched");
             } finally { removeMonitor(monitor); }
             try (InputStream bytes = resolver.openInputStream(uri)) {
                 require(bytes != null, "document provider did not return an export");
                 String report = new String(bytes.readAllBytes(), StandardCharsets.UTF_8);
-                require(report.startsWith("INTA service handoff\n") && report.contains("[x] Confirm scope and back up")
-                    && report.contains("Billing profile: Business") && report.contains("Billable minutes: 5")
-                    && report.contains("Draft subtotal: 7.92"), "unexpected handoff contents");
+                checkReport.accept(report);
             }
-            require(seconds(activity) == recorded, "export altered the source timer");
         } finally {
             resolver.delete(uri, null, null);
         }
