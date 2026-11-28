@@ -23,10 +23,16 @@ jobs:
       - name: Require verified control before adding a new catalog tool
         if: github.event_name == 'pull_request'
         env:
-          INTA_BASE: ${{ github.event.pull_request.base.sha }}
+          INTA_PR_HEAD: ${{ github.event.pull_request.head.sha }}
         run: |
-          [[ "$INTA_BASE" =~ ^[0-9a-f]{40}$ ]]
-          git show "${INTA_BASE}:data/tools.json" > "$RUNNER_TEMP/inta-base-tools.json"
+          set -euo pipefail
+          [[ "$INTA_PR_HEAD" =~ ^[0-9a-f]{40}$ ]]
+          # The checked-out pull-request merge can be rebuilt on a newer base
+          # than the event payload describes. Use the actual tested merge base.
+          read -r merge_sha base_sha head_sha extra < <(git rev-list --parents -n 1 HEAD)
+          [[ "$merge_sha" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$base_sha" =~ ^[0-9a-f]{40}$ && "$head_sha" == "$INTA_PR_HEAD" && -z "$extra" ]]
+          git show "${base_sha}:data/tools.json" > "$RUNNER_TEMP/inta-base-tools.json"
           python3 -B scripts/check-tool-cli.py --require-new-offers "$RUNNER_TEMP/inta-base-tools.json" --json
       - name: Validate complete content and generated outputs
         run: |

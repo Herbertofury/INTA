@@ -34,7 +34,7 @@ try {
     if ($registered.Package.Applications.Application.Executable -cne 'INTA.Desktop.exe') { throw 'Incorrect registered application.' }
     $exe = Join-Path $added[0].InstallLocation 'INTA.Desktop.exe'
     if ((Get-FileHash -Algorithm SHA256 -LiteralPath $exe).Hash -ne $ExecutableHash) { throw 'Installed bytes changed.' }
-    & (Join-Path $PSScriptRoot '..\verify-native-ui.ps1') $exe
+    & (Join-Path $PSScriptRoot '..\verify-native-ui.ps1') $exe -InstalledPackage
 } finally {
     $ours = Get-AppxPackage -Name $identity
     if ($ours -and $cert -and $ours.Publisher -eq $cert.Subject -and $ours.Version -eq $Version.ToString()) {

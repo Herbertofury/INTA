@@ -2,9 +2,40 @@ param([Parameter(Mandatory)][string]$Executable)
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName UIAutomationClient,UIAutomationTypes
 $app = (Resolve-Path -LiteralPath $Executable).Path
-$p = Start-Process -FilePath $app -WorkingDirectory (Split-Path $app) -PassThru
+$folder = Split-Path $app
+if (Test-Path -LiteralPath (Join-Path $folder 'state/maintenance-view.v1')) {
+    throw 'First-launch proof requires a freshly extracted fixture without a saved navigation preference.'
+}
+$window = $null
+$p = Start-Process -FilePath $app -WorkingDirectory $folder -PassThru
 $condition = [Windows.Automation.PropertyCondition]
 $scope = [Windows.Automation.TreeScope]::Descendants
+function Identified([string]$Id) {
+    if ($null -ne $window) {
+        $window.FindFirst($scope,$condition::new([Windows.Automation.AutomationElement]::AutomationIdProperty,$Id))
+    }
+}
+function Describe-Workspace {
+    if ($null -eq $window) { return ('main window not captured, HWND=' + $p.MainWindowHandle) }
+    $observations = foreach ($id in @('WorkspaceHeading', 'WorkspaceStatus')) {
+        try {
+            $entry = Identified $id
+            $name = if ($null -ne $entry) { [string]$entry.Current.Name } else { '(unavailable)' }
+            if ($name.Length -gt 240) { $name = $name.Substring(0, 240) }
+            "$id='$($name -replace '[
+]', ' ')'"
+        } catch { "$id=(UI Automation unavailable: $($_.Exception.GetType().Name))" }
+    }
+    try {
+        $nav = Identified 'Navigation'
+        $selection = $null
+        if ($null -ne $nav -and $nav.TryGetCurrentPattern([Windows.Automation.SelectionPattern]::Pattern,[ref]$selection)) {
+            $names = @($selection.Current.GetSelection() | ForEach-Object { $_.Current.Name })
+            $observations += "Selection='$($names -join ', ')'"
+        }
+    } catch { $observations += "Selection=(UI Automation unavailable: $($_.Exception.GetType().Name))" }
+    $observations -join '; '
+}
 function Wait-For([scriptblock]$Read, [string]$Description) {
     $until = [DateTime]::UtcNow.AddSeconds(30)
     do {
@@ -14,7 +45,7 @@ function Wait-For([scriptblock]$Read, [string]$Description) {
         if ($value) { return $value }
         Start-Sleep -Milliseconds 150
     } while ([DateTime]::UtcNow -lt $until)
-    throw "Timed out waiting for $Description."
+    throw "Timed out waiting for $Description. $(Describe-Workspace)"
 }
 try {
     $window = Wait-For {
@@ -26,7 +57,10 @@ try {
     function Named([string]$Name) {
         $window.FindFirst($scope,$condition::new([Windows.Automation.AutomationElement]::NameProperty,$Name))
     }
-    $null = Wait-For { Named 'Technician directory' } 'the directory on first launch'
+    $null = Wait-For {
+        $currentHeading = Identified 'WorkspaceHeading'
+        if ($null -ne $currentHeading -and $currentHeading.Current.Name -ceq 'Technician directory') { $currentHeading }
+    } 'the directory on first launch'
     $search = Named 'Search all tools, playbooks and methods'
     if (!$search) { throw 'Global search missing' }
     $search.GetCurrentPattern([Windows.Automation.ValuePattern]::Pattern).SetValue('7-Zip')

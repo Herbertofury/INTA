@@ -11,6 +11,9 @@
     <ApplicationIcon>../../native/workbench/desktop/inta.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../native/desktop/interop/FavoriteTweaks.cs" Link="Windows/FavoriteTweaks.cs" />
+    <Compile Include="../../native/desktop/interop/MaintenanceTaxonomy.cs" Link="Windows/MaintenanceTaxonomy.cs" />
+    <Compile Include="../../native/desktop/interop/PortableMaintenanceRoute.cs" Link="Windows/PortableMaintenanceRoute.cs" />
     <Compile Include="../../agent/INTA.LocalAgent/StartupInventory.cs" Link="Windows/StartupInventory.cs" />
     <Compile Include="../../agent/INTA.LocalAgent/StartupFolders.cs" Link="Windows/StartupFolders.cs" />
     <Compile Include="../../agent/INTA.LocalAgent/PowerPlans.cs" Link="Windows/PowerPlans.cs" />

@@ -1,9 +1,17 @@
-# INTA Desktop Startup preview
+# INTA Desktop maintenance preview
 
-This Windows-native WinForms view builds against the same source files as
+This Windows-native WinForms workspace builds against the same source files as
 the read-only Local Agent inventory. It does not launch the agent or use a
 web server, account, service, background scan loop, or third-party runtime.
-The inventory shows schema-2 registration names and provenance. It does not
+The sidebar has exactly nine categories across Storage, Privacy & Security,
+and System Tools. Startup Items, App Uninstaller, Disk Space Analysis and
+System Optimization contain their existing native previews. Other categories
+explain the current limit; they do not run unavailable cleanup or repair actions.
+The tool search and INTA Recommended filter apply only to the current category.
+The last selected category is saved in the portable app’s `state/` folder on
+close if writable; otherwise there is no roaming or AppData fallback.
+
+The Startup Items inventory shows schema-2 registration names and provenance. It does not
 infer enabled state. The Windows Settings button opens the system Startup
 Apps page only on explicit interaction.
 
@@ -11,7 +19,8 @@ Build and test on a disposable Windows test host using the .NET 10 SDK:
 `dotnet run -c Release --project desktop/INTA.Desktop/INTA.Desktop.csproj`.
 Look for both Startup folder scopes and the registry views available on that
 host. Use the search box and then clear it; it must not alter Windows state.
-Verify keyboard access, high contrast, a 760×500 viewport, and 150% DPI.
+Verify keyboard access (Tab to the rail; arrows, Home and End switch views),
+selected state, high contrast, the compact 655×500 minimum, and 150% DPI.
 Click the Settings button and verify Windows opens Apps → Startup. Close
 without making changes. Do not export/screenshot live personal entries or
 attach registry names to CI logs. Packaging and visible native acceptance
@@ -20,13 +29,13 @@ remain separate from cross-target compilation.
 [Windows Forms .NET 10 desktop SDK](https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props-desktop)
 and [Microsoft's Startup Apps Settings URL](https://learn.microsoft.com/en-us/windows/apps/develop/launch/launch-settings).
 
-Open **Power plans** from the Startup window to inspect the installed Windows
+Open **System Optimization → Power plans** to inspect the installed Windows
 power schemes and active plan. The preview reads Windows power APIs directly
 on demand; it does not activate, edit, import, or remove a plan. Incomplete
-and unstable snapshots do not label a plan active. Close the Power plans
-window to return to Startup.
+and unstable snapshots do not label a plan active. Select **Startup Items** in the rail to return without re-reading the registry.
+**Favorite Tweaks** is inside System Optimization, not another sidebar item.
 
-Open **Storage preview** to inspect a folder you explicitly choose. The view
+Open **Disk Space Analysis** to inspect a folder you explicitly choose. The view
 reports file and byte counts, age-threshold totals, and partial or skipped
 coverage. It never opens file contents or deletes anything. Drive roots,
 network locations and link-backed roots are not scanned. Reported bytes are
@@ -40,7 +49,7 @@ snapshot or estimate reclaimable bytes. Use **Cancel scan** to stop between
 entries. The default remains the logical-size-only preview.
 
 
-Open **Installed programs** to browse desktop program registrations by name,
+Open **App Uninstaller** to browse desktop program registrations by name,
 version, publisher and registry scope. Identical names in separate registrations
 stay separate. Searches do not change the computer or invoke a package manager.
 Hidden and unnamed records are omitted; unreadable sources and scan caps are

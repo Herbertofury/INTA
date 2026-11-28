@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
+using INTA.Desktop;
 
 namespace Inta.Desktop
 {
@@ -17,7 +18,6 @@ namespace Inta.Desktop
         private static readonly Entry[] Diagnostics = {
             Diagnostic("overview", "System overview", "Windows build, processor and memory"),
             Diagnostic("storage", "Volume capacity", "Filesystem and free space on local volumes"),
-            Diagnostic("space", "Folder space analysis", "Largest files and duplicate-content candidates"),
             Diagnostic("security", "Endpoint protection", "Defender and Windows Firewall status"),
             Diagnostic("network", "Network interfaces", "Adapter state and link speed"),
             Diagnostic("startup", "Startup inventory", "Registered startup entries grouped by source"),
@@ -76,9 +76,10 @@ namespace Inta.Desktop
                 Action(pageActions, "Capability diagnostics", delegate { OpenFeature("diagnostics"); });
                 Action(pageActions, "Mobile handoff", ExportMobileSnapshot);
                 Action(pageActions, "Review phone repair draft...", ReviewPhoneRepairDraft);
-                Action(pageActions, "Review cache files\u2026", OpenCleanupReview);
-                Action(pageActions, "Manage sign-in entries\u2026", OpenStartupReview);
-                SetRows(Diagnostics); return;
+                Action(pageActions, "Open Deep Cleanup", delegate { OpenMaintenance(MaintenanceView.DeepCleanup); });
+                Action(pageActions, "Open Startup Items", delegate { OpenMaintenance(MaintenanceView.StartupItems); });
+                Action(pageActions, "Open System Maintenance", delegate { OpenMaintenance(MaintenanceView.SystemMaintenance); });
+                SetRows(Diagnostics.Where(entry => !MaintenanceDiagnosticIds.Contains(entry.Id))); return;
             }
             if (section == "Virtual machines") { await LoadLab(token); return; }
             if (section == "Scenarios")
@@ -115,16 +116,6 @@ namespace Inta.Desktop
                 if (listing.Count == 0) { Message("No managed packages", "The selected toolbox contains no packages in the managed index."); Status("Toolbox index loaded."); }
                 return;
             }
-            if (section == "Windows settings")
-            {
-                Action(pageActions, "Setting profiles", ShowProfiles);
-                var settings = await core.Read(new[] { "tweak", "list" }, token);
-                if (token.IsCancellationRequested) return;
-                SetRows(Json.Array(settings).Select(Json.Object).Select(d => new Entry { Kind = "setting", Id = Json.Text(d, "id"),
-                    Title = Json.Text(d, "setting"), Subtitle = Json.Text(d, "effect"), Data = d }));
-                if (listing.Count == 0) { Message("No Windows settings available", "This core returned an empty list of supported settings."); Status("Settings loaded."); }
-                return;
-            }
             if (section == "Rescue media")
             {
                 Title("INTA Media Creator");
@@ -153,6 +144,8 @@ namespace Inta.Desktop
         private async Task ShowOperation(Entry item, CancellationToken token)
         {
             Title(item.Title);
+            if (item.Kind == "maintenance") { ShowMaintenanceOperation(item); return; }
+            if (item.Kind == "favorite-tweak") { ShowFavoriteTweak(item); return; }
             if (item.Kind == "profile") { await ShowProfile(item, token); return; }
             if (item.Kind == "setting") {
                 var state = Json.Object(await core.Read(new[] { "tweak", "status", item.Id }, token));
@@ -186,12 +179,9 @@ namespace Inta.Desktop
             if (item.Kind == "diagnostic")
             {
                 Note(item.Subtitle + ".");
-                if (item.Id == "space")
-                    Action(detailActions, "Choose folder\u2026", delegate {
-                        string path = ChooseFolder("Select a local folder for read-only space analysis.");
-                        if (path != null) RunOperation(item.Title, new[] { "storage", path }, false);
-                    });
-                else Action(detailActions, "Run inspection", delegate { RunOperation(item.Title, new[] { "inspect", item.Id }, false); });
+                if (section == "App Uninstaller")
+                    Note("This is a read-only Windows inventory. This view does not uninstall an app or remove its leftover files.");
+                Action(detailActions, "Run inspection", delegate { RunOperation(item.Title, new[] { "inspect", item.Id }, false); });
                 Status("Ready for read-only inspection.");
             }
             if (item.Kind == "scenario")
@@ -254,7 +244,8 @@ namespace Inta.Desktop
         {
             changingSetting = locked;
             navigation.IsEnabled = !locked; pageActions.IsEnabled = !locked; entries.IsEnabled = !locked;
-            search.IsEnabled = !locked; Find<System.Windows.Controls.Button>("Clear").IsEnabled = !locked;
+            search.IsEnabled = !locked; maintenanceSearch.IsEnabled = !locked; maintenanceRecommended.IsEnabled = !locked;
+            Find<System.Windows.Controls.Button>("Clear").IsEnabled = !locked;
         }
         private async void RunOperation(string title, string[] args, bool setting, Action<object> completed = null)
         {

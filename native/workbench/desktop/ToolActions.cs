@@ -267,7 +267,7 @@ namespace Inta.Desktop
                     if (Json.Text(handoff, "id") != id || Json.Text(handoff, "workspace") != kind || Json.Text(handoff, "state") != "workspace")
                         throw new InvalidDataException("The core did not authorize the requested workspace.");
                     if (kind == "vm-workspace" && !navigation.Items.Contains("Virtual machines")) {
-                        initializing = true; navigation.ItemsSource = Sections; initializing = false;
+                        initializing = true; BindNavigation(true); initializing = false;
                     }
                     navigation.SelectedItem = kind == "vm-workspace" ? "Virtual machines" : "Rescue media";
                     if (kind == "media-creator") OpenMedia();

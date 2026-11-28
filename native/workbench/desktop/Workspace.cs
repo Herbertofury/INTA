@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Microsoft.Win32;
+using INTA.Desktop;
 
 namespace Inta.Desktop
 {
@@ -27,6 +28,7 @@ namespace Inta.Desktop
         internal string Id;
         internal Dictionary<string, object> Data;
         internal Workspace Owner;
+        internal bool RecommendedMaintenanceTool;
         internal bool HasActions { get { return Kind == "tool" || Kind == "package"; } }
         public Visibility ToolControls { get { return HasActions ? Visibility.Visible : Visibility.Collapsed; } }
         public string InstallName { get { return "Review installation for " + Title; } }
@@ -40,7 +42,7 @@ namespace Inta.Desktop
     {
         private static readonly string[] Sections = {
             "Directory", "Tools", "Playbooks", "Methods", "Diagnostics", "Scenarios",
-            "Managed toolbox", "Windows settings", "Rescue media", "Virtual machines", "Local AI", "Activity"
+            "Managed toolbox", "Rescue media", "Virtual machines", "Local AI", "Activity"
         };
         private static readonly string[] BrushKeys = { "Canvas", "Rail", "Surface", "Hover", "Select", "Border", "Muted", "Text", "Accent" };
         private static readonly string[] Dark = { "#17191B","#111314","#222529","#30353A","#23384E","#35393E","#B0B7BE","#F1F3F5","#8FC4FF" };
@@ -88,10 +90,12 @@ namespace Inta.Desktop
             detailActions = Find<WrapPanel>("DetailActions"); detail = Find<StackPanel>("Detail");
             debounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(190) };
             debounce.Tick += delegate { debounce.Stop(); RefreshPage(); };
-            navigation.ItemsSource = Sections.Where(s => s != "Virtual machines").ToArray();
+            BindNavigation(false);
             navigation.SelectionChanged += delegate {
                 if (initializing || navigation.SelectedItem == null) return;
                 section = (string)navigation.SelectedItem;
+                maintenanceSelectionChanged = true;
+                startupRouteChosen = true;
                 pendingRecord = null; pendingToolAction = null;
                 debounce.Stop();
                 RefreshPage();
@@ -100,6 +104,7 @@ namespace Inta.Desktop
             entries.AddHandler(Button.ClickEvent, new RoutedEventHandler(RowActionClick));
             search.TextChanged += delegate {
                 if (initializing) return;
+                startupRouteChosen = true;
                 pendingRecord = null; pendingToolAction = null;
                 if (!IsCatalog) {
                     initializing = true; section = "Directory"; navigation.SelectedItem = section; initializing = false;
@@ -108,26 +113,51 @@ namespace Inta.Desktop
                 count.Text = ""; Status("Searching\u2026");
                 debounce.Stop(); debounce.Start();
             };
-            Find<Button>("Clear").Click += delegate { search.Clear(); search.Focus(); };
+            ConfigureMaintenanceSearch();
+            Find<Button>("Clear").Click += delegate {
+                if (MaintenanceIdentityFor(section) != null) ClearMaintenanceFilters();
+                else { search.Clear(); search.Focus(); }
+            };
             Find<Button>("Theme").Click += delegate { ApplyTheme(!light); SaveTheme(); };
             Find<Button>("Hub").Click += delegate { OpenHub(); };
             Find<Button>("Appearance").Click += delegate { OpenFeature("appearance"); };
             window.PreviewKeyDown += delegate(object sender, KeyEventArgs e) {
                 if (e.Key == Key.K && Keyboard.Modifiers == ModifierKeys.Control && !changingSetting)
                 {
-                    if (!IsCatalog || section != "Directory") navigation.SelectedItem = "Directory";
-                    search.Focus(); search.SelectAll(); e.Handled = true;
+                    if (MaintenanceIdentityFor(section) != null) { maintenanceSearch.Focus(); maintenanceSearch.SelectAll(); }
+                    else {
+                        if (!IsCatalog || section != "Directory") navigation.SelectedItem = "Directory";
+                        search.Focus(); search.SelectAll();
+                    }
+                    e.Handled = true;
                 }
+                else if (e.Key == Key.Escape && maintenanceSearch.IsKeyboardFocusWithin) { maintenanceSearch.Clear(); e.Handled = true; }
                 else if (e.Key == Key.Escape && search.IsKeyboardFocusWithin) { search.Clear(); e.Handled = true; }
             };
             window.Closing += delegate(object sender, System.ComponentModel.CancelEventArgs e) {
                 if (changingSetting || activeExports > 0) { e.Cancel = true; Status("Finishing the current operation. Close the window once it completes."); }
-                else { debounce.Stop(); Cancel(ref pageRequest); Cancel(ref detailRequest); }
+                else {
+                    debounce.Stop(); Cancel(ref pageRequest); Cancel(ref detailRequest);
+                    if (maintenanceSelectionChanged)
+                    {
+                        var active = MaintenanceIdentityFor(section);
+                        PortableMaintenanceRoute.Save(baseDirectory, active == null ? (MaintenanceView?)null : active.Id);
+                    }
+                }
             };
             window.Closed += delegate { ReleaseModelServer(); lifetime.Cancel(); lifetime.Dispose(); };
             window.Loaded += async delegate {
                 ApplyTheme(ReadTheme()); WatchInstalledBuild();
-                if (route == null) navigation.SelectedItem = "Directory";
+                if (route == null)
+                {
+                    var item = await Task.Run(() => PortableMaintenanceRoute.Read(baseDirectory));
+                    if (lifetime.IsCancellationRequested) return;
+                    // The grouped collection's currency is not a user action.
+                    // A user navigation or search during the read wins; otherwise
+                    // activate the chosen route even if the row was already selected.
+                    if (!startupRouteChosen)
+                        OpenRecord(item.HasValue ? MaintenanceTaxonomy.Get(item.Value).Name : "Directory", null);
+                }
                 else OpenRecord("Tools", route.Id, route.Operation);
                 await LoadCapabilities();
             };
@@ -142,14 +172,14 @@ namespace Inta.Desktop
                 repairLabAvailable = advertised != null && advertised.Cast<object>().Any(c => Convert.ToString(c) == "rust-repair-lab");
                 rustConsoleAvailable = advertised != null && advertised.Cast<object>().Any(c => Convert.ToString(c) == "rust-rescue-console");
                 if (token.IsCancellationRequested || (!vmAvailable && !repairLabAvailable && !rustConsoleAvailable)) return;
-                initializing = true; navigation.ItemsSource = Sections; navigation.SelectedItem = section; initializing = false;
+                initializing = true; BindNavigation(true); navigation.SelectedItem = section; initializing = false;
                 if (section == "Rescue media") RefreshPage();
             } catch (OperationCanceledException) { }
             catch (Exception) { /* The catalog pane reports a missing or incompatible core. */ }
         }
 
         private T Find<T>(string name) where T : class { return (T)window.FindName(name); }
-        private bool IsCatalog { get { return Array.IndexOf(Sections, section) <= 3; } }
+        private bool IsCatalog { get { int index = Array.IndexOf(Sections, section); return index >= 0 && index <= 3; } }
         private void Status(string message) { status.Text = message; status.ToolTip = message; }
         private void ApplyTheme(bool useLight)
         {
@@ -272,7 +302,9 @@ namespace Inta.Desktop
             listing = null; ResetDetail(); pageActions.Children.Clear();
             heading.Text = section == "Directory" ? "Technician directory" : section;
             count.Text = ""; Status("Loading\u2026");
-            Split(IsCatalog || section == "Diagnostics" || section == "Scenarios" || section == "Managed toolbox" || section == "Windows settings");
+            var maintenance = MaintenanceIdentityFor(section);
+            SetMaintenanceSearch(maintenance);
+            Split(IsCatalog || maintenance != null || section == "Diagnostics" || section == "Scenarios" || section == "Managed toolbox");
             try
             {
                 if (IsCatalog)
@@ -289,6 +321,7 @@ namespace Inta.Desktop
                         Status("Search complete.");
                     }
                 }
+                else if (maintenance != null) await LoadMaintenancePage(maintenance, token);
                 else await LoadOperationPage(token);
             }
             catch (OperationCanceledException) { }
@@ -306,6 +339,7 @@ namespace Inta.Desktop
             Cancel(ref detailRequest);
             Entry item = Current;
             if (item == null) return;
+            RememberMaintenanceSelection(item);
             detailRequest = new CancellationTokenSource();
             var token = detailRequest.Token;
             ResetDetail(); Status("Loading " + item.Title + "\u2026");
@@ -380,7 +414,10 @@ namespace Inta.Desktop
         }
         private void OpenRecord(string destination, string id, string operation = null)
         {
-            initializing = true; search.Clear(); navigation.SelectedItem = destination; section = destination; initializing = false;
+            startupRouteChosen = true;
+            initializing = true;
+            try { search.Clear(); navigation.SelectedItem = destination; section = destination; }
+            finally { initializing = false; }
             pendingRecord = id; pendingToolAction = operation; debounce.Stop(); RefreshPage();
         }
         private async void LocatePackage(Entry item)

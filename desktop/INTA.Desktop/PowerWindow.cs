@@ -60,6 +60,11 @@ internal sealed class PowerWindow : Form
         _status.Margin = new Padding(3, 12, 3, 0);
         layout.Controls.Add(_status, 0, 4);
         Controls.Add(layout);
+        layout.Resize += (_, _) =>
+        {
+            int width = Math.Max(1, layout.ClientSize.Width - layout.Padding.Horizontal - _status.Margin.Horizontal - 1);
+            if (_status.MaximumSize.Width != width) _status.MaximumSize = new Size(width, 0);
+        };
         AddColumn("Power plan", 48);
         AddColumn("Plan identifier", 33);
         AddColumn("Observation", 19);

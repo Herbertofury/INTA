@@ -11,7 +11,7 @@ internal static class Program
     private static void Main()
     {
         ApplicationConfiguration.Initialize();
-        Application.Run(new StartupWindow());
+        Application.Run(new MaintenanceWindow());
     }
 }
 
@@ -73,7 +73,7 @@ internal static class StartupReader
 internal sealed class StartupWindow : Form
 {
     private readonly bool _contrast = SystemInformation.HighContrast;
-    private readonly TextBox _filter = new() { AccessibleName = "Find a startup registration", PlaceholderText = "Search names, sources, or scope", Width = 300, TabIndex = 0 };
+    private readonly TextBox _filter = new() { AccessibleName = "Find a startup registration", PlaceholderText = "Search names, sources, or scope", Width = 225, TabIndex = 0 };
     private readonly Button _refresh = new() { Text = "&Refresh", AccessibleName = "Refresh", AutoSize = true, TabIndex = 1 };
     private readonly Button _settings = new() { Text = "&Open Windows Startup Settings", AccessibleName = "Open Windows Startup Settings", AutoSize = true, TabIndex = 2 };
     private readonly Label _status = new() { AutoSize = true, Text = "Ready to scan on this PC.", AccessibleName = "Inventory status" };
@@ -91,9 +91,6 @@ internal sealed class StartupWindow : Form
         ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText,
     };
     private StartupRow[] _all = [], _visible = [];
-    private PowerWindow? _powerWindow;
-    private StorageWindow? _storageWindow;
-    private ProgramsWindow? _programsWindow;
     private int _completedScans;
     private int _sortColumn = -1;
     private bool _sortDescending;
@@ -116,54 +113,20 @@ internal sealed class StartupWindow : Form
         layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
         layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         layout.Controls.Add(new Label { AutoSize = true, Text = "Startup inventory", Font = new Font(Font.FontFamily, 26F, FontStyle.Bold) }, 0, 0);
-        layout.Controls.Add(new Label { AutoSize = true, Text = "LOCAL ONLY  /  READ-ONLY  /  REGISTRY + STARTUP FOLDERS", Margin = new Padding(3, 4, 3, 14) }, 0, 1);
+        layout.Controls.Add(new Label { AutoSize = true, Text = "READ-ONLY  /  REGISTRY + STARTUP FOLDERS", Margin = new Padding(3, 4, 3, 14) }, 0, 1);
         var actions = new FlowLayoutPanel { AutoSize = true, Dock = DockStyle.Fill, WrapContents = true, Padding = new Padding(0, 0, 0, 8) };
-        var powerPlans = new Button { Text = "&Power plans", AccessibleName = "Open power plans", AutoSize = true, TabIndex = 3 };
-        powerPlans.Click += (_, _) =>
-        {
-            if (_powerWindow is { IsDisposed: false } existing)
-            {
-                existing.Activate();
-                return;
-            }
-            var window = new PowerWindow();
-            _powerWindow = window;
-            window.FormClosed += (_, _) => _powerWindow = null;
-            window.Show(this);
-        };
-        var storage = new Button { Text = "&Storage preview", AccessibleName = "Open storage preview", AutoSize = true, TabIndex = 4 };
-        storage.Click += (_, _) =>
-        {
-            if (_storageWindow is { IsDisposed: false } existing)
-            {
-                existing.Activate();
-                return;
-            }
-            var window = new StorageWindow();
-            _storageWindow = window;
-            window.FormClosed += (_, _) => _storageWindow = null;
-            window.Show(this);
-        };
-        var programs = new Button { Text = "Installed &programs", AccessibleName = "Open installed programs", AutoSize = true, TabIndex = 5 };
-        programs.Click += (_, _) =>
-        {
-            if (_programsWindow is { IsDisposed: false } existing)
-            {
-                existing.Activate();
-                return;
-            }
-            var window = new ProgramsWindow();
-            _programsWindow = window;
-            window.FormClosed += (_, _) => _programsWindow = null;
-            window.Show(this);
-        };
-        actions.Controls.AddRange([_filter, _refresh, _settings, powerPlans, storage, programs]);
+        actions.Controls.AddRange([_filter, _refresh, _settings]);
         layout.Controls.Add(actions, 0, 2);
         layout.Controls.Add(_grid, 0, 3);
         _status.Margin = new Padding(3, 12, 3, 0);
         layout.Controls.Add(_status, 0, 4);
         Controls.Add(layout);
-        StyleControls(powerPlans, storage, programs);
+        layout.Resize += (_, _) =>
+        {
+            int width = Math.Max(1, layout.ClientSize.Width - layout.Padding.Horizontal - _status.Margin.Horizontal - 1);
+            if (_status.MaximumSize.Width != width) _status.MaximumSize = new Size(width, 0);
+        };
+        StyleControls();
         AddColumn("Registration", 39);
         AddColumn("Scope", 14);
         AddColumn("Source", 24);
@@ -195,7 +158,7 @@ internal sealed class StartupWindow : Form
         Name = name, HeaderText = name, FillWeight = share, SortMode = DataGridViewColumnSortMode.Programmatic
     });
 
-    private void StyleControls(Button powerPlans, Button storage, Button programs)
+    private void StyleControls()
     {
         _grid.RowTemplate.Height = 30;
         if (_contrast) return;
@@ -212,7 +175,7 @@ internal sealed class StartupWindow : Form
         _grid.ColumnHeadersDefaultCellStyle.ForeColor = foreground;
         _filter.BackColor = surface;
         _filter.ForeColor = foreground;
-        foreach (var button in new[] { _refresh, _settings, powerPlans, storage, programs })
+        foreach (var button in new[] { _refresh, _settings })
         {
             button.FlatStyle = FlatStyle.Flat;
             button.UseVisualStyleBackColor = false;
