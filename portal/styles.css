@@ -981,7 +981,7 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 .tool-access .brand-reference { margin: 0; }
 .tool-access .brand-icon-link { min-height: 32px; }
 .tool-name-cell h3 .brand-icon { width: 28px; height: 28px; min-width: 28px; padding: 3px; border-radius: 5px; }
-.brand-icon[data-brand-icon="app-inta"] { background: transparent; padding: 0; border-radius: 0; }
+.brand-icon:is([data-brand-icon="app-inta"], [data-brand-icon="app-inta-rescue"]) { background: transparent; padding: 0; border-radius: 0; }
 .tool-name-cell h3 .brand-link { gap: 10px; min-height: 32px; }
 .tool-name-cell p { margin-top: 9px; }
 .tool-name-cell h3 + p { padding-left: 38px; }
