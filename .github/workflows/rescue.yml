@@ -10,6 +10,7 @@ on:
       - 'docs/assets/inta-mark.svg'
       - 'scripts/build-iso'
       - 'scripts/smoke-iso'
+      - 'scripts/rescue_boot_log.py'
   workflow_dispatch:
   schedule:
     - cron: '39 9 * * 2'

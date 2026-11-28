@@ -7,6 +7,7 @@ import re
 import subprocess
 import zipfile
 from pathlib import Path
+from rescue_boot_log import passed
 
 
 # These files become part of the ISO. The standalone Media Creator is rebuilt
@@ -118,8 +119,7 @@ def verify_boot_archive(archive, digest, repository, run_id, artifact_id, source
         serial_hashes = {}
         for firmware in ("bios", "uefi"):
             serial = read("inta-diagnostics/" + firmware + "-serial.log")
-            lines = serial.splitlines()
-            if b"INTA_SMOKE_START" not in lines or b"INTA_SMOKE_PASS" not in lines:
+            if not passed(serial):
                 raise ValueError(f"Preserved {firmware} serial proof did not pass")
             serial_hashes[firmware] = hashlib.sha256(serial).hexdigest()
         return serial_hashes

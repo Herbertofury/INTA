@@ -36,7 +36,7 @@ for ((second = 0; second < 340; second += 5)); do
     if ! kill -0 "$guest" 2>/dev/null; then
         wait "$guest"
         cat "$log"
-        tr -d '\r' < "$log" | grep -Fx INTA_SMOKE_PASS
+        python3 "$(dirname -- "$0")/rescue_boot_log.py" "$log"
         exit
     fi
     if ((second == 35)); then

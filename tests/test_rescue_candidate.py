@@ -11,6 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
 SPEC = importlib.util.spec_from_file_location("rescue_candidate", ROOT / "scripts/verify-rescue-candidate.py")
 CANDIDATE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CANDIDATE)
@@ -106,7 +107,7 @@ class RescueCandidateIntegrity(unittest.TestCase):
                         validate()
                     jobs["jobs"][0]["steps"][index]["conclusion"] = "success"
 
-    def make_archive(self, directory, missing=None, altered_source=False, duplicate=None):
+    def make_archive(self, directory, missing=None, altered_source=False, duplicate=None, bios_log=None):
         archive = Path(directory) / "proof.zip"
         records = {"run": copy.deepcopy(self.run), "artifact": self.artifact, "jobs": self.jobs}
         if altered_source:
@@ -117,7 +118,8 @@ class RescueCandidateIntegrity(unittest.TestCase):
             for firmware in ("bios", "uefi"):
                 serial = "INTA_SMOKE_START\nVerified 303 bundled native icon files\n"
                 serial += "INTA_SMOKE_FAIL\n" if firmware == missing else "INTA_SMOKE_PASS\n"
-                output.writestr("inta-diagnostics/" + firmware + "-serial.log", serial)
+                log = bios_log if firmware == "bios" and bios_log is not None else serial
+                output.writestr("inta-diagnostics/" + firmware + "-serial.log", log)
             if duplicate:
                 output.writestr("inta-diagnostics/" + duplicate + "-serial.log", "INTA_SMOKE_PASS\n")
         return archive, hashlib.sha256(archive.read_bytes()).hexdigest()
@@ -144,6 +146,34 @@ class RescueCandidateIntegrity(unittest.TestCase):
             archive, digest = self.make_archive(directory, altered_source=True)
             with self.assertRaisesRegex(ValueError, "head_sha"):
                 self.check_archive(archive, digest)
+
+    def test_current_boot_and_archived_proof_require_one_ordered_attempt(self):
+        start = "INTA_SMOKE_START"
+        passed = "INTA_SMOKE_PASS"
+        fail = "INTA_SMOKE_FAIL (1)"
+        cases = [
+            (["firmware banner", start, "XFCE ready", passed, "powered off"], True),
+            ([passed], False),
+            ([passed, start], False),
+            ([start, passed, fail], False),
+            ([start, fail, start, passed], False),
+            ([start, passed, passed], False),
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            serial = Path(directory) / "bios-serial.log"
+            for lines, expected in cases:
+                with self.subTest(lines=lines):
+                    contents = ("\r\n".join(lines) + "\r\n").encode()
+                    serial.write_bytes(contents)
+                    check = subprocess.run([sys.executable, str(ROOT / "scripts/rescue_boot_log.py"), str(serial)],
+                                           capture_output=True)
+                    self.assertEqual(check.returncode == 0, expected)
+                    archive, digest = self.make_archive(directory, bios_log=contents)
+                    if expected:
+                        self.assertEqual(self.check_archive(archive, digest)["bios"], hashlib.sha256(contents).hexdigest())
+                    else:
+                        with self.assertRaisesRegex(ValueError, "bios"):
+                            self.check_archive(archive, digest)
 
 
 class RescueInputCompatibility(unittest.TestCase):
