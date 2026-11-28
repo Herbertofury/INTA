@@ -15,9 +15,12 @@ def package(output: Path, root: Path = ROOT):
     registry = json.loads((root / "data/brand-icons.json").read_text())
     entries = {
         "__main__.py": (root / "media/inta-media.py").read_bytes(),
+        "rescue_products.py": (root / "native/workbench/media/rescue_products.py").read_bytes(),
+        "rescue_iso.py": (root / "native/workbench/media/rescue_iso.py").read_bytes(),
         "inta_brand_ui.py": (root / "media/inta_brand_ui.py").read_bytes(),
         "inta_optics_ui.py": (root / "media/inta_optics_ui.py").read_bytes(),
         "inta-resources/data/brand-icons.json": (root / "data/brand-icons.json").read_bytes(),
+        "inta-resources/data/rescue-recovery-download-channel.json": (root / "data/rescue-recovery-download-channel.json").read_bytes(),
         "inta-resources/data/rescue-download-channel.json": (root / "data/rescue-download-channel.json").read_bytes(),
     }
     for asset in registry["assets"].values():

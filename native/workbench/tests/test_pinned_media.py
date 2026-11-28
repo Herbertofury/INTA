@@ -27,7 +27,7 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def boot_fixture():
+def boot_fixture(recovery=False):
     image = bytearray(24 * 2048)
     for sector, kind in ((16, 1), (17, 0), (18, 255)):
         offset = sector * 2048
@@ -41,29 +41,40 @@ def boot_fixture():
     struct.pack_into("<H", image, offset+28, -(1 + 0xaa55) & 0xffff)
     image[offset+32] = 0x88
     struct.pack_into("<HI", image, offset+38, 4, 21)
+    if recovery:
+        image[16*2048+40:16*2048+53] = b"INTA_RECOVERY"
+        struct.pack_into("<BBH", image, offset+64, 0x91, 0xef, 1)
+        image[offset+96] = 0x88
+        struct.pack_into("<HI", image, offset+102, 4, 22)
     return bytes(image)
 
 
 class Fixture:
-    def __init__(self):
-        self.iso = boot_fixture()
+    def __init__(self, recovery=False):
+        self.edition = media.products.RECOVERY if recovery else media.products.FULL
+        self.filename = media.products.RECOVERY_ISO if recovery else media.ISO
+        self.iso = boot_fixture(recovery)
         self.digest = sha(self.iso)
         self.tag = "rescue-12.1"
         self.channel = {"schemaVersion": 1, "tag": self.tag, "qualification": "historical-recovery",
                         "sha256": self.digest, "scannerWarning": "Example offline-only warning."}
+        if recovery:
+            self.tag = "rescue-recovery-20261128.1"
+            self.channel = dict(media.download_channel(self.edition), tag=self.tag,
+                                sha256=self.digest, bytes=len(self.iso))
         self.api = media.RELEASE_API + self.tag
         self.base = media.ASSET_ROOT + self.tag + "/"
         self.urls = {}
         self.assets = {}
         self.requests = []
         self.reads = []
-        self.add(media.SUMS, f"{self.digest}  {media.ISO}\n".encode("ascii"))
+        self.add(media.SUMS, f"{self.digest}  {self.filename}\n".encode("ascii"))
         parts = []
         for index, chunk in enumerate((self.iso[:13000], self.iso[13000:41000], self.iso[41000:]), 1):
-            name = f"{media.ISO}.part{index:03d}"
+            name = f"{self.filename}.part{index:03d}"
             self.add(name, chunk)
             parts.append({"name":name, "size":len(chunk), "sha256":sha(chunk)})
-        self.parts = {"schemaVersion":1, "filename":media.ISO, "size":len(self.iso),
+        self.parts = {"schemaVersion":1, "filename":self.filename, "size":len(self.iso),
                       "sha256":self.digest, "parts":parts}
         self.set_parts()
 
@@ -73,7 +84,7 @@ class Fixture:
                              "digest":"sha256:"+sha(data)}
 
     def set_parts(self):
-        self.add(media.PARTS, json.dumps(self.parts).encode())
+        self.add(self.filename + ".parts.json", json.dumps(self.parts).encode())
 
     def open(self, url, timeout):
         self.requests.append(url)
@@ -94,7 +105,7 @@ class Fixture:
     def run(self, dest, reviewed=True):
         with patch.object(media, "download_channel", return_value=self.channel), \
                 patch.object(media.urllib.request, "build_opener", return_value=self):
-            return media.download_release(dest, copy.deepcopy(self.channel) if reviewed else None)
+            return media.download_release(dest, copy.deepcopy(self.channel) if reviewed else None, self.edition)
 
     def target(self, dest):
         return dest / f"{self.tag}-{self.digest[:12]}"
@@ -115,6 +126,63 @@ class WorkbenchMediaTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "scanner warning"):
             self.fixture.run(self.root, reviewed=False)
         self.assertEqual(self.fixture.requests, [])
+
+    def test_bundled_recovery_product_is_distinct(self):
+        c = media.download_channel(media.products.RECOVERY)
+        self.assertNotEqual(c["sha256"], media.download_channel()["sha256"])
+        self.assertEqual(c["filename"], "inta-rescue-recovery-amd64.iso")
+        self.assertEqual(c["volumeId"], "INTA_RECOVERY")
+        self.assertEqual(c["edition"], "recovery-only-v1")
+        self.assertEqual(c["qualification"], "recovery-only")
+        for bad in (dict(c, tag="rescue-12.1"), dict(c, filename=media.ISO),
+                    dict(c, bytes=True), dict(c, qualification="qualified")):
+            with self.assertRaises(ValueError):
+                media.products.validate(bad, media.products.RECOVERY)
+        with self.assertRaises(ValueError):
+            media.products.validate(c, media.products.FULL)
+        with self.assertRaises(ValueError):
+            media.products.validate(media.download_channel(), media.products.RECOVERY)
+
+    def test_recovery_raw_and_multipart_with_iso_readback(self):
+        for raw in (True, False):
+            with self.subTest(raw=raw):
+                dest = self.root / str(raw)
+                dest.mkdir()
+                f = Fixture(recovery=True)
+                if raw:
+                    f.add(f.filename, f.iso)
+                f.run(dest)
+                iso = f.target(dest) / f.filename
+                self.assertEqual(iso.read_bytes(), f.iso)
+                info = media.products.readback(iso, f.channel, f.edition)
+                self.assertEqual(info["volumeLabel"], "INTA_RECOVERY")
+                self.assertEqual(set(info["bootEntries"]), {"bios", "uefi"})
+                self.assertTrue((f.base+f.filename in f.requests) == raw)
+                with patch.object(media, "download_channel", return_value=f.channel):
+                    self.assertEqual(media.image_digest(iso), f.digest)
+                requests = list(f.requests)
+                f.run(dest)
+                self.assertEqual(f.requests, requests)
+
+    def test_wrong_product_bytes_rejected_before_publication(self):
+        for issue in ("label", "firmware", "size", "checksum filename"):
+            with self.subTest(issue=issue):
+                f = Fixture(recovery=True)
+                damaged = bytearray(f.iso)
+                if issue == "label":
+                    damaged[16*2048+40:16*2048+53] = b"OTHER_PRODUCT"
+                if issue == "firmware":
+                    damaged[20*2048+64] = 0
+                digest = sha(damaged)
+                f.channel["sha256"] = digest
+                if issue == "size":
+                    f.channel["bytes"] += 1
+                sums_name = media.ISO if issue == "checksum filename" else f.filename
+                f.add(media.SUMS, f"{digest}  {sums_name}\n".encode())
+                f.add(f.filename, bytes(damaged))
+                with self.assertRaises(ValueError):
+                    f.run(self.root)
+                self.assertEqual(list(self.root.iterdir()), [])
 
     def test_dialog_shows_full_warning_before_selection_or_download(self):
         messages, chooser, start = Mock(), Mock(), Mock()

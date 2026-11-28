@@ -35,6 +35,10 @@ const ASSETS: &[(&str, &[u8])] = &[
         include_bytes!("../../media/inta-media.py"),
     ),
     (
+        "media/rescue_products.py",
+        include_bytes!("../../media/rescue_products.py"),
+    ),
+    (
         "media/rescue_iso.py",
         include_bytes!("../../media/rescue_iso.py"),
     ),

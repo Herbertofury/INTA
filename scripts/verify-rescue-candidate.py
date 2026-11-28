@@ -17,7 +17,9 @@ ISO_INPUTS = (
     "docs/assets/inta-mark.svg", "scripts/build-iso", "scripts/build-rescue-wallpaper.py",
     "media/inta_optics_ui.py", "native/optics",
 )
-MEDIA_INPUTS = ("media", "data/rescue-download-channel.json", "scripts/package-media.py", "scripts/package-rescue-release.py")
+MEDIA_INPUTS = ("media", "native/workbench/media/rescue_products.py", "native/workbench/media/rescue_iso.py",
+               "data/rescue-download-channel.json", "data/rescue-recovery-download-channel.json",
+               "scripts/package-media.py", "scripts/package-rescue-release.py")
 BUILD_RECIPE = "Build with Debian stable and current signed security updates"
 BUILD_STEPS = (
     "Validate source", BUILD_RECIPE,
