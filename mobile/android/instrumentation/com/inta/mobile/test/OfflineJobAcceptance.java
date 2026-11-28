@@ -7,11 +7,13 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CheckBox;
@@ -60,12 +62,12 @@ public final class OfflineJobAcceptance extends Instrumentation {
                 }
                 require(active > 8, "native interaction did not change the Android glyph field");
                 press(activity, "Appearance");
-                clickDialog("Classic", "android:id/text1");
+                tapOption("Classic");
                 waitForIdleSync();
                 var prefs = getTargetContext().getSharedPreferences("optics-v1", 0);
                 require(prefs.getInt("profile", -1) == 4, "Classic appearance was not saved");
                 press(activity, "Appearance");
-                clickDialog("Full Prism", "android:id/text1");
+                tapOption("Full Prism");
                 waitForIdleSync();
                 require(prefs.getInt("profile", -1) == 0, "Full Prism was not restored");
             } else if ("draft".equals(stage)) {
@@ -202,6 +204,30 @@ public final class OfflineJobAcceptance extends Instrumentation {
         } finally {
             resolver.delete(uri, null, null);
         }
+    }
+
+    private void tapOption(String name) {
+        long deadline = SystemClock.uptimeMillis() + 8000;
+        do {
+            AccessibilityNodeInfo root = getUiAutomation().getRootInActiveWindow();
+            if (root != null) {
+                for (AccessibilityNodeInfo item : root.findAccessibilityNodeInfosByText(name)) {
+                    if (!name.contentEquals(item.getText() == null ? "" : item.getText()) || !item.isVisibleToUser()) continue;
+                    Rect bounds = new Rect();
+                    item.getBoundsInScreen(bounds);
+                    if (bounds.isEmpty()) continue;
+                    long now = SystemClock.uptimeMillis();
+                    for (int action : new int[]{MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP}) {
+                        MotionEvent touch = MotionEvent.obtain(now, SystemClock.uptimeMillis(), action,
+                                bounds.centerX(), bounds.centerY(), 0);
+                        try { sendPointerSync(touch); } finally { touch.recycle(); }
+                    }
+                    return;
+                }
+            }
+            SystemClock.sleep(100);
+        } while (SystemClock.uptimeMillis() < deadline);
+        throw new AssertionError("appearance option was not visible: " + name);
     }
 
     private void clickDialog(String name, String buttonId) {
