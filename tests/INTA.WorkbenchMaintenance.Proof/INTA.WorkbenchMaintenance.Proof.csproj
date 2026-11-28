@@ -9,5 +9,7 @@
     <Compile Include="../../native/desktop/interop/MaintenanceTaxonomy.cs" Link="MaintenanceTaxonomy.cs" />
     <Compile Include="../../native/desktop/interop/PortableMaintenanceRoute.cs" Link="PortableMaintenanceRoute.cs" />
     <Compile Include="../../native/workbench/desktop/MaintenanceEvidence.cs" Link="MaintenanceEvidence.cs" />
+    <Compile Include="../../native/workbench/desktop/WorkbenchStateDirectory.cs" Link="WorkbenchStateDirectory.cs" />
+    <Compile Include="../../native/desktop/interop/FavoriteTweaks.cs" Link="FavoriteTweaks.cs" />
   </ItemGroup>
 </Project>
