@@ -1,0 +1,55 @@
+# CLI control for INTA tools
+
+Every tool INTA recommends, ships, installs, launches or puts in a repair
+plan needs a tested, machine-readable control surface. Use
+[CLI-Anything](https://github.com/HKUDS/CLI-Anything) conventions: prefer an
+official CLI or API, otherwise make a reviewed harness against the genuine
+backend. Pin product and wrapper versions and reviewed bytes; use one-shot
+operation IDs, structured output and an observable result. Never substitute
+a GUI macro, download link or installer for the actual task.
+
+Review the platform, edition, applicable install/discovery, launch, and
+every operation exposed by INTA. Provide primary sources, exact successful
+runtime checks and predictable errors. Record whether the operation only
+reads or modifies the device, its required privileges, cancellation and
+rollback/review conditions. If something cannot be controlled, keep its
+reference clearly manual-only, explain why and surface a qualifying alternative.
+Do not silently remove useful existing links or advertise stub automation.
+
+Desktop, Mobile and agent actions must share the registry. A reconnect plan
+can refer only to a registered version and an actually tested operation with
+validated arguments. Authorize the exact target, outcome, and effect before
+queueing. Never forward raw shell text. Live dispatch must validate the
+approved operation at execution time, and failures must not trigger automatic
+repetition of a possibly completed mutation.
+
+```sh
+python3 scripts/check-tool-cli.py --json
+python3 scripts/check-tool-cli.py --require-full TOOL_ID --platform windows
+python3 scripts/check-tool-cli.py --require-operation TOOL_ID OPERATION_ID --platform windows \
+  --version REVIEWED_VERSION --artifact-sha256 REVIEWED_SHA256
+```
+
+The catalog report is read-only. Unmapped tools stay visible as `needs-tool-review`;
+they do not become automation-ready by omission. The ledger currently tracks
+main's tool catalog, not an exhaustive inventory of bundled rescue packages or
+hardware support. A `candidate` is not runtime verification; a `tested` record
+requires primary documentation, exact version, artifact SHA-256 and actual
+runtime evidence. The `complete` scope claim is set only after every relevant
+feature has been reviewed; one qualified operation does not imply parity.
+
+The first candidate harness is a read-only native Power Plans inventory through
+the pinned INTA agent and documented Windows power APIs:
+
+```sh
+python3 scripts/cli-anything-inta.py --json power-plans \
+  --agent-binary ABSOLUTE_PATH_TO_REVIEWED_INTA_AGENT \
+  --agent-sha256 APPROVED_PACKAGE_EXECUTABLE_SHA256
+```
+
+Use only an administrator-controlled package location whose bytes are already
+trusted. Use the repository’s self-contained single-file packaged Local Agent,
+not a thin executable with unpinned sidecar DLLs. This command is not admitted into remote job dispatch. It requires no
+agent service or background polling and never changes a power plan. Exit 0
+means ready data, 1 means a supported command returned a non-ready observation
+(e.g. unsupported OS), and 2 means the request or backend contract was refused.
