@@ -79,6 +79,30 @@ def inventory(path, expected_sha):
     return report
 
 
+def sleep_states(path, expected_sha):
+    """Read a bounded native ACPI S1–S4 capability snapshot, not a policy action."""
+    binary = executable(path, expected_sha)
+    run = subprocess.run([str(binary), "--sleep-states"], capture_output=True, check=True,
+                         shell=False, timeout=12, stdin=subprocess.DEVNULL)
+    if len(run.stdout) > 4096:
+        raise ValueError("native response is too large")
+    report = json.loads(run.stdout.decode("utf-8"), object_pairs_hook=unique)
+    fields = {"standbyS1", "standbyS2", "standbyS3", "hibernateS4", "hibernationFilePresent"}
+    if (not isinstance(report, dict)
+            or set(report) != {"schema", "status", "readOnly", "source", "states"}
+            or type(report["schema"]) is not int or report["schema"] != 1
+            or report["readOnly"] is not True or report["source"] != "system-power-capabilities-prefix"
+            or not isinstance(report["status"], str) or report["status"] not in {"ready", "unsupported", "unavailable"}):
+        raise ValueError("unexpected sleep capability response")
+    states = report["states"]
+    if report["status"] == "ready":
+        if not isinstance(states, dict) or set(states) != fields or any(type(value) is not bool for value in states.values()):
+            raise ValueError("invalid sleep capability flags")
+    elif states is not None:
+        raise ValueError("non-ready capability response must not contain flags")
+    return report
+
+
 def startup_inventory(path, expected_sha, include_folders=False):
     """List documented logon registration names; startup folder names require explicit opt-in."""
     binary = executable(path, expected_sha)
@@ -368,6 +392,7 @@ def main(argv=None):
     parser.add_argument("--json", action="store_true", help="output a machine-readable JSON result (also the default)")
     sub = parser.add_subparsers(dest="operation", required=True)
     power = sub.add_parser("power-plans", help="read only: list Windows power plans and their active selection")
+    sleep = sub.add_parser("sleep-states", help="read only: documented legacy Windows ACPI sleep capability flags")
     startup = sub.add_parser("startup-inventory", help="read only: Windows Run and RunOnce names, no commands or enable state")
     programs = sub.add_parser("installed-programs", help="read only: Windows desktop registration display metadata")
     startup.add_argument("--include-folders", action="store_true",
@@ -376,7 +401,7 @@ def main(argv=None):
     storage.add_argument("--folder", type=pathlib.Path, required=True)
     storage.add_argument("--minimum-age-days", type=int, default=7)
     storage.add_argument("--entry-limit", type=int, default=100000)
-    for operation in (power, startup, programs, storage):
+    for operation in (power, sleep, startup, programs, storage):
         operation.add_argument("--agent-binary", type=pathlib.Path, required=True)
         operation.add_argument("--agent-sha256", required=True)
     rclone = sub.add_parser("rclone-sha256", help="read only: use pinned rclone to hash a single local file")
@@ -400,7 +425,7 @@ def main(argv=None):
         elif args.operation == "startup-inventory":
             result = startup_inventory(args.agent_binary, args.agent_sha256, args.include_folders)
         else:
-            read = {"power-plans": inventory, "installed-programs": installed_programs}[args.operation]
+            read = {"power-plans": inventory, "sleep-states": sleep_states, "installed-programs": installed_programs}[args.operation]
             result = read(args.agent_binary, args.agent_sha256)
     except (OSError, ValueError, TypeError, RecursionError, subprocess.SubprocessError):
         print(json.dumps({"operation": args.operation, "status": "refused"}))
