@@ -99,6 +99,37 @@ jobs:
               if ($fixtureWritten) { $key.DeleteValue($tag, $false) }
               $key.Dispose()
           }
+      - name: Verify opted-in Windows startup folder metadata without resolving shortcuts
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $agent = (Resolve-Path 'cli-native/inta-agent.exe').Path
+          $pin = (Get-FileHash -Algorithm SHA256 $agent).Hash.ToLowerInvariant()
+          function Independent-Names([System.Environment+SpecialFolder] $Folder) {
+              $path = [System.Environment]::GetFolderPath($Folder)
+              if (-not $path -or -not (Test-Path -LiteralPath $path -PathType Container)) { return @() }
+              @(Get-ChildItem -LiteralPath $path -Force | ForEach-Object Name | Sort-Object -CaseSensitive)
+          }
+          $userBefore = @(Independent-Names Startup)
+          $allBefore = @(Independent-Names CommonStartup)
+          $raw = python -B scripts/cli-anything-inta.py --json startup-inventory --include-folders --agent-binary $agent --agent-sha256 $pin
+          if ($LASTEXITCODE -ne 0) { throw 'Startup folder harness did not return a complete inventory' }
+          $result = $raw | ConvertFrom-Json
+          if ($result.schema -ne 2 -or $result.startupSettingsUri -ne 'ms-settings:startupapps' -or $result.argumentsCollected -or
+              $result.startupFolders.Count -ne 2) { throw 'Startup folder response does not match the expected scope' }
+          $user = @($result.startupFolders | Where-Object scope -eq 'current-user')[0]
+          $all = @($result.startupFolders | Where-Object scope -eq 'all-users')[0]
+          $userAfter = @(Independent-Names Startup)
+          $allAfter = @(Independent-Names CommonStartup)
+          if (($user.status -ne 'read' -and $userBefore.Count -ne 0) -or ($all.status -ne 'read' -and $allBefore.Count -ne 0) -or
+              (ConvertTo-Json -InputObject $userBefore -Compress) -cne (ConvertTo-Json -InputObject @($user.entryNames | Sort-Object -CaseSensitive) -Compress) -or
+              (ConvertTo-Json -InputObject $allBefore -Compress) -cne (ConvertTo-Json -InputObject @($all.entryNames | Sort-Object -CaseSensitive) -Compress) -or
+              (ConvertTo-Json -InputObject $userBefore -Compress) -cne (ConvertTo-Json -InputObject $userAfter -Compress) -or
+              (ConvertTo-Json -InputObject $allBefore -Compress) -cne (ConvertTo-Json -InputObject $allAfter -Compress)) {
+              throw 'Startup folder evidence did not match or the snapshot changed'
+          }
+          @{ operation = 'startup-inventory-include-folders'; platform = 'windows-x64'; passed = $true; agentSha256 = $pin; sourceCommit = $env:GITHUB_SHA } |
+              ConvertTo-Json | Set-Content -Encoding utf8 cli-startup-folders-proof.json
       - name: Verify desktop program metadata without exposing uninstall commands
         shell: pwsh
         run: |
@@ -144,6 +175,7 @@ jobs:
           path: |
             cli-harness-proof.json
             cli-startup-proof.json
+            cli-startup-folders-proof.json
             cli-programs-proof.json
             cli-storage-proof.json
             cli-native/inta-agent.exe
