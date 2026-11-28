@@ -25,3 +25,10 @@ power schemes and active plan. The preview reads Windows power APIs directly
 on demand; it does not activate, edit, import, or remove a plan. Incomplete
 and unstable snapshots do not label a plan active. Close the Power plans
 window to return to Startup.
+
+Open **Storage preview** to inspect a folder you explicitly choose. The view
+reports file and byte counts, age-threshold totals, and partial or skipped
+coverage. It never opens file contents or deletes anything. Drive roots,
+network locations and link-backed roots are not scanned. Reported bytes are
+logical size, not a guarantee of disk space you can reclaim. The Windows UI
+test uses disposable files only.

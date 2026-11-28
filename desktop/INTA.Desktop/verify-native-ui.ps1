@@ -105,6 +105,61 @@ try {
     }
     $null = Wait-Until { $refresh.Current.IsEnabled } 'Could not return to the Startup inventory window.'
     'The real Power plans window showed the current Windows plan without changing the active scheme.'
+    $fixture = Join-Path ([IO.Path]::GetTempPath()) ('inta-storage-ui-'+[Guid]::NewGuid().ToString('N'))
+    $null = [IO.Directory]::CreateDirectory($fixture)
+    $storageWindow = $null
+    try {
+        $old = Join-Path $fixture 'old.test'
+        $recent = Join-Path $fixture 'recent.test'
+        [IO.File]::WriteAllBytes($old, [byte[]](1,2,3,4))
+        [IO.File]::WriteAllBytes($recent, [byte[]](5,6,7,8,9,10,11,12,13))
+        [IO.File]::SetLastWriteTimeUtc($old, [DateTime]::UtcNow.AddDays(-8))
+        $oldTime = [IO.File]::GetLastWriteTimeUtc($old)
+        $bytes = @(Get-FileHash -LiteralPath $old, $recent | ForEach-Object Hash)
+        $storage = Wait-Until { Find-Name 'Open storage preview' } 'Missing Storage preview action.'
+        $storage.GetCurrentPattern([Windows.Automation.InvokePattern]::Pattern).Invoke()
+        $storageWindow = Wait-Until {
+            $condition = [Windows.Automation.PropertyCondition]::new(
+                [Windows.Automation.AutomationElement]::ProcessIdProperty, [int]$process.Id)
+            $matches = [Windows.Automation.AutomationElement]::RootElement.FindAll([Windows.Automation.TreeScope]::Children, $condition)
+            foreach ($item in $matches) { if ($item.Current.Name -like 'INTA Desktop * Storage preview') { return $item } }
+            $matches = $window.FindAll([Windows.Automation.TreeScope]::Descendants, $condition)
+            foreach ($item in $matches) { if ($item.Current.Name -like 'INTA Desktop * Storage preview') { return $item } }
+        } 'The native Storage preview window did not launch.'
+        function Find-StorageControl([string]$Name) {
+            $condition = [Windows.Automation.PropertyCondition]::new([Windows.Automation.AutomationElement]::NameProperty, $Name)
+            $storageWindow.FindFirst([Windows.Automation.TreeScope]::Descendants, $condition)
+        }
+        function Storage-Status([string]$Pattern) {
+            $condition = [Windows.Automation.PropertyCondition]::new(
+                [Windows.Automation.AutomationElement]::ControlTypeProperty, [Windows.Automation.ControlType]::Text)
+            $labels = $storageWindow.FindAll([Windows.Automation.TreeScope]::Descendants, $condition)
+            foreach ($label in $labels) { if ($label.Current.Name -like $Pattern) { return $true } }
+            return $false
+        }
+        $pathInput = Wait-Until { Find-StorageControl 'Local folder path' } 'Missing accessible local-folder input.'
+        $folderPicker = Wait-Until { Find-StorageControl 'Choose local folder' } 'Missing explicit folder picker.'
+        if (-not $folderPicker.Current.IsKeyboardFocusable) { throw 'The folder picker is not keyboard focusable.' }
+        $preview = Wait-Until { Find-StorageControl 'Preview storage' } 'Missing accessible storage scan action.'
+        $totals = Wait-Until { Find-StorageControl 'Storage preview totals' } 'Missing native storage totals grid.'
+        $rows = $totals.GetCurrentPattern([Windows.Automation.GridPattern]::Pattern)
+        if ($rows.Current.RowCount -ne 0) { throw 'Storage must not scan on startup.' }
+        $edit = $pathInput.GetCurrentPattern([Windows.Automation.ValuePattern]::Pattern)
+        $scan = $preview.GetCurrentPattern([Windows.Automation.InvokePattern]::Pattern)
+        $edit.SetValue($fixture)
+        $scan.Invoke()
+        $null = Wait-Until { (Storage-Status 'Preview complete: 2 files, 13 bytes.*') -and $rows.Current.RowCount -eq 8 -and $preview.Current.IsEnabled } 'Storage totals did not match the synthetic fixture.'
+        if ([IO.File]::GetLastWriteTimeUtc($old) -ne $oldTime -or
+            (Compare-Object $bytes @(Get-FileHash -LiteralPath $old, $recent | ForEach-Object Hash))) { throw 'The read-only scan modified the fixture.' }
+        $edit.SetValue([IO.Path]::GetPathRoot($fixture))
+        $scan.Invoke()
+        $null = Wait-Until { (Storage-Status '*not a drive root or link*') -and $rows.Current.RowCount -eq 0 -and $preview.Current.IsEnabled } 'The drive-root request was not rejected before scanning.'
+    } finally {
+        if ($null -ne $storageWindow) { $storageWindow.GetCurrentPattern([Windows.Automation.WindowPattern]::Pattern).Close() }
+        Remove-Item -LiteralPath $fixture -Recurse -Force
+    }
+    'The real Storage preview matched the scoped fixture, left its files unchanged, and refused a whole-drive scan.'
+
 
 }
 finally {
