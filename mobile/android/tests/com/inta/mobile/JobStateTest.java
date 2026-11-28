@@ -88,6 +88,16 @@ public final class JobStateTest {
         catch (IllegalArgumentException expected) { }
         try { InvoiceDraft.prepare(billable, "1e3", "", InvoiceDraft.Profile.BUSINESS); throw new AssertionError("exponent accepted"); }
         catch (IllegalArgumentException expected) { }
-        System.out.println("Offline job, repair draft, invoice calculation and atomic storage acceptance passed.");
+        String[] labels = {"Scope", "Scan", "Diagnose", "Update", "Retest", "Review"};
+        String report = JobHandoff.render(billable, saved, labels);
+        must(report.contains("Recorded time: 01:30:00") && report.contains("[x] Diagnose")
+            && report.contains("[ ] Update") && report.contains("Billable minutes: 5")
+            && report.contains("Draft subtotal: 7.92"), "exact completed record and stored draft in handoff");
+        must(!JobHandoff.render(billable, null, labels).contains("subtotal"), "no inferred billing");
+        try { JobHandoff.render(active, null, labels); throw new AssertionError("unfinished job exported"); }
+        catch (IllegalArgumentException expected) { }
+        try { JobHandoff.render(done, saved, labels); throw new AssertionError("mismatched invoice exported"); }
+        catch (IllegalArgumentException expected) { }
+        System.out.println("Offline job, repair draft, invoice calculation, handoff and atomic storage acceptance passed.");
     }
 }

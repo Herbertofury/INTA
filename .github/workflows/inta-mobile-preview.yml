@@ -62,4 +62,7 @@ jobs:
             mobile-proof/verify-completed.log
             mobile-proof/draft.log
             mobile-proof/draft-verify.log
+            mobile-proof/invoice.log
+            mobile-proof/invoice-verify.log
+            mobile-proof/handoff.log
           if-no-files-found: error
