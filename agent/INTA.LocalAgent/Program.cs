@@ -3,6 +3,12 @@ using System.Security.Cryptography;
 using System.Runtime.InteropServices;
 using INTA.LocalAgent;
 
+if (args.Length > 0 && args[0] == "--storage-allocation-preview")
+{
+    Environment.ExitCode = StoragePreview.Run(args.AsSpan(1), Console.Out, Console.Error, measureAllocation: true);
+    return;
+}
+
 if (args.Length > 0 && args[0] == "--storage-preview")
 {
     Environment.ExitCode = StoragePreview.Run(args.AsSpan(1), Console.Out, Console.Error);
