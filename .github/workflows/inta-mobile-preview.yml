@@ -76,6 +76,7 @@ jobs:
             mobile-proof/invoice.log
             mobile-proof/invoice-verify.log
             mobile-proof/handoff.log
+            mobile-proof/diagnostic-import.log
             mobile-proof/SHA256SUMS
             mobile-proof/disposable-signing-proof.txt
           if-no-files-found: error

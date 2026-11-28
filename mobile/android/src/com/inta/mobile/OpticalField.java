@@ -7,7 +7,10 @@ import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.RadialGradient;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.PowerManager;
@@ -35,6 +38,8 @@ final class OpticalField extends FrameLayout {
     private static native int cell(int col, int row, int cols, int rows, int profile, long newest, long previous);
 
     private final Paint ink = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint blueLight = new Paint();
+    private final Paint violetLight = new Paint();
     private final SharedPreferences settings;
     private final float pitch;
     private int profile;
@@ -115,10 +120,31 @@ final class OpticalField extends FrameLayout {
         return age >= 0 && age < SETTLE_MS ? value | (age << 32) : 0;
     }
 
+    @Override protected void onSizeChanged(int w, int h, int oldWidth, int oldHeight) {
+        super.onSizeChanged(w, h, oldWidth, oldHeight);
+        if (w == 0 || h == 0) return;
+        placeLight(blueLight, 0xff34566f, w*.77f, h*.25f, w*.67f, h*.58f);
+        placeLight(violetLight, 0xff544365, w*.24f, h*.64f, w*.52f, h*.64f);
+    }
+
+    private static void placeLight(Paint paint, int color, float x, float y, float rx, float ry) {
+        RadialGradient gradient = new RadialGradient(0, 0, 1, color, color & 0xffffff, Shader.TileMode.CLAMP);
+        Matrix matrix = new Matrix();
+        matrix.setScale(rx, ry);
+        matrix.postTranslate(x, y);
+        gradient.setLocalMatrix(matrix);
+        paint.setShader(gradient);
+    }
+
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(contrast ? 0xff000000 : 0xff0b1019);
         if (!NATIVE || contrast || profile >= 4 || getWidth() == 0 || getHeight() == 0) return;
+        int light = profile == 0 ? 112 : profile == 1 ? 77 : profile == 2 ? 47 : 24;
+        blueLight.setAlpha(light);
+        violetLight.setAlpha(light);
+        canvas.drawRect(0,0,getWidth(),getHeight(),blueLight);
+        canvas.drawRect(0,0,getWidth(),getHeight(),violetLight);
         long now = SystemClock.uptimeMillis();
         long a = reduced ? 0 : impulse(point, now-time);
         long b = reduced ? 0 : impulse(previous, now-previousTime);
