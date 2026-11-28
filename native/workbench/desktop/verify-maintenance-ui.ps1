@@ -14,13 +14,17 @@ function Wait-Until([scriptblock]$Probe, [string]$Failure) {
     } while ([DateTime]::UtcNow -lt $until)
     throw $Failure
 }
-try {
-    $window = Wait-Until {
+function Get-WorkspaceWindow {
+    $main = Wait-Until {
         $app.Refresh()
-        if ($app.HasExited) { throw 'INTA Desktop exited before opening.' }
+        if ($app.HasExited) { throw "INTA Desktop exited before opening (exit $($app.ExitCode))." }
         if ($app.MainWindowHandle -ne 0) { [Windows.Automation.AutomationElement]::FromHandle($app.MainWindowHandle) }
     } 'The shipping WPF window was not available.'
-    if ($window.Current.Name -ne 'INTA Desktop') { throw 'Unexpected Workbench window.' }
+    if ($main.Current.Name -ne 'INTA Desktop') { throw "Unexpected Workbench window: $($main.Current.Name)" }
+    $main
+}
+try {
+    $window = Get-WorkspaceWindow
     function Find-Name([string]$Name, $Root = $window) {
         $condition = [Windows.Automation.PropertyCondition]::new(
             [Windows.Automation.AutomationElement]::NameProperty, $Name)
@@ -70,12 +74,35 @@ try {
     $null = Wait-Until { Find-Name 'Startup inventory' } 'Clear did not restore Startup Items.'
     Open-Route 'Directory'
     $null = Wait-Until { Find-Name 'Search all tools, playbooks and methods' } 'The Technician Desk search no longer works.'
-    'Shipping WPF route, keyboard-accessible selection, scoped filter and Technician Desk UI checks passed. No maintenance action ran.'
+    # Exercise the saved route on a literal relaunch of the same disposable package;
+    # do not select the route in the reopened process to satisfy its startup proof.
+    Open-Route 'Disk Space Analysis'
+    $null = Wait-Until { Find-Name 'Analyze a local folder' } 'Disk Space Analysis did not render before closing.'
+    if (-not $app.CloseMainWindow() -or -not $app.WaitForExit(6000)) { throw 'The portable fixture did not close cleanly.' }
+    $mark = Join-Path ([IO.Path]::GetDirectoryName($exe)) 'state/maintenance-view.v1'
+    if (-not (Test-Path -LiteralPath $mark -PathType Leaf) -or [IO.File]::ReadAllText($mark) -cne 'disk-space-analysis') {
+        throw 'The portable fixture did not save the selected maintenance route.'
+    }
+    $app.Dispose()
+    $app = $null
+    $app = Start-Process -FilePath $exe -WorkingDirectory ([IO.Path]::GetDirectoryName($exe)) -PassThru
+    $window = Get-WorkspaceWindow
+    $null = Wait-Until {
+        $restoredHeading = $window.FindFirst([Windows.Automation.TreeScope]::Descendants,
+            [Windows.Automation.PropertyCondition]::new([Windows.Automation.AutomationElement]::AutomationIdProperty, 'WorkspaceHeading'))
+        if ($null -ne $restoredHeading -and $restoredHeading.Current.Name -ceq 'Disk Space Analysis') {
+            Find-Name 'Analyze a local folder'
+        }
+    } 'The saved Disk Space Analysis route did not render after reopening the portable fixture.'
+    'Shipping WPF route, keyboard-accessible selection, scoped filter and Technician Desk and portable restoration passed. No maintenance action ran.'
 }
 finally {
-    $app.Refresh()
-    if (-not $app.HasExited) {
-        $null = $app.CloseMainWindow()
-        if (-not $app.WaitForExit(5000)) { Stop-Process -Id $app.Id }
+    if ($null -ne $app) {
+        $app.Refresh()
+        if (-not $app.HasExited) {
+            $null = $app.CloseMainWindow()
+            if (-not $app.WaitForExit(5000)) { Stop-Process -Id $app.Id }
+        }
+        $app.Dispose()
     }
 }

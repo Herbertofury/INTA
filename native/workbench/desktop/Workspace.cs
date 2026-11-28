@@ -94,7 +94,8 @@ namespace Inta.Desktop
             navigation.SelectionChanged += delegate {
                 if (initializing || navigation.SelectedItem == null) return;
                 section = (string)navigation.SelectedItem;
-                if (!restoringMaintenanceSelection) maintenanceSelectionChanged = true;
+                maintenanceSelectionChanged = true;
+                startupRouteChosen = true;
                 pendingRecord = null; pendingToolAction = null;
                 debounce.Stop();
                 RefreshPage();
@@ -103,6 +104,7 @@ namespace Inta.Desktop
             entries.AddHandler(Button.ClickEvent, new RoutedEventHandler(RowActionClick));
             search.TextChanged += delegate {
                 if (initializing) return;
+                startupRouteChosen = true;
                 pendingRecord = null; pendingToolAction = null;
                 if (!IsCatalog) {
                     initializing = true; section = "Directory"; navigation.SelectedItem = section; initializing = false;
@@ -150,12 +152,11 @@ namespace Inta.Desktop
                 {
                     var item = await Task.Run(() => PortableMaintenanceRoute.Read(baseDirectory));
                     if (lifetime.IsCancellationRequested) return;
-                    if (navigation.SelectedItem == null)
-                    {
-                        restoringMaintenanceSelection = true;
-                        navigation.SelectedItem = item.HasValue ? MaintenanceTaxonomy.Get(item.Value).Name : "Directory";
-                        restoringMaintenanceSelection = false;
-                    }
+                    // The grouped collection's currency is not a user action.
+                    // A user navigation or search during the read wins; otherwise
+                    // activate the chosen route even if the row was already selected.
+                    if (!startupRouteChosen)
+                        OpenRecord(item.HasValue ? MaintenanceTaxonomy.Get(item.Value).Name : "Directory", null);
                 }
                 else OpenRecord("Tools", route.Id, route.Operation);
                 await LoadCapabilities();
@@ -413,7 +414,10 @@ namespace Inta.Desktop
         }
         private void OpenRecord(string destination, string id, string operation = null)
         {
-            initializing = true; search.Clear(); navigation.SelectedItem = destination; section = destination; initializing = false;
+            startupRouteChosen = true;
+            initializing = true;
+            try { search.Clear(); navigation.SelectedItem = destination; section = destination; }
+            finally { initializing = false; }
             pendingRecord = id; pendingToolAction = operation; debounce.Stop(); RefreshPage();
         }
         private async void LocatePackage(Entry item)

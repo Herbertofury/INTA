@@ -33,7 +33,7 @@ namespace Inta.Desktop
 
         private TextBox maintenanceSearch;
         private CheckBox maintenanceRecommended;
-        private bool loadingMaintenanceFilter, restoringMaintenanceSelection, maintenanceSelectionChanged;
+        private bool loadingMaintenanceFilter, maintenanceSelectionChanged, startupRouteChosen;
         private string optimizationMode;
         private List<Entry> profileRows;
         private readonly Dictionary<MaintenanceView, Tuple<string, bool>> maintenanceFilters =

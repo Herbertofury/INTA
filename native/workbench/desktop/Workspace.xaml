@@ -92,7 +92,7 @@
       <Button x:Name="Appearance" Content="Appearance Studio" Margin="0,0,0,6"/>
       <Button x:Name="Theme" Content="Use light theme"/>
      </StackPanel>
-     <ListBox x:Name="Navigation" AutomationProperties.Name="Workspace navigation" KeyboardNavigation.DirectionalNavigation="Contained">
+     <ListBox x:Name="Navigation" IsSynchronizedWithCurrentItem="False" AutomationProperties.Name="Workspace navigation" KeyboardNavigation.DirectionalNavigation="Contained">
       <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
        <Setter Property="Padding" Value="8,4"/><Setter Property="AutomationProperties.Name" Value="{Binding}"/>
       </Style></ListBox.ItemContainerStyle>
@@ -144,7 +144,7 @@
   </Grid>
   <Border Grid.Row="1" Background="{DynamicResource Rail}" BorderBrush="{DynamicResource Border}" BorderThickness="0,1,0,0" Padding="15,5">
    <DockPanel><TextBlock Text="Ctrl+K   Search" DockPanel.Dock="Right" FontSize="12" Foreground="{DynamicResource Muted}" Margin="10,0,0,0"/>
-    <TextBlock x:Name="Status" FontSize="12" Foreground="{DynamicResource Muted}" TextTrimming="CharacterEllipsis"/></DockPanel>
+    <TextBlock x:Name="Status" AutomationProperties.AutomationId="WorkspaceStatus" AutomationProperties.Name="{Binding Text, RelativeSource={RelativeSource Self}}" FontSize="12" Foreground="{DynamicResource Muted}" TextTrimming="CharacterEllipsis"/></DockPanel>
   </Border>
  </Grid>
 </Window>
