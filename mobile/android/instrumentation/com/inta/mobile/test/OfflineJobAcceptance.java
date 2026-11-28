@@ -9,6 +9,8 @@ import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -26,11 +28,30 @@ public final class OfflineJobAcceptance extends Instrumentation {
         Bundle result = new Bundle();
         try {
             Activity activity = startActivitySync(new Intent()
-                .setClassName(getTargetContext(), "com.inta.mobile.JobActivity")
+                .setClassName(getTargetContext(), stage.startsWith("draft")
+                    ? "com.inta.mobile.RepairDraftActivity" : "com.inta.mobile.JobActivity")
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             require(getTargetContext().checkSelfPermission("android.permission.INTERNET")
                 == PackageManager.PERMISSION_DENIED, "unexpected network access");
-            if ("start".equals(stage)) {
+            if ("draft".equals(stage)) {
+                find(activity, "Saved on this phone.", false);
+                edit(activity, 3, "Scan the serviced PC");
+                press(activity, "Add to draft");
+                find(activity, "1. Run a malware scan · Scan the serviced PC", false);
+                edit(activity, 1, "Review printer queue");
+                press(activity, "Add to draft");
+                find(activity, "2. Apply a repair · Review printer queue", false);
+                find(activity, "Add to draft", true);
+                runOnMainSync(() -> {
+                    View move = byDescription(activity.getWindow().getDecorView(), "Move step 2 up");
+                    require(move != null && move.isEnabled() && move.performClick(), "cannot move second repair step");
+                });
+                find(activity, "1. Apply a repair · Review printer queue", false);
+            } else if ("draft-verify".equals(stage)) {
+                find(activity, "1. Apply a repair · Review printer queue", false);
+                find(activity, "2. Run a malware scan · Scan the serviced PC", false);
+                find(activity, "Put steps in order before picking and approving a PC. Nothing runs from this draft.", false);
+            } else if ("start".equals(stage)) {
                 find(activity, "Paused on this phone.", false);
                 press(activity, "Start timer");
                 find(activity, "Pause timer", true);
@@ -69,6 +90,42 @@ public final class OfflineJobAcceptance extends Instrumentation {
             result.putString("stream", "\nINTA_ANDROID_ACCEPTANCE_FAILED " + stage + " " + failure + "\n");
             finish(Activity.RESULT_CANCELED, result);
         }
+    }
+
+    private void edit(Activity activity, int type, String name) {
+        find(activity, "Add to draft", true);
+        runOnMainSync(() -> {
+            View root = activity.getWindow().getDecorView();
+            Spinner picker = byType(root, Spinner.class);
+            EditText input = byType(root, EditText.class);
+            require(picker != null && input != null, "draft editor controls missing");
+            picker.setSelection(type);
+            input.setText(name);
+        });
+    }
+
+    private static View byDescription(View view, String value) {
+        if (value.contentEquals(view.getContentDescription() == null ? "" : view.getContentDescription())) return view;
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+            for (int i = 0; i < group.getChildCount(); ++i) {
+                View found = byDescription(group.getChildAt(i), value);
+                if (found != null) return found;
+            }
+        }
+        return null;
+    }
+
+    private static <T extends View> T byType(View view, Class<T> kind) {
+        if (kind.isInstance(view)) return kind.cast(view);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+            for (int i = 0; i < group.getChildCount(); ++i) {
+                T found = byType(group.getChildAt(i), kind);
+                if (found != null) return found;
+            }
+        }
+        return null;
     }
 
     private void press(Activity activity, String label) {
