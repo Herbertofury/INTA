@@ -35,7 +35,7 @@ import java.util.concurrent.Executors;
 
 public final class JobActivity extends Activity {
     private static final int WHITE = 0xfff5f7fa, MUTED = 0xffa8b1c1;
-    private static final int CARD = 0xff15191f, ACCENT = 0xff9af4d8;
+    private static final int CARD = 0xf3151b25, ACCENT = 0xff9af4d8;
     private static final String[] STEPS = {
         "Confirm scope and back up",
         "Scan and remove threats",
@@ -77,7 +77,8 @@ public final class JobActivity extends Activity {
         super.onCreate(saved);
         if (saved != null) pendingHandoff = saved.getString("pending-handoff");
         ScrollView scroll = new ScrollView(this);
-        scroll.setBackgroundColor(Color.BLACK);
+        OpticalField optics = new OpticalField(this);
+        optics.addView(scroll);
         scroll.setFillViewport(true);
         scroll.setOnApplyWindowInsetsListener((view, insets) -> {
             if (Build.VERSION.SDK_INT >= 30) {
@@ -94,6 +95,7 @@ public final class JobActivity extends Activity {
         label(body, "INTA MOBILE  /  OFFLINE PREVIEW", 12, ACCENT, true);
         label(body, "Repair job", 33, WHITE, true);
         label(body, "Track work here while the serviced PC restarts.", 15, MUTED, false);
+        optics.addAppearanceButton(body);
         LinearLayout timerCard = card(body);
         label(timerCard, "RECORDED TIME", 12, MUTED, true);
         clock = label(timerCard, "00:00:00", 38, WHITE, true);
@@ -152,7 +154,7 @@ public final class JobActivity extends Activity {
         handoffStatus = label(handoffCard, "Complete the job to export its recorded time and checklist.", 14, MUTED, false);
         button(body, "Draft a repair plan", () -> startActivity(new Intent(this, RepairDraftActivity.class)));
         label(body, "Job records stay on this phone. An export goes to the location you choose.", 13, MUTED, false);
-        setContentView(scroll);
+        setContentView(optics);
         render();
         DISK.execute(() -> {
             JobStore local = new JobStore(getNoBackupFilesDir().toPath().resolve("offline-job.v2"));
@@ -440,6 +442,7 @@ public final class JobActivity extends Activity {
         LinearLayout view = column();
         GradientDrawable background = new GradientDrawable();
         background.setColor(CARD);
+        background.setStroke(dp(1), 0xff344254);
         background.setCornerRadius(dp(18));
         view.setBackground(background);
         view.setPadding(dp(16), dp(12), dp(16), dp(12));

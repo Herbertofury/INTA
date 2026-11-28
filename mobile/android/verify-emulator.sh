@@ -93,7 +93,7 @@ fi
 "$adb" -s "$serial" install "$scratch/signed/INTA-Mobile-Android.apk"
 "$adb" -s "$serial" install "$scratch/test.apk"
 test_id=com.inta.mobile.test/.OfflineJobAcceptance
-for stage in start resume verify-completed draft draft-verify invoice invoice-verify handoff; do
+for stage in optics start resume verify-completed draft draft-verify invoice invoice-verify handoff; do
   "$adb" -s "$serial" shell am force-stop com.inta.mobile
   if [[ "$stage" == resume ]]; then sleep 2; fi
   timeout 80 "$adb" -s "$serial" shell am instrument -w -e stage "$stage" "$test_id" | tee "$out/$stage.log"

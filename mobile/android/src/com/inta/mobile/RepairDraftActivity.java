@@ -35,7 +35,8 @@ public final class RepairDraftActivity extends Activity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ScrollView scroll = new ScrollView(this);
-        scroll.setBackgroundColor(Color.BLACK);
+        OpticalField optics = new OpticalField(this);
+        optics.addView(scroll);
         scroll.setFillViewport(true);
         scroll.setOnApplyWindowInsetsListener((view, insets) -> {
             if (Build.VERSION.SDK_INT >= 30) {
@@ -51,6 +52,7 @@ public final class RepairDraftActivity extends Activity {
         text(body, "INTA MOBILE  /  LOCAL DRAFT", 12, ACCENT, true);
         text(body, "Repair plan", 32, WHITE, true);
         text(body, "Put steps in order before picking and approving a PC. Nothing runs from this draft.", 15, DIM, false);
+        optics.addAppearanceButton(body);
         kind = new Spinner(this);
         ArrayAdapter<RepairDraft.Kind> picker = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, RepairDraft.Kind.values());
         picker.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -70,7 +72,7 @@ public final class RepairDraftActivity extends Activity {
         status = text(body, "Opening saved draft…", 14, DIM, false);
         rows = column();
         body.addView(rows);
-        setContentView(scroll);
+        setContentView(optics);
         add.setEnabled(false);
         DISK.execute(() -> {
             Path local = getNoBackupFilesDir().toPath().resolve("repair-plan-draft.v1");

@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - mobile/android/**
+      - native/optics/**
       - .github/workflows/inta-mobile-preview.yml
   workflow_dispatch:
 
@@ -24,6 +25,7 @@ jobs:
           set -euo pipefail
           export JAVA_HOME="$JAVA_HOME_21_X64" PATH="$JAVA_HOME_21_X64/bin:$PATH"
           java -version
+          rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
           mkdir -p "$RUNNER_TEMP/inta-avd" "$RUNNER_TEMP/inta-android-user"
           export ANDROID_AVD_HOME="$RUNNER_TEMP/inta-avd"
           export ANDROID_USER_HOME="$RUNNER_TEMP/inta-android-user"
@@ -65,6 +67,7 @@ jobs:
             mobile-proof/inta-mobile-unsigned.apk
             mobile-proof/inta-job-completed.png
             mobile-proof/build.log
+            mobile-proof/optics.log
             mobile-proof/start.log
             mobile-proof/resume.log
             mobile-proof/verify-completed.log

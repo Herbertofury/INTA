@@ -43,7 +43,32 @@ public final class OfflineJobAcceptance extends Instrumentation {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             require(getTargetContext().checkSelfPermission("android.permission.INTERNET")
                 == PackageManager.PERMISSION_DENIED, "unexpected network access");
-            if ("draft".equals(stage)) {
+            if ("optics".equals(stage)) {
+                var field = getTargetContext().getClassLoader().loadClass("com.inta.mobile.OpticalField");
+                var nativeLoaded = field.getDeclaredField("NATIVE");
+                nativeLoaded.setAccessible(true);
+                require(nativeLoaded.getBoolean(null), "Android failed to load the packaged Rust field");
+                var renderer = field.getDeclaredMethod("cell", int.class, int.class, int.class,
+                        int.class, int.class, long.class, long.class);
+                renderer.setAccessible(true);
+                int active = 0;
+                long event = 32768L | (32768L << 16) | (250L << 32) | (255L << 48);
+                for (int y = 0; y < 12; y++) for (int x = 0; x < 24; x++) {
+                    int idle = (Integer)renderer.invoke(null, x, y, 24, 12, 0, 0L, 0L);
+                    int moving = (Integer)renderer.invoke(null, x, y, 24, 12, 0, event, 0L);
+                    if (idle != moving) active++;
+                }
+                require(active > 8, "native interaction did not change the Android glyph field");
+                press(activity, "Appearance");
+                clickDialog("Classic", "android:id/text1");
+                waitForIdleSync();
+                var prefs = getTargetContext().getSharedPreferences("optics-v1", 0);
+                require(prefs.getInt("profile", -1) == 4, "Classic appearance was not saved");
+                press(activity, "Appearance");
+                clickDialog("Full Prism", "android:id/text1");
+                waitForIdleSync();
+                require(prefs.getInt("profile", -1) == 0, "Full Prism was not restored");
+            } else if ("draft".equals(stage)) {
                 find(activity, "Saved on this phone.", false);
                 edit(activity, 3, "Scan the serviced PC");
                 press(activity, "Add to draft");

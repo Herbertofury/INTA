@@ -14,15 +14,22 @@ requested. The job record is private application data, not a portable folder
 or a cross-device backup. Uninstalling the preview removes the local record.
 This first current-job view does not yet create, index, or reopen past jobs.
 
-Build in the cloud or on a Linux builder with JDK 21, `zip`, Android API 36,
-and Android Build Tools 36.0.0 from the official Android SDK:
+Build on Linux with JDK 21, `zip`, a current stable Rust toolchain, Android API 36,
+and Android Build Tools 36.0.0. Install the four Rust Android targets once per toolchain.
 
 ```sh
+rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
 bash mobile/android/build-preview.sh \
   "$ANDROID_HOME/platforms/android-36/android.jar" \
   "$ANDROID_HOME/build-tools/36.0.0" \
   path-to-new-candidate
 ```
+
+Both screens offer five local **Appearance** profiles. The default Full Prism
+matrix responds to touch and stops drawing when the ripple settles. Deep Focus
+and Silent Eco are static. Classic uses a solid background. System high contrast,
+reduced animations and battery saver take precedence. The native Android controls
+remain available if the optical library cannot load.
 
 The script runs deterministic state and persistence tests and produces an
 **unsigned** APK. Use an isolated test key for emulator testing; don't publish
