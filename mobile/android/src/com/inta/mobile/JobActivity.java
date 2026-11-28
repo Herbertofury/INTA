@@ -46,16 +46,19 @@ public final class JobActivity extends Activity {
     };
     private static final Executor DISK = Executors.newSingleThreadExecutor();
     private static final int CREATE_HANDOFF = 31;
+    private static final int SELECT_JOB = 32;
     private final Handler ui = new Handler(Looper.getMainLooper());
     private final CheckBox[] checks = new CheckBox[STEPS.length];
-    private TextView clock, detail, progress;
+    private TextView clock, detail, progress, jobTitle;
+    private Button selectJob;
+    private JobBook book;
     private Button timer, complete;
     private LinearLayout billing;
     private EditText rate, billableMinutes;
     private CheckBox business;
     private TextView billingStatus;
     private Button saveInvoice;
-    private boolean billingLoaded, billingPending, billingDamaged;
+    private boolean billingLoaded, billingPending, billingDamaged, invoiceEdited;
     private Button handoff;
     private TextView handoffStatus;
     private InvoiceDraft savedInvoice;
@@ -93,9 +96,10 @@ public final class JobActivity extends Activity {
         body.setPadding(dp(20), dp(19), dp(20), dp(24));
         scroll.addView(body);
         label(body, "INTA MOBILE  /  OFFLINE PREVIEW", 12, ACCENT, true);
-        label(body, "Repair job", 33, WHITE, true);
+        jobTitle = label(body, "Repair job", 33, WHITE, true);
         label(body, "Track work here while the serviced PC restarts.", 15, MUTED, false);
         optics.addAppearanceButton(body);
+        selectJob = button(body, "Switch or create job", this::openJobs);
         LinearLayout timerCard = card(body);
         label(timerCard, "RECORDED TIME", 12, MUTED, true);
         clock = label(timerCard, "00:00:00", 38, WHITE, true);
@@ -158,10 +162,13 @@ public final class JobActivity extends Activity {
         setContentView(optics);
         render();
         DISK.execute(() -> {
-            JobStore local = new JobStore(getNoBackupFilesDir().toPath().resolve("offline-job.v2"));
+            JobBook opened;
+            JobStore local;
             JobTimer loaded;
             int phoneBoot;
             try {
+                opened = JobBook.read(getNoBackupFilesDir().toPath());
+                local = new JobStore(opened.directory().resolve("offline-job.v2"));
                 phoneBoot = Settings.Global.getInt(getContentResolver(), Settings.Global.BOOT_COUNT, -1);
                 loaded = local.read();
             } catch (IllegalArgumentException | IOException malformed) {
@@ -174,6 +181,8 @@ public final class JobActivity extends Activity {
             boolean ok = reconciled == before || write(local, reconciled);
             ui.post(() -> {
                 if (isDestroyed()) return;
+                book = opened;
+                jobTitle.setText(book.jobs.get(book.current));
                 store = local;
                 boot = currentBoot;
                 state = ok ? reconciled : null;
@@ -181,6 +190,17 @@ public final class JobActivity extends Activity {
                 render();
             });
         });
+    }
+
+    @SuppressWarnings("deprecation")
+    private void openJobs() {
+        if ((book == null && !failed) || pending || billingPending || writingHandoff || pendingHandoff != null) return;
+        Runnable open = () -> startActivityForResult(new Intent(this, JobsActivity.class), SELECT_JOB);
+        if (invoiceEdited) {
+            new AlertDialog.Builder(this).setTitle("Switch with unsaved invoice edits?")
+                .setMessage("Only the last saved invoice draft will be available when you return.")
+                .setNegativeButton("Stay", null).setPositiveButton("Open jobs", (dialog, which) -> open.run()).show();
+        } else open.run();
     }
 
     @Override protected void onStart() { super.onStart(); visible = true; render(); }
@@ -193,7 +213,8 @@ public final class JobActivity extends Activity {
     @SuppressWarnings("deprecation")
     private void reviewHandoff() {
         if (state == null || !billingLoaded || billingPending || writingHandoff || pendingHandoff != null) return;
-        String report = JobHandoff.render(state, savedInvoice, STEPS);
+        String prefix = JobBook.ORIGINAL.equals(book.current) ? "" : "Job: " + book.jobs.get(book.current) + "\n\n";
+        String report = prefix + JobHandoff.render(state, savedInvoice, STEPS);
         new AlertDialog.Builder(this).setTitle("Review service handoff").setMessage(report)
                 .setNegativeButton("Cancel", null).setPositiveButton("Choose save location", (dialog, which) -> {
                     pendingHandoff = report;
@@ -213,6 +234,10 @@ public final class JobActivity extends Activity {
     @Override @SuppressWarnings("deprecation")
     protected void onActivityResult(int request, int result, Intent data) {
         super.onActivityResult(request, result, data);
+        if (request == SELECT_JOB) {
+            if (result == RESULT_OK) recreate();
+            return;
+        }
         if (request != CREATE_HANDOFF) return;
         String report = pendingHandoff;
         pendingHandoff = null;
@@ -246,6 +271,7 @@ public final class JobActivity extends Activity {
     }
 
     private void updateHandoff() {
+        selectJob.setEnabled((book != null || failed) && !pending && !billingPending && !writingHandoff && pendingHandoff == null);
         handoff.setEnabled(state != null && state.phase == JobTimer.Phase.COMPLETE && billingLoaded
                 && !billingPending && !writingHandoff && pendingHandoff == null);
     }
@@ -338,7 +364,7 @@ public final class JobActivity extends Activity {
     }
 
     private java.nio.file.Path invoiceFile() {
-        return getNoBackupFilesDir().toPath().resolve("offline-invoice-draft.v1");
+        return book.directory().resolve("offline-invoice-draft.v1");
     }
 
     private void billingEnabled(boolean enabled) {
@@ -383,6 +409,7 @@ public final class JobActivity extends Activity {
     }
 
     private void refreshBilling() {
+        if (billingLoaded && !billingPending && !billingDamaged) invoiceEdited = true;
         if (billingPending || billingDamaged || !billingLoaded || state == null) return;
         try {
             billingStatus.setText("Unsaved preview · Draft subtotal US$" + billingDraftFromFields().subtotalDollars());
@@ -424,6 +451,7 @@ public final class JobActivity extends Activity {
     }
 
     private void showSavedBilling(InvoiceDraft draft) {
+        invoiceEdited = false;
         billingStatus.setText("Saved on this phone · Draft subtotal US$" + draft.subtotalDollars()
                 + (draft.minutes < 0 ? " · Recorded time" : " · " + draft.minutes + " billable min"));
     }

@@ -99,6 +99,7 @@ jobs:
             mobile-proof/invoice-verify.log
             mobile-proof/handoff.log
             mobile-proof/diagnostic-import.log
+            mobile-proof/jobs-*.log
             mobile-proof/SHA256SUMS
             mobile-proof/disposable-signing-proof.txt
             mobile-proof/owner-install.txt
