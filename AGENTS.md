@@ -63,3 +63,15 @@ Maintain an actionable [research queue](data/research-queue.json) for every serv
 ## External permissions and approval prompts
 
 Whenever a user message mentions **<a href="https://github.com/" title="Open GitHub official download or service page" aria-label="Open GitHub official download or service page" data-inta-brand="app-github"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/99f4edb33272b70febb8.png" alt="GitHub official page" width="18" height="18" valign="middle" /></a> [GitHub](https://github.com/)**, **Drive**, or **<a href="https://drive.google.com/" title="Open Google Drive official download or service page" aria-label="Open Google Drive official download or service page" data-inta-brand="app-google-drive"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4a3cfc17be3f4e8ad2c8.png" alt="Google Drive official page" width="18" height="18" valign="middle" /></a> [Google Drive](https://drive.google.com/)** in the context of a task, automatically invoke the [Permission Command Center skill](.agents/skills/permission-command-center/SKILL.md) before lengthy work; also invoke it for explicit `/permissions` or `/access` requests. Classify incidental mentions without launching unnecessary audits. Before lengthy work that requires another connected service, follow the same skill. Preflight only the providers the task needs, use the first legitimate task operation to surface approval prompts early, and resume from the existing checkpoint after the user approves. Never claim the skill can click consent controls, bypass provider scopes, or make conversation-scoped approvals persist across chats. Do not create dummy writes merely to trigger prompts unless the user explicitly requests a permission test; use a designated scratch target and clean up only when deletion is supported.
+
+## CLI-first technician control
+
+Every tool INTA recommends, ships, installs, launches or queues requires a
+[verified CLI-Anything-compatible control surface](docs/cli-control-standard.md).
+Use the tool's documented native CLI or API before building a reviewed harness
+against the real backend. Cover and test every operation INTA offers by
+platform and edition. Do not infer operation readiness from a download,
+website, silent installer, process launch or harness name. Preserve existing
+reference links, but label unqualified tools and hide their automated
+actions until their required operations pass. Desktop, Mobile and agents
+share the same capability list; no generated command text runs remotely.

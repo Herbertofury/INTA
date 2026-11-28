@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "tools": {
+    "powercfg": {
+      "scope": "partial",
+      "requiredOperations": ["power-plans", "battery-report", "sleep-states", "wake-source", "power-requests"],
+      "operations": {
+        "power-plans": {
+          "state": "candidate",
+          "backend": "official-api",
+          "effect": "read-only",
+          "platform": "windows",
+          "source": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+          "note": "INTA's native one-shot inventory is implemented. The new harness is not yet accepted inside Windows."
+        }
+      }
+    }
+  }
+}
