@@ -98,7 +98,25 @@ def main():
         page.on('pageerror', lambda error: errors.append(str(error)))
         page.on('request', lambda request: requests.append(request.url)
                 if request.url.startswith(('https://', 'http://')) else None)
+        page.goto(args.html.resolve().as_uri() + '#home')
+        home_mark = page.locator('#app .home-heritage-mark')
+        nav_mark = page.locator('.brand > .brand-mark')
+        home_mark.wait_for()
+        check(home_mark.get_attribute('src') != nav_mark.get_attribute('src'),
+              'Front-page Heritage and navigation Application must be different')
+        check(page.locator('[data-brand-icon="app-inta"]').count() > 0, 'Missing INTA inline logo')
+        check(page.locator('[data-brand-icon="app-inta"]').evaluate_all(
+            '(icons) => icons.every(i => getComputedStyle(i).backgroundColor === "rgba(0, 0, 0, 0)")'),
+            'INTA inline logo has a visible backing')
+        for width in (320, 1440):
+            page.set_viewport_size({'width': width, 'height': 1000})
+            check(home_mark.is_visible(), 'Front-page Heritage not visible')
+            check(page.evaluate('document.documentElement.scrollWidth <= innerWidth'),
+                  'Brand layout overflows viewport')
+        report['checks'].append('Application chrome, transparent inline marks and front-page-only Heritage')
+
         page.goto(args.html.resolve().as_uri() + '#tools?cli=partial')
+        check(home_mark.count() == 0, 'Heritage leaked into tool workspace')
         cli_ids = page.evaluate("Object.entries(window.INTA_DATA.toolCliCoverage).filter(([,x])=>x.status==='partial').map(([id])=>id)")
         page.locator('#tool-results [data-tool-id=powercfg]').wait_for()
         check(set(page.locator('#tool-results [data-tool-id]').evaluate_all(

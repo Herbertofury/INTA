@@ -1477,13 +1477,14 @@ def build_outputs() -> dict[str, str]:
         "{{DATA}}": "window.INTA_DATA = " + safe_json + ";",
         "{{APP}}": (ROOT / "portal/app.js").read_text(encoding="utf-8"),
         "{{FAVICON}}": "data:image/x-icon;base64," + base64.b64encode((ROOT / "native/workbench/desktop/inta.ico").read_bytes()).decode("ascii"),
+        "{{APPLICATION_MARK}}": "data:image/png;base64," + base64.b64encode((ROOT / "assets/inta-brand/application-64.png").read_bytes()).decode("ascii"),
         "{{HERITAGE}}": "data:image/png;base64," + base64.b64encode((ROOT / "assets/inta-brand/heritage-192.png").read_bytes()).decode("ascii"),
     }
     for marker, value in replacements.items():
         if marker not in template:
             raise ValueError(f"Template missing {marker}")
         template = template.replace(marker, value)
-    if re.search(r"\{\{(?:STYLES|DATA|APP|FAVICON|HERITAGE)\}\}", template):
+    if re.search(r"\{\{(?:STYLES|DATA|APP|FAVICON|APPLICATION_MARK|HERITAGE)\}\}", template):
         raise ValueError("Unresolved template marker")
     by_id, jobs_by_id = {x["id"]: x for x in tools}, {x["id"]: x for x in jobs}
     access = tool_access["tools"]
