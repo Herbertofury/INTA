@@ -70,6 +70,9 @@ jobs:
           $facts | ConvertTo-Json -Compress
       - uses: actions/upload-artifact@v4
         with:
-          name: inta-power-plans-cli-proof
-          path: cli-harness-proof.json
+          name: inta-power-plans-cli-test-preview
+          retention-days: 7
+          path: |
+            cli-harness-proof.json
+            cli-native/inta-agent.exe
           if-no-files-found: error
