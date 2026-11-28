@@ -310,6 +310,59 @@ def rclone_local_sha256(binary_path, expected_pin, file_path, expected_digest=No
             "matchesExpected": None if expected_digest is None else expected_digest == digest}
 
 
+def windows_system_directory():
+    from ctypes import WinDLL, c_uint, c_wchar_p, create_unicode_buffer
+    result = create_unicode_buffer(32768)
+    locate = WinDLL("kernel32", use_last_error=True).GetSystemDirectoryW
+    locate.argtypes = [c_wchar_p, c_uint]
+    locate.restype = c_uint
+    size = locate(result, len(result))
+    if not 1 <= size < len(result):
+        raise ValueError("system tool location unavailable")
+    return pathlib.Path(result.value)
+
+
+def windows_compare_directory(path):
+    from ctypes import WinDLL, c_uint, c_wchar_p
+    if (not path.is_absolute() or not re.fullmatch(r"[A-Za-z]:", path.drive)
+            or not path.name or path.is_reserved()
+            or any(p.endswith((".", " ")) or any(ch in p for ch in ':*?"<>|') for p in path.parts[1:])):
+        raise ValueError("choose an existing ordinary drive-local folder, not a drive root")
+    drive_type = WinDLL("kernel32", use_last_error=True).GetDriveTypeW
+    drive_type.argtypes = [c_wchar_p]
+    drive_type.restype = c_uint
+    if drive_type(path.anchor) != 3:
+        raise ValueError("comparison supports fixed local drives only")
+    # Evaluate every ancestor without following an NTFS junction or mount point.
+    for part in [*reversed(path.parents), path]:
+        info = part.lstat()
+        if not stat.S_ISDIR(info.st_mode) or info.st_file_attributes & stat.FILE_ATTRIBUTE_REPARSE_POINT:
+            raise ValueError("reparse points or non-directories are not accepted")
+    return path
+
+
+def robocopy_metadata_preview(source, destination, expected_sha):
+    if os.name != "nt":
+        return {"status": "unsupported", "writesRequested": False, "recursive": False}
+    source, destination = (windows_compare_directory(p) for p in (source, destination))
+    if source == destination or source in destination.parents or destination in source.parents:
+        raise ValueError("choose separate existing folders")
+    binary = executable(windows_system_directory() / "robocopy.exe", expected_sha, frozenset({"robocopy.exe"}))
+    # /L asks the installed tool to list only. No copy, mirror, exclude-lists
+    # supplied by users, inherited jobs, recursive scope or output files.
+    run = subprocess.run([str(binary), str(source), str(destination), "*",
+                          "/L", "/XJ", "/R:0", "/W:0", "/NP", "/NJH", "/NJS", "/NFL", "/NDL"],
+                         stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                         shell=False, timeout=15)
+    code = run.returncode
+    if not 0 <= code <= 7:
+        return {"status": "unavailable", "writesRequested": False, "recursive": False}
+    return {"status": "ready", "writesRequested": False, "recursive": False,
+            "exitCode": code, "copyWouldBeConsidered": bool(code & 1),
+            "extrasReported": bool(code & 2), "mismatchReported": bool(code & 4),
+            "contentCompared": False}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help="output a machine-readable JSON result (also the default)")
@@ -331,9 +384,15 @@ def main(argv=None):
     rclone.add_argument("--rclone-sha256", required=True)
     rclone.add_argument("--file", type=pathlib.Path, required=True)
     rclone.add_argument("--expect-sha256")
+    robocopy = sub.add_parser("robocopy-preview", help="read only: compare immediate folder entries with the pinned Windows tool")
+    robocopy.add_argument("--source", type=pathlib.Path, required=True)
+    robocopy.add_argument("--destination", type=pathlib.Path, required=True)
+    robocopy.add_argument("--robocopy-sha256", required=True)
     args = parser.parse_args(argv)
     try:
-        if args.operation == "rclone-sha256":
+        if args.operation == "robocopy-preview":
+            result = robocopy_metadata_preview(args.source, args.destination, args.robocopy_sha256)
+        elif args.operation == "rclone-sha256":
             result = rclone_local_sha256(args.rclone_binary, args.rclone_sha256, args.file, args.expect_sha256)
         elif args.operation == "storage-preview":
             result = storage_preview(args.agent_binary, args.agent_sha256, args.folder,
