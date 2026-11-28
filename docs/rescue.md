@@ -48,3 +48,18 @@ python3 scripts/smoke-rescue-optics.py dist/inta-rescue-amd64.iso "$ISO_SHA256" 
 ```
 
 The build targets BIOS and UEFI. Secure Boot and physical USB boot require separate hardware validation. The test service activates only on a QEMU guest explicitly marked by the smoke-test script.
+
+### Verifying that boot evidence is fresh
+
+A passing Rescue boot requires a newly written serial log with exactly one
+ordered start/pass attempt and a clean QEMU exit. The host rejects missing or
+empty ISO input and clears previously recorded evidence before starting the
+guest. Production ISO qualification still boots both BIOS and UEFI at the
+existing build gate.
+
+Run `python3 -m unittest discover -s tests -p test_rescue_smoke_runner.py` to
+exercise the actual host script against synthetic QEMU outcomes independently
+of a full image build. This is a regression test of the host gate, not proof
+that an ISO booted. The test-first approach is informed by the pinned
+[ECC eval harness](https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/skills/eval-harness/SKILL.md).
+ECC is not installed or bundled in the image.
