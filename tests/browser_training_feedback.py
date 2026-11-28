@@ -8,8 +8,10 @@ PROBE = """() => {
   const Native = window.AudioContext || window.webkitAudioContext;
   window.__toneContexts = 0;
   window.__toneAnalyser = null;
+  window.__oscillators = 0;
   class Monitored extends Native {
     constructor() { super(); window.__toneContexts++; }
+    createOscillator() { window.__oscillators++; return super.createOscillator(); }
     createGain() {
       const node = super.createGain();
       if (!window.__toneAnalyser) {
@@ -68,6 +70,7 @@ def check(browser, html):
     step.press('Space')
     page.wait_for_function('window.__toneContexts === 1')
     assert step.is_checked()
+    page.wait_for_function('window.__oscillators === 2')
     page.goto(html.as_uri()+'#packet-duel')
     page.get_by_role('heading', name='Packet Duel').wait_for()
     page.goto(html.as_uri()+'#defense-circuit')
@@ -75,7 +78,14 @@ def check(browser, html):
     assert page.evaluate('window.__toneContexts') == 1
     assert not errors, errors
     assert not remote, remote
-    assert peak(page) < .01
+    # A time-domain window can still contain the tail immediately after
+    # oscillator stop. Verify no new voice and wait for that window to drain.
+    assert page.evaluate('window.__oscillators') == 2
+    page.wait_for_function('''() => {
+      window.__toneAnalyser.getFloatTimeDomainData(window.__toneData);
+      return Math.max(...window.__toneData.map(Math.abs)) < .0001;
+    }''', timeout=2500)
+    assert peak(page) < .0001
     context.close()
 
 
