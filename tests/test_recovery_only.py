@@ -13,6 +13,24 @@ VOLUMES=runpy.run_path(str(ROOT/"scripts/recovery-source-volumes.py"))
 
 
 class RecoveryOnly(unittest.TestCase):
+    def test_secure_firmware_receipt_requires_matching_image_and_guest_output(self):
+        attest = runpy.run_path(str(ROOT/"scripts/package-recovery.py"))["additional_boot_receipts"]
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            sha = "a" * 64
+            receipt = {"isoSHA256":sha,"networkDevices":0,"bytes":100,"pflashSecure":True,
+                       "SMM":True,"writableDataDisks":0,"firmwareCodeSHA256":"b"*64,
+                       "initialMSVarsSHA256":"c"*64,"firmware":"SecureBootEnable ON, verified before and after boot"}
+            (root/"evidence.json").write_text(json.dumps(receipt))
+            log = root/"secure-serial.log"
+            log.write_bytes(b"INTA_RECOVERY_ONLY_RUNTIME_OK\nINTA_SMOKE_PASS\n")
+            self.assertIn("enrolledSecureBoot",attest(root,None,sha,100))
+            with self.assertRaises(ValueError):
+                attest(root,None,"d"*64,100)
+            log.write_bytes(b"INTA_SMOKE_PASS\n")
+            with self.assertRaises(ValueError):
+                attest(root,None,sha,100)
+
     def test_edition_uses_reviewed_files_and_distinct_launcher(self):
         product=runpy.run_path(str(ROOT/"recovery/inta-rescue"))
         controls=[row for actions in product["SECTIONS"].values() for row in actions]
