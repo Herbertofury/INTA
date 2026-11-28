@@ -28,6 +28,26 @@ class NativeHarness(unittest.TestCase):
             self.assertEqual(harness.inventory(self.binary, self.pin)["plans"][0]["name"], "Balanced")
         run.assert_called_once_with([str(self.binary), "--power-plans"], capture_output=True, check=True, shell=False, timeout=12)
 
+    def test_sleep_state_snapshot_is_a_fixed_one_shot_with_strict_boolean_flags(self):
+        report = dict(schema=1, status="ready", readOnly=True, source="system-power-capabilities-prefix",
+                      states=dict(standbyS1=False, standbyS2=False, standbyS3=True, hibernateS4=True,
+                                  hibernationFilePresent=False))
+        def result():
+            return subprocess.CompletedProcess([], 0, json.dumps(report).encode(), b"")
+        with patch.object(harness.subprocess, "run", return_value=result()) as run:
+            self.assertEqual(harness.sleep_states(self.binary, self.pin), report)
+        run.assert_called_once_with([str(self.binary), "--sleep-states"], capture_output=True, check=True,
+                                    shell=False, timeout=12, stdin=subprocess.DEVNULL)
+        report["states"]["standbyS3"] = 1
+        with patch.object(harness.subprocess, "run", return_value=result()), self.assertRaises(ValueError):
+            harness.sleep_states(self.binary, self.pin)
+        report.update(status="unavailable", states=None)
+        with patch.object(harness.subprocess, "run", return_value=result()):
+            self.assertEqual(harness.sleep_states(self.binary, self.pin)["status"], "unavailable")
+        report["states"] = {"extra": "must-not-be-reported"}
+        with patch.object(harness.subprocess, "run", return_value=result()), self.assertRaises(ValueError):
+            harness.sleep_states(self.binary, self.pin)
+
     def test_startup_validates_source_coverage_and_never_invokes_shell(self):
         def source(scope, view, key, names=()):
             return dict(scope=scope, view=view, key=key, status="read", entryNames=list(names), truncated=False)
