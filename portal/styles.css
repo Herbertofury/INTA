@@ -1724,3 +1724,14 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 .training-audio input[type=range] { width:90px; accent-color:var(--accent); }
 .training-audio button { padding:5px 8px; border:1px solid var(--line); border-radius:5px; background:var(--selected); }
 @media print { .training-audio { display:none !important; } }
+
+.product-downloads { margin-bottom: 26px; }
+.product-release-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 10px; }
+.product-release { min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 14px; border: 1px solid var(--line); border-radius: 8px; }
+.product-release header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; }
+.product-release h3 { font-size: 17px; }
+.product-release-platform, .product-release-proof { color: var(--muted); font-size: .875rem; }
+.product-release-actions, .product-release-history { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.product-release-actions { margin-top: auto; padding-top: 5px; }
+.product-release-actions .button { min-height: 44px; white-space: normal; }
+.product-release-history { margin-top: 12px; }

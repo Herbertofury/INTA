@@ -10,6 +10,7 @@
 
 | Canonical source | Owns |
 | --- | --- |
+| [Product releases](https://github.com/Herbertofury/INTA/blob/main/data/product-releases.json) | Current Desktop, Mobile and Rescue tags, named files, channels and published evidence. Change this record rather than editing generated links. |
 | [Tool catalog](https://github.com/Herbertofury/INTA/blob/main/data/tools.json) | Names, official URLs, platforms, selection tier, source and review date |
 | [Job guides](https://github.com/Herbertofury/INTA/blob/main/data/jobs.json) | Workflows, recommended tools, actions, verification, escalation and sources |
 | [Job workspaces](https://github.com/Herbertofury/INTA/blob/main/data/job-workspaces.json) | Purpose-specific toolkits, official action resources, symptom decisions and completion evidence |
@@ -35,6 +36,8 @@ Generated `site/`, `wiki/` and `docs/runbooks/` are reproducible outputs. Preser
 4. Compare the result, compatibility, startup behavior and relevant resource cost with the current kit. Apply [stable-release promotion](https://github.com/Herbertofury/INTA/wiki/Job-preventive-maintenance) only when the applicable evidence supports it.
 5. Update guidance and `reviewedAt` after real editorial review. Keep release date, retrieval date and runtime-test date distinct.
 6. Rebuild, test and publish. Retain a usable previous installer, image or source when needed for recovery.
+
+The three product channels are independent. Verify each exact release tag, published asset and checksum before changing [the download record](https://github.com/Herbertofury/INTA/blob/main/data/product-releases.json); never substitute the repository-wide latest redirect. Check the generated landing pages and the [Hub Resources view](https://herbertofury.github.io/INTA/#resources) after publishing.
 
 ## 🔎 Run a freshness check on demand
 

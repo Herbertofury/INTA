@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "products": [
+    {
+      "id": "desktop",
+      "name": "INTA Desktop",
+      "platform": "Windows x64",
+      "version": "0.2 preview 1",
+      "channel": "preview",
+      "tag": "desktop-0.2-preview.1",
+      "summary": "Install the technician workspace or extract the portable app. The MSI uses the self-signed INTA Desktop Preview certificate, so Windows can show an unknown-publisher warning.",
+      "tested": "The release reports installed and portable manifest verification and installed Windows UI checks.",
+      "downloads": [
+        {"label": "Windows installer (.msi)", "file": "INTA-Desktop-x64.msi"},
+        {"label": "Portable app (.zip)", "file": "INTA-Desktop-portable-x64.zip"}
+      ],
+      "checksums": "SHA256SUMS"
+    },
+    {
+      "id": "mobile",
+      "name": "INTA Mobile",
+      "platform": "Android 8+",
+      "version": "0.2 preview 3",
+      "channel": "preview",
+      "tag": "mobile-0.2-preview.3",
+      "summary": "Offline repair drafts, work orders, timers, invoices and encrypted diagnostics import. This APK does not control Desktop or Rescue live.",
+      "tested": "The release reports Android 16 emulator acceptance and APK v2/v3 signature verification; physical phone acceptance is not established here.",
+      "downloads": [
+        {"label": "Signed Android app (.apk)", "file": "INTA-Mobile-Android.apk"}
+      ],
+      "checksums": "SHA256SUMS",
+      "evidence": {"label": "APK verification", "file": "verification.txt"}
+    },
+    {
+      "id": "rescue",
+      "name": "INTA Rescue Recovery",
+      "platform": "x64 boot media",
+      "version": "2026-11-28.2",
+      "channel": "stable",
+      "tag": "rescue-recovery-20261128.2",
+      "summary": "Recovery only: runs offline for disk inspection, imaging and file recovery. No antivirus scanner or live Mobile control.",
+      "requirements": "Media Creator runs on Windows or Linux with Python 3.11+ and Tk.",
+      "tested": "The release reports BIOS, UEFI, OVMF Secure Boot with enrolled keys and Ventoy VM boots, and offline recovery with the synthetic source unchanged. Physical systems and USB controllers remain untested.",
+      "downloads": [
+        {"label": "Recovery ISO (.iso)", "file": "inta-rescue-recovery-amd64.iso"},
+        {"label": "Media Creator (.pyz)", "file": "INTA-Media-Creator.pyz"}
+      ],
+      "checksums": "SHA256SUMS",
+      "evidence": {"label": "ISO verification", "file": "verification.json"}
+    }
+  ]
+}

@@ -21,6 +21,8 @@ WIKI = REPO + "/wiki"
 HUB = "https://herbertofury.github.io/INTA/"
 QUICK_START_START = "<!-- INTA:QUICK-START:START -->"
 QUICK_START_END = "<!-- INTA:QUICK-START:END -->"
+PRODUCT_RELEASES_START = "<!-- INTA:PRODUCT-RELEASES:START -->"
+PRODUCT_RELEASES_END = "<!-- INTA:PRODUCT-RELEASES:END -->"
 WIKI_MIRRORS = {
     "Start-Here": "start-here.md", "Maintaining-the-Hub": "maintaining-the-hub.md",
     "Rescue-Media": "rescue-media.md", "Technician-Handoff": "technician-handoff.md",
@@ -656,15 +658,75 @@ def quick_answer_markdown(item: dict, tools_by_id: dict, access: dict, reviewed:
     return "\n".join(lines)
 
 
-def replace_quick_start_block(content: str, block: str, source_name: str) -> str:
+def replace_managed_block(content: str, block: str, source_name: str, opening: str, closing: str) -> str:
     """Replace only the managed region, preserving every surrounding byte."""
-    if content.count(QUICK_START_START) != 1 or content.count(QUICK_START_END) != 1:
-        raise ValueError(f"{source_name}: exactly one quick-start marker pair is required")
-    start = content.index(QUICK_START_START) + len(QUICK_START_START)
-    end = content.index(QUICK_START_END)
+    if content.count(opening) != 1 or content.count(closing) != 1:
+        raise ValueError(f"{source_name}: exactly one {opening} and {closing} required")
+    start = content.index(opening) + len(opening)
+    end = content.index(closing)
     if end < start:
-        raise ValueError(f"{source_name}: quick-start markers are reversed")
+        raise ValueError(f"{source_name}: managed markers are reversed")
     return content[:start] + "\n\n" + block.strip() + "\n\n" + content[end:]
+
+
+def replace_quick_start_block(content: str, block: str, source_name: str) -> str:
+    return replace_managed_block(content, block, source_name, QUICK_START_START, QUICK_START_END)
+
+
+def product_release_links(config: dict) -> list[dict]:
+    """Expose the authored releases offline; never resolve GitHub's global latest redirect."""
+    products = config.get("products")
+    if config.get("schemaVersion") != 1 or not isinstance(products, list):
+        raise ValueError("Invalid product release record")
+    release_ids = [product.get("id") for product in products]
+    if release_ids != ["desktop", "mobile", "rescue"]:
+        raise ValueError("Product releases must be Desktop, Mobile, and Rescue in that order")
+    result = []
+    for product in products:
+        identity, tag, channel = (product.get(key, "") for key in ("id", "tag", "channel"))
+        if (not isinstance(tag, str) or not re.fullmatch(rf"{identity}-[0-9A-Za-z][0-9A-Za-z._-]*", tag)
+                or tag.endswith((".", "-")) or channel not in {"stable", "preview"}):
+            raise ValueError(f"{identity}: invalid exact release tag or channel")
+        for key in ("name", "version", "platform", "summary", "tested"):
+            if not isinstance(product.get(key), str) or not product[key].strip():
+                raise ValueError(f"{identity}: missing release {key}")
+        downloads = product.get("downloads")
+        if not isinstance(downloads, list) or not downloads:
+            raise ValueError(f"{identity}: missing release downloads")
+        def asset(item):
+            name = item.get("file")
+            if not isinstance(name, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", name):
+                raise ValueError(f"{identity}: invalid release asset filename")
+            if not isinstance(item.get("label"), str) or not item["label"].strip():
+                raise ValueError(f"{identity}: missing release asset label")
+            return {"label": item["label"], "url": f"{REPO}/releases/download/{tag}/{name}"}
+
+        actions = [asset(item) for item in downloads]
+        actions.append(asset({"label": "SHA-256 checksums", "file": product.get("checksums")}))
+        if "evidence" in product:
+            actions.append(asset(product["evidence"]))
+        if len({item["url"] for item in actions}) != len(actions):
+            raise ValueError(f"{identity}: duplicate release asset")
+        result.append({**{key: value for key, value in product.items() if key not in {"downloads", "checksums", "evidence"}},
+                       "releaseUrl": f"{REPO}/releases/tag/{tag}", "actions": actions})
+    return result
+
+
+def product_releases_markdown(releases: list[dict], *, rescue_only: bool = False) -> str:
+    lines = ["## Download INTA" if not rescue_only else "## Current Recovery download", ""]
+    for product in releases:
+        if rescue_only and product["id"] != "rescue":
+            continue
+        links = " · ".join(f"[{item['label']}]({item['url']})" for item in product["actions"])
+        lines += [f"**[{product['name']}]({product['releaseUrl']})** · "
+                  f"{product['platform']} · {product['version']} · **{product['channel'].title()}**",
+                  "", links, "", product["summary"], ""]
+        if product.get("requirements"):
+            lines += [product["requirements"], ""]
+        lines += [product["tested"], ""]
+    if not rescue_only:
+        lines += [f"[All releases and previous versions]({REPO}/releases) · [Connected release status]({REPO}/issues/76)", ""]
+    return "\n".join(lines)
 
 
 def validate_layout(layout: dict, jobs: list[dict], tools: list[dict] | None = None) -> None:
@@ -972,14 +1034,14 @@ def playbook_index(jobs: list[dict], layout: dict, wiki: bool, reviewed: str) ->
 
 
 def home_markdown(tools: list[dict], jobs: list[dict], categories: dict, layout: dict, meta: dict,
-                  quick_start_block: str) -> str:
+                  quick_start_block: str, product_releases: list[dict]) -> str:
     by_id = {job["id"]: job for job in jobs}
     lines = [f"![INTA Computer Services — technical knowledge base]({REPO}/raw/main/docs/assets/wiki-hero.svg)", "",
              f"[Brand kit and replacement guide]({REPO}/blob/main/assets/inta-brand/README.md)", "",
              *heading(1, "INTA knowledge base", "🧭 Your next good fix starts here."),
              "Service procedures, tool references and troubleshooting methods for the INTA team.", "",
              f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [Updates & Maintenance](Updates-and-Maintenance) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
-             f"**Install a native app** · [INTA Desktop for Windows x64]({REPO}/releases/tag/desktop-0.2-preview.1) · [INTA Mobile for Android]({REPO}/releases/tag/mobile-0.2-preview.1)", "",
+             product_releases_markdown(product_releases).rstrip(), "",
              f"**{len(tools)} tools · {len(jobs)} playbooks · {len(categories)} tool categories**", "",
              quick_start_block.rstrip(), "",
              *heading(2, "🧭 Start a job", "🚦 First, choose the right route"),
@@ -1420,6 +1482,7 @@ def build_outputs() -> dict[str, str]:
     tools = records(ROOT / "data/tools.json", "tools")
     jobs = records(ROOT / "data/jobs.json", "jobs")
     meta = json.loads((ROOT / "data/meta.json").read_text(encoding="utf-8"))
+    product_releases = product_release_links(json.loads((ROOT / "data/product-releases.json").read_text(encoding="utf-8")))
     layout = json.loads((ROOT / "data/wiki-layout.json").read_text(encoding="utf-8"))
     quick_start = json.loads((ROOT / "data/quick-start.json").read_text(encoding="utf-8"))
     tool_access = json.loads((ROOT / "data/tool-access.json").read_text(encoding="utf-8"))
@@ -1469,7 +1532,7 @@ def build_outputs() -> dict[str, str]:
     cli_coverage = cli_audit.public_portal_coverage(tools, cli_audit.load(ROOT / "data/tool-cli-coverage.json"))
     data = {"tools": [{**tool, "reputation": reputation["tools"][tool["id"]]} for tool in tools], "jobs": jobs, "meta": meta, "links": linker.portal_links(registry),
             "quickStart": quick_start, "toolAccess": tool_access["tools"], "toolCliCoverage": cli_coverage, "jobWorkspaces": job_workspaces, "commandCenter": command_center, "updatesCenter": updates_center,
-            "layout": layout, "fieldNotes": field_notes, "onlineTools": online_data, "brands": brands_module.portal_icons(brands), "news": news, "newsDigest": news_digest}
+            "layout": layout, "fieldNotes": field_notes, "onlineTools": online_data, "productReleases": product_releases, "brands": brands_module.portal_icons(brands), "news": news, "newsDigest": news_digest}
     data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     template = (ROOT / "portal/index.template.html").read_text(encoding="utf-8")
@@ -1484,11 +1547,13 @@ def build_outputs() -> dict[str, str]:
         "{{APPLICATION_MARK}}": "data:image/png;base64," + base64.b64encode((ROOT / "assets/inta-brand/application-64.png").read_bytes()).decode("ascii"),
         "{{HERITAGE}}": "data:image/png;base64," + base64.b64encode((ROOT / "assets/inta-brand/heritage-192.png").read_bytes()).decode("ascii"),
     }
+    replacements.update({f"{{{{{product['id'].upper()}_RELEASE}}}}": product["releaseUrl"]
+                         for product in product_releases if product["id"] != "rescue"})
     for marker, value in replacements.items():
         if marker not in template:
             raise ValueError(f"Template missing {marker}")
         template = template.replace(marker, value)
-    if re.search(r"\{\{(?:STYLES|DATA|APP|ARCADE|FAVICON|APPLICATION_MARK|HERITAGE)\}\}", template):
+    if re.search(r"\{\{(?:STYLES|DATA|APP|ARCADE|FAVICON|APPLICATION_MARK|HERITAGE|DESKTOP_RELEASE|MOBILE_RELEASE)\}\}", template):
         raise ValueError("Unresolved template marker")
     by_id, jobs_by_id = {x["id"]: x for x in tools}, {x["id"]: x for x in jobs}
     access = tool_access["tools"]
@@ -1499,6 +1564,11 @@ def build_outputs() -> dict[str, str]:
         name: replace_quick_start_block((ROOT / name).read_bytes().decode("utf-8"), quick_start_block, name)
         for name in ("README.md", "docs/start-here.md", "docs/free-tool-picks.md")
     }
+    for name in ("README.md", "docs/rescue.md", "docs/rescue-media.md"):
+        source = managed_sources[name] if name in managed_sources else (ROOT / name).read_text(encoding="utf-8")
+        managed_sources[name] = replace_managed_block(
+            source, product_releases_markdown(product_releases, rescue_only=name != "README.md"),
+            name, PRODUCT_RELEASES_START, PRODUCT_RELEASES_END)
     categories = defaultdict(list)
     for tool in tools:
         categories[tool["category"]].append(tool)
@@ -1580,7 +1650,7 @@ self.addEventListener("fetch", event => {
                        f"{tool_access_links(tool, access, all_routes=True)} |"]
     tool_index += page_footer(meta["reviewedAt"])
     outputs["wiki/Tool-Directory.md"] = "\n".join(tool_index)
-    outputs["wiki/Home.md"] = home_markdown(tools, jobs, categories, layout, meta, quick_start_block)
+    outputs["wiki/Home.md"] = home_markdown(tools, jobs, categories, layout, meta, quick_start_block, product_releases)
     default_answers = {}
     for item in quick_start["items"]:
         default_answers.setdefault(item["jobId"], item)
