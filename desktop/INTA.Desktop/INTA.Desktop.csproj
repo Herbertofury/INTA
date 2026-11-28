@@ -8,6 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyName>INTA.Desktop</AssemblyName>
+    <ApplicationIcon>../../native/workbench/desktop/inta.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../agent/INTA.LocalAgent/StartupInventory.cs" Link="Windows/StartupInventory.cs" />
