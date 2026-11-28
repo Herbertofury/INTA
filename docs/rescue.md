@@ -23,7 +23,7 @@ The live session uses <a href="https://www.xfce.org/" title="Open XFCE official 
 
 ## Build from source
 
-The two editions have separate build entry points. To build the Recovery ISO from its tagged source on an amd64 Debian 13 build VM, use the prerequisites below and select a new output directory. The ISO and its checksum file are written together.
+The two editions have separate build entry points. To build the Recovery ISO from its tagged source on an amd64 <a href="https://www.debian.org/" title="Open Debian official download or service page" aria-label="Open Debian official download or service page" data-inta-brand="app-debian"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/98c05baf7fde67ee3abe.png" alt="Debian official page" width="18" height="18" valign="middle" /></a> [Debian](https://www.debian.org/) 13 build VM, use the prerequisites below and select a new output directory. The ISO and its checksum file are written together.
 
 ```sh
 sudo ./scripts/build-recovery-iso /var/tmp/inta-recovery-output
@@ -54,4 +54,4 @@ Pass the checksum recorded for the completed source build.
 python3 scripts/smoke-rescue-optics.py dist/inta-rescue-amd64.iso "$ISO_SHA256" new-optical-proof
 ```
 
-The Recovery release booted its default desktop in BIOS, UEFI and an OVMF Secure Boot VM with enrolled keys. A disposable Ventoy USB image booted in BIOS and UEFI. Physical USB and firmware compatibility depend on the target computer. The test service activates only on a QEMU guest explicitly marked by the smoke-test script.
+The Recovery release booted its default desktop in BIOS, UEFI and an OVMF Secure Boot VM with enrolled keys. A disposable <a href="https://www.ventoy.net/en/download.html" title="Open Ventoy official download or service page" aria-label="Open Ventoy official download or service page" data-inta-brand="ventoy"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/d1a0c38643bc2cdb9425.png" alt="Ventoy official page" width="18" height="18" valign="middle" /></a> [Ventoy](https://www.ventoy.net/) USB image booted in BIOS and UEFI. Physical USB and firmware compatibility depend on the target computer. The test service activates only on a QEMU guest explicitly marked by the smoke-test script.
