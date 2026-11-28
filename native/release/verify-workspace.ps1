@@ -38,7 +38,18 @@ try {
     $diag = Named 'Diagnostics'
     $diag.GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern).Select()
     $null = Wait-For { Named 'Capability diagnostics' } 'native diagnostics entry point'
-    'Original directory, search, tool action controls and diagnostic navigation passed.'
+    $references = Named 'Offline references'
+    $references.GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern).Select()
+    $guideSearch = Wait-For { Named 'Search offline guides, tools and Wiki' } 'offline reference search'
+    $guideInput = $guideSearch.GetCurrentPattern([Windows.Automation.ValuePattern]::Pattern)
+    $guideInput.SetValue('Why is the printer queue stuck?')
+    $null = Wait-For { Named 'Restore printing without breaking other queues' } 'the matching local printer runbook'
+    $context = Named 'Read surrounding passages for Restore printing without breaking other queues'
+    $context.GetCurrentPattern([Windows.Automation.ExpandCollapsePattern]::Pattern).Expand()
+    $null = Wait-For { Named 'Surrounding passages loaded.' } 'reading the original guide in context'
+    $guideInput.SetValue('qxzzvlowerkq')
+    $null = Wait-For { Named '0 references' } 'clearing previous results on a new query'
+    'Original directory, tool actions, diagnostic navigation and offline reference search passed.'
 } finally {
     if (!$p.HasExited) {
         [void]$p.CloseMainWindow()

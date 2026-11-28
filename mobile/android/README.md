@@ -7,7 +7,7 @@ phone boot retains the running interval. If the phone itself restarts, the
 app pauses and retains only the last saved duration rather than guessing time.
 A restart of the serviced PC does not modify this independent phone timer.
 
-Install the [signed Android APK](https://github.com/Herbertofury/INTA/releases/tag/mobile-0.2-preview.2)
+Install the [signed Android APK](https://github.com/Herbertofury/INTA/releases/tag/mobile-0.2-preview.3)
 on Android 8.0 or later. **Switch or create job** opens named local work orders. Each
 keeps its own stopwatch, checklist, invoice and repair draft. An existing
 installation's original record stays accessible under **Repair job**. Use **Review

@@ -77,6 +77,11 @@ pub(super) fn list(toolbox: &Path) -> R<Value> {
     let mut issues = Vec::new();
     for (marker, name, manifest) in [
         (
+            ".inta-recovery-lab.json",
+            "INTA Rescue Recovery",
+            include_str!("../../../../data/rescue-recovery-download-channel.json"),
+        ),
+        (
             ".inta-cloud-lab.json",
             "INTA Linux Rescue",
             include_str!("../../media/rescue-releases.json"),
@@ -92,17 +97,20 @@ pub(super) fn list(toolbox: &Path) -> R<Value> {
             continue;
         }
         let result: R<()> = (|| {
-            let locations = if name == "INTA Linux Rescue" {
-                vec![read_json::<Location>(&file)?]
-            } else {
+            let locations = if marker == ".inta-winpe-lab.json" {
                 read_json::<Registry<Location>>(&file)?.images
+            } else {
+                vec![read_json::<Location>(&file)?]
             };
-            let pins: Registry<Pin> = serde_json::from_str(manifest).map_err(super::err)?;
+            let pins = if marker == ".inta-recovery-lab.json" {
+                vec![serde_json::from_str::<Pin>(manifest).map_err(super::err)?]
+            } else {
+                serde_json::from_str::<Registry<Pin>>(manifest).map_err(super::err)?.images
+            };
             for entry in locations {
                 let path = toolbox.join(safe_rel(&entry.iso)?);
                 let mut boot = medium(&path, true)?;
                 let mut candidates = pins
-                    .images
                     .iter()
                     .filter(|p| p.bytes == boot.bytes && p.architecture == entry.architecture)
                     .peekable();

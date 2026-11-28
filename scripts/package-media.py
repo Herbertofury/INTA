@@ -1,23 +1,27 @@
 #!/usr/bin/env python3
-"""Package the complete portable INTA Media Creator, including genuine icons."""
+"""Package the portable INTA Media Creator with its first-party artwork and publisher links."""
 from __future__ import annotations
 import argparse
 import hashlib
 import io
 import json
 from pathlib import Path
+import runpy
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def package(output: Path, root: Path = ROOT):
-    registry = json.loads((root / "data/brand-icons.json").read_text())
+    registry = runpy.run_path(str(root / "scripts/release_artwork.py"))["media_registry"](root)
     entries = {
         "__main__.py": (root / "media/inta-media.py").read_bytes(),
+        "rescue_products.py": (root / "native/workbench/media/rescue_products.py").read_bytes(),
+        "rescue_iso.py": (root / "native/workbench/media/rescue_iso.py").read_bytes(),
         "inta_brand_ui.py": (root / "media/inta_brand_ui.py").read_bytes(),
         "inta_optics_ui.py": (root / "media/inta_optics_ui.py").read_bytes(),
-        "inta-resources/data/brand-icons.json": (root / "data/brand-icons.json").read_bytes(),
+        "inta-resources/data/brand-icons.json": json.dumps(registry, ensure_ascii=False, indent=2).encode("utf-8"),
+        "inta-resources/data/rescue-recovery-download-channel.json": (root / "data/rescue-recovery-download-channel.json").read_bytes(),
         "inta-resources/data/rescue-download-channel.json": (root / "data/rescue-download-channel.json").read_bytes(),
     }
     for asset in registry["assets"].values():
@@ -30,6 +34,8 @@ def package(output: Path, root: Path = ROOT):
     with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for name, data in sorted(entries.items()):
             info = zipfile.ZipInfo(name, date_time=(2026, 11, 26, 0, 0, 0))
+            # Pin the central directory's creator OS for identical Windows and Linux builds.
+            info.create_system = 0
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o644 << 16
             archive.writestr(info, data)

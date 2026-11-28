@@ -17,7 +17,7 @@ The Cloud Hypervisor bridge is available on machines with the prepared Debian la
 
 ## Use the graphical lab
 
-From **Virtual machines**, choose a local boot ISO. For a repair case, also select a regular raw test disk image ending in `.img`. INTA copies and hashes the selected base, verifies the snapshot by reading it back, and presents the guest with a writable qcow2 overlay. The source file and session base remain separate. Without a base image the guest receives an empty thin-provisioned 64 GiB disk.
+From **Virtual machines**, choose a local boot ISO. For a repair case, also select a regular raw test disk image ending in `.img`. INTA copies and hashes the selected base, verifies the snapshot by reading it back, and presents the guest with a writable qcow2 overlay. For a blank guest it selects the largest 8, 16, 32 or 64 GiB thin disk that fits on the session volume with a 1 GiB reserve. Review its capacity in the boot plan. Use `--disk-gib 8` on the CLI to select a lightweight offline recovery lab explicitly.
 
 ```powershell
 inta vm status

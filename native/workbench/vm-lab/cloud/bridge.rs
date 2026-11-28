@@ -20,7 +20,18 @@ struct RescuePins {
     images: Vec<ImagePin>,
 }
 const RECOVERED: &str = "14516d423e8f53c66e0af6eec66cf942606e571efe2861058ac8e78911507881";
+const RECOVERY_CHANNEL: &str =
+    include_str!("../../../../data/rescue-recovery-download-channel.json");
+const RECOVERY_PROOF: &str = include_str!("recovery-proof.json");
 const ASSETS: &[(&str, &[u8])] = &[
+    (
+        "vm-lab/cloud/recovery-proof.json",
+        RECOVERY_PROOF.as_bytes(),
+    ),
+    (
+        "media/rescue-recovery-download-channel.json",
+        RECOVERY_CHANNEL.as_bytes(),
+    ),
     ("runner.py", include_bytes!("runner.py")),
     (
         "scripts/smoke-rescue-repair.py",
@@ -33,6 +44,10 @@ const ASSETS: &[(&str, &[u8])] = &[
     (
         "media/inta-media.py",
         include_bytes!("../../media/inta-media.py"),
+    ),
+    (
+        "media/rescue_products.py",
+        include_bytes!("../../media/rescue_products.py"),
     ),
     (
         "media/rescue_iso.py",
@@ -95,13 +110,35 @@ pub(super) fn run(toolbox: &Path, console: bool, base: Option<&Path>) -> Result<
     }
     let started = Instant::now();
     let _toolbox = guarded_dirs(toolbox)?;
-    let layout: Layout = read_json(&toolbox.join(".inta-cloud-lab.json"))
+    let full = toolbox.join(".inta-cloud-lab.json");
+    let recovery = !full.try_exists().map_err(err)?;
+    let marker = if recovery {
+        toolbox.join(".inta-cloud-recovery-lab.json")
+    } else {
+        full
+    };
+    let layout: Layout = read_json(&marker)
         .map_err(|_| "Select a toolbox containing the INTA Rescue Cloud Hypervisor profile.")?;
     let image = toolbox.join(safe_rel(&layout.iso)?);
     let _parents = guarded_dirs(image.parent().ok_or("Invalid ISO path")?)?;
     let mut input = read_file(&image)?;
-    let pins: RescuePins =
-        serde_json::from_str(include_str!("../../media/rescue-releases.json")).map_err(err)?;
+    let pins: RescuePins = if recovery {
+        let channel: Value = serde_json::from_str(RECOVERY_CHANNEL).map_err(err)?;
+        let proof: Value = serde_json::from_str(RECOVERY_PROOF).map_err(err)?;
+        if proof["passed"] != true || channel["sha256"] != proof["rescueISO"] {
+            return Err(
+                "The recovery channel requires a matching Cloud Hypervisor qualification.".into(),
+            );
+        }
+        if image.file_name().and_then(|n| n.to_str()) != channel["filename"].as_str() {
+            return Err("The recovery lab requires its pinned recovery-only ISO.".into());
+        }
+        RescuePins {
+            images: vec![serde_json::from_value(channel).map_err(err)?],
+        }
+    } else {
+        serde_json::from_str(include_str!("../../media/rescue-releases.json")).map_err(err)?
+    };
     let size = input.metadata().map_err(err)?.len();
     if !pins.images.iter().any(|p| p.bytes == size) {
         return Err("The rescue ISO has an unrecognized size.".into());
@@ -198,7 +235,12 @@ pub(super) fn run(toolbox: &Path, console: bool, base: Option<&Path>) -> Result<
     {
         return Err("Guest evidence did not match the verified recovery profile.".into());
     }
+    let guest = if recovery {
+        "INTA Rescue Recovery amd64"
+    } else {
+        "INTA Rescue amd64"
+    };
     Ok(
-        json!({"schemaVersion":1,"engine":"Cloud Hypervisor v55.0","backend":"Linux KVM in WSL2","guest":"INTA Rescue amd64","network":"offline","passed":true,"sourcePreserved":true,"recoveredSha256":RECOVERED,"isoSha256":image_hash,"elapsedMs":started.elapsed().as_millis(),"evidence":proof}),
+        json!({"schemaVersion":1,"engine":"Cloud Hypervisor v55.0","backend":"Linux KVM in WSL2","guest":guest,"network":"offline","passed":true,"sourcePreserved":true,"recoveredSha256":RECOVERED,"isoSha256":image_hash,"elapsedMs":started.elapsed().as_millis(),"evidence":proof}),
     )
 }

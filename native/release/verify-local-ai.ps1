@@ -8,6 +8,10 @@ $plan = & $cli ai ask $Model $selected[0].digest 'My computer is running extreme
 if ($LASTEXITCODE -or $plan.state -ne 'awaiting-review' -or $plan.executed -ne $false -or $plan.plan.id -ne 'slow-pc') {
     throw 'The local planner did not select the matching performance inspection for review.'
 }
+$sources = @($plan.knowledge.citations | Where-Object { $_.source -and $_.location -and $_.passage -and $_.sourceTextSha256 -match '^[a-f0-9]{64}$' })
+if (!$sources.Count -or !($sources | Where-Object { $_.source -like '*slow-pc*' -or $_.location -like 'job/slow-pc/*' })) {
+    throw 'The reviewed plan is missing relevant offline sources.'
+}
 $null = & $cli ai run-plan slow-pc ('0' * 64) --approve 2>$null
 if ($LASTEXITCODE -eq 0) { throw 'A different plan digest was accepted.' }
 $result = & $cli ai run-plan slow-pc $plan.planSha256 --approve | ConvertFrom-Json

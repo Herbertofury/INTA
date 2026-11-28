@@ -2,7 +2,6 @@
 """Start an interactive, offline INTA Rescue guest with a disposable working disk."""
 import argparse
 import hashlib
-import importlib
 import os
 from pathlib import Path
 import runpy
@@ -15,7 +14,6 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-media = importlib.import_module("media.inta-media")
 VMM_SHA256 = "ce7133bf535ed5a4e2a63ea1f26025445a5b1241f73ddfb81ff2fbcb2e803a59"
 
 
@@ -57,19 +55,17 @@ def launch(args):
         if hashlib.file_digest(stream, "sha256").hexdigest() != VMM_SHA256:
             raise ValueError("The Cloud Hypervisor executable does not match the approved release.")
     image = args.iso.resolve(strict=True)
-    if image.name != media.ISO or not image.is_file():
+    if not image.is_file():
         raise ValueError("Choose the INTA Rescue AMD64 ISO with its checksum manifest.")
     if any(ch in str(path) for ch in ",\r\n" for path in (image, Path(tempfile.gettempdir()))):
         raise ValueError("Use ISO and temporary paths representable as single VMM disk values.")
     print("Checking the rescue ISO and preparing a private working disk...", flush=True)
-    info = media.verify_iso(image, media.image_digest(image))
-    if info["volumeLabel"] != "INTA_RESCUE":
-        raise ValueError("The ISO does not identify itself as INTA Rescue.")
+    helpers = runpy.run_path(str(ROOT / "scripts/smoke-rescue-repair.py"))
+    helpers["verified_lab_iso"](image)
     with tempfile.TemporaryDirectory(prefix="inta-cloud-console-") as temporary:
         work = Path(temporary)
         scratch = work / "working.raw"
         private_copy(args.base, scratch)
-        helpers = runpy.run_path(str(ROOT / "scripts/smoke-rescue-repair.py"))
         kernel, initrd = helpers["extract_boot_files"](image, work)
         seed = work / "control"
         seed.mkdir()

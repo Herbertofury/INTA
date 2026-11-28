@@ -2,9 +2,11 @@
 
 The installer opens the technician directory. The original search, tool actions, playbooks, Windows settings, recovery workflows and case history use the same local state as earlier Workstation installations. Open **Diagnostics** for system inventory and structured operations, **Managed toolbox → CLI Forge** for tested recipes, and **Local AI** to review an offline model’s inspection plan. **Appearance Studio** controls the optical field.
 
+Select **Offline references** and type a symptom into Search to read matching passages from the installed guides, Wiki and catalog. Expand a guide result to see the surrounding steps, or open a catalog result to reach its tool actions. This search runs locally with or without a model.
+
 ## Install and verify
 
-Download the MSI or portable ZIP and SHA256SUMS from the same [Desktop release](https://github.com/Herbertofury/INTA/releases/tag/desktop-0.2-preview.1). Verify the file digest before opening it. Run the MSI under the Windows account that will use Desktop. The portable archive needs to be extracted in full.
+Download the MSI or portable ZIP and SHA256SUMS from the same [Desktop release](https://github.com/Herbertofury/INTA/releases/tag/desktop-0.2-preview.2). Verify the file digest before opening it. Run the MSI under the Windows account that will use Desktop. The portable archive needs to be extracted in full.
 
 ```powershell
 Get-FileHash -Algorithm SHA256 .\INTA-Desktop-x64.msi
@@ -20,6 +22,9 @@ The CLI is beside the installed launcher in `%LOCALAPPDATA%\Programs\INTA Deskto
 
 ```powershell
 .\inta.exe catalog 'printer'
+$hits = (.\inta.exe knowledge search 'Why is the printer queue stuck?' | ConvertFrom-Json).citations
+$guide = $hits | Where-Object kind -in 'runbook','wiki' | Select-Object -First 1
+.\inta.exe knowledge context $guide.source $guide.location
 .\inta.exe capabilities
 .\inta.exe tools inspect powercfg
 .\inta.exe capabilities run system.memory
@@ -35,6 +40,7 @@ $m = (.\inta.exe assistant models | ConvertFrom-Json).models | Select-Object -Fi
 $p = .\inta.exe ai ask $m.name $m.digest 'Why is this PC slow?' | ConvertFrom-Json
 $p.plan
 .\inta.exe ai run-plan $p.plan.id $p.planSha256 --approve
+.\inta.exe ai forge $m.name $m.digest 'Check memory and power' "$env:TEMP\new-workstation-baseline.json" --approve
 ```
 
 Tool acquisition, opening an application, and controlling an operation have different coverage. Capability discovery lists the typed operations available in the binary. Forge tests local declarative recipes against those operations before import. Read-only inspection results can be exported from the native workspace.

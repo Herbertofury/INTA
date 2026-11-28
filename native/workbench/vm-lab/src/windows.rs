@@ -48,7 +48,15 @@ const LOCK: &str = include_str!("../runtime-lock.json");
 const MAX_BASE: u64 = 8 * 1024 * 1024 * 1024;
 const CPU: u32 = 2;
 const MEMORY: u32 = 4096;
-const DISK_GIB: u32 = 64;
+const GIB: u64 = 1024 * 1024 * 1024;
+const BLANK_SIZES: [u32; 4] = [64, 32, 16, 8];
+
+fn blank_size(free: u64) -> u32 {
+    BLANK_SIZES
+        .into_iter()
+        .find(|size| (u64::from(*size) + 1) * GIB <= free)
+        .unwrap_or(8)
+}
 fn err(e: impl std::fmt::Display) -> String {
     e.to_string()
 }
@@ -289,6 +297,8 @@ fn state_root(toolbox: &Path, create: bool) -> R<PathBuf> {
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 struct Session {
     id: String,
+    #[serde(default)]
+    blank_disk_gib: Option<u32>,
     iso: PathBuf,
     iso_sha256: Option<String>,
     definitions: Option<images::Definitions>,
@@ -674,7 +684,11 @@ fn supervise(rt: &Runtime, dir: &Path, s: &mut Session) -> R<()> {
         img.args(["-F", "raw", "-b", "base.raw"]).arg(&disk);
     } else {
         _base_lock = None;
-        img.arg(&disk).arg(format!("{DISK_GIB}G"));
+        let size = s.blank_disk_gib.unwrap_or(64);
+        if !BLANK_SIZES.contains(&size) {
+            return Err("Invalid blank disk size in the session".into());
+        }
+        img.arg(&disk).arg(format!("{size}G"));
     }
     run_img(img)?;
     let session_log = pin_new_file(&dir.join("engine.log"))?;
@@ -759,6 +773,7 @@ fn plan(
     let mut nat = false;
     let mut approved = false;
     let mut base_bytes = 0;
+    let mut requested_size = None;
     while let Some((arg, rest)) = tail.split_first() {
         tail = rest;
         match *arg {
@@ -778,6 +793,17 @@ fn plan(
                 tail = next;
             }
             "--approve" if !approved && starting => approved = true,
+            "--disk-gib" if requested_size.is_none() => {
+                let (value, next) = tail.split_first().ok_or("Choose 8, 16, 32 or 64 GiB")?;
+                requested_size = Some(
+                    value
+                        .parse::<u32>()
+                        .ok()
+                        .filter(|v| BLANK_SIZES.contains(v))
+                        .ok_or("Choose 8, 16, 32 or 64 GiB")?,
+                );
+                tail = next;
+            }
             "--nat" if !nat => nat = true,
             "--base" if base.is_none() => {
                 let (f, next) = tail.split_first().ok_or("Choose a raw .img test disk")?;
@@ -824,13 +850,17 @@ fn plan(
     {
         return Err(err(io::Error::last_os_error()));
     }
-    let required = 1024u64.pow(3)
+    if base.is_some() && requested_size.is_some() {
+        return Err("A selected raw base determines the virtual disk capacity".into());
+    }
+    let size = requested_size.unwrap_or_else(|| blank_size(free));
+    let required = GIB
         + if base.is_some() {
             2 * base_bytes
         } else {
-            u64::from(DISK_GIB) * 1024u64.pow(3)
+            u64::from(size) * GIB
         };
-    let v = json!({"ready":free>=required,"freeBytes":free,"requiredFreeBytes":required,"version":rt.version,"iso":iso,"isoBytes":boot.bytes,"base":base,"baseBytes":base_bytes,"network":if nat{"user-nat"}else{"none"},"firmware":"EDK II UEFI x64","memoryMiB":MEMORY,"cpus":CPU,"diskGiB":if base.is_some(){base_bytes as f64/(1024.0_f64.powi(3))}else{DISK_GIB as f64},"accelerator":"WHPX with TCG fallback","storageRoot":root});
+    let v = json!({"ready":free>=required,"freeBytes":free,"requiredFreeBytes":required,"version":rt.version,"iso":iso,"isoBytes":boot.bytes,"base":base,"baseBytes":base_bytes,"network":if nat{"user-nat"}else{"none"},"firmware":"EDK II UEFI x64","memoryMiB":MEMORY,"cpus":CPU,"diskGiB":if base.is_some(){json!(base_bytes as f64/GIB as f64)}else{json!(size)},"accelerator":"WHPX with TCG fallback","storageRoot":root});
     let mut v = v;
     v["isoSha256"] = json!(iso_digest);
     v["definitions"] = json!(definitions);
@@ -848,6 +878,11 @@ fn start_session(toolbox: &Path, args: &[&str]) -> R<Value> {
     fs::create_dir(&dir).map_err(err)?;
     let mut s = Session {
         id: id.clone(),
+        blank_disk_gib: if base.is_none() {
+            preview["diskGiB"].as_u64().map(|v| v as u32)
+        } else {
+            None
+        },
         iso,
         iso_sha256: preview["isoSha256"].as_str().map(str::to_owned),
         definitions: serde_json::from_value(preview["definitions"].clone()).map_err(err)?,
@@ -957,7 +992,7 @@ pub(super) fn command(toolbox: &Path, args: &[&str]) -> R<Value> {
         ["repair-test"] => return repair::run(toolbox, false, None),
         ["console", "--approve"] => return repair::run(toolbox, true, None),
         ["console", "--approve", "--base", path] | ["console", "--base", path, "--approve"] => {
-            return repair::run(toolbox, true, Some(Path::new(path)))
+            return repair::run(toolbox, true, Some(Path::new(path)));
         }
         ["console", ..] => return Err("Expected vm console --approve [--base FILE.img]".into()),
         _ => {}
@@ -979,6 +1014,14 @@ pub(super) fn command(toolbox: &Path, args: &[&str]) -> R<Value> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn blank_disks_keep_the_reserved_space_and_old_capacity() {
+        assert_eq!(blank_size(65 * GIB), 64);
+        assert_eq!(blank_size(65 * GIB - 1), 32);
+        assert_eq!(blank_size(33 * GIB - 1), 16);
+        assert_eq!(blank_size(17 * GIB - 1), 8);
+        assert_eq!(blank_size(4 * GIB), 8); // Preview rejects the minimum when it cannot fit.
+    }
     #[test]
     fn raw_devices_uris_ads_and_escape_paths_are_rejected() {
         for path in [
@@ -1005,6 +1048,7 @@ mod tests {
             _guard: vec![],
         };
         let session = Session {
+            blank_disk_gib: None,
             id: uuid::Uuid::new_v4().to_string(),
             iso: PathBuf::from("C:/test/file,cache=unsafe.iso"),
             iso_sha256: None,
@@ -1080,6 +1124,7 @@ mod session_contention {
         let dir = root.path().join(&id);
         fs::create_dir(&dir).unwrap();
         let s = Session {
+            blank_disk_gib: None,
             id: id.clone(),
             iso: PathBuf::from("C:/test/boot.iso"),
             iso_sha256: None,

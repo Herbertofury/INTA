@@ -203,7 +203,7 @@ class BrandUI:
 
     def window_icon(self, window, name="INTA"):
         record = self.resources.resolve(name)
-        if record:
+        if record and record.get("assetId"):
             window.iconphoto(True, self.photo(record, 64))
 
     def open(self, record):
@@ -283,9 +283,10 @@ class BrandText(tk.Text):
         for start, end, record in owner.resources.mentions(value):
             self.insert("end", value[position:start])
             first = self.index("end-1c")
-            self.image_create("end", image=owner.photo(record, icon_size), align="center", padx=2)
+            if record.get("assetId"):
+                self.image_create("end", image=owner.photo(record, icon_size), align="center", padx=2)
             icon_end = self.index("end-1c")
-            self.insert("end", " " + value[start:end])
+            self.insert("end", (" " if record.get("assetId") else "") + value[start:end])
             last = self.index("end-1c")
             tag = "brand-" + str(len(self.links))
             self.tag_add("brand", first, last)

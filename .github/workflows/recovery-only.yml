@@ -1,0 +1,91 @@
+name: Debian recovery-only image
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Candidate release tag, e.g. rescue-recovery-20261128.2'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  recovery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 115
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: c764da6f05af7882e2ec246d26396bfab6b14309
+          path: recovery-companion-source
+          persist-credentials: false
+      - name: Validate independent recovery recipe and package restrictions
+        run: |
+          python3 -m unittest discover -s tests -p 'test_recovery_only.py'
+          bash -n scripts/build-recovery-iso
+      - name: Build Recovery with Debian signed stable and security repositories
+        run: |
+          docker pull debian:13-slim
+          image=$(docker image inspect --format '{{index .RepoDigests 0}}' debian:13-slim)
+          printf '%s\n' "$image" > "$RUNNER_TEMP/recovery-builder-image.txt"
+          docker run --rm --privileged -e "INTA_RECOVERY_SOURCE_REVISION=$GITHUB_SHA" \
+            -v "$GITHUB_WORKSPACE:/src:ro" -v "$RUNNER_TEMP:/out" "$image" bash -euc '
+            apt-get update
+            apt-get install -y --no-install-recommends live-build debootstrap debian-archive-keyring ca-certificates rustc gcc libc6-dev python3 xorriso squashfs-tools initramfs-tools-core mtools gpgv
+            set -o pipefail
+            bash /src/scripts/build-recovery-iso /out/recovery-only 2>&1 | tee /out/recovery-build.log
+            iso=/out/recovery-only/inta-rescue-recovery-amd64.iso
+            hash=$(sha256sum "$iso" | cut -c1-64)
+            python3 /src/scripts/check-recovery-image.py "$iso" "$hash" "$INTA_RECOVERY_SOURCE_REVISION" /out/recovery-audit
+            python3 /src/scripts/recovery-boot-components.py "$iso" /out/recovery-audit/image-qualification.json /out/recovery-build.log /out/boot-components
+            python3 /src/scripts/recovery-source-index.py /out/recovery-audit/debian-package-inventory.json /out/recovery-audit/debian-source-index.json --boot-components /out/boot-components/boot-components.json
+            python3 /src/scripts/recovery-notices.py "$iso" /out/recovery-audit /out/boot-components /out/debian-notices.tar.gz'
+      - name: Verify actual ISO, rootfs, initial RAM disk, EFI contents and package inventory
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends xorriso squashfs-tools initramfs-tools-core mtools dosfstools qemu-system-x86 ovmf
+          cd "$RUNNER_TEMP/recovery-only"
+          sha256sum --check --strict SHA256SUMS
+          hash=$(sha256sum inta-rescue-recovery-amd64.iso | cut -d' ' -f1)
+          echo "RECOVERY_SHA256=$hash" >> "$GITHUB_ENV"
+      - name: Archive complete corresponding sources and original package notices
+        run: |
+          audit="$RUNNER_TEMP/recovery-audit"
+          python3 scripts/recovery-source-volumes.py "$audit/debian-source-index.json" "$RUNNER_TEMP/debian-source-cache" "$RUNNER_TEMP/source-volumes"
+          python3 scripts/archive-recovery-source.py "$GITHUB_SHA" "$RUNNER_TEMP/INTA-Recovery-build-source.tar.gz"
+      - name: Exercise firmware, graphical controls and recovery on a damaged synthetic filesystem
+        run: |
+          image="$RUNNER_TEMP/recovery-only/inta-rescue-recovery-amd64.iso"
+          python3 scripts/verify-recovery-boots.py "$image" "$RECOVERY_SHA256" "$RUNNER_TEMP/recovery-boot"
+          python3 scripts/smoke-recovery-ui.py "$image" "$RECOVERY_SHA256" "$RUNNER_TEMP/recovery-ui"
+          python3 scripts/verify-recovery-fixture.py absence "$image" "$RECOVERY_SHA256" "$GITHUB_SHA" "$RUNNER_TEMP/independent-absence"
+          python3 scripts/verify-recovery-fixture.py repair "$image" "$RECOVERY_SHA256" "$GITHUB_SHA" "$RUNNER_TEMP/checked-repair"
+      - name: Pin the portable creator and package the complete offline release
+        env:
+          RECOVERY_TAG: ${{ inputs.tag }}
+        run: |
+          image="$RUNNER_TEMP/recovery-only/inta-rescue-recovery-amd64.iso"
+          audit="$RUNNER_TEMP/recovery-audit"
+          media="$RUNNER_TEMP/INTA-Media-Creator.pyz"
+          python3 scripts/build-recovery-companion.py recovery-companion-source "$image" "$audit/image-qualification.json" "$RECOVERY_TAG" "$media"
+          python3 scripts/package-recovery.py --iso "$image" --qualification "$audit" --source-index "$audit/debian-source-index.json" \
+            --source-volumes "$RUNNER_TEMP/source-volumes" --notices "$RUNNER_TEMP/debian-notices.tar.gz" \
+            --firmware "$RUNNER_TEMP/recovery-boot" --ui "$RUNNER_TEMP/recovery-ui" --repair "$RUNNER_TEMP/checked-repair/repair-proof.json" \
+            --independent-absence "$RUNNER_TEMP/independent-absence/absence.json" --build-source "$RUNNER_TEMP/INTA-Recovery-build-source.tar.gz" \
+            --media-creator "$media" --media-source-revision "$(git -C recovery-companion-source rev-parse HEAD)" \
+            --media-sha256 "$(sha256sum "$media" | cut -d' ' -f1)" "$RUNNER_TEMP/recovery-release"
+          (cd "$RUNNER_TEMP/recovery-release" && sha256sum --check --strict SHA256SUMS)
+      - name: Preserve verified recovery candidate and evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: inta-recovery-only-candidate
+          path: |
+            ${{ runner.temp }}/recovery-release/
+            ${{ runner.temp }}/recovery-boot/*-serial.log
+            ${{ runner.temp }}/recovery-ui/evidence.json
+            ${{ runner.temp }}/recovery-builder-image.txt
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7

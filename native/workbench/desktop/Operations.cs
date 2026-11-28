@@ -70,6 +70,7 @@ namespace Inta.Desktop
         }
         private async Task LoadOperationPage(CancellationToken token)
         {
+            if (section == "Offline references") { await SearchReferences(token); return; }
             if (section == "Local AI") { await LoadTriage(token); return; }
             if (section == "Diagnostics") {
                 Action(pageActions, "System inventory", delegate { OpenFeature("inventory"); });

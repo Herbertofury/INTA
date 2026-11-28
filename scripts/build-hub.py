@@ -978,7 +978,7 @@ def home_markdown(tools: list[dict], jobs: list[dict], categories: dict, layout:
              *heading(1, "INTA knowledge base", "🧭 Your next good fix starts here."),
              "Service procedures, tool references and troubleshooting methods for the INTA team.", "",
              f"**[🧰 Open technician hub]({HUB})** · **[🗺️ Service map](Service-Map)** · [⚡ Command Center](Command-Center) · [Updates & Maintenance](Updates-and-Maintenance) · [⚡ Quick commands](Quick-Commands) · [Decision desk](Decision-Desk) · [Playbooks](Playbooks) · [Tool directory](Tool-Directory) · [Methods](Methods)", "",
-             f"**Install a native app** · [INTA Desktop for Windows x64]({REPO}/releases/tag/desktop-0.2-preview.1) · [INTA Mobile for Android]({REPO}/releases/tag/mobile-0.2-preview.1)", "",
+             f"**Install a native app** · [INTA Desktop for Windows x64]({REPO}/releases/tag/desktop-0.2-preview.2) · [INTA Mobile for Android]({REPO}/releases/tag/mobile-0.2-preview.3)", "",
              f"**{len(tools)} tools · {len(jobs)} playbooks · {len(categories)} tool categories**", "",
              quick_start_block.rstrip(), "",
              *heading(2, "🧭 Start a job", "🚦 First, choose the right route"),
@@ -1626,7 +1626,7 @@ self.addEventListener("fetch", event => {
     authored = [ROOT / name for name in ("README.md", "AGENTS.md", "CONTRIBUTING.md")]
     authored += sorted((ROOT / "docs").rglob("*.md"))
     for source in authored:
-        path = str(source.relative_to(ROOT))
+        path = source.relative_to(ROOT).as_posix()
         if path not in outputs and source.is_file():
             outputs[path] = source.read_text(encoding="utf-8")
     for path, content in list(outputs.items()):

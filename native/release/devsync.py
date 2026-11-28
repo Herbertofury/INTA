@@ -238,9 +238,10 @@ def daemon():
                 daemon=True,
             ).start()
 
-        watch(root, False, names=("Cargo.toml", "Cargo.lock", *WATCH_DIRS))
+        watch(root, False, names=("Cargo.toml", "Cargo.lock", "scripts", *WATCH_DIRS))
         for name in WATCH_DIRS:
             watch(root / name, True)
+        watch(root / "scripts", False, names=("brand_markdown.py", "release_artwork.py"))
         for query in ("--absolute-git-dir", "--git-common-dir"):
             folder = Path(
                 subprocess.check_output(

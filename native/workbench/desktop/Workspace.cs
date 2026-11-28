@@ -39,7 +39,7 @@ namespace Inta.Desktop
     internal sealed partial class Workspace
     {
         private static readonly string[] Sections = {
-            "Directory", "Tools", "Playbooks", "Methods", "Diagnostics", "Scenarios",
+            "Directory", "Tools", "Playbooks", "Methods", "Offline references", "Diagnostics", "Scenarios",
             "Managed toolbox", "Windows settings", "Rescue media", "Virtual machines", "Local AI", "Activity"
         };
         private static readonly string[] BrushKeys = { "Canvas", "Rail", "Surface", "Hover", "Select", "Border", "Muted", "Text", "Accent" };
@@ -88,7 +88,7 @@ namespace Inta.Desktop
             search.TextChanged += delegate {
                 if (initializing) return;
                 pendingRecord = null; pendingToolAction = null;
-                if (!IsCatalog) {
+                if (!IsCatalog && section != "Offline references") {
                     initializing = true; section = "Directory"; navigation.SelectedItem = section; initializing = false;
                 }
                 Cancel(ref pageRequest); Cancel(ref detailRequest);
@@ -102,7 +102,7 @@ namespace Inta.Desktop
             window.PreviewKeyDown += delegate(object sender, KeyEventArgs e) {
                 if (e.Key == Key.K && Keyboard.Modifiers == ModifierKeys.Control && !changingSetting)
                 {
-                    if (!IsCatalog || section != "Directory") navigation.SelectedItem = "Directory";
+                    if (section != "Directory" && section != "Offline references") navigation.SelectedItem = "Directory";
                     search.Focus(); search.SelectAll(); e.Handled = true;
                 }
                 else if (e.Key == Key.Escape && search.IsKeyboardFocusWithin) { search.Clear(); e.Handled = true; }
@@ -258,6 +258,9 @@ namespace Inta.Desktop
             initializing = true; entries.ItemsSource = null; initializing = false;
             listing = null; ResetDetail(); pageActions.Children.Clear();
             heading.Text = section == "Directory" ? "Technician directory" : section;
+            string searchLabel = section == "Offline references" ? "Search offline guides, tools and Wiki" : "Search all tools, playbooks and methods";
+            AutomationProperties.SetName(search, searchLabel);
+            search.ToolTip = searchLabel + " (Ctrl+K)";
             count.Text = ""; Status("Loading\u2026");
             Split(IsCatalog || section == "Diagnostics" || section == "Scenarios" || section == "Managed toolbox" || section == "Windows settings");
             try
