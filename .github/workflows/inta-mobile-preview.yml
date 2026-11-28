@@ -13,7 +13,7 @@ permissions:
 jobs:
   native-android:
     runs-on: ubuntu-24.04
-    timeout-minutes: 18
+    timeout-minutes: 23
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -36,7 +36,15 @@ jobs:
           test -x "$avd_manager"
           "$sdk_manager" --install 'platforms;android-36' 'build-tools;36.0.0' 'system-images;android-36;default;x86_64' 'emulator'
           mode=off
-          if [[ -r /dev/kvm && -w /dev/kvm ]] && "$ANDROID_HOME/emulator/emulator" -accel-check; then mode=on; fi
+          if [[ -c /dev/kvm ]]; then
+            # Give only this job's runner access to the GitHub-hosted VM's KVM device.
+            if [[ ! -r /dev/kvm || ! -w /dev/kvm ]]; then
+              sudo chown "$(id -u):$(id -g)" /dev/kvm
+              sudo chmod u+rw /dev/kvm
+            fi
+            if "$ANDROID_HOME/emulator/emulator" -accel-check; then mode=on; fi
+          fi
+          printf 'Android emulator acceleration: %s\n' "$mode"
           printf 'INTA_ANDROID_EMULATOR_ACCEL=%s\n' "$mode" >> "$GITHUB_ENV"
           printf 'no\n' | "$avd_manager" create avd -n inta-test-ci -k 'system-images;android-36;default;x86_64'
           {

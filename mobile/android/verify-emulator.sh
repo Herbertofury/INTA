@@ -32,11 +32,11 @@ fi
 : "${ANDROID_HOME:?Android SDK required}"
 mode=${INTA_ANDROID_EMULATOR_ACCEL:-on}
 [[ "$mode" == on || "$mode" == off ]]
-attempts=90
+boot_seconds=180
 if [[ "$mode" == off ]]; then
   # Official software emulation for test builders without access to /dev/kvm.
   export ANDROID_I_WANT_MY_TCG=yes
-  attempts=160
+  boot_seconds=540
 fi
 "$ANDROID_HOME/emulator/emulator" -avd "$avd" -port 5584 -accel "$mode" -no-window -no-audio \
   -no-snapshot -no-boot-anim -camera-back none -camera-front none -gpu swiftshader_indirect \
@@ -77,13 +77,19 @@ INTA_ANDROID_STORE_PASS=local-ci-key INTA_ANDROID_KEY_PASS=local-ci-key \
 "$tools/apksigner" sign --v4-signing-enabled false --ks "$scratch/ci-only.p12" --ks-pass pass:local-ci-key \
   --out "$scratch/test.apk" "$scratch/test-aligned.apk"
 "$tools/apksigner" verify "$scratch/test.apk"
-for ((try=0; try<attempts; try++)); do
+deadline=$((SECONDS + boot_seconds))
+while (( SECONDS < deadline )); do
   kill -0 "$owned_pid" || { tail -30 "$out/emulator.log"; exit 2; }
   booted=$(timeout 5 "$adb" -s "$serial" shell getprop sys.boot_completed 2>/dev/null || true)
   [[ "$booted" == 1 ]] && break
   sleep 2
 done
-[[ "${booted:-}" == 1 ]]
+if [[ "${booted:-}" != 1 ]]; then
+  printf 'Android boot did not complete within %s seconds (acceleration %s).\n' "$boot_seconds" "$mode" >&2
+  "$adb" devices -l
+  tail -50 "$out/emulator.log"
+  exit 2
+fi
 "$adb" -s "$serial" install "$scratch/signed/INTA-Mobile-Android.apk"
 "$adb" -s "$serial" install "$scratch/test.apk"
 test_id=com.inta.mobile.test/.OfflineJobAcceptance
