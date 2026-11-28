@@ -7,12 +7,13 @@ phone boot retains the running interval. If the phone itself restarts, the
 app pauses and retains only the last saved duration rather than guessing time.
 A restart of the serviced PC does not modify this independent phone timer.
 
-This does not sign in, sync or upload records, control another device, produce
-an invoice, or replace the site, Desktop, or Rescue. It creates one real native
-Activity, not a WebView. No network, notification or storage permission is
-requested. The job record is private application data, not a portable folder
-or a cross-device backup. Uninstalling the preview removes the local record.
-This first current-job view does not yet create, index, or reopen past jobs.
+Install the [signed Android APK](https://github.com/Herbertofury/INTA/releases/tag/mobile-0.2-preview.1)
+on Android 8.0 or later. It keeps one job in private device storage. Use **Review
+handoff export** to save a completed job before uninstalling. **Receive PC
+diagnostics** opens an encrypted Desktop handoff through the system file picker.
+Create the one-time pairing code on the phone, enter it on Desktop, then open the
+transferred file on the phone to review its observations.
+The application works offline and requests no network or broad storage permission.
 
 Build on Linux with JDK 21, `zip`, a current stable Rust toolchain, Android API 36,
 and Android Build Tools 36.0.0. Install the four Rust Android targets once per toolchain.
@@ -88,3 +89,12 @@ bash mobile/android/package-release.sh \
 The output contains the signed APK, its SHA-256 and the signature verification
 receipt. The emulator uses a disposable key to exercise packaging and install.
 Public updates require the approved persistent app signing key.
+
+On the Windows release host, `owner-sign.ps1 -Action Initialize` creates or
+checks the dedicated release identity. Its encrypted keystore and Windows
+CurrentUser DPAPI-protected password live together under the owner's local
+application data. Keep an owner-controlled recoverable backup of the Windows
+identity and signing material for future updates. `-Action Identity` prints
+the public SHA-256 certificate fingerprint. `-Action Sign` takes the tested
+unsigned APK, expected SHA-256, source revision, apksigner Java classpath and
+a new output directory. The public release includes its signature receipt.
