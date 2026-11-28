@@ -113,7 +113,7 @@ namespace Inta.Desktop
             };
             ConfigureMaintenanceSearch();
             Find<Button>("Clear").Click += delegate {
-                if (MaintenanceTaxonomy.Find(section) != null) ClearMaintenanceFilters();
+                if (MaintenanceIdentityFor(section) != null) ClearMaintenanceFilters();
                 else { search.Clear(); search.Focus(); }
             };
             Find<Button>("Theme").Click += delegate { ApplyTheme(!light); SaveTheme(); };
@@ -122,7 +122,7 @@ namespace Inta.Desktop
             window.PreviewKeyDown += delegate(object sender, KeyEventArgs e) {
                 if (e.Key == Key.K && Keyboard.Modifiers == ModifierKeys.Control && !changingSetting)
                 {
-                    if (MaintenanceTaxonomy.Find(section) != null) { maintenanceSearch.Focus(); maintenanceSearch.SelectAll(); }
+                    if (MaintenanceIdentityFor(section) != null) { maintenanceSearch.Focus(); maintenanceSearch.SelectAll(); }
                     else {
                         if (!IsCatalog || section != "Directory") navigation.SelectedItem = "Directory";
                         search.Focus(); search.SelectAll();
@@ -138,7 +138,7 @@ namespace Inta.Desktop
                     debounce.Stop(); Cancel(ref pageRequest); Cancel(ref detailRequest);
                     if (maintenanceSelectionChanged)
                     {
-                        var active = MaintenanceTaxonomy.Find(section);
+                        var active = MaintenanceIdentityFor(section);
                         PortableMaintenanceRoute.Save(baseDirectory, active == null ? (MaintenanceView?)null : active.Id);
                     }
                 }
@@ -301,7 +301,7 @@ namespace Inta.Desktop
             listing = null; ResetDetail(); pageActions.Children.Clear();
             heading.Text = section == "Directory" ? "Technician directory" : section;
             count.Text = ""; Status("Loading\u2026");
-            var maintenance = MaintenanceTaxonomy.Find(section);
+            var maintenance = MaintenanceIdentityFor(section);
             SetMaintenanceSearch(maintenance);
             Split(IsCatalog || maintenance != null || section == "Diagnostics" || section == "Scenarios" || section == "Managed toolbox");
             try

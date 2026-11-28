@@ -14,11 +14,17 @@ namespace Inta.Desktop
 {
     internal sealed partial class Workspace
     {
+        private static MaintenanceIdentity MaintenanceIdentityFor(string name)
+        {
+            var route = MaintenanceTaxonomy.FindView(name);
+            return route.HasValue ? MaintenanceTaxonomy.Get(route.Value) : null;
+        }
+
         private sealed class MaintenanceGroup : IValueConverter
         {
             public object Convert(object value, Type target, object parameter, CultureInfo culture)
             {
-                var identity = MaintenanceTaxonomy.Find(value as string);
+                var identity = MaintenanceIdentityFor(value as string);
                 return identity == null ? "Technician Desk" : identity.Group;
             }
             public object ConvertBack(object value, Type target, object parameter, CultureInfo culture)
@@ -92,7 +98,7 @@ namespace Inta.Desktop
         private void MaintenanceFilterChanged()
         {
             if (loadingMaintenanceFilter) return;
-            var identity = MaintenanceTaxonomy.Find(section);
+            var identity = MaintenanceIdentityFor(section);
             if (identity == null) return;
             maintenanceFilters[identity.Id] = Tuple.Create(maintenanceSearch.Text, maintenanceRecommended.IsChecked == true);
             if (maintenanceRows != null) RenderMaintenanceRows(identity);
@@ -257,7 +263,7 @@ namespace Inta.Desktop
 
         private void RememberMaintenanceSelection(Entry item)
         {
-            var identity = MaintenanceTaxonomy.Find(section);
+            var identity = MaintenanceIdentityFor(section);
             if (identity != null && item != null) maintenanceSelections[identity.Id] = item.Id;
         }
 
