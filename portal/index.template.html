@@ -36,6 +36,7 @@
         <a href="#playbooks" data-nav="playbooks"><span data-icon="book"></span>Job playbooks<span class="nav-count" id="job-count"></span></a>
         <a href="#knowledge" data-nav="knowledge"><span data-icon="layers"></span>Knowledge desk</a>
         <a href="#saved" data-nav="saved"><span data-icon="bookmark"></span>Saved tools<span class="nav-count" id="saved-count">0</span></a>
+        <div class="training-nav" role="group" aria-label="Training simulations"><a href="#defense-circuit" data-nav="defense-circuit"><span data-icon="shield"></span>Defense Circuit</a><a href="#packet-duel" data-nav="packet-duel"><span data-icon="layers"></span>Packet Duel</a></div>
         <a href="#resources" data-nav="resources"><span data-icon="compass"></span>Resources &amp; wiki</a>
       </nav>
       <div class="sidebar-divider"></div>
@@ -72,6 +73,7 @@
   <noscript><div class="noscript">This interactive workspace needs JavaScript. The complete guides are also available in the <a href="https://github.com/Herbertofury/INTA/wiki">INTA GitHub wiki</a>.</div></noscript>
   <template id="inta-home-brand"><img class="home-heritage-mark" src="{{HERITAGE}}" alt="" width="64" height="64"></template>
   <script id="inta-data">{{DATA}}</script>
+  <script id="inta-arcade">{{ARCADE}}</script>
   <script id="inta-app">{{APP}}</script>
   <script>if ("serviceWorker" in navigator && location.protocol !== "file:") { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(() => {})); }</script>
 </body>
