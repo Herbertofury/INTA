@@ -51,6 +51,11 @@ internal sealed class ProgramsWindow : Form
             _read.FlatStyle = FlatStyle.Flat; _read.UseVisualStyleBackColor = false; _read.BackColor = surface; _read.ForeColor = ForeColor;
         }
         layout.Controls.Add(_list, 0, 3); layout.Controls.Add(_status, 0, 4); Controls.Add(layout);
+        layout.Resize += (_, _) =>
+        {
+            int width = Math.Max(1, layout.ClientSize.Width - layout.Padding.Horizontal - _status.Margin.Horizontal - 1);
+            if (_status.MaximumSize.Width != width) _status.MaximumSize = new Size(width, 0);
+        };
         _list.CellValueNeeded += (_, e) =>
         {
             if (e.RowIndex < 0 || e.RowIndex >= _shown.Length) return;

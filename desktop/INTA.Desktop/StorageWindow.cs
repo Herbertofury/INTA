@@ -33,7 +33,7 @@ internal sealed record FolderSnapshot(
 internal sealed class StorageWindow : Form
 {
     private readonly bool _contrast = SystemInformation.HighContrast;
-    private readonly TextBox _folder = new() { PlaceholderText = "Choose a local folder", AccessibleName = "Local folder path", Width = 430 };
+    private readonly TextBox _folder = new() { PlaceholderText = "Choose a local folder", AccessibleName = "Local folder path", Width = 240 };
     private readonly Button _choose = new() { Text = "&Choose folder", AccessibleName = "Choose local folder", AutoSize = true };
     private readonly Button _scan = new() { Text = "&Preview", AccessibleName = "Preview storage", AutoSize = true };
     private readonly CheckBox _allocation = new() { Text = "Include observed disk allocation", AutoSize = true,
@@ -66,7 +66,7 @@ internal sealed class StorageWindow : Form
         layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
         layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         layout.Controls.Add(new Label { Text = "Storage preview", AutoSize = true, Font = new Font(Font.FontFamily, 26F, FontStyle.Bold) }, 0, 0);
-        layout.Controls.Add(new Label { Text = "LOCAL ONLY  /  METADATA ONLY  /  NO DELETION OR CLEANUP", AutoSize = true, Margin = new Padding(3, 4, 3, 12) }, 0, 1);
+        layout.Controls.Add(new Label { Text = "LOCAL METADATA ONLY  /  NO CLEANUP", AutoSize = true, Margin = new Padding(3, 4, 3, 12) }, 0, 1);
         var paths = new FlowLayoutPanel { AutoSize = true, Dock = DockStyle.Fill, WrapContents = true };
         paths.Controls.AddRange([_folder, _choose, _scan, _cancel]);
         layout.Controls.Add(paths, 0, 2);
@@ -80,6 +80,11 @@ internal sealed class StorageWindow : Form
         _status.Margin = new Padding(3, 12, 3, 0);
         layout.Controls.Add(_status, 0, 5);
         Controls.Add(layout);
+        layout.Resize += (_, _) =>
+        {
+            int width = Math.Max(1, layout.ClientSize.Width - layout.Padding.Horizontal - _status.Margin.Horizontal - 1);
+            if (_status.MaximumSize.Width != width) _status.MaximumSize = new Size(width, 0);
+        };
         StyleControls();
         _choose.Click += (_, _) =>
         {
