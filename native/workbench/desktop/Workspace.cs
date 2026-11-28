@@ -40,7 +40,7 @@ namespace Inta.Desktop
     {
         private static readonly string[] Sections = {
             "Directory", "Tools", "Playbooks", "Methods", "Diagnostics", "Scenarios",
-            "Managed toolbox", "Windows settings", "Rescue media", "Virtual machines", "Local AI", "Activity"
+            "Managed toolbox", "System Optimization", "Rescue media", "Virtual machines", "Local AI", "Activity"
         };
         private static readonly string[] BrushKeys = { "Canvas", "Rail", "Surface", "Hover", "Select", "Border", "Muted", "Text", "Accent" };
         private static readonly string[] Dark = { "#17191B","#111314","#222529","#30353A","#23384E","#35393E","#B0B7BE","#F1F3F5","#8FC4FF" };
@@ -272,7 +272,7 @@ namespace Inta.Desktop
             listing = null; ResetDetail(); pageActions.Children.Clear();
             heading.Text = section == "Directory" ? "Technician directory" : section;
             count.Text = ""; Status("Loading\u2026");
-            Split(IsCatalog || section == "Diagnostics" || section == "Scenarios" || section == "Managed toolbox" || section == "Windows settings");
+            Split(IsCatalog || section == "Diagnostics" || section == "Scenarios" || section == "Managed toolbox" || section == "System Optimization");
             try
             {
                 if (IsCatalog)

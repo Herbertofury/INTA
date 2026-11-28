@@ -115,14 +115,25 @@ namespace Inta.Desktop
                 if (listing.Count == 0) { Message("No managed packages", "The selected toolbox contains no packages in the managed index."); Status("Toolbox index loaded."); }
                 return;
             }
-            if (section == "Windows settings")
+            if (section == "System Optimization")
             {
+                Action(pageActions, "Favorite Tweaks", ShowFavoriteTweakList);
                 Action(pageActions, "Setting profiles", ShowProfiles);
-                var settings = await core.Read(new[] { "tweak", "list" }, token);
-                if (token.IsCancellationRequested) return;
-                SetRows(Json.Array(settings).Select(Json.Object).Select(d => new Entry { Kind = "setting", Id = Json.Text(d, "id"),
-                    Title = Json.Text(d, "setting"), Subtitle = Json.Text(d, "effect"), Data = d }));
-                if (listing.Count == 0) { Message("No Windows settings available", "This core returned an empty list of supported settings."); Status("Settings loaded."); }
+                SetRows(FavoriteTweakRows());
+                try
+                {
+                    var settings = await core.Read(new[] { "tweak", "list" }, token);
+                    if (token.IsCancellationRequested) return;
+                    pendingRecord = Current == null ? null : Current.Id;
+                    SetRows(FavoriteTweakRows().Concat(Json.Array(settings).Select(Json.Object)
+                        .Select(d => new Entry { Kind = "setting", Id = Json.Text(d, "id"),
+                            Title = Json.Text(d, "setting"), Subtitle = Json.Text(d, "effect"), Data = d })));
+                }
+                catch (OperationCanceledException) { }
+                catch (Exception) {
+                    if (!token.IsCancellationRequested)
+                        Status("Favorite Tweaks are available. The local Explorer settings backend did not respond.");
+                }
                 return;
             }
             if (section == "Rescue media")
@@ -153,6 +164,7 @@ namespace Inta.Desktop
         private async Task ShowOperation(Entry item, CancellationToken token)
         {
             Title(item.Title);
+            if (item.Kind == "favorite-tweak") { ShowFavoriteTweak(item); return; }
             if (item.Kind == "profile") { await ShowProfile(item, token); return; }
             if (item.Kind == "setting") {
                 var state = Json.Object(await core.Read(new[] { "tweak", "status", item.Id }, token));
