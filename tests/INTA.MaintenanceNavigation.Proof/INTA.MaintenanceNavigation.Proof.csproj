@@ -8,6 +8,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../desktop/INTA.Desktop/MaintenanceCatalog.cs" Link="MaintenanceCatalog.cs" />
+    <Compile Include="../../native/desktop/interop/MaintenanceTaxonomy.cs" Link="MaintenanceTaxonomy.cs" />
+    <Compile Include="../../native/desktop/interop/PortableMaintenanceRoute.cs" Link="PortableMaintenanceRoute.cs" />
     <Compile Include="../../desktop/INTA.Desktop/NavigationPreference.cs" Link="NavigationPreference.cs" />
   </ItemGroup>
 </Project>
