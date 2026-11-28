@@ -55,3 +55,33 @@ The verifier checks the complete two-file package, executable bytes and Windows 
 GUI header. After a successful check, open `INTA.Desktop.exe` from that directory.
 The workflow exercises the downloaded executable on a fresh Windows runner and
 publishes the digest after its native UI checks pass. This is an unsigned preview.
+
+## Desktop installer candidate
+
+The same workflow produces `inta-desktop-msix-unsigned-win-x64` from the verified
+executable. It builds the installer twice and compares SHA-256, signs a disposable
+copy on a hosted runner, installs it, checks registration and runs the four native
+views before uninstalling. The downloadable candidate contains the unsigned MSIX
+and its checksum. Windows requires a trusted publisher signature for deployment.
+
+To rebuild on Windows, use Python 3.11 or later, the Windows SDK 10.0.26100.0
+x64 packaging tools, the extracted preview, and its independently recorded
+executable digest. Provide an unused output path and a four-part package version.
+
+```text
+python -B desktop/INTA.Desktop/msix/package.py build EXTRACTED_PREVIEW OUTPUT.msix --version 0.1.7.0 --exe-sha256 EXECUTABLE_SHA256
+```
+
+An authorized publisher can sign the verified candidate outside CI. The certificate
+subject must match the manifest identity and the signing operation must include a
+trusted timestamp. Before distribution, independently obtain the organization's
+approved signing certificate fingerprint, then check the exact signed installer.
+
+```text
+python -B desktop/INTA.Desktop/msix/package.py verify SIGNED.msix --version 0.1.7.0 --exe-sha256 EXECUTABLE_SHA256 --publisher-sha256 CERTIFICATE_SHA256
+```
+
+This gate verifies the Windows trust chain, timestamp, certificate fingerprint,
+package manifest, block hashes and executable. The project has not established
+a trusted public signing identity. The generated test certificate stays on the
+disposable runner. [Windows SDK packaging](https://learn.microsoft.com/en-us/windows/msix/package/create-app-package-with-makeappx-tool) · [Microsoft package signing](https://learn.microsoft.com/en-us/windows/msix/package/sign-app-package-using-signtool).
