@@ -1,0 +1,75 @@
+name: Verify INTA command-line control
+on:
+  pull_request:
+    paths:
+      - .github/workflows/inta-cli-preview.yml
+      - agent/INTA.LocalAgent/**
+      - data/tool-cli-coverage.json
+      - data/tools.json
+      - scripts/check-tool-cli.py
+      - scripts/cli-anything-inta.py
+      - tests/test_cli_anything_inta.py
+      - tests/test_tool_cli_coverage.py
+permissions:
+  contents: read
+jobs:
+  windows-power-harness:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Check catalog coverage and CLI rejection behavior
+        shell: pwsh
+        run: |
+          python -B -m unittest discover -s tests -p test_cli_anything_inta.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -B -m unittest discover -s tests -p test_tool_cli_coverage.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -B scripts/check-tool-cli.py
+          exit $LASTEXITCODE
+      - name: Publish the genuine local agent as a pinned single-file package
+        shell: pwsh
+        run: |
+          dotnet publish agent/INTA.LocalAgent/INTA.LocalAgent.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o cli-native
+          exit $LASTEXITCODE
+      - name: Independently verify the read-only Windows result
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          function Read-PowerIds([string] $Flag) {
+              $tool = Join-Path $env:SystemRoot 'System32\powercfg.exe'
+              $text = (& $tool $Flag) -join "`n"
+              if ($LASTEXITCODE -ne 0) { throw "Native powercfg query failed" }
+              $pattern = '(?i)\b[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\b'
+              @([regex]::Matches($text, $pattern) | ForEach-Object { $_.Value.ToLowerInvariant() } | Sort-Object -Unique)
+          }
+          $before = @(Read-PowerIds '/getactivescheme')
+          $registered = @(Read-PowerIds '/list')
+          if ($before.Length -ne 1 -or $before[0] -notin $registered) { throw 'The runner exposed no coherent power inventory' }
+          $agent = (Resolve-Path 'cli-native/inta-agent.exe').Path
+          $pin = (Get-FileHash -Algorithm SHA256 $agent).Hash.ToLowerInvariant()
+          $wrong = '0' * 64
+          $refused = python -B scripts/cli-anything-inta.py --json power-plans --agent-binary $agent --agent-sha256 $wrong
+          if ($LASTEXITCODE -ne 2 -or ($refused | ConvertFrom-Json).status -ne 'refused') { throw 'Wrong executable pin was accepted' }
+          $raw = python -B scripts/cli-anything-inta.py --json power-plans --agent-binary $agent --agent-sha256 $pin
+          if ($LASTEXITCODE -ne 0) { throw 'Native harness failed' }
+          $snapshot = $raw | ConvertFrom-Json
+          $after = @(Read-PowerIds '/getactivescheme')
+          if ($snapshot.operation -ne 'power-plans' -or $snapshot.status -ne 'ready' -or $snapshot.activeId -ne $before[0] -or
+              $after.Length -ne 1 -or $after[0] -ne $before[0] -or
+              @(Compare-Object $registered @($snapshot.plans.id | Sort-Object -Unique)).Length -ne 0) {
+              throw 'Harness does not match the independent Windows inventory or changed the active plan'
+          }
+          $facts = @{ operation = 'power-plans'; platform = 'windows-x64'; passed = $true; version = '0.1.0'; agentSha256 = $pin; sourceCommit = $env:GITHUB_SHA }
+          $facts | ConvertTo-Json | Set-Content -Encoding utf8 cli-harness-proof.json
+          $facts | ConvertTo-Json -Compress
+      - uses: actions/upload-artifact@v4
+        with:
+          name: inta-power-plans-cli-proof
+          path: cli-harness-proof.json
+          if-no-files-found: error
