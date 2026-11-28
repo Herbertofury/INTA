@@ -43,7 +43,7 @@ internal static class Launch {
                     throw new InvalidDataException("Installed file failed verification: " + e.path);
             }
         }
-        if (!new[] {"inta.exe","inta-desktop.exe","inta-capabilities.exe","inta-views.exe","INTA System Tools.exe"}.All(listed.Contains)) throw new InvalidDataException("Incomplete application package.");
+        if (!new[] {"inta.exe","inta-desktop.exe","inta-capabilities.exe","inta-views.exe","inta-diagnostic-handoff.exe","inta_optics.dll","INTA System Tools.exe"}.All(listed.Contains)) throw new InvalidDataException("Incomplete application package.");
         foreach (string f in Directory.GetFiles(root,"*",SearchOption.AllDirectories)) {
             var rel=f.Substring(root.Length+1).Replace('\\','/');
             if (rel!="manifest.json" && rel!="manifest.p7s" && !listed.Contains(rel)) throw new InvalidDataException("Unlisted installed file: "+rel);
@@ -140,7 +140,11 @@ internal static class Launch {
                 return PortableLinks(home,args[1]);
             }
             string executable="inta.exe";
-            if (args.Length > 0 && (args[0] == "capabilities" || args[0] == "tools" || args[0] == "forge" || args[0] == "schema")) {
+            if (args.Length > 0 && args[0] == "handoff") {
+                executable="inta-diagnostic-handoff.exe";
+                args=args.Skip(1).ToArray();
+            }
+            else if (args.Length > 0 && (args[0] == "capabilities" || args[0] == "tools" || args[0] == "forge" || args[0] == "schema")) {
                 executable="inta-capabilities.exe";
                 if (args[0] == "capabilities") args=args.Length==1 ? new[]{"discover"} : args.Skip(1).ToArray();
             }

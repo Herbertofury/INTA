@@ -5,6 +5,7 @@
     <application android:label="INTA Mobile" android:icon="@drawable/inta_icon" android:allowBackup="false"
         android:theme="@android:style/Theme.Material.NoActionBar">
         <activity android:name=".RepairDraftActivity" android:exported="false" />
+        <activity android:name=".DiagnosticHandoffActivity" android:exported="false" />
         <activity android:name=".JobActivity" android:launchMode="singleTask" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

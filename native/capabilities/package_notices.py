@@ -15,8 +15,7 @@ def digest(path):
         return hashlib.file_digest(source, "sha256").hexdigest()
 
 
-def build(binary, output):
-    project = Path(__file__).resolve().parent
+def build(binary, output, project):
     if not binary.is_file() or output.exists() or not output.parent.is_dir():
         raise ValueError("Select a built executable and a new output directory under an existing parent")
     meta = json.loads(subprocess.check_output(
@@ -69,7 +68,7 @@ def build(binary, output):
                 "components": components, "dependencies": [
                     {"ref": refs[n["id"]], "dependsOn": sorted(refs[d["pkg"]] for d in n["deps"])}
                     for n in meta["resolve"]["nodes"]]}
-        for filename, data in [("capabilities.cdx.json", sbom), ("license-inventory.json", notices)]:
+        for filename, data in [(root["name"].removeprefix("inta-") + ".cdx.json", sbom), ("license-inventory.json", notices)]:
             (dest / filename).write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
         dest.rename(output)
     print(f"{len(components)} dependencies and {sum(len(r['files']) for r in notices)} original license documents in {output}")
@@ -79,5 +78,6 @@ if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("executable", type=Path)
     cli.add_argument("new_directory", type=Path)
+    cli.add_argument("--project", type=Path, default=Path(__file__).resolve().parent)
     args = cli.parse_args()
-    build(args.executable.resolve(), args.new_directory.resolve())
+    build(args.executable.resolve(), args.new_directory.resolve(), args.project.resolve())

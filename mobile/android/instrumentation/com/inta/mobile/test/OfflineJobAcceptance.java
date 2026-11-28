@@ -40,12 +40,15 @@ public final class OfflineJobAcceptance extends Instrumentation {
         Bundle result = new Bundle();
         try {
             Activity activity = startActivitySync(new Intent()
-                .setClassName(getTargetContext(), stage.startsWith("draft")
+                .setClassName(getTargetContext(), "diagnostic-import".equals(stage)
+                    ? "com.inta.mobile.DiagnosticHandoffActivity" : stage.startsWith("draft")
                     ? "com.inta.mobile.RepairDraftActivity" : "com.inta.mobile.JobActivity")
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             require(getTargetContext().checkSelfPermission("android.permission.INTERNET")
                 == PackageManager.PERMISSION_DENIED, "unexpected network access");
-            if ("optics".equals(stage)) {
+            if ("diagnostic-import".equals(stage)) {
+                verifyDiagnosticImport(activity);
+            } else if ("optics".equals(stage)) {
                 var field = getTargetContext().getClassLoader().loadClass("com.inta.mobile.OpticalField");
                 var nativeLoaded = field.getDeclaredField("NATIVE");
                 nativeLoaded.setAccessible(true);
@@ -63,13 +66,10 @@ public final class OfflineJobAcceptance extends Instrumentation {
                 require(active > 8, "native interaction did not change the Android glyph field");
                 press(activity, "Appearance");
                 tapOption("Classic");
-                waitForIdleSync();
-                var prefs = getTargetContext().getSharedPreferences("optics-v1", 0);
-                require(prefs.getInt("profile", -1) == 4, "Classic appearance was not saved");
+                awaitProfile(activity, 4);
                 press(activity, "Appearance");
                 tapOption("Full Prism");
-                waitForIdleSync();
-                require(prefs.getInt("profile", -1) == 0, "Full Prism was not restored");
+                awaitProfile(activity, 0);
             } else if ("draft".equals(stage)) {
                 find(activity, "Saved on this phone.", false);
                 edit(activity, 3, "Scan the serviced PC");
@@ -206,6 +206,18 @@ public final class OfflineJobAcceptance extends Instrumentation {
         }
     }
 
+    private void awaitProfile(Activity activity, int expected) {
+        var prefs = getTargetContext().getSharedPreferences("optics-v1", 0);
+        long deadline = SystemClock.uptimeMillis() + 5000;
+        do {
+            AtomicReference<Boolean> ready = new AtomicReference<>(false);
+            runOnMainSync(() -> ready.set(activity.hasWindowFocus() && prefs.getInt("profile", -1) == expected));
+            if (ready.get()) return;
+            SystemClock.sleep(60);
+        } while (SystemClock.uptimeMillis() < deadline);
+        throw new AssertionError("appearance did not settle at " + expected + ", stored " + prefs.getInt("profile", -1));
+    }
+
     private void tapOption(String name) {
         long deadline = SystemClock.uptimeMillis() + 8000;
         do {
@@ -228,6 +240,45 @@ public final class OfflineJobAcceptance extends Instrumentation {
             SystemClock.sleep(100);
         } while (SystemClock.uptimeMillis() < deadline);
         throw new AssertionError("appearance option was not visible: " + name);
+    }
+
+    private void verifyDiagnosticImport(Activity activity) throws Exception {
+        press(activity,"Create one-time pairing");
+        clickDialog("Create pairing","android:id/button1");
+        find(activity,"Choose encrypted report",true);
+        var code=new AtomicReference<String>();
+        runOnMainSync(() -> code.set(((TextView)activity.getWindow().getDecorView().findViewWithTag("pairing-code")).getText().toString()));
+        String[] parts=code.get().split("\\.");
+        require(parts.length==3 && "INTA1".equals(parts[0]) && parts[2].matches("[0-9a-f]{32}"),"Missing ephemeral pairing");
+        long issued=Long.parseLong(parts[1]);byte[] key=new byte[16];
+        for(int n=0;n<key.length;n++) key[n]=(byte)Integer.parseInt(parts[2].substring(n*2,n*2+2),16);
+        var hash=java.security.MessageDigest.getInstance("SHA-256");hash.update("INTA-DIAGNOSTIC-SESSION-1".getBytes(StandardCharsets.US_ASCII));
+        byte[] nonce=new byte[12];new java.security.SecureRandom().nextBytes(nonce);
+        byte[] header=java.nio.ByteBuffer.allocate(44).put("INTADG01".getBytes(StandardCharsets.US_ASCII)).putLong(issued)
+                .put(hash.digest(key),0,16).put(nonce).array();
+        var cipher=javax.crypto.Cipher.getInstance("AES/GCM/NoPadding");
+        cipher.init(javax.crypto.Cipher.ENCRYPT_MODE,new javax.crypto.spec.SecretKeySpec(key,"AES"),new javax.crypto.spec.GCMParameterSpec(128,nonce));
+        Arrays.fill(key,(byte)0);cipher.updateAAD(header);
+        byte[] plain=java.nio.ByteBuffer.allocate(27).putLong(issued).putLong(8L<<30).putLong(4L<<30).put((byte)50).put((byte)1).put((byte)100).array();
+        byte[] sealed=java.nio.ByteBuffer.allocate(87).put(header).put(cipher.doFinal(plain)).array();
+        var resolver=getTargetContext().getContentResolver();
+        var values=new ContentValues();
+        values.put(MediaStore.Downloads.DISPLAY_NAME,"inta-diagnostic-test-"+SystemClock.elapsedRealtime()+".intadiag");
+        values.put(MediaStore.Downloads.MIME_TYPE,"application/octet-stream");
+        values.put(MediaStore.Downloads.IS_PENDING,1);
+        Uri uri=resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI,values);
+        require(uri!=null,"Could not create the scoped fixture");
+        try {
+            try(var out=resolver.openOutputStream(uri,"wt")){require(out!=null,"Could not write fixture");out.write(sealed);}
+            IntentFilter select=new IntentFilter(Intent.ACTION_OPEN_DOCUMENT,"*/*");select.addCategory(Intent.CATEGORY_OPENABLE);
+            var monitor=addMonitor(select,new ActivityResult(Activity.RESULT_OK,new Intent().setData(uri)),true);
+            try {
+                press(activity,"Choose encrypted report");find(activity,"Report authenticated. The pairing has been consumed.",false);
+                require(monitor.getHits()==1 && !enabled(activity,"Choose encrypted report"),"SAF or one-use invariant failed");
+            } finally {removeMonitor(monitor);}
+            press(activity,"Create one-time pairing");clickDialog("Create pairing","android:id/button1");
+            press(activity,"Revoke pairing");require(!enabled(activity,"Choose encrypted report"),"Revoked pairing still active");
+        } finally {require(resolver.delete(uri,null,null)==1,"Could not release fixture");}
     }
 
     private void clickDialog(String name, String buttonId) {

@@ -23,7 +23,7 @@ if ($certificate.NotBefore -gt [DateTime]::Now -or $certificate.NotAfter -le [Da
 # Check the exact localized HRESULT text so a bad file digest or revoked signer fails.
 $untrustedRoot = [ComponentModel.Win32Exception]::new(-2146762487).Message.Trim()
 if ($PSCmdlet.ParameterSetName -eq 'Payload') {
-    $Files = @('inta.exe','inta-desktop.exe','inta-capabilities.exe','inta-views.exe','INTA System Tools.exe') | ForEach-Object { Join-Path $Payload $_ }
+    $Files = @('inta.exe','inta-desktop.exe','inta-capabilities.exe','inta-diagnostic-handoff.exe','inta-views.exe','INTA System Tools.exe') | ForEach-Object { Join-Path $Payload $_ }
 }
 if ($PSCmdlet.ParameterSetName -eq 'Launchers') {
     $Files = @((Join-Path $Launchers 'inta.exe'), (Join-Path $Launchers 'INTA Desktop.exe'), (Join-Path $Launchers 'INTA Verify.exe'))

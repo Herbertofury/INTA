@@ -33,6 +33,7 @@ SOURCES = [
 CRATES = [
     ("workbench", "inta"),
     ("capabilities", "inta-capabilities"),
+    ("diagnostic-handoff", "inta-diagnostic-handoff"),
     ("desktop", "inta-desktop"),
 ]
 

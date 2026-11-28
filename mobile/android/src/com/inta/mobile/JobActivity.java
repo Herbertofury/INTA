@@ -153,6 +153,7 @@ public final class JobActivity extends Activity {
         handoff = button(handoffCard, "Review handoff export", this::reviewHandoff);
         handoffStatus = label(handoffCard, "Complete the job to export its recorded time and checklist.", 14, MUTED, false);
         button(body, "Draft a repair plan", () -> startActivity(new Intent(this, RepairDraftActivity.class)));
+        button(body, "Receive PC diagnostics", () -> startActivity(new Intent(this, DiagnosticHandoffActivity.class)));
         label(body, "Job records stay on this phone. An export goes to the location you choose.", 13, MUTED, false);
         setContentView(optics);
         render();
