@@ -13,7 +13,7 @@ namespace Inta.Desktop
         private FavoriteTweaks localFavorites;
         private FavoriteTweaks LocalFavorites
         {
-            get { return localFavorites ?? (localFavorites = new FavoriteTweaks(baseDirectory)); }
+            get { return localFavorites ?? (localFavorites = FavoriteTweaks.ForStateDirectory(() => WorkbenchStateDirectory.Resolve(baseDirectory))); }
         }
 
         private IEnumerable<Entry> FavoriteTweakRows()
@@ -53,7 +53,7 @@ namespace Inta.Desktop
                 maintenanceRows = BuildOptimizationRows();
                 RenderMaintenanceRows(MaintenanceTaxonomy.Get(MaintenanceView.SystemOptimization));
                 Status(persisted ? "Favorite changed. No Windows setting was changed."
-                    : "Favorite changed for this session only. Portable storage is unavailable.");
+                    : "Favorite changed for this session only. Local state storage is unavailable.");
             });
             Status(card == FavoriteTweaks.TaskbarEndTask ? "Local Windows preference · no automatic change."
                 : "No ownership menu installed by INTA.");

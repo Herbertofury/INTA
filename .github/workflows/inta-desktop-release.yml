@@ -49,8 +49,11 @@ jobs:
           if ($install.ExitCode) { throw "MSI install failed: $($install.ExitCode)" }
           try {
             $app = Join-Path $env:LOCALAPPDATA 'Programs/INTA Desktop'
+            $env:INTA_DATA_DIR = Join-Path $env:RUNNER_TEMP 'inta-installed-case-fixture'
             $result = & (Join-Path $app 'inta.exe') capabilities | ConvertFrom-Json
             if (!$result.ok) { throw 'Installed capability discovery failed' }
+            native/release/verify-installed-workspace.ps1 -InstallRoot $app -VerifiedPortableRoot $copy
+            native/workbench/desktop/verify-maintenance-ui.ps1 -Executable (Join-Path $app 'INTA Desktop.exe')
           } finally {
             $uninstall = Start-Process msiexec.exe -WindowStyle Hidden -ArgumentList "/x `"$package`" /qn /norestart" -PassThru -Wait
             if ($uninstall.ExitCode) { throw "MSI uninstall failed: $($uninstall.ExitCode)" }

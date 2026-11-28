@@ -33,12 +33,22 @@ namespace Inta.Desktop.Tweaks
         internal const string EndTaskHelp = "https://learn.microsoft.com/en-us/windows/advanced-settings/";
         internal const string BookmarkDescription = "Pins only this card in INTA. It never changes Windows.";
         private static readonly FavoriteTweak[] Cards = { TaskbarEndTask, TakeOwnership };
-        private readonly string stateDirectory;
+        private readonly Func<string> resolveStateDirectory;
         private readonly Dictionary<FavoriteTweak, bool> session = new Dictionary<FavoriteTweak, bool>();
 
         internal FavoriteTweaks(string applicationDirectory)
+            : this(FixedStateDirectory(Path.Combine(Path.GetFullPath(applicationDirectory), "state"))) { }
+
+        private FavoriteTweaks(Func<string> resolveStateDirectory)
         {
-            stateDirectory = Path.Combine(Path.GetFullPath(applicationDirectory), "state");
+            this.resolveStateDirectory = resolveStateDirectory;
+        }
+
+        private static Func<string> FixedStateDirectory(string path) { return () => path; }
+
+        internal static FavoriteTweaks ForStateDirectory(Func<string> resolveStateDirectory)
+        {
+            return new FavoriteTweaks(resolveStateDirectory);
         }
 
         internal IEnumerable<FavoriteTweak> Rows()
@@ -49,9 +59,12 @@ namespace Inta.Desktop.Tweaks
 
         internal bool Pinned(FavoriteTweak card)
         {
-            var path = BookmarkPath(card);
+            string name = BookmarkName(card);
             bool value;
             if (session.TryGetValue(card, out value)) return value;
+            var stateDirectory = resolveStateDirectory();
+            if (stateDirectory == null) return card.DefaultPinned;
+            var path = Path.Combine(stateDirectory, name);
             // These are tiny fixed records. Do not follow a redirected state
             // folder, and do not parse arbitrary data supplied in an old marker.
             try
@@ -81,8 +94,11 @@ namespace Inta.Desktop.Tweaks
 
         internal bool SetPinned(FavoriteTweak card, bool value)
         {
-            string path = BookmarkPath(card);
+            string name = BookmarkName(card);
             session[card] = value;
+            var stateDirectory = resolveStateDirectory();
+            if (stateDirectory == null) return false;
+            string path = Path.Combine(stateDirectory, name);
             string temporary = String.Empty;
             try
             {
@@ -114,11 +130,11 @@ namespace Inta.Desktop.Tweaks
             }
         }
 
-        private string BookmarkPath(FavoriteTweak card)
+        private static string BookmarkName(FavoriteTweak card)
         {
             if (card != TaskbarEndTask && card != TakeOwnership)
                 throw new ArgumentException("This tweak is not in the local favorites catalog.", "card");
-            return Path.Combine(stateDirectory, "favorite-tweak-" + card.Id + ".v1");
+            return "favorite-tweak-" + card.Id + ".v1";
         }
 
         private static bool ReparsePoint(string path)

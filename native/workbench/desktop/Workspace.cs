@@ -141,7 +141,8 @@ namespace Inta.Desktop
                     if (maintenanceSelectionChanged)
                     {
                         var active = MaintenanceIdentityFor(section);
-                        PortableMaintenanceRoute.Save(baseDirectory, active == null ? (MaintenanceView?)null : active.Id);
+                        PortableMaintenanceRoute.SaveStateDirectory(WorkbenchStateDirectory.Resolve(baseDirectory),
+                            active == null ? (MaintenanceView?)null : active.Id);
                     }
                 }
             };
@@ -150,7 +151,8 @@ namespace Inta.Desktop
                 ApplyTheme(ReadTheme()); WatchInstalledBuild();
                 if (route == null)
                 {
-                    var item = await Task.Run(() => PortableMaintenanceRoute.Read(baseDirectory));
+                    var item = await Task.Run(() => PortableMaintenanceRoute.ReadStateDirectory(
+                        WorkbenchStateDirectory.Resolve(baseDirectory)));
                     if (lifetime.IsCancellationRequested) return;
                     // The grouped collection's currency is not a user action.
                     // A user navigation or search during the read wins; otherwise
@@ -195,25 +197,23 @@ namespace Inta.Desktop
         private string ThemePath
         {
             get {
-                string configured = Environment.GetEnvironmentVariable("INTA_DATA_DIR");
-                if (!String.IsNullOrWhiteSpace(configured) && !Path.IsPathRooted(configured))
-                    throw new IOException("INTA_DATA_DIR must be an absolute directory.");
-                if (String.IsNullOrWhiteSpace(configured))
-                    configured = File.Exists(Path.Combine(baseDirectory, "inta-portable.marker")) ?
-                        Path.Combine(baseDirectory, "state") :
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "INTA", "state");
-                return Path.Combine(configured, "desktop-theme.txt");
+                string state = WorkbenchStateDirectory.Resolve(baseDirectory);
+                if (state == null) throw new IOException("The local state directory is unavailable.");
+                string path = Path.Combine(state, "desktop-theme.txt");
+                if (File.Exists(path) && (File.GetAttributes(path) & FileAttributes.ReparsePoint) != 0)
+                    throw new IOException("The theme record is redirected.");
+                return path;
             }
         }
         private bool ReadTheme()
         {
-            try { return File.Exists(ThemePath) && File.ReadAllText(ThemePath).Trim() == "light"; }
+            try { string path = ThemePath; return File.Exists(path) && File.ReadAllText(path).Trim() == "light"; }
             catch (IOException) { return false; }
             catch (UnauthorizedAccessException) { return false; }
         }
         private void SaveTheme()
         {
-            try { Directory.CreateDirectory(Path.GetDirectoryName(ThemePath)); File.WriteAllText(ThemePath, light ? "light" : "dark"); }
+            try { string path = ThemePath; Directory.CreateDirectory(Path.GetDirectoryName(path)); File.WriteAllText(path, light ? "light" : "dark"); }
             catch (Exception e) { Status("Theme changed for this session. " + e.Message); }
         }
 
