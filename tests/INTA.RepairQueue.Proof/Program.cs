@@ -1,4 +1,6 @@
 using Inta.RepairQueue;
+using Microsoft.Win32;
+using System.Runtime.Versioning;
 using System.Security.Cryptography;
 
 static void Must(bool condition, string message) { if (!condition) throw new Exception(message); }
@@ -215,6 +217,27 @@ static DiagnosticSnapshot ReadAcceptedPower()
         json.RootElement.GetProperty("plans").GetArrayLength());
 }
 
+[SupportedOSPlatform("windows")]
+static int IndependentStartupCount()
+{
+    var scopes = Environment.Is64BitOperatingSystem
+        ? new[] { (RegistryHive.CurrentUser, RegistryView.Default),
+                  (RegistryHive.LocalMachine, RegistryView.Registry64),
+                  (RegistryHive.LocalMachine, RegistryView.Registry32) }
+        : new[] { (RegistryHive.CurrentUser, RegistryView.Default),
+                  (RegistryHive.LocalMachine, RegistryView.Default) };
+    int count = 0;
+    foreach (var (hive, view) in scopes)
+    {
+        using var key = RegistryKey.OpenBaseKey(hive, view);
+        using var run = key.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", writable: false);
+        using var next = key.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\RunOnce", writable: false);
+        count = checked(count + (run?.ValueCount ?? 0) + (next?.ValueCount ?? 0));
+    }
+    return count;
+}
+
+int? beforeCount = OperatingSystem.IsWindows() ? IndependentStartupCount() : null;
 var twoRoot = Directory.CreateTempSubdirectory("inta-multistep-local-pilot-");
 try
 {
@@ -237,10 +260,8 @@ try
             Must(order.SequenceEqual(["power", "startup"]) && next.Claimed
                 && next.Observation?.Status == "ready" && next.State == QueueState.Succeeded
                 && next.Observation == CountStartup(), "approved startup count must run exactly once after restart");
-            var independentCount = Environment.GetEnvironmentVariable("INTA_EXPECTED_STARTUP_COUNT");
-            if (independentCount is not null)
-                Must(int.TryParse(independentCount, out var expected) && next.Observation?.ItemCount == expected,
-                    "startup count must agree with independent hosted Windows observation");
+            Must(next.Observation?.ItemCount == beforeCount && IndependentStartupCount() == beforeCount,
+                "startup count must match independent Windows counts before and after");
         }
         else
         {
