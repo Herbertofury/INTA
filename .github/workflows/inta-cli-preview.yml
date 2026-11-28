@@ -8,8 +8,10 @@ on:
       - data/tools.json
       - scripts/check-tool-cli.py
       - scripts/cli-anything-inta.py
+      - scripts/stage-rclone-preview.py
       - tests/test_cli_anything_inta.py
       - tests/verify_cli_storage_preview.py
+      - tests/verify_cli_rclone_local.py
       - tests/test_tool_cli_coverage.py
 permissions:
   contents: read
@@ -180,3 +182,21 @@ jobs:
             cli-storage-proof.json
             cli-native/inta-agent.exe
           if-no-files-found: error
+  publisher-rclone-hash:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Stage the publisher-checksummed rclone archive without installation
+        run: python -B scripts/stage-rclone-preview.py cli-rclone-publisher
+      - name: Compare actual rclone output and verify the local fixture is unchanged
+        run: python -B tests/verify_cli_rclone_local.py cli-rclone-publisher/rclone${{ runner.os == 'Windows' && '.exe' || '' }}
