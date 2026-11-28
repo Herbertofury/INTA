@@ -19,7 +19,7 @@ ISO_INPUTS = (
 )
 MEDIA_INPUTS = ("media", "native/workbench/media/rescue_products.py", "native/workbench/media/rescue_iso.py",
                "data/rescue-download-channel.json", "data/rescue-recovery-download-channel.json",
-               "scripts/package-media.py", "scripts/package-rescue-release.py")
+               "scripts/package-media.py", "scripts/package-rescue-release.py", "scripts/release_artwork.py")
 BUILD_RECIPE = "Build with Debian stable and current signed security updates"
 BUILD_STEPS = (
     "Validate source", BUILD_RECIPE,

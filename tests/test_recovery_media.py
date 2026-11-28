@@ -7,6 +7,7 @@ import sys
 import tempfile
 import unittest
 from unittest.mock import patch
+import zipfile
 import zipimport
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,6 +53,14 @@ class RecoveryMediaTests(unittest.TestCase):
             self.assertEqual(app["download_channel"]("recovery-only"), self.pin)
             self.assertEqual(app["download_channel"](), self.media.download_channel())
             self.assertEqual(app["products"].RECOVERY_ISO, self.pin["filename"])
+            with zipfile.ZipFile(first) as archive:
+                registry = json.loads(archive.read("inta-resources/data/brand-icons.json"))
+                artwork = [n for n in archive.namelist() if n.lower().endswith((".png", ".ico", ".svg"))]
+                self.assertEqual(artwork, ["inta-resources/assets/brand-icons/70ad9f0981b05341142b.png"])
+                records = {b["id"]: b for b in registry["brands"]}
+                for vendor, url in (("rufus", "https://rufus.ie/#download"), ("ventoy", "https://www.ventoy.net/en/download.html")):
+                    self.assertNotIn("assetId", records[vendor])
+                    self.assertEqual(records[vendor]["downloadPage"], url)
 
     def test_ventoy_preserves_an_existing_recovery_image_on_failed_readback(self):
         import hashlib
