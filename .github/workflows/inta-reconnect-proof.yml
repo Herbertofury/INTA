@@ -1,0 +1,41 @@
+name: Verify INTA local reconnect pilot
+on:
+  pull_request:
+    paths:
+      - .github/workflows/inta-reconnect-proof.yml
+      - agent/INTA.RepairQueue/**
+      - agent/INTA.LocalAgent/PowerPlans.cs
+      - tests/INTA.RepairQueue.Proof/**
+permissions:
+  contents: read
+jobs:
+  signed-local-proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [windows-latest, ubuntu-24.04]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Verify local signed worker, read-only host action, and journal recovery
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          function ActivePowerGuid {
+              $tool = Join-Path $env:SystemRoot 'System32\powercfg.exe'
+              $report = (& $tool /getactivescheme) -join "`n"
+              if ($LASTEXITCODE -ne 0) { throw 'Power scheme observation failed' }
+              $rows = [regex]::Matches($report, '(?i)\b[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\b')
+              if ($rows.Count -ne 1) { throw 'Cannot identify independent active scheme' }
+              return $rows[0].Value.ToLowerInvariant()
+          }
+          if ($IsWindows) { $before = ActivePowerGuid }
+          dotnet run --project tests/INTA.RepairQueue.Proof/INTA.RepairQueue.Proof.csproj
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if ($IsWindows -and (ActivePowerGuid) -ne $before) { throw 'Read-only pilot changed the active plan' }
