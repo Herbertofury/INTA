@@ -1,5 +1,6 @@
 import hashlib
 import importlib.util
+import json
 import pathlib
 import subprocess
 import tempfile
@@ -25,6 +26,33 @@ class NativeHarness(unittest.TestCase):
         with patch.object(harness.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, payload, b"")) as run:
             self.assertEqual(harness.inventory(self.binary, self.pin)["plans"][0]["name"], "Balanced")
         run.assert_called_once_with([str(self.binary), "--power-plans"], capture_output=True, check=True, shell=False, timeout=12)
+
+    def test_startup_validates_source_coverage_and_never_invokes_shell(self):
+        def source(scope, view, key, names=()):
+            return dict(scope=scope, view=view, key=key, status="read", entryNames=list(names), truncated=False)
+        rows = [source("current-user", "shared", "Run", ("Synthetic",)),
+                source("current-user", "shared", "RunOnce"),
+                source("machine", "default", "Run"),
+                source("machine", "default", "RunOnce")]
+        report = dict(schema=1, scope="windows-logon-run-keys-only", readOnly=True,
+                      enabledState="not-evaluated", argumentsCollected=False, sources=rows)
+        def result():
+            return subprocess.CompletedProcess([], 0, json.dumps(report).encode(), b"")
+        with patch.object(harness.subprocess, "run", return_value=result()) as run:
+            self.assertEqual(harness.startup_inventory(self.binary, self.pin)["status"], "ready")
+        run.assert_called_once_with([str(self.binary), "--startup-inventory"], capture_output=True,
+                                    check=True, shell=False, timeout=12)
+        rows[1]["status"] = "unavailable"
+        with patch.object(harness.subprocess, "run", return_value=result()):
+            self.assertEqual(harness.startup_inventory(self.binary, self.pin)["status"], "incomplete")
+        rows[1]["entryNames"] = ["Unexpected"]
+        with patch.object(harness.subprocess, "run", return_value=result()):
+            with self.assertRaises(ValueError):
+                harness.startup_inventory(self.binary, self.pin)
+        rows[1] = rows[0]
+        with patch.object(harness.subprocess, "run", return_value=result()):
+            with self.assertRaises(ValueError):
+                harness.startup_inventory(self.binary, self.pin)
 
     def test_bad_pin_never_launches(self):
         with patch.object(harness.subprocess, "run") as run:

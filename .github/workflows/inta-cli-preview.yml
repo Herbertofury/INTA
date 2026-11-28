@@ -68,11 +68,42 @@ jobs:
           $facts = @{ operation = 'power-plans'; platform = 'windows-x64'; passed = $true; version = '0.1.0'; agentSha256 = $pin; sourceCommit = $env:GITHUB_SHA }
           $facts | ConvertTo-Json | Set-Content -Encoding utf8 cli-harness-proof.json
           $facts | ConvertTo-Json -Compress
+      - name: Verify the startup harness against a disposable Windows registry fixture
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $agent = (Resolve-Path 'cli-native/inta-agent.exe').Path
+          $pin = (Get-FileHash -Algorithm SHA256 $agent).Hash.ToLowerInvariant()
+          if ($env:GITHUB_ACTIONS -ne 'true' -or $env:RUNNER_ENVIRONMENT -ne 'github-hosted') { throw 'Disposable hosted runner required' }
+          $tag = 'INTA_CLI_CI_' + [Guid]::NewGuid().ToString('N')
+          $marker = 'SYNTHETIC_VALUE_MUST_NOT_LEAVE_THE_REGISTRY'
+          $key = [Microsoft.Win32.Registry]::CurrentUser.CreateSubKey('Software\Microsoft\Windows\CurrentVersion\RunOnce')
+          $fixtureWritten = $false
+          try {
+              if ($null -ne $key.GetValue($tag)) { throw 'Fixture name already exists' }
+              $key.SetValue($tag, $marker, [Microsoft.Win32.RegistryValueKind]::String)
+              $fixtureWritten = $true
+              $before = $key.GetValue($tag)
+              $raw = python -B scripts/cli-anything-inta.py --json startup-inventory --agent-binary $agent --agent-sha256 $pin
+              if ($LASTEXITCODE -ne 0 -or ($raw -join "`n").Contains($marker)) { throw 'Startup harness failed or disclosed a registry value' }
+              $snapshot = $raw | ConvertFrom-Json
+              $matches = @($snapshot.sources | Where-Object { $_.scope -eq 'current-user' -and $_.view -eq 'shared' -and $_.key -eq 'RunOnce' -and $_.entryNames -contains $tag })
+              if ($snapshot.operation -ne 'startup-inventory' -or $snapshot.status -ne 'ready' -or $snapshot.argumentsCollected -or
+                  $matches.Length -ne 1 -or $before -ne $marker -or $key.GetValue($tag) -ne $before) {
+                  throw 'Startup harness did not match independent read-only fixture evidence'
+              }
+              @{ operation = 'startup-inventory'; platform = 'windows-x64'; passed = $true; version = '0.1.0'; agentSha256 = $pin; sourceCommit = $env:GITHUB_SHA } |
+                  ConvertTo-Json | Set-Content -Encoding utf8 cli-startup-proof.json
+          } finally {
+              if ($fixtureWritten) { $key.DeleteValue($tag, $false) }
+              $key.Dispose()
+          }
       - uses: actions/upload-artifact@v4
         with:
           name: inta-power-plans-cli-test-preview
           retention-days: 7
           path: |
             cli-harness-proof.json
+            cli-startup-proof.json
             cli-native/inta-agent.exe
           if-no-files-found: error
