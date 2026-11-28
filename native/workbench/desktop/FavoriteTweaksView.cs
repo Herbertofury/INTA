@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using Inta.Desktop.Tweaks;
+using INTA.Desktop;
 
 namespace Inta.Desktop
 {
@@ -26,12 +27,7 @@ namespace Inta.Desktop
 
         private void ShowFavoriteTweakList()
         {
-            // This listing still works before (or without) the local CLI.
-            Cancel(ref pageRequest);
-            SetRows(FavoriteTweakRows());
-            pageActions.Children.Clear();
-            Action(pageActions, "All optimization settings", RefreshPage);
-            heading.Text = "System Optimization · Favorite Tweaks";
+            OpenOptimizationSubview("favorites", "Favorite Tweaks");
         }
 
         private void ShowFavoriteTweak(Entry item)
@@ -54,9 +50,8 @@ namespace Inta.Desktop
             }
             Action(detailActions, LocalFavorites.Pinned(card) ? "Unpin from favorites" : "Pin to favorites", delegate {
                 var persisted = LocalFavorites.SetPinned(card, !LocalFavorites.Pinned(card));
-                var others = listing.Where(entry => entry.Kind != "favorite-tweak").ToArray();
-                pendingRecord = item.Id;
-                SetRows(FavoriteTweakRows().Concat(others));
+                maintenanceRows = BuildOptimizationRows();
+                RenderMaintenanceRows(MaintenanceTaxonomy.Get(MaintenanceView.SystemOptimization));
                 Status(persisted ? "Favorite changed. No Windows setting was changed."
                     : "Favorite changed for this session only. Portable storage is unavailable.");
             });

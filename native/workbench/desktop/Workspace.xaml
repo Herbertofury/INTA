@@ -92,7 +92,14 @@
       <Button x:Name="Appearance" Content="Appearance Studio" Margin="0,0,0,6"/>
       <Button x:Name="Theme" Content="Use light theme"/>
      </StackPanel>
-     <ListBox x:Name="Navigation" AutomationProperties.Name="Workspace navigation">
+     <ListBox x:Name="Navigation" AutomationProperties.Name="Workspace navigation" KeyboardNavigation.DirectionalNavigation="Contained">
+      <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+       <Setter Property="Padding" Value="8,4"/><Setter Property="AutomationProperties.Name" Value="{Binding}"/>
+      </Style></ListBox.ItemContainerStyle>
+      <ListBox.GroupStyle><GroupStyle>
+       <GroupStyle.HeaderTemplate><DataTemplate><TextBlock Text="{Binding Name}" FontSize="11" FontWeight="SemiBold"
+        Foreground="{DynamicResource Muted}" Margin="8,9,0,3" AutomationProperties.Name="{Binding Name}"/></DataTemplate></GroupStyle.HeaderTemplate>
+      </GroupStyle></ListBox.GroupStyle>
       <ListBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding}" TextWrapping="Wrap"/></DataTemplate></ListBox.ItemTemplate>
      </ListBox>
     </DockPanel>
@@ -100,20 +107,30 @@
    <Grid Grid.Column="1"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
     <Grid x:Name="OpticalBackground" Grid.RowSpan="2" IsHitTestVisible="False" ClipToBounds="True"/>
     <Border BorderBrush="{DynamicResource Border}" BorderThickness="0,0,0,1" Padding="21,14">
-     <DockPanel><Button x:Name="Clear" Content="Clear" DockPanel.Dock="Right" Margin="8,0,0,0" Padding="10,4"/>
+     <DockPanel>
+      <Button x:Name="Clear" Content="Clear" DockPanel.Dock="Right" Margin="8,0,0,0" Padding="10,4"/>
+      <CheckBox x:Name="MaintenanceRecommended" Content="INTA Recommended" DockPanel.Dock="Right" VerticalAlignment="Center"
+        Foreground="{DynamicResource Text}" Margin="9,0,0,0" Visibility="Collapsed"
+        AutomationProperties.HelpText="Filter tools within this maintenance view only. No settings, results or installation change."/>
       <TextBlock Text="Search" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0,0,10,0"/>
-      <TextBox x:Name="Search" AutomationProperties.Name="Search all tools, playbooks and methods" ToolTip="Search all tools, playbooks and methods (Ctrl+K)" MaxLength="512"/>
+      <Grid>
+       <TextBox x:Name="Search" AutomationProperties.Name="Search all tools, playbooks and methods" ToolTip="Search all tools, playbooks and methods (Ctrl+K)" MaxLength="512"/>
+       <TextBox x:Name="MaintenanceSearch" AutomationProperties.Name="Search tools in this maintenance view"
+        ToolTip="Search tools in this maintenance view (Ctrl+K)" MaxLength="512" Visibility="Collapsed"/>
+      </Grid>
      </DockPanel>
     </Border>
     <Grid Grid.Row="1" Margin="21,16,18,12"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
      <DockPanel><TextBlock x:Name="Count" DockPanel.Dock="Right" Margin="8,0,0,0" VerticalAlignment="Center" Foreground="{DynamicResource Muted}"/>
-      <TextBlock x:Name="Heading" FontWeight="SemiBold" FontSize="24" TextWrapping="Wrap"/></DockPanel>
+      <TextBlock x:Name="Heading" AutomationProperties.AutomationId="WorkspaceHeading" AutomationProperties.Name="{Binding Text, RelativeSource={RelativeSource Self}}" FontWeight="SemiBold" FontSize="24" TextWrapping="Wrap"/></DockPanel>
      <WrapPanel x:Name="PageActions" Grid.Row="1" Margin="0,6,0,8"/>
      <Grid Grid.Row="2" x:Name="Body"><Grid.ColumnDefinitions>
       <ColumnDefinition x:Name="ListColumn" Width="2*"/><ColumnDefinition x:Name="GapColumn" Width="16"/><ColumnDefinition x:Name="DetailColumn" Width="3*"/>
      </Grid.ColumnDefinitions>
       <Border x:Name="EntryBorder" BorderBrush="{DynamicResource Border}" BorderThickness="0,1,0,0">
-       <ListBox x:Name="Entries" ItemTemplate="{StaticResource EntryTemplate}" AutomationProperties.Name="Workspace results"/>
+       <ListBox x:Name="Entries" ItemTemplate="{StaticResource EntryTemplate}" AutomationProperties.Name="Workspace results">
+        <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}"><Setter Property="AutomationProperties.Name" Value="{Binding Title}"/></Style></ListBox.ItemContainerStyle>
+       </ListBox>
       </Border>
       <Grid x:Name="DetailGrid" Grid.Column="2"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
        <WrapPanel x:Name="DetailActions"/>

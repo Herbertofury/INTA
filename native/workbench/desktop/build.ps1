@@ -17,6 +17,8 @@ $arguments += $refs | ForEach-Object { "/reference:$(Join-Path $framework $_)" }
 $arguments += (Get-ChildItem -LiteralPath $PSScriptRoot -Filter '*.cs' | Sort-Object Name).FullName
 $arguments += (Join-Path $PSScriptRoot '..\..\desktop\interop\PrismField.cs')
 $arguments += (Join-Path $PSScriptRoot '..\..\desktop\interop\FavoriteTweaks.cs')
+$arguments += (Join-Path $PSScriptRoot '..\..\desktop\interop\MaintenanceTaxonomy.cs')
+$arguments += (Join-Path $PSScriptRoot '..\..\desktop\interop\PortableMaintenanceRoute.cs')
 & $compiler @arguments
 if ($LASTEXITCODE -ne 0) { throw "Desktop compilation failed with exit $LASTEXITCODE." }
 Get-Item -LiteralPath (Join-Path $output 'inta-desktop.exe')

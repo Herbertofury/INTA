@@ -14,12 +14,11 @@ namespace Inta.Desktop
             try {
                 var profiles = await core.Read(new[] { "tweak", "profiles" }, token);
                 if (token.IsCancellationRequested) return;
-                pageActions.Children.Clear();
-                Action(pageActions, "Individual settings", RefreshPage);
-                SetRows(Json.Array(profiles).Select(Json.Object).Select(p => new Entry {
+                profileRows = Json.Array(profiles).Select(Json.Object).Select(p => new Entry {
                     Kind = "profile", Id = Json.Text(p, "id"), Title = Json.Text(p, "name"),
                     Subtitle = Json.Array(Json.Get(p, "settings")).Count() + " Explorer preferences"
-                }));
+                }).ToList();
+                OpenOptimizationSubview("profiles", "Setting profiles");
             } catch (OperationCanceledException) { }
             catch (Exception e) { if (!token.IsCancellationRequested) Message("Unable to load profiles", e.GetBaseException().Message); }
         }
