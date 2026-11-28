@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import runpy
 from pathlib import Path
 import shutil
 import subprocess
@@ -30,6 +31,8 @@ SOURCES = [
     "wiki",
     "media",
     "assets",
+    "scripts/release_artwork.py",
+    "scripts/brand_markdown.py",
 ]
 CRATES = [
     ("workbench", "inta"),
@@ -266,6 +269,7 @@ def build(out, thumbprint):
     offline = importlib.util.module_from_spec(loader)
     loader.loader.exec_module(offline)
     offline.offline_guides(out)
+    runpy.run_path(str(HERE / "offline_artwork.py"))["apply_release_artwork"](out)
     with tempfile.TemporaryDirectory(dir=TARGET) as state:
         env = dict(os.environ, INTA_DATA_DIR=state)
         catalog = json.loads(output(out / "inta.exe", "catalog", env=env))
