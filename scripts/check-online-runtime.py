@@ -105,7 +105,7 @@ def main():
         check(home_mark.get_attribute('src') != nav_mark.get_attribute('src'),
               'Front-page Heritage and navigation Application must be different')
         check(page.locator('[data-brand-icon="app-inta"]').count() > 0, 'Missing INTA inline logo')
-        check(page.locator('[data-brand-icon="app-inta"]').evaluate_all(
+        check(page.locator('[data-inta-brand-mark]').evaluate_all(
             '(icons) => icons.every(i => getComputedStyle(i).backgroundColor === "rgba(0, 0, 0, 0)")'),
             'INTA inline logo has a visible backing')
         for width in (320, 1440):
