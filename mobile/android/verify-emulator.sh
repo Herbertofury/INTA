@@ -15,6 +15,7 @@ out=$(cd -- "$5" && pwd)
 scratch=$(mktemp -d "$out/.verify.XXXXXX")
 cleanup() {
   if [[ -n "${owned_pid:-}" ]]; then
+    timeout 12 "$adb" -s emulator-5584 logcat -d -b crash > "$out/android-crash.log" 2>&1 || true
     kill "$owned_pid" 2>/dev/null || true
     wait "$owned_pid" 2>/dev/null || true
   fi
@@ -29,7 +30,15 @@ if "$adb" devices | awk -v serial="$serial" '$1 == serial { matched=1 } END { ex
   exit 2
 fi
 : "${ANDROID_HOME:?Android SDK required}"
-"$ANDROID_HOME/emulator/emulator" -avd "$avd" -port 5584 -accel on -no-window -no-audio \
+mode=${INTA_ANDROID_EMULATOR_ACCEL:-on}
+[[ "$mode" == on || "$mode" == off ]]
+attempts=90
+if [[ "$mode" == off ]]; then
+  # Official software emulation for test builders without access to /dev/kvm.
+  export ANDROID_I_WANT_MY_TCG=yes
+  attempts=160
+fi
+"$ANDROID_HOME/emulator/emulator" -avd "$avd" -port 5584 -accel "$mode" -no-window -no-audio \
   -no-snapshot -no-boot-anim -camera-back none -camera-front none -gpu swiftshader_indirect \
   >"$out/emulator.log" 2>&1 &
 owned_pid=$!
@@ -49,7 +58,7 @@ for pair in "$scratch/app/inta-mobile-unsigned.apk:$scratch/app.apk" "$scratch/t
     --out "${pair#*:}" "${pair%%:*}"
   "$tools/apksigner" verify "${pair#*:}"
 done
-for ((try=0; try<90; try++)); do
+for ((try=0; try<attempts; try++)); do
   kill -0 "$owned_pid" || { tail -30 "$out/emulator.log"; exit 2; }
   booted=$(timeout 5 "$adb" -s "$serial" shell getprop sys.boot_completed 2>/dev/null || true)
   [[ "$booted" == 1 ]] && break
