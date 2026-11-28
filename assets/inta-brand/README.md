@@ -1,12 +1,20 @@
-# INTA branding
+# INTA brand kit
 
-Use **Heritage** where the logo has room to be seen: the site wordmark, Windows and Android app headers, the Rescue desktop backdrop, and the repository and wiki banners. Use **Application** at icon size: Windows executables and shortcuts, Android launcher, web tab and home-screen icons, Rescue launcher, and inline catalog marks. Existing stable URLs are preserved.
+| Artwork | Where to use it | Preview |
+| --- | --- | --- |
+| **Application** | Default mark: navigation, tool/source links, Desktop and Mobile headers, Windows ICO/MSIX, web and mobile launchers, Rescue launcher and workspace. Use the supplied transparent artwork with no decorative backing. | <img src="application-64.png" width="36" height="36" alt="INTA Application"> |
+| **Heritage** | Front-page heroes, such as Hub Home, the repository cover, and Wiki Home; also appropriate for a dedicated splash screen. Never use it in shared navigation, in-line links, or ordinary app chrome. | <img src="heritage-192.png" width="48" height="48" alt="INTA Heritage"> |
 
-## Change the logo
+## Source pack
 
-1. In an approved INTA icon pack, provide the Application ICO and transparent PNGs (64, 192 and 512 px) and the Heritage 192 px PNG. Preserve the current pack's file layout. The importer reads only the five named image entries, never extracts or runs anything.
-2. Run `python3 -m pip install Pillow` if your development environment does not already have it, then `python3 scripts/refresh-inta-brand.py --pack path/to/INTA-Complete-Icon-Pack.zip`. To rebuild after changing the canonical images directly, use `--sync` instead.
-3. The swap regenerates the checked-in Hub and offline icons in the same command. Verify with `python3 scripts/refresh-inta-brand.py --check` and `python3 scripts/build-hub.py --check`.
-4. Review generated changes and run the Hub, Windows and Android workflows. Publish Rescue only from a new security-verified build with BIOS and UEFI evidence. Files already released are immutable; the new branding appears in separately built releases.
+[Download the original complete icon pack](source/INTA-Complete-Icon-Pack.zip) · [SHA-256](source/SHA256SUMS)
 
-The PNGs beside this README and `native/workbench/desktop/inta.ico` are the source of truth. Site assets are generated; Android packages the PNGs directly; Windows reads the ICO and embeds Heritage; the MSIX package uses derived fixed-size logos whose hashes are sealed. The old hash-shaped inline icon URL is retained as a compatibility alias. Do not edit a generated surface by hand.
+The archive preserves the supplied bytes and original folder layout. Each family has a native PNG, a multi-size ICO, 19 PNG sizes from 16 to 1024 px, and its own notes. The archive also includes the original icon-size proof. The four working PNGs here and the [Windows Application ICO](../../native/workbench/desktop/inta.ico) are the build inputs. The stable inline icon URL remains a compatibility alias.
+
+## Replace the kit
+
+1. Make a replacement ZIP with the same Application and Heritage layout. Provide transparent Application PNGs at 64, 192 and 512 px, a transparent multi-size Application ICO, and Heritage at 192 px. Keep the supplied originals and proof together.
+2. Install Pillow if needed, then run `python3 scripts/refresh-inta-brand.py --pack path/to/new-pack.zip` from the repository root. The command also saves the original ZIP and its SHA-256 in `source/`. Use `--sync` to regenerate from the current committed working inputs without replacing the pack. The importer reads only five known files, rejects opaque canvases, and regenerates the site, offline cache, inline mark, covers and MSIX resources.
+3. Run `python3 scripts/refresh-inta-brand.py --check` and `python3 scripts/build-hub.py --check`. Review the Hub, Windows and Android builds. Rescue requires a separately verified, security-cleared build; existing release packages are not changed.
+
+Do not edit the generated graphics or published site HTML by hand.
