@@ -3,8 +3,9 @@ using Inta.Desktop;
 
 Require(MaintenanceTaxonomy.Rows.Select(v => v.Group).Distinct().SequenceEqual(["Storage", "Privacy & Security", "System Tools"]), "Three exact groups");
 Require(MaintenanceTaxonomy.Rows.Count == 9 && MaintenanceTaxonomy.Rows.Select(v => v.Key).Distinct().Count() == 9, "Nine stable canonical keys");
-Require(MaintenanceTaxonomy.Find("System Optimization").Key == "system-optimization", "Canonical Favorite Tweaks parent");
-Require(MaintenanceTaxonomy.Find("Technician Desk") == null && MaintenanceTaxonomy.Find("INTA Recommended") == null, "The Desk and filter are not maintenance routes");
+Require(MaintenanceTaxonomy.FindView("System Optimization") == MaintenanceView.SystemOptimization
+    && MaintenanceTaxonomy.Get(MaintenanceView.SystemOptimization).Key == "system-optimization", "Canonical Favorite Tweaks parent");
+Require(!MaintenanceTaxonomy.FindView("Technician Desk").HasValue && !MaintenanceTaxonomy.FindView("INTA Recommended").HasValue, "The Desk and filter are not maintenance routes");
 Require(MaintenanceTaxonomy.Matches(MaintenanceTaxonomy.Terms("    LARGE  fiLe "), "Large files", "read-only"), "Scoped multi-term match");
 Require(!MaintenanceTaxonomy.Matches(MaintenanceTaxonomy.Terms("large privacy"), "Large files", "read-only"), "No broadening across routes");
 
