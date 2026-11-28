@@ -154,6 +154,30 @@ def new_offer_gaps(report, base_catalog, catalog):
     return result
 
 
+def public_portal_coverage(catalog, ledger):
+    """Project evidence only, never artifact hashes, download links or job capability."""
+    report = audit(catalog, ledger, now=datetime(1970, 1, 1, tzinfo=timezone.utc))
+    public = {}
+    for tool_id, entry in ledger["tools"].items():
+        row = report["tools"][tool_id]
+        record = {}
+        for name in entry["requiredOperations"]:
+            proof = entry["operations"].get(name, {})
+            record[name] = {key: proof[key] for key in
+                            ("state", "platform", "version", "runtimeEvidence", "source", "expiresAt")
+                            if key in proof}
+            if not proof:
+                record[name]["state"] = "not-verified"
+        fingerprints = {(value["platform"], value["version"], value["artifactSha256"])
+                        for value in row["bindings"].values()}
+        platform = next(iter(fingerprints))[0] if len(fingerprints) == 1 else None
+        labels = next(tool.get("platforms", []) for tool in catalog if tool["id"] == tool_id)
+        full = row["status"] == "ready" and bool(labels) and all(
+            label in OFFER_PLATFORM_LABELS.get(platform, ()) for label in labels)
+        public[tool_id] = {"status": "verified" if full else "partial", "operations": record}
+    return public
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--catalog", type=pathlib.Path, default=ROOT / "data/tools.json")

@@ -81,6 +81,18 @@ class Coverage(unittest.TestCase):
         self.catalog[0]["platforms"] = ["Windows", "Windows 11"]
         self.assertEqual(control.new_offer_gaps(report, before, self.catalog), {})
 
+    def test_portal_projection_does_not_ship_install_or_job_data(self):
+        self.operation.update(state="tested-preview", expiresAt="2030-03-04T00:00:00Z",
+                              artifactUrl="https://example.com/ci", archiveSha256="b" * 64)
+        public = control.public_portal_coverage(self.catalog, self.ledger)
+        self.assertNotIn("unpinned", public)
+        row = public["fake-tool"]
+        self.assertEqual(row["status"], "partial")
+        self.assertEqual(row["operations"]["inventory"]["state"], "tested-preview")
+        self.assertEqual(row["operations"]["inventory"]["expiresAt"], "2030-03-04T00:00:00Z")
+        self.assertTrue({"artifactUrl", "archiveSha256", "artifactSha256", "effect"}.isdisjoint(
+            row["operations"]["inventory"]))
+
     def test_claim_without_evidence_refused(self):
         del self.operation["runtimeEvidence"]
         with self.assertRaises(ValueError):

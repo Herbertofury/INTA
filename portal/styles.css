@@ -1329,7 +1329,7 @@ h1 .prose-link, h2 .prose-link, h3 .prose-link { color: inherit; text-decoration
 .library-options { display: grid; grid-template-columns: minmax(150px, 1.24fr) minmax(0, 4fr); gap: 8px; }
 /* Filter reading order matches keyboard flow: sort first, then the four facet selects. */
 .library-filter-primary { display: grid; min-width: 0; }
-.library-workspace .library-filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.library-workspace .library-filters { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
 .library-more-filters { display: none; }
 .library-filter { display: grid; min-width: 0; gap: 4px; font-size: .875rem; font-weight: 600; color: var(--muted); }
 .library-filter > span { min-height: 1.4em; }
