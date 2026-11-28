@@ -74,6 +74,13 @@ distinguished from unreadable or truncated ones. Names can be sensitive, so
 keep output local and do not send or store it in shared logs by default.
 The command is not a production certification for a full startup manager.
 
+Optional `--include-folders` keeps that registry inventory and adds base names
+from the current-user and all-users Startup folders and a Windows Settings link
+(unopened). It uses the same collector as Desktop and does not open files, resolve
+shortcut targets, disclose full paths, start items, or change startup settings.
+A redirected or unreadable folder is reported as incomplete, not empty.
+The default remains the original registry-only scope.
+
 ### Registered desktop programs preview
 
 ```text
