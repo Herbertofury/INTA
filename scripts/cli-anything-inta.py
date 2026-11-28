@@ -1,5 +1,6 @@
 """One-shot, JSON CLI harness for the reviewed native INTA Local Agent inventory."""
 import argparse
+import datetime
 import hashlib
 import json
 import pathlib
@@ -145,6 +146,44 @@ def installed_programs(path, expected_sha):
     return {"status": "incomplete" if report["capped"] or report["errors"] else "ready", **report}
 
 
+def storage_preview(path, expected_sha, folder, days, entry_limit):
+    if not folder.is_absolute() or folder.parent == folder or type(days) is not int or not 1 <= days <= 3650 \
+            or type(entry_limit) is not int or not 1 <= entry_limit <= 1_000_000:
+        raise ValueError("select a bounded absolute local child folder")
+    binary = executable(path, expected_sha)
+    run = subprocess.run([str(binary), "--storage-preview", str(folder), str(days), str(entry_limit)],
+                         capture_output=True, check=True, shell=False, timeout=30)
+    if len(run.stdout) > 4096:
+        raise ValueError("native response is too large")
+    report = json.loads(run.stdout.decode("utf-8"), object_pairs_hook=unique)
+    quantities = {"entriesScanned", "filesScanned", "logicalBytes", "olderFiles", "olderLogicalBytes",
+                  "specialEntriesSkipped", "readErrors", "depthLimitedDirectories"}
+    expected = quantities | {"schemaVersion", "resultType", "observedAt", "minimumAgeDays", "entryLimit",
+                             "entryLimitReached", "partial"}
+    if (not isinstance(report, dict) or set(report) != expected
+            or type(report["schemaVersion"]) is not int or report["schemaVersion"] != 1
+            or report["resultType"] != "storage-preview"
+            or type(report["minimumAgeDays"]) is not int or report["minimumAgeDays"] != days
+            or type(report["entryLimit"]) is not int or report["entryLimit"] != entry_limit
+            or not isinstance(report["observedAt"], str)
+            or not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,7})?\+00:00",
+                                report["observedAt"])
+            or any(type(report[key]) is not int or not 0 <= report[key] <= 2**63 - 1 for key in quantities)
+            or type(report["entryLimitReached"]) is not bool or type(report["partial"]) is not bool):
+        raise ValueError("unexpected native storage result")
+    datetime.datetime.fromisoformat(report["observedAt"])
+    n = report["entriesScanned"]
+    if (n > entry_limit or report["filesScanned"] + report["specialEntriesSkipped"] + report["depthLimitedDirectories"] > n
+            or report["olderFiles"] > report["filesScanned"] or report["olderLogicalBytes"] > report["logicalBytes"]
+            or (report["filesScanned"] == 0 and report["logicalBytes"] != 0)
+            or (report["olderFiles"] == 0 and report["olderLogicalBytes"] != 0)
+            or report["readErrors"] > n + 1
+            or (report["entryLimitReached"] and n != entry_limit)
+            or report["partial"] != bool(report["entryLimitReached"] or report["readErrors"] or report["depthLimitedDirectories"])):
+        raise ValueError("inconsistent native storage totals")
+    return {"status": "incomplete" if report["partial"] else "ready", **report}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help="output a machine-readable JSON result (also the default)")
@@ -152,14 +191,22 @@ def main(argv=None):
     power = sub.add_parser("power-plans", help="read only: list Windows power plans and their active selection")
     startup = sub.add_parser("startup-inventory", help="read only: Windows Run and RunOnce names, no commands or enable state")
     programs = sub.add_parser("installed-programs", help="read only: Windows desktop registration display metadata")
-    for operation in (power, startup, programs):
+    storage = sub.add_parser("storage-preview", help="read only: aggregate metadata for a selected local folder")
+    storage.add_argument("--folder", type=pathlib.Path, required=True)
+    storage.add_argument("--minimum-age-days", type=int, default=7)
+    storage.add_argument("--entry-limit", type=int, default=100000)
+    for operation in (power, startup, programs, storage):
         operation.add_argument("--agent-binary", type=pathlib.Path, required=True)
         operation.add_argument("--agent-sha256", required=True)
     args = parser.parse_args(argv)
     try:
-        read = {"power-plans": inventory, "startup-inventory": startup_inventory,
-                "installed-programs": installed_programs}[args.operation]
-        result = read(args.agent_binary, args.agent_sha256)
+        if args.operation == "storage-preview":
+            result = storage_preview(args.agent_binary, args.agent_sha256, args.folder,
+                                     args.minimum_age_days, args.entry_limit)
+        else:
+            read = {"power-plans": inventory, "startup-inventory": startup_inventory,
+                    "installed-programs": installed_programs}[args.operation]
+            result = read(args.agent_binary, args.agent_sha256)
     except (OSError, ValueError, TypeError, RecursionError, subprocess.SubprocessError):
         print(json.dumps({"operation": args.operation, "status": "refused"}))
         return 2
