@@ -2,9 +2,18 @@
 """An offline, attended disk-recovery workspace."""
 import subprocess
 import sys
+import webbrowser
 from pathlib import Path
 
 TITLE = "INTA Rescue Recovery"
+OFFICIAL = {
+    "GSmartControl": ("https://gsmartcontrol.shaduri.dev/", ("gsmartcontrol","org.gsmartcontrol.GSmartControl")),
+    "GParted": ("https://gparted.org/", ("gparted","org.gnome.GParted")),
+    "TestDisk": ("https://www.cgsecurity.org/wiki/TestDisk", ()),
+    "PhotoRec": ("https://www.cgsecurity.org/wiki/PhotoRec", ()),
+    "Clonezilla": ("https://clonezilla.org/", ()),
+    "GNU ddrescue": ("https://www.gnu.org/software/ddrescue/", ()),
+}
 SECTIONS = {
     "Inspect": [
         ("Disk inventory", "Show device sizes, filesystems, mount points and read-only flags.", "List devices",
@@ -59,6 +68,33 @@ def build_app():
         except OSError as error:
             brands.showerror("Could not open recovery tool", str(error))
 
+    def title_widget(parent,name):
+        if name not in OFFICIAL:
+            return brands.text(parent,name,font=("TkDefaultFont",11,"bold"))
+        url,names=OFFICIAL[name]
+        label=ttk.Label(parent,text=name,foreground="#8bb8ff",cursor="hand2",takefocus=True)
+        # Optional original distribution icons come from the installed Debian packages.
+        # Tools without a packaged PNG retain their accessible publisher text link.
+        icons=Path("/usr/share/icons/hicolor")
+        for size in (24,22,32,16):
+            for stem in names:
+                candidate=icons/f"{size}x{size}"/"apps"/(stem+".png")
+                if candidate.is_file() and candidate.resolve().is_relative_to(icons) and candidate.stat().st_size<256*1024:
+                    try:
+                        label.icon=tk.PhotoImage(file=str(candidate))
+                        label.configure(image=label.icon,compound="left")
+                        break
+                    except tk.TclError:
+                        continue
+            if hasattr(label,"icon"):
+                break
+        def open_publisher(_event):
+            webbrowser.open(url)
+            return "break"
+        for event in ("<Button-1>","<Return>","<space>"):
+            label.bind(event,open_publisher)
+        return label
+
     for name, rows in SECTIONS.items():
         view = ScrollableFrame(tabs, padding=16)
         tabs.add(view,text=name)
@@ -66,7 +102,7 @@ def build_app():
         panel.columnconfigure(1, weight=1)
         for index,(tool,detail,label,command,terminal) in enumerate(rows):
             y = index*2
-            brands.text(panel,tool,font=("TkDefaultFont",11,"bold"),icon_size=24).grid(row=y,column=0,sticky="w",padx=(0,12),pady=9)
+            title_widget(panel,tool).grid(row=y,column=0,sticky="w",padx=(0,12),pady=9)
             brands.text(panel,detail).grid(row=y,column=1,sticky="ew",padx=(0,12),pady=9)
             ttk.Button(panel,text=label,command=lambda c=command,t=terminal:launch(c,t)).grid(row=y,column=2,sticky="e")
             ttk.Separator(panel).grid(row=y+1,column=0,columnspan=3,sticky="ew")
