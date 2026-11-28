@@ -213,8 +213,10 @@ public final class OfflineJobAcceptance extends Instrumentation {
         long deadline = SystemClock.uptimeMillis() + 5000;
         do {
             AtomicReference<Boolean> ready = new AtomicReference<>(false);
-            runOnMainSync(() -> ready.set(activity.hasWindowFocus() && prefs.getInt("profile", -1) == expected));
-            if (ready.get()) return;
+            runOnMainSync(() -> ready.set(!activity.isDestroyed() && prefs.getInt("profile", -1) == expected));
+            AccessibilityNodeInfo root = getUiAutomation().getRootInActiveWindow();
+            if (ready.get() && root != null && root.findAccessibilityNodeInfosByText("Repair job").stream()
+                    .anyMatch(item -> item.isVisibleToUser() && "Repair job".contentEquals(item.getText() == null ? "" : item.getText()))) return;
             SystemClock.sleep(60);
         } while (SystemClock.uptimeMillis() < deadline);
         throw new AssertionError("appearance did not settle at " + expected + ", stored " + prefs.getInt("profile", -1));
