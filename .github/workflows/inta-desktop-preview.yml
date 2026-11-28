@@ -1,5 +1,6 @@
 name: Verify INTA Desktop preview
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - 'desktop/INTA.Desktop/**'
@@ -20,22 +21,61 @@ on:
 permissions:
   contents: read
 jobs:
-  native-startup:
+  build:
     runs-on: windows-latest
     timeout-minutes: 15
+    outputs:
+      sha256: ${{ steps.package.outputs.sha256 }}
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - uses: actions/setup-dotnet@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: '10.0.x'
       - name: Build the native Windows preview
         run: dotnet publish desktop/INTA.Desktop/INTA.Desktop.csproj -c Release -r win-x64 --self-contained -warnaserror -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o out
-      - name: Exercise the exact native window on the test runner
-        shell: powershell
-        run: desktop/INTA.Desktop/verify-native-ui.ps1 out/INTA.Desktop.exe
-      - uses: actions/upload-artifact@v4
+      - name: Package the single executable and record its independent build digest
+        id: package
+        shell: pwsh
+        run: |
+          $sha = (Get-FileHash -Algorithm SHA256 -LiteralPath out/INTA.Desktop.exe).Hash.ToLowerInvariant()
+          $null = New-Item -ItemType Directory -Path preview
+          Copy-Item -LiteralPath out/INTA.Desktop.exe -Destination preview/INTA.Desktop.exe
+          [IO.File]::WriteAllText("$pwd/preview/SHA256SUMS", "$sha  INTA.Desktop.exe`n", [Text.Encoding]::ASCII)
+          "sha256=$sha" >> $env:GITHUB_OUTPUT
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        id: upload
         with:
           name: inta-desktop-startup-preview-win-x64
-          path: out/INTA.Desktop.exe
+          path: preview/
           if-no-files-found: error
           retention-days: 30
+
+  native-startup:
+    needs: build
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Exercise invalid preview packages
+        run: python -B -m unittest discover -s desktop/INTA.Desktop -p test_verify_preview.py
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          artifact-ids: ${{ needs.build.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/inta-desktop-preview
+      - name: Check downloaded bytes and run the native UI from the isolated package
+        shell: powershell
+        env:
+          BUILD_SHA256: ${{ needs.build.outputs.sha256 }}
+        run: |
+          $package = Join-Path $env:RUNNER_TEMP 'inta-desktop-preview'
+          python -B desktop/INTA.Desktop/verify-preview.py $package --sha256 $env:BUILD_SHA256
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          desktop/INTA.Desktop/verify-native-ui.ps1 (Join-Path $package 'INTA.Desktop.exe')
+          $summary = "Verified Windows x64 Desktop preview at commit $env:GITHUB_SHA`n`nExecutable SHA-256: $env:BUILD_SHA256`n"
+          [IO.File]::AppendAllText($env:GITHUB_STEP_SUMMARY, $summary, [Text.UTF8Encoding]::new($false))

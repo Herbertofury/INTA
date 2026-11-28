@@ -39,3 +39,19 @@ stay separate. Searches do not change the computer or invoke a package manager.
 Hidden and unnamed records are omitted; unreadable sources and scan caps are
 reported. This is not the Windows Store app list and does not uninstall programs.
 See Microsoft's [Windows Installer registry properties](https://learn.microsoft.com/windows/win32/msi/uninstall-registry-key).
+
+## Verify a downloaded preview
+
+Open a successful **Verify INTA Desktop preview** workflow run and copy the
+**Executable SHA-256** from its summary. Download `inta-desktop-startup-preview-win-x64`
+from that run and extract it to an empty directory. With Python 3.11 or later,
+run the following command from this checkout, substituting that directory and digest.
+
+```text
+python -B desktop/INTA.Desktop/verify-preview.py PATH_TO_EXTRACTED_PREVIEW --sha256 EXECUTABLE_SHA256
+```
+
+The verifier checks the complete two-file package, executable bytes and Windows x64
+GUI header. After a successful check, open `INTA.Desktop.exe` from that directory.
+The workflow exercises the downloaded executable on a fresh Windows runner and
+publishes the digest after its native UI checks pass. This is an unsigned preview.

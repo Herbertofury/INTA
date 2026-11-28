@@ -2,7 +2,7 @@ param([Parameter(Mandatory=$true)][string]$Executable)
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes
 $exe = (Resolve-Path -LiteralPath $Executable).Path
-$process = Start-Process -FilePath $exe -PassThru
+$process = Start-Process -FilePath $exe -WorkingDirectory ([IO.Path]::GetDirectoryName($exe)) -PassThru
 
 function Wait-Until([scriptblock]$Probe, [string]$Failure) {
     $until = [DateTime]::UtcNow.AddSeconds(22)
