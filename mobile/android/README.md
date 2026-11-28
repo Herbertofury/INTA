@@ -81,3 +81,14 @@ bash mobile/android/package-release.sh \
 The output contains the signed APK, its SHA-256 and the signature verification
 receipt. The emulator uses a disposable key to exercise packaging and install.
 Public updates require the approved persistent app signing key.
+
+
+### Review and export an ordered repair draft
+
+From **Draft a repair plan**, save and reorder your steps, then tap **Review
+draft export**. Review the exact text before choosing a document destination.
+The plain-text handoff preserves the saved order and marks the draft as not
+approved. It contains no runnable action, device token or approval; it cannot
+dispatch work or grant access. The app writes to the destination you select,
+which may be outside the phone if you choose a synced provider. Canceling
+before choosing a destination leaves the local draft and files unchanged.
