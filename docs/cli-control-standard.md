@@ -53,3 +53,10 @@ not a thin executable with unpinned sidecar DLLs. This command is not admitted i
 agent service or background polling and never changes a power plan. Exit 0
 means ready data, 1 means a supported command returned a non-ready observation
 (e.g. unsupported OS), and 2 means the request or backend contract was refused.
+
+A Windows CI artifact is evidence for an exact short-lived preview, not
+production approval. An unexpired read-only preview may be gated locally with
+`--require-operation ... --preview` on its exact platform, version and executable
+hash. It is never counted as full coverage or automatically accepted for a
+Desktop, Mobile or agent repair. Expired previews remain visible for history
+but are refused for use.

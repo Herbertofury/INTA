@@ -1,4 +1,5 @@
 import importlib.util
+from datetime import datetime, timezone
 import pathlib
 import unittest
 
@@ -35,6 +36,21 @@ class Coverage(unittest.TestCase):
         self.assertEqual(row["status"], "partial")
         self.assertEqual(row["tested"], [])
         self.assertEqual(row["missing"], ["inventory"])
+
+    def test_preview_is_not_admitted_for_production_and_expires(self):
+        self.operation.update(state="tested-preview", expiresAt="2030-03-04T00:00:00Z",
+                              artifactUrl="https://example.com/ci", archiveSha256="b" * 64)
+        before = datetime(2030, 3, 3, tzinfo=timezone.utc)
+        after = datetime(2030, 3, 4, tzinfo=timezone.utc)
+        row = control.audit(self.catalog, self.ledger, now=before)["tools"]["fake-tool"]
+        self.assertEqual((row["status"], row["bindings"]), ("partial", {}))
+        self.assertEqual(row["previews"]["inventory"]["artifactSha256"], "a" * 64)
+        expired = control.audit(self.catalog, self.ledger, now=after)["tools"]["fake-tool"]
+        self.assertEqual(expired["previews"], {})
+        self.assertEqual(expired["expiredPreviews"], ["inventory"])
+        self.operation["effect"] = "changes-device"
+        with self.assertRaises(ValueError):
+            control.audit(self.catalog, self.ledger, now=before)
 
     def test_claim_without_evidence_refused(self):
         del self.operation["runtimeEvidence"]

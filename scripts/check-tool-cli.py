@@ -1,6 +1,7 @@
 """Catalog-level audit of INTA's reviewed command-line control coverage."""
 import argparse
 import collections
+from datetime import datetime, timezone
 import json
 import pathlib
 import re
@@ -10,7 +11,7 @@ from urllib.parse import urlparse
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 ID = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 HASH = re.compile(r"[a-f0-9]{64}\Z")
-MODES = {"candidate", "tested", "manual-only", "blocked"}
+MODES = {"candidate", "tested", "tested-preview", "manual-only", "blocked"}
 BACKENDS = {"official-cli", "official-api", "cli-anything"}
 EFFECTS = {"read-only", "changes-device"}
 
@@ -37,7 +38,7 @@ def https(value):
     return parsed.scheme == "https" and bool(parsed.hostname) and not (parsed.username or parsed.password)
 
 
-def as_operation(entry):
+def as_operation(entry, now):
     if not isinstance(entry, dict) or entry.get("state") not in MODES:
         raise ValueError("invalid operation entry")
     state = entry["state"]
@@ -49,16 +50,26 @@ def as_operation(entry):
         return state
     if entry.get("backend") not in BACKENDS or entry.get("effect") not in EFFECTS or not slug(entry.get("platform")):
         raise ValueError("structured operation lacks backend, platform or effect")
-    if state == "tested":
+    if state in {"tested", "tested-preview"}:
         version, digest = entry.get("version"), entry.get("artifactSha256")
         if not isinstance(version, str) or not version.strip() or len(version) > 96:
             raise ValueError("tested operation requires exact version")
         if not isinstance(digest, str) or not HASH.fullmatch(digest) or not https(entry.get("runtimeEvidence")):
             raise ValueError("tested operation requires exact artifact and runtime proof")
+    if state == "tested-preview":
+        expires = entry.get("expiresAt")
+        archive = entry.get("archiveSha256")
+        if (entry["effect"] != "read-only" or not isinstance(expires, str)
+                or not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z", expires)
+                or not isinstance(archive, str) or not HASH.fullmatch(archive) or not https(entry.get("artifactUrl"))):
+            raise ValueError("nonproduction preview requires read-only scope, archive pin and UTC expiry")
+        if datetime.fromisoformat(expires[:-1] + "+00:00") <= now:
+            return "expired-preview"
     return state
 
 
-def audit(catalog, ledger):
+def audit(catalog, ledger, now=None):
+    now = datetime.now(timezone.utc) if now is None else now
     if not isinstance(catalog, list) or not all(isinstance(t, dict) and slug(t.get("id")) for t in catalog):
         raise ValueError("invalid tool catalog")
     ids = {t["id"] for t in catalog}
@@ -83,14 +94,18 @@ def audit(catalog, ledger):
                 or len(required) != len(set(required)) or not isinstance(operations, dict)
                 or operations.keys() - set(required)):
             raise ValueError(f"{tool_id}: invalid operation inventory")
-        state = {key: as_operation(value) for key, value in operations.items()}
+        state = {key: as_operation(value, now) for key, value in operations.items()}
         tested = sorted(k for k in required if state.get(k) == "tested")
         missing = sorted(set(required) - set(tested))
         candidates = sorted(k for k in required if state.get(k) == "candidate")
         status = "ready" if not missing and entry["scope"] == "complete" else "partial"
-        metadata = {k: {field: operations[k][field] for field in ("platform", "version", "artifactSha256", "effect")}
-                    for k in tested}
+        def binding(k, fields):
+            return {field: operations[k][field] for field in ("platform", "version", "artifactSha256", "effect", *fields)}
+        metadata = {k: binding(k, ()) for k in tested}
+        preview = {k: binding(k, ("expiresAt", "archiveSha256", "artifactUrl"))
+                   for k in required if state.get(k) == "tested-preview"}
         rows[tool_id] = {"status": status, "tested": tested, "candidate": candidates, "bindings": metadata,
+                         "previews": preview, "expiredPreviews": sorted(k for k in required if state.get(k) == "expired-preview"),
                          "missing": missing, "manual": sorted(k for k in required if state.get(k) in {"manual-only", "blocked"})}
     return {"toolCount": len(ids), "summary": dict(collections.Counter(row["status"] for row in rows.values())), "tools": rows}
 
@@ -106,7 +121,10 @@ def main(argv=None):
     parser.add_argument("--platform")
     parser.add_argument("--version")
     parser.add_argument("--artifact-sha256")
+    parser.add_argument("--preview", action="store_true", help="explicitly allow an unexpired local read-only test preview")
     args = parser.parse_args(argv)
+    if args.preview and not args.require_operation:
+        parser.error("--preview is valid only for an exact operation")
     if (args.require_full or args.require_operation) and not slug(args.platform):
         parser.error("a gate requires a platform slug")
     if args.require_operation and (not args.version or not args.artifact_sha256 or not HASH.fullmatch(args.artifact_sha256)):
@@ -124,6 +142,8 @@ def main(argv=None):
             ready = row["status"] == "ready" and all(item["platform"] == args.platform for item in bindings.values())
         else:
             item = bindings.get(args.require_operation[1])
+            if item is None and args.preview:
+                item = row.get("previews", {}).get(args.require_operation[1])
             ready = bool(item and (item["platform"], item["version"], item["artifactSha256"])
                          == (args.platform, args.version, args.artifact_sha256))
         if args.json:
