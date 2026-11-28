@@ -13,6 +13,7 @@
   const commandCenterSearch = new Map(array(commandCenter.commands).map(item => [item.id,
     [item.title, item.summary, item.code, item.safety, item.shell, item.sourceTitle, item.category].join(' ').toLowerCase()]));
   const meta = data.meta || {};
+  const findIntaHref = "#resources?section=find-inta";
   const toolMap = new Map(tools.map(tool => [tool.id, tool]));
   const jobMap = new Map(jobs.map(job => [job.id, job]));
   const accessRegistry = data.toolAccess && typeof data.toolAccess === 'object' ? data.toolAccess : {};
@@ -550,7 +551,7 @@
     const featuredJobs = selectFeatured(jobs, [/malware|virus/i, /slow|performance/i, /network|internet|dns/i, /backup|restore/i, /boot|bitlocker/i, /remote/i], 6);
     return `<div class="home-deck">
       <header class="home-intro page-heading">
-        <div class="home-intro-copy"><p class="home-section-tag" data-no-link>INTA COMPUTER SERVICES</p><h1>Technician home</h1><p>Find the next step, the right tool, and a way to verify the fix.</p></div>
+        <div class="home-intro-copy"><p class="home-section-tag" data-no-link>INTA COMPUTER SERVICES</p><h1>Technician home</h1><p>Find the next step, the right tool, and a way to verify the fix.</p><a class="home-panel-link" href="${findIntaHref}">Find INTA ${icon('arrow')}</a></div>
         <div class="home-intro-meta"><span><strong>${tools.length}</strong> tools</span><span><strong>${jobs.length}</strong> playbooks</span>${reviewBadge()}</div>
       </header>
       <nav class="home-launcher" aria-label="Common technician actions">${homeRoutes.map(([symbol,title,desc,href]) => `<a class="home-launch-link" href="${href}"><span class="home-tile-icon">${icon(symbol)}</span><span><strong>${title}</strong><small>${desc}</small></span>${icon('arrow')}</a>`).join('')}</nav>
@@ -1334,8 +1335,25 @@
         ${external(`${repo}/blob/main/docs/rescue-scanner-release-review.md`, 'Rescue scanner release review')}</div>
     </section>`;
   }
+  const businessProfileCopy = {
+    company: ['Company website', 'View INTA Computer Services information and contact options.', 'Open company website', 'globe'],
+    nextdoor: ['Nextdoor business page', 'Find the Northglenn, Colorado listing and community activity.', 'Open Nextdoor business page', 'compass']
+  };
+  function businessProfilesSection() {
+    const profiles = array(meta.businessProfiles).filter(profile => profile && Object.hasOwn(businessProfileCopy, profile.id) && registryUrl(profile.url));
+    if (!profiles.length) return '';
+    return `<section class="public-business" id="find-inta" aria-labelledby="find-inta-heading" data-no-link>
+      <div class="section-title"><div><h2 id="find-inta-heading" tabindex="-1">Find INTA Computer Services</h2>
+      <p>Public business links for the company and its Northglenn listing.</p></div></div>
+      <ul class="resource-list" role="list">${profiles.map(profile => {
+        const [title, description, action, symbol] = businessProfileCopy[profile.id];
+        return `<li class="resource-row"><span class="reference-icon">${icon(symbol)}</span><div><h3>${title}</h3><p>${description}</p></div>
+          ${external(profile.url, `${action} ${icon('external')}`, 'button ghost') }</li>`;
+      }).join('')}</ul>
+    </section>`;
+  }
   function resources() {
-    return heading('INTA references', 'Resources', 'Official references, project releases, research, and an offline copy of the workspace.') + productDownloads() + `<div class="resource-list" role="list">${projectResources.map(resource => `<article class="resource-row" role="listitem"><span class="reference-icon">${icon(resource.icon)}</span><div><h2>${esc(resource.title)}</h2><p>${esc(resource.body)}</p></div>${resource.action ? `<button class="button ghost" data-download-offline>${esc(resource.label)} ${icon('download')}</button>` : external(resource.url, `${esc(resource.label)} ${icon('external')}`, 'button ghost')}</article>`).join('')}</div><section class="resource-note"><h2>Current sources, honest expectations.</h2><p>The source review date tells you when this collection was checked. It does not mean every program was installed or tested on every system. Official download pages are used so you can check the current release and compatibility before a job.</p><p><strong>Everyday picks</strong> are practical first choices. <strong>Specialist</strong> tools serve a more focused need. <strong>Evaluate first</strong> entries are candidates to test before they become part of a routine workflow.</p><p>Favorites and checklist progress stay in this browser. Use your team's private ticketing system for client records. ${storageAvailable ? 'Export a checklist when you need a portable handoff.' : 'Browser storage is unavailable in this session; export a checklist to preserve it.'}</p></section><section class="section-space"><div class="section-title"><div><h2>Official reference desk</h2><p>The primary references used by the job playbooks.</p></div></div><label class="input-wrap">${icon('search')}<span class="sr-only">Filter official references</span><input type="search" id="source-search" placeholder="Find a vendor, document, or reference…"></label><div class="filter-result"><span id="source-count" aria-live="polite"></span></div><div class="source-directory" id="source-directory"></div></section>`;
+    return heading('INTA references', 'Resources', 'Official references, project releases, research, and an offline copy of the workspace.') + productDownloads() + businessProfilesSection() + `<div class="resource-list" role="list">${projectResources.map(resource => `<article class="resource-row" role="listitem"><span class="reference-icon">${icon(resource.icon)}</span><div><h2>${esc(resource.title)}</h2><p>${esc(resource.body)}</p></div>${resource.action ? `<button class="button ghost" data-download-offline>${esc(resource.label)} ${icon('download')}</button>` : external(resource.url, `${esc(resource.label)} ${icon('external')}`, 'button ghost')}</article>`).join('')}</div><section class="resource-note"><h2>Current sources, honest expectations.</h2><p>The source review date tells you when this collection was checked. It does not mean every program was installed or tested on every system. Official download pages are used so you can check the current release and compatibility before a job.</p><p><strong>Everyday picks</strong> are practical first choices. <strong>Specialist</strong> tools serve a more focused need. <strong>Evaluate first</strong> entries are candidates to test before they become part of a routine workflow.</p><p>Favorites and checklist progress stay in this browser. Use your team's private ticketing system for client records. ${storageAvailable ? 'Export a checklist when you need a portable handoff.' : 'Browser storage is unavailable in this session; export a checklist to preserve it.'}</p></section><section class="section-space"><div class="section-title"><div><h2>Official reference desk</h2><p>The primary references used by the job playbooks.</p></div></div><label class="input-wrap">${icon('search')}<span class="sr-only">Filter official references</span><input type="search" id="source-search" placeholder="Find a vendor, document, or reference…"></label><div class="filter-result"><span id="source-count" aria-live="polite"></span></div><div class="source-directory" id="source-directory"></div></section>`;
   }
   const allSources = (() => {
     const unique = new Map();
@@ -1663,7 +1681,8 @@
     else if (lastRoute !== route.raw) window.scrollTo({ top: 0, behavior: 'instant' });
     const serviceTarget = route.name === 'services' && document.getElementById(`service-${route.params.get('area')}`);
     const section = route.name === 'job' && route.params.get('section');
-    const sectionTarget = section && document.getElementById(`job-${section}`);
+    const sectionTarget = route.name === 'resources' && route.params.get('section') === 'find-inta'
+      ? document.getElementById('find-inta') : section && document.getElementById(`job-${section}`);
     const selectedAnswer = route.quickId && document.getElementById(`quick-${route.quickId}`);
     const onlineTarget = route.name === 'online' && onlineByTool.has(route.params.get('tool'))
       && document.getElementById(`online-service-${route.params.get('tool')}`);
