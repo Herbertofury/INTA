@@ -51,6 +51,27 @@ V1 accepts up to eight steps and 24 vectors. Every step has at least one test. E
 
 Reimporting identical content succeeds. A different recipe using an existing ID returns a conflict. The receipt includes a SHA-256 of the normalized manifest. Saving an expected digest separately allows an operator to compare revisions. Local store checks detect damaged or inconsistent records. Authentication of a recipe's author requires a separately trusted expected digest or signature. A user with write access to the store can replace a record and its stored digest. All loaded content still passes the same closed schema and operation restrictions.
 
+## Compose a baseline with a local model
+
+Start the prepared local-only Ollama service in Workstation. In PowerShell, choose the installed model and a new recipe filename in an existing directory. The **ai forge** command runs in the Workstation CLI. The resulting file also works with the standalone v1 capability CLI.
+
+~~~powershell
+$models = (inta assistant models | ConvertFrom-Json).models
+$model = $models | Where-Object name -eq 'qwen2.5:0.5b' | Select-Object -First 1
+$recipe = 'I:\INTA\readiness-baseline.json'
+$store = 'I:\INTA\My recipes'
+$request = 'Check installed memory capacity and the active Windows power plan.'
+$receipt = inta ai forge $model.name $model.digest $request $recipe --approve | ConvertFrom-Json
+$receipt.selectedOperations
+inta forge verify $recipe
+inta forge import $recipe --store $store
+inta forge run $receipt.id --store $store
+~~~
+
+The model receives the one-line request and a fixed description of three choices. It can select Windows memory capacity, Windows power plans, or the six Run and RunOnce registration counts. INTA reads the selected observations locally and fills in expected values. It reads them again before publishing the new file. A later verification flags changes to the selected capacity, active power scheme and scheme count, or per-view startup counts. Review the selected operations before importing. A small model can misinterpret a request.
+
+The receipt contains the selected IDs, normalized manifest digest, model identity and number of passing checks. The exported recipe contains expected baseline values. The request and model response stay out of the recipe. The integration test ran on Windows x64 with the prepared Qwen2.5 0.5B model and verified compatibility with the original standalone Forge binary. [Windows integration receipt](evidence/forge-local-model.json)
+
 ## Verification and boundaries
 
 ~~~powershell

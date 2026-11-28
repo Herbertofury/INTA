@@ -23,6 +23,7 @@ use std::{env, path::Path};
 const HELP: &str = "INTA technician CLI. Results are JSON.
   capabilities | tools search QUERY | tools inspect ID | forge verify FILE
   ai ask MODEL MODEL_DIGEST QUESTION | ai run-plan SCENARIO PLAN_SHA256 --approve
+  ai forge MODEL MODEL_DIGEST REQUEST NEW_ABSOLUTE_RECIPE.json --approve
   catalog [query] | record tool|job|method ID
   tool actions [ID] | tool install|launch ID --approve | tool bind ID FILE.exe --approve
   tool configure ID HTTPS_URL --approve | tool workflow|terminal|linux ID --approve [--root DIRECTORY]

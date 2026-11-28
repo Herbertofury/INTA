@@ -23,10 +23,10 @@ The live session uses <a href="https://www.xfce.org/" title="Open XFCE official 
 
 ## Build from source
 
-The launcher and Media Creator share five appearance profiles. Full Prism
+The launcher and <a href="https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md" title="Open Media Creator official download or service page" aria-label="Open Media Creator official download or service page" data-inta-brand="app-media-creator"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="Media Creator official page" width="18" height="18" valign="middle" /></a> [Media Creator](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md) share five appearance profiles. Full Prism
 responds to pointer input and sleeps after the ripple settles. Classic keeps
 the controls on a solid background. The live image includes the Rust field
-and an offline desktop backdrop. The portable Media Creator uses a Tk
+and an offline desktop backdrop. The portable <a href="https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md" title="Open Media Creator official download or service page" aria-label="Open Media Creator official download or service page" data-inta-brand="app-media-creator"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="Media Creator official page" width="18" height="18" valign="middle" /></a> [Media Creator](https://github.com/Herbertofury/INTA/blob/main/docs/rescue.md) uses a Tk
 software renderer when a native library is unavailable.
 
 Use an amd64 <a href="https://www.debian.org/" title="Open Debian official download or service page" aria-label="Open Debian official download or service page" data-inta-brand="app-debian"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/98c05baf7fde67ee3abe.png" alt="Debian official page" width="18" height="18" valign="middle" /></a> [Debian](https://www.debian.org/) 13 host or disposable VM with network access and sufficient disk space.
@@ -39,7 +39,7 @@ cd dist
 sha256sum -c SHA256SUMS
 ```
 
-On a Linux host with QEMU and xorriso, the following check opens the installed
+On a <a href="https://www.kernel.org/" title="Open Linux official download or service page" aria-label="Open Linux official download or service page" data-inta-brand="app-linux"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/c274b9b1ea45948db04e.png" alt="Linux official page" width="18" height="18" valign="middle" /></a> [Linux](https://www.kernel.org/) host with QEMU and xorriso, the following check opens the installed
 launcher in a networkless guest and records Full Prism and Classic screenshots.
 Pass the checksum recorded for the completed source build.
 

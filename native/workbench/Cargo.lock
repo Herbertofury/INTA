@@ -188,6 +188,7 @@ name = "inta"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "inta-capabilities",
  "inta-toolbox",
  "inta-vm-lab",
  "rusqlite",
@@ -198,6 +199,18 @@ dependencies = [
  "time",
  "uuid",
  "walkdir",
+ "windows-sys",
+ "winreg",
+]
+
+[[package]]
+name = "inta-capabilities"
+version = "1.0.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "sha2",
+ "tempfile",
  "windows-sys",
  "winreg",
 ]

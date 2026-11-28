@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tempfile
 import tomllib
 import zipfile
@@ -247,6 +248,14 @@ def build(out, thumbprint):
         WORKBENCH / "media",
         out / "media",
         ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
+    )
+    shutil.copyfile(
+        ROOT / "data/rescue-download-channel.json",
+        out / "media/rescue-download-channel.json",
+    )
+    run(
+        sys.executable, "-I", "-B", WORKBENCH / "tests/test_pinned_media.py",
+        "--payload", out,
     )
     shutil.copyfile(ROOT / "media/inta_optics_ui.py", out / "media/inta_optics_ui.py")
     shutil.copyfile(out / "inta_optics.dll", out / "media/inta_optics.dll")

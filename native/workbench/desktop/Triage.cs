@@ -50,8 +50,12 @@ namespace Inta.Desktop
                     var selected = choice.SelectedItem as LocalModel;
                     if (selected != null) PreviewTriage(selected, question.Text.Trim());
                 });
-                plan.IsEnabled = false;
-                question.TextChanged += delegate { plan.IsEnabled = !String.IsNullOrWhiteSpace(question.Text); };
+                var compose = Action(buttons, "Create tested recipe…", delegate {
+                    var selected = choice.SelectedItem as LocalModel;
+                    if (selected != null) ChooseRecipe(selected, question.Text.Trim());
+                });
+                plan.IsEnabled = compose.IsEnabled = false;
+                question.TextChanged += delegate { plan.IsEnabled = compose.IsEnabled = !String.IsNullOrWhiteSpace(question.Text); };
                 OfferStopModelServer(buttons, null);
                 Status("Local model ready.");
             } catch (OperationCanceledException) { }
@@ -64,6 +68,35 @@ namespace Inta.Desktop
             if (needsServer && !token.IsCancellationRequested) {
                 await OfferModelServer(null, token);
                 if (!token.IsCancellationRequested) Status("Select a prepared model store or start your local model server.");
+            }
+        }
+
+        private async void ChooseRecipe(LocalModel selected, string question)
+        {
+            var file = new Microsoft.Win32.SaveFileDialog { Title = "Create a new tested local recipe",
+                Filter = "INTA Forge recipe (*.json)|*.json", AddExtension = true, DefaultExt = ".json",
+                FileName = "INTA-baseline-" + DateTime.Now.ToString("yyyyMMdd-HHmmss"), OverwritePrompt = true };
+            if (file.ShowDialog(window) != true) return;
+            if (File.Exists(file.FileName)) { Status("Choose an unused filename for the recipe."); return; }
+            Cancel(ref detailRequest);
+            detailRequest = new CancellationTokenSource();
+            var token = detailRequest.Token;
+            Message("Testing a local recipe", "The model selects memory, power or startup checks. Forge runs them and validates their assertions before saving.");
+            Action(detailActions, "Cancel", RefreshPage);
+            try {
+                var result = Json.Object(await core.Read(new[] { "ai", "forge", selected.Name, selected.Digest, question, file.FileName, "--approve" }, token));
+                token.ThrowIfCancellationRequested();
+                Message("Tested recipe saved", file.FileName);
+                Field("Operations", Json.Get(result, "selectedOperations"));
+                Field("Passing assertions", Json.Get(result, "testsPassed"));
+                Field("Manifest SHA-256", Json.Get(result, "manifestSha256"));
+                Action(detailActions, "Open CLI Forge", delegate { OpenFeature("forge"); });
+                Action(detailActions, "New request", RefreshPage);
+            } catch (OperationCanceledException) { }
+              catch (Exception e) {
+                if (token.IsCancellationRequested) return;
+                Message("Recipe unavailable", e.GetBaseException().Message);
+                Action(detailActions, "Try again", RefreshPage);
             }
         }
 

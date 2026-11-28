@@ -377,13 +377,12 @@ impl Desktop {
         Self::heading(ui, "Capability Forge");
         ui.label("Review a capability manifest before adding it to your local collection.");
         ui.add_space(5.);
-        if ui.button("Choose manifest…").clicked() {
-            if let Some(path) = rfd::FileDialog::new()
+        if ui.button("Choose manifest…").clicked()
+            && let Some(path) = rfd::FileDialog::new()
                 .add_filter("JSON manifest", &["json"])
                 .pick_file()
-            {
-                self.forge_file = Some(path);
-            }
+        {
+            self.forge_file = Some(path);
         }
         if let Some(path) = self.forge_file.clone() {
             ui.label(path.display().to_string());

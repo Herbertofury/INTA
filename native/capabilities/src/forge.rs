@@ -139,6 +139,9 @@ fn exercise(c: &Catalog, m: &Manifest, retain: bool) -> Result<Value> {
 fn read_manifest(path: &Path) -> Result<Manifest> {
     decode(strict_json::parse(&files::read(path, MAX)?)?)
 }
+pub(super) fn verify_value(c: &Catalog, value: Value) -> Result<Value> {
+    exercise(c, &decode(value)?, false)
+}
 pub fn verify_file(c: &Catalog, path: &Path) -> Result<Value> {
     exercise(c, &read_manifest(path)?, false)
 }

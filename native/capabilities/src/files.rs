@@ -16,7 +16,7 @@ fn io_error(_: std::io::Error) -> crate::Error {
 }
 
 #[cfg(windows)]
-mod host {
+pub(super) mod host {
     use super::*;
     use std::ffi::OsStr;
     use std::os::windows::{

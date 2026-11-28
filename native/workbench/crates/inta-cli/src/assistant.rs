@@ -1,5 +1,6 @@
 //! A deliberately small Ollama client for explaining published catalog records.
 //! The production endpoint, request paths, context fields, and prompt are fixed.
+mod forge;
 pub(crate) mod server;
 use anyhow::{Context, Result, bail, ensure};
 use serde_json::{Value, json};
@@ -252,6 +253,16 @@ pub fn triage(c: &rusqlite::Connection, args: &[&str]) -> Result<Value> {
         Ok((plan, digest))
     }
     match args {
+        ["forge", model, digest, request, path, "--approve"] => forge::compose(
+            &Ollama(PORT),
+            model,
+            digest,
+            request,
+            std::path::Path::new(path),
+        ),
+        ["forge", ..] => {
+            bail!("Use ai forge MODEL MODEL_DIGEST REQUEST NEW_ABSOLUTE_RECIPE.json --approve")
+        }
         ["run-plan", id, digest, "--approve"] => {
             ensure!(
                 reviewed(c, id)?.1 == *digest,
