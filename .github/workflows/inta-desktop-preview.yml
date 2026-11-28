@@ -99,6 +99,8 @@ jobs:
           EXE_SHA256: ${{ needs.build.outputs.sha256 }}
         run: |
           $tool = 'desktop/INTA.Desktop/msix/package.py'
+          python -B -m unittest discover -s desktop/INTA.Desktop/msix -p test_package.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $version = "0.1.$env:GITHUB_RUN_NUMBER.0"
           $preview = Join-Path $env:RUNNER_TEMP 'verified-preview'
           $file = 'INTA-Desktop-Preview-x64-unsigned.msix'

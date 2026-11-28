@@ -98,6 +98,32 @@ def verify_blocks(archive, payload):
         raise ValueError("Installer block map omits required files")
 
 
+def verify_content_types(archive, signed):
+    namespace = "{http://schemas.openxmlformats.org/package/2006/content-types}"
+    types = ET.fromstring(archive.read("[Content_Types].xml"))
+    if types.tag != namespace + "Types":
+        raise ValueError("Invalid installer content types")
+    defaults, overrides = {}, {}
+    for item in types:
+        if item.tag == namespace + "Default":
+            mapping, key = defaults, item.attrib["Extension"].lower()
+        elif item.tag == namespace + "Override":
+            mapping, key = overrides, item.attrib["PartName"]
+        else:
+            raise ValueError("Unexpected installer content type element")
+        if key in mapping:
+            raise ValueError("Duplicate installer content type")
+        mapping[key] = item.attrib["ContentType"]
+    required = {EXE: "application/x-msdownload", MANIFEST: "application/vnd.ms-appx.manifest+xml",
+                "AppxBlockMap.xml": "application/vnd.ms-appx.blockmap+xml",
+                **{"Assets/" + name: "image/png" for name in LOGOS}}
+    if signed:
+        required[SIG] = "application/vnd.ms-appx.signature"
+    for name, media_type in required.items():
+        if overrides.get("/" + name, defaults.get(name.rsplit(".", 1)[-1].lower())) != media_type:
+            raise ValueError("Incorrect installer content type for " + name)
+
+
 def publisher(package, fingerprint):
     # SignTool checks MSIX integrity, the Windows trust chain and a timestamp.
     subprocess.run([sdk("signtool.exe"), "verify", "/pa", "/all", "/tw", package], check=True)
@@ -139,7 +165,7 @@ def verify(package, executable_sha256, version, publisher_sha256=None):
             if digest(stream) != expected:
                 raise ValueError("Installer contains a different executable")
         verify_blocks(archive, {EXE, MANIFEST, *(f"Assets/{it}" for it in LOGOS)})
-        archive.read("[Content_Types].xml")  # Also require this member's ZIP CRC to pass.
+        verify_content_types(archive, signed)
     if publisher_sha256 is not None:
         required = pin(publisher_sha256)
         if not signed:
