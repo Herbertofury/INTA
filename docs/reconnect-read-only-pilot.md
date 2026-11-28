@@ -27,10 +27,10 @@ implementation still needs reviewed immutable catalog artifacts, pairing and
 revocation, authenticated delivery and receipts, and independent acceptance
 for each operation. The Mobile editor is not yet an authorized dispatch path.
 
-### Review an exported phone draft on Windows
+### Review an exported phone draft on [Windows](https://www.microsoft.com/windows)
 
-In the native INTA workbench, open **Diagnostics → Review phone repair
-draft...** and choose the unchanged text file from INTA Mobile's **Review
+In the native <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) workbench, open **Diagnostics → Review phone repair
+draft...** and choose the unchanged text file from <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) Mobile's **Review
 draft export**. The workbench shows the original step order and labels. It
 opens only a selected file on an ordinary local fixed drive, with a 16 KiB
 limit. It does not keep a copy, choose a device, approve a plan, run commands
