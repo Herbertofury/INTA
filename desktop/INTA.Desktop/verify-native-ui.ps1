@@ -5,6 +5,48 @@ $sourceExe = (Resolve-Path -LiteralPath $Executable).Path
 $testRoot = $null
 $exe = $sourceExe
 $process = $null
+$acceptanceFailure = $null
+
+function Remove-PreviewFixture {
+    param([string]$Path, [int]$BudgetMilliseconds = 6000,
+        [scriptblock]$DeleteTree = { param($Folder) [IO.Directory]::Delete($Folder, $true) })
+    $timer = [Diagnostics.Stopwatch]::StartNew()
+    $pause = 50
+    while ($true) {
+        try {
+            & $DeleteTree $Path
+            return
+        } catch {
+            $cause = $_.Exception.GetBaseException()
+            if ($cause -is [IO.DirectoryNotFoundException] -and -not [IO.Directory]::Exists($Path)) { return }
+            # A Windows sharing/lock violation can outlast the child process.
+            # Retain and report persistent or unrelated errors instead of hiding them.
+            if ($cause -isnot [IO.IOException] -or $cause.HResult -notin @(-2147024864, -2147024863)) { throw }
+            $code = $cause.HResult -band 0xffff
+            $remaining = $BudgetMilliseconds - [int]$timer.ElapsedMilliseconds
+            if ($remaining -le 0) {
+                throw [IO.IOException]::new("Preview fixture remained locked after $BudgetMilliseconds ms (Win32 $code): $Path", $cause)
+            }
+            Start-Sleep -Milliseconds ([Math]::Min($pause, $remaining))
+            $pause = [Math]::Min(800, $pause * 2)
+        }
+    }
+}
+
+function Close-PreviewProcess([Diagnostics.Process]$OwnedProcess) {
+    try {
+        if ($OwnedProcess.HasExited) { return }
+        $null = $OwnedProcess.CloseMainWindow()
+        if ($OwnedProcess.WaitForExit(4000)) { return }
+        # Stop only the exact Process object returned by this harness.
+        try { $OwnedProcess.Kill() }
+        catch [InvalidOperationException] { if (-not $OwnedProcess.HasExited) { throw } }
+        if (-not $OwnedProcess.WaitForExit(4000)) {
+            throw "The owned preview process $($OwnedProcess.Id) remained running after termination."
+        }
+        throw "The owned preview process $($OwnedProcess.Id) did not close normally and had to be stopped."
+    } finally { $OwnedProcess.Dispose() }
+}
 
 function Wait-Until([scriptblock]$Probe, [string]$Failure) {
     $until = [DateTime]::UtcNow.AddSeconds(22)
@@ -248,6 +290,8 @@ try {
         # touching the operator's installation, and prove navigation restoration.
         Open-Category 'system-maintenance'
         if (-not $process.CloseMainWindow() -or -not $process.WaitForExit(8000)) { throw 'Preview did not close cleanly.' }
+        $process.Dispose()
+        $process = $null
         $process = Start-Process -FilePath $exe -WorkingDirectory ([IO.Path]::GetDirectoryName($exe)) -PassThru
         $window = Wait-Until {
             $process.Refresh()
@@ -259,17 +303,23 @@ try {
     }
     'Nine canonical routes, recommendation + search, and preserved data passed.'
 
-}
-finally {
+} catch {
+    $acceptanceFailure = $_
+    throw
+} finally {
+    $teardown = @()
     if ($null -ne $process) {
-        $process.Refresh()
-        if (-not $process.HasExited) {
-            $null = $process.CloseMainWindow()
-            if (-not $process.WaitForExit(4000)) {
-                Stop-Process -Id $process.Id
-                $process.WaitForExit()
-            }
-        }
+        try { Close-PreviewProcess $process }
+        catch { $teardown += $_.Exception.Message }
     }
-    if ($null -ne $testRoot) { Remove-Item -LiteralPath $testRoot -Recurse -Force }
+    if ($null -ne $testRoot) {
+        try {
+            Remove-PreviewFixture $testRoot
+            'Isolated Preview fixture removed.'
+        } catch { $teardown += $_.Exception.Message }
+    }
+    if ($teardown.Count -ne 0) {
+        if ($null -ne $acceptanceFailure) { $teardown = @($acceptanceFailure.Exception.Message) + $teardown }
+        throw ($teardown -join ' | ')
+    }
 }
