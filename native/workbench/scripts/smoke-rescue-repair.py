@@ -95,14 +95,14 @@ def verified_lab_iso(image):
     return info
 
 
-def run(args):
+def run(args, inspect_image=verified_lab_iso):
     image = args.iso.resolve(strict=True)
     if not image.is_file():
         raise ValueError("Select a regular ISO file.")
     paths = [image, args.output.resolve(), Path(tempfile.gettempdir())]
     if any(any(char in str(path) for char in ",\r\n") for path in paths):
         raise ValueError("VMM device paths must be representable as single option values.")
-    info = verified_lab_iso(image)
+    info = inspect_image(image)
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     serial = output / "guest-serial.log"
