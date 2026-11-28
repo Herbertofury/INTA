@@ -24,6 +24,14 @@
           "artifactUrl": "https://github.com/Herbertofury/INTA/actions/runs/46090342014#artifacts",
           "archiveSha256": "b37eba7cb06c3faec22c942a7c4d756f7316dbe05ab4e495cbd8b8fbddb68263",
           "expiresAt": "2026-12-05T00:54:53Z"
+        },
+        "sleep-states": {
+          "state": "candidate",
+          "backend": "official-api",
+          "effect": "read-only",
+          "platform": "windows-x64",
+          "source": "https://learn.microsoft.com/en-us/windows/win32/api/powerbase/nf-powerbase-callntpowerinformation",
+          "note": "Queries the documented S1\u2013S4 and hibernation-file flags only. No S0 reason analysis, scheduled power action, reboot or automatic job. Windows package proof required."
         }
       }
     },
