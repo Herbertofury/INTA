@@ -99,7 +99,7 @@ public final class JobActivity extends Activity {
         LinearLayout brand = new LinearLayout(this);
         brand.setGravity(android.view.Gravity.CENTER_VERTICAL);
         ImageView mark = new ImageView(this);
-        mark.setImageResource(R.drawable.inta_heritage);
+        mark.setImageResource(R.mipmap.inta_application);
         mark.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
         LinearLayout.LayoutParams markSize = new LinearLayout.LayoutParams(dp(34), dp(34));
         markSize.setMarginEnd(dp(8));
