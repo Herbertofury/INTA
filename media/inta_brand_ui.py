@@ -60,6 +60,8 @@ class BrandResources:
             raise RuntimeError("The INTA icon resources are missing. Open the complete portable .pyz or the source folder.")
         self.registry = json.loads(self.read("data/brand-icons.json"))
         self.assets = self.registry["assets"]
+        self.application_asset = next((row["assetId"] for row in self.registry["brands"]
+                                       if row["id"] == "app-inta"), None)
         self.names = {}
         for record in self.registry["brands"]:
             for name in record.get("names", [record["name"]]):
@@ -289,7 +291,8 @@ class BrandText(tk.Text):
             last = self.index("end-1c")
             tag = "brand-" + str(len(self.links))
             self.tag_add("brand", first, last)
-            self.tag_add("brand-icon", first, icon_end)
+            if record["assetId"] != owner.resources.application_asset:
+                self.tag_add("brand-icon", first, icon_end)
             self.tag_add(tag, first, last)
             self.tag_bind(tag, "<Button-1>", lambda _event, record=record: owner.open(record))
             self.tag_bind(tag, "<Enter>", lambda _event: self.configure(cursor="hand2"))

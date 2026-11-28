@@ -32,6 +32,8 @@ def check(html, browser, width, screenshots=None):
     page.on("pageerror", lambda error: page_errors.append(str(error)))
     page.goto(ORIGIN)
     expect(page.get_by_role("heading", name="Technician home", exact=True)).to_be_visible()
+    picks = page.locator('[data-quick-start="suspected-malware"]')
+    picks.locator('summary').press('Enter')
     platform = page.locator('main a[data-link-name="Windows"][href="https://www.microsoft.com/windows"]').first
     expect(platform).to_have_text("Windows")
     expect(page.locator(GENERIC_IMAGES)).to_have_count(0)
@@ -39,7 +41,6 @@ def check(html, browser, width, screenshots=None):
     expect(platform.locator("img")).to_have_count(0)
     assert platform.evaluate("a => a.href") == "https://www.microsoft.com/windows"
     assert platform.evaluate("a => a.tabIndex") == 0
-    picks = page.locator('[data-quick-start="suspected-malware"]')
     expect(picks.locator('[data-brand-icon="malwarebytes"]').first).to_be_visible()
     if screenshots:
         picks.scroll_into_view_if_needed()
