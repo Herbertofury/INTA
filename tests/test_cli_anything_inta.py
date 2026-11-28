@@ -54,6 +54,38 @@ class NativeHarness(unittest.TestCase):
             with self.assertRaises(ValueError):
                 harness.startup_inventory(self.binary, self.pin)
 
+    def test_startup_folder_opt_in_and_private_field_refusal(self):
+        sources = [dict(scope=scope, view=view, key=key, status="read", entryNames=[], truncated=False)
+                   for scope, view in (("current-user", "shared"), ("machine", "default"))
+                   for key in ("Run", "RunOnce")]
+        folders = [dict(scope="current-user", status="read", entryNames=["Example tool.lnk"], truncated=False),
+                   dict(scope="all-users", status="not-present", entryNames=[], truncated=False)]
+        report = dict(schema=2, scope="windows-logon-registrations-and-local-startup-folders",
+                      readOnly=True, enabledState="not-evaluated", argumentsCollected=False,
+                      sources=sources, startupFolders=folders, startupSettingsUri="ms-settings:startupapps")
+        def response():
+            return subprocess.CompletedProcess([], 0, json.dumps(report).encode(), b"")
+        with patch.object(harness.subprocess, "run", return_value=response()) as call:
+            self.assertEqual(harness.startup_inventory(self.binary, self.pin, True)["status"], "ready")
+        call.assert_called_once_with([str(self.binary), "--startup-inventory", "--include-folders"],
+                                    capture_output=True, check=True, shell=False, timeout=12)
+        folders[1]["status"] = "location-not-scanned"
+        with patch.object(harness.subprocess, "run", return_value=response()):
+            self.assertEqual(harness.startup_inventory(self.binary, self.pin, True)["status"], "incomplete")
+            with self.assertRaises(ValueError):
+                harness.startup_inventory(self.binary, self.pin)
+        for replacement in (["C:/private/name"], ["two", "two"], [".."], ["unexpected:stream"], [None]):
+            with self.subTest(replacement=replacement):
+                folders[0]["entryNames"] = replacement
+                with patch.object(harness.subprocess, "run", return_value=response()):
+                    with self.assertRaises(ValueError):
+                        harness.startup_inventory(self.binary, self.pin, True)
+        folders[0]["entryNames"] = []
+        folders[0]["path"] = "C:/private"
+        with patch.object(harness.subprocess, "run", return_value=response()):
+            with self.assertRaises(ValueError):
+                harness.startup_inventory(self.binary, self.pin, True)
+
     def test_program_display_metadata_only(self):
         report = dict(schema=1, scope="windows-desktop-registrations", readOnly=True,
                       commandsCollected=False, skipped=0, errors=0, capped=False,
