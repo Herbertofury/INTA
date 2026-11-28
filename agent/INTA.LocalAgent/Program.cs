@@ -15,6 +15,12 @@ if (args.Length > 0 && args[0] == "--storage-preview")
     return;
 }
 
+if (args.Length > 0 && args[0] == "--sleep-states")
+{
+    Environment.ExitCode = SleepStates.Run(args.AsSpan(1), Console.Out, Console.Error);
+    return;
+}
+
 if (args.Length > 0 && args[0] == "--power-plans")
 {
     Environment.ExitCode = PowerPlans.Run(args.AsSpan(1), Console.Out, Console.Error);
