@@ -83,9 +83,9 @@ final class JobStore {
     }
 
     @FunctionalInterface
-    private interface Payload { void write(DataOutputStream output) throws IOException; }
+    interface Payload { void write(DataOutputStream output) throws IOException; }
 
-    private static void publish(Path target, Payload payload) throws IOException {
+    static void publish(Path target, Payload payload) throws IOException {
         Path staged = Files.createTempFile(target.getParent(), "job-stage-", ".tmp");
         try {
             try (FileOutputStream bytes = new FileOutputStream(staged.toFile());
