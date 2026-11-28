@@ -2,16 +2,26 @@ package com.inta.mobile.test;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.accessibilityservice.AccessibilityServiceInfo;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
 
 /** Instrument an isolated Android guest, never install into an owner's app profile. */
@@ -79,10 +89,13 @@ public final class OfflineJobAcceptance extends Instrumentation {
                     require(minutes != null && "5".contentEquals(minutes.getText()), "manual minutes did not survive");
                     require(profile != null && profile.isChecked(), "business category did not survive");
                 });
+            } else if ("handoff".equals(stage)) {
+                verifyHandoff(activity);
             } else if ("start".equals(stage)) {
                 find(activity, "Paused on this phone.", false);
                 TextView billing=find(activity,"Invoice draft",false);
                 runOnMainSync(() -> require(!billing.isShown(),"unfinished jobs must not show billing"));
+                require(!enabled(activity, "Review handoff export"), "unfinished job export was enabled");
                 press(activity, "Start timer");
                 find(activity, "Pause timer", true);
                 press(activity, "Confirm scope and back up");
@@ -120,6 +133,70 @@ public final class OfflineJobAcceptance extends Instrumentation {
             result.putString("stream", "\nINTA_ANDROID_ACCEPTANCE_FAILED " + stage + " " + failure + "\n");
             finish(Activity.RESULT_CANCELED, result);
         }
+    }
+
+    private void verifyHandoff(Activity activity) throws Exception {
+        long recorded = seconds(activity);
+        var resolver = getTargetContext().getContentResolver();
+        ContentValues file = new ContentValues();
+        file.put(MediaStore.Downloads.DISPLAY_NAME, "inta-ci-handoff-" + SystemClock.elapsedRealtime() + ".txt");
+        file.put(MediaStore.Downloads.MIME_TYPE, "text/plain");
+        file.put(MediaStore.Downloads.IS_PENDING, 1);
+        Uri uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, file);
+        require(uri != null, "could not allocate an isolated export file");
+        try {
+            byte[] original = "Untouched acceptance-test destination".getBytes(StandardCharsets.UTF_8);
+            try (OutputStream bytes = resolver.openOutputStream(uri, "wt")) {
+                require(bytes != null, "document provider could not create the test file");
+                bytes.write(original);
+            }
+            press(activity, "Review handoff export");
+            clickDialog("Cancel", "android:id/button2");
+            find(activity, "Review handoff export", true);
+            try (InputStream bytes = resolver.openInputStream(uri)) {
+                require(bytes != null && Arrays.equals(bytes.readAllBytes(), original), "cancel changed the test file");
+            }
+            IntentFilter create = new IntentFilter(Intent.ACTION_CREATE_DOCUMENT, "text/plain");
+            create.addCategory(Intent.CATEGORY_OPENABLE);
+            var monitor = addMonitor(create,
+                    new ActivityResult(Activity.RESULT_OK, new Intent().setData(uri)), true);
+            try {
+                press(activity, "Review handoff export");
+                clickDialog("Choose save location", "android:id/button1");
+                find(activity, "Reviewed handoff saved.", false);
+                require(monitor.getHits() == 1, "Android create-document action was not launched");
+            } finally { removeMonitor(monitor); }
+            try (InputStream bytes = resolver.openInputStream(uri)) {
+                require(bytes != null, "document provider did not return an export");
+                String report = new String(bytes.readAllBytes(), StandardCharsets.UTF_8);
+                require(report.startsWith("INTA service handoff\n") && report.contains("[x] Confirm scope and back up")
+                    && report.contains("Billing profile: Business") && report.contains("Billable minutes: 5")
+                    && report.contains("Draft subtotal: 7.92"), "unexpected handoff contents");
+            }
+            require(seconds(activity) == recorded, "export altered the source timer");
+        } finally {
+            resolver.delete(uri, null, null);
+        }
+    }
+
+    private void clickDialog(String name, String buttonId) {
+        var automation = getUiAutomation();
+        var service = automation.getServiceInfo();
+        service.flags |= AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS;
+        automation.setServiceInfo(service);
+        long deadline = SystemClock.uptimeMillis() + 8000;
+        do {
+            AccessibilityNodeInfo root = automation.getRootInActiveWindow();
+            if (root != null) {
+                for (AccessibilityNodeInfo node : root.findAccessibilityNodeInfosByViewId(buttonId)) {
+                    CharSequence text = node.getText();
+                    if (text != null && name.equalsIgnoreCase(text.toString())
+                            && node.performAction(AccessibilityNodeInfo.ACTION_CLICK)) return;
+                }
+            }
+            SystemClock.sleep(100);
+        } while (SystemClock.uptimeMillis() < deadline);
+        throw new AssertionError("missing confirmation button: " + name);
     }
 
     private void edit(Activity activity, int type, String name) {

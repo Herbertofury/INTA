@@ -32,11 +32,11 @@ fi
 : "${ANDROID_HOME:?Android SDK required}"
 mode=${INTA_ANDROID_EMULATOR_ACCEL:-on}
 [[ "$mode" == on || "$mode" == off ]]
-attempts=90
+boot_seconds=180
 if [[ "$mode" == off ]]; then
   # Official software emulation for test builders without access to /dev/kvm.
   export ANDROID_I_WANT_MY_TCG=yes
-  attempts=160
+  boot_seconds=540
 fi
 "$ANDROID_HOME/emulator/emulator" -avd "$avd" -port 5584 -accel "$mode" -no-window -no-audio \
   -no-snapshot -no-boot-anim -camera-back none -camera-front none -gpu swiftshader_indirect \
@@ -53,22 +53,47 @@ mapfile -d '' -t classes < <(find "$scratch/classes" -name '*.class' -print0 | s
 "$tools/zipalign" -f -p 4 "$scratch/test-unsigned.apk" "$scratch/test-aligned.apk"
 keytool -genkeypair -noprompt -alias ci -keystore "$scratch/ci-only.p12" -storepass local-ci-key \
   -keypass local-ci-key -keyalg RSA -keysize 2048 -validity 1 -dname 'CN=Disposable INTA CI' > "$scratch/keygen.log" 2>&1
-for pair in "$scratch/app/inta-mobile-unsigned.apk:$scratch/app.apk" "$scratch/test-aligned.apk:$scratch/test.apk"; do
-  "$tools/apksigner" sign --v4-signing-enabled false --ks "$scratch/ci-only.p12" --ks-pass pass:local-ci-key \
-    --out "${pair#*:}" "${pair%%:*}"
-  "$tools/apksigner" verify "${pair#*:}"
+unsigned="$scratch/app/inta-mobile-unsigned.apk"
+expected=$(sha256sum < "$unsigned")
+keytool -exportcert -alias ci -keystore "$scratch/ci-only.p12" -storepass local-ci-key -file "$scratch/ci-cert.der"
+signer=$(sha256sum < "$scratch/ci-cert.der")
+revision=$(git -C "$root" rev-parse HEAD)
+bad_digest=$(printf '%064d' 0)
+for check in input signer; do
+  apk_pin=${expected%% *}
+  signer_pin=${signer%% *}
+  if [[ "$check" == input ]]; then apk_pin=$bad_digest; else signer_pin=$bad_digest; fi
+  if INTA_ANDROID_STORE_PASS=local-ci-key INTA_ANDROID_KEY_PASS=local-ci-key \
+    bash "$root/package-release.sh" "$tools" "$unsigned" "$apk_pin" "$signer_pin" \
+      "$scratch/ci-only.p12" ci "$revision" "$scratch/invalid-$check"; then
+    echo "Android packager accepted the wrong $check digest" >&2
+    exit 2
+  fi
+  [[ ! -e "$scratch/invalid-$check" ]]
 done
-for ((try=0; try<attempts; try++)); do
+INTA_ANDROID_STORE_PASS=local-ci-key INTA_ANDROID_KEY_PASS=local-ci-key \
+  bash "$root/package-release.sh" "$tools" "$unsigned" "${expected%% *}" "${signer%% *}" \
+    "$scratch/ci-only.p12" ci "$revision" "$scratch/signed"
+"$tools/apksigner" sign --v4-signing-enabled false --ks "$scratch/ci-only.p12" --ks-pass pass:local-ci-key \
+  --out "$scratch/test.apk" "$scratch/test-aligned.apk"
+"$tools/apksigner" verify "$scratch/test.apk"
+deadline=$((SECONDS + boot_seconds))
+while (( SECONDS < deadline )); do
   kill -0 "$owned_pid" || { tail -30 "$out/emulator.log"; exit 2; }
   booted=$(timeout 5 "$adb" -s "$serial" shell getprop sys.boot_completed 2>/dev/null || true)
   [[ "$booted" == 1 ]] && break
   sleep 2
 done
-[[ "${booted:-}" == 1 ]]
-"$adb" -s "$serial" install "$scratch/app.apk"
+if [[ "${booted:-}" != 1 ]]; then
+  printf 'Android boot did not complete within %s seconds (acceleration %s).\n' "$boot_seconds" "$mode" >&2
+  "$adb" devices -l
+  tail -50 "$out/emulator.log"
+  exit 2
+fi
+"$adb" -s "$serial" install "$scratch/signed/INTA-Mobile-Android.apk"
 "$adb" -s "$serial" install "$scratch/test.apk"
 test_id=com.inta.mobile.test/.OfflineJobAcceptance
-for stage in start resume verify-completed draft draft-verify invoice invoice-verify; do
+for stage in start resume verify-completed draft draft-verify invoice invoice-verify handoff; do
   "$adb" -s "$serial" shell am force-stop com.inta.mobile
   if [[ "$stage" == resume ]]; then sleep 2; fi
   timeout 80 "$adb" -s "$serial" shell am instrument -w -e stage "$stage" "$test_id" | tee "$out/$stage.log"
@@ -78,4 +103,5 @@ done
 sleep 1
 "$adb" -s "$serial" exec-out screencap -p > "$out/inta-job-completed.png"
 cp "$scratch/app/inta-mobile-unsigned.apk" "$out/"
-sha256sum "$out/inta-mobile-unsigned.apk"
+cp "$scratch/signed/verification.txt" "$out/disposable-signing-proof.txt"
+(cd "$out"; sha256sum inta-mobile-unsigned.apk > SHA256SUMS)

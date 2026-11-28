@@ -7,6 +7,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -42,6 +45,7 @@ public final class JobActivity extends Activity {
         "Review billable time and prepare invoice"
     };
     private static final Executor DISK = Executors.newSingleThreadExecutor();
+    private static final int CREATE_HANDOFF = 31;
     private final Handler ui = new Handler(Looper.getMainLooper());
     private final CheckBox[] checks = new CheckBox[STEPS.length];
     private TextView clock, detail, progress;
@@ -52,6 +56,11 @@ public final class JobActivity extends Activity {
     private TextView billingStatus;
     private Button saveInvoice;
     private boolean billingLoaded, billingPending, billingDamaged;
+    private Button handoff;
+    private TextView handoffStatus;
+    private InvoiceDraft savedInvoice;
+    private String pendingHandoff;
+    private boolean writingHandoff;
     private JobStore store;
     private JobTimer state;
     private int boot;
@@ -66,6 +75,7 @@ public final class JobActivity extends Activity {
 
     @Override protected void onCreate(Bundle saved) {
         super.onCreate(saved);
+        if (saved != null) pendingHandoff = saved.getString("pending-handoff");
         ScrollView scroll = new ScrollView(this);
         scroll.setBackgroundColor(Color.BLACK);
         scroll.setFillViewport(true);
@@ -136,8 +146,12 @@ public final class JobActivity extends Activity {
         rate.addTextChangedListener(preview);
         billableMinutes.addTextChangedListener(preview);
         business.setOnCheckedChangeListener((button, enabled) -> refreshBilling());
+        LinearLayout handoffCard = card(body);
+        label(handoffCard, "Service handoff", 22, WHITE, true);
+        handoff = button(handoffCard, "Review handoff export", this::reviewHandoff);
+        handoffStatus = label(handoffCard, "Complete the job to export its recorded time and checklist.", 14, MUTED, false);
         button(body, "Draft a repair plan", () -> startActivity(new Intent(this, RepairDraftActivity.class)));
-        label(body, "This job stays on this phone. No sync, remote access, or invoice is sent.", 13, MUTED, false);
+        label(body, "Job records stay on this phone. An export goes to the location you choose.", 13, MUTED, false);
         setContentView(scroll);
         render();
         DISK.execute(() -> {
@@ -167,6 +181,71 @@ public final class JobActivity extends Activity {
     }
 
     @Override protected void onStart() { super.onStart(); visible = true; render(); }
+
+    @Override protected void onSaveInstanceState(Bundle saved) {
+        super.onSaveInstanceState(saved);
+        saved.putString("pending-handoff", pendingHandoff);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void reviewHandoff() {
+        if (state == null || !billingLoaded || billingPending || writingHandoff || pendingHandoff != null) return;
+        String report = JobHandoff.render(state, savedInvoice, STEPS);
+        new AlertDialog.Builder(this).setTitle("Review service handoff").setMessage(report)
+                .setNegativeButton("Cancel", null).setPositiveButton("Choose save location", (dialog, which) -> {
+                    pendingHandoff = report;
+                    updateHandoff();
+                    Intent create = new Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE)
+                            .setType("text/plain").putExtra(Intent.EXTRA_TITLE, "INTA-service-handoff.txt");
+                    try {
+                        startActivityForResult(create, CREATE_HANDOFF);
+                    } catch (android.content.ActivityNotFoundException unavailable) {
+                        pendingHandoff = null;
+                        handoffStatus.setText("This device has no document picker.");
+                        updateHandoff();
+                    }
+                }).show();
+    }
+
+    @Override @SuppressWarnings("deprecation")
+    protected void onActivityResult(int request, int result, Intent data) {
+        super.onActivityResult(request, result, data);
+        if (request != CREATE_HANDOFF) return;
+        String report = pendingHandoff;
+        pendingHandoff = null;
+        Uri destination = data == null ? null : data.getData();
+        if (result != RESULT_OK || report == null || destination == null || !"content".equals(destination.getScheme())) {
+            handoffStatus.setText(result == RESULT_CANCELED ? "Export canceled." : "No document destination was confirmed.");
+            updateHandoff();
+            return;
+        }
+        writingHandoff = true;
+        updateHandoff();
+        handoffStatus.setText("Saving the reviewed handoff…");
+        DISK.execute(() -> {
+            boolean saved = false;
+            try (OutputStream stream = getContentResolver().openOutputStream(destination, "wt")) {
+                if (stream == null) throw new IOException("Document provider returned no stream");
+                stream.write(report.getBytes(StandardCharsets.UTF_8));
+                stream.flush();
+                saved = true;
+            } catch (IOException | RuntimeException failure) {
+                saved = false;
+            }
+            boolean confirmed = saved;
+            ui.post(() -> {
+                if (isDestroyed()) return;
+                writingHandoff = false;
+                handoffStatus.setText(confirmed ? "Reviewed handoff saved." : "Export failed. Check the chosen destination before retrying.");
+                updateHandoff();
+            });
+        });
+    }
+
+    private void updateHandoff() {
+        handoff.setEnabled(state != null && state.phase == JobTimer.Phase.COMPLETE && billingLoaded
+                && !billingPending && !writingHandoff && pendingHandoff == null);
+    }
     @Override protected void onStop() {
         visible = false;
         ui.removeCallbacks(tick);
@@ -238,6 +317,7 @@ public final class JobActivity extends Activity {
             billing.setVisibility(finished ? View.VISIBLE : View.GONE);
             if (finished && !billingLoaded && !billingPending) loadBilling(state);
         }
+        updateHandoff();
         ui.removeCallbacks(tick);
         if (visible && running) ui.postDelayed(tick, 1000);
     }
@@ -278,6 +358,7 @@ public final class JobActivity extends Activity {
             ui.post(() -> {
                 if (isDestroyed()) return;
                 billingLoaded = true;
+                savedInvoice = draft;
                 billingDamaged = damaged;
                 if (damaged) billingStatus.setText("Previous invoice draft could not be read. It was not replaced.");
                 if (draft != null) {
@@ -288,6 +369,7 @@ public final class JobActivity extends Activity {
                 }
                 billingPending = false;
                 billingEnabled(!damaged);
+                updateHandoff();
             });
         });
     }
@@ -317,6 +399,7 @@ public final class JobActivity extends Activity {
         }
         billingPending = true;
         billingEnabled(false);
+        updateHandoff();
         billingStatus.setText("Saving invoice draft locally…");
         DISK.execute(() -> {
             boolean saved = false;
@@ -327,8 +410,12 @@ public final class JobActivity extends Activity {
                 if (isDestroyed()) return;
                 billingPending = false;
                 billingEnabled(true);
-                if (ok) showSavedBilling(draft);
+                if (ok) {
+                    savedInvoice = draft;
+                    showSavedBilling(draft);
+                }
                 else billingStatus.setText("Could not save. No new draft confirmed.");
+                updateHandoff();
             });
         });
     }
