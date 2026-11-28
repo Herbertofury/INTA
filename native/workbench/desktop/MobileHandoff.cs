@@ -5,12 +5,48 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Microsoft.Win32;
 
 namespace Inta.Desktop
 {
     internal sealed partial class Workspace
     {
+        private async void ReviewPhoneRepairDraft()
+        {
+            var file = new OpenFileDialog { Title = "Choose an unchanged INTA Mobile draft",
+                Filter = "INTA Mobile repair draft (*.txt)|*.txt", CheckFileExists = true, Multiselect = false };
+            if (file.ShowDialog(window) != true) return;
+            Status("Reading the selected draft. Nothing will run.");
+            try {
+                var rows = await Task.Run(delegate { return MobileDraftReader.ReadFile(file.FileName); });
+                if (lifetime.IsCancellationRequested) return;
+                var panel = new StackPanel { Margin = new Thickness(18) };
+                var dialog = new Window { Owner = window, Title = "Review phone repair draft",
+                    Background = (Brush)window.FindResource("Surface"), Foreground = (Brush)window.FindResource("Text"),
+                    Width = 540, Height = 440, WindowStartupLocation = WindowStartupLocation.CenterOwner, Content = panel };
+                panel.Children.Add(new TextBlock {
+                    Text = "This is an unapproved draft, not a command or a paired-device job. Closing leaves the original unchanged.",
+                    TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 12)
+                });
+                var close = new Button { Content = "Close review", IsCancel = true, Margin = new Thickness(0, 0, 0, 12) };
+                close.Click += delegate { dialog.DialogResult = false; };
+                panel.Children.Add(close);
+                var list = new ListBox { MaxHeight = 260, Background = (Brush)window.FindResource("Canvas"),
+                    Foreground = (Brush)window.FindResource("Text") };
+                AutomationProperties.SetName(list, "Ordered unapproved repair steps");
+                for (int i = 0; i < rows.Count; i++)
+                    list.Items.Add(new TextBlock { Text = (i + 1) + ". " + rows[i].Kind + " \u00b7 " + rows[i].Label,
+                        TextWrapping = TextWrapping.Wrap, MaxWidth = 450, Padding = new Thickness(4) });
+                panel.Children.Add(list);
+                dialog.ContentRendered += delegate { close.Focus(); };
+                dialog.ShowDialog();
+                Status("Draft review closed. No job was queued and no file changed.");
+            } catch (Exception) {
+                if (!lifetime.IsCancellationRequested) Status("Draft not opened. Select an unchanged local INTA Mobile export.");
+            }
+        }
+
         private void ExportMobileSnapshot()
         {
             var panel = new StackPanel { Margin = new Thickness(18) };
