@@ -180,3 +180,84 @@ try
     Console.WriteLine("Signed local read-only reconnect pilot passed; actual backend result: " + ReadPower().Status);
 }
 finally { pilotRoot.Delete(recursive: true); }
+
+var startupStep = readOnlyStep with { CatalogId = "inta:startup-registration-count" };
+var multiPlan = new RepairPlan("read-two", phoneQueue, now.AddMinutes(5), [readOnlyStep, startupStep]);
+var multiStatement = statement with { PlanSha256 = multiPlan.Digest };
+var multiApproval = verifier.Verify(multiPlan, multiStatement, Sign(serviceKey, multiStatement), now);
+
+static DiagnosticSnapshot CountStartup()
+{
+    using var result = new StringWriter();
+    using var errors = new StringWriter();
+    var code = INTA.LocalAgent.StartupInventory.Run([], result, errors);
+    if (code == 3) return new DiagnosticSnapshot("unsupported", 0);
+    if (code != 0) throw new InvalidDataException("Startup inventory unavailable");
+    using var json = System.Text.Json.JsonDocument.Parse(result.ToString());
+    var rows = json.RootElement.GetProperty("sources").EnumerateArray();
+    int count = 0;
+    bool incomplete = false;
+    foreach (var row in rows)
+    {
+        incomplete |= row.GetProperty("status").GetString() == "unavailable" || row.GetProperty("truncated").GetBoolean();
+        count += row.GetProperty("entryNames").GetArrayLength();
+    }
+    return new DiagnosticSnapshot(incomplete ? "incomplete" : "ready", count);
+}
+static DiagnosticSnapshot ReadAcceptedPower()
+{
+    using var output = new StringWriter();
+    using var errors = new StringWriter();
+    if (INTA.LocalAgent.PowerPlans.Run([], output, errors) != 0)
+        throw new InvalidDataException("Could not inspect native power plans");
+    using var json = System.Text.Json.JsonDocument.Parse(output.ToString());
+    return new DiagnosticSnapshot(json.RootElement.GetProperty("status").GetString()!,
+        json.RootElement.GetProperty("plans").GetArrayLength());
+}
+
+var twoRoot = Directory.CreateTempSubdirectory("inta-multistep-local-pilot-");
+try
+{
+    var order = new List<string>();
+    var worker = new ReadOnlyReconnectPilot(readOnlyStep.ContentSha256,
+        () => { order.Add("power"); return ReadAcceptedPower(); },
+        () => { order.Add("startup"); return CountStartup(); });
+    using (var ledger = new LocalRepairJournal(twoRoot.FullName, multiApproval, TimeSpan.FromMinutes(1)))
+    {
+        var power = worker.RunNext(ledger, multiApproval, phoneQueue, () => now);
+        Must(power.Claimed && order.SequenceEqual(["power"]), "only the first approved native adapter may run");
+        Must(power.State == (OperatingSystem.IsWindows() ? QueueState.Waiting : QueueState.Failed),
+            "unsupported operation must stop the whole plan");
+    }
+    using (var reopened = new LocalRepairJournal(twoRoot.FullName, multiApproval, TimeSpan.FromMinutes(1)))
+    {
+        var next = worker.RunNext(reopened, multiApproval, phoneQueue, () => now);
+        if (OperatingSystem.IsWindows())
+        {
+            Must(order.SequenceEqual(["power", "startup"]) && next.Claimed
+                && next.Observation?.Status == "ready" && next.State == QueueState.Succeeded
+                && next.Observation == CountStartup(), "approved startup count must run exactly once after restart");
+            var independentCount = Environment.GetEnvironmentVariable("INTA_EXPECTED_STARTUP_COUNT");
+            if (independentCount is not null)
+                Must(int.TryParse(independentCount, out var expected) && next.Observation?.ItemCount == expected,
+                    "startup count must agree with independent hosted Windows observation");
+        }
+        else
+        {
+            Must(order.SequenceEqual(["power"]) && !next.Claimed && next.State == QueueState.Failed,
+                "the second native operation cannot follow unsupported power");
+        }
+        Must(!worker.RunNext(reopened, multiApproval, phoneQueue, () => now).Claimed, "a finished or failed plan cannot replay");
+    }
+
+    var unavailablePlan = new RepairPlan("unconfigured-counter", phoneQueue, now.AddMinutes(5), [startupStep]);
+    var without = multiStatement with { PlanSha256 = unavailablePlan.Digest };
+    var unavailableApproval = verifier.Verify(unavailablePlan, without, Sign(serviceKey, without), now);
+    using var unavailable = new LocalRepairJournal(twoRoot.FullName, unavailableApproval, TimeSpan.FromMinutes(1));
+    var onlyPower = new ReadOnlyReconnectPilot(readOnlyStep.ContentSha256,
+        () => throw new Exception("A missing startup counter must never call the power adapter"));
+    Must(onlyPower.RunNext(unavailable, unavailableApproval, phoneQueue, () => now).State == QueueState.NeedsReview,
+        "the host must explicitly supply the startup counter");
+    Console.WriteLine("Signed ordered two-operation proof passed; native registration names were not retained or logged.");
+}
+finally { twoRoot.Delete(recursive: true); }

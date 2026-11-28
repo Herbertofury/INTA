@@ -6,5 +6,7 @@
   <ItemGroup>
     <Compile Include="../../agent/INTA.RepairQueue/*.cs" />
     <Compile Include="../../agent/INTA.LocalAgent/PowerPlans.cs" Link="PowerPlans.cs" />
+    <Compile Include="../../agent/INTA.LocalAgent/StartupInventory.cs" Link="StartupInventory.cs" />
+    <Compile Include="../../agent/INTA.LocalAgent/StartupFolders.cs" Link="StartupFolders.cs" />
   </ItemGroup>
 </Project>
