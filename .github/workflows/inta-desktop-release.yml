@@ -6,7 +6,13 @@ on:
       - 'native/**'
       - 'desktop/**'
       - 'agent/**'
-      - 'data/tools.json'
+      - 'data/**'
+      - 'docs/**'
+      - 'wiki/**'
+      - 'site/**'
+      - 'media/**'
+      - 'assets/**'
+      - 'scripts/release_artwork.py'
       - '.github/workflows/inta-desktop-release.yml'
 permissions:
   contents: read
