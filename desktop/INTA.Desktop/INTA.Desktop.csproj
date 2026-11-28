@@ -15,5 +15,6 @@
     <Compile Include="../../agent/INTA.LocalAgent/PowerPlans.cs" Link="Windows/PowerPlans.cs" />
     <Compile Include="../../agent/INTA.LocalAgent/WindowsPrograms.cs" Link="Windows/WindowsPrograms.cs" />
     <Compile Include="../../agent/INTA.LocalAgent/StoragePreview.cs" Link="Windows/StoragePreview.cs" />
+    <Compile Include="../../agent/INTA.LocalAgent/WindowsAllocation.cs" Link="Windows/WindowsAllocation.cs" />
   </ItemGroup>
 </Project>

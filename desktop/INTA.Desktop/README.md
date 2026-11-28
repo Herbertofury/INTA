@@ -32,6 +32,13 @@ coverage. It never opens file contents or deletes anything. Drive roots,
 network locations and link-backed roots are not scanned. Reported bytes are
 logical size, not a guarantee of disk space you can reclaim. The Windows UI
 test uses disposable files only.
+Select **Include observed disk allocation** for an additional Windows
+metadata pass during the scan. It counts allocation once per identified file,
+reports repeats and files with links not seen in the selected scope, and
+labels incomplete measurements. It does not claim a point-in-time global
+snapshot or estimate reclaimable bytes. Use **Cancel scan** to stop between
+entries. The default remains the logical-size-only preview.
+
 
 Open **Installed programs** to browse desktop program registrations by name,
 version, publisher and registry scope. Identical names in separate registrations
