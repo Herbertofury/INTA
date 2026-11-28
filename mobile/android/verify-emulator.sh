@@ -113,6 +113,9 @@ if [[ -n "${INTA_OWNER_SIGNED_APK:-}" ]]; then
   "$tools/zipalign" -c -P 16 4 "$signed"
   "$tools/aapt2" dump badging "$signed" >> "$proof"
   grep -Eq "^package: name='com[.]inta[.]mobile' versionCode='[0-9]+'" "$proof"
+  if [[ -n "${INTA_OWNER_VERSION:-}" ]]; then
+    grep -F "versionName='$INTA_OWNER_VERSION'" "$proof"
+  fi
   grep -Eq "^(minSdkVersion|sdkVersion):'26'$" "$proof"
   grep -Fxq "targetSdkVersion:'36'" "$proof"
   "$adb" -s "$serial" uninstall com.inta.mobile.test
@@ -122,7 +125,7 @@ if [[ -n "${INTA_OWNER_SIGNED_APK:-}" ]]; then
     python3 "$root/verify-owner-upgrade.py" "$adb" "$serial" record
     "$adb" -s "$serial" install -r "$signed"
     python3 "$root/verify-owner-upgrade.py" "$adb" "$serial" check
-    printf '%s\n' 'Updated over the signed 0.2-preview.1 release and preserved its original checklist.' >> "$proof"
+    printf 'Updated over %s and preserved its original checklist.\n' "${INTA_PRIOR_TAG:-the prior signed release}" >> "$proof"
   else
     "$adb" -s "$serial" install "$signed"
   fi

@@ -77,10 +77,18 @@ jobs:
           cd "$RUNNER_TEMP"
           printf '%s  INTA-Mobile-Android.apk\n' "$DIGEST" | sha256sum --check
           printf 'INTA_OWNER_SIGNED_APK=%s/INTA-Mobile-Android.apk\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+          printf 'INTA_OWNER_VERSION=%s\n' "${TAG#mobile-}" >> "$GITHUB_ENV"
           if [[ "$TAG" != mobile-0.2-preview.1 ]]; then
+            prior=mobile-0.2-preview.2
+            prior_sha=4f3d0984f1745beee10043c33af2a037d8c876ffada022a7bf076daa84b93a0b
+            if [[ "$TAG" == "$prior" ]]; then
+              prior=mobile-0.2-preview.1
+              prior_sha=74cd9e5aa37dee61104f9a43a89c4815bb8647af64ab6c3e4eec9607ef112e63
+            fi
             mkdir "$RUNNER_TEMP/prior-mobile"
-            gh release download mobile-0.2-preview.1 --repo "$GITHUB_REPOSITORY" --pattern INTA-Mobile-Android.apk --dir "$RUNNER_TEMP/prior-mobile"
-            printf '%s  %s\n' 74cd9e5aa37dee61104f9a43a89c4815bb8647af64ab6c3e4eec9607ef112e63 "$RUNNER_TEMP/prior-mobile/INTA-Mobile-Android.apk" | sha256sum --check
+            gh release download "$prior" --repo "$GITHUB_REPOSITORY" --pattern INTA-Mobile-Android.apk --dir "$RUNNER_TEMP/prior-mobile"
+            printf '%s  %s\n' "$prior_sha" "$RUNNER_TEMP/prior-mobile/INTA-Mobile-Android.apk" | sha256sum --check
+            printf 'INTA_PRIOR_TAG=%s\n' "$prior" >> "$GITHUB_ENV"
             printf 'INTA_PRIOR_SIGNED_APK=%s/prior-mobile/INTA-Mobile-Android.apk\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
           fi
       - name: Build and exercise native timer, restart and checklist
