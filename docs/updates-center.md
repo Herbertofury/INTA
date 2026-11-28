@@ -8,6 +8,17 @@ The public website and installed responsive web app contain a searchable, review
 
 The canonical source is `data/updates-center.json`. The UI is `#updates` and is designed for desktop and narrow mobile screens. All commands are copy-only in this build.
 
+## Favorite Tweaks
+
+Two quick preferences for the Desktop **Tune & Customize** workspace. The Wiki is a guide; it does not change a PC. See [implementation status](https://github.com/Herbertofury/INTA/issues/78).
+
+| Favorite | How to use it | Current availability |
+| --- | --- | --- |
+| **Taskbar → End task** | Follow <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft’s Advanced Windows Settings guide](https://learn.microsoft.com/en-us/windows/advanced-settings/#taskbar). Open **Settings → System → Advanced** (or **For developers** on older supported [Windows 11](https://www.microsoft.com/windows/windows-11) builds), turn on **End task**, then right-click a running app’s taskbar icon. Turn the same setting off to remove the menu action. Ending a task can discard unsaved work. | **[Windows](https://www.microsoft.com/windows) setting.** <a href="https://herbertofury.github.io/INTA/" title="Open INTA official download or service page" aria-label="Open INTA official download or service page" data-inta-brand="app-inta"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/70ad9f0981b05341142b.png" alt="INTA official page" width="18" height="18" valign="middle" /></a> [INTA](https://herbertofury.github.io/INTA/) toggle must be verified on the supported build before it is shown as available. |
+| **Explorer → Take ownership** | The planned opt-in would add a menu item. Merely enabling the menu would not change any file. Using it would preview the exact selected item and owner, then ask for elevation and confirmation. It would not apply recursively or grant access by default. | **Planned.** Use <a href="https://www.microsoft.com/" title="Open microsoft.com official download or service page" aria-label="Open microsoft.com official download or service page" data-inta-brand="site-www-microsoft-com"><img src="https://raw.githubusercontent.com/Herbertofury/INTA/main/assets/brand-icons/4538691198fe0ea7526e.png" alt="microsoft.com official page" width="18" height="18" valign="middle" /></a> [Microsoft’s ownership guidance](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/takeown) only when you are authorized to repair a particular item. Ownership alone is not a grant of access. |
+
+The two favorites are part of Desktop maintenance parity, not bulk optimizations. Disabling a menu item does not undo any separate ownership change.
+
 ## Keep update channels separate
 
 | Channel | Owns | Preview/audit |
