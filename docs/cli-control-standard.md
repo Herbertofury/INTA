@@ -73,3 +73,16 @@ Startup folders, or assess other autostart sources. Missing sources are
 distinguished from unreadable or truncated ones. Names can be sensitive, so
 keep output local and do not send or store it in shared logs by default.
 The command is not a production certification for a full startup manager.
+
+### Registered desktop programs preview
+
+```text
+python3 scripts/cli-anything-inta.py --json installed-programs --agent-binary ABSOLUTE_PATH --agent-sha256 EXACT_SHA256
+```
+
+This uses the same reader as the Windows Desktop view. It returns registered
+display name, version, publisher and scope. It does not expose registry IDs,
+installation paths or uninstall commands, inventory Store apps, or modify
+the system. Skipped display rows and capped or unreadable scopes are reported
+rather than guessed. Keep this inventory local by default. This command does
+not authorize an uninstall, package identity or tool-wide admission.
