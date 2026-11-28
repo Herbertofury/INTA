@@ -14,9 +14,8 @@ scratch=$(mktemp -d "$out/.build.XXXXXX")
 trap 'rm -rf -- "$scratch"' EXIT
 mkdir "$scratch"/{classes,dex,test,fixture}
 brand="$root/../../assets/inta-brand"
-mkdir -p "$scratch"/{res/mipmap-xxxhdpi,res/drawable-nodpi,gen}
+mkdir -p "$scratch"/{res/mipmap-xxxhdpi,gen}
 install -m 644 "$brand/application-192.png" "$scratch/res/mipmap-xxxhdpi/inta_application.png"
-install -m 644 "$brand/heritage-192.png" "$scratch/res/drawable-nodpi/inta_heritage.png"
 "$tools/aapt2" compile --dir "$scratch/res" -o "$scratch/resources.zip"
 "$tools/aapt2" link --manifest "$root/AndroidManifest.xml" -I "$jar" --java "$scratch/gen" -o "$scratch/base.apk" "$scratch/resources.zip"
 javac --release 11 -Xlint:all -Werror -classpath "$jar" -d "$scratch/classes" "$scratch/gen/com/inta/mobile/R.java" "$root"/src/com/inta/mobile/*.java

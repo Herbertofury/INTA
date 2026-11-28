@@ -66,7 +66,7 @@ namespace Inta.Desktop
         internal Workspace(Window window, string directory, ToolActionRoute route)
         {
             this.window = window;
-            using (var art = typeof(Workspace).Assembly.GetManifestResourceStream("INTA.Heritage.png"))
+            using (var art = typeof(Workspace).Assembly.GetManifestResourceStream("INTA.Application.png"))
             {
                 if (art != null)
                 {
@@ -76,7 +76,7 @@ namespace Inta.Desktop
                     image.StreamSource = art;
                     image.EndInit();
                     image.Freeze();
-                    Find<Image>("HeritageMark").Source = image;
+                    Find<Image>("ApplicationMark").Source = image;
                 }
             }
             baseDirectory = directory;

@@ -22,7 +22,7 @@ def render(library: Path, output: Path):
                 if value:
                     svg.write(f'<text x="{col * 16 + 4}" y="{row * 20 + 14}" fill="#{value & 0xffffff:06x}">'
                               f'{chr(value >> 24)}</text>\n')
-        mark = Path(__file__).resolve().parents[1] / "assets/inta-brand/heritage-192.png"
+        mark = Path(__file__).resolve().parents[1] / "assets/inta-brand/application-192.png"
         data = base64.b64encode(mark.read_bytes()).decode("ascii")
         svg.write('</g><image x="740" y="385" width="184" height="184" '
                   'xmlns:xlink="http://www.w3.org/1999/xlink" '

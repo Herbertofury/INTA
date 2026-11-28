@@ -1,4 +1,5 @@
 import base64
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -22,6 +23,26 @@ class BrandContract(unittest.TestCase):
             data = (ROOT / "docs/assets" / hero).read_bytes()
             self.assertIn(heritage, data)
             self.assertNotIn(base64.b64encode(files[brand.icon_source()]), data)
+
+    def test_original_archive_is_sealed_and_matches_working_inputs(self):
+        source = ROOT / brand.ASSETS / "source"
+        filename = "INTA-Complete-Icon-Pack.zip"
+        expected, name = (source / "SHA256SUMS").read_text(encoding="ascii").split()
+        self.assertEqual(name, filename)
+        self.assertEqual(hashlib.sha256((source / filename).read_bytes()).hexdigest(), expected)
+        self.assertEqual(brand.pack_inputs(source / filename), brand.canonical_inputs(ROOT))
+
+    def test_route_and_native_chrome_use_application(self):
+        files = brand.canonical_inputs(ROOT)
+        inline = (ROOT / brand.THUMB).read_bytes()
+        self.assertEqual(inline, files[brand.icon_source()])
+        a = (ROOT / "native/workbench/desktop/build.ps1").read_text()
+        self.assertIn("application-64.png", a)
+        self.assertNotIn("heritage-192.png", a)
+        for file in ("JobsActivity.java", "JobActivity.java"):
+            src = (ROOT / "mobile/android/src/com/inta/mobile" / file).read_text()
+            self.assertIn("mark.setImageResource(R.mipmap.inta_application)", src)
+        self.assertIn("application-192.png", (ROOT / "scripts/build-rescue-wallpaper.py").read_text())
 
     def test_pwa_uses_application_art_and_verified_cache(self):
         site = ROOT / "site"

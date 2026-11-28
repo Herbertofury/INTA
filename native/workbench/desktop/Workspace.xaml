@@ -82,7 +82,7 @@
     <DockPanel LastChildFill="True" Margin="10,0">
      <StackPanel DockPanel.Dock="Top" Margin="12,21,0,20">
       <StackPanel Orientation="Horizontal">
-       <Image x:Name="HeritageMark" Width="32" Height="32" Margin="0,0,6,0" Focusable="False"/>
+       <Image x:Name="ApplicationMark" Width="32" Height="32" Margin="0,0,6,0" Focusable="False"/>
        <TextBlock Text="INTA Desktop" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center"/>
       </StackPanel>
      </StackPanel>

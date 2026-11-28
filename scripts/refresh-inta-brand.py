@@ -16,6 +16,8 @@ ASSETS = "assets/inta-brand"
 ICO = "native/workbench/desktop/inta.ico"
 THUMB = "assets/brand-icons/70ad9f0981b05341142b.png"  # stable URL in published Markdown
 REGISTRY = "data/brand-icons.json"
+SOURCE_PACK = f"{ASSETS}/source/INTA-Complete-Icon-Pack.zip"
+SOURCE_SUM = f"{ASSETS}/source/SHA256SUMS"
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
 APP_SIZES = (64, 192, 512)
 HERITAGE_SIZE = 192
@@ -79,10 +81,14 @@ def canonical_inputs(root):
 
 
 def brand_cache_version(files):
-    seal = hashlib.sha256()
+    seal = hashlib.sha256(b"inta-brand-surfaces-v2\0")
     for name, data in sorted(files.items()):
         seal.update(name.encode("ascii") + b"\0" + hashlib.sha256(data).digest())
     return seal.hexdigest()[:16]
+
+
+def source_checksum(data):
+    return (hashlib.sha256(data).hexdigest() + "  " + Path(SOURCE_PACK).name + "\n").encode("ascii")
 
 
 def pack_inputs(path):
@@ -124,6 +130,18 @@ def generated(root, files):
     }
 
 
+def validate_transparency(files):
+    from PIL import Image
+    for name, data in files.items():
+        image = Image.open(io.BytesIO(data))
+        frames = (image.ico.getimage(size) for size in image.ico.sizes()) if name == ICO else (image,)
+        for frame in frames:
+            alpha = frame.convert("RGBA").getchannel("A")
+            w, h = alpha.size
+            if any(alpha.getpixel(point) for point in ((0, 0), (0, h-1), (w-1, 0), (w-1, h-1))) or not alpha.getbbox():
+                raise ValueError(f"{name}: artwork must be visible on a transparent canvas, without a solid backing")
+
+
 def msix_assets(files, root, check):
     source = files[f"{ASSETS}/application-192.png"]
     if check:
@@ -160,7 +178,8 @@ def web_brand_errors(root, files):
     html = site / "index.html"
     expected_html = (
         b'<link rel="icon" type="image/x-icon" href="' + ico + b'">',
-        b'<img class="brand-mark" src="' + png_uri(heritage).encode("ascii") + b'"',
+        b'<img class="brand-mark" src="' + png_uri(files[icon_source()]).encode("ascii") + b'"',
+        b'<template id="inta-home-brand"><img class="home-heritage-mark" src="' + png_uri(heritage).encode("ascii") + b'"',
     )
     page = html.read_bytes() if html.is_file() else b""
     if not all(token in page for token in expected_html):
@@ -179,15 +198,23 @@ def main():
     mode.add_argument("--check", action="store_true", help="Verify existing derived assets without writing")
     mode.add_argument("--sync", action="store_true", help="Regenerate from the committed source pair and ICO")
     args = parser.parse_args()
-    files = pack_inputs(args.pack) if args.pack else canonical_inputs(ROOT)
+    archive = args.pack.read_bytes() if args.pack else None
+    files = pack_inputs(io.BytesIO(archive)) if archive is not None else canonical_inputs(ROOT)
+    if not args.check:
+        validate_transparency(files)
     outputs = {**generated(ROOT, files), **msix_assets(files, ROOT, args.check)}
     if args.check:
         errors = [name for name, data in outputs.items() if not (ROOT / name).exists() or (ROOT / name).read_bytes() != data]
         errors.extend(web_brand_errors(ROOT, files))
+        original = (ROOT / SOURCE_PACK).read_bytes()
+        if (ROOT / SOURCE_SUM).read_bytes() != source_checksum(original) or pack_inputs(io.BytesIO(original)) != files:
+            errors.append(SOURCE_PACK)
         if errors:
             parser.exit(1, "Stale INTA branding: " + ", ".join(errors) + "\n")
     else:
-        for name, data in ({**files, **outputs} if args.pack else outputs).items():
+        if archive is not None:
+            outputs = {**files, **outputs, SOURCE_PACK: archive, SOURCE_SUM: source_checksum(archive)}
+        for name, data in outputs.items():
             path = ROOT / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(data)
