@@ -21,13 +21,20 @@ namespace Inta.Desktop
             {
                 ToolActionRoute route;
                 if (!ToolActionRoute.Parse(arguments, out route)) return 2;
+                string payload = AppDomain.CurrentDomain.BaseDirectory;
+                string configuredState = Environment.GetEnvironmentVariable("INTA_DATA_DIR");
+                // The core opens its catalog database on startup. Do not let an
+                // unsafe override reach the core or another child of the workspace.
+                if (configuredState != null &&
+                    (String.IsNullOrWhiteSpace(configuredState) || WorkbenchStateDirectory.Resolve(payload) == null))
+                    throw new IOException("INTA_DATA_DIR must name an absolute, non-redirected state folder outside the signed application payload.");
                 var app = new Application();
                 Window window;
                 using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Workspace.xaml"))
                 {
                     window = (Window)XamlReader.Load(stream);
                 }
-                var workspace = new Workspace(window, AppDomain.CurrentDomain.BaseDirectory, route);
+                var workspace = new Workspace(window, payload, route);
                 int result = app.Run(window);
                 GC.KeepAlive(workspace);
                 return result;
