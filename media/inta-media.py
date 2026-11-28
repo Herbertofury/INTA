@@ -12,16 +12,19 @@ import threading
 import urllib.request
 import webbrowser
 from contextlib import closing
+from datetime import datetime
 from pathlib import Path
 
 REPO = "Herbertofury/INTA"
-RELEASE_API = f"https://api.github.com/repos/{REPO}/releases/latest"
+RELEASE_API = f"https://api.github.com/repos/{REPO}/releases?per_page=40"
 ASSET_ROOT = f"https://github.com/{REPO}/releases/download/"
 ISO = "inta-rescue-amd64.iso"
 SUMS = "SHA256SUMS"
 PARTS = ISO + ".parts.json"
 MAX_PART_SIZE = 1024 * 1024 * 1024
 MAX_MANIFEST_SIZE = 1024 * 1024
+MAX_RELEASE_LIST_SIZE = 4 * 1024 * 1024
+RESCUE_TAG = re.compile(r"rescue-([1-9][0-9]{0,18})\.([1-9][0-9]{0,8})")
 
 
 def expected_digest(data):
@@ -57,28 +60,29 @@ def stream_verified(source, target, expected, expected_size=None):
                 partial.unlink()
 
 
-def release_asset(assets, name):
+def release_asset(assets, name, tag=None):
     if name not in assets:
         raise ValueError(f"The release is missing {name}.")
     asset = assets[name]
     url = asset["browser_download_url"]
-    if not isinstance(url, str) or not url.startswith(ASSET_ROOT) or not url.endswith("/" + name):
+    if (not isinstance(url, str) or not url.startswith(ASSET_ROOT) or not url.endswith("/" + name)
+            or (tag is not None and url != ASSET_ROOT + tag + "/" + name)):
         raise ValueError("Unexpected release asset URL.")
     if type(asset["size"]) is not int or asset["size"] < 0:
         raise ValueError("Invalid release asset size.")
     return url, asset["size"]
 
 
-def _unique_manifest_object(pairs):
+def _unique_manifest_object(pairs, label="parts manifest"):
     result = {}
     for key, value in pairs:
         if key in result:
-            raise ValueError(f"Duplicate parts manifest field: {key}.")
+            raise ValueError(f"Duplicate {label} field: {key}.")
         result[key] = value
     return result
 
 
-def verified_parts(manifest, assets, expected):
+def verified_parts(manifest, assets, expected, tag=None):
     """Resolve an ordered manifest exclusively through this release's asset map."""
     fields = {"schemaVersion", "filename", "size", "sha256", "parts"}
     if not isinstance(manifest, dict) or set(manifest) != fields:
@@ -108,7 +112,7 @@ def verified_parts(manifest, assets, expected):
         digest = part["sha256"]
         if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", digest):
             raise ValueError(f"Invalid checksum for {name}.")
-        url, asset_size = release_asset(assets, name)
+        url, asset_size = release_asset(assets, name, tag)
         if asset_size != size:
             raise ValueError(f"The release asset size disagrees with the manifest for {name}.")
         resolved.append((name, url, size, digest.lower()))
@@ -152,23 +156,58 @@ class _VerifiedPartsReader:
                 raise ValueError(f"Verification failed for {self.name}. Any previous ISO is intact.")
 
 
+def select_rescue_release(releases):
+    """Select the newest published Rescue release in the bounded repository window."""
+    if not isinstance(releases, list) or len(releases) > 40:
+        raise ValueError("Invalid recent release list.")
+    candidates = []
+    seen = set()
+    for item in releases:
+        if not isinstance(item, dict):
+            raise ValueError("Invalid release listing entry.")
+        tag = item.get("tag_name")
+        match = RESCUE_TAG.fullmatch(tag) if isinstance(tag, str) else None
+        if not match or item.get("draft") is not False or item.get("prerelease") is not False:
+            continue
+        date = item.get("published_at")
+        if not isinstance(date, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", date):
+            raise ValueError("A published Rescue release has no valid publication date.")
+        if tag in seen:
+            raise ValueError("The release list repeats a published Rescue tag.")
+        seen.add(tag)
+        candidates.append((datetime.fromisoformat(date), int(match[1]), int(match[2]), item))
+    if not candidates:
+        raise ValueError("No published Rescue release was found in the latest 40 releases.")
+    return max(candidates, key=lambda row: row[:3])[3]
+
+
 def download_release(folder):
     with urllib.request.urlopen(RELEASE_API, timeout=30) as reply:
-        release = json.load(reply)
+        content = reply.read(MAX_RELEASE_LIST_SIZE + 1)
+    if len(content) > MAX_RELEASE_LIST_SIZE:
+        raise ValueError("The recent release list exceeds 4 MiB.")
+    release = select_rescue_release(json.loads(
+        content, object_pairs_hook=lambda pairs: _unique_manifest_object(pairs, "release metadata")))
+    tag = release["tag_name"]
+    rows = release.get("assets")
+    if not isinstance(rows, list):
+        raise ValueError("The Rescue release has no valid asset list.")
     assets = {}
-    for asset in release["assets"]:
+    for asset in rows:
+        if not isinstance(asset, dict) or not isinstance(asset.get("name"), str):
+            raise ValueError("The Rescue release contains an invalid asset record.")
         name = asset["name"]
         if name in assets:
             raise ValueError(f"The release contains duplicate assets named {name}.")
         assets[name] = asset
-    sums_url, _ = release_asset(assets, SUMS)
+    sums_url, _ = release_asset(assets, SUMS, tag)
     with urllib.request.urlopen(sums_url, timeout=30) as reply:
         expected = expected_digest(reply.read(65_536).decode("ascii"))
     parts = None
     if ISO in assets:
-        image_url, image_size = release_asset(assets, ISO)
+        image_url, image_size = release_asset(assets, ISO, tag)
     else:
-        manifest_url, manifest_size = release_asset(assets, PARTS)
+        manifest_url, manifest_size = release_asset(assets, PARTS, tag)
         if not 0 < manifest_size <= MAX_MANIFEST_SIZE:
             raise ValueError("The ISO parts manifest must be nonempty and at most 1 MiB.")
         with urllib.request.urlopen(manifest_url, timeout=30) as reply:
@@ -176,7 +215,7 @@ def download_release(folder):
         if len(content) != manifest_size:
             raise ValueError("The parts manifest size differs from its release asset.")
         manifest = json.loads(content, object_pairs_hook=_unique_manifest_object)
-        image_size, parts = verified_parts(manifest, assets, expected)
+        image_size, parts = verified_parts(manifest, assets, expected, tag)
     if shutil.disk_usage(folder).free < image_size:
         raise ValueError("The destination has insufficient free space for a safe replacement.")
     if parts is None:

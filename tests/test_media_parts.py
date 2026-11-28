@@ -27,6 +27,16 @@ media = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(media)
 
 
+def release_index(tag, assets):
+    """Use the bounded production channel shape, including an unrelated release."""
+    return [
+        {"tag_name": "online-toolbox-fixture", "draft": False, "prerelease": False,
+         "published_at": "2026-11-27T02:00:00Z", "assets": []},
+        {"tag_name": tag, "draft": False, "prerelease": False,
+         "published_at": "2026-11-27T01:00:00Z", "assets": assets},
+    ]
+
+
 def digest(data):
     return hashlib.sha256(data).hexdigest()
 
@@ -68,7 +78,7 @@ class ReleaseFixture:
 
     @staticmethod
     def url(name):
-        return media.ASSET_ROOT + "test-release/" + name
+        return media.ASSET_ROOT + "rescue-101.1/" + name
 
     def add(self, name, data):
         self.data[name] = data
@@ -80,7 +90,7 @@ class ReleaseFixture:
     def open(self, url, timeout):
         self.requests.append(url)
         if url == media.RELEASE_API:
-            response = TrackedResponse(json.dumps({"assets": list(self.assets.values()) + self.extra_assets}).encode("utf-8"))
+            response = TrackedResponse(json.dumps(release_index("rescue-101.1", list(self.assets.values()) + self.extra_assets)).encode("utf-8"))
         else:
             matches = [name for name in self.data if url == self.url(name)]
             if len(matches) != 1:
@@ -117,11 +127,11 @@ def verify_local_release_directory(directory, expected_sha256, temporary_directo
     else:
         names = [media.SUMS, media.ISO]
         mode = "iso"
-    urls = {media.ASSET_ROOT + "local-proof/" + name: directory / name for name in names}
-    release = {"assets": [
+    urls = {media.ASSET_ROOT + "rescue-102.1/" + name: directory / name for name in names}
+    release = release_index("rescue-102.1", [
         {"name": path.name, "size": path.stat().st_size, "browser_download_url": url}
         for url, path in urls.items()
-    ]}
+    ])
     requested = []
 
     def local_urlopen(url, timeout):
