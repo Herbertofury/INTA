@@ -1474,7 +1474,10 @@ def build_outputs() -> dict[str, str]:
     safe_json = data_json.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     template = (ROOT / "portal/index.template.html").read_text(encoding="utf-8")
     replacements = {
-        "{{STYLES}}": (ROOT / "portal/styles.css").read_text(encoding="utf-8"),
+        "{{STYLES}}": "\n".join((ROOT / "portal" / name).read_text(encoding="utf-8")
+                                  for name in ("styles.css", "rogue-game.css", "card-game.css")),
+        "{{ARCADE}}": "\n;\n".join((ROOT / "portal" / name).read_text(encoding="utf-8")
+                                 for name in ("rogue-game.js", "card-game.js")),
         "{{DATA}}": "window.INTA_DATA = " + safe_json + ";",
         "{{APP}}": (ROOT / "portal/app.js").read_text(encoding="utf-8"),
         "{{FAVICON}}": "data:image/x-icon;base64," + base64.b64encode((ROOT / "native/workbench/desktop/inta.ico").read_bytes()).decode("ascii"),
@@ -1485,7 +1488,7 @@ def build_outputs() -> dict[str, str]:
         if marker not in template:
             raise ValueError(f"Template missing {marker}")
         template = template.replace(marker, value)
-    if re.search(r"\{\{(?:STYLES|DATA|APP|FAVICON|APPLICATION_MARK|HERITAGE)\}\}", template):
+    if re.search(r"\{\{(?:STYLES|DATA|APP|ARCADE|FAVICON|APPLICATION_MARK|HERITAGE)\}\}", template):
         raise ValueError("Unresolved template marker")
     by_id, jobs_by_id = {x["id"]: x for x in tools}, {x["id"]: x for x in jobs}
     access = tool_access["tools"]

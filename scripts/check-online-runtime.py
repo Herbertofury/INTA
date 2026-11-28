@@ -88,6 +88,9 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     report = {'artifact': str(args.html.resolve()),
               'sha256': hashlib.sha256(args.html.read_bytes()).hexdigest(), 'checks': []}
+    import runpy
+    mission_test = runpy.run_path(str(Path(__file__).with_name('check-mission-board.py')))['check_mission_board']
+    arcade_test = runpy.run_path(str(Path(__file__).with_name('check-training-arcade.py')))['check_training_arcade']
     errors, requests = [], []
     with sync_playwright() as runtime:
         browser = runtime.chromium.launch(executable_path=args.browser, headless=True,
@@ -98,6 +101,10 @@ def main():
         page.on('pageerror', lambda error: errors.append(str(error)))
         page.on('request', lambda request: requests.append(request.url)
                 if request.url.startswith(('https://', 'http://')) else None)
+        mission_test(page, args.html, args.output)
+        report['checks'].append('Checklist keyboard, milestones, persistence, reset/undo, export, print and reduced motion')
+        arcade_test(page, args.html, args.output)
+        report['checks'].append('Two offline playable modes, mobile layout, and isolated checklist progress')
         page.goto(args.html.resolve().as_uri() + '#home')
         home_mark = page.locator('#app .home-heritage-mark')
         nav_mark = page.locator('.brand > .brand-mark')

@@ -1,0 +1,185 @@
+/* Defense Circuit styles stay within the opt-in simulation route. */
+.defense-circuit {
+  --dc-text: var(--text, #edf0fa);
+  --dc-muted: var(--muted, #aeb7cd);
+  --dc-surface: var(--surface, #161b25);
+  --dc-bg: var(--bg, #10141c);
+  --dc-line: var(--line, #313d50);
+  --dc-accent: var(--accent, #9bbfff);
+  --dc-quiet: var(--surface-2, #1e2838);
+  --dc-danger: #d58caa;
+  --dc-safe: #85bfb6;
+  color: var(--dc-text);
+  display: grid;
+  gap: 14px;
+  max-width: 1160px;
+  margin-inline: auto;
+  line-height: 1.5;
+}
+.defense-circuit h1, .defense-circuit h2, .defense-circuit h3,
+.defense-circuit h4, .defense-circuit p { margin: 0; }
+.defense-circuit p { color: var(--dc-muted); }
+.defense-circuit h1 { font-size: clamp(1.75rem, 4vw, 3.25rem); letter-spacing: -.045em; }
+.defense-circuit h2 { font-size: clamp(1.3rem, 3vw, 2rem); letter-spacing: -.035em; }
+.defense-circuit h3 { font-size: clamp(1.15rem, 2.5vw, 1.6rem); letter-spacing: -.025em; }
+.defense-circuit .dc-head, .defense-circuit .dc-stage, .defense-circuit .dc-archive,
+.defense-circuit .dc-exit {
+  border: 1px solid var(--dc-line);
+  background: var(--dc-surface);
+  border-radius: 14px;
+  min-width: 0;
+}
+.defense-circuit .dc-head {
+  padding: 17px clamp(15px, 4vw, 28px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-top: 3px solid var(--dc-accent);
+}
+.defense-circuit .dc-eyebrow {
+  color: var(--dc-accent);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+.defense-circuit .dc-record {
+  display: grid;
+  justify-items: start;
+  border-inline-start: 1px solid var(--dc-line);
+  padding-inline-start: 16px;
+  color: var(--dc-muted);
+  min-width: 130px;
+}
+.defense-circuit .dc-record span { font-size: .68rem; letter-spacing: .1em; font-weight: 800; }
+.defense-circuit .dc-record b { color: var(--dc-text); line-height: 1.13; font-size: 1.75rem; font-variant-numeric: tabular-nums; }
+.defense-circuit .dc-record small { font-size: .75rem; }
+.defense-circuit .dc-boundary { padding-inline: 4px; font-size: .83rem; }
+.defense-circuit .dc-stage { padding: clamp(13px, 3.5vw, 24px); }
+.defense-circuit .dc-stage:focus-visible { outline: 2px solid var(--dc-accent); outline-offset: 2px; }
+.defense-circuit .dc-start, .defense-circuit .dc-final, .defense-circuit .dc-victory { display: grid; gap: 9px; }
+.defense-circuit .dc-start details { border-top: 1px solid var(--dc-line); padding-block-start: 8px; }
+.defense-circuit .dc-start details > p { margin-block: 8px; }
+.defense-circuit .dc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 172px), 1fr));
+  gap: 8px;
+  margin-block: 8px 0;
+}
+.defense-circuit .dc-button {
+  color: var(--dc-text);
+  background: var(--dc-bg);
+  border: 1px solid var(--dc-line);
+  border-radius: 9px;
+  text-align: start;
+  font-family: inherit;
+  line-height: 1.35;
+  padding: 11px 13px;
+  min-height: 46px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  cursor: pointer;
+  touch-action: manipulation;
+  overflow-wrap: anywhere;
+}
+.defense-circuit .dc-button:hover:not(:disabled), .defense-circuit .dc-button.is-primary {
+  border-color: var(--dc-accent);
+}
+.defense-circuit .dc-button:focus-visible, .defense-circuit summary:focus-visible,
+.defense-circuit a:focus-visible { outline: 2px solid var(--dc-accent); outline-offset: 2px; }
+.defense-circuit .dc-button:disabled { opacity: .53; cursor: default; }
+.defense-circuit .dc-button strong { font-size: 1rem; }
+.defense-circuit .dc-button small { color: var(--dc-muted); font-size: .78rem; }
+.defense-circuit .dc-button.is-boss { border-color: var(--dc-danger); }
+.defense-circuit .dc-run-head { display: grid; grid-template-columns: 1fr minmax(100px, 28%); gap: 15px; align-items: center; }
+.defense-circuit .dc-chip-row {
+  margin-block: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.defense-circuit .dc-chip-row span {
+  color: var(--dc-muted);
+  padding: 2px 8px;
+  border: 1px solid var(--dc-line);
+  border-radius: 20px;
+  font-size: .76rem;
+}
+.defense-circuit .dc-meter { display: grid; gap: 3px; }
+.defense-circuit .dc-meter span { display: flex; justify-content: space-between; color: var(--dc-muted); font-size: .8rem; font-variant-numeric: tabular-nums; gap: 6px; }
+.defense-circuit .dc-meter b { color: var(--dc-text); }
+.defense-circuit meter { width: 100%; height: .78rem; accent-color: var(--dc-safe); }
+.defense-circuit .is-enemy meter { accent-color: var(--dc-danger); }
+.defense-circuit meter::-webkit-meter-optimum-value { background: var(--dc-safe); }
+.defense-circuit .is-enemy meter::-webkit-meter-optimum-value { background: var(--dc-danger); }
+.defense-circuit .dc-route-trace {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+  gap: 5px;
+}
+.defense-circuit .dc-route-trace li {
+  border: 1px solid var(--dc-line);
+  border-radius: 6px;
+  font-size: .77rem;
+  padding: 4px 8px;
+  text-align: center;
+  color: var(--dc-muted);
+}
+.defense-circuit .dc-route-trace li.current { border-color: var(--dc-accent); color: var(--dc-text); font-weight: 800; }
+.defense-circuit .dc-route-trace li.past { color: var(--dc-muted); text-decoration: line-through; }
+.defense-circuit .dc-encounter, .defense-circuit .dc-report {
+  display: grid;
+  grid-template-columns: clamp(56px, 9vw, 98px) minmax(0, 1fr);
+  align-items: center;
+  gap: 13px;
+  padding: 12px;
+  background: var(--dc-bg);
+  border: 1px solid var(--dc-line);
+  border-radius: 10px;
+}
+.defense-circuit .dc-encounter .dc-meter { margin-block-start: 8px; }
+.defense-circuit .dc-threat-art { width: 100%; height: auto; color: var(--dc-danger); }
+.defense-circuit .dc-threat-art g { stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.defense-circuit .dc-threat-art .dc-rings { stroke: currentColor; stroke-width: 1; opacity: .47; }
+.defense-circuit .dc-readout {
+  margin-block: 9px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.defense-circuit .dc-readout > div {
+  border-inline-start: 2px solid var(--dc-accent);
+  padding: 6px 10px;
+  background: var(--dc-bg);
+}
+.defense-circuit .dc-readout > div:first-child { border-color: var(--dc-danger); }
+.defense-circuit .dc-readout strong { font-size: .83rem; }
+.defense-circuit .dc-end, .defense-circuit .dc-finale { display: flex; justify-content: end; margin-block-start: 10px; }
+.defense-circuit .dc-archive, .defense-circuit .dc-exit { padding: 9px 13px; }
+.defense-circuit summary { cursor: pointer; padding-block: 7px; font-weight: 750; }
+.defense-circuit .dc-archive > p, .defense-circuit .dc-exit > p { margin: 6px 0; }
+.defense-circuit .dc-archive .dc-report { margin-block: 7px; }
+.defense-circuit .dc-victory { margin-block-start: 9px; animation: dc-clear .35s ease-out; }
+.defense-circuit .dc-report { align-items: start; }
+.defense-circuit .dc-report .dc-eyebrow { color: var(--dc-text); }
+.defense-circuit .dc-report-visual { padding-top: 4px; }
+.defense-circuit .dc-report .dc-threat-art { color: var(--dc-accent); }
+.defense-circuit .dc-report ol { margin: 7px 0; padding-inline-start: 1.35rem; }
+.defense-circuit .dc-report li + li { margin-top: 4px; }
+.defense-circuit .dc-report a { color: var(--dc-accent); text-decoration: underline; text-underline-offset: .14em; overflow-wrap: anywhere; }
+.defense-circuit .dc-status { min-height: 1.5em; font-size: .83rem; padding-inline: 4px; }
+@keyframes dc-clear { from { opacity: .55; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .defense-circuit .dc-victory { animation: none; } }
+@media (max-width: 460px) {
+  .defense-circuit .dc-run-head, .defense-circuit .dc-readout { grid-template-columns: 1fr; }
+  .defense-circuit .dc-encounter, .defense-circuit .dc-report { grid-template-columns: 42px minmax(0, 1fr); gap: 8px; padding: 9px; }
+  .defense-circuit .dc-actions { grid-template-columns: 1fr 1fr; }
+  .defense-circuit .dc-button { padding: 8px; }
+  .defense-circuit .dc-head { padding: 12px; }
+}
+.defense-circuit .dc-lore { margin-block: 6px; }
