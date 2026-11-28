@@ -1,0 +1,19 @@
+#!/bin/sh
+# Apply the default only on first use of this live account. XFCE owns later choices.
+set -eu
+state=${XDG_CONFIG_HOME:-"$HOME/.config"}/INTA
+test ! -e "$state/xfce-backdrop-v1" || exit 0
+image=/usr/share/backgrounds/inta/obsidian-field.svg
+test -r "$image" || exit 0
+theme=$(xfconf-query -c xsettings -p /Net/ThemeName 2>/dev/null || true)
+case "$theme" in *[Hh]igh[Cc]ontrast*) exit 0;; esac
+applied=0
+for monitor in $(xrandr --query | awk '$2 == "connected" {print $1}'); do
+    case "$monitor" in *[!A-Za-z0-9_.:-]*) continue;; esac
+    property="/backdrop/screen0/monitor$monitor/workspace0/last-image"
+    if xfconf-query -c xfce4-desktop -p "$property" -s "$image" 2>/dev/null ||
+       xfconf-query -c xfce4-desktop -p "$property" --create -t string -s "$image"; then
+        applied=1
+    fi
+done
+if [ "$applied" = 1 ]; then mkdir -p "$state"; touch "$state/xfce-backdrop-v1"; fi

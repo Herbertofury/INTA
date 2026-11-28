@@ -5,10 +5,13 @@ on:
     paths:
       - 'live/**'
       - 'media/inta_brand_ui.py'
+      - 'media/inta_optics_ui.py'
+      - 'native/optics/**'
       - 'data/brand-icons.json'
       - 'assets/brand-icons/**'
       - 'docs/assets/inta-mark.svg'
       - 'scripts/build-iso'
+      - 'scripts/build-rescue-wallpaper.py'
       - 'scripts/smoke-iso'
       - 'scripts/rescue_boot_log.py'
   workflow_dispatch:
@@ -34,7 +37,7 @@ jobs:
         run: |
           docker run --rm --privileged -v "${GITHUB_WORKSPACE}:/src:ro" -v "${RUNNER_TEMP}:/out" debian:13-slim bash -euc '
             apt-get update
-            apt-get install -y --no-install-recommends live-build debootstrap debian-archive-keyring ca-certificates
+            apt-get install -y --no-install-recommends live-build debootstrap debian-archive-keyring ca-certificates rustc gcc libc6-dev python3
             /src/scripts/build-iso /out/inta-dist
           '
           cat "${RUNNER_TEMP}/inta-dist/SHA256SUMS"

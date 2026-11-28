@@ -14,9 +14,10 @@ from rescue_boot_log import passed
 # from the publication source and has its own tests and checksum.
 ISO_INPUTS = (
     "live", "media/inta_brand_ui.py", "data/brand-icons.json", "assets/brand-icons",
-    "docs/assets/inta-mark.svg", "scripts/build-iso",
+    "docs/assets/inta-mark.svg", "scripts/build-iso", "scripts/build-rescue-wallpaper.py",
+    "media/inta_optics_ui.py", "native/optics",
 )
-MEDIA_INPUTS = ("media", "scripts/package-media.py", "scripts/package-rescue-release.py")
+MEDIA_INPUTS = ("media", "data/rescue-download-channel.json", "scripts/package-media.py", "scripts/package-rescue-release.py")
 BUILD_RECIPE = "Build with Debian stable and current signed security updates"
 BUILD_STEPS = (
     "Validate source", BUILD_RECIPE,

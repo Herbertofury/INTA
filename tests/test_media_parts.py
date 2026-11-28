@@ -25,6 +25,12 @@ spec = importlib.util.spec_from_file_location(
     "inta_media_parts", Path(__file__).resolve().parents[1] / "media" / "inta-media.py")
 media = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(media)
+TEST_TAG = "rescue-123.1"
+TEST_API = media.RELEASE_API + TEST_TAG
+
+
+def fixture_channel(expected):
+    return {"schemaVersion": 1, "tag": TEST_TAG, "sha256": expected, "qualification": "qualified"}
 
 
 def digest(data):
@@ -68,7 +74,7 @@ class ReleaseFixture:
 
     @staticmethod
     def url(name):
-        return media.ASSET_ROOT + "test-release/" + name
+        return media.ASSET_ROOT + TEST_TAG + "/" + name
 
     def add(self, name, data):
         self.data[name] = data
@@ -79,8 +85,10 @@ class ReleaseFixture:
 
     def open(self, url, timeout):
         self.requests.append(url)
-        if url == media.RELEASE_API:
-            response = TrackedResponse(json.dumps({"assets": list(self.assets.values()) + self.extra_assets}).encode("utf-8"))
+        if url == TEST_API:
+            release = {"tag_name":TEST_TAG, "draft":False, "prerelease":False,
+                       "assets": list(self.assets.values()) + self.extra_assets}
+            response = TrackedResponse(json.dumps(release).encode("utf-8"))
         else:
             matches = [name for name in self.data if url == self.url(name)]
             if len(matches) != 1:
@@ -117,8 +125,8 @@ def verify_local_release_directory(directory, expected_sha256, temporary_directo
     else:
         names = [media.SUMS, media.ISO]
         mode = "iso"
-    urls = {media.ASSET_ROOT + "local-proof/" + name: directory / name for name in names}
-    release = {"assets": [
+    urls = {media.ASSET_ROOT + TEST_TAG + "/" + name: directory / name for name in names}
+    release = {"tag_name":TEST_TAG, "draft":False, "prerelease":False, "assets": [
         {"name": path.name, "size": path.stat().st_size, "browser_download_url": url}
         for url, path in urls.items()
     ]}
@@ -126,7 +134,7 @@ def verify_local_release_directory(directory, expected_sha256, temporary_directo
 
     def local_urlopen(url, timeout):
         requested.append(url)
-        if url == media.RELEASE_API:
+        if url == TEST_API:
             return io.BytesIO(json.dumps(release).encode("utf-8"))
         if url not in urls:
             raise AssertionError(f"Downloader requested a non-release asset: {url}")
@@ -135,7 +143,7 @@ def verify_local_release_directory(directory, expected_sha256, temporary_directo
     with tempfile.TemporaryDirectory(prefix="inta-media-release-proof-", dir=temporary_directory) as folder:
         target = Path(folder) / media.ISO
         with mock.patch.object(media.urllib.request, "urlopen", side_effect=local_urlopen):
-            media.download_release(Path(folder))
+            media.download_release(Path(folder), fixture_channel(expected_sha256))
         actual = hashlib.sha256()
         with target.open("rb") as image:
             while chunk := image.read(1024 * 1024):
@@ -165,7 +173,7 @@ class MediaPartsTests(unittest.TestCase):
     def download(self, fixture=None):
         fixture = fixture or self.fixture
         with mock.patch.object(media.urllib.request, "urlopen", side_effect=fixture.open):
-            media.download_release(self.folder)
+            media.download_release(self.folder, fixture_channel(fixture.expected))
 
     def assert_failed_atomically(self, fixture=None, exception=ValueError):
         fixture = fixture or self.fixture
@@ -186,7 +194,7 @@ class MediaPartsTests(unittest.TestCase):
         self.download()
         self.assertEqual((self.folder / media.ISO).read_bytes(), self.fixture.image)
         self.assertEqual((self.folder / media.SUMS).read_text(encoding="ascii"), f"{self.fixture.expected}  {media.ISO}\n")
-        self.assertEqual(self.fixture.requests, [media.RELEASE_API, self.fixture.url(media.SUMS), self.fixture.url(media.PARTS)] +
+        self.assertEqual(self.fixture.requests, [TEST_API, self.fixture.url(media.SUMS), self.fixture.url(media.PARTS)] +
                          [self.fixture.url(part["name"]) for part in self.fixture.manifest["parts"]])
         self.assertEqual(sorted(path.name for path in self.folder.iterdir()), sorted([media.ISO, media.SUMS]))
         for response in self.fixture.responses[3:]:
@@ -198,7 +206,7 @@ class MediaPartsTests(unittest.TestCase):
         self.fixture.add(media.PARTS, b"not valid JSON")
         self.download()
         self.assertEqual((self.folder / media.ISO).read_bytes(), self.fixture.image)
-        self.assertEqual(self.fixture.requests, [media.RELEASE_API, self.fixture.url(media.SUMS), self.fixture.url(media.ISO)])
+        self.assertEqual(self.fixture.requests, [TEST_API, self.fixture.url(media.SUMS), self.fixture.url(media.ISO)])
 
     def test_ordinary_iso_without_a_manifest_still_downloads(self):
         self.fixture.add(media.ISO, self.fixture.image)
@@ -226,7 +234,7 @@ class MediaPartsTests(unittest.TestCase):
                 fixture.add(media.ISO, fixture.image)
                 fixture.extra_assets.append(copy.deepcopy(fixture.assets[name]))
                 self.assert_failed_atomically(fixture)
-                self.assertEqual(fixture.requests, [media.RELEASE_API])
+                self.assertEqual(fixture.requests, [TEST_API])
 
     def test_manifest_size_is_bounded_before_its_http_request(self):
         for size in (0, media.MAX_MANIFEST_SIZE + 1):
@@ -234,7 +242,7 @@ class MediaPartsTests(unittest.TestCase):
                 fixture = ReleaseFixture()
                 fixture.assets[media.PARTS]["size"] = size
                 self.assert_failed_atomically(fixture)
-                self.assertEqual(fixture.requests, [media.RELEASE_API, fixture.url(media.SUMS)])
+                self.assertEqual(fixture.requests, [TEST_API, fixture.url(media.SUMS)])
 
     def test_out_of_order_duplicate_and_gapped_parts_are_rejected(self):
         for change in (lambda parts: parts.reverse(),
@@ -298,11 +306,30 @@ class MediaPartsTests(unittest.TestCase):
 
     def test_final_iso_digest_is_verified_even_when_all_parts_are_valid(self):
         wrong = "f" * 64
+        self.fixture.expected = wrong
         self.fixture.manifest["sha256"] = wrong
         self.fixture.add(media.SUMS, f"{wrong}  {media.ISO}\n".encode("ascii"))
         self.fixture.update_manifest()
         self.assert_failed_atomically()
         self.assertEqual(len(self.fixture.requests), 3 + len(self.fixture.manifest["parts"]))
+
+    def test_channel_checksum_mismatch_stops_before_downloading_image_parts(self):
+        self.fixture.expected = "f" * 64
+        self.assert_failed_atomically()
+        self.assertEqual(self.fixture.requests, [TEST_API, self.fixture.url(media.SUMS)])
+
+    def test_historical_channel_requires_plain_warning(self):
+        channel = {**fixture_channel(self.fixture.expected), "qualification": "historical-recovery"}
+        for invalid in (None, "", {}, 1):
+            with self.subTest(warning=invalid), self.assertRaises(ValueError):
+                media.validated_channel({**channel, "scannerWarning": invalid})
+
+    def test_foreign_product_tag_is_refused(self):
+        release = {"tag_name":"toolbox-123.1", "draft":False, "prerelease":False, "assets":[]}
+        with mock.patch.object(media.urllib.request, "urlopen", return_value=io.BytesIO(json.dumps(release).encode())):
+            with self.assertRaisesRegex(ValueError, "channel"):
+                media.download_release(self.folder, fixture_channel(self.fixture.expected))
+        self.assertFalse(list(self.folder.iterdir()))
 
     def test_part_asset_sizes_and_origins_must_match_the_release(self):
         for key, value in (("size", 1), ("size", True),

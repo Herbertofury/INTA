@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "tag": "rescue-45951274984.1",
+  "sha256": "4d921887446656127e8a945b551316e83320bc52ba7327eee9418931dfaef68d",
+  "qualification": "historical-recovery",
+  "scannerWarning": "This historical image is available for offline recovery. Its ClamAV scanner has known security issues. Do not scan untrusted files with this image."
+}

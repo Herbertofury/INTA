@@ -110,6 +110,8 @@ class OpticalHeader(ttk.Frame):
         self.pitch = max(10, round(10 * float(self.tk.call("tk", "scaling"))))
         self.cells = []
         self.grid_size = None
+        self.backdrop = None
+        self.backdrop_key = None
         self.impulses = []
         self.pending = None
         self.canvas.bind("<Configure>", self.queue)
@@ -178,10 +180,34 @@ class OpticalHeader(ttk.Frame):
         dimensions = (cols, rows) if p < 4 and not self.high_contrast else (0, 0)
         if self.grid_size != dimensions:
             self.canvas.delete("all")
+            self.backdrop_key = None
             self.cells = [[self.canvas.create_text((x + .5)*self.pitch, (y + .5)*height,
                            font=("TkFixedFont", max(6, round(self.pitch*.49)))), None]
                           for y in range(dimensions[1]) for x in range(dimensions[0])]
             self.grid_size = dimensions
+        key = (self.canvas.winfo_width(), self.canvas.winfo_height(), p, self.high_contrast)
+        if key != self.backdrop_key:
+            self.canvas.delete("nebula")
+            self.backdrop = None
+            if dimensions != (0, 0):
+                # The soft light is independent of touch. Rasterize once per size and
+                # profile instead of resampling an expensive blur on every frame.
+                width, pixels_high = math.ceil(key[0]/4), math.ceil(key[1]/4)
+                gain = (1, .72, .45, .24)[p]
+                pixels = bytearray()
+                for y in range(pixels_high):
+                    v = y / max(1, pixels_high-1)
+                    for x in range(width):
+                        u = x / max(1, width-1)
+                        blue = math.exp(-((u-.76+(v-.5)*.2)**2*13 + (v-.32)**2*2.6))
+                        violet = math.exp(-((u-.28-(v-.5)*.13)**2*16 + (v-.74)**2*2))
+                        pixels.extend((int(11+gain*(blue*5+violet*18)), int(16+gain*(blue*23+violet*6)),
+                                       int(25+gain*(blue*31+violet*24))))
+                raw = f"P6\n{width} {pixels_high}\n255\n".encode() + pixels
+                self.backdrop = tk.PhotoImage(master=self.canvas, data=raw, format="PPM").zoom(4, 4)
+                self.canvas.create_image(0, 0, image=self.backdrop, anchor="nw", tags="nebula")
+                self.canvas.tag_lower("nebula")
+            self.backdrop_key = key
         for i, cell in enumerate(self.cells):
             value = self.sample(i % cols, i // cols, cols, rows, p, newest, previous)
             if cell[1] != value:

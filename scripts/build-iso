@@ -31,6 +31,13 @@ cp -a "$root/live/." config/
 # Keep native UI assets on the same canonical registry as the portal.
 install -d config/includes.chroot/usr/share/inta/data config/includes.chroot/usr/share/inta/assets/brand-icons
 install -m 644 "$root/media/inta_brand_ui.py" config/includes.chroot/usr/share/inta/inta_brand_ui.py
+install -m 644 "$root/media/inta_optics_ui.py" config/includes.chroot/usr/share/inta/inta_optics_ui.py
+install -d config/includes.chroot/usr/lib/inta
+rustc --edition=2021 --crate-name inta_optics --crate-type cdylib -C opt-level=s -C panic=abort -C strip=symbols \
+    "$root/native/optics/src/lib.rs" -o config/includes.chroot/usr/lib/inta/libinta_optics.so
+install -d config/includes.chroot/usr/share/backgrounds/inta
+python3 "$root/scripts/build-rescue-wallpaper.py" config/includes.chroot/usr/lib/inta/libinta_optics.so \
+    config/includes.chroot/usr/share/backgrounds/inta/obsidian-field.svg
 install -m 644 "$root/data/brand-icons.json" config/includes.chroot/usr/share/inta/data/brand-icons.json
 cp -a "$root/assets/brand-icons/." config/includes.chroot/usr/share/inta/assets/brand-icons/
 install -d config/includes.chroot/usr/share/icons/hicolor/scalable/apps

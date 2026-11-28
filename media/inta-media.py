@@ -11,11 +11,12 @@ import tempfile
 import threading
 import urllib.request
 import webbrowser
+import zipimport
 from contextlib import closing
 from pathlib import Path
 
 REPO = "Herbertofury/INTA"
-RELEASE_API = f"https://api.github.com/repos/{REPO}/releases/latest"
+RELEASE_API = f"https://api.github.com/repos/{REPO}/releases/tags/"
 ASSET_ROOT = f"https://github.com/{REPO}/releases/download/"
 ISO = "inta-rescue-amd64.iso"
 SUMS = "SHA256SUMS"
@@ -152,18 +153,48 @@ class _VerifiedPartsReader:
                 raise ValueError(f"Verification failed for {self.name}. Any previous ISO is intact.")
 
 
-def download_release(folder):
-    with urllib.request.urlopen(RELEASE_API, timeout=30) as reply:
+def download_channel():
+    name = "data/rescue-download-channel.json"
+    if isinstance(__loader__, zipimport.zipimporter):
+        data = __loader__.get_data("inta-resources/" + name)
+    else:
+        data = (Path(__file__).resolve().parents[1] / name).read_bytes()
+    return validated_channel(json.loads(data, object_pairs_hook=_unique_manifest_object))
+
+
+def validated_channel(channel):
+    if (not isinstance(channel, dict) or type(channel.get("schemaVersion")) is not int or channel["schemaVersion"] != 1
+            or not re.fullmatch(r"rescue-[0-9]+\.[0-9]+", str(channel.get("tag", "")))
+            or not re.fullmatch(r"[0-9a-f]{64}", str(channel.get("sha256", "")))
+            or channel.get("qualification") not in ("historical-recovery", "qualified")):
+        raise ValueError("The bundled Rescue download channel is invalid.")
+    warning = channel.get("scannerWarning")
+    if channel["qualification"] == "historical-recovery" and (
+            not isinstance(warning, str) or not 1 <= len(warning.strip()) <= 1500):
+        raise ValueError("The historical Rescue channel requires a scanner warning.")
+    return channel
+
+
+def download_release(folder, channel=None):
+    channel = download_channel() if channel is None else validated_channel(channel)
+    tag = channel["tag"]
+    with urllib.request.urlopen(RELEASE_API + tag, timeout=30) as reply:
         release = json.load(reply)
+    if release.get("tag_name") != tag or release.get("draft") is not False or release.get("prerelease") is not False:
+        raise ValueError("The published release differs from the bundled Rescue channel.")
     assets = {}
     for asset in release["assets"]:
         name = asset["name"]
         if name in assets:
             raise ValueError(f"The release contains duplicate assets named {name}.")
+        if (name in (ISO, SUMS, PARTS) or name.startswith(ISO + ".part")) and asset.get("browser_download_url") != ASSET_ROOT + tag + "/" + name:
+            raise ValueError("Unexpected release asset URL.")
         assets[name] = asset
     sums_url, _ = release_asset(assets, SUMS)
     with urllib.request.urlopen(sums_url, timeout=30) as reply:
         expected = expected_digest(reply.read(65_536).decode("ascii"))
+    if expected != channel["sha256"]:
+        raise ValueError("The ISO checksum differs from the bundled Rescue channel.")
     parts = None
     if ISO in assets:
         image_url, image_size = release_asset(assets, ISO)
@@ -207,6 +238,7 @@ def build_app():
     if str(source_folder) not in sys.path:
         sys.path.insert(0, str(source_folder))
     from inta_brand_ui import BrandUI, ScrollableFrame
+    from inta_optics_ui import OpticalHeader
 
     root = tk.Tk()
     root.title("INTA Media Creator")
@@ -219,8 +251,17 @@ def build_app():
     viewport = ScrollableFrame(root, padding=24)
     viewport.pack(fill="both", expand=True, padx=16, pady=16)
     panel = viewport.content
-    brand_ui.text(panel, "INTA Media Creator", font=("TkDefaultFont", 22, "bold"), foreground="#e7e9ee", icon_size=36, fill="x")
-    brand_ui.text(panel, "Download a refreshed INTA Rescue ISO and prepare your boot USB.", fill="x", pady=(3, 12))
+    header = ttk.Frame(panel)
+    header.pack(fill="x", pady=(0, 10))
+    header.columnconfigure(0, weight=3, minsize=155)
+    header.columnconfigure(1, weight=2, minsize=160)
+    appearance = OpticalHeader(header)
+    appearance.grid(row=0, column=1, sticky="nsew", padx=(12, 0))
+    root.inta_optics = appearance
+    headings = ttk.Frame(header)
+    headings.grid(row=0, column=0, sticky="new")
+    brand_ui.text(headings, "INTA Media Creator", font=("TkDefaultFont", 22, "bold"), foreground="#e7e9ee", icon_size=36, fill="x")
+    brand_ui.text(panel, "Download the selected INTA Rescue image or prepare an existing Ventoy volume.", fill="x", pady=(3, 12))
     brand_ui.text(panel, "Open a tool name or icon for its official download page. The action buttons keep installation and launch separate.", fill="x", pady=(0, 16))
     responses = queue.Queue()
     buttons = []
@@ -253,15 +294,23 @@ def build_app():
             except Exception as error:
                 responses.put(("", str(error)))
             else:
-                responses.put(("Verified ISO ready", None))
+                responses.put(("ISO ready · SHA-256 checksum matched", None))
 
         threading.Thread(target=worker, daemon=True).start()
         root.after(150, collect)
 
     def download():
-        folder = filedialog.askdirectory(title="Choose where to save the updated ISO")
+        try:
+            channel = download_channel()
+        except (OSError, ValueError, KeyError) as error:
+            messagebox.showerror("Rescue download unavailable", str(error))
+            return
+        if channel["qualification"] == "historical-recovery" and not messagebox.askokcancel(
+            "Historical recovery image", channel["scannerWarning"] + "\n\nContinue with the historical file-recovery download?"):
+            return
+        folder = filedialog.askdirectory(title="Choose where to save the Rescue ISO")
         if folder:
-            run("Downloading and verifying release", download_release, Path(folder))
+            run("Downloading and checking the release checksum", download_release, Path(folder), channel)
 
     def ventoy():
         source = filedialog.askopenfilename(
@@ -317,8 +366,8 @@ def build_app():
             root.destroy()
 
     actions = [
-        ("INTA Rescue", "Download or update the verified ISO.", "Download / update ISO", download),
-        ("Ventoy", "Install or update the ISO on an existing Ventoy USB volume.", "Copy verified ISO", ventoy),
+        ("INTA Rescue", "Download the image selected by the bundled Rescue channel and check its SHA-256.", "Download / update ISO", download),
+        ("Ventoy", "Check the selected ISO against its adjacent SHA256SUMS and copy it to an existing Ventoy volume.", "Copy checked ISO", ventoy),
         ("Ventoy", "Open a downloaded executable, or get the official Ventoy download.", "Open / download", lambda: official_tool("Ventoy")),
         ("Rufus", "Open a downloaded executable, or get the official Rufus download.", "Open / download", lambda: official_tool("Rufus")),
     ]

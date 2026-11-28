@@ -185,6 +185,7 @@ class RescueInputCompatibility(unittest.TestCase):
         self.git("config", "user.email", "test@example.invalid")
         self.git("config", "user.name", "Fixture")
         for name in ("live/fixture", "media/inta_brand_ui.py", "media/inta-media.py",
+                     "native/optics/src/lib.rs", "scripts/build-rescue-wallpaper.py", "media/inta_optics_ui.py",
                      "data/brand-icons.json", "assets/brand-icons/fixture.png",
                      "docs/assets/inta-mark.svg", "scripts/build-iso", "scripts/package-media.py"):
             self.write(name, "original\n")
@@ -222,7 +223,8 @@ class RescueInputCompatibility(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_all_iso_inputs_remain_protected(self):
-        for name in ("live/fixture", "media/inta_brand_ui.py", "data/brand-icons.json",
+        for name in ("live/fixture", "media/inta_brand_ui.py", "media/inta_optics_ui.py",
+                     "native/optics/src/lib.rs", "scripts/build-rescue-wallpaper.py", "data/brand-icons.json",
                      "assets/brand-icons/fixture.png", "docs/assets/inta-mark.svg", "scripts/build-iso"):
             with self.subTest(path=name):
                 self.git("reset", "--hard", self.source)
