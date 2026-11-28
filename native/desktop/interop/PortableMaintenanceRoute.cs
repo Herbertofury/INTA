@@ -1,6 +1,3 @@
-#if NET10_0
-#nullable disable
-#endif
 using System;
 using System.IO;
 using System.Linq;
@@ -27,7 +24,8 @@ namespace INTA.Desktop
                     int total = 0, read;
                     while (total < bytes.Length && (read = file.Read(bytes, total, bytes.Length - total)) != 0) total += read;
                     if (total != bytes.Length) return null;
-                    var row = MaintenanceTaxonomy.Rows.FirstOrDefault(v => v.Key == Encoding.ASCII.GetString(bytes));
+                    var key = Encoding.ASCII.GetString(bytes);
+                    var row = MaintenanceTaxonomy.Rows.FirstOrDefault(v => v.Key == key);
                     return row == null ? (MaintenanceView?)null : row.Id;
                 }
             }
@@ -40,7 +38,7 @@ namespace INTA.Desktop
         {
             string state = Path.Combine(applicationDirectory, "state");
             string path = Path.Combine(state, FileName);
-            string temporary = null;
+            string temporary = String.Empty;
             try
             {
                 if (Redirected(state) || Redirected(path)) return false;
@@ -61,7 +59,7 @@ namespace INTA.Desktop
             catch (System.Security.SecurityException) { return false; }
             finally
             {
-                if (temporary != null)
+                if (temporary.Length != 0)
                     try { if (!Redirected(state)) File.Delete(temporary); }
                     catch (IOException) { }
                     catch (UnauthorizedAccessException) { }

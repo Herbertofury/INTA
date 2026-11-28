@@ -1,6 +1,3 @@
-#if NET10_0
-#nullable disable
-#endif
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,10 +38,16 @@ namespace INTA.Desktop
         });
 
         internal static MaintenanceIdentity Get(MaintenanceView view) { return Rows.First(row => row.Id == view); }
-        internal static MaintenanceIdentity Find(string name) { return Rows.FirstOrDefault(row => row.Name == name); }
+        // A value-type optional result expresses the same contract to the
+        // Framework compiler and the nullable-enabled modern preview.
+        internal static MaintenanceView? FindView(string name)
+        {
+            var row = Rows.FirstOrDefault(identity => identity.Name == name);
+            return row == null ? (MaintenanceView?)null : row.Id;
+        }
         internal static string[] Terms(string query)
         {
-            return (query ?? String.Empty).Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+            return (query ?? String.Empty).Split(default(char[]), StringSplitOptions.RemoveEmptyEntries);
         }
         internal static bool Matches(string[] terms, params string[] fields)
         {
